@@ -22,7 +22,7 @@ For more information on this functionality, see [Test your Astro project locally
 
 :::info
 
-This command requires Astro Runtime version `4.1.0`+. For more information, see [Astro Runtime Release Notes](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-410).
+This command requires Astro Runtime version `4.1.0`+. For more information, see [Astro Runtime Release Notes](https://www.astronomer.io/docs/astro/runtime-release-notes#astro-runtime-410).
 
 :::
 

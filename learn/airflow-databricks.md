@@ -57,7 +57,7 @@ There are multiple resources for learning about this topic. See also:
 
 Many data teams leverage Databricks' optimized Spark engine to run heavy workloads like machine learning models, data transformations, and data analysis. While Databricks offers some orchestration with Databricks Workflows, they are limited in functionality and do not integrate with the rest of your data stack. Using a tool-agnostic orchestrator like Airflow gives you several advantages, like the ability to:
 
-- Use CI/CD to manage your workflow deployment. Airflow DAGs are Python code, and can be [integrated with a variety of CI/CD tools](https://docs.astronomer.io/astro/ci-cd-templates/template-overview) and [tested](testing-airflow.md).
+- Use CI/CD to manage your workflow deployment. Airflow DAGs are Python code, and can be [integrated with a variety of CI/CD tools](https://www.astronomer.io/docs/astro/ci-cd-templates/template-overview) and [tested](testing-airflow.md).
 - Repair single tasks in your Databricks Workflow. If a task fails, you can [re-run it](#repairing-a-databricks-workflow) without having to re-run the entire Workflow, saving valuable compute resources.
 - Use [task groups](task-groups.md) within Databricks Workflows, enabling you to collapse and expand parts of larger Databricks Workflows visually.
 - Leverage Airflow [cross-DAG dependencies](cross-dag-dependencies.md) to trigger Databricks Workflows from other DAGs in your Airflow environment, allowing for a data-driven architecture.
@@ -79,7 +79,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - Access to a Databricks workspace. See [Databricks' documentation](https://docs.databricks.com/getting-started/index.html) for instructions. You can use any workspace that has access to the [Databricks Workflows](https://docs.databricks.com/workflows/index.html) feature. You need a user account with permissions to create notebooks and Databricks jobs. You can use any underlying cloud service, and a [14-day free trial](https://www.databricks.com/try-databricks) is available.
 
 ## Step 1: Configure your Astro project

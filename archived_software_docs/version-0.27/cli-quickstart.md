@@ -28,7 +28,7 @@ The Astronomer CLI requires:
 - [Docker](https://www.docker.com/) (v18.09 or higher).
 - [Docker Engine](https://docs.docker.com/engine/) (v0.13.1 or higher).
 
-Alternatively, you can run the CLI with Podman 3.1.0+. For more information, read [Run the CLI with Podman](https://docs.astronomer.io/astro/cli/use-podman).
+Alternatively, you can run the CLI with Podman 3.1.0+. For more information, read [Run the CLI with Podman](https://www.astronomer.io/docs/astro/cli/use-podman).
 
 ## Step 1: Install the Astronomer CLI
 

@@ -143,7 +143,7 @@ When you choose a deprecated version of Astro Runtime, Astronomer recommends alw
 
     :::
 
-3. Create a Deployment using the [Astro API](https://docs.astronomer.io/api/platform-api-reference/deployment/create-deployment). In your request, specify your PAT in the authorization header, and your deprecated Astro Runtime version using the `astroRuntimeVersions` property.
+3. Create a Deployment using the [Astro API](https://www.astronomer.io/docs/api/platform-api-reference/deployment/create-deployment). In your request, specify your PAT in the authorization header, and your deprecated Astro Runtime version using the `astroRuntimeVersions` property.
 
 After you create the Deployment, you can manage the Deployment using any interface, including the Astro CLI and [Astro UI](deployment-settings.md). You can also create additional Deployments with deprecated Runtimes using the Astro API and either a Workspace or Organization API token.
 
@@ -227,7 +227,7 @@ This incompatibility results in breaking the GKEStartPodOperator. This operator 
 
 #### Runtime 6 (Airflow 2.4)
 
-Smart Sensors were deprecated in Airflow 2.2.4 and removed in Airflow 2.4.0. If your organization is still using Smart Sensors, you'll need to start using deferrable operators. See [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
+Smart Sensors were deprecated in Airflow 2.2.4 and removed in Airflow 2.4.0. If your organization is still using Smart Sensors, you'll need to start using deferrable operators. See [Deferrable operators](https://www.astronomer.io/docs/learn/deferrable-operators).
 
 #### Runtime 5 (Airflow 2.3)
 

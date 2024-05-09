@@ -3,8 +3,8 @@ const versions = require('./software_versions.json')
 module.exports = {
   title: 'Astronomer Documentation',
   tagline: 'Learn how to use Astro, the next-generation data orchestration platform.',
-  url: 'https://docs.astronomer.io',
-  baseUrl: '/',
+  url: 'https://www.astronomer.io',
+  baseUrl: '/docs',
   trailingSlash: false,
   noIndex: false,
   onBrokenLinks: 'throw', // 'warn' for drafts, 'throw' for prod
@@ -67,7 +67,7 @@ module.exports = {
       logo: {
         alt: 'Astronomer',
         src: 'img/AstroMonogram.svg',
-        href: 'https://docs.astronomer.io',
+        href: 'https://www.astronomer.io/docs',
         target: '_self',
       },
       items: [

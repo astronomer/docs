@@ -13,7 +13,7 @@ Use this document to select the right Airflow connection and variable management
 
 Airflow supports several different methods for managing connections and variables. Each of these strategies has benefits and limitations related to their security and ease of use. The strategies you choose should be compatible with both your local environments and Astro Deployments, allowing you to [import and export objects](import-export-connections-variables.md) between the two contexts.
 
-For in-depth information on managing connections and variables, see [Connection Basics](https://docs.astronomer.io/learn/connections) and [Variable Basics](https://docs.astronomer.io/learn/airflow-variables).
+For in-depth information on managing connections and variables, see [Connection Basics](https://www.astronomer.io/docs/learn/connections) and [Variable Basics](https://www.astronomer.io/docs/learn/airflow-variables).
 
 ## Prerequisites
 
@@ -46,7 +46,7 @@ If you use a mix of strategies for managing connections, it's important to under
 If Airflow reads a connection in one place and then finds the same connection ID in a subsequent check, it will override the previous configuration it found. For example, if you store a connection with the same connection ID in both a secrets backend and the Airflow UI, Airflow ignores the configuration in your secrets backend and applies the highest priority configuration from the Airflow UI.
 
 :::tip
-If you only want to test connections or export connections in  a JSON or URI format, use the Airflow UI to [manage your connection](https://docs.astronomer.io/learn/connections#defining-connections-in-the-airflow-ui).  You can then use the Astro CLI commands to export the connections in a URI or JSON format. See [Import and export connections and variables](import-export-connections-variables.md#from-the-airflow-ui-and-metadata-database).
+If you only want to test connections or export connections in  a JSON or URI format, use the Airflow UI to [manage your connection](https://www.astronomer.io/docs/learn/connections#defining-connections-in-the-airflow-ui).  You can then use the Astro CLI commands to export the connections in a URI or JSON format. See [Import and export connections and variables](import-export-connections-variables.md#from-the-airflow-ui-and-metadata-database).
 :::
 
 ## Compare strategies

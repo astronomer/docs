@@ -11,7 +11,7 @@ Use this guide to understand which features are exclusive to Astro Hosted or Ast
 ## Astro Hosted-exclusive features
 
 - [Deployment health incidents](deployment-health-incidents.md)
-- Specific resource authorization strategies, such as [attaching a service account to a Deployment](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud?tab=gcp#setup)
+- Specific resource authorization strategies, such as [attaching a service account to a Deployment](https://www.astronomer.io/docs/astro/authorize-deployments-to-your-cloud?tab=gcp#setup)
 - Self-service VPC peering
 - [Deploy history and rollbacks](deploy-history.md)
 - [Run a deprecated Astro Runtime version](upgrade-runtime.md#run-a-deprecated-astro-runtime-version)

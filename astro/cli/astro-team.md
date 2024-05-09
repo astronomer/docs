@@ -13,7 +13,7 @@ This command is available only if you're authenticated to an Astronomer Software
 
 :::
 
-Manage system-level Teams on Astronomer Software. See [Import identity provider groups into Astronomer Software](https://docs.astronomer.io/software/import-idp-groups).
+Manage system-level Teams on Astronomer Software. See [Import identity provider groups into Astronomer Software](https://www.astronomer.io/docs/software/import-idp-groups).
 
 ## Usage 
 

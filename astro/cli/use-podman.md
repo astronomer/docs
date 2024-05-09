@@ -88,7 +88,7 @@ Set up Podman on Windows so you can run Apache Airflow locally and deploy to Ast
 
 - Podman 3 or later installed on Windows Subsystem for Linux version 2 (WSL 2) using Ubuntu 22.04 or later. See [Install Linux on Windows with WSL](https://learn.microsoft.com/en-us/windows/wsl/install) and [Getting started with Podman](https://podman.io/get-started/).
 - A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps` in your Linux terminal.
-- The Astro CLI Linux distribution installed on WSL 2. See [Install the Astro CLI on Linux](https://docs.astronomer.io/astro/cli/install-cli?tab=linux#install-the-astro-cli).
+- The Astro CLI Linux distribution installed on WSL 2. See [Install the Astro CLI on Linux](https://www.astronomer.io/docs/astro/cli/install-cli?tab=linux#install-the-astro-cli).
 
 :::tip
 

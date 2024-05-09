@@ -8,7 +8,7 @@ description: 'Use tutorials and guides to make the most out of Airflow and Astro
 import CodeBlock from '@theme/CodeBlock';
 import my_astronauts_dag from '!!raw-loader!../code-samples/dags/get-started-with-airflow/my_astronauts_dag.py';
 
-Getting started with [Apache Airflow](https://airflow.apache.org/docs/apache-airflow/stable/index.html) is easy with the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
+Getting started with [Apache Airflow](https://airflow.apache.org/docs/apache-airflow/stable/index.html) is easy with the [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli).
 
 Follow this tutorial if you're new to Apache Airflow and want to create and run your first data pipeline.
 
@@ -40,13 +40,13 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) version 1.25.0 or later.
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli) version 1.25.0 or later.
 - An integrated development environment (IDE) for Python development, such as [VSCode](https://code.visualstudio.com/).
 - (Optional) A local installation of [Python 3](https://www.python.org/downloads/) to improve your Python developer experience.
 
 ## Step 1: Create an Astro project
 
-To run data pipelines on Astro, you first need to create an Astro project, which contains the set of files necessary to run Airflow locally. This can be done with the [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+To run data pipelines on Astro, you first need to create an Astro project, which contains the set of files necessary to run Airflow locally. This can be done with the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 
 1. Create a new directory for your Astro project:
 
@@ -71,7 +71,7 @@ The Astro project is built to run Airflow with Docker. [Docker](https://docs.doc
 The default Astro project structure includes a collection of folders and files that you can use to run and customize Airflow. For this tutorial, you only need to know the following files and folders:
 
 - `/dags`: A directory of DAG files. Each Astro project includes an example DAG called `example_astronauts`. For more information on DAGs, see [Introduction to Airflow DAGs](dags.md).
-- `Dockerfile`: This is where you specify your version of [Astro Runtime](https://docs.astronomer.io/astro/runtime-image-architecture), which is a runtime software based on Apache Airflow that is built and maintained by Astronomer. The CLI generates new Astro projects with the latest version of Runtime, which is equivalent to the latest version of Airflow. For advanced use cases, you can also configure this file with Docker-based commands to run locally at build time.
+- `Dockerfile`: This is where you specify your version of [Astro Runtime](https://www.astronomer.io/docs/astro/runtime-image-architecture), which is a runtime software based on Apache Airflow that is built and maintained by Astronomer. The CLI generates new Astro projects with the latest version of Runtime, which is equivalent to the latest version of Airflow. For advanced use cases, you can also configure this file with Docker-based commands to run locally at build time.
 
 ## Step 2: Start Airflow
 
@@ -216,7 +216,7 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
 
     - `dag_id`: The name of the DAG that appears in the Airflow UI. If no `dag_id` is specified, the name of the Python function is used as the DAG ID. Each DAG must have a unique name, and Astronomer recommends using the same name for the DAG file and the `dag_id`.
     - `start_date`: The date and time when the DAG is scheduled to start running, given as a datetime object. In this example, the DAG is triggered on its schedule as long as the current time is 0:00 UTC on January 1st, 2024 or later.
-    - `schedule`: The frequency at which the DAG runs. If you don't set this value, the DAG runs every 24 hours after the `start_date`. In this example, the DAG is scheduled to run whenever the `example_astronauts` DAG's `get_astronauts` task completes successfully using an Airflow dataset. There are many options to define the schedule of a DAG. For more information, see [DAG scheduling and time tables in Airflow](https://docs.astronomer.io/learn/scheduling-in-airflow).
+    - `schedule`: The frequency at which the DAG runs. If you don't set this value, the DAG runs every 24 hours after the `start_date`. In this example, the DAG is scheduled to run whenever the `example_astronauts` DAG's `get_astronauts` task completes successfully using an Airflow dataset. There are many options to define the schedule of a DAG. For more information, see [DAG scheduling and time tables in Airflow](https://www.astronomer.io/docs/learn/scheduling-in-airflow).
     - `catchup`: Defines whether the DAG reruns all DAG runs that were scheduled before today's date. The default value is `True`, but it is recommended that you set this argument to `False` unless you are explicitly running your DAG to backfill runs.
     - `default_args`: A dictionary of arguments to be passed to every task in the DAG. In this example, the `default_args` change the owner of the DAG and set the default number of retries in case of a failure for all tasks in the DAG to 3. You can pass any arguments to all your tasks by setting them in `default_args` and override them for specific tasks by setting them in the task definition.
     - `tags`: Defines the **Tags** that appear in the **DAGs** page of the Airflow UI. These can help you organize DAGs in more complex projects.

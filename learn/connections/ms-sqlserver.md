@@ -12,8 +12,8 @@ This guide provides the basic setup for creating a Microsoft SQL Server connecti
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
-- A locally running [Astro project](https://docs.astronomer.io/astro/cli/get-started-cli).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
+- A locally running [Astro project](https://www.astronomer.io/docs/astro/cli/get-started-cli).
 - A Microsoft SQL Server database hosted in cloud or on-premises.
 - [Permissions](https://www.w3computing.com/sqlserver2012/managing-permissions-using-management-studio/) to access Microsoft SQL Server from your local Airflow environment.
 
@@ -88,4 +88,4 @@ Airflow uses [PyMSSQL](https://pypi.org/project/pymssql/) to connect to Microsof
 
 - [Apache Airflow Microsoft provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-mssql/stable/index.html)
 - [MS SQL Server Modules](https://registry.astronomer.io/modules?query=mssql) in the Astronomer Registry
-- [Import and export Airflow connections using Astro CLI](https://docs.astronomer.io/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
+- [Import and export Airflow connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)

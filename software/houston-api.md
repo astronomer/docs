@@ -180,7 +180,7 @@ astronomer:
         upsertDeploymentEnabled: true
 ```
 
-Then push the configuration change to your cluster. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+Then push the configuration change to your cluster. See [Apply a config change](https://www.astronomer.io/docs/software/apply-platform-config).
 
 :::
 

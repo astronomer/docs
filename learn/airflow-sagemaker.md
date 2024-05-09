@@ -40,7 +40,7 @@ To complete this tutorial, you need:
   - Access to an S3 [storage bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html). If you don't already have an account, Amazon offers 5GB of free storage in S3 for 12 months. This should be more than enough for this tutorial.
   - Access to [AWS SageMaker](https://aws.amazon.com/sagemaker/). If you don't already use SageMaker, Amazon offers a free tier for the first month.
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started).
 
 ## Step 1: Create a role to access SageMaker
 

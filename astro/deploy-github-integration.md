@@ -27,7 +27,7 @@ Compared to deploying code manually using the Astro CLI or through a custom CI/C
 
 To make the most out of the Astro GitHub integration, Astronomer recommends the following:
 
-- Consider mapping long-lasting `main` and `dev` branches in GitHub to Deployments. For example, you would map a `main` branch to a production Deployment and your `dev` branch to your development Deployment. This approach is described in [Develop a CI/CD strategy](https://docs.astronomer.io/astro/set-up-ci-cd#multiple-environments).
+- Consider mapping long-lasting `main` and `dev` branches in GitHub to Deployments. For example, you would map a `main` branch to a production Deployment and your `dev` branch to your development Deployment. This approach is described in [Develop a CI/CD strategy](https://www.astronomer.io/docs/astro/set-up-ci-cd#multiple-environments).
 - Run CI checks on your DAGs and project code as part of your pull request review process. There is currently no testing included in the default GitHub deploy process, so ensure that your DAG changes pass unit tests before they’re merged and deployed.
 - Write descriptive commit messages or pull request descriptions for any project changes. These messages appear in the Astro UI under **Deploy History** to give your team more context about each deploy.
 
@@ -37,16 +37,16 @@ The Astro GitHub integration is not supported if any of the following are true:
 
 - You build a custom Astro Runtime image as part of your deploy process. However, using the `-base` distribution of Astro Runtime is supported.
 - You need to deploy images from an external or private Docker registry.
-- You use the `--image-only` flag in the Astro CLI, or you need to exclude DAGs from specific deploys. This is usually the case if you have a multiple-repository deploy strategy as described in [Develop a CI/CD strategy](https://docs.astronomer.io/astro/set-up-ci-cd#multiple-repositories).
-- Your repository is hosted in an on-premises GitHub Enterprise server. To deploy code from an on-premises repository, see [Private network CI/CD templates](https://docs.astronomer.io/astro/ci-cd-templates/github-actions-private-network).
-- There are currently no checks to prevent you from downgrading your version of Astro Runtime. Astronomer recommends only downgrading Deployments using [rollbacks](https://docs.astronomer.io/astro/deploy-history#roll-back-to-a-past-deploy).
+- You use the `--image-only` flag in the Astro CLI, or you need to exclude DAGs from specific deploys. This is usually the case if you have a multiple-repository deploy strategy as described in [Develop a CI/CD strategy](https://www.astronomer.io/docs/astro/set-up-ci-cd#multiple-repositories).
+- Your repository is hosted in an on-premises GitHub Enterprise server. To deploy code from an on-premises repository, see [Private network CI/CD templates](https://www.astronomer.io/docs/astro/ci-cd-templates/github-actions-private-network).
+- There are currently no checks to prevent you from downgrading your version of Astro Runtime. Astronomer recommends only downgrading Deployments using [rollbacks](https://www.astronomer.io/docs/astro/deploy-history#roll-back-to-a-past-deploy).
 
 There is currently no limit or additional charge for deploying code to Astro with the GitHub integration, but Astronomer might reach out to discuss your usage if you trigger an unusually large number of deploys.
 
 ## Prerequisites
 
 - Workspace Admin permissions on an Astro Workspace.
-- A GitHub repository that contains an [Astro project](https://docs.astronomer.io/astro/cli/develop-project#create-an-astro-project). The Astro project can exist at any level in your repository.
+- A GitHub repository that contains an [Astro project](https://www.astronomer.io/docs/astro/cli/develop-project#create-an-astro-project). The Astro project can exist at any level in your repository.
 - A GitHub account with read and write permissions to the repositories containing your Astro project. If you don't have these permissions, send a request to your GitHub repository administrator when prompted by Astro.
 - At least one Astro Deployment.
 - At least one GitHub branch that you want to deploy to Astro.
@@ -124,4 +124,4 @@ If an additional deploy is triggered while a deploy is currently processing, Ast
 
 When you roll back a deploy created by the GitHub integration, Astro does not roll back the code in your GitHub repository. Therefore, rollbacks should only be used as a last resort due to the potential for your repository code to become out of sync with your deploy code.
 
-If you do roll back a deploy, manually revert the code in your GitHub repository as soon as possible so that it matches the code running in your rolled back deploy. For more information, see [What happens during a rollback](https://docs.astronomer.io/astro/deploy-history#what-happens-during-a-deploy-rollback).
+If you do roll back a deploy, manually revert the code in your GitHub repository as soon as possible so that it matches the code running in your rolled back deploy. For more information, see [What happens during a rollback](https://www.astronomer.io/docs/astro/deploy-history#what-happens-during-a-deploy-rollback).
