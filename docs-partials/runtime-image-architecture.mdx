@@ -175,17 +175,18 @@ quay.io/astronomer/astro-runtime:<runtime-version>-python-<python-version>
 
 Starting with Astro Runtime 11, Astronomer maintains a slim Astro Runtime image. Slim Astro Runtime images only include the dependencies required for the basic funcionality of Astro. These packages are:
 
-- `apache-airflow-providers-celery`
-- `apache-airflow-providers-common-io`
-- `apache-airflow-providers-common-sql`
-- `apache-airflow-providers-elasticsearch`
-- `apache-airflow-providers-fab`
-- `apache-airflow-providers-ftp`
-- `apache-airflow-providers-http`
-- `apache-airflow-providers-imap`
-- `apache-airflow-providers-postgres`
-- `apache-airflow-providers-smtp`
-- `apache-airflow-providers-sqlite`
+- Common IO [`apache-airflow-providers-common-io`](https://pypi.org/project/apache-airflow-providers-common-io/)\*
+- Common SQL [`apache-airflow-providers-common-sql`](https://pypi.org/project/apache-airflow-providers-common-sql/)\*
+- FAB [`apache-airflow-providers-fab`](https://pypi.org/project/apache-airflow-providers-fab/)\*
+- FTP [`apache-airflow-providers-ftp`](https://pypi.org/project/apache-airflow-providers-ftp/)\*
+- HTTP [`apache-airflow-providers-http`](https://pypi.org/project/apache-airflow-providers-http/)\*
+- IMAP [`apache-airflow-providers-imap`](https://pypi.org/project/apache-airflow-providers-imap/)\*
+- SMTP [`apache-airflow-providers-smtp`](https://pypi.org/project/apache-airflow-providers-smtp/)\*
+- SQLite [`apache-airflow-providers-sqlite`](https://pypi.org/project/apache-airflow-providers-sqlite/)\*
+- Celery [`apache-airflow-providers-celery`](https://pypi.org/project/apache-airflow-providers-celery/)
+- Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)
+- MySQL [`apache-airflow-providers-mysql`](https://pypi.org/project/apache-airflow-providers-mysql/)
+- PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)
 - `astronomer-kubernetes-executor`
 
 Use the slim Astro Runtime image if you want faster local builds and deploys, smaller footprint for security vulnerabilities and dependency conflicts, or you don't require the packages included in the default Astro Runtime distribution.
