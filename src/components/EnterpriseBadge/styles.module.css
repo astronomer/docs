@@ -1,0 +1,7 @@
+.enterpriseBadge {
+  display: inline-block;
+  overflow: hidden;
+  width: 180px;
+  height: 30%;
+  min-width: 180px;
+}

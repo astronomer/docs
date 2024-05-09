@@ -37,7 +37,7 @@ While SQLite is the default on Apache Airflow, Postgres is by far the most commo
 
 You should also consider the size of your metadata database when setting up your Airflow environment. Production environments typically use a managed database service, which includes features like autoscaling and automatic backups. The size you need will depend heavily on the workloads running in your Airflow instance. For reference, Apache Airflow uses a 2GB SQLite database by default, but this is intended for development purposes only. The Astro CLI starts Airflow environments with a 1GB Postgres database.
 
-Changes to the Airflow metadata database configuration and its schema are very common and happen with almost every minor update. For this reason, prior to Airflow 2.3 you should not downgrade your Airflow instance in place. With Airflow 2.3 the `db downgrade` command was added, providing an option to [downgrade Airflow](https://airflow.apache.org/docs/apache-airflow/stable/howto/usage-cli.html#downgrading-airflow).
+Changes to the Airflow metadata database configuration and its schema are very common and happen with almost every minor update. To downgrade your Airflow environment, use the [`db downgrade`](https://airflow.apache.org/docs/apache-airflow/stable/howto/usage-cli.html#downgrading-airflow) command.
 
 ## Metadata database content
 
@@ -96,7 +96,7 @@ There are additional tables in the metadata database storing data ranging from D
 
 - Memory in the Airflow metadata database can be limited depending on your setup, and running low on memory in your metadata database can cause performance issues in Airflow. This is one of the many reasons why Astronomer advises against moving large amounts of data with XCom, and recommends using a cleanup and archiving mechanism in any production deployments.
 
-- Since the metadata database is critical for the scalability and resiliency of your Airflow deployment, it is best practice to use a managed database service for production environments, for example [AWS RDS](https://aws.amazon.com/rds/) or [Google Cloud SQL](https://cloud.google.com/sql). Alternatively, you can use a managed Airflow service like [Astro](https://www.astronomer.io/try-astro/) with a built-in scalable and resilient metadata database.
+- Since the metadata database is critical for the scalability and resiliency of your Airflow deployment, it is best practice to use a managed database service for production environments, for example [AWS RDS](https://aws.amazon.com/rds/) or [Google Cloud SQL](https://cloud.google.com/sql). Alternatively, you can use a managed Airflow service like [Astro](https://www.astronomer.io/try-astro/?utm_medium=docs&utm_content=learn-airflow-database&utm_source=body) with a built-in scalable and resilient metadata database.
 
 - When configuring a database backend, make sure your version is fully supported by checking the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html#choosing-database-backend).
 

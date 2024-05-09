@@ -11,7 +11,7 @@ Use this guide to get started with Astro, the best place to run Apache Airflow.
 
 ## Start a trial
 
-Go to [Try Astro](https://www.astronomer.io/try-astro/) to activate your free 14-day trial. To create your Astro user account, you'll need to provide a valid email address and create a password.
+Go to [Try Astro](https://www.astronomer.io/try-astro/?referral=docs-what-astro-banner&utm_medium=docs&utm_content=astro-trial&utm_source=body) to activate your free 14-day trial. To create your Astro user account, you'll need to provide a valid email address and create a password.
 
 :::tip
 
@@ -25,7 +25,7 @@ After you've created your Astro user account, you'll be asked to create an Organ
 
 An _Organization_ is the highest management level on Astro. An Organization contains _Workspaces_, which are collections of _Deployments_, or Airflow environments, that are typically owned by a single team. You can manage user roles and permissions both at the Organization and Workspace levels. For more information about Astro's key concepts and components, see [About Astro](astro-architecture.md).
 
-To start your trial, Astronomer recommends using the name of your company as the name of your Organization and naming your first Workspace after your data team or initial business use case with Airflow. You can update these names in the Cloud UI after you finish activating your trial.
+To start your trial, Astronomer recommends using the name of your company as the name of your Organization and naming your first Workspace after your data team or initial business use case with Airflow. You can update these names in the Astro UI after you finish activating your trial.
 
 <img src={require("../static/img/docs/start-trial.png").default} alt="Create an Organization and Workspace" style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
@@ -37,10 +37,10 @@ You have 14 days and $300 to spend in credits before your trial ends. See [Manag
 
 ## After your trial
 
-After your 14-day trial ends, you can no longer access your Deployments and Workspaces from the Cloud UI. You can still access your user account page and Astronomer support forms.
+After your 14-day trial ends, you can no longer access your Deployments and Workspaces from the Astro UI. You can still access your user account page and Astronomer support forms.
 
 After your trial ends, all Deployments are automatically deleted. If you created a dedicated cluster, it is also deleted. Any code that you deployed to Astro will be lost. If you need additional time to evaluate Astro, or you need to copy your configuration for future use, you can:
 
 - Contact [sales](https://astronomer.io/contact/) to request a trial extension.
 - Run `astro deployment inspect` with the Astro CLI to save your existing Deployment configuration as a JSON or YAML file. See [Astro CLI command reference](cli/astro-deployment-inspect.md).
-- Open the Cloud UI and [schedule office hours](office-hours.md) with an Astronomer engineer.
+- Open the Astro UI and [schedule office hours](office-hours.md) with an Astronomer engineer.

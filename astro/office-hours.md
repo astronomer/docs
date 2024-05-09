@@ -4,8 +4,11 @@ navTitle: 'Office hours'
 id: astro-office-hours
 description: Attend office hours with Astronomer data engineers to ask non-support questions about Airflow.
 ---
+import TeamBadge from '@site/src/components/TeamBadge';
 
-Office hours are a way for you to meet with Astronomer data engineers and ask about Astro and Airflow features and best practices . Office hours are available weekly on a first-come, first-served basis. An office hour session is typically 30 minutes long. 
+<TeamBadge/>
+
+Office hours are a way for you to meet with Astronomer data engineers and ask about Astro and Airflow features and best practices. Office hours are available weekly on a first-come, first-served basis. An office hour session is typically 30 minutes long.
 
 :::warning
 
@@ -24,12 +27,12 @@ During an office hours meeting, you can:
 - Do an architecture review or discuss scaling Airflow and Astro Deployments .
 - Conduct a code review for a DAG.
 
-## Book an office hours appointment 
+## Book an office hours appointment
 
-Before you book an office hours appointment, please browse the documentation, [Astronomer Academy](https://academy.astronomer.io/), [Airflow Guides](https://docs.astronomer.io/learn/), or discussion on the [Astronomer Forum](https://forum.astronomer.io) to see if there are existing guides or resources that answer your question. 
+Before you book an office hours appointment, please browse the documentation, [Astronomer Academy](https://academy.astronomer.io/), [Airflow Guides](https://docs.astronomer.io/learn/), or past discussions on the [Astronomer Forum](https://forum.astronomer.io) to see if there are existing guides or resources that answer your question.
 
 To book office hours, click **Book office hours** in the documentation sidebar navigation. Then, schedule a 30-minute virtual meeting on the Calendly form. In the form, provide details about any issues and questions that you want to discuss during the meeting.
 
-Alternatively, you can click **Help** > **Book Office Hours** in the [Cloud UI](https://cloud.astronomer.io). 
+Alternatively, you can click **Help** > **Book Office Hours** in the [Astro UI](https://cloud.astronomer.io).
 
 ![A screenshot showing the menu in cloud.astronomer.io which contains a Book Office Hours entry](/img/docs/office-hours-location.png)

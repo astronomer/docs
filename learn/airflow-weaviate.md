@@ -80,7 +80,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     version: '3.1'
     services:           
       weaviate:
-        image: semitechnologies/weaviate:latest
+        image: cr.weaviate.io/semitechnologies/weaviate:latest
         command: "--host 0.0.0.0 --port '8081' --scheme http"
         ports:
           - 8081:8081

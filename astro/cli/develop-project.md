@@ -111,7 +111,7 @@ To add Airflow [connections](https://airflow.apache.org/docs/apache-airflow/stab
 
 - Use the Airflow UI. In **Admin**, click **Connections**, **Variables** or **Pools**, and then add your values. These values are stored in the metadata database and are deleted when you run the [`astro dev kill` command](/astro/cli/astro-dev-kill.md), which can sometimes be used for troubleshooting.
 - Modify the `airflow_settings.yaml` file of your Astro project. This file is included in every Astro project and permanently stores your values in plain-text. To prevent you from committing sensitive credentials or passwords to your version control tool, Astronomer recommends adding this file to `.gitignore`.
-- Use the Cloud UI to create connections that can be shared across Deployments in a Workspace. These connections are not visible in the Airflow UI. See [Create Airflow connections in the Astro Cloud UI](/astro/create-and-link-connections.md).
+- Use the Astro UI to create connections that can be shared across Deployments in a Workspace. These connections are not visible in the Airflow UI. See [Create Airflow connections in the Astro UI](/astro/create-and-link-connections.md).
 - Use a secret backend, such as AWS Secrets Manager, and access the secret backend locally. See [Configure an external secrets backend on Astro](/astro/secrets-backend.md).
 
 When you add Airflow objects to the Airflow UI of a local environment or to your `airflow_settings.yaml` file, your values can only be used locally. When you deploy your project to a Deployment on Astro, the values in this file are not included.
@@ -206,7 +206,7 @@ To learn more about the format of the `requirements.txt` file, see [Requirements
 
 ## Set environment variables locally
 
-For local development, Astronomer recommends setting environment variables in your Astro project’s `.env` file. You can then push your environment variables from the `.env` file to a Deployment on Astro. To manage environment variables in the Cloud UI, see [Environment variables](/astro/environment-variables.md).
+For local development, Astronomer recommends setting environment variables in your Astro project’s `.env` file. You can then push your environment variables from the `.env` file to a Deployment on Astro. To manage environment variables in the Astro UI, see [Environment variables](/astro/environment-variables.md).
 
 If your environment variables contain sensitive information or credentials that you don’t want to expose in plain-text, you can add your `.env` file to `.gitignore` when you deploy these changes to your version control tool.
 
@@ -230,7 +230,7 @@ If your environment variables contain sensitive information or credentials that 
 
    These commands output all environment variables that are running locally. This includes environment variables set on Astro Runtime by default.
 
-5. Optional. Run `astro deployment variable create --load` or `astro deployment variable update --load` to export environment variables from your `.env` file to a Deployment. You can view and modify the exported environment variables in the Cloud UI page for your Deployment.
+5. Optional. Run `astro deployment variable create --load` or `astro deployment variable update --load` to export environment variables from your `.env` file to a Deployment. You can view and modify the exported environment variables in the Astro UI page for your Deployment.
 
 :::info
 

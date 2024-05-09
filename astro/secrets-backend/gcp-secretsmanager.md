@@ -61,7 +61,7 @@ For more information on creating secrets in Google Cloud Secret Manager, read th
 
 3. (Optional) Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials in `AIRFLOW__SECRETS__BACKEND_KWARGS`.
 
-To ensure the security of secrets, the `.env` variable is only available in your local environment and not in the Cloud UI . See [Set Environment Variables Locally](cli/develop-project.md#set-environment-variables-locally).
+To ensure the security of secrets, the `.env` variable is only available in your local environment and not in the Astro UI . See [Set Environment Variables Locally](cli/develop-project.md#set-environment-variables-locally).
 
 ## Step 4: Configure Secret Manager on Astro using a service account JSON key file
 

@@ -37,6 +37,7 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | 8             | 2.6                    |
 | 9             | 2.7                    |
 | 10            | 2.8                    |
+| 11            | 2.9                    |
 
 For version compatibility information, see the [Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes).
 
@@ -81,7 +82,7 @@ Astro Runtime {{RUNTIME_VER}} includes the following pre-installed open source p
 - Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)
 - Google [`apache-airflow-providers-google`](https://pypi.org/project/apache-airflow-providers-google/)
 - Microsoft Azure [`apache-airflow-providers-microsoft-azure`](https://pypi.org/project/apache-airflow-providers-microsoft-azure/)
-- OpenLineage [`apache-airflow-providers-openlineage`](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html) 
+- OpenLineage [`apache-airflow-providers-openlineage`](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html)
 - PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)
 - Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)
 
@@ -95,6 +96,12 @@ To determine the version of any provider package installed in your current Astro
 docker run --rm <runtime-image> pip freeze | grep <provider>
 ```
 
+For example, to find the version of the current package for Astronomer providers, run the following command:
+
+```
+astro dev bash pip freeze | grep astronomer-providers
+```
+
 ## Python versioning
 
 | Astro Runtime | Apache Airflow version | Python version |
@@ -106,6 +113,7 @@ docker run --rm <runtime-image> pip freeze | grep <provider>
 | 8             | 2.6                    | 3.10           |
 | 9             | 2.7                    | 3.11           |
 | 10            | 2.8                    | 3.11           |
+| 11            | 2.9                    | 3.11           |
 
 Starting with Astro Runtime 9, if you require a different version of Python than what's included in the base distribution, you can use a Python distribution of Astro Runtime. See [Distribution](#distribution).
 
@@ -125,6 +133,7 @@ The following table shows which versions Postgres are compatible with each versi
 | 8             | 2.6                    | 11-15             |
 | 9             | 2.7                    | 11-15             |
 | 10            | 2.8                    | 12-16             |
+| 11            | 2.9                    | 12-16             |
 
 ## Executors
 
@@ -168,5 +177,6 @@ The following table lists the operating systems and architectures supported by e
 | 8             | 2.6                    | Debian 11.7 (bullseye) | AMD64 and ARM64 |
 | 9             | 2.7                    | Debian 11.7 (bullseye) | AMD64 and ARM64 |
 | 10            | 2.8                    | Debian 11.8 (bullseye) | AMD64 and ARM64 |
+| 11            | 2.9                    | Debian 11.8 (bullseye) | AMD64 and ARM64 |
 
 Astro Runtime 6.0.4 and later images are multi-arch and support AMD64 and ARM64 processor architectures for local development. Docker automatically uses the correct processor architecture based on the computer you are using.

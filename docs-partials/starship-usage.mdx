@@ -7,7 +7,7 @@ You might have defined Airflow connections and variables in the following places
 - Environment variables
 - A secrets backend.
 
-If you defined your Airflow variables and connections in the Airflow UI, you can migrate those to Astro with Starship. You can check which resources will be migrated by going to **Admin** > **Variables** and **Admin** > **Connections** in the Airflow UI to find your source Airflow environment information.
+If you defined your Airflow variables and connections in the Airflow UI, you can migrate those to Astro with [Starship](https://astronomer.github.io/starship/). You can check which resources will be migrated by going to **Admin** > **Variables** and **Admin** > **Connections** in the Airflow UI to find your source Airflow environment information.
 
 :::warning
 
@@ -18,28 +18,31 @@ Some environment variables or Airflow Settings, like global environment variable
 <Tabs>
 <TabItem value="plugin" label="Starship Plugin" default>
 
-1. In the Airflow UI for your source Airflow environment, go to **Astronomer** > **Migration Tool 🚀**.
+1. Log in to Astro. In the Astro UI, open the Deployment you're migrating to.
+2. Click **Open Airflow** to open the Airflow UI for the Deployment. Copy the URL for the home page. It should look similar to `https://<your-organization>.astronomer.run/<id>/home`.
+3. Create a Deployment API token for the Deployment. The token should minimally have permissions to update the Deployment and deploy code. Copy this token. See [Create and manage Deployment API tokens](https://docs.astronomer.io/astro/deployment-api-tokens) for additional setup steps.
+4. Open the Airflow UI for your source Airflow environment, then go to **Astronomer** > **Migration Tool 🚀**.
 
-    ![Location of the Astro migration menu in the Cloud UI](/img/docs/migration-menu.png)
+    ![Location of the Astro migration menu in the Astro UI](/img/docs/migration-menu.png)
 
-2. Click **Get Token**.
-3. If required, log in to [cloud.astronomer.io](https://cloud.astronomer.io).
-4. Copy the access token that appears after logging in. 
-5. In the **Migration Tool 🚀** page of the Airflow UI, paste the access token into the **Authentication Token** field.
-6. Click **Sign in**.
-7. In the **Target Deployment** menu, select the Deployment where you want to migrate your Airflow variables and connections, then click **Select**.
+5. Ensure that the **Astronomer Product** toggle is set to **Astro**.
+6. In the **Airflow URL** section, fill in the fields so that the complete URL on the page matches the URL of the Airflow UI for the Deployment you're migrating to. 
+7. Specify your API token in the **Token** field. Starship will confirm that it has access to your Deployment. 
 8. Click **Connections**. In the table that appears, click **Migrate** for each connection that you want to migrate to Astro. After the migration is complete, the status **Migrated ✅** appears.
-9. Click **Variables**.
-10. In the table that appears, click **Migrate** for each variable that you want to migrate to Astro. After the migration is complete, the status **Migrated ✅** appears.
-11. Click **Environment variables**.
-12. In the table that appears, check the box for each environment variable that you want to migrate to Astro, then click **Migrate**. After the migration is complete, the status **Migrated ✅** appears.
+9. Click **Pools**. In the table that appears, click **Migrate** for each connection that you want to migrate to Astro. After the migration is complete, the status **Migrated ✅** appears.
+10. Click **Variables**. In the table that appears, click **Migrate** for each variable that you want to migrate to Astro. After the migration is complete, the status **Migrated ✅** appears.
+11. Click **Environment variables**. In the table that appears, check the box for each environment variable that you want to migrate to Astro, then click **Migrate**. After the migration is complete, the status **Migrated ✅** appears.
+12. Click **DAG History**. In the table that appears, check the box for each DAG whose history you want to migrate to Astro, then click **Migrate**. After the migration is complete, the status **Migrated ✅** appears.
 
 </TabItem>
 <TabItem value="operator" label="Starship operator">
 
-Refer to the [Configuration](https://github.com/astronomer/starship/tree/master/astronomer-starship-provider#configuration) detailed instructions on using the operator.
+Refer to the [Configuration](https://astronomer.github.io/starship/operator/#usage) detailed instructions on using the operator.
 
-1. Add the following DAG to your source Airflow environment:
+1. Log in to Astro. In the Astro UI, open the Deployment you're migrating to.
+2. Click **Open Airflow** to open the Airflow UI for the Deployment. Copy the URL for the home page. It should look similar to `https://<your-organization>.astronomer.run/<id>/home`.
+3. Create a Deployment API token for the Deployment. The token should minimally have permissions to update the Deployment and deploy code. Copy this token. See [Create and manage Deployment API tokens](https://docs.astronomer.io/astro/deployment-api-tokens) for additional setup steps.
+4. Add the following DAG to your source Airflow environment:
 
     ```python
     from airflow.models.dag import DAG
@@ -57,9 +60,9 @@ Refer to the [Configuration](https://github.com/astronomer/starship/tree/master/
           token='{{ dag_run.conf["astro_token"] }}',
       )
     ```
-2. Deploy this DAG to your source Airflow environment.
-3. Once the DAG is available in the Airflow UI, click **Trigger DAG**, then click **Trigger DAG w/ config**. 
-4. In **Configuration JSON**, add the following configuration:
+5. Deploy this DAG to your source Airflow environment.
+6. Once the DAG is available in the Airflow UI, click **Trigger DAG**, then click **Trigger DAG w/ config**. 
+7. In **Configuration JSON**, add the following configuration:
 
     ```json
     {
@@ -68,12 +71,12 @@ Refer to the [Configuration](https://github.com/astronomer/starship/tree/master/
     }
     ```
 
-5. Replace the following placeholder values:
+8. Replace the following placeholder values:
 
-    - `<your-deployment-url>`: To retrieve a deployment URL, open your Astro Airflow Deployment in the Cloud UI, click **Open Airflow**, and copy the Airflow UI URL excluding `/home` on the end of the URL. For example, if your deployment URL is `https://astronomer.astronomer.run/abcdt4ry/home`, you would enter `https://astronomer.astronomer.run/abcdt4ry`.
-    - `<your-astro-token>`: To retrieve an Astronomer token, go to [cloud.astronomer.io/token](https://cloud.astronomer.io/token) and log in using your Astro credentials. After you log in, copy the token that appears and paste it as the value.
+    - `<your-deployment-url>`: The Deployment URL you copied in Step 2.
+    - `<your-astro-token>`: The token you copied in Step 3.
 
-6. Click **Trigger**. After the DAG successfully runs, all connections, variables, and environment variables that are available from the Airflow UI are migrated to Astronomer.
+9. Click **Trigger**. After the DAG successfully runs, all connections, variables, and environment variables that are available from the Airflow UI are migrated to Astronomer.
 
 </TabItem>
 </Tabs>

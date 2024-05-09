@@ -57,8 +57,8 @@ A custom registry can still connect to public networks or internet. Therefore, t
 
   :::
 
-2. Open your `config.yaml` file. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
-3. Add the following to your `config.yaml` file:
+2. Open your `values.yaml` file. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
+3. Add the following to your `values.yaml` file:
 
     ```yaml
     astronomer:
@@ -77,8 +77,8 @@ A custom registry can still connect to public networks or internet. Therefore, t
 
   :::info
 
-  To use different registries for each Deployment, do not set `astronomer.houston.config.deployments.registry.protectedCustomRegistry.updateRegistry.host`.
-
+  To use different registries for each Deployment, do not set `astronomer.houston.config.deployments.registry.protectedCustomRegistry.updateRegistry.host`. When you specify the host, include both the registry and the repository in the format `<registry>/<repo-name>/<subdirectory>`, where `<repo-name>/<subdirectory>` represents a repository name and optionally a subdirectory within that repository.
+  
   :::
 
 4. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
@@ -119,9 +119,9 @@ A custom registry can still connect to public networks or internet. Therefore, t
 
   :::
 
-2. Open your `config.yaml` file. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
+2. Open your `values.yaml` file. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
 
-3. Add the following to your `config.yaml` file:
+3. Add the following to your `values.yaml` file:
 
     ```yaml
     astronomer:
