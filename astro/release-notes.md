@@ -25,9 +25,86 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## May 8, 2024
+
+### Updates to address ranges for dedicated clusters on Google Cloud Provider
+
+Astro on GCP Dedicated Clusters uses source network address translation (SNAT) that performs many-to-one IP address translations for connections to your data sources and defaults secondary ranges to RFC 6598 address space (non-standard Private IP addresses), to minimize the risk and concern with IP overlap and exhaustion. Your target data sources will see connections from Astro using the VPC Subnet Range when using private networking, like VPC Peering or VPN. If you want to configure private connectivity, ensure the default subnet and peering ranges do not overlap with your target data source network when you're creating your dedicated cluster. See [Create a dedicated Astro cluster](https://docs.astronomer.io/astro/create-dedicated-cluster?tab=gcp#create-a-cluster) for more details.
+
+### Improvements to Astro performance
+
+As part of continued investment in the reliability, performance, and scalability of Astro, Astronomer is embarking on a migration of public and private image registries. Astro Runtime clusters will benefit from more performant, globally distributed and geo-replicated image registries, with built-in registry resilience if a regional outage occurs. This is in addition to the previous release of the registry cache local to every Astro cluster.
+
+No end user or task runtime change or impact is expected as part of the backend cutover during the week of May 6th, 2024.
+
+### Additional improvements
+
+- You can no longer create Deployments using Astro Runtime versions marked as `yanked` in `https://updates.astronomer.io/astronomer-runtime`, even if your Organization has enabled creating Deployments with deprecated Runtime versions. These versions of the Astro Runtime have known issues and should not be used. For more information, see [Restricted Runtime Versions](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#restricted-runtime-versions).
+
+### Bug fixes
+
+- Fixed a bug where multiple users could not access [Organization Dashboards](https://docs.astronomer.io/astro/organization-dashboard) simultaneously.
+
+## April 30, 2024
+
+### Deploy automatically from GitHub using the official Astro GitHub integration
+
+:::privatepreview
+:::
+
+
+The Astro GitHub integration is a new way to automatically deploy code from a GitHub repository to Astro without needing to configure a GitHub Action. Compared to using GitHub Actions, the Astro GitHub integration:
+
+- Allows you to enforce software development best practices without maintaining custom CI/CD scripts.
+- Enables developers to iterate on DAG code quickly.
+- Shows Git metadata directly in the Astro UI, including Git commit descriptions.
+- Gives you greater visibility into the status and detailed logs of an individual deploy.
+
+See [Deploy code with the Astro GitHub integration](deploy-github-integration.md) for more information.
+
+## April 23, 2024
+
+### Restrict a custom Deployment role to specific Workspaces
+
+You can now restrict the use of a custom Deployment role to specific Workspaces. Use Workspace role restriction when some Workspaces in your Organization have different requirements for how users interact with Deployments. See [Restrict a custom Deployment role to specific Workspaces](https://docs.astronomer.io/astro/customize-deployment-roles#restrict-a-custom-deployment-role-to-specific-workspaces) for setup steps.
+
+### Additional improvements
+
+- The [custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles) feature is now generally available.
+- You can now promote a [development Deployment](https://docs.astronomer.io/astro/deployment-resources#hibernate-a-development-deployment) to a production Deployment by switching off the **Development Mode** toggle in the Deployment's configuration.
+- Workspace Members can now see and use [custom Airflow menu items](https://docs.astronomer.io/learn/using-airflow-plugins#appbuilder-menu-items). To give a custom role this permission, you can add `deployment.airflow.customMenu.get` to the role's permissions list. This permission works only on Deployments running Astro Runtime 9 or later.
+
+    Note that you might have to modify the code for your menu item plugins to make them work on Astro. See [Appbuilder menu items](https://docs.astronomer.io/learn/using-airflow-plugins#appbuilder-menu-items) for more information.
+
+- You can now filter the Workspaces and clusters lists in the Astro UI by name.
+
+### Bug fixes
+
+- To improve the reliability of data lineage for customers who leverage it, data lineage is now a private preview feature that can be enabled upon request. To reenable data lineage for an Astro Organization, reach out to your account team.
+
+## April 16, 2024
+
+### Bug fixes
+
+- Fixed an issue where you couldn't grant a custom Deployment role to a Deployment API token using the Astro API.
+
+## April 9, 2024
+
+### Additional improvements
+
+- You can now manage [custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles) using the Astro API.
+- Improved the time it takes to load Deployment analytics in the Astro UI.
+- You can now view info-level incidents from the Deployment health status indicator in the Astro UI.
+- It is now possible for workers to use up to 6400 CPUs and 12800 GiB of memory on a single Deployment.
+
+### Bug fixes
+
+- Fixed an issue where you couldn't configure boolean values for Airflow connections in the Astro UI.
+- Fixed an issue where Airflow connections configured through the Astro UI did not work with deferrable tasks.
+
 ## April 3, 2024
 
-### Additional improvements 
+### Additional improvements
 
 - [Deployment health incidents](https://docs.astronomer.io/astro/deployment-health-incidents) are now generally available.
 - [Deployment hibernation](https://docs.astronomer.io/astro/deployment-resources#hibernate-a-development-deployment) is now in public preview.
@@ -52,7 +129,7 @@ Astro API documentation is now hosted at [https://docs.astronomer.io/api](https:
 
 ### Create Deployments with deprecated versions of Astro Runtime
 
-You can now use the Astro API to create Deployments with deprecated versions of Astro Runtime. Using deprecated Astro Runtime versions is sometimes necessary if you're migrating existing Airflow environments to Astro, or if you need to maintain deprecated environments for testing purposes. 
+You can now use the Astro API to create Deployments with deprecated versions of Astro Runtime. Using deprecated Astro Runtime versions is sometimes necessary if you're migrating existing Airflow environments to Astro, or if you need to maintain deprecated environments for testing purposes.
 
 Note that this feature is disabled by default. To use this feature, reach out to your account team and request for the feature to be enabled. See [Run a deprecated Astro Runtime version](https://docs.astronomer.io/astro/upgrade-runtime#run-a-deprecated-astro-runtime-version) for more information.
 
@@ -64,7 +141,7 @@ You can now use the following node instance types for database instances in GCP 
 
 - XLarge Compute Optimized (24 CPU, 48 GiB MEM)
 - XXLarge Compute Optimized (32 CPU, 64 GiB MEM)
-  
+
 See [GCP Hybrid cluster settings](https://docs.astronomer.io/astro/resource-reference-gcp-hybrid#supported-cloud-sql-instance-types) for a list of all available database instance types.
 
 ### Additional improvements
@@ -110,7 +187,7 @@ You can additionally use the new **Workplace Accessor** and **Deployment Admin**
 :::publicpreview
 :::
 
-In addition to exporting report data with downloads or email, you can now [export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) using webhooks. Use webhooks to send your reporting data to services such as Segment, Airtable, or Marketo.
+In addition to exporting report data with downloads or email, you can now [export reporting data](https://docs.astronomer.io/astro/org-dash-exports) using webhooks. Use webhooks to send your reporting data to services such as Segment, Airtable, or Marketo.
 
 Note that webhook exports are a [Sigma feature in beta](https://help.sigmacomputing.com/docs/webhook-exports) and might experience behavior changes.
 
@@ -123,9 +200,9 @@ Note that webhook exports are a [Sigma feature in beta](https://help.sigmacomput
 
 ### Reporting dashboards are now in public preview
 
-[Organization dashboards](https://docs.astronomer.io/astro/reporting-dashboard) are now in [Public Preview](https://docs.astronomer.io/astro/feature-previews) to use for examining key metrics across your Organization.
+[Organization dashboards](https://docs.astronomer.io/astro/organization-dashboard) are now in [Public Preview](https://docs.astronomer.io/astro/feature-previews) to use for examining key metrics across your Organization.
 
-You can also export data from reporting dashboards in the format of your choice. Exports can be triggered on a regular schedule or as an alert when specific criteria are met in your data. Export reporting data to share with other team members or to keep a record of key performance indicators. See [Export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) for more information.
+You can also export data from dashboards in the format of your choice. Exports can be triggered on a regular schedule or as an alert when specific criteria are met in your data. Export reporting data to share with other team members or to keep a record of key performance indicators. See [Export reporting data](https://docs.astronomer.io/astro/org-dash-exports) for more information.
 
 ### Customize Deployment-level permissions using Deployment roles
 
@@ -205,11 +282,11 @@ This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-pr
 
 :::
 
-The new **Dashboards** page includes a suite of dashboards that you can use to asses the performance of Deployments and DAGs across your entire Organization. Each dashboard focuses on a different aspect of your data pipelines to show you opportunities for cost and performance improvements. You can additionally configure Astro to send you alerts when a given metric reaches a specific threshold. See [Reporting dashboards](https://docs.astronomer.io/astro/reporting-dashboard) for summaries of each available dashboard.
+The new **Dashboards** page includes a suite of dashboards that you can use to asses the performance of Deployments and DAGs across your entire Organization. Each dashboard focuses on a different aspect of your data pipelines to show you opportunities for cost and performance improvements. You can additionally configure Astro to send you alerts when a given metric reaches a specific threshold. See [Organization Dashboards](https://docs.astronomer.io/astro/organization-dashboard) for summaries of each available dashboard.
 
 ### Additional improvements
 
-- When you submit a support request from the Astro UI, you must now define an **Active Engagement Period** when you or a member of your team can engage with a member of Astronomer support. 
+- When you submit a support request from the Astro UI, you must now define an **Active Engagement Period** when you or a member of your team can engage with a member of Astronomer support.
 - Workspace Members can now access the **Clusters** view in the Airflow UI for a Deployment.
 
 ### Bug fixes

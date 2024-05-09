@@ -953,7 +953,7 @@ components:
           description: The Deployment's current DAG tarball version, also known as
             the Bundle Version in the Astro UI. If no deploys are currently processing,
             this value should be the same as DesiredDagTarballVersion.
-          example: 2024-01-12T18:32
+          example: "2024-01-12T18:32:20.5898930Z"
           type: string
         defaultTaskPodCpu:
           description: The default CPU resource usage for a worker Pod when running
@@ -977,7 +977,7 @@ components:
             a DAG-only deploy to indicate that the Deployment is expecting a new DAG
             tarball version. If no deploys are currently processing, this value should
             be the same as DagTarballVersion.
-          example: 2024-01-12T18:34
+          example: "2024-01-12T18:32:20.5898930Z"
           type: string
         environmentVariables:
           description: The Deployment's environment variables. Secret values will
@@ -2004,6 +2004,13 @@ components:
           description: Whether the Deployment has DAG deploys enabled.
           example: true
           type: boolean
+        isDevelopmentMode:
+          description: Whether the Deployment is for development only. If `false`,
+            the Deployment can be considered production for the purposes of support
+            case priority, but development-only features such as hibernation will
+            not be available. You can't update this value to `true` for existing non-development
+            Deployments.
+          type: boolean
         isHighAvailability:
           description: Whether the Deployment is configured for high availability.
             If `true`, multiple scheduler pods will be online.
@@ -2279,6 +2286,13 @@ components:
         isDagDeployEnabled:
           description: Whether the Deployment has DAG deploys enabled.
           example: true
+          type: boolean
+        isDevelopmentMode:
+          description: Whether the Deployment is for development only. If `false`,
+            the Deployment can be considered production for the purposes of support
+            case priority, but development-only features such as hibernation will
+            not be available. You can't update this value to `true` for existing non-development
+            Deployments.
           type: boolean
         isHighAvailability:
           description: Whether the Deployment is configured for high availability.
@@ -2608,11 +2622,9 @@ components:
       - workspaces
       type: object
   securitySchemes:
-    Bearer:
-      type: http
+    JWT:
       scheme: bearer
-security: 
-  - Bearer: []
+      type: http
 info:
   contact: {}
   description: Astro Platform API
@@ -2917,6 +2929,14 @@ paths:
         required: true
         schema:
           type: string
+      - description: A list of names for Clusters to filter by. The API returns details
+          only for the specified Clusters.
+        in: query
+        name: names
+        schema:
+          items:
+            type: string
+          type: array
       - description: The cloud provider to list clusters for. Clusters from other
           providers will be filtered out of the results.
         in: query
@@ -3354,6 +3374,14 @@ paths:
           items:
             type: string
           type: array
+      - description: A list of names for Deployments to filter by. The API returns
+          details only for the specified Deployments.
+        in: query
+        name: names
+        schema:
+          items:
+            type: string
+          type: array
       - description: A list of IDs for Workspaces to filter on. The API returns details
           for all Deployments belonging only to the specified Workspaces.
         in: query
@@ -3775,6 +3803,15 @@ paths:
           items:
             type: string
           type: array
+      - description: A list of names for specific Workspaces to filter by. The API
+          will list information only for Workspaces which have been specified in this
+          list.
+        in: query
+        name: names
+        schema:
+          items:
+            type: string
+          type: array
       - description: The number of results to skip before returning values.
         in: query
         name: offset
@@ -4090,6 +4127,8 @@ paths:
       - Workspace
       x-permission:
       - action: workspace.settings.update
+security:
+- JWT: []
 servers:
 - url: https://api.astronomer.io/platform/v1beta1
 tags:

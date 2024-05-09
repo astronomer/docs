@@ -52,7 +52,7 @@ To grant a Deployment access to a service that is running in an AWS account not 
 To authorize your Deployment, create an IAM role that is assumed by the Deployment's workload identity:
 
 1. In the Astro UI, select your Deployment and then click **Details**. Copy the Deployment's **Workload Identity**.
-2. Create an IAM role in the AWS account that contains your AWS service. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
+2. In the AWS account that contains your AWS service, create an IAM role. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
 3. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
 4. Click **Roles** and in the **Role name** column, select the role you created in Step 2.
 5. Click **Trust relationships**.

@@ -136,13 +136,13 @@ When you choose a deprecated version of Astro Runtime, Astronomer recommends alw
 
 1. Contact your Astronomer account team and request the ability to run deprecated versions of Astro Runtime.
 2. Create a [Personal Access Token](https://cloud.astronomer.io/token)(PAT) to use for authentication to Astro.
- 
+
        :::info
 
     You only need a PAT to create the first Deployment in your Organization running a deprecated version of Astro Runtime. You can then create all subsequent Deployments using either a Workspace or Organization API token with permissions to create a Deployment.
 
     :::
-    
+
 3. Create a Deployment using the [Astro API](https://docs.astronomer.io/api/platform-api-reference/deployment/create-deployment). In your request, specify your PAT in the authorization header, and your deprecated Astro Runtime version using the `astroRuntimeVersions` property.
 
 After you create the Deployment, you can manage the Deployment using any interface, including the Astro CLI and [Astro UI](deployment-settings.md). You can also create additional Deployments with deprecated Runtimes using the Astro API and either a Workspace or Organization API token.
@@ -156,6 +156,14 @@ This is where you'll find the upgrade considerations for specific Astro Runtime 
 If an Astro Runtime version isn't included in this section, then there are no specific upgrade considerations for that version.
 
 :::
+
+#### Runtime 11 (Airflow 2.9)
+
+##### Bug affecting users running a local Astro Runtime environment
+
+In Airflow 2.9, a bug affecting custom actions in Airflow plugins ([#39421](https://github.com/apache/airflow/pull/39421)) prevented users from running the Astro Runtime environment locally for Astro Runtime versions 11.0.0, 11.1.0, and 11.2.0. Deployments running these versions on Astro are not affected.
+
+To continue using these versions of the Astro runtime locally, set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
 
 #### Runtime 9 (Airflow 2.7)
 

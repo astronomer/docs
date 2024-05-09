@@ -25,7 +25,7 @@ To complete this setup, you need:
 - A PostgreSQL instance accessible from that environment.
 - PostgreSQL superuser permissions.
 - A VPN (or other means) set up to access, at a minimum, Kubernetes and DNS from inside your VPC.
-- A Helm configuration file for Astronomer named `config.yaml`. You can find sample `config.yaml` files in the [AWS](install-aws-standard.md#step-8-configure-your-helm-chart), [Azure](install-azure-standard.md#step-8-configure-your-helm-chart), [GCP](install-gcp-standard.md#step-8-configure-your-helm-chart) standard installation guides.
+- A Helm configuration file for Astronomer named `values.yaml`. You can find sample `values.yaml` files in the [AWS](install-aws-standard.md#step-8-configure-your-helm-chart), [Azure](install-azure-standard.md#step-8-configure-your-helm-chart), [GCP](install-gcp-standard.md#step-8-configure-your-helm-chart) standard installation guides.
 
 ## Step 1: Configure a private Docker registry
 
@@ -60,21 +60,30 @@ The images and tags which are required for your Software installation depend on 
     ```
 
     This command sets all possible Helm values that could impact which images are required for your installation. By fetching all images now, you save time by eliminating the risk of missing an image.
-2. Run the following command to template the Airflow Helm chart and fetch its rendered image tags:
+    
+2. Run the following command to determine the Astronomer Airflow Helm chart version:
+ 
+    ```shell
+    helm template astronomer/astronomer --version <your-astronomer-version>|grep 'Static helm' -A4| grep "version: " | sed -e 's/"//g' -e 's/version:[ ]//' -e 's/^ */v/g'
+    ```
+
+3. Run the following command to template the Astronomer Airflow Helm chart and fetch its rendered image tags:
 
     ```shell
-    helm template --version <your-airflow-version> astronomer/airflow --set airflow.postgresql.enabled=false --set airflow.pgbouncer.enabled=true --set airflow.statsd.enabled=true --set airflow.executor=CeleryExecutor | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq
+    helm template --version <your-astronomer-airflow-chart-version> astronomer/airflow --set airflow.postgresql.enabled=false --set airflow.pgbouncer.enabled=true --set airflow.statsd.enabled=true --set airflow.executor=CeleryExecutor | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq
     ```
+
+    **Note:** The Astronomer Airflow Helm Chart version begins with the letter v and is versioned separately from Astronomer Software and Airflow.
 
 These commands generate a list of images required for your version of Astronomer. Add these images to a private image registry hosted within your organization's network. In Step 3, you will specify this private registry in your Astronomer configuration.
 
-> **Note:** If you have already enabled or disabled Astronomer platform components in your `config.yaml`, you can pass `-f/--values config.yaml` to `helm template` to print a list specific to your `config.yaml` configuration.
+> **Note:** If you have already enabled or disabled Astronomer platform components in your `values.yaml`, you can pass `-f/--values values.yaml` to `helm template` to print a list specific to your `values.yaml` configuration.
 
-## Step 3: Add images to your config.yaml file
+## Step 3: Add images to your values.yaml file
 
 Regardless of whether you choose to mirror or manually pull/push images to your private registry, the returned images and/or tags must be made accessible within your network.
 
-To make these images accessible to Astronomer, specify your organization's private registry in the `global` section of your `config.yaml` file:
+To make these images accessible to Astronomer, specify your organization's private registry in the `global` section of your `values.yaml` file:
 
 ```yaml
 global:
@@ -84,7 +93,7 @@ global:
     # secretName: ~
 ```
 
-This configuration automatically pulls most Docker images required in the Astronomer Helm chart. You must also configure the following images individually in a separate section of your `config.yaml` file:
+This configuration automatically pulls most Docker images required in the Astronomer Helm chart. You must also configure the following images individually in a separate section of your `values.yaml` file:
 
 ```yaml
 astronomer:
@@ -120,16 +129,16 @@ astronomer:
 There are two Helm charts required for Astronomer:
 
 - The [Astronomer Helm chart](https://github.com/astronomer/astronomer) for the Astronomer Platform
-- The [Airflow Helm chart](https://github.com/astronomer/airflow-chart) for Airflow deployments in Astronomer Platform
+- The [Astronomer Airflow Helm chart](https://github.com/astronomer/airflow-chart) for Airflow deployments in Astronomer Platform
 
 The Astronomer Helm chart can be downloaded using `helm pull` and applied locally if desired.
 
-Commander, which is Astronomer's provisioning component, uses the Airflow Helm chart to create Airflow deployments. You have two options to make the Helm chart available to Commander:
+Commander, which is Astronomer's provisioning component, uses the Astronomer Airflow Helm chart to create Airflow deployments. You have two options to make the Helm chart available to Commander:
 
-- Use the built-in Airflow Helm chart in the Commander Docker image.
-- Host the Airflow Helm chart within your network. Not every cloud provider has a managed Helm registry, so you might want to check out [JFrog Artifactory](https://jfrog.com/artifactory) or [ChartMuseum](https://github.com/helm/chartmuseum).
+- Use the built-in Astronomer Airflow Helm chart in the Commander Docker image.
+- Host the Astronomer Airflow Helm chart within your network. Not every cloud provider has a managed Helm registry, so you might want to check out [JFrog Artifactory](https://jfrog.com/artifactory) or [ChartMuseum](https://github.com/helm/chartmuseum).
 
-To use the built-in Airflow Helm chart in the Commander Docker image, add the following configuration to your `config.yaml` file:
+To use the built-in Astronomer Airflow Helm chart in the Commander Docker image, add the following configuration to your `values.yaml` file:
 
 ```yaml
 astronomer:
@@ -138,7 +147,7 @@ astronomer:
       enabled: true
 ```
 
-To configure a self-hosted Helm chart, add the following configuration to your `config.yaml` file:
+To configure a self-hosted Helm chart, add the following configuration to your `values.yaml` file:
 
 ```yaml
 # Example URL - replace with your own repository destination
@@ -148,7 +157,7 @@ global:
 
 :::info
 
-If you configure both options in your `config.yaml` file, then `astronomer.commander.airGapped.enabled` takes precedence over `global.helmRepo`.
+If you configure both options in your `values.yaml` file, then `astronomer.commander.airGapped.enabled` takes precedence over `global.helmRepo`.
 
 :::
 
@@ -314,7 +323,7 @@ astronomer:
       deployments:
         helm:
           airflow:
-            extraEnv: |
+            extraEnv:
             - name: AIRFLOW__ASTRONOMER__UPDATE_URL
               value: http://astronomer-releases.astronomer.svc.cluster.local/astronomer-runtime
 ```
@@ -323,7 +332,7 @@ astronomer:
 
 Before completing this step, double-check that the following statements are true:
 
-- You made Astronomer's Docker images, Airflow Helm chart, and updates JSON accessible inside your network.
+- You made Astronomer's Docker images, Astronomer Airflow Helm chart, and updates JSON accessible inside your network.
 - You completed Steps 1 through 8 in the [AWS](install-aws-standard.md), [Azure](install-azure-standard.md), or [GCP](install-gcp-standard.md) install guide.
 
 After this check, you can install the Astronomer Helm chart by running the following commands, making sure to replace `<your-image-tag>` with the version of Astronomer that you want to install:
@@ -335,7 +344,7 @@ curl -L https://github.com/astronomer/astronomer/archive/v<your-image-tag>.tar.g
 helm pull astronomer/astronomer
 
 # ... If necessary, copy to a place where you can access Kubernetes ...
-helm install astronomer -f config.yaml -n astronomer astronomer.tgz
+helm install astronomer -f values.yaml -n astronomer astronomer.tgz
 ```
 
 After these commands finish, continue your installation with Step 10 (Verify pods are up) in the [AWS](install-aws-standard.md#step-10-verify-pods-are-up), [Azure](install-azure-standard.md#step-10-verify-all-pods-are-up), or [GCP](install-gcp-standard.md#step-10-verify-that-all-pods-are-up) installation guide.

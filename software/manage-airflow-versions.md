@@ -45,7 +45,7 @@ Starting the upgrade process doesn't interrupt or otherwise impact your Airflow 
 
 ### With the Astro CLI
 
-1. Run `astro auth login <base-domain>` to confirm you're authenticated.
+1. Run `astro login <base-domain>` to confirm you're authenticated.
 
 2. Run the following command to list your current Deployments.
 
@@ -156,7 +156,7 @@ Canceling the Airflow upgrade process does not interrupt or otherwise impact you
 
 :::info
 
-If you can't cancel your upgrade and receive an error message about using an unsupported Airflow version, set the following value in your `config.yaml` file and [apply the change](apply-platform-config.md) to successfully cancel your upgrade. This configuration allows you to roll back to your current version of Airflow, even if it's not supported.
+If you can't cancel your upgrade and receive an error message about using an unsupported Airflow version, set the following value in your `values.yaml` file and [apply the change](apply-platform-config.md) to successfully cancel your upgrade. This configuration allows you to roll back to your current version of Airflow, even if it's not supported.
 
 ```yaml
 astronomer:

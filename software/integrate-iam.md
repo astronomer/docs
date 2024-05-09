@@ -189,7 +189,7 @@ For additional information, refer to [IAM role Configuration](https://docs.aws.a
 
 In order to apply your IAM role to any Airflow Deployment on Astronomer, you'll need to explicitly pass an annotation key to the platform. To do so:
 
-1. Set the following in your `config.yaml` file under `astronomer.houston.config.deployments`:
+1. Set the following in your `values.yaml` file under `astronomer.houston.config.deployments`:
 
     ```yaml
     serviceAccountAnnotationKey: eks.amazonaws.com/role-arn
@@ -274,7 +274,7 @@ gcloud iam service-accounts create <gsa-name>
 
 ### Step 3: Configure Astronomer
 
-Add the following to your `config.yaml` file and push it to your platform as described in [Apply a config change](apply-platform-config.md):
+Add the following to your `values.yaml` file and push it to your platform as described in [Apply a config change](apply-platform-config.md):
 
 ```yaml
 astronomer:

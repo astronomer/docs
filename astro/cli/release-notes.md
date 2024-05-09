@@ -16,7 +16,29 @@ import HybridBadge from '@site/src/components/HybridBadge';
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
-- **Stable versions**: {{CLI_VER_LATEST}}, {{CLI_VER_2}}, and {{CLI_VER_3}}. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md).
+- **Stable versions**: {{CLI_VER_LATEST}}, {{CLI_VER_2}}, and {{CLI_VER_3}}. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md) for more information about support for CLI versions.
+
+## Astro CLI 1.26.0
+
+Release date: April 24, 2024
+
+### New commands to assign Organization and Workspace API tokens at different levels
+
+You can now use the Astro CLI to manage Organization and Workspace API tokens at the Workspace and Deployment level using the following commands:
+
+- [`astro deployment token organization-token`](https://docs.astronomer.io/astro/cli/astro-deployment-token-organization-token)
+- [`astro deployment token workspace-token`](https://docs.astronomer.io/astro/cli/astro-deployment-workspace-token)
+- [`astro workspace token organization-token`](https://docs.astronomer.io/astro/cli/astro-workspace-token-organization-token)
+
+For more information about this feature, see:
+- [Assign an Organization or Workspace API token to a Deployment](deployment-api-tokens.md#assign-an-organization-or-workspace-api-token-to-a-deployment).
+- [Assign an Organization API token to a Workspace](https://docs.astronomer.io/astro/workspace-api-tokens#assign-an-organization-api-token-to-a-workspace)
+
+### Bug fixes
+
+- Fixed an issue where existing secret environment variables in a Deployment file could be applied to the Deployment with an empty value. The secret variable value now persists.
+- Fixed an issue where `astro deployment inspect` generated an incorrect Airflow API URL.
+- Fixed a bug that caused some input checks for `astro deployment upgrade-checks` to fail against valid inputs.
 
 ## Astro CLI 1.25.0
 

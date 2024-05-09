@@ -14,11 +14,14 @@ If you're experiencing an issue or have a question that requires Astronomer expe
 - Submit a support request in the [Astro UI](https://cloud.astronomer.io/open-support-request).
 - Submit a support request on the [Astronomer support portal](https://support.astronomer.io/hc/en-us).
 - Send an email to [support@astronomer.io](mailto:support@astronomer.io).
-- Submit a support request by phone at +1 (831) 777-2768.
 
 ## Best practices for support request submissions
 
 The following are the best practices for submitting support requests in the Astro UI or the Astronomer support portal:
+
+### Check the Astro status page
+
+Before you open a ticket for unexpected or disruptive behavior on Astro, check the [Astro status page](https://status.astronomer.io/) to see if the problem you're experiencing has already been reported.
 
 ### Always indicate priority
 

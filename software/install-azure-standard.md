@@ -261,7 +261,7 @@ kubectl create secret generic astronomer-bootstrap \
 A few additional configuration notes:
 - If you provision an external database, `postgresqlEnabled` should be set to `false` in Step 8. The in-cluster database should be used only for development or proof-of-concept installations. All production installations should use an external database.
 - If your organization uses Azure Database for PostgreSQL as the database backend, you need to enable the `pg_trgm` extension using the Azure portal or the Azure CLI before you install Astronomer Software. If you don't enable the `pg_trgm` extension, the install will fail. For more information about enabling the `pg_trgm` extension, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
-- If you provision Azure Database for PostgreSQL - Flexible Server, it enforces TLS/SSL and requires that you set `sslmode` to `prefer` in your `config.yaml`.
+- If you provision Azure Database for PostgreSQL - Flexible Server, it enforces TLS/SSL and requires that you set `sslmode` to `prefer` in your `values.yaml`.
 
 ## Step 8: Configure Your Helm chart
 
@@ -271,9 +271,9 @@ To use a third-party ingress controller for Astronomer, see [Third-Party Ingress
 
 :::
 
-As a next step, create a file named `config.yaml` in an empty directory.
+As a next step, create a file named `values.yaml` in an empty directory.
 
-For context, this `config.yaml` file will assume a set of default values for our platform that specify everything from user role definitions to the Airflow images you want to support. As you grow with Astronomer and want to customize the platform to better suit your team and use case, your `config.yaml` file is the best place to do so.
+For context, this `values.yaml` file will assume a set of default values for our platform that specify everything from user role definitions to the Airflow images you want to support. As you grow with Astronomer and want to customize the platform to better suit your team and use case, your `values.yaml` file is the best place to do so.
 
 In the newly created file, copy the example below and replace `baseDomain`, `private-root-ca`, `/etc/containerd/certs.d`, and `astronomer.houston.secret` with your own values. For more example configuration files, see the [Astronomer GitHub](https://github.com/astronomer/astronomer/tree/master/configs).
 
@@ -365,7 +365,7 @@ If you are installing Astronomer in an airgapped environment without access to t
 
 <!--- Version-specific -->
 
-Now that you have an AKS cluster set up and your `config.yaml` defined, you're ready to deploy all components of our platform.
+Now that you have an AKS cluster set up and your `values.yaml` defined, you're ready to deploy all components of our platform.
 
 First, run:
 
@@ -382,7 +382,7 @@ helm repo update
 This ensures that you pull the latest image from the Astronomer Helm repository. Now, run:
 
 ```sh
-helm install -f config.yaml --version=0.34 --namespace=astronomer <your-platform-release-name> astronomer/astronomer
+helm install -f values.yaml --version=0.34 --namespace=astronomer <your-platform-release-name> astronomer/astronomer
 ```
 
 This command installs the most recent patch version of Astronomer Software. To install a different patch version, add the `--version=` flag and use the format `0.34.x`.  For example, to install Astronomer Software v0.34.0, you specify `--version=0.34.0`. For more information about the available patch versions, see the [Software Release Notes](release-notes.md).
@@ -397,11 +397,11 @@ You can install Astronomer with [ArgoCD](https://argo-cd.readthedocs.io/en/stabl
 
 Because ArgoCD doesn't support sync wave dependencies for [app of apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern) structures, installing Astronomer requires some additional steps compared to the standard ArgoCD workflow:
 
-1. Under the `global` section of your `config.yaml` file, add `enableArgoCDAnnotation: true`.
-
+1. Under the `global` section of your `values.yaml` file, add `enableArgoCDAnnotation: true`.
+   
 2. Create a new ArgoCD app. When creating the app, configure the following:
 
-    - **Path**: The filepath of your `config.yaml` file
+    - **Path**: The filepath of your `values.yaml` file
     - **Namespace**: The namespace you want to use for Astronomer
     - **Cluster**: The Kubernetes cluster in which you're installing Astronomer
     - **Repository URL**: `https://helm.astronomer.io`
@@ -538,7 +538,7 @@ curl -v -k -X POST https://houston.BASEDOMAIN/v1 -H "Authorization: Bearer <toke
 Next, to make sure the registry is accepted by Astronomer's local docker client, try authenticating to Astronomer with the Astro CLI:
 
 ```sh
-astro auth login <your-astronomer-base-domain>
+astro login <your-astronomer-base-domain>
 ```
 
 If you can log in, then your Docker client trusts the registry. If Docker does not trust the Astronomer registry, run the following and restart Docker:
@@ -552,7 +552,7 @@ Finally, try running `$ astro deploy` on a test deployment. Create a deployment 
 ```sh
 $ mkdir demo
 $ cd demo
-$ astro dev init --use-astronomer-certified
+$ astro dev init
 $ astro deploy -f
 ```
 Check the Airflow namespace. If pods are changing at all, then the Houston API trusts the registry.
@@ -562,7 +562,7 @@ If you have Airflow pods in the state `ImagePullBackoff`, check the pod descript
 - Configured containerd’s `config_path` to point to `/etc/containerd/certs.d`.
 - Added the `privateCaCertsAddToHost` key-value pairs to your Helm chart.
 
-If you missed these steps during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation. If you are using a base image such as CoreOS that does not permit values to be changed, or you otherwise can't modify `config.yaml`, contact [Astronomer support](https://support.astronomer.io) for additional configuration assistance.
+If you missed these steps during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation. If you are using a base image such as CoreOS that does not permit values to be changed, or you otherwise can't modify `values.yaml`, contact [Astronomer support](https://support.astronomer.io) for additional configuration assistance.
 
 ## What's next
 

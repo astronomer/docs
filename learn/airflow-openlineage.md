@@ -90,7 +90,7 @@ These capabilities translate into real world benefits by:
 
 ## Lineage on Astro
 
-For Astronomer customers using [Astro](https://www.astronomer.io/product/), OpenLineage is built in. The **Lineage** tab in the Astronomer UI provides multiple pages that can help you troubleshoot issues with your data pipelines and understand the movement of data across your organization. OpenLineage also powers Astro's own [alerts](https://docs.astronomer.io/astro/alerts.md), which is why you need to make sure OpenLineage is enabled to configure them. For more on lineage capabilities with Astro, see [View lineage on Astro](https://docs.astronomer.io/astro/data-lineage) or [contact Astronomer](https://www.astronomer.io). 
+For Astronomer customers using [Astro](https://www.astronomer.io/product/), OpenLineage is built in. The **Lineage** tab in the Astronomer UI provides multiple pages that can help you troubleshoot issues with your data pipelines and understand the movement of data across your organization. OpenLineage also powers Astro's own [alerts](https://docs.astronomer.io/astro/alerts), which is why you need to make sure OpenLineage is enabled to configure them. For more on lineage capabilities with Astro, see [View lineage on Astro](https://docs.astronomer.io/astro/data-lineage) or [contact Astronomer](https://www.astronomer.io). 
 
 ## Getting started locally
 

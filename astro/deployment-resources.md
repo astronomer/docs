@@ -65,7 +65,7 @@ To manage Kubernetes resources programmatically, you can set default Pod limits 
         - **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
         - **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
 
-     For a Deployment running in a Hosted dedicated or shared cluster, the maximum possible **CPU** quota is 1600 vCPU and maximum **Memory** quota is 3200 GiB.
+     For a Deployment running in a Hosted dedicated or shared cluster, the maximum possible **CPU** quota is 6400 vCPU and maximum **Memory** quota is 12800 GiB.
 
      :::warning Astro Hosted
 
@@ -83,7 +83,9 @@ Scheduler resources must be set for each Deployment and are managed separately f
 
 Unlike workers, schedulers do not autoscale. The resources you set for them are the resources you have regardless of usage. For more information about how scheduler configuration affects resources usage, see [Pricing](https://astronomer.io/pricing).
 
-Astronomer Deployments run a single scheduler. You can configure your scheduler to have different amounts of resources based on how many tasks you need to schedule. The following table lists all possible scheduler sizes for Astro Hosted:
+Astronomer Deployments run a single scheduler by default. You can configure your scheduler to have different amounts of resources based on how many tasks you need to schedule. You can also enable [High Availability](deployment-resources.md#enable-high-availability) to run two instances of PGBouncer and the Airflow Scheduler.
+
+The following table lists all possible scheduler sizes for Astro Hosted:
 
 | Scheduler size | vCPU | Memory | Ephemeral storage |
 | -------------- | ---- | ------ | ----------------- |
@@ -172,7 +174,7 @@ You can hibernate a Deployment only if you enabled **Development Mode** when you
 
 Before you create a hibernation schedule for a Deployment, consider the following constraints:
 
-- The Deployment must have the **Development Mode** setting turned on. This setting can only be configured when you create a Deployment.
+- The Deployment must have the **Development Mode** setting turned on. This setting can be turned on only when you create a Deployment.
 - The **High Availability** feature is not supported. A Deployment with a hibernation schedule cannot be highly available.
 - The **Small Scheduler** (1 vCPU, 2 GiB RAM) is the only scheduler size supported.
 - Deployments with hibernation schedules are not required to meet the uptime SLAs of standard production Deployments.
