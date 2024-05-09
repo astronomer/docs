@@ -2,7 +2,6 @@
   "name": "my-website",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "yarn@4.2.2",
   "scripts": {
     "script:buildRSS": "yarn node createRSSFeeds.mjs",
     "docusaurus": "docusaurus",
