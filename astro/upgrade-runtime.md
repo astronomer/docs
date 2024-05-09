@@ -136,13 +136,13 @@ When you choose a deprecated version of Astro Runtime, Astronomer recommends alw
 
 1. Contact your Astronomer account team and request the ability to run deprecated versions of Astro Runtime.
 2. Create a [Personal Access Token](https://cloud.astronomer.io/token)(PAT) to use for authentication to Astro.
- 
+
        :::info
 
     You only need a PAT to create the first Deployment in your Organization running a deprecated version of Astro Runtime. You can then create all subsequent Deployments using either a Workspace or Organization API token with permissions to create a Deployment.
 
     :::
-    
+
 3. Create a Deployment using the [Astro API](https://docs.astronomer.io/api/platform-api-reference/deployment/create-deployment). In your request, specify your PAT in the authorization header, and your deprecated Astro Runtime version using the `astroRuntimeVersions` property.
 
 After you create the Deployment, you can manage the Deployment using any interface, including the Astro CLI and [Astro UI](deployment-settings.md). You can also create additional Deployments with deprecated Runtimes using the Astro API and either a Workspace or Organization API token.
@@ -173,7 +173,7 @@ ENV AIRFLOW__CORE__TEST_CONNECTION=Enabled
 
 The base distribution of Astro Runtime 9 uses Python 3.11 by default. Some provider packages, such as `apache-airflow-providers-apache-hive`, aren't compatible with Python 3.11.
 
-To continue using these packages with a compatible version of Python, upgrade to the [Astro Runtime Python distribution](runtime-image-architecture.mdx#python-version-distributions) for your desired Python version.
+To continue using these packages with a compatible version of Python, upgrade to the [Astro Runtime Python distribution](runtime-image-architecture.mdx#python-version-images) for your desired Python version.
 
 #### Runtime 8 (Airflow 2.6)
 
