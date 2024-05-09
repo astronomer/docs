@@ -147,8 +147,6 @@ def test_dag_tags(dag_id, dag, fileloc):
 
 Airflow offers different ways to run DAG validation tests using any Python test runner. This section gives an overview of the most common implementation methods. If you are new to testing Airflow DAGs, you can quickly get started by using Astro CLI commands.
 
-
-
 ### Airflow CLI 
 
 The Airflow CLI offers two commands related to local testing:
@@ -169,6 +167,12 @@ The Astro CLI includes a suite of commands to help simplify common testing workf
 ### Test DAGs in a CI/CD pipeline
 
 You can use CI/CD tools to test and deploy your Airflow code. By installing the Astro CLI into your CI/CD process, you can test your DAGs before deploying them to a production environment. See [set up CI/CD](https://docs.astronomer.io/astro/set-up-ci-cd) for example implementations.
+
+:::info
+
+Astronomer customers can use the Astro GitHub integration, which allows you to automatically deploy code from a GitHUb repository to an Astro deployment, viewing Git metadata in the Astro UI. See [Deploy code with the Astro GitHub integration](https://docs.astronomer.io/astro/deploy-github-integration). 
+
+:::
 
 ## Add test data or files for local testing
 
