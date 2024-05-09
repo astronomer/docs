@@ -1,6 +1,6 @@
 ---
 title: 'When to use Airflow or Astro alerts for your pipelines on Astro'
-sidebar_label: 'Airflow vs. Astro alerts'
+sidebar_label: 'Choosing Airflow or Astro alerts'
 id: airflow-vs-astro-alerts
 ---
 
