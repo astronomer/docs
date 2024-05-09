@@ -30,3 +30,6 @@ static/astro-software-release-notes.xml
 static/astro-software-runtime-release-notes.xml
 
 **/.definition/**
+
+.yarn
+.yarnrc.yml

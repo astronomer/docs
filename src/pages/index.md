@@ -11,7 +11,7 @@ import LinkCard from '@site/src/components/LinkCard';
 import AstroCard from '@site/src/components/AstroCard';
 import NewsletterForm from '@site/src/components/NewsletterForm';
 
-<img src="/img/home-logos@2x.png" width="145" height="48" style={{marginBottom: "0.5rem"}} />
+<img src="/docs/img/home-logos@2x.png" width="145" height="48" style={{marginBottom: "0.5rem"}} />
 
 # Astronomer Docs
 

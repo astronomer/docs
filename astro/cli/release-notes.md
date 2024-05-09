@@ -10,7 +10,7 @@ import HybridBadge from '@site/src/components/HybridBadge';
 
 <p>
     <a href="/astro-cli-release-notes.xml" target="_blank">
-        <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
+        <img src="/docs/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
     </a>
 </p>
 
