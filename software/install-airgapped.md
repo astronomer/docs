@@ -8,15 +8,22 @@ id: install-airgapped
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This guide explains how to install Astronomer Software into an airgapped environment. An airgapped environment is a locked-down environment with no access to or from the public internet. Astronomer recommends that all new Astronomer Software installations should run in an airgapped environment.
+## Confirm you meet requirements for Astronomer Software
+TODO
+* kubernetes version
+* cert type
+* database
 
-To complete this setup, you'll configure a new namespace in your Kubernetes cluster and set up infrastructure so that the namespace can access all of the following resources from a private network:
-
-- Docker images from `quay.io/astronomer` or `docker.io`
-- Astronomer Helm charts from `helm.astronomer.io`
-- Astronomer version information from `updates.astronomer.io`
-
-You'll also configure various Astronomer features that are essential to running Airflow securely and reliably within your airgapped environment. 
+See TODO
+## Prepare to Access the Astronomer Software Platform Chart
+* If you have internet accces to `https://helm.astronomer.io` run the following command on the machine you will be installing Astronomer Software on:
+```
+helm repo add astronomer https://helm.astronomer.io/
+helm repo update
+```
+* If you do not have internet access to `https://helm.astronomer.io` download the Astronomer Software Platform helm chart file corresponding to the version of Astronomer Software they are installing or upgrading to from `https://helm.astronomer.io/astronomer-<version number>.tgz`. 
+  * e.g. if installing Astronomer Software v0.34.1 download `https://helm.astronomer.io/astronomer-0.34.1.tgz`.
+  * This file does not need to uploaded to an internal chart-repository.
 
 ## Prerequisites
 
@@ -27,6 +34,7 @@ You'll also configure various Astronomer features that are essential to running 
         {label: 'AWS', value: 'aws'},
         {label: 'GCP', value: 'gcp'},
         {label: 'Azure', value: 'azure'},
+        {label: 'Other', value: 'other'},
     ]}>
 
 <TabItem value="aws">
@@ -39,7 +47,6 @@ To complete this setup, you need:
 - A VPN (or other means) to access, at a minimum, Kubernetes and DNS from inside your VPC.
 - A PostgreSQL instance accessible from your Kubernetes cluster. For versioning considerations, see [Version Compatibility Reference](version-compatibility-reference.md).
 - The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-- The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html)
 - [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
 - An SMTP service and credentials. For example, Mailgun or Sendgrid.
 - Permission to create and modify resources on AWS.
@@ -47,19 +54,18 @@ To complete this setup, you need:
 - PostgreSQL superuser permissions.
 - An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).  
 - If you use Kubernetes version 1.23 or later, the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
+- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
 - (Optional) [`eksctl`](https://eksctl.io/) for creating and managing your Astronomer cluster on EKS.
 
 </TabItem>
 
 <TabItem value="gcp">
-
 - [Google Cloud SDK](https://cloud.google.com/sdk/install)
 - A VPC.
 - A private Kubernetes cluster. For versioning considerations, see [Version Compatibility Reference](version-compatibility-reference.md).
 - A VPN (or other means) to access, at a minimum, Kubernetes and DNS from inside your VPC.
 - A PostgreSQL instance accessible from your Kubernetes cluster. For versioning considerations, see [Version Compatibility Reference](version-compatibility-reference.md).
 - The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-- The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html)
 - [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
 - An SMTP service and credentials. For example, Mailgun or Sendgrid.
 - Permission to create and modify resources on Google Cloud Platform
@@ -67,15 +73,9 @@ To complete this setup, you need:
 - PostgreSQL superuser permissions.
 - An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).  
 - If you use Kubernetes version 1.23 or later, the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
-- (Optional) [`eksctl`](https://eksctl.io/) for creating and managing your Astronomer cluster on EKS.
+- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
 
-:::info
 
-There is a known bug on GCP GKE Dataplane V2 clusters that affects Astronomer Software installations. When Astronomer Software is installed on a GCP GKE Dataplane V2 cluster, the interaction between the Astronomer Nginx ingress controller and Cilium can cause dropped connections, dropped packets, and intermittent 504 timeout errors when accessing the Astronomer UI or Houston API.
-
-To avoid these issues, Astronomer recommends installing Astronomer Software on a GKE Dataplane V1 cluster. 
-
-:::
 
 </TabItem>
 
@@ -86,7 +86,6 @@ To avoid these issues, Astronomer recommends installing Astronomer Software on a
 - A VPN (or other means) to access, at a minimum, Kubernetes and DNS from inside your VPC.
 - A PostgreSQL instance accessible from your Kubernetes cluster. For versioning considerations, see [Version Compatibility Reference](version-compatibility-reference.md).
 - The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-- The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html)
 - [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
 - An SMTP service and credentials. For example, Mailgun or Sendgrid.
 - The [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
@@ -94,9 +93,28 @@ To avoid these issues, Astronomer recommends installing Astronomer Software on a
 - Permission to generate a certificate (not self-signed) that covers a defined set of subdomains
 - PostgreSQL superuser permissions
 - If your organization uses Azure Database for PostgreSQL as the database backend, you need to enable the `pg_trgm` extension using the Azure portal or the Azure CLI before you install Astronomer Software. If you don't enable the `pg_trgm` extension, the install will fail. For more information about enabling the `pg_trgm` extension, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
+- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
 
 
 </TabItem>
+
+<TabItem value="other">
+
+To complete this setup, you need:
+
+- A Kubernetes cluster. For versioning considerations, see [Version Compatibility Reference](version-compatibility-reference.md).
+- A machine with access to the Kubernetes API Server from which to perform the installation with both the following tools installed:
+  * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install) installed on a machine with access to the Kubernetes Control Plane.
+  * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+- The ability to create DNS records.
+- A PostgreSQL instance accessible from your Kubernetes cluster. For versioning considerations, see [Version Compatibility Reference](version-compatibility-reference.md).
+- An SMTP service and credentials. For example, Mailgun or Sendgrid.
+- Permission to generate a certificate (not self-signed) that covers a defined set of subdomains.
+- PostgreSQL superuser permissions.
+- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
+
+</TabItem>
+
 </Tabs>
 
 ## Step 1: Choose a base domain
@@ -317,35 +335,33 @@ global:
   # Create a generic secret for each cert, and add it to the list below.
   # Each secret must have a data entry for 'cert.pem'
   # Example command: `kubectl create secret generic private-root-ca --from-file=cert.pem=./<your-certificate-filepath>`
-  privateCaCerts:
-  - private-root-ca
+  # privateCaCerts:
+  # - private-root-ca
 
   # Enable privateCaCertsAddToHost only when your nodes do not already
-  # include the private CA in their docker trust store.
+  # include the private CA in their containerd trust store.
   # Most enterprises already have this configured,
   # and in that case 'enabled' should be false.
   privateCaCertsAddToHost:
     enabled: true
     hostDirectory: /etc/containerd/certs.d
   # For development or proof-of-concept, you can use an in-cluster database
+  # postgresqlEnabled: true is NOT supported in production.
   postgresqlEnabled: false
 
-  # Enables using SSL connections to
-  # encrypt client/server communication
-  # between databases and the Astronomer platform.
-  # If your database enforces SSL for connections,
-  # change this value to true. Incluster postgres only supports 
-  # sslmode.enabled = false.
   ssl:
-    enabled: false
+    # if doing a proof-of-concept with in-cluster-db, this must be set to false
+    enabled: true
+  dagOnlyDeployment:
+    enabled: true
 #################################
 ### Nginx configuration
 #################################
 nginx:
   # IP address the nginx ingress should bind to
   loadBalancerIP: ~
-  #  Set to 'true' when deploying to a private EKS cluster.
-  privateLoadBalancer: false
+  #  set privateLoadbalancer to 'false' to make nginx request a LoadBalancer on a public vnet
+  privateLoadBalancer: true
   # Dict of arbitrary annotations to add to the nginx ingress. For full configuration options, see https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/advanced-configuration-with-annotations/
   ingressAnnotations: {service.beta.kubernetes.io/aws-load-balancer-type: nlb} # Change to 'elb' if your node group is private and doesn't utilize a NAT gateway
   # If all subnets are private, auto-discovery may fail.
@@ -357,8 +373,12 @@ astronomer:
       publicSignups: false # Users need to be invited to have access to Astronomer. Set to true otherwise
       emailConfirmation: true # Users get an email verification before accessing Astronomer
       deployments:
+        hardDeleteDeployment: true # Allow deletions to immediately remove the database and namespace
         manualReleaseNames: true # Allows you to set your release names
         serviceAccountAnnotationKey: eks.amazonaws.com/role-arn # Flag to enable using IAM roles (don't enter a specific role)
+        configureDagDeployment: true # Required for dag-only deploys
+        enableUpdateDeploymentImageEndpoint: true # Enables apis for deploying images
+        upsertDeploymentEnabled: true # Enables additional apis for updating deployments
       email:
         enabled: true
         reply: "noreply@astronomer.io" # Emails will be sent from this address
@@ -396,39 +416,35 @@ global:
   # Create a generic secret for each cert, and add it to the list below.
   # Each secret must have a data entry for 'cert.pem'
   # Example command: `kubectl create secret generic private-root-ca --from-file=cert.pem=./<your-certificate-filepath>`
-  privateCaCerts:
-  - private-root-ca
+  # privateCaCerts:
+  # - private-root-ca
 
   # Enable privateCaCertsAddToHost only when your nodes do not already
-  # include the private CA in their docker trust store.
+  # include the private CA in their containerd trust store.
   # Most enterprises already have this configured,
   # and in that case 'enabled' should be false.
   privateCaCertsAddToHost:
     enabled: true
     hostDirectory: /etc/containerd/certs.d
   # For development or proof-of-concept, you can use an in-cluster database
+  # postgresqlEnabled: true is NOT supported in production.
   postgresqlEnabled: false
 
-  # Enables using SSL connections to
-  # encrypt client/server communication
-  # between databases and the Astronomer platform.
-  # Note that incluster postgres only supports sslmode.enabled = false
-  # If your database enforces SSL for connections,
-  # change this value to true
   ssl:
-    enabled: false
+    # if doing a proof-of-concept with in-cluster-db, this must be set to false
+    enabled: true
+  dagOnlyDeployment:
+    enabled: true
 #################################
 ### Nginx configuration
 #################################
 nginx:
   # IP address the nginx ingress should bind to
   loadBalancerIP: ~
+  #  set privateLoadbalancer to 'false' to make nginx request a LoadBalancer on a public vnet
+  privateLoadBalancer: true
   # Dict of arbitrary annotations to add to the nginx ingress. For full configuration options, see https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/advanced-configuration-with-annotations/
   ingressAnnotations: {}
-
-#################################
-### SMTP configuration
-#################################
 
 astronomer:
   houston:
@@ -436,8 +452,12 @@ astronomer:
       publicSignups: false # Users need to be invited to have access to Astronomer. Set to true otherwise
       emailConfirmation: true # Users get an email verification before accessing Astronomer
       deployments:
+        hardDeleteDeployment: true # Allow deletions to immediately remove the database and namespace
         manualReleaseNames: true # Allows you to set your release names
         serviceAccountAnnotationKey: iam.gke.io/gcp-service-account  # Flag to enable using IAM roles (don't enter a specific role)
+        configureDagDeployment: true # Required for dag-only deploys
+        enableUpdateDeploymentImageEndpoint: true # Enables apis for deploying images
+        upsertDeploymentEnabled: true # Enables additional apis for updating deployments
       email:
         enabled: true
         reply: "noreply@astronomer.io" # Emails will be sent from this address
@@ -491,19 +511,23 @@ global:
   #   hostDirectory: /etc/containerd/certs.d
 
   # For development or proof-of-concept, you can use an in-cluster database
-  postgresqlEnabled: false # Keep True if deploying a database on your AKS cluster.
+  # postgresqlEnabled: true is NOT supported in production.
+  postgresqlEnabled: false
 
-# SSL support for using SSL connections to encrypt client/server communication between database and Astronomer platform. Enable SSL if provisioning Azure Database for PostgreSQL - Flexible Server as it enforces SSL. Incluster postgres only supports sslmode.enabled = false. Change the setting with respect to the database provisioned. 
   ssl:
+    # if doing a proof-of-concept with in-cluster-db, this must be set to false
     enabled: true
     mode: "prefer"
-
+  dagOnlyDeployment:
+    enabled: true
 #################################
 ### Nginx configuration
 #################################
 nginx:
   # IP address the nginx ingress should bind to
   loadBalancerIP: ~
+  #  set privateLoadbalancer to 'false' to make nginx request a LoadBalancer on a public vnet
+  privateLoadBalancer: true
   # Dict of arbitrary annotations to add to the nginx ingress. For full configuration options, see https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/advanced-configuration-with-annotations/
   ingressAnnotations:
     # required for azure load balancer post Kubernetes 1.24
@@ -515,7 +539,11 @@ astronomer:
       publicSignups: false # Users need to be invited to have access to Astronomer. Set to true otherwise
       emailConfirmation: true # Users get an email verification before accessing Astronomer
       deployments:
+        hardDeleteDeployment: true # Allow deletions to immediately remove the database and namespace
         manualReleaseNames: true # Allows you to set your release names
+        configureDagDeployment: true # Required for dag-only deploys
+        enableUpdateDeploymentImageEndpoint: true # Enables apis for deploying images
+        upsertDeploymentEnabled: true # Enables additional apis for updating deployments
       email:
         enabled: true
         reply: "noreply@astronomer.io" # Emails will be sent from this address
@@ -534,6 +562,83 @@ astronomer:
 ```
 
 </TabItem>
+
+<TabItem value="other">
+
+```yaml
+#################################
+### Astronomer global configuration
+#################################
+global:
+  # Base domain for all subdomains exposed through ingress
+  baseDomain: astro.mydomain.com
+
+  # Name of secret containing TLS certificate
+  tlsSecret: astronomer-tls
+
+  # Enable privateCaCerts only if your enterprise security team
+  # generated a certificate from a private certificate authority.
+  # Create a generic secret for each cert, and add it to the list below.
+  # Each secret must have a data entry for 'cert.pem'
+  # Example command: `kubectl create secret generic private-root-ca --from-file=cert.pem=./<your-certificate-filepath>`
+  # privateCaCerts:
+  # - private-root-ca
+
+  # Enable privateCaCertsAddToHost only when your nodes do not already
+  # include the private CA in their containerd trust store.
+  # Most enterprises already have this configured,
+  # and in that case 'enabled' should be false.
+  privateCaCertsAddToHost:
+    enabled: true
+    hostDirectory: /etc/containerd/certs.d
+  # For development or proof-of-concept, you can use an in-cluster database
+  # postgresqlEnabled: true is NOT supported in production.
+  postgresqlEnabled: false
+
+  ssl:
+    # if doing a proof-of-concept with in-cluster-db, this must be set to false
+    enabled: true
+  dagOnlyDeployment:
+    enabled: true
+#################################
+### Nginx configuration
+#################################
+nginx:
+  # IP address the nginx ingress should bind to
+  loadBalancerIP: ~
+  # Dict of arbitrary annotations to add to the nginx ingress. For full configuration options, see https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/advanced-configuration-with-annotations/
+  ingressAnnotations: {}
+
+astronomer:
+  houston:
+    config:
+      publicSignups: false # Users need to be invited to have access to Astronomer. Set to true otherwise
+      emailConfirmation: true # Users get an email verification before accessing Astronomer
+      deployments:
+        hardDeleteDeployment: true # Allow deletions to immediately remove the database and namespace
+        manualReleaseNames: true # Allows you to set your release names
+        configureDagDeployment: true # Required for dag-only deploys
+        enableUpdateDeploymentImageEndpoint: true # Enables apis for deploying images
+        upsertDeploymentEnabled: true # Enables additional apis for updating deployments
+      email:
+        enabled: true
+        reply: "noreply@astronomer.io" # Emails will be sent from this address
+      auth:
+        github:
+          enabled: true # Lets users authenticate with Github
+        local:
+          enabled: false # Disables logging in with just a username and password
+        openidConnect:
+          google:
+            enabled: true # Lets users authenticate with Google
+    secret:
+    - envName: "EMAIL__SMTP_URL"  # Reference to the Kubernetes secret for SMTP credentials. Can be removed if email is not used.
+      secretName: "astronomer-smtp"
+      secretKey: "connection"
+```
+
+</TabItem>
+
 </Tabs>
 
 ## Step 9: Configure a private Docker registry
@@ -840,7 +945,7 @@ See [Configure a Kubernetes namespace pool for Astronomer Software](namespace-po
 
 Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
 
-## Step 15: Use a third-party ingress controller
+Most third-party ingress-controllers require the public certificate additionally be available in the namespace of the various airflow instances. If using a third-party ingress-controller, run the following command to mark the secret for automatic-replication into astronomer-managed Airflow namespaces, substituting both instances of `<astronomer platform namespace>` with the name of the Astronomer Software platform namespace:
 
 Astronomer Software is its most secure when you supply a pre-existing ingress controller that meets your organization's strict security standards. Follow the steps in [Use a third-party ingress controller](third-party-ingress-controllers.md) to configure your `values.yaml` file to host your third-party ingress controller. 
 
