@@ -25,7 +25,7 @@ In this guide, you'll learn when to use the following Astro and Airflow features
 
 ## Best practice guidance
 
-Astro Alerts and Airflow Datasets are the best methods for implementing cross-deployment dependencies. The `dagRuns` endpoint of the Airflow API can also be used for this purpose, but it is less flexible than the other methods and not recommended.
+Astro Alerts and Airflow Datasets are the best methods for implementing cross-deployment dependencies. The `dagRuns` endpoint of the Airflow API can also be used for this purpose and might be appropriate in cases where you want tasks that do not update datasets to trigger DAGs. This method will not be covered here, but you can implement it by following the guidance in [Airflow REST API](https://docs.astronomer.io/astro/airflow-api#trigger-a-dag-run).
 
 To determine whether an Astro Alert or the Datasets feature is the right solution for your use case, consider the following guidance. 
 
@@ -106,7 +106,13 @@ While you can also use the HttpOperator to make the API request to update the da
 1. In your upstream Deployment, which is the Deployment for which you did **not** create an API Token, use **Variables** in the Astro UI to create an environment variable for your API token, and use `API_TOKEN` for the key.
 2. For your downstream Deployment, follow the guidance in [Airflow REST API](https://docs.astronomer.io/astro/airflow-api#step-2-retrieve-the-deployment-url) to obtain the Deployment URL for your downstream Deployment. 
 3. In your upstream Deployment, use Variables in the Astro UI to create an environment variable where you can store your downstream Deployment URL, using `DEPLOYMENT_URL` for the key.
-4. In the upstream Deployment, implement a listener following the guidance in the [Create Airflow listeners tutorial](https://docs.astronomer.io/learn/airflow-listeners). Use the following code in place of the `listeners_code.py` code provided there:
+4. In the upstream Deployment, implement a listener following the guidance in the [Create Airflow listeners tutorial](https://docs.astronomer.io/learn/airflow-listeners). Use the following code in place of the `listeners_code.py` code provided there.
+
+:::note
+
+Although this listener is designed to make an API request only for updates to the specific dataset in this example, the conditional statement `if dataset.uri ...` can be removed or adjusted if you would like to apply the function for updates to multiple datasets or all datasets in a deployment.
+
+:::
 
 ```python
 from airflow.datasets import Dataset
@@ -119,7 +125,10 @@ DEPLOYMENT_URL = os.environ.get("DEPLOYMENT_URL")
 
 @hookimpl
 def on_dataset_changed(dataset: Dataset):
-    """Execute if a dataset is updated."""
+    """
+    Execute if a specific dataset is updated. Remove or adjust the if statement 
+    to apply the function to multiple datasets.
+    """
     if dataset.uri == "file://include/bears":
         payload = {
             "dataset_uri": dataset.uri
