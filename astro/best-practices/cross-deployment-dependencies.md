@@ -110,7 +110,7 @@ While you can also use the HttpOperator to make the API request to update the da
 
 :::note
 
-Although this listener is designed to listen only for updates to the specific dataset in this example, the conditional statement `if dataset.uri ...` can be removed or adjusted if you would like to listen for updates to multiple datasets or all datasets in a deployment.
+Although this listener is designed to make an API request only for updates to the specific dataset in this example, the conditional statement `if dataset.uri ...` can be removed or adjusted if you would like to apply the function for updates to multiple datasets or all datasets in a deployment.
 
 :::
 
@@ -126,8 +126,8 @@ DEPLOYMENT_URL = os.environ.get("DEPLOYMENT_URL")
 @hookimpl
 def on_dataset_changed(dataset: Dataset):
     """
-    Execute if a dataset is updated. Remove or adjust the if statement 
-    to listen for multiple datasets.
+    Execute if a specific dataset is updated. Remove or adjust the if statement 
+    to apply the function to multiple datasets.
     """
     if dataset.uri == "file://include/bears":
         payload = {

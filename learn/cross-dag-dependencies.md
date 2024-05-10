@@ -250,4 +250,3 @@ It is sometimes necessary to implement cross-DAG dependencies where the DAGs do 
 
 To implement cross-DAG dependencies on two different Airflow environments on Astro, follow the guidance in [Cross-deployment dependencies](https://docs.astronomer.io/astro/best-practices/cross-deployment-dependencies).
 
-You can implement cross-deployment dependencies on Astronomer Software by triggering a DAG using the Airflow API. See [Make requests to the Airflow REST API](https://docs.astronomer.io/software/airflow-api) for Software-specific instructions on accessing the Airflow API.
