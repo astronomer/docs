@@ -315,6 +315,7 @@ Your `values.yaml` file should include the following configurations alongside th
         {label: 'AWS', value: 'aws'},
         {label: 'GCP', value: 'gcp'},
         {label: 'Azure', value: 'azure'},
+        {label: 'Other', value: 'other'},
     ]}>
 
 <TabItem value="aws">
