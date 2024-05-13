@@ -8,22 +8,7 @@ id: install-airgapped
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## Confirm you meet requirements for Astronomer Software
-TODO
-* kubernetes version
-* cert type
-* database
-
-See TODO
-## Prepare to Access the Astronomer Software Platform Chart
-* If you have internet accces to `https://helm.astronomer.io` run the following command on the machine you will be installing Astronomer Software on:
-```
-helm repo add astronomer https://helm.astronomer.io/
-helm repo update
-```
-* If you do not have internet access to `https://helm.astronomer.io` download the Astronomer Software Platform helm chart file corresponding to the version of Astronomer Software they are installing or upgrading to from `https://helm.astronomer.io/astronomer-<version number>.tgz`. 
-  * e.g. if installing Astronomer Software v0.34.1 download `https://helm.astronomer.io/astronomer-0.34.1.tgz`.
-  * This file does not need to uploaded to an internal chart-repository.
+This guide describes the steps to install Astronomer Software, which allows you to deploy and scale any number of Apache Airflow deployments.
 
 ## Prerequisites
 
@@ -31,86 +16,98 @@ helm repo update
     defaultValue="aws"
     groupId= "prerequisites"
     values={[
-        {label: 'AWS', value: 'aws'},
-        {label: 'GCP', value: 'gcp'},
-        {label: 'Azure', value: 'azure'},
+        {label: 'EKS on AWS', value: 'aws'},
+        {label: 'GKE on GCP', value: 'gcp'},
+        {label: 'AKS on Azure', value: 'azure'},
         {label: 'Other', value: 'other'},
     ]}>
 
 <TabItem value="aws">
+The following prerequisites apply to customers running Astronomer Software on Amazon EKS (see the 'Other' tab if running a different version of Kubernetes on AWS).
 
-To complete this setup, you need:
-
-- The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
-- A VPC.
-- A private Kubernetes cluster. For versioning considerations, see [Version Compatibility Reference](version-compatibility-reference.md).
-- A VPN (or other means) to access, at a minimum, Kubernetes and DNS from inside your VPC.
-- A PostgreSQL instance accessible from your Kubernetes cluster. For versioning considerations, see [Version Compatibility Reference](version-compatibility-reference.md).
-- The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-- [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
-- An SMTP service and credentials. For example, Mailgun or Sendgrid.
-- Permission to create and modify resources on AWS.
-- Permission to generate a certificate (not self-signed) that covers a defined set of subdomains.
+- An EKS Kubernetes cluster, running a version of Kubernetes certified as compatible on the [Version Compatibility Reference](version-compatibility-reference.md) providing the following components.
+  * The [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) (or an alternative CSI) must be installed on the Kubernetes Cluster.
+  * An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).  
+- A PostgreSQL instance, accessible from your Kubernetes cluster, and running a version of Postgres certified as compatible on the [Version Compatibility Reference]
+(version-compatibility-reference.md).
 - PostgreSQL superuser permissions.
-- An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).  
-- If you use Kubernetes version 1.23 or later, the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
-- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
+- Permission to create and modify resources on AWS.
+- Permission to generate a certificate that covers a defined set of subdomains.
+- An SMTP service and credentials. For example, Mailgun or Sendgrid.
+- The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
 - (Optional) [`eksctl`](https://eksctl.io/) for creating and managing your Astronomer cluster on EKS.
+- A machine with access to the Kubernetes API Server meeting the following criteria:
+  * Network access to the Kubernetes API Server - either directly or VPN.
+  * Network access to load-balancer resources created when Astronomer Software is installed later in the procedure - either directly or via vpn.
+  * Configured to use the DNS servers where Astronomer Software DNS records will be created.
+  * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
+  * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
+- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
 
 </TabItem>
 
 <TabItem value="gcp">
-- [Google Cloud SDK](https://cloud.google.com/sdk/install)
-- A VPC.
-- A private Kubernetes cluster. For versioning considerations, see [Version Compatibility Reference](version-compatibility-reference.md).
-- A VPN (or other means) to access, at a minimum, Kubernetes and DNS from inside your VPC.
-- A PostgreSQL instance accessible from your Kubernetes cluster. For versioning considerations, see [Version Compatibility Reference](version-compatibility-reference.md).
-- The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-- [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
-- An SMTP service and credentials. For example, Mailgun or Sendgrid.
-- Permission to create and modify resources on Google Cloud Platform
-- Permission to generate a certificate (not self-signed) that covers a defined set of subdomains.
-- PostgreSQL superuser permissions.
-- An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).  
-- If you use Kubernetes version 1.23 or later, the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
-- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
+The following prerequisites apply to customers running Astronomer Software on Google GKE (see the 'Other' tab if running a different version of Kubernetes on GCP).
 
+- A GKE Kubernetes cluster, running a version of Kubernetes certified as compatible on the [Version Compatibility Reference](version-compatibility-reference.md).
+- A PostgreSQL instance, accessible from your Kubernetes cluster, and running a version of Postgres certified as compatible on the [Version Compatibility Reference]
+- PostgreSQL superuser permissions.
+- Permission to create and modify resources on Google Cloud Platform
+- Permission to generate a certificate that covers a defined set of subdomains.
+- An SMTP service and credentials. For example, Mailgun or Sendgrid.
+- [Google Cloud SDK](https://cloud.google.com/sdk/install)
+- A machine with access to the Kubernetes API Server meeting the following criteria:
+  * Network access to the Kubernetes API Server - either directly or VPN.
+  * Network access to load-balancer resources created when Astronomer Software is installed later in the procedure - either directly or via vpn.
+  * Configured to use the DNS servers where Astronomer Software DNS records will be created.
+  * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
+  * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+  * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
 
 
 </TabItem>
 
 <TabItem value="azure">
+The following prerequisites apply to customers running Astronomer Software on Azure AKS (see the 'Other' tab if running a different version of Kubernetes on Azure).
 
-- A VPC.
-- A private Kubernetes cluster. For versioning considerations, see [Version Compatibility Reference](version-compatibility-reference.md).
-- A VPN (or other means) to access, at a minimum, Kubernetes and DNS from inside your VPC.
-- A PostgreSQL instance accessible from your Kubernetes cluster. For versioning considerations, see [Version Compatibility Reference](version-compatibility-reference.md).
-- The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-- [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
+- A Kubernetes cluster, running a version of Kubernetes certified as compatible on the [Version Compatibility Reference](version-compatibility-reference.md).
+- A PostgreSQL instance, accessible from your Kubernetes cluster, and running a version of Postgres certified as compatible on the [Version Compatibility Reference]
+  * If your organization uses Azure Database for PostgreSQL as the database backend, you need to enable the `pg_trgm` extension using the Azure portal or the Azure CLI before you install Astronomer Software. If you don't enable the `pg_trgm` extension, the install will fail. For more information about enabling the `pg_trgm` extension, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
+- PostgreSQL superuser permissions.
+- Permission to create and modify resources on Azure
+- Permission to generate a certificate that covers a defined set of subdomains
 - An SMTP service and credentials. For example, Mailgun or Sendgrid.
 - The [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
-- Permission to create and modify resources on Azure
-- Permission to generate a certificate (not self-signed) that covers a defined set of subdomains
-- PostgreSQL superuser permissions
-- If your organization uses Azure Database for PostgreSQL as the database backend, you need to enable the `pg_trgm` extension using the Azure portal or the Azure CLI before you install Astronomer Software. If you don't enable the `pg_trgm` extension, the install will fail. For more information about enabling the `pg_trgm` extension, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
+- A machine with access to the Kubernetes API Server meeting the following criteria:
+  * Network access to the Kubernetes API Server - either directly or VPN.
+  * Network access to load-balancer resources created when Astronomer Software is installed later in the procedure - either directly or via vpn.
+  * Configured to use the DNS servers where Astronomer Software DNS records will be created.
+  * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
+  * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+  * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 - (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
 
 
 </TabItem>
 
 <TabItem value="other">
-
-To complete this setup, you need:
+The following prerequisites apply to customers running Astronomer Software on Kubernetes.
 
 - A Kubernetes cluster. For versioning considerations, see [Version Compatibility Reference](version-compatibility-reference.md).
-- A machine with access to the Kubernetes API Server from which to perform the installation with both the following tools installed:
-  * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install) installed on a machine with access to the Kubernetes Control Plane.
-  * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-- The ability to create DNS records.
 - A PostgreSQL instance accessible from your Kubernetes cluster. For versioning considerations, see [Version Compatibility Reference](version-compatibility-reference.md).
-- An SMTP service and credentials. For example, Mailgun or Sendgrid.
-- Permission to generate a certificate (not self-signed) that covers a defined set of subdomains.
 - PostgreSQL superuser permissions.
+- An SMTP service and credentials. For example, Mailgun or Sendgrid.
+- Permission to generate a certificate that covers a defined set of subdomains.
+- PostgreSQL superuser permissions.
+- The ability to create DNS records.
+- A machine with access to the Kubernetes API Server meeting the following criteria:
+  * Network access to the Kubernetes API Server - either directly or VPN.
+  * Network access to load-balancer resources created when Astronomer Software is installed later in the procedure - either directly or via vpn.
+  * Configured to use the DNS servers where Astronomer Software DNS records will be created.
+  * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
+  * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 - (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
 
 </TabItem>
@@ -203,8 +200,20 @@ The command generates a report of all certificates. Verify the order of the cert
 If you received a globally trusted certificate or created a self-signed certificate, create a Kubernetes TLS secret using the following command and then proceed to the next step:
 
 ```sh
-kubectl create secret tls astronomer-tls --cert <your-certificate-filepath> --key <your-private-key-filepath> -n astronomer
+kubectl -n <astronomer platform namespace>> create secret tls astronomer-tls --cert <fullchain-pem-filepath> --key <your-private-key-filepath>
 ```
+
+E.g.
+```
+kubectl -n astronomer create secret tls astronomer-tls --cert fullchain.pem --key server_private_key.pem
+```
+
+If not using Astronomer's bundled ingress-controller, additionally annotate the secret and set `"astronomer.io/commander-sync` to `platform=<astronomer platform release name>`, e.g.:
+```
+kubectl -n <astronomer platfomr namespace> annotate secret astronomer-bootstrap "astronomer.io/commander-sync"="platform=astronomer"
+```
+
+## Step TBD: Configuring a Private Certificate Authority
 
 If you received a certificate from a private CA, follow these steps instead:
 
@@ -220,13 +229,30 @@ If you received a certificate from a private CA, follow these steps instead:
 
 2. Note the value of `private-root-ca` for when you configure your Helm chart in Step 8. You'll need to additionally specify the `privateCaCerts` key-value pair with this value for that step.
 
-## Step 5: Configure your SMTP URI
+## Step 5: Configure Outbound SMTP Email
 
-An SMTP service is required for sending and accepting email invites from Astronomer. If you're running Astronomer Software with `publicSignups` disabled (which is the default), you'll need to configure SMTP as a way for your users to receive and accept invites to the platform via email. To integrate your SMTP service with Astronomer, fetch your SMTP service's URI and store it in a Kubernetes secret:
 
-```sh
-kubectl create secret generic astronomer-smtp --from-literal connection="smtp://USERNAME:PASSWORD@HOST/?requireTLS=true" -n astronomer
-```
+Astronomer Software requires the ability to send email to:
+* notifying users of certain errors (e.g. users that try to deploy mis-matched Airflow image versions)
+* sending and accepting email invites from Astronomer
+* sending certain platform alerts (in the default configuration, configurable)
+
+Astronomer Software sends all outbound email via SMTP.
+
+::info
+
+If evaluating Astronomer Software in an environment where outbound SMTP is not available, follow instructions in `Appendix: Configuring Astronomer Software To Not Send Outbound Email` and then skip the rest of this section.
+
+::
+
+1. Obtain a valid set of SMTP credentials.
+2. Ensure that the Kubetes Cluster has access to send outbound email to the SMTP server.
+3. Change the reply values already present in `values.yaml` from `noreply@my.email.internal` to an email address that is valid for use with the SMTP credentials.
+4. Construct an email connection string (see guidance later in this section) and store it in a secret named `astronomer-tls` in the astronomer platform namespace. Make sure to *url-encode* the username and password if they contain special characters.
+  e.g.
+  ```sh
+  kubectl -n astronomer create secret generic astronomer-smtp --from-literal connection="smtp://my@40user:my%40pass@smtp.email.internal/?requireTLS=true"
+  ```
 
 In general, an SMTP URI will take the following form:
 
@@ -267,39 +293,44 @@ Save the chart in a file named `values.yaml`.
 
 ## Step 7: Configure the database
 
-By default, Astronomer requires a central Postgres database that acts as the backend for Astronomer's Houston API and will host individual metadata databases for all Airflow Deployments spun up on the platform.
+Astronomer requires a central Postgres database that acts as the backend for Astronomer's Houston API and will host individual metadata databases for all Airflow Deployments spun up on the platform.
 
 :::info
 
-If you're setting up a development environment, this step is optional. Astronomer can be configured to deploy the PostgreSQL helm chart as the backend database if you add the following to your `values.yaml` file:
+If, while evaluating Astronomer Software, you need to create a temporary environment where Postgres is not available, locate the `global.postgresqlEnabled` option already present in your `values.yaml` and set it to `true` then skip the remainder of this step.
 
-```yaml
-global:
-  postgresqlEnabled: true
-```
+Setting `global.postgresqlEnabled` to `true` is an *unsupported* configuration and *must* not be used on any development, staging, or production environment.
 
 :::
 
-To connect to an external database to your cluster, create a Kubernetes Secret named `astronomer-bootstrap` that points to your database.
+
+:::info
+
+If using Azure Database for PostgreSQL or another Postgres instance that does not enable the `pg_trgm` by default, you *must* enable the `pg_trgm` extension prior to installing Astronomer Software. If `pg_trgm` is not enabled, the install will fail. `pg_tgrm` is enabled by default on Amazon RDS and Google CLoud SQL for PostgresQL. For instructions on enabling the `pg_trgm` extension for Azure Flexible Server, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
+
+:::
+
+Create a Kubernetes Secret named `astronomer-bootstrap` that points to your database. You must URL encode any special characters in your Postgres password.
+
+To create this secret, run the following command replacing the astronomer platform namespace, username, password, database hostname, and database port with their respective values (username and password must be url-encoded if they contain special-characters):
 
 ```bash
-kubectl create secret generic astronomer-bootstrap \
-  --from-literal connection="postgres://USERNAME:$PASSWORD@host:5432" \
-  --namespace astronomer
+kubectl --namespace <astronomer platform namespace> create secret generic astronomer-bootstrap \
+  --from-literal connection="postgres://<url-encoded username>:<url-encoded password>@<database hostname>:<database port>"
 ```
 
-:::info
+e.g. For a username named `bob` with password `abc@abc` at hostname `some.host.internal`:
+```bash
+kubectl --namespace astronomer create secret generic astronomer-bootstrap \
+  --from-literal connection="postgres://bob:abc%40abc@some.host.internal:5432"
+```
 
-You must URL encode any special characters in your Postgres password.
-
-:::
-
-A few additional configuration notes:
-
-- (AWS Only) Astronomer recommends using a [t2 medium](https://aws.amazon.com/rds/instance-types/) as the minimum RDS instance size.
-- If you provision an external database, `postgresqlEnabled` should be set to `false` in Step 8. The in-cluster database should be used only for development or proof-of-concept installations. All production installations should use an external database.
-- (Azure only) If your organization uses Azure Database for PostgreSQL as the database backend, you need to enable the `pg_trgm` extension using the Azure portal or the Azure CLI before you install Astronomer Software. If you don't enable the `pg_trgm` extension, the install will fail. For more information about enabling the `pg_trgm` extension, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
-- (Azure only) If you provision Azure Database for PostgreSQL - Flexible Server, it enforces TLS/SSL and requires that you set `sslmode` to `prefer` in your `values.yaml`.
+Additional requirements apply to the following databases:
+- AWS RDS:
+  * [t2 medium](https://aws.amazon.com/rds/instance-types/) is the minimum RDS instance size.
+- Azure Flexible Server:
+  * you must enable the `pg_trgm` extension as per the advisory earlier in this section
+  * `global.ssl.sslmode` must be set to `prefer` in your `values.yaml` (set during Step 8, and already set if using the Azure on AKS config provided there).
 
 ## Step 8: Confirm the base configuration for your Helm chart
 
@@ -312,9 +343,9 @@ Your `values.yaml` file should include the following configurations alongside th
     defaultValue="aws"
     groupId= "prerequisites"
     values={[
-        {label: 'AWS', value: 'aws'},
-        {label: 'GCP', value: 'gcp'},
-        {label: 'Azure', value: 'azure'},
+        {label: 'EKS on AWS', value: 'aws'},
+        {label: 'GKE on GCP', value: 'gcp'},
+        {label: 'AKS on Azure', value: 'azure'},
         {label: 'Other', value: 'other'},
     ]}>
 
@@ -382,7 +413,7 @@ astronomer:
         upsertDeploymentEnabled: true # Enables additional apis for updating deployments
       email:
         enabled: true
-        reply: "noreply@astronomer.io" # Emails will be sent from this address
+        reply: "noreply@my.email.internal" # Emails will be sent from this address
       auth:
         github:
           enabled: true # Lets users authenticate with Github
@@ -461,7 +492,7 @@ astronomer:
         upsertDeploymentEnabled: true # Enables additional apis for updating deployments
       email:
         enabled: true
-        reply: "noreply@astronomer.io" # Emails will be sent from this address
+        reply: "noreply@my.email.internal" # Emails will be sent from this address
       auth:
         github:
           enabled: true # Lets users authenticate with Github
@@ -547,7 +578,7 @@ astronomer:
         upsertDeploymentEnabled: true # Enables additional apis for updating deployments
       email:
         enabled: true
-        reply: "noreply@astronomer.io" # Emails will be sent from this address
+        reply: "noreply@my.email.internal" # Emails will be sent from this address
       auth:
         github:
           enabled: true # Lets users authenticate with Github
@@ -623,7 +654,7 @@ astronomer:
         upsertDeploymentEnabled: true # Enables additional apis for updating deployments
       email:
         enabled: true
-        reply: "noreply@astronomer.io" # Emails will be sent from this address
+        reply: "noreply@my.email.internal" # Emails will be sent from this address
       auth:
         github:
           enabled: true # Lets users authenticate with Github
@@ -737,40 +768,15 @@ astronomer:
 
 ## Step 12: Fetch Airflow Helm charts
 
-There are two Helm charts required for Astronomer:
-
-- The [Astronomer Helm chart](https://github.com/astronomer/astronomer) for the Astronomer Platform
-- The [Airflow Helm chart](https://github.com/astronomer/airflow-chart) for Airflow deployments in Astronomer Platform
-
-The Astronomer Helm chart can be downloaded using `helm pull` and applied locally if desired.
-
-Commander, which is Astronomer's provisioning component, uses the Airflow Helm chart to create Airflow deployments. You have two options to make the Helm chart available to Commander in an airgapped environment:
-
-- Use the built-in Airflow Helm chart in the Commander Docker image.
-- Host the Airflow Helm chart within your network. Not every cloud provider has a managed Helm registry, so you might want to check out [JFrog Artifactory](https://jfrog.com/artifactory) or [ChartMuseum](https://github.com/helm/chartmuseum).
-
-To use the built-in Airflow Helm chart in the Commander Docker image, add the following configuration to your `values.yaml` file:
-
-```yaml
-astronomer:
-  commander:
-    airGapped:
-      enabled: true
+* If you have internet accces to `https://helm.astronomer.io` run the following command on the machine you will be installing Astronomer Software on:
 ```
-
-To configure a self-hosted Helm chart, add the following configuration to your `values.yaml` file:
-
-```yaml
-# Example URL - replace with your own repository destination
-global:
-  helmRepo: "http://artifactory.company.com:32775/artifactory/astro-helm-chart"
+helm repo add astronomer https://helm.astronomer.io/
+helm repo update
 ```
+* If you do not have internet access to `https://helm.astronomer.io` download the Astronomer Software Platform helm chart file corresponding to the version of Astronomer Software they are installing or upgrading to from `https://helm.astronomer.io/astronomer-<version number>.tgz`. 
+  * e.g. if installing Astronomer Software v0.34.1 download `https://helm.astronomer.io/astronomer-0.34.1.tgz`.
+  * This file does not need to uploaded to an internal chart-repository.
 
-:::info
-
-If you configure both options in your `values.yaml` file, then `astronomer.commander.airGapped.enabled` takes precedence over `global.helmRepo`.
-
-:::
 
 ## Step 13: Fetch Airflow updates
 
@@ -1116,3 +1122,14 @@ If you have Airflow pods in the state `ImagePullBackoff`, check the pod descript
 - Added the `privateCaCertsAddToHost` key-value pairs to your Helm chart. 
 
 If you missed these steps during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation. If you are using a base image such as CoreOS that does not permit values to be changed, or you otherwise can't modify `values.yaml`, contact [Astronomer support](https://support.astronomer.io) for additional configuration assistance.
+
+
+## Appendix: Configuring Astronomer Software To Not Send Outbound Email
+
+::info
+Setting `astronomer.houston.config.publicSignups` to `true` is only secure when all non-OIDC authentication backends are explicitly disabled.
+::
+
+set `astronomer.houston.config.email.enabled` to `false`, remove the `EMAIL__SMTP_URL` list-item from `astronomer.houston.secret`, and 
+
+ 
