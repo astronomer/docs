@@ -161,7 +161,7 @@ If an Astro Runtime version isn't included in this section, then there are no sp
 
 ##### Restricted versions of Runtime 11
 
-You cannot create new Deployments or upgrade to the following versions of Runtime 11, which are `yanked`. These [restricted runtime versions](runtime-version-lifecycle-policy.md#restricted-runtime-versions) prevent you from upgrading to or creating a Deployment with a version that contains a known limitation or bug.
+You cannot create new Deployments or upgrade to the following versions of Runtime 11, which are `yanked`. These [restricted runtime versions](runtime-version-lifecycle-policy.mdx#restricted-runtime-versions) prevent you from upgrading to or creating a Deployment with a version that contains a known limitation or bug.
 
 - 11.0.0
 - 11.1.0
