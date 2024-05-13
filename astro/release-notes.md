@@ -25,6 +25,13 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## May 15, 2024
+
+### Bug fixes
+
+- Fixed a bug with SCIM integrations where some updates could not be made to Organization-less users. <!--https://github.com/astronomer/astro/pull/20843-->
+- Fixed an issue that could allow users to use custom roles to create API Tokens, users, or teams with higher Deployment access privilege. Users can now only use custom roles to make resources with their access privileges or lower. <!--https://github.com/astronomer/astro/pull/20826-->
+
 ## May 8, 2024
 
 ### Updates to address ranges for dedicated clusters on Google Cloud Provider
