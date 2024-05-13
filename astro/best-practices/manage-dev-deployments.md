@@ -22,7 +22,23 @@ This guide highlights when to use the following Astro features to manage your De
 
 ## Best practice guidance
 
-[WHEN TO CHOOSE WHICH METHOD]
+### Single environments
+
+Smaller teams that can tolerate testing and applying bug fixes in production will likely find that a [Single environment](https://docs.astronomer.io/astro/set-up-ci-cd#single-environment) will meet their needs. To use a single environment, deploy from a single, permanent branch to a single Astro Deployment using CI/CD. If the GitHub integration is used, changes to `main` are deployed automatically on Astro and available in the Airflow UI. An advantage of this approach is that it is the most cost-effective way to manage Deployments on Astro. A disadvantage, especially for teams with business-critical DAGs, is that you lack the ability to test changes on Astro prior to deploying to production.
+
+### Multiple environments
+
+Larger teams and teams with business-critical DAGs will likely prefer to maintain [Multiple environments](https://docs.astronomer.io/astro/set-up-ci-cd#multiple-environments) and deploy separate development and production versions of their pipelines to Astro. The GitHub integration supports automated deployment from multiple permanent branches of the same GitHub repository in a single Astro Workspace. An advantage of this approach is that you can test multiple versions of your DAGs on Astro before deploying to production. A disadvantage is that each additional Deployment adds to the cost of infrastructure for your pipelines.
+
+:::tip
+
+[Hibernating development Deployments](https://docs.astronomer.io/astro/deployment-resources#hibernate-a-development-deployment) reduces the cost of maintaining multiple permanent Deployments.
+
+:::
+
+### A hybrid approach
+
+Some teams might prefer some combination of the above. For example, some teams might prefer to use ephemeral Deployments for production code rather than maintain a permanent production Deployment. Other teams might choose to maintain permanent sandbox Deployments in addition to development and production Deployments.
 
 
 
