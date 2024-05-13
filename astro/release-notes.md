@@ -27,6 +27,10 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## May 15, 2024
 
+### Additional improvements
+
+- You can now use [Astro connections](https://docs.astronomer.io/astro/create-and-link-connections) with the Airflow Scheduler. Previously, the scheduler could not access Astro-managed connections due to how the scheduler accesses the local file-systems secret's backend. <!--https://github.com/astronomer/astro/pull/20401-->
+
 ### Bug fixes
 
 - Fixed a bug with SCIM integrations where some updates could not be made to Organization-less users. <!--https://github.com/astronomer/astro/pull/20843-->
