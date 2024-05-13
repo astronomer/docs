@@ -127,7 +127,7 @@ There are a couple of special types of operators that are worth mentioning:
 
 Some commonly used building blocks, like the BashOperator, the `@task` decorator, or the PythonOperator, are part of core Airflow and automatically installed in all Airflow instances. Additionally, many operators are maintained separately to Airflow in **Airflow provider packages**, which group modules interacting with a specific service into a package.
 
-You can browse all available operators and find detailed information about their parameters in the [Astronomer Registry](https://registry.astronomer.io/). For many common data tools, there are [integration tutorials](https://docs.astronomer.io/learn/category/integrations) available, showing a simple implementation of the provider package.
+You can browse all available operators and find detailed information about their parameters in the [Astronomer Registry](https://registry.astronomer.io/). For many common data tools, there are [integration tutorials](https://docs.astronomer.io/learn/category/integrations--connections) available, showing a simple implementation of the provider package.
 
 ### Additional concepts
 
