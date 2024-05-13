@@ -24,7 +24,7 @@ Standard clusters have different connection options than dedicated clusters.
 
 Standard clusters can connect to Azure in the following ways:
 
-- Using [static external IP addresses](#allowlist-a deployments-external-ip-addresses-on-azure).
+- Using [static external IP addresses](#allowlist-a-deployments-external-ip-addresses-on-azure).
 
 Dedicated clusters can also connect to Azure using static IP addresses. Additionally, they support a number of private connectivity options including:
 
