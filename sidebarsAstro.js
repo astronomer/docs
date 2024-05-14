@@ -60,6 +60,7 @@ module.exports = {
         },
         "upgrade-runtime",
         "kubernetespodoperator",
+        "dag-metrics",
         "view-logs",
         "manage-dags",
         "airflow-api",
@@ -187,7 +188,7 @@ module.exports = {
         {
           type: "category",
           label: "View metrics",
-          items: ["dag-metrics",
+          items: [
            "deployment-metrics",
            {
             type: "category",
