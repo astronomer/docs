@@ -126,7 +126,12 @@ To configure the scheduler on an [Astro Hybrid](hybrid-overview.md) Deployment:
 
 ## Enable high availability
 
-By default, the Pods running your Deployment's Airflow components are distributed across multiple nodes. When you enable high availability, Astro runs your nodes in different regions and re-configures specific Airflow components, such as the scheduler, to increase resiliency. This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node or availability zone.
+By default, the Pods running your Deployment's Airflow components are distributed across multiple nodes. When you enable high availability, Astro re-configures the Deployment to be more resilient. This includes:
+
+- Running nodes in different availability zones.
+- Running two schedulers so that at least one is always available.
+
+This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node or availability zone.
 
 Because this setting results in more resource usage, it can increase the cost of your Deployment. See [Pricing](https://astronomer.io/pricing).
 
