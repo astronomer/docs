@@ -24,7 +24,7 @@ This guide highlights when to use the following Astro features to manage your De
 
 ### Single environments
 
-Smaller teams that can tolerate testing and applying bug fixes in production will likely find that a [Single environment](https://docs.astronomer.io/astro/set-up-ci-cd#single-environment) will meet their needs. To use a single environment, deploy from a single, permanent branch to a single Astro Deployment using CI/CD. If the GitHub integration is used, changes to `main` are deployed automatically on Astro and available in the Airflow UI. An advantage of this approach is that it is the most cost-effective way to manage Deployments on Astro. A disadvantage, especially for teams with business-critical DAGs, is that you lack the ability to test changes on Astro prior to deploying to production.
+Smaller teams that can tolerate testing and applying bug fixes in production will likely find that a [Single environment](https://docs.astronomer.io/astro/set-up-ci-cd#single-environment) will meet their needs. To use a single environment, deploy from a single, permanent branch to a single Astro Deployment using CI/CD. If the GitHub integration is used, changes to the branch are deployed automatically on Astro and available in the Airflow UI. An advantage of this approach is that it is the most cost-effective way to manage Deployments on Astro. A disadvantage, especially for teams with business-critical DAGs, is that you lack the ability to test changes on Astro prior to deploying to production.
 
 ### Multiple environments
 
