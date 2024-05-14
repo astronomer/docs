@@ -18,7 +18,7 @@ module.exports = {
           '{{CLI_VER_LATEST}}': "1.26.0",
           '{{CLI_VER_2}}': "1.25.0",
           '{{CLI_VER_3}}': "1.24.1",
-          '{{RUNTIME_VER}}': "11.2.0",
+          '{{RUNTIME_VER}}': "11.3.0",
         };
         var re = new RegExp(Object.keys(mapObj).join("|"), "gi");
         return fileContent.replaceAll(re, function (matched) {

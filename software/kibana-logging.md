@@ -13,9 +13,9 @@ All Airflow logs from your Astronomer logs will flow to Elasticsearch and can be
 
 2. Click **Menu** in the upper left, click **Stack Management**, and then click **Index Patterns**.
 
-3. In the **Name** field enter `fluentd.*` and then click **Create index pattern**.
+3. In the **Name** field enter `fluentd.*` or enter `vector.*` if using sidecar logging, and then click **Create index pattern**.
 
-    Elasticsearch uses [index patterns](https://www.elastic.co/guide/en/kibana/current/index-patterns.html) to organize how you explore data. Setting `fluentd.*` as the index means that Kibana will display all logs from all deployments (Astronomer uses `fluentd` to ship logs from pods to ElasticSearch).
+    Elasticsearch uses [index patterns](https://www.elastic.co/guide/en/kibana/current/index-patterns.html) to organize how you explore data. Setting `fluentd.*`, or `vector.*` if using sidecar logging,  as the index means that Kibana displays all logs from all deployments.
 
 4. Enter `@timestamp` as the `Time Filter`.
 

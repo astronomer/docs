@@ -44,7 +44,7 @@ You can forward Airflow task logs from a Deployment to [Datadog](https://www.dat
 
 1. (Optional) Set the following [environment variable](environment-variables.md) on your Deployment to send your logs to a specific [Datadog site](https://docs.datadoghq.com/getting_started/site/):
 
-    - **Key**: `DD_SITE`
+    - **Key**: `DATADOG_SITE`
     - **Value**: Your Datadog **Site Parameter**. For example, `datadoghq.com`.
 
 2. (Optional) For Astro Runtime 9.2.0 and greater, set the following [environment variable](environment-variables.md) on your Deployment to [add specific tags to your logs](https://docs.datadoghq.com/getting_started/tagging/):
@@ -76,7 +76,7 @@ Astro does not export any [service checks](https://docs.datadoghq.com/integratio
 
 4. (Optional) Add the following environment variable if your organization doesn't use the default Datadog site `datadoghq.com`:
 
-   - **Key:** `DD_SITE`
+   - **Key:** `DATADOG_SITE`
    - **Value:** `<Your-Datadog-Site>`
 
 5. (Optional) Add the following environment variables to create [custom Datadog tags](https://docs.datadoghq.com/getting_started/tagging/) associated with your Deployment:

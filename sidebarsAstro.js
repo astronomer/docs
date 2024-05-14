@@ -87,6 +87,7 @@ module.exports = {
         "deploy-code",
         "deploy-project-image",
         "deploy-dags",
+        "deploy-github-integration",
         "deploy-history",
       ],
     },
@@ -326,8 +327,9 @@ module.exports = {
       type: 'category',
       label: 'Best practices',
       items: [
+        'best-practices/airflow-vs-astro-alerts',
         'best-practices/connections-branch-deploys',
-        'best-practices/airflow-vs-astro-alerts'
+        'best-practices/cross-deployment-dependencies',
       ],
     },
     {
