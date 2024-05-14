@@ -75,7 +75,7 @@ Before you begin, ensure that you’re logged in to GitHub with permissions to r
     - **Astro Project Path:** Specify the path to your Astro project, up to and including the Astro project folder. For example, `/myorg/myprojects/my-astro-project`
 
 7. Click **Connect Repository**.
-8. Map specific branches in your repository to Deployments in your Workspace. For example, you can map a development branch and your production branch to separate Deployments, so that bugs in development don’t affect your production data pipelines. When you map a branch to a Deployment, any commits to the Astro project in that branch trigger a code deploy to Astro.
+8. Map specific branches in your repository to Deployments in your Workspace. For example, you can map a development branch and your production branch to separate Deployments, so that bugs in development don’t affect your production data pipelines. When you map a branch to a Deployment, any future commits to the Astro project in that branch trigger a code deploy to Astro.
 
 Any commits to your mapped branches will now trigger a code deploy to the corresponding Deployment.
 
