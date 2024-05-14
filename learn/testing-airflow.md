@@ -147,15 +147,6 @@ def test_dag_tags(dag_id, dag, fileloc):
 
 Airflow offers different ways to run DAG validation tests using any Python test runner. This section gives an overview of the most common implementation methods. If you are new to testing Airflow DAGs, you can quickly get started by using Astro CLI commands.
 
-### The Astro CLI
-
-The Astro CLI includes two commands to run DAG validation tests. Airflow does not need to be running to use these commands.
-
-- [`astro dev parse`](https://docs.astronomer.io/astro/cli/astro-dev-parse): will quickly parse your DAGs to find any Python syntax or DAG import errors.
-- [`astro dev pytest`](https://docs.astronomer.io/astro/cli/astro-dev-pytest): will run all pytest test suites in the `test` directory of your current Airflow project.
-
-Every new Astro project will be initialized with a `test/dags` folder in your Astro project directory. This folder contains the `test_dag_example.py` script defining several examples of using `pytest` with Airflow. For more information on the Astro CLI's testing capabilities, see [Test your Astro project locally](https://docs.astronomer.io/astro/cli/test-your-astro-project-locally).
-
 ### Airflow CLI 
 
 The Airflow CLI offers two commands related to local testing:
@@ -169,37 +160,29 @@ With the Astro CLI, you can run all Airflow CLI commands using [`astro dev run`]
 astro dev run dags test my_dag '2023-01-29'
 ```
 
+### The Astro CLI
+
+The Astro CLI includes a suite of commands to help simplify common testing workflows. See [Test your Astro project locally](https://docs.astronomer.io/astro/cli/test-your-astro-project-locally).
+
 ### Test DAGs in a CI/CD pipeline
 
-You can use CI/CD tools to test and deploy your Airflow code. A common use case is to run the `astro dev pytest` for all pytests in the `tests` directory every time someone pushes code to a specific branch in your repository.
+You can use CI/CD tools to test and deploy your Airflow code. By installing the Astro CLI into your CI/CD process, you can test your DAGs before deploying them to a production environment. See [set up CI/CD](https://docs.astronomer.io/astro/set-up-ci-cd) for example implementations.
 
-The following is an example GitHub Action workflow which installs the Astro CLI and runs `astro dev pytest` on every push to the `main` branch.
+:::info
 
-```yaml
-name: Airflow CI - Run pytests
+Astronomer customers can use the Astro GitHub integration, which allows you to automatically deploy code from a GitHUb repository to an Astro deployment, viewing Git metadata in the Astro UI. See [Deploy code with the Astro GitHub integration](https://docs.astronomer.io/astro/deploy-github-integration). 
 
-on:
-  push:
-    branches:
-      - main
-      
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: checkout repo
-      uses: actions/checkout@v3
-    - name: Auto-pytest
-      run: |
-        curl -sSL install.astronomer.io | sudo bash -s
-        astro dev pytest
-```
+:::
 
-If you are an Astro customer, you can find further information on how to set up CI/CD to your Astro deployment in [CI/CD](https://docs.astronomer.io/astro/set-up-ci-cd).
+## Add test data or files for local testing
+
+Use the `include` folder of your Astro project to store files for testing locally, such as test data or a dbt project file. The files in your `include` folder are included in your deploys to Astro, but they are not parsed by Airflow. Therefore, you don't need to specify them in `.airflowignore` to prevent parsing. 
+
+If you're running Airflow locally, apply your changes by refreshing the Airflow UI.
 
 ## Debug interactively with dag.test()
 
-Airflow 2.5.0 introduced the `dag.test()` method which allows you to run all tasks in a DAG within a single serialized Python process without running the Airflow scheduler. The `dag.test()` method allows for faster iteration and use of IDE debugging tools when developing DAGs.
+The `dag.test()` method allows you to run all tasks in a DAG within a single serialized Python process, without running the Airflow scheduler. The `dag.test()` method lets you iterate faster and use IDE debugging tools when developing DAGs.
 
 This functionality replaces the deprecated DebugExecutor. Learn more in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/debug.html).
 

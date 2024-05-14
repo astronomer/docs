@@ -21,7 +21,7 @@ To install Astronomer on EKS, you'll need access to the following tools and perm
 * Permission to create and modify resources on AWS.
 * Permission to generate a certificate (not self-signed) that covers a defined set of subdomains.
 * PostgreSQL superuser permissions.
-* An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).  
+* An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).
 * If you use Kubernetes version 1.23 or later, the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
 * Optional. [`eksctl`](https://eksctl.io/) for creating and managing your Astronomer cluster on EKS.
 
@@ -129,10 +129,10 @@ Depending on your organization, you may receive either a globally trusted certif
 
 ### Option 3: Use the AWS Certificate Manager as the certificate provider
 
-AWS Certificate Manager (ACM) terminates TLS at the Load Balancer level and does not encrypt the internal traffic inside the cluster. The ACM ingress controller requires an `astronomer-tls` secret with a certificate and private key to encrypt internal traffic. 
+AWS Certificate Manager (ACM) terminates TLS at the Load Balancer level and does not encrypt the internal traffic inside the cluster. The ACM ingress controller requires an `astronomer-tls` secret with a certificate and private key to encrypt internal traffic.
 
 Because ACM relies on annotations attached to Kubernetes resources and does not issue certificates or private key files, you must complete one of the following options to create the `astronomer-tls` secret:
- 
+
 - Create a [self-signed certificate](self-signed-certificate.md). Self-signed certificates are ideal for privately hosted internal applications, as well as in development and testing environments. Avoid using self-signed certificates in installations where the trust and identity of the certificate issuer are important.
 - Create a certificate with [AWS Certificate Manager Private CA](https://aws.amazon.com/blogs/containers/setting-up-end-to-end-tls-encryption-on-amazon-eks-with-the-new-aws-load-balancer-controller/).
 - Create a certificate with [Let's Encrypt](renew-tls-cert.md#automatically-renew-tls-certificates-using-lets-encrypt).
@@ -142,7 +142,7 @@ After you create the certificate, add the following configuration block to your 
     ```yaml
     nginx:
       loadBalancerIP: ~
-      privateLoadBalancer: true  # this does affect aws-load-balancer-type: external 
+      privateLoadBalancer: true  # this does affect aws-load-balancer-type: external
       ingressAnnotations:
         service.beta.kubernetes.io/aws-load-balancer-type: external
         service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
@@ -175,7 +175,7 @@ If you received a globally trusted certificate or created a self-signed certific
 kubectl create secret tls astronomer-tls --cert <your-certificate-filepath> --key <your-private-key-filepath> -n astronomer
 ```
 
-If you created a certificate using Let's Encrypt, the `astronomer-tls` secret already exists in your Kubernetes cluster. Run the following command to confirm it exists: 
+If you created a certificate using Let's Encrypt, the `astronomer-tls` secret already exists in your Kubernetes cluster. Run the following command to confirm it exists:
 
 ```bash
 kubectl describe secret astronomer-tls --namespace astronomer
@@ -229,7 +229,7 @@ By default, Astronomer requires a central Postgres database that will act as the
 
 While you're free to configure any database, most AWS users on Astronomer run [Amazon RDS for PostgreSQL](https://aws.amazon.com/rds/postgresql/). For production environments, Astronomer recommends a managed Postgres solution.
 
-> **Note:** If you're setting up a development environment, this step is optional. Astronomer can be configured to deploy the PostgreSQL helm chart as the backend database with the following set in your `config.yaml`:
+> **Note:** If you're setting up a development environment, this step is optional. Astronomer can be configured to deploy the PostgreSQL helm chart as the backend database with the following set in your `values.yaml`:
 >
 > ```yaml
 > global:
@@ -250,17 +250,17 @@ kubectl create secret generic astronomer-bootstrap \
 
 ## Step 8: Configure your Helm chart
 
-:::info 
+:::info
 
 To use a third-party ingress controller for Astronomer, see [Third-Party Ingress Controllers](third-party-ingress-controllers.md).
 
 :::
 
-As a next step, create a file named `config.yaml` in an empty directory.
+As a next step, create a file named `values.yaml` in an empty directory.
 
-For context, this `config.yaml` file will assume a set of default values for our platform that specify everything from user role definitions to the Airflow images you want to support. As you grow with Astronomer and want to customize the platform to better suit your team and use case, your `config.yaml` file is the best place to do so.
+For context, this `values.yaml` file will assume a set of default values for our platform that specify everything from user role definitions to the Airflow images you want to support. As you grow with Astronomer and want to customize the platform to better suit your team and use case, your `values.yaml` file is the best place to do so.
 
-Copy and paste the following example into the `config.yaml` file. Replace `baseDomain`, `private-root-ca`, `/etc/containerd/certs.d`, `astronomer.houston.secret`, and `ssl.enabled` with your own values. Additional example configurations are available in the [Astronomer GitHub configs repository](https://github.com/astronomer/astronomer/tree/master/configs).
+Copy and paste the following example into the `values.yaml` file. Replace `baseDomain`, `private-root-ca`, `/etc/containerd/certs.d`, `astronomer.houston.secret`, and `ssl.enabled` with your own values. Additional example configurations are available in the [Astronomer GitHub configs repository](https://github.com/astronomer/astronomer/tree/master/configs).
 
 ```yaml
 #################################
@@ -295,7 +295,7 @@ global:
   # encrypt client/server communication
   # between databases and the Astronomer platform.
   # If your database enforces SSL for connections,
-  # change this value to true. Incluster postgres only supports 
+  # change this value to true. Incluster postgres only supports
   # sslmode.enabled = false.
   ssl:
     enabled: false
@@ -310,7 +310,7 @@ nginx:
   # Dict of arbitrary annotations to add to the nginx ingress. For full configuration options, see https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/advanced-configuration-with-annotations/
   ingressAnnotations: {service.beta.kubernetes.io/aws-load-balancer-type: nlb} # Change to 'elb' if your node group is private and doesn't utilize a NAT gateway
   # If all subnets are private, auto-discovery may fail.
-  # You must enter the subnet IDs manually in the annotation below. 
+  # You must enter the subnet IDs manually in the annotation below.
   # service.beta.kubernetes.io/aws-load-balancer-subnets: subnet-id-1,subnet-id-2
 astronomer:
   houston:
@@ -349,7 +349,7 @@ If you are installing Astronomer in an airgapped environment without access to t
 
 <!--- Version-specific -->
 
-Now that you have an EKS cluster set up and your `config.yaml` file defined, you're ready to deploy all components of our platform.
+Now that you have an EKS cluster set up and your `values.yaml` file defined, you're ready to deploy all components of our platform.
 
 First, run:
 
@@ -366,7 +366,7 @@ helm repo update
 This ensures that you pull the latest image from the Astronomer Helm repository. Now, run:
 
 ```sh
-helm install -f config.yaml --version=0.34 --namespace=astronomer <your-platform-release-name> astronomer/astronomer
+helm install -f values.yaml --version=0.34 --namespace=astronomer <your-platform-release-name> astronomer/astronomer
 ```
 
 This command installs the most recent patch version of Astronomer Software. To install a different patch version, add the `--version=` flag and use the format `0.34.x`.  For example, to install Astronomer Software v0.34.0, you specify `--version=0.34.0`. For more information about the available patch versions, see the [Software Release Notes](release-notes.md).
@@ -377,25 +377,25 @@ After you run the previous commands, a set of Kubernetes pods are generated in y
 
 ### Alternative ArgoCD installation
 
-You can install Astronomer with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), which is an open source continuous delivery tool for Kubernetes, as an alternative to using `helm install`. 
+You can install Astronomer with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), which is an open source continuous delivery tool for Kubernetes, as an alternative to using `helm install`.
 
 Because ArgoCD doesn't support sync wave dependencies for [app of apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern) structures, installing Astronomer requires some additional steps compared to the standard ArgoCD workflow:
 
-1. Under the `global` section of your `config.yaml` file, add `enableArgoCDAnnotation: true`.
+1. Under the `global` section of your `values.yaml` file, add `enableArgoCDAnnotation: true`.
    
 2. Create a new ArgoCD app. When creating the app, configure the following:
 
-    - **Path**: The filepath of your `config.yaml` file
+    - **Path**: The filepath of your `values.yaml` file
     - **Namespace**: The namespace you want to use for Astronomer
-    - **Cluster**: The Kubernetes cluster in which you're installing Astronomer 
+    - **Cluster**: The Kubernetes cluster in which you're installing Astronomer
     - **Repository URL**: `https://helm.astronomer.io`
 
 3. Sync the ArgoCD app with every component of the Astronomer platform selected. See [Sync (Deploy) the Application](https://argo-cd.readthedocs.io/en/stable/getting_started/#7-sync-deploy-the-application).
-   
-4. Stop the sync when you see that `astronomer-houston-db-migrations` has completed in the Argo UI. 
-   
+
+4. Stop the sync when you see that `astronomer-houston-db-migrations` has completed in the Argo UI.
+
 5. Sync the application a second time, but this time clear `astronomer-alertmanager` in the Argo UI while keeping all other components selected. Wait for this sync to finish completely.
-   
+
 6. Sync the ArgoCD app a third time with all Astronomer platform components selected.
 
 ## Step 10: Verify Pods are up
@@ -522,7 +522,7 @@ curl -v -k -X POST https://houston.BASEDOMAIN/v1 -H "Authorization: Bearer <toke
 Next, to make sure the registry is accepted by Astronomer's local docker client, try authenticating to Astronomer with the Astro CLI:
 
 ```sh
-astro auth login <your-astronomer-base-domain>
+astro login <your-astronomer-base-domain>
 ```
 
 If you can log in, then your Docker client trusts the registry. If Docker does not trust the Astronomer registry, run the following and restart Docker:
@@ -537,7 +537,7 @@ Finally, try running `$ astro deploy` on a test deployment. Create a deployment 
 ```sh
 mkdir demo
 cd demo
-astro dev init --use-astronomer-certified
+astro dev init
 astro deploy -f
 ```
 
@@ -546,9 +546,9 @@ Check the Airflow namespace. If pods are changing at all, then the Houston API t
 If you have Airflow pods in the state `ImagePullBackoff`, check the pod description. If you see an x509 error, ensure that you have:
 
 - Configured containerd’s `config_path` to point to `/etc/containerd/certs.d`.
-- Added the `privateCaCertsAddToHost` key-value pairs to your Helm chart. 
+- Added the `privateCaCertsAddToHost` key-value pairs to your Helm chart.
 
-If you missed these steps during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation. If you are using a base image such as CoreOS that does not permit values to be changed, or you otherwise can't modify `config.yaml`, contact [Astronomer support](https://support.astronomer.io) for additional configuration assistance.
+If you missed these steps during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation. If you are using a base image such as CoreOS that does not permit values to be changed, or you otherwise can't modify `values.yaml`, contact [Astronomer support](https://support.astronomer.io) for additional configuration assistance.
 
 ## What's next
 
@@ -562,7 +562,7 @@ To help you make the most of Astronomer Software, check out the following additi
 
 If you have any feedback or need help during this process and aren't in touch with our team already, a few resources to keep in mind:
 
-* [Community Forum](https://forum.astronomer.io): General Airflow + Astronomer FAQs
+* [Community Forum](https://forum.astronomer.io): Search previously asked questions about Airflow + Astronomer FAQs
 * [Astronomer Support Portal](https://support.astronomer.io/hc/en-us/): Platform or Airflow issues
 
 For detailed guidelines on reaching out to Astronomer Support, reference our guide [here](support.md).

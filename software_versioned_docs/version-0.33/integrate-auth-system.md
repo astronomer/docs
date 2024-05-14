@@ -61,7 +61,7 @@ The following setups assume that you are using the default Astronomer [implicit 
         - Web / `https://houston.BASEDOMAIN/v1/oauth/redirect/`.
         - Web / `https://houston.BASEDOMAIN/v1/oauth/callback/`.
 
-    Replace `BASEDOMAIN` with your own. For example, if your base domain is `mycompany.com`, your redirect URIs should be `https://houston.mycompany.com/v1/oauth/redirect/` and `https://houston.mycompany.com/v1/oauth/callback/`.
+    Replace `BASEDOMAIN` with your own. For example, if your base domain is `example.com`, your redirect URIs should be `https://houston.example.com/v1/oauth/redirect/` and `https://houston.example.com/v1/oauth/callback/`.
 
 3. Click **Register**.
 

@@ -94,7 +94,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 2. Add the [Astro Databricks provider package](https://github.com/astronomer/astro-provider-databricks) to your requirements.txt file.
 
     ```text
-    astro-provider-databricks==0.1.3
+    astro-provider-databricks==0.1.6
     ```
 
 3. Define the following environment variable in your `.env` file. This allows you to serialize Astro Databricks provider objects.

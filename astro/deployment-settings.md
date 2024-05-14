@@ -5,7 +5,7 @@ id: deployment-settings
 description: "Manage Deployment settings to customize your Deployment for your use case."
 ---
 
-After you create an Astro Deployment, you can modify its settings using the Cloud UI and Astro CLI to tailor its performance. There are two categories of Deployment configurations: Deployment _details_ and _resources_.
+After you create an Astro Deployment, you can modify its settings using the Astro UI and Astro CLI to tailor its performance. There are two categories of Deployment configurations: Deployment _details_ and _resources_.
 
 ## Deployment details
 
@@ -27,11 +27,11 @@ After you create an Astro Deployment, you can modify its settings using the Clou
 - Enable High Availability.
 - Customize your Airflow environment using environment variables.
 
-For advanced Deployment resource configurations, see [Manage Airflow executors on Astro](executors-overview.md) and [Configure worker queues](configure-worker-queues.md).
+For advanced Deployment resource configurations, see [Manage Airflow executors on Astro](executors-overview.md) and [Configure worker queues](configure-worker-queues.mdx).
 
 :::cli
 
-These documents focuses on configuring Deployments through the Cloud UI. To configure Deployments as code using the Astro CLI, see [Manage Deployments as code](manage-deployments-as-code.md).
+These documents focuses on configuring Deployments through the Astro UI. To configure Deployments as code using the Astro CLI, see [Manage Deployments as code](manage-deployments-as-code.md).
 
 :::
 

@@ -52,8 +52,8 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
 
 ### Configure logging sidecars
  
-1. Retrieve your `config.yaml` file. See [Apply a config change](apply-platform-config.md).
-2. Add the following entry to your `config.yaml` file:
+1. Retrieve your `values.yaml` file. See [Apply a config change](apply-platform-config.md).
+2. Add the following entry to your `values.yaml` file:
 
     ```yaml
     global:
@@ -79,7 +79,7 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
 
 :::info
 
-To revert to the default behavior and export task logs using a Fluentd Daemonset, remove this configuration from your `config.yaml` file and reapply it.
+To revert to the default behavior and export task logs using a Fluentd Daemonset, remove this configuration from your `values.yaml` file and reapply it.
 
 :::
 
@@ -87,7 +87,7 @@ To revert to the default behavior and export task logs using a Fluentd Daemonset
 
 You can customize the default Astronomer Vector logging sidecar to have different transformations and sinks based on your team's requirements. This is useful if you want to annotate, otherwise customize, or filter your logs before sending them to your logging platform.
 
-1. Add the following line to your `config.yaml` file:
+1. Add the following line to your `values.yaml` file:
 
     ```yaml {5}
     global:
@@ -305,7 +305,7 @@ You can customize the default Astronomer Vector logging sidecar to have differen
 4. Run the following command to add the configuration file to your cluster as a Kubernetes secret:
 
     ```sh
-    kubectl create secret generic sidecar-config --from-file=vector-config.yaml=vector-config.yaml
+    kubectl create secret generic sidecar-config --from-file=vector-values.yaml=vector-values.yaml
     ```
 
 5. Run the following command to annotate the secret so that it's automatically applied to all new Deployments:
@@ -361,7 +361,7 @@ After you've created an Elastic deployment and endpoint, you have two options to
     defaultValue="configyaml"
     groupId= "save-your-elastic-cloud-deployment-credentials"
     values={[
-        {label: 'config.yaml', value: 'configyaml'},
+        {label: 'values.yaml', value: 'configyaml'},
         {label: 'Kubernetes secret', value: 'kubernetessecret'},
     ]}>
 <TabItem value="configyaml">
@@ -371,7 +371,7 @@ After you've created an Elastic deployment and endpoint, you have two options to
  ```bash
     echo -n "<username>:<password>" | base64
  ```
-2. Add the following entry to your `config.yaml` file:
+2. Add the following entry to your `values.yaml` file:
 
  ```yaml
  global:
@@ -386,16 +386,16 @@ After you've created an Elastic deployment and endpoint, you have two options to
      # encoded credentials from above step 1
      secret: "<encoded credentials>"    
  ```
-3. Add the following entry to your `config.yaml` file to disable internal logging:
+3. Add the following entry to your `values.yaml` file to disable internal logging:
 
  ```yaml
  tags:
    logging: false     
  ```
-4. Run the following command to upgrade the Astronomer Software release version in the `config.yaml` file:
+4. Run the following command to upgrade the Astronomer Software release version in the `values.yaml` file:
 
  ```bash
- helm upgrade -f config.yaml --version=0.27 --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
+ helm upgrade -f values.yaml --version=0.27 --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
  ```
 
 </TabItem>
@@ -406,7 +406,7 @@ After you've created an Elastic deployment and endpoint, you have two options to
  ```bash
  kubectl create secret generic elasticcreds --from-literal elastic=<username>:<password> --namespace=<your-platform-namespace>
  ```
-2. Add the following entry to your `config.yaml` file:
+2. Add the following entry to your `values.yaml` file:
 
  ```yaml
  global:
@@ -421,16 +421,16 @@ After you've created an Elastic deployment and endpoint, you have two options to
      # kubernetes secret containing credentials
      secretName: elasticcreds   
  ```
-3. Add the following entry to your `config.yaml` file to disable internal logging:
+3. Add the following entry to your `values.yaml` file to disable internal logging:
 
  ```yaml
  tags:
       logging: false    
  ```
-4. Run the following command to upgrade the Astronomer Software release version in the `config.yaml` file:
+4. Run the following command to upgrade the Astronomer Software release version in the `values.yaml` file:
 
   ```bash
-  helm upgrade -f config.yaml --version=0.27 --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
+  helm upgrade -f values.yaml --version=0.27 --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
   ```
 
 </TabItem>

@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-runtime-release-notes.xml" rel="self" type="application/rss+xml"/><title>Astro Runtime Release Notes</title><link>https://docs.astronomer.io/astro/runtime-release-notes</link><pubDate>Mon, 12 Feb 2024 18:10:03 GMT</pubDate><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Runtime.</description><language>en-US</language><item><title>Astro Runtime 10.3.0</title><link>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-1030</link><pubDate>Thu, 01 Feb 2024 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-1030</guid><description><![CDATA[<ul>
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-runtime-release-notes.xml" rel="self" type="application/rss+xml"/><title>Astro Runtime Release Notes</title><link>https://docs.astronomer.io/astro/runtime-release-notes</link><pubDate>Mon, 26 Feb 2024 13:53:05 GMT</pubDate><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Runtime.</description><language>en-US</language><item><title>Astro Runtime 10.4.0</title><link>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-1040</link><pubDate>Mon, 26 Feb 2024 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-1040</guid><description><![CDATA[<ul>
+<li>Release date: February 26, 2024</li>
+<li>Airflow version: 2.8.2</li>
+</ul><h3>Airflow 2.8.2</h3><p>Astro Runtime 10.4.0 includes same-day support for Apache Airflow 2.8.2. Airflow 2.8.2 contains a number of bug fixes including:</p><ul>
+<li>Base date for fetching DAG grid view must include selected run_id (<a href="https://github.com/apache/airflow/pull/34887">#34887</a>)</li>
+<li>Change AirflowTaskTimeout to inherit BaseException (<a href="https://github.com/apache/airflow/pull/35653">#35653</a>)</li>
+</ul><p>For more information, see the <a href="https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-8-2-2024-02-26">Apache Airflow release notes</a>.</p>]]></description></item><item><title>Astro Runtime 10.3.0</title><link>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-1030</link><pubDate>Thu, 01 Feb 2024 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-1030</guid><description><![CDATA[<ul>
 <li>Release date: February 1, 2024</li>
 <li>Airflow version: 2.8.1</li>
 </ul><h3>Early access Airflow bug fixes</h3><ul>
@@ -262,7 +269,7 @@
 <li><code>apache-airflow-providers-sftp</code></li>
 <li><code>apache-airflow-providers-snowflake</code></li>
 <li><code>apache-airflow-providers-ssh</code></li>
-</ul><p>If your DAGs use any of these providers, ensure that the provider packages are listed in your Astro project <code>requirements.txt</code> file before upgrading.</p><h3>Upgrade to Python 3.10</h3><p>Astro Runtime now uses Python 3.10 by default. To continue using Python 3.9, see <a href="runtime-image-architecture.md#python-versioning">Python versioning</a>.</p><h3>Additional improvements</h3><ul>
+</ul><p>If your DAGs use any of these providers, ensure that the provider packages are listed in your Astro project <code>requirements.txt</code> file before upgrading.</p><h3>Upgrade to Python 3.10</h3><p>Astro Runtime now uses Python 3.10 by default. To continue using Python 3.9, see <a href="runtime-image-architecture.mdx#python-versioning">Python versioning</a>.</p><h3>Additional improvements</h3><ul>
 <li>Upgraded <code>astronomer-providers</code> to 1.15.4, which includes a bug fix for a backwards compatibility issue. See the <a href="https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1154-2023-04-19"><code>astronomer-providers</code> changelog</a> for a complete list of changes.</li>
 <li>Upgraded <code>openlineage-airflow</code> to 0.23.0, which includes support for dbt snapshots and support for parsing additional SQL commands. See the <a href="https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md#0230---2023-4-20">OpenLineage changelog</a> for a complete list of changes.</li>
 </ul>]]></description></item><item><title>Astro Runtime 7.6.0</title><link>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-760</link><pubDate>Mon, 12 Jun 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-760</guid><description><![CDATA[<ul>
@@ -881,3 +888,5 @@
 <li>Fixed an issue where tasks would fail when running with <code>run_as_user</code> (<a href="https://github.com/astronomer/airflow/commit/075622cbe">commit</a>)</li>
 <li>Fixed an issue where tasks would fail when running with <code>CeleryKubernetesExecutor</code> (<a href="https://github.com/astronomer/airflow/commit/90aaf3d48">commit</a>)</li>
 </ul>]]></description></item></channel></rss>
+=======
+>>>>>>> 4a363a40011afe9c49300b9ae27316728914d7e2

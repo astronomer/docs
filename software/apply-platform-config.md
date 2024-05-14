@@ -11,16 +11,16 @@ Astronomer Software uses [Helm](https://helm.sh/) to install and manage some pla
 - [Registry backends](registry-backend.md)
 - [Resource allocation limits](configure-platform-resources.md)
 
-You can apply any Astronomer Software platform customizations to your cluster using a YAML configuration. `config.yaml` contains settings for both the Astronomer Helm chart, as well as Helm charts for system components like [ElasticSearch](https://github.com/astronomer/astronomer/blob/master/charts/elasticsearch/values.yaml) and [nginx](https://github.com/astronomer/astronomer/blob/master/charts/nginx/values.yaml). Using Helm allows you to keep all of your configurations in a single file that you can version and store securely. 
+You can apply any Astronomer Software platform customizations to your cluster using a YAML configuration. `values.yaml` contains settings for both the Astronomer Helm chart, as well as Helm charts for system components like [ElasticSearch](https://github.com/astronomer/astronomer/blob/master/charts/elasticsearch/values.yaml) and [nginx](https://github.com/astronomer/astronomer/blob/master/charts/nginx/values.yaml). Using Helm allows you to keep all of your configurations in a single file that you can version and store securely. 
 
 Use this document to learn how to retrieve your existing Helm configuration, modify configurations, and apply your changes to your Astronomer Software cluster.
 
 ## Step 1: Retrieve your current cluster configuration
 
-The best way to add or modify configurations is to start with your existing `config.yaml` file. To retrieve the current `config.yaml` file of an existing Software cluster, run the following command:
+The best way to add or modify configurations is to start with your existing `values.yaml` file. To retrieve the current `values.yaml` file of an existing Software cluster, run the following command:
 
 ```bash
-helm get values -o yaml <your-installation-release-name> -n <your-installation-namespace> > config.yaml
+helm get values -o yaml <your-installation-release-name> -n <your-installation-namespace> > values.yaml
 ```
 
 Alternatively, your team might use version management to store your existing Helm configuration. In this case, retrieve, update, and store your configuration file according to your team's workflows.
@@ -29,8 +29,8 @@ Alternatively, your team might use version management to store your existing Hel
 
 <!--- Version-specific -->
 
-1. Create a copy of your `config.yaml` file so that you can compare your existing configuration to your new configuration. 
-2. In your copied file, update the values for the configurations you want to change. To update a configuration you haven't already specified, copy the corresponding default values from the relevant [default Helm chart](https://github.com/astronomer/astronomer/tree/master/charts) into your `config.yaml` file and then modify the value.
+1. Create a copy of your `values.yaml` file so that you can compare your existing configuration to your new configuration. 
+2. In your copied file, update the values for the configurations you want to change. To update a configuration you haven't already specified, copy the corresponding default values from the relevant [default Helm chart](https://github.com/astronomer/astronomer/tree/master/charts) into your `values.yaml` file and then modify the value.
 
 When you have finished updating the configuration, ensure that they have the same relative order and indentation as they do in the [default configuration file](https://github.com/astronomer/astronomer/blob/master/values.yaml). If they don't, your changes might not be properly applied. The name of the Helm charts you're modifying should be the first items in the file, such as in the following example:
  
@@ -68,7 +68,7 @@ A number of configurations, including those for user permissions and identity pr
     helm ls -n <your-platform-namespace>
     ```
 
-2. Save your updated `config.yaml` file and run the following command to apply it as a Helm upgrade:
+2. Save your updated `values.yaml` file and run the following command to apply it as a Helm upgrade:
 
     ```bash
     helm upgrade <your-platform-release-name> astronomer/astronomer -f <your-updated-config-yaml-file> -n <your-platform-namespace> --set astronomer.houston.upgradeDeployments.enabled=false

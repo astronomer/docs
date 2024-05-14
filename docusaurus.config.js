@@ -15,11 +15,13 @@ module.exports = {
     preprocessor: ({ filePath, fileContent }) => {
       function updateValues() {
         var mapObj = {
-          '{{CLI_VER}}':"1.22.0",
-          '{{RUNTIME_VER}}':"10.3.0",
+          '{{CLI_VER_LATEST}}': "1.26.0",
+          '{{CLI_VER_2}}': "1.25.0",
+          '{{CLI_VER_3}}': "1.24.1",
+          '{{RUNTIME_VER}}': "11.3.0",
         };
-        var re = new RegExp(Object.keys(mapObj).join("|"),"gi");
-        return fileContent.replaceAll(re, function(matched){
+        var re = new RegExp(Object.keys(mapObj).join("|"), "gi");
+        return fileContent.replaceAll(re, function (matched) {
           return mapObj[matched];
         });
       }
@@ -111,7 +113,7 @@ module.exports = {
       buttons: {
         primary: {
           label: "Try Astro",
-          href: "https://www.astronomer.io/try-astro/?referral=docs-what-astro-banner"
+          href: "https://www.astronomer.io/try-astro/?referral=docs-what-astro-banner&utm_medium=docs&utm_content=astr&utm_source=body"
         },
         secondary: {
           label: "Learn about Astronomer",
@@ -232,7 +234,12 @@ module.exports = {
               'info',
               'tip',
               'cli',
-              'highlight'
+              'highlight',
+              'privatepreview',
+              'publicpreview',
+              'cliastroonly',
+              'clisoftwareonly',
+              'cliastroandsoftware'
             ],
             extendDefaults: true,
           },
@@ -321,15 +328,15 @@ module.exports = {
   ],
   scripts: [
     {
-      src: './scripts/segment.js',
+      src: '/scripts/segment.js',
       defer: true,
     },
     {
-      src: './scripts/consent-manager.js',
+      src: '/scripts/consent-manager.js',
       defer: true,
     },
     {
-      src: './scripts/consent-manager-config.js',
+      src: '/scripts/consent-manager-config.js',
     },
     {
       src: "/scripts/set-tab.js",
@@ -337,12 +344,7 @@ module.exports = {
       defer: true,
     },
     {
-      src: 'https://docs.astronomer.io/js/script.outbound-links.js',
-      "data-domain": 'docs.astronomer.io',
-      defer: true,
-    },
-    {
-      src: './scripts/remix-redocly.js',
+      src: '/scripts/remix-redocly.js',
       async: true,
       defer: true,
     },

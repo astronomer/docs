@@ -30,9 +30,9 @@ As a System Admin, you can open the platform to public signups, limit account cr
 
 Public signups allow any user with access to your base domain to create an account. If public signups are disabled, users that try to access Astronomer without an invitation from another user will be met with an error.
 
-In cases where SMTP credentials are difficult to acquire, enabling this flag might facilitate initial setup, as disabling public signups requires that a user accept an email invitation. Public signups are a configuration available in Astronomer's Houston API and can be enabled in the `config.yaml` file of your Helm chart.
+In cases where SMTP credentials are difficult to acquire, enabling this flag might facilitate initial setup, as disabling public signups requires that a user accept an email invitation. Public signups are a configuration available in Astronomer's Houston API and can be enabled in the `values.yaml` file of your Helm chart.
 
-To enable public signups, add the following yaml snippet to your `config.yaml` file:
+To enable public signups, add the following yaml snippet to your `values.yaml` file:
 
 ```yaml
 astronomer:
@@ -42,7 +42,7 @@ astronomer:
       emailConfirmation: false # If you wish to also disable other SMTP-dependent features
 ```
 
-An example `config.yaml` file would look like:
+An example `values.yaml` file would look like:
 
 ```yaml
 global:
@@ -148,9 +148,9 @@ Review the default roles and permissions in the [default Houston API configurati
 
 For example, you might want to block a `DEPLOYMENT_EDITOR` (and therefore `WORKSPACE_EDITOR`) from deploying code to all Airflow Deployments within a Workspace and instead limit that action to users assigned the `DEPLOYMENT_ADMIN` role.
 
-### Step 2: Modify your config.yaml file
+### Step 2: Modify your values.yaml file
 
-Apply the role and permission changes to your organization's `config.yaml` file. For example:
+Apply the role and permission changes to your organization's `values.yaml` file. For example:
 
 ```yaml
 astronomer:
@@ -189,7 +189,7 @@ If you're a System Admin who wants to limit Workspace creation, you can:
 - Set the `system.workspace.create` permission for the `USER` role to `false`
 - Attach the `system.workspace.create` permission to a separate role of your choice
 
-You might want limit this permission to the `SYSTEM_ADMIN` role on the platform, because System Admins can be responsible for managing cluster-level resources and costs. To reassign this permission to System Admins, your `config.yaml` would appear similar to the following example: 
+You might want limit this permission to the `SYSTEM_ADMIN` role on the platform, because System Admins can be responsible for managing cluster-level resources and costs. To reassign this permission to System Admins, your `values.yaml` would appear similar to the following example: 
 
 ```yaml
 astronomer:

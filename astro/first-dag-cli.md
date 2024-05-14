@@ -131,7 +131,7 @@ For more information about Astro CLI install options and troubleshooting, see [I
 
 An Astro _Deployment_ is an instance of Apache Airflow that is powered by all core Airflow components, including a webserver, scheduler, and one or more workers. You deploy DAGs to a Deployment, and you can have one or more Deployments within a Workspace.
 
-1. Log in to the [Cloud UI](https://cloud.astronomer.io).
+1. Log in to the [Astro UI](https://cloud.astronomer.io).
 
 2. On the **Deployments** page, click **+ Deployment**.
 
@@ -196,7 +196,7 @@ DAG-only deploys are an Astro feature that you can use to quickly update your As
     astro login astronomer.io
     ```
 
-    After running this command, you are prompted to open your web browser and enter your credentials to the Cloud UI. The Cloud UI then automatically authenticates you to the CLI. The next time you log in, you can run `astro login` without specifying a domain. If you run into issues logging in, check to make sure that you have the latest version of the Astro CLI. See [Upgrade the CLI](cli/install-cli.md#upgrade-the-cli).
+    After running this command, you are prompted to open your web browser and enter your credentials to the Astro UI. The Astro UI then automatically authenticates you to the CLI. The next time you log in, you can run `astro login` without specifying a domain. If you run into issues logging in, check to make sure that you have the latest version of the Astro CLI. See [Upgrade the CLI](cli/install-cli.md#upgrade-the-cli).
 
 2. Run the following command to deploy your DAGs to Astro:
 
@@ -210,7 +210,7 @@ DAG-only deploys are an Astro feature that you can use to quickly update your As
 
 Newly-deployed DAGs are paused by default and will not start running automatically. To run one of the example DAGs in your Astro project according to its schedule, you must unpause it from the Airflow UI hosted on your Deployment.
 
-1. In the Deployment page of the Cloud UI, click the **Open Airflow** button.
+1. In the Deployment page of the Astro UI, click the **Open Airflow** button.
 
 2. In the main DAGs view of the Airflow UI, click the slider button next to `example-dag-basic` to unpause it. If you hover over the DAG, it says `DAG is Active`. When you do this, the DAG starts to run on the schedule that is defined in its code.
 
@@ -228,11 +228,11 @@ Newly-deployed DAGs are paused by default and will not start running automatical
 
 5. Pause your DAG by clicking the slider button next to `example-dag-basic`. This prevents your example DAG from running automatically and consuming your Deployment resources.
 
-## Step 6: View your DAG status in the Cloud UI
+## Step 6: View your DAG status in the Astro UI
 
-The Cloud UI shows you information about the health of your Deployment, including analytics and logs for your DAG runs.
+The Astro UI shows you information about the health of your Deployment, including analytics and logs for your DAG runs.
 
-Go back to your Deployment page in the Cloud UI. Because you ran your example DAG, your Deployment information page now has data about your Deployment and DAG runs. The following example shows an example of what you might find in the **Overview** page for your Deployment.
+Go back to your Deployment page in the Astro UI. Because you ran your example DAG, your Deployment information page now has data about your Deployment and DAG runs. The following example shows an example of what you might find in the **Overview** page for your Deployment.
 
 ![Summary information about your DAG runs in the Analytics tab of a Quickstart Deployment.](/img/docs/first-DAG-data.png)
 

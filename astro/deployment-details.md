@@ -5,15 +5,17 @@ id: deployment-details
 description: "Edit information about your Deployment, like metadata settings, observability settings, and user access settings."
 ---
 
+import BusinessBadge from '@site/src/components/BusinessBadge';
+
 Deployment details define how users can view and interact with your Deployment. They include metadata settings, observability settings, and user access settings.
 
 ## Update a Deployment name and description
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
-2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
+2. Click the **More Actions** menu of the Deployment you want to update, and select **Edit Deployment**.
 
-    ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
+    <img src={require("../static/img/docs/edit-deployment.png").default} alt="Edit Deployment in options menu" style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
 3. In the **Basic** section, update the Deployment **Name** or **Description**.
 
@@ -23,7 +25,7 @@ Deployment details define how users can view and interact with your Deployment. 
 
 Configure a contact email to get proactive alerts directly from Astronomer support. Astronomer support uses contact emails to notify recipients in case there's an issue with the infrastructure for your Deployment, such as a problem with your scheduler or worker components.
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Details** tab. In the **Advanced** menu, click **Edit**.
 
@@ -39,28 +41,51 @@ In addition to alert emails for your Deployments, Astronomer recommends configur
 
 ## Enforce CI/CD deploys
 
-By default, Deployments accept code deploys from any authenticated source. When you enforce CI/CD deploys for a Deployment:
+<BusinessBadge/>
 
-- The Deployment accepts code deploys only if the deploys are triggered with a Deployment API token, Workspace API token, or Organization API token.
-- You can't enable [DAG-only deploys](deploy-dags.md) for the Deployment.
+By default, any user can deploy code either directly from the Astro CLI or from a CI/CD process that is authenticated with an API token. To help your team protect production environments from manual code deploys that circumvent your organization's CI/CD processes and checks, you can configure a Deployment so that users can't deploy code manually using the Astro CLI.
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+After you enable CI/CD enforcement on a Deployment, the Deployment accepts a deploy only if the deploy is authenticated using a Deployment API token, Workspace API token, or Organization API token. Astronomer recommends enabling this setting for all production environments.
 
-2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
-    ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
+2. Click the **More Actions** menu of the Deployment you want to update, and select **Edit Deployment**.
+
+    <img src={require("../static/img/docs/edit-deployment.png").default} alt="Edit Deployment in options menu" style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
 3. In the **Advanced** section, find **CI/CD Enforcement** and click the toggle to **On**.
 
 You can also update your Workspace so that any new Deployments in the Workspace enforce CI/CD deploys by default. See [Update general Workspace settings](manage-workspaces.md#update-general-workspace-settings).
 
+:::info
+
+When CI/CD enforcement is enabled for a Deployment, you cannot enable or disable [DAG-only deploys](deploy-dags.md) for the Deployment.
+
+To enable or disable DAG-only deploys when CI/CD enforcement is turned on:
+
+1. Turn **CI/CD Enforcement** to **Off**.
+2. Enable or disable the DAG-only deploy feature. See [Enable or disable DAG-only deploys](deploy-dags.md#enable-or-disable-dag-only-deploys-on-a-deployment).
+3. Turn **CI/CD Enforcememt** back to **On**.
+
+You have to only complete these steps once. Once the DAG-only deploy feature is enabled or disabled, you can turn CI/CD enforcement on or off at any time.
+
+:::
+
 ## Delete a Deployment
 
 When you delete a Deployment, all infrastructure resources assigned to the Deployment are immediately deleted. However, the Kubernetes namespace and metadata database for the Deployment are retained for 30 days. Deleted Deployments can't be restored. If you accidentally delete a Deployment, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
-2. Click the **Options** menu of the Deployment you want to delete, and select **Delete Deployment**.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Click the **More Actions** menu of the Deployment you want to delete, and select **Delete Deployment**.
 
-    ![Delete Deployment in options menu](/img/docs/delete-deployment.png)
+    <img src={require("../static/img/docs/delete-deployment.png").default} alt="Delete Deployment in options menu" style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
 3. Enter `Delete` and click **Yes, Continue**.
+
+## Find Deployment external IP addresses
+
+Each Astro Deployment has its own external IP addresses. Allowlist these addresses on any external service as a first step to create a connection between the Deployment and the service.
+
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Select the **Details** tab.
+3. In the **Other** section, you can find the **External IPs** associated with the Deployment.

@@ -47,7 +47,7 @@ The following topics provide setup steps for integrating each of these external 
     apache-airflow-providers-sendgrid
     ```
 
-7. In the Deployment view of the Cloud UI, add the following environment variables:
+7. In the Deployment view of the Astro UI, add the following environment variables:
 
     - `AIRFLOW__EMAIL__EMAIL_BACKEND` = `airflow.providers.sendgrid.utils.emailer.send_email`
     - `AIRFLOW__EMAIL__EMAIL_CONN_ID` = `smtp_default`
@@ -103,7 +103,7 @@ Use your existing Amazon SES instance to send Airflow notifications by email.
     - Click **Download Credentials** or copy them and store them in a safe place.
     - Click **Close Window**.
 
-7. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+7. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 8. In the environment variables area, click **Edit Variables** and add these variables:
     - `AIRFLOW__SMTP__SMTP_HOST`: Enter the value you copied in step 5
