@@ -255,17 +255,33 @@ You can programmatically create or update Deployments with all possible configur
 
 ## Clean Deployment task metadata
 
-You can run a cron job to automatically archive task and DAG metadata from your Deployment. This job runs [`airflow db clean`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#clean) for all of your Deployments and exports the results for each Deployment as a file to your external storage service. To run this job for a Deployment, you must install the Astronomer-maintained `airflow-dbcleanup-plugin` on the Deployment. 
+You can run a cron job to automatically archive task and DAG metadata from your Deployment. This job runs [`airflow db clean`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#clean) programmatically for all of your Deployments and exports the results each Deployment as files to your external storage service. To run this job for a Deployment, you must install the Astronomer-maintained `airflow-dbcleanup-plugin` on the Deployment. This plugin executes the cleanup job from your Deployment's `webserver` Pod. 
 
-1. For each of your Deployments, add the following line to the `requirements.txt` file of your Deployment's Astro project. Replace `<latest-version>` with the latest available version in the [`airflow-dbcleanup-plugin` GitHub repository](https://github.com/astronomer/airflow-dbcleanup-plugin/releases).
+
+1. For Deployments running Runtime 7 or earlier, add the following line to the `requirements.txt` file of your Deployment's Astro project. Replace `<latest-version>` with the latest available version in the [`airflow-dbcleanup-plugin` GitHub repository](https://github.com/astronomer/airflow-dbcleanup-plugin/releases).
 
     ```text
     https://github.com/astronomer/airflow-dbcleanup-plugin/releases/download/<latest-version>/astronomer_dbcleanup_plugin-<latest-version>-py3-none-any.whl
     ```
 
+<<<<<<< sudarshan-dbcleanup-job-documentation
+    You can skip this step for Deployments running Astro Runtime 8 or later.
+    
+2. Authorize your Deployments to your external storage service so that the webserver Pod can export the results of your cleanup jobs in JSON or URI Format. You can authorize your Deployment using one of the following methods:
+
+    - Configure an [Airflow connection] in the Deployment that connects to your external storage service.
+    - To configure a global connection for all Deployments, create a [Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret) containing an Airflow connection to your external storage service. The connection must be defined in either JSON or URI format. To pass the secret to all the Deployments, annotate the secret using the following command: 
+    
+    ```sh
+    kubectl annotate secret <secret-name> "astronomer.io/commander-sync"="platform=astronomer"
+    ```
+
+3. Add the following configuration to your `config.yaml` file and change the default values as needed.
+=======
 2. Configure an Airflow connection to your external storage service in JSON or URI format so that it can be stored as an environment variable. You must use a service account to authenticate to your service. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#storing-connections-in-environment-variables) to learn how to configure your connection.
 3. Store the connection environment variable as a Kubernetes Secret on your Astronomer cluster. See [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret).
 4. Add the following configuration to your `values.yaml` file and change the default values as needed.
+>>>>>>> main
    
     ```yaml
     houston:
@@ -301,4 +317,16 @@ You can run a cron job to automatically archive task and DAG metadata from your 
         tables: ""
     ```
 
-5. Push the configuration change. See [Apply a config change](apply-platform-config.md).
+4. Push the configuration change. See [Apply a config change](apply-platform-config.md).
+
+:::tip
+
+Set `dryRun: true` to test this feature without deleting any data. When dry runs are enabled, the cleanup job will only print the data that it plans to modify in the serial output of the webserver Pod. To view the dryRun events of the cleanup job, check the logs of your webserver Pod for each Deployment.
+
+:::
+
+:::danger
+
+The cleanup job deletes any data that's older than the number of days specified in your `olderThan` configuration. Ensure that none of your historical data is required to run current DAGs or tasks before enabling this feature. 
+
+:::
