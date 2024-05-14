@@ -26,6 +26,12 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## 0.35.0 
+
+Release date: May 14, 2024
+
+
+
 ## 0.34.1
 
 Release date: April 8, 2024
