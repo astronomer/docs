@@ -7,7 +7,7 @@ description: "Learn how to monitor Deployment performance, health, and total tas
 
 The Astro UI exposes a suite of observability metrics that show real-time data related to the performance and health of your Deployments. These metrics are a useful reference as you troubleshoot issues and can inform how you allocate resources. They can also help you estimate the cost of your Deployments. This document explains each available metric and where to find them.
 
-To view metrics for individual DAGs, see [DAG metrics](dag-metrics.md). To track Deployment health and specific incidents, see [Deployment health and incidents](deployment-health-incidents.md).
+To view information about individual DAGs, see [View DAG runs](dag-metrics.md). To track Deployment health and specific incidents, see [Deployment health and incidents](deployment-health-incidents.md).
 
 ## Deployment analytics
 
