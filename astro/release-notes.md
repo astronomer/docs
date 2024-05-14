@@ -29,12 +29,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Additional improvements
 
-- You can now use [Astro connections](https://docs.astronomer.io/astro/create-and-link-connections) with the Airflow Scheduler. Previously, the scheduler could not access Astro-managed connections due to how the scheduler accesses the local file-systems secret's backend. <!--https://github.com/astronomer/astro/pull/20401-->
+- Airflow connections that you configure through the Astro UI environment manager are now mounted to Deployment schedulers, meaning that scheduler processes can now make use of these Airflow connections.
 
 ### Bug fixes
 
-- Fixed a bug with SCIM integrations where some updates could not be made to Organization-less users. <!--https://github.com/astronomer/astro/pull/20843-->
-- Fixed an issue that could allow users to use custom roles to create API Tokens, users, or teams with higher Deployment access privilege. Users can now only use custom roles to make resources with their access privileges or lower. <!--https://github.com/astronomer/astro/pull/20826-->
+- Fixed an issue where you couldn't update users who were added through SCIM but didn't belong to an Organization.
+- Fixed an issue where a user with a custom role could create API Tokens, users, or teams with greater permissions than their own.
 
 ## May 8, 2024
 
