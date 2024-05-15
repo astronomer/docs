@@ -16,7 +16,7 @@ To meet the unique needs of different operating environments, Astro Runtime vers
 - **Stable:** Includes the latest Astronomer and Apache Airflow features, available on release
 - **Long-term Support (LTS):** Includes additional testing, stability, and maintenance for a core set of features
 
-Each Astro Runtime version defined as a `major.minor` pair, such as Runtime version 5.1,  is associated with an Astro Runtime stable release channel. The LTS release channel is a subset of the stable release channel and includes additional stability, reliability, and support. For more information on how Astro Runtime is versioned, see [Runtime versioning](runtime-image-architecture.md#runtime-versioning).
+Each Astro Runtime version defined as a `major.minor` pair, such as Runtime version 5.1,  is associated with an Astro Runtime stable release channel. The LTS release channel is a subset of the stable release channel and includes additional stability, reliability, and support. For more information on how Astro Runtime is versioned, see [Runtime versioning](runtime-image-architecture.mdx#runtime-versioning).
 
 For users that want to keep up with the latest Astronomer and Airflow features on an incremental basis, we recommend upgrading to new versions of Astro Runtime as soon as they are made generally available. This should be regardless of release channel. New versions of Runtime are issued regularly and include timely support for the latest major, minor, and patch versions of Airflow.
 
@@ -38,7 +38,7 @@ Within the maintenance window of each Astro Runtime version, the following is tr
 - A set of Docker images corresponding to that version are available for download on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags) and PyPi.
 - Astronomer will regularly publish bug or security fixes identified as high priority.
 - Support for paying customers running a maintained version of Astro Runtime is provided by [Astronomer Support](https://support.astronomer.io).
-- A user can create a new Deployment with the Cloud UI, API, or Astro CLI with any supported `major.minor` version pair of Runtime. For new Deployments, the Cloud UI assumes the latest patch.
+- A user can create a new Deployment with the Astro UI, API, or Astro CLI with any supported `major.minor` version pair of Runtime. For new Deployments, the Astro UI assumes the latest patch.
 
 When the maintenance window for a given version of Runtime ends, the following is true:
 
@@ -99,5 +99,5 @@ If you have any questions or concerns, contact [Astronomer support](https://supp
 
 ## Related documentation
 
-- [Astro Runtime architecture](runtime-image-architecture.md)
+- [Astro Runtime architecture](runtime-image-architecture.mdx)
 - [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes)

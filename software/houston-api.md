@@ -38,21 +38,21 @@ A _mutation_ is a request to update data for a specific object. Different mutati
 
 ```graphql
 mutation workspaceAddUser(
-    $workspaceUuid: Uuid = "<your-workspace-uuid>"
-    $email: String! = "<user-email-address>"
-    $role: Role! = <user-workspace-role>
-    $bypassInvite: Boolean! = true
+  $workspaceUuid: Uuid = "<your-workspace-uuid>"
+  $email: String! = "<user-email-address>"
+  $role: Role! = <user-workspace-role>
+  $bypassInvite: Boolean! = true
+) {
+  workspaceAddUser(
+    workspaceUuid: $workspaceUuid
+    email: $email
+    role: $role
+    deploymentRoles: $deploymentRoles
+    bypassInvite: $bypassInvite
   ) {
-    workspaceAddUser(
-      workspaceUuid: $workspaceUuid
-      email: $email
-      role: $role
-      deploymentRoles: $deploymentRoles
-      bypassInvite: $bypassInvite
-    ) {
-      id
-    }
+    id
   }
+}
 ```
 
 In this mutation, the values to update are formatted as variables in the first part of the request, then applied in the second half. Variables marked with a `!` are required in order for the query to complete. Lastly, the mutation requests the Houston API to return `id` of the added user to confirm that the mutation was successful. In this way, it's possible to make a mutation and a query in a single request. 

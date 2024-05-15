@@ -102,9 +102,9 @@ Add the following section to the role created in the section above:
 
 This will allow your EKS nodes to assume the role created above, giving them the necessary permissions to write to S3.
 
-### Enable Fluentd to S3 in your config.yaml file
+### Enable Fluentd to S3 in your values.yaml file
 
-In your `config.yaml` file, add the following values:
+In your `values.yaml` file, add the following values:
 
 ```
 fluentd:

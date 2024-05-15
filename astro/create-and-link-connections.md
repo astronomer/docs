@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Create connections in Astro'
-title: 'Create Airflow connections in the Cloud UI'
+title: 'Create Airflow connections in the Astro UI'
 id: create-and-link-connections
 description: "Create Airflow connections and link them to multiple Deployments in the Astro Environment Manager."
 ---
@@ -9,13 +9,13 @@ import HostedBadge from '@site/src/components/HostedBadge';
 
 <HostedBadge/>
 
-You can create and manage Airflow connections for Deployments with the Astro Environment Manager in the Cloud UI. The Environment Manager uses an Astro-managed secrets backend to store connection configurations as Kubernetes Secrets.
+You can create and manage Airflow connections for Deployments with the Astro Environment Manager in the Astro UI. The Environment Manager uses an Astro-managed secrets backend to store connection configurations as Kubernetes Secrets.
 
 Using the Environment Manager, you can quickly and securely create connections once and share them to multiple Deployments without having to set up your own secrets backend. You can also create a connection once and use it across multiple Airflow Deployments.
 
 For example, you can configure a connection with the credentials for a sandbox or development environment. Then, you can later configure your connection to be applied to all Deployments in the workspace by default. This means that when you create new Deployments, they automatically have access to your development environment. Later, you can edit the connection to point to your production resources by using [field overrides](#override-connection-fields).
 
-Compared to creating a connection in the Airflow UI, when you create a connection in the Cloud UI, you can:
+Compared to creating a connection in the Airflow UI, when you create a connection in the Astro UI, you can:
 
 - Share the connection with multiple Deployments within the Workspace.
 - Override fields in the connection for individual Deployments.
@@ -40,11 +40,11 @@ When you use connections for local development, the Astro CLI reads the connecti
 
 ### Fetching environment secrets
 
-The Astro CLI can automatically retrieve connections from the Cloud UI when you start your local airflow instance, which means you can use your connection details without needing to manage credentials between local and deployed environments. Local environments fetch connection information the same way as for Deployments, so they require an active internet connection and for you to be logged in with the Astro CLI. You can only fetch environment secrets from Deployments that belong to Workspaces where you are at least a Workspace Member.
+The Astro CLI can automatically retrieve connections from the Astro UI when you start your local airflow instance, which means you can use your connection details without needing to manage credentials between local and deployed environments. Local environments fetch connection information the same way as for Deployments, so they require an active internet connection and for you to be logged in with the Astro CLI. You can only fetch environment secrets from Deployments that belong to Workspaces where you are at least a Workspace Member.
 
 :::tip
 
-By default, connections can't be exported locally. However, if you want to work with connections locally, the Organization Owner can enable [**Environment Secrets Fetching**](organization-settings.md#configure-environment-secrets-fetching-for-the-astro-environment-manager) in the Cloud UI.
+By default, connections can't be exported locally. However, if you want to work with connections locally, the Organization Owner can enable [**Environment Secrets Fetching**](organization-settings.md#configure-environment-secrets-fetching-for-the-astro-environment-manager) in the Astro UI.
 
 :::
 
@@ -60,7 +60,7 @@ You can create connections both at the Deployment and Workspace level. When you 
 
 To create a connection at the Workspace level:
 
-1. In the Cloud UI, click **Environment** in the left menu to open the **Connections** page.
+1. In the Astro UI, click **Environment** in the left menu to open the **Connections** page.
 2. Click **+ Connection** to add a new connection.
 3. Find the service you want to connect from the list of available options.
 5. Enter the information for your connection in the listed fields.
@@ -69,7 +69,7 @@ To create a connection at the Workspace level:
 
 To create a connection at the Deployment level:
 
-1. In the Cloud UI, select a Deployment, then click the **Environment** tab within the Deployment menu.
+1. In the Astro UI, select a Deployment, then click the **Environment** tab within the Deployment menu.
 3. Click **+ Connection** to add a new connection.
 4. Find the service you want to connect from the list of available options.
 5. Enter your information in the required fields.
@@ -85,7 +85,7 @@ For the most flexibility, you can set default connections and override the conne
 
 ### Step 1: Link the connection
 
-1. In the Cloud UI, click **Environment** in the left menu to open the **Connections** page.
+1. In the Astro UI, click **Environment** in the left menu to open the **Connections** page.
 2. Click the connection you want to link to a Deployment.
 3. Click **+ Link Deployment**.
 4. Choose a Deployment from the list that appears.

@@ -28,7 +28,7 @@ values={[
 
 This command bundles all files in your Astro project and pushes them to Astro. Before completing the process, it tests your DAGs in your Astro project for errors. If this test fails, the deploy to Astro will also fail. This is the same test which runs locally with `astro dev parse`.
 
-When you run `astro deploy`, the CLI prompts you to select from a list of all Deployments that you can access across Workspaces. To bypass this prompt, you can also specify a Deployment ID in the command. To retrieve a Deployment ID, open your Deployment in the Cloud UI and copy the value in the **ID** section of the Deployment page. You can also run `astro deployment list` to find a Deployment ID or name.
+When you run `astro deploy`, the CLI prompts you to select from a list of all Deployments that you can access across Workspaces. To bypass this prompt, you can also specify a Deployment ID in the command. To retrieve a Deployment ID, open your Deployment in the Astro UI and copy the value in the **ID** section of the Deployment page. You can also run `astro deployment list` to find a Deployment ID or name.
 
 For teams operating at scale, this command can be automated with a [CI/CD pipeline](set-up-ci-cd.md) by using [Deployment API tokens](deployment-api-tokens.md) in the request. When `ASTRO_API_TOKEN` is specified as OS-level environment variables on your local machine or in a CI tool, `astro deploy <deployment-id>` can be run without requiring user authentication.
 
@@ -55,7 +55,7 @@ astro deploy <options>
 | `--build-secrets` | Run `docker build --secret` to mount a secret value to your Docker image. | `id=<your-secret-id>, src=<path-to-secret> .` See [Docker documentation](https://docs.docker.com/build/building/secrets/#secret-mounts). |
 | `-d`, `--dags`            | Deploy only your `dags` directory. See [DAG-only deploys](deploy-dags.md)                                                                       | None                                                             |
 | `-n`, `--deployment-name` | The name of the Deployment to deploy to. Use as an alternative to `<deployment-id>`                                                                              | Any valid Deployment name                                        |
-| `--description`           | A description for your code deploy. Descriptions appear in the Cloud UI in your Deployment's **Deploy History**                                                  | None                                                             |
+| `--description`           | A description for your code deploy. Descriptions appear in the Astro UI in your Deployment's **Deploy History**                                                  | None                                                             |
 | `-e`,`--env`              | Location of the file containing environment variables for pytests. By default, this is `.env`.                                                                   | Any valid filepath to an `.env` file                             |
 | `-f`,`--force`            | Force deploy even if your project contains errors or uncommitted changes                                                                                         | None                                                             |
 | `--image`                 | If you have DAGs-only deploys enabled, use this flag to deploy only your Astro project image. When you use this option, your `dags` folder is not deployed to Astro | None                                                             |
@@ -107,7 +107,7 @@ If you have uncommitted changes in your working directory, you must use the `-f`
 
 This command bundles all files in your Astro project and pushes them to Astronomer Software.
 
-When you run `astro deploy`, you'll be prompted to select from a list of all Deployments that you can access in all Workspaces. To bypass this prompt, you can specify a Deployment ID in the command. To retrieve a Deployment ID, go to your Deployment's information page in the Cloud UI and copy the value after the last `/` in the URL. You can also run `astro deployment list` to retrieve a Deployment ID .
+When you run `astro deploy`, you'll be prompted to select from a list of all Deployments that you can access in all Workspaces. To bypass this prompt, you can specify a Deployment ID in the command. To retrieve a Deployment ID, go to your Deployment's information page in the Astro UI and copy the value after the last `/` in the URL. You can also run `astro deployment list` to retrieve a Deployment ID .
 
 ## Options
 

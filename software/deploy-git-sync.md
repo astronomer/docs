@@ -22,7 +22,7 @@ To deploy DAGs to a Deployment using a git-sync deploy mechanism, you need permi
 
 ## Enable git-sync
 
-Git-sync deploys must be explicitly enabled on Astronomer by a System Admin. To enable it, update your `config.yaml` file with the following values:
+Git-sync deploys must be explicitly enabled on Astronomer by a System Admin. To enable it, update your `values.yaml` file with the following values:
 
 ```yaml
 astronomer:

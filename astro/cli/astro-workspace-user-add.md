@@ -4,15 +4,15 @@ title: "astro workspace user add"
 id: astro-workspace-user-add
 description: Add a user to a Workspace.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-:::info  
+:::info
 
-The behavior and format of this command differs depending on which Astronomer product you're using. Use the following tabs to change product contexts. 
+The behavior and format of this command differs depending on which Astronomer product you're using. Use the following tabs to change product contexts.
 
 :::
 
@@ -31,7 +31,7 @@ You can use this command to invite multiple users to a Workspace at a time. See 
 ## Usage
 
 ```sh
-astro workspace user add <email> 
+astro workspace user add <email>
 ```
 
 ## Options
@@ -39,7 +39,7 @@ astro workspace user add <email>
 | Option    | Description                                          | Valid Values                                                                               |
 | --------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `<email-address>` | The email address of the user that you want to add to the Workspace. | Any valid email address                                                                            |
-| `--role`  | The user's role in the Workspace.                    | Possible values are either `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
+| `--role`  | The user's role in the Workspace.                    | Possible values are either `WORKSPACE_ACCESSOR`, `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
 
 ## Related commands
 
@@ -55,7 +55,7 @@ Creates a new user in your current Workspace. If the user has already authentica
 ## Usage
 
 ```sh
-astro workspace user add --email <user-email-address> 
+astro workspace user add --email <user-email-address>
 ```
 
 ## Options

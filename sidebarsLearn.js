@@ -47,6 +47,7 @@ module.exports = {
             'bashoperator',
             'connections',
             'dags',
+            'airflow-datasets',
             'what-is-a-hook',
             'managing-airflow-code',
             'airflow-openlineage',
@@ -74,6 +75,7 @@ module.exports = {
             'cross-dag-dependencies',
             'airflow-importing-custom-hooks-operators',
             'error-notifications-in-airflow',
+            'airflow-dag-parameters',
             'dag-best-practices',
             'debugging-dags',
             'dynamic-tasks',
@@ -112,9 +114,9 @@ module.exports = {
           items: [
             'logging',
             'data-quality',
-            'airflow-datasets',
             'deferrable-operators',
             'dynamically-generating-dags',
+            'airflow-isolated-environments',
             'kubepod-operator',
             'airflow-mlops',
             'using-airflow-plugins',
@@ -145,16 +147,15 @@ module.exports = {
         'airflow-object-storage-tutorial',
         'airflow-sql-data-quality',
         'astro-python-sdk',
-        'external-python-operator',
         'custom-airflow-ui-docs-tutorial',
       ],
     },
     {
       type: 'category',
-      label: 'Integrations',
+      label: 'Integrations & connections',
       link: {
         type: 'generated-index',
-        title: 'Integrations',
+        title: 'Integrations & connections',
         description: 'Integrate Airflow with commonly used data engineering tools.',
       },
       items: [
@@ -162,7 +163,6 @@ module.exports = {
         'airflow-kafka',
         'connections/azure-blob-storage',
         'airflow-azure-container-instances',
-        'airflow-azure-data-explorer',
         {
           type: 'category',
           label: 'Azure Data Factory',
@@ -252,7 +252,6 @@ module.exports = {
           ],
         },
         'soda-data-quality',
-        'airflow-talend-integration',
         'airflow-weaviate',
         'airflow-weights-and-biases',
       ],
@@ -274,7 +273,6 @@ module.exports = {
           'use-case-llm-customer-feedback',
           'use-case-airflow-ml-datasets',
           'use-case-airflow-mlflow',
-          'use-case-ml-airflow-snowpark-weaviate'
       ],
     },
     'airflow-glossary'

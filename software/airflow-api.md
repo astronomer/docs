@@ -20,7 +20,7 @@ You can use the Software UI or the Astro CLI to create a Service account.
 
 :::info
 
-If you just need to call the Airflow REST API once, you can create a temporary Authentication Token (_expires in 24 hours_) on Astronomer in place of a long-lasting Service account. To do so, go to: `https://app.<BASE-DOMAIN>/token` (e.g. `https://app.astronomer.yourcompany.com/token`) and skip to Step 2.
+If you just need to call the Airflow REST API once, you can create a temporary Authentication Token (_expires in 24 hours_) on Astronomer in place of a long-lasting Service account. To do so, go to: `https://app.<BASE-DOMAIN>/token` (e.g. `https://app.astronomer.example.com/token`) and skip to Step 2.
 
 :::
 
@@ -71,7 +71,7 @@ To use the Astro CLI to create a Deployment-level Service Account:
 With the information from Step 1, you can now execute requests against any supported endpoints in the [Airflow Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) at the following base URL:
 
 ```
-https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-NAME>/airflow/api/v1
+https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-RELEASE-NAME>/airflow/api/v1
 ```
 
 ## Example API Requests

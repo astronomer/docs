@@ -9,9 +9,7 @@ description: Create Deployment API keys to make requests to Airflow's REST API a
 
 Deployment API keys are deprecated in favor of [Deployment API tokens](deployment-api-tokens.md).
 
-You can continue to use existing Deployment API keys but you cannot create new API keys after October 31, 2023. After this date, Deployments with zero API keys will no longer display the **API Keys** tab and you won't be able to create new Deployment API keys. If you want to continue using API keys after October 31, ensure that you always have at least one API key configured for the Deployment prior to October 31.
-
-You will have to convert existing API keys into Deployment API tokens in the future when API Keys are no longer supported, however, the deadline for converting API keys has not yet been determined.
+You must convert existing API keys into Deployment API tokens by **June 1, 2024**, after which API keys will no longer work.
 
 If you have any questions, contact [Astronomer Support](https://cloud.astronomer.io/open-support-request).
 
@@ -39,7 +37,7 @@ When using a Deployment API key, keep the following in mind:
 
 ## Create an API key
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **API Keys** tab.
 
@@ -85,7 +83,7 @@ For more information and examples, see [Automate code deploys with CI/CD](set-up
 
 If you delete an API key, make sure that no existing CI/CD pipelines are using it. Once deleted, an API key and secret cannot be recovered. If you unintentionally delete an API key, create a new one and update any CI/CD workflows that used the deleted API key.
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **API Keys** tab.
 

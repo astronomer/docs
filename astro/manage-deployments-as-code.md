@@ -62,8 +62,8 @@ Alternatively, you can manually create a template file without using an existing
           workspace_name: <your-workspace-name>
           scheduler_size: small
   ```
-  
-  Note that for Deployments on a standard cluster, the `region` and `cluster-name` parameters must both contain the region name for the standard cluster. See [Available regions for your cloud provider](resource-reference-hosted.md#standard-cluster-regions). 
+
+  Note that for Deployments on a standard cluster, the `region` and `cluster-name` parameters must both contain the region name for the standard cluster. See [Available regions for your cloud provider](resource-reference-hosted.mdx#standard-cluster-regions).
 
   </TabItem>
 
@@ -112,7 +112,7 @@ Alternatively, you can manually create a template file without using an existing
     astro deployment create --deployment-file <your-deployment-file-name>
     ```
 
-4. (Optional) Either open the Cloud UI or run the following command to confirm that you successfully created your Deployment:
+4. (Optional) Either open the Astro UI or run the following command to confirm that you successfully created your Deployment:
 
    ```bash
    astro deployment list
@@ -128,7 +128,7 @@ When you update a Deployment with a Deployment file, keep the following in mind:
 
 - You can’t change the cluster or Workspace the Deployment runs on. To transfer a Deployment to a different Workspace, see [Transfer a Deployment](transfer-a-deployment.md).
 - You can't change the Astro Runtime version of the Deployment. To upgrade Astro Runtime, you must update the Dockerfile in your Astro project. See [Upgrade Astro Runtime](upgrade-runtime.md).
-- Environment variables marked as secret in the Cloud UI will be exported with a blank `value` to your Deployment file. To redeploy using the Deployment file, you either need to provide the `value` again in the Deployment file or delete the object for the variable. Otherwise, `astro deployment create` will fail. See [`deployment.environment_variables`](#deploymentenvironment_variables) for more details.
+- Environment variables marked as secret in the Astro UI will be exported with a blank `value` to your Deployment file. To redeploy using the Deployment file, you either need to provide the `value` again in the Deployment file or delete the object for the variable. Otherwise, `astro deployment create` will fail. See [`deployment.environment_variables`](#deploymentenvironment_variables) for more details.
 
 :::danger
 
@@ -152,7 +152,7 @@ To update a Deployment using a Deployment file:
   astro deployment update <deployment-id> --deployment-file <your-deployment-file>
   ```
 
-4. (Optional) Confirm that your Deployment was updated successfully by running the following command. You can also go to the Deployment page in the Cloud UI to confirm the new values.
+4. (Optional) Confirm that your Deployment was updated successfully by running the following command. You can also go to the Deployment page in the Astro UI to confirm the new values.
 
   ```bash
   astro deployment inspect <deployment-id>

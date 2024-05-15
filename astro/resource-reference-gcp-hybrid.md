@@ -8,7 +8,7 @@ sidebar_custom_props: { icon: 'img/gcp.png' }
 
 :::warning
 
-This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Cloud UI, then click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
+This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Astro UI, then click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
 
 To create a cluster on Astro Hosted, see [Create a dedicated cluster](create-dedicated-cluster.md).
 
@@ -89,6 +89,8 @@ The following Cloud SQL instance types are supported on Astro:
 - Small Compute Optimized (4 CPU, 8 GiB MEM)
 - Medium Compute Optimized (8 CPU, 16 GiB MEM)
 - Large Compute Optimized (16 CPU, 32 GiB MEM)
+- XLarge Compute Optimized (24 CPU, 48 GiB MEM)
+- XXLarge Compute Optimized (32 CPU, 64 GiB MEM)
 
 For detailed information about each instance type, see the [Cloud SQL documentation](https://cloud.google.com/sql). If you're interested in an Cloud SQL instance type that is not on this list, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
