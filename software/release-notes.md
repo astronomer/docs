@@ -30,7 +30,26 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 Release date: May 14, 2024
 
+### Bug fixes
 
+- Fixed an issue where the `lastUsedAt` data for a service account was not updated when the service account deployed an Airflow image.
+- Resolved the following vulnerabilities:
+
+    - [GHSA-m425-mq94-257g](https://github.com/advisories/GHSA-m425-mq94-257g)
+    - [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/CVE-2024-21626)
+    - [CVE-2022-21698](https://nvd.nist.gov/vuln/detail/CVE-2022-21698) 
+    - [CVE-2021-33194](https://nvd.nist.gov/vuln/detail/CVE-2021-33194) 
+    - [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/CVE-2023-39325) 
+    - [CVE-2021-38561](https://nvd.nist.gov/vuln/detail/CVE-2021-38561) 
+    - [GHSA-36jr-mh4h-2g58](https://github.com/advisories/GHSA-36jr-mh4h-2g58)
+    - [GHSA-xpw8-rcwv-8f8p](https://github.com/advisories/GHSA-xpw8-rcwv-8f8p) 
+    - [CVE-2023-1370](https://nvd.nist.gov/vuln/detail/CVE-2023-1370) 
+    - [CVE-2024-25710](https://nvd.nist.gov/vuln/detail/CVE-2024-25710) 
+    - [CVE-2024-26308](https://nvd.nist.gov/vuln/detail/CVE-2024-26308)
+    - [GHSA-9763-4f94-gfch](https://github.com/advisories/GHSA-9763-4f94-gfch)
+    - [CVE-2024-26147](https://nvd.nist.gov/vuln/detail/CVE-2024-26147)
+    - [CVE-2024-28757](https://nvd.nist.gov/vuln/detail/CVE-2024-28757)
+    - [CVE-2023-36665](https://nvd.nist.gov/vuln/detail/CVE-2023-36665)
 
 ## 0.34.1
 
