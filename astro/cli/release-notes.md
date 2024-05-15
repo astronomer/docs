@@ -18,6 +18,31 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 - **Stable versions**: {{CLI_VER_LATEST}}, {{CLI_VER_2}}, and {{CLI_VER_3}}. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md) for more information about support for CLI versions.
 
+## Astro CLI 1.27.0
+
+Release date: April 24, 2024
+
+### New Flags for the Deployment Logs Commands: 
+
+Introducing new flags (`--webserver`, `--scheduler`, `--triggerer`, `--worker`) for the `astro deployment logs` command. Now users can parse logs for specific components, providing granular insights into Deployments and enhancing monitoring capabilities.
+
+### Exclude DAG Files from Parse Test
+
+Users can now exclude DAG files from testing with `astro dev parse` command. To get the new test, delete the `.astro/test_dag_integrity_default.py` file and run `astro dev init`. A new default test file will be created along with a `.astro/dag_integrity_exceptions.txt`. You can add dag files you want to be excluded to this text file. This allows you to exclude tests that you know do not pass the `astro dev parse` test.
+
+### Additional improvements
+
+- The `astro deploy --image` command can now be used to deploy to deployments without pre-existing DAGs.
+- Users can now append `2>/dev/null | head` to commands to disregard upgrade messages. For example, running `astro completion bash 2>/dev/null | head`ensures that resulting bash script remains unaffected by the upgrade message.
+- New flag `astro deployment update --development-mode disable` to turn off development mode for an existing deployment. Note that you still cannot turn on development mode for an existing deployment.
+- New error message for expired API tokens.
+
+
+### Bug fixes
+
+- Fixed an issue where deployments with identical names across different workspaces couldn't be created
+- The upgrade-test command now returns the correct error code, ensuring accurate feedback during testing and CI/CD.
+
 ## Astro CLI 1.26.0
 
 Release date: April 24, 2024
