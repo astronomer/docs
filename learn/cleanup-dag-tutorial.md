@@ -14,7 +14,8 @@ When a table in the metadata DB is larger than 50GB, you might start to experien
 
 - Slow task scheduling
 - Slow DAG parsing
-- [List more specifics]
+- Gunicorn timing out when using the Celery executor
+- Slower Airflow UI load times
 
 The following tables in the database are at risk of becoming too large over time:
 
@@ -37,16 +38,21 @@ Even when using `airflow db clean`, deleting data from the metadata database can
 
 Deleting data from the metadata database can be an extremely destructive action. If you delete data that future task runs depend on, it's difficult to recover the database to its previous state without interrupting your data pipelines. Before implementing the DAG in this tutorial, consider the following:
 
-- Delete older data before newer data. The older the deleted data, the less likely it is to affect your currently running DAGs.
-- On Astro, the DAG will fail if it runs for longer than five minutes, which can happen if you have an exceptionally large amount of data to delete. If this happens, use the DAG's params to reduce the amount of data being deleted at once, either by reducing the time window for deletion or reducing the number of tables to clean.
+- When specifying the `clean_before_timestamp` value, use as late of a data as possible. The older the deleted data, the less likely it is to affect your currently running DAGs.
+- On Astro, the DAG will fail if it runs for longer than five minutes, which can happen if you have an exceptionally large amount of data to delete. If this happens, use the DAG's params to reduce the amount of data being deleted from a single table at once.
 
 ## Prerequisites
 
-- An Astro project
+- An Airflow project project
 - The Astro CLI
 
 ## Step 1: Create your DAG
 
+:::warning
+
+This DAG has been designed and optimized for Airflow environments running on Astro. Consider adjusting the parameters and code if you're running the DAG in any other type of Airflow environment.
+
+:::
 
 1. In your dags folder, create a file called `db_cleanup.py`.
 
