@@ -5,20 +5,19 @@ id: houston-api-examples
 description: Examples of some of the most common queries you might make to the Astronomer Software Houston API
 ---
 
-Use the following example Houston API requests as the basis for your applications developed for Astronomer Software. 
+Use the following example Houston API requests as the basis for the applications you develop for Astronomer Software. 
 
 ## Example queries
 
-The following sample queries can be used to retrieve common information for specific Astronomer objects.
+You can retrieve common information for specific Astronomer objects by using the following sample queries.
 
 ### Query Deployment details
 
-The `workspaceDeployment` query can be used to retrieve details about a Deployment in a given Workspace. It requires the following inputs:
+You can use the `workspaceDeployment` query to retrieve details about a Deployment in a given Workspace. It requires the following inputs:
 
 - **Workspace ID**: To retrieve this value, run `astro workspace list`. Alternatively, open a Workspace in the Software UI and copy the value after `/w/` in your Workspace URL (for example `https://app.basedomain/w/<workspace-id>`).
 - **Deployment release name**: To retrieve this value, run `astro deployment list` in your Workspace. Alternatively, you can copy the **Release name** from your Deployment's **Settings** tab in the Software UI.
-
-and can return any of the fields under `Type Details`:
+and can return any of the fields under `Type Details`, such as:
 
 - `config`
 - `uuid`
@@ -26,7 +25,6 @@ and can return any of the fields under `Type Details`:
 - `createdAt`
 - `updatedAt`
 - `roleBindings`
-- etc.
 
 For instance, you can run the following query to retrieve the Deployment's:
 
@@ -94,11 +92,11 @@ query User {
 
 ## Example mutations
 
-Mutations make a change to your platform's underlying database. For some common examples, read below.
+Mutations make a change to your platform's underlying database. The following sections describe some common examples.
 
 ### Create a Deployment
 
-To create a Deployment, you'll need Workspace Admin permissions and a -**Workspace ID**. To retrieve this value, run `astro workspace list`. Alternatively, open a Workspace in the Software UI and copy the value after `/w/` in your Workspace URL (for example `https://app.basedomain/w/<workspace-id>`).
+To create a Deployment, you need Workspace Admin permissions and a **Workspace ID**. To retrieve this value, run `astro workspace list`. Alternatively, open a Workspace in the Software UI and copy the value after `/w/` in your Workspace URL (for example `https://app.basedomain/w/<workspace-id>`).
 
 This example mutation creates a Deployment with the Celery executor and the latest Runtime version. It then returns the Deployment's ID and configuration to confirm that it was successfully created. 
 
@@ -134,7 +132,7 @@ Then push the configuration change to your cluster. See [Apply a config change](
 
 :::
 
-The `upsertDeployment` mutation can be used to both create and update Deployments with all possible Deployment configurations. If you query `upsertDeployment` without a `deploymentUuid`, the Houston API creates a new Deployment according to your specifications. If you specify an existing `deploymentUuid`, the Houston API updates the Deployment with that ID. All queries to create a Deployment require specifying a `workspaceUuid`.
+You can use the `upsertDeployment` mutation to both create and update Deployments with all possible Deployment configurations. If you query `upsertDeployment` without a `deploymentUuid`, the Houston API creates a new Deployment according to your specifications. If you specify an existing `deploymentUuid`, the Houston API updates the Deployment with that ID. All queries to create a Deployment require specifying a `workspaceUuid`.
 
 The following query creates a new Deployment in a custom namespace `test-new-dep` and configures a Deployment environment variable `AIRFLOW__CORE__COLORED_LOG_FORMAT`.
 
@@ -274,7 +272,7 @@ mutation upsertDeployment(
 
 ### Delete a Deployment
 
-To delete a Deployment, you'll need:
+To delete a Deployment, you need:
 
 - Either System Admin or Workspace Admin permissions
 - A Deployment ID. To retrieve this value, run `astro deployment list` or request the `id` value in the `workspaceDeployment` query.
@@ -293,7 +291,7 @@ mutation DeleteDeployment {
 
 ### Create a Deployment user
 
-To add an existing Astronomer Software user to a Deployment, you'll need. 
+To add an existing Astronomer Software user to a Deployment, you need:
 
 - Workspace Admin privileges
 - A Deployment ID. To retrieve this value, run `astro deployment list` or request the `id` value in the `workspaceDeployment` query.
@@ -331,7 +329,7 @@ mutation AddDeploymentUser(
 
 ### Delete a user
 
-To delete a user from Astronomer Software, you'll need:
+To delete a user from Astronomer Software, you need:
 
 - System Admin permissions
 - The ID of the user to delete. To retrieve this, request the `id` value in a `users` query or run `astro workspace user list`.
@@ -357,7 +355,7 @@ If a user on the platform has trouble verifying their email address, you can use
 To run this mutation, you'll need:
 
 - System Admin Permissions
-- The user's email address. Additionally, ensure that the user has already begun creating an account on the platform. They must have signed up for an account, and Astronomer Software must already have generated an invite token for the user. 
+- The user's email address. This needs to be the email address that the user provided when they began creating an account on the platform. They must have signed up for an account, and Astronomer Software must already have generated an invite token for the user. 
 
 The following request verifies the email and returns `true` or `false` based on whether the mutation was successful. 
 
@@ -373,10 +371,10 @@ mutation verifyEmail {
 
 If you don't need certain users to verify their email before they join a Workspace, you can configure a bypass when you add them to a Workspace. This can be useful for minimizing friction when programmatically inviting many users to your platform.
 
-To run this mutation, you'll need:
+To run this mutation, you need:
 
 - Workspace Admin permissions
-- A -**Workspace ID**. To retrieve this value, run `astro workspace list`. Alternatively, open a Workspace in the Software UI and copy the value after `/w/` in your Workspace URL (for example `https://app.basedomain/w/<workspace-id>`).
+- A Workspace ID. To retrieve this value, run `astro workspace list`. Alternatively, open a Workspace in the Software UI and copy the value after `/w/` in your Workspace URL (for example `https://app.basedomain/w/<workspace-id>`).
 - The user's email address.
 - The user's desired role in the Workspace (`WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, `WORKSPACE_ADMIN`).
 
@@ -402,10 +400,10 @@ mutation workspaceAddUser(
 
 ### Add a System Admin
 
-To add a user as a System Admin through the Houston API, you'll need the following values: 
+To add a user as a System Admin through the Houston API, you need the following values: 
 
-- To retrieve this, request the `id` value in a `users` query or run `astro workspace user list`.
-- System Admin permissions
+- The user's ID. To retrieve this, request the `id` value in a `users` query or run `astro workspace user list`.
+- System Admin permissions.
 
 You can then run the following query to add the user as a System Admin.
 
@@ -425,7 +423,7 @@ mutation createSystemRoleBinding (
 
 ### Update environment variables
 
-To programmatically update environment variables, you'll need:
+To programmatically update environment variables, you need:
 
 - A Deployment ID. To retrieve this value, run `astro deployment list` or request the `id` value in the `workspaceDeployment` query.
 - A Deployment release name: To retrieve this value, run `astro deployment list` in your Workspace. Alternatively, you can copy the **Release name** from your Deployment's **Settings** tab in the Software UI.
