@@ -20,28 +20,33 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 ## Astro CLI 1.27.0
 
-Release date: April 24, 2024
+Release date: May 16, 2024
 
-### New Flags for the Deployment Logs Commands: 
+### New flags for the Deployment logs commands: 
 
-Introducing new flags (`--webserver`, `--scheduler`, `--triggerer`, `--worker`) for the `astro deployment logs` command. Now users can parse logs for specific components, providing granular insights into Deployments and enhancing monitoring capabilities.
+You can now parse logs for specific components, providing granular insights into Deployments and enhancing monitoring capabilities, with the following new flags for the `astro deployment logs` command:
 
-### Exclude DAG Files from Parse Test
+- `--webserver`
+- `--scheduler`
+- `--triggerer`
+- `--worker`
 
-Users can now exclude DAG files from testing with `astro dev parse` command. To get the new test, delete the `.astro/test_dag_integrity_default.py` file and run `astro dev init`. A new default test file will be created along with a `.astro/dag_integrity_exceptions.txt`. You can add dag files you want to be excluded to this text file. This allows you to exclude tests that you know do not pass the `astro dev parse` test.
+### Exclude DAG files from parse test
+
+You can exclude DAG files from testing with `astro dev parse` command. 
+
+To get this new test option for an existing project, delete the `.astro/test_dag_integrity_default.py` file and run `astro dev init`. After you run this command, the Astro CLI creates a new default test file along with a `.astro/dag_integrity_exceptions.txt` text file. You can also add DAG files that you want to be excluded to the `dag_integrity_exceptions.txt` file, which allows you to exclude tests that you know do not pass the `astro dev parse` test.
 
 ### Additional improvements
 
-- The `astro deploy --image` command can now be used to deploy to deployments without pre-existing DAGs.
-- Users can now append `2>/dev/null | head` to commands to disregard upgrade messages. For example, running `astro completion bash 2>/dev/null | head`ensures that resulting bash script remains unaffected by the upgrade message.
-- New flag `astro deployment update --development-mode disable` to turn off development mode for an existing deployment. Note that you still cannot turn on development mode for an existing deployment.
-- New error message for expired API tokens.
-
+- The `astro deploy --image` command can now be used to deploy to Deployments without pre-existing DAGs.
+- You can now append `2>/dev/null | head` to commands to disregard upgrade messages. For example, running `astro completion bash 2>/dev/null | head` ensures that resulting bash script remains unaffected by the upgrade message.
+- A new flag is available, `astro deployment update --development-mode disable`, to turn off development mode for an existing deployment. Note that you still cannot turn on development mode for an existing deployment.
 
 ### Bug fixes
 
-- Fixed an issue where deployments with identical names across different workspaces couldn't be created
-- The upgrade-test command now returns the correct error code, ensuring accurate feedback during testing and CI/CD.
+- Fixed an issue where Deployments with identical names across different Workspaces couldn't be created
+- The `upgrade-test` command now returns the correct error code, ensuring accurate feedback during testing and CI/CD.
 
 ## Astro CLI 1.26.0
 
