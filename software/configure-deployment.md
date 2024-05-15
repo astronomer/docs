@@ -264,7 +264,6 @@ You can run a cron job to automatically archive task and DAG metadata from your 
     https://github.com/astronomer/airflow-dbcleanup-plugin/releases/download/<latest-version>/astronomer_dbcleanup_plugin-<latest-version>-py3-none-any.whl
     ```
 
-<<<<<<< sudarshan-dbcleanup-job-documentation
     You can skip this step for Deployments running Astro Runtime 8 or later.
     
 2. Authorize your Deployments to your external storage service so that the webserver Pod can export the results of your cleanup jobs in JSON or URI Format. You can authorize your Deployment using one of the following methods:
@@ -276,12 +275,7 @@ You can run a cron job to automatically archive task and DAG metadata from your 
     kubectl annotate secret <secret-name> "astronomer.io/commander-sync"="platform=astronomer"
     ```
 
-3. Add the following configuration to your `config.yaml` file and change the default values as needed.
-=======
-2. Configure an Airflow connection to your external storage service in JSON or URI format so that it can be stored as an environment variable. You must use a service account to authenticate to your service. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#storing-connections-in-environment-variables) to learn how to configure your connection.
-3. Store the connection environment variable as a Kubernetes Secret on your Astronomer cluster. See [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret).
-4. Add the following configuration to your `values.yaml` file and change the default values as needed.
->>>>>>> main
+3. Add the following configuration to your `values.yaml` file and change the default values as needed.
    
     ```yaml
     houston:
