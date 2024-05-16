@@ -61,7 +61,7 @@ Dedicated clusters offer the self-service convenience of a fully managed service
     Astro uses source network address translation (SNAT) that performs many-to-one IP address translations for connections to your data sources and defaults secondary ranges to RFC 6598 address space (non-standard Private IP addresses), to minimize the risk and concern with IP overlap and exhaustion. When using private networking, like VPN or VPC Peering, between Astro and your target data sources, your target data sources see connections from the default **VPC Subnet Range**. If you're using private connections, confirm that the following **Advanced Configuration** network ranges do not overlap with your target data source networks.
 
     - **Pod Subnet Range**: Specify the range used by GKE Pods (Default: `100.64.0.0/16`).
-    - **Service Subnet Range**: Specify the range used by nodes in your GKE cluster (Default: `100.65.0.0/22`).
+    - **Service Subnet Range**: Specify the range used by Services in your GKE cluster (Default: `100.65.0.0/22`).
     - **Service Peering Range**: Specify the range used by Private Service connections (Default: `100.66.0.0/21`)
 
     If there is an overlap between the Advanced Configurations and your target data source networks, you can use the following alternative ranges:

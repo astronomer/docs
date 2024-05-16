@@ -5,8 +5,6 @@ description: "How to implement dependencies between your Airflow deployments."
 id: cross-deployment-dependencies
 ---
 
-import CodeBlock from '@theme/CodeBlock';
-
 [Cross-DAG dependencies](https://docs.astronomer.io/learn/cross-dag-dependencies.md) serve a common use case: configuring a DAG to run when a separate DAG or a task in another DAG completes or updates a dataset. But what about situations in which a dataset or DAG you monitor exists in a separate deployment? For example, you might want to make a task dependent on a dataset update in a DAG that is owned by a different team and located in a separate deployment. Astro also supports the orchestration of tasks using this kind of relationship, which is referred to as a *cross-deployment dependency*.  
 
 This guide uses the following terms to describe cross-deployment dependencies:
@@ -14,7 +12,7 @@ This guide uses the following terms to describe cross-deployment dependencies:
 - **Upstream deployment**: A deployment where a DAG must reach a specified state before a DAG in another deployment can run.
 - **Downstream deployment**: A deployment in which a DAG cannot run until a DAG in an upstream deployment reaches a specified state.
 
-Cross-deployment dependencies require special implementation because methods such as TriggerDagRunOperator and ExternalTaskSensor are only designed for DAGs in the same deployment. On Astro, there are two recommended methods available for implementing cross-deployment dependencies: Astro Alerts and Airflow Datasets.
+Cross-deployment dependencies require special implementation because some methods, like the TriggerDagRunOperator, ExternalTaskSensor and direct Airflow Dataset dependencies, are only designed for DAGs in the same deployment. On Astro, there are two recommended methods available for implementing cross-deployment dependencies: Astro Alerts and triggering updates to Airflow Datasets using the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/create_dataset_event).
 
 ## Feature overview
 
@@ -25,7 +23,7 @@ In this guide, you'll learn when to use the following Astro and Airflow features
 
 ## Best practice guidance
 
-Astro Alerts and Airflow Datasets are the best methods for implementing cross-deployment dependencies. The `dagRuns` endpoint of the Airflow API can also be used for this purpose, but it is less flexible than the other methods and not recommended.
+Astro Alerts and Airflow Datasets are the best methods for implementing cross-deployment dependencies. The `dagRuns` endpoint of the Airflow API can also be used for this purpose and might be appropriate in cases where you want tasks that do not update datasets to trigger DAGs. This method will not be covered here, but you can implement it by following the guidance in [Airflow REST API](https://docs.astronomer.io/astro/airflow-api#trigger-a-dag-run).
 
 To determine whether an Astro Alert or the Datasets feature is the right solution for your use case, consider the following guidance. 
 
@@ -44,7 +42,7 @@ Datasets represent a significant evolution in the way Airflow can be used to def
 
 :::tip
 
-Before Airflow 2.9, Datasets were only available within a single deployment. As of Airflow 2.9, you can update a dataset with a `POST` request to the [datasets endpoint of the Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Dataset), which supports implementation across deployments.
+Before Airflow 2.9, you could only create updates to Airflow Datasets from within tasks located in the same deployment as the Dataset. As of Airflow 2.9, you can update a dataset with a `POST` request to the [datasets endpoint of the Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/create_dataset_event), which supports implementation across deployments.
 
 :::
 
@@ -93,7 +91,7 @@ To use Airflow Datasets to create cross-deployment dependencies, you should have
 
 This section explains how to use a listener in combination with the [Airflow API's Datasets endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Dataset) to trigger the downstream DAG in another deployment when a dataset is updated. Typical dataset implementation only works for DAGs in the same Airflow deployment, but by using the Airflow API, this pattern can be implemented across deployments.
 
-While you can also use the HttpOperator to make the API request to update the dataset, an advantage of using a listener is that the dataset is updated and the downstream DAG runs whenever _any_ DAG updates the dataset. This means you don't need to implement an API call in every upstream DAG that updates the same dataset.
+While you can also use the HttpOperator or a custom Python function in an `@task` decorated task to make the API request to update the dataset, an advantage of using a listener is that the dataset is updated and the downstream DAG runs whenever _any_ DAG updates the dataset. This means you don't need to implement an API call in every upstream DAG that updates the same dataset.
  
 #### Prerequisites
 
@@ -104,11 +102,19 @@ While you can also use the HttpOperator to make the API request to update the da
 #### Process
 
 1. In your upstream Deployment, which is the Deployment for which you did **not** create an API Token, use **Variables** in the Astro UI to create an environment variable for your API token, and use `API_TOKEN` for the key.
-2. For your downstream Deployment, follow the guidance in [Airflow REST API](https://docs.astronomer.io/astro/airflow-api#step-2-retrieve-the-deployment-url) to obtain the Deployment URL for your downstream Deployment. 
+2. For your downstream Deployment, follow the guidance in [Make requests to the Airflow REST API - Step 2](https://docs.astronomer.io/astro/airflow-api#step-2-retrieve-the-deployment-url) to obtain the Deployment URL for your downstream Deployment. The Deployment URL should be in the format of `clq52ag32000108i8e3v3acml.astronomer.run/dz3uu847`. 
 3. In your upstream Deployment, use Variables in the Astro UI to create an environment variable where you can store your downstream Deployment URL, using `DEPLOYMENT_URL` for the key.
-4. In the upstream Deployment, implement a listener following the guidance in the [Create Airflow listeners tutorial](https://docs.astronomer.io/learn/airflow-listeners). Use the following code in place of the `listeners_code.py` code provided there:
+4. In the upstream Deployment, implement a listener following the guidance in Step 2 and 3 of the [Create Airflow listeners tutorial](https://docs.astronomer.io/learn/airflow-listeners). Use the following code in place of the `listeners_code.py` and `listener_plugin.py` code provided there.
+
+:::note
+
+Although this listener is designed to make an API request only for updates to the specific dataset in this example, the conditional statement `if dataset.uri ...` can be removed or adjusted if you would like to apply the function for updates to multiple datasets or all datasets in a deployment.
+
+:::
 
 ```python
+# listeners_code.py
+
 from airflow.datasets import Dataset
 from airflow.listeners import hookimpl
 import requests
@@ -119,7 +125,10 @@ DEPLOYMENT_URL = os.environ.get("DEPLOYMENT_URL")
 
 @hookimpl
 def on_dataset_changed(dataset: Dataset):
-    """Execute if a dataset is updated."""
+    """
+    Execute if a specific dataset is updated. Remove or adjust the if statement 
+    to apply the function to multiple datasets.
+    """
     if dataset.uri == "file://include/bears":
         payload = {
             "dataset_uri": dataset.uri
@@ -137,7 +146,18 @@ def on_dataset_changed(dataset: Dataset):
 
 ```
 
-4. Add the following DAG to your Astro project.
+```python
+# listener_plugin.py
+
+from airflow.plugins_manager import AirflowPlugin
+from plugins import listener_code
+
+class MyListenerPlugin(AirflowPlugin):
+    name = "my_listener_plugin"
+    listeners = [listener_code]
+```
+
+4. Add the following DAG to your Astro project running in the upstream Deployment.
 
 ```python
 from airflow.datasets import Dataset
@@ -187,10 +207,11 @@ URI = "file://include/bears"
     doc_md=__doc__,
 )
 def consumer_dag():
-    @task(task_id="empty")
-    def nada(): EmptyOperator()
+    @task
+    def wait_for_bears():
+        print("The bears are here!")
 
-    nada()
+    wait_for_bears()
 
 consumer_dag()
 
@@ -198,8 +219,8 @@ consumer_dag()
 
 After deploying both projects to their respective Deployments on Astro, you should see runs of your `producer_dag` trigger your `consumer_dag` automatically. If the downstream DAG is not firing, verify that the upstream Deployment's environment variables, the API token and deployment URL, correspond to the downstream Deployment's API Token and Deployment URL. Also, a properly functioning listener will emit an API response payload containing DAG run information related to the dataset. Check the task logs for output that looks similar to this:
 
-```
-{\'created_dagruns\': [], \'dataset_id\': 2, \'dataset_uri\': \'file://include/bears\', \'extra\': {\'from_rest_api\': True}, \'id\': 3, \'source_dag_id\': None, \'source_map_index\': -1, \'source_run_id\': None, \'source_task_id\': None, \'timestamp\': \'2024-05-07T21:52:40.295802+00:00\'}
+```text
+[2024-05-13, 11:21:06 UTC] {logging_mixin.py:188} INFO - {'created_dagruns': [], 'dataset_id': 1, 'dataset_uri': 'file://include/bears', 'extra': {'from_rest_api': True}, 'id': 4, 'source_dag_id': None, 'source_map_index': -1, 'source_run_id': None, 'source_task_id': None, 'timestamp': '2024-05-13T11:21:06.252976+00:00'}
 ```
 
 ## See also
