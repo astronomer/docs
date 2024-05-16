@@ -38,7 +38,7 @@ Even when using `airflow db clean`, deleting data from the metadata database can
 
 Deleting data from the metadata database can be an extremely destructive action. If you delete data that future task runs depend on, it's difficult to restore the database to its previous state without interrupting your data pipelines. Before implementing the DAG in this tutorial, consider the following:
 
-- When specifying the `clean_before_timestamp` value, use as late of a date as possible. The older the deleted data, the less likely it is to affect your currently running DAGs.
+- When specifying the `clean_before_timestamp` value, use as old a date as possible. The older the deleted data, the less likely it is to affect your currently running DAGs.
 - On Astro, the DAG fails if it runs for longer than five minutes, which can happen if a table has an exceptionally large amount of data to delete. If this happens, use the DAG's params to reduce the amount of data deleted from a single table at once by moving the `clean_before_timestamp` to a less recent time.
   
 ## Prerequisites
