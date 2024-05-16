@@ -338,7 +338,7 @@ To store the secret in the Astronomer platform namespace, run the following comm
 kubectl -n <astronomer platform namespace> create secret tls astronomer-tls --cert <your-certificate-filepath> --key <your-private-key-filepath>
 ```
 
-Additionally, most third-party ingress-controllers require the public certificate to be available in the namespace of the various airflow instances. If using a third-party ingress-controller, run the following command to mark the secret for automatic replication into Astronomer-managed Airflow namespaces. When you run the command, substitute both instances of `<astronomer-platform-namespace>` with the name of the Astronomer Software platform namespace:
+Most third-party ingress-controllers require the public certificate to be available in the namespace of the various airflow instances. If using a third-party ingress-controller, run the following command to mark the secret for automatic replication into Astronomer-managed Airflow namespaces. When you run the command, substitute both instances of `<astronomer-platform-namespace>` with the name of the Astronomer Software platform namespace:
 
 ```sh
 kubectl -n <astronomer-platform-namespace> annotate secret astronomer-tls "astronomer.io/commander-sync"="platform=<astronomer platform namespace>"
