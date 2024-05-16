@@ -24,7 +24,7 @@ To create an Airflow Deployment on Astronomer:
     - **Airflow Version**: Select the Airflow version/ Astro Runtime version that the Deployment should run with.
     - **Executor**: Astronomer recommends starting with Local.
 
-3. Click **Create Deployment** and give the Deployment a few moments to be created. After the Deployment is created, you'll be able to access the **Settings** page of your new Deployment:
+3. Click **Create Deployment** and wait a few moments. After the Deployment is created, you can access the **Settings** page of your new Deployment:
 
    ![New Deployment Celery Dashboard](/img/software/v0.23-new_deployment-dashboard.png)
 
@@ -40,7 +40,7 @@ To create an Airflow Deployment on Astronomer:
 
 ## Customize Deployment release names
 
-An Airflow Deployment's release name on Astronomer is a unique, immutable identifier for that Deployment that corresponds to its Kubernetes namespace and that renders in Grafana, Kibana, and other platform-level monitoring tools. 
+An Airflow Deployment's release name on Astronomer is a unique, immutable identifier for that Deployment. The release name corresponds to its Kubernetes namespace and that renders in Grafana, Kibana, and other platform-level monitoring tools. 
 
 By default, release names are randomly generated in the following format: `noun-noun-<4-digit-number>`. For example: `elementary-zenith-7243`. Alternatively, you can customize the release name for a Deployment if you want all namespaces in your cluster to follow a specific style.
 

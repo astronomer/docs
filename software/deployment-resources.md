@@ -9,17 +9,17 @@ Use this document to configure resource usage for a Deployment's executor , webs
 
 ## Select an executor
 
-The Airflow [executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html) works closely with the Airflow scheduler to decide what resources will complete tasks as they're queued. The difference between executors comes down to their available resources and how they utilize those resources to distribute work.
+The Airflow [executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html) works closely with the Airflow scheduler to determine what resources complete tasks as they queue. The main difference between executors is their available resources and how they utilize those resources to distribute work.
 
-Astronomer supports 3 executors:
+Astronomer supports three executors:
 
 - [Local executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/local.html)
 - [Celery executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html)
 - [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html)
 
-Though it largely depends on your use case, we recommend the Local executor for development environments and the Celery or Kubernetes executors for production environments operating at scale.
+Though it largely depends on your use case, Astronomer recommends the Local executor for development environments and the Celery or Kubernetes executors for production environments operating at scale.
 
-For a detailed breakdown of each executor, see [Airflow executors explained](https://docs.astronomer.io/learn/airflow-executors-explained).
+For a detailed description of each executor, see [Airflow executors explained](https://docs.astronomer.io/learn/airflow-executors-explained).
 
 ## Select a resource strategy
 
@@ -31,7 +31,7 @@ If you set your resource strategy to **Custom Resources**, you can freely set CP
 
 :::info
 
-If you still want a constant ratio of CPU to memory but want to change the specific ratio, you can change the amount of resources an AU represents. See [Overprovision Deployments](cluster-resource-provisioning).
+If you still want a constant ratio of CPU to memory, but also want to change the specific ratio, you can change the amount of resources an AU represents. See [Overprovision Deployments](cluster-resource-provisioning).
 
 :::
 
@@ -84,7 +84,7 @@ By adjusting the **Triggerer** slider in the Software UI, you can provision up t
 
 On Astronomer, resources required for the [KubernetesPodOperator](kubepodoperator.md) or the [Kubernetes Executor](kubernetes-executor.md) are set as **Extra Capacity**.
 
-The Kubernetes executor and KubernetesPodOperator each spin up an individual Kubernetes pod for each task that needs to be executed, then spin down the pod once that task is completed.
+The Kubernetes executor and KubernetesPodOperator each spin up an individual Kubernetes pod for each task that needs to be executed, then spin down the pod after that task is completed.
 
 The amount of CPU and Memory allocated to **Extra Capacity** maps to [resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/) on the [Kubernetes Namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) in which your Airflow Deployment lives on Astronomer. More specifically, **Extra Capacity** represents the maximum possible resources that could be provisioned to a pod at any given time.
 
@@ -92,7 +92,7 @@ Resources allocated to **Extra Capacity** do not affect scheduler or webserver p
 
 ### (Celery executor only) Configure workers
 
-To optimize for flexibility and availability, the Celery executor works with a set of independent Celery workers across which it can delegate tasks. On Astronomer, you're free to configure your Celery workers to fit your use case.
+To optimize for flexibility and availability, the Celery executor works with a set of independent Celery workers across that it can delegate tasks. On Astronomer, you can configure your Celery workers to fit your use case.
 
 #### Worker count
 
@@ -102,6 +102,6 @@ Each individual worker will be provisioned with the resources specified in **Wor
 
 #### Worker termination grace period
 
-On Astronomer, Celery workers restart following every code deploy to your Airflow Deployment. This is to make sure that workers are executing with the most up-to-date code. To minimize disruption during task execution, however, Astronomer supports the ability to set a **Worker Termination Grace Period**.
+On Astronomer, Celery workers restart after every code deploy to your Airflow Deployment. This makes sure that workers execute with the most up-to-date code. To minimize disruption during task execution, however, Astronomer supports the ability to set a **Worker Termination Grace Period**.
 
 If a deploy is triggered while a Celery worker is executing a task and **Worker Termination Grace Period** is set, the worker will continue to process that task up to a certain number of minutes before restarting itself. By default, the grace period is ten minutes.

@@ -21,7 +21,7 @@ This mechanism builds your DAGs into a Docker image alongside all other files in
 
 The resulting image is then used to generate a set of Docker containers for each of Airflow's core components. Every time you run `astro deploy` in the Astro CLI, your DAGs are rebuilt into a new Docker image and all Docker containers are restarted.
 
-You can also enable [DAG only deploys](deploy-dags.md) to deploy only your `dags` directory without building a Docker image. Note that you will still need access to Docker to authenticate to Astronomer Software before you can deploy DAGs.
+You can also enable [DAG only deploys](deploy-dags.md) to deploy only your `dags` directory without building a Docker image. Note that you still need access to Docker to authenticate to Astronomer Software before you can deploy DAGs.
 
 ## NFS volume-based DAG deploys
 
@@ -35,4 +35,4 @@ To deploy DAGs to a Deployment via an NFS volume, you must first enable the feat
 
 For teams using a Git-based workflow for DAG development, Astronomer supports a [git-sync](https://github.com/kubernetes/git-sync) deploy mechanism.
 
-To deploy DAGs via git-sync, you add DAGs to a repository that has been configured to sync with your Astronomer Deployment. Once the Deployment detects a change in the repository, your DAG code will automatically sync to your Deployment with no downtime. For more information on configuring this feature, read [Deploy DAGs via git sync](deploy-git-sync.md).
+To deploy DAGs via git-sync, you add DAGs to a repository that has been configured to sync with your Astronomer Deployment. After the Deployment detects a change in the repository, your DAG code automatically syncs to your Deployment with no downtime. For more information on configuring this feature, read [Deploy DAGs via git sync](deploy-git-sync.md).

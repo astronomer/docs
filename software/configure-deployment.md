@@ -2,7 +2,7 @@
 sidebar_label: 'Overview'
 title: 'Configure a Deployment on Astronomer Software'
 id: configure-deployment
-description: Learn about all of the ways you can configure individual Airflow Deployments on Astronomer Software
+description: Learn the ways you can configure individual Airflow Deployments on Astronomer Software
 ---
 
 An Airflow Deployment on Astronomer is an instance of Apache Airflow that runs in your Astronomer Software cluster. Each Astronomer Software Deployment is hosted on a dedicated Kubernetes namespace, has a dedicated set of resources, and operates with an isolated Postgres metadata database.
