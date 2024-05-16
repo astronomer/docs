@@ -24,7 +24,7 @@ Release date: May 16, 2024
 
 ### Bug fixes
 
-- Fixed a big where ...
+- Fixed an issue where the API token expiration check was causing login failures with API tokens that did not have an expiration date.
 
 ## Astro CLI 1.27.0
 
