@@ -30,7 +30,7 @@ To keep your Airflow environment running at optimal performance, you can clean t
 
 :::danger
 
-Even when using `airflow db clean`, deleting data from the metadata database can be destroy important data. Read the [Warnings](#warnings) section carefully before implementing this tutorial DAG in any production Airflow environments.
+Even when using `airflow db clean`, deleting data from the metadata database can destroy important data. Read the [Warnings](#warnings) section carefully before implementing this tutorial DAG in any production Airflow environment.
 
 :::
 
