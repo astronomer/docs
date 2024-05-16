@@ -8,7 +8,7 @@ description: 'Learn how to remove unnecessary data from the Airflow metadata dat
 import CodeBlock from '@theme/CodeBlock';
 import db_cleanup from '!!raw-loader!../code-samples/dags/cleanup-dag-tutorial/db_cleanup.py';
 
-In addition to storing configuration about your Airflow environment, the Airflow [metadata database](https://docs.astronomer.io/learn/airflow-database) stores data about past and present task runs. Airflow never automatically removes metadata, so the longer you use it, the more task run data is stored in your metadata DB. Over a long enough time, this can result in a bloated metadata DB, which can affect performance across your Airflow environment.
+In addition to storing configurations about your Airflow environment, the Airflow [metadata database](https://docs.astronomer.io/learn/airflow-database) stores data about past and present task runs. Airflow never automatically removes metadata, so the longer you use it, the more task run data is stored in your metadata DB. Over a long enough time, this can result in a bloated metadata DB, which can affect performance across your Airflow environment.
 
 When a table in the metadata DB is larger than 50GB, you might start to experience degraded scheduler performance. This can result in:
 
@@ -26,21 +26,21 @@ The following tables in the database are at risk of becoming too large over time
 - `task_instance`
 - `xcom`
 
-To keep your Airflow environment running at optimal performance, you can clean the metadata DB using the Airflow CLI `airflow db clean` command. This command was created as a way to safely clean up your metadata DB without querying it directly. This tutorial walks you through how to implement a cleanup DAG in Airflow so that you can clean your database using the command directly from the Airflow UI.
+To keep your Airflow environment running at optimal performance, you can clean the metadata DB using the Airflow CLI `airflow db clean` command. This command was created as a way to safely clean up your metadata DB without querying it directly. This tutorial describes how to implement a cleanup DAG in Airflow so that you can clean your database using the command directly from the Airflow UI.
 
 :::danger
 
-Even when using `airflow db clean`, deleting data from the metadata database can be destructive . Read the [Warnings](#warnings) section carefully before implementing this tutorial DAG in any production Airflow environments.
+Even when using `airflow db clean`, deleting data from the metadata database can be destroy important data. Read the [Warnings](#warnings) section carefully before implementing this tutorial DAG in any production Airflow environments.
 
 :::
 
 ## Warnings
 
-Deleting data from the metadata database can be an extremely destructive action. If you delete data that future task runs depend on, it's difficult to recover the database to its previous state without interrupting your data pipelines. Before implementing the DAG in this tutorial, consider the following:
+Deleting data from the metadata database can be an extremely destructive action. If you delete data that future task runs depend on, it's difficult to restore the database to its previous state without interrupting your data pipelines. Before implementing the DAG in this tutorial, consider the following:
 
-- When specifying the `clean_before_timestamp` value, use as late of a data as possible. The older the deleted data, the less likely it is to affect your currently running DAGs.
-- On Astro, the DAG will fail if it runs for longer than five minutes, which can happen if you have an exceptionally large amount of data to delete. If this happens, use the DAG's params to reduce the amount of data being deleted from a single table at once by moving the `clean_before_timestamp` earlier.
-
+- When specifying the `clean_before_timestamp` value, use as late of a date as possible. The older the deleted data, the less likely it is to affect your currently running DAGs.
+- On Astro, the DAG fails if it runs for longer than five minutes, which can happen if a table has an exceptionally large amount of data to delete. If this happens, use the DAG's params to reduce the amount of data deleted from a single table at once by moving the `clean_before_timestamp` to a less recent time.
+  
 ## Prerequisites
 
 - An Airflow project project
@@ -70,7 +70,7 @@ This DAG has been designed and optimized for Airflow environments running on Ast
 
 ## Step 2: Run the DAG
 
-In this step, you'll run the DAG in a local Airflow environment to practice the workflow for cleaning metadata DB data. In reality, you would first deploy this DAG to a production environment, such as an Astro Deployment, then run the DAG only when your metadata DB was getting full.
+In this step, run the DAG in a local Airflow environment to practice the workflow for cleaning metadata DB data. When completing this process in a production environment, you would complete this process only after your Airflow environment has been running for a while.
 
 1. Run `astro dev start` in your Astro project to start Airflow, then open the Airflow UI at `localhost:8080`.
 
@@ -85,6 +85,6 @@ In this step, you'll run the DAG in a local Airflow environment to practice the 
 5. Click a task run.
 6. Click **Instance Details**.
 7. Click **Log**.
-8. Check that the `airflow db cleanup` command completed successfully. Note that you created a new Astro project, the run will not show much data to be deleted. 
+8. Check that the `airflow db cleanup` command completed successfully. Note that if you created a new Astro project for this tutorial, the run will not show much data to be deleted. 
 
 You can now use this DAG to periodically clean data from the Airflow metadata DB as needed. 
