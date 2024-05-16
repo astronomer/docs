@@ -18,11 +18,19 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 - **Stable versions**: {{CLI_VER_LATEST}}, {{CLI_VER_2}}, and {{CLI_VER_3}}. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md) for more information about support for CLI versions.
 
+## Astro CLI 1.27.1
+
+Release date: May 16, 2024
+
+### Bug fixes
+
+- Fixed an issue where the API token expiration check was causing login failures with API tokens that did not have an expiration date.
+
 ## Astro CLI 1.27.0
 
 Release date: May 16, 2024
 
-### New flags for the Deployment logs commands: 
+### New flags for the Deployment logs commands:
 
 You can now filter logs for specific Deployment components using the following new flags for `astro deployment logs`:
 
@@ -33,11 +41,11 @@ You can now filter logs for specific Deployment components using the following n
 
 ### Exclude DAG files from parse test
 
-You can now exclude DAG files from being tested when you run `astro dev parse`. 
+You can now exclude DAG files from being tested when you run `astro dev parse`.
 
 All new Astro projects that you create with `astro dev init` now include a file named `.astro/dag_integrity_exceptions.txt`. Add the names of DAGs to this file to exclude them from being tested when you run `astro dev parse`. This allows you to exclude DAGs that you know will not pass your tests.
 
-To use this feature in an existing Astro project, delete the `.astro/test_dag_integrity_default.py` file  in your Astro project, then run `astro dev init`. After you run this command, the Astro CLI creates a new default test file along with a `.astro/dag_integrity_exceptions.txt` text file. 
+To use this feature in an existing Astro project, delete the `.astro/test_dag_integrity_default.py` file  in your Astro project, then run `astro dev init`. After you run this command, the Astro CLI creates a new default test file along with a `.astro/dag_integrity_exceptions.txt` text file.
 
 ### Additional improvements
 
@@ -47,7 +55,7 @@ To use this feature in an existing Astro project, delete the `.astro/test_dag_in
 
 ### Bug fixes
 
-- Fixed an issue where you couldn't create two Deployments with identical names across different Workspaces. 
+- Fixed an issue where you couldn't create two Deployments with identical names across different Workspaces.
 - The `upgrade-test` command now returns the correct error code, ensuring accurate feedback during testing and CI/CD.
 
 ## Astro CLI 1.26.0

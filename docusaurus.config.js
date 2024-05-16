@@ -15,7 +15,7 @@ module.exports = {
     preprocessor: ({ filePath, fileContent }) => {
       function updateValues() {
         var mapObj = {
-          '{{CLI_VER_LATEST}}': "1.27.0",
+          '{{CLI_VER_LATEST}}': "1.27.1",
           '{{CLI_VER_2}}': "1.26.0",
           '{{CLI_VER_3}}': "1.25.0",
           '{{RUNTIME_VER}}': "11.3.0",
