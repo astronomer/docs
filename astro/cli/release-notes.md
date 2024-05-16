@@ -33,9 +33,9 @@ You can now parse logs for specific components, providing granular insights into
 
 ### Exclude DAG files from parse test
 
-You can exclude DAG files from testing with `astro dev parse` command. 
+You can exclude DAG files from testing with the `astro dev parse` command. 
 
-To get this new test option for an existing project, delete the `.astro/test_dag_integrity_default.py` file and run `astro dev init`. After you run this command, the Astro CLI creates a new default test file along with a `.astro/dag_integrity_exceptions.txt` text file. You can also add DAG files that you want to be excluded to the `dag_integrity_exceptions.txt` file, which allows you to exclude tests that you know do not pass the `astro dev parse` test.
+To use this new testing option for an existing project, delete the `.astro/test_dag_integrity_default.py` file and run `astro dev init`. After you run this command, the Astro CLI creates a new default test file along with a `.astro/dag_integrity_exceptions.txt` text file. You can also add DAG files that you want to be excluded to the `dag_integrity_exceptions.txt` file, which allows you to exclude tests that you know do not pass the `astro dev parse` test.
 
 ### Additional improvements
 
@@ -45,7 +45,7 @@ To get this new test option for an existing project, delete the `.astro/test_dag
 
 ### Bug fixes
 
-- Fixed an issue where Deployments with identical names across different Workspaces couldn't be created
+- Fixed an issue where Deployments with identical names across different Workspaces couldn't be created.
 - The `upgrade-test` command now returns the correct error code, ensuring accurate feedback during testing and CI/CD.
 
 ## Astro CLI 1.26.0
