@@ -330,33 +330,38 @@ astronomer:
 
 ## Step 6: Create a Kubernetes TLS Secret
 
-Store the public tls certificate in a kubernetes secret in the Astronomer platform namespace. If using a third-party ingress controller this secret must be named `astronomer-tls` (it must be exactly astronomer-tls, there is no substitution for platform release name). Additionally, ensure the value of `global.tlsSecret` in your `values.yaml` is set to this secret name.
+Store the public TLS certificate in a kubernetes secret in the Astronomer platform namespace. If you use a third-party ingress controller, this secret must be named `astronomer-tls`. You must use `astronomer-tls` exactly. There is no substitution for platform release name. Additionally, make sure the value of `global.tlsSecret` in your `values.yaml` is also set to `astronomer-tls`.
 
-To store the secret in the astronomer platform namespace, run the following command:
+To store the secret in the Astronomer platform namespace, run the following command:
 
 ```sh
 kubectl -n <astronomer platform namespace> create secret tls astronomer-tls --cert <your-certificate-filepath> --key <your-private-key-filepath>
 ```
 
-Most third-party ingress-controllers require the public certificate additionally be available in the namespace of the various airflow instances. If using a third-party ingress-controller, run the following command to mark the secret for automatic-replication into astronomer-managed Airflow namespaces, substituting both instances of `<astronomer platform namespace>` with the name of the Astronomer Software platform namespace:
+Additionally, most third-party ingress-controllers require the public certificate to be available in the namespace of the various airflow instances. If using a third-party ingress-controller, run the following command to mark the secret for automatic replication into Astronomer-managed Airflow namespaces. When you run the command, substitute both instances of `<astronomer-platform-namespace>` with the name of the Astronomer Software platform namespace:
 
 ```sh
 kubectl -n <astronomer-platform-namespace> annotate secret astronomer-tls "astronomer.io/commander-sync"="platform=<astronomer platform namespace>"
 ```
 
-If you received a certificate from a private CA, additionally follow these steps:
+If you received a certificate from a private CA, you also need to follow these steps:
 
-1. Add the root certificate provided by your security team to an [Opaque Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#secret-types) in the Astronomer namespace by running the following command:
+1. Add the root certificate provided to you by your security team to an [Opaque Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#secret-types) in the Astronomer namespace by running the following command:
 
     ```sh
     kubectl create secret generic private-root-ca --from-file=cert.pem=./<your-certificate-filepath> -n astronomer
     ```
 
-    > **Note:** The root certificate which you specify here should be the certificate of the authority that signed the Astronomer certificate, rather than the Astronomer certificate itself. This is the same certificate you need to install with all clients to get them to trust your services.
+    The root certificate that you specify with this command must be the certificate of the authority that signed the Astronomer certificate, rather than the Astronomer certificate itself. This is the same certificate you need to install with all your clients for them to trust your services.
 
-    > **Note:** The name of the secret file must be `cert.pem` for your certificate to be trusted properly.
+    :::info
+    
+    The name of the secret file must be `cert.pem` for Astronomer to properly trust your certificate.
+    
+    :::
+    
 
-2. Note the value of `private-root-ca` for when you configure your Helm chart in Step 7. You'll need to additionally specify the `privateCaCerts` key-value pair with this value for that step.
+2. Note the value of `private-root-ca`. You need this value to configure your Helm chart in Step 7 to specify the `privateCaCerts` key-value pair with this value.
 
 ## Step 7: Install Astronomer using Helm
 

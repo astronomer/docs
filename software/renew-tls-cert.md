@@ -88,7 +88,7 @@ sudo certbot certonly --manual --preferred-challenges=dns -d -d *. --key-type=rs
     kubectl apply -f clusterissuer.yaml -n astronomer
     ```
 
-4. Create a "Certificate" resource that declares the type of certificate you'll request from Let's Encrypt. To do so, first create a `certificate.yaml` file, replacing `BASE_DOMAIN` with yours. If using a third-party ingress-controller, additionally uncomment the secretTemplate section and change the value of the platform-release label to match your astronomer platform release name:
+4. Create a Certificate resource that declares the type of certificate you'll request from Let's Encrypt. First, create a `certificate.yaml` file and replace `BASE_DOMAIN` with your base domain. If you use a third-party ingress-controller, un-comment the` secretTemplate` section and change the value of the platform-release label to match your Astronomer platform release name:
 
     ```yaml
     apiVersion: cert-manager.io/v1
@@ -113,8 +113,8 @@ sudo certbot certonly --manual --preferred-challenges=dns -d -d *. --key-type=rs
             name: letsencrypt-prod
             kind: ClusterIssuer
             group: cert-manager.io
-      # if using a third-party ingress controller uncomment the following section and change
-      # the value of platform-release to match your astronomer platform release name
+      # If using a third-party ingress controller, uncomment the following section and change
+      # the value of platform-release to match your Astronomer platform release name
       # secretTemplate:
       #   annotations:
       #     astronomer.io/commander-sync="platform-release=astronomer"
