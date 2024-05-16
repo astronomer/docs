@@ -40,8 +40,6 @@ Larger teams and teams with business-critical DAGs will likely prefer to maintai
 
 Some teams might prefer some combination of the above. For example, some teams might prefer to use ephemeral Deployments for production code rather than maintain a permanent production Deployment. Other teams might choose to maintain permanent sandbox Deployments in addition to development and production Deployments.
 
-
-
 ## Hibernating development Deployment example
 
 This example shows how to implement a permanent development Deployment with a hibernation schedule and a CI/CD pipeline to promote code from development to production.
