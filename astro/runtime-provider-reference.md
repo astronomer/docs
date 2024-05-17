@@ -82,4 +82,4 @@ docker run --rm quay.io/astronomer/astro-runtime:11.0.0 | grep apache-airflow-pr
 | astronomer-providers-logging           | 1.4.7     |
 
 </TabItem>
-</wTabs>
+</Tabs>
