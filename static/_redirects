@@ -380,3 +380,4 @@
 /learn/airflow-talend-integration https://www.astronomer.io/blog/orchestrate-talend-with-airflow/
 /learn/airflow-azure-data-explorer https://www.astronomer.io/blog/orchestrate-adx-with-airflow/
 /learn/use-case-ml-airflow-snowpark-weaviate https://www.astronomer.io/blog/ml-with-snowpark-and-airflow/
+/learn/category/integrations /learn 301

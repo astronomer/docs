@@ -564,4 +564,4 @@ Now that Airflow has access to your user credentials, you can use them to connec
 </TabItem>
 </Tabs>
 
-![Secrets in logs](/docs/img/docs/secret_logs.png)
+![Secrets in logs](/img/docs/secret_logs.png)
