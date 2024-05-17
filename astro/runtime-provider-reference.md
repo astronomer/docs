@@ -37,7 +37,7 @@ docker run --rm quay.io/astronomer/astro-runtime:11.0.0 | grep apache-airflow-pr
     ]}>
 <TabItem value="standard">
 
-| package_name                             | version   |
+| Package name                             | Version   |
 |:-----------------------------------------|:----------|
 | apache-airflow-providers-amazon          | 8.20.0    |
 | apache-airflow-providers-celery          | 3.7.0     |
@@ -65,7 +65,7 @@ docker run --rm quay.io/astronomer/astro-runtime:11.0.0 | grep apache-airflow-pr
 </TabItem>
 <TabItem value="slim">
 
-| package_name                           | version   |
+| Package name                           | Version   |
 |:---------------------------------------|:----------|
 | apache-airflow-providers-celery        | 3.7.0     |
 | apache-airflow-providers-common-io     | 1.3.1     |
