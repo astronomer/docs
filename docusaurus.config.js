@@ -15,9 +15,9 @@ module.exports = {
     preprocessor: ({ filePath, fileContent }) => {
       function updateValues() {
         var mapObj = {
-          '{{CLI_VER_LATEST}}': "1.26.0",
-          '{{CLI_VER_2}}': "1.25.0",
-          '{{CLI_VER_3}}': "1.24.1",
+          '{{CLI_VER_LATEST}}': "1.27.1",
+          '{{CLI_VER_2}}': "1.26.0",
+          '{{CLI_VER_3}}': "1.25.0",
           '{{RUNTIME_VER}}': "11.3.0",
         };
         var re = new RegExp(Object.keys(mapObj).join("|"), "gi");
@@ -145,7 +145,7 @@ module.exports = {
         },
         {
           label: '0.33',
-          to: '/software/',
+          to: '/software/0.33/',
           activeBaseRegex: `(software\/0.33)+`,
         },
         {

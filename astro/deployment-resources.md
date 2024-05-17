@@ -87,11 +87,11 @@ Astronomer Deployments run a single scheduler by default. You can configure your
 
 The following table lists all possible scheduler sizes for Astro Hosted:
 
-| Scheduler size | vCPU | Memory | Ephemeral storage |
-| -------------- | ---- | ------ | ----------------- |
-| Small          | 1    | 2G     | 5Gi               |
-| Medium         | 2    | 4G     | 5Gi               |
-| Large          | 4    | 8G     | 5Gi              |
+| Scheduler size          | vCPU | Memory | Ephemeral storage |
+| ----------------------- | ---- | ------ | ----------------- |
+| Small (Up to ~50 DAGs)  | 1    | 2G     | 5Gi               |
+| Medium (Up to ~250 DAGs)| 2    | 4G     | 5Gi               |
+| Large (Up to ~1000 DAGs)| 4    | 8G     | 5Gi               |
 
 ### Update scheduler size
 
@@ -126,7 +126,12 @@ To configure the scheduler on an [Astro Hybrid](hybrid-overview.md) Deployment:
 
 ## Enable high availability
 
-By default, the Pods running your Deployment's Airflow components are distributed across multiple nodes. When you enable high availability, your Deployment runs two instances of [PgBouncer](https://www.pgbouncer.org/) and two instances of the Airflow Scheduler across different nodes. However, Astro makes a best effort to use different availability zones for your PGBouncer and Scheduler, which means it is possible but unlikely that they are both located in the same availability zone. This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node or availability zone.
+By default, the Pods running your Deployment's Airflow components are distributed across multiple nodes. When you enable high availability, Astro re-configures the Deployment to be more resilient. This includes:
+
+- Running nodes in different availability zones.
+- Running two schedulers so that at least one is always available.
+
+This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node or availability zone.
 
 Because this setting results in more resource usage, it can increase the cost of your Deployment. See [Pricing](https://astronomer.io/pricing).
 

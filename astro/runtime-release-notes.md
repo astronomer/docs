@@ -259,6 +259,20 @@ For more information about the major changes in this release, see the [Airflow b
 - Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_CLIENT_ID` as an environment variable.
 - Fixed an issue where Astro audit logs listed a user's name as `User` for trigger events instead of their IDs.
 
+## Astro Runtime 9.14.0
+
+- Release date: May 13, 2024
+- Airflow version: 2.7.3
+
+### Additional improvements
+
+- Added the [`apache-airflow-providers-mysql`](https://airflow.apache.org/docs/apache-airflow-providers-mysql/stable/index.html) provider
+- Upgraded some OSS providers' minor and patch versions
+
+### Bug fixes
+
+- Fixed ([CVE-2024-30251](https://nvd.nist.gov/vuln/detail/CVE-2024-30251))
+
 ## Astro Runtime 9.13.0
 
 - Release date: April 18, 2024

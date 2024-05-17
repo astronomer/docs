@@ -25,6 +25,17 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## May 15, 2024
+
+### Additional improvements
+
+- Airflow connections that you configure through the Astro UI environment manager are now mounted to Deployment schedulers, meaning that scheduler processes can now make use of these Airflow connections.
+
+### Bug fixes
+
+- Fixed an issue where you couldn't update users who were added through SCIM but didn't belong to an Organization.
+- Fixed an issue where a user with a custom role could create API Tokens, users, or teams with greater permissions than their own.
+
 ## May 8, 2024
 
 ### Updates to address ranges for dedicated clusters on Google Cloud Provider

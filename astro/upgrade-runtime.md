@@ -159,6 +159,13 @@ If an Astro Runtime version isn't included in this section, then there are no sp
 
 #### Runtime 11 (Airflow 2.9)
 
+##### Restricted versions of Runtime 11
+
+You cannot create new Deployments or upgrade to the following versions of Runtime 11, which are `yanked`. These [restricted runtime versions](runtime-version-lifecycle-policy.mdx#restricted-runtime-versions) prevent you from upgrading to or creating a Deployment with a version that contains a known limitation or bug.
+
+- 11.0.0
+- 11.1.0
+
 ##### Bug affecting users running a local Astro Runtime environment
 
 In Airflow 2.9, a bug affecting custom actions in Airflow plugins ([#39421](https://github.com/apache/airflow/pull/39421)) prevented users from running the Astro Runtime environment locally for Astro Runtime versions 11.0.0, 11.1.0, and 11.2.0. Deployments running these versions on Astro are not affected.
@@ -166,6 +173,18 @@ In Airflow 2.9, a bug affecting custom actions in Airflow plugins ([#39421](http
 To continue using these versions of the Astro runtime locally, set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
 
 #### Runtime 9 (Airflow 2.7)
+
+##### Restricted versions of Runtime 9
+
+You cannot create new Deployments or upgrade to the following versions of Runtime 9, which are `yanked`. These [restricted runtime versions](runtime-version-lifecycle-policy.mdx#restricted-runtime-versions) prevent you from upgrading to or creating a Deployment with a version that contains a known limitation or bug.
+
+- 9.0.0
+- 9.1.0
+- 9.2.0
+- 9.3.0
+- 9.4.0
+- 9.5.0
+- 9.6.0
 
 ##### Connection testing in the Airflow UI disabled by default
 
@@ -181,9 +200,11 @@ ENV AIRFLOW__CORE__TEST_CONNECTION=Enabled
 
 The base distribution of Astro Runtime 9 uses Python 3.11 by default. Some provider packages, such as `apache-airflow-providers-apache-hive`, aren't compatible with Python 3.11.
 
-To continue using these packages with a compatible version of Python, upgrade to the [Astro Runtime Python distribution](runtime-image-architecture.mdx#python-version-distributions) for your desired Python version.
+To continue using these packages with a compatible version of Python, upgrade to the [Astro Runtime Python distribution](runtime-image-architecture.mdx#python-version-images) for your desired Python version.
 
 #### Runtime 8 (Airflow 2.6)
+
+Astro Runtime version 8.0.0 is a restricted version of the Astro Runtime (`yanked`), which means you can't create Deployments on Astro with this runtime version. These [restricted runtime versions](runtime-version-lifecycle-policy.mdx#restricted-runtime-versions) prevent you from upgrading to or creating a Deployment with a version that contains a known limitation or bug.
 
 ##### Breaking change to `apache-airflow-providers-cncf-kubernetes` in version 8.4.0
 
