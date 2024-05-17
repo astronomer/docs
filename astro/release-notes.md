@@ -25,6 +25,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## May 21, 2024
+
+### Bug fixes
+
+- Fixed a bug where users creating custom roles in the UI could see roles that could not be assigned. <!-- https://github.com/astronomer/astro/pull/21148-->
+
 ## May 15, 2024
 
 ### Additional improvements
