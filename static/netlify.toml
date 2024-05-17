@@ -1,5 +1,0 @@
-[[redirects]]
-  from = "/*"
-  to = "astro-site.netlify.app/docs:splat"
-  status = 301
-  force = true
