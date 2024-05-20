@@ -40,7 +40,7 @@ See [Deploy code with the Astro GitHub integration](deploy-github-integration.md
 
 ### Bug fixes
 
-- Fixed a bug where users creating custom roles in the UI could see roles that could not be assigned. <!-- https://github.com/astronomer/astro/pull/21148-->
+- Fixed a bug where users using custom roles in the UI could see roles that could not be assigned.
 
 ## May 15, 2024
 
