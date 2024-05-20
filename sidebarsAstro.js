@@ -87,6 +87,7 @@ module.exports = {
         "deploy-code",
         "deploy-project-image",
         "deploy-dags",
+        "deploy-github-integration",
         "deploy-history",
       ],
     },
@@ -186,7 +187,16 @@ module.exports = {
         {
           type: "category",
           label: "View metrics",
-          items: ["dag-metrics", "deployment-metrics", "organization-metrics", "reporting-dashboard"],
+          items: ["dag-metrics",
+           "deployment-metrics",
+           {
+            type: "category",
+            label: "Organization dashboards",
+            items: ["organization-dashboard",
+            "org-dash-exports",
+            ],
+          },
+          ],
         },
         {
           type: "category",
@@ -226,6 +236,7 @@ module.exports = {
           label: "Deployments",
           items: [
             "deployment-api-tokens",
+            "customize-deployment-roles",
             "authorize-deployments-to-your-cloud",
             "transfer-a-deployment",
           ],
@@ -313,22 +324,12 @@ module.exports = {
       ],
     },
     {
-      type: "category",
-      label: "Astro API",
-      items: [
-        "api/overview",
-        "api/get-started",
-        "api/versioning-and-support",
-        "api/iam-api-reference",
-        "api/platform-api-reference",
-      ],
-    },
-    {
       type: 'category',
       label: 'Best practices',
       items: [
+        'best-practices/airflow-vs-astro-alerts',
         'best-practices/connections-branch-deploys',
-        'best-practices/airflow-vs-astro-alerts'
+        'best-practices/cross-deployment-dependencies',
       ],
     },
     {
@@ -346,8 +347,10 @@ module.exports = {
           ],
         },
         'platform-variables',
+        'deployment-role-reference',
         "allowlist-domains",
         "feature-previews",
+        "hosted-hybrid-reference",
         {
           type: "category",
           label: "Security",
@@ -364,6 +367,11 @@ module.exports = {
         },
         "astro-glossary"
       ],
+    },
+    {
+      type: 'link',
+      label: 'Astro API',
+      href: 'https://docs.astronomer.io/api',
     },
   ],
   cli: [
@@ -507,15 +515,40 @@ module.exports = {
             'cli/astro-deployment-runtime-upgrade',
             'cli/astro-deployment-service-account',
             'cli/astro-deployment-team',
+            {
+              type: "category",
+              label: "astro deployment token",
+              items: [
+                'cli/astro-deployment-token-create',
+                'cli/astro-deployment-token-delete',
+                'cli/astro-deployment-token-list',
+                "cli/astro-deployment-token-organization-token",
+                "cli/astro-deployment-token-workspace-token",
+                'cli/astro-deployment-token-rotate',
+                'cli/astro-deployment-token-update',
+              ],
+            },
             'cli/astro-deployment-update',
             'cli/astro-deployment-user',
-            'cli/astro-deployment-variable-create',
-            'cli/astro-deployment-variable-list',
-            'cli/astro-deployment-variable-update',
+            {
+              type: "category",
+              label: "astro deployment variable",
+              items: [
+                'cli/astro-deployment-variable-create',
+                'cli/astro-deployment-variable-list',
+                'cli/astro-deployment-variable-update',
+              ],
+            },
             'cli/astro-deployment-wake-up',
-            'cli/astro-deployment-worker-queue-create',
-            'cli/astro-deployment-worker-queue-delete',
-            'cli/astro-deployment-worker-queue-update',
+            {
+              type: "category",
+              label: "astro deployment worker-queue",
+              items: [
+                'cli/astro-deployment-worker-queue-create',
+                'cli/astro-deployment-worker-queue-delete',
+                'cli/astro-deployment-worker-queue-update',
+              ],
+            },
           ],
         },
         {
@@ -556,6 +589,7 @@ module.exports = {
           items: [
             "cli/astro-organization-list",
             "cli/astro-organization-switch",
+            "cli/astro-organization-role-list",
             "cli/astro-organization-team-create",
             "cli/astro-organization-team-delete",
             "cli/astro-organization-team-list",
@@ -611,6 +645,7 @@ module.exports = {
             "cli/astro-workspace-token-add",
             "cli/astro-workspace-token-create",
             "cli/astro-workspace-token-list",
+            "cli/astro-workspace-token-organization-token",
             "cli/astro-workspace-token-rotate",
             "cli/astro-workspace-token-update",
             "cli/astro-workspace-update",

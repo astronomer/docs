@@ -47,7 +47,7 @@ Operators typically only require a few parameters. Keep the following considerat
 - If an operator exists for your specific use case, you should use it instead of your own Python functions or [hooks](what-is-a-hook.md). This makes your DAGs easier to read and maintain.
 - If an operator doesn't exist for your use case, you can extend an operator to meet your needs. For more information about customizing operators, see the video [Anatomy of an Operator](https://www.astronomer.io/events/webinars/anatomy-of-an-operator).
 - [Sensors](what-is-a-sensor.md) are a type of operator that waits for something to happen. They can be used to make your DAGs more event-driven.
-- [Deferrable Operators](deferrable-operators.md) are a type of operator that releases their worker slot while waiting for their work to be completed. This can result in cost savings and greater scalability. Astronomer recommends using deferrable operators whenever one exists for your use case and your task takes longer than a minute. You must be using Airflow 2.2 or later and have a triggerer running to use deferrable operators.
+- [Deferrable Operators](deferrable-operators.md) are a type of operator that releases their worker slot while waiting for their work to be completed. This can result in cost savings and greater scalability. Astronomer recommends using deferrable operators whenever one exists for your use case and your task takes longer than a minute. You must have a triggerer running to use deferrable operators.
 - Any operator that interacts with a service external to Airflow typically requires a connection so that Airflow can authenticate to that external system. For more information about setting up connections, see [Managing your connections in Apache Airflow](connections.md) or in the examples to follow.
 
 ## Example implementation
@@ -67,7 +67,7 @@ The following operators are used in this example:
 
 There are a few things to note about the operators in this example DAG:
 
-- Every operator is given a `task_id`. This is a required parameter, and the value provided is displayed as the name of the task in the Airflow UI.
+- Every operator is given a `task_id`. This is a required parameter, and the value provided is displayed as the name of the task in the Airflow UI. In Airflow 2.9 and later you can override the task name in the UI using the `task_display_name`, which allows special characters.
 - Each operator requires different parameters based on the work it does. For example, the PostgresOperator has a `sql` parameter for the SQL script to be executed, and the `S3ToRedshiftOperator` has parameters to define the location and keys of the files being copied from Amazon S3 and the Redshift table receiving the data.
 - Connections to external systems are passed in most of these operators. The parameters `conn_id`, `postgres_conn_id`, and `aws_conn_id` all point to the names of the relevant connections stored in Airflow.
 

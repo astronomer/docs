@@ -26,6 +26,3 @@ Each Deployment has its own set of environment variables that you can use to def
 Astronomer supports several different methods for deploying DAGs and code-based project configurations to Astro. See [Deploy methods overview](deploy-code-overview.md).
 
 When you're ready to automate a deploy mechanism at scale for your team, see [CI/CD](ci-cd.md) to learn how to configure API credentials and examples of CI/CD pipelines in different version management tools.
-
-
-

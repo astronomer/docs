@@ -4,12 +4,12 @@ title: "Astro Hybrid overview"
 id: hybrid-overview
 ---
 
-Astro Hybrid is a self-hosted, Astronomer-managed service for data orchestration that is built for the cloud and powered by Apache Airflow. Astro Hybrid is built with a multi-plane architecture which consists of:
+_Astro Hybrid_ is a self-hosted, Astronomer-managed service for data orchestration that is built for the cloud and powered by Apache Airflow. Astro Hybrid is built with a multi-plane architecture which consists of:
 
 - A control plane that is hosted by Astronomer.
 - A data plane that runs in your cloud.
 
-Astro Hybrid can be activated on Amazon Web Services (AWS), Google Cloud Platform (GCP), or Microsoft Azure. Astronomer runs Astro on managed Kubernetes services for each cloud provider, including AWS Elastic Kubernetes Service (EKS), Google Kubernetes Engine (GKE), and Azure Kubernetes Service (AKS).
+Astro Hybrid can be activated on Amazon Web Services (AWS), Google Cloud Platform (GCP), or Microsoft Azure. Astronomer runs Astro on managed Kubernetes services for each cloud provider, including AWS Elastic Kubernetes Service (EKS), Google Kubernetes Engine (GKE), and Azure Kubernetes Service (AKS). For a breakdown of feature differences between Astro Hosted and Astro Hybrid, see [Hosted vs. Hybrid features](hosted-hybrid-reference.md).
 
 The control plane and data plane are managed by Astronomer and require no operational oversight by your organization. The Hybrid architecture ensures that tasks are executed securely within your corporate network.
 

@@ -64,7 +64,7 @@ If you have Workspace Owner permissions, you can enable or disable DAG-only depl
 
 - Any changes to your DAG code are deployed as part of your Astro project Docker image.
 - Your Deployment no longer includes Azure Blob Storage or DAG downloading sidecars.
-- In the Cloud UI, your Deployment **DAG bundle version** will not update when you deploy code.
+- In the Astro UI, your Deployment **DAG bundle version** will not update when you deploy code.
 
 To determine if turning off DAG-only deploy functionality is the right choice for your organization, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
@@ -92,7 +92,7 @@ Before you enable or disable DAG-only deploys on a Deployment, ensure the follow
 DAG-only deploys are enabled by default on Astro Hosted. You have the option to enable DAG-only deploys only if you're on Astro Hybrid or if you've previously disabled them on a Hosted Deployment. After you enable DAG-only deploys:
 
 - You can run `astro deploy --dags` to deploy only DAGs to your Deployment.
-- In the Cloud UI, your Deployment **DAG bundle version** updates when you trigger an image deploy or a DAG-only deploy.
+- In the Astro UI, your Deployment **DAG bundle version** updates when you trigger an image deploy or a DAG-only deploy.
 - When you only deploy DAGs, it does not automatically upgrade your Runtime version. You must periodically complete a full image deploy to [upgrade the Runtime version](upgrade-runtime.md).
 - Your Deployment includes infrastructure for deploying your DAGs separately from your project image. See [What happens during a code deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
 
@@ -114,7 +114,7 @@ After you disable DAG-only deploys:
 
 - You can't run `astro deploy --dags` to trigger a DAG-only deploy to your Deployment.
 - Any changes to your DAG code are deployed as part of your Astro project Docker image.
-- In the Cloud UI, your Deployment **DAG bundle version** doesn't update when you deploy code.
+- In the Astro UI, your Deployment **DAG bundle version** doesn't update when you deploy code.
 - Your Deployment doesn't include infrastructure for deploying your DAGs separately from your project image. See [What happens during a code deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
 
 1. Run the following command to disable DAG-only deploys:

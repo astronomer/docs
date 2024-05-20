@@ -57,7 +57,7 @@ Core settings control the number of processes running concurrently and how long 
 
     On Astro, this value is [set automatically](https://docs.astronomer.io/astro/configure-worker-queues#worker-autoscaling-logic) based on your maximum worker count, meaning that you don't have to configure it.
 
-- `max_active_tasks_per_dag` (formerly `dag_concurrency`): The maximum number of tasks that can be scheduled at once, per DAG. Use this setting to prevent any one DAG from taking up too many of the available slots from parallelism or your pools. The default value is 16.
+- `max_active_tasks_per_dag` (formerly `dag_concurrency`): The maximum number of tasks that can be scheduled at the same time across all runs of a DAG. Use this setting to prevent any one DAG from taking up too many of the available slots from parallelism or your pools. The default value is 16.
 
   If you increase the amount of resources available to Airflow (such as Celery workers or Kubernetes resources) and notice that tasks are still not running as expected, you might have to increase the values of both `parallelism` and `max_active_tasks_per_dag`.
 

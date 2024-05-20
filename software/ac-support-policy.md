@@ -120,7 +120,7 @@ To ensure reliability, service is not interrupted when Astronomer Deployments ar
 
 :::info
 
-If you have System Admin permissions and are using Astronomer Software version 0.27 or later, you can create Deployments with deprecated AC versions by setting `houston.config.deployments.enableSystemAdminCanCreateDeprecatedAirflows: true` in your `config.yaml` file. See [Apply a config change](apply-platform-config.md).
+If you have System Admin permissions and are using Astronomer Software version 0.27 or later, you can create Deployments with deprecated AC versions by setting `houston.config.deployments.enableSystemAdminCanCreateDeprecatedAirflows: true` in your `values.yaml` file. See [Apply a config change](apply-platform-config.md).
 
 :::
 
