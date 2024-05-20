@@ -381,5 +381,3 @@
 /learn/airflow-azure-data-explorer https://www.astronomer.io/blog/orchestrate-adx-with-airflow/
 /learn/use-case-ml-airflow-snowpark-weaviate https://www.astronomer.io/blog/ml-with-snowpark-and-airflow/
 /learn/category/integrations /learn 301
-
-https://deploy-preview-3722--gallant-neumann-56599d.netlify.app/* https://deploy-preview-372--astro-site.netlify.app/docs/:splat 301!
