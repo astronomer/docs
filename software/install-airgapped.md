@@ -10,6 +10,9 @@ import TabItem from '@theme/TabItem';
 
 This guide describes the steps to install Astronomer Software, which allows you to deploy and scale any number of Apache Airflow deployments.
 
+# MAJOR REWORK IN PROGRESS DO NOT COPY-EDIT
+
+
 ## Prerequisites
 
 <Tabs
@@ -114,229 +117,46 @@ The following prerequisites apply to customers running Astronomer Software on Ku
 
 </Tabs>
 
-## Step 1: Choose a base domain
+## Step 1: Determining how to structure and organize your platform environments
+The procedures detailed in this document create an Astronomer Software platform-instance that will be used used to deploy and manage multiple Airflow installations.
 
-All Astronomer services will be tied to a base domain under which you will need the ability to add and edit DNS records.
+Do not install multiple instances of Astronomer Software onto the same Kubernetes cluster.
 
-Once created, your Astronomer base domain will be linked to a variety of sub-services that your users will access via the internet to manage, monitor, and run Airflow on the platform.
+Plan a series of environments so that Astronomer Software platform-upgrades and Kubernetes upgrades can be tested in advance, e.g.:
+  * sandbox - lowest environment, contains no sensitive-data, used only by system-administrators to experiment, not subject to change-control
+  * development - user-accessible, subject to most of the restrictions of higher environments, relaxed change-control
+  * staging - all network/security/patch-versions in lock-step with production, no availability guarantees, relaxed change-control
+  * production - hosts production Airflow instances (dev airflow instances may live here or in lower environments)
 
-For the base domain `astro.mydomain.com`, for example, here are some corresponding URLs that your users would be able to reach:
+### Create a platform-project directory
+Create a platform-project directory to store files you will be creating throughout this installation guide.
 
-- Software UI: `app.astro.mydomain.com`
-- Airflow Deployments: `deployments.astro.mydomain.com/deployment-release-name/airflow`
-- Grafana Dashboard: `grafana.astro.mydomain.com`
-- Kibana Dashboard: `kibana.astro.mydomain.com`
+e.g.
+`mkdir ~/astronomer-dev`
 
-Save your chosen base domain name for use in Step 6. For the full list of subdomains under the base domain, see Step 3.
+:::tip
 
-## Step 2: Create a namespace
-
-In your Kubernetes cluster, create a [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) called `astronomer` to host the core Astronomer platform:
-
-```sh
-kubectl create namespace astronomer
-```
-
-After Astronomer is running, each Airflow Deployment that you create will have its own isolated namespace.
-
-## Step 3: Configure TLS
-
-In order for users to access the web applications they need to manage Astronomer, you'll need a TLS certificate that covers the following subdomains:
-
-```sh
-BASEDOMAIN
-app.BASEDOMAIN
-deployments.BASEDOMAIN
-registry.BASEDOMAIN
-houston.BASEDOMAIN
-grafana.BASEDOMAIN
-kibana.BASEDOMAIN
-install.BASEDOMAIN
-alertmanager.BASEDOMAIN
-prometheus.BASEDOMAIN
-```
-
-:::warning
-
-Astronomer requires you to use RSA to sign TLS certificates. By default, [Certbot](https://certbot.eff.org/) uses Elliptic Curve Digital Signature Algorithm (ECDSA) keys to sign certificates. If you're using Certbot to sign your TLS certificate, you must include `-key-type rsa --rsa-key-size 2048` in your command to sign your certificate with an RSA key. If you don't use RSA keys, deploys fail and error messages appear in the registry and Houston logs. For example, you can run the following command to sign your certificate with an RSA key:
-
-```sh
-sudo certbot certonly --manual --preferred-challenges=dns -d -d *. --key-type=rsa
-```
+Certain files in this directory may contain secrets. For your first install, keep these in a secure place on a suitable machine. See TODO - guidance on vauliting prior to continuing to higher environments
 
 :::
 
-Request a TLS certificate and private key from your enterprise security team. This certificate needs to be valid for the `BASEDOMAIN` your organization uses for Astronomer, as well as your subdomains. You should be given two `.pem` files:
+## Step 2: Create values.yaml from a template
 
-- One for your encrypted certificate
-- One for your private key
+Choose the template below that corresponds to your Kubernetes Platform and save it to a file named `values.yaml` in your platform-project directory.
 
-To confirm that your enterprise security team generated the correct certificate, run the following command using the `openssl` CLI:
+* Do not make any changes to this file until instructed to do so in later steps.
+* Do not apply this file with helm until instructed to do so in later steps.
 
-```sh
-openssl x509 -in  <your-certificate-filepath> -text -noout
-```
+::: tip
 
-This command will generate a report. If the `X509v3 Subject Alternative Name` section of this report includes either a single `*.BASEDOMAIN` wildcard domain or all subdomains, then the certificate creation was successful.
-
-Depending on your organization, you may receive either a globally trusted certificate or a certificate from a private CA. The certificate from your private CA may include a domain certificate, a root certificate, and/or intermediate certificates, all of which need to be in proper certificate order. To verify certificate order, follow the guidelines below.
-
-### Confirm certificate chain order
-
-If your organization is using a private certificate authority, you'll need to confirm that your certificate chain is ordered correctly. To determine your certificate chain order, run the following command using the `openssl` CLI:
-
-```sh
-openssl crl2pkcs7 -nocrl -certfile <your-certificate-filepath> | openssl pkcs7 -print_certs -noout
-```
-
-The command generates a report of all certificates. Verify the order of the certificates is as follows:
-
-- Domain
-- Intermediate (optional)
-- Root
-
-## Step 4: Create a Kubernetes TLS Secret
-
-If you received a globally trusted certificate or created a self-signed certificate, create a Kubernetes TLS secret using the following command and then proceed to the next step:
-
-```sh
-kubectl -n <astronomer platform namespace>> create secret tls astronomer-tls --cert <fullchain-pem-filepath> --key <your-private-key-filepath>
-```
-
-E.g.
-```
-kubectl -n astronomer create secret tls astronomer-tls --cert fullchain.pem --key server_private_key.pem
-```
-
-If not using Astronomer's bundled ingress-controller, additionally annotate the secret and set `"astronomer.io/commander-sync` to `platform=<astronomer platform release name>`, e.g.:
-```
-kubectl -n <astronomer platfomr namespace> annotate secret astronomer-bootstrap "astronomer.io/commander-sync"="platform=astronomer"
-```
-
-## Step TBD: Configuring a Private Certificate Authority
-
-If you received a certificate from a private CA, follow these steps instead:
-
-1. Add the root certificate provided by your security team to an [Opaque Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#secret-types) in the Astronomer namespace by running the following command:
-
-    ```sh
-    kubectl create secret generic private-root-ca --from-file=cert.pem=./<your-certificate-filepath> -n astronomer
-    ```
-
-    > **Note:** The root certificate which you specify here should be the certificate of the authority that signed the Astronomer certificate, rather than the Astronomer certificate itself. This is the same certificate you need to install with all clients to get them to trust your services.
-
-    > **Note:** The name of the secret file must be `cert.pem` for your certificate to be trusted properly.
-
-2. Note the value of `private-root-ca` for when you configure your Helm chart in Step 8. You'll need to additionally specify the `privateCaCerts` key-value pair with this value for that step.
-
-## Step 5: Configure Outbound SMTP Email
-
-
-Astronomer Software requires the ability to send email to:
-* notifying users of certain errors (e.g. users that try to deploy mis-matched Airflow image versions)
-* sending and accepting email invites from Astronomer
-* sending certain platform alerts (in the default configuration, configurable)
-
-Astronomer Software sends all outbound email via SMTP.
-
-::info
-
-If evaluating Astronomer Software in an environment where outbound SMTP is not available, follow instructions in `Appendix: Configuring Astronomer Software To Not Send Outbound Email` and then skip the rest of this section.
-
-::
-
-1. Obtain a valid set of SMTP credentials.
-2. Ensure that the Kubetes Cluster has access to send outbound email to the SMTP server.
-3. Change the reply values already present in `values.yaml` from `noreply@my.email.internal` to an email address that is valid for use with the SMTP credentials.
-4. Construct an email connection string (see guidance later in this section) and store it in a secret named `astronomer-tls` in the astronomer platform namespace. Make sure to *url-encode* the username and password if they contain special characters.
-  e.g.
-  ```sh
-  kubectl -n astronomer create secret generic astronomer-smtp --from-literal connection="smtp://my@40user:my%40pass@smtp.email.internal/?requireTLS=true"
-  ```
-
-In general, an SMTP URI will take the following form:
-
-```text
-smtps://USERNAME:PASSWORD@HOST/?pool=true
-```
-
-The following table contains examples of what the URI will look like for some of the most popular SMTP services:
-
-| Provider          | Example SMTP URL                                                                                 |
-|-------------------|--------------------------------------------------------------------------------------------------|
-| AWS SES           | `smtp://AWS_SMTP_Username:AWS_SMTP_Password@email-smtp.us-east-1.amazonaws.com/?requireTLS=true` |
-| SendGrid          | `smtps://apikey:SG.sometoken@smtp.sendgrid.net:465/?pool=true`                                   |
-| Mailgun           | `smtps://xyz%40example.com:password@smtp.mailgun.org/?pool=true`                                 |
-| Office365         | `smtp://xyz%40example.com:password@smtp.office365.com:587/?requireTLS=true`                      |
-| Custom SMTP-relay | `smtp://smtp-relay.example.com:25/?ignoreTLS=true`                                               |
-
-If your SMTP provider is not listed, refer to the provider's documentation for information on creating an SMTP URI.
-
-
-:::info 
-
-If there are `/` or other escape characters in your username or password, you may need to [URL encode](https://www.urlencoder.org/) those characters.
-
-:::
-
-## Step 6: Retrieve the Astronomer platform Helm chart
-
-Starting in the next step, you might need to modify Astronomer's Helm chart to customize your Astronomer installation to your use case. Making changes to the Astronomer Helm chart is the primary method for customizing the Astronomer Software platform. 
-
-To download a templated Helm chart for your installation, run the following command:
-
-```bash
-helm template --version <your-astronomer-version> astronomer/astronomer --set global.dagOnlyDeployment.enabled=True --set global.loggingSidecar.enabled=True --set global.postgresqlEnabled=True --set global.authSidecar.enabled=True --set global.baseDomain=<your-basedomain> | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq                           
-```
-
-Save the chart in a file named `values.yaml`.
-
-## Step 7: Configure the database
-
-Astronomer requires a central Postgres database that acts as the backend for Astronomer's Houston API and will host individual metadata databases for all Airflow Deployments spun up on the platform.
-
-:::info
-
-If, while evaluating Astronomer Software, you need to create a temporary environment where Postgres is not available, locate the `global.postgresqlEnabled` option already present in your `values.yaml` and set it to `true` then skip the remainder of this step.
-
-Setting `global.postgresqlEnabled` to `true` is an *unsupported* configuration and *must* not be used on any development, staging, or production environment.
+Create a platform-project directory for each platform environment to store values.yaml and other files you will be creating throughout this installation guide. e.g. store as `astronomer-sandbox/values.yaml`.
 
 :::
 
 
-:::info
+Subsequent steps of this installation guide will instruct you to review or make changes to the contents of `values.yaml`. As you make changes to this file, do not apply them to the cluster until you reach the step where are you are explicitly instructed to apply the platform configurtation.
 
-If using Azure Database for PostgreSQL or another Postgres instance that does not enable the `pg_trgm` by default, you *must* enable the `pg_trgm` extension prior to installing Astronomer Software. If `pg_trgm` is not enabled, the install will fail. `pg_tgrm` is enabled by default on Amazon RDS and Google CLoud SQL for PostgresQL. For instructions on enabling the `pg_trgm` extension for Azure Flexible Server, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
-
-:::
-
-Create a Kubernetes Secret named `astronomer-bootstrap` that points to your database. You must URL encode any special characters in your Postgres password.
-
-To create this secret, run the following command replacing the astronomer platform namespace, username, password, database hostname, and database port with their respective values (username and password must be url-encoded if they contain special-characters):
-
-```bash
-kubectl --namespace <astronomer platform namespace> create secret generic astronomer-bootstrap \
-  --from-literal connection="postgres://<url-encoded username>:<url-encoded password>@<database hostname>:<database port>"
-```
-
-e.g. For a username named `bob` with password `abc@abc` at hostname `some.host.internal`:
-```bash
-kubectl --namespace astronomer create secret generic astronomer-bootstrap \
-  --from-literal connection="postgres://bob:abc%40abc@some.host.internal:5432"
-```
-
-Additional requirements apply to the following databases:
-- AWS RDS:
-  * [t2 medium](https://aws.amazon.com/rds/instance-types/) is the minimum RDS instance size.
-- Azure Flexible Server:
-  * you must enable the `pg_trgm` extension as per the advisory earlier in this section
-  * `global.ssl.sslmode` must be set to `prefer` in your `values.yaml` (set during Step 8, and already set if using the Azure on AKS config provided there).
-
-## Step 8: Confirm the base configuration for your Helm chart
-
-Your `values.yaml` file will store a set of values for Astronomer Software that specify everything from user role definitions to the Airflow images you want to support. You'll continually modify this file and apply it to your platform you grow with Astronomer Software and want to take advantage of new features.
-
-Your `values.yaml` file should include the following configurations alongside the configurations you copied in Step 6. For more example configuration files, see the [Astronomer GitHub](https://github.com/astronomer/astronomer/tree/master/configs).
+This file defines major platform configuration settings for the Astronomer Software Platform and must be present to install, upgrade, or reconfigure Astronomer Software. You'll continually modify this file as you grow with Astronomer Software and want to take advantage of new features.
 
 
 <Tabs
@@ -353,11 +173,11 @@ Your `values.yaml` file should include the following configurations alongside th
 
 ```yaml
 #################################
-### Astronomer global configuration
+### Astronomer global configuration for EKS
 #################################
 global:
   # Base domain for all subdomains exposed through ingress
-  baseDomain: astro.mydomain.com
+  baseDomain: sandbox-astro.example.com
 
   # Name of secret containing TLS certificate
   tlsSecret: astronomer-tls
@@ -404,6 +224,8 @@ astronomer:
     config:
       publicSignups: false # Users need to be invited to have access to Astronomer. Set to true otherwise
       emailConfirmation: true # Users get an email verification before accessing Astronomer
+      upgradeDeployments:
+        enabled: false # dont automatically upgrade airflow instances when the platform is upgraded
       deployments:
         hardDeleteDeployment: true # Allow deletions to immediately remove the database and namespace
         manualReleaseNames: true # Allows you to set your release names
@@ -434,11 +256,11 @@ astronomer:
 
 ```yaml
 #################################
-### Astronomer global configuration
+### Astronomer global configuration for GKE
 #################################
 global:
   # Base domain for all subdomains exposed through ingress
-  baseDomain: astro.mydomain.com
+  baseDomain: sandbox-astro.example.com
 
   # Name of secret containing TLS certificate
   tlsSecret: astronomer-tls
@@ -483,6 +305,8 @@ astronomer:
     config:
       publicSignups: false # Users need to be invited to have access to Astronomer. Set to true otherwise
       emailConfirmation: true # Users get an email verification before accessing Astronomer
+      upgradeDeployments:
+        enabled: false # dont automatically upgrade airflow instances when the platform is upgraded
       deployments:
         hardDeleteDeployment: true # Allow deletions to immediately remove the database and namespace
         manualReleaseNames: true # Allows you to set your release names
@@ -513,7 +337,7 @@ astronomer:
 
 ```yaml
 #################################
-### Astronomer global configuration
+### Astronomer global configuration for AKS
 #################################
 global:
   # Enables default values for Azure installations
@@ -521,7 +345,7 @@ global:
     enabled: true
 
   # Base domain for all subdomains exposed through ingress
-  baseDomain: astro.mydomain.com
+  baseDomain: sandbox-astro.example.com
 
   # Name of secret containing TLS certificate
   tlsSecret: astronomer-tls
@@ -570,6 +394,8 @@ astronomer:
     config:
       publicSignups: false # Users need to be invited to have access to Astronomer. Set to true otherwise
       emailConfirmation: true # Users get an email verification before accessing Astronomer
+      upgradeDeployments:
+        enabled: false # dont automatically upgrade airflow instances when the platform is upgraded
       deployments:
         hardDeleteDeployment: true # Allow deletions to immediately remove the database and namespace
         manualReleaseNames: true # Allows you to set your release names
@@ -603,7 +429,7 @@ astronomer:
 #################################
 global:
   # Base domain for all subdomains exposed through ingress
-  baseDomain: astro.mydomain.com
+  baseDomain: sandbox-astro.example.com
 
   # Name of secret containing TLS certificate
   tlsSecret: astronomer-tls
@@ -673,6 +499,323 @@ astronomer:
 
 </Tabs>
 
+
+## Step 2: Choose and configure the base domain
+
+### Choosing the base domain {#choosing-the-base-domain}
+The installation procedure detailed in this guide will create a variety of services that your users will access to manage, monitor, and run Airflow on the platform.
+
+Choose a base-domain (e.g. `astronomer.example.com`, `astro-sandbox.example.com`, `astro-prod.example.internal`) for which:
+* you have the ability to create and edit DNS records
+* you have the ability to issue TLS-certificates
+* the following addresses are available:
+  - `app.<base-domain>`
+  - `deployments.<base-domain>`
+  - `houston.<base-domain>`
+  - `grafana.<base-domain>`
+  - `kibana.<base-domain>`
+  - `install.<base-domain>`
+  - `alertmanager.<base-domain>`
+  - `prometheus.<base-domain>`
+  - `registry.<base-domain>`
+
+The base-domain itself does not need to be available and may even point to another service not associated with Astronomer or Airflow. If available, later sections of this document will establish a vanity-redirect from `<base-domain>` to `app.<base-domain>`.
+
+When choosing a baseDomain, consider:
+* the name you choose must be be resolvable by both your users and Kubernetes itself
+* you will need to have or obtain a TLS certificate that is recognized as valid by your users (and if using the bundled container-registry, by Kubernetes itself)
+* wildcardcard certificates are only valid one-level deep (e.g. an ingress controller using a certificate of `*.example.com` can provide service for `app.example.com` but not `app.astronomer-dev.example.com`).
+* the bottom-level hostnames (e.g. `app`, `registry`, `prometheus`) are fixed and cannot be changed.
+* most kubernetes clusters refuse to resolve DNS hostnames with more than 5 segments (seperated by the dot character; e.g. `app.astronomer.sandbox.mygroup.example.com` is 6 segments and might be problematic, so choosing a baseDomain of `astronomer-sandbox.mygroup.example.com` instead of `astronomer.sandbox.mygroup.example.com` would be advisable).
+* the base-domain will be visible to end-users
+  - when accessing the Astronomer Software UI (e.g. `https://app.sandbox-astro.example.com`)
+  - when accessing an Airflow Deployment (e.g. `https://deployments.sandbox-astro.example.com/deployment-release-name/airflow`)
+  - when logging into the astro cli (e.g. `astro login sandbox-astro.example.com`)
+  
+::: info
+
+Openshift customers who wish to use OpenShift's integrated ingress controller typically use the hostname of the default OpenShift ingress controller as their base-domain. Doing so results in a slightly-unwieldy user-visible hostname of `app.apps.<openshift-domain>` and requires permission to re-configure the route-admission policy for the standard ingress controller to `InterNamespaceAllowed` (covered later in this document). See [Third Party Ingress Controller - Configuration notes for Openshift](third-party-ingress-controllers#configuration-notes-for-openshift) additional infomation and options.
+
+:::
+
+### Configuring the base domain
+
+Locate the `global.baseDomain` key already present in your `values.yaml` file and change it to your base-domain.
+
+e.g.
+```
+global:
+  # Base domain for all subdomains exposed through ingress
+  baseDomain: sandbox-astro.example.com
+```
+
+## Step 2: Create the Astronomer Software platform namespace
+
+In your Kubernetes cluster, create a [kubernetes namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) (Astronomer generally recommends this namespace be named `astronomer`) to contain the Astronomer Software platform.
+
+```sh
+kubectl create namespace astronomer
+```
+
+The contents of this namespace will be used to provision and manage Airflow instances running in other namespaces. Each Airflow will have its own isolated namespace.
+
+## Step TBD: Third-Party Igress-Controller DNS Configuration
+
+If using Astronomer's bundled ingress-controller - skip this step.
+
+### Astronomer Software Third-Party DNS Requirements and Record Guidance {#third-party-dns-guidance}
+
+Astronomer Software requires the following domain-names be registered and resolvable within the Kubernetes Cluster and to users of Astronomer And Airflow.
+  - `<base-domain>` (optional but recommended, provides a vanity re-direct to app.<base-domain>)
+  - `app.<base-domain>` (required)
+  - `deployments.<base-domain>` (required)
+  - `houston.<base-domain>` (required)
+  - `grafana.<base-domain>` (required if using bundled grafana)
+  - `kibana.<base-domain>` (required if not using external elasticsearch)
+  - `install.<base-domain>` (optional)
+  - `alertmanager.<base-domain>` (required if using bundled alert manager)
+  - `prometheus.<base-domain>` (required)
+  - `registry.<base-domain>` (required if using bundled container-registry)
+
+Astronomer generally recommends that:
+* the `<base-domain>` record be a zone-apex record (typically expressed by using a hostname of `@`) pointing to the IP(s) of the ingress-controller
+* all other records be CNAME records pointing to the `<base-domain>`
+
+For customers unable to register the base-domain, Astronomer recommends that:
+* the `app.<baseDomain>` record be an A record pointing to the IP(s) of the ingress-controller
+* all other records be CNAME records pointing to `app.<base-domain>`
+
+:::tip
+
+For lower environments, Astronomer recommends a relatively short ttl-value (e.g. 60 seconds) when you first deploy Astronomer so that any errors can be quickly corrected.
+
+:::
+
+
+### Request Ingress Information from your Ingress-Administrator {get-ingress-info}
+
+Provide your Ingress Controller Administrator with the [Astronomer Software Third-Party DNS Requirements and Record Guidance](#third-party-dns-guidance) above (replacing <base-domain> with the base-domain from [Choosing the Base Domain](#choosing-the-base-domain)) and guidance and request the following information:
+* what ingress class name you should use (or whether you should leave blank and use the default)
+* what IP address(es) you should use for DNS entries pointing to the ingress controller
+* whether DNS-records will be automatically created in reponse to Ingress rources that we will be created later in the install
+* if DNS-records need to be manually created, and if so who will coordinate their creation and who will create them
+### Create DNS records pointing to your third-party ingress-controller
+
+Create DNS records pointed to your third-party ingress. controller.
+
+### Verify DNS records are pointed to your third-party ingress-controller
+
+Use `dig <hostname>` or `getent hosts <hostname>` to verify each DNS entry is created and pointing to the IP address of the ingress-controller you will be using.
+
+
+## Step 3: Requesting and Validating an Astronomer TLS Certificate
+
+In order to install Astronomer Software, you'll need a TLS certificate that is valid for several domains - one of which will be the primary name on the certificate (referred to as the Common name or CN) and the rest will be equally-valid supplementary domains known as Subject Alternative Names (SAN)s.
+
+Astronomer requires a private certificate be present in the Astronomer Platform namespace, even if using a third-party ingress-controller that doesn't otherwise require it.
+
+### Requesting an Astronomer TLS Certificate
+
+Request a TLS certificate and associated items (see below) from your enterprise security team.
+
+When requesting a certificate for Astronomer Software, use the [base domain you chose earlier](#choosing-the-base-domain) as the Common Name (CN). If your Certificate Authority will not issue certificates for the bare base domain, use `app.<base-domain>` as the Common Name instead.
+
+Additionally, you must include *either* a wildcard Subject Alternative Name (SAN) entry of `*.<base-domain>` *or* an explicit SAN entry for each of the following items:
+
+```sh
+app.<base-domain> (omit if already used as the Common Name)
+deployments.<base-domain>
+registry.<base-domain>
+houston.<base-domain>
+grafana.<base-domain>
+kibana.<base-domain>
+install.<base-domain>
+alertmanager.<base-domain>
+prometheus.<base-domain>
+```
+
+:::warning
+
+If using Astronomer's bundled container image registry, the encryption-type used on your TLS certificate must be *RSA*. Cerbot users must include `-key-type rsa` when requesting certificates, most other solutions generate RSA-keys by default.
+
+:::
+
+In your request to your Security Team, include:
+* the Common Name and Subject Alternative Name(s) as per above
+* if using the bundled Astronomer container-registry, the requirement that the encryption type of the certificate *must* be RSA
+* request that the return format be as follows:
+  - a key.pem - containing the private key
+  - **either** a full-chain.pem (containing the public certificate additional certificates required to validate it) **or** a bare `cert.pem` and explicit affirmation that there are no intermediate certificates an that the public certificate is the full-chain
+  - **either** a statement that the certificate is signed by public and generally recognized Certificate Authority **or** the public certificate of the Certificate Authority used to create your certificate
+
+### Validating the received certficiate and associated items
+Ensure that you have received each of the follownig three items:
+
+* a key.pem - containing the private key
+* **either** a full-chain.pem (containing the public certificate additional certificates required to validate it) **or** a bare `cert.pem` and explicit affirmation that it the full-chain
+* **either** a statement that the certificate is signed by public and generally recognized Certificate Authority **or** the public certificate of the Certificate Authority used to create your certificate
+
+
+Validate that your enterprise security team generated the correct certificate, run the following command using the `openssl` CLI:
+
+```sh
+openssl x509 -in  <your-certificate-filepath> -text -noout
+```
+
+This command will generate a report. If the `X509v3 Subject Alternative Name` section of this report includes either a single `*.<base-domain>` wildcard domain or all subdomains, then the certificate creation was successful.
+
+Confirm that your full-chain certificate chain is ordered correctly. To determine your certificate chain order, run the following command using the `openssl` CLI:
+
+```sh
+openssl crl2pkcs7 -nocrl -certfile <your-full-chain-certificate-filepath> | openssl pkcs7 -print_certs -noout
+```
+
+The command generates a report of all certificates. Verify the order of the certificates is as follows:
+
+- Domain
+- Intermediate (optional)
+- Root
+
+## Step 4: Storing and configuring the Public TLS Full-Chain Certificate
+
+### Storing the full-chain TLS certificate in the Astronomre Platform Namespace
+Store the public full-chain certificate in the Astronomer Software Platform Namespace in a `tls`-type Kubernetes secret named `astronomer-tls` using the following command.
+
+If your enterprise-security organization has instructed you that there are no intermediate certifi
+
+```sh
+kubectl -n <astronomer platform namespace> create secret tls astronomer-tls --cert <fullchain-pem-filepath> --key <your-private-key-filepath>
+```
+
+E.g.
+```
+kubectl -n astronomer create secret tls astronomer-tls --cert fullchain.pem --key server_private_key.pem
+```
+
+Naming the secret `astronomer-tls` (no substitutions) is always recommended and is a strict requirement when using a third-party ingress-controller.
+
+## Step TBD-THIRDPARTY: Configuring a third-party ingress-controller
+### Check your ingress-controller
+### Set the full-chain TLS certificate Kubernetes Secret for replication
+Most third-party ingress-controllers require the `astronomer-tls` secret be replicated into each Airflow namespace.
+
+Annotate the secret and set `"astronomer.io/commander-sync` to `platform=<astronomer platform release name>`, e.g.:
+```
+kubectl -n <astronomer platform namespace> annotate secret astronomer-tls "astronomer.io/commander-sync"="platform=astronomer"
+```
+
+Astronomer will automatically replicate the secret into the namespace used by each newly deployed Airflow instance.
+
+## Step TBD-VALUES: Configuring a Private Certificate Authority
+
+If you received a certificate from a private CA, follow these steps instead:
+
+1. Add the root certificate provided by your security team to an [Opaque Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#secret-types) in the Astronomer namespace by running the following command:
+
+    ```sh
+    kubectl create secret generic private-root-ca --from-file=cert.pem=./<your-certificate-filepath> -n astronomer
+    ```
+
+    > **Note:** The root certificate which you specify here should be the certificate of the authority that signed the Astronomer certificate, rather than the Astronomer certificate itself. This is the same certificate you need to install with all clients to get them to trust your services.
+
+    > **Note:** The name of the secret file must be `cert.pem` for your certificate to be trusted properly.
+
+2. Note the value of `private-root-ca` for when you configure your Helm chart in TBD-VALUES. You'll need to additionally specify the `privateCaCerts` key-value pair with this value for that step.
+
+## Step 5: Configure Outbound SMTP Email
+
+
+Astronomer Software requires the ability to send email to:
+* notifying users of certain errors (e.g. users that try to deploy mis-matched Airflow image versions)
+* sending and accepting email invites from Astronomer
+* sending certain platform alerts (in the default configuration, configurable)
+
+Astronomer Software sends all outbound email via SMTP.
+
+::info
+
+If evaluating Astronomer Software in an environment where outbound SMTP is not available, follow instructions in `Appendix: Configuring Astronomer Software To Not Send Outbound Email` and then skip the rest of this section.
+
+::
+
+1. Obtain a valid set of SMTP credentials.
+2. Ensure that the Kubetes Cluster has access to send outbound email to the SMTP server.
+3. Change the reply values already present in `values.yaml` from `noreply@my.email.internal` to an email address that is valid for use with the SMTP credentials.
+4. Construct an email connection string (see guidance later in this section) and store it in a secret named `astronomer-tls` in the astronomer platform namespace. Make sure to *url-encode* the username and password if they contain special characters.
+  e.g.
+  ```sh
+  kubectl -n astronomer create secret generic astronomer-smtp --from-literal connection="smtp://my@40user:my%40pass@smtp.email.internal/?requireTLS=true"
+  ```
+
+In general, an SMTP URI will take the following form:
+
+```text
+smtps://USERNAME:PASSWORD@HOST/?pool=true
+```
+
+The following table contains examples of what the URI will look like for some of the most popular SMTP services:
+
+| Provider          | Example SMTP URL                                                                                 |
+|-------------------|--------------------------------------------------------------------------------------------------|
+| AWS SES           | `smtp://AWS_SMTP_Username:AWS_SMTP_Password@email-smtp.us-east-1.amazonaws.com/?requireTLS=true` |
+| SendGrid          | `smtps://apikey:SG.sometoken@smtp.sendgrid.net:465/?pool=true`                                   |
+| Mailgun           | `smtps://xyz%40example.com:password@smtp.mailgun.org/?pool=true`                                 |
+| Office365         | `smtp://xyz%40example.com:password@smtp.office365.com:587/?requireTLS=true`                      |
+| Custom SMTP-relay | `smtp://smtp-relay.example.com:25/?ignoreTLS=true`                                               |
+
+If your SMTP provider is not listed, refer to the provider's documentation for information on creating an SMTP URI.
+
+
+:::info 
+
+If there are `/` or other escape characters in your username or password, you may need to [URL encode](https://www.urlencoder.org/) those characters.
+
+:::
+
+
+
+## Step 7: Configure the database
+
+Astronomer requires a central Postgres database that acts as the backend for Astronomer's Houston API and will host individual metadata databases for all Airflow Deployments spun up on the platform.
+
+:::info
+
+If, while evaluating Astronomer Software, you need to create a temporary environment where Postgres is not available, locate the `global.postgresqlEnabled` option already present in your `values.yaml` and set it to `true` then skip the remainder of this step.
+
+Setting `global.postgresqlEnabled` to `true` is an *unsupported* configuration and *must* not be used on any development, staging, or production environment.
+
+:::
+
+
+:::info
+
+If using Azure Database for PostgreSQL or another Postgres instance that does not enable the `pg_trgm` by default, you *must* enable the `pg_trgm` extension prior to installing Astronomer Software. If `pg_trgm` is not enabled, the install will fail. `pg_tgrm` is enabled by default on Amazon RDS and Google CLoud SQL for PostgresQL. For instructions on enabling the `pg_trgm` extension for Azure Flexible Server, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
+
+:::
+
+Create a Kubernetes Secret named `astronomer-bootstrap` that points to your database. You must URL encode any special characters in your Postgres password.
+
+To create this secret, run the following command replacing the astronomer platform namespace, username, password, database hostname, and database port with their respective values (username and password must be url-encoded if they contain special-characters):
+
+```bash
+kubectl --namespace <astronomer platform namespace> create secret generic astronomer-bootstrap \
+  --from-literal connection="postgres://<url-encoded username>:<url-encoded password>@<database hostname>:<database port>"
+```
+
+e.g. For a username named `bob` with password `abc@abc` at hostname `some.host.internal`:
+```bash
+kubectl --namespace astronomer create secret generic astronomer-bootstrap \
+  --from-literal connection="postgres://bob:abc%40abc@some.host.internal:5432"
+```
+
+Additional requirements apply to the following databases:
+- AWS RDS:
+  * [t2 medium](https://aws.amazon.com/rds/instance-types/) is the minimum RDS instance size.
+- Azure Flexible Server:
+  * you must enable the `pg_trgm` extension as per the advisory earlier in this section
+  * `global.ssl.sslmode` must be set to `prefer` in your `values.yaml` (set during TBD-VALUES, and already set if using the Azure on AKS config provided there).
+
+
 ## Step 9: Configure a private Docker registry
 
 Astronomer's Docker images are hosted on a public registry which isn't accessible from an airgapped network. Therefore, these images must be hosted on a Docker registry accessible from within your own network. Every major cloud platform provides its own managed Docker registry service that can be used for this step:
@@ -695,22 +838,92 @@ After you create your registry:
     ```
 3. Copy the generated secret for use in Step 3.
 
-## Step 10: Fetch images from Astronomer's Helm template
+## Step TBD: Determine what version of Astronomer Software to install
+
+Astronomer recommends new Astronomer Software installations use the most-recently version of either the Stable or LTS (long-term support) release-channel.
+
+Current recommended versions:
+  * Stable Channel: v0.34.1 (0.34 is supported until August 2025)
+  * Long-term Support Channel: v0.34.1 (0.34 is supported until August 2025)
+
+See Astronomer Software's [lifecycle policy](release-lifecycle-policy) and [release notes](version-compatibility-reference) for more information.
+
+
+## Step TBD: Fetch Airflow Helm charts
+
+* If you have internet accces to `https://helm.astronomer.io` run the following command on the machine you will be installing Astronomer Software on:
+```
+helm repo add astronomer https://helm.astronomer.io/
+helm repo update
+```
+* If you do not have internet access to `https://helm.astronomer.io` download the Astronomer Software Platform helm chart file corresponding to the version of Astronomer Software they are installing or upgrading to from `https://helm.astronomer.io/astronomer-<version number>.tgz`. 
+  * e.g. if installing Astronomer Software v0.34.1 download `https://helm.astronomer.io/astronomer-0.34.1.tgz`.
+  * This file does not need to uploaded to an internal chart-repository.
+
+
+## Step TBD: Create and customize upgrade.sh
+C
+### Create upgrade.sh
+
+Create a file named `upgrade.sh` containing the script below, then customize:
+* CHART_VERSION - v-prefixed version of the Astronomer Software version, including patch (e.g. v0.34.1)
+* RELEASE_NAME - helm release name, strongly recommended `astronomer`
+* NAMESPACE - namespace name to install platform components into, strongly recommend `astronomer`
+* CHART_NAME - set to `astronomer/astronomer` if fetching from the internet or the filename if installing from a file (e.g. `astronomer-0.34.1.tgz`)
+
+```sh
+#!/bin/bash
+set -xe
+
+# typically astronomer
+RELEASE_NAME=<astronomer-platform-release-name>
+# typically astronomer
+NAMESPACE=<astronomer-platform-namespace>
+# typically astronomer/astronomer
+CHART_NAME=<chart name>
+# format is v<major>.<minor>.<path> e.g. v0.32.9
+CHART_VERSION=<v-prefixed version of the Astronomer Software platform chart>
+# ensure all the above environment variables have been set
+
+helm repo add --force-update astronomer https://helm.astronomer.io
+helm repo update
+
+# upgradeDeployments false ensures that Airflow charts are not upgraded when this script is ran
+# If you deployed a config change that is intended to reconfigure something inside Airflow,
+# then you may set this value to "true" instead. When it is "true", then each Airflow chart will
+# restart. Note that some stable version upgrades require setting this value to true regardless of your own configuration.
+# If you are currently on Astronomer Software 0.25, 0.26, or 0.27, you must upgrade to version 0.28 before upgrading to 0.29. A direct upgrade to 0.29 from a version lower than 0.28 is not possible.
+helm upgrade --install --namespace $NAMESPACE \
+            -f ./values.yaml \
+            --reset-values \
+            --version $CHART_VERSION \
+            --debug \
+            --set astronomer.houston.upgradeDeployments.enabled=false \
+            $RELEASE_NAME \
+            $CHART_NAME $@
+```
+## Step TBD: Fetch images from Astronomer's Helm template
 
 The images and tags which are required for your Software installation depend on the version of Astronomer you're installing. To gather a list of exact images and tags required for your Astronomer version:
 
-1. Run the following command to template the Astronomer Helm chart and fetch all of its rendered image tags. Make sure to substitute `<your-basedomain>` and `<your-astronomer-version>` with your information.
+1. Configure your current session by setting:
+  * CHART_VERSION - v-prefixed version of the Astronomer Software platform chart, including patch (e.g. v0.34.1)
+  * CHART_NAME - set to `astronomer/astronomer` if fetching from the internet or the filename if installing from a file (e.g. `astronomer-0.34.1.tgz`)
 
     ```bash
-    helm template --version <your-astronomer-version> astronomer/astronomer --set global.dagOnlyDeployment.enabled=True --set global.loggingSidecar.enabled=True --set global.postgresqlEnabled=True --set global.authSidecar.enabled=True --set global.baseDomain=<your-basedomain> | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq                           
+    CHART_VERSION=<v-prefixed version of the Astronomer Software platform chart>        
+    CHART_NAME=<chart name>
+    ```
+2. Run the following command to template the Astronomer Helm chart and fetch all of its rendered image tags.
+    ```bash
+    helm template --version $CHART_VERSION $CHART_NAME --set global.dagOnlyDeployment.enabled=True --set global.loggingSidecar.enabled=True --set global.postgresqlEnabled=True --set global.authSidecar.enabled=True --set global.baseDomain=ignored | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq                           
     ```
     
     This command sets all possible Helm values that could impact which images are required for your installation. By fetching all images now, you save time by eliminating the risk of missing an image. 
-  
-2. Run the following command to template the Airflow Helm chart and fetch its rendered image tags:
+3. Run the following command to template the Airflow Helm chart and fetch its rendered image tags:
 
     ```shell
-    helm template --version <your-airflow-version> astronomer/airflow --set airflow.postgresql.enabled=false --set airflow.pgbouncer.enabled=true --set airflow.statsd.enabled=true --set airflow.executor=CeleryExecutor | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq
+    helm template --version $CHART_VERSION $CHART_NAME --set airflow.postgresql.enabled=false --set airflow.pgbouncer.enabled=true --set airflow.statsd.enabled=true --set airflow.executor=CeleryExecutor | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq
     ```
 
 These commands generate a list of images required for your version of Astronomer. Add these images to a private image registry hosted within your organization's network. In Step 3, you will specify this private registry in your Astronomer configuration.
@@ -721,7 +934,8 @@ If you have already enabled or disabled Astronomer platform components in your `
 
 :::
 
-## Step 11: Add images to your values.yaml file
+## Step 11: Customize values.yaml to to use a custom image repository for platform images
+If your Kubernetes cluster can fetch images directly from public repositories, you may skip this section.
 
 Regardless of whether you choose to mirror or manually pull/push images to your private registry, the returned images and/or tags must be made accessible within your network.
 
@@ -765,17 +979,6 @@ astronomer:
                 gitSync:
                   repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-git-sync
 ```
-
-## Step 12: Fetch Airflow Helm charts
-
-* If you have internet accces to `https://helm.astronomer.io` run the following command on the machine you will be installing Astronomer Software on:
-```
-helm repo add astronomer https://helm.astronomer.io/
-helm repo update
-```
-* If you do not have internet access to `https://helm.astronomer.io` download the Astronomer Software Platform helm chart file corresponding to the version of Astronomer Software they are installing or upgrading to from `https://helm.astronomer.io/astronomer-<version number>.tgz`. 
-  * e.g. if installing Astronomer Software v0.34.1 download `https://helm.astronomer.io/astronomer-0.34.1.tgz`.
-  * This file does not need to uploaded to an internal chart-repository.
 
 
 ## Step 13: Fetch Airflow updates
@@ -942,6 +1145,7 @@ astronomer:
             extraEnv:
             - name: AIRFLOW__ASTRONOMER__UPDATE_URL
               value: http://astronomer-releases.astronomer.svc.cluster.local/astronomer-runtime
+            
 ```
 
 ## Step 14: Configure namespace pools
@@ -970,21 +1174,157 @@ Astronomer Software includes integrations for several of the most popular identi
 
 Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
 
-## Step 18: Install Astronomer using Helm
+## Step TBD: Openshift Configuration
+Merge the following configuration options into `values.yaml` - either manually or by placing [merge_yaml.py] in your astro-platform project-directory and running `python merge_yaml.py openshift-snippet.yaml values.yaml`.
 
-Before completing this step, ensure that you made Astronomer's Docker images, Airflow Helm chart, and updates JSON accessible inside your network.
+```
+astronomer:
+  authSidecar:
+    enabled: true
+  dagOnlyDeployment:
+    securityContext:
+      fsGroup: ""
+  fluentdEnabled: false
+  loggingSidecar:
+    enabled: true
+    name: sidecar-log-consumer
+  sccEnabled: false
+elasticsearch:
+  securityContext:
+    fsGroup: ~
+  sysctlInitContainer:
+    enabled: false
+```
 
-After this check, you can install the Astronomer Helm chart by running the following commands, making sure to replace `<your-image-tag>` with the version of Astronomer that you want to install:
+
+## Step 19: Creating the Load-Balancer
+
+If using a third-party ingress-controller, skip this step.
+
+Perform a preliminary install of Astronomer Software to trigger the load-balancer creation. This installation will fail and timeout after 30 seconds but will cause the load balancer to be created.
+
+
+<Tabs
+    defaultValue="script"
+    groupId= "load-balancer-creation"
+    values={[
+        {label: 'upgrade.sh', value: 'script'},
+        {label: 'helm', value: 'helm'},
+    ]}>
+
+<TabItem value="script">
 
 ```bash
-curl -L https://github.com/astronomer/astronomer/archive/v<your-image-tag>.tar.gz -o astronomer.tgz
-
-# Alternatively, use helm pull to pull the latest version of Astronomer
-helm pull astronomer/astronomer
-
-# ... If necessary, copy to a place where you can access Kubernetes ...
-helm install astronomer -f values.yaml -n astronomer astronomer.tgz
+./upgrade.sh --timeout 30s
 ```
+
+</TabItem>
+<TabItem value="helm">
+
+
+Create a file named `upgrade.sh` containing the script below, then customize:
+* CHART_VERSION - v-prefixed version of the Astronomer Software version, including patch (e.g. v0.34.1)
+* RELEASE_NAME - helm release name, strongly recommended `astronomer`
+* NAMESPACE - namespace name to install platform components into, strongly recommend `astronomer`
+* CHART_NAME - set to `astronomer/astronomer` if fetching from the internet or the filename if installing from a file (e.g. `astronomer-0.34.1.tgz`)
+
+```sh
+#!/bin/bash
+set -xe
+
+# typically astronomer
+RELEASE_NAME=<astronomer-platform-release-name>
+# typically astronomer
+NAMESPACE=<astronomer-platform-namespace>
+# typically astronomer/astronomer
+CHART_NAME=<chart name>
+# format is v<major>.<minor>.<path> e.g. v0.32.9
+CHART_VERSION=<v-prefixed version of the Astronomer Software platform chart>
+# ensure all the above environment variables have been set
+
+```
+helm upgrade --install --namespace $NAMESPACE \
+            -f ./values.yaml \
+            --reset-values \
+            --version $CHART_VERSION \
+            --debug \
+            --set astronomer.houston.upgradeDeployments.enabled=false \
+            --timeout 30s \
+            $RELEASE_NAME \
+            $CHART_NAME $@
+```
+
+</TabItem>
+</Tabs>
+
+
+## Step 20: Configure DNS
+
+The Astronomer load balancer routes incoming traffic to your NGINX ingress controller. After you install Astronomer Software, the load balancer will spin up in your cloud provider account.
+
+Run `$ kubectl get svc -n <astronomer platform namespace>`m e.g. `kubectl get svc -n ingress` to view your load balancer's CNAME, located under the `EXTERNAL-IP` column for the `astronomer-nginx` service. It should look similar to the following:
+
+```sh
+$ kubectl get svc -n astronomer
+NAME                                 TYPE           CLUSTER-IP       EXTERNAL-IP                                                               PORT(S)                                      AGE
+astronomer-alertmanager              ClusterIP      172.20.48.232    <none>                                                                    9093/TCP                                     24d
+[...]
+astronomer-nginx                     LoadBalancer   172.20.54.142    ELB_ADDRESS.us-east-1.elb.amazonaws.com                                   80:31925/TCP,443:32461/TCP,10254:32424/TCP   24d
+astronomer-nginx-default-backend     ClusterIP      172.20.186.254   <none>                                                                    8080/TCP                                     24d
+[...]                         
+```
+
+You will need to create a new CNAME record through your DNS provider using the external IP listed for for `astronomer-nginx`.
+
+You can create a single wildcard CNAME record such as `*.sandbox-astro.example.com`, or alternatively create individual CNAME records for the following routes:
+
+```sh
+app.sandbox-astro.example.com
+deployments.sandbox-astro.example.com
+registry.sandbox-astro.example.com
+houston.sandbox-astro.example.com
+grafana.sandbox-astro.example.com
+kibana.sandbox-astro.example.com
+install.sandbox-astro.example.com
+alertmanager.sandbox-astro.example.com
+prometheus.sandbox-astro.example.com
+```
+
+## Step 18: Install Astronomer using Helm
+
+Install the Astronomer Software helm chart using `upgrade.sh` (recommended for your first install) or directly from helm.
+
+<Tabs
+    defaultValue="script"
+    groupId= "load-balancer-creation"
+    values={[
+        {label: 'upgrade.sh', value: 'script'},
+        {label: 'helm', value: 'helm'},
+    ]}>
+
+<TabItem value="script">
+
+```bash
+./upgrade.sh --timeout 20m
+```
+
+</TabItem>
+<TabItem value="helm">
+
+```
+helm upgrade --install --namespace $NAMESPACE \
+            -f ./values.yaml \
+            --reset-values \
+            --version $CHART_VERSION \
+            --debug \
+            --set astronomer.houston.upgradeDeployments.enabled=false \
+            --timeout 20m \
+            $RELEASE_NAME \
+            $CHART_NAME $@
+```
+
+</TabItem>
+</Tabs>
 
 ## Step 19: Verify Pods are up
 
@@ -1040,37 +1380,6 @@ astronomer-registry-0                                      1/1     Running      
 
 If you are seeing issues here, check out our [guide on debugging your installation](debug-install.md).
 
-## Step 20: Configure DNS
-
-The Astronomer load balancer routes incoming traffic to your NGINX ingress controller. After you install Astronomer Software, the load balancer will spin up in your cloud provider account.
-
-Run `$ kubectl get svc -n astronomer` to view your load balancer's CNAME, located under the `EXTERNAL-IP` column for the `astronomer-nginx` service. It should look similar to the following:
-
-```sh
-$ kubectl get svc -n astronomer
-NAME                                 TYPE           CLUSTER-IP       EXTERNAL-IP                                                               PORT(S)                                      AGE
-astronomer-alertmanager              ClusterIP      172.20.48.232    <none>                                                                    9093/TCP                                     24d
-[...]
-astronomer-nginx                     LoadBalancer   172.20.54.142    ELB_ADDRESS.us-east-1.elb.amazonaws.com                                   80:31925/TCP,443:32461/TCP,10254:32424/TCP   24d
-astronomer-nginx-default-backend     ClusterIP      172.20.186.254   <none>                                                                    8080/TCP                                     24d
-[...]                         
-```
-
-You will need to create a new CNAME record through your DNS provider using the external IP listed for for `astronomer-nginx`.
-
-You can create a single wildcard CNAME record such as `*.astro.mydomain.com`, or alternatively create individual CNAME records for the following routes:
-
-```sh
-app.astro.mydomain.com
-deployments.astro.mydomain.com
-registry.astro.mydomain.com
-houston.astro.mydomain.com
-grafana.astro.mydomain.com
-kibana.astro.mydomain.com
-install.astro.mydomain.com
-alertmanager.astro.mydomain.com
-prometheus.astro.mydomain.com
-```
 
 ## Step 21: Verify you can access the Software UI
 
@@ -1132,4 +1441,210 @@ Setting `astronomer.houston.config.publicSignups` to `true` is only secure when 
 
 set `astronomer.houston.config.email.enabled` to `false`, remove the `EMAIL__SMTP_URL` list-item from `astronomer.houston.secret`, and 
 
+## TODO SECTION
+
+## Addendum
+### merge_yaml.py {#merge-yaml}
+
+```
+#!/usr/bin/env python
+"""
+Backup destination file and merge YAML contents of src into dest.
+
+By default creates backups, overwrites destination, and clobbers lists.
+
+Usage:
+    merge_yaml.py src dest [--create-backup=True] [--dry-run] [--show-stacktrace=False] [--merge-lists=True] [--help]
+"""
+
+
+import argparse
+import os
+import shutil
+from datetime import datetime
+import sys
+from pathlib import Path
+
+# Check Python version
+if sys.version_info < (3, 0):
+    print("Error: This script requires Python 3.0 or greater.")
+    sys.exit(2)
+
+# Try importing ruamel.yaml
+try:
+    from ruamel.yaml import YAML
+except ImportError:
+    print(
+        "Error: ruamel.yaml is not installed. Please install it using 'pip install ruamel.yaml'"
+    )
+    sys.exit(2)
+
+yaml = YAML()
+
+
+def deep_merge(d1, d2, **kwargs):
+    """Deep merges dictionary d2 into dictionary d1."""
+    merge_lists = kwargs.get("merge_lists")
+    for key, value in d2.items():
+        if key in d1:
+            if isinstance(d1[key], dict) and isinstance(value, dict):
+                deep_merge(d1[key], value, **kwargs)
+            elif merge_lists and isinstance(d1[key], list) and isinstance(value, list):
+                d1[key].extend(value)
+            else:
+                d1[key] = value
+        else:
+            d1[key] = value
+    return d1
+
+
+def load_yaml_file(filename):
+    """Load YAML data from a file."""
+    if not os.path.exists(filename):
+        return {}
+    with open(filename, "r") as file:
+        return yaml.load(file)
+
+
+def save_yaml_file(filename, data):
+    """Save YAML data to a file."""
+    with open(filename, "w") as file:
+        yaml.dump(data, file)
+
+
+def create_backup(filename):
+    """Create a timestamped backup of the file."""
+    # create a directory called backups relative to the filename
+    backup_dir = filename.parent / "yaml_backups"
+    try:
+        backup_dir.mkdir(exist_ok=True)
+    except Exception as e:
+        print(
+            f"Error: Could not create backup directory {backup_dir}. Check your file-permissions or use --no-create-backup to skip creating a backup."
+        )
+        exit(2)
+
+    timestamp = datetime.now().strftime("%y%m%d%H%M%S")
+    backup_filename = backup_dir / f"{filename.name}.{timestamp}.bak"
+    shutil.copyfile(filename, backup_filename)
+    print(f"Backup created: {backup_filename}")
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Deep merge YAML contents of src into dest."
+    )
+    parser.add_argument("src", type=Path, help="Source filename")
+    parser.add_argument("dest", type=Path, help="Destination filename")
+    parser.add_argument(
+        "--create-backup",
+        type=bool,
+        default=True,
+        help="Create a backup of the destination file before merging",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Print to stdout only, do not write to the destination file",
+    )
+    # add a argument for showing the stack trace on yaml parse errors
+    parser.add_argument(
+        "--show-stacktrace",
+        action="store_true",
+        help="Show stack trace on yaml parse errors",
+    )
+    # add an argument to clobber lists
+    parser.add_argument(
+        "--merge-lists",
+        action="store_true",
+        help="Merge list items instead of clobbering",
+        default=False,
+    )
+
+    args = parser.parse_args()
+
+    src_filename = args.src.resolve().expanduser()
+    dest_filename = args.dest.resolve().expanduser()
+
+    # make sure both files exist
+    if not src_filename.exists():
+        print(f"Error: {args.src} does not exist")
+        exit(2)
+
+    if not dest_filename.exists():
+        print(f"Error: {args.dest} does not exist")
+        exit(2)
+
+    try:
+        src_data = load_yaml_file(src_filename)
+    except Exception as e:
+        print(
+            f"Error: {args.src} is not a valid YAML file. Run with --show-stacktrace to see the error."
+        )
+        if args.show_stacktrace:
+            raise e
+        exit(2)
+    try:
+        dest_data = load_yaml_file(dest_filename)
+    except Exception as e:
+        print(
+            f"Error: {args.dest} is not a valid YAML file. Run with --show-stacktrace to see the error."
+        )
+        if args.show_stacktrace:
+            raise e
+        exit(2)
+
+    if args.create_backup and not args.dry_run:
+        create_backup(dest_filename)
+
+    src_data = load_yaml_file(args.src)
+    dest_data = load_yaml_file(args.dest)
+
+    # if dest_data is empty, just copy src_data to dest_data
+    if not dest_data:
+        if not args.dry_run:
+            save_yaml_file(args.dest, src_data)
+    else:
+        merged_data = deep_merge(dest_data, src_data, merge_lists=args.merge_lists)
+        if not args.dry_run:
+            save_yaml_file(args.dest, merged_data)
+            print(f"Merged data from {args.src} into {args.dest}")
+        else:
+            yaml.dump(merged_data, sys.stdout)
+
+
+if __name__ == "__main__":
+    main()
+
+```
+
  
+## TODO FIND home
+Your `values.yaml` file should include the following configurations alongside the configurations you copied in Step 6. For more example configuration files, see the [Astronomer GitHub](https://github.com/astronomer/astronomer/tree/master/configs).
+
+## TODO disable install domain by default
+
+
+# TODO OPTIONAL
+disabling metrics stack (prom/alertmanager/grafana)
+- cons
+- pros
+- instructions
+disabling elasticsearch/kibana
+- cons
+- prons
+- requirement to use externalElasticsearch
+disabling the registry
+- instructions
+disabling the install basedomain (TICKET?)
+disabling the vanity redirect at basedomain (TICKET?)
+
+## TODO configuring containerd to recognize tls
+
+## TDOO validation enc type of cert for registry being rsa
+- is there an openssl cmmd they can run
+
+## TODO Guidance on storing for CiCD
+
+As you progress to higher environments, remove these secrets and move these secrets to your organization's standard secret vault and use CI/CD to retrieve and template them as required
+
