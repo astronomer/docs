@@ -38,17 +38,6 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## May 8, 2024
 
-### Official Astro GitHub integration is now in Public Preview
-
-:::publicpreview
-:::
-
-The ability to deploy automatically from GitHub using the official Astro GitHub integration is now in Public Preview.
-
-The Astro GitHub integration is a new way to automatically deploy code from a GitHub repository to Astro by merging pull requests or making commits directly to specific branches, without needing to configure a GitHub Action. Additionally, the GitHub integration displays Git metadata directly in the Astro UI, including Git commit descriptions and gives you greater visibility into the status and logs of individual code deploys.
-
-See [Deploy code with the Astro GitHub integration](deploy-github-integration.md) for more information.
-
 ### Updates to address ranges for dedicated clusters on Google Cloud Provider
 
 Astro on GCP Dedicated Clusters uses source network address translation (SNAT) that performs many-to-one IP address translations for connections to your data sources and defaults secondary ranges to RFC 6598 address space (non-standard Private IP addresses), to minimize the risk and concern with IP overlap and exhaustion. Your target data sources will see connections from Astro using the VPC Subnet Range when using private networking, like VPC Peering or VPN. If you want to configure private connectivity, ensure the default subnet and peering ranges do not overlap with your target data source network when you're creating your dedicated cluster. See [Create a dedicated Astro cluster](https://docs.astronomer.io/astro/create-dedicated-cluster?tab=gcp#create-a-cluster) for more details.
