@@ -31,7 +31,7 @@ To get the most out of this guide, you should have a basic understanding of:
 
 ### Testing upgrades using the Astro CLI
 
-Before upgrading Astro Runtime, you should run the Astro CLI's `upgrade-test` command locally:
+Before upgrading Astro Runtime, we recommend running the Astro CLI's `upgrade-test` command locally:
 
 ```bash
 astro dev upgrade-test --runtime-version <upgraded-runtime-version>
@@ -40,7 +40,7 @@ astro dev upgrade-test --runtime-version <upgraded-runtime-version>
 This command: 
 
 - Compares dependency versions between the current and upgraded environments.
-- Checks DAGs in the project for errors against the new Airflow version.
+- Checks DAGs in the project against the new Airflow version for errors.
 - Runs a DAG parse test with the new Airflow version.
 - Produces:
 	- an HTML report with environment metadata and a Results table including any errors logged.
@@ -83,7 +83,22 @@ redis 4.6.0 >> 5.0.4
 urllib3 1.26.18 >> 2.2.1
 ```
 
+### Rolling back deployments
+
+:::danger
+
+Astronomer recommends triggering Deployment rollbacks only as a last resort for recent deploys that aren't working as expected. Deployment rollbacks can be disruptive, especially if you triggered multiple deploys between your current version and the rollback version. See [What happens during a deploy rollback](https://docs.astronomer.io/astro/upgrade-runtime#step-3-optional-run-upgrade-tests-with-the-astro-cli:~:text=What%20happens%20during%20a%20deploy%20rollback).
+
+The only way to downgrade a Deployment's version of Astro Runtime is to trigger a rollback to a previous deploy on Astro.
+
+:::
+
+The Astro UI supports rollbacks including automatic version downgrading. For detailed instructions, see [Deploy history](https://docs.astronomer.io/astro/deploy-history#roll-back-to-a-past-deploy).
+
+:::tip
+
+The `upgrade-test` command can also be used to test the current Runtime version against a _downgraded_ version.
+
+:::
+
 See also [Upgrade Astro Runtime](https://docs.astronomer.io/astro/upgrade-runtime#step-3-optional-run-upgrade-tests-with-the-astro-cli).
-
-## Rolling back deployments in the case of emergencies
-
