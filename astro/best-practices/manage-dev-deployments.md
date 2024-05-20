@@ -88,7 +88,6 @@ You can extend this example to encompass any number of Astro Deployments.
 2. Install the Astro CLI in your CI/CD tool. See [Authenticate an automation tool to Astro](https://docs.astronomer.io/astro/automation-authentication#step-2-install-the-astro-cli-in-your-automation-tool).
 3. Choose a deployment strategy. We recommend multiple environments. See [Develop a CI/CD workflow for multiple environments](https://docs.astronomer.io/astro/set-up-ci-cd#multiple-environments).
 4. Create a CI/CD pipeline using a [GitHub Actions template](https://docs.astronomer.io/astro/ci-cd-templates/github-actions-deployment-preview) or, if using a different CI/CD tool, [shell scripts](https://docs.astronomer.io/astro/ci-cd-templates/template-overview#preview-deployment-templates) that contain logic for managing preview Deployments based on branches. These workflows require at least an Astro Deployment name or ID and a branch name. See [Create a CI/CD pipeline](https://docs.astronomer.io/astro/set-up-ci-cd#create-a-cicd-pipeline) and [Template options](https://docs.astronomer.io/astro/ci-cd-templates/template-overview#preview-deployment-templates).
-5. Add testing to your pipeline. We recommend using [pytests](https://docs.astronomer.io/astro/set-up-ci-cd#test-and-validate-dags-in-your-cicd-pipeline).
 
 :::tip
 
