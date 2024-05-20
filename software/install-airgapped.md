@@ -117,7 +117,7 @@ The following prerequisites apply to customers running Astronomer Software on Ku
 
 </Tabs>
 
-## Step 1: Determining how to structure and organize your platform environments
+## Step 1: Determining how to structure and organize your platform environments {#determining-how-to-structure-and-organize-your-platform-environments}
 The procedures detailed in this document create an Astronomer Software platform-instance that will be used used to deploy and manage multiple Airflow installations.
 
 Do not install multiple instances of Astronomer Software onto the same Kubernetes cluster.
@@ -140,7 +140,7 @@ Certain files in this directory may contain secrets. For your first install, kee
 
 :::
 
-## Step 2: Create values.yaml from a template
+## Step 2: Create values.yaml from a template {#create-valuesyaml-from-a-template}
 
 Choose the template below that corresponds to your Kubernetes Platform and save it to a file named `values.yaml` in your platform-project directory.
 
@@ -500,7 +500,7 @@ astronomer:
 </Tabs>
 
 
-## Step 2: Choose and configure the base domain
+## Step 2: Choose and configure the base domain {#choose-and-configure-the-base-domain}
 
 ### Choosing the base domain {#choosing-the-base-domain}
 The installation procedure detailed in this guide will create a variety of services that your users will access to manage, monitor, and run Airflow on the platform.
@@ -549,7 +549,7 @@ global:
   baseDomain: sandbox-astro.example.com
 ```
 
-## Step 2: Create the Astronomer Software platform namespace
+## Step 2: Create the Astronomer Software platform namespace {#create-the-astronomer-software-platform-namespace}
 
 In your Kubernetes cluster, create a [kubernetes namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) (Astronomer generally recommends this namespace be named `astronomer`) to contain the Astronomer Software platform.
 
@@ -559,7 +559,7 @@ kubectl create namespace astronomer
 
 The contents of this namespace will be used to provision and manage Airflow instances running in other namespaces. Each Airflow will have its own isolated namespace.
 
-## Step TBD: Third-Party Igress-Controller DNS Configuration
+## Step TBD: Third-Party Igress-Controller DNS Configuration {#third-party-igress-controller-dns-configuration}
 
 If using Astronomer's bundled ingress-controller - skip this step.
 
@@ -608,7 +608,7 @@ Create DNS records pointed to your third-party ingress. controller.
 Use `dig <hostname>` or `getent hosts <hostname>` to verify each DNS entry is created and pointing to the IP address of the ingress-controller you will be using.
 
 
-## Step 3: Requesting and Validating an Astronomer TLS Certificate
+## Step 3: Requesting and Validating an Astronomer TLS Certificate {#requesting-and-validating-an-astronomer-tls-certificate}
 
 In order to install Astronomer Software, you'll need a TLS certificate that is valid for several domains - one of which will be the primary name on the certificate (referred to as the Common name or CN) and the rest will be equally-valid supplementary domains known as Subject Alternative Names (SAN)s.
 
@@ -676,7 +676,7 @@ The command generates a report of all certificates. Verify the order of the cert
 - Intermediate (optional)
 - Root
 
-## Step 4: Storing and configuring the Public TLS Full-Chain Certificate
+## Step 4: Storing and configuring the Public TLS Full-Chain Certificate {#storing-and-configuring-the-public-tls-full-chain-certificate}
 
 ### Storing the full-chain TLS certificate in the Astronomre Platform Namespace
 Store the public full-chain certificate in the Astronomer Software Platform Namespace in a `tls`-type Kubernetes secret named `astronomer-tls` using the following command.
@@ -694,7 +694,7 @@ kubectl -n astronomer create secret tls astronomer-tls --cert fullchain.pem --ke
 
 Naming the secret `astronomer-tls` (no substitutions) is always recommended and is a strict requirement when using a third-party ingress-controller.
 
-## Step TBD-THIRDPARTY: Configuring a third-party ingress-controller
+## Step TBD-THIRDPARTY: Configuring a third-party ingress-controller {#configuring-a-third-party-ingress-controller}
 ### Check your ingress-controller
 ### Set the full-chain TLS certificate Kubernetes Secret for replication
 Most third-party ingress-controllers require the `astronomer-tls` secret be replicated into each Airflow namespace.
@@ -706,7 +706,7 @@ kubectl -n <astronomer platform namespace> annotate secret astronomer-tls "astro
 
 Astronomer will automatically replicate the secret into the namespace used by each newly deployed Airflow instance.
 
-## Step TBD-VALUES: Configuring a Private Certificate Authority
+## Step TBD-VALUES: Configuring a Private Certificate Authority {#configuring-a-private-certificate-authority}
 
 If you received a certificate from a private CA, follow these steps instead:
 
@@ -722,7 +722,7 @@ If you received a certificate from a private CA, follow these steps instead:
 
 2. Note the value of `private-root-ca` for when you configure your Helm chart in TBD-VALUES. You'll need to additionally specify the `privateCaCerts` key-value pair with this value for that step.
 
-## Step 5: Configure Outbound SMTP Email
+## Step 5: Configure Outbound SMTP Email {#configure-outbound-smtp-email}
 
 
 Astronomer Software requires the ability to send email to:
@@ -774,7 +774,7 @@ If there are `/` or other escape characters in your username or password, you ma
 
 
 
-## Step 7: Configure the database
+## Step 7: Configure the database {#configure-the-database}
 
 Astronomer requires a central Postgres database that acts as the backend for Astronomer's Houston API and will host individual metadata databases for all Airflow Deployments spun up on the platform.
 
@@ -816,7 +816,7 @@ Additional requirements apply to the following databases:
   * `global.ssl.sslmode` must be set to `prefer` in your `values.yaml` (set during TBD-VALUES, and already set if using the Azure on AKS config provided there).
 
 
-## Step 9: Configure a private Docker registry
+## Step 9: Configure a private Docker registry {#configure-a-private-docker-registry}
 
 Astronomer's Docker images are hosted on a public registry which isn't accessible from an airgapped network. Therefore, these images must be hosted on a Docker registry accessible from within your own network. Every major cloud platform provides its own managed Docker registry service that can be used for this step:
 
@@ -838,7 +838,7 @@ After you create your registry:
     ```
 3. Copy the generated secret for use in Step 3.
 
-## Step TBD: Determine what version of Astronomer Software to install
+## Step TBD: Determine what version of Astronomer Software to install {#determine-what-version-of-astronomer-software-to-install}
 
 Astronomer recommends new Astronomer Software installations use the most-recently version of either the Stable or LTS (long-term support) release-channel.
 
@@ -849,7 +849,7 @@ Current recommended versions:
 See Astronomer Software's [lifecycle policy](release-lifecycle-policy) and [release notes](version-compatibility-reference) for more information.
 
 
-## Step TBD: Fetch Airflow Helm charts
+## Step TBD: Fetch Airflow Helm charts {#fetch-airflow-helm-charts}
 
 * If you have internet accces to `https://helm.astronomer.io` run the following command on the machine you will be installing Astronomer Software on:
 ```
@@ -861,7 +861,7 @@ helm repo update
   * This file does not need to uploaded to an internal chart-repository.
 
 
-## Step TBD: Create and customize upgrade.sh
+## Step TBD: Create and customize upgrade.sh {#create-and-customize-upgradesh}
 C
 ### Create upgrade.sh
 
@@ -902,7 +902,7 @@ helm upgrade --install --namespace $NAMESPACE \
             $RELEASE_NAME \
             $CHART_NAME $@
 ```
-## Step TBD: Fetch images from Astronomer's Helm template
+## Step TBD: Fetch images from Astronomer's Helm template {#fetch-images-from-astronomer's-helm-template}
 
 The images and tags which are required for your Software installation depend on the version of Astronomer you're installing. To gather a list of exact images and tags required for your Astronomer version:
 
@@ -934,7 +934,7 @@ If you have already enabled or disabled Astronomer platform components in your `
 
 :::
 
-## Step 11: Customize values.yaml to to use a custom image repository for platform images
+## Step 11: Customize values.yaml to to use a custom image repository for platform images {#customize-valuesyaml-to-to-use-a-custom-image-repository-for-platform-images}
 If your Kubernetes cluster can fetch images directly from public repositories, you may skip this section.
 
 Regardless of whether you choose to mirror or manually pull/push images to your private registry, the returned images and/or tags must be made accessible within your network.
@@ -981,7 +981,7 @@ astronomer:
 ```
 
 
-## Step 13: Fetch Airflow updates
+## Step 13: Fetch Airflow updates {#fetch-airflow-updates}
 
 By default, Astronomer checks for Airflow updates once a day at midnight by querying `https://updates.astronomer.io/astronomer-runtime`, which returns a JSON file with version details. However, this URL is not accessible in an airgapped environment. There are several options for making these updates accessible in an airgapped environment:
 
@@ -1148,7 +1148,7 @@ astronomer:
             
 ```
 
-## Step 14: Configure namespace pools
+## Step 14: Configure namespace pools {#configure-namespace-pools}
 
 Dedicated namespace pools are strongly recommended for the security of any Astronomer Software installation. They allow you to grant Astronomer Software permissions at the namespace level and limit cluster-level permission.
 
@@ -1162,19 +1162,19 @@ Astronomer Software is its most secure when you supply a pre-existing ingress co
 
 Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
 
-## Step 16: Configure sidecar logging
+## Step 16: Configure sidecar logging {#configure-sidecar-logging}
 
 Running a logging sidecar to export Airflow task logs is essential for running Astronomer Software in a multi-tenant cluster. See [Export logs using container sidecars](export-task-logs.md#export-logs-using-container-sidecars) to learn how to configure logging sidecars in your `values.yaml` file. 
 
 Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
 
-## Step 17: Integrate an external identity provider
+## Step 17: Integrate an external identity provider {#integrate-an-external-identity-provider}
 
 Astronomer Software includes integrations for several of the most popular identity providers (IdPs), such as Okta and Microsoft Entra ID. Configuring an external IdP allows you to automatically provision and manage users in accordance with your organization's security requirements. See [Integrate an auth system](integrate-auth-system.md) to configure the identity provider of your choice in your `config.yaml` file. 
 
 Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
 
-## Step TBD: Openshift Configuration
+## Step TBD: Openshift Configuration {#openshift-configuration}
 Merge the following configuration options into `values.yaml` - either manually or by placing [merge_yaml.py] in your astro-platform project-directory and running `python merge_yaml.py openshift-snippet.yaml values.yaml`.
 
 ```
@@ -1197,7 +1197,7 @@ elasticsearch:
 ```
 
 
-## Step 19: Creating the Load-Balancer
+## Step 19: Creating the Load-Balancer {#creating-the-load-balancer}
 
 If using a third-party ingress-controller, skip this step.
 
@@ -1258,7 +1258,7 @@ helm upgrade --install --namespace $NAMESPACE \
 </Tabs>
 
 
-## Step 20: Configure DNS
+## Step 20: Configure DNS {#configure-dns}
 
 The Astronomer load balancer routes incoming traffic to your NGINX ingress controller. After you install Astronomer Software, the load balancer will spin up in your cloud provider account.
 
@@ -1290,7 +1290,7 @@ alertmanager.sandbox-astro.example.com
 prometheus.sandbox-astro.example.com
 ```
 
-## Step 18: Install Astronomer using Helm
+## Step 18: Install Astronomer using Helm {#install-astronomer-using-helm}
 
 Install the Astronomer Software helm chart using `upgrade.sh` (recommended for your first install) or directly from helm.
 
@@ -1326,7 +1326,7 @@ helm upgrade --install --namespace $NAMESPACE \
 </TabItem>
 </Tabs>
 
-## Step 19: Verify Pods are up
+## Step 19: Verify Pods are up {#verify-pods-are-up}
 
 To verify all pods are up and running, run:
 
@@ -1381,13 +1381,13 @@ astronomer-registry-0                                      1/1     Running      
 If you are seeing issues here, check out our [guide on debugging your installation](debug-install.md).
 
 
-## Step 21: Verify you can access the Software UI
+## Step 21: Verify you can access the Software UI {#verify-you-can-access-the-software-ui}
 
 Go to `app.BASEDOMAIN` to see the Software UI.
 
 Consider this your new Airflow control plane. From the Software UI, you'll be able to both invite and manage users as well as create and monitor Airflow Deployments on the platform.
 
-## Step 22: Verify your TLS setup
+## Step 22: Verify your TLS setup {#verify-your-tls-setup}
 
 To check if your TLS certificates were accepted, log in to the Software UI. Then, go to `app.BASEDOMAIN/token` and run:
 
