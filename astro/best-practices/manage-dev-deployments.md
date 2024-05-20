@@ -29,9 +29,11 @@ This guide highlights when to use the following Astro features to manage your De
 
 ## Best practice guidance
 
-Maintaining [Multiple environments](https://docs.astronomer.io/astro/set-up-ci-cd#multiple-environments) for separate development and production versions of pipelines on Astro is a best practice, and Astro's GitHub integration makes it easy to do this with one of the most widely-used version control platforms currently available. You can follow the guidance in [Deploy code with GitHub](https://docs.astronomer.io/astro/deploy-github-integration) to map a permanent development branch on GitHub to a permanent Astro Deployment. Some teams might prefer to configure [CI/CD](https://docs.astronomer.io/astro/set-up-ci-cd#multiple-environments) workflows to spin up preview Deployments for feature testing in place of, or in addition to, a permanent dev Deployment.
+Maintaining [multiple environments](https://docs.astronomer.io/astro/set-up-ci-cd#multiple-environments) for separate development and production versions of pipelines on Astro is a best practice. While there are many ways to do this, the two options covered in this guide, permanent dev Deployment with hibernation schedule or ephemeral preview Deployments mapped to feature branches, will work for most teams.
 
-In general, preview Deployments offer a better development experience but are not always necessary. They should be preferred by larger teams and teams that deploy changes frequently. Permanent deployments are easier to set up and manage. In most cases, they are also more cost-effective, but they also run the risk of developer conflicts and should, therefore, be preferred by smaller teams and teams that are more cost-constrained.
+In general, preview Deployments offer a better development experience. Since each feature branch maps to its own Astro Deployment, you don't have to worry about conflicts from other developers working on a development branch at the same time. If you have larger teams working on Astro or deploy changes frequently, this is a good option. However, managing development Deployments in this way requires more setup to ensure the Deployments have access to external systems, secrets, etc. and a more complex CI/CD implementation.  Your team should have experience with CI/CD to make this pattern successful. Finally, this option can come with less predictable costs, especially at higher scale with many feature Deployments that are spun up and down frequently.
+
+Permanent dev Deployments are easier to set up and manage. You only need to set up the environment once, and for GitHub users Astro's GitHub integration offers far simpler CI/CD implementation. In many cases, this pattern is also more cost-effective, as you can maintain one dev Deployment and use Astro's hibernation feature to reduce costs for the Deployment when you aren't using it. This option is often best for smaller teams, teams that deploy infrequently, and teams who are very cost conscious. 
 
 :::tip
 
@@ -62,7 +64,7 @@ You can extend this example to encompass any number of Astro Deployments.
 2. Create a hibernation schedule for your development Deployment. Choose a schedule that will not interfere with your typical development times. Note that you cannot deploy to a Deployment that is hibernating. See [Hibernate a development Deployment](https://docs.astronomer.io/astro/deployment-resources#hibernate-a-development-deployment).
 3. Configure branch-based deployment using the GitHub integration, mapping one branch of a GitHub repository to the development Deployment you created. See [Deploy code with the Astro GitHub integration](https://docs.astronomer.io/astro/deploy-github-integration).
 
-## Ephemeral feature Deployment example
+## Ephemeral preview Deployment example
 
 This example shows how to implement ephemeral Deployments for feature development that are created and destroyed by CI/CD.
 
