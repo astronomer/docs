@@ -27,6 +27,5 @@ Astronomer supports several different methods for deploying DAGs and code-based 
 
 When you're ready to automate a deploy mechanism at scale for your team, see [CI/CD](ci-cd.md) to learn how to configure API credentials and examples of CI/CD pipelines in different version management tools.
 
-## Upgrading Deployments
 
 
