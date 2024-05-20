@@ -329,13 +329,13 @@
 /astro/astro-use-case/use-case-astro-connections /astro/use-cases/connections-branch-deploys 301
 
 # API redirects
-/api https://astronomer.docs.buildwithfern.com/api/overview 200!
-/api/* https://astronomer.docs.buildwithfern.com/api/:splat 200!
-/astro/api/overview https://www.astronomer.io/docs/api/overview 301!
-/astro/api/get-started https://www.astronomer.io/docs/api/get-started 301!
-/astro/api/versioning-and-support https://www.astronomer.io/docs/api/versioning-and-support 301!
-/astro/api/iam-api-reference https://www.astronomer.io/docs/api/iam-api-reference 301!
-/astro/api/platform-api-reference https://www.astronomer.io/docs/api/platform-api-reference 301!
+# /api https://astronomer.docs.buildwithfern.com/api/overview 200!
+# /api/* https://astronomer.docs.buildwithfern.com/api/:splat 200!
+# /astro/api/overview https://www.astronomer.io/docs/api/overview 301!
+# /astro/api/get-started https://www.astronomer.io/docs/api/get-started 301!
+# /astro/api/versioning-and-support https://www.astronomer.io/docs/api/versioning-and-support 301!
+# /astro/api/iam-api-reference https://www.astronomer.io/docs/api/iam-api-reference 301!
+# /astro/api/platform-api-reference https://www.astronomer.io/docs/api/platform-api-reference 301!
 
 # CLI restructuring redirects
 /astro/cli/run-airflow-locally#troubleshoot-KubernetesPodOperator-issues /astro/cli/troubleshoot-locally#troubleshoot-KubernetesPodOperator-issues 301
@@ -381,3 +381,5 @@
 /learn/airflow-azure-data-explorer https://www.astronomer.io/blog/orchestrate-adx-with-airflow/
 /learn/use-case-ml-airflow-snowpark-weaviate https://www.astronomer.io/blog/ml-with-snowpark-and-airflow/
 /learn/category/integrations /learn 301
+
+https://deploy-preview-3722--gallant-neumann-56599d.netlify.app/* https://deploy-preview-372--astro-site.netlify.app/docs/:splat 301!
