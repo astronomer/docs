@@ -27,6 +27,17 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## May 21, 2024
 
+### Official Astro GitHub integration is now in Public Preview
+
+:::publicpreview
+:::
+
+The ability to deploy automatically from GitHub using the official Astro GitHub integration is now in Public Preview.
+
+The Astro GitHub integration is a new way to automatically deploy code from a GitHub repository to Astro by merging pull requests or making commits directly to specific branches, without needing to configure a GitHub Action. Additionally, the GitHub integration displays Git metadata directly in the Astro UI, including Git commit descriptions and gives you greater visibility into the status and logs of individual code deploys.
+
+See [Deploy code with the Astro GitHub integration](deploy-github-integration.md) for more information.
+
 ### Bug fixes
 
 - Fixed a bug where users creating custom roles in the UI could see roles that could not be assigned. <!-- https://github.com/astronomer/astro/pull/21148-->
