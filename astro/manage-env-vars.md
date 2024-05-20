@@ -5,22 +5,20 @@ id: manage-env-vars
 description: Learn how to manage environment variables on Astro
 ---
 
-
-
 On Astro, you can create, update, or delete environment variables for a Deployment in the following ways:
 
-- Using the Deployment's **Variables** tab in the Cloud UI.
+- Using the Deployment's **Variables** tab in the Astro UI.
 - Using your Astro project `Dockerfile`.
 
 The way you manage environment variables can affect security and access for your variable data. See [Choose a strategy](environment-variables.md#choose-a-strategy) to determine which management strategy is right for your use case.
 
-Additionally, you can test environment variables from your local Astro environment and export them to the Cloud UI. See [Manage environment variables locally](#manage-environment-variables-locally).
+Additionally, you can test environment variables from your local Astro environment and export them to the Astro UI. See [Manage environment variables locally](#manage-environment-variables-locally).
 
-## Using the Cloud UI
+## Using the Astro UI
 
-Setting environment variables using the Cloud UI is the quickest and easiest way to manage environment variables on Astro.
+Setting environment variables using the Astro UI is the quickest and easiest way to manage environment variables on Astro.
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Variables** tab.
 
@@ -34,7 +32,7 @@ Setting environment variables using the Cloud UI is the quickest and easiest way
 
 After you set an environment variable key, only the environment variable value can be modified. You can modify environment variables that are set as **Secret**, but the existing secret variable value is never shown. When you modify a secret environment variable, the existing value is erased and you are prompted to enter a new value.
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Variables** tab.
 
@@ -52,7 +50,7 @@ If you want to store environment variables with an external version control tool
 
 :::warning
 
-Environment variables set in your `Dockerfile` are stored in plain text. For this reason, Astronomer recommends storing sensitive environment variables using the Cloud UI or a third-party secrets backend. For more information, see [Configure a secrets backend](secrets-backend.md).
+Environment variables set in your `Dockerfile` are stored in plain text. For this reason, Astronomer recommends storing sensitive environment variables using the Astro UI or a third-party secrets backend. For more information, see [Configure a secrets backend](secrets-backend.md).
 
 :::
 
@@ -76,7 +74,7 @@ To delete an environment variable from your Astro Runtime image, remove or comme
 
 :::info
 
-Environment variables set in your Dockerfile are not visible in the Cloud UI.
+Environment variables set in your Dockerfile are not visible in the Astro UI.
 
 :::
 
@@ -119,7 +117,7 @@ astro deployment variable create AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT=60 ENVIRON
 ```
 :::
 
-After you deploy environment variables, your Deployment automatically restarts to and applies the variables. To verify if the environment variables were applied correctly, go to the **Variables** tab of your Deployment in the Cloud UI. 
+After you deploy environment variables, your Deployment automatically restarts to and applies the variables. To verify if the environment variables were applied correctly, go to the **Variables** tab of your Deployment in the Astro UI. 
 
 ### Use multiple .env files
 

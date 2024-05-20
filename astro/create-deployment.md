@@ -5,11 +5,11 @@ id: create-deployment
 description: "Learn how to create an Astro Deployment. After you’ve created a Deployment, you can deploy DAGs to it from the Astro command-line interface (CLI), or from a continuous integration and continuous delivery (CI/CD) pipeline."
 ---
 
-An Astro Deployment is an Airflow environment that is powered by [Astro Runtime](runtime-image-architecture.md). It runs all core Airflow components, including the Airflow webserver, scheduler, and workers, plus additional tooling for reliability and observability.
+An Astro Deployment is an Airflow environment that is powered by [Astro Runtime](runtime-image-architecture.mdx). It runs all core Airflow components, including the Airflow webserver, scheduler, and workers, plus additional tooling for reliability and observability.
 
 There are three ways to create a Deployment:
 
-- Manually, using the Cloud UI. This is the most basic way to create a Deployment and is the focus of this document.
+- Manually, using the Astro UI. This is the most basic way to create a Deployment and is the focus of this document.
 - Programmatically, using [`astro deployment create`](cli/astro-deployment-create.md).
 - Programmatically, using a Deployment template file. See [Manage Deployments as code](manage-deployments-as-code.md).
 
@@ -29,13 +29,22 @@ After you create a Deployment, you can deploy DAGs to it using the Astro CLI on 
 
 Every Deployment is hosted on an Astro cluster with its own dedicated resources that you can [customize](deployment-resources.md) to fine-tune your resource usage. To restrict communication between Deployments, resources for each Deployment are isolated within a corresponding Kubernetes namespace. See [Deployment network isolation](data-protection.md#deployment-network-isolation).
 
+:::info
+
+If you're migrating to Astro from OSS Airflow or another Astronomer product, and you currently use an older version of Airflow, you can still create Deployments with the corresponding version of Astro Runtime even if it is deprecated according to the [Astro Runtime maintenance policy](runtime-version-lifecycle-policy.mdx#astro-runtime-maintenance-policy). This allows you to migrate your DAGs to Astro without needing to make any code changes and then immediately upgrade to a new version of Airflow. Note that after you migrate your DAGs, Astronomer recommends upgrading to a supported version of Astro Runtime as soon as you can.
+
+See [Run a deprecated Astro Runtime version](upgrade-runtime.md#run-a-deprecated-astro-runtime-version).
+
+:::
+
+
 ## Prerequisites
 
 - A [Workspace](manage-workspaces.md)
 
 ## Create a Deployment
 
-1. In the Cloud UI, go to **Deployments**.
+1. In the Astro UI, go to **Deployments**.
 
 2. Click **+ Deployment**.
 
@@ -56,7 +65,7 @@ Every Deployment is hosted on an Astro cluster with its own dedicated resources 
      A confirmation message appears indicating that the Deployment is in progress. The Deployment status is **Creating** until all underlying components in your Astro cluster are healthy, including the Airflow webserver and scheduler. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
 
 You can continue to access your other Deployments by selecting the **Deployments** link.
-    
+
 For more information about possible Deployment health statuses, see [Deployment health](deployment-health-incidents.md).
 
 ## Next steps

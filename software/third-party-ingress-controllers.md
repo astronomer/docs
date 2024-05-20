@@ -13,11 +13,12 @@ While using the default ingress controller is the best choice for most organizat
 
 To complete this setup, you need to supply your own ingress controller. Astronomer fully supports the following types of ingress controllers:
 
-- kong
-- haproxy
-- ingress-nginx
-- traefik
-- contour
+- OpenShift
+- Kong
+- HAProxy
+- Ingress-nginx
+- Traefik
+- Contour
 
 If you want to use an ingress controller that isn't listed here, please contact your Astronomer representative.
 
@@ -48,7 +49,7 @@ If the certificates of the third-party ingress controller presents are signed by
 - The third-party ingress controller must be configured to trust your private CA (as per the documentation of your ingress controller).
 - The CA's public certificate must be stored as a Kubernetes secret in the Astronomer namespace.
 
-If a private certificate authority is used to sign the certificate contained in the `global.tlsSecret` value in your `config.yaml` file, the third-party ingress controller must recognize the CA signing `global.tlsSecret` as valid. Typically, this is done by either:
+If a private certificate authority is used to sign the certificate contained in the `global.tlsSecret` value in your `values.yaml` file, the third-party ingress controller must recognize the CA signing `global.tlsSecret` as valid. Typically, this is done by either:
 
 - Signing the secret used in `global.tlsSecret` with a private CA that's already trusted by the custom ingress controller (typically the same CA used to sign the certificates being used by the ingress controller).
 - Explicitly configuring your custom ingress controller to trust the CA used when generating the certificate contained in `global.tlsSecret`.
@@ -78,7 +79,7 @@ $ kubectl -n ${INGRESS_CONTROLLER_NAMESPACE} get secret ${SECRET_NAME}
 
 ## Step 2: Configure Your Helm chart
 
-To install your existing ingress controller and disable the default one, add the following to your `config.yaml` file:
+To install your existing ingress controller and disable the default one, add the following to your `values.yaml` file:
 
 ```yaml
 global:
@@ -104,7 +105,7 @@ If you use an Nginx, Traefik or Contour ingress controller, you need to configur
 
 ### Required configuration for nginx
 
-If you're using an nginx ingress controller, add the following configuration to your `config.yaml` file:
+If you're using an nginx ingress controller, add the following configuration to your `values.yaml` file:
 
 ```yaml
 global:
@@ -116,7 +117,7 @@ This setting disables Nginx's maximum allowed upload size, which prevents HTTP 4
 
 ### Required configuration for traefik
 
-If you're using a traefik ingress controller, add the following configuration to your `config.yaml` file:
+If you're using a traefik ingress controller, add the following configuration to your `values.yaml` file:
 
 ```yaml
 global:
@@ -125,11 +126,11 @@ global:
     traefik.ingress.kubernetes.io/router.tls: "true"
 ```
 
-> **Note:** Depending on the version of Traefik, upgrading from using the default ingress controller to a Traefik controller might cause issues. If you are upgrading a platform that used the built-in ingress controller, manually delete the Astronomer Platform Ingress objects in the Astronomer Platform namespace before updating your `config.yaml` file. You can do so using the following commands:
+> **Note:** Depending on the version of Traefik, upgrading from using the default ingress controller to a Traefik controller might cause issues. If you are upgrading a platform that used the built-in ingress controller, manually delete the Astronomer Platform Ingress objects in the Astronomer Platform namespace before updating your `values.yaml` file. You can do so using the following commands:
 >
 >    ```sh
 >    $ kubectl -n <your-platform-namespace> delete ingress -l release=<your-platform-release-name>
->    $ helm upgrade --install -f config.yaml --version=<your-platform-version> --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
+>    $ helm upgrade --install -f values.yaml --version=<your-platform-version> --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
 >    ```
 
 ### Required configuration for Contour
@@ -165,18 +166,18 @@ Contour ships with support for websockets disabled by default. To use a Contour 
    kubectl apply -n <your-platform-namespace> -f proxy.yaml
    ```
 
-> **Note:** Depending on the version of Contour, upgrading from using the default ingress controller to a Contour controller might cause issues. If you are upgrading a platform that used the built-in ingress controller, manually delete the Astronomer Platform Ingress objects in the Astronomer Platform namespace before updating your `config.yaml` file. You can do so using the following commands:
+> **Note:** Depending on the version of Contour, upgrading from using the default ingress controller to a Contour controller might cause issues. If you are upgrading a platform that used the built-in ingress controller, manually delete the Astronomer Platform Ingress objects in the Astronomer Platform namespace before updating your `values.yaml` file. You can do so using the following commands:
 >
 >    ```sh
 >    $ kubectl -n <your-platform-namespace> delete ingress -l release=<your-platform-release-name>
->    $ helm upgrade --install -f config.yaml --version=<your-platform-version> --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
+>    $ helm upgrade --install -f values.yaml --version=<your-platform-version> --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
 
 ## Step 3: Apply Changes With Helm
 
 If this is an existing installation, apply your updated configuration using the following command:
 
 ```bash
-helm upgrade --install -f config.yaml --version=<your-platform-version> --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
+helm upgrade --install -f values.yaml --version=<your-platform-version> --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
 ```
 
 If this is a new installation, continue through the standard installation steps to install this Helm chart.

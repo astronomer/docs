@@ -6,9 +6,13 @@ export default (function () {
   }
 
   return {
-    onRouteUpdate() {
-      if (!window.analytics) return;
-      setTimeout(() => window.analytics.page(), 0);
+    onRouteDidUpdate({ location, previousLocation }) {
+      if (previousLocation && location.pathname !== previousLocation.pathname) {
+        if (!window.analytics) return;
+        setTimeout(() => {
+          window.analytics.page();
+        }, 0);
+      }
     },
   };
 })();

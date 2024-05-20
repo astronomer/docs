@@ -67,8 +67,8 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
                 steps {
                     checkout scm
                     sh '''
-                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v{{CLI_VER}}/astro_{{CLI_VER}}_linux_amd64.tar.gz
-                    tar -zxvf astro_{{CLI_VER}}_linux_amd64.tar.gz astro && rm astro_{{CLI_VER}}_linux_amd64.tar.gz
+                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v{{CLI_VER_LATEST}}/astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz
+                    tar -zxvf astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz astro && rm astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz
                     ./astro deploy env.ASTRONOMER_DEPLOYMENT_ID
                     '''
                 }
@@ -128,8 +128,8 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
                 steps {
                     checkout scm
                     sh '''
-                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v{{CLI_VER}}/astro_{{CLI_VER}}_linux_amd64.tar.gz
-                    tar -zxvf astro_{{CLI_VER}}_linux_amd64.tar.gz astro && rm astro_{{CLI_VER}}_linux_amd64.tar.gz
+                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v{{CLI_VER_LATEST}}/astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz
+                    tar -zxvf astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz astro && rm astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz
                     ./astro deploy env.ASTRONOMER_DEPLOYMENT_ID
                     '''
                 }
@@ -181,8 +181,8 @@ pipeline {
                     sh '''
                     export astro_id=$(date +%Y%m%d%H%M%S)
                     docker build -f Dockerfile --progress=plain --build-arg <your-build-arguments> -t $astro_id .
-                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v{{CLI_VER}}/astro_{{CLI_VER}}_linux_amd64.tar.gz
-                    tar -zxvf astro_{{CLI_VER}}_linux_amd64.tar.gz astro && rm astro_{{CLI_VER}}_linux_amd64.tar.gz
+                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v{{CLI_VER_LATEST}}/astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz
+                    tar -zxvf astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz astro && rm astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz
                     ./astro deploy env.ASTRONOMER_DEPLOYMENT_ID --image-name $astro_id
                     '''
                 }
@@ -232,8 +232,8 @@ Use the following template to implement DAG-only deploys to a single Deployment 
                 steps {
                     checkout scm
                     sh '''
-                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v{{CLI_VER}}/astro_{{CLI_VER}}_linux_amd64.tar.gz
-                    tar -zxvf astro_{{CLI_VER}}_linux_amd64.tar.gz astro && rm astro_{{CLI_VER}}_linux_amd64.tar.gz
+                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v{{CLI_VER_LATEST}}/astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz
+                    tar -zxvf astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz astro && rm astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz
                     files=($(git diff-tree HEAD --name-only --no-commit-id))
                     find="dags"
                     if [[ ${files[*]} =~ (^|[[:space:]])"$find"($|[[:space:]]) && ${#files[@]} -eq 1 ]]; then

@@ -12,7 +12,7 @@ This command is only available on Astro.
 
 :::
 
-Delete an existing [worker queue](configure-worker-queues.md) in a Deployment on Astro.
+Delete an existing [worker queue](configure-worker-queues.mdx) in a Deployment on Astro.
 
 ## Usage
 

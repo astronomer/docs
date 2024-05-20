@@ -2,27 +2,67 @@
 sidebar_label: "astro deployment team"
 title: "astro deployment team"
 id: astro-deployment-team
-description: Manage Deployment Teams (Software only).
+description: Manage Deployment Teams.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' }
+sidebar_custom_props: { icon: "img/term-icon.png" }
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 :::info
 
-This command is available only if you're authenticated to an Astronomer Software installation.
+The behavior and format of this command differs depending on what Astronomer product you're using. Use the following tabs to change between product contexts.
 
 :::
 
-Manage Deployment-level Teams on Astronomer Software.
+Manage Deployment-level Teams.
+
+<Tabs
+defaultValue="astro"
+values={[
+{label: 'Astro', value: 'astro'},
+{label: 'Software', value: 'software'},
+]}>
+
+<TabItem value="astro">
 
 ## Usage
 
-This command includes four subcommands: `add`, `create`, `delete`, and `list`
+This command includes four subcommands: `add`, `list`, `update`, and `remove`.
+
+```sh
+astro deployment team add --deployment-id=<your-deployment-id> <team-id> --role --workspace-id
+astro deployment team list --deployment-id=<deployment-id> <team-id> --role --workspace-id
+astro deployment team update --deployment-id=<your-deployment-id> <team-id> --role --workspace-id
+astro deployment team remove --deployment-id=<your-deployment-id> <team-id> --role --workspace-id
+```
+
+To find a Team ID using the Astro CLI, run `astro organization team list`.
+
+To find a Team ID in the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings** > **Access Management** > **Teams**. Search for your Team in the **Teams** table and copy its **ID**. The ID should look something like `clk17xqgm124q01hkrgilsr49`.
+
+## Options
+
+| Option                         | Description                 | Possible Values                                                 |
+| ------------------------------ | --------------------------- | --------------------------------------------------------------- |
+| `--deployment-id` (_Required_) | The Deployment for the Team | Any valid Deployment ID                                         |
+| `<team-id>` (_Required_)       | The Team's ID               | Any valid Team ID                                               |
+| `--role`                       | The role for the team.      | `DEPLOYMENT_ADMIN` or a custom role name. |
+| `--workspace-id`             | The Workspace from which to remove the user  | Any valid Workspace ID  |
+
+
+</TabItem>
+<TabItem value="software">
+
+## Usage
+
+This command includes four subcommands: `add`, `list`, `update`, and `remove`:
 
 ```sh
 astro deployment team add --deployment-id=<your-deployment-id> <team-id>
 astro deployment team list <deployment-id>
-astro deployment team --deployment-id=<your-deployment-id> <team-id>
+astro deployment team update --deployment-id=<your-deployment-id> <team-id>
 astro deployment team remove --deployment-id=<your-deployment-id> <team-id>
 ```
 
@@ -33,8 +73,11 @@ You can retrieve a Team's ID in one of two ways:
 
 ## Options
 
-| Option              | Description                                                                              | Possible Values                       |
-| ------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------- |
-| `--deployment-id` (_Required_)    | The Deployment for the Team                    | Any valid Deployment ID |
-| `<team-id>` (_Required_)     | The Team's ID             | Any valid Team ID |
-| `--role`    | The Team's role in the Deployment | Possible values are either `DEPLOYMENT_VIEWER`, `DEPLOYMENT_EDITOR`, or `DEPLOYMENT_ADMIN`.   Default is `DEPLOYMENT_VIEWER`    |
+| Option                         | Description                       | Possible Values                                                                                                            |
+| ------------------------------ | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `--deployment-id` (_Required_) | The Deployment for the Team       | Any valid Deployment ID                                                                                                    |
+| `<team-id>` (_Required_)       | The Team's ID                     | Any valid Team ID                                                                                                          |
+| `--role`                       | The Team's role in the Deployment | Possible values are either `DEPLOYMENT_VIEWER`, `DEPLOYMENT_EDITOR`, or `DEPLOYMENT_ADMIN`. Default is `DEPLOYMENT_VIEWER` |
+
+</TabItem>
+</Tabs>

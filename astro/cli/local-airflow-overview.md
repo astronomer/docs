@@ -13,5 +13,5 @@ See the following documentation to get started:
 
 - [Run Airflow locally](cli/run-airflow-locally.md)
 - [Test your DAGs](cli/test-your-astro-project-locally.md)
-- [Trouleshoot locally](cli/troubleshoot-locally.md)
+- [Troubleshoot locally](cli/troubleshoot-locally.md)
 - [Sync Deployment connections from Astro](cli/local-connections.md)

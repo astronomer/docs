@@ -7,7 +7,7 @@ description: Versioning and lifecycle policy for Astronomer Certified, our Apach
 
 :::danger
 
-No versions of Astronomer Certified (AC) are currently supported by Astronomer. Astronomer stopped releasing new versions of AC with the release of Apache Airflow 2.4. Astronomer recommends creating all new Deployments with Astro Runtime, as well as migrating existing Deployments from AC to Astro Runtime as soon as your organization is ready. See [Migrate to Runtime](migrate-to-runtime.md) and [Runtime image architecture](runtime-image-architecture.md).
+No versions of Astronomer Certified (AC) are currently supported by Astronomer. Astronomer stopped releasing new versions of AC with the release of Apache Airflow 2.4. Astronomer recommends creating all new Deployments with Astro Runtime, as well as migrating existing Deployments from AC to Astro Runtime as soon as your organization is ready. See [Migrate to Runtime](migrate-to-runtime.md) and [Runtime image architecture](runtime-image-architecture.mdx).
 
 :::
 
@@ -99,9 +99,9 @@ The maintenance period for an Astronomer Certified version depends on its releas
 | Stable          | 6 Months             |
 | LTS             | 18 Months            |
 
-To fix bugs, Astronomer provides patch releases as new images and recommends that organizations install them regularly to ensure optimum performance. Upgrading only when an issue occurs can delay the resolution of the issue. 
+To fix bugs, Astronomer provides patch releases as new images and recommends that organizations install them regularly to ensure optimum performance. Upgrading only when an issue occurs can delay the resolution of the issue.
 
-For each `major.minor` pair, only the latest patch and hot-fix combination is supported at any given time. If you report an issue with an Astronomer Certified patch or hot-fix version that is not latest, the Astronomer Support team will always ask that you upgrade as a first step to resolution. For example, if Astronomer Certified 2.2.3 is the latest patch in the 2.2.x series, the Support team would encourage any user who reports an issue with Astronomer Certified 2.2.2 to first upgrade to 2.2.3 before starting to troubleshoot the issue. 
+For each `major.minor` pair, only the latest patch and hot-fix combination is supported at any given time. If you report an issue with an Astronomer Certified patch or hot-fix version that is not latest, the Astronomer Support team will always ask that you upgrade as a first step to resolution. For example, if Astronomer Certified 2.2.3 is the latest patch in the 2.2.x series, the Support team would encourage any user who reports an issue with Astronomer Certified 2.2.2 to first upgrade to 2.2.3 before starting to troubleshoot the issue.
 
 Within the maintenance window of each Astronomer Certified version, the following is true:
 
@@ -120,7 +120,7 @@ To ensure reliability, service is not interrupted when Astronomer Deployments ar
 
 :::info
 
-If you have System Admin permissions and are using Astronomer Software version 0.27 or later, you can create Deployments with deprecated AC versions by setting `houston.config.deployments.enableSystemAdminCanCreateDeprecatedAirflows: true` in your `config.yaml` file. See [Apply a config change](apply-platform-config.md).
+If you have System Admin permissions and are using Astronomer Software version 0.27 or later, you can create Deployments with deprecated AC versions by setting `houston.config.deployments.enableSystemAdminCanCreateDeprecatedAirflows: true` in your `values.yaml` file. See [Apply a config change](apply-platform-config.md).
 
 :::
 
