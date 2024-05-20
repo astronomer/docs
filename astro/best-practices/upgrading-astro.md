@@ -93,7 +93,7 @@ The only way to downgrade a Deployment's version of Astro Runtime is to trigger 
 
 :::
 
-The Astro UI supports rollbacks including automatic version downgrading. For detailed instructions, see [Deploy history](https://docs.astronomer.io/astro/deploy-history#roll-back-to-a-past-deploy).
+The Astro UI supports rollbacks including automatic version downgrading. For detailed instructions, see [Deploy history](https://docs.astronomer.io/astro/deploy-history#roll-back-to-a-past-deploy) and [Upgrade Astro Runtime](https://docs.astronomer.io/astro/upgrade-runtime#step-7-deploy-to-astronomer).
 
 :::tip
 
