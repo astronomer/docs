@@ -16,4 +16,4 @@ To use Astro in a network that requires you to allowlist new domains, make a req
 - `https://astro-<organization-short-name>.datakin.com/`
 - `https://<organization-short-name>.astronomer.run/`
 
-To locate the value for `<organization-short-name>` in the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. Copy the value listed under **Organization Short Name**.
+To locate the value for `<organization-short-name>` in the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**. Copy the value listed under **Organization Short Name**.

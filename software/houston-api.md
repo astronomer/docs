@@ -116,7 +116,7 @@ To query for information about a user on the platform (e.g. "When was this user 
 
 ```graphql
 query User {
-  users(user: { email: "<name@mycompany.com>"} )
+  users(user: { email: "<name@example.com>"} )
   {
     id
     roleBindings {role}
@@ -153,22 +153,36 @@ mutation CreateDeployment {
     type: "airflow",
     label: "<deployment-name>",
     config: {executor:"<airflow-executor>"},
-
-
-    )
-    {
-      id
-      config
-      releaseName
-      workspace{label}
-      roleBindings{id}
-    }
+  )
+  {
+    id
+    config
+    releaseName
+    workspace{label}
+    roleBindings{id}
+  }
 }
 ```
 
 Here, `<airflow-executor>` can be `LocalExecutor`, `CeleryExecutor`, or `KubernetesExecutor`.
 
 ### Create or update a Deployment with configurations
+
+:::info 
+
+The `upsertDeployment` mutation is behind a feature flag. To enable this feature, set the following configuration in your `values.yaml` file:
+
+```yaml
+astronomer:
+  houston:
+    config:
+      deployments:
+        upsertDeploymentEnabled: true
+```
+
+Then push the configuration change to your cluster. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+
+:::
 
 The `upsertDeployment` mutation can be used to both create and update Deployments with all possible Deployment configurations. If you query `upsertDeployment` without a `deploymentUuid`, the Houston API creates a new Deployment according to your specifications. If you specify an existing `deploymentUuid`, the Houston API updates the Deployment with that ID. All queries to create a Deployment require specifying a `workspaceUuid`.
 
@@ -271,7 +285,7 @@ mutation upsertDeployment(
 }
 {
   "workspaceUuid": "cldemxl9502454yxe6vjlxy23",
-	"environmentVariables": [
+  "environmentVariables": [
     {
       "key": "AIRFLOW__CORE__COLORED_LOG_FORMAT",
       "value": "test",
@@ -344,28 +358,28 @@ First, add the following to your GraphQL playground:
 
 ```graphql
 mutation AddDeploymentUser(
-		$userId: Id
-		$email: String!
-		$deploymentId: Id!
-		$role: Role!
-	) {
-		deploymentAddUserRole(
-			userId: $userId
-			email: $email
-			deploymentId: $deploymentId
-			role: $role
-		) {
-			id
-			user {
-				username
-			}
-			role
-			deployment {
-				id
-				releaseName
-			}
-		}
-	}
+  $userId: Id
+  $email: String!
+  $deploymentId: Id!
+  $role: Role!
+) {
+  deploymentAddUserRole(
+    userId: $userId
+    email: $email
+    deploymentId: $deploymentId
+    role: $role
+  ) {
+    id
+    user {
+      username
+    }
+    role
+    deployment {
+      id
+      releaseName
+    }
+  }
+}
 ```
 
 Then, in the **Query Variables** tab, add the following:
@@ -393,7 +407,7 @@ With a `userUuid`, run the following:
 
 ```graphql
 mutation removeUser {
-	removeUser (
+  removeUser (
     userUuid: "<USERUUID>"
   ) {
     uuid
@@ -416,7 +430,7 @@ With the email address in question, run the following:
 
 ```graphql
 mutation verifyEmail {
-	verifyEmail (
+  verifyEmail (
     email: "<USERUUID>"
   )
 }
@@ -437,21 +451,21 @@ To run this mutation, you'll need:
 
 ```graphql
 mutation workspaceAddUser(
-    $workspaceUuid: Uuid = "<your-workspace-uuid>"
-    $email: String! = "<user-email-address>"
-    $role: Role! = <user-workspace-role>
-    $bypassInvite: Boolean! = true
+  $workspaceUuid: Uuid = "<your-workspace-uuid>"
+  $email: String! = "<user-email-address>"
+  $role: Role! = <user-workspace-role>
+  $bypassInvite: Boolean! = true
+) {
+  workspaceAddUser(
+    workspaceUuid: $workspaceUuid
+    email: $email
+    role: $role
+    deploymentRoles: $deploymentRoles
+    bypassInvite: $bypassInvite
   ) {
-    workspaceAddUser(
-      workspaceUuid: $workspaceUuid
-      email: $email
-      role: $role
-      deploymentRoles: $deploymentRoles
-      bypassInvite: $bypassInvite
-    ) {
-      id
-    }
+    id
   }
+}
 ```
 
 ### Add a System Admin (_Software only_)
@@ -506,14 +520,18 @@ Then, in your GraphQL Playground, run the following:
 mutation UpdateDeploymentVariables {
   updateDeploymentVariables(
     deploymentUuid: "<deployment-id>",
-  	releaseName: "<deployment-release-name>",
+    releaseName: "<deployment-release-name>",
     environmentVariables: [
-      {key: "<environment-variable-1>",
-      value: "<environment-variable-value-1>",
-      isSecret: <true-or-false>},
-      {key: "<environment-variable-2>",
-      value: "<environment-variable-value-2>",
-      isSecret: <true-or-false>}
+      {
+        key: "<environment-variable-1>",
+        value: "<environment-variable-value-1>",
+        isSecret: <true-or-false>
+      },
+      {
+        key: "<environment-variable-2>",
+        value: "<environment-variable-value-2>",
+        isSecret: <true-or-false>
+      }
     ]
   ) {
     key
@@ -545,9 +563,9 @@ With that information, run the following:
 
 ```graphql
 mutation WorkspaceAddUser {
-	workspaceAddUser (
+  workspaceAddUser (
     workspaceUuid: "<workspace-id>"
-    email: "<email@mycompany.com>"
+    email: "<email@example.com>"
     role: WORKSPACE_ADMIN
   ) {
     users {emails {address} }
@@ -579,12 +597,12 @@ Using the Workspace ID, run the following query to delete the Workspace:
 
 ```graphql
 mutation deleteWorkspace(
-    $workspaceUuid: Uuid = "<workspace-id>"
+  $workspaceUuid: Uuid = "<workspace-id>"
+) {
+  deleteWorkspace(
+    workspaceUuid: $workspaceUuid
   ) {
-    deleteWorkspace(
-      workspaceUuid: $workspaceUuid
-    ) {
-        id
-    }
+      id
   }
+}
 ```

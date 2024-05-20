@@ -10,9 +10,9 @@ On Astro, you can configure Celery executor in the following ways:
 - The minimum and maximum number of workers that your Deployment can run at a time.
 - The number of tasks that each worker can run at a time.
 
-You can set these configurations per [worker queue](configure-worker-queues.md). With the celery executor, you can configure multiple worker queues for different types of tasks and assign tasks to those queues in your DAG code.
+You can set these configurations per [worker queue](configure-worker-queues.mdx). With the celery executor, you can configure multiple worker queues for different types of tasks and assign tasks to those queues in your DAG code.
 
-The following document explains basic Celery executor configurations for a single worker queue. For instructions on how to configure multiple worker queues, see [Create a worker queue](configure-worker-queues.md#create-a-worker-queue).
+The following document explains basic Celery executor configurations for a single worker queue. For instructions on how to configure multiple worker queues, see [Create a worker queue](configure-worker-queues.mdx#create-a-worker-queue).
 
 :::tip
 
@@ -43,7 +43,7 @@ When you push code to a Deployment, workers running tasks from before the code p
 
 For each worker queue on your Deployment, you have to specify certain settings that affect worker autoscaling behavior. If you're new to Airflow, Astronomer recommends using the defaults in Astro for each of these settings.
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Worker Queues** tab and then click **Edit** to edit a worker queue.
 
@@ -57,5 +57,5 @@ For each worker queue on your Deployment, you have to specify certain settings t
 
 ## See also
 
-- [Configure worker queues](configure-worker-queues.md).
+- [Configure worker queues](configure-worker-queues.mdx).
 - [Airflow Executors explained](https://docs.astronomer.io/learn/airflow-executors-explained)

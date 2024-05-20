@@ -43,11 +43,11 @@ A few of these files are essential for deploying your Airflow image for the firs
 
 ### Dockerfile
 
-Your Dockerfile will include reference to an Astro Runtime Docker image. [Astro Runtime](runtime-image-architecture.md) is a production ready data orchestration tool based on Apache Airflow that includes additional features and undergoes additional levels of rigorous testing conducted by Astronomer.
+Your Dockerfile will include reference to an Astro Runtime Docker image. [Astro Runtime](runtime-image-architecture.mdx) is a production ready data orchestration tool based on Apache Airflow that includes additional features and undergoes additional levels of rigorous testing conducted by Astronomer.
 
 This Docker image is hosted on [Astronomer's Quay.io registry](https://quay.io/repository/astronomer/runtime?tab=tags) and allows you to run Airflow on Astronomer. Additionally, the image you include in your Dockerfile dictates the version of Airflow you'd like to run both when you're developing locally and pushing up to Astro.
 
-Because Astro Runtime releases more frequently than Apache Airflow, a Runtime image's version number will be different than the Apache Airflow version it supports. See [Astro Runtime and Apache Airflow parity](runtime-image-architecture.md#astro-runtime-and-apache-airflow-parity).
+Because Astro Runtime releases more frequently than Apache Airflow, a Runtime image's version number will be different than the Apache Airflow version it supports. See [Astro Runtime and Apache Airflow parity](runtime-image-architecture.md).
 
 By default, the Docker image in your Dockerfile is:
 

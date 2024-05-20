@@ -42,7 +42,7 @@ To create a namespace pool you have the following options:
 
 ## Option 1: Use the Astronomer Helm chart
 
-1. Set the following configuration in your `config.yaml` file:
+1. Set the following configuration in your `values.yaml` file:
 
 ```yaml
 global:
@@ -59,7 +59,7 @@ global:
           - <your-namespace-2>
 ```
 
-2. Save the changes in your `config.yaml` file and update your Astronomer Software. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+2. Save the changes in your `values.yaml` file and update your Astronomer Software. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
 
 Based on the namespace names that you specified, Astronomer creates the necessary namespaces and Kubernetes resources. These resources have permissions scoped appropriately for most use-cases.
 
@@ -84,7 +84,7 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
     apiVersion: rbac.authorization.k8s.io/v1
     kind: Role
     metadata:
-      name: deployment-commander-role
+      name: astronomer-commander
       namespace: <your-namespace-name>
     rules:
     - apiGroups: ["*"]
@@ -98,7 +98,7 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
       verbs: ["get", "create", "delete"]
     - apiGroups: [""]
       resources: ["secrets"]
-      verbs: ["create", "delete", "deletecollection", "get", "list", "patch", "update", "watc
+      verbs: ["create", "delete", "deletecollection", "get", "list", "patch", "update", "watch"]
     - apiGroups: [""]
       resources: ["namespaces"]
       verbs: ["get", "list", "patch", "update", "watch"]
@@ -110,7 +110,7 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
       verbs: ["*"]
     - apiGroups: [""]
       resources: ["persistentvolumeclaims"]
-      verbs: ["create", "delete", "deletecollection", "get", "list", "update", "watch", "patc
+      verbs: ["create", "delete", "deletecollection", "get", "list", "update", "watch", "patch"]
     - apiGroups: [""]
       resources: ["pods"]
       verbs: ["get", "list", "watch"]
@@ -201,7 +201,7 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
     roleRef:
       apiGroup: rbac.authorization.k8s.io
       kind: Role
-      name: deployment-commander-role # Should match name of Role
+      name: astronomer-commander # Should match name of Role
     subjects:
     - namespace: astronomer # Should match namespace where SA lives
       kind: ServiceAccount
@@ -214,7 +214,7 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
 
 ### Step 2: Configure a namespace pool in Astronomer
 
-1. Set the following values in your `config.yaml` file, making sure to specify all of the namespaces you created in the `namespaces.names` object:
+1. Set the following values in your `values.yaml` file, making sure to specify all of the namespaces you created in the `namespaces.names` object:
 
     ```yaml
     global:
@@ -232,7 +232,7 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
               - <your-namespace-2>
     ```
 
-2. Save the changes in your `config.yaml` and update Astronomer Software. See [Apply a config change](apply-platform-config.md).
+2. Save the changes in your `values.yaml` and update Astronomer Software. See [Apply a config change](apply-platform-config.md).
 
 ## Creating Deployments in pre-created namespaces
 
@@ -246,7 +246,7 @@ If no namespaces are available, an error message appears when you create new Dep
 
 ## Advanced settings
 
-If your namespace configurations require more granularity, use the following settings in your `config.yaml` file.
+If your namespace configurations require more granularity, use the following settings in your `values.yaml` file.
 
 Mixing global and advanced settings might result in unexpected behavior. If you use the standard settings, Astronomer recommends that you set `global.features.namespacePools.enabled` to `false`.
 
@@ -260,7 +260,7 @@ Mixing global and advanced settings might result in unexpected behavior. If you 
 
 When using these settings, Astronomer recommends enabling [hard deletion](configure-deployment.md#hard-delete-a-deployment) for Deployments.
 
-In the following example `config.yaml` file, these settings are configured so that you don't configure namespace pools at a global level:
+In the following example `values.yaml` file, these settings are configured so that you don't configure namespace pools at a global level:
 
 ```yaml
 global:
@@ -315,4 +315,4 @@ If you're not using hard deletion, it can take several days for pre-created name
 
 ### My Deployments using NFS deploys stopped working
 
-[NFS deploys](deploy-nfs.md) don't work if you both use namespace pools and set `global.clusterRoles` to `false` in your `config.yaml` file.
+[NFS deploys](deploy-nfs.md) don't work if you both use namespace pools and set `global.clusterRoles` to `false` in your `values.yaml` file.

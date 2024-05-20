@@ -33,7 +33,7 @@ To use GCS as a registry backend solution, you'll need:
 - Your Google Cloud Platform service account JSON Key
 - Permissions to create a Kubernetes Secret in your cluster
 
-### Update your config.yaml file
+### Update your values.yaml file
 
 1. Download your GCP service account JSON key from the [Google Console](https://console.cloud.google.com/apis/credentials/serviceaccountkey). Make sure the service account you use has both the `Storage Legacy Bucket Owner` and `Storage Object Admin` roles.
 
@@ -43,7 +43,7 @@ To use GCS as a registry backend solution, you'll need:
 kubectl create secret generic astronomer-gcs-keyfile --from-file astronomer-gcs-keyfile=/path/to/key.json -n <your-namespace>
 ```
 
-3. Add the following to your config.yaml file:
+3. Add the following to your values.yaml file:
 
 ```yaml
 astronomer:
@@ -147,7 +147,7 @@ To use AWS S3 as a registry backend solution, you'll need:
 
 4. Select one of the following options:
 
-  - To authenticate to AWS with your registry credentials, add this entry to the `config.yaml` file:
+  - To authenticate to AWS with your registry credentials, add this entry to the `values.yaml` file:
 
   ```yaml
     astronomer:
@@ -172,7 +172,7 @@ To use AWS S3 as a registry backend solution, you'll need:
                   key: AWS_ACCESS_SECRET_ACCESS_KEY
     ```
 
-  - To authenticate to AWS without providing your registry credentials, add this entry to the `config.yaml` file:
+  - To authenticate to AWS without providing your registry credentials, add this entry to the `values.yaml` file:
 
   ```yaml
     astronomer:
@@ -200,7 +200,7 @@ To use AWS S3 as a registry backend solution, you'll need:
     $ kubectl create secret generic astronomer-s3-secret-key --from-literal=secretkey=<your-secret-key> -n <your-namespace>
     ```
 
-3. Add the following values to your `config.yaml` file to enable encryption:
+3. Add the following values to your `values.yaml` file to enable encryption:
 
 ```yaml
 astronomer:
@@ -230,7 +230,7 @@ astronomer:
 
 ### Authorize Astronomer to a registry backend using IAM roles (Optional)
 
-To avoid hardcoding credentials for your registry backend, add the following configuration to your `config.yaml` file:
+To avoid hardcoding credentials for your registry backend, add the following configuration to your `values.yaml` file:
 
 ```yaml
 registry:
@@ -268,7 +268,7 @@ To use Azure Blog Storage as a registry backend solution, you'll need:
     $ kubectl create secret generic astronomer-azure-secret-key --from-literal=accountkey=<your-account-key> -n <your-namespace>
     ```
 
-2. Add the following to your `config.yaml` file:
+2. Add the following to your `values.yaml` file:
 
 ```yaml
 astronomer:

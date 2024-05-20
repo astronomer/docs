@@ -7,6 +7,9 @@ toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---
 
+:::privatepreview
+:::
+
 [Data lineage](https://en.wikipedia.org/wiki/Data_lineage) is the concept of tracking data from its origin to wherever it is consumed downstream as it flows through a data pipeline. This includes connections between datasets and tables in a database as well as rich metadata about the tasks that create and transform data. You can observe data lineage to:
 
 - Trace the history of a dataset.
@@ -20,7 +23,7 @@ This guide provides information about how lineage metadata is automatically extr
 
 Astro uses the [OpenLineage Airflow library](https://openlineage.io/docs/integrations/airflow/) (`openlineage-airflow`) to extract lineage from Airflow tasks and stores that data in the Astro control plane. This package includes [default extractors](https://openlineage.io/docs/integrations/airflow/default-extractors) for popular Airflow operators.
 
-The latest version of the OpenLineage Airflow library is installed on [Astro Runtime](runtime-image-architecture.md) by default, meaning that you can use all default extractors without additional configuration. If you use an Airflow operator that includes a default extractor in your DAG, the operator automatically generates lineage metadata to the **Lineage** page on Astro. 
+The latest version of the OpenLineage Airflow library is installed on [Astro Runtime](runtime-image-architecture.mdx) by default, meaning that you can use all default extractors without additional configuration. If you use an Airflow operator that includes a default extractor in your DAG, the operator automatically generates lineage metadata to the **Lineage** page on Astro. 
 
 Each operator generates different lineage metadata based on its default extractor. For more information about operators with default extractors and what lineage metadata they generate, see [OpenLineage documentation](https://openlineage.io/docs/integrations/about#capability-matrix).
 
@@ -38,7 +41,7 @@ To write a custom extractor, see [OpenLineage documentation](https://openlineage
     OPENLINEAGE_EXTRACTORS='<path-to-extractor-class-1>;<path-to-extractor-class-2>;<path-to-extractor-class-x>'
     ```
 
-    Specify the path to your extractor class as relative to the base of your Astro project directory (for example, `include/myExtractorClass`). If you are importing only one custom extractor, do not include a semicolon after the file path. 
+    Specify the path to your extractor class as relative to the base of your Astro project directory (for example, `include/myExtractorClass`). If you are importing only one custom extractor, do not include a semicolon after the file path.
 
 ## Extract lineage metadata from Airflow operators using custom inlets and outlets
 
@@ -50,7 +53,7 @@ To specify inlets and outlets, see the [OpenLineage documentation](https://openl
 
 To send lineage metadata from an external system to Astro, you need to configure the external system's OpenLineage integration with a Deployment namespace, your Organization's OpenLineage URL, and your organization's OpenLineage API key. This information is used to send OpenLineage data to your Astro lineage backend.
 
-To locate your Deployment namespace in the Cloud UI, open the Deployment and copy the value in **Namespace**. To locate your Organization's OpenLineage URL and OpenLineage API key, go to `https://cloud.<your-astro-base-domain>.io/settings` and copy the values in the **Lineage API Key** and **OpenLineage URL** fields.
+To locate your Deployment namespace in the Astro UI, open the Deployment and copy the value in **Namespace**. To locate your Organization's OpenLineage URL and OpenLineage API key, go to `https://cloud.<your-astro-base-domain>.io/settings` and copy the values in the **Lineage API Key** and **OpenLineage URL** fields.
 
 Use the following topics to configure these values in supported external systems and send lineage metadata from those systems to Astro.
 
@@ -76,11 +79,11 @@ When you run an Airflow task with the `SnowflakeOperator`, the following data is
 - Output datasets
 - Quality metrics based on dataset and column-level checks, including successes and failures per run
 
-To view this data in the Cloud UI, click **Lineage**, select a SnowflakeOperator task, and then click the dataset. See [View data lineage](data-lineage.md#view-metrics-for-a-specific-run-or-dataset).
+To view this data in the Astro UI, click **Lineage**, select a SnowflakeOperator task, and then click the dataset. See [View data lineage](data-lineage.md#view-metrics-for-a-specific-run-or-dataset).
 
 :::tip
 
-Airflow tasks run with the `SnowflakeOperator` emit SQL source code that you can view in the Cloud UI. See [View SQL source code](#view-SQL-source-code).
+Airflow tasks run with the `SnowflakeOperator` emit SQL source code that you can view in the Astro UI. See [View SQL source code](#view-SQL-source-code).
 
 :::
 
@@ -119,13 +122,13 @@ After you save this configuration, lineage is enabled for all Spark jobs running
 
 #### Verify Setup
 
-To test that lineage was configured correctly on your Databricks cluster, run a test Spark job on Databricks. After your job runs, click **Lineage** in the Cloud UI and then click **Runs** in the left menu. If your configuration is successful, your Spark job appears in the table of most recent runs. Click a job run to see it within a lineage graph.
+To test that lineage was configured correctly on your Databricks cluster, run a test Spark job on Databricks. After your job runs, click **Lineage** in the Astro UI and then click **Runs** in the left menu. If your configuration is successful, your Spark job appears in the table of most recent runs. Click a job run to see it within a lineage graph.
 
 ### OpenLineage and dbt Core with Airflow
 
 Use the information provided here to set up lineage collection for dbt Core tasks. To learn how to create and productionize dbt tasks in Airflow, and how to automatically create dbt Core tasks based on a manifest, see [Orchestrate dbt with Airflow](https://docs.astronomer.io/learn/airflow-dbt).
 
-If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). 
+If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 #### Prerequisites
 
@@ -160,7 +163,7 @@ If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [
 
 #### Verify setup
 
-To confirm that your setup is successful, run a dbt model in your project. After you run this model, click **Lineage** in the Cloud UI and then click **Runs** in the left menu. If the setup is successful, the run that you triggered appears in the table of most recent runs.
+To confirm that your setup is successful, run a dbt model in your project. After you run this model, click **Lineage** in the Astro UI and then click **Runs** in the left menu. If the setup is successful, the run that you triggered appears in the table of most recent runs.
 
 ### OpenLineage and Great Expectations with Airflow
 
@@ -170,24 +173,24 @@ This guide outlines how to set up lineage collection for a Great Expectations pr
 
 #### Prerequisites
 
-- A [Great Expectations Data Context](https://legacy.docs.greatexpectations.io/en/latest/guides/tutorials/getting_started.html#tutorials-getting-started)
+- A [Great Expectations Data Context](https://docs.greatexpectations.io/docs/oss/guides/setup/configuring_data_contexts/instantiating_data_contexts/instantiate_data_context/)
 - If using a Checkpoint or Checkpoint config, your Astro base domain and OpenLineage API key.
 
 #### Setup
 
-1. Make your Data Context accessible to your DAGs. For most use cases, Astronomer recommends adding the Data Context to your Astro project `include` folder. The GreatExpectationsOperator will access `include/great_expectations/great_expectations.yml` and use the configuration to run your Expectations. Then, add the following lines to your DAGs: 
+1. Make your Data Context accessible to your DAGs. For most use cases, Astronomer recommends adding the Data Context to your Astro project `include` folder. The GreatExpectationsOperator will access `include/great_expectations/great_expectations.yml` and use the configuration to run your Expectations. Then, add the following lines to your DAGs:
 
     ```python
     # Required imports for Great Expectations
     import os
     from pathlib import Path
     from great_expectations_provider.operators.great_expectations import GreatExpectationsOperator
-    # Set base path for Data Context 
+    # Set base path for Data Context
     base_path = Path(__file__).parents[2]
 
     ...
 
-    # Example task using GreatExpectationsOperator 
+    # Example task using GreatExpectationsOperator
     ge_task = GreatExpectationsOperator(
       task_id="ge_task",
       # Set directory for the Data Context
@@ -197,9 +200,9 @@ This guide outlines how to set up lineage collection for a Great Expectations pr
     ```
 
    If you use the `GreatExpectationsOperator` version 0.2.0 or later and don't provide a Checkpoint file or Checkpoint Config, you can skip steps 2 and 3.
-   
+
 2. In each of your Checkpoint files, add `OpenLineageValidationAction` to your `action_list` like in the following example:
-    
+
     ```yaml{10-17}
     name: my.simple.chk
     config_version: 1.0
@@ -224,7 +227,7 @@ This guide outlines how to set up lineage collection for a Great Expectations pr
 
 #### Verify
 
-To confirm that your setup is successful, click **Lineage** in the Cloud UI and then click **Issues** in the left menu. Recent data quality assertion issues appear in the **All Issues** table.
+To confirm that your setup is successful, click **Lineage** in the Astro UI and then click **Issues** in the left menu. Recent data quality assertion issues appear in the **All Issues** table.
 
 If your code hasn't produced any data quality assertion issues, use the search bar to search for a dataset and view its node on the lineage graph for a recent job run. Click **Quality** to view metrics and assertion pass or fail counts.
 
@@ -255,11 +258,11 @@ In your Spark application, set the following properties to configure your lineag
 
 #### Verify
 
-To confirm that your setup is successful, run a Spark job after you save your configuration. After you run this model, click **Lineage** in the Cloud UI and then click **Runs** in the left menu. Your recent Spark job run appears in the table of most recent runs.
+To confirm that your setup is successful, run a Spark job after you save your configuration. After you run this model, click **Lineage** in the Astro UI and then click **Runs** in the left menu. Your recent Spark job run appears in the table of most recent runs.
 
 ## View SQL source code
 
-The SQL source code view for [supported Airflow operators](https://openlineage.io/docs/integrations/about/#capability-matrix) in the Cloud UI  **Lineage** page is off by default for all Workspace users. To enable the source code view, set the following [environment variable](manage-env-vars.md) for each Astro Deployment:
+The SQL source code view for [supported Airflow operators](https://openlineage.io/docs/integrations/about/#capability-matrix) in the Astro UI  **Lineage** page is off by default for all Workspace users. To enable the source code view, set the following [environment variable](manage-env-vars.md) for each Astro Deployment:
 
 - Key: `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE`
 - Value: `False`
@@ -268,18 +271,18 @@ Astronomer recommends enabling this feature only for Deployments with non-sensit
 
 ## Generate custom facets for OpenLineage events
 
-[OpenLineage facets](https://openlineage.io/docs/spec/facets/) are JSON objects that provide additional context about a given job run. By default, a job run for an Airflow task includes facets that show the source code for the task, whether the task run was successful, and who owns the task. All default facets for a job run appear as **Standard Facets** in the **Info** tab of your data pipeline's lineage graph. 
+[OpenLineage facets](https://openlineage.io/docs/spec/facets/) are JSON objects that provide additional context about a given job run. By default, a job run for an Airflow task includes facets that show the source code for the task, whether the task run was successful, and who owns the task. All default facets for a job run appear as **Standard Facets** in the **Info** tab of your data pipeline's lineage graph.
 
 You can configure both Airflow and external systems to generate custom facets that contain more specific information about job runs. Custom facets appear as **Custom Facets** in the **Info** tab of your data pipeline's lineage graph. To create a custom facet, see [OpenLineage Documentation](https://openlineage.io/docs/spec/facets/custom-facets).
 
 ## Disable OpenLineage
 
-By default, OpenLineage is enabled for all Astro Deployments. If you don't want your Deployment to collect or send lineage data, you can disable OpenLineage. 
+By default, OpenLineage is enabled for all Astro Deployments. If you don't want your Deployment to collect or send lineage data, you can disable OpenLineage.
 
 Before you disable OpenLineage, keep the following in mind:
 
 - You can't use [Astro alerts](alerts.md) in a Deployment with OpenLineage disabled.
-- A Deployment with OpenLineage disabled will not send any data to the [**Lineage** page](data-lineage.md) in the Cloud UI.
+- A Deployment with OpenLineage disabled will not send any data to the [**Lineage** page](data-lineage.md) in the Astro UI.
 
 To disable OpenLIneage for a Deployment, set the following [environment variable](manage-env-vars.md):
 

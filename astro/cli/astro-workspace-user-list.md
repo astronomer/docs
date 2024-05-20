@@ -4,7 +4,7 @@ title: "astro workspace user list"
 id: astro-workspace-user-list
 description: List Workspace users.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 import Tabs from '@theme/Tabs';
@@ -39,7 +39,7 @@ astro workspace user list
 | `FULLNAME`       | The full name of the user.                                                                                                                                                 | String                        |
 | `EMAIL`          | The email address associated with the user account.                                                                                                                        | String                        |
 | `ID`             | The user ID.                                                                                                                                                               | String                        |
-| `WORKSPACE ROLE` | The level of permissions granted to the user in this Workspace. Possible values can be `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. | String                        |
+| `WORKSPACE ROLE` | The level of permissions granted to the user in this Workspace. Possible values can be `WORKSPACE_ACCESSOR`, `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. | String                        |
 | `CREATE DATE`    | The date the user profile was created.                                                                                                                                     | Date (`YYYY-MM-DDTHH:MM:SSZ`) |
 
 ## Related commands

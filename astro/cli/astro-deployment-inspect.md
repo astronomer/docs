@@ -13,7 +13,7 @@ This command is only available on Astro.
 
 :::
 
-Inspect an Astro Deployment. This command returns a YAML or JSON representation of a Deployment's current configuration and state as shown in the Cloud UI. When the `--key` flag is used, it returns only the values specified with the flag.
+Inspect an Astro Deployment. This command returns a YAML or JSON representation of a Deployment's current configuration and state as shown in the Astro UI. When the `--key` flag is used, it returns only the values specified with the flag.
 
 For more information about how to use Deployment files, see [Manage Deployments as Code](manage-deployments-as-code.md).
 
