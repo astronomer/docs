@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 :::tip
 
-The Astro GitHub integration is a new way to automatically deploy code from a GitHub repository to Astro without needing to configure a GitHub Action, allowing you to see Git metadata directly from your Astro Deployment. See [Deploy code with the Astro GitHub integration](deploy-github-integration.md) for more information.
+The Astro GitHub integration can automatically deploy code from a GitHub repository to Astro without you needing to configure a GitHub action. In addition, the Astro UI shows Git metadata for each deploy on your Deployment information screen. See [Deploy code with the Astro GitHub integration](deploy-github-integration.md) for setup steps.
 
 :::
 
