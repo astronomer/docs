@@ -92,7 +92,7 @@ To implement this feature, you need a CI/CD workflow that:
 - Deletes the preview Deployment when you delete the branch.
 - Deploys your changes to your base Deployment after you merge your changes into your main branch.
 
-If you use GitHub Actions as your CI/CD tool, you can find preview Deployment templates as part of the [Astronomer GitHub action in the GitHub Marketplace](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates). This GitHub action includes sub-actions for each of these four steps. To learn more, see [GitHub Actions](ci-cd-templates/github-actions-deployment-preview.md).
+If you use GitHub Actions as your CI/CD tool, you can find preview Deployment templates as part of the [Astronomer GitHub action in the GitHub Marketplace](https://github.com/astronomer/deploy-action?tab=readme-ov-file#deployment-preview-templates). This GitHub action includes sub-actions for each of these four steps. To learn more, see [GitHub Actions](ci-cd-templates/github-actions-deployment-preview.md).
 
 To configure your own automated workflow for preview Deployments with another CI/CD tool, use the following scripts. Each of the following four shell scripts is equivalent to the steps required to implement this feature with [GitHub Actions](ci-cd-templates/github-actions-deployment-preview.md).
 
