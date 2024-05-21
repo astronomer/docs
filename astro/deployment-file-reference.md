@@ -67,13 +67,13 @@ deployment:
             wake_at: "2 * * * *"
             description: "My hibernation description"
             enabled: true
-        worker_queues: ## worker_queues only used when executor is CELERY
-          - name: default
-            max_worker_count: 10
-            min_worker_count: 0
-            worker_concurrency: 5
-            worker_type: A5
         workload_identity: arn:aws:iam::clskz0os1000308jz2prn0s8u:role/clskyy4h8000208jz60olha0w-release
+    worker_queues: ## worker_queues only used when executor is CELERY
+      - name: default
+        max_worker_count: 10
+        min_worker_count: 0
+        worker_concurrency: 5
+        worker_type: A5
     alert_emails:
         - test-emailclskz4wu5000508jz4gm25q5j@testdomain.io
 ```
@@ -114,13 +114,13 @@ deployment:
             wake_at: "2 * * * *"
             description: "My hibernation description"
             enabled: true
-        worker_queues: ## worker_queues is only used when executor is CELERY
-          - name: default
-            max_worker_count: 10
-            min_worker_count: 0
-            worker_concurrency: 16
-            worker_type: m5.xlarge
         workload_identity: arn:aws:iam::clskz0os1000308jz2prn0s8u:role/clskyy4h8000208jz60olha0w-release
+    worker_queues: ## worker_queues is only used when executor is CELERY
+      - name: default
+        max_worker_count: 10
+        min_worker_count: 0
+        worker_concurrency: 16
+        worker_type: m5.xlarge
     metadata:
         deployment_id: clskxpb35000008l69kzp5psq
         workspace_id: clskytztd000008lad0i5c993
@@ -145,7 +145,7 @@ The following sections describe each section in the file.
 
 ### `deployment.environment_variables`
 
-You can create, update, or delete environment variables in the `environment_variables` section of the template file. This is equivalent to configuring environment variables in the **Variables** page of a Deployment in the Cloud UI. Each variable in this section must include a `key` and a `value`.
+You can create, update, or delete environment variables in the `environment_variables` section of the template file. This is equivalent to configuring environment variables in the **Variables** page of a Deployment in the Astro UI. Each variable in this section must include a `key` and a `value`.
 
 By default, each variable is created as a non-secret variable. To set any new or existing environment variables as secret, specify `is_secret: true` in the same section as the key and value. For example:
 
@@ -159,7 +159,7 @@ When you inspect a Deployment, the value of secret environment variables do not 
 
 To delete an environment variable, remove the lines that contain its key, its value, and other associated fields. Then, reapply the file to the Deployment. Any variables that exist on the Deployment, but are not included in the most recently applied Deployment file, are deleted.
 
-If you commit a template file to a GitHub repository, do not add secret environment variables in the file. Instead, add them manually in the Cloud UI. This ensures that you do not commit secret values to a version control tool in plain-text.
+If you commit a template file to a GitHub repository, do not add secret environment variables in the file. Instead, add them manually in the Astro UI. This ensures that you do not commit secret values to a version control tool in plain-text.
 
 :::warning
 
@@ -169,7 +169,7 @@ When you add environment variables using a Deployment file, you must provide a `
 
 ### `deployment.configuration`
 
-The `configuration` section contains all of the basic settings that you can configure from the Deployment **Details** page in the Cloud UI. See:
+The `configuration` section contains all of the basic settings that you can configure from the Deployment **Details** page in the Astro UI. See:
 
 - [Create a Deployment](create-deployment.md#create-a-deployment).
 - [Update a Deployment name and description](deployment-details.md#update-a-deployment-name-and-description).
@@ -177,7 +177,7 @@ The `configuration` section contains all of the basic settings that you can conf
 
 ### `deployment.worker_queues`
 
-The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for Deployments that use the Celery executor. This section is not applicable to Deployments that use Kubernetes executor.
+The `worker_queues` section defines the [worker queues](configure-worker-queues.mdx) for Deployments that use the Celery executor. This section is not applicable to Deployments that use Kubernetes executor.
 
 If you don't enter specific values for the `default` worker queue for a Deployment, Astro uses default values based on the worker types available on your cluster. Each additional worker queue must include a `name` and `worker_type`. The Astro CLI uses default values for any other unspecified fields.
 
@@ -185,4 +185,4 @@ If you don't enter specific values for the `default` worker queue for a Deployme
 
 - `scheduler_size` and `is_high_availability` are not applicable to Astro Hybrid.
 - `deployment_type` can be `HOSTED_SHARED` or `HOSTED_DEDICATED` for Astro Hosted depending on your [cluster type](cli/astro-deployment-create.md#options). Use `HOSTED_SHARED` for standard clusters and `HOSTED_DEDICATED` for dedicated clusters. For Astro Hybrid, the only option is `HYBRID`.
-- `cluster_name` is the name for the cluster that appears in the Cloud UI for Astro Hosted and Hybrid.
+- `cluster_name` is the name for the cluster that appears in the Astro UI for Astro Hosted and Hybrid.

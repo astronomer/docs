@@ -28,3 +28,5 @@ static/astro-release-notes.xml
 static/astro-runtime-release-notes.xml
 static/astro-software-release-notes.xml
 static/astro-software-runtime-release-notes.xml
+
+**/.definition/**

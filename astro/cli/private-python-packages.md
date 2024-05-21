@@ -13,7 +13,7 @@ Depending on where your private packages are stored, use one of the following se
 
 :::info
 
-Deploying a custom Runtime image with a CI/CD pipeline requires additional configurations. For an example implementation, see [GitHub Actions CI/CD templates](https://docs.astronomer.io/astro/ci-cd-templates/github-actions).
+Deploying a custom Runtime image with a CI/CD pipeline requires additional configurations. For an example implementation, see the GitHub Actions CI/CD templates for [Astro](https://docs.astronomer.io/astro/ci-cd-templates/github-actions-template?tab=custom#setup) and [Software](https://docs.astronomer.io/software/ci-cd#github-actions-cicd).
 
 :::
 
@@ -169,7 +169,7 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
 Create a new file called `indexurl.txt` that contains the extra index URL used to access your private PuPI index. For example:
 
 ```text
-https://myuser:mycompany.com/api/pypi/pypi/simple
+https://myuser:example.com/api/pypi/pypi/simple
 ```
 
 Ensure that this file is accessible from your Astro project. You will mount this value as a secret when you build your Astro project image.

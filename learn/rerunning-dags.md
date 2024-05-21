@@ -5,6 +5,9 @@ description: "How to configure retries, catchup, backfill, and clear task instan
 id: rerunning-dags
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 import CodeBlock from '@theme/CodeBlock';
 import retry_example from '!!raw-loader!../code-samples/dags/rerunning-dags/retry_example.py';
 
@@ -21,14 +24,14 @@ In this guide, you'll learn how to configure automatic retries, rerun tasks or D
 
 To get the most out of this guide, you should have an understanding of:
 
-- DAG scheduling. See [Scheduling and timetables in Airflow](scheduling-in-airflow.md)
+- DAG scheduling. See [Schedule DAGs in Airflow](scheduling-in-airflow.md)
 
 ## Automatically retry tasks
 
 In Airflow, you can configure individual tasks to retry automatically in case of a failure. The default number of times a task will retry before failing permanently can be defined at the Airflow configuration level using the core config `default_task_retries`. You can set this configuration either in `airflow.cfg` or with the environment variable `AIRFLOW__CORE__DEFAULT_TASK_RETRIES`. 
 You can overwrite the `default_task_retries` of an Airflow environment at the task level by using the `retries` parameter.
 
-The `retry_delay` parameter (default: `timedelta(seconds=300)`) defines the time spent between retries. As of Airflow 2.6, you can set a maximum value for the retry delay in the core Airflow config `max_task_retry_delay` (`AIRFLOW__CORE__MAX_TASK_RETRY_DELAY`), which, by default, is set at 24 hours. Or, for individual tasks, you can set the maximum retry delay with the parameter, `max_retry_delay`.
+The `retry_delay` parameter (default: `timedelta(seconds=300)`) defines the time spent between retries. You can set a maximum value for the retry delay in the core Airflow config, `max_task_retry_delay` (`AIRFLOW__CORE__MAX_TASK_RETRY_DELAY`), which, by default, is set at 24 hours. Or, for individual tasks, you can set the maximum retry delay with the parameter, `max_retry_delay`.
 
 To progressively increase the wait time between retries until `max_retry_delay` is reached, set `retry_exponential_backoff` to `True`.
 
@@ -37,6 +40,69 @@ It is common practice to set the number of retries for all tasks in a DAG by usi
 The DAG below contains 4 tasks that will always fail. Each of the tasks uses a different retry parameter configuration.
 
 <CodeBlock language="python">{retry_example}</CodeBlock>
+
+## Automatically pause a failing DAG
+
+As of Airflow 2.9, you can configure Airflow to automatically pause a DAG after a certain number of failed DAG runs, preventing a failing DAG from continuing to run and potentially causing more issues.
+
+To set the maximum number of consecutive failed DAG runs at for your all DAGs in your Airflow environment, set the `core.max_consecutive_failed_dag_runs_per_dag` config. For example, to automatically pause all your DAGs after they had 5 failed DAG runs in a row, set:
+
+```text
+AIRFLOW__CORE__MAX_CONSECUTIVE_FAILED_DAG_RUNS_PER_DAG=5
+```
+
+You can override this setting for a specific DAG by setting the `max_consecutive_failed_dag_runs` parameter in the DAG instantiation. For example, to pause a specific DAG after 3 failed DAG runs in a row, set:
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="automatically-pause-a-failing-dag"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
+```python
+# from airflow.decorators import dag
+# from pendulum import datetime
+
+@dag(
+    start_date=datetime(2024, 4, 1),
+    schedule="@daily",
+    max_consecutive_failed_dag_runs=3,
+    catchup=False,
+)
+def my_dag():
+    # Define your tasks here
+
+my_dag()
+```
+
+</TabItem>
+<TabItem value="traditional">
+
+```python
+# from airflow.modules import DAG
+# from pendulum import datetime
+
+with DAG(
+    dag_id="my_dag",
+    start_date=datetime(2024, 4, 1),
+    schedule="@daily",
+    max_consecutive_failed_dag_runs=3,
+    catchup=False,
+):
+    # Define your tasks here
+```
+
+</TabItem>
+</Tabs>
+
+:::caution
+
+The `max_consecutive_failed_dag_runs` config and DAG-level parameter is currently experimental and and might be subject to breaking changes in future releases.
+
+:::
 
 ## Manually rerun tasks or DAGs
 
@@ -84,11 +150,11 @@ Don't clear or change task statuses directly in the Airflow metastore. This can 
 
 ### Add notes to cleared tasks and DAGs
 
-As of Airflow 2.5, you can add notes to task instances and DAG runs from the **Grid View** in the Airflow UI. This feature is useful for tracking manual changes to task instances, such as reruns or task status changes. Astronomer recommends leaving a note on a task or DAG whenever you manually update a task instance through the Airflow UI.
+You can add notes to task instances and DAG runs from the **Grid View** in the Airflow UI. This feature is useful for tracking manual changes to task instances, such as reruns or task status changes. Astronomer recommends leaving a note on a task or DAG whenever you manually update a task instance through the Airflow UI.
 
 To add a note to a task instance or DAG run:
 
-1.  Go to the **Grid View** of the Airflow UI.
+1. Go to the **Grid View** of the Airflow UI.
 2. Select a task instance or DAG run.
 3. Click **Details** > **Task Instance Notes** or **DAG Run notes** > **Add Note**.
 4. Write a note and click **Save Note**.

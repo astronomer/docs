@@ -9,7 +9,7 @@ Test your data pipeline as a whole or in parts using a dedicated and isolated te
 
 ## Run a cell
 
-1. In the Cloud UI, select a Workspace and then click **Cloud IDE**.
+1. In the Astro UI, select a Workspace and then click **Cloud IDE**.
    
 2. Select a project on the **Projects** page.
    
@@ -42,7 +42,7 @@ To test your entire data pipeline in a single run, click **Run** in the top righ
 You can use the Astro Cloud IDE GitHub integration to run your code with additional dependencies that aren't configurable within the Cloud IDE, such as helper functions in an `include` folder. The Astro Cloud IDE loads files from your GitHub repository into the testing environment so that your cells can access all of the required files. 
 
 1. Deploy your Astro Cloud IDE project to GitHub if you haven't already. See [Deploy a project](deploy-project.md).
-2. In the Cloud UI, select a Workspace and then click **Cloud IDE**.
+2. In the Astro UI, select a Workspace and then click **Cloud IDE**.
 3. Select a project on the **Projects** page.
 4. In the **GitHub Repo** pane, click **Configure**.
 5. Configure the following values: 

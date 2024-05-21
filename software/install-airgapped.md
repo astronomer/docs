@@ -112,7 +112,6 @@ The following prerequisites apply to customers running Astronomer Software on Ku
   * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
   * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 - (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
-
 </TabItem>
 
 </Tabs>
@@ -250,6 +249,7 @@ astronomer:
       secretKey: "connection"
 ```
 
+
 </TabItem>
 
 <TabItem value="gcp">
@@ -329,6 +329,7 @@ astronomer:
     - envName: "EMAIL__SMTP_URL"  # Reference to the Kubernetes secret for SMTP credentials. Can be removed if email is not used.
       secretName: "astronomer-smtp"
       secretKey: "connection"
+
 ```
 
 </TabItem>
@@ -343,6 +344,7 @@ global:
   # Enables default values for Azure installations
   azure:
     enabled: true
+
 
   # Base domain for all subdomains exposed through ingress
   baseDomain: sandbox-astro.example.com
@@ -496,6 +498,7 @@ astronomer:
 ```
 
 </TabItem>
+
 
 </Tabs>
 
@@ -868,6 +871,7 @@ astronomer:
                 repository: <custom-platform-repo-prefix>/ap-pgbouncer-exporter
               gitSync:
                 repository: <custom-platform-repo-prefix>/ap-git-sync
+
 ```
 
 e.g. for a custom platform image repository prefix of `012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer`:
@@ -1014,6 +1018,7 @@ These commands generate a list of images required for your version of Astronomer
 :::info
 
 If you have already enabled or disabled Astronomer platform components in your `values.yaml`, you can pass `-f/--values values.yaml` to `helm template` to print a list specific to your `values.yaml` configuration.
+
 
 :::
 
@@ -1165,7 +1170,7 @@ No matter what option you choose, the commands that you run should return the up
 
 ### Configuring a custom updates JSON URL
 
-After you have made the updates JSON accessible within your premises, you must configure the Helm chart to fetch updates from the custom URL:  
+After you have made the updates JSON accessible within your premises, you must configure the Helm chart to fetch updates from the custom URL:
 
 ```yaml
 astronomer:
@@ -1209,6 +1214,7 @@ Do not apply the configuration to your cluster yet as described in the linked do
 Running a logging sidecar to export Airflow task logs is essential for running Astronomer Software in a multi-tenant cluster. See [Export logs using container sidecars](export-task-logs.md#export-logs-using-container-sidecars) to learn how to configure logging sidecars in your `values.yaml` file. 
 
 Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
+
 
 ## Step 24: Integrate an external identity provider {#integrate-an-external-identity-provider}
 
@@ -1463,6 +1469,7 @@ mkdir demo
 cd demo
 astro dev init --use-astronomer-certified
 astro deploy -f
+
 ```
 
 Check the Airflow namespace. If pods are changing at all, then the Houston API trusts the registry.
@@ -1661,9 +1668,18 @@ if __name__ == "__main__":
 ```
 
  
-## TODO FIND home
+## TODO FIND home for this info
 Your `values.yaml` file should include the following configurations alongside the configurations you copied in Step TODO. For more example configuration files, see the [Astronomer GitHub](https://github.com/astronomer/astronomer/tree/master/configs).
 
+Commander, which is Astronomer's provisioning component, uses the Astronomer Airflow Helm chart to create Airflow deployments. You have two options to make the Helm chart available to Commander:
+
+- Use the built-in Astronomer Airflow Helm chart in the Commander Docker image.
+- Host the Astronomer Airflow Helm chart within your network. Not every cloud provider has a managed Helm registry, so you might want to check out [JFrog Artifactory](https://jfrog.com/artifactory) or [ChartMuseum](https://github.com/helm/chartmuseum).
+
+To use the built-in Astronomer Airflow Helm chart in the Commander Docker image, add the following configuration to your `values.yaml` file:
+
+                         
+                         
 ## TODO disable install domain by default
 
 

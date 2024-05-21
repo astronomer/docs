@@ -27,14 +27,15 @@ To create a Deployment through the Houston API that uses the custom resource str
 
 ## Disable Astronomer Units (AUs) from Deployment resource configurations
 
-To limit users to only configure Deployments using custom resources, set the following configuration in your `config.yaml` file:
+To limit users to only configure Deployments using custom resources, set the following configuration in your `values.yaml` file:
 
 ```yaml
 astronomer:
   houston:
-    deployments:
-      resourceProvisioningStrategy:
-        astroUnitsEnabled: false
+    config:
+      deployments:
+        resourceProvisioningStrategy:
+          astroUnitsEnabled: false
 ```
 
 Then, save this configuration and push it to your platform. See [Apply a Platform Config Change](apply-platform-config.md).

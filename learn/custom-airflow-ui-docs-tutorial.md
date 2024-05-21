@@ -332,7 +332,7 @@ tell_me_what_to_do = PythonOperator(
 
 ## Step 5: Add notes to a task instance and DAG run
 
-Starting in Airflow 2.5, you can add notes to task instances and DAG runs from the **Grid** view in the Airflow UI. This feature is useful if you need to share contextual information about a DAG or task run with your team, such as why a specific run failed.
+You can add notes to task instances and DAG runs from the **Grid** view in the Airflow UI. This feature is useful if you need to share contextual information about a DAG or task run with your team, such as why a specific run failed.
 
 1. Go to the **Grid View** of the `docs_example_dag` DAG you created in [Step 2](#step-2-create-a-new-dag).
 

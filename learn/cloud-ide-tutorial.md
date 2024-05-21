@@ -45,7 +45,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- An Astro account. If you do not already have an Astro account, [sign up for a free trial](https://www.astronomer.io/try-astro/) and follow the onboarding flow to create your first Organization and Workspace.
+- An Astro account. If you do not already have an Astro account, [sign up for a free trial](https://www.astronomer.io/try-astro/?utm_medium=docs&utm_content=learn-cloud-ide-tutorial&utm_source=body) and follow the onboarding flow to create your first Organization and Workspace.
 
 (Optional) To complete steps [11](#step-11-optional-connect-your-github-to-the-astro-cloud-ide) - [14](#step-14-optional-run-your-dag-on-astro) at the end of this tutorial, you will also need:
 
@@ -56,7 +56,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 1: Create your Astro Cloud IDE project
 
-1. In the Cloud UI, select a Workspace, and click **Cloud IDE** in the left menu.
+1. In the Astro UI, select a Workspace, and click **Cloud IDE** in the left menu.
 
     ![Screenshot of the Astro UI. The Cloud IDE button as the fourth button in the sidebar on the left.](/img/tutorials/cloud-ide-tutorial_cloud_ide_button.png)
 
@@ -304,7 +304,7 @@ Setting a schedule for your pipeline will determine how this pipeline will be sc
 
 ## Step 10: View your DAG code 
 
-Through this tutorial, the Astro Cloud IDE was building a DAG based on the configurations you set in the Cloud UI. Export your pipeline as DAG code to see the results of your work.
+Through this tutorial, the Astro Cloud IDE was building a DAG based on the configurations you set in the Astro UI. Export your pipeline as DAG code to see the results of your work.
 
 1. Click **Code**. You can see that your pipeline was automatically converted to DAG code using the [Astro SDK](https://docs.astronomer.io/learn/astro-python-sdk-etl).
 
@@ -372,7 +372,7 @@ Note that if you used the `In-memory SQL` connection in your Astro Cloud IDE pro
 
 ## Step 14: (Optional) Run your DAG on Astro
 
-1. In the Cloud UI, open your Deployment. 
+1. In the Astro UI, open your Deployment. 
 
 2. Click **Open Airflow**.
 
