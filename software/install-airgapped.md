@@ -502,6 +502,106 @@ astronomer:
 
 </Tabs>
 
+
+
+## Step 6: Requesting and Validating an Astronomer TLS Certificate {#requesting-and-validating-an-astronomer-tls-certificate}
+
+In order to install Astronomer Software, you'll need a TLS certificate that is valid for several domains - one of which will be the primary name on the certificate (referred to as the Common name or CN) and the rest will be equally-valid supplementary domains known as Subject Alternative Names (SAN)s.
+
+Astronomer requires a private certificate be present in the Astronomer Platform namespace, even if using a third-party ingress-controller that doesn't otherwise require it.
+
+### Requesting an Astronomer TLS Certificate
+
+Request a TLS certificate and associated items (see below) from your enterprise security team.
+
+When requesting a certificate for Astronomer Software, use the [base domain you chose earlier](#choosing-the-base-domain) as the Common Name (CN). If your Certificate Authority will not issue certificates for the bare base domain, use `app.<base-domain>` as the Common Name instead.
+
+Additionally, you must include *either* a wildcard Subject Alternative Name (SAN) entry of `*.<base-domain>` *or* an explicit SAN entry for each of the following items:
+
+```sh
+app.<base-domain> (omit if already used as the Common Name)
+deployments.<base-domain>
+registry.<base-domain>
+houston.<base-domain>
+grafana.<base-domain>
+kibana.<base-domain>
+install.<base-domain>
+alertmanager.<base-domain>
+prometheus.<base-domain>
+```
+
+:::warning
+
+If using Astronomer's bundled container image registry, the encryption-type used on your TLS certificate must be *RSA*. Cerbot users must include `-key-type rsa` when requesting certificates, most other solutions generate RSA-keys by default.
+
+:::
+
+In your request to your Security Team, include:
+* the Common Name and Subject Alternative Name(s) as per above
+* if using the bundled Astronomer container-registry, the requirement that the encryption type of the certificate *must* be RSA
+* request that the return format be as follows:
+  - a key.pem - containing the private key
+  - **either** a full-chain.pem (containing the public certificate additional certificates required to validate it) **or** a bare `cert.pem` and explicit affirmation that there are no intermediate certificates an that the public certificate is the full-chain
+  - **either** a statement that the certificate is signed by public and generally recognized Certificate Authority **or** the public certificate of the Certificate Authority used to create your certificate
+
+### Validating the received certficiate and associated items
+Ensure that you have received each of the follownig three items:
+
+* a key.pem - containing the private key
+* **either** a full-chain.pem (containing the public certificate additional certificates required to validate it) **or** a bare `cert.pem` and explicit affirmation that it the full-chain
+* **either** a statement that the certificate is signed by public and generally recognized Certificate Authority **or** the public certificate of the Certificate Authority used to create your certificate
+
+
+Validate that your enterprise security team generated the correct certificate, run the following command using the `openssl` CLI:
+
+```sh
+openssl x509 -in  <your-certificate-filepath> -text -noout
+```
+
+This command will generate a report. If the `X509v3 Subject Alternative Name` section of this report includes either a single `*.<base-domain>` wildcard domain or all subdomains, then the certificate creation was successful.
+
+Confirm that your full-chain certificate chain is ordered correctly. To determine your certificate chain order, run the following command using the `openssl` CLI:
+
+```sh
+openssl crl2pkcs7 -nocrl -certfile <your-full-chain-certificate-filepath> | openssl pkcs7 -print_certs -noout
+```
+
+The command generates a report of all certificates. Verify the order of the certificates is as follows:
+
+- Domain
+- Intermediate (optional)
+- Root
+
+## Step 7: Storing and configuring the Public TLS Full-Chain Certificate {#storing-and-configuring-the-public-tls-full-chain-certificate}
+
+### Storing the full-chain TLS certificate in the Astronomre Platform Namespace
+Store the public full-chain certificate in the Astronomer Software Platform Namespace in a `tls`-type Kubernetes secret named `astronomer-tls` using the following command.
+
+If your enterprise-security organization has instructed you that there are no intermediate certifi
+
+```sh
+kubectl -n <astronomer platform namespace> create secret tls astronomer-tls --cert <fullchain-pem-filepath> --key <your-private-key-filepath>
+```
+
+E.g.
+```
+kubectl -n astronomer create secret tls astronomer-tls --cert fullchain.pem --key server_private_key.pem
+```
+
+Naming the secret `astronomer-tls` (no substitutions) is always recommended and is a strict requirement when using a third-party ingress-controller.
+
+## Step 8: Configuring a third-party ingress-controller {#configuring-a-third-party-ingress-controller}
+### Check your ingress-controller
+### Set the full-chain TLS certificate Kubernetes Secret for replication
+Most third-party ingress-controllers require the `astronomer-tls` secret be replicated into each Airflow namespace.
+
+Annotate the secret and set `"astronomer.io/commander-sync` to `platform=<astronomer platform release name>`, e.g.:
+```
+kubectl -n <astronomer platform namespace> annotate secret astronomer-tls "astronomer.io/commander-sync"="platform=astronomer"
+```
+
+Astronomer will automatically replicate the secret into the namespace used by each newly deployed Airflow instance.
+
 ## Step 9: Configuring a Private Certificate Authority {#configuring-a-private-certificate-authority}
 
 If you received a certificate from a private CA, follow these steps instead:
