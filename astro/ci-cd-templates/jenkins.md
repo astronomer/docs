@@ -206,11 +206,11 @@ This `Jenkinsfile` triggers a code push to Astro every time a commit or pull req
 
 The DAG deploy template uses the `--dags` flag in the Astro CLI to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-dags.md).
 
-:::tip
+:::info
 
-If you make multiple commits to a local branch with DAG changes, and then push them all to your remote branch simultaneously, the DAG deploy template only deploys DAG code changes in the most recent commit.
+If you stage multiple commits to DAG files and push them all at once to your remote branch, the template only deploys DAG code changes from the most recent commit. It will miss any code changes made in previous commits.
 
-Either push commits individually or configure your repository to **Squash commits** for pull requests that merge multiple commits simultanouesly.
+To avoid this, either push commits individually or configure your repository to **Squash commits** for pull requests that merge multiple commits simultaneously.
 
 :::
 

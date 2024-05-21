@@ -118,11 +118,11 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
 10. If you haven't already, deploy your complete Astro project to your Deployment. See [Deploy code](deploy-code.md).
 11. Add your DAGs to the `dags` folder in your storage bucket.
 
-    :::tip
+    :::info
 
-    When you stage multiple commits locally that include DAG changes, and then push them all to your remote branch simultaneously, the DAG deploy template only deploys DAG code changes from the most recent commit. It might miss any code changes made in previous commits.
+    If you stage multiple commits to DAG files and push them all at once to your remote branch, the template only deploys DAG code changes from the most recent commit. It will miss any code changes made in previous commits.
 
-    Either push commits individually or configure your repository to **Squash commits** for pull requests that merge multiple commits simultanouesly.
+    To avoid this, either push commits individually or configure your repository to **Squash commits** for pull requests that merge multiple commits simultaneously.
 
     :::
 
