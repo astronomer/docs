@@ -735,11 +735,11 @@ Astronomer Software requires the ability to send email to:
 
 Astronomer Software sends all outbound email via SMTP.
 
-::info
+:::info
 
 If evaluating Astronomer Software in an environment where outbound SMTP is not available, follow instructions in `Appendix: Configuring Astronomer Software To Not Send Outbound Email` and then skip the rest of this section.
 
-::
+:::
 
 1. Obtain a valid set of SMTP credentials.
 2. Ensure that the Kubetes Cluster has access to send outbound email to the SMTP server.
@@ -1483,9 +1483,11 @@ If you missed these steps during installation, follow the steps in [Apply a conf
 
 ## Appendix: Configuring Astronomer Software To Not Send Outbound Email
 
-::info
+:::info
+
 Setting `astronomer.houston.config.publicSignups` to `true` is only secure when all non-OIDC authentication backends are explicitly disabled.
-::
+
+:::
 
 set `astronomer.houston.config.email.enabled` to `false`, remove the `EMAIL__SMTP_URL` list-item from `astronomer.houston.secret`, and 
 
