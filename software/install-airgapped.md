@@ -146,7 +146,7 @@ Choose the template below that corresponds to your Kubernetes Platform and save 
 * Do not make any changes to this file until instructed to do so in later steps.
 * Do not apply this file with helm until instructed to do so in later steps.
 
-::: tip
+:::tip
 
 Create a platform-project directory for each platform environment to store values.yaml and other files you will be creating throughout this installation guide. e.g. store as `astronomer-sandbox/values.yaml`.
 
@@ -535,7 +535,7 @@ When choosing a baseDomain, consider:
   - when accessing an Airflow Deployment (e.g. `https://deployments.sandbox-astro.example.com/deployment-release-name/airflow`)
   - when logging into the astro cli (e.g. `astro login sandbox-astro.example.com`)
   
-::: info
+:::tip
 
 Openshift customers who wish to use OpenShift's integrated ingress controller typically use the hostname of the default OpenShift ingress controller as their base-domain. Doing so results in a slightly-unwieldy user-visible hostname of `app.apps.<openshift-domain>` and requires permission to re-configure the route-admission policy for the standard ingress controller to `InterNamespaceAllowed` (covered later in this document). See [Third Party Ingress Controller - Configuration notes for Openshift](third-party-ingress-controllers#configuration-notes-for-openshift) additional infomation and options.
 
