@@ -1290,7 +1290,6 @@ CHART_NAME=<chart name>
 CHART_VERSION=<v-prefixed version of the Astronomer Software platform chart>
 # ensure all the above environment variables have been set
 
-```
 helm upgrade --install --namespace $NAMESPACE \
             -f ./values.yaml \
             --reset-values \
