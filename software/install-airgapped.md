@@ -502,3 +502,209 @@ astronomer:
 
 </Tabs>
 
+
+## Step 3: Choose and configure the base domain {#choose-and-configure-the-base-domain}
+
+### Choosing the base domain {#choosing-the-base-domain}
+The installation procedure detailed in this guide will create a variety of services that your users will access to manage, monitor, and run Airflow on the platform.
+
+Choose a base-domain (e.g. `astronomer.example.com`, `astro-sandbox.example.com`, `astro-prod.example.internal`) for which:
+* you have the ability to create and edit DNS records
+* you have the ability to issue TLS-certificates
+* the following addresses are available:
+  - `app.<base-domain>`
+  - `deployments.<base-domain>`
+  - `houston.<base-domain>`
+  - `grafana.<base-domain>`
+  - `kibana.<base-domain>`
+  - `install.<base-domain>`
+  - `alertmanager.<base-domain>`
+  - `prometheus.<base-domain>`
+  - `registry.<base-domain>`
+
+The base-domain itself does not need to be available and may even point to another service not associated with Astronomer or Airflow. If available, later sections of this document will establish a vanity-redirect from `<base-domain>` to `app.<base-domain>`.
+
+When choosing a baseDomain, consider:
+* the name you choose must be be resolvable by both your users and Kubernetes itself
+* you will need to have or obtain a TLS certificate that is recognized as valid by your users (and if using the bundled container-registry, by Kubernetes itself)
+* wildcardcard certificates are only valid one-level deep (e.g. an ingress controller using a certificate of `*.example.com` can provide service for `app.example.com` but not `app.astronomer-dev.example.com`).
+* the bottom-level hostnames (e.g. `app`, `registry`, `prometheus`) are fixed and cannot be changed.
+* most kubernetes clusters refuse to resolve DNS hostnames with more than 5 segments (seperated by the dot character; e.g. `app.astronomer.sandbox.mygroup.example.com` is 6 segments and might be problematic, so choosing a baseDomain of `astronomer-sandbox.mygroup.example.com` instead of `astronomer.sandbox.mygroup.example.com` would be advisable).
+* the base-domain will be visible to end-users
+  - when accessing the Astronomer Software UI (e.g. `https://app.sandbox-astro.example.com`)
+  - when accessing an Airflow Deployment (e.g. `https://deployments.sandbox-astro.example.com/deployment-release-name/airflow`)
+  - when logging into the astro cli (e.g. `astro login sandbox-astro.example.com`)
+  
+:::tip
+
+Openshift customers who wish to use OpenShift's integrated ingress controller typically use the hostname of the default OpenShift ingress controller as their base-domain. Doing so results in a slightly-unwieldy user-visible hostname of `app.apps.<openshift-domain>` and requires permission to re-configure the route-admission policy for the standard ingress controller to `InterNamespaceAllowed` (covered later in this document). See [Third Party Ingress Controller - Configuration notes for Openshift](third-party-ingress-controllers#configuration-notes-for-openshift) additional infomation and options.
+
+:::
+
+### Configuring the base domain
+
+Locate the `global.baseDomain` key already present in your `values.yaml` file and change it to your base-domain.
+
+e.g.
+```
+global:
+  # Base domain for all subdomains exposed through ingress
+  baseDomain: sandbox-astro.example.com
+```
+
+## Step 4: Create the Astronomer Software platform namespace {#create-the-astronomer-software-platform-namespace}
+
+In your Kubernetes cluster, create a [kubernetes namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) (Astronomer generally recommends this namespace be named `astronomer`) to contain the Astronomer Software platform.
+
+```sh
+kubectl create namespace astronomer
+```
+
+The contents of this namespace will be used to provision and manage Airflow instances running in other namespaces. Each Airflow will have its own isolated namespace.
+
+## Step 5: Third-Party Igress-Controller DNS Configuration {#third-party-igress-controller-dns-configuration}
+
+If using Astronomer's bundled ingress-controller - skip this step.
+
+### Astronomer Software Third-Party DNS Requirements and Record Guidance {#third-party-dns-guidance}
+
+Astronomer Software requires the following domain-names be registered and resolvable within the Kubernetes Cluster and to users of Astronomer And Airflow.
+  - `<base-domain>` (optional but recommended, provides a vanity re-direct to `app.<base-domain>`)
+  - `app.<base-domain>` (required)
+  - `deployments.<base-domain>` (required)
+  - `houston.<base-domain>` (required)
+  - `grafana.<base-domain>` (required if using bundled grafana)
+  - `kibana.<base-domain>` (required if not using external elasticsearch)
+  - `install.<base-domain>` (optional)
+  - `alertmanager.<base-domain>` (required if using bundled alert manager)
+  - `prometheus.<base-domain>` (required)
+  - `registry.<base-domain>` (required if using bundled container-registry)
+
+Astronomer generally recommends that:
+* the `<base-domain>` record be a zone-apex record (typically expressed by using a hostname of `@`) pointing to the IP(s) of the ingress-controller
+* all other records be CNAME records pointing to the `<base-domain>`
+
+For customers unable to register the base-domain, Astronomer recommends that:
+* the `app.<baseDomain>` record be an A record pointing to the IP(s) of the ingress-controller
+* all other records be CNAME records pointing to `app.<base-domain>`
+
+:::tip
+
+For lower environments, Astronomer recommends a relatively short ttl-value (e.g. 60 seconds) when you first deploy Astronomer so that any errors can be quickly corrected.
+
+:::
+
+
+### Request Ingress Information from your Ingress-Administrator {get-ingress-info}
+
+Provide your Ingress Controller Administrator with the [Astronomer Software Third-Party DNS Requirements and Record Guidance](#third-party-dns-guidance) above (replacing`<base-domain>` with the base-domain from [Choosing the Base Domain](#choosing-the-base-domain)) and guidance and request the following information:
+* what ingress class name you should use (or whether you should leave blank and use the default)
+* what IP address(es) you should use for DNS entries pointing to the ingress controller
+* whether DNS-records will be automatically created in reponse to Ingress rources that we will be created later in the install
+* if DNS-records need to be manually created, and if so who will coordinate their creation and who will create them
+### Create DNS records pointing to your third-party ingress-controller
+
+Create DNS records pointed to your third-party ingress. controller.
+
+### Verify DNS records are pointed to your third-party ingress-controller
+
+Use `dig <hostname>` or `getent hosts <hostname>` to verify each DNS entry is created and pointing to the IP address of the ingress-controller you will be using.
+
+
+## Step 6: Requesting and Validating an Astronomer TLS Certificate {#requesting-and-validating-an-astronomer-tls-certificate}
+
+In order to install Astronomer Software, you'll need a TLS certificate that is valid for several domains - one of which will be the primary name on the certificate (referred to as the Common name or CN) and the rest will be equally-valid supplementary domains known as Subject Alternative Names (SAN)s.
+
+Astronomer requires a private certificate be present in the Astronomer Platform namespace, even if using a third-party ingress-controller that doesn't otherwise require it.
+
+### Requesting an Astronomer TLS Certificate
+
+Request a TLS certificate and associated items (see below) from your enterprise security team.
+
+When requesting a certificate for Astronomer Software, use the [base domain you chose earlier](#choosing-the-base-domain) as the Common Name (CN). If your Certificate Authority will not issue certificates for the bare base domain, use `app.<base-domain>` as the Common Name instead.
+
+Additionally, you must include *either* a wildcard Subject Alternative Name (SAN) entry of `*.<base-domain>` *or* an explicit SAN entry for each of the following items:
+
+```sh
+app.<base-domain> (omit if already used as the Common Name)
+deployments.<base-domain>
+registry.<base-domain>
+houston.<base-domain>
+grafana.<base-domain>
+kibana.<base-domain>
+install.<base-domain>
+alertmanager.<base-domain>
+prometheus.<base-domain>
+```
+
+:::warning
+
+If using Astronomer's bundled container image registry, the encryption-type used on your TLS certificate must be *RSA*. Cerbot users must include `-key-type rsa` when requesting certificates, most other solutions generate RSA-keys by default.
+
+:::
+
+In your request to your Security Team, include:
+* the Common Name and Subject Alternative Name(s) as per above
+* if using the bundled Astronomer container-registry, the requirement that the encryption type of the certificate *must* be RSA
+* request that the return format be as follows:
+  - a key.pem - containing the private key
+  - **either** a full-chain.pem (containing the public certificate additional certificates required to validate it) **or** a bare `cert.pem` and explicit affirmation that there are no intermediate certificates an that the public certificate is the full-chain
+  - **either** a statement that the certificate is signed by public and generally recognized Certificate Authority **or** the public certificate of the Certificate Authority used to create your certificate
+
+### Validating the received certficiate and associated items
+Ensure that you have received each of the follownig three items:
+
+* a key.pem - containing the private key
+* **either** a full-chain.pem (containing the public certificate additional certificates required to validate it) **or** a bare `cert.pem` and explicit affirmation that it the full-chain
+* **either** a statement that the certificate is signed by public and generally recognized Certificate Authority **or** the public certificate of the Certificate Authority used to create your certificate
+
+
+Validate that your enterprise security team generated the correct certificate, run the following command using the `openssl` CLI:
+
+```sh
+openssl x509 -in  <your-certificate-filepath> -text -noout
+```
+
+This command will generate a report. If the `X509v3 Subject Alternative Name` section of this report includes either a single `*.<base-domain>` wildcard domain or all subdomains, then the certificate creation was successful.
+
+Confirm that your full-chain certificate chain is ordered correctly. To determine your certificate chain order, run the following command using the `openssl` CLI:
+
+```sh
+openssl crl2pkcs7 -nocrl -certfile <your-full-chain-certificate-filepath> | openssl pkcs7 -print_certs -noout
+```
+
+The command generates a report of all certificates. Verify the order of the certificates is as follows:
+
+- Domain
+- Intermediate (optional)
+- Root
+
+## Step 7: Storing and configuring the Public TLS Full-Chain Certificate {#storing-and-configuring-the-public-tls-full-chain-certificate}
+
+### Storing the full-chain TLS certificate in the Astronomre Platform Namespace
+Store the public full-chain certificate in the Astronomer Software Platform Namespace in a `tls`-type Kubernetes secret named `astronomer-tls` using the following command.
+
+If your enterprise-security organization has instructed you that there are no intermediate certifi
+
+```sh
+kubectl -n <astronomer platform namespace> create secret tls astronomer-tls --cert <fullchain-pem-filepath> --key <your-private-key-filepath>
+```
+
+E.g.
+```
+kubectl -n astronomer create secret tls astronomer-tls --cert fullchain.pem --key server_private_key.pem
+```
+
+Naming the secret `astronomer-tls` (no substitutions) is always recommended and is a strict requirement when using a third-party ingress-controller.
+
+## Step 8: Configuring a third-party ingress-controller {#configuring-a-third-party-ingress-controller}
+### Check your ingress-controller
+### Set the full-chain TLS certificate Kubernetes Secret for replication
+Most third-party ingress-controllers require the `astronomer-tls` secret be replicated into each Airflow namespace.
+
+Annotate the secret and set `"astronomer.io/commander-sync` to `platform=<astronomer platform release name>`, e.g.:
+```
+kubectl -n <astronomer platform namespace> annotate secret astronomer-tls "astronomer.io/commander-sync"="platform=astronomer"
+```
+
+Astronomer will automatically replicate the secret into the namespace used by each newly deployed Airflow instance.
