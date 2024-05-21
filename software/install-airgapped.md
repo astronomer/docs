@@ -569,7 +569,7 @@ If using Astronomer's bundled ingress-controller - skip this step.
 ### Astronomer Software Third-Party DNS Requirements and Record Guidance {#third-party-dns-guidance}
 
 Astronomer Software requires the following domain-names be registered and resolvable within the Kubernetes Cluster and to users of Astronomer And Airflow.
-  - `<base-domain>` (optional but recommended, provides a vanity re-direct to app.<base-domain>)
+  - `<base-domain>` (optional but recommended, provides a vanity re-direct to `app.<base-domain>`)
   - `app.<base-domain>` (required)
   - `deployments.<base-domain>` (required)
   - `houston.<base-domain>` (required)
