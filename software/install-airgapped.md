@@ -562,6 +562,39 @@ kubectl create namespace astronomer
 
 The contents of this namespace will be used to provision and manage Airflow instances running in other namespaces. Each Airflow will have its own isolated namespace.
 
+## Step 5: Third-Party Igress-Controller DNS Configuration {#third-party-igress-controller-dns-configuration}
+
+If using Astronomer's bundled ingress-controller - skip this step.
+
+### Astronomer Software Third-Party DNS Requirements and Record Guidance {#third-party-dns-guidance}
+
+Astronomer Software requires the following domain-names be registered and resolvable within the Kubernetes Cluster and to users of Astronomer And Airflow.
+  - `<base-domain>` (optional but recommended, provides a vanity re-direct to `app.<base-domain>`)
+  - `app.<base-domain>` (required)
+  - `deployments.<base-domain>` (required)
+  - `houston.<base-domain>` (required)
+  - `grafana.<base-domain>` (required if using bundled grafana)
+  - `kibana.<base-domain>` (required if not using external elasticsearch)
+  - `install.<base-domain>` (optional)
+  - `alertmanager.<base-domain>` (required if using bundled alert manager)
+  - `prometheus.<base-domain>` (required)
+  - `registry.<base-domain>` (required if using bundled container-registry)
+
+Astronomer generally recommends that:
+* the `<base-domain>` record be a zone-apex record (typically expressed by using a hostname of `@`) pointing to the IP(s) of the ingress-controller
+* all other records be CNAME records pointing to the `<base-domain>`
+
+For customers unable to register the base-domain, Astronomer recommends that:
+* the `app.<baseDomain>` record be an A record pointing to the IP(s) of the ingress-controller
+* all other records be CNAME records pointing to `app.<base-domain>`
+
+:::tip
+
+For lower environments, Astronomer recommends a relatively short ttl-value (e.g. 60 seconds) when you first deploy Astronomer so that any errors can be quickly corrected.
+
+:::
+
+
 
 ## Step 6: Requesting and Validating an Astronomer TLS Certificate {#requesting-and-validating-an-astronomer-tls-certificate}
 
