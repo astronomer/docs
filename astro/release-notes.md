@@ -27,7 +27,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## May 21, 2024
 
-### Official Astro GitHub integration is now in Public Preview
+### The Astro GitHub integration is now in Public Preview
 
 :::publicpreview
 :::
@@ -40,7 +40,7 @@ See [Deploy code with the Astro GitHub integration](deploy-github-integration.md
 
 ### Bug fixes
 
-- Fixed a bug where users using custom roles in the UI could see roles that could not be assigned.
+- Fixed an issue where users with custom roles could see roles that could not be assigned in the Astro UI.
 
 ## May 15, 2024
 
