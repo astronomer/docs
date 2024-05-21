@@ -503,6 +503,54 @@ astronomer:
 </Tabs>
 
 
+## Step 3: Choose and configure the base domain {#choose-and-configure-the-base-domain}
+
+### Choosing the base domain {#choosing-the-base-domain}
+The installation procedure detailed in this guide will create a variety of services that your users will access to manage, monitor, and run Airflow on the platform.
+
+Choose a base-domain (e.g. `astronomer.example.com`, `astro-sandbox.example.com`, `astro-prod.example.internal`) for which:
+* you have the ability to create and edit DNS records
+* you have the ability to issue TLS-certificates
+* the following addresses are available:
+  - `app.<base-domain>`
+  - `deployments.<base-domain>`
+  - `houston.<base-domain>`
+  - `grafana.<base-domain>`
+  - `kibana.<base-domain>`
+  - `install.<base-domain>`
+  - `alertmanager.<base-domain>`
+  - `prometheus.<base-domain>`
+  - `registry.<base-domain>`
+
+The base-domain itself does not need to be available and may even point to another service not associated with Astronomer or Airflow. If available, later sections of this document will establish a vanity-redirect from `<base-domain>` to `app.<base-domain>`.
+
+When choosing a baseDomain, consider:
+* the name you choose must be be resolvable by both your users and Kubernetes itself
+* you will need to have or obtain a TLS certificate that is recognized as valid by your users (and if using the bundled container-registry, by Kubernetes itself)
+* wildcardcard certificates are only valid one-level deep (e.g. an ingress controller using a certificate of `*.example.com` can provide service for `app.example.com` but not `app.astronomer-dev.example.com`).
+* the bottom-level hostnames (e.g. `app`, `registry`, `prometheus`) are fixed and cannot be changed.
+* most kubernetes clusters refuse to resolve DNS hostnames with more than 5 segments (seperated by the dot character; e.g. `app.astronomer.sandbox.mygroup.example.com` is 6 segments and might be problematic, so choosing a baseDomain of `astronomer-sandbox.mygroup.example.com` instead of `astronomer.sandbox.mygroup.example.com` would be advisable).
+* the base-domain will be visible to end-users
+  - when accessing the Astronomer Software UI (e.g. `https://app.sandbox-astro.example.com`)
+  - when accessing an Airflow Deployment (e.g. `https://deployments.sandbox-astro.example.com/deployment-release-name/airflow`)
+  - when logging into the astro cli (e.g. `astro login sandbox-astro.example.com`)
+  
+:::tip
+
+Openshift customers who wish to use OpenShift's integrated ingress controller typically use the hostname of the default OpenShift ingress controller as their base-domain. Doing so results in a slightly-unwieldy user-visible hostname of `app.apps.<openshift-domain>` and requires permission to re-configure the route-admission policy for the standard ingress controller to `InterNamespaceAllowed` (covered later in this document). See [Third Party Ingress Controller - Configuration notes for Openshift](third-party-ingress-controllers#configuration-notes-for-openshift) additional infomation and options.
+
+:::
+
+### Configuring the base domain
+
+Locate the `global.baseDomain` key already present in your `values.yaml` file and change it to your base-domain.
+
+e.g.
+```
+global:
+  # Base domain for all subdomains exposed through ingress
+  baseDomain: sandbox-astro.example.com
+```
 
 ## Step 4: Create the Astronomer Software platform namespace {#create-the-astronomer-software-platform-namespace}
 
@@ -513,54 +561,6 @@ kubectl create namespace astronomer
 ```
 
 The contents of this namespace will be used to provision and manage Airflow instances running in other namespaces. Each Airflow will have its own isolated namespace.
-
-## Step 5: Third-Party Igress-Controller DNS Configuration {#third-party-igress-controller-dns-configuration}
-
-If using Astronomer's bundled ingress-controller - skip this step.
-
-### Astronomer Software Third-Party DNS Requirements and Record Guidance {#third-party-dns-guidance}
-
-Astronomer Software requires the following domain-names be registered and resolvable within the Kubernetes Cluster and to users of Astronomer And Airflow.
-  - `<base-domain>` (optional but recommended, provides a vanity re-direct to `app.<base-domain>`)
-  - `app.<base-domain>` (required)
-  - `deployments.<base-domain>` (required)
-  - `houston.<base-domain>` (required)
-  - `grafana.<base-domain>` (required if using bundled grafana)
-  - `kibana.<base-domain>` (required if not using external elasticsearch)
-  - `install.<base-domain>` (optional)
-  - `alertmanager.<base-domain>` (required if using bundled alert manager)
-  - `prometheus.<base-domain>` (required)
-  - `registry.<base-domain>` (required if using bundled container-registry)
-
-Astronomer generally recommends that:
-* the `<base-domain>` record be a zone-apex record (typically expressed by using a hostname of `@`) pointing to the IP(s) of the ingress-controller
-* all other records be CNAME records pointing to the `<base-domain>`
-
-For customers unable to register the base-domain, Astronomer recommends that:
-* the `app.<baseDomain>` record be an A record pointing to the IP(s) of the ingress-controller
-* all other records be CNAME records pointing to `app.<base-domain>`
-
-:::tip
-
-For lower environments, Astronomer recommends a relatively short ttl-value (e.g. 60 seconds) when you first deploy Astronomer so that any errors can be quickly corrected.
-
-:::
-
-
-### Request Ingress Information from your Ingress-Administrator {get-ingress-info}
-
-Provide your Ingress Controller Administrator with the [Astronomer Software Third-Party DNS Requirements and Record Guidance](#third-party-dns-guidance) above (replacing`<base-domain>` with the base-domain from [Choosing the Base Domain](#choosing-the-base-domain)) and guidance and request the following information:
-* what ingress class name you should use (or whether you should leave blank and use the default)
-* what IP address(es) you should use for DNS entries pointing to the ingress controller
-* whether DNS-records will be automatically created in reponse to Ingress rources that we will be created later in the install
-* if DNS-records need to be manually created, and if so who will coordinate their creation and who will create them
-### Create DNS records pointing to your third-party ingress-controller
-
-Create DNS records pointed to your third-party ingress. controller.
-
-### Verify DNS records are pointed to your third-party ingress-controller
-
-Use `dig <hostname>` or `getent hosts <hostname>` to verify each DNS entry is created and pointing to the IP address of the ingress-controller you will be using.
 
 
 ## Step 6: Requesting and Validating an Astronomer TLS Certificate {#requesting-and-validating-an-astronomer-tls-certificate}
