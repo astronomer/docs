@@ -252,3 +252,11 @@ If your Astro project requires additional build-time arguments to build an image
 
 </TabItem>
 </Tabs>
+
+:::info
+
+If you stage multiple commits to DAG files and push them all at once to your remote branch, the template only deploys DAG code changes from the most recent commit. It will miss any code changes made in previous commits.
+
+To avoid this, either push commits individually or configure your repository to **Squash commits** for pull requests that merge multiple commits simultaneously.
+
+:::
