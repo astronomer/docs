@@ -45,9 +45,9 @@ There is currently no limit or additional charge for deploying code to Astro wit
 
 ## Prerequisites
 
-- Workspace Admin permissions on an Astro Workspace.
+- Workspace Owner permissions on an Astro Workspace.
 - A GitHub repository that contains an [Astro project](https://docs.astronomer.io/astro/cli/develop-project#create-an-astro-project). The Astro project can exist at any level in your repository.
-- A GitHub user account with read permissions to the repository containing your Astro project. If you don't have these permissions, send a request to your GitHub repository administrator when prompted by Astro. 
+- A GitHub user account with read permissions to the repository containing your Astro project. If you don't have these permissions, send a request to your GitHub repository administrator when prompted by Astro.
 
     The read permissions are required so that you can map Deployments to repositories in the Astro UI. To trigger a code deploy to Astro, you additionally need write permissions for the repository.
 
