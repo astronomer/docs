@@ -98,7 +98,7 @@ The following tables contain the exact lifecycle for each published version of A
 | ---------------- | ----------------- | ----------------------- |
 | 0.34             | February 13, 2024 | August 2025             |
 
-### Legacy (No longer supported)
+### Unsupported
 
 | Software Version | Release Date      | End of Maintenance Date |
 | ---------------- | ----------------- | ----------------------- |
