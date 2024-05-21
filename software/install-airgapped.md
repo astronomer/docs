@@ -597,7 +597,7 @@ For lower environments, Astronomer recommends a relatively short ttl-value (e.g.
 
 ### Request Ingress Information from your Ingress-Administrator {get-ingress-info}
 
-Provide your Ingress Controller Administrator with the [Astronomer Software Third-Party DNS Requirements and Record Guidance](#third-party-dns-guidance) above (replacing <base-domain> with the base-domain from [Choosing the Base Domain](#choosing-the-base-domain)) and guidance and request the following information:
+Provide your Ingress Controller Administrator with the [Astronomer Software Third-Party DNS Requirements and Record Guidance](#third-party-dns-guidance) above (replacing`<base-domain>` with the base-domain from [Choosing the Base Domain](#choosing-the-base-domain)) and guidance and request the following information:
 * what ingress class name you should use (or whether you should leave blank and use the default)
 * what IP address(es) you should use for DNS entries pointing to the ingress controller
 * whether DNS-records will be automatically created in reponse to Ingress rources that we will be created later in the install
