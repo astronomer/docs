@@ -812,9 +812,53 @@ If there are `/` or other escape characters in your username or password, you ma
 
 :::
 
+## Step 11: Configure volume storage classes
+Astronomer strongly recommends against backing any volumes used for Astronomer Software with mechanical hard-drives.
+
+If your cluster defines a volume-storage class, and you wish to use it for all volumes associated with Astronomer Software and the Airlfow deployments it you may skip this step.
+
+Replace `<desired-storage-class>` in the following configuration data with the storage class you wish to use for each respective component (removing any entries where you wish to use the default) and merge into `values.yaml` - either manually or by placing [merge_yaml.py](#merge_yaml) in your astro-platform project-directory and running `python merge_yaml.py storage-class-config.yaml values.yaml`.
+
+```yaml
+alertmanager:
+  persistence:
+    storageClassName: "<desired-storage-class>"
+stan:
+  store:
+    volume:
+      storageClass: "<desired-storage-class>"
+prometheus:
+  persistence:
+    storageClassName: "<desired-storage-class>"
+elasticsearch:
+  common:
+    persistence:
+      storageClassName: "<desired-storage-class>"
+astronomer:
+  registry:
+    persistence:
+      storageClassName: "<desired-storage-class>"
+  houston:
+    config:
+      deployments:
+        helm:
+          dagDeploy:
+            persistence:
+              storageClass: "<desired-storage-class>"
+          airflow:
+            redis:
+              persistence:
+                storageClassName: "<desired-storage-class>"
+# this option does not apply when using an external postgres database
+# bundled postgresql not a supported option, only for use in proof-of-concepts
+postgresql:
+  persistence:
+    storageClass: "<desired-storage-class>"
+
+```
 
 
-## Step 11: Configure the database {#configure-the-database}
+## Step 12: Configure the database {#configure-the-database}
 
 ## Create a database instance
 
@@ -859,7 +903,7 @@ kubectl --namespace astronomer create secret generic astronomer-bootstrap \
 ```
 
 
-## Step 12: Configure an external docker registry for user-provided Airflow images {#configure-a-private-docker-registry-airflow}
+## Step 13: Configure an external docker registry for user-provided Airflow images {#configure-a-private-docker-registry-airflow}
 Astronomer Software users create customized Airflow container images. These images frequently contain sensitive information and **must** be stored in a secure location accessible to Kubernetes.
 
 Astronomer software deploys an integrated image-registry that can be used for this purpose.
@@ -868,7 +912,7 @@ Users may use images hosted in other container image repositories accessible to 
 
 See [Configure a custom registry for Deployment images](custom-image-registry) for additional configurable options.
 
-## Step 13: Configure the docker registry used for platform images {#configure-a-private-docker-registry-platform}
+## Step 14: Configure the docker registry used for platform images {#configure-a-private-docker-registry-platform}
 
 If you are installing Astronomer Software onto a Kubernetes Cluster that can pull container images from public image repositories and you do not wish to mirror these images locally skip this step.
 
@@ -966,7 +1010,7 @@ Astronomer Software platform images are requently hosted internal repositories t
     ```
 
 
-## Step 14: Determine what version of Astronomer Software to install {#determine-what-version-of-astronomer-software-to-install}
+## Step 15: Determine what version of Astronomer Software to install {#determine-what-version-of-astronomer-software-to-install}
 
 Astronomer recommends new Astronomer Software installations use the most-recently version of either the Stable or LTS (long-term support) release-channel.
 
@@ -977,7 +1021,7 @@ Current recommended versions:
 See Astronomer Software's [lifecycle policy](release-lifecycle-policy) and [release notes](version-compatibility-reference) for more information.
 
 
-## Step 15: Fetch Airflow Helm charts {#fetch-airflow-helm-charts}
+## Step 16: Fetch Airflow Helm charts {#fetch-airflow-helm-charts}
 
 * If you have internet accces to `https://helm.astronomer.io` run the following command on the machine you will be installing Astronomer Software on:
 ```sh
@@ -989,7 +1033,7 @@ helm repo update
   * This file does not need to uploaded to an internal chart-repository.
 
 
-## Step 16: Create and customize upgrade.sh {#create-and-customize-upgradesh}
+## Step 17: Create and customize upgrade.sh {#create-and-customize-upgradesh}
 
 Create a file named `upgrade.sh` in your [platform-deployment project-directory](#platform-deployment-project-directory) containing the script below, then customize:
 * CHART_VERSION - v-prefixed version of the Astronomer Software version, including patch (e.g. v0.34.1)
@@ -1028,7 +1072,7 @@ helm upgrade --install --namespace $NAMESPACE \
             $RELEASE_NAME \
             $CHART_NAME $@
 ```
-## Step 17: Fetch images from Astronomer's Helm template {#fetch-images-from-astronomer's-helm-template}
+## Step 18: Fetch images from Astronomer's Helm template {#fetch-images-from-astronomer's-helm-template}
 
 The images and tags which are required for your Software installation depend on the version of Astronomer you're installing. To gather a list of exact images and tags required for your Astronomer version:
 
@@ -1244,22 +1288,22 @@ Astronomer Software is its most secure when you supply a pre-existing ingress co
 
 Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
 
-## Step 22: Configure your Kubernetes Cluster to Trust Private Root Certificates {#private-root-ca-for-containerd}
+## Step 21: Configure your Kubernetes Cluster to Trust Private Root Certificates {#private-root-ca-for-containerd}
 
-## Step 23: Configure sidecar logging {#configure-sidecar-logging}
+## Step 22: Configure sidecar logging {#configure-sidecar-logging}
 
 Running a logging sidecar to export Airflow task logs is essential for running Astronomer Software in a multi-tenant cluster. See [Export logs using container sidecars](export-task-logs.md#export-logs-using-container-sidecars) to learn how to configure logging sidecars in your `values.yaml` file. 
 
 Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
 
 
-## Step 24: Integrate an external identity provider {#integrate-an-external-identity-provider}
+## Step 23: Integrate an external identity provider {#integrate-an-external-identity-provider}
 
 Astronomer Software includes integrations for several of the most popular identity providers (IdPs), such as Okta and Microsoft Entra ID. Configuring an external IdP allows you to automatically provision and manage users in accordance with your organization's security requirements. See [Integrate an auth system](integrate-auth-system.md) to configure the identity provider of your choice in your `config.yaml` file. 
 
 Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
 
-## Step 25: Openshift Configuration {#openshift-configuration}
+## Step 24: Openshift Configuration {#openshift-configuration}
 Merge the following configuration options into `values.yaml` - either manually or by placing [merge_yaml.py](#merge_yaml) in your astro-platform project-directory and running `python merge_yaml.py openshift-snippet.yaml values.yaml`.
 
 ```yaml
@@ -1282,7 +1326,7 @@ elasticsearch:
 ```
 
 
-## Step 26: Creating the Load-Balancer {#creating-the-load-balancer}
+## Step 25: Creating the Load-Balancer {#creating-the-load-balancer}
 
 If using a third-party ingress-controller, skip this step.
 
@@ -1340,7 +1384,7 @@ helm upgrade --install --namespace $NAMESPACE \
 </Tabs>
 
 
-## Step 27: Configure DNS {#configure-dns}
+## Step 26: Configure DNS {#configure-dns}
 
 The Astronomer load balancer routes incoming traffic to your NGINX ingress controller. After you install Astronomer Software, the load balancer will spin up in your cloud provider account.
 
@@ -1372,7 +1416,7 @@ alertmanager.sandbox-astro.example.com
 prometheus.sandbox-astro.example.com
 ```
 
-## Step 28: Install Astronomer using Helm {#install-astronomer-using-helm}
+## Step 27: Install Astronomer using Helm {#install-astronomer-using-helm}
 
 Install the Astronomer Software helm chart using `upgrade.sh` (recommended for your first install) or directly from helm.
 
@@ -1408,7 +1452,7 @@ helm upgrade --install --namespace <astronomer-platform-namespace> \
 </TabItem>
 </Tabs>
 
-## Step 29: Verify Pods are up {#verify-pods-are-up}
+## Step 28: Verify Pods are up {#verify-pods-are-up}
 
 To verify all pods are up and running, run:
 
@@ -1463,13 +1507,13 @@ astronomer-registry-0                                      1/1     Running      
 If you are seeing issues here, check out our [guide on debugging your installation](debug-install.md).
 
 
-## Step 30: Verify you can access the Software UI {#verify-you-can-access-the-software-ui}
+## Step 29: Verify you can access the Software UI {#verify-you-can-access-the-software-ui}
 
 Visit `https://app.<base-domain>` in your web-browser to view Astronomer Software's web interface.
 
 Consider this your new Airflow control plane. From the Astronomer Software UI, you'll be able to both invite and manage users as well as create and monitor Airflow Deployments on the platform.
 
-## Step 31: Verify your TLS setup {#verify-your-tls-setup}
+## Step 30: Verify your TLS setup {#verify-your-tls-setup}
 
 To check if your TLS certificates were accepted, log in to the Software UI. Then, go to `app.BASEDOMAIN/token` and run:
 
