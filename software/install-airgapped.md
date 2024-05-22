@@ -127,7 +127,7 @@ Plan a series of environments so that Astronomer Software platform-upgrades and 
   * staging - all network/security/patch-versions in lock-step with production, no availability guarantees, relaxed change-control
   * production - hosts production Airflow instances (dev airflow instances may live here or in lower environments)
 
-### Create a platform-project directory
+### Create a platform-project directory{#platform-deployment-project-directory}
 Create a platform-project directory to store files you will be creating throughout this installation guide.
 
 e.g.
@@ -181,21 +181,11 @@ global:
   # Name of secret containing TLS certificate
   tlsSecret: astronomer-tls
 
-  # Enable privateCaCerts only if your enterprise security team
-  # generated a certificate from a private certificate authority.
-  # Create a generic secret for each cert, and add it to the list below.
-  # Each secret must have a data entry for 'cert.pem'
-  # Example command: `kubectl create secret generic private-root-ca --from-file=cert.pem=./<your-certificate-filepath>`
+  # List of secrets containing the cert.pem of trusted private certification authorities
+  # Example command: `kubectl create secret generic private-root-ca --from-file=cert.pem=./ca.pem`
   # privateCaCerts:
   # - private-root-ca
 
-  # Enable privateCaCertsAddToHost only when your nodes do not already
-  # include the private CA in their containerd trust store.
-  # Most enterprises already have this configured,
-  # and in that case 'enabled' should be false.
-  privateCaCertsAddToHost:
-    enabled: true
-    hostDirectory: /etc/containerd/certs.d
   # For development or proof-of-concept, you can use an in-cluster database
   # postgresqlEnabled: true is NOT supported in production.
   postgresqlEnabled: false
@@ -265,21 +255,11 @@ global:
   # Name of secret containing TLS certificate
   tlsSecret: astronomer-tls
 
-  # Enable privateCaCerts only if your enterprise security team
-  # generated a certificate from a private certificate authority.
-  # Create a generic secret for each cert, and add it to the list below.
-  # Each secret must have a data entry for 'cert.pem'
-  # Example command: `kubectl create secret generic private-root-ca --from-file=cert.pem=./<your-certificate-filepath>`
+  # List of secrets containing the cert.pem of trusted private certification authorities
+  # Example command: `kubectl create secret generic private-root-ca --from-file=cert.pem=./ca.pem`
   # privateCaCerts:
   # - private-root-ca
 
-  # Enable privateCaCertsAddToHost only when your nodes do not already
-  # include the private CA in their containerd trust store.
-  # Most enterprises already have this configured,
-  # and in that case 'enabled' should be false.
-  privateCaCertsAddToHost:
-    enabled: true
-    hostDirectory: /etc/containerd/certs.d
   # For development or proof-of-concept, you can use an in-cluster database
   # postgresqlEnabled: true is NOT supported in production.
   postgresqlEnabled: false
@@ -352,21 +332,10 @@ global:
   # Name of secret containing TLS certificate
   tlsSecret: astronomer-tls
 
-  # Enable privateCaCerts only if your enterprise security team
-  # generated a certificate from a private certificate authority.
-  # Create a generic secret for each cert, and add it to the list below.
-  # Each secret must have a data entry for 'cert.pem'
-  # Example command: `kubectl create secret generic private-root-ca --from-file=cert.pem=./<your-certificate-filepath>`
+  # List of secrets containing the cert.pem of trusted private certification authorities
+  # Example command: `kubectl create secret generic private-root-ca --from-file=cert.pem=./ca.pem`
   # privateCaCerts:
   # - private-root-ca
-
-  # Enable privateCaCertsAddToHost only when your nodes do not already
-  # include the private CA in their containerd trust store.
-  # Most enterprises already have this configured,
-  # and in that case 'enabled' should be false.
-  # privateCaCertsAddToHost:
-  #   enabled: true
-  #   hostDirectory: /etc/containerd/certs.d
 
   # For development or proof-of-concept, you can use an in-cluster database
   # postgresqlEnabled: true is NOT supported in production.
@@ -436,21 +405,11 @@ global:
   # Name of secret containing TLS certificate
   tlsSecret: astronomer-tls
 
-  # Enable privateCaCerts only if your enterprise security team
-  # generated a certificate from a private certificate authority.
-  # Create a generic secret for each cert, and add it to the list below.
-  # Each secret must have a data entry for 'cert.pem'
-  # Example command: `kubectl create secret generic private-root-ca --from-file=cert.pem=./<your-certificate-filepath>`
+  # List of secrets containing the cert.pem of trusted private certification authorities
+  # Example command: `kubectl create secret generic private-root-ca --from-file=cert.pem=./ca.pem`
   # privateCaCerts:
   # - private-root-ca
 
-  # Enable privateCaCertsAddToHost only when your nodes do not already
-  # include the private CA in their containerd trust store.
-  # Most enterprises already have this configured,
-  # and in that case 'enabled' should be false.
-  privateCaCertsAddToHost:
-    enabled: true
-    hostDirectory: /etc/containerd/certs.d
   # For development or proof-of-concept, you can use an in-cluster database
   # postgresqlEnabled: true is NOT supported in production.
   postgresqlEnabled: false
@@ -526,7 +485,7 @@ The base-domain itself does not need to be available and may even point to anoth
 
 When choosing a baseDomain, consider:
 * the name you choose must be be resolvable by both your users and Kubernetes itself
-* you will need to have or obtain a TLS certificate that is recognized as valid by your users (and if using the bundled container-registry, by Kubernetes itself)
+* you will need to have or obtain a TLS certificate that is recognized as valid by your users (and if using the Astronomer Software integrated container registry, by Kubernetes itself)
 * wildcardcard certificates are only valid one-level deep (e.g. an ingress controller using a certificate of `*.example.com` can provide service for `app.example.com` but not `app.astronomer-dev.example.com`).
 * the bottom-level hostnames (e.g. `app`, `registry`, `prometheus`) are fixed and cannot be changed.
 * most kubernetes clusters refuse to resolve DNS hostnames with more than 5 segments (seperated by the dot character; e.g. `app.astronomer.sandbox.mygroup.example.com` is 6 segments and might be problematic, so choosing a baseDomain of `astronomer-sandbox.mygroup.example.com` instead of `astronomer.sandbox.mygroup.example.com` would be advisable).
@@ -546,7 +505,7 @@ Openshift customers who wish to use OpenShift's integrated ingress controller ty
 Locate the `global.baseDomain` key already present in your `values.yaml` file and change it to your base-domain.
 
 e.g.
-```
+```yaml
 global:
   # Base domain for all subdomains exposed through ingress
   baseDomain: sandbox-astro.example.com
@@ -564,7 +523,7 @@ The contents of this namespace will be used to provision and manage Airflow inst
 
 ## Step 5: Third-Party Igress-Controller DNS Configuration {#third-party-igress-controller-dns-configuration}
 
-If using Astronomer's bundled ingress-controller - skip this step.
+If using Astronomer Software's integrated ingress-controller - skip this step.
 
 ### Astronomer Software Third-Party DNS Requirements and Record Guidance {#third-party-dns-guidance}
 
@@ -573,12 +532,12 @@ Astronomer Software requires the following domain-names be registered and resolv
   - `app.<base-domain>` (required)
   - `deployments.<base-domain>` (required)
   - `houston.<base-domain>` (required)
-  - `grafana.<base-domain>` (required if using bundled grafana)
+  - `grafana.<base-domain>` (required if using Astronomer Software's integrated grafana)
   - `kibana.<base-domain>` (required if not using external elasticsearch)
   - `install.<base-domain>` (optional)
-  - `alertmanager.<base-domain>` (required if using bundled alert manager)
+  - `alertmanager.<base-domain>` (required if using Astronomer Software's integrated Alert Manager)
   - `prometheus.<base-domain>` (required)
-  - `registry.<base-domain>` (required if using bundled container-registry)
+  - `registry.<base-domain>` (required if using Astronomer Software's integrated container-registry)
 
 Astronomer generally recommends that:
 * the `<base-domain>` record be a zone-apex record (typically expressed by using a hostname of `@`) pointing to the IP(s) of the ingress-controller
@@ -617,7 +576,7 @@ In order to install Astronomer Software, you'll need a TLS certificate that is v
 
 Astronomer requires a private certificate be present in the Astronomer Platform namespace, even if using a third-party ingress-controller that doesn't otherwise require it.
 
-### Requesting an Astronomer TLS Certificate
+### Requesting an Astronomer TLS Certificate {request-a-certificate-bundle}
 
 Request a TLS certificate and associated items (see below) from your enterprise security team.
 
@@ -639,25 +598,24 @@ prometheus.<base-domain>
 
 :::warning
 
-If using Astronomer's bundled container image registry, the encryption-type used on your TLS certificate must be *RSA*. Cerbot users must include `-key-type rsa` when requesting certificates, most other solutions generate RSA-keys by default.
+If using the Astronomer Software integrated container registry, the encryption-type used on your TLS certificate must be *RSA*. Cerbot users must include `-key-type rsa` when requesting certificates, most other solutions generate RSA-keys by default. If using the registry, we will confirm the received certificate encryption type [in later steps](#docker-registry-cert-encryption-restrictions).
 
 :::
 
 In your request to your Security Team, include:
 * the Common Name and Subject Alternative Name(s) as per above
-* if using the bundled Astronomer container-registry, the requirement that the encryption type of the certificate *must* be RSA
+* if using the Astronomer Software integrated container registry, the requirement that the encryption type of the certificate *must* be RSA
 * request that the return format be as follows:
-  - a key.pem - containing the private key
-  - **either** a full-chain.pem (containing the public certificate additional certificates required to validate it) **or** a bare `cert.pem` and explicit affirmation that there are no intermediate certificates an that the public certificate is the full-chain
-  - **either** a statement that the certificate is signed by public and generally recognized Certificate Authority **or** the public certificate of the Certificate Authority used to create your certificate
+  - a key.pem - containing the private key in pem format
+  - **either** a full-chain.pem (containing the public certificate additional certificates required to validate it, in pem format) **or** a bare `cert.pem` and explicit affirmation that there are no intermediate certificates and that the public certificate is the full-chain
+  - **either** the private-root-ca.pem of the the private Certificate Authority used to create your certificate (in pem format) or a statement that the certificate is signed by public Certificate Authority
 
 ### Validating the received certficiate and associated items
 Ensure that you have received each of the follownig three items:
 
-* a key.pem - containing the private key
-* **either** a full-chain.pem (containing the public certificate additional certificates required to validate it) **or** a bare `cert.pem` and explicit affirmation that it the full-chain
-* **either** a statement that the certificate is signed by public and generally recognized Certificate Authority **or** the public certificate of the Certificate Authority used to create your certificate
-
+* a key.pem - containing the private key in pem format
+* **either** a full-chain.pem (containing the public certificate additional certificates required to validate it, in pem format) **or** a bare `cert.pem` and explicit affirmation that there are no intermediate 
+* **either** the private-root-ca.pem of the the private Certificate Authority used to create your certificate (in pem format) or a statement that the certificate is signed by public Certificate Authority
 
 Validate that your enterprise security team generated the correct certificate, run the following command using the `openssl` CLI:
 
@@ -679,6 +637,32 @@ The command generates a report of all certificates. Verify the order of the cert
 - Intermediate (optional)
 - Root
 
+### Additional Validation for the Astronomer Integrated Container Registry{#docker-registry-cert-encryption-restrictions}
+If you will not be storing images in Astronomer's integrated container registry and will instead be storing all container images an [external container registry](#configure-a-private-docker-registry-airflow)) skip this sub-step.
+
+The Astronomer Software integrated container-registry requires the key used to sign traffic originating from the Astronomer Software platform do so using the RSA encryption method.
+
+Follow the following procedure to identify the encryption type associated with the certificate you were provided from your certificate authority.
+
+Extract the bare public cert (if it was not already included in the files provided by your certificate-authority) from the full-chain certificate file.
+
+e.g.
+```sh
+openssl crl2pkcs7 -nocrl -certfile full-chain.pem | openssl pkcs7 -print_certs -noout > cert.pem`
+```
+
+Examine the public certificate and ensure all Signature Alogithm's are listed as `sha1WithRSAEncryption`.
+
+```sh
+openssl x509 -in cert.pem -text|grep Algorithm 
+        Signature Algorithm: sha1WithRSAEncryption
+            Public Key Algorithm: rsaEncryption
+    Signature Algorithm: sha1WithRSAEncryption
+```
+
+If your key is not compatible with the Astronomer Software integrated container registry, request your Certificate Authority [re-issue the credentials](#request-a-certificate-bundle) (re-emphasizing the need for an RSA cert) or [use an external container registry](#configure-a-private-docker-registry-airflow).
+
+
 ## Step 7: Storing and configuring the Public TLS Full-Chain Certificate {#storing-and-configuring-the-public-tls-full-chain-certificate}
 
 ### Storing the full-chain TLS certificate in the Astronomre Platform Namespace
@@ -691,8 +675,8 @@ kubectl -n <astronomer platform namespace> create secret tls astronomer-tls --ce
 ```
 
 E.g.
-```
-kubectl -n astronomer create secret tls astronomer-tls --cert fullchain.pem --key server_private_key.pem
+```sh
+kubectl -n astronomer create secret tls astronomer-tls --cert full-chain.pem --key server_private_key.pem
 ```
 
 Naming the secret `astronomer-tls` (no substitutions) is always recommended and is a strict requirement when using a third-party ingress-controller.
@@ -703,7 +687,7 @@ Naming the secret `astronomer-tls` (no substitutions) is always recommended and 
 Most third-party ingress-controllers require the `astronomer-tls` secret be replicated into each Airflow namespace.
 
 Annotate the secret and set `"astronomer.io/commander-sync` to `platform=<astronomer platform release name>`, e.g.:
-```
+```sh
 kubectl -n <astronomer platform namespace> annotate secret astronomer-tls "astronomer.io/commander-sync"="platform=astronomer"
 ```
 
@@ -713,7 +697,7 @@ Astronomer will automatically replicate the secret into the namespace used by ea
 
 If you received a certificate from a private CA, follow these steps instead:
 
-1. Add the root certificate provided by your security team to an [Opaque Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#secret-types) in the Astronomer namespace by running the following command:
+1. Store the root certificate provided by your security team to an [Opaque Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#secret-types) in the Astronomer namespace named `private-root-ca` by running the following command:
 
     ```sh
     kubectl create secret generic private-root-ca --from-file=cert.pem=./<your-certificate-filepath> -n astronomer
@@ -723,7 +707,60 @@ If you received a certificate from a private CA, follow these steps instead:
 
     > **Note:** The name of the secret file must be `cert.pem` for your certificate to be trusted properly.
 
-2. Note the value of `private-root-ca` for when you configure your Helm chart in [Configure Astronomer Software to Trust Private Root Certificates](#private-root-ca-for-astronomer). You'll need to additionally specify the `privateCaCerts` key-value pair with this value for that step.
+2. Add `private-root-ca` to the list of secret names contained in `global.privateCaCerts` in `values.yaml`. E.g.
+    ```yaml
+    astronomer:
+      privateCaCerts:
+      - private-root-ca
+    ```
+
+## Step TBD: Ensure your Kubernetes Cluster Trusts Required Certificate Authorities
+Kubernetes must be able to pull images from one or more container registries for Astronomer Software to function.
+
+By default, Kubernetes **only** trusts publicly signed certificates.
+
+You may need to add additional trusted certificate-authorities to your Kubernetes Cluster's store of trusted certificates when:
+* you have configured Astronomer software to pull platform [platform container images](#use-a-custom-image-repository-for-platform-images) from an external container registry that uses a certificate signed by a private certificate-authority
+* users will be deploying airflow images to Astronomer Software's integrated container registry **and** Astronomer is using a TLS certificate issued by a private Certificate Authority 
+* users will be deploying images to an external container registry **and** that registry is using a TLS certificate issued by a private Certificate Authority 
+
+If none of the above situations apply, skip this step.
+
+Kubernetes does not honor the list of certificates [trusted by the Astronomer Software platform](#configuring-a-private-certificate-authority).
+
+Many enterprises configure Kubernetes to trust additional certificate-authorities as part of their standard cluter-creation procedure.
+
+Contact your Kubernetes Administrator to find out what, if any, private certificaties are currently trusted by your Kubernetes Cluster.
+
+Consult your Kubernetes administrator and Kubernetes-provider's documentation for instructions on configuring Kubernetes trust additional Certificate Authorities.
+
+Follow procedures for your Kubernetes provider to configure Kubernetes to trust each certificate authority associated with container registries (including the integrated container registry, if applicable) that Kubernetes will be pulling images from.
+
+Certain clusters do not provide a mechanism to configure the list of certificates trusted by Kubernetes.
+
+While configuring Kubernetes list of cluster-certificates is a custeomer-responsibility, Astronomer Software includes an optional component that can, for certiain Kubernetes Cluster configurations, add certificates defined in `astronomer.privateCaCerts` to the list of certificates trusted by Kubernetes. This can be enabled by setting `astronomer.privateCaCertsAddToHost.enabled` and ``astronomer.privateCaCertsAddToHost.addToContainerd` to `true`. E.g.
+
+```yaml
+  astronomer:
+    privateCaCertsAddToHost:
+      enabled: true
+      addToContainerd: true
+      hostDirectory: /etc/containerd/certs.d
+```
+
+The above configuration is valid for most Kubernetes Clusters, including EKS and AKS.
+
+GKE users must additionally add a `containerdConfigToml` containing a pair of lines for each registry hostname (and the associated secret name) in the following format:
+```
+  astronomer:
+    privateCaCertsAddToHost:
+      enabled: true
+      addToContainerd: true
+      hostDirectory: /etc/containerd/certs.d
+      containerdConfigToml: |-
+        [host."https://<registry hostname>"]
+          ca = "/etc/containerd/certs.d/<registry hostname>/<secret name>.pem"
+```
 
 ## Step 10: Configure Outbound SMTP Email {#configure-outbound-smtp-email}
 
@@ -779,37 +816,24 @@ If there are `/` or other escape characters in your username or password, you ma
 
 ## Step 11: Configure the database {#configure-the-database}
 
+## Create a database instance
+
 Astronomer requires a central Postgres database that acts as the backend for Astronomer's Houston API and will host individual metadata databases for all Airflow Deployments spun up on the platform.
 
 :::info
 
 If, while evaluating Astronomer Software, you need to create a temporary environment where Postgres is not available, locate the `global.postgresqlEnabled` option already present in your `values.yaml` and set it to `true` then skip the remainder of this step.
 
-Setting `global.postgresqlEnabled` to `true` is an *unsupported* configuration and *must* not be used on any development, staging, or production environment.
+Setting `global.postgresqlEnabled` to `true` is an **unsupported** configuration and **must not** be used on any development, staging, or production environment.
 
 :::
 
 
 :::info
 
-If using Azure Database for PostgreSQL or another Postgres instance that does not enable the `pg_trgm` by default, you *must* enable the `pg_trgm` extension prior to installing Astronomer Software. If `pg_trgm` is not enabled, the install will fail. `pg_tgrm` is enabled by default on Amazon RDS and Google CLoud SQL for PostgresQL. For instructions on enabling the `pg_trgm` extension for Azure Flexible Server, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
+If using Azure Database for PostgreSQL or another Postgres instance that does not enable the `pg_trgm` by default, you **must** enable the `pg_trgm` extension prior to installing Astronomer Software. If `pg_trgm` is not enabled, the install will fail. `pg_tgrm` is enabled by default on Amazon RDS and Google Cooud SQL for PostgresQL. For instructions on enabling the `pg_trgm` extension for Azure Flexible Server, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
 
 :::
-
-Create a Kubernetes Secret named `astronomer-bootstrap` that points to your database. You must URL encode any special characters in your Postgres password.
-
-To create this secret, run the following command replacing the astronomer platform namespace, username, password, database hostname, and database port with their respective values (username and password must be url-encoded if they contain special-characters):
-
-```bash
-kubectl --namespace <astronomer platform namespace> create secret generic astronomer-bootstrap \
-  --from-literal connection="postgres://<url-encoded username>:<url-encoded password>@<database hostname>:<database port>"
-```
-
-e.g. For a username named `bob` with password `abc@abc` at hostname `some.host.internal`:
-```bash
-kubectl --namespace astronomer create secret generic astronomer-bootstrap \
-  --from-literal connection="postgres://bob:abc%40abc@some.host.internal:5432"
-```
 
 Additional requirements apply to the following databases:
 - AWS RDS:
@@ -817,6 +841,23 @@ Additional requirements apply to the following databases:
 - Azure Flexible Server:
   * you must enable the `pg_trgm` extension as per the advisory earlier in this section
   * Set `global.ssl.mode`to `prefer` in your `values.yaml`
+
+
+Create a Kubernetes Secret named `astronomer-bootstrap` that points to your database. You must URL encode any special characters in your Postgres password.
+
+To create this secret, run the following command replacing the astronomer platform namespace, username, password, database hostname, and database port with their respective values (username and password must be url-encoded if they contain special-characters):
+
+```sh
+kubectl --namespace <astronomer platform namespace> create secret generic astronomer-bootstrap \
+  --from-literal connection="postgres://<url-encoded username>:<url-encoded password>@<database hostname>:<database port>"
+```
+
+e.g. For a username named `bob` with password `abc@abc` at hostname `some.host.internal`:
+```sh
+kubectl --namespace astronomer create secret generic astronomer-bootstrap \
+  --from-literal connection="postgres://bob:abc%40abc@some.host.internal:5432"
+```
+
 
 ## Step 12: Configure an external docker registry for user-provided Airflow images {#configure-a-private-docker-registry-airflow}
 Astronomer Software users create customized Airflow container images. These images frequently contain sensitive information and **must** be stored in a secure location accessible to Kubernetes.
@@ -831,16 +872,16 @@ See [Configure a custom registry for Deployment images](custom-image-registry) f
 
 If you are installing Astronomer Software onto a Kubernetes Cluster that can pull container images from public image repositories and you do not wish to mirror these images locally skip this step.
 
-### Configure values.yaml to to use a custom image repository for platform images {#customize-valuesyaml-to-to-use-a-custom-image-repository-for-platform-images}
+### Configure values.yaml to to use a custom image repository for platform images {#use-a-custom-image-repository-for-platform-images}
 
 Astronomer expects the images to be present using their normal names but prefixed by a string you define. E.g. if you specify `artifactory.example.com/astronomer`, when you mirror images later in this procedure, you would mirror:
 * `quay.io/astronomer/ap-houston-api` to `artifactory.example.com/astronomer/ap-houston-api`
 * `quay.io/astronomer/astronomer/ap-commander` to `artifactory.example.com/astronomer/ap-commander`
 * etc.
 
-Replace `<custom-platform-repo-prefix>` in the following configuration data with your platform image repository prefix and merge into `values.yaml` - either manually or by placing [merge_yaml.py] in your astro-platform project-directory and running `python merge_yaml.py private-platform-registry-snippet.yaml values.yaml`.
+Replace `<custom-platform-repo-prefix>` in the following configuration data with your platform image repository prefix and merge into `values.yaml` - either manually or by placing [merge_yaml.py](#merge_yaml) in your astro-platform project-directory and running `python merge_yaml.py private-platform-registry-snippet.yaml values.yaml`.
 
-```
+```yaml
 global:
   privateRegistry:
     enabled: true
@@ -939,7 +980,7 @@ See Astronomer Software's [lifecycle policy](release-lifecycle-policy) and [rele
 ## Step 15: Fetch Airflow Helm charts {#fetch-airflow-helm-charts}
 
 * If you have internet accces to `https://helm.astronomer.io` run the following command on the machine you will be installing Astronomer Software on:
-```
+```sh
 helm repo add astronomer https://helm.astronomer.io/
 helm repo update
 ```
@@ -949,10 +990,8 @@ helm repo update
 
 
 ## Step 16: Create and customize upgrade.sh {#create-and-customize-upgradesh}
-C
-### Create upgrade.sh
 
-Create a file named `upgrade.sh` containing the script below, then customize:
+Create a file named `upgrade.sh` in your [platform-deployment project-directory](#platform-deployment-project-directory) containing the script below, then customize:
 * CHART_VERSION - v-prefixed version of the Astronomer Software version, including patch (e.g. v0.34.1)
 * RELEASE_NAME - helm release name, strongly recommended `astronomer`
 * NAMESPACE - namespace name to install platform components into, strongly recommend `astronomer`
@@ -1009,7 +1048,7 @@ The images and tags which are required for your Software installation depend on 
     This command sets all possible Helm values that could impact which images are required for your installation. By fetching all images now, you save time by eliminating the risk of missing an image. 
 3. Run the following command to template the Airflow Helm chart and fetch its rendered image tags:
 
-    ```shell
+    ```sh
     helm template --version $CHART_VERSION $CHART_NAME --set airflow.postgresql.enabled=false --set airflow.pgbouncer.enabled=true --set airflow.statsd.enabled=true --set airflow.executor=CeleryExecutor | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq
     ```
 
@@ -1044,7 +1083,7 @@ To complete this setup:
 
 1. Host an updates JSON in a Kubernetes configmap by running the following commands:
 
-    ```bash
+    ```sh
     $ curl -L https://updates.astronomer.io/astronomer-certified --output astronomer-certified.json
     $ curl -L https://updates.astronomer.io/astronomer-runtime --output astronomer-runtime.json
     $ kubectl create configmap astronomer-certified --from-file=astronomer-certified.json=./astronomer-certified.json -n astronomer
@@ -1205,8 +1244,6 @@ Astronomer Software is its most secure when you supply a pre-existing ingress co
 
 Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
 
-## Step 21: Configure Astronomer Software to Trust Private Root Certificates {#private-root-ca-for-astronomer}
-
 ## Step 22: Configure your Kubernetes Cluster to Trust Private Root Certificates {#private-root-ca-for-containerd}
 
 ## Step 23: Configure sidecar logging {#configure-sidecar-logging}
@@ -1223,9 +1260,9 @@ Astronomer Software includes integrations for several of the most popular identi
 Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
 
 ## Step 25: Openshift Configuration {#openshift-configuration}
-Merge the following configuration options into `values.yaml` - either manually or by placing [merge_yaml.py] in your astro-platform project-directory and running `python merge_yaml.py openshift-snippet.yaml values.yaml`.
+Merge the following configuration options into `values.yaml` - either manually or by placing [merge_yaml.py](#merge_yaml) in your astro-platform project-directory and running `python merge_yaml.py openshift-snippet.yaml values.yaml`.
 
-```
+```yaml
 astronomer:
   authSidecar:
     enabled: true
@@ -1269,8 +1306,6 @@ Perform a preliminary install of Astronomer Software to trigger the load-balance
 </TabItem>
 <TabItem value="helm">
 
-
-Create a file named `upgrade.sh` containing the script below, then customize:
 * CHART_VERSION - v-prefixed version of the Astronomer Software version, including patch (e.g. v0.34.1)
 * RELEASE_NAME - helm release name, strongly recommended `astronomer`
 * NAMESPACE - namespace name to install platform components into, strongly recommend `astronomer`
@@ -1351,18 +1386,18 @@ Install the Astronomer Software helm chart using `upgrade.sh` (recommended for y
 
 <TabItem value="script">
 
-```bash
+```sh
 ./upgrade.sh --timeout 20m
 ```
 
 </TabItem>
 <TabItem value="helm">
 
-```
-helm upgrade --install --namespace $NAMESPACE \
+```sh
+helm upgrade --install --namespace <astronomer-platform-namespace> \
             -f ./values.yaml \
             --reset-values \
-            --version $CHART_VERSION \
+            --version <v-prefixed-astronomer-platform-chart-version> \
             --debug \
             --set astronomer.houston.upgradeDeployments.enabled=false \
             --timeout 20m \
@@ -1378,7 +1413,7 @@ helm upgrade --install --namespace $NAMESPACE \
 To verify all pods are up and running, run:
 
 ```sh
-kubectl get pods --namespace <my-namespace>
+kubectl get pods --namespace <astronomer-platform-namespace>
 ```
 
 You should see something like this:
@@ -1430,9 +1465,9 @@ If you are seeing issues here, check out our [guide on debugging your installati
 
 ## Step 30: Verify you can access the Software UI {#verify-you-can-access-the-software-ui}
 
-Go to `app.BASEDOMAIN` to see the Software UI.
+Visit `https://app.<base-domain>` in your web-browser to view Astronomer Software's web interface.
 
-Consider this your new Airflow control plane. From the Software UI, you'll be able to both invite and manage users as well as create and monitor Airflow Deployments on the platform.
+Consider this your new Airflow control plane. From the Astronomer Software UI, you'll be able to both invite and manage users as well as create and monitor Airflow Deployments on the platform.
 
 ## Step 31: Verify your TLS setup {#verify-your-tls-setup}
 
@@ -1496,7 +1531,7 @@ set `astronomer.houston.config.email.enabled` to `false`, remove the `EMAIL__SMT
 ## Addendum
 ### merge_yaml.py {#merge-yaml}
 
-```
+```python
 #!/usr/bin/env python
 """
 Backup destination file and merge YAML contents of src into dest.
@@ -1667,23 +1702,8 @@ if __name__ == "__main__":
     main()
 
 ```
-
- 
-## TODO FIND home for this info
-Your `values.yaml` file should include the following configurations alongside the configurations you copied in Step TODO. For more example configuration files, see the [Astronomer GitHub](https://github.com/astronomer/astronomer/tree/master/configs).
-
-Commander, which is Astronomer's provisioning component, uses the Astronomer Airflow Helm chart to create Airflow deployments. You have two options to make the Helm chart available to Commander:
-
-- Use the built-in Astronomer Airflow Helm chart in the Commander Docker image.
-- Host the Astronomer Airflow Helm chart within your network. Not every cloud provider has a managed Helm registry, so you might want to check out [JFrog Artifactory](https://jfrog.com/artifactory) or [ChartMuseum](https://github.com/helm/chartmuseum).
-
-To use the built-in Astronomer Airflow Helm chart in the Commander Docker image, add the following configuration to your `values.yaml` file:
-
+                        
                          
-                         
-## TODO disable install domain by default
-
-
 # TODO OPTIONAL
 disabling metrics stack (prom/alertmanager/grafana)
 - cons
@@ -1693,15 +1713,10 @@ disabling elasticsearch/kibana
 - cons
 - prons
 - requirement to use externalElasticsearch
-disabling the registry
-- instructions
-disabling the install basedomain (TICKET?)
-disabling the vanity redirect at basedomain (TICKET?)
 
 ## TODO configuring containerd to recognize tls
 
-## TDOO validation enc type of cert for registry being rsa
-- is there an openssl cmmd they can run
+
 
 ## TODO Guidance on storing for CiCD
 
