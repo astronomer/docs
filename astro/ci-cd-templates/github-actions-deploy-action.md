@@ -8,6 +8,12 @@ description: Use pre-built Astronomer CI/CD templates to automate deploying Apac
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+:::tip
+
+The Astro GitHub integration can automatically deploy code from a GitHub repository to Astro without you needing to configure a GitHub action. In addition, the Astro UI shows Git metadata for each deploy on your Deployment information screen. See [Deploy code with the Astro GitHub integration](deploy-github-integration.md) for setup steps.
+
+:::
+
 GitHub Action templates use the Astronomer-maintained `deploy-action`, which is available in the [GitHub Marketplace](https://github.com/marketplace/actions/deploy-apache-airflow-dags-to-astro). This action automates the deploy process and includes additional features for more complex automation workflows. Specifically, the action can automatically:
 
 - Choose a deploy type based on the files that were changed in a commit. This allows you to use the same template for DAG deploys and image deploys.
