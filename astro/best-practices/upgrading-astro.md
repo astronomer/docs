@@ -1,6 +1,6 @@
 ---
 title: "Upgrading Astro Runtime"
-sidebar_label: "Upgrading Astro"
+sidebar_label: "Upgrading Astro Runtime"
 description: "How to upgrade your version of Astro Runtime safely and rollback if necessary."
 id: upgrading-astro
 ---
@@ -16,9 +16,9 @@ In this guide, you'll learn:
 
 ## Best practice guidance
 
-Keeping the version of Astro Runtime in your projects up-to-date is highly recommended as new versions are released regularly to apply bug fixes, security fixes, and improvements not only to Astro but also the underlying Airflow package.
+Keeping the version of Astro Runtime in your projects up-to-date is highly recommended as new versions are released regularly to apply bug fixes, security fixes, and improvements to Airflow.
 
-Upgrades can apply breaking changes, particularly in the case of new major versions. The Astro CLI has built-in functionality to identify and help resolve problems. We recommend making use of these features prior to upgrades.
+Upgrades can apply breaking changes, particularly in the case of new major versions. With new minor versions of Airflow, it is typically provider package upgrades that cause issues. The Astro CLI has built-in functionality to identify and help resolve problems. We recommend making use of these features prior to upgrades.
 
 In the case of emergencies, a rollback to a previous deploy can be used to downgrade the Astro Runtime version. Astro's rollback functionality, akin to Git's `revert` feature, makes use of Astro's deploy history. Rollbacks revert project code only, keeping environment variables and other configuration unchanged. Also, downgrading erases any data related to newer features. For these reasons, we recommend viewing rollbacks only as a measure of last resort.
 
@@ -33,17 +33,17 @@ Upgrading to certain versions of Runtime might result in extended upgrade times 
 To get the most out of this guide, you should have a basic understanding of:
 
 - The [Astro CLI](https://docs.astronomer.io/cli/overview.md).
-- Creating and managing [Deployment](https://docs.astronomer.io/astro/create-deployment)s.
+- Creating and managing [Deployments](https://docs.astronomer.io/astro/create-deployment).
 
-### Prepare for upgrades
+## Prepare for upgrades
 
 Before upgrading Astro Runtime, we recommend: 
 - Pinning the provider package versions in your current version of Runtime to ensure a stable upgrade path.
 - Running upgrade tests to anticipate and address problems.
 
-#### Pin provider versions
+### Pin provider versions
 
-New major versions of Astro Runtime can include major upgrades to built-in provider packages that can sometimes include breaking changes.
+New major versions of Astro Runtime (which correspond to minor versions of Airflow) can include major upgrades to built-in provider packages that can sometimes include breaking changes.
 
 Check the version of all provider packages installed in your Runtime version by running:
 
@@ -59,7 +59,7 @@ apache-airflow-providers-amazon==8.20.0
 
 For more details, see [Upgrading Astro Runtime](https://docs.astronomer.io/astro/upgrade-runtime#step-2-optional-pin-provider-package-versions).
 
-#### Run upgrade tests
+### Run upgrade tests
 
 Run the following command to run tests against the version of Astro Runtime you're upgrading to:
 
@@ -111,7 +111,7 @@ methodtools==0.4.7
 
 For more details about this command, see [Testing your Astro project locally](https://docs.astronomer.io/astro/cli/test-your-astro-project-locally#test-before-an-astro-runtime-upgrade).
 
-### Upgrade the Astro Runtime version and deploy to Astro
+## Upgrade the Astro Runtime version and deploy to Astro
 
 Follow the steps in [Upgrade Astro Runtime](https://docs.astronomer.io/astro/upgrade-runtime) to:
 
@@ -121,7 +121,7 @@ Follow the steps in [Upgrade Astro Runtime](https://docs.astronomer.io/astro/upg
 4. Deploy to Astronomer.
 5. Confirm your upgrade on Astro.
 
-### Rolling back deployments
+## Rolling back deployments
 
 The only way to downgrade the version of Astro Runtime in a Deployment is to trigger a rollback to a previous deploy on Astro.
 
@@ -144,4 +144,6 @@ The `upgrade-test` command can also be used to test the current Runtime version 
 
 For more details, see [Deploy history](https://docs.astronomer.io/astro/deploy-history#roll-back-to-a-past-deploy) and [Upgrade Astro Runtime](https://docs.astronomer.io/astro/upgrade-runtime#step-7-deploy-to-astronomer).
 
-See also [Upgrade Astro Runtime](https://docs.astronomer.io/astro/upgrade-runtime#step-3-optional-run-upgrade-tests-with-the-astro-cli).
+## See also 
+
+- [Upgrade Astro Runtime](https://docs.astronomer.io/astro/upgrade-runtime#step-3-optional-run-upgrade-tests-with-the-astro-cli).
