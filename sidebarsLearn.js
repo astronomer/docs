@@ -255,6 +255,7 @@ module.exports = {
         'soda-data-quality',
         'airflow-weaviate',
         'airflow-weights-and-biases',
+        'airflow-qdrant',
       ],
     },
     {
