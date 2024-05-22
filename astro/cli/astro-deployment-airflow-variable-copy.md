@@ -49,7 +49,7 @@ See [Organization](organization-api-tokens.md), [Workspace](workspace-api-tokens
 
 ```bash
 # copy airflow variables stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv to a deployment with an ID of cl03oiq7d80402nwn7fsl3dcd
-astro deployment airflow-variable copy --source-id cl03oiq7d80402nwn7fsl3dmv --target cl03oiq7d80402nwn7fsl3dcd
+astro deployment airflow-variable copy --source-id cl03oiq7d80402nwn7fsl3dmv --target-id cl03oiq7d80402nwn7fsl3dcd
 
 # copy airflow variables stored in the Deployment "My Deployment" to another Deployment "My Other Deployment"
 astro deployment airflow-variable copy --source-name="My Deployment" --target-name="My Other Deployment"

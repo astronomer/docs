@@ -49,8 +49,8 @@ alertmanager:
     platform:
       email_configs:
         - smarthost: smtp.sendgrid.net:587
-          from: <your-astronomer-alert-email@company.com>
-          to: <your-email@company.com>
+          from: <your-astronomer-alert-email@example.com>
+          to: <your-email@example.com>
           auth_username: apikey
           auth_password: SG.myapikey1234567891234abcdef_bKY
           send_resolved: true

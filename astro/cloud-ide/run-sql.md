@@ -34,7 +34,7 @@ Regardless of the cell type you choose, you can use your query results in downst
 
 ## Create a SQL cell
 
-1. In the Cloud UI, select a Workspace and then select **Cloud IDE**.
+1. In the Astro UI, select a Workspace and then select **Cloud IDE**.
 
 2. Select a project.
 

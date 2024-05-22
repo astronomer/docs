@@ -11,6 +11,14 @@ In this guide, you'll learn how to organize your Airflow projects, when to separ
 
 Throughout this guide, the term project is used to denote any set of DAGs and supporting files that are deployed to a single Airflow Deployment. For example, your organization might have a finance team and a data science team each with their own separate Airflow deployment, and they each have a separate Airflow project that contains all of their code.
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Airflow: Local Development Environment](https://academy.astronomer.io/path/airflow-101/local-development-environment).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:

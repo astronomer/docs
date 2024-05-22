@@ -2,7 +2,7 @@
 sidebar_label: 'Overview'
 title: 'Automate actions on Astro'
 id: automation-overview
-description: Learn how you can automate various actions on Astro to quickly build and manage your data ecosystem. 
+description: Learn how you can automate various actions on Astro to quickly build and manage your data ecosystem.
 ---
 
 As an administrator or head of your team, you can use the Astro CLI to automate the management of Deployments and Workspaces. Some common actions you can automate include:
@@ -20,16 +20,16 @@ This section of documentation covers how to automate processes on Astro using As
 ### Deployment actions
 
 - Deploy code to your Deployment using [CI/CD](set-up-ci-cd.md).
-- Update your Deployment using a [Deployment file](manage-deployments-as-code.md).  
-- Make a request to your Deployment using the [Airflow REST API](airflow-api.md). 
+- Update your Deployment using a [Deployment file](manage-deployments-as-code.md).
+- Make a request to your Deployment using the [Airflow REST API](airflow-api.md).
 
 ### Workspace actions
 
 - [Manage users, Teams, and tokens](cli/astro-workspace-list.md) in your Workspace.
-- Create [preview Deployments](ci-cd-templates/github-actions.md#deployment-preview-templates) using CI/CD. 
-- Perform all Deployment-level actions on any Deployment in a Workspace. 
+- Create [preview Deployments](ci-cd-templates/github-actions-deployment-preview.md) using CI/CD.
+- Perform all Deployment-level actions on any Deployment in a Workspace.
 
 ### Organization actions
 
 - [Manage Organization users, Teams, and tokens](cli/astro-organization-list.md).
-- Export [audit logs](audit-logs.md#export-audit-logs). 
+- Export [audit logs](audit-logs.md#export-audit-logs).

@@ -30,9 +30,6 @@ The Airflow topic [Cross-DAG Dependencies](https://airflow.apache.org/docs/apach
 
 In this guide, you'll review the methods for implementing cross-DAG dependencies, including how to implement dependencies if your dependent DAGs are located in different Airflow deployments.
 
-
-All code used in this  is available in the [cross-dag-dependencies-tutorial registry](https://github.com/astronomer/cross-dag-dependencies-tutorial).
-
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
@@ -57,7 +54,7 @@ Using SubDAGs to handle DAG dependencies can cause performance issues. Instead, 
 
 ### Dataset dependencies
 
-In Airflow 2.4 and later, you can use datasets to create data-driven dependencies between DAGs. DAGs that access the same data can have explicit, visible relationships, and DAGs can be scheduled based on updates to this data.
+The most common way to define cross-DAG dependencies is by using [datasets](airflow-datasets.md). DAGs that access the same data can have explicit, visible relationships, and DAGs can be scheduled based on updates to this data.
 
 You should use this method if you have a downstream DAG that should only run after a dataset has been updated by an upstream DAG, especially if those updates are irregular. This type of dependency also provides you with increased observability into the dependencies between your DAGs and datasets in the Airflow UI.
 
@@ -102,7 +99,7 @@ See [Datasets and Data-Aware Scheduling in Airflow](airflow-datasets.md) to lear
 
 The TriggerDagRunOperator is a straightforward method of implementing cross-DAG dependencies from an upstream DAG. This operator allows you to have a task in one DAG that triggers another DAG in the same Airflow environment. For more information about this operator, see [TriggerDagRunOperator](https://registry.astronomer.io/providers/apache-airflow/modules/triggerdagrunoperator).
 
-You can trigger a downstream DAG with the TriggerDagRunOperator from any point in the upstream DAG. If you set the operator's  `wait_for_completion` parameter to `True`, the upstream DAG will pause and resume only once the downstream DAG has finished running. As of Airflow 2.6 this waiting process can be deferred to the triggerer by setting the parameter `deferrable` to True, turning the operator into a [deferrable operator](deferrable-operators.md) which increases Airflow's scalability and can reduce cost.
+You can trigger a downstream DAG with the TriggerDagRunOperator from any point in the upstream DAG. If you set the operator's `wait_for_completion` parameter to `True`, the upstream DAG pauses and then resumes only after the downstream DAG has finished running. This waiting process can be deferred to the triggerer by setting the parameter, `deferrable`, to True. This setting turns the operator into a [deferrable operator](deferrable-operators.md), which increases Airflow's scalability and can reduce cost.
 
 A common use case for this implementation is when an upstream DAG fetches new testing data for a machine learning pipeline, runs and tests a model, and publishes the model's prediction. In case of the model underperforming, the TriggerDagRunOperator is used to start a separate DAG that retrains the model while the upstream DAG waits. Once the model is retrained and tested by the downstream DAG, the upstream DAG resumes and publishes the new model's results.
 
@@ -145,7 +142,7 @@ This method of creating cross-DAG dependencies is especially useful when you hav
 
 For example, you could have upstream tasks modifying different tables in a data warehouse and one downstream DAG running one branch of data quality checks for each of those tables. You can use one ExternalTaskSensor at the start of each branch to make sure that the checks running on each table only start after the update to the specific table is finished.
 
-In Airflow 2.2 and later, a deferrable version of the ExternalTaskSensor is available, the [ExternalTaskSensorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/externaltasksensorasync). For more info on deferrable operators and their benefits, see [Deferrable Operators](deferrable-operators.md)
+A deferrable version of the ExternalTaskSensor is available, the [ExternalTaskSensorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/externaltasksensorasync). For more info on deferrable operators and their benefits, see [Deferrable Operators](deferrable-operators.md)
 
 The following example DAG uses three ExternalTaskSensors at the start of three parallel branches in the same DAG.
 
@@ -186,7 +183,7 @@ In the previous example, the upstream DAG (`example_dag`) and downstream DAG (`e
 
 ### Airflow API
 
-The [Airflow API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) is another way of creating cross-DAG dependencies. This is especially useful in [Airflow 2.0](https://www.astronomer.io/blog/introducing-airflow-2-0), which has a fully stable REST API. To use the API to trigger a DAG run, you can make a POST request to the `DAGRuns` endpoint as described in the [Airflow API documentation](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run).
+The [Airflow API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) is another way of creating cross-DAG dependencies. To use the API to trigger a DAG run, you can make a POST request to the `DAGRuns` endpoint as described in the [Airflow API documentation](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run).
 
 This method is useful if your dependent DAGs live in different Airflow environments (more on this in the Cross-Deployment Dependencies section below). The task triggering the downstream DAG will complete once the API call is complete.
 
@@ -227,7 +224,7 @@ To use the SimpleHttpOperator to trigger another DAG, you need to define the fol
 
 ## DAG dependencies view
 
-In [Airflow 2.1](https://airflow.apache.org/docs/apache-airflow/stable/changelog.html#airflow-2-1-0-2021-05-21), a new cross-DAG dependencies view was added to the Airflow UI. This view shows all DAG dependencies in your Airflow environment as long as they are implemented using one of the following methods:
+The cross-DAG dependencies view shows all DAG dependencies in your Airflow environment as long as they are implemented using one of the following methods:
 
 - Using dataset driven scheduling
 - Using a TriggerDagRunOperator
@@ -241,7 +238,7 @@ When DAGs are scheduled depending on datasets, both the DAG containing the produ
 
 ![DAG Dependencies View Datasets](/img/guides/2_4_CrossGuide_Dependencies.png)
 
-In Airflow 2.4 an additional **Datasets** tab was added, which shows all dependencies between datasets and DAGs.
+To see all dependencies between datasets and DAGs, click on the **Datasets** tab in the Airflow UI.
 
 ![DAG Dependencies View Datasets](/img/guides/2_5_Datasets.png)
 
@@ -251,6 +248,5 @@ It is sometimes necessary to implement cross-DAG dependencies where the DAGs do 
 
 ### Cross-deployment dependencies on Astro
 
-To implement cross-DAG dependencies on two different Airflow environments on Astro, follow the steps for triggering a DAG using the Airflow API. Before you get started, review [Make requests to the Airflow REST API](https://docs.astronomer.io/astro/airflow-api). Then, follow the steps in [Trigger DAG runs across Deployments](https://docs.astronomer.io/astro/airflow-api#trigger-dag-runs-across-deployments).
+To implement cross-DAG dependencies on two different Airflow environments on Astro, follow the guidance in [Cross-deployment dependencies](https://docs.astronomer.io/astro/best-practices/cross-deployment-dependencies).
 
-You can follow similar steps to implement cross-deployment dependencies on Astronomer Software. See [Make requests to the Airflow REST API](https://docs.astronomer.io/software/airflow-api) for Software-specific instructions on accessing the Airflow API.

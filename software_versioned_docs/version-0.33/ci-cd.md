@@ -201,7 +201,7 @@ The following setup is an example implementation of CI/CD using GitHub Actions. 
 1. Create a GitHub repository for an Astro project. Ensure your repo has a development branch and a main branch. In this example, the branches are named `dev` and `main`.
 2. Create two [Deployment-level service accounts](ci-cd.md#step-1-create-a-service-account): One for your Dev Deployment and one for your Production Deployment.
 3. Follow instructions in [GitHub documentation](https://docs.github.com/en/actions/reference/encrypted-secrets) to add your service accounts as secrets to your repository. In the example below, these secrets are named `SERVICE_ACCOUNT_KEY` and `SERVICE_ACCOUNT_KEY_DEV`.
-4. Go to the Actions tab of your GitHub repo and create a new action with a `main.yml` file. To achieve the recommended workflow described in [Overview](ci-cd.md#overview), use the following action:
+4. Go to the Actions tab of your GitHub repo and create a new action with a `main.yml` file, then add the following configuration to the file:
 
     ```yaml
     name: Astronomer CI - Deploy code

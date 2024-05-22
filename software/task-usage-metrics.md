@@ -9,7 +9,7 @@ Task usage metrics provide an overview of your Airflow task runs and can help yo
 
 ## Enable task usage metrics
 
-To enable task usage metrics for your entire Astronomer installation, configure the following values in your `config.yaml` file:
+To enable task usage metrics for your entire Astronomer installation, configure the following values in your `values.yaml` file:
 
 ```yaml
 global:

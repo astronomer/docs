@@ -183,13 +183,13 @@ export default function NewsletterForm(
             aria-label="Email Address"
             type="email"
             name="email"
-            placeholder="you@company.com"
+            placeholder="you@example.com"
             value={email}
             autoComplete="email"
             onChange={(e) => setEmail(e.target.value.trim().toLowerCase())}
             pattern="^.+@.+\..+$"
             required
-            title="you@company.com"
+            title="you@example.com"
           />
           <button type="submit" disabled={disableButton}>{buttonText || content.buttonText}</button>
         </div>

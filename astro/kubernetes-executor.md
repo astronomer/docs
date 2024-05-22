@@ -1,13 +1,11 @@
 ---
 sidebar_label: 'Kubernetes executor'
-title: 'Configure the Kubernetes executor'
+title: 'Configure tasks to run with the Kubernetes executor'
 id: 'kubernetes-executor'
+description: Learn how to configure the Pods that the Kubernetes executor runs your tasks in.
 ---
 
-On Astro, you can configure Kubernetes executor in the following ways:
-
-- Change the resource usage for the default Pods on which your tasks run in the Cloud UI.
-- Customize individual Pods for tasks, including CPU and memory requests, using a `pod_override` configuration in your DAG code.
+The Kubernetes executor runs each Airflow task in a dedicated Kubernetes [Pod](https://kubernetes.io/docs/concepts/workloads/pods/). On Astro, you can customize these Pods on a per-task basis using a `pod_override` configuration. If a task doesn't contain a `pod_override` configuration, it runs using the default Pod as configured in your Deployment resource settings. 
 
 :::info
 
@@ -198,13 +196,13 @@ with DAG(
 
 :::info
 
-This section applies only to [Astro Hybrid](hybrid-overview.md) users. To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
+This section applies only to [Astro Hybrid](hybrid-overview.md) users. To see whether you're an Astro Hybrid user, open your Organization in the Astro UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
 
 :::
 
-A Deployment on Astro Hybrid that uses the Kubernetes executor runs worker Pods on a single `default` worker queue. You can change the type of worker that this queue uses from the Cloud UI.
+A Deployment on Astro Hybrid that uses the Kubernetes executor runs worker Pods on a single `default` worker queue. You can change the type of worker that this queue uses from the Astro UI.
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Worker Queues** tab and then click **Edit** to edit the `default` worker queue.
 

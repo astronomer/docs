@@ -1,22 +1,78 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-software-release-notes.xml" rel="self" type="application/rss+xml"/><title>Astro Software Release Notes</title><link>https://docs.astronomer.io/software/release-notes</link><pubDate>Tue, 13 Feb 2024 12:14:34 GMT</pubDate><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Software.</description><language>en-US</language><item><title>0.34.0</title><link>https://docs.astronomer.io/software/release-notes#0340</link><pubDate>Mon, 12 Feb 2024 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0340</guid><description><![CDATA[<p>Release date: February 12, 2024</p><h3>Updated permissions for upgrading Deployments to unsupported Astro Runtime versions</h3><p>:::danger Breaking change</p><p>This update includes a breaking change to the Astronomer Software Helm chart. The setting <code>enableSystemAdminCanUseAllRuntimes</code> no longer exists and has been replaced with:</p><pre><code class="language-yaml">astronomer:
-   houston:
-      config:
-         deployments:
-            enableListAllRuntimeVersions: true   
-</code></pre><p>This new setting changes whether all Admin-level users can view and upgrade to deprecated versions of Astro Runtime from the Software UI.</p><p>:::</p><p>By default, any user with an Admin-level role (Deployment Admin, Workspace Admin, System Admin) can now upgrade a Deployment to an unsupported version of Astro Runtime using the Astro CLI and the Houston API.</p><p>You can additionally set the following value in your <code>config.yaml</code> file to enable these users to view and upgrade to unsupported Runtime versions through the Software UI:</p><pre><code class="language-yaml">astronomer:
-   houston:
-      config:
-         deployments:
-            enableListAllRuntimeVersions: true   
-</code></pre><h3>Change resource provisioning strategy per Deployment</h3><p>You can now set a <strong>Resource Strategy</strong> for each Deployment to fine-tune how Astronomer Software reserves resources for the Deployment within the cluster. The new resource strategies don't use AUs, meaning you can specify the exact CPU/ Memory requests and limits based on the needs of the Deployment. For example, you can configure a Deployment to have significantly more memory than CPU in extra capacity so that memory-intensive tasks are always guaranteed to run. See <a href="customize-resource-usage.md">Customize resource usage</a> for more information.</p><h3>Deploy only DAGs with <code>astro deploy -—dags</code></h3><p>You can now deploy only the DAGs folder of an Astro project to a Deployment. If you only need to deploy DAG code changes, DAG-only deploys are faster and safer than a full image deploy. This also allows you to configure CI/CD pipelines that allow certain team members to only push DAGs, while allowing other team members to push Astro project configuration updates. See <a href="deploy-dags.md">Deploy DAGs</a> for more information.</p><h3>Additional improvements</h3><ul>
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-software-release-notes.xml" rel="self" type="application/rss+xml"/><title>Astro Software Release Notes</title><link>https://docs.astronomer.io/software/release-notes</link><pubDate>Mon, 20 May 2024 09:47:04 GMT</pubDate><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Software.</description><language>en-US</language><item><title>0.34.1</title><link>https://docs.astronomer.io/software/release-notes#0341</link><pubDate>Sun, 07 Apr 2024 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0341</guid><description><![CDATA[<p>Release date: April 8, 2024</p><h3>Documentation refactor</h3><ul>
+<li>To make the documentation more consistent with Helm standards, all instances of <code>config.yaml</code> have been replaced with <code>values.yaml</code>.</li>
+</ul><h3>Additional improvements</h3><ul>
 <li>
-<p>You can now configure a global label that is applied to all Astronomer Software Pods. &lt;!-- Can't relocate issue for this one--&gt;</p>
+<p>NGinx now has a dedicated service account with only the required permissions for the service</p>
+</li>
+<li>
+<p>You can now specify an image pull secret for the <code>privateCaCertsAddToHost.certCopier</code> image so that it can pull the image from a private registry.</p>
+</li>
+<li>
+<p>Added support for <a href="https://kubernetes.io/blog/2023/12/13/kubernetes-v1-29-release/">Kubernetes 1.29</a>.</p>
+</li>
+<li>
+<p>You can now define <code>additionalScrapeJobs</code> in the Prometheus Helm chart so that Prometheus scrapes additional jobs on the Astronomer Software cluster. For example, you could add the following configuration to <code>values.yaml</code> to scrape a static job:</p>
+<pre><code class="language-yaml">astronomer:
+prometheus:
+additionalScrapeJobs:
+- job_name: example-static-job
+  static_configs:
+  - targets:
+    - localhost:9090
+</code></pre>
+</li>
+</ul><h3>Bug fixes</h3><ul>
+<li>
+<p>Fixed an issue where the value for <code>houston.config.deployments.resourceProvisioningStrategy.astroUnitsEnabled</code> was not respected when creating Deployments using the Houston API.</p>
+</li>
+<li>
+<p>Fixed an issue where skipping multiple pages of a list in the Software UI could skip an extra page.</p>
+</li>
+<li>
+<p>Removed support for Kubernetes 1.24.</p>
+</li>
+<li>
+<p>Fixed an issue where task usage metrics didn't work when using a private certificate authority.</p>
+</li>
+<li>
+<p>Resolved the following vulnerabilities:</p>
+<ul>
+<li><a href="https://github.com/advisories/GHSA-m425-mq94-257g">GHSA-m425-mq94-257g</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-7104">CVE-2023-7104</a></li>
+<li><a href="https://github.com/advisories/GHSA-xpw8-rcwv-8f8p">GHSA-xpw8-rcwv-8f8p</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-1370">CVE-2023-1370</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2024-25062">CVE-2024-25062</a></li>
+<li><a href="https://github.com/advisories/GHSA-36jr-mh4h-2g58">GHSA-36jr-mh4h-2g58</a></li>
+<li><a href="https://github.com/advisories/GHSA-9763-4f94-gfch">GHSA-9763-4f94-gfch</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2024-21626">CVE-2024-21626</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2022-2625">CVE-2022-2625</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2024-0985">CVE-2024-0985</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2022-21698">CVE-2022-21698</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2021-33194">CVE-2021-33194</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-39325">CVE-2023-39325</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2021-38561">CVE-2021-38561</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-52425">CVE-2023-52425</a></li>
+</ul>
+</li>
+</ul>]]></description></item><item><title>0.34.0</title><link>https://docs.astronomer.io/software/release-notes#0340</link><pubDate>Mon, 12 Feb 2024 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0340</guid><description><![CDATA[<p>Release date: February 12, 2024</p><h3>Updated permissions for upgrading Deployments to unsupported Astro Runtime versions</h3><p>:::danger Breaking change</p><p>This update includes a breaking change to the Astronomer Software Helm chart. The setting <code>enableSystemAdminCanUseAllRuntimes</code> no longer exists and has been replaced with:</p><pre><code class="language-yaml">astronomer:
+   houston:
+      config:
+         deployments:
+            enableListAllRuntimeVersions: true   
+</code></pre><p>This new setting changes whether all Admin-level users can view and upgrade to deprecated versions of Astro Runtime from the Software UI.</p><p>:::</p><p>By default, any user with an Admin-level role (Deployment Admin, Workspace Admin, System Admin) can now upgrade a Deployment to an unsupported version of Astro Runtime using the Astro CLI and the Houston API.</p><p>You can additionally set the following value in your <code>values.yaml</code> file to enable these users to view and upgrade to unsupported Runtime versions through the Software UI:</p><pre><code class="language-yaml">astronomer:
+   houston:
+      config:
+         deployments:
+            enableListAllRuntimeVersions: true   
+</code></pre><h3>Change resource provisioning strategy per Deployment</h3><p>You can now set a <strong>Resource Strategy</strong> for each Deployment to fine-tune how Astronomer Software reserves resources for the Deployment within the cluster. The new resource strategies don't use AUs, meaning you can specify the exact CPU/ Memory requests and limits based on the needs of the Deployment. For example, you can configure a Deployment to have significantly more memory than CPU in extra capacity so that memory-intensive tasks are always guaranteed to run. See <a href="https://docs.astronomer.io/software/customize-resource-usage">Customize resource usage</a> for more information.</p><h3>Deploy only DAGs with <code>astro deploy -—dags</code></h3><p>You can now deploy only the DAGs folder of an Astro project to a Deployment. If you only need to deploy DAG code changes, DAG-only deploys are faster and safer than a full image deploy. This also allows you to configure CI/CD pipelines that allow certain team members to only push DAGs, while allowing other team members to push Astro project configuration updates. See <a href="deploy-dags.md">Deploy DAGs</a> for more information.</p><h3>Additional improvements</h3><ul>
+<li>
+<p>You can now configure a global label that is applied to all Astronomer Software Pods.</p>
 </li>
 <li>
 <p>You can now filter on <code>release_name</code> when you make a <code>deployments()</code> query to the Houston API.</p>
 </li>
 <li>
-<p>You can now use containerd-based Astro Runtime images on an Astronomer Software cluster with a self-managed private CA certificate. To configure a self-managed private CA certificate, add the following configuration to your <code>config.yaml</code> file and apply the configuration to your cluster:</p>
+<p>You can now use containerd-based Astro Runtime images on an Astronomer Software cluster with a self-managed private CA certificate. To configure a self-managed private CA certificate, add the following configuration to your <code>values.yaml</code> file and apply the configuration to your cluster:</p>
 <pre><code class="language-yaml">astronomer:
   privateCaCertsAddToHost:
     enabled: true
@@ -31,7 +87,7 @@
 <p>You can now make a <code>createDeployment</code> or <code>upsertDeployment</code> query by specifying a Workspace name or label instead of a Workspace ID.</p>
 </li>
 <li>
-<p>You can now disable the <code>astro-cli</code> Pod to free up resources on your cluster. This Pod is typically only used in airgapped clusters that can't access <code>https://install.astronomer.io</code>. To disable the Pod, add the following configuration to your <code>config.yaml</code> file and apply the change to your cluster:</p>
+<p>You can now disable the <code>astro-cli</code> Pod to free up resources on your cluster. This Pod is typically only used in airgapped clusters that can't access <code>https://install.astronomer.io</code>. To disable the Pod, add the following configuration to your <code>values.yaml</code> file and apply the change to your cluster:</p>
 <pre><code class="language-yaml">astronomer:
   install:
     cli-enabled: true
@@ -40,9 +96,18 @@
 <li>
 <p>Astronomer Software now redeploys your Deployment when you switch your executor type.</p>
 </li>
+<li>
+<p>You no longer have to manually define your private registry in the configuration for <a href="https://docs.astronomer.io/software/export-task-logs#customize-vector-logging-sidecars">Vector logging sidecars.</a>.</p>
+</li>
 </ul><h3>Bug fixes</h3><ul>
 <li>
+<p>Fixed an issue where Astronomer users would occasionally not be associated with their related Azure AD/ Microsoft Entra ID accounts when added to Astronomer using SCIM.</p>
+</li>
+<li>
 <p>The Houston API now validates <code>updateDeployment</code> queries to ensure that Deployment resource limits and requests are set correctly.</p>
+</li>
+<li>
+<p>Fixed an issue where the <strong>Core Container Status</strong> section of the <strong>Metrics</strong> tab would occasionally show unhealthy containers with a healthy status.</p>
 </li>
 <li>
 <p>Fixed an issue where Deployments would occasionally not recreate the correct resources when switching from the Kubernetes executor to the Celery executor.</p>
@@ -76,7 +141,9 @@
 <li><a href="https://nvd.nist.gov/vuln/detail/CVE-2021-38561">CVE-2021-38561</a></li>
 </ul>
 </li>
-</ul>]]></description></item><item><title>0.33.3</title><link>https://docs.astronomer.io/software/release-notes#0333</link><pubDate>Fri, 19 Jan 2024 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0333</guid><description><![CDATA[<p>Release date: January 19, 2024</p><h3>Bug fixes</h3><ul>
+</ul>]]></description></item><item><title>0.33.3</title><link>https://docs.astronomer.io/software/release-notes#0333</link><pubDate>Fri, 19 Jan 2024 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0333</guid><description><![CDATA[<p>Release date: January 19, 2024</p><h3>Additional improvements</h3><ul>
+<li>Added support for <a href="https://kubernetes.io/blog/2023/12/13/kubernetes-v1-29-release/">Kubernetes 1.29</a>.</li>
+</ul><h3>Bug fixes</h3><ul>
 <li>
 <p>Fixed an issue where the Workspace list page in the Software UI would show an error if any Workspace had an empty description.</p>
 </li>
@@ -94,14 +161,14 @@
 <li><a href="https://github.com/advisories/GHSA-fr2g-9hjm-wr23">GHSA-fr2g-9hjm-wr23</a></li>
 </ul>
 </li>
-</ul>]]></description></item><item><title>0.33.2</title><link>https://docs.astronomer.io/software/release-notes#0332</link><pubDate>Mon, 20 Nov 2023 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0332</guid><description><![CDATA[<p>Release date: November 20, 2023</p><h3>Change to behavior for interacting with deprecated Runtime versions</h3><p>In 0.33.2, non-System Admin users can now update Deployments using deprecated versions of Astro Runtime. By default, non-System Admin users can now interact with Deployments using deprecated Runtime versions, but only System Admins can create new Deployments with deprecated Runtime versions. As a result of this change, the <code>enableSystemAdminCanUseNonSupportedRuntime</code> key has been replaced with <code>enableSystemAdminCanUseAllRuntimes</code>. To set the new flag, add the following configuration to your <code>config.yaml</code> file:</p><pre><code class="language-yaml">astronomer:
+</ul>]]></description></item><item><title>0.33.2</title><link>https://docs.astronomer.io/software/release-notes#0332</link><pubDate>Mon, 20 Nov 2023 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0332</guid><description><![CDATA[<p>Release date: November 20, 2023</p><h3>Change to behavior for interacting with deprecated Runtime versions</h3><p>In 0.33.2, non-System Admin users can now update Deployments using deprecated versions of Astro Runtime. By default, non-System Admin users can now interact with Deployments using deprecated Runtime versions, but only System Admins can create new Deployments with deprecated Runtime versions. As a result of this change, the <code>enableSystemAdminCanUseNonSupportedRuntime</code> key has been replaced with <code>enableSystemAdminCanUseAllRuntimes</code>. To set the new flag, add the following configuration to your <code>values.yaml</code> file:</p><pre><code class="language-yaml">astronomer:
    houston:
       config:
          deployments:
             enableSystemAdminCanUseAllRuntimes: true   
 </code></pre><h3>Additional improvements</h3><ul>
 <li>
-<p>You can now configure a global index name prefix to use for both Fluentd and sidecar-based logging, which allows Astronomer Software to retain logs when you migrate between logging solutions. To enable this feature, add the following lines to your <code>config.yaml</code> file:</p>
+<p>You can now configure a global index name prefix to use for both Fluentd and sidecar-based logging, which allows Astronomer Software to retain logs when you migrate between logging solutions. To enable this feature, add the following lines to your <code>values.yaml</code> file:</p>
 <pre><code class="language-yaml">global:
    logging:
       indexNamePrefix: &lt;your-index-prefix&gt;
@@ -146,9 +213,9 @@
 </ul>
 </li>
 </ul>]]></description></item><item><title>0.33.1</title><link>https://docs.astronomer.io/software/release-notes#0331</link><pubDate>Thu, 12 Oct 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0331</guid><description><![CDATA[<p>Release date: October 13, 2023</p><h3>Additional improvements</h3><ul>
-<li>You can now set <code>astronomer.auth.microsoft.useExternalProxy: false</code> in your <code>config.yaml</code> file to bypass proxy support for Azure logins.</li>
+<li>You can now set <code>astronomer.auth.microsoft.useExternalProxy: false</code> in your <code>values.yaml</code> file to bypass proxy support for Azure logins.</li>
 <li>You can now list System-level Service Accounts using the Houston API.</li>
-<li>You can now configure a service account specifically for your image registry using by setting <code>astronomer.registry.serviceaccount</code> in your <code>config.yaml</code> file.</li>
+<li>You can now configure a service account specifically for your image registry using by setting <code>astronomer.registry.serviceaccount</code> in your <code>values.yaml</code> file.</li>
 <li>The Kibana logging dashboard now includes a default index.</li>
 </ul><h3>Bug fixes</h3><ul>
 <li>
@@ -223,7 +290,7 @@
 <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-25653">CVE-2023-25653</a></li>
 </ul>
 </li>
-</ul>]]></description></item><item><title>0.33.0</title><link>https://docs.astronomer.io/software/release-notes#0330</link><pubDate>Thu, 07 Sep 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0330</guid><description><![CDATA[<p>Release date: September 8, 2023</p><h3>Automatic PGBouncer connection scaling</h3><p>Astronomer Software can now automatically scale the size of PGBouncer connection pools based on your Airflow component counts and Airflow configuration, instead of solely based on total AU. This improves performance, scalability, and utilization of database connections across all Deployments.</p><p>This feature is off by default. You can enable it by setting  <code>deployments.pgBouncerResourceCalculationStrategy: airflowStratV2</code> in your <code>config.yaml</code> file. To revert back to previous behavior, set this key to <code>auStratV1</code> instead.</p><h3>Additional improvements</h3><ul>
+</ul>]]></description></item><item><title>0.33.0</title><link>https://docs.astronomer.io/software/release-notes#0330</link><pubDate>Thu, 07 Sep 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0330</guid><description><![CDATA[<p>Release date: September 8, 2023</p><h3>Automatic PGBouncer connection scaling</h3><p>Astronomer Software can now automatically scale the size of PGBouncer connection pools based on your Airflow component counts and Airflow configuration, instead of solely based on total AU. This improves performance, scalability, and utilization of database connections across all Deployments.</p><p>This feature is off by default. You can enable it by setting  <code>deployments.pgBouncerResourceCalculationStrategy: airflowStratV2</code> in your <code>values.yaml</code> file. To revert back to previous behavior, set this key to <code>auStratV1</code> instead.</p><h3>Additional improvements</h3><ul>
 <li>You can now disable Airflow and platform alerts on the Prometheus alerts dashboard by setting <code>prometheus.defaultAlerts.airflow.enabled</code> and <code>prometheus.defaultAlerts.airflow.enabled</code> to <code>false</code> in your Prometheus Helm chart. If you disable these alerts, you can still add back specific alerts or configure custom alerts using <code>prometheus.defaultAlerts.additionalAlerts</code>. See <a href="platform-alerts.md#create-custom-alerts">Create custom alerts</a>.</li>
 <li>Added support for <a href="https://kubernetes.io/blog/2023/04/11/kubernetes-v1-27-release/">Kubernetes 1.27</a>.</li>
 <li>The Workspace <strong>Deployments</strong> page is now paginated in the Astronomer UI.</li>
@@ -271,9 +338,56 @@
 <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945">CVE-2023-35945</a></li>
 </ul>
 </li>
+</ul>]]></description></item><item><title>0.32.6</title><link>https://docs.astronomer.io/software/release-notes#0326</link><pubDate>Fri, 16 Feb 2024 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0326</guid><description><![CDATA[<p>Release date: February 16, 2024</p><h3>Additional improvements</h3><ul>
+<li>Added support for <a href="https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.29.md">Kubernetes 1.29</a></li>
+<li>You no longer have to manually define your private registry in the configuration for <a href="https://docs.astronomer.io/software/export-task-logs#customize-vector-logging-sidecars">Vector logging sidecars.</a>. Your registry details are now automatically pulled from your core private registry configuration.</li>
+<li>Fixed an issue where container status and usage did not appear in the <strong>Metrics</strong> tab for Deployments with pre-created namespaces.</li>
+</ul><h3>Bug fixes</h3><ul>
+<li>
+<p>Fixed an issue where Deployments would not have default configuration values as expected when a configuration was missing.</p>
+</li>
+<li>
+<p>Fixed an issue where the <strong>Core Container Status</strong> section of the <strong>Metrics</strong> tab would occasionally show unhealthy containers with a healthy status.</p>
+</li>
+<li>
+<p>Fixed an issue where a Deployment would incorrectly appear as unhealthy if you scaled down its number of triggerers to zero.</p>
+</li>
+<li>
+<p>Fixed an issue where you couldn't specify an image pull secret for the <code>certCopier</code> image, meaning that you couldn't pull it from a private registry.</p>
+</li>
+<li>
+<p>Resolved the following vulnerabilities:</p>
+<ul>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39325">CVE-2023-39325</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-52425">CVE-2023-52425</a></li>
+<li><a href="https://github.com/advisories/GHSA-m425-mq94-257g">GHSA-m425-mq94-257g</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-7104">CVE-2023-7104</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-34054">CVE-2023-34054</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-34062">CVE-2023-34062</a></li>
+<li><a href="https://github.com/advisories/GHSA-xpw8-rcwv-8f8p">GHSA-xpw8-rcwv-8f8p</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1370">CVE-2023-1370</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-0985">CVE-2024-0985</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-21626">CVE-2024-21626</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-47090">CVE-2023-47090</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-46129">CVE-2023-46129</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-46233">CVE-2023-46233</a></li>
+<li><a href="https://github.com/advisories/GHSA-36jr-mh4h-2g58">GHSA-36jr-mh4h-2g58</a></li>
+<li><a href="https://github.com/advisories/GHSA-9763-4f94-gfch">GHSA-9763-4f94-gfch</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-49569">CVE-2023-49569</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-49568">CVE-2023-49568</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-47108">CVE-2023-47108</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-45142">CVE-2023-45142</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2625">CVE-2022-2625</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5869">CVE-2023-5869</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2253">CVE-2023-2253</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=2022-21698">CVE-2022-21698</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33194">CVE-2021-33194</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-38561">CVE-2021-38561</a></li>
+</ul>
+</li>
 </ul>]]></description></item><item><title>0.32.5</title><link>https://docs.astronomer.io/software/release-notes#0325</link><pubDate>Fri, 08 Dec 2023 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0325</guid><description><![CDATA[<p>Release date: December 8, 2023</p><h3>Additional improvements</h3><ul>
 <li>
-<p>You can now configure a global index name prefix to use for both <a href="export-task-logs.md">Fluentd and sidecar-based logging</a>, which allows Astronomer Software to retain logs when you migrate between logging solutions. To enable this feature, add the following lines to your <code>config.yaml</code> file:</p>
+<p>You can now configure a global index name prefix to use for both <a href="export-task-logs.md">Fluentd and sidecar-based logging</a>, which allows Astronomer Software to retain logs when you migrate between logging solutions. To enable this feature, add the following lines to your <code>values.yaml</code> file:</p>
 <pre><code class="language-yaml">global:
   logging:
     indexNamePrefix: &lt;your-index-prefix&gt;
@@ -357,9 +471,9 @@
 </ul>]]></description></item><item><title>0.32.3</title><link>https://docs.astronomer.io/software/release-notes#0323</link><pubDate>Wed, 30 Aug 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0323</guid><description><![CDATA[<p>Release date: August 31, 2023</p><h3>Additional improvements</h3><ul>
 <li>You can now disable Airflow and platform alerts on the Prometheus alerts dashboard by setting <code>Values.defaultAlerts.airflow.enabled</code> and <code>prometheus.defaultAlerts.platform.enabled</code> to <code>false</code> in your Prometheus Helm chart. If you disable these alerts, you can still add back specific alerts or configure custom alerts using <code>prometheus.defaultAlerts.additionalAlerts</code>. See <a href="platform-alerts.md#create-custom-alerts">Create custom alerts</a>.</li>
 <li>You no longer have to set <code>elasticsearch.curator.age.timestring</code> when you configure a custom indexing pattern for <a href="export-task-logs.md#export-logs-using-container-sidecars">Vector logging sidecars</a>. The only required value is now <code>global.loggingSidecar.indexPattern</code>.</li>
-<li>You can now configure a service account specifically for your image registry using by setting <code>astronomer.registry.serviceaccount</code> in your <code>config.yaml</code> file.</li>
+<li>You can now configure a service account specifically for your image registry using by setting <code>astronomer.registry.serviceaccount</code> in your <code>values.yaml</code> file.</li>
 <li>You can now <a href="cluster-resource-provisioning.md">overprovision</a> the <code>triggerer-log-groomer</code> component.</li>
-<li>You can now set <code>astronomer.houston.enableHoustonInternalAuthorization</code> in your <code>config.yaml</code> file to redirect all authorization requests from the ingress controller to the Houston API internal service endpoint. This can increase performance and decrease network latency.</li>
+<li>You can now set <code>astronomer.houston.enableHoustonInternalAuthorization</code> in your <code>values.yaml</code> file to redirect all authorization requests from the ingress controller to the Houston API internal service endpoint. This can increase performance and decrease network latency.</li>
 <li>Upgraded ElasticSearch to 8.x.</li>
 <li>Added support for <a href="https://kubernetes.io/blog/2023/04/11/kubernetes-v1-27-release/">Kubernetes 1.27</a>.</li>
 </ul><h3>Bug fixes</h3><ul>
@@ -418,10 +532,10 @@
 <p>You can now set <code>prometheus.config.scrape_configs.kubernetes_apiservers.tls_config.insecure_skip_verify</code> in the Prometheus Helm chart.</p>
 </li>
 <li>
-<p>You can now set <code>astronomer.houston.config.deployments.helm.prometheus.certgenerator.extraAnnotations</code> in your <code>config.yaml</code> file.</p>
+<p>You can now set <code>astronomer.houston.config.deployments.helm.prometheus.certgenerator.extraAnnotations</code> in your <code>values.yaml</code> file.</p>
 </li>
 <li>
-<p>You can now configure credentials for a registry backend as Kubernetes secrets in your <code>config.yaml</code> file. See <a href="registry-backend.md">Configure a registry backend</a>.</p>
+<p>You can now configure credentials for a registry backend as Kubernetes secrets in your <code>values.yaml</code> file. See <a href="registry-backend.md">Configure a registry backend</a>.</p>
 </li>
 </ul><h3>Bug fixes</h3><ul>
 <li>
@@ -437,7 +551,7 @@
 <p>System Admins can no longer change a user's system role if the user is imported to Astronomer through an IdP group and <code>manageSystemPermissionsViaIdpGroups</code> is set to <code>true</code>.</p>
 </li>
 <li>
-<p>Fixed an issue where you could not create a new Deployment from the Cloud UI if you updated its scheduler count using the text-based input field.</p>
+<p>Fixed an issue where you could not create a new Deployment from the Astro UI if you updated its scheduler count using the text-based input field.</p>
 </li>
 <li>
 <p>Fixed an issue where container status and usage did not appear in the <strong>Metrics</strong> tab for Deployments with pre-created namespaces.</p>
@@ -465,7 +579,7 @@
 <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2650">CVE-2023-2650</a></li>
 </ul>
 </li>
-</ul>]]></description></item><item><title>0.32.0</title><link>https://docs.astronomer.io/software/release-notes#0320</link><pubDate>Thu, 27 Apr 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0320</guid><description><![CDATA[<p>Release date: April 28, 2023</p><h3>Clean Deployment task metadata</h3><p>You can now clean task data from your Deployments by exporting it to an external storage service. This workflow reduces the amount of data Airflow stores in your Deployment metadata database by archiving data that you don't need to access on a regular basis. To configure this job, see <a href="configure-deployment.md#clean-deployment-task-metadata">Clean Deployment task metadata</a>.</p><h3>Programmatically create and update Deployments with the Houston API</h3><p>You can now programmatically create or update Deployments using the Houston API <code>upsertDeployment</code> mutation. Unlike <code>createDeployment</code>, the <code>upsertDeployment</code> mutation includes keys for configuring Deployment resources such as environment variables. See <a href="houston-api.md#create-or-update-a-deployment-with-configurations">Create or update a Deployment with configurations</a>.</p><h3>Reduce resource requests for Airflow components in development environments</h3><p>You can reduce the amount of CPU and memory that an Airflow component requests in development environments, allowing you to more efficiently provision resources based on the requirements for your development Deployments. See <a href="cluster-resource-provisioning">Underprovision Airflow resources</a> for configuration steps.</p><h3>New cron job to clean Deployment task data</h3><p>You can now clean task data from your Deployments by exporting it to an external storage service. This workflow reduces the amount of storage Astronomer Software uses by archiving data that you don't need to access on a regular basis. See <a href="configure-deployment.md#clean-deployment-task-metadata">Configure a Deployment</a> for configuration steps.</p><h3>Assign System-level permissions to Teams</h3><p>You can assign the System Admin, System Editor, and System Viewer permissions to teams by setting the following values in your <code>config.yaml</code> file:</p><pre><code class="language-sh"># Auth configuration.
+</ul>]]></description></item><item><title>0.32.0</title><link>https://docs.astronomer.io/software/release-notes#0320</link><pubDate>Thu, 27 Apr 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0320</guid><description><![CDATA[<p>Release date: April 28, 2023</p><h3>Clean Deployment task metadata</h3><p>You can now clean task data from your Deployments by exporting it to an external storage service. This workflow reduces the amount of data Airflow stores in your Deployment metadata database by archiving data that you don't need to access on a regular basis. To configure this job, see <a href="configure-deployment.md#clean-deployment-task-metadata">Clean Deployment task metadata</a>.</p><h3>Programmatically create and update Deployments with the Houston API</h3><p>You can now programmatically create or update Deployments using the Houston API <code>upsertDeployment</code> mutation. Unlike <code>createDeployment</code>, the <code>upsertDeployment</code> mutation includes keys for configuring Deployment resources such as environment variables. See <a href="houston-api.md#create-or-update-a-deployment-with-configurations">Create or update a Deployment with configurations</a>.</p><h3>Reduce resource requests for Airflow components in development environments</h3><p>You can reduce the amount of CPU and memory that an Airflow component requests in development environments, allowing you to more efficiently provision resources based on the requirements for your development Deployments. See <a href="cluster-resource-provisioning">Underprovision Airflow resources</a> for configuration steps.</p><h3>New cron job to clean Deployment task data</h3><p>You can now clean task data from your Deployments by exporting it to an external storage service. This workflow reduces the amount of storage Astronomer Software uses by archiving data that you don't need to access on a regular basis. See <a href="configure-deployment.md#clean-deployment-task-metadata">Configure a Deployment</a> for configuration steps.</p><h3>Assign System-level permissions to Teams</h3><p>You can assign the System Admin, System Editor, and System Viewer permissions to teams by setting the following values in your <code>values.yaml</code> file:</p><pre><code class="language-sh"># Auth configuration.
 auth:
   openidConnect:
     idpGroupsImportEnabled: true
@@ -480,8 +594,8 @@ auth:
 <li>The root user feature introduced in Astronomer Software version 0.31 has been deprecated. System Admins now have the highest level of permissions on the platform.</li>
 <li>Workspaces are now required to have unique names. If you have existing Workspaces with identical names, upon upgrade the duplicate names will be appended with an underscore and a number.</li>
 <li>If you configured <a href="deploy-git-sync.md">git-sync deploys</a> for a Deployment, you can now <a href="deployment-logs.md">view error logs</a> emitted from the git-sync Kubernetes Pod in the Software UI.</li>
-<li>You can now configure a custom indexing pattern for <a href="export-task-logs.md#export-logs-using-container-sidecars">Vector logging sidecars</a> by setting both <code>elasticsearch.curator.age.timestring</code> and <code>astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern</code> in your <code>config.yaml</code> file.</li>
-<li>You can now configure custom environment variables for ElasticSearch-based custom logging using the <code>astronomer.customLogging.extraEnv</code> value in your <code>config.yaml</code> file.</li>
+<li>You can now configure a custom indexing pattern for <a href="export-task-logs.md#export-logs-using-container-sidecars">Vector logging sidecars</a> by setting both <code>elasticsearch.curator.age.timestring</code> and <code>astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern</code> in your <code>values.yaml</code> file.</li>
+<li>You can now configure custom environment variables for ElasticSearch-based custom logging using the <code>astronomer.customLogging.extraEnv</code> value in your <code>values.yaml</code> file.</li>
 <li>The <code>astronomer.houston.config.deployments.sysAdminScalabilityImprovementsEnabled</code> key has been replaced with <code>astronomer.houston.config.deployments.performanceOptimizationModeEnabled</code>  for improved performance across additional Software UI views.</li>
 </ul><h3>Bug fixes</h3><ul>
 <li>
@@ -567,13 +681,13 @@ Fixed an issue in the Software UI where a text search returned duplicate entries
 <p>Support for Kubernetes <a href="https://kubernetes.io/blog/2022/08/23/kubernetes-v1-25-release/">1.25</a> and <a href="https://kubernetes.io/blog/2022/12/09/kubernetes-v1-26-release/">1.26</a>.</p>
 </li>
 <li>
-<p>You can now configure custom annotations for Houston ingress by setting <code>astronomer.houston.ingress.annotation</code> in your <code>config.yaml</code> file.</p>
+<p>You can now configure custom annotations for Houston ingress by setting <code>astronomer.houston.ingress.annotation</code> in your <code>values.yaml</code> file.</p>
 </li>
 <li>
 <p>The System Admin <strong>Deployments</strong> list in the Software UI is now paginated.</p>
 </li>
 <li>
-<p>You can now use the following values in your <code>config.yaml</code> file to configure resource allocation for the git-sync relay service:</p>
+<p>You can now use the following values in your <code>values.yaml</code> file to configure resource allocation for the git-sync relay service:</p>
 <ul>
 <li><code>astronomer.gitSyncRelay.gitSyncResources</code></li>
 <li><code>astronomer.gitSyncRelay.gitDaemonResources</code></li>
@@ -646,7 +760,7 @@ Fixed an issue in the Software UI where a text search returned duplicate entries
 <li>Nginx</li>
 <li>Grafana</li>
 <li>Blackbox exporter</li>
-</ul><p>You might experience OOMKill errors or unexpected behavior after upgrading if you use resources beyond the new default limits. To minimize disruption, view resource usage for these components in <a href="grafana-metrics.md">Grafana</a> prior to upgrade and compare this usage to the default resource limits in the <a href="https://github.com/astronomer/astronomer/blob/master/charts/astronomer/values.yaml">Astronomer Helm chart</a>.</p><p>If your current usage is expected and higher than the default resource limits, update the limits in your <code>config.yaml</code> file before upgrading to Astronomer Software 0.31.</p><h3>Additional improvements</h3><ul>
+</ul><p>You might experience OOMKill errors or unexpected behavior after upgrading if you use resources beyond the new default limits. To minimize disruption, view resource usage for these components in <a href="grafana-metrics.md">Grafana</a> prior to upgrade and compare this usage to the default resource limits in the <a href="https://github.com/astronomer/astronomer/blob/master/charts/astronomer/values.yaml">Astronomer Helm chart</a>.</p><p>If your current usage is expected and higher than the default resource limits, update the limits in your <code>values.yaml</code> file before upgrading to Astronomer Software 0.31.</p><h3>Additional improvements</h3><ul>
 <li>You can now set a custom security context for <code>es-client</code> by setting <code>elasticsearch.client.securityContext.capabilities.add={}</code> in the ElasticSearch Helm chart.</li>
 <li>The <strong>Deployment users</strong> page is now paginated in the Software UI.</li>
 <li>You can now set <code>astronomer.registry.logLevel</code> to filter which types of logs appear in your Docker registry.</li>
@@ -683,10 +797,10 @@ Fixed an issue in the Software UI where a text search returned duplicate entries
 <p>Fixed an issue where the configuration in <code>astronomer.houston.updateRuntimeCheck.url</code> was ignored if not all supported Deployment image versions were present in the destination URL.</p>
 </li>
 </ul>]]></description></item><item><title>0.30.8</title><link>https://docs.astronomer.io/software/release-notes#0308</link><pubDate>Thu, 14 Sep 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0308</guid><description><![CDATA[<p>Release date: September 15, 2023</p><h3>Additional improvements</h3><ul>
-<li>You can now configure credentials for a registry backend as Kubernetes secrets in your <code>config.yaml</code> file. See <a href="registry-backend.md">Configure a registry backend</a>.</li>
+<li>You can now configure credentials for a registry backend as Kubernetes secrets in your <code>values.yaml</code> file. See <a href="registry-backend.md">Configure a registry backend</a>.</li>
 <li>You can now disable Airflow and platform alerts on the Prometheus alerts dashboard by setting <code>prometheus.defaultAlerts.airflow.enabled</code> and <code>prometheus.defaultAlerts.airflow.enabled</code> to <code>false</code> in your Prometheus Helm chart. If you disable these alerts, you can still add back specific alerts or configure custom alerts using <code>prometheus.defaultAlerts.additionalAlerts</code>. See <a href="platform-alerts.md#create-custom-alerts">Create custom alerts</a>.</li>
 <li>You no longer have to set <code>elasticsearch.curator.age.timestring</code> when you configure a custom indexing pattern for <a href="export-task-logs.md#export-logs-using-container-sidecars">Vector logging sidecars</a>. The only required value is now <code>astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern</code>.</li>
-<li>You can now configure a service account specifically for your image registry using by setting <code>astronomer.registry.serviceaccount</code> in your <code>config.yaml</code> file.</li>
+<li>You can now configure a service account specifically for your image registry using by setting <code>astronomer.registry.serviceaccount</code> in your <code>values.yaml</code> file.</li>
 <li>The Kibana logging dashboard now includes a default index.</li>
 <li>Added support for <a href="https://kubernetes.io/blog/2023/04/11/kubernetes-v1-27-release/">Kubernetes 1.27</a>.</li>
 </ul><h3>Bug fixes</h3><ul>
@@ -744,13 +858,13 @@ Fixed an issue in the Software UI where a text search returned duplicate entries
 </ul>
 </li>
 </ul>]]></description></item><item><title>0.30.7</title><link>https://docs.astronomer.io/software/release-notes#0307</link><pubDate>Thu, 25 May 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0307</guid><description><![CDATA[<p>Release date: May 26, 2023</p><h3>Additional improvements</h3><ul>
-<li>You can now configure custom environment variables for ElasticSearch-based custom logging using the <code>astronomer.customLogging.extraEnv</code> value in your <code>config.yaml</code> file.</li>
+<li>You can now configure custom environment variables for ElasticSearch-based custom logging using the <code>astronomer.customLogging.extraEnv</code> value in your <code>values.yaml</code> file.</li>
 <li>You can now configure <code>prometheus.config.scrape_configs.kubernetes_apiservers.tls_config.insecure_skip_verify</code> in the Prometheus Helm chart.</li>
-<li>You can now set <code>astronomer.houston.config.deployments.helm.prometheus.certgenerator.extraAnnotations</code> in your <code>config.yaml</code> file.</li>
-<li>You can now configure a custom indexing pattern for <a href="export-task-logs.md#export-logs-using-container-sidecars">Vector logging sidecars</a> by setting both <code>elasticsearch.curator.age.timestring</code> and <code>astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern</code> in your <code>config.yaml</code> file.</li>
+<li>You can now set <code>astronomer.houston.config.deployments.helm.prometheus.certgenerator.extraAnnotations</code> in your <code>values.yaml</code> file.</li>
+<li>You can now configure a custom indexing pattern for <a href="export-task-logs.md#export-logs-using-container-sidecars">Vector logging sidecars</a> by setting both <code>elasticsearch.curator.age.timestring</code> and <code>astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern</code> in your <code>values.yaml</code> file.</li>
 <li>The Software UI now shows a warning message for Deployments currently running an Astronomer Certified image. Only System Admins can create Deployments with deprecated Astronomer Certified images by setting <code>deployments.enableSystemAdminCanCreateDeprecatedAirflows</code> to <code>true</code>.</li>
 <li>Grafana now includes an <strong>Astronomer Houston Dashboard</strong> that you can use to view Houston metrics.</li>
-<li>Improved signalling between primary Kubernetes containers and the logging sidecar so that you no longer have to set <code>global.loggingSidecar.terminationEndpoint</code> in your <code>config.yaml</code> file.</li>
+<li>Improved signalling between primary Kubernetes containers and the logging sidecar so that you no longer have to set <code>global.loggingSidecar.terminationEndpoint</code> in your <code>values.yaml</code> file.</li>
 </ul><h3>Bug fixes</h3><ul>
 <li>
 <p>Fixed an issue where container status and usage did not appear in the <strong>Metrics</strong> tab for Deployments with pre-created namespaces.</p>
@@ -895,18 +1009,18 @@ Fixed an issue in the Software UI where a text search returned duplicate entries
 </li>
 </ul>]]></description></item><item><title>0.30.3</title><link>https://docs.astronomer.io/software/release-notes#0303</link><pubDate>Tue, 25 Oct 2022 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0303</guid><description><![CDATA[<p>Release date: October 26, 2022</p><h3>Additional improvements</h3><ul>
 <li>You can now configure custom Alertmanager receivers with their own rules and topics using <code>customReceiver</code> in the Alertmanager Helm chart.</li>
-<li>You can now limit which Runtime versions are available for new Deployments using <code>astronomer.minAstroRuntimeVersion</code> and <code>astronomer.airflowMinimumAstroRuntimeVersion</code> in your <code>config.yaml</code> file.</li>
+<li>You can now limit which Runtime versions are available for new Deployments using <code>astronomer.minAstroRuntimeVersion</code> and <code>astronomer.airflowMinimumAstroRuntimeVersion</code> in your <code>values.yaml</code> file.</li>
 <li>You can now configure a <code>livenessProbe</code> and <code>readinessProbe</code> specific to Prometheus in the Prometheus Helm chart.</li>
-<li>You can now pass extra environment variables to <a href="export-task-logs.md#configure-logging-sidecars">logging sidecars</a> using <code>global.loggingSidecar.extraEnv</code> in your <code>config.yaml</code> file.</li>
-<li>You can now define resource requests for <a href="export-task-logs.md#configure-logging-sidecars">logging sidecars</a> using <code>global.loggingSidecar.resources</code> in your <code>config.yaml</code> file.</li>
-<li>You can now configure whether introspection APIs are available in GraphQL using <code>astronomer.apollo.introspection</code> in your <code>config.yaml</code> file.</li>
+<li>You can now pass extra environment variables to <a href="export-task-logs.md#configure-logging-sidecars">logging sidecars</a> using <code>global.loggingSidecar.extraEnv</code> in your <code>values.yaml</code> file.</li>
+<li>You can now define resource requests for <a href="export-task-logs.md#configure-logging-sidecars">logging sidecars</a> using <code>global.loggingSidecar.resources</code> in your <code>values.yaml</code> file.</li>
+<li>You can now configure whether introspection APIs are available in GraphQL using <code>astronomer.apollo.introspection</code> in your <code>values.yaml</code> file.</li>
 </ul><h3>Bug fixes</h3><ul>
 <li>Fixed an issue where upgrading Astronomer Software with a custom <code>houston.deployments.components</code> value in Helm could make the Software UI unavailable.</li>
 <li>Fixed an issue where the Software UI didn't show the correct value for <strong>Extra Capacity</strong>.</li>
 <li>Fixed an issue where upgrading a Deployment from Airflow 1.10.15 to 2.3 prevented you from configuring Deployment resources in the Software UI.</li>
 <li>Added protections for using Arm-based Runtime images in Software Deployments.</li>
 <li>Fixed an issue where some Deployments failed when pulling secrets from a private Docker registry.</li>
-<li>Fixed an issue where some email alerts for unhealthy Deployments would not send if <code>namespaceFreeFormEntry: true</code> was set in <code>config.yaml</code>.</li>
+<li>Fixed an issue where some email alerts for unhealthy Deployments would not send if <code>namespaceFreeFormEntry: true</code> was set in <code>values.yaml</code>.</li>
 <li>Fixed an issue where you could not view Deployment-level service accounts in the Software UI.</li>
 <li>Fixed an issue where token refreshing could break when the token didn't have a properly formatted date.</li>
 <li>Suppressed some extraneous ElasticSearch logs that made parsing logs for relevant information difficult.</li>
@@ -937,14 +1051,14 @@ Fixed an issue in the Software UI where a text search returned duplicate entries
 </ul>]]></description></item><item><title>0.30.0</title><link>https://docs.astronomer.io/software/release-notes#0300</link><pubDate>Sun, 28 Aug 2022 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0300</guid><description><![CDATA[<p>Release date: August 29, 2022</p><p>:::danger Breaking Change for Azure Database for PostgreSQL</p><p>A change in 0.30 enabled the <code>trgm</code> extension for PostgreSQL. If you use Azure Database for PostgreSQL as your database backend, you need to enable the <code>pg_trgm</code> extension before upgrading to Software 0.30 using either Azure portal or the Azure CLI. See <a href="https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions">Azure documentation</a> for configuration steps.</p><p>If you don't complete this setup before your upgrade, the upgrade will fail.</p><p>:::</p><h3>Improved token refreshing for IdP integrations</h3><p>The Software UI now refreshes your JSON web token (JWT) based on the validity of your authentication token from your IdP. This means that as long as you stay logged in to your IdP, you no longer have to refresh the Software UI to continue accessing the Software UI, Astro CLI, and Houston API.</p><p>Additionally, if you change a user's access to Astronomer from your IdP, their permissions will be automatically updated in Astronomer after their current IdP token expires. If you remove a user completely from Astronomer, they are automatically logged out of the Software UI and CLI after their current IdP token expires.</p><p>As part of this change, you can now configure <code>jwt.authDuration</code> in your <a href="https://github.com/astronomer/docs/blob/main/software_configs/0.30/default.yaml">Houston Helm configuration</a>. If a user is logged on longer than <code>authDuration</code>, they will be immediately logged out regardless of the status of their JWT or authentication token.</p><h3>Additional improvements</h3><ul>
 <li>Workspace users are now paginated in the Software UI.</li>
 <li>You can now configure credentials for a private image registry by specifying a secret you create instead of a username and password. The secret is attached to any Pods that need to access the registry.</li>
-<li>You can now specify <code>authUrlParams</code> for your identity provider (IdP) in <code>config.yaml</code>.</li>
+<li>You can now specify <code>authUrlParams</code> for your identity provider (IdP) in <code>values.yaml</code>.</li>
 <li>System Editors can no longer manage Teams or users in a Workspace. These permissions are now available only at the System Admin level.</li>
 </ul><h3>Bug fixes</h3><ul>
 <li>Fixed an issue where <code>updateRuntimeCheck.enabled:false</code> did not properly stop an Astronomer Software installation from checking for Runtime updates.</li>
 <li>Fixed an issue where applying an IAM role to a Deployment would reset the Deployment's <strong>Extra Capacity</strong> setting back to the default of 0 AU.</li>
 <li>Fixed an issue where System Admins could receive an error when trying to view a Team imported from a different IdP than their current one.</li>
 <li>When a System Admin makes a change to a Team, that change now appears in the UI without needing to refresh the page.</li>
-<li>Configurations for disabling a specific executor type in <code>config.yaml</code> are now reflected in the Software UI.</li>
+<li>Configurations for disabling a specific executor type in <code>values.yaml</code> are now reflected in the Software UI.</li>
 <li>Fixed an issue where Workspace-level service accounts could view Deployment information from Deployments outside of their Workspace.</li>
 <li>Fixed an issue where updating the role of a user in a Team using the Astro CLI would not throw an error as expected.</li>
 <li>Fixed an issue where JSON web tokens persisted after a user logged out if <code>idpGroupsRefreshEnabled</code> was set to <code>false</code>.</li>
@@ -968,7 +1082,7 @@ Fixed an issue in the Software UI where a text search returned duplicate entries
 </ul>
 </li>
 </ul>]]></description></item><item><title>0.29.4</title><link>https://docs.astronomer.io/software/release-notes#0294</link><pubDate>Mon, 12 Sep 2022 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0294</guid><description><![CDATA[<p>Release date: September 13, 2022</p><h3>Additional improvements</h3><ul>
-<li>You can now specify <code>authUrlParams</code> for your identity provider (IdP) in <code>config.yaml</code></li>
+<li>You can now specify <code>authUrlParams</code> for your identity provider (IdP) in <code>values.yaml</code></li>
 <li>Added error handling for upgrading a Software installation on an unsupported upgrade path</li>
 </ul><h3>Bug fixes</h3><ul>
 <li>
@@ -1021,13 +1135,13 @@ Fixed an issue in the Software UI where a text search returned duplicate entries
 <li>You can now disable all network policies for Airflow components using the Astronomer Helm chart</li>
 <li>System Admins can now view all Workspaces on their installation by default</li>
 <li>User auth tokens for the Software UI are now stored in httpOnly cookies</li>
-<li>When importing IdP groups as teams, you can now configure a <code>teamFilterRegex</code> in <code>config.yaml</code> to filter out IdP groups from being imported using regex</li>
+<li>When importing IdP groups as teams, you can now configure a <code>teamFilterRegex</code> in <code>values.yaml</code> to filter out IdP groups from being imported using regex</li>
 <li>Added support for audit logging when a user interacts with the Houston API. This includes actions within the Software UI</li>
 </ul><h3>Bug fixes</h3><ul>
 <li>Fixed an issue in Deployments running Airflow 2.3+ where logs for dynamically mapped tasks did not have a correct <code>log_id</code></li>
 <li>Fixed a typo in the <code>loadBalancerIP</code> key in the Nginx Helm chart</li>
 <li>Fixed an issue where Azure AD connect sync did not work with Astronomer's Teams feature</li>
-<li>Fixed an issue where upgrades would fail if you had changed <code>networkNSLabels</code> from <code>true</code> to <code>false</code> in <code>config.yaml</code></li>
+<li>Fixed an issue where upgrades would fail if you had changed <code>networkNSLabels</code> from <code>true</code> to <code>false</code> in <code>values.yaml</code></li>
 </ul>]]></description></item><item><title>v0.28.8</title><link>https://docs.astronomer.io/software/release-notes#v0288</link><pubDate>Thu, 26 Jan 2023 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#v0288</guid><description><![CDATA[<p>Release date: January 26, 2023</p><h3>Bug fixes</h3><ul>
 <li>
 <p>Fixed the following vulnerabilities:</p>
@@ -1068,7 +1182,7 @@ Fixed an issue in the Software UI where a text search returned duplicate entries
 </ul>
 </li>
 </ul>]]></description></item><item><title>v0.28.6</title><link>https://docs.astronomer.io/software/release-notes#v0286</link><pubDate>Tue, 20 Sep 2022 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#v0286</guid><description><![CDATA[<p>Release date: September 21, 2022</p><h3>Additional improvements</h3><ul>
-<li>You can now specify <code>authUrlParams</code> for your identity provider (IdP) in <code>config.yaml</code></li>
+<li>You can now specify <code>authUrlParams</code> for your identity provider (IdP) in <code>values.yaml</code></li>
 <li>Added support for Kubernetes 1.21, 1.22, and 1.23</li>
 <li>Upgraded Prometheus to the LTS release of 2.37.0</li>
 </ul><h3>Bug fixes</h3><ul>
@@ -1096,7 +1210,7 @@ Fixed an issue in the Software UI where a text search returned duplicate entries
 <li>Users added to Astronomer Software via an <a href="import-idp-groups.md">IDP group</a> no longer need to be invited by email in order to join Astronomer.</li>
 <li>Teams now support <a href="https://docs.microsoft.com/en-us/azure/active-directory/hybrid/concept-azure-ad-connect-sync-user-and-contacts">Azure AD Connect sync</a> for user groups.</li>
 <li>System admins can no longer remove the last user from an active Workspace or Deployment. This ensures that a given Workspace or Deployment can always be deleted by an existing member. Similarly, Workspace Admins can no longer remove a Team if doing so results in a Workspace having zero Admins.</li>
-<li>You can now map your IDP's groups claim to Astronomer's expected claim of <code>groups</code> via the <code>astronomer.houston.config.auth.openidConnect.&lt;idp&gt;.claimsMapping</code> setting in <code>config.yaml</code>.</li>
+<li>You can now map your IDP's groups claim to Astronomer's expected claim of <code>groups</code> via the <code>astronomer.houston.config.auth.openidConnect.&lt;idp&gt;.claimsMapping</code> setting in <code>values.yaml</code>.</li>
 </ul><h3>Bug Fixes</h3><ul>
 <li>Fixed an issue where deleted Teams did not disappear from the Software UI until you refreshed the page</li>
 <li>Fixed an issue where Teams were still available in the Software UI even when their underlying IDP group had been deleted from the IDP</li>
@@ -1117,8 +1231,8 @@ Fixed an issue in the Software UI where a text search returned duplicate entries
 </ul>]]></description></item><item><title>v0.28.1</title><link>https://docs.astronomer.io/software/release-notes#v0281</link><pubDate>Tue, 22 Feb 2022 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#v0281</guid><description><![CDATA[<p>Release date: February 22, 2022</p><h3>Bug fixes</h3><ul>
 <li>Fixed an issue where users could not successfully log in through Azure AD</li>
 </ul>]]></description></item><item><title>v0.28.0</title><link>https://docs.astronomer.io/software/release-notes#v0280</link><pubDate>Tue, 15 Feb 2022 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#v0280</guid><description><![CDATA[<p>Release date: February 15, 2022</p><h3>Import Identity Provider User Groups as Teams</h3><p>You now can import existing identity provider (IDP) groups into Astronomer Software as Teams, which are groups of Astronomer users that have the same set of permissions to a given Workspace or Deployment. Importing existing IDP groups as Teams enables swift onboarding to Astronomer and better control over multiple user permissions.</p><h3>Additional Improvements</h3><ul>
-<li>Astronomer now supports <code>prefer</code> and <code>require</code> SSL modes for connecting to PGBouncer. You can set this SSL mode via the <code>global.ssl.mode</code> value in your <code>config.yaml</code> file. Note that in v0.28.0, this feature works only with AWS and Azure.</li>
-<li>You can now set <a href="https://grafana.com/docs/grafana/latest/administration/configuration/#override-configuration-with-environment-variables">Grafana environment variables</a> using the <code>grafana.extraEnvVars</code> setting in your <code>config.yaml</code> file.</li>
+<li>Astronomer now supports <code>prefer</code> and <code>require</code> SSL modes for connecting to PGBouncer. You can set this SSL mode via the <code>global.ssl.mode</code> value in your <code>values.yaml</code> file. Note that in v0.28.0, this feature works only with AWS and Azure.</li>
+<li>You can now set <a href="https://grafana.com/docs/grafana/latest/administration/configuration/#override-configuration-with-environment-variables">Grafana environment variables</a> using the <code>grafana.extraEnvVars</code> setting in your <code>values.yaml</code> file.</li>
 <li>Added a new <strong>Ephemeral Storage Overwrite Gigabytes</strong> slider to the Git Sync configuration screen. You can configure this slider to allocate more memory for syncing larger Git repos.</li>
 <li>Added a new <strong>Sync Timeout</strong> slider to the Git Sync configuration screen. You can configure this slider to set a maximum allowed length of time for syncing a Git repo.</li>
 </ul><h3>Bug Fixes</h3><ul>
@@ -1139,7 +1253,7 @@ Fixed an issue in the Software UI where a text search returned duplicate entries
 <li>Fixed documentation links in the Software UI</li>
 </ul>]]></description></item><item><title>0.27.1</title><link>https://docs.astronomer.io/software/release-notes#0271</link><pubDate>Mon, 10 Jan 2022 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0271</guid><description><![CDATA[<p>Release date: January 10, 2022</p><h3>Bug Fixes</h3><ul>
 <li>Fixed an issue where users could not create Deployments via an IAM role</li>
-</ul>]]></description></item><item><title>0.27.0</title><link>https://docs.astronomer.io/software/release-notes#0270</link><pubDate>Tue, 21 Dec 2021 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0270</guid><description><![CDATA[<p>Release date: December 21, 2021</p><h3>Custom OAuth Flows</h3><p>You can now configure a custom OAuth flow as an alternative to Astronomer's default implicit flow. You can customize Astronomer's existing Okta, Google, and GitHub OAuth flows, or you can import an entirely custom OAuth flow. For more information, read <a href="integrate-auth-system.md#configure-a-custom-oauth-flow">Configure a Custom OAuth Flow</a>.</p><h3>Deploy DAGs via Git Sync</h3><p>You can now configure a Git repo to continually push DAGs to an Astronomer Deployment via git-sync. DAGs deployed via git-sync automatically appear in the Airflow UI without requiring additional action or causing downtime. For more information, read <a href="deploy-git-sync.md">Deploy DAGs via Git Sync</a>.</p><h3>External ElasticSearch Logging</h3><p>Custom ElasticSearch logging tools are now supported via new values in your <code>config.yaml</code> file:</p><pre><code class="language-yaml"># External ES logging
+</ul>]]></description></item><item><title>0.27.0</title><link>https://docs.astronomer.io/software/release-notes#0270</link><pubDate>Tue, 21 Dec 2021 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0270</guid><description><![CDATA[<p>Release date: December 21, 2021</p><h3>Custom OAuth Flows</h3><p>You can now configure a custom OAuth flow as an alternative to Astronomer's default implicit flow. You can customize Astronomer's existing Okta, Google, and GitHub OAuth flows, or you can import an entirely custom OAuth flow. For more information, read <a href="integrate-auth-system.md#configure-a-custom-oauth-flow">Configure a Custom OAuth Flow</a>.</p><h3>Deploy DAGs via Git Sync</h3><p>You can now configure a Git repo to continually push DAGs to an Astronomer Deployment via git-sync. DAGs deployed via git-sync automatically appear in the Airflow UI without requiring additional action or causing downtime. For more information, read <a href="deploy-git-sync.md">Deploy DAGs via Git Sync</a>.</p><h3>External ElasticSearch Logging</h3><p>Custom ElasticSearch logging tools are now supported via new values in your <code>values.yaml</code> file:</p><pre><code class="language-yaml"># External ES logging
 global:
   customLogging:
     enabled: true
@@ -1156,7 +1270,7 @@ global:
 <li>Fixed an issue where redeployments could clobber existing annotations for namespaces</li>
 <li>Fixed an issue where new Deployments could potentially generate invalid usernames for Celery and the metadata DB</li>
 <li>Fixed an issue where scheduler, webserver, and worker logs were not accessible via the Astronomer CLI</li>
-<li>Fixed an issue where where setting extra volumes via <code>config.yaml</code> did not work when NFS DAG deploys were enabled.</li>
+<li>Fixed an issue where where setting extra volumes via <code>values.yaml</code> did not work when NFS DAG deploys were enabled.</li>
 </ul>]]></description></item><item><title>0.26.7</title><link>https://docs.astronomer.io/software/release-notes#0267</link><pubDate>Tue, 01 Mar 2022 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0267</guid><description><![CDATA[<p>Release date: March 1, 2022</p><h3>Additional improvements</h3><ul>
 <li>Fixed several CVEs</li>
 <li>Updated documentation links in the UI to point to Software documentation</li>
@@ -1165,8 +1279,8 @@ global:
 </ul>]]></description></item><item><title>0.26.5</title><link>https://docs.astronomer.io/software/release-notes#0265</link><pubDate>Sat, 11 Dec 2021 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0265</guid><description><![CDATA[<p>Release date: December 11, 2021</p><h3>Bug Fixes</h3><ul>
 <li>Remediated <a href="https://github.com/advisories/GHSA-jfh8-c2jp-5v3q">CVE-2021-44228</a> related to Log4J by setting ES_JAVA_OPTS=-Dlog4j2.formatMsgNoLookups=true at runtime for all ElasticSearch containers</li>
 </ul>]]></description></item><item><title>0.26.4</title><link>https://docs.astronomer.io/software/release-notes#0264</link><pubDate>Mon, 22 Nov 2021 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0264</guid><description><![CDATA[<p>Release date: November 22, 2021</p><h3>Support for Airflow 2.2.0</h3><p><a href="https://airflow.apache.org/blog/airflow-2.2.0/">Apache Airflow 2.2.0</a> is an exciting milestone in the open source project. Most notably, this release introduces custom timetables and deferrable operators.</p><h4>Custom Timetables</h4><p>Timetables are a powerful new framework that you can use to create custom schedules using Python. In an effort to provide more flexibility and address known limitations imposed by cron, timetables use an intuitive <code>data_interval</code> that, for example, allows you to schedule a DAG to run daily on Monday through Friday, but not on the weekend. Timetables can be easily plugged into existing DAGs, which means that it's easy to create your own or use community-developed timetables in your project.</p><p>For more information on using timetables, read the <a href="https://airflow.apache.org/docs/apache-airflow/stable/howto/timetable.html">Apache Airflow Documentation</a>.</p><h4>Deferrable Operators</h4><p>Deferrable operators are a new type of Airflow operator that promises improved performance and lower resource costs. While standard operators and sensors take up a Worker or Scheduler slot even when they are waiting for an external trigger, deferrable operators are designed to suspend themselves and free up that Worker or Scheduler slot while they wait. This is made possible by a new, lightweight Airflow component called the Triggerer.</p><p>As part of supporting deferrable operators, you can provision multiple Triggerers on your Astronomer Deployments. By provisioning multiple Triggerers, you can ensure that tasks using Deferrable Operators are run even when one Triggerer goes down. For more information about configuring Triggerers and other resources, see <a href="configure-deployment.md">Configure a Deployment</a>.</p><h3>CLI Verbosity Flag</h3><p>You can now specify a <code>--verbosity</code> flag for all Astronomer CLI commands. When you specify this flag with a CLI command, the CLI prints out <a href="https://github.com/sirupsen/logrus">Logrus</a> logs as the command runs. This is useful for debugging any errors that might result from a CLI command.</p><p>The flag prints out different levels of logs depending on the value that you pass it. Each possible value (<code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>, <code>fatal</code>, and <code>panic</code>) maps to a different Logrus logging level. For more information about these logging levels, read the <a href="https://github.com/sirupsen/logrus#level-logging">Logrus documentation</a>.</p><h3>Minor Improvements</h3><ul>
-<li>You can now create a custom set of cluster-level permissions for the Astronomer Commander service by setting <code>astronomer.global.clusterRoles: false</code> in your <code>config.yaml</code> file and pushing a new <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RoleBinding</a> to a pre-created Kubernetes namespace.</li>
-<li>In the <code>astronomer.houston.config</code> section of your <code>config.yaml</code> file, you can now configure a list of <code>allowedSystemLevelDomains []</code>. If you configure this list, only users with emails from domains specified in the list (for example, <code>&lt;company&gt;.com</code>) can be granted System Admin privileges.</li>
+<li>You can now create a custom set of cluster-level permissions for the Astronomer Commander service by setting <code>astronomer.global.clusterRoles: false</code> in your <code>values.yaml</code> file and pushing a new <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">RoleBinding</a> to a pre-created Kubernetes namespace.</li>
+<li>In the <code>astronomer.houston.config</code> section of your <code>values.yaml</code> file, you can now configure a list of <code>allowedSystemLevelDomains []</code>. If you configure this list, only users with emails from domains specified in the list (for example, <code>&lt;company&gt;.com</code>) can be granted System Admin privileges.</li>
 <li>Greatly improved load times for the <strong>System Admin</strong> page in the UI.</li>
 <li>You can now specify a node port for 3rd party ingress controllers with a service type of <code>nodePort</code>.</li>
 <li>The naming format of service account pods has been changed from <code>&lt;release-name&gt;-dags-prod-worker-serviceaccount</code> to <code>release_name-dags-prod-airflow-worker</code>.</li>
@@ -1174,5 +1288,5 @@ global:
 <li>Fixed an issue where you could not update an existing Deployment's IAM role via the Astronomer CLI</li>
 <li>Fixed an issue where Deployments would not work on clusters with custom domains</li>
 <li>Fixed error handling when interacting with a Deployment that wasn't fully spun up</li>
-<li>Added a new validation step for Airflow Helm chart values configured in the <code>astronomer.houston.config.deployments.helm.airflow</code> section of <code>config.yaml</code></li>
+<li>Added a new validation step for Airflow Helm chart values configured in the <code>astronomer.houston.config.deployments.helm.airflow</code> section of <code>values.yaml</code></li>
 </ul>]]></description></item></channel></rss>

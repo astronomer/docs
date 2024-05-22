@@ -24,7 +24,7 @@ Standard clusters have different connection options than dedicated clusters.
 
 Standard clusters can connect to AWS in the following ways:
 
-- Using [static external IP addresses](#allowlist-external-ip-addresses-for-a-cluster)
+- Using [static external IP addresses](#allowlist-a-deployments-external-ip-addresses-on-aws)
 - Using PrivateLink to connect with the following endpoints:
     - [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/privatelink-interface-endpoints.html) - Gateway Endpoint
     - [Amazon Elastic Compute Cloud (Amazon EC2) Autoscaling](https://docs.aws.amazon.com/general/latest/gr/as.html) - Interface Endpoint
@@ -42,16 +42,29 @@ If you require a private connection between Astro and AWS, Astronomer recommends
 
 ## Access a public AWS endpoint
 
-All Astro clusters include a set of external IP addresses that persist for the lifetime of the cluster. To facilitate communication between an Astro cluster and your cloud, you can allowlist these external IPs in your cloud. If you have no other security restrictions, this means that any cluster with an allowlisted external IP address can access your AWS resources through a valid Airflow connection.
+All Astro clusters include a set of external IP addresses that persist for the lifetime of the cluster. When you create a Deployment in your workspace, Astro assigns the external IP addresses to it. To facilitate communication between Astro and your cloud, you can allowlist these external IPs in your cloud. If you have no other security restrictions, this means that any cluster with an allowlisted external IP address can access your AWS resources through a valid Airflow connection.
 
-### Allowlist external IP addresses for a cluster
+### Allowlist a Deployment's external IP addresses on AWS
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Select the **Details** tab.
+3. In the **Other** section, you can find the **External IPs** associated with the Deployment.
+4. Add the IP addresses to the allowlist of any external services that you want your Deployment to access.
+
+When you use publicly accessible endpoints to connect to AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the Astronomer managed control plane. Note that you still might also need to authorize your Deployment to some resources before it can access them. For example, you can [Authorize deployments to your cloud with workload identity](authorize-deployments-to-your-cloud.md) so that you can avoid adding passwords or other access credentials to your Airflow connections.
+
+<details>
+  <summary><strong>Dedicated cluster external IP addresses</strong></summary>
+
+If you use Dedicated clusters and want to allowlist external IP addresses at the cluster level instead of at the Deployment level, you can find the list cluster-level external IP addresses in your **Organization settings**.
+
+1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
 2. Click **Clusters**, then select a cluster.
 3. In the Details page, copy the IP addresses listed under **External IPs**.
 4. Add the IP addresses to the allowlist of any external services that you want your cluster to access. You can also access these IP addresses from the **Details** page of any Deployment in the cluster.
 
-After you allowlist a cluster's IP addresses, all Deployments in that cluster have network connectivity to AWS. When you use publicly accessible endpoints to connect to AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the Astronomer managed control plane. Note that you still might also need to authorize your Deployment to some resources before it can access them.
+After you allowlist a cluster's IP addresses, all Deployments in that cluster have network connectivity to AWS.
+</details>
 
 ## Create a private connection between Astro and AWS
 
@@ -97,20 +110,20 @@ To set up a private connection between an Astro VPC and an AWS VPC, you can crea
     - VPC ID of the external VPC
     - CIDR block of the external VPC
 
-2. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
+2. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
 
 3. Click **Clusters**, select your cluster, click **VPC Peering Connections**, then click **+ VPC Peering Connection**.
 
 4. Configure the following values for your VPC peering connection using the information you copied in Step 1:
 
-    - **Peering Name**: Provide a name for the VPC peering connection. 
+    - **Peering Name**: Provide a name for the VPC peering connection.
     - **AWS account ID**: Enter the account ID of the external VPC.
     - **Destination VPC ID**: Enter the VPC ID.
     - **Destination VPC region**: Enter the region of the external VPC.
     - **Destination VPC CIDR block**: Enter the CIDR block of the external VPC.
 
 5. Click **Create Connection**. The connection appears as **Pending**.
-6. Wait a few minutes for the **Complete Activation** button to appear, then click **Complete Activation link**. 
+6. Wait a few minutes for the **Complete Activation** button to appear, then click **Complete Activation link**.
 7. In the modal that appears, follow the instructions to accept the connection from your external VPC and create routes from the external VPC to Astro.
 
 A few minutes after you complete the instructions in the modal, the connection status changes from **Pending** to **Active**. A new default route appears in **Routes** with your configured CIDR block.
@@ -129,7 +142,8 @@ Note that a VPC connection can be listed as **Active** even when it has an incor
 
 :::
 
-:::info Alternative Astro Hybrid setup 
+<details>
+  <summary><strong>Alternative Astro Hybrid setup</strong></summary>
 
 To set up a private connection between an Astro VPC and an AWS VPC, you can create a VPC peering connection. VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
 
@@ -145,11 +159,11 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
 2. Create a temporary role using the [role creation stack template](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?templateURL=https://cre-addon-infrastructure-us-east-1.s3.amazonaws.com/astro-peering-role.yaml). In the **Quick create stack** template that opens, complete the following fields:
 
     - **Stack name**: Enter a meaningful name for your stack.
-    - **Peer Owner IDs**: Enter your cluster's AWS account ID. To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). To retrieve your cluster's AWS account ID on Astro Hybrid, click the name of your Workspace in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
+    - **Peer Owner IDs**: Enter your cluster's AWS account ID. To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). To retrieve your cluster's AWS account ID on Astro Hybrid, click the name of your Workspace in the upper left corner of the Astro UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
 
 3. After the stack is created, go to the **Outputs** tab and copy the value from the **PeerRole ARN** field.
 
-4. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. Click **Clusters**, select your cluster, and copy the **ID** of the cluster.
+4. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**. Click **Clusters**, select your cluster, and copy the **ID** of the cluster.
 
 5. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the following details:
 
@@ -166,7 +180,7 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
 
 7. (Optional) Delete the stack that you created. This will delete the temporary assumable role.
 
-:::
+</details>
 
 ### Configure additional routes for a VPC connection
 
@@ -176,9 +190,9 @@ Your initial VPC connection connects Astro to your external VPC through a primar
 
 2. Configure the following details for your route:
 
-    - **Route ID**: Provide a name for the route. 
+    - **Route ID**: Provide a name for the route.
     - **Destination**: Enter the subnet of the service in the external VPC.
-    - **Target**: Select the VPC peering connection you configured. 
+    - **Target**: Select the VPC peering connection you configured.
 
 3. Click **Create Route**, then wait a few minutes for the route to be created.
 
@@ -224,11 +238,11 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 
 #### Setup
 
-1. In the Cloud UI, click the name of your Workspace in the upper left corner of the Cloud UI, then click **Organization Settings** > **Clusters*. Open your cluster from the table that appears and copy its **ID**.
+1. In the Astro UI, click the name of your Workspace in the upper left corner of the Astro UI, then click **Organization Settings** > **Clusters*. Open your cluster from the table that appears and copy its **ID**.
 2. In your AWS console, copy the ID of your existing transit gateway (TGW).
 3. [Create a resource share in AWS RAM](https://docs.aws.amazon.com/ram/latest/userguide/working-with-sharing-create.html) and [share the TGW with your cluster's Astro AWS account](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#tgw-sharing).
 
-    To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). To retrieve your cluster's AWS account ID in the Astro Hybrid, click the name of your Workspace in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
+    To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). To retrieve your cluster's AWS account ID in the Astro Hybrid, click the name of your Workspace in the upper left corner of the Astro UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
 
 4. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the following information:
 
@@ -250,7 +264,13 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 
 :::info
 
-This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
+On Astro Hosted standard clusters, only the following AWS PrivateLink endpoints are supported:
+
+- [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/privatelink-interface-endpoints.html) - Gateway Endpoint
+- [Amazon Elastic Compute Cloud (Amazon EC2) Autoscaling](https://docs.aws.amazon.com/general/latest/gr/as.html) - Interface Endpoint
+- [Amazon Elastic Container Registry (ECR)](https://docs.aws.amazon.com/AmazonECR/latest/userguide/vpc-endpoints.html) - Interface Endpoints for ECR API and Docker Registry API
+- [Elastic Load Balancing (ELB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/load-balancer-vpc-endpoints.html) - Interface Endpoint
+- [AWS Security Token Service (AWS STS)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_sts_vpce.html) - Interface Endpoint
 
 :::
 
@@ -314,7 +334,7 @@ To allow Astro to access a private hosted zone, you need to share your Amazon Ro
 
 6. On the **Grant access to principals** page, select **Allow sharing only within your organization**, and then enter your Astro AWS account ID for your organization in the **Enter an AWS account ID** field.
 
-    To get the Astro AWS account ID, click the name of your Workspace in the upper left corner of the Cloud UI, then click **Organization Settings**. From the **General** page, copy the **AWS External ID**.
+    To get the Astro AWS account ID, click the name of your Workspace in the upper left corner of the Astro UI, then click **Organization Settings**. From the **General** page, copy the **AWS External ID**.
 
 7. Click **Create resource share**.
 

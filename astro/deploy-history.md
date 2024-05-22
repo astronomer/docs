@@ -5,17 +5,17 @@ id: deploy-history
 description: View a historical record of code deploys to an Astro Deployment and roll back to specific deploys when something goes wrong.
 ---
 
-The **Deploy History** tab in the Cloud UI shows you a record of all code deploys to your Deployment. Use this page to track the development of a Deployment and to pinpoint when your team made key changes to code.
+The **Deploy History** tab in the Astro UI shows you a record of all code deploys to your Deployment. Use this page to track the development of a Deployment and to pinpoint when your team made key changes to code.
 
 Astronomer stores the image and DAGs for all deploys made in the last 90 days. You can trigger a rollback to any of these deploys so that your Deployment starts running a previous version of your code.
 
 Deploy rollbacks are an emergency option if a Deployment unexpectedly stops working after a recent deploy. For example, if one of your DAGs worked in development but suddenly fails in a mission-critical production Deployment, you can roll back to your previous deploy to quickly get your pipeline running again. This allows you to troubleshoot the issue more thoroughly in development before redeploying to production. You can roll back to any deploy in the last three months regardless of your Runtime version, DAG code, or Deployment settings.
 
-![View of the Deploy History tab in the Cloud UI, with one deploy entry](/img/docs/deploy-history.png)
+![View of the Deploy History tab in the Astro UI, with one deploy entry](/img/docs/deploy-history.png)
 
 ## View deploy history
 
-1. In the Cloud UI, select a Deployment.
+1. In the Astro UI, select a Deployment.
 2. Click **Deploy History**
 
 For each deploy, the **Deploy History** table shows the user that made the deploy, when they made the deploy, what image they used, and any descriptions they added to the deploy. 
@@ -44,7 +44,7 @@ Astronomer recommends triggering Deployment rollbacks only as a last resort for 
 
 :::
 
-1. In the Cloud UI, select a Deployment.
+1. In the Astro UI, select a Deployment.
 2. Click **Deploy History**.
 3. Locate the deploy you want to roll back to. In the **Rollback to** column for the deploy, click **Deploy**. 
 4. Provide a description for your rollback, then complete the confirmation to trigger the rollback.
@@ -72,7 +72,7 @@ The following information isn't rolled back:
 
 - Your Deployment's resource configurations, such as executor and scheduler configurations.
 - Your Deployment's environment variable values.
-- Any other Deployment settings that you configure through the Cloud UI, such as your Deployment name and description. 
+- Any other Deployment settings that you configure through the Astro UI, such as your Deployment name and description. 
 - For Runtime version downgrades, any data related to features that are not available in the rollback version are erased from the metadata database and not recoverable.
 
 A rollback's effect on running tasks depends on whether the rollback downgrades your Deployment:
