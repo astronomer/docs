@@ -576,7 +576,7 @@ In order to install Astronomer Software, you'll need a TLS certificate that is v
 
 Astronomer requires a private certificate be present in the Astronomer Platform namespace, even if using a third-party ingress-controller that doesn't otherwise require it.
 
-### Requesting an Astronomer TLS Certificate {request-a-certificate-bundle}
+### Requesting an Astronomer TLS Certificate {#request-a-certificate-bundle}
 
 Request a TLS certificate and associated items (see below) from your enterprise security team.
 
