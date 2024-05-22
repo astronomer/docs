@@ -99,7 +99,7 @@ You can check if the service that you want to connect Airflow to is available th
 ```bash
 gcloud services list --available --filter="name:googleapis.com"
 ```
-If you don't see your service listed, please open a support case with [Astronomer support](astro-support.md) to set up the necessary PSC connectivity. 
+If you don't see your service listed, open a support case with [Astronomer support](astro-support.md) to set up the necessary PSC connectivity. 
 
 </TabItem>
 
