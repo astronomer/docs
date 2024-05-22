@@ -5,6 +5,9 @@ id: astro-support
 description: Get Astro support when you need it.
 ---
 
+import BusinessBadge from '@site/src/components/BusinessBadge';
+import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
+
 In addition to product documentation, the following resources are available to help you resolve issues:
 
 - [Astronomer knowledge base](https://support.astronomer.io/hc/en-us)
@@ -22,44 +25,6 @@ The following are the best practices for submitting support requests in the Astr
 ### Check the Astro status page
 
 Before you open a ticket for unexpected or disruptive behavior on Astro, check the [Astro status page](https://status.astronomer.io/) to see if the problem you're experiencing has already been reported.
-
-### Always indicate priority
-
-To help Astronomer support respond effectively to your support request, it's important that you correctly identify the severity of your issue. The following are the categories that Astronomer uses to determine the severity of your support request:
-
-**P1:** Critical impact. A Deployment is completely unavailable, or a DAG that was previously working in production is no longer working.
-
-P1 tickets are handled with the highest levels of urgency, if Astronomer Support responds on a P1 ticket and subsequently does not hear back for 2 hours, the ticket priority will be automatically changed to P2.
-
-Additionally, if the immediate problem is solved but there are follow up investigations ongoing, those follow ups will be conducted in a separate ticket at a lower priority.
-
-**P2:** High impact. Ability to use Astro is severely impaired but does not affect critical, previously working pipelines in production.
-
-Examples:
-
-- A newly deployed production DAG is not working, even though it ran successfully in a development or test environment.
-- The Airflow UI is unavailable.
-- You are unable to deploy code to your Deployment, but existing DAGs and tasks are running as expected.
-- You need to [modify a Hybrid cluster setting](manage-hybrid-clusters.md) that is required for running tasks, such as adding a new worker instance type.
-- Task logs are missing in the Airflow UI.
-
-**P3:** Medium impact. Service is partially impaired.
-
-Examples:
-
-- A newly deployed DAG is not working in a development Deployment, even though it ran successfully in a local environment using the Astro CLI.
-- You need to [modify a Hybrid cluster setting](manage-hybrid-clusters.md) that affects your cluster's performance but isn't required to run tasks, such as changing the size of your cluster's database or adding a new VPC peering connection.
-- Astro CLI usage is impaired (for example, there are incompatibility errors between installed packages).
-- There is an Airflow issue that has a code-based solution.
-- You received a log alert on Astronomer.
-- You have lost the ability to use a [Public Preview](https://docs.astronomer.io/astro/feature-previews) feature that does not affect general services.
-
-**P4:** Low impact. Astro is fully usable but you have a question for our team.
-
-Examples:
-
-- There are package incompatibilities caused by a specific, complex use case.
-- You have an inquiry or a small bug report for a Public Preview feature.
 
 ### Be as descriptive as possible
 
@@ -113,6 +78,21 @@ If you've submitted your support request on the Astronomer support portal, sign 
 To add a teammate to an existing support request, cc them when replying on the support ticket email thread.
 
 :::
+
+## Escalate a support request
+<EnterpriseBadge/> <BusinessBadge/>
+
+Business and Enterprise customers are eligible to escalate support requests. To submit a support request, email escalations@astronomer.io with the following information:
+
+* Issue summary
+* Reason for escalation
+
+Reasons for escalation include:
+
+* The ticket is taking much longer than expected to resolve.
+* Multiple attempts to solve the issue have failed.
+* The urgency of the ticket has increased substantially.
+
 
 ## Book office hours
 
