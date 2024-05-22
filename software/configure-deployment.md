@@ -151,7 +151,7 @@ Environment variables can be set for your Airflow Deployment either in the **Var
 
 An Airflow Deployment's release name on Astronomer is a unique, immutable identifier for that Deployment that corresponds to its Kubernetes namespace and that renders in Grafana, Kibana, and other platform-level monitoring tools. By default, release names are randomly generated in the following format: `noun-noun-<4-digit-number>`. For example: `elementary-zenith-7243`.
 
-To customize the release name for a Deployment as you're creating it, you first need to enable the feature on your Astronomer platform. To do so, set the following value in your `config.yaml` file:
+To customize the release name for a Deployment as you're creating it, you first need to enable the feature on your Astronomer platform. To do so, set the following value in your `values.yaml` file:
 
 ```yaml
 astronomer:
@@ -161,7 +161,7 @@ astronomer:
         manualReleaseNames: true # Allows you to set your release names
 ```
 
-Then, push the updated `config.yaml` file to your installation as described in [Apply a config change](apply-platform-config.md).
+Then, push the updated `values.yaml` file to your installation as described in [Apply a config change](apply-platform-config.md).
 
 After applying this change, the **Release Name** field in the Software UI becomes configurable:
 
@@ -237,7 +237,7 @@ The following is an example of how you might configure the cronjob in your Helm 
 
 To reuse a custom release name given to an existing Deployment after a soft delete but before Astronomer automatically cleans up any persisting Deployment records, you need to hard delete both the Deployment's metadata database and the Deployment's entry in your Astronomer database. 
 
-1. Enable hard delete as an option at the platform level. To enable this feature, set `astronomer.houston.config.deployments.hardDeleteDeployment: true` in your `config.yaml` file and push the changes to your platform as described in [Apply a config change](apply-platform-config.md).
+1. Enable hard delete as an option at the platform level. To enable this feature, set `astronomer.houston.config.deployments.hardDeleteDeployment: true` in your `values.yaml` file and push the changes to your platform as described in [Apply a config change](apply-platform-config.md).
 
 2. Hard delete a Deployment with the Software UI or Astro CLI.
   - **Software UI:** Go to the Deployment's **Settings** tab and select **Delete Deployment**. Then, select the **Hard Delete?** checkbox before confirming **Delete Deployment**. 
@@ -255,17 +255,27 @@ You can programmatically create or update Deployments with all possible configur
 
 ## Clean Deployment task metadata
 
-You can run a cron job to automatically archive task and DAG metadata from your Deployment. This job runs [`airflow db clean`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#clean) for all of your Deployments and exports the results for each Deployment as a file to your external storage service. To run this job for a Deployment, you must install the Astronomer-maintained `airflow-dbcleanup-plugin` on the Deployment. 
+You can run a cron job to automatically archive task and DAG metadata from your Deployment. This job runs [`airflow db clean`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#clean) programmatically for all of your Deployments and exports the results each Deployment as files to your external storage service. To run this job for a Deployment, you must install the Astronomer-maintained `airflow-dbcleanup-plugin` on the Deployment. This plugin executes the cleanup job from your Deployment's `webserver` Pod. 
 
-1. For each of your Deployments, add the following line to the `requirements.txt` file of your Deployment's Astro project. Replace `<latest-version>` with the latest available version in the [`airflow-dbcleanup-plugin` GitHub repository](https://github.com/astronomer/airflow-dbcleanup-plugin/releases).
+
+1. For Deployments running Runtime 7 or earlier, add the following line to the `requirements.txt` file of your Deployment's Astro project. Replace `<latest-version>` with the latest available version in the [`airflow-dbcleanup-plugin` GitHub repository](https://github.com/astronomer/airflow-dbcleanup-plugin/releases).
 
     ```text
     https://github.com/astronomer/airflow-dbcleanup-plugin/releases/download/<latest-version>/astronomer_dbcleanup_plugin-<latest-version>-py3-none-any.whl
     ```
 
-2. Configure an Airflow connection to your external storage service in JSON or URI format so that it can be stored as an environment variable. You must use a service account to authenticate to your service. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#storing-connections-in-environment-variables) to learn how to configure your connection.
-3. Store the connection environment variable as a Kubernetes Secret on your Astronomer cluster. See [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret).
-4. Add the following configuration to your `config.yaml` file and change the default values as needed.
+    You can skip this step for Deployments running Astro Runtime 8 or later.
+    
+2. Authorize your Deployments to your external storage service so that the webserver Pod can export the results of your cleanup jobs in JSON or URI Format. You can authorize your Deployment using one of the following methods:
+
+    - Configure an [Airflow connection] in the Deployment that connects to your external storage service.
+    - To configure a global connection for all Deployments, create a [Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret) containing an Airflow connection to your external storage service. The connection must be defined in either JSON or URI format. To pass the secret to all the Deployments, annotate the secret using the following command: 
+    
+    ```sh
+    kubectl annotate secret <secret-name> "astronomer.io/commander-sync"="platform=astronomer"
+    ```
+
+3. Add the following configuration to your `values.yaml` file and change the default values as needed.
    
     ```yaml
     houston:
@@ -301,4 +311,16 @@ You can run a cron job to automatically archive task and DAG metadata from your 
         tables: ""
     ```
 
-5. Push the configuration change. See [Apply a config change](apply-platform-config.md).
+4. Push the configuration change. See [Apply a config change](apply-platform-config.md).
+
+:::tip
+
+Set `dryRun: true` to test this feature without deleting any data. When dry runs are enabled, the cleanup job will only print the data that it plans to modify in the serial output of the webserver Pod. To view the dryRun events of the cleanup job, check the logs of your webserver Pod for each Deployment.
+
+:::
+
+:::danger
+
+The cleanup job deletes any data that's older than the number of days specified in your `olderThan` configuration. Ensure that none of your historical data is required to run current DAGs or tasks before enabling this feature. 
+
+:::

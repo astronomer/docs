@@ -2,7 +2,7 @@
 sidebar_label: Jenkins
 title: Astro CI/CD templates for Jenkins
 id: jenkins
-description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using Jenkins. 
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using Jenkins.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -30,7 +30,7 @@ For more information on each template or to configure your own, see [Template ov
 Each CI/CD template implementation might have additional requirements.
 
 ## Image deploy templates
- 
+
 <Tabs
     defaultValue="standard"
     groupId= "image-deploy-templates"
@@ -67,8 +67,8 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
                 steps {
                     checkout scm
                     sh '''
-                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v{{CLI_VER}}/astro_{{CLI_VER}}_linux_amd64.tar.gz
-                    tar -zxvf astro_{{CLI_VER}}_linux_amd64.tar.gz astro && rm astro_{{CLI_VER}}_linux_amd64.tar.gz
+                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v{{CLI_VER_LATEST}}/astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz
+                    tar -zxvf astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz astro && rm astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz
                     ./astro deploy env.ASTRONOMER_DEPLOYMENT_ID
                     '''
                 }
@@ -128,8 +128,8 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
                 steps {
                     checkout scm
                     sh '''
-                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v{{CLI_VER}}/astro_{{CLI_VER}}_linux_amd64.tar.gz
-                    tar -zxvf astro_{{CLI_VER}}_linux_amd64.tar.gz astro && rm astro_{{CLI_VER}}_linux_amd64.tar.gz
+                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v{{CLI_VER_LATEST}}/astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz
+                    tar -zxvf astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz astro && rm astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz
                     ./astro deploy env.ASTRONOMER_DEPLOYMENT_ID
                     '''
                 }
@@ -181,8 +181,8 @@ pipeline {
                     sh '''
                     export astro_id=$(date +%Y%m%d%H%M%S)
                     docker build -f Dockerfile --progress=plain --build-arg <your-build-arguments> -t $astro_id .
-                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v{{CLI_VER}}/astro_{{CLI_VER}}_linux_amd64.tar.gz
-                    tar -zxvf astro_{{CLI_VER}}_linux_amd64.tar.gz astro && rm astro_{{CLI_VER}}_linux_amd64.tar.gz
+                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v{{CLI_VER_LATEST}}/astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz
+                    tar -zxvf astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz astro && rm astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz
                     ./astro deploy env.ASTRONOMER_DEPLOYMENT_ID --image-name $astro_id
                     '''
                 }
@@ -205,6 +205,14 @@ This `Jenkinsfile` triggers a code push to Astro every time a commit or pull req
 ## DAG deploy templates
 
 The DAG deploy template uses the `--dags` flag in the Astro CLI to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-dags.md).
+
+:::info
+
+If you stage multiple commits to DAG files and push them all at once to your remote branch, the template only deploys DAG code changes from the most recent commit. It will miss any code changes made in previous commits.
+
+To avoid this, either push commits individually or configure your repository to **Squash commits** for pull requests that merge multiple commits simultaneously.
+
+:::
 
 ### Single branch implementation
 
@@ -232,8 +240,8 @@ Use the following template to implement DAG-only deploys to a single Deployment 
                 steps {
                     checkout scm
                     sh '''
-                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v{{CLI_VER}}/astro_{{CLI_VER}}_linux_amd64.tar.gz
-                    tar -zxvf astro_{{CLI_VER}}_linux_amd64.tar.gz astro && rm astro_{{CLI_VER}}_linux_amd64.tar.gz
+                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v{{CLI_VER_LATEST}}/astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz
+                    tar -zxvf astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz astro && rm astro_{{CLI_VER_LATEST}}_linux_amd64.tar.gz
                     files=($(git diff-tree HEAD --name-only --no-commit-id))
                     find="dags"
                     if [[ ${files[*]} =~ (^|[[:space:]])"$find"($|[[:space:]]) && ${#files[@]} -eq 1 ]]; then

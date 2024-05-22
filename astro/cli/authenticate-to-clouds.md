@@ -90,13 +90,13 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
     services:
         scheduler:
             volumes:
-            - /home/<username>/.aws:/usr/local/airflow/.aws:rw
+            - /home/<username>/.aws:/home/astro/.aws:rw
         webserver:
             volumes:
-            - /home/<username>/.aws:/usr/local/airflow/.aws:rw
+            - /home/<username>/.aws:/home/astro/.aws:rw
         triggerer:
             volumes:
-            - /home/<username>/.aws:/usr/local/airflow/.aws:rw
+            - /home/<username>/.aws:/home/astro/.aws:rw
     ```
     
     </TabItem>
@@ -107,13 +107,13 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
     services:
         scheduler:
             volumes:
-            - /c/Users/<username>/.aws:/usr/local/airflow/.aws:rw
+            - /c/Users/<username>/.aws:/home/astro/.aws:rw
         webserver:
             volumes:
-            - /c/Users/<username>/.aws:/usr/local/airflow/.aws:rw
+            - /c/Users/<username>/.aws:/home/astro/.aws:rw
         triggerer:
             volumes:
-            - /c/Users/<username>/.aws:/usr/local/airflow/.aws:rw
+            - /c/Users/<username>/.aws:/home/astro/.aws:rw
     ```
 
     </TabItem>
@@ -128,8 +128,8 @@ Depending on your Docker configurations, you might have to make your `.aws` fold
 2. In your Astro project's `.env` file, add the following environment variables. Make sure that the volume path is the same as the one you configured in the `docker-compose.override.yml`.
 
     ```text
-    AWS_CONFIG_FILE=/usr/local/airflow/.aws/config
-    AWS_SHARED_CREDENTIALS_FILE=/usr/local/airflow/.aws/credentials
+    AWS_CONFIG_FILE=/home/astro/.aws/config
+    AWS_SHARED_CREDENTIALS_FILE=/home/astro/.aws/credentials
     ```
 
 When you run Airflow locally, all AWS connections without defined credentials automatically fall back to your user credentials when connecting to AWS. Airflow applies and overrides user credentials for AWS connections in the following order:

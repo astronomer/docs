@@ -251,7 +251,7 @@ To configure a self-hosted Helm chart, add the following configuration to your `
 ```yaml
 # Example URL - replace with your own repository destination
 global:
-  helmRepo: "http://artifactory.company.com:32775/artifactory/astro-helm-chart"
+  helmRepo: "http://artifactory.example.com:32775/artifactory/astro-helm-chart"
 ```
 
 :::info

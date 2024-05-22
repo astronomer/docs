@@ -15,8 +15,10 @@ module.exports = {
     preprocessor: ({ filePath, fileContent }) => {
       function updateValues() {
         var mapObj = {
-          '{{CLI_VER}}': "1.23.0",
-          '{{RUNTIME_VER}}': "10.3.0",
+          '{{CLI_VER_LATEST}}': "1.27.1",
+          '{{CLI_VER_2}}': "1.26.0",
+          '{{CLI_VER_3}}': "1.25.0",
+          '{{RUNTIME_VER}}': "11.3.0",
         };
         var re = new RegExp(Object.keys(mapObj).join("|"), "gi");
         return fileContent.replaceAll(re, function (matched) {
@@ -111,7 +113,7 @@ module.exports = {
       buttons: {
         primary: {
           label: "Try Astro",
-          href: "https://www.astronomer.io/try-astro/?referral=docs-what-astro-banner"
+          href: "https://www.astronomer.io/try-astro/?referral=docs-what-astro-banner&utm_medium=docs&utm_content=astr&utm_source=body"
         },
         secondary: {
           label: "Learn about Astronomer",
@@ -143,7 +145,7 @@ module.exports = {
         },
         {
           label: '0.33',
-          to: '/software/',
+          to: '/software/0.33/',
           activeBaseRegex: `(software\/0.33)+`,
         },
         {
@@ -232,7 +234,12 @@ module.exports = {
               'info',
               'tip',
               'cli',
-              'highlight'
+              'highlight',
+              'privatepreview',
+              'publicpreview',
+              'cliastroonly',
+              'clisoftwareonly',
+              'cliastroandsoftware'
             ],
             extendDefaults: true,
           },
@@ -334,11 +341,6 @@ module.exports = {
     {
       src: "/scripts/set-tab.js",
       async: true,
-      defer: true,
-    },
-    {
-      src: 'https://docs.astronomer.io/js/script.outbound-links.js',
-      "data-domain": 'docs.astronomer.io',
       defer: true,
     },
     {

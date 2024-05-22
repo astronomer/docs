@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 :::warning
 
-This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Cloud UI, then click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
+This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Astro UI, then click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
 
 To create a cluster on Astro Hosted, see [Create a dedicated cluster](create-dedicated-cluster.md).
 
@@ -27,7 +27,7 @@ To complete the installation, you'll:
 - Create a new Azure subscription with the required Azure resources.
 - Add the IAM service principal to Microsoft Entra ID that'll be used by Astro.
 
-Astronomer support will create infrastructure within your AWS account to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
+Astronomer support will create infrastructure within your Azure account to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Prerequisites
 
@@ -97,7 +97,7 @@ From here, Astronomer support will set up the VNet connection to Astro.
 
 1. Go to https://cloud.astronomer.io/ and create an account, or enter your email address, and then click **Continue**.
 
-2. Select one of the following options to access the Cloud UI:
+2. Select one of the following options to access the Astro UI:
 
     - Enter your password and click **Continue**.
     - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.
@@ -219,7 +219,7 @@ After you provide Astronomer support with the setup information for your cluster
 
 ## Create a Deployment and confirm the install
 
-When Astronomer support confirms that your Astro cluster has been created, you can confirm it in the [Cloud UI](https://cloud.astronomer.io) by clicking on the Astronomer icon in the top left corner, then click on **Clusters** to see your cluster. You can then [create a Deployment](create-deployment.md) and start to [develop and deploy your DAGs](deploy-project-image.md).
+When Astronomer support confirms that your Astro cluster has been created, you can confirm it in the [Astro UI](https://cloud.astronomer.io) by clicking on the Astronomer icon in the top left corner, then click on **Clusters** to see your cluster. You can then [create a Deployment](create-deployment.md) and start to [develop and deploy your DAGs](deploy-project-image.md).
 
 ## Next steps
 

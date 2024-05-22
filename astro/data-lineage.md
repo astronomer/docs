@@ -5,7 +5,10 @@ id: data-lineage
 description: "Track and visualize the movement of your data with data lineage on Astro"
 ---
 
-The **Lineage** tab in the Cloud UI can help you troubleshoot issues with your data pipelines and understand the movement of data across your Organization.
+:::privatepreview
+:::
+
+The **Lineage** tab in the Astro UI can help you troubleshoot issues with your data pipelines and understand the movement of data across your Organization.
 
 From the **Lineage** tab on Astro, you can access the following four pages:
 
@@ -17,11 +20,11 @@ From the **Lineage** tab on Astro, you can access the following four pages:
 
 :::info
 
-Lineage datasets are different from Airflow's [datasets feature](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/datasets.html). Airflow datasets are defined explicitly in your DAG code, whereas lineage metadatasets are extracted and generated using lineage metadata. The Cloud UI currently does not show information about Airflow datasets.
+Lineage datasets are different from Airflow's [datasets feature](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/datasets.html). Airflow datasets are defined explicitly in your DAG code, whereas lineage metadatasets are extracted and generated using lineage metadata. The Astro UI currently does not show information about Airflow datasets.
 
 :::
 
-You can use these pages to diagnose issues that may be difficult to troubleshoot in other environments. For example, if an Airflow task failed because a database schema changed, you can use the **Lineage** page of the Cloud UI to determine which run caused the change and which downstream tasks failed as a result.
+You can use these pages to diagnose issues that may be difficult to troubleshoot in other environments. For example, if an Airflow task failed because a database schema changed, you can use the **Lineage** page of the Astro UI to determine which run caused the change and which downstream tasks failed as a result.
 
 For more information on data lineage and related concepts, see [Data lineage concepts](data-lineage-concepts.md).
 
@@ -37,11 +40,11 @@ To view lineage metadata for Deployments, you must configure Airflow and your ex
 
 ## View the lineage graph for a data pipeline
 
-You can use the search field at the top of the Cloud UI to view the lineage graph for one of your data pipelines, search for a DAG, task, or dataset. You can also search for runs from other tools with lineage integrations, including dbt or Spark.
+You can use the search field at the top of the Astro UI to view the lineage graph for one of your data pipelines, search for a DAG, task, or dataset. You can also search for runs from other tools with lineage integrations, including dbt or Spark.
 
 ![Example query in the lineage search bar](/img/docs/lineage-search.png)
 
-The search results include the namespace that emitted the matching event. When an Astro Deployment emits the lineage event, the namespace matches the Deployment namespace shown in the **Deployments** page of the Cloud UI. Clicking a search result opens the **Lineage** page and shows the lineage graph for the selected job or dataset. You can also access the lineage graph for a recent job run in the **Runs** page below **Most Recent Runs**.
+The search results include the namespace that emitted the matching event. When an Astro Deployment emits the lineage event, the namespace matches the Deployment namespace shown in the **Deployments** page of the Astro UI. Clicking a search result opens the **Lineage** page and shows the lineage graph for the selected job or dataset. You can also access the lineage graph for a recent job run in the **Runs** page below **Most Recent Runs**.
 
 The **Lineage** page shows lineage metadata only for the most recent run of a given data pipeline. To explore lineage metadata from previous runs, see [Compare lineage graphs from previous runs](data-lineage.md#compare-lineage-graphs-from-previous-runs).
 
@@ -204,11 +207,11 @@ Click on the name of a dataset to show its lineage graph.
 
 To view datasets that a specific Deployment read or wrote to:
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click **Lineage**. Your Organization **Datasets** tab opens and filters to show only datasets that the selected Deployment read or wrote to.
 
 Alternatively, you can filter datasets by Deployment directly from the **Datasets** tab.
 
-1. In the Cloud UI, click **Lineage**, then click **Datasets**.
+1. In the Astro UI, click **Lineage**, then click **Datasets**.
 2. Click **Select namespace**.
-3. Select the namespace for your Deployment. You can find a Deployment's namespace by opening the Deployment in the Cloud UI and checking the value in **Namespace**. 
+3. Select the namespace for your Deployment. You can find a Deployment's namespace by opening the Deployment in the Astro UI and checking the value in **Namespace**. 

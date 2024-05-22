@@ -54,16 +54,16 @@ kubectl get pods -n <your-astronomer-namespace>
 
 All Pods should be in either the `Running` or `Completed` state. If any of your Pods are in a `CrashLoopBackOff` state or are otherwise unhealthy, make sure that that is expected behavior before you proceed.
 
-## Step 5: Get a copy of your `config.yaml` file and confirm values
+## Step 5: Get a copy of your `values.yaml` file and confirm values
 
 1. Run the following command to retrieve your current platform configuration:
 
     ```sh
-    helm get values <your-platform-release-name> -n <your-platform-namespace>  > config.yaml
+    helm get values <your-platform-release-name> -n <your-platform-namespace>  > values.yaml
     ```
 
 2. Review this configuration. If you see the line `"USER-SUPPLIED VALUES:"`, delete it.
-3. Create a copy of `config.yaml` called `old_config.yaml`. Save this in case you need to roll back your upgrade.
+3. Create a copy of `values.yaml` called `old_values.yaml`. Save this in case you need to roll back your upgrade.
 
 ## Step 6: Verify your current platform version
 
@@ -94,7 +94,7 @@ helm repo update
 # restart. Note that some stable version upgrades require setting this value to true regardless of your own configuration.
 # If you are currently on Astronomer Software 0.25, 0.26, or 0.27, you must upgrade to version 0.28 before upgrading to 0.29. A direct upgrade to 0.29 from a version lower than 0.28 is not possible.
 helm upgrade --namespace $NAMESPACE \
-            -f ./config.yaml \
+            -f ./values.yaml \
             --reset-values \
             --version $ASTRO_VERSION \
             --debug \
@@ -124,7 +124,7 @@ You can upgrade Astronomer with ArgoCD, which is an open source continuous deliv
 
 Because ArgoCD doesn't support sync wave dependencies for [app of apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern) structures, upgrading Astronomer requires some additional steps compared to the standard ArgoCD workflow:
 
-1. Make sure `enableArgoCDAnnotation: true` and `astronomer.houston.upgradeDeployments.enabled=false` are set in your `config.yaml` file.
+1. Make sure `enableArgoCDAnnotation: true` and `astronomer.houston.upgradeDeployments.enabled=false` are set in your `values.yaml` file.
    
 2. In your ArgoCD application, choose the version of Astronomer Software you want to upgrade to from `astronomer/astronomer`.
    
@@ -176,12 +176,12 @@ To avoid extended service disruptions, Astronomer recommends upgrading Astronome
 
 If you're upgrading through multiple Astronomer Software versions in a single upgrade process, review the following table to ensure that you're following the correct upgrade path. If your combination of **Current version** and **Target version** isn't listed, you can upgrade directly from your current version to the target version. 
 
-| Current version | Target version | Upgrade path                |
-| --------------- | -------------- | --------------------------- |
-| 0.29            | 0.31 or later  | 0.29 > 0.30 > 0.31 or later |
-| 0.27            | 0.29 or later  | 0.27 > 0.28 > 0.29 or later |
-| 0.26            | 0.29 or later  | 0.26 > 0.28 > 0.29 or later |
-| 0.25            | 0.29 or later  | 0.25 > 0.28 > 0.29 or later |
+| Current version | Target version | Upgrade path         |
+| --------------- | -------------- | -------------------- |
+| 0.29            | 0.31 or later  | 0.29 -> 0.30 -> 0.34 |
+| 0.27            | 0.29 or later  | 0.27 -> 0.28 -> 0.34 |
+| 0.26            | 0.29 or later  | 0.26 -> 0.28 -> 0.34 |
+| 0.25            | 0.29 or later  | 0.25 -> 0.28 -> 0.34 |
 
 ### Upgrade to Kubernetes 1.25
 
@@ -206,7 +206,7 @@ In Kubernetes 1.25, [PodSecurityPolicies (PSPs)](https://kubernetes.io/blog/2021
 
 ### Upgrade to Kubernetes 1.24 (Azure only)
 
-To use Kubernetes 1.24 and later on Azure, you must set `nginx.ingressAnnotations.service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: "/healthz"` in your `config.yaml` file. See [Apply a platform config change](apply-platform-config.md).
+To use Kubernetes 1.24 and later on Azure, you must set `nginx.ingressAnnotations.service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: "/healthz"` in your `values.yaml` file. See [Apply a platform config change](apply-platform-config.md).
 
 ### Upgrade to Kubernetes 1.22
 
@@ -226,7 +226,7 @@ If you're upgrading to Astronomer Software 0.29 or later and Kubernetes 1.22 at 
 
 Astronomer Software uses Postgres 15 by default. If you are using an in-cluster database solution, Astronomer recommends that you configure Astronomer Software to stay on Postgres 11.18.0-1 when you upgrade to 0.32. To do so:
 
-- Set `global.postgresql.image.tag=<latest-version-11-tag>` in your `config.yaml` file.
+- Set `global.postgresql.image.tag=<latest-version-11-tag>` in your `values.yaml` file.
 - Complete the upgrade as documented.
 
 You can then upgrade to Postgres 15 after the upgrade is complete. See [How to upgrade PostgreSQL in Docker and Kubernetes](https://www.cloudytuts.com/tutorials/docker/how-to-upgrade-postgresql-in-docker-and-kubernetes/).
@@ -235,7 +235,7 @@ You can then upgrade to Postgres 15 after the upgrade is complete. See [How to u
 
 The `astronomer.houston.config.deployments.sysAdminScalabilityImprovementsEnabled` flag has been deprecated and replaced with `astronomer.houston.config.deployments.performanceOptimizationModeEnabled` for improved performance across additional Software UI views.
 
-If you set `sysAdminScalabilityImprovementsEnabled` in your `config.yaml` file, replace it with `performanceOptimizationModeEnabled` before upgrading. If you don't replace the key, the upgrade will fail.
+If you set `sysAdminScalabilityImprovementsEnabled` in your `values.yaml` file, replace it with `performanceOptimizationModeEnabled` before upgrading. If you don't replace the key, the upgrade will fail.
 
 ### Upgrade to Astronomer Software 0.31
 
@@ -245,7 +245,7 @@ If your Deployments are using version 1.9.3 or earlier of the Airflow Helm chart
 
 ```zsh
 helm upgrade --namespace $NAMESPACE \
-            -f ./config.yaml \
+            -f ./values.yaml \
             --reset-values \
             --version $ASTRO_VERSION \
             --debug \
@@ -270,7 +270,7 @@ Astronomer Software 0.31 includes new default resource limits and requests on th
 
 You might experience OOMKill errors or unexpected behavior after upgrading if you use resources beyond the new default limits. To minimize disruption, view resource usage for these components in [Grafana](grafana-metrics.md) prior to upgrade and compare this usage to the default resource limits in the [Astronomer Helm chart](https://github.com/astronomer/astronomer/blob/v0.31.0/charts/astronomer/values.yaml).
 
-If your current usage is expected and higher than the default resource limits, update the limits in your `config.yaml` file prior to upgrading to Astronomer Software 0.31.
+If your current usage is expected and higher than the default resource limits, update the limits in your `values.yaml` file prior to upgrading to Astronomer Software 0.31.
 
 ### Upgrade to Astronomer Software 0.30
 
@@ -333,11 +333,11 @@ Before upgrading to Astronomer Software 0.28, ensure that the following tools ar
 
 - **Helm**: Your version must be 3.6 ≤ 3.8.
 
-#### Modify `config.yaml` values
+#### Modify `values.yaml` values
 
-During Step 5 of the upgrade process, check your `config.yaml` file to see if you have any configuration listed under `astronomer.houston.config.deployments.helm`. You must update all key-value pairs in this section to be under `astronomer.houston.config.deployments.helm.airflow` instead.
+During Step 5 of the upgrade process, check your `values.yaml` file to see if you have any configuration listed under `astronomer.houston.config.deployments.helm`. You must update all key-value pairs in this section to be under `astronomer.houston.config.deployments.helm.airflow` instead.
 
-For example, consider an existing `config.yaml` file that includes an override of `webserver.allowPodLogReading`:
+For example, consider an existing `values.yaml` file that includes an override of `webserver.allowPodLogReading`:
 
 ```yaml
 astronomer:

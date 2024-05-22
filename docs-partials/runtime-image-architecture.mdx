@@ -37,6 +37,7 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | 8             | 2.6                    |
 | 9             | 2.7                    |
 | 10            | 2.8                    |
+| 11            | 2.9                    |
 
 For version compatibility information, see the [Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes).
 
@@ -67,10 +68,13 @@ Because this DAG is essential to Astro's managed service, you are not charged fo
 
 Astro Runtime {{RUNTIME_VER}} includes the following pre-installed open source provider packages. Providers marked with an asterisk (\*) are also installed by default on open source Apache Airflow.
 
+- Common IO [`apache-airflow-providers-common-io`](https://pypi.org/project/apache-airflow-providers-common-io/)\*
 - Common SQL [`apache-airflow-providers-common-sql`](https://pypi.org/project/apache-airflow-providers-common-sql/)\*
+- FAB [`apache-airflow-providers-fab`](https://pypi.org/project/apache-airflow-providers-fab/)\*
 - FTP [`apache-airflow-providers-ftp`](https://pypi.org/project/apache-airflow-providers-ftp/)\*
 - HTTP [`apache-airflow-providers-http`](https://pypi.org/project/apache-airflow-providers-http/)\*
 - IMAP [`apache-airflow-providers-imap`](https://pypi.org/project/apache-airflow-providers-imap/)\*
+- SMTP [`apache-airflow-providers-smtp`](https://pypi.org/project/apache-airflow-providers-smtp/)\*
 - SQLite [`apache-airflow-providers-sqlite`](https://pypi.org/project/apache-airflow-providers-sqlite/)\*
 - Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/)
 - Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)
@@ -81,19 +85,14 @@ Astro Runtime {{RUNTIME_VER}} includes the following pre-installed open source p
 - Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)
 - Google [`apache-airflow-providers-google`](https://pypi.org/project/apache-airflow-providers-google/)
 - Microsoft Azure [`apache-airflow-providers-microsoft-azure`](https://pypi.org/project/apache-airflow-providers-microsoft-azure/)
-- OpenLineage [`apache-airflow-providers-openlineage`](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html) 
+- MySQL [`apache-airflow-providers-mysql`](https://pypi.org/project/apache-airflow-providers-mysql/)
+- OpenLineage [`apache-airflow-providers-openlineage`](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html)
 - PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)
 - Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)
 
 ### Provider package versioning
 
-If an Astro Runtime release includes changes to an installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), the version change is documented in the [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes).
-
-To determine the version of any provider package installed in your current Astro Runtime image, run:
-
-```
-docker run --rm <runtime-image> pip freeze | grep <provider>
-```
+Astronomer users specific provider package versions in each release of Astro Runtime. See [Astro Runtime provider package reference](https://docs.astronomer.io/astro/runtime-provider-reference) for a list of all providers installed in each release of Astro Runtime.
 
 ## Python versioning
 
@@ -106,6 +105,7 @@ docker run --rm <runtime-image> pip freeze | grep <provider>
 | 8             | 2.6                    | 3.10           |
 | 9             | 2.7                    | 3.11           |
 | 10            | 2.8                    | 3.11           |
+| 11            | 2.9                    | 3.11           |
 
 Starting with Astro Runtime 9, if you require a different version of Python than what's included in the base distribution, you can use a Python distribution of Astro Runtime. See [Distribution](#distribution).
 
@@ -125,6 +125,7 @@ The following table shows which versions Postgres are compatible with each versi
 | 8             | 2.6                    | 11-15             |
 | 9             | 2.7                    | 11-15             |
 | 10            | 2.8                    | 12-16             |
+| 11            | 2.9                    | 12-16             |
 
 ## Executors
 
@@ -132,30 +133,79 @@ In Airflow, the executor is responsible for determining how and where a task is 
 
 In all local environments created with the Astro CLI, Astro Runtime runs the [Local executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/local.html). On Astro and Astronomer Software, you can use either the Celery executor or the Kubernetes executor.
 
-## Distribution
+## Image types
 
-Astro Runtime is distributed as a Debian-based Docker image. For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
+Astro Runtime is distributed as a Debian-based Docker image. An Astro Runtime image must be specified in the `Dockerfile` of your Astro project. The default image tag is:
 
-### Base distributions
+```
+quay.io/astronomer/astro-runtime:<version>
+```
 
-The base Astro Runtime Docker images have the following format:
+You can modify this image tag in your Astro project Dockerfile to use different versions of Astro Runtime. The following sections explain each image type and how to specify them. For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
 
-- `quay.io/astronomer/astro-runtime:<version>`
-- `quay.io/astronomer/astro-runtime:<version>-base`
+### Base images
 
-An Astro Runtime image must be specified in the `Dockerfile` of your Astro project. Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component. A `base` Astro Runtime image is recommended for complex use cases that require additional customization, such as [installing Python packages from private sources](https://docs.astronomer.io/astro/cli/private-python-packages).
+The base Astro Runtime Docker image has the following format:
 
-### Python version distributions
+```
+quay.io/astronomer/astro-runtime:<version>-base
+```
 
-Starting with Astro Runtime 9, Astronomer maintains different distributions Astro Runtime for each supported Python version. Python version distribution images have the following format:
+A `base` Astro Runtime image is recommended for complex use cases that require additional customization, such as [installing Python packages from private sources](https://docs.astronomer.io/astro/cli/private-python-packages).
+
+For all other cases, Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the images running each core Airflow component. 
+
+### Python version images
+
+Starting with Astro Runtime 9, Astronomer maintains different Astro Runtime images for each supported Python version. Python version images have the following format:
 
 ```text
 quay.io/astronomer/astro-runtime:<runtime-version>-python-<python-version>
 ```
 
-Each Python distribution also has an alternative `quay.io/astronomer/astro-runtime:<version>-base` distribution that you can use to further customize the image.
+### Slim images 
 
-## System distribution
+Starting with Astro Runtime 11, Astronomer maintains a slim Astro Runtime image. Slim Astro Runtime images only include the dependencies required for the basic functionality of Astro. Providers marked with an asterisk (\*) are also installed by default on open source Apache Airflow. The providers installed in the slim image are:
+
+- Common IO [`apache-airflow-providers-common-io`](https://pypi.org/project/apache-airflow-providers-common-io/)\*
+- Common SQL [`apache-airflow-providers-common-sql`](https://pypi.org/project/apache-airflow-providers-common-sql/)\*
+- FAB [`apache-airflow-providers-fab`](https://pypi.org/project/apache-airflow-providers-fab/)\*
+- FTP [`apache-airflow-providers-ftp`](https://pypi.org/project/apache-airflow-providers-ftp/)\*
+- HTTP [`apache-airflow-providers-http`](https://pypi.org/project/apache-airflow-providers-http/)\*
+- IMAP [`apache-airflow-providers-imap`](https://pypi.org/project/apache-airflow-providers-imap/)\*
+- SMTP [`apache-airflow-providers-smtp`](https://pypi.org/project/apache-airflow-providers-smtp/)\*
+- SQLite [`apache-airflow-providers-sqlite`](https://pypi.org/project/apache-airflow-providers-sqlite/)\*
+- Celery [`apache-airflow-providers-celery`](https://pypi.org/project/apache-airflow-providers-celery/)
+- Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)
+- MySQL [`apache-airflow-providers-mysql`](https://pypi.org/project/apache-airflow-providers-mysql/)
+- PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)
+- `astronomer-kubernetes-executor`
+
+Use the slim Astro Runtime image if you want faster local builds and deploys, smaller footprint for security vulnerabilities and dependency conflicts, or you don't require the packages included in the default Astro Runtime distribution.
+
+### Combine image types
+
+Image types are additive, meaning that you can combine multiple types in your image tag to specify an image with multiple variations.
+
+Types must be specified in a specific order in your image tag. The order and format multi-type image tag is:
+
+```
+quay.io/astronomer/astro-runtime:<astro-runtime-version>-<python-version-type>-<slim-type>-<base-type>
+```
+
+You can add or remove any types as needed. For example, to use the base, slim Astro Runtime image with Python 3.11, your image tag would be:
+
+```
+quay.io/astronomer/astro-runtime:11.0.0-python-3.11-slim-base
+```
+
+If you wanted the same base image using Python 3.11, but you didn't want it to be slim, you would remove the `-slim-` from the image tag like in the following example:
+
+```
+quay.io/astronomer/astro-runtime:11.0.0-python-3.11-base
+```
+
+## Operating system support
 
 The following table lists the operating systems and architectures supported by each Astro Runtime version. If you're using a Mac computer with an M1 chip, Astronomer recommends using Astro Runtime 6.0.4 or later.
 
@@ -168,5 +218,6 @@ The following table lists the operating systems and architectures supported by e
 | 8             | 2.6                    | Debian 11.7 (bullseye) | AMD64 and ARM64 |
 | 9             | 2.7                    | Debian 11.7 (bullseye) | AMD64 and ARM64 |
 | 10            | 2.8                    | Debian 11.8 (bullseye) | AMD64 and ARM64 |
+| 11            | 2.9                    | Debian 11.8 (bullseye) | AMD64 and ARM64 |
 
 Astro Runtime 6.0.4 and later images are multi-arch and support AMD64 and ARM64 processor architectures for local development. Docker automatically uses the correct processor architecture based on the computer you are using.

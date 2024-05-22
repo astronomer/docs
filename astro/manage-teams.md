@@ -4,6 +4,9 @@ title: 'Configure Teams on Astro'
 id: manage-teams
 description: Create, delete, and update Teams on Astro.
 ---
+import BusinessBadge from '@site/src/components/BusinessBadge';
+
+<BusinessBadge/>
 
 As an Organization Owner or Workspace Owner, you can use Teams to batch assign Organization and Workspace roles to groups of users. Organization Owners create, update, or delete Teams. Then, either Organization Owners or Workspace Owners can assign Teams to different Workspaces and define their [Workspace permissions](user-permissions.md#workspace-roles).
 
@@ -13,7 +16,7 @@ You can also assign different roles for each Workspace. For example, you can hav
 
 ## Create a Team
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Access Management**.
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Access Management**.
 
 2. Click **Teams**.
 
@@ -23,8 +26,8 @@ You can also assign different roles for each Workspace. For example, you can hav
 
     - **Team Name**: The name for your Team.
     - **Team description**: (Optional) The description for your Team.
-    - **Organization role**: The Organization role for your Team. 
-    - **Add users**: Choose the Organization users you want to add to the Team. 
+    - **Organization role**: The Organization role for your Team.
+    - **Add users**: Choose the Organization users you want to add to the Team.
 
     If you don't find the user you want to add, you might need to [add the user to your Organization](manage-organization-users.md#add-a-user-to-an-organization).
 
@@ -34,7 +37,7 @@ You can now [add your Team to a Workspace](manage-teams.md#add-a-team-to-a-works
 
 ## Update existing Teams
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Access Management**.
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Access Management**.
 
 2. Click **Teams**.
 
@@ -47,7 +50,7 @@ You can now [add your Team to a Workspace](manage-teams.md#add-a-team-to-a-works
 
 ## Add a Team to a Workspace
 
-1. In the Cloud UI, select a Workspace and click **Workspace Settings** > **Access Management**.
+1. In the Astro UI, select a Workspace and click **Workspace Settings** > **Access Management**.
 
 2. Click **Teams**.
 
@@ -85,7 +88,7 @@ You can use the Astro CLI and a shell script to add a Team to multiple Workspace
         echo "Usage: $0 <file>"
         exit 1
     fi
-    
+
     while read line; do
         team_id=$(echo "$line" | cut -d' ' -f1)
         role=$(echo "$line" | cut -d' ' -f2)
@@ -95,7 +98,7 @@ You can use the Astro CLI and a shell script to add a Team to multiple Workspace
     done < "$1"
     ```
 
-4. (Optional) Log in to the Astro CLI using `astro login`, then run `astro workspace list` to ensure that you have access to the Workspaces where you want to add the users. 
+4. (Optional) Log in to the Astro CLI using `astro login`, then run `astro workspace list` to ensure that you have access to the Workspaces where you want to add the users.
 
 5. Run the following command to execute the shell script:
 

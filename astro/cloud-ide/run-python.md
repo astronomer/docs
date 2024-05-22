@@ -13,7 +13,7 @@ A Python cell contains a Python function that you can run in isolation or as a d
 
 ## Create a Python cell
 
-1. In the Cloud UI, select a Workspace and then select Cloud IDE.
+1. In the Astro UI, select a Workspace and then select Cloud IDE.
 
 2. Select a project.
 
