@@ -37,16 +37,16 @@ For more information on how deferrable operators work and how to use them, see t
 
 To use deferrable operators both in a local Airflow environment and on Astronomer Software, you must have:
 
-- An [Astronomer Software project](create-project.md) running [Astro Runtime version 4.2.0 or later](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-420).
-- The [Astro CLI version 1.0 or later](https://docs.astronomer.io/astro/cli-release-notes#v110) installed.
-- Triggerers enabled. See [Enable triggerers](https://docs.astronomer.io/software/configure-deployment#enable-triggerers).
+- An [Astronomer Software project](create-project.md) running [Astro Runtime version 4.2.0 or later](https://www.astronomer.io/docs/astro/runtime-release-notes#astro-runtime-420).
+- The [Astro CLI version 1.0 or later](https://www.astronomer.io/docs/astro/cli-release-notes#v110) installed.
+- Triggerers enabled. See [Enable triggerers](https://www.astronomer.io/docs/software/configure-deployment#enable-triggerers).
 
 All versions of Astro Runtime version 4.2.0 and later support the triggerer and have the `astronomer-providers` package installed. See [Upgrade Airflow](manage-airflow-versions.md).
 
 ## Astronomer Certified prerequisites
 
 - Astronomer Certified version 2.2 or later.
-- The `astronomer-providers` package added to your Astro project `requirements.txt` file. [Add Python and OS-level packages](https://docs.astronomer.io/software/customize-image#install-python-packages-from-private-sources).
+- The `astronomer-providers` package added to your Astro project `requirements.txt` file. [Add Python and OS-level packages](https://www.astronomer.io/docs/software/customize-image#install-python-packages-from-private-sources).
 
 ## Using deferrable operators
 

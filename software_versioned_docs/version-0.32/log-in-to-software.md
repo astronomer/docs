@@ -10,7 +10,7 @@ You can use the Astronomer Software UI and the Astro CLI to view and modify your
 ## Prerequisites
 
 - An Astronomer account.
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 
 ## Log in to the Astronomer Software UI
 

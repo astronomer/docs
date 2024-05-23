@@ -28,7 +28,7 @@ This tutorial takes approximately 15 minutes to complete.
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli).
 
 ## Step 1: Create an Astro project
 

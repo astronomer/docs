@@ -127,7 +127,7 @@ You can learn more about how to set complex dependencies between tasks and task 
 
 ## Write a DAG
 
-A DAG can be defined with a Python file placed in an Airflow project's `DAG_FOLDER`, which is `dags` when using the [Astro CLI](https://docs.astronomer.io/astro/cli/get-started-cli). Airflow automatically parses all files in this folder every 5 minutes to check for new DAGs, and it parses existing DAGs for code changes every 30 seconds. You can force a new DAG parse using [`airflow dags reserialize`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#reserialize), or `astro dev run dags reserialize` using the Astro CLI.
+A DAG can be defined with a Python file placed in an Airflow project's `DAG_FOLDER`, which is `dags` when using the [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started-cli). Airflow automatically parses all files in this folder every 5 minutes to check for new DAGs, and it parses existing DAGs for code changes every 30 seconds. You can force a new DAG parse using [`airflow dags reserialize`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#reserialize), or `astro dev run dags reserialize` using the Astro CLI.
 
 There are two types of syntax you can use to structure your DAG:
 

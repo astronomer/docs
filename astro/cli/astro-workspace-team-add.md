@@ -49,7 +49,7 @@ To add a Team to a specific Workspace, specify the Workspace using the `--worksp
 
 <TabItem value="software">
 
-Manage Astronomer Software [Teams](https://docs.astronomer.io/software/import-idp-groups).
+Manage Astronomer Software [Teams](https://www.astronomer.io/docs/software/import-idp-groups).
 
 ## Usage
 

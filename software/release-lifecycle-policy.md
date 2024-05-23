@@ -17,7 +17,7 @@ For information on the latest Astronomer Software releases, see [Release notes](
 
 :::info
 
-These policies apply only to the Astronomer Software platform. For release and lifecycle policies related to Astro Runtime, see [Runtime release and lifecycle Policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy).
+These policies apply only to the Astronomer Software platform. For release and lifecycle policies related to Astro Runtime, see [Runtime release and lifecycle Policy](https://www.astronomer.io/docs/astro/runtime-version-lifecycle-policy).
 
 :::
 

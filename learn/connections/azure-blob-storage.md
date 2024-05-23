@@ -15,8 +15,8 @@ This guide explains how to set up an Azure Blob Storage connection using the **A
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
-- A locally running [Astro project](https://docs.astronomer.io/astro/cli/get-started-cli).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
+- A locally running [Astro project](https://www.astronomer.io/docs/astro/cli/get-started-cli).
 - An [Azure storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal).
 - [Permissions to access](https://learn.microsoft.com/en-us/azure/storage/blobs/assign-azure-role-data-access?tabs=portal) blob data from your local Airflow environment.
 
@@ -239,4 +239,4 @@ Airflow uses the [Azure SDK for Python](https://github.com/Azure/azure-sdk-for-p
 
 - [Apache Airflow Microsoft Azure provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/connections/wasb.html).
 - [Azure blob storage modules](https://registry.astronomer.io/modules?query=wasb) and [example DAGs](https://registry.astronomer.io/dags/covid_to_azure_blob/versions/1.2.0) in the Astronomer Registry.
-- [Import and export Airflow connections using Astro CLI](https://docs.astronomer.io/astro/import-export-connections-variables#from-environment-variables).
+- [Import and export Airflow connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#from-environment-variables).

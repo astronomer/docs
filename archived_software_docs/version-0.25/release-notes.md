@@ -14,9 +14,9 @@ For more Astronomer Software release notes, see:
 
 - [Astro CLI release notes](cli-release-notes.md)
 - [Astro Runtime release notes](runtime-release-notes.md)
-- [Astronomer Software 0.29 release notes](https://docs.astronomer.io/software/0.29/release-notes)
-- [Astronomer Software 0.28 release notes](https://docs.astronomer.io/software/0.28/release-notes)
-- [Astronomer Software 0.25 release notes](https://docs.astronomer.io/software/0.25/release-notes)
+- [Astronomer Software 0.29 release notes](https://www.astronomer.io/docs/software/0.29/release-notes)
+- [Astronomer Software 0.28 release notes](https://www.astronomer.io/docs/software/0.28/release-notes)
+- [Astronomer Software 0.25 release notes](https://www.astronomer.io/docs/software/0.25/release-notes)
 
 All Astronomer Software versions are tested for scale, reliability and security on Amazon EKS, Google GKE, and Azure AKS. If you have questions or an issue to report, contact [Astronomer support](https://support.astronomer.io).
 

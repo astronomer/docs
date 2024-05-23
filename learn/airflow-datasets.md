@@ -42,7 +42,7 @@ To get the most out of this guide, you should have an existing knowledge of:
 
 - Airflow scheduling concepts. See [Schedule DAGs in Airflow](scheduling-in-airflow.md).
 - Creating dependencies between DAGs. See [Cross-DAG Dependencies](cross-dag-dependencies.md).
-- The Astro Python SDK. See [Using the Astro Python SDK](https://docs.astronomer.io/tutorials/astro-python-sdk).
+- The Astro Python SDK. See [Using the Astro Python SDK](https://www.astronomer.io/docs/tutorials/astro-python-sdk).
 
 ## Why use datasets?
 
@@ -60,7 +60,7 @@ As of Airflow 2.8, you can use [listeners](https://airflow.apache.org/docs/apach
 - on_dataset_created
 - on_dataset_changed
 
-For examples, refer to our [Create Airflow listeners tutorial](https://docs.astronomer.io/learn/airflow-listeners).
+For examples, refer to our [Create Airflow listeners tutorial](https://www.astronomer.io/docs/learn/airflow-listeners).
 :::
 
 ## Dataset concepts
@@ -385,7 +385,7 @@ with DAG(
 
 ## Datasets with the Astro Python SDK
 
-If you are using the [Astro Python SDK](https://docs.astronomer.io/tutorials/astro-python-sdk) version 1.1 or later, you do not need to make any code updates to use datasets. Datasets are automatically registered for any functions with output tables and you do not need to define any `outlet` parameters. 
+If you are using the [Astro Python SDK](https://www.astronomer.io/docs/tutorials/astro-python-sdk) version 1.1 or later, you do not need to make any code updates to use datasets. Datasets are automatically registered for any functions with output tables and you do not need to define any `outlet` parameters. 
 
 The following example DAG results in three registered datasets: one for each `load_file` function and one for the resulting data from the `transform` function.
 

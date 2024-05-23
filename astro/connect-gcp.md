@@ -79,7 +79,7 @@ This connection option is available only for dedicated Astro Hosted clusters and
 
 :::
 
-VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts. Because Astro uses source network address translation (SNAT) that performs many-to-one IP address translations for connections to your data sources, to minimize the risk and concern with IP overlap and exhaustion with dedicated GCP clusters, you might need to confirm that the default Astro subnet and peering ranges do not overlap with the ranges used by your target resource. See [create a dedicated GCP cluster](https://docs.astronomer.io/astro/create-dedicated-cluster?tab=gcp#create-a-cluster) for more information about default ranges and alternative configurations.
+VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts. Because Astro uses source network address translation (SNAT) that performs many-to-one IP address translations for connections to your data sources, to minimize the risk and concern with IP overlap and exhaustion with dedicated GCP clusters, you might need to confirm that the default Astro subnet and peering ranges do not overlap with the ranges used by your target resource. See [create a dedicated GCP cluster](https://www.astronomer.io/docs/astro/create-dedicated-cluster?tab=gcp#create-a-cluster) for more information about default ranges and alternative configurations.
 
 To create a VPC peering connection between an Astro VPC and a GCP VPC:
 

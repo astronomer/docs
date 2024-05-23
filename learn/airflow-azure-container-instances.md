@@ -32,7 +32,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 To complete this tutorial, you need:
 
 - Access to ACI. See [Quickstart: Deploy a container instance in Azure using the Azure portal](https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart-portal) for instructions. If you don't already have ACI access, Azure offers a $200 credit when you sign up for a free Azure account.
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started).
 
 ## Step 1: Create an Azure service principal
 

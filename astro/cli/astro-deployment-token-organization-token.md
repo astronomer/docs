@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: "img/term-icon.png" }
 :::cliastroonly
 :::
 
-Manage Organization-level API tokens within a specific Deployment. See [Assign an Organization or Workspace API token to a Deployment](https://docs.astronomer.io/astro/deployment-api-tokens#assign-an-organization-or-workspace-api-token-to-a-deployment).
+Manage Organization-level API tokens within a specific Deployment. See [Assign an Organization or Workspace API token to a Deployment](https://www.astronomer.io/docs/astro/deployment-api-tokens#assign-an-organization-or-workspace-api-token-to-a-deployment).
 
 ## astro deployment organization-token add
 

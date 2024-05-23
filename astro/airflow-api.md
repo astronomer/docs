@@ -232,7 +232,7 @@ This topic has guidelines on how to trigger a DAG run, but you can modify the ex
     }
     ```
 
-    See [Manage connections in Apache Airflow](https://docs.astronomer.io/learn/connections).
+    See [Manage connections in Apache Airflow](https://www.astronomer.io/docs/learn/connections).
 
   :::info
 

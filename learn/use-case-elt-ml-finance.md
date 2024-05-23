@@ -13,7 +13,7 @@ ELT/ETL and ML orchestration are two of the most common use cases for Airflow. T
 
 Before trying this example, make sure you have:
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop).
 
 ## Clone the project
@@ -294,7 +294,7 @@ This DAG includes two possible paths for model training, based on whether the Ai
 
 Since Airflow DAGs are defined as Python code, different task definitions for different environments can be achieved by a simple if/else statement. If the environment is `prod`, the model training task runs using the [@task.kubernetes](kubepod-operator.md#use-the-taskkubernetes-decorator) decorator, which is the decorator version of the [KubernetesPodOperator](https://registry.astronomer.io/providers/apache-airflow-providers-cncf-kubernetes/versions/latest/modules/KubernetesPodOperator). This allows you to run your model training in a dedicated Kubernetes pod, gaining full control over the environment and resources used.
 
-Additionally, Astro customers can use the `queue` parameter to run this task using a dedicated [worker queue](https://docs.astronomer.io/astro/configure-worker-queues) with more resources.
+Additionally, Astro customers can use the `queue` parameter to run this task using a dedicated [worker queue](https://www.astronomer.io/docs/astro/configure-worker-queues) with more resources.
 
 If the environment is `local`, a regular `@task` decorator is used.
 

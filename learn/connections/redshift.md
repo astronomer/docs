@@ -19,14 +19,14 @@ This document covers two different methods to connect Airflow to Amazon Redshift
 
 :::tip
 
-If you're an Astro user, Astronomer recommends using workload identity to authorize to your Deployments to Redshift. This eliminates the need to specify secrets in your Airflow connections or copying credentials file to your Airflow project. See [Authorize Deployments to your cloud](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud).
+If you're an Astro user, Astronomer recommends using workload identity to authorize to your Deployments to Redshift. This eliminates the need to specify secrets in your Airflow connections or copying credentials file to your Airflow project. See [Authorize Deployments to your cloud](https://www.astronomer.io/docs/astro/authorize-deployments-to-your-cloud).
 
 :::
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
-- A locally running [Astro project](https://docs.astronomer.io/astro/cli/get-started-cli).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
+- A locally running [Astro project](https://www.astronomer.io/docs/astro/cli/get-started-cli).
 - Permissions to access to your Redshift cluster. See [Using IAM authentication](https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html) and [Authorizing Amazon Redshift to access other AWS services](https://docs.aws.amazon.com/redshift/latest/mgmt/authorizing-redshift-service.html).
 
 ## Get connection details
@@ -266,4 +266,4 @@ Airflow uses the [Amazon Redshift Python Connector](https://docs.aws.amazon.com/
 
 - [Apache Airflow Amazon provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/redshift.html)
 - [Redshift modules](https://registry.astronomer.io/modules?query=redshift) in the Astronomer Registry
-- [Import and export Airflow connections using Astro CLI](https://docs.astronomer.io/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
+- [Import and export Airflow connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
