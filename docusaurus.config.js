@@ -94,7 +94,7 @@ module.exports = {
         },
         {
           label: 'Software',
-          to: 'software/',
+          to: '/software/',
           activeBaseRegex: 'software',
           position: 'left',
           activeClassName: 'navbar__link--active',
