@@ -78,9 +78,9 @@ Astronomer recommends testing new versions of Astro Runtime locally before upgra
 
 4. (Optional) Run DAGs locally to ensure that all of your code works as expected. If you encounter errors after your upgrade, it's possible that your new Astro Runtime version includes a breaking provider package change. If you encounter one of these breaking changes, follow the steps in [Upgrade or pin provider package versions](#optional-upgrade-or-pin-provider-package-versions) to check your provider package versions and, if required, pin the provider package version from your previous Runtime version in your `requirements.txt` file.
 
-### Step 6: (Optional) Upgrade and test provider packages
+## Step 6: (Optional) Upgrade and test provider packages
 
-If you pinned provider package versions before your upgrade, upgrade your provider packages by changing the pinned version in your `requirements.txt` file. Test east provider package upgrade locally before deploying to Astro.
+If you pinned provider package versions before your upgrade, upgrade your provider packages by changing the pinned version in your `requirements.txt` file. Test each provider package upgrade locally before deploying to Astro.
 
 ## Step 7: Deploy to Astronomer
 

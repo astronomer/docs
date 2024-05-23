@@ -4,7 +4,11 @@ title: 'Run your first DAG with GitHub Actions'
 id: 'first-dag-github-actions'
 ---
 
+:::tip
 
+The Astro GitHub integration can automatically deploy code from a GitHub repository to Astro without you needing to configure a GitHub action. In addition, the Astro UI shows Git metadata for each deploy on your Deployment information screen. See [Deploy code with the Astro GitHub integration](deploy-github-integration.md) for setup steps.
+
+:::
 
 Astro is the industry's leading managed service for Apache Airflow. To quickly learn how Astro works, follow the steps in this quickstart to create an Airflow environment and run your first DAG with GitHub Actions.
 

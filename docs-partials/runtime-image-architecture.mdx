@@ -92,19 +92,7 @@ Astro Runtime {{RUNTIME_VER}} includes the following pre-installed open source p
 
 ### Provider package versioning
 
-If an Astro Runtime release includes changes to an installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), the version change is documented in the [Astro Runtime release notes](https://www.astronomer.io/docs/astro/runtime-release-notes).
-
-To determine the version of any provider package installed in your current Astro Runtime image, run:
-
-```
-docker run --rm <runtime-image> pip freeze | grep <provider>
-```
-
-For example, to find the version of the current package for Astronomer providers, run the following command:
-
-```
-astro dev bash pip freeze | grep astronomer-providers
-```
+Astronomer users specific provider package versions in each release of Astro Runtime. See [Astro Runtime provider package reference](https://www.astronomer.io/docs/astro/runtime-provider-reference) for a list of all providers installed in each release of Astro Runtime.
 
 ## Python versioning
 

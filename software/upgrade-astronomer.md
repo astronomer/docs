@@ -176,12 +176,12 @@ To avoid extended service disruptions, Astronomer recommends upgrading Astronome
 
 If you're upgrading through multiple Astronomer Software versions in a single upgrade process, review the following table to ensure that you're following the correct upgrade path. If your combination of **Current version** and **Target version** isn't listed, you can upgrade directly from your current version to the target version. 
 
-| Current version | Target version | Upgrade path                |
-| --------------- | -------------- | --------------------------- |
-| 0.29            | 0.31 or later  | 0.29 > 0.30 > 0.31 or later |
-| 0.27            | 0.29 or later  | 0.27 > 0.28 > 0.29 or later |
-| 0.26            | 0.29 or later  | 0.26 > 0.28 > 0.29 or later |
-| 0.25            | 0.29 or later  | 0.25 > 0.28 > 0.29 or later |
+| Current version | Target version | Upgrade path         |
+| --------------- | -------------- | -------------------- |
+| 0.29            | 0.31 or later  | 0.29 -> 0.30 -> 0.34 |
+| 0.27            | 0.29 or later  | 0.27 -> 0.28 -> 0.34 |
+| 0.26            | 0.29 or later  | 0.26 -> 0.28 -> 0.34 |
+| 0.25            | 0.29 or later  | 0.25 -> 0.28 -> 0.34 |
 
 ### Upgrade to Kubernetes 1.25
 

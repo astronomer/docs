@@ -104,14 +104,19 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Platform observability',
+          label: 'CI/CD and automation',
           items: [
-            'grafana-metrics',
-            'kibana-logging',
-            'platform-alerts',
-            'task-usage-metrics',
-            'logs-to-s3',
-            'export-task-logs',
+            'ci-cd',
+            {
+              type: 'category',
+              label: 'Houston API',
+              items: [
+                'houston-api',
+                'houston-api-examples',
+              ],
+            },
+            'deploy-git-sync',
+            'deploy-nfs',
           ],
         },
         {

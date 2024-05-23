@@ -3,6 +3,7 @@ title: 'Get started with Apache Airflow, Part 1: Write and run your first DAG'
 sidebar_label: 'Part 1: Write your first DAG'
 id: get-started-with-airflow
 description: 'Use tutorials and guides to make the most out of Airflow and Astronomer.'
+pagination_next: get-started-with-airflow-part-2
 ---
 
 import CodeBlock from '@theme/CodeBlock';

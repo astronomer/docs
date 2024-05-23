@@ -5,7 +5,7 @@ id: deploy-github-integration
 description: Learn how to automatically deploy Apache Airflow code to Astro from GitHub with a built-in integration.
 ---
 
-:::privatepreview
+:::publicpreview
 :::
 
 Astronomer's built-in GitHub integration is the fastest way to implement CI/CD for Apache Airflow and deploy code to Astro. Astro’s automatic deploy system eliminates both the need to implement GitHub Actions and gives you greater visibility into the code you’re running on Astro.
@@ -72,7 +72,7 @@ Before you begin, ensure that you’re logged in to GitHub with permissions to r
 6. Configure the following fields:
 
     - **Repository:** Select the repository you want to integrate with Astro.
-    - **Astro Project Path:** Specify the path to your Astro project, up to and including the Astro project folder. For example, `/myorg/myprojects/my-astro-project`
+    - **Astro Project Path:** Specify the path to your Astro project relative to your GitHub repository directory, up to and including the Astro project folder. For example, for a project in `github-repository/myorg/myprojects/my-astro-project`, enter `myorg/myprojects/my-astro-project`. If the path is configured incorrectly, code does not deploy to Astro from GitHub. You can change this path after you create the integration by editing the **Branch Configuration** setting in the Astro UI.
 
 7. Click **Connect Repository**.
 8. Map specific branches in your repository to Deployments in your Workspace. For example, you can map a development branch and your production branch to separate Deployments, so that bugs in development don’t affect your production data pipelines. When you map a branch to a Deployment, any future commits to the Astro project in that branch trigger a code deploy to Astro.
