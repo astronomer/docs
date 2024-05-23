@@ -28,10 +28,52 @@ This use case assumes you have:
     - `ASTRO_API_TOKEN` - See [Create an API token](https://docs.astronomer.io/astro/automation-authentication#step-1-create-an-api-token)
     - `AIRFLOW_PROJECT_PATH` - The path where your Airflow project exists.
 
-## Example workflow
+## Example workflows
 
-## Scripts and scenarios
+### With DAG-only deploy enabled
 
-### With DAG deploy enabled
+#### Complete deploy
 
-### With DAG deploy disabled
+#### DAG-only deploy
+
+#### Image-only deploy
+
+### With DAG-only deploy disabled
+
+:::info
+
+You can only use complete deploys if you have DAG-only deploys disabled. Image-only and DAG-only deploys do not work.
+
+:::
+
+1. Create the `Deploy`
+    - Use the `IMAGE_AND_DAG` type
+    - Retrieve the `id`, `imageRepository`, and `imageTag`, which you need in the following steps.
+
+2. Log in to Docker
+
+    ```bash
+
+    docker login images.astronomer.cloud -u cli -p $ASTRO_API_TOKEN
+
+    ```
+
+3. Build the Docker image
+
+    ```bash
+
+    docker build -t imageRepository:imageTag --platform=linux/amd64 $AIRFLOW_PROJECT_PATH
+
+    ```
+4. Push the Docker image
+
+    ```bash
+
+    docker push imageRepository:imageTag
+
+    ```
+
+5. Finalize the deploy
+
+    - On `Success`, the deploy process has completed. Pass the requested body as empty, `({})`.
+    - It might take a few minutes for the changes to update in your Deployment.
