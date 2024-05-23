@@ -328,23 +328,23 @@ module.exports = {
   ],
   scripts: [
     {
-      src: '/scripts/segment.js',
+      src: '/docs/scripts/segment.js',
       defer: true,
     },
     {
-      src: '/scripts/consent-manager.js',
+      src: '/docs/scripts/consent-manager.js',
       defer: true,
     },
     {
-      src: '/scripts/consent-manager-config.js',
+      src: '/docs/scripts/consent-manager-config.js',
     },
     {
-      src: "/scripts/set-tab.js",
+      src: "/docs/scripts/set-tab.js",
       async: true,
       defer: true,
     },
     {
-      src: '/scripts/remix-redocly.js',
+      src: '/docs/scripts/remix-redocly.js',
       async: true,
       defer: true,
     },
