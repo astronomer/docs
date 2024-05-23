@@ -14,7 +14,7 @@ This guide contains a list of scenarios and the respective scripts that you can 
 
 This guide highlights the following Astro features to use for automating code deploys:
 
-- The Astro API [`Deploy` endpoint](https://docs.astronomer.io/api/platform-api-reference/deploy/list-deploys) to create and manage code deploys to an Astro Deployment.
+- The Astro API [`Deploy` endpoint](https://www.astronomer.io/api/platform-api-reference/deploy/list-deploys) to create and manage code deploys to an Astro Deployment.
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ This use case assumes you have:
 - The following values configured:
     - `ORGANIZATION_ID`
     - `DEPLOYMENT_ID`
-    - `ASTRO_API_TOKEN` - See [Create an API token](https://docs.astronomer.io/astro/automation-authentication#step-1-create-an-api-token)
+    - `ASTRO_API_TOKEN` - See [Create an API token](https://www.astronomer.io/docs/astro/automation-authentication#step-1-create-an-api-token)
     - `AIRFLOW_PROJECT_PATH` - The path where your Airflow project exists.
 
 ## With DAG-only deploy enabled
