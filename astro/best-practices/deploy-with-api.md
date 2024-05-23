@@ -350,6 +350,7 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
             fi
     fi
   ```
+</details>
 
 ## With DAG-only deploy disabled
 
