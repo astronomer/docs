@@ -26,7 +26,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - [PostgreSQL](https://www.postgresql.org/download/).
 
 ## Step 1: Run Marquez locally
@@ -271,4 +271,4 @@ The lineage graph shows you how these two DAGs are connected and how data flows 
 
 ## Conclusion
 
-Congratulations! You can now run Marquez and Airflow locally and trace data through your DAGs by viewing their lineage. As a great next step, try other Airflow operators that generate lineage metadata. Or, if you are an Astronomer customer, check out [lineage in Astro](https://docs.astronomer.io/astro/data-lineage).
+Congratulations! You can now run Marquez and Airflow locally and trace data through your DAGs by viewing their lineage. As a great next step, try other Airflow operators that generate lineage metadata. Or, if you are an Astronomer customer, check out [lineage in Astro](https://www.astronomer.io/docs/astro/data-lineage).

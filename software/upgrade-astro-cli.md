@@ -9,7 +9,7 @@ Astro CLI version 1.0+ delivers several new features to Astronomer Software and 
 
 Several commands and their flags have been updated as part of this release, resulting in breaking changes for users of Astronomer Software. Use this document to learn about these breaking changes and prepare for your upgrade to Astro CLI version 1.0+.
 
-This information applies only to users who are upgrading the Astro CLI from a pre-1.0 to a post-1.0 version. To install the latest version of the CLI for the first time, see [Install the CLI](https://docs.astronomer.io/astro/cli/install-cli).
+This information applies only to users who are upgrading the Astro CLI from a pre-1.0 to a post-1.0 version. To install the latest version of the CLI for the first time, see [Install the CLI](https://www.astronomer.io/docs/astro/cli/install-cli).
 
 ## Upgrade checklist
 
@@ -20,7 +20,7 @@ Before installing Astro CLI version 1.0+, complete all of the following steps:
 - Update any CI/CD pipelines or automated processes that use Astro CLI commands to ensure that these commands do not break after you upgrade.
 - Review any custom shortcuts in your local CLI terminal to ensure that your shortcuts do not run any CLI commands that are no longer supported.
 
-After you complete these steps, upgrade to Astro CLI version 1.0+ by following the instructions in [Install the CLI](https://docs.astronomer.io/astro/cli/install-cli).
+After you complete these steps, upgrade to Astro CLI version 1.0+ by following the instructions in [Install the CLI](https://www.astronomer.io/docs/astro/cli/install-cli).
 
 ## Features
 
@@ -28,25 +28,25 @@ After you complete these steps, upgrade to Astro CLI version 1.0+ by following t
 
 For users making continuous changes to an Astro project locally, the Astro CLI now supports a new `astro dev restart` command. With this new command, you no longer need to run `astro dev stop` followed by `astro dev start` when you're testing locally.
 
-For more information, see [CLI command reference](https://docs.astronomer.io/astro/cli/astro-dev-restart).
+For more information, see [CLI command reference](https://www.astronomer.io/docs/astro/cli/astro-dev-restart).
 
 ### New command to run DAG unit tests with pytest
 
 You can now run custom unit tests for all DAGs in your Astro project with `astro dev pytest`, a new Astro CLI command that uses [pytest](https://docs.pytest.org/en/7.1.x/contents.html#), a common testing framework for Python. As part of this change, new Astro projects created with `astro dev init` now include a `tests` directory, which includes one example unit test built by Astronomer.
 
-In addition to running tests locally, you can also run `astro dev pytest` as part of the deploy process to Astronomer Software. For more information, see [CLI command reference](https://docs.astronomer.io/astro/cli/astro-dev-pytest).
+In addition to running tests locally, you can also run `astro dev pytest` as part of the deploy process to Astronomer Software. For more information, see [CLI command reference](https://www.astronomer.io/docs/astro/cli/astro-dev-pytest).
 
 ### New command to parse DAGs for errors
 
 The new `astro dev parse` command allows you to run a basic test against your Astro project to ensure that your DAGs are able to to render in the Airflow UI. This includes the DAG integrity test that is run with `astro dev pytest`, which checks that your DAGs are able to to render in the Airflow UI. Now, you can quickly run `astro dev parse` and see import and syntax errors directly in your terminal without having to restart all Airflow services locally.
 
-For more complex testing, Astronomer recommends using `astro dev pytest` to run custom tests in your project. For more information on `astro dev parse`, see the [CLI command reference](https://docs.astronomer.io/astro/cli/astro-dev-parse).
+For more complex testing, Astronomer recommends using `astro dev pytest` to run custom tests in your project. For more information on `astro dev parse`, see the [CLI command reference](https://www.astronomer.io/docs/astro/cli/astro-dev-parse).
 
 ## Breaking changes
 
 This topic contains all information related to breaking changes included in Astro CLI version 1.0+ relative to version 0.28 and below.
 
-This topic does not include information about new features and changes that are not breaking. For a summary of all changes, see the [CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
+This topic does not include information about new features and changes that are not breaking. For a summary of all changes, see the [CLI release notes](https://www.astronomer.io/docs/astro/cli/release-notes).
 
 ### `astro dev init`: New `--use-astronomer-certified` Flag Required for All New Projects Deployed to Software
 

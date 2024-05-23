@@ -14,7 +14,7 @@ Unlike Airflow callbacks and SLAs, Astro alerts require no changes to DAG code. 
 
 :::info
 
-To configure Airflow notifications, see [Airflow email notifications](airflow-email-notifications.md) and [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow).
+To configure Airflow notifications, see [Airflow email notifications](airflow-email-notifications.md) and [Manage Airflow DAG notifications](https://www.astronomer.io/docs/learn/error-notifications-in-airflow).
 
 :::
 
@@ -130,7 +130,7 @@ No external configuration is required for the email integration. Astronomer reco
 
 :::warning
 
-This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-previews). Please reach out to your customer success manager to enable this feature.
+This feature is in [Private Preview](https://www.astronomer.io/docs/astro/feature-previews). Please reach out to your customer success manager to enable this feature.
 
 :::
 
@@ -156,7 +156,7 @@ The following is an example alert payload that would be passed through the API:
 }
 ```
 
-These parameters are accessible in the triggered DAG using [DAG params](https://docs.astronomer.io/learn/airflow-params).
+These parameters are accessible in the triggered DAG using [DAG params](https://www.astronomer.io/docs/learn/airflow-params).
 
 1. Create a DAG that you want to run when the alert is triggered. For example, you can use the following DAG to run arbitrary Python code when the alert is triggered:
 

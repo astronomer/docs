@@ -13,7 +13,7 @@ Astro Runtime includes the following features for Astronomer Software:
 - The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Astronomer Providers documentation](https://astronomer-providers.readthedocs.io/en/stable/index.html).
 - A custom Airflow UI that includes links to Astronomer resources and exposes the currently running Docker image tag in the footer of all UI pages.
 
-For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes).
+For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime release notes](https://www.astronomer.io/docs/astro/runtime-release-notes).
 
 ## Runtime versioning
 
@@ -78,7 +78,7 @@ The latest version of the Astro Runtime image has the following open source prov
 
 ### Provider package versioning
 
-If an Astro Runtime release includes changes to an installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), the version change is documented in the [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes).
+If an Astro Runtime release includes changes to an installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), the version change is documented in the [Astro Runtime release notes](https://www.astronomer.io/docs/astro/runtime-release-notes).
 
 To determine the version of any provider package installed in your current Astro Runtime image, run:
 
@@ -121,7 +121,7 @@ The base Astro Runtime Docker images have the following format:
 - `quay.io/astronomer/astro-runtime:<version>`
 - `quay.io/astronomer/astro-runtime:<version>-base`
 
-An Astro Runtime image must be specified in the `Dockerfile` of your Astro project. Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component. A `base` Astro Runtime image is recommended for complex use cases that require additional customization, such as [installing Python packages from private sources](https://docs.astronomer.io/astro/cli/develop-project#install-python-packages-from-private-sources).
+An Astro Runtime image must be specified in the `Dockerfile` of your Astro project. Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component. A `base` Astro Runtime image is recommended for complex use cases that require additional customization, such as [installing Python packages from private sources](https://www.astronomer.io/docs/astro/cli/develop-project#install-python-packages-from-private-sources).
 
 ### Python version distributions
 
@@ -149,6 +149,6 @@ Astro Runtime 6.0.4 and later images are multi-arch and support AMD64 and ARM64 
 
 ## Related documentation
 
-- [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes)
-- [Upgrade Runtime](https://docs.astronomer.io/astro/upgrade-runtime)
+- [Astro Runtime release notes](https://www.astronomer.io/docs/astro/runtime-release-notes)
+- [Upgrade Runtime](https://www.astronomer.io/docs/astro/upgrade-runtime)
 - [Astro Runtime versioning and lifecycle policy](runtime-version-lifecycle-policy.md)

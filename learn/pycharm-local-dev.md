@@ -6,15 +6,15 @@ sidebar_label: "Develop with PyCharm"
 sidebar_custom_props: { icon: 'img/examples/pycharm_logo.png' }
 ---
 
-This example shows how to set up [PyCharm](https://www.jetbrains.com/pycharm/) for local development with Airflow and the [Astro CLI](https://docs.astronomer.io/astro/cli/overview). Setting up a local development environment allows you to iterate more quickly when developing DAGs by taking advantage of IDE features.
+This example shows how to set up [PyCharm](https://www.jetbrains.com/pycharm/) for local development with Airflow and the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview). Setting up a local development environment allows you to iterate more quickly when developing DAGs by taking advantage of IDE features.
 
 ## Before you start
 
 Before trying this example, make sure you have:
 
 - [PyCharm](https://www.jetbrains.com/pycharm/)
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli)
-- An Astro project running locally on your computer. See [Getting started with the Astro CLI](https://docs.astronomer.io/astro/cli/get-started-cli)
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli)
+- An Astro project running locally on your computer. See [Getting started with the Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started-cli)
 
 ## Configure the Python interpreter
 
@@ -83,4 +83,4 @@ Run Airflow CLI commands by right clicking on `/scheduler` and selecting **Creat
 ## See also
 
 - [Develop with VS Code](vscode-local-dev.md)
-- [Debug interactively with dag.test()](https://docs.astronomer.io/learn/testing-airflow#debug-interactively-with-dagtest)
+- [Debug interactively with dag.test()](https://www.astronomer.io/docs/learn/testing-airflow#debug-interactively-with-dagtest)

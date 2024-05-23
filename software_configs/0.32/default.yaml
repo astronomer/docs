@@ -178,15 +178,15 @@ ui:
   port: 5000
   externalUrls:
     documentation:
-      base:  https://docs.astronomer.io/software/
-      manageAirflowVersions:  https://docs.astronomer.io/software/manage-airflow-versions/
-      cliInstallWindows10:  https://docs.astronomer.io/software/cli-install-windows-10/
-      cliQuickstart:  https://docs.astronomer.io/software/cli-quickstart/
-      deployCli:  https://docs.astronomer.io/software/deploy-cli/
-      configureDeployment:  https://docs.astronomer.io/software/configure-deployment/
-      ciCd:  https://docs.astronomer.io/software/ci-cd/
-      manageWorkspaces:  https://docs.astronomer.io/software/manage-workspaces/
-      migrateToRuntime:  https://docs.astronomer.io/software/migrate-to-runtime/
+      base:  https://www.astronomer.io/docs/software/
+      manageAirflowVersions:  https://www.astronomer.io/docs/software/manage-airflow-versions/
+      cliInstallWindows10:  https://www.astronomer.io/docs/software/cli-install-windows-10/
+      cliQuickstart:  https://www.astronomer.io/docs/software/cli-quickstart/
+      deployCli:  https://www.astronomer.io/docs/software/deploy-cli/
+      configureDeployment:  https://www.astronomer.io/docs/software/configure-deployment/
+      ciCd:  https://www.astronomer.io/docs/software/ci-cd/
+      manageWorkspaces:  https://www.astronomer.io/docs/software/manage-workspaces/
+      migrateToRuntime:  https://www.astronomer.io/docs/software/migrate-to-runtime/
     statusPage: ~
 
 # Elasticsearch configuration for Houston to pull logs.

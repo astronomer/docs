@@ -41,7 +41,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started).
 - An OpenAI API key of at least [tier 1](https://platform.openai.com/docs/guides/rate-limits/usage-tiers) if you want to use OpenAI for vectorization. If you do not want to use OpenAI, you can adapt the `create_embeddings` function at the start of the DAG to use a different vectorizer.
 
 This tutorial uses a local PostgreSQL database created as a Docker container. [The image](https://hub.docker.com/r/ankane/pgvector) comes with pgvector preinstalled.

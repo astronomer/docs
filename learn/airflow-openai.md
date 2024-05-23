@@ -40,7 +40,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started).
 - An OpenAI API key with at least [tier 1 usage limits](https://platform.openai.com/docs/guides/rate-limits/usage-tiers).
 
 ## Step 1: Configure your Astro project

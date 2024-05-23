@@ -19,7 +19,7 @@ More specifically, this doc includes instructions for how to:
 - Add environment variables locally
 - Build from a private repository
 
-> **Note:** The guidelines below assume that you've initialized a project on Astronomer via `$ astro dev init`. If you haven't done so already, refer to our ["CLI Quickstart" doc](https://docs.astronomer.io/astro/cli/install-cli).
+> **Note:** The guidelines below assume that you've initialized a project on Astronomer via `$ astro dev init`. If you haven't done so already, refer to our ["CLI Quickstart" doc](https://www.astronomer.io/docs/astro/cli/install-cli).
 
 ## Add Python and OS-level dependencies
 
@@ -276,7 +276,7 @@ The following setup has been validated only with a single SSH key. Due to the na
 
 To install Python packages from a private GitHub repository on Astronomer Software, you need:
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - A [Software project](create-project.md).
 - Custom Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
 - A private GitHub repository for each of your custom Python packages.

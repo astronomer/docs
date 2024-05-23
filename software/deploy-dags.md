@@ -77,7 +77,7 @@ If you use a [third-party ingress controller](third-party-ingress-controllers.md
 
 :::
 
-Then, push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+Then, push the configuration change. See [Apply a config change](https://www.astronomer.io/docs/software/apply-platform-config).
 
 ## Configure DAG-only deploys on a deployment
 

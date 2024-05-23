@@ -6,7 +6,7 @@ import IconWarning from '@theme/Admonition/Icon/Warning';
 const infimaClassName = 'alert alert--warning';
 const defaultProps = {
   icon: <IconWarning />,
-  children: <div class="admonitionContent">This feature is in <a href="https://docs.astronomer.io/astro/feature-previews" target="_blank" rel="noopener noreferrer">Private Preview</a>. Please reach out to your account team to enable this feature.</div>,
+  children: <div class="admonitionContent">This feature is in <a href="https://www.astronomer.io/docs/astro/feature-previews" target="_blank" rel="noopener noreferrer">Private Preview</a>. Please reach out to your account team to enable this feature.</div>,
   title: (
     <Translate
       id="theme.admonition.Warning"

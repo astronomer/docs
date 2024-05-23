@@ -96,7 +96,7 @@ Transfer operators move data from a source to a destination. For SQL-related tas
 
 ## Examples
 
-Now that you've learned about the most commonly used Airflow SQL operators, you'll use the operators in some SQL use cases. For this guide you'll use [Snowflake](https://www.snowflake.com/), but the concepts shown can be adapted for other databases. Some of the environment setup for each example makes use of the [Astro CLI](https://docs.astronomer.io/astro/cli/overview) and Astro project structure, but you can also adapt this setup for use with Apache Airflow.
+Now that you've learned about the most commonly used Airflow SQL operators, you'll use the operators in some SQL use cases. For this guide you'll use [Snowflake](https://www.snowflake.com/), but the concepts shown can be adapted for other databases. Some of the environment setup for each example makes use of the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview) and Astro project structure, but you can also adapt this setup for use with Apache Airflow.
 
 ### Example 1: Execute a query
 
@@ -120,7 +120,7 @@ CALL sp_pi_squared();
 
 `sp_pi()` and `sp_pi_squared()` are two stored procedures that are defined in a Snowflake instance. Note that the SQL in these files could be any type of query you need to execute. Sprocs are used here only as an example.
 
-Finally, you need to set up a connection to Snowflake. There are a few ways to manage connections using Astronomer, including [IAM roles](https://docs.astronomer.io/software/integrate-iam), [secrets managers](https://docs.astronomer.io/software/secrets-backend), and the [Airflow API](https://docs.astronomer.io/software/airflow-api). For this example, set up a connection using the Airflow UI. Because the connection in the DAG is called `snowflake`, your configured connection should look something like this:
+Finally, you need to set up a connection to Snowflake. There are a few ways to manage connections using Astronomer, including [IAM roles](https://www.astronomer.io/docs/software/integrate-iam), [secrets managers](https://www.astronomer.io/docs/software/secrets-backend), and the [Airflow API](https://www.astronomer.io/docs/software/airflow-api). For this example, set up a connection using the Airflow UI. Because the connection in the DAG is called `snowflake`, your configured connection should look something like this:
 
 ![Configured Snowflake connection in the Airflow UI](/img/guides/snowflake_connection.png)
 

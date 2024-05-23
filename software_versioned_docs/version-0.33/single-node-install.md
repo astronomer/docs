@@ -110,7 +110,7 @@ venv is a tool to create lightweight, isolated Python environments without affec
 
 ## Step 5: Install Astronomer Certified
 
-To install the AC Python wheel onto your machine, run one of the following commands depending on your chosen Airflow Version and [Executor](https://docs.astronomer.io/learn/airflow-executors-explained):
+To install the AC Python wheel onto your machine, run one of the following commands depending on your chosen Airflow Version and [Executor](https://www.astronomer.io/docs/learn/airflow-executors-explained):
 
 - For Local Executor:
 
@@ -184,7 +184,7 @@ To use systemd as a process supervisor:
 
 ## Step 7: Configure Airflow for database access
 
-To connect your Airflow environment to the metadata database you created in Step 1, add the following environment variables to your `sys-config` file depending on your chosen [executor](https://docs.astronomer.io/learn/airflow-executors-explained):
+To connect your Airflow environment to the metadata database you created in Step 1, add the following environment variables to your `sys-config` file depending on your chosen [executor](https://www.astronomer.io/docs/learn/airflow-executors-explained):
 
 - For Local Executor:
 
