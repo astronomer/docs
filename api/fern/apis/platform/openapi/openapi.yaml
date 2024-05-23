@@ -4720,16 +4720,16 @@ tags:
 - description: A `cluster` object represents an Astro cluster, which is a Kubernetes
     cluster that hosts the infrastructure required to run Deployments. Make requests
     to `cluster` endpoints to manage your standard and dedicated clusters. See [Create
-    a dedicated cluster](https://docs.astronomer.io/astro/create-dedicated-cluster).
+    a dedicated cluster](https://www.astronomer.io/docs/astro/create-dedicated-cluster).
   name: Cluster
 - description: The `organization` object contains the metadata and configurations
     of an Astro Organization. It does not include objects within the Organization,
     such as users and clusters. Make requests to `organization` endpoints to view
     and update high level settings for your Organization, including settings related
     to authentication and billing. To manage resources within an Organization, make
-    requests to the endpoints related to those resources, such as `users`. See [Billing](https://docs.astronomer.io/astro/manage-billing),
-    [Set up single sign-on](https://docs.astronomer.io/astro/configure-idp), and [Manage
-    domains](https://docs.astronomer.io/astro/manage-domains).
+    requests to the endpoints related to those resources, such as `users`. See [Billing](https://www.astronomer.io/docs/astro/manage-billing),
+    [Set up single sign-on](https://www.astronomer.io/docs/astro/configure-idp), and [Manage
+    domains](https://www.astronomer.io/docs/astro/manage-domains).
   name: Organization
 - description: The `options` object represents all possible configurations for a given
     Astro component. Make requests to the `options` object to get the configuration
@@ -4742,5 +4742,5 @@ tags:
     high level details about your Workspace. To manage resources within a Workspace,
     make requests to the endpoints related to those resources, such as `users`, and
     use the `workspaceIds` parameter to filter results by Workspace. See [Configure
-    Workspaces](https://docs.astronomer.io/astro/manage-workspaces).
+    Workspaces](https://www.astronomer.io/docs/astro/manage-workspaces).
   name: Workspace

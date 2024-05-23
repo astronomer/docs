@@ -82,7 +82,7 @@ If the tests are successful, the Astro CLI creates a folder in your Astro projec
 - `Dockerfile`: The updated file used in the upgrade test.
 - `dag-test-results.html`: The results of the DAG test.
 
-Use the test results to fix any major package changes or broken DAGs before you upgrade. Refer to the Airflow and Provider package release notes to assist in upgrading your DAGs. After you resolve all conflicts and DAG import errors, you can [upgrade Astro Runtime](upgrade-runtime.md) and [deploy your project](https://docs.astronomer.io/astro/deploy-dags) to an Astro Deployment.
+Use the test results to fix any major package changes or broken DAGs before you upgrade. Refer to the Airflow and Provider package release notes to assist in upgrading your DAGs. After you resolve all conflicts and DAG import errors, you can [upgrade Astro Runtime](upgrade-runtime.md) and [deploy your project](https://www.astronomer.io/docs/astro/deploy-dags) to an Astro Deployment.
 
 :::info
 
@@ -124,5 +124,5 @@ astro dev upgrade-test --dag-test
 
 ## See also
 
-- [Debug DAGs](https://docs.astronomer.io/learn/debugging-dags)
+- [Debug DAGs](https://www.astronomer.io/docs/learn/debugging-dags)
 - [`astro dev pytest`](./astro-dev-pytest.md)

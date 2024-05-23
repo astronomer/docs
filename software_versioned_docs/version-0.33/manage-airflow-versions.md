@@ -88,7 +88,7 @@ You can use the Astro CLI to anticipate and address problems before upgrading to
 astro dev upgrade-test --runtime-version <upgraded-runtime-version>
 ```
 
-The Astro CLI then generates test results in your Astro project that identify dependency conflicts and import errors that you would experience using the new Astro Runtime version. Review these results and make the recommended changes to reduce the risk of your project generating errors after you upgrade. For more information about using this command and the test results, see [Test before upgrade your Astro project](https://docs.astronomer.io/astro/cli/test-your-astro-project-locally#test-before-an-astro-runtime-upgrade).
+The Astro CLI then generates test results in your Astro project that identify dependency conflicts and import errors that you would experience using the new Astro Runtime version. Review these results and make the recommended changes to reduce the risk of your project generating errors after you upgrade. For more information about using this command and the test results, see [Test before upgrade your Astro project](https://www.astronomer.io/docs/astro/cli/test-your-astro-project-locally#test-before-an-astro-runtime-upgrade).
 
 ## Step 5: Update your Astro project
 
@@ -99,7 +99,7 @@ The Astro CLI then generates test results in your Astro project that identify de
     FROM quay.io/astronomer/astro-runtime:{{RUNTIME_VER}}
     ```
 
-    For a list of supported Astro Runtime versions, see [Astro Runtime maintenance and lifecycle policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule).
+    For a list of supported Astro Runtime versions, see [Astro Runtime maintenance and lifecycle policy](https://www.astronomer.io/docs/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule).
 
   :::danger
 
@@ -174,7 +174,7 @@ Consider the following when you upgrade Astro Runtime:
 - All versions of the Astro CLI support all versions of Astro Runtime. There are no dependencies between the two products.
 - Upgrading to certain versions of Runtime might result in extended upgrade times or otherwise disruptive changes to your environment. To learn more, see [Version-specific upgrade considerations](#version-upgrade-considerations).
 
-To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes). For more information on Astro Runtime versioning and support, see [Astro Runtime versioning and lifecycle policy](runtime-version-lifecycle-policy.md). For a full collection of Astro Runtime Docker images, go to the [Astro Runtime repository on Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
+To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime release notes](https://www.astronomer.io/docs/astro/runtime-release-notes). For more information on Astro Runtime versioning and support, see [Astro Runtime versioning and lifecycle policy](runtime-version-lifecycle-policy.md). For a full collection of Astro Runtime Docker images, go to the [Astro Runtime repository on Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
 
 ### Version upgrade considerations
 
@@ -244,7 +244,7 @@ This incompatibility results in breaking the GKEStartPodOperator. This operator 
 
 #### Runtime 6 (Airflow 2.4)
 
-Smart Sensors were deprecated in Airflow 2.2.4 and removed in Airflow 2.4.0. If your organization still uses Smart Sensors, you need to start using deferrable operators. See [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
+Smart Sensors were deprecated in Airflow 2.2.4 and removed in Airflow 2.4.0. If your organization still uses Smart Sensors, you need to start using deferrable operators. See [Deferrable operators](https://www.astronomer.io/docs/learn/deferrable-operators).
 
 #### Runtime 5 (Airflow 2.3)
 

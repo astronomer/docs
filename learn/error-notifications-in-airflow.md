@@ -149,7 +149,7 @@ smtp_mail_from = noreply@astronomer.io
 
 You can also set these values using environment variables. In this case, all parameters are preceded by `AIRFLOW__SMTP__`. For example, `smtp_host` can be specified by setting the `AIRFLOW__SMTP__SMTP_HOST` variable. For more on Airflow email configuration, see [Email Configuration](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html). 
 
-If you are using Astro, [use environment variables](https://docs.astronomer.io/astro/environment-variables) to set up SMTP because the `airflow.cfg` cannot be directly edited.
+If you are using Astro, [use environment variables](https://www.astronomer.io/docs/astro/environment-variables) to set up SMTP because the `airflow.cfg` cannot be directly edited.
 
 ### Custom email notifications
 
@@ -445,7 +445,7 @@ t1 = PythonOperator(
 
 :::tip
 
-Airflow SLAs can be unintuitive, and do not work the way most users expect. If you are an Astronomer customer, consider using the [Astro Task duration or Absolute time alerts](https://docs.astronomer.io/astro/alerts#trigger-types). 
+Airflow SLAs can be unintuitive, and do not work the way most users expect. If you are an Astronomer customer, consider using the [Astro Task duration or Absolute time alerts](https://www.astronomer.io/docs/astro/alerts#trigger-types). 
 
 :::
 
@@ -511,4 +511,4 @@ There is no functionality to disable email alerting for SLAs. If you have an `'e
 
 ## Astronomer notifications
 
-Airflow's built-in notification mechanisms are great for common use cases, but they have some limitations. For the cases where Airflow notifications aren't sufficient, [Astro alerts](https://docs.astronomer.io/astro/alerts) provide an additional level of observability. For guidance on when to choose Airflow notifications or Astro alerts, see [When to use Airflow or Astro alerts for your pipelines on Astro](https://docs.astronomer.io/astro/best-practices/airflow-vs-astro-alerts).
+Airflow's built-in notification mechanisms are great for common use cases, but they have some limitations. For the cases where Airflow notifications aren't sufficient, [Astro alerts](https://www.astronomer.io/docs/astro/alerts) provide an additional level of observability. For guidance on when to choose Airflow notifications or Astro alerts, see [When to use Airflow or Astro alerts for your pipelines on Astro](https://www.astronomer.io/docs/astro/best-practices/airflow-vs-astro-alerts).

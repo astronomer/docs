@@ -76,7 +76,7 @@ SELECT {{ var.value.MY_KEY }} FROM mytable;
 
 ## Configure Airflow connections
 
-You can configure Airflow connections in the Astro Cloud IDE in the same way that you can in the [Airflow UI](https://docs.astronomer.io/learn/connections). You can then reference the connection in your Python cells as code or in SQL cells as a configuration.
+You can configure Airflow connections in the Astro Cloud IDE in the same way that you can in the [Airflow UI](https://www.astronomer.io/docs/learn/connections). You can then reference the connection in your Python cells as code or in SQL cells as a configuration.
 
 1. In the Astro UI, select a Workspace and then select **Cloud IDE**.
 
@@ -96,7 +96,7 @@ The connection appears in the **Connections** list. To edit the connection, clic
 
 ### Use connections in cells
 
-To use a connection in a Python cell, pass the connection ID to any function that accepts an Airflow connection as an argument, such as a [hook](https://docs.astronomer.io/learn/what-is-a-hook).
+To use a connection in a Python cell, pass the connection ID to any function that accepts an Airflow connection as an argument, such as a [hook](https://www.astronomer.io/docs/learn/what-is-a-hook).
 
 To use a connection in a SQL or Warehouse SQL cell:
 

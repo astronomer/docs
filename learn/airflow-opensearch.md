@@ -39,7 +39,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started).
 
 This tutorial uses a local OpenSearch instance created as a [Docker container](https://hub.docker.com/r/opensearchproject/opensearch). You do not need to install OpenSearch on your machine.
 

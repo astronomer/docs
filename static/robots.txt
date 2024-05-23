@@ -9,4 +9,4 @@ Disallow: /README.md
 Disallow: /docusaurus.config.js
 Disallow: /astro/cross-account-role-setup
 
-Sitemap: https://docs.astronomer.io/sitemap.xml
+Sitemap: https://www.astronomer.io/docs/sitemap.xml

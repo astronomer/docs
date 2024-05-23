@@ -155,12 +155,12 @@
         {
           "type": "link",
           "label": "Astro CLI",
-          "href": "https://docs.astronomer.io/astro/cli/release-notes"
+          "href": "https://www.astronomer.io/docs/astro/cli/release-notes"
         },
         {
           "type": "link",
           "label": "Astro Runtime",
-          "href": "https://docs.astronomer.io/astro/runtime-release-notes"
+          "href": "https://www.astronomer.io/docs/astro/runtime-release-notes"
         }
       ]
     },
@@ -171,7 +171,7 @@
         {
           "type": "link",
           "label": "Astro CLI command reference",
-          "href": "https://docs.astronomer.io/astro/cli/reference"
+          "href": "https://www.astronomer.io/docs/astro/cli/reference"
         },
         {
           "type": "category",

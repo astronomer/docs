@@ -22,7 +22,7 @@ This guide walks through the best practices for creating and managing Workspaces
 
 The most important function of Workspaces is creating and managing access to one or more Airflow Deployments. An Airflow Deployment is an instance of Apache Airflow that consists of a scheduler, webserver, and one or more workers if you're running the Celery or Kubernetes executors.
 
-To create a new Deployment, click the **New Deployment** button in the **Deployments** tab or use the Astro CLI as described in [CLI Quickstart](https://docs.astronomer.io/astro/cli/install-cli). For more information on configuring Deployment settings and resources, read [Configure a Deployment](configure-deployment.md).
+To create a new Deployment, click the **New Deployment** button in the **Deployments** tab or use the Astro CLI as described in [CLI Quickstart](https://www.astronomer.io/docs/astro/cli/install-cli). For more information on configuring Deployment settings and resources, read [Configure a Deployment](configure-deployment.md).
 
 The **Deployments** tab also contains information on all of your existing Deployments, including name, executor type, and Deployment status. A blue dot next to a Deployment's name indicates that the Deployment is still spinning up, while a green dot indicates that the Deployment is fully operational:
 

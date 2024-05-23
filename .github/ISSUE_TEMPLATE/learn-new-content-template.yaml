@@ -1,5 +1,5 @@
 name: Request new Apache Airflow content in Learn
-description: Request new or updated [Learn](https://docs.astronomer.io/learn) content on an Apache Airflow feature or use case.
+description: Request new or updated [Learn](https://www.astronomer.io/docs/learn) content on an Apache Airflow feature or use case.
 labels: ["kind/enhancement", "area/learn"]
 assignees:
   - kentdanas

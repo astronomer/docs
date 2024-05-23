@@ -11,7 +11,7 @@ If you defined your Airflow variables and connections in the Airflow UI, you can
 
 :::warning
 
-Some environment variables or Airflow Settings, like global environment variable values, can't be migrated to Astro. See [Global environment variables](https://docs.astronomer.io/astro/platform-variables) for a list of variables that you can't migrate to Astro.
+Some environment variables or Airflow Settings, like global environment variable values, can't be migrated to Astro. See [Global environment variables](https://www.astronomer.io/docs/astro/platform-variables) for a list of variables that you can't migrate to Astro.
 
 :::
 
@@ -20,7 +20,7 @@ Some environment variables or Airflow Settings, like global environment variable
 
 1. Log in to Astro. In the Astro UI, open the Deployment you're migrating to.
 2. Click **Open Airflow** to open the Airflow UI for the Deployment. Copy the URL for the home page. It should look similar to `https://<your-organization>.astronomer.run/<id>/home`.
-3. Create a Deployment API token for the Deployment. The token should minimally have permissions to update the Deployment and deploy code. Copy this token. See [Create and manage Deployment API tokens](https://docs.astronomer.io/astro/deployment-api-tokens) for additional setup steps.
+3. Create a Deployment API token for the Deployment. The token should minimally have permissions to update the Deployment and deploy code. Copy this token. See [Create and manage Deployment API tokens](https://www.astronomer.io/docs/astro/deployment-api-tokens) for additional setup steps.
 4. Open the Airflow UI for your source Airflow environment, then go to **Astronomer** > **Migration Tool 🚀**.
 
     ![Location of the Astro migration menu in the Astro UI](/img/docs/migration-menu.png)
@@ -41,7 +41,7 @@ Refer to the [Configuration](https://astronomer.github.io/starship/operator/#usa
 
 1. Log in to Astro. In the Astro UI, open the Deployment you're migrating to.
 2. Click **Open Airflow** to open the Airflow UI for the Deployment. Copy the URL for the home page. It should look similar to `https://<your-organization>.astronomer.run/<id>/home`.
-3. Create a Deployment API token for the Deployment. The token should minimally have permissions to update the Deployment and deploy code. Copy this token. See [Create and manage Deployment API tokens](https://docs.astronomer.io/astro/deployment-api-tokens) for additional setup steps.
+3. Create a Deployment API token for the Deployment. The token should minimally have permissions to update the Deployment and deploy code. Copy this token. See [Create and manage Deployment API tokens](https://www.astronomer.io/docs/astro/deployment-api-tokens) for additional setup steps.
 4. Add the following DAG to your source Airflow environment:
 
     ```python

@@ -196,7 +196,7 @@ export default function NewsletterForm(
       )
       }
       {submitting &&
-        <img src="/img/spinner.gif" alt="Sending your email address to our servers..." className={styles.newsletterForm__spinner} width="20" height="20" />
+        <img src="/docs/img/spinner.gif" alt="Sending your email address to our servers..." className={styles.newsletterForm__spinner} width="20" height="20" />
       }
       {success &&
         <p className={styles.newsletterForm__success}>{successMessage || content.successMessage}</p>

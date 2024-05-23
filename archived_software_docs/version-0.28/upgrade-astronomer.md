@@ -146,7 +146,7 @@ Make changes as needed and rerun the upgrade command from Step 7. Do not continu
 
 Each Software version is compatible only with specific versions of the Astro CLI. Ensure that all users in your organization are using the latest compatible version of the Astro CLI for your Software version. See [Version compatibility reference](version-compatibility-reference.md).
 
-For standard upgrade steps, see [Upgrade the CLI](https://docs.astronomer.io/astro/cli/install-cli#upgrade-the-cli). To upgrade from a pre-1.0 version of the CLI to version 1.0+, see [Upgrade to Astro CLI version 1.0+](upgrade-astro-cli.md).
+For standard upgrade steps, see [Upgrade the CLI](https://www.astronomer.io/docs/astro/cli/install-cli#upgrade-the-cli). To upgrade from a pre-1.0 version of the CLI to version 1.0+, see [Upgrade to Astro CLI version 1.0+](upgrade-astro-cli.md).
 
 ## Upgrade considerations
 

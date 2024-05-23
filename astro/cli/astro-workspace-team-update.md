@@ -56,7 +56,7 @@ To find a Team ID using the Astro CLI, run `astro workspace team list`. You can 
 
 #### Related documentation
 
-- [Import identity provider groups into Astronomer Software](https://docs.astronomer.io/software/import-idp-groups).
+- [Import identity provider groups into Astronomer Software](https://www.astronomer.io/docs/software/import-idp-groups).
 
 #### Options
 

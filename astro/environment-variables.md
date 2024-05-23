@@ -18,7 +18,7 @@ Some examples of customizing core settings of Airflow or any of its pre-installe
 - Changing the import timeout of DAGBag using `AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT`.
 - Setting up an SMTP service to receive [Airflow alerts](airflow-email-notifications.md) by email.
 
-You can also use environment variables to store [Airflow connections](https://docs.astronomer.io/learn/connections#define-connections-with-environment-variables) and [variables](https://docs.astronomer.io/learn/airflow-variables#using-environment-variables).
+You can also use environment variables to store [Airflow connections](https://www.astronomer.io/docs/learn/connections#define-connections-with-environment-variables) and [variables](https://www.astronomer.io/docs/learn/airflow-variables#using-environment-variables).
 
 Some environment variables on Astro are set globally and cannot be overridden for individual Deployments, while others are used by Astro Runtime to enhance your Airflow experience. For more information on these, see [Global environment variables](platform-variables.md).
 

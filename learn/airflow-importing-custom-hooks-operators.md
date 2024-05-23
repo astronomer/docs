@@ -126,7 +126,7 @@ class MyHook(BaseHook):
 
 After you've defined a custom hook or operator, you need to make it available to your DAGs. Some legacy Airflow documentation or forums may reference registering your custom operator as an Airflow plugin, but this is not necessary. To import a custom operator or hook to your DAGs, the operator or hook file needs to be in a directory that is present in your `PYTHONPATH`. See the Apache Airflow [module management documentation](https://airflow.apache.org/docs/apache-airflow/stable/modules_management.html) for more info.
 
-When using the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) you can add your custom operator file to the `include` directory of your Astro project. Consider adding sub-folders to make your `include` directory easier to navigate.
+When using the [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli) you can add your custom operator file to the `include` directory of your Astro project. Consider adding sub-folders to make your `include` directory easier to navigate.
 
 ```text
 .

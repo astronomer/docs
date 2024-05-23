@@ -35,7 +35,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 To complete this tutorial, you need:
 
 - The Soda Core package for your database backend. The [Soda documentation](https://docs.soda.io/soda-core/configuration.html) provides a list of supported databases and how to configure them. This tutorial uses Snowflake.
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started).
 
 ## Step 1: Configure your Astro project
 
