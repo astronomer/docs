@@ -12,7 +12,7 @@ import BusinessBadge from '@site/src/components/BusinessBadge';
 
 
 <p class="rssButton">
-  <a href="/astro-release-notes.xml" target="_blank">
+  <a href="/docs/astro-release-notes.xml" target="_blank">
     <img src="/docs/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
   </a>
 </p>

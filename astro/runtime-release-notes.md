@@ -9,7 +9,7 @@ description: A summary of the latest Astro Runtime features and functionality. A
 <!--version-specific-->
 
 <p>
-    <a href="/astro-runtime-release-notes.xml" target="_blank">
+    <a href="/docs/astro-runtime-release-notes.xml" target="_blank">
         <img src="/docs/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
     </a>
 </p>

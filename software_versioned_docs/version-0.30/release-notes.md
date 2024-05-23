@@ -6,7 +6,7 @@ description: Astronomer Software release notes.
 ---
 
 <p>
-    <a href="/astro-software-release-notes.xml" target="_blank">
+    <a href="/docs/astro-software-release-notes.xml" target="_blank">
         <img src="/docs/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
     </a>
 </p>
