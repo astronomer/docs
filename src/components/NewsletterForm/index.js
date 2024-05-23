@@ -151,7 +151,7 @@ export default function NewsletterForm(
 
     body.anonId = getSegmentUser() || email;
 
-    fetch(`/.netlify/functions/submit-form`, {
+    fetch(`/docs/.netlify/functions/submit-form`, {
       // eslint-disable-line
       method: "POST",
       body: JSON.stringify(body),
