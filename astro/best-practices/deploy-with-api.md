@@ -8,7 +8,7 @@ While you can deploy code to Astro using the GitHub Integration, the Astro CLI, 
 
 Instead of using the other code deploy options, you can instead use the Astro API Deploy endpoints to perform `IMAGE_ONLY`, `DAG_ONLY`, or both `IMAGE_AND_DAG` Deploys.
 
-This guide contains a list of scenarios and the respective scripts that you can use to deploy code with the Astro API using bash scripts. It also includes an example of an entire deploy flow, in case you want to use those steps and integrate into your own CI/CD pipelines.
+This guide contains an example of an entire deploy flow and the respective scripts that you can use to deploy code with the Astro API using bash scripts. It also includes an example of a script that can make deploys depending on the files changed, in case you want to use those steps and integrate into your own CI/CD pipelines.
 
 ## Feature overview
 
@@ -18,7 +18,7 @@ This guide highlights the following Astro features to use for automating code de
 
 ## Prerequisites
 
-This use case assumes you have:
+These use cases assume you have:
 
 - Sufficient permissions to deploy code to your Astro Deployments
 - At least one Astro Deployment
@@ -30,7 +30,9 @@ This use case assumes you have:
 
 ## With DAG-only deploy enabled
 
-### Complete deploy
+If you have DAG-only deploys enabled, you can create scripts for complete project deploys, DAG-only deploys, or image-only deploys.
+
+### Project deploy
 
 1. Create the `Deploy`
     - Use the `IMAGE_AND_DAG` type
@@ -351,11 +353,9 @@ This use case assumes you have:
 
 ## With DAG-only deploy disabled
 
-:::info
+You can only use complete project deploys if you have DAG-only deploys disabled. Image-only and DAG-only deploys do not work.
 
-You can only use complete deploys if you have DAG-only deploys disabled. Image-only and DAG-only deploys do not work.
-
-:::
+### Project deploy
 
 1. Create the `Deploy`
     - Use the `IMAGE_AND_DAG` type
@@ -444,6 +444,20 @@ You can only use complete deploys if you have DAG-only deploys disabled. Image-o
 </details>
 
 ## Trigger deploys when files change
+
+In addition to manually triggering project, DAG, and image deploys, you can create scripts that trigger specific code deploys depending on whether there have been changes to DAGs or files used to build the project image.
+
+The following code example shows the steps you can use to create a bash script that triggers different code deploys depending on the files changed in your project.
+
+### Workflow example steps
+
+1. Determine whether DAG files have been changed. If only DAGs have changed, then the script initiates a DAG-only deploy.
+
+2. Create a`Deploy` with the `CREATE` call.
+
+3. If only DAGs have changed, the script initiates a DAGs-only deploy. If more files have been changed, the script builds and deploys the project image, and then completes a DAG-only deploy.
+
+4. The script cleans up any tar files created during the build process.
 
 <details>
 <summary><strong>Trigger deploys code example</strong></summary>
