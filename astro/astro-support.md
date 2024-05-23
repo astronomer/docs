@@ -6,7 +6,6 @@ description: Get Astro support when you need it.
 ---
 
 import BusinessBadge from '@site/src/components/BusinessBadge';
-import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
 
 In addition to product documentation, the following resources are available to help you resolve issues:
 
@@ -80,7 +79,7 @@ To add a teammate to an existing support request, cc them when replying on the s
 :::
 
 ## Escalate a support request
-<EnterpriseBadge/> <BusinessBadge/>
+<BusinessBadge/>
 
 Business and Enterprise customers are eligible to escalate support requests. To submit a support request, email escalations@astronomer.io with the following information:
 
