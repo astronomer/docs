@@ -223,6 +223,7 @@ module.exports = {
         'airflow-pgvector',
         'airflow-pinecone',
         'connections/postgres',
+        'airflow-qdrant',
         {
           type: 'category',
           label: 'Redshift',
@@ -255,7 +256,6 @@ module.exports = {
         'soda-data-quality',
         'airflow-weaviate',
         'airflow-weights-and-biases',
-        'airflow-qdrant',
       ],
     },
     {
