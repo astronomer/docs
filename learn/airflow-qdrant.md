@@ -1,5 +1,5 @@
 ---
-title: "Semantic Querying with Airflow and Astronomer"
+title: "Semantic Querying with Qdrant, Airflow and Astronomer"
 sidebar_label: "Qdrant"
 description: "Learn how to integrate Qdrant and Airflow."
 id: airflow-qdrant
