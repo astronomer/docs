@@ -8,7 +8,7 @@ sidebar_custom_props: { icon: 'img/integrations/qdrant.png' }
 
 import CodeBlock from '@theme/CodeBlock';
 
-[Qdrant])https://qdrant.tech/ is an open-source vector database and similarity search engine designed for AI applications.
+[Qdrant](https://qdrant.tech/) is an open-source vector database and similarity search engine designed for AI applications.
 
 In this tutorial, you use Qdrant as a [provider](https://airflow.apache.org/docs/apache-airflow-providers-qdrant/stable/index.html) in Airflow and write a DAG that generates embeddings in parallel and performs semantic retrieval based on user input.
 
