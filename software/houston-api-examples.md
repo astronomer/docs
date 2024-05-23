@@ -17,7 +17,8 @@ You can use the `workspaceDeployment` query to retrieve details about a Deployme
 
 - **Workspace ID**: To retrieve this value, run `astro workspace list`. Alternatively, open a Workspace in the Software UI and copy the value after `/w/` in your Workspace URL (for example `https://app.basedomain/w/<workspace-id>`).
 - **Deployment release name**: To retrieve this value, run `astro deployment list` in your Workspace. Alternatively, you can copy the **Release name** from your Deployment's **Settings** tab in the Software UI.
-and can return any of the fields under `Type Details`, such as:
+
+ The `workspaceDeployment` query can return also any of the fields under `Type Details`, such as:
 
 - `config`
 - `uuid`
@@ -26,7 +27,7 @@ and can return any of the fields under `Type Details`, such as:
 - `updatedAt`
 - `roleBindings`
 
-For instance, you can run the following query to retrieve the Deployment's:
+For example, you can run the following query to retrieve the Deployment's:
 
 - ID
 - Health status
@@ -73,9 +74,9 @@ A common query is `users`, which lets you retrieve information about multiple us
     - `createdAt`(DateTime): When the user was created
     - `updatedAt`(DateTime): When the user was updated
   
-- **Workspace ID**: To retrieve this value, run `astro workspace list`. Alternatively, open a Workspace in the Software UI and copy the value after `/w/` in your Workspace URL (for example `https://app.basedomain/w/<workspace-id>`).
+- **Workspace ID**: To retrieve this value, run `astro workspace list`. Alternatively, open a Workspace in the Software UI and copy the value after `/w/` in your Workspace URL, for example `https://app.basedomain/w/<workspace-id>`.
 
-The query returns the requested details for all users who exactly match the values provided for the `userSearch`. For example, the following query would retrieve the requested values for any user accounts with the email `name@mycompany.com`
+The query returns the requested details for all users who exactly match the values provided for the `userSearch`. For example, the following query would retrieve the requested values for any user accounts with the email `name@mycompany.com`:
 
 
 ```graphql
@@ -96,7 +97,7 @@ Mutations make a change to your platform's underlying database. The following se
 
 ### Create a Deployment
 
-To create a Deployment, you need Workspace Admin permissions and a **Workspace ID**. To retrieve this value, run `astro workspace list`. Alternatively, open a Workspace in the Software UI and copy the value after `/w/` in your Workspace URL (for example `https://app.basedomain/w/<workspace-id>`).
+To create a Deployment, you need Workspace Admin permissions and a **Workspace ID**. To retrieve this value, run `astro workspace list`. Alternatively, open a Workspace in the Software UI and copy the value after `/w/` in your Workspace URL, for example `https://app.basedomain/w/<workspace-id>`.
 
 This example mutation creates a Deployment with the Celery executor and the latest Runtime version. It then returns the Deployment's ID and configuration to confirm that it was successfully created. 
 
