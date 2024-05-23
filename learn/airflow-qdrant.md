@@ -8,9 +8,11 @@ sidebar_custom_props: { icon: 'img/integrations/qdrant.png' }
 
 import CodeBlock from '@theme/CodeBlock';
 
-In this tutorial, you will use Qdrant as a [provider](https://airflow.apache.org/docs/apache-airflow-providers-qdrant/stable/index.html) in Airflow.
+[Qdrant])https://qdrant.tech/ is an open-source vector database and similarity search engine designed for AI applications.
 
-You will write the pipeline as a DAG (Directed Acyclic Graph) in Python. With this, you can leverage the powerful suite of Python’s capabilities and libraries to achieve almost anything your data pipeline needs.
+In this tutorial, you use Qdrant as a [provider](https://airflow.apache.org/docs/apache-airflow-providers-qdrant/stable/index.html) in Airflow and write a DAG that generates embeddings in parallel and performs semantic retrieval based on user input.
+
+Writing pipelines as DAGs (Directed Acyclic Graphs) in Python allows you to leverage the powerful suite of Python’s capabilities and libraries to achieve almost anything your data pipeline needs.
 
 Airflow is useful when running operations in Qdrant based on data events or building parallel tasks for generating vector embeddings. By using Airflow, you can set up monitoring and alerts for your pipelines for full observability.
 
@@ -19,7 +21,7 @@ Airflow is useful when running operations in Qdrant based on data events or buil
 Please make sure you have the following ready:
 
 - A running Qdrant instance. We’ll be using a free instance from https://cloud.qdrant.io.
-- The Astronomer CLI. Find the installation instructions [here](https://docs.astronomer.io/astro/cli/install-cli).
+- The Astronomer CLI. See [Install the Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 - A [HuggingFace token](https://huggingface.co/docs/hub/en/security-tokens) to generate embeddings.
 
 ## Implementation
@@ -35,7 +37,7 @@ mkdir qdrant-airflow-tutorial && cd qdrant-airflow-tutorial
 astro dev init
 ```
 
-This command generates all of the project files you need to run Airflow locally. You can find a directory called `dags`, which is where we can place our Python DAG files.
+This command generates all of the project files you need to run Airflow locally. You will find a directory called `dags`, which is where we will place our Python DAG files.
 
 To use Qdrant within Airflow, install the Qdrant Airflow provider by adding the following to the `requirements.txt` file:
 
@@ -45,9 +47,9 @@ apache-airflow-providers-qdrant==1.1.0
 
 ### Configure credentials
 
-We can set up provider connections using the Airflow UI, environment variables or the `airflow_settings.yml` file.
+We can set up provider connections using the Airflow UI, environment variables, or the `airflow_settings.yml` file.
 
-Add the following to the `.env` file in the project. Replace the values as per your credentials.
+To use an environment variable, add the following to the `.env` file in the project. Replace the values as per your credentials.
 
 ```text
 HUGGINGFACE_TOKEN="<YOUR_HUGGINGFACE_ACCESS_TOKEN>"
@@ -60,7 +62,7 @@ AIRFLOW_CONN_QDRANT_DEFAULT='{
 
 ### Add the data corpus
 
-Let’s add some sample data to work with. Paste the following content into a file called books.txt file within the include directory.
+Let’s add some sample data to work with. Paste the following content into a file called `books.txt` within the `include` directory.
 
 ```text
 1 | To Kill a Mockingbird (1960) | fiction | Harper Lee's Pulitzer Prize-winning novel explores racial injustice and moral growth through the eyes of young Scout Finch in the Deep South.
@@ -75,7 +77,7 @@ Let’s add some sample data to work with. Paste the following content into a fi
 10 | The Da Vinci Code (2003) | mystery/thriller | Dan Brown's gripping thriller follows symbologist Robert Langdon as he unravels clues hidden in art and history while trying to solve a murder mystery with far-reaching implications.
 ```
 
-Now, the hacking part - writing our Airflow DAG!
+Now, the hacking part: writing our Airflow DAG!
 
 ### Write the DAG
 
@@ -197,15 +199,15 @@ recommend_book()
 
 ```
 
-`import_books`: This task reads a text file containing information about the books (like title, genre, and description), and then returns the data as a list of dictionaries.
+`import_books`: This task reads a text file containing information about the books (like title, genre, and description) and then returns the data as a list of dictionaries.
 
-`init_collection`: This task initializes a collection in the Qdrant database, where we will store the vector representations of the book descriptions. The recreate_collection() deletes a collection first if it already exists. Trying to create a collection that already exists throws an error.
+`init_collection`: This task initializes a collection in the Qdrant database, where we will store the vector representations of the book descriptions. The `recreate_collection()` function deletes a collection first if it already exists. Trying to create a collection that already exists throws an error.
 
-`embed_description`: This is a dynamic task that creates one mapped task instance for each book in the list. The task uses the embed function to generate vector embeddings for each description. To use a different embedding model, you can adjust the EMBEDDING_MODEL_ID, EMBEDDING_DIMENSION values.
+`embed_description`: This is a dynamic task that creates one mapped task instance for each book in the list. The task uses the `embed` function to generate vector embeddings for each description. To use a different embedding model, you can adjust the `EMBEDDING_MODEL_ID` and `EMBEDDING_DIMENSION` values.
 
 `embed_user_preference`: Here, we take a user’s input and convert it into a vector using the same pre-trained model used for the book descriptions.
 
-`qdrant_vector_ingest`: This task ingests the book data into the Qdrant collection using the QdrantIngestOperator, associating each book description with its corresponding vector embeddings.
+`qdrant_vector_ingest`: This task ingests the book data into the Qdrant collection using the `QdrantIngestOperator`, associating each book description with its corresponding vector embeddings.
 
 `search_qdrant`: Finally, this task performs a search in the Qdrant database using the vectorized user preference. It finds the most relevant book in the collection based on vector similarity.
 
@@ -225,7 +227,7 @@ After your DAG run completes, you should be able to see the output of your searc
 
 ![Qdrant output](/img/integrations/qdrant-output.png)
 
-There you have it, an Airflow pipeline that interfaces with Qdrant! Feel free to fiddle around and explore Airflow. There are references below that might come in handy.
+There you have it, an Airflow pipeline that interfaces with Qdrant! Feel free to fiddle around and explore Airflow. The following references might come in handy.
 
 ## Further reading
 
