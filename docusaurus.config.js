@@ -140,27 +140,27 @@ module.exports = {
       items: [
         {
           label: '0.34 (Latest)',
-          to: '/software/',
+          to: '/docs/software/',
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
         },
         {
           label: '0.33',
-          to: '/software/0.33/',
+          to: '/docs/software/0.33/',
           activeBaseRegex: `(software\/0.33)+`,
         },
         {
           label: '0.32',
-          to: '/software/0.32/',
+          to: '/docs/software/0.32/',
           activeBaseRegex: `(software\/0.32)+`,
         },
         {
           label: '0.30',
-          to: '/software/0.30/',
+          to: '/docs/software/0.30/',
           activeBaseRegex: '(software\/0.30)+',
         },
         {
           label: 'Archive',
-          to: '/software/documentation-archive',
+          to: '/docs/software/documentation-archive',
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
         },
       ],
