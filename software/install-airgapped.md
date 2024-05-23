@@ -690,9 +690,9 @@ Naming the secret `astronomer-tls` (no substitutions) is always recommended and 
 If using Astronomer Software's integrated ingress controller, skip this step.
 
 Follow procedures at [Third-party Ingress-Controllers](#third-party-ingress-controllers), which includes steps to:
-* perform standard configuration for the use of a third-party ingress-controller
-* perform any distribution-specific required for ingress controllers on your Kubernetes distribution
-* perform any additional controller-specific required configuration
+* perform the standard configuration required to a third-party ingress-controller
+* perform any environment-specific configured required for ingress controllers in certain environments (like OpenShift)
+* perform any additional controller-specific required configuration (required for most ingress-controllers)
 
 ## Step 9: Configuring a Private Certificate Authority {#configuring-a-private-certificate-authority}
 
@@ -1519,7 +1519,7 @@ Verify that this output matches with that of the following command, which doesn'
 curl -v -k -X POST https://houston.BASEDOMAIN/v1 -H "Authorization: Bearer <token>"
 ```
 
-## Step TBD: Verify Your Local Machine Trusts the Container Registry
+## Step 31: Verify Your Local Machine Trusts the Container Registry
 
 If not using Astronomer
 Next, to make sure the registry is accepted by Astronomer's local docker client, try authenticating to Astronomer with the Astro CLI:
