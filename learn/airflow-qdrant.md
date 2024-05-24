@@ -190,7 +190,7 @@ def recommend_book():
 recommend_book()
 
 ```
-
+This DAG consists of 6 tasks that generate embeddings in parallel for the data corpus and perform semantic retrieval based on user input.
 - `import_books`: This task reads a text file containing information about the books (such as title, genre, and description) and then returns the data as a list of dictionaries.
 
 - `init_collection`: This task initializes a collection in the Qdrant database, where we will store the vector representations of the book descriptions. The `recreate_collection()` function deletes a collection first if it already exists. Trying to create a collection that already exists throws an error.
