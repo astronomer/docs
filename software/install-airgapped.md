@@ -14,9 +14,6 @@ Astronomer recommends platform administrators perform their first Astronomer Sof
 
 Astronomer recommends platform administrators adapt the procedures contained in this document to meet organizational best-practices when deploying to change-controlled environments.
 
-# MAJOR REWORK IN PROGRESS DO NOT COPY-EDIT
-
-
 ## Prerequisites
 
 <Tabs
@@ -121,7 +118,7 @@ The following prerequisites apply when running Astronomer Software on Kubernetes
 </Tabs>
 
 ## Step 1: Determining how to structure and organize your platform environments {#determining-how-to-structure-and-organize-your-platform-environments}
-The procedures detailed in this document create an Astronomer Software platform-instance that will be used used to deploy and manage multiple Airflow installations.
+The procedures detailed in this document create an Astronomer Software platform-instance that will be used to deploy and manage multiple Airflow installations.
 
 Do not install multiple instances of Astronomer Software onto the same Kubernetes cluster.
 
@@ -709,7 +706,7 @@ Naming the secret `astronomer-tls` (no substitutions) is always recommended and 
 
 If using Astronomer Software's integrated ingress controller, skip this step.
 
-Follow procedures at [Third-party Ingress-Controllers](#third-party-ingress-controllers), which includes steps to:
+Follow procedures at [Third-party Ingress-Controllers](third-party-ingress-controllers), which includes steps to:
 * perform the standard configuration required to a third-party ingress-controller
 * perform any environment-specific configured required for ingress controllers in certain environments (like OpenShift)
 * perform any additional controller-specific required configuration (required for most ingress-controllers)
@@ -1715,7 +1712,7 @@ if __name__ == "__main__":
                         
                          
 
-## Configuring Astronomer Software To Not Send Outbound Email
+### Configuring Astronomer Software to not send outbound email
 
 Astronomer Software can be configured to not send outbound email.
 
@@ -1734,7 +1731,7 @@ If the guide has not yet instructed you to install Astronomer software, skip the
 
 Apply the configuration update to the Astronomer Software helm release using `upgrade.sh` (recommended for your first install) or directly from helm. 
 
-## Configuring Astronomer Software to trust Private Certificate Authorities (Private CA's) {#configuring-private-cas}
+### Configuring Astronomer Software to trust private Certificate Authorities (private CA's) {#configuring-private-cas}
 
 1. Store the Certificate Authority's root public certificate to an [Opaque Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#secret-types) in the Astronomer namespace with a descriptive name, e.g. `private-root-ca` by running the following command:
 
@@ -1761,7 +1758,7 @@ Apply the configuration update to the Astronomer Software helm release using `up
       - private-root-ca
     ```
 
-## Adding Additional Trusted Certificate Authorities to Docker Desktop {#configure-desktop-container-solution-extra-cas}
+### Adding additional trusted Certificate Authorities (private CA's) to Docker Desktop {#configure-desktop-container-solution-extra-cas}
 
 If your end-users will be deploying images to a container-registry (including the integrated container registry) that uses TLS certificate signed by a private Certificate Authority, Docker Desktop needs to be configured to trust the Certificate Authority's public certificate. 
 
