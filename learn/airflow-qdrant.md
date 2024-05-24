@@ -12,19 +12,17 @@ import CodeBlock from '@theme/CodeBlock';
 
 In this tutorial, you'll use the [Qdrant Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-qdrant/stable/index.html) to write a DAG that generates embeddings in parallel and performs semantic retrieval based on user input.
 
-
 Airflow is useful when running operations in Qdrant based on data events or building parallel tasks for generating vector embeddings. By using Airflow, you can set up monitoring and alerts for your pipelines for full observability.
 
 ## Time to complete
 
 This tutorial takes approximately 30 minutes to complete.
-## Prerequisites
 
+## Prerequisites
 
 - A running Qdrant instance. A [free instance](https://cloud.qdrant.io) is available.
 - The Astro CLI. See [Install the Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 - A [HuggingFace token](https://huggingface.co/docs/hub/en/security-tokens) to generate embeddings.
-
 
 ## Step 1: Set up the project
 
@@ -35,7 +33,6 @@ mkdir qdrant-airflow-tutorial && cd qdrant-airflow-tutorial
 astro dev init
 ```
 
-
 2. To use Qdrant within Airflow, install the Qdrant Airflow provider by adding the following to your `requirements.txt` file:
 
 ```text
@@ -45,7 +42,6 @@ apache-airflow-providers-qdrant==1.1.0
 ## Step 2: Configure credentials
 
 Add the following configuration to your `.env` file to create Airflow connections between Airflow and HuggingFace and Qdrant.
-
 
 ```text
 HUGGINGFACE_TOKEN="<YOUR_HUGGINGFACE_ACCESS_TOKEN>"
@@ -72,7 +68,6 @@ Paste the following sample data into a file called `books.txt` within your `incl
 9 | The Alchemist (1988) | fiction | Paulo Coelho's philosophical novel follows Santiago, an Andalusian shepherd boy, on a journey of self-discovery and spiritual awakening as he searches for a hidden treasure.
 10 | The Da Vinci Code (2003) | mystery/thriller | Dan Brown's gripping thriller follows symbologist Robert Langdon as he unravels clues hidden in art and history while trying to solve a murder mystery with far-reaching implications.
 ```
-
 
 ## Step 4: Create your DAG
 
@@ -196,7 +191,7 @@ recommend_book()
 
 ```
 
-- `import_books`: This task reads a text file containing information about the books (like title, genre, and description) and then returns the data as a list of dictionaries.
+- `import_books`: This task reads a text file containing information about the books (such as title, genre, and description) and then returns the data as a list of dictionaries.
 
 - `init_collection`: This task initializes a collection in the Qdrant database, where we will store the vector representations of the book descriptions. The `recreate_collection()` function deletes a collection first if it already exists. Trying to create a collection that already exists throws an error.
 
@@ -208,19 +203,16 @@ recommend_book()
 
 - `search_qdrant`: Finally, this task performs a search in the Qdrant database using the vectorized user preference. It finds the most relevant book in the collection based on vector similarity.
 
+![Qdrant demo DAG](/img/integrations/qdrant-demo-dag.png)
+
 ## Step 5: Run your DAG
 
 1. Run `astro dev start` in your Astro project to start Airflow and open the Airflow UI at `localhost:8080`.
 
 2. In the Airflow UI, run the `books_recommend` DAG by clicking the play button. You'll be asked for input about your book preference.
 
-![Qdrant demo DAG](/img/integrations/qdrant-demo-dag.png)
-
-
 ![Qdrant reference input](/img/integrations/qdrant-reference-input.png)
 
 3. View the output of your search in the logs of the `search_qdrant` task.
 
 ![Qdrant output](/img/integrations/qdrant-output.png)
-
-
