@@ -33,10 +33,10 @@ To create an Airflow Deployment on Astronomer:
     - Choose a strategy for how you configure resources to Airflow components. See [Customize resource usage](customize-resource-usage.md).
     - Select an Airflow executor
     - Allocate resources to your Airflow scheduler and webserver
-    - Set scheduler count (*Airflow 2.0+ only*)
-    - Add extra capacity (*Kubernetes only*)
-    - Set worker count (*Celery only*)
-    - Adjust your worker termination grace period (*Celery only*)
+    - Set scheduler count (_Airflow 2.0+ only_)
+    - Add extra capacity (_Kubernetes only_)
+    - Set worker count (_Celery only_)
+    - Adjust your worker termination grace period (_Celery only_)
 
 ## Customize Deployment release names
 
