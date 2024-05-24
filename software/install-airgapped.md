@@ -1409,7 +1409,7 @@ helm upgrade --install --namespace $NAMESPACE \
 </TabItem>
 </Tabs>
 
-Run `kubectl -n <astronomer platformm namespace> get service -l component=ingress-controller and verify that a service-type LoadBalancer resource has been created and received an External IP in a range that is accessible to your end-users but **not** accessible to the general internet.
+Run `kubectl -n <astronomer platformm namespace> get service -l component=ingress-controller` and verify that a service-type LoadBalancer resource has been created and received an External IP in a range that is accessible to your end-users but **not** accessible to the general internet.
 
 E.g.
 
