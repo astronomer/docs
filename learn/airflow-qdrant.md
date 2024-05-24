@@ -10,46 +10,42 @@ import CodeBlock from '@theme/CodeBlock';
 
 [Qdrant](https://qdrant.tech/) is an open-source vector database and similarity search engine designed for AI applications.
 
-In this tutorial, you use Qdrant as a [provider](https://airflow.apache.org/docs/apache-airflow-providers-qdrant/stable/index.html) in Airflow and write a DAG that generates embeddings in parallel and performs semantic retrieval based on user input.
+In this tutorial, you'll use the [Qdrant Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-qdrant/stable/index.html) to write a DAG that generates embeddings in parallel and performs semantic retrieval based on user input.
 
-Writing pipelines as DAGs (Directed Acyclic Graphs) in Python allows you to leverage the powerful suite of Python’s capabilities and libraries to achieve almost anything your data pipeline needs.
 
 Airflow is useful when running operations in Qdrant based on data events or building parallel tasks for generating vector embeddings. By using Airflow, you can set up monitoring and alerts for your pipelines for full observability.
 
+## Time to complete
+
+This tutorial takes approximately 30 minutes to complete.
 ## Prerequisites
 
-Please make sure you have the following ready:
 
-- A running Qdrant instance. We’ll be using a free instance from https://cloud.qdrant.io.
-- The Astronomer CLI. See [Install the Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
+- A running Qdrant instance. A [free instance](https://cloud.qdrant.io) is available.
+- The Astro CLI. See [Install the Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 - A [HuggingFace token](https://huggingface.co/docs/hub/en/security-tokens) to generate embeddings.
 
-## Implementation
 
-We’ll be building a DAG that generates embeddings in parallel for our data corpus and performs semantic retrieval based on user input.
+## Step 1: Set up the project
 
-### Set up the project
-
-The Astronomer CLI makes it very straightforward to set up the Airflow project:
+1. Create a new Astro project:
 
 ```bash
 mkdir qdrant-airflow-tutorial && cd qdrant-airflow-tutorial
 astro dev init
 ```
 
-This command generates all of the project files you need to run Airflow locally. You will find a directory called `dags`, which is where we will place our Python DAG files.
 
-To use Qdrant within Airflow, install the Qdrant Airflow provider by adding the following to the `requirements.txt` file:
+2. To use Qdrant within Airflow, install the Qdrant Airflow provider by adding the following to your `requirements.txt` file:
 
 ```text
 apache-airflow-providers-qdrant==1.1.0
 ```
 
-### Configure credentials
+## Step 2: Configure credentials
 
-We can set up provider connections using the Airflow UI, environment variables, or the `airflow_settings.yml` file.
+Add the following configuration to your `.env` file to create Airflow connections between Airflow and HuggingFace and Qdrant.
 
-To use an environment variable, add the following to the `.env` file in the project. Replace the values as per your credentials.
 
 ```text
 HUGGINGFACE_TOKEN="<YOUR_HUGGINGFACE_ACCESS_TOKEN>"
@@ -60,9 +56,9 @@ AIRFLOW_CONN_QDRANT_DEFAULT='{
 }'
 ```
 
-### Add the data corpus
+## Step 3: Add the data corpus
 
-Let’s add some sample data to work with. Paste the following content into a file called `books.txt` within the `include` directory.
+Paste the following sample data into a file called `books.txt` within your `include` directory.
 
 ```text
 1 | To Kill a Mockingbird (1960) | fiction | Harper Lee's Pulitzer Prize-winning novel explores racial injustice and moral growth through the eyes of young Scout Finch in the Deep South.
@@ -77,11 +73,12 @@ Let’s add some sample data to work with. Paste the following content into a fi
 10 | The Da Vinci Code (2003) | mystery/thriller | Dan Brown's gripping thriller follows symbologist Robert Langdon as he unravels clues hidden in art and history while trying to solve a murder mystery with far-reaching implications.
 ```
 
-Now, the hacking part: writing our Airflow DAG!
 
-### Write the DAG
+## Step 4: Create your DAG
 
-We’ll add the following content to a `books_recommend.py` file within the `dags` directory. Let’s go over what it does for each task.
+1. In your `dags` folder, create a file called `books_recommend.py`.
+
+2. Copy the following code into the file.
 
 ```python
 import os
@@ -199,39 +196,31 @@ recommend_book()
 
 ```
 
-`import_books`: This task reads a text file containing information about the books (like title, genre, and description) and then returns the data as a list of dictionaries.
+- `import_books`: This task reads a text file containing information about the books (like title, genre, and description) and then returns the data as a list of dictionaries.
 
-`init_collection`: This task initializes a collection in the Qdrant database, where we will store the vector representations of the book descriptions. The `recreate_collection()` function deletes a collection first if it already exists. Trying to create a collection that already exists throws an error.
+- `init_collection`: This task initializes a collection in the Qdrant database, where we will store the vector representations of the book descriptions. The `recreate_collection()` function deletes a collection first if it already exists. Trying to create a collection that already exists throws an error.
 
-`embed_description`: This is a dynamic task that creates one mapped task instance for each book in the list. The task uses the `embed` function to generate vector embeddings for each description. To use a different embedding model, you can adjust the `EMBEDDING_MODEL_ID` and `EMBEDDING_DIMENSION` values.
+- `embed_description`: This is a dynamic task that creates one mapped task instance for each book in the list. The task uses the `embed` function to generate vector embeddings for each description. To use a different embedding model, you can adjust the `EMBEDDING_MODEL_ID` and `EMBEDDING_DIMENSION` values.
 
-`embed_user_preference`: Here, we take a user’s input and convert it into a vector using the same pre-trained model used for the book descriptions.
+- `embed_user_preference`: Here, we take a user’s input and convert it into a vector using the same pre-trained model used for the book descriptions.
 
-`qdrant_vector_ingest`: This task ingests the book data into the Qdrant collection using the `QdrantIngestOperator`, associating each book description with its corresponding vector embeddings.
+- `qdrant_vector_ingest`: This task ingests the book data into the Qdrant collection using the `QdrantIngestOperator`, associating each book description with its corresponding vector embeddings.
 
-`search_qdrant`: Finally, this task performs a search in the Qdrant database using the vectorized user preference. It finds the most relevant book in the collection based on vector similarity.
+- `search_qdrant`: Finally, this task performs a search in the Qdrant database using the vectorized user preference. It finds the most relevant book in the collection based on vector similarity.
 
-### Run the DAG
+## Step 5: Run your DAG
 
-Head over to your terminal and run `astro dev start`.
+1. Run `astro dev start` in your Astro project to start Airflow and open the Airflow UI at `localhost:8080`.
 
-A local Airflow container should spawn. You can now access the Airflow UI at http://localhost:8080. Visit our DAG by clicking on **books_recommend**.
+2. In the Airflow UI, run the `books_recommend` DAG by clicking the play button. You'll be asked for input about your book preference.
 
 ![Qdrant demo DAG](/img/integrations/qdrant-demo-dag.png)
 
-Hit the **PLAY** button on the right to run the DAG. You’ll be asked for input about your preference, with the default value already filled in.
 
 ![Qdrant reference input](/img/integrations/qdrant-reference-input.png)
 
-After your DAG run completes, you should be able to see the output of your search in the logs of the `search_qdrant` task.
+3. View the output of your search in the logs of the `search_qdrant` task.
 
 ![Qdrant output](/img/integrations/qdrant-output.png)
 
-There you have it, an Airflow pipeline that interfaces with Qdrant! Feel free to fiddle around and explore Airflow. The following references might come in handy.
 
-## Further reading
-
-- [Introduction to Airflow](https://docs.astronomer.io/learn/intro-to-airflow)
-- [Airflow Concepts](https://docs.astronomer.io/learn/category/airflow-concepts)
-- [Airflow Reference](https://airflow.apache.org/docs/)
-- [Astronomer Documentation](https://docs.astronomer.io/)
