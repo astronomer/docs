@@ -93,13 +93,8 @@ helm repo update
 # then you may set this value to "true" instead. When it is "true", then each Airflow chart will
 # restart. Note that some stable version upgrades require setting this value to true regardless of your own configuration.
 # If you are currently on Astronomer Software 0.25, 0.26, or 0.27, you must upgrade to version 0.28 before upgrading to 0.29. A direct upgrade to 0.29 from a version lower than 0.28 is not possible.
-<<<<<<< Updated upstream
 helm upgrade --namespace $NAMESPACE \
             -f ./values.yaml \
-=======
-helm upgrade --install --namespace $NAMESPACE \
-            -f ./config.yaml \
->>>>>>> Stashed changes
             --reset-values \
             --version $ASTRO_VERSION \
             --debug \

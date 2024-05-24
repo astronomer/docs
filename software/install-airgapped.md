@@ -148,7 +148,8 @@ Certain files in this directory may contain secrets. For your first install, kee
 Choose the template below that corresponds to your Kubernetes Platform and save it to a file named `values.yaml` in your platform-project directory.
 
 * Do not make any changes to this file until instructed to do so in later steps.
-* Do not apply this file with helm until instructed to do so in later steps.
+* Ignore any instructions to run `helm upgrade` from external documents.
+* Do not run `helm upgrade` or `upgrade.sh`) until instructed to do so in later steps of this document. 
 
 :::tip
 
@@ -465,16 +466,16 @@ astronomer:
 
 </Tabs>
 
-## Step 3: Decide Whether to Use a Third-Party Ingress Controller
+## Step 3: Decide Whether to Use a Third-Party Ingress Controller {#elect-to-use-a-third-party-ingress-controller}
 Astronomer Software requires a Kubernetes Ingress Controller to function and provides an integrated ingress-controller by default.
 
-Astronomer generally recommends customers use its integrated ingress-controller but supports certain third-party ingress controllers. Ingress controllers, including Astronomer's ingress controllers, typically need elevated permissions to function - particularly the ability to list all namespaces and view the ingresses in those namespaces and the ability to retrieve secrets in those namespaces to locate and use private TLS certificates used to service those ingresses.
+Astronomer generally recommends customers use its integrated ingress-controller but supports certain third-party [third-party ingress-controllers](#third-party-ingress-controllers) in certain configurations.. 
 
-Customers in complex regulatory requirements frequently have ingress-controllers that are already internally-approved to hold those permissions. 
+Ingress controllers, including Astronomer's ingress controllers, typically need elevated permissions (including a ClusterRole) to function - particularly the ability to list all namespaces and view the ingresses in those namespaces and the ability to retrieve secrets in those namespaces to locate and use private TLS certificates used to service those ingresses.
 
-Astronomer supports [third-party ingress-controllers](#third-party-ingress-controllers) in certain configurations.
+Customers in complex regulatory requirements frequently have ingress-controllers that are already internally-approved to hold those permissions and disable Astronomer's integrated ingress-controller. 
 
-Customers using third-party ingress-controllers perfrom certain additional steps later in this procedure to disable the integrated ingress-controller and configure Astronomer for use with their pre-existing ingress-controller.
+Customers electing to use a third-party ingress-controllers perform certain additional steps later in this procedure to disable the integrated ingress-controller and configure Astronomer for use with their pre-existing ingress-controller.
 
 ## Step 4: Choose and configure the base domain {#choose-and-configure-the-base-domain}
 
@@ -1293,42 +1294,10 @@ astronomer:
             
 ```
 
-## Step 22: Configure namespace pools {#configure-namespace-pools}
+## Step 22: Openshift only - apply openshift-specific configuration {#openshift-configuration}
 
-Dedicated namespace pools are strongly recommended for the security of any Astronomer Software installation. They allow you to grant Astronomer Software permissions at the namespace level and limit cluster-level permission.
+Skip this step if not installing onto an Openshift Kubernetes Cluster.
 
-## Step 23: Determine whether to use the Astronomer Software integrated ingress-controller
-Astronomer Software 
-
-If using Astronomer Software's integrated ingress controller, skip this step.
-
-Follow procedures at [Third-party Ingress-Controllers](#third-party-ingress-controllers), which includes steps to:
-* perform the standard configuration required to a third-party ingress-controller
-* perform any environment-specific configured required for ingress controllers in certain environments (like OpenShift)
-* perform any additional controller-specific required configuration (required for most ingress-controllers)
-
-See [Configure a Kubernetes namespace pool for Astronomer Software](namespace-pools.md) to learn how to configure pre-created namespaces in your `values.yaml` file. When you decide on a namespace pool implementation, apply the required changes to your cluster and `values.yaml` file. 
-
-Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
-
-Most third-party ingress-controllers require the public certificate additionally be available in the namespace of the various airflow instances. If using a third-party ingress-controller, run the following command to mark the secret for automatic-replication into astronomer-managed Airflow namespaces, substituting both instances of `<astronomer platform namespace>` with the name of the Astronomer Software platform namespace:
-
-Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
-
-## Step 24: Configure sidecar logging {#configure-sidecar-logging}
-
-Running a logging sidecar to export Airflow task logs is essential for running Astronomer Software in a multi-tenant cluster. See [Export logs using container sidecars](export-task-logs.md#export-logs-using-container-sidecars) to learn how to configure logging sidecars in your `values.yaml` file. 
-
-Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
-
-
-## Step 25: Integrate an external identity provider {#integrate-an-external-identity-provider}
-
-Astronomer Software includes integrations for several of the most popular identity providers (IdPs), such as Okta and Microsoft Entra ID. Configuring an external IdP allows you to automatically provision and manage users in accordance with your organization's security requirements. See [Integrate an auth system](integrate-auth-system.md) to configure the identity provider of your choice in your `config.yaml` file. 
-
-Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
-
-## Step 26: OpenShift Configuration {#OpenShift-configuration}
 Merge the following configuration options into `values.yaml` - either manually or by placing [merge_yaml.py](#merge_yaml) in your astro-platform project-directory and running `python merge_yaml.py OpenShift-snippet.yaml values.yaml`.
 
 ```yaml
@@ -1350,8 +1319,28 @@ elasticsearch:
     enabled: false
 ```
 
+Astronomer Software on Openshift is only supported when using [a third-party ingress-controller](#elect-to-use-a-third-party-ingress-controller) using the [logging sidecar](#configure-sidecar-logging) feature of Astronomer Software. The above configuration enables both these items.
 
-## Step 27: Pre-creating the Load-Balancer {#creating-the-load-balancer}
+## Step 23: Optional - limit Astronomer to a namespace pool {#configure-namespace-pools}
+
+By default, Astronomer Software automatically creates namespaces for each new Airflow deployment.
+
+You may restrict the airflow-management components of Astronomre Software to a list of pre-defined namespaces and configure it to operate without a ClusterRole by following instructions at [Configure a Kubernetes namespace pool for Astronomer Software](namespace-pools) and setting`global.clusterRoles` to `false`. 
+
+## Step 24: Optional - enable sidecar logging {#configure-sidecar-logging}
+
+Running a logging sidecar to export Airflow task logs is essential for running Astronomer Software in a multi-tenant cluster.
+
+By default, Astronomer Software creates a privileged DaemonSet to aggregate logs from Airflow components for viewing from within Airflow and the Astronomer Software UI.
+
+You may replace this privileged daemonset with unprivileged logging sidecars by following instructions at [Export logs using container sidecars](export-task-logs.md#export-logs-using-container-sidecars).
+
+## Step 25: Optional - integrate an external identity provider {#integrate-an-external-identity-provider}
+
+Astronomer Software includes integrations for several of the most popular OAUTH2 identity providers (IdPs), such as Okta and Microsoft Entra ID. Configuring an external IdP allows you to automatically provision and manage users in accordance with your organization's security requirements. See [Integrate an auth system](integrate-auth-system.md) to configure the identity provider of your choice in your `config.yaml` file. 
+
+
+## Step 26: Pre-creating the Load-Balancer {#creating-the-load-balancer}
 
 If using a third-party ingress-controller or provisioning domain-names for ingress objects using external-dns, skip this step.
 
@@ -1441,7 +1430,7 @@ nginx:
 This optional allows the cluster to request same Load Balancer IP at creation-time. Practically, re-builds immediately following tear-downs almost always can receive the same IP address but re-issuance is not guaranteed and installations will fail if the IP address has been assigned elsewhere or is otherwise not available.  As such, this option should not be used in higher environments unless you have taken special measures to guarantee re-issuence.
 
 
-## Step 28: Configure DNS for the integrated ingress-controller {#intigrated-ingress-controller-dns-configuration}
+## Step 27: Configure DNS for the integrated ingress-controller {#intigrated-ingress-controller-dns-configuration}
 
 If using a third-party ingress-controller skip this step - you completed corresponding procedures in a [prior section](#third-party-ingress-controller-dns-configuration)).
 
@@ -1475,7 +1464,7 @@ Astronomer Software requires the following domain-names be registered and resolv
   - `prometheus.<base-domain>` (required)
   - `registry.<base-domain>` (required if using Astronomer Software's integrated container-registry)
 
-## Step 29: Install Astronomer using Helm {#install-astronomer-using-helm}
+## Step 28: Install Astronomer using Helm {#install-astronomer-using-helm}
 
 Install the Astronomer Software helm chart using `upgrade.sh` (recommended for your first install) or directly from helm.
 
@@ -1511,7 +1500,7 @@ helm upgrade --install --namespace <astronomer-platform-namespace> \
 </TabItem>
 </Tabs>
 
-## Step 30: Verify Pods are up {#verify-pods-are-up}
+## Step 29: Verify Pods are up {#verify-pods-are-up}
 
 To verify all pods are up and running, run:
 
@@ -1528,44 +1517,12 @@ NAME                                                       READY   STATUS       
 astronomer-alertmanager-0                                  1/1     Running             0          24m
 astronomer-astro-ui-7f94c9bbcc-7xntd                       1/1     Running             0          24m
 astronomer-astro-ui-7f94c9bbcc-lkn5b                       1/1     Running             0          24m
-astronomer-cli-install-88df56bbd-t4rj2                     1/1     Running             0          24m
-astronomer-commander-84f64d55cf-8rns9                      1/1     Running             0          24m
-astronomer-commander-84f64d55cf-j6w4l                      1/1     Running             0          24m
-astronomer-elasticsearch-client-7786447c54-9kt4x           1/1     Running             0          24m
-astronomer-elasticsearch-client-7786447c54-mdxpn           1/1     Running             0          24m
-astronomer-elasticsearch-data-0                            1/1     Running             0          24m
-astronomer-elasticsearch-data-1                            1/1     Running             0          24m
-astronomer-elasticsearch-exporter-6495597c9f-ks4jz         1/1     Running             0          24m
-astronomer-elasticsearch-master-0                          1/1     Running             0          24m
-astronomer-elasticsearch-master-1                          1/1     Running             0          23m
-astronomer-elasticsearch-master-2                          1/1     Running             0          23m
-astronomer-elasticsearch-nginx-b954fd4d4-249sh             1/1     Running             0          24m
-astronomer-fluentd-5lv2c                                   1/1     Running             0          24m
-astronomer-fluentd-79vv4                                   1/1     Running             0          24m
-astronomer-fluentd-hlr6v                                   1/1     Running             0          24m
-astronomer-fluentd-l7zj9                                   1/1     Running             0          24m
-astronomer-fluentd-m4gh2                                   1/1     Running             0          24m
-astronomer-fluentd-q987q                                   1/1     Running             0          24m
-astronomer-grafana-c487d5c7b-pjtmc                         1/1     Running             0          24m
-astronomer-houston-544c8855b5-bfctd                        1/1     Running             0          24m
-astronomer-houston-544c8855b5-gwhll                        1/1     Running             0          24m
-astronomer-houston-upgrade-deployments-stphr               1/1     Running             0          24m
-astronomer-kibana-596599df6-vh6bp                          1/1     Running             0          24m
-astronomer-kube-state-6658d79b4c-hf2hf                     1/1     Running             0          24m
-astronomer-kubed-6cc48c5767-btscx                          1/1     Running             0          24m
-astronomer-nginx-746589b744-h6r5n                          1/1     Running             0          24m
-astronomer-nginx-746589b744-hscb9                          1/1     Running             0          24m
-astronomer-nginx-default-backend-8cb66c54-4vjmz            1/1     Running             0          24m
-astronomer-nginx-default-backend-8cb66c54-7m86w            1/1     Running             0          24m
-astronomer-prometheus-0                                    1/1     Running             0          24m
-astronomer-prometheus-blackbox-exporter-65f6c5f456-865h2   1/1     Running             0          24m
-astronomer-prometheus-blackbox-exporter-65f6c5f456-szr4s   1/1     Running             0          24m
-astronomer-registry-0                                      1/1     Running             0          24m
+<snip>
 ```
 
 If all pods are not in running status, check out our [guide on debugging your installation](debug-install.md) or contact [Astronomer support](https://support.astronomer.io) for additional configuration assistance.
 
-## Step 31: Verify you can access the Software UI {#verify-you-can-access-the-software-ui}
+## Step 30: Verify you can access the Software UI {#verify-you-can-access-the-software-ui}
 
 Visit `https://app.<base-domain>` in your web-browser to view Astronomer Software's web interface.
 
