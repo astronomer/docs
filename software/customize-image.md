@@ -184,8 +184,11 @@ RUN ls
 
 ## Docker Compose override
 
-The Astro CLI is built on top of [Docker Compose](https://docs.docker.com/compose/), a tool for defining and running multi-container Docker applications. To override the default CLI configurations, add a `docker-compose.override.yml` file to your Astro project directory. The values in this file override the default settings when you run `$ astro dev start`.
+The Astro CLI is built on top of [Docker Compose](https://docs.docker.com/compose/), a tool for defining and running multi-container Docker applications. To override the default CLI configurations, add a `docker-compose.override.yml` file to your Astro project directory. The values in this file override the default settings when you run `$ astro dev start`. Some common use cases are described below:
 
+> **Note:** The Astro CLI does _not_ support overrides to Environment Variables. For more information on how to set, configure and customize those values, see ["Environment Variables" doc](environment-variables.md).
+
+### Adding a volume mount
 To add another volume mount for a directory named `custom_dependencies`, for example, add the following to your `docker-compose.override.yml`:
 
 ```
@@ -220,7 +223,23 @@ drwxrwxr-x    2 1000     1000          4096 Oct  8 00:07 plugins
 -rw-r--r--    1 astro    astro         2338 Dec 30 17:21 unittests.cfg
 ```
 
-> **Note:** The Astro CLI does _not_ support overrides to Environment Variables. For more information on how to set, configure and customize those values, see ["Environment Variables" doc](environment-variables.md).
+### Using a different Postgres image
+To use a different Postgres image to the default, for example to test a different Postgres version, add the following to your `docker-compose.override.yml`:
+
+```
+version: 3.1
+services:
+  postgres:
+    image: <my registry>/<my repository>/postgres:<tag>
+```
+
+For instance, to use Postgres version 14.5:
+```
+version: 3.1
+services:
+  postgres:
+    image: docker.io/library/postgres:14.5
+```
 
 ## Access to the Airflow CLI
 
