@@ -74,20 +74,24 @@ module.exports = {
           ],
         },
         {
-          type: 'category',
-          label: 'Manage Deployments',
-          items: [
-            'configure-deployment',
-            'environment-variables',
-            'customize-resource-usage',
-            {
-              type: 'category',
-              label: 'Deploy options',
-              items: [
-                'deploy-cli',
-                'deploy-dags',
-                'deploy-git-sync',
-                'deploy-nfs',
+        type: 'category',
+        label: 'Manage Deployments',
+        items: [
+          'configure-deployment',
+          'create-deployment',
+          'deployment-resources',
+          'clean-up-and-delete-deployment',
+          'environment-variables',
+          'customize-resource-usage',
+          {
+            type: 'category',
+            label: 'Deploy options',
+            items: [
+            'deploy-code-overview',
+            'deploy-cli',
+            'deploy-dags',
+            'deploy-git-sync',
+            'deploy-nfs',
               ],
             },
           ],
