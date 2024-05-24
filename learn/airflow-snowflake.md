@@ -46,7 +46,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started).
 - A Snowflake account. A [30-day free trial](https://trial.snowflake.com/?owner=SPN-PID-365384) is available. You need to have at least one schema in one database available for which you have permissions to create and write to tables.
 
 ## Step 1: Configure your Astro project
@@ -86,7 +86,7 @@ Use the Astro CLI to create and run an Airflow project on your local machine.
 
 :::info
 
-For more information on creating a Snowflake connection, see [Create a Snowflake connection in Airflow](https://docs.astronomer.io/learn/connections/snowflake).
+For more information on creating a Snowflake connection, see [Create a Snowflake connection in Airflow](https://www.astronomer.io/docs/learn/connections/snowflake).
 
 :::
 
@@ -318,7 +318,7 @@ This image shows an overview of the interaction between OpenLineage, Airflow, an
 
 ![Snowflake OpenLineage](/img/guides/snowflake_openlineage_architecture.png)
 
-To view lineage metadata from your DAGs, you need to have OpenLineage installed in your Airflow environment and a lineage front end running. If you're using [Astro](https://docs.astronomer.io/astro/data-lineage), lineage is enabled automatically. If you're using open source tools, you can run Marquez locally and connect it to your Airflow environment. See [OpenLineage and Airflow](airflow-openlineage.md).
+To view lineage metadata from your DAGs, you need to have OpenLineage installed in your Airflow environment and a lineage front end running. If you're using [Astro](https://www.astronomer.io/docs/astro/data-lineage), lineage is enabled automatically. If you're using open source tools, you can run Marquez locally and connect it to your Airflow environment. See [OpenLineage and Airflow](airflow-openlineage.md).
 
 To show an example of lineage resulting from Snowflake orchestration, you'll look at the write, audit, publish DAG from the previous example. The following image shows the Lineage UI integrated with Astro.
 

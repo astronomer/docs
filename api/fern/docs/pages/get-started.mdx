@@ -8,14 +8,14 @@ In this quick introduction to the Astro API, you'll make some simple requests to
 
 ## Prerequisites
 
-- An [Astro account](https://docs.astronomer.io/astro/log-in-to-astro). 
-- An [Organization API token](https://docs.astronomer.io/astro/organization-api-tokens) with the Organization Owner role. Astronomer recommends that you create a new API token for this tutorial.
-- An Astro [Workspace](https://docs.astronomer.io/astro/manage-workspaces).
+- An [Astro account](https://www.astronomer.io/docs/astro/log-in-to-astro). 
+- An [Organization API token](https://www.astronomer.io/docs/astro/organization-api-tokens) with the Organization Owner role. Astronomer recommends that you create a new API token for this tutorial.
+- An Astro [Workspace](https://www.astronomer.io/docs/astro/manage-workspaces).
 - A method for making API requests. This tutorial assumes you're using curl, but you can also use tools such as Postman.
 
 ## Step 1: Make your first API request
 
-To access most endpoints, you need to provide an Organization ID to the API as a path parameter. One of the few requests that doesn't require an Organization ID is the [List Organizations](https://docs.astronomer.io/astro/api/platform-api-reference#tag/Organization/operation/ListOrganizations) request, which means that you can programmatically retrieve an Organization ID. 
+To access most endpoints, you need to provide an Organization ID to the API as a path parameter. One of the few requests that doesn't require an Organization ID is the [List Organizations](https://www.astronomer.io/docs/astro/api/platform-api-reference#tag/Organization/operation/ListOrganizations) request, which means that you can programmatically retrieve an Organization ID. 
 
 To retrieve the Organization ID through the API, run the following command:
 

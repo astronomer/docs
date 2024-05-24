@@ -38,8 +38,8 @@ astro workspace service-account create --workspace-id=<your-workspace> --label=<
 
 #### Related documentation
 
-- [Manage Workspaces and Deployments on Astronomer](https://docs.astronomer.io/software/manage-workspaces)
-- [Configure CI/CD on Astronomer Software](https://docs.astronomer.io/software/ci-cd)
+- [Manage Workspaces and Deployments on Astronomer](https://www.astronomer.io/docs/software/manage-workspaces)
+- [Configure CI/CD on Astronomer Software](https://www.astronomer.io/docs/software/ci-cd)
 
 ### astro workspace service-account delete
 
@@ -59,8 +59,8 @@ astro workspace service-account delete <your-service-account-id>
 
 #### Related documentation
 
-- [Manage Workspaces and Deployments on Astronomer](https://docs.astronomer.io/software/manage-workspaces)
-- [Configure CI/CD on Astronomer Software](https://docs.astronomer.io/software/ci-cd)
+- [Manage Workspaces and Deployments on Astronomer](https://www.astronomer.io/docs/software/manage-workspaces)
+- [Configure CI/CD on Astronomer Software](https://www.astronomer.io/docs/software/ci-cd)
 
 ### astro workspace service-account get
 
@@ -78,5 +78,5 @@ Run `astro deployment service-account get <service-account-id> --workspace-id=<y
 
 #### Related documentation
 
-- [Manage Workspaces and Deployments on Astronomer](https://docs.astronomer.io/software/manage-workspaces)
-- [Configure CI/CD on Astronomer Software](https://docs.astronomer.io/software/ci-cd)
+- [Manage Workspaces and Deployments on Astronomer](https://www.astronomer.io/docs/software/manage-workspaces)
+- [Configure CI/CD on Astronomer Software](https://www.astronomer.io/docs/software/ci-cd)

@@ -12,8 +12,8 @@ This guide provides the basic setup for creating a Databricks connection. For a 
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
-- A locally running [Astro project](https://docs.astronomer.io/astro/cli/get-started-cli).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
+- A locally running [Astro project](https://www.astronomer.io/docs/astro/cli/get-started-cli).
 - A [Databricks account](https://www.databricks.com/try-databricks?itm_data=NavBar-TryDatabricks-Trial#account).
 
 ## Get connection details
@@ -60,4 +60,4 @@ Airflow uses Python's `requests` library to connect to Databricks through the [B
 
 - [Apache Airflow Databricks provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-databricks/stable/index.html)
 - [Databricks modules](https://registry.astronomer.io/modules?query=databricks) and [example DAGs](https://registry.astronomer.io/dags?limit=24&sorts=updatedAt%3Adesc&query=databricks) in the Astronomer Registry
-- [Import and export Airflow connections using Astro CLI](https://docs.astronomer.io/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
+- [Import and export Airflow connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)

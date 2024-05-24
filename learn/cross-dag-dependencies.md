@@ -248,5 +248,5 @@ It is sometimes necessary to implement cross-DAG dependencies where the DAGs do 
 
 ### Cross-deployment dependencies on Astro
 
-To implement cross-DAG dependencies on two different Airflow environments on Astro, follow the guidance in [Cross-deployment dependencies](https://docs.astronomer.io/astro/best-practices/cross-deployment-dependencies).
+To implement cross-DAG dependencies on two different Airflow environments on Astro, follow the guidance in [Cross-deployment dependencies](https://www.astronomer.io/docs/astro/best-practices/cross-deployment-dependencies).
 

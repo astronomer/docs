@@ -9,8 +9,8 @@ description: A summary of the latest Astro Runtime features and functionality. A
 <!--version-specific-->
 
 <p>
-    <a href="/astro-runtime-release-notes.xml" target="_blank">
-        <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
+    <a href="/docs/astro-runtime-release-notes.xml" target="_blank">
+        <img src="/docs/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
     </a>
 </p>
 
@@ -262,7 +262,7 @@ For more information about the major changes in this release, see the [Airflow b
 ## Astro Runtime 9.14.0
 
 - Release date: May 13, 2024
-- Airflow version: 2.9.1
+- Airflow version: 2.7.3
 
 ### Additional improvements
 
@@ -519,12 +519,12 @@ To learn more, see the [Apache Airflow 2.7.1 release notes](https://airflow.apac
 
 Astro Runtime 9 is based on Airflow 2.7, which includes a number of new features and improvements. Most notably, Airflow 2.7 includes the following changes:
 
-- In the Airflow UI, the **Trigger DAG w/ config** button now appears only when a DAG has configured [params](https://docs.astronomer.io/learn/airflow-params). Because some teams use this workflow without configuring DAG params, this change has been feature flagged. To revert the change, set the following environment variable in your Dockerfile or as an Astro [environment variable](environment-variables.md):
+- In the Airflow UI, the **Trigger DAG w/ config** button now appears only when a DAG has configured [params](https://www.astronomer.io/docs/learn/airflow-params). Because some teams use this workflow without configuring DAG params, this change has been feature flagged. To revert the change, set the following environment variable in your Dockerfile or as an Astro [environment variable](environment-variables.md):
 
     - **Key**: `AIRFLOW__WEBSERVER__SHOW_TRIGGER_FORM_IF_NO_PARAMS`
     - **Value**: `True`
 
-- Setup and teardown tasks are a new type of task that you can use to prepare resources and configurations for specific tasks, ensuring that they always have resources even when you retry failed tasks. See [Use setup and teardown tasks in Airflow](https://docs.astronomer.io/learn/airflow-setup-teardown) to learn how to use them.
+- Setup and teardown tasks are a new type of task that you can use to prepare resources and configurations for specific tasks, ensuring that they always have resources even when you retry failed tasks. See [Use setup and teardown tasks in Airflow](https://www.astronomer.io/docs/learn/airflow-setup-teardown) to learn how to use them.
 - You can now clear task groups or mark them as successful/failed from the Airflow UI **Grid View** just like individual tasks.
 - You can set `operators.default_deferrable` in your Airflow config to always use the deferrable version of an operator if one is available, which means that you no longer have to update import statements in DAGs to replace traditional operators with deferrable ones.
 
@@ -900,7 +900,7 @@ For a complete list of the changes, see the [Apache Airflow 2.5.1 release notes]
 
 Astro Runtime now includes the Astro Python SDK, an open source tool and Python package (`astro-sdk-python`) for DAG development that is built and maintained by Astronomer. With Astro Runtime versions 7.2.0 and later, you don't have to add the Astro Python SDK to your Astro project to use it.
 
-To learn more about the Astro Python SDK, see [Astro Python SDK ReadTheDocs](https://astro-sdk-python.readthedocs.io/en/stable/) and [The Astro Python SDK Tutorial for ETL](https://docs.astronomer.io/learn/astro-python-sdk-etl).
+To learn more about the Astro Python SDK, see [Astro Python SDK ReadTheDocs](https://astro-sdk-python.readthedocs.io/en/stable/) and [The Astro Python SDK Tutorial for ETL](https://www.astronomer.io/docs/learn/astro-python-sdk-etl).
 
 ### Early access Airflow bug fixes
 
@@ -1537,7 +1537,7 @@ For more information, see the [changelog for Apache Airflow 2.3.1](https://githu
 
 ### Astronomer Providers 1.2.0
 
-Astro Runtime 5.0.1 includes v1.2.0 of the `astronomer-providers` package ([CHANGELOG](https://astronomer-providers.readthedocs.io/en/stable/)). This release includes 5 new [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators):
+Astro Runtime 5.0.1 includes v1.2.0 of the `astronomer-providers` package ([CHANGELOG](https://astronomer-providers.readthedocs.io/en/stable/)). This release includes 5 new [deferrable operators](https://www.astronomer.io/docs/learn/deferrable-operators):
 
     - `DataprocSubmitJobOperatorAsync`
     - `EmrContainerSensorAsync`
@@ -1674,7 +1674,7 @@ Astro Runtime 4.2.1 upgrades the `astronomer-providers` package to v1.1.0 ([CHAN
     - `GCSUploadSessionCompleteSensorAsync`
     - `BigQueryTableExistenceSensorAsync`
 
-For more information about deferrable operators and how to use them, see [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators). To access the source code of this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
+For more information about deferrable operators and how to use them, see [Deferrable operators](https://www.astronomer.io/docs/learn/deferrable-operators). To access the source code of this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
 
 ### Additional improvements
 
@@ -1689,7 +1689,7 @@ For more information about deferrable operators and how to use them, see [Deferr
 
 The `astronomer-providers` package is now installed on Astro Runtime by default. This package is an open source collection of Apache Airflow providers and modules that is maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`.
 
-For more information, see [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators). To access the source code of this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
+For more information, see [Deferrable operators](https://www.astronomer.io/docs/learn/deferrable-operators). To access the source code of this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
 
 ### Additional improvements
 
@@ -1727,7 +1727,7 @@ Astro Runtime now also includes the following operators:
 - `SnowflakeOperatorAsync`
 - `FileSensorAsync`
 
-These are all [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators) built by Astronomer and available exclusively on Astro Runtime. They are pre-installed into the Astro Runtime Docker image and ready to use.
+These are all [deferrable operators](https://www.astronomer.io/docs/learn/deferrable-operators) built by Astronomer and available exclusively on Astro Runtime. They are pre-installed into the Astro Runtime Docker image and ready to use.
 
 ### Additional improvements
 
@@ -1865,7 +1865,7 @@ For more information on using timetables, read the [Apache Airflow Documentation
 
 Existing Airflow operators have to be re-written according to the deferrable operator framework. In addition to supporting those available in the open source project, Astronomer has built an exclusive collection of deferrable operators in Runtime 4.0.0. This collection includes the `DatabricksSubmitRunOperator`, the `DatabricksRunNowOperator`, and the `ExternalTaskSensor`. These are designed to be drop-in replacements for corresponding operators currently in use.
 
-As part of supporting deferrable operators, the triggerer is now available as a fully managed component on Astro. This means that you can start using deferrable operators in your DAGs as soon as you're ready. For more general information on deferrable operators, as well as how to use Astronomer's exclusive deferrable operators, read [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
+As part of supporting deferrable operators, the triggerer is now available as a fully managed component on Astro. This means that you can start using deferrable operators in your DAGs as soon as you're ready. For more general information on deferrable operators, as well as how to use Astronomer's exclusive deferrable operators, read [Deferrable operators](https://www.astronomer.io/docs/learn/deferrable-operators).
 
 ## Astro Runtime 3.0.4
 

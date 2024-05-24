@@ -37,7 +37,7 @@ Running your project locally allows you to test your DAGs before you deploy them
     - **Postgres:** Airflow's metadata database
     - **Webserver:** The Airflow component responsible for rendering the Airflow UI
     - **Scheduler:** The Airflow component responsible for monitoring and triggering tasks
-    - **Triggerer:** The Airflow component responsible for running Triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators)
+    - **Triggerer:** The Airflow component responsible for running Triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](https://www.astronomer.io/docs/learn/deferrable-operators)
 
 2. After your project builds successfully, open the Airflow UI in your web browser at `https://localhost:8080/`.
 

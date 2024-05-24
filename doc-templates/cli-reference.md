@@ -14,7 +14,7 @@ Describe what the command does or does not do. Include a link to relevant Docs p
 
 For example:
 
-`astro workspace update` allows you to update the workspace metadata, including the workspace name and ci-cd deployment enforcement. It does not include adding new users or changing permissions. See [Configure workspaces](https://docs.astronomer.io/astro/manage-workspaces).
+`astro workspace update` allows you to update the workspace metadata, including the workspace name and ci-cd deployment enforcement. It does not include adding new users or changing permissions. See [Configure workspaces](https://www.astronomer.io/docs/astro/manage-workspaces).
 
 ## Usage
 

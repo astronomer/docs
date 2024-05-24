@@ -84,7 +84,7 @@ astro dev run variables set my_var my_value
 astro dev run variables set -j my_json_var '{"key": "value"}'
 ```
 
-Note that [`astro dev run`](https://docs.astronomer.io/astro/cli/astro-dev-run) executes Airflow commands only in your local Airflow environment and can't be used on Astro Deployments. To set Airflow variables for an Astro Deployment, either create them using the Deployment's Airflow UI or using [Astro environment variables](https://docs.astronomer.io/astro/environment-variables).
+Note that [`astro dev run`](https://www.astronomer.io/docs/astro/cli/astro-dev-run) executes Airflow commands only in your local Airflow environment and can't be used on Astro Deployments. To set Airflow variables for an Astro Deployment, either create them using the Deployment's Airflow UI or using [Astro environment variables](https://www.astronomer.io/docs/astro/environment-variables).
 
 </TabItem>
 
@@ -117,7 +117,7 @@ To fetch the Airflow variable in the DAG, you can then use the following methods
 
 If Airflow can't find the environment variable, replace `<default_value>` with a default value.
 
-To learn more about how to set environment variables on Astro, see [Environment Variables](https://docs.astronomer.io/astro/manage-env-vars).
+To learn more about how to set environment variables on Astro, see [Environment Variables](https://www.astronomer.io/docs/astro/manage-env-vars).
 
 ### Programmatically from a DAG or task
 
@@ -265,7 +265,7 @@ As seen in the screenshot at the beginning of this guide, some Airflow variables
 
 This list can be extended by adding comma separated strings to the [`sensitive_var_conn_names`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#sensitive-var-conn-names) configuration. See [Masking sensitive data](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/mask-sensitive-values.html).
 
-On Astro you can also manually mark Airflow variables as secrets when creating them as an environment variable. See [Set environment variables on Astro](https://docs.astronomer.io/astro/environment-variables).
+On Astro you can also manually mark Airflow variables as secrets when creating them as an environment variable. See [Set environment variables on Astro](https://www.astronomer.io/docs/astro/environment-variables).
 
 :::info
 

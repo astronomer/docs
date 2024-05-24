@@ -39,7 +39,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 ## Prerequisites
 
 - A MongoDB cluster. Astronomer recommends using [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register), a hosted MongoDB cluster with integrated data services that offers a free trial. See [Getting started with MongoDB Atlas](https://www.mongodb.com/docs/atlas/getting-started/).
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 
 ## Step 1: Configure your MongoDB Atlas cluster and database
 

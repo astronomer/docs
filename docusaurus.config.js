@@ -3,8 +3,8 @@ const versions = require('./software_versions.json')
 module.exports = {
   title: 'Astronomer Documentation',
   tagline: 'Learn how to use Astro, the next-generation data orchestration platform.',
-  url: 'https://docs.astronomer.io',
-  baseUrl: '/',
+  url: 'https://www.astronomer.io',
+  baseUrl: '/docs',
   trailingSlash: false,
   noIndex: false,
   onBrokenLinks: 'throw', // 'warn' for drafts, 'throw' for prod
@@ -15,9 +15,9 @@ module.exports = {
     preprocessor: ({ filePath, fileContent }) => {
       function updateValues() {
         var mapObj = {
-          '{{CLI_VER_LATEST}}': "1.26.0",
-          '{{CLI_VER_2}}': "1.25.0",
-          '{{CLI_VER_3}}': "1.24.1",
+          '{{CLI_VER_LATEST}}': "1.27.1",
+          '{{CLI_VER_2}}': "1.26.0",
+          '{{CLI_VER_3}}': "1.25.0",
           '{{RUNTIME_VER}}': "11.3.0",
         };
         var re = new RegExp(Object.keys(mapObj).join("|"), "gi");
@@ -67,7 +67,7 @@ module.exports = {
       logo: {
         alt: 'Astronomer',
         src: 'img/AstroMonogram.svg',
-        href: 'https://docs.astronomer.io',
+        href: 'https://www.astronomer.io/docs',
         target: '_self',
       },
       items: [
@@ -94,7 +94,7 @@ module.exports = {
         },
         {
           label: 'Software',
-          to: 'software/',
+          to: '/software/',
           activeBaseRegex: 'software',
           position: 'left',
           activeClassName: 'navbar__link--active',
@@ -140,27 +140,27 @@ module.exports = {
       items: [
         {
           label: '0.34 (Latest)',
-          to: '/software/',
+          to: '/docs/software/',
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
         },
         {
           label: '0.33',
-          to: '/software/0.33/',
+          to: '/docs/software/0.33/',
           activeBaseRegex: `(software\/0.33)+`,
         },
         {
           label: '0.32',
-          to: '/software/0.32/',
+          to: '/docs/software/0.32/',
           activeBaseRegex: `(software\/0.32)+`,
         },
         {
           label: '0.30',
-          to: '/software/0.30/',
+          to: '/docs/software/0.30/',
           activeBaseRegex: '(software\/0.30)+',
         },
         {
           label: 'Archive',
-          to: '/software/documentation-archive',
+          to: '/docs/software/documentation-archive',
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
         },
       ],
@@ -213,7 +213,7 @@ module.exports = {
           id: 'cookiePref',
         },
       ],
-      copyright: '© Astronomer 2023. Various trademarks held by their respective owners.',
+      copyright: '© Astronomer 2024. Various trademarks held by their respective owners.',
     },
   },
   presets: [
@@ -328,23 +328,23 @@ module.exports = {
   ],
   scripts: [
     {
-      src: '/scripts/segment.js',
+      src: '/docs/scripts/segment.js',
       defer: true,
     },
     {
-      src: '/scripts/consent-manager.js',
+      src: '/docs/scripts/consent-manager.js',
       defer: true,
     },
     {
-      src: '/scripts/consent-manager-config.js',
+      src: '/docs/scripts/consent-manager-config.js',
     },
     {
-      src: "/scripts/set-tab.js",
+      src: "/docs/scripts/set-tab.js",
       async: true,
       defer: true,
     },
     {
-      src: '/scripts/remix-redocly.js',
+      src: '/docs/scripts/remix-redocly.js',
       async: true,
       defer: true,
     },

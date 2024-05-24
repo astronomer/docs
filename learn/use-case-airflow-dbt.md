@@ -26,7 +26,7 @@ For more detailed instructions on using dbt Core with Cosmos, see the [dbt Core 
 
 Before trying this example, make sure you have:
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop).
 - Access to a data warehouse supported by dbt Core and the Astro Python SDK. See [dbt supported warehouses](https://docs.getdbt.com/docs/supported-data-platforms) and [Astro Python SDK supported warehouses](https://astro-sdk-python.readthedocs.io/en/stable/supported_databases.html). This example uses a local [PostgreSQL](https://www.postgresql.org/) database with a database called `postgres` and a schema called `postgres`.
 

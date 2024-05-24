@@ -50,7 +50,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli).
 - A local or cloud-based object storage account. This tutorial has instructions for AWS, GCP, Azure, and MinIO.
 
 ## Step 1: Create an Astro project
@@ -636,7 +636,7 @@ class CustomXComBackendJSON(BaseXCom):
     AIRFLOW__CORE__XCOM_BACKEND=include.xcom_backend_json.CustomXComBackendJSON
     ```
 
-    If you use Astro, set this environment variable in your Deployment instead. See [Environment variables](https://docs.astronomer.io/astro/environment-variables).
+    If you use Astro, set this environment variable in your Deployment instead. See [Environment variables](https://www.astronomer.io/docs/astro/environment-variables).
 
 5. Restart your Airflow instance using `astro dev restart`. 
 

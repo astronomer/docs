@@ -54,7 +54,7 @@ If you prefer to use the Astro CLI, you can run `astro deployment runtime migrat
     For a list of currently supported Astronomer images, see:
 
     - [AC Lifecycle Schedule](ac-support-policy.md#astronomer-certified-lifecycle-schedule)
-    - [Astro Runtime Lifecycle Schedule](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule)
+    - [Astro Runtime Lifecycle Schedule](https://www.astronomer.io/docs/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule)
 
   :::danger
 
