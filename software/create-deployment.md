@@ -44,7 +44,7 @@ An Airflow Deployment's release name on Astronomer is a unique, immutable identi
 
 By default, release names are randomly generated in the following format: `noun-noun-<4-digit-number>`. For example: `elementary-zenith-7243`. Alternatively, you can customize the release name for a Deployment if you want all namespaces in your cluster to follow a specific style.
 
-To customize the release name for a Deployment as you're creating it, you first need to enable the feature on your Astronomer platform. To do so, set the following value in your `config.yaml` file:
+To customize the release name for a Deployment as you're creating it, you first need to enable the feature on your Astronomer platform. To do so, set the following value in your `values.yaml` file:
 
 ```yaml
 astronomer:
