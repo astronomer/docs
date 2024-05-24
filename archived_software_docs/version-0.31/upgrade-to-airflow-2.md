@@ -28,7 +28,7 @@ Airflow 2.3 subsequently introduced several powerful features, the most notable 
 
 This setup requires:
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - An Astro project running Airflow 1.10.15. If your Astro project uses Airflow 1.10.14 or earlier, upgrade to 1.10.15 using the [standard upgrade process](manage-airflow-versions.md).
 
 ## Step 1: Run the Airflow upgrade check script

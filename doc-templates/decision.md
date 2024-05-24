@@ -4,7 +4,7 @@ title: "Decision title"
 id: decision-template
 ---
 
-<!-- Decision doc example includes astro/set-up-ci-cd.md https://docs.astronomer.io/astro/set-up-ci-cd -->
+<!-- Decision doc example includes astro/set-up-ci-cd.md https://www.astronomer.io/docs/astro/set-up-ci-cd -->
 
 - Similar to the Overview introduction, a couple of sentences about what the feature is and why to use it
 - Unlike the Overview introduction, include a couple of sentences about what the different available options are for this feature or functionality. This introduces users to the general concepts, features, or functionality that the rest of the document goes into detail about in the following sections.
@@ -35,7 +35,7 @@ Write a few sentences about the option. Be sure your description addresses the f
 
 ## Recommendations/ Use Cases
 
-<!-- see https://docs.astronomer.io/astro/environment-variables#example-use-cases or https://docs.astronomer.io/astro/manage-connections-variables#choose-a-connection-and-variable-management-strategy as examples -->
+<!-- see https://www.astronomer.io/docs/astro/environment-variables#example-use-cases or https://www.astronomer.io/docs/astro/manage-connections-variables#choose-a-connection-and-variable-management-strategy as examples -->
 
 | Scenario                                                                                                                       | Recommended method                                                                      |
 | ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |

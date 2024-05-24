@@ -17,10 +17,10 @@ This guide explains how to set up an Azure Workload Identity connection using th
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/) or access to the Azure web portal.
-- An [Astro project](https://docs.astronomer.io/astro/cli/get-started-cli).
-- (Optional) An [Astro Deployment](https://docs.astronomer.io/astro/create-deployment).
+- An [Astro project](https://www.astronomer.io/docs/astro/cli/get-started-cli).
+- (Optional) An [Astro Deployment](https://www.astronomer.io/docs/astro/create-deployment).
 - A Microsoft Entra [managed identity](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?pivots=identity-mi-methods-azp).
 
 :::info 
@@ -31,7 +31,7 @@ If you want to use Microsoft Entra Workload ID with a generic Apache Airflow pro
 
 To create a workload identity for your Airflow environment, you first need to link your Airflow environment to your Entra ID managed identity.
 
-If you're using Astro, follow the steps in [Authorize Deployments to Cloud resources](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud?tab=azure#setup) to create a workload identity for your Deployment.
+If you're using Astro, follow the steps in [Authorize Deployments to Cloud resources](https://www.astronomer.io/docs/astro/authorize-deployments-to-your-cloud?tab=azure#setup) to create a workload identity for your Deployment.
 
 If you're using Apache Airflow outside of Astro, your setup will vary based on your cloud and the environment you're running Airflow in. Generally speaking, the setup will be similar to the following:
 
@@ -49,7 +49,7 @@ If you're using Apache Airflow outside of Astro, your setup will vary based on y
 
 ## Create your connection
 
-To create your connection in Astro, follow the steps to [create a new connection in the Astro Environment Manager](https://docs.astronomer.io/astro/create-and-link-connections). Select the **Azure workload identity** connection type and enter your **Client ID** and **Tenant ID**. If you need to specify a **Subscription ID** for a specific service, you can open the **More options** dropdown menu and add it there.
+To create your connection in Astro, follow the steps to [create a new connection in the Astro Environment Manager](https://www.astronomer.io/docs/astro/create-and-link-connections). Select the **Azure workload identity** connection type and enter your **Client ID** and **Tenant ID**. If you need to specify a **Subscription ID** for a specific service, you can open the **More options** dropdown menu and add it there.
 
 ![example_conn](/img/examples/connection-azure-workload-identity-5.png)
 

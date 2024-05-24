@@ -17,7 +17,7 @@ Initializes the Runtime version upgrade process on any Deployment on Astronomer 
 
 ## Usage
 
-Run `astro deployment runtime upgrade --deployment-id=<deployment-id>` to initialize the Runtime upgrade process. To finalize the Runtime upgrade process, complete all of the steps in [Upgrade Apache Airflow on Astronomer Software](https://docs.astronomer.io/software/manage-airflow-versions).
+Run `astro deployment runtime upgrade --deployment-id=<deployment-id>` to initialize the Runtime upgrade process. To finalize the Runtime upgrade process, complete all of the steps in [Upgrade Apache Airflow on Astronomer Software](https://www.astronomer.io/docs/software/manage-airflow-versions).
 
 ## Options
 

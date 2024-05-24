@@ -45,7 +45,7 @@ The reason Airflow allows so many adjustments is that, as an agnostic orchestrat
 
 Environment-level settings are those that impact your entire Airflow environment (all DAGs). They all have default values that can be overridden by setting the appropriate environment variable or modifying your `airflow.cfg` file. Generally, all default values can be found in the [Airflow Configuration Reference](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html). To check current values for an existing Airflow environment, go to **Admin** > **Configurations** in the Airflow UI. For more information, see [Setting Configuration Options](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-config.html) in the Apache Airflow documentation.
 
-If you're running Airflow on Astronomer, you should modify these parameters with Astronomer environment variables. For more information, see [Environment Variables on Astronomer](https://docs.astronomer.io/astro/environment-variables).
+If you're running Airflow on Astronomer, you should modify these parameters with Astronomer environment variables. For more information, see [Environment Variables on Astronomer](https://www.astronomer.io/docs/astro/environment-variables).
 
 You should modify environment-level settings if you want to tune performance across all of the DAGs in your Airflow environment. This is particularly relevant if you want your DAGs to run well on your support infrastructure. 
 
@@ -55,7 +55,7 @@ Core settings control the number of processes running concurrently and how long 
 
 - `parallelism`: The maximum number of tasks that can run concurrently on each scheduler within a single Airflow environment. For example, if this setting is set to 32, and there are two schedulers, then no more than 64 tasks can be in a running or queued state at once across all DAGs. If your tasks remain in a scheduled state for an extended period, you might want to increase this value. The default value is 32. 
 
-    On Astro, this value is [set automatically](https://docs.astronomer.io/astro/configure-worker-queues#worker-autoscaling-logic) based on your maximum worker count, meaning that you don't have to configure it.
+    On Astro, this value is [set automatically](https://www.astronomer.io/docs/astro/configure-worker-queues#worker-autoscaling-logic) based on your maximum worker count, meaning that you don't have to configure it.
 
 - `max_active_tasks_per_dag` (formerly `dag_concurrency`): The maximum number of tasks that can be scheduled at the same time across all runs of a DAG. Use this setting to prevent any one DAG from taking up too many of the available slots from parallelism or your pools. The default value is 16.
 
@@ -79,7 +79,7 @@ Core settings control the number of processes running concurrently and how long 
   
   :::tip
 
-  If you have less than 200 DAGs in a Deployment on Astro, it's safe to set `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=30` (30 seconds) as a Deployment-level [environment variable](https://docs.astronomer.io/astro/environment-variables).
+  If you have less than 200 DAGs in a Deployment on Astro, it's safe to set `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=30` (30 seconds) as a Deployment-level [environment variable](https://www.astronomer.io/docs/astro/environment-variables).
 
   ::: 
 

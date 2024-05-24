@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import kpo_separate_cluster_example from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_separate_cluster_example.py';
 
-The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most customizable Apache Airflow operators. A task using the KubernetesPodOperator runs in a dedicated, isolated Kubernetes Pod that terminates after the task completes. To learn more about the benefits and usage of the KubernetesPodOperator, see the [KubernetesPodOperator Learn guide](https://docs.astronomer.io/learn/kubepod-operator).
+The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most customizable Apache Airflow operators. A task using the KubernetesPodOperator runs in a dedicated, isolated Kubernetes Pod that terminates after the task completes. To learn more about the benefits and usage of the KubernetesPodOperator, see the [KubernetesPodOperator Learn guide](https://www.astronomer.io/docs/learn/kubepod-operator).
 
 On Astro, the infrastructure required to run the KubernetesPodOperator is built into every Deployment and is managed by Astronomer. Astro supports setting a default Pod configuration so that any task Pods without specific resource requests and limits cannot exceed your expected resource usage for the Deployment.
 
@@ -248,7 +248,7 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
 
 :::info
 
-Passwordless setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. For Astro Hosted standard clusters, please follow the steps in [Private Registry](https://docs.astronomer.io/astro/kubernetespodoperator?tab=PrivateRegistry#step-1-create-a-kubernetes-secret) to create a Kubernetes secret containing your registry credentials.
+Passwordless setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. For Astro Hosted standard clusters, please follow the steps in [Private Registry](https://www.astronomer.io/docs/astro/kubernetespodoperator?tab=PrivateRegistry#step-1-create-a-kubernetes-secret) to create a Kubernetes secret containing your registry credentials.
 
 :::
 
@@ -338,7 +338,7 @@ To launch Pods in external clusters from a local Airflow environment, you must a
 
 ### Prerequisites
 
-- A [network connection](https://docs.astronomer.io/astro/networking-overview) between your Astro Deployment and your external cluster.
+- A [network connection](https://www.astronomer.io/docs/astro/networking-overview) between your Astro Deployment and your external cluster.
 
 ### Step 1: Set up your external cluster
 
@@ -348,7 +348,7 @@ To launch Pods in external clusters from a local Airflow environment, you must a
     - `AmazonEKS_CNI_Policy`
     - `AmazonEC2ContainerRegistryReadOnly`
 
-2. [Update the trust policy](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/edit_trust.html) of this new role to include the [workload identity](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud) of your Deployment. This step ensures that the role can be assumed by your Deployment.
+2. [Update the trust policy](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/edit_trust.html) of this new role to include the [workload identity](https://www.astronomer.io/docs/astro/authorize-deployments-to-your-cloud) of your Deployment. This step ensures that the role can be assumed by your Deployment.
 
     ```json
     {
@@ -463,5 +463,5 @@ The example DAG contains 5 consecutive tasks:
 ## Related documentation
 
 - [How to use cluster ConfigMaps, Secrets, and Volumes with Pods](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)
-- [KubernetesPodOperator Airflow Guide](https://docs.astronomer.io/learn/kubepod-operator/)
+- [KubernetesPodOperator Airflow Guide](https://www.astronomer.io/docs/learn/kubepod-operator/)
 

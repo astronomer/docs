@@ -20,20 +20,20 @@ The Astro API is currently in beta. See [Support](/api/versioning-and-support) f
 
 <Tip>
 
-Looking to use the Airflow REST API instead? See the [Astro documentation](https://docs.astronomer.io/astro/airflow-api) to learn how to make requests to Airflow Deployments using the Airflow API.
+Looking to use the Airflow REST API instead? See the [Astro documentation](https://www.astronomer.io/docs/astro/airflow-api) to learn how to make requests to Airflow Deployments using the Airflow API.
 
 </Tip>
 
 ## Authentication
 
-All requests to the API must be authenticated. You can use [bearer authentication](https://swagger.io/docs/specification/authentication/bearer-authentication/) to authenticate with a [Workspace API token](https://docs.astronomer.io/astro/workspace-api-tokens), [Organization API token](https://docs.astronomer.io/astro/organization-api-tokens), or [Deployment API token](https://docs.astronomer.io/astro/deplopyment-api-tokens). The following example shows how you can add a token to a curl request:
+All requests to the API must be authenticated. You can use [bearer authentication](https://swagger.io/docs/specification/authentication/bearer-authentication/) to authenticate with a [Workspace API token](https://www.astronomer.io/docs/astro/workspace-api-tokens), [Organization API token](https://www.astronomer.io/docs/astro/organization-api-tokens), or [Deployment API token](https://www.astronomer.io/docs/astro/deplopyment-api-tokens). The following example shows how you can add a token to a curl request:
 
 ```curl
 curl --location 'https://api.astronomer.io/platform/v1beta1/organizations/<your-organization-id>/clusters' \
 --header 'Authorization: Bearer <your-api-token>'
 ```
 
-Endpoints can return subsets of specific attributes based on the permissions of your API token. If your token's role allows you to access something in the Astro UI or Astro CLI, it also allows you to access the same thing or action using the API. See [User permissions](https://docs.astronomer.io/astro/user-permissions) for a list of all possible permissions.
+Endpoints can return subsets of specific attributes based on the permissions of your API token. If your token's role allows you to access something in the Astro UI or Astro CLI, it also allows you to access the same thing or action using the API. See [User permissions](https://www.astronomer.io/docs/astro/user-permissions) for a list of all possible permissions.
 
 ## Rate limiting
 

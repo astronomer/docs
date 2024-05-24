@@ -28,7 +28,7 @@ You'll also learn how to use the KubernetesPodOperator to run a task in a langua
 
 :::tip
 
-On Astro, all of the infrastructure required to run the KubernetesPodOperator is hosted by Astronomer and managed automatically. Therefore, some of the use cases on this page might be simplified if you're running the KubernetesPodOperator on Astro. See [Run the KubernetesPodOperator on Astro](https://docs.astronomer.io/astro/kubernetespodoperator) to learn more.
+On Astro, all of the infrastructure required to run the KubernetesPodOperator is hosted by Astronomer and managed automatically. Therefore, some of the use cases on this page might be simplified if you're running the KubernetesPodOperator on Astro. See [Run the KubernetesPodOperator on Astro](https://www.astronomer.io/docs/astro/kubernetespodoperator) to learn more.
 
 :::
 
@@ -56,7 +56,7 @@ To use the KubernetesPodOperator you need to install the Kubernetes provider pac
 pip install apache-airflow-providers-cncf-kubernetes==<version>
 ```
 
-If you use the [Astro CLI](https://docs.astronomer.io/astro/cli/overview), you can alternatively install the package by adding the following line to your Astro project:
+If you use the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview), you can alternatively install the package by adding the following line to your Astro project:
 
 ```text
 apache-airflow-providers-cncf-kubernetes==<version>
@@ -73,14 +73,14 @@ You don't need to use the Kubernetes executor to use the KubernetesPodOperator. 
 - Kubernetes executor
 - CeleryKubernetes executor
 
-On Astro, the infrastructure needed to run the KubernetesPodOperator with the Celery executor is included with all clusters by default.  For more information, see [Run the KubernetesPodOperator on Astro](https://docs.astronomer.io/astro/kubernetespodoperator).
+On Astro, the infrastructure needed to run the KubernetesPodOperator with the Celery executor is included with all clusters by default.  For more information, see [Run the KubernetesPodOperator on Astro](https://www.astronomer.io/docs/astro/kubernetespodoperator).
 
 ### Run the KubernetesPodOperator locally
 
 Setting up your local environment to use the KubernetesPodOperator can help you avoid time consuming deployments to remote environments.
 
 
-Use the steps below to quickly set up a local environment for the KubernetesPodOperator using the [Astro CLI](https://docs.astronomer.io/astro/cli/overview). Alternatively, you can use the [Helm Chart for Apache Airflow](https://airflow.apache.org/docs/helm-chart/stable/index.html) to run open source Airflow within a local Kubernetes cluster. See [Getting Started With the Official Airflow Helm Chart](https://www.youtube.com/watch?v=39k2Sz9jZ2c&ab_channel=Astronomer).
+Use the steps below to quickly set up a local environment for the KubernetesPodOperator using the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview). Alternatively, you can use the [Helm Chart for Apache Airflow](https://airflow.apache.org/docs/helm-chart/stable/index.html) to run open source Airflow within a local Kubernetes cluster. See [Getting Started With the Official Airflow Helm Chart](https://www.youtube.com/watch?v=39k2Sz9jZ2c&ab_channel=Astronomer).
 
 #### Step 1: Set up Kubernetes
 
@@ -285,7 +285,7 @@ The way that you connect to an external cluster will vary based on where your cl
 - Your Airflow environment must have permissions to spin up Pods in the external cluster
 - Your cluster configuration must be passed to your KubernetesPodOperator tasks either through a task-level configuration or a Kubernetes connection
 
-See the [Astro documentation](https://docs.astronomer.io/astro/kubernetespodoperator) for a more detailed example of how to configure a KubernetesPodOperator task to launch a Pod in an external EKS cluster. 
+See the [Astro documentation](https://www.astronomer.io/docs/astro/kubernetespodoperator) for a more detailed example of how to configure a KubernetesPodOperator task to launch a Pod in an external EKS cluster. 
 
 :::
 

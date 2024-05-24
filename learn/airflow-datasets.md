@@ -42,7 +42,7 @@ To get the most out of this guide, you should have an existing knowledge of:
 
 - Airflow scheduling concepts. See [Schedule DAGs in Airflow](scheduling-in-airflow.md).
 - Creating dependencies between DAGs. See [Cross-DAG Dependencies](cross-dag-dependencies.md).
-- The Astro Python SDK. See [Using the Astro Python SDK](https://docs.astronomer.io/tutorials/astro-python-sdk).
+- The Astro Python SDK. See [Using the Astro Python SDK](https://www.astronomer.io/docs/tutorials/astro-python-sdk).
 
 ## Why use datasets?
 
@@ -60,7 +60,7 @@ As of Airflow 2.8, you can use [listeners](https://airflow.apache.org/docs/apach
 - on_dataset_created
 - on_dataset_changed
 
-For examples, refer to our [Create Airflow listeners tutorial](https://docs.astronomer.io/learn/airflow-listeners).
+For examples, refer to our [Create Airflow listeners tutorial](https://www.astronomer.io/docs/learn/airflow-listeners).
 :::
 
 ## Dataset concepts
@@ -141,7 +141,7 @@ For more information about datasets, see [Data-aware scheduling](https://airflow
 
 The **Datasets** tab, and the **DAG Dependencies** view in the Airflow UI give you observability for datasets and data dependencies in the DAG's schedule.
 
-On the **DAGs** view, you can see that your `dataset_downstream_1_2` DAG is scheduled on two producer datasets (one in `dataset_upstream1` and `dataset_upstream2`). When Datasets are provided as a list, the DAG is scheduled to run after all Datasets in the list have received at least one update. In the following screenshot, the `dataset_downstream_1_2` DAG's next run is pending one dataset update. At this point the `dataset_upstream` DAG has run and updated its dataset, but the `dataset_upstream2` DAG has not.
+On the **DAGs** view, you can see that your `dataset_downstream_1_2` DAG is scheduled on two producer datasets (one in `dataset_upstream1` and `dataset_upstream2`). When Datasets are provided as a list, the DAG is scheduled to run after all Datasets in the list have received at least one update. In the following screenshot, the `dataset_downstream_1_2` DAG's next run is pending one dataset update. At this point the `dataset_upstream1` DAG has run and updated its dataset, but the `dataset_upstream2` DAG has not.
 
 ![DAGs View](/img/guides/dags_view_dataset_schedule.png)
 
@@ -385,7 +385,7 @@ with DAG(
 
 ## Datasets with the Astro Python SDK
 
-If you are using the [Astro Python SDK](https://docs.astronomer.io/tutorials/astro-python-sdk) version 1.1 or later, you do not need to make any code updates to use datasets. Datasets are automatically registered for any functions with output tables and you do not need to define any `outlet` parameters. 
+If you are using the [Astro Python SDK](https://www.astronomer.io/docs/tutorials/astro-python-sdk) version 1.1 or later, you do not need to make any code updates to use datasets. Datasets are automatically registered for any functions with output tables and you do not need to define any `outlet` parameters. 
 
 The following example DAG results in three registered datasets: one for each `load_file` function and one for the resulting data from the `transform` function.
 

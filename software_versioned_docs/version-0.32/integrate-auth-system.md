@@ -456,7 +456,7 @@ This setup assumes that you have already created a web app for Astronomer Softwa
             scimAuthCode: <your-provisioning-account-username>:<your-provisioning-account-password>
     ```
 
-11. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+11. Push the configuration change. See [Apply a config change](https://www.astronomer.io/docs/software/apply-platform-config).
 
 See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm?cshid=ext_Apps_App_Integration_Wizard-scim) for more information about configuring SCIM within Okta.
 
@@ -478,7 +478,7 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
    
     **Note**: If you have already configured Open ID Connect with Microsoft Entra ID, the `scimAuthCode` key should be on the same level as `clientId` and `discoveryUrl`
 
-2. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+2. Push the configuration change. See [Apply a config change](https://www.astronomer.io/docs/software/apply-platform-config).
 
 3. Sign in to the [Microsoft Entra ID portal](https://aad.portal.azure.com/). 
    

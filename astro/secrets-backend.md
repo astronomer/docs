@@ -5,7 +5,7 @@ id: secrets-backend
 description: "Learn to configure a secrets backend on Astro to store Airflow connections and variables"
 ---
 
-Apache Airflow [variables](https://docs.astronomer.io/learn/airflow-variables) and [connections](https://docs.astronomer.io/learn/connections) often contain sensitive information about your external systems that you need to keep in a _secrets backend_ tool, which stores secrets in a secure and centralized location. Unlike other management strategies, such as using Environment Variables or working with connections and variables in the Airflow UI, secrets backends require a third-party secrets manager. This means that you can use a secrets manager administered by your organization for existing security protocols, or you need to choose and set up a secrets backend. 
+Apache Airflow [variables](https://www.astronomer.io/docs/learn/airflow-variables) and [connections](https://www.astronomer.io/docs/learn/connections) often contain sensitive information about your external systems that you need to keep in a _secrets backend_ tool, which stores secrets in a secure and centralized location. Unlike other management strategies, such as using Environment Variables or working with connections and variables in the Airflow UI, secrets backends require a third-party secrets manager. This means that you can use a secrets manager administered by your organization for existing security protocols, or you need to choose and set up a secrets backend. 
 
 This document explains the available secrets backend integrations supported by Astro and how Airflow finds connections and variables if you use multiple strategies to manage them.
 

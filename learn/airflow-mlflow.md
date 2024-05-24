@@ -43,7 +43,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started).
 - An [MLflow instance](https://www.mlflow.org/docs/latest/quickstart.html). This tutorial uses a local instance.
 - An object storage connected to your MLflow instance. This tutorial uses [MinIO](https://min.io/).
 

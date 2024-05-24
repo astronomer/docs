@@ -11,7 +11,7 @@ Once you have submitted a PR for your changes, Netlify will add a comment to you
 
 Small edits and typo fixes don't need to be linked to an issue and should be merged quickly. To get a timely review on a larger contribution, we recommend first creating a GitHub issue describing the problem and linking that within your PR.
 
-Every update to the `main` branch of this repository will trigger a rebuild of our production documentation page at https://www.docs.astronomer.io. It might take a few moments for your merged changes to appear.
+Every update to the `main` branch of this repository will trigger a rebuild of our production documentation page at https://www.astronomer.io/docs. It might take a few moments for your merged changes to appear.
 
 > For more detailed instructions and workflows when contributing to docs as an Astronomer team member, see the [Astronomer Docs Contribution Notion](https://www.notion.so/astronomerio/Contribute-a-Docs-Pull-Request-a3ca9018fdbc4206b120a6d530a8401b), [Astronomer Doc Types Overview](https://www.notion.so/astronomerio/Doc-Types-Overview-1015aeb5fb74457eb366bcc0bcbb63d0?pvs=4), and [Astronomer Docs Spec](https://www.notion.so/astronomerio/Doc-Types-Spec-2a6d3e0332574ddaa5e4d89f99fff5ca?pvs=4).
 
@@ -25,7 +25,7 @@ There are 3 core documentation folders in this repository:
 
 These folders contain the primary Astronomer docsets that you see by default on Astronomer's documentation site. Docs for the Astro CLI live within the `astro` folder.
 
-The `software` directory is equivalent to the **Latest** version of the Astronomer Software docset, which is the docset that users see by default when accesssing `docs.astronomer.io/software`. An additional `software_versioned_docs` folder contains docsets for previous versions of Software. Whenever there's a new release of Astronomer Software, a new versioned docset is copied from `software` and added to this folder, with all links and sidebars updated automatically by Docusuaurs.
+The `software` directory is equivalent to the **Latest** version of the Astronomer Software docset, which is the docset that users see by default when accesssing `www.astronomer.io/docs/software`. An additional `software_versioned_docs` folder contains docsets for previous versions of Software. Whenever there's a new release of Astronomer Software, a new versioned docset is copied from `software` and added to this folder, with all links and sidebars updated automatically by Docusuaurs.
 
 ![Screen Shot 2022-01-04 at 11 22 19 AM](https://user-images.githubusercontent.com/74574233/148051957-b739ba42-2fc7-4344-b0a0-4f78881fd68c.png)
 

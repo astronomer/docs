@@ -18,7 +18,7 @@ See [DAGs-only Deploys](deploy-dags.md) to learn more about how to deploy your D
 - The [Astro CLI](cli/overview.md) is installed in an empty directory. If you're using an Apple M1 system with Astro Runtime 6.0.4 or later for local development, you must install Astro CLI 1.4.0 or later to deploy to Astro.
 - An Astro Workspace with at least one [Deployment](create-deployment.md).
 - An [Astro project](cli/develop-project.md#create-an-astro-project).
-- [Docker](https://www.docker.com/products/docker-desktop) or [Podman](https://docs.astronomer.io/astro/cli/use-podman).
+- [Docker](https://www.docker.com/products/docker-desktop) or [Podman](https://www.astronomer.io/docs/astro/cli/use-podman).
 
 ## Step 1: Authenticate to Astro
 
@@ -46,7 +46,7 @@ astro deploy
 
 This command returns a list of Deployments available in your Workspace and prompts you to pick one.
 
-After you select a Deployment, the CLI parses your DAGs and runs a suite of pytests to ensure that they don't contain basic errors. This testing process is equivalent to running `astro dev parse` and `astro dev pytest` in a local Airflow environment. If any of your DAGs fail this testing process, the deploy to Astro also fails. To force a deploy even if your project has errors, you can run `astro deploy --force`. For more information about using pytests, see [Troubleshoot your local Airflow environment](cli/run-airflow-locally.md) and [Testing Airflow DAGs](https://docs.astronomer.io/learn/testing-airflow).
+After you select a Deployment, the CLI parses your DAGs and runs a suite of pytests to ensure that they don't contain basic errors. This testing process is equivalent to running `astro dev parse` and `astro dev pytest` in a local Airflow environment. If any of your DAGs fail this testing process, the deploy to Astro also fails. To force a deploy even if your project has errors, you can run `astro deploy --force`. For more information about using pytests, see [Troubleshoot your local Airflow environment](cli/run-airflow-locally.md) and [Testing Airflow DAGs](https://www.astronomer.io/docs/learn/testing-airflow).
 
 If your code passes the testing phase, the Astro CLI deploys your project in two separate, simultaneous processes:
 

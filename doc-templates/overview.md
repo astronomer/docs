@@ -17,7 +17,7 @@ description: A template for overview docs.
 
 - Ends with a couple of sentences about similar topics that are not addressed in the overview page.
 
-<!--see CI/CD Template overview for examples of this structure https://docs.astronomer.io/astro/ci-cd-templates/template-overview -->
+<!--see CI/CD Template overview for examples of this structure https://www.astronomer.io/docs/astro/ci-cd-templates/template-overview -->
 
 ## Related concept 1
 The related concepts/processes/options sections go into more specific detail and nuance about the subjects you introduced in the introduction. We use a similar structure that's introduced in the intro, except instead of looking at a high level or general view of the topic, go into specificity and depth.
@@ -27,10 +27,10 @@ The related concepts/processes/options sections go into more specific detail and
 - What conflicts, contraindications, or problems might be important for users to know?
 - Are there any relevant code examples, templates, or GitHub repos to include or refer to?
 
-See https://docs.astronomer.io/astro/ci-cd-templates/template-overview#dag-deploy-templates
+See https://www.astronomer.io/docs/astro/ci-cd-templates/template-overview#dag-deploy-templates
 
 ## Related concept 2
-Follow the same recommendations as for Related concept 1. See https://docs.astronomer.io/astro/ci-cd-templates/template-overview#image-deploy-templates and compare to the `DAG deploy templates` section as an example.
+Follow the same recommendations as for Related concept 1. See https://www.astronomer.io/docs/astro/ci-cd-templates/template-overview#image-deploy-templates and compare to the `DAG deploy templates` section as an example.
 
 ## Related concept 3
 ...
