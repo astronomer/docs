@@ -28,7 +28,7 @@ If you don't have the Enterprise tier of Astro, you can still reference the [Ast
 
 Astro Runtime upgrades can include breaking changes, especially when you upgrade to a new major version. Provider package upgrades in new minor versions of the underlying Airflow package can also cause issues. The Astro CLI has [built-in functionality](https://docs.astronomer.io/astro/cli/test-your-astro-project-locally#test-before-an-astro-runtime-upgrade) to keep such changes from breaking your DAGs. Astronomer recommends making use of this feature prior to every upgrade.
 
-For a smooth upgrade path, we recommend following the guidance in [Upgrade Astro Runtime](https://docs.astronomer.io/astro/upgrade-runtime) with special attention to these optional steps: 
+Use the process documented in [Upgrade Astro Runtime](https://www.astronomer.io/docs/astro/upgrade-runtime#step-3-optional-run-upgrade-tests-with-the-astro-cli) as the basis for all upgrades. It gives step-by-step guidance on completing an upgrade, as well as version-specific advice. In particular, the following steps should be followed for a smooth upgrade:
 - Pinning the provider package versions in your current version of Runtime to ensure a stable upgrade path. This is a simple process involving a single command and, if necessary, modification of `requirements.txt` based on the output.
 - Running upgrade tests to anticipate and address problems. This involves a single command that:
 
@@ -40,32 +40,13 @@ For a smooth upgrade path, we recommend following the guidance in [Upgrade Astro
 		- `pip freeze` output for both versions.
 		- A report with environment metadata and a Results table including any errors logged.
 		![Astro Upgrade Test Report](/img/guides/astro-upgrade_test_report.png)
-		- A Dependency Compare report with comprehensive information about updates and removals. 
+		- A Dependency Compare report listing the upgrades, additions and removals coming in the new Astro version and underlying Airflow package. For example, a "Major Updates" section lists the packages receiving new major versions, and a "Minor Updates" lists the packages receiving new minor versions:
 		```text
-		Apache Airflow Update:
-		apache-airflow 2.9.0+astro.2 >> 2.9.1+astro.1
-
-		Airflow Providers Minor Updates:
-		apache-airflow-providers-celery 3.6.2 >> 3.7.0
-
-		Airflow Providers Patch Updates:
-		apache-airflow-providers-openlineage 1.7.0 >> 1.7.1
-
-		Unknown Updates:
-		msrestazure 0.6.4 >> 0.6.4.post1
-
 		Major Updates:
 		azure-mgmt-datafactory 6.1.0 >> 7.0.0
 
 		Minor Updates:
 		Flask-Caching 2.1.0 >> 2.2.0
-
-		Patch Updates:
-		Mako 1.3.2 >> 1.3.3
-
-		Added Packages:
-		methodtools==0.4.7
-
 		```
 
 For more details about the `upgrade-test` command, see [Testing your Astro project locally](https://docs.astronomer.io/astro/cli/test-your-astro-project-locally#test-before-an-astro-runtime-upgrade).
