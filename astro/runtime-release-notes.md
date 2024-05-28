@@ -29,6 +29,16 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## Astro Runtime 11.4.0
+
+- Release date: May 28, 2024
+- Airflow version: 2.9.1
+
+### Additional improvements
+
+- Upgraded some OSS providers' minor and patch versions. See [Astro Runtime 11.4.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-1140)
+- Added a centralized reference page with all OSS provider package versions listed for each Astro Runtime version. See [Provider package reference](https://www.astronomer.io/docs/astro/runtime-provider-reference)
+
 ## Astro Runtime 11.3.0
 
 - Release date: May 6, 2024
