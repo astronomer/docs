@@ -41,7 +41,7 @@ apache-airflow-providers-qdrant==1.1.0
 
 ## Step 2: Configure credentials
 
-Add the following configuration to your `.env` file to create Airflow connections between Airflow and HuggingFace and Qdrant.
+Add the following to your `.env` file to create Airflow connections between Airflow and HuggingFace and Qdrant. Make sure to update with your HuggingFace access token and Qdrant instance details.
 
 ```text
 HUGGINGFACE_TOKEN="<YOUR_HUGGINGFACE_ACCESS_TOKEN>"
@@ -52,7 +52,7 @@ AIRFLOW_CONN_QDRANT_DEFAULT='{
 }'
 ```
 
-## Step 3: Add the data corpus
+## Step 3: Add your data
 
 Paste the following sample data into a file called `books.txt` within your `include` directory.
 
