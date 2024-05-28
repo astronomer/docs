@@ -25,6 +25,17 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## May 29, 2024
+
+### Additional improvements
+
+- For Kubernetes Executor and KubernetesPodOperator pods, the default resources are now `0.25Gi` instead of `10Gi`for both Astro and Astro Hybrid. You can still customize the resource allocation for Kubernetes pods depending on your needs. <!--https://github.com/astronomer/astro/pull/21215-->
+
+### Bug fixes
+
+- Fixed an issue so that when your Organization is inactive, you can't make changes to your Astro clusters or deploy changes to your Deployments. <!-- https://github.com/astronomer/astro/pull/21407, https://github.com/astronomer/astro/pull/21403-->
+- Fixed a bug where for **Trial** accounts, you can no longer make a Dedicated cluster. <!--https://github.com/astronomer/astro/pull/21383-->
+
 ## May 22, 2024
 
 ### The Astro GitHub integration is now in Public Preview
