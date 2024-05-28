@@ -5,7 +5,7 @@ description: "How to upgrade your version of Astro Runtime safely and rollback i
 id: upgrading-astro-runtime
 ---
 
-Astro includes features that make upgrading to the latest version of Astro Runtime easy and, more importantly, safe. When leveraging these features, follow these best practices ensure that your Deployments remain stable after you upgrade:
+Astro includes features that make upgrading to the latest version of Astro Runtime easy and, more importantly, safe. When leveraging these features, follow these best practices to ensure that your Deployments remain stable after you upgrade:
 
 - Monitor for upgrade opportunities using [Organization dashboards](https://www.astronomer.io/docs/astro/organization-dashboard), as well as by following the [Astro Runtime maintenance and lifecycle policy](https://www.astronomer.io/docs/astro/runtime-version-lifecycle-policy). 
 - Check [Upgrade Astro Runtime](https://docs.astronomer.io/astro/upgrade-runtime) for advisories on the specific version you're upgrading to.
@@ -40,7 +40,7 @@ Use the process documented in [Upgrade Astro Runtime](https://www.astronomer.io/
 		- `pip freeze` output for both versions.
 		- A report with environment metadata and a Results table including any errors logged.
 		![Astro Upgrade Test Report](/img/guides/astro-upgrade_test_report.png)
-		- A Dependency Compare report listing the upgrades, additions and removals coming in the new Astro version and underlying Airflow package. For example, a "Major Updates" section lists the packages receiving new major versions, and a "Minor Updates" lists the packages receiving new minor versions:
+		- A Dependency Compare report listing the upgrades, additions and removals coming in the new Astro runtime version and underlying Airflow package. For example, a "Major Updates" section lists the packages receiving new major versions, and a "Minor Updates" lists the packages receiving new minor versions:
 		```text
 		Major Updates:
 		azure-mgmt-datafactory 6.1.0 >> 7.0.0
