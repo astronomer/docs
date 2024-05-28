@@ -101,16 +101,6 @@ module.exports = {
           label: 'CI/CD and automation',
           items: [
             'ci-cd',
-            'houston-api',
-            'deploy-git-sync',
-            'deploy-nfs',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'CI/CD and automation',
-          items: [
-            'ci-cd',
             {
               type: 'category',
               label: 'Houston API',
@@ -119,8 +109,6 @@ module.exports = {
                 'houston-api-examples',
               ],
             },
-            'deploy-git-sync',
-            'deploy-nfs',
           ],
         },
         {
