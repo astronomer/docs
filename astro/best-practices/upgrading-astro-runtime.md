@@ -16,7 +16,7 @@ Use this document to learn more about each of these best practices for upgrading
 
 ## Best practice guidance
 
-It's best practice to keep your running Astro Runtime versions up-to-date. Astro Runtime upgrades include new Airflow features, as well as bug fixes, security fixes, and improvements to Astro. 
+It's best practice to keep your running Astro Runtime versions up-to-date. Astro Runtime upgrades include new Airflow features, as well as bug fixes, security fixes, and improvements to Astro Runtime. 
 
 ### Monitoring for upgrades
 
