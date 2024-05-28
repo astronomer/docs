@@ -2,7 +2,7 @@
 title: "Best practices for upgrading Astro Runtime"
 sidebar_label: "Astro Runtime upgrades"
 description: "How to upgrade your version of Astro Runtime safely and rollback if necessary."
-id: upgrading-astro
+id: upgrading-astro-runtime
 ---
 
 Astro includes features that make upgrading to the latest version of Astro Runtime easy and, more importantly, safe. When leveraging these features, follow these best practices ensure that your Deployments remain stable after you upgrade:
