@@ -10,9 +10,7 @@ import TabItem from '@theme/TabItem';
 
 This guide describes the steps to install Astronomer Software, which allows you to deploy and scale any number of Apache Airflow deployments.
 
-Astronomer recommends platform administrators perform their first Astronomer Software installation manually using the procedures described in this document.
-
-Astronomer recommends platform administrators adapt the procedures contained in this document to meet organizational best-practices when deploying to change-controlled environments.
+Astronomer recommends platform administrators perform their first Astronomer Software installation manually using the procedures described in this document. You can adapt the procedure to meet organizational best practices when deploying to change-controlled environments.
 
 ## Prerequisites
 
@@ -30,8 +28,8 @@ Astronomer recommends platform administrators adapt the procedures contained in 
 The following prerequisites apply when running Astronomer Software on Amazon EKS (see the 'Other' tab if running a different version of Kubernetes on AWS).
 
 - An EKS Kubernetes cluster, running a version of Kubernetes certified as compatible on the [Version Compatibility Reference](version-compatibility-reference.md) providing the following components.
-  * The [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) (or an alternative CSI) must be installed on the Kubernetes Cluster.
-  * An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).  
+    * The [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) (or an alternative CSI) must be installed on the Kubernetes Cluster.
+    * An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).  
 - A PostgreSQL instance, accessible from your Kubernetes cluster, and running a version of Postgres certified as compatible on the [Version Compatibility Reference]
 (version-compatibility-reference.md).
 - PostgreSQL superuser permissions.
@@ -41,11 +39,11 @@ The following prerequisites apply when running Astronomer Software on Amazon EKS
 - The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
 - (Optional) [`eksctl`](https://eksctl.io/) for creating and managing your Astronomer cluster on EKS.
 - A machine with access to the Kubernetes API Server meeting the following criteria:
-  * Network access to the Kubernetes API Server - either directly or VPN.
-  * Network access to load-balancer resources created when Astronomer Software is installed later in the procedure - either directly or via vpn.
-  * Configured to use the DNS servers where Astronomer Software DNS records will be created.
-  * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
-  * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+    * Network access to the Kubernetes API Server - either directly or VPN.
+    * Network access to load-balancer resources created when Astronomer Software is installed later in the procedure - either directly or via vpn.
+    * Configured to use the DNS servers where Astronomer Software DNS records will be created.
+    * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
+    * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 - (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
 - (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
 
@@ -62,12 +60,12 @@ The following prerequisites apply when running Astronomer Software on Google GKE
 - An SMTP service and credentials. For example, Mailgun or Sendgrid.
 - [Google Cloud SDK](https://cloud.google.com/sdk/install)
 - A machine with access to the Kubernetes API Server meeting the following criteria:
-  * Network access to the Kubernetes API Server - either directly or VPN.
-  * Network access to load-balancer resources created when Astronomer Software is installed later in the procedure - either directly or via vpn.
-  * Configured to use the DNS servers where Astronomer Software DNS records will be created.
-  * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
-  * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-  * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+    * Network access to the Kubernetes API Server - either directly or VPN.
+    * Network access to load-balancer resources created when Astronomer Software is installed later in the procedure - either directly or via vpn.
+    * Configured to use the DNS servers where Astronomer Software DNS records will be created.
+    * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
+    * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+    * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 - (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
 
 
@@ -85,12 +83,12 @@ The following prerequisites apply when running Astronomer Software on Azure AKS 
 - An SMTP service and credentials. For example, Mailgun or Sendgrid.
 - The [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 - A machine with access to the Kubernetes API Server meeting the following criteria:
-  * Network access to the Kubernetes API Server - either directly or VPN.
-  * Network access to load-balancer resources created when Astronomer Software is installed later in the procedure - either directly or via vpn.
-  * Configured to use the DNS servers where Astronomer Software DNS records will be created.
-  * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
-  * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-  * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+    * Network access to the Kubernetes API Server - either directly or VPN.
+    * Network access to load-balancer resources created when Astronomer Software is installed later in the procedure - either directly or via vpn.
+    * Configured to use the DNS servers where Astronomer Software DNS records will be created.
+    * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
+    * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+    * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 - (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
 
 
@@ -117,48 +115,35 @@ The following prerequisites apply when running Astronomer Software on Kubernetes
 
 </Tabs>
 
-## Step 1: Determining how to structure and organize your platform environments {#determining-how-to-structure-and-organize-your-platform-environments}
-The procedures detailed in this document create an Astronomer Software platform-instance that will be used to deploy and manage multiple Airflow installations.
+## Step 1: Plan the structure of your Astronomer Software environments {#determining-how-to-structure-and-organize-your-platform-environments}
 
-Do not install multiple instances of Astronomer Software onto the same Kubernetes cluster.
+Before installing Astronomer Software, consider how many instances of the platform you want to host. Each of these instances will need to be installed on separate Kubernetes clusters following the instructions in this document.
 
-Plan a series of environments so that Astronomer Software platform-upgrades and Kubernetes upgrades can be tested in advance, e.g.:
-  * sandbox - lowest environment, contains no sensitive-data, used only by system-administrators to experiment, not subject to change-control
-  * development - user-accessible, subject to most of the restrictions of higher environments, relaxed change-control
-  * staging - all network/security/patch-versions in lock-step with production, no availability guarantees, relaxed change-control
-  * production - hosts production Airflow instances (dev airflow instances may live here or in lower environments)
+Each instance of Astronomer Software can host multiple Airflow environments, or Deployments. Some common types of Astronomer Software instances you might consider hosting are:
 
-### Create a platform-project directory{#platform-deployment-project-directory}
-Create a platform-project directory to store files you will be creating throughout this installation guide.
+- Sandbox : Lowest environment, contains no sensitive-data, used only by system-administrators to experiment, not subject to change-control.
+- Development : User-accessible, subject to most of the restrictions of higher environments, relaxed change-control.
+- Staging : All network/security/patch-versions in lock-step with production, no availability guarantees, relaxed change-control.
+- Production : Hosts production Airflow environments. Development Airflow environments can be hosted here or in lower environments.
 
-e.g.
-`mkdir ~/astronomer-dev`
+For each instance of the platform that you plan to host, create a project folder that will host the platform instance's configurations. For example, if you are installing a development environment, create a folder named `~/astronomer-dev`.
 
-:::tip
 
-Certain files in this directory may contain secrets. For your first install, keep these in a secure place on a suitable machine. As you progress to higher environments, vault these files seperately and use the remaining files to serve as the basis for your CI/CD deployment.
+:::info
+
+Certain files in this directory may contain secrets. For your first install, keep these in a secure place on a suitable machine. As you progress to higher environments, vault these files separately and use the remaining files to serve as the basis for your CI/CD deployment.
 
 :::
 
-## Step 2: Create values.yaml from a template {#create-valuesyaml-from-a-template}
+## Step 2: Create `values.yaml` from a template {#create-valuesyaml-from-a-template}
 
-Choose the template below that corresponds to your Kubernetes Platform and save it to a file named `values.yaml` in your platform-project directory.
+Astronomer Software uses Helm to apply platform-level configurations. Use one of the following templates as the basis for your Astronomer Software platform configuration. Copy the template into a local file named `values.yaml` in your platform project directory. You'll continually modify this file as you grow with Astronomer Software and want to take advantage of new features.
 
-* Do not make any changes to this file until instructed to do so in later steps.
-* Ignore any instructions to run `helm upgrade` from external documents.
-* Do not run `helm upgrade` or `upgrade.sh`) until instructed to do so in later steps of this document. 
+As you copy the template configuration, keep the following in mind.
 
-:::tip
-
-Create a platform-project directory for each platform environment to store values.yaml and other files you will be creating throughout this installation guide. e.g. store as `astronomer-sandbox/values.yaml`.
-
-:::
-
-
-Subsequent steps of this installation guide will instruct you to review or make changes to the contents of `values.yaml`. As you make changes to this file, do not apply them to the cluster until you reach the step where are you are explicitly instructed to apply the platform configurtation.
-
-This file defines major platform configuration settings for the Astronomer Software Platform and must be present to install, upgrade, or reconfigure Astronomer Software. You'll continually modify this file as you grow with Astronomer Software and want to take advantage of new features.
-
+- Do not make any changes to this file until instructed to do so in later steps.
+- Do not run `helm upgrade` or `upgrade.sh` until instructed to do so in later steps. 
+- Ignore any instructions to run `helm upgrade` from other Astronomer documentation until you've completed this installation.
 
 <Tabs
     defaultValue="aws"
@@ -459,30 +444,31 @@ astronomer:
 ```
 
 </TabItem>
-
-
 </Tabs>
 
-## Step 3: Decide Whether to Use a Third-Party Ingress Controller {#elect-to-use-a-third-party-ingress-controller}
-Astronomer Software requires a Kubernetes Ingress Controller to function and provides an integrated ingress-controller by default.
+## Step 3: Decide whether to use a third-party Ingress controller {#elect-to-use-a-third-party-ingress-controller}
 
-Astronomer generally recommends customers use its integrated ingress-controller but supports certain third-party [third-party ingress-controllers](#third-party-ingress-controllers) in certain configurations.. 
+Astronomer Software requires a Kubernetes Ingress controller to function and provides an integrated Ingress controller by default.
 
-Ingress controllers, including Astronomer's ingress controllers, typically need elevated permissions (including a ClusterRole) to function - particularly the ability to list all namespaces and view the ingresses in those namespaces and the ability to retrieve secrets in those namespaces to locate and use private TLS certificates used to service those ingresses.
+Astronomer generally recommends you use the integrated Ingress controller, but Astronomer Software also supports certain third-party [third-party ingress-controllers](#third-party-ingress-controllers).
 
-Customers in complex regulatory requirements frequently have ingress-controllers that are already internally-approved to hold those permissions and disable Astronomer's integrated ingress-controller. 
+Ingress controllers typically need elevated permissions (including a ClusterRole) to function. Specifically, the Astronomer Software Ingress controller requires the ability to: 
 
-Customers electing to use a third-party ingress-controllers perform certain additional steps later in this procedure to disable the integrated ingress-controller and configure Astronomer for use with their pre-existing ingress-controller.
+- List all namespaces in the cluster. 
+- View ingresses in the namespaces.
+- Retrieve secrets in the namespaces to locate and use private TLS certificates that service the ingresses.
+
+If you have complex regulatory requirements, you might need to use an internally-approved Ingress controller and disable Astronomer's integrated controller. You'll configure this detail later in the installation.
 
 ## Step 4: Choose and configure the base domain {#choose-and-configure-the-base-domain}
 
-### Choosing the base domain {#choosing-the-base-domain}
-The installation procedure detailed in this guide will create a variety of services that your users will access to manage, monitor, and run Airflow on the platform.
+When you install Astronomer Software, it will create a variety of services that your users will access to manage, monitor, and run Airflow.
 
 Choose a base-domain (e.g. `astronomer.example.com`, `astro-sandbox.example.com`, `astro-prod.example.internal`) for which:
-* you have the ability to create and edit DNS records
-* you have the ability to issue TLS-certificates
-* the following addresses are available:
+
+- You have the ability to create and edit DNS records
+- You have the ability to issue TLS-certificates
+- The following addresses are available:
   - `app.<base-domain>`
   - `deployments.<base-domain>`
   - `houston.<base-domain>`
@@ -493,15 +479,15 @@ Choose a base-domain (e.g. `astronomer.example.com`, `astro-sandbox.example.com`
   - `prometheus.<base-domain>`
   - `registry.<base-domain>`
 
-The base-domain itself does not need to be available and may even point to another service not associated with Astronomer or Airflow. If available, later sections of this document will establish a vanity-redirect from `<base-domain>` to `app.<base-domain>`.
+The base-domain itself does not need to be available and may even point to another service not associated with Astronomer or Airflow. If available, later sections of this document will establish a vanity redirect from `<base-domain>` to `app.<base-domain>`.
 
-When choosing a baseDomain, consider:
-* the name you choose must be be resolvable by both your users and Kubernetes itself
-* you will need to have or obtain a TLS certificate that is recognized as valid by your users (and if using the Astronomer Software integrated container registry, by Kubernetes itself)
-* wildcardcard certificates are only valid one-level deep (e.g. an ingress controller using a certificate of `*.example.com` can provide service for `app.example.com` but not `app.astronomer-dev.example.com`).
-* the bottom-level hostnames (e.g. `app`, `registry`, `prometheus`) are fixed and cannot be changed.
-* most kubernetes clusters refuse to resolve DNS hostnames with more than 5 segments (seperated by the dot character; e.g. `app.astronomer.sandbox.mygroup.example.com` is 6 segments and might be problematic, so choosing a baseDomain of `astronomer-sandbox.mygroup.example.com` instead of `astronomer.sandbox.mygroup.example.com` would be advisable).
-* the base-domain will be visible to end-users
+When choosing a baseDomain, consider the following :
+- The name you choose must be be resolvable by both your users and Kubernetes itself
+- You will need to have or obtain a TLS certificate that is recognized as valid by your users (and if using the Astronomer Software integrated container registry, by Kubernetes itself)
+- Wildcardcard certificates are only valid one-level deep (e.g. an ingress controller using a certificate of `*.example.com` can provide service for `app.example.com` but not `app.astronomer-dev.example.com`).
+- The bottom-level hostnames (e.g. `app`, `registry`, `prometheus`) are fixed and cannot be changed.
+- Most kubernetes clusters refuse to resolve DNS hostnames with more than 5 segments (seperated by the dot character; e.g. `app.astronomer.sandbox.mygroup.example.com` is 6 segments and might be problematic, so choosing a baseDomain of `astronomer-sandbox.mygroup.example.com` instead of `astronomer.sandbox.mygroup.example.com` would be advisable).
+- The base-domain will be visible to end-users
   - when accessing the Astronomer Software UI (e.g. `https://app.sandbox-astro.example.com`)
   - when accessing an Airflow Deployment (e.g. `https://deployments.sandbox-astro.example.com/deployment-release-name/airflow`)
   - when logging into the astro cli (e.g. `astro login sandbox-astro.example.com`)
@@ -512,7 +498,7 @@ OpenShift customers who wish to use OpenShift's integrated ingress controller ty
 
 :::
 
-### Configuring the base domain
+### Configure the base domain
 
 Locate the `global.baseDomain` key already present in your `values.yaml` file and change it to your base-domain.
 
