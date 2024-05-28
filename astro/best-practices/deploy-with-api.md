@@ -4,15 +4,15 @@ sidebar_label: 'Deploy with API'
 id: deploy-with-api
 ---
 
-While you can deploy code to Astro using the GitHub Integration, the Astro CLI, or by configuring a CI/CD pipeline, you might prefer to use the Astro API to automate deploying code. Using the Astro API can solve some of the deploy automation issues that can result because some CI/CD configurations are not compatible with the GitHub Integration and the Astro CLI requires you to install Docker.
+While you can deploy code using the Astro GitHub Integration, the Astro CLI, or by configuring a CI/CD pipeline, you might prefer to use the Astro API to automate deploying code. Using the Astro API is the most straightforward way to deploy code and requires very few additional dependencies, meaning it is compatible with most CI/CD configurations.
 
-Instead of using the other code deploy options, you can instead use the Astro API Deploy endpoints to perform `IMAGE_ONLY`, `DAG_ONLY`, or both `IMAGE_AND_DAG` Deploys.
+If the Astro API has access to your Astro project files, you can use the Astro API `deploy` endpoints to complete an image deploy or DAG deploy. You can then implement scripts to automate deploys as a workaround to not using the Astro CLI or Astro GitHub integration.
 
-This guide contains an example of an entire deploy flow and the respective scripts that you can use to deploy code with the Astro API using bash scripts. It also includes an example of a script that can make deploys depending on the files changed, in case you want to use those steps and integrate into your own CI/CD pipelines.
+This best practice guide walks through the steps that are necessary to deploy code to Astro using the Astro API. It also provides example bash scripts that implement these steps for different types of deploy workflows in your own CI/CD pipelines.
 
 ## Feature overview
 
-This guide highlights the following Astro features to use for automating code deploys:
+This guide highlights the following Astro features:
 
 - The Astro API [`Deploy` endpoint](https://www.astronomer.io/api/platform-api-reference/deploy/list-deploys) to create and manage code deploys to an Astro Deployment.
 
