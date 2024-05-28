@@ -94,7 +94,7 @@ For the most flexibility, you can set default connections and override the conne
 
 ### Step 2: (Optional) Add provider packages to your Deployment
 
-Some connection types require installing dependencies on your Deployment through provider packages. If your connection type requires a provider package and the provider package is neither [included in Astro Runtime](https://docs.astronomer.io/astro/runtime-image-architecture#provider-packages) nor included in the `requirements.txt` file of your Astro project, Airflow won't be able to use your connection.
+Some connection types require installing dependencies on your Deployment through provider packages. If your connection type requires a provider package and the provider package is neither [included in Astro Runtime](https://www.astronomer.io/docs/astro/runtime-image-architecture#provider-packages) nor included in the `requirements.txt` file of your Astro project, Airflow won't be able to use your connection.
 
 1. Open the local Astro project for your Deployment.
 2. Add the required provider package name to your project's `requirements.txt`. Save your changes.

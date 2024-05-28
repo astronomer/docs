@@ -83,14 +83,21 @@ The first component of MLOps is to make sure there is strategic aligment with al
 
 Since you define Airflow pipelines in Python code, you can apply DevOps best practices when using Airflow. This includes:
 
-- **Version control**. All code and configuration should be stored in a version control system like [Git](https://git-scm.com/). Version control allows you to track all changes of your pipeline, ML model, and environment over time and roll back to previous versions if needed. Astro customers can take advantage of [Deployment rollbacks](https://docs.astronomer.io/astro/deploy-history).
-- **Continuous integration/ continuous delivery** ([CI/CD](https://resources.github.com/ci-cd/)). It is a standard Software best practice for all code to undergo automatic testing, linting, and deployment. This ensures that your code is always in a working state and that any changes are automatically deployed to production. Airflow integrates with all major CI/CD tools, see [CI/CD templates](https://docs.astronomer.io/astro/ci-cd-templates/template-overview) for popular templates.
+- **Version control**. All code and configuration should be stored in a version control system like [Git](https://git-scm.com/). Version control allows you to track all changes of your pipeline, ML model, and environment over time and roll back to previous versions if needed. Astro customers can take advantage of [Deployment rollbacks](https://www.astronomer.io/docs/astro/deploy-history).
+- **Continuous integration/ continuous delivery** ([CI/CD](https://resources.github.com/ci-cd/)). It is a standard Software best practice for all code to undergo automatic testing, linting, and deployment. This ensures that your code is always in a working state and that any changes are automatically deployed to production. Airflow integrates with all major CI/CD tools, see [CI/CD templates](https://www.astronomer.io/docs/astro/ci-cd-templates/template-overview) for popular templates.
+
+:::info
+
+Astronomer customers can use the Astro GitHub integration, which allows you to automatically deploy code from a GitHUb repository to an Astro deployment, viewing Git metadata in the Astro UI. See [Deploy code with the Astro GitHub integration](https://www.astronomer.io/docs/astro/deploy-github-integration). 
+
+:::
+
 - **Infrastructure as code** ([IaC](https://en.wikipedia.org/wiki/Infrastructure_as_code)). Ideally, all infrastructure is defined as code and follows the same CI/CD process as your pipeline and model code. This allows you to control and, if necessary, roll back environment changes, or quickly deploy new instances of your model.
 
 In practice, following modern DevOps patterns when using Airflow for MLOps means:
 
 - Storing all Airflow code and configuration in a version control system like Git. 
-- Setting up development, staging, and production branches in your version control system and also connecting them to different Airflow environments. For Astro customers, see [Manage Astro connections in branch-based deploy workflows](https://docs.astronomer.io/astro/astro-use-case/use-case-astro-connections).
+- Setting up development, staging, and production branches in your version control system and also connecting them to different Airflow environments. For Astro customers, see [Manage Astro connections in branch-based deploy workflows](https://www.astronomer.io/docs/astro/astro-use-case/use-case-astro-connections).
 - Use automatic testing and linting for all Airflow code before deployment.
 - Define all infrastructure as code and use the same CI/CD process for infrastructure as for your Airflow code.
 - Store model artifacts in a versioned system. This can be a dedicated tool like MLFlow or an object storage solution.
@@ -106,7 +113,7 @@ Give special considerations to the following:
 - [**Data quality**](data-quality.md) and data cleaning. If your data is of bad quality, your model predictions will be too. Astronomer recommends incorporating data quality checks and data cleaning steps into your data pipelines to define and monitor the requirements your data has to fulfill in order for downstream ML operations to be successful. Airflow supports integration with any data quality tool that has an API, and has pre-built integrations for tools such as [Great Expectations](airflow-great-expectations.md) and [Soda Core](soda-data-quality.md).
 - **Data preprocessing and feature engineering**. It is common for data to undergo several transformation steps before it is ready to be used as input for an ML model. These steps can include simple [preprocessing steps](https://scikit-learn.org/stable/modules/preprocessing.html) like scaling, one-hot-encoding, or imputation of missing values. It can also include more complex steps like [feature selection](https://scikit-learn.org/stable/modules/feature_selection.html#feature-selection), [dimensionality reduction](https://en.wikipedia.org/wiki/Dimensionality_reduction), or [feature extraction](https://scikit-learn.org/stable/modules/feature_extraction.html). Airflow allows you to run preprocessing and feature engineering steps in a pythonic way using [Airflow decorators](airflow-decorators.md).
 - **Data storage**. 
-    - Training and testing data. The best way to store your data highly depends on your data and type of ML. Data engineering includes ingesting data and moving it to the ideal platform for your ML model to access. This can, for example, be an object storage solution, a relational database management system (RDBMS), or a vector database. Airflow integrates with all these options, with tools such as [Airflow object storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) and the [Astro Python SDK](https://docs.astronomer.io/learn/astro-python-sdk) simplifying common operations. 
+    - Training and testing data. The best way to store your data highly depends on your data and type of ML. Data engineering includes ingesting data and moving it to the ideal platform for your ML model to access. This can, for example, be an object storage solution, a relational database management system (RDBMS), or a vector database. Airflow integrates with all these options, with tools such as [Airflow object storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) and the [Astro Python SDK](https://www.astronomer.io/docs/learn/astro-python-sdk) simplifying common operations. 
     - Model artifacts. Model artifacts include model parameters, hyperparameters, and other metadata. Airflow integrates with specialized version control systems such as [MLFlow](airflow-mlflow.md) or [Weights and Biases](airflow-weights-and-biases.md).
 
 Apart from the foundations mentioned above, second day data quality operations in MLOps often include advanced topics like data governance, [data lineage](airflow-openlineage.md), and data cataloging as well as monitoring of data drift.
@@ -132,7 +139,7 @@ With Airflow you can use the ML tools and compute locations of your choice. Some
 - **Spark**: with modules from the [Spark Airflow provider](https://registry.astronomer.io/providers/apache-airflow-providers-apache-spark/versions/latest).
 - **External compute**: in [AWS](https://registry.astronomer.io/providers/apache-airflow-providers-amazon/versions/latest), [Azure](https://registry.astronomer.io/providers/apache-airflow-providers-microsoft-azure/versions/latest) and [Google Cloud](https://registry.astronomer.io/providers/apache-airflow-providers-google/versions/latest) using the respective Airflow providers.
 
-Other Airflow users decide to [scale up](airflow-scaling-workers.md) their Airflow infrastructure with larger worker nodes for compute intensive tasks. Astro customers can leverage the [worker queues](https://docs.astronomer.io/astro/configure-worker-queues) feature, which lets them decide the exact specifications for the workers each task can run on. This means that Airflow only uses large workers for the biggest workloads, saving compute and cost.
+Other Airflow users decide to [scale up](airflow-scaling-workers.md) their Airflow infrastructure with larger worker nodes for compute intensive tasks. Astro customers can leverage the [worker queues](https://www.astronomer.io/docs/astro/configure-worker-queues) feature, which lets them decide the exact specifications for the workers each task can run on. This means that Airflow only uses large workers for the biggest workloads, saving compute and cost.
 
 In practice, following modern model operations patterns when using Airflow for MLOps means:
 
@@ -170,7 +177,7 @@ A specific set of Airflow features can help you implement MLOps best practices:
 
     ![DAG with a branching task deciding whether or not a model is retrained and redeployed.](/img/guides/airflow-mlops_branching.png)
 
-- [Alerts and Notifications](error-notifications-in-airflow.md): Airflow has a wide variety of options to alert you of events in your pipelines, such as DAG or task failures. It is a best practice to set up alerts for critical events in your ML pipelines, such as a drop in model performance or a data quality check failure. Astronomer customers can use [Astro Alerts](https://docs.astronomer.io/astro/alerts).
+- [Alerts and Notifications](error-notifications-in-airflow.md): Airflow has a wide variety of options to alert you of events in your pipelines, such as DAG or task failures. It is a best practice to set up alerts for critical events in your ML pipelines, such as a drop in model performance or a data quality check failure. Astronomer customers can use [Astro Alerts](https://www.astronomer.io/docs/astro/alerts).
 
     ![Screenshot of an Astro alert in a Slack channel.](/img/guides/airflow-mlops_alerts.png)
 

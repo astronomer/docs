@@ -40,7 +40,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started).
 - A Cohere API key. You can generate an API key in the [Cohere dashboard](https://dashboard.cohere.com/api-keys), accessible with a Cohere account. A free tier API key is sufficient for this tutorial.
 
 ## Step 1: Configure your Astro project

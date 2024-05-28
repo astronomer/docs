@@ -31,7 +31,7 @@ def good_practices_dag_1():
         postgres_conn_id="postgres_default",
         # reference query kept in separate file
         sql="covid_state_query.sql",
-        params={"state": "'" + state + "'"},
+        params={"state": f"'{state}'"},
     )
 
     query

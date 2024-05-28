@@ -11,10 +11,10 @@ Astro Runtime includes the following features:
 
 - Timely support for new patch, minor, and major versions of Apache Airflow. This includes bug fixes that have not been released by the open source project but are backported to Astro Runtime and available to users earlier.
 - The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Astronomer deferrable operators](https://astronomer-providers.readthedocs.io/en/stable/providers/operators_and_sensors_list.html).
-- The `openlineage-airflow` package. [OpenLineage](https://openlineage.io/) standardizes the definition of data lineage, the metadata that forms lineage metadata, and how data lineage metadata is collected from external systems. See [OpenLineage and Airflow](https://docs.astronomer.io/learn/airflow-openlineage/).
+- The `openlineage-airflow` package. [OpenLineage](https://openlineage.io/) standardizes the definition of data lineage, the metadata that forms lineage metadata, and how data lineage metadata is collected from external systems. See [OpenLineage and Airflow](https://www.astronomer.io/docs/learn/airflow-openlineage/).
 - A custom security manager that enforces user roles and permissions as defined by Astronomer. See [Manage user permissions on Astronomer Software](workspace-permissions.md).
 
-For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes).
+For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime release notes](https://www.astronomer.io/docs/astro/runtime-release-notes).
 
 ## Runtime versioning
 
@@ -26,7 +26,7 @@ Astro Runtime versions are released regularly and use [semantic versioning](http
 
 Every version of Astro Runtime correlates to an Apache Airflow version. All Deployments on Astronomer Software must run only one version of Astro Runtime, but you can run different versions of Astro Runtime on different Deployments within a given cluster or Workspace. See [Create a Deployment](configure-deployment.md#create-a-deployment).
 
-For a list of supported Astro Runtime versions and more information on the Astro Runtime maintenance policy, see [Astro Runtime versioning and lifecycle policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy).
+For a list of supported Astro Runtime versions and more information on the Astro Runtime maintenance policy, see [Astro Runtime versioning and lifecycle policy](https://www.astronomer.io/docs/astro/runtime-version-lifecycle-policy).
 
 ### Astro Runtime and Apache Airflow parity
 
@@ -41,7 +41,7 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | 8             | 2.6                    |
 
 :::info
-Each Runtime version in a given minor series supports only a single version of Apache Airflow. For specific version compatibility information, see [Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes).
+Each Runtime version in a given minor series supports only a single version of Apache Airflow. For specific version compatibility information, see [Runtime release notes](https://www.astronomer.io/docs/astro/runtime-release-notes).
 :::
 
 ## Provider packages
@@ -64,7 +64,7 @@ The latest version of Astro Runtime has the following open source provider packa
 
 ### Provider package versioning
 
-If an Astro Runtime release includes changes to an installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), the version change is documented in the [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes).
+If an Astro Runtime release includes changes to an installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), the version change is documented in the [Astro Runtime release notes](https://www.astronomer.io/docs/astro/runtime-release-notes).
 
 To determine the version of any provider package installed in your current Astro Runtime image, run:
 

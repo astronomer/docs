@@ -67,13 +67,13 @@ deployment:
             wake_at: "2 * * * *"
             description: "My hibernation description"
             enabled: true
-        worker_queues: ## worker_queues only used when executor is CELERY
-          - name: default
-            max_worker_count: 10
-            min_worker_count: 0
-            worker_concurrency: 5
-            worker_type: A5
         workload_identity: arn:aws:iam::clskz0os1000308jz2prn0s8u:role/clskyy4h8000208jz60olha0w-release
+    worker_queues: ## worker_queues only used when executor is CELERY
+      - name: default
+        max_worker_count: 10
+        min_worker_count: 0
+        worker_concurrency: 5
+        worker_type: A5
     alert_emails:
         - test-emailclskz4wu5000508jz4gm25q5j@testdomain.io
 ```
@@ -114,13 +114,13 @@ deployment:
             wake_at: "2 * * * *"
             description: "My hibernation description"
             enabled: true
-        worker_queues: ## worker_queues is only used when executor is CELERY
-          - name: default
-            max_worker_count: 10
-            min_worker_count: 0
-            worker_concurrency: 16
-            worker_type: m5.xlarge
         workload_identity: arn:aws:iam::clskz0os1000308jz2prn0s8u:role/clskyy4h8000208jz60olha0w-release
+    worker_queues: ## worker_queues is only used when executor is CELERY
+      - name: default
+        max_worker_count: 10
+        min_worker_count: 0
+        worker_concurrency: 16
+        worker_type: m5.xlarge
     metadata:
         deployment_id: clskxpb35000008l69kzp5psq
         workspace_id: clskytztd000008lad0i5c993

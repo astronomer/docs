@@ -24,7 +24,7 @@ Standard clusters have different connection options than dedicated clusters.
 
 Standard clusters can connect to AWS in the following ways:
 
-- Using [static external IP addresses](#allowlist-external-ip-addresses-for-a-cluster)
+- Using [static external IP addresses](#allowlist-a-deployments-external-ip-addresses-on-aws)
 - Using PrivateLink to connect with the following endpoints:
     - [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/privatelink-interface-endpoints.html) - Gateway Endpoint
     - [Amazon Elastic Compute Cloud (Amazon EC2) Autoscaling](https://docs.aws.amazon.com/general/latest/gr/as.html) - Interface Endpoint
@@ -42,16 +42,29 @@ If you require a private connection between Astro and AWS, Astronomer recommends
 
 ## Access a public AWS endpoint
 
-All Astro clusters include a set of external IP addresses that persist for the lifetime of the cluster. To facilitate communication between an Astro cluster and your cloud, you can allowlist these external IPs in your cloud. If you have no other security restrictions, this means that any cluster with an allowlisted external IP address can access your AWS resources through a valid Airflow connection.
+All Astro clusters include a set of external IP addresses that persist for the lifetime of the cluster. When you create a Deployment in your workspace, Astro assigns the external IP addresses to it. To facilitate communication between Astro and your cloud, you can allowlist these external IPs in your cloud. If you have no other security restrictions, this means that any cluster with an allowlisted external IP address can access your AWS resources through a valid Airflow connection.
 
-### Allowlist external IP addresses for a cluster
+### Allowlist a Deployment's external IP addresses on AWS
+
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Select the **Details** tab.
+3. In the **Other** section, you can find the **External IPs** associated with the Deployment.
+4. Add the IP addresses to the allowlist of any external services that you want your Deployment to access.
+
+When you use publicly accessible endpoints to connect to AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the Astronomer managed control plane. Note that you still might also need to authorize your Deployment to some resources before it can access them. For example, you can [Authorize deployments to your cloud with workload identity](authorize-deployments-to-your-cloud.md) so that you can avoid adding passwords or other access credentials to your Airflow connections.
+
+<details>
+  <summary><strong>Dedicated cluster external IP addresses</strong></summary>
+
+If you use Dedicated clusters and want to allowlist external IP addresses at the cluster level instead of at the Deployment level, you can find the list cluster-level external IP addresses in your **Organization settings**.
 
 1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
 2. Click **Clusters**, then select a cluster.
 3. In the Details page, copy the IP addresses listed under **External IPs**.
 4. Add the IP addresses to the allowlist of any external services that you want your cluster to access. You can also access these IP addresses from the **Details** page of any Deployment in the cluster.
 
-After you allowlist a cluster's IP addresses, all Deployments in that cluster have network connectivity to AWS. When you use publicly accessible endpoints to connect to AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the Astronomer managed control plane. Note that you still might also need to authorize your Deployment to some resources before it can access them.
+After you allowlist a cluster's IP addresses, all Deployments in that cluster have network connectivity to AWS.
+</details>
 
 ## Create a private connection between Astro and AWS
 
@@ -96,8 +109,8 @@ To set up a private connection between an Astro VPC and an AWS VPC, you can crea
     - AWS region
     - VPC ID of the external VPC
     - CIDR block of the external VPC
-  
-2. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
+
+2. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
 
 3. Click **Clusters**, select your cluster, click **VPC Peering Connections**, then click **+ VPC Peering Connection**.
 

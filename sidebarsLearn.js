@@ -139,6 +139,7 @@ module.exports = {
       items: [
         'airflow-listeners',
         'operator-extra-link-tutorial',
+        'cleanup-dag-tutorial',
         'xcom-backend-tutorial',
         'pycharm-local-dev',
         'vscode-local-dev',
@@ -152,10 +153,10 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Integrations',
+      label: 'Integrations & connections',
       link: {
         type: 'generated-index',
-        title: 'Integrations',
+        title: 'Integrations & connections',
         description: 'Integrate Airflow with commonly used data engineering tools.',
       },
       items: [

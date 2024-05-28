@@ -22,3 +22,4 @@ jobs:
       with:
         token: ${{secrets.GITHUB_TOKEN}}
         title: '${{ steps.date.outputs.date }} - Generate API spec and changelog'
+        body: 'Weekly update to the Astro API specifications. Use the manual trigger action if the API release is delayed until after this action runs. To generate a preview site, close and reopen the PR manually - this triggers our preview GitHub action.'

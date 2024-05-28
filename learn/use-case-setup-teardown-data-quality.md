@@ -14,7 +14,7 @@ This example uses synthetic data about roses and tries to predict each rose's cu
 
 Before trying this example, make sure you have:
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop).
 
 ## Clone the project

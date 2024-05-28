@@ -45,8 +45,8 @@ Starting the upgrade process doesn't interrupt or otherwise impact your Airflow 
 
 1. Run `astro auth login <base-domain>` to confirm you're authenticated.
 
-2. Run the following command to list your current Deployments. 
-   
+2. Run the following command to list your current Deployments.
+
     ```bash
     astro deployment list
     ```
@@ -63,9 +63,9 @@ Starting the upgrade process doesn't interrupt or otherwise impact your Airflow 
 
 ## Step 3: (Optional) Pin provider package versions
 
-Major Astro Runtime upgrades can include significant upgrades to built-in provider packages. These package upgrades can sometimes include breaking changes for your DAGs. See the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers/packages-ref.html) for a list of all available provider packages and their release notes. 
+Major Astro Runtime upgrades can include significant upgrades to built-in provider packages. These package upgrades can sometimes include breaking changes for your DAGs. See the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers/packages-ref.html) for a list of all available provider packages and their release notes.
 
-For the most stable upgrade path, Astronomer recommends pinning all provider package versions from your current Runtime version before upgrading. 
+For the most stable upgrade path, Astronomer recommends pinning all provider package versions from your current Runtime version before upgrading.
 
 1. Run the following command to check the version of all provider packages installed in your Astro Runtime version:
 
@@ -84,11 +84,11 @@ For the most stable upgrade path, Astronomer recommends pinning all provider pac
 
 You can use the Astro CLI to anticipate and address problems before upgrading to a newer version of Astro Runtime. Before you upgrade, run the following command to run tests against the version of Astro Runtime you're upgrading to:
 
-```bash 
+```bash
 astro dev upgrade-test --runtime-version <upgraded-runtime-version>
 ```
 
-The Astro CLI then generates test results in your Astro project that identify dependency conflicts and import errors that you would experience using the new Astro Runtime version. Review these results and make the recommended changes to reduce the risk of your project generating errors after you upgrade. For more information about using this command and the test results, see [Test before upgrade your Astro project](https://docs.astronomer.io/astro/cli/test-your-astro-project-locally#test-before-an-astro-runtime-upgrade).
+The Astro CLI then generates test results in your Astro project that identify dependency conflicts and import errors that you would experience using the new Astro Runtime version. Review these results and make the recommended changes to reduce the risk of your project generating errors after you upgrade. For more information about using this command and the test results, see [Test before upgrade your Astro project](https://www.astronomer.io/docs/astro/cli/test-your-astro-project-locally#test-before-an-astro-runtime-upgrade).
 
 ## Step 5: Update your Astro project
 
@@ -99,7 +99,7 @@ The Astro CLI then generates test results in your Astro project that identify de
     FROM quay.io/astronomer/astro-runtime:{{RUNTIME_VER}}
     ```
 
-    For a list of supported Astro Runtime versions, see [Astro Runtime maintenance and lifecycle policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule).
+    For a list of supported Astro Runtime versions, see [Astro Runtime maintenance and lifecycle policy](https://www.astronomer.io/docs/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule).
 
   :::danger
 
@@ -154,7 +154,7 @@ Canceling the Airflow upgrade process does not interrupt or otherwise impact you
 
 :::info
 
-If you can't cancel your upgrade and receive an error message about using an unsupported Airflow version, set the following value in your `config.yaml` file and [apply the change](apply-platform-config.md) to successfully cancel your upgrade. This configuration allows you to roll back to your current version of Airflow, even if it's not supported. 
+If you can't cancel your upgrade and receive an error message about using an unsupported Airflow version, set the following value in your `config.yaml` file and [apply the change](apply-platform-config.md) to successfully cancel your upgrade. This configuration allows you to roll back to your current version of Airflow, even if it's not supported.
 
 ```yaml
 astronomer:
@@ -174,7 +174,7 @@ Consider the following when you upgrade Astro Runtime:
 - All versions of the Astro CLI support all versions of Astro Runtime. There are no dependencies between the two products.
 - Upgrading to certain versions of Runtime might result in extended upgrade times or otherwise disruptive changes to your environment. To learn more, see [Version-specific upgrade considerations](#version-upgrade-considerations).
 
-To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes). For more information on Astro Runtime versioning and support, see [Astro Runtime versioning and lifecycle policy](runtime-version-lifecycle-policy.md). For a full collection of Astro Runtime Docker images, go to the [Astro Runtime repository on Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
+To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime release notes](https://www.astronomer.io/docs/astro/runtime-release-notes). For more information on Astro Runtime versioning and support, see [Astro Runtime versioning and lifecycle policy](runtime-version-lifecycle-policy.md). For a full collection of Astro Runtime Docker images, go to the [Astro Runtime repository on Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
 
 ### Version upgrade considerations
 
@@ -202,7 +202,7 @@ ENV AIRFLOW__CORE__TEST_CONNECTION=Enabled
 
 The base distribution of Astro Runtime 9 uses Python 3.11 by default. Some provider packages, such as `apache-airflow-providers-apache-hive`, aren't compatible with Python 3.11.
 
-To continue using these packages with a compatible version of Python, upgrade to the [Astro Runtime Python distribution](runtime-image-architecture.mdx#python-version-distributions) for your desired Python version.
+To continue using these packages with a compatible version of Python, upgrade to the [Astro Runtime Python distribution](runtime-image-architecture.mdx#python-version-images) for your desired Python version.
 
 #### Runtime 8 (Airflow 2.6)
 
@@ -240,11 +240,11 @@ There is an incompatibility between Astro Runtime 8 and the following provider p
 
 That can be resolved by pinning `apache-airflow-providers-google==10.9.0` or greater in your `requirements.txt` file.
 
-This incompatibility results in breaking the GKEStartPodOperator. This operator inherits from the KubernetesPodOperator, but then overrides the hook attribute with the GKEPodHook. In the included version of the `cncf-kubernetes` providers package, the KubernetesPodOperator uses a new method, `get_xcom_sidecar_container_resources`. This method is present in the KubernetesHook, but not the GKEPodHook. Therefore, when it is called, it causes the task execution to break. 
+This incompatibility results in breaking the GKEStartPodOperator. This operator inherits from the KubernetesPodOperator, but then overrides the hook attribute with the GKEPodHook. In the included version of the `cncf-kubernetes` providers package, the KubernetesPodOperator uses a new method, `get_xcom_sidecar_container_resources`. This method is present in the KubernetesHook, but not the GKEPodHook. Therefore, when it is called, it causes the task execution to break.
 
 #### Runtime 6 (Airflow 2.4)
 
-Smart Sensors were deprecated in Airflow 2.2.4 and removed in Airflow 2.4.0. If your organization still uses Smart Sensors, you need to start using deferrable operators. See [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
+Smart Sensors were deprecated in Airflow 2.2.4 and removed in Airflow 2.4.0. If your organization still uses Smart Sensors, you need to start using deferrable operators. See [Deferrable operators](https://www.astronomer.io/docs/learn/deferrable-operators).
 
 #### Runtime 5 (Airflow 2.3)
 

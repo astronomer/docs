@@ -30,7 +30,7 @@ Dedicated clusters offer the self-service convenience of a fully managed service
 
 
 1. In the Astro UI, click the name of of your Workspace in the upper left corner, then click **Organization Settings**.
-   
+
 2. Click **Cluster** > **+ Cluster**.
 
 3. Configure the following details about your cluster:
@@ -47,7 +47,7 @@ Dedicated clusters offer the self-service convenience of a fully managed service
 <TabItem value="gcp">
 
 1. In the Astro UI, click the name of of your Workspace in the upper left corner, then click **Organization Settings**.
-   
+
 2. Click **Cluster** > **+ Cluster**.
 
 3. Configure the following details about your cluster:
@@ -55,12 +55,25 @@ Dedicated clusters offer the self-service convenience of a fully managed service
     - **Cloud Provider**: Select **GCP**.
     - **Name**: The name for your cluster.
     - **Region**: Select the region that your cluster runs in.
-    - **Subnet CIDR**: Specify the range used by nodes in your GKE cluster (Default: `172.20.0.0/22`).
-    - **Pod CIDR**: Specify the range used by GKE Pods (Default: `172.21.0.0/19`).
-    - **Service Address CIDR**: Specify the range used by GKE services (Default: `172.22.0.0/22`).
-    - **Service VPC Peering**: Specify the range used by Private Service connections (Default: `172.23.0.0/20`).
+    - **VPC Subnet Range**: Specify the range used by nodes in your GKE cluster (Default: `172.20.0.0/22`). Astro uses this range to make private connections to your target data sources.
 
-4. Click **Create cluster**. After Astro finishes creating the cluster, users in your Organization can select the cluster when they [create a Deployment](create-deployment.md).
+4. (Optional) Configure the following **Advanced Configuration** details about your cluster for Private Networking.
+
+    Astro uses source network address translation (SNAT) that performs many-to-one IP address translations for connections to your data sources and defaults secondary ranges to RFC 6598 address space (non-standard Private IP addresses), to minimize the risk and concern with IP overlap and exhaustion. When using private networking, like VPN or VPC Peering, between Astro and your target data sources, your target data sources see connections from the default **VPC Subnet Range**. If you're using private connections, confirm that the following **Advanced Configuration** network ranges do not overlap with your target data source networks.
+
+    - **Pod Subnet Range**: Specify the range used by GKE Pods (Default: `100.64.0.0/16`).
+    - **Service Subnet Range**: Specify the range used by Services in your GKE cluster (Default: `100.65.0.0/22`).
+    - **Service Peering Range**: Specify the range used by Private Service connections (Default: `100.66.0.0/21`)
+
+    If there is an overlap between the Advanced Configurations and your target data source networks, you can use the following alternative ranges:
+
+    - **RFC 1918**:
+        - 10.0.0.0/8, 10.0.0.0 – 10.255.255.255
+        - 172.16.0.0/12, 172.16.0.0 – 172.31.255.255
+        - 192.168.0.0/16, 192.168.0.0 – 192.168.255.255
+    - **RFC 6598**: 100.64.0.0/10, specifically IP addresses from 100.64.0.0 to 100.127.255.255
+
+5. Click **Create cluster**. After Astro finishes creating the cluster, users in your Organization can select the cluster when they [create a Deployment](create-deployment.md).
 
 :::info Configure cluster maintenance windows
 
@@ -77,7 +90,7 @@ To set a maintenance window, first choose a maintenance window time and read thr
 <TabItem value="azure">
   
 1. In the Astro UI, click the name of of your Workspace in the upper left corner, then click **Organization Settings**.
-   
+
 2. Click **Cluster** > **+ Cluster**.
 
 3. Configure the following details about your cluster:

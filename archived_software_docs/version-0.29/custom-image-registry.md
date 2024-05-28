@@ -58,7 +58,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
   :::
 
-2. Open your `config.yaml` file. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
+2. Open your `config.yaml` file. See [Apply a Config Change](https://www.astronomer.io/docs/software/apply-platform-config).
 3. Add the following to your `config.yaml` file:
 
     ```yaml
@@ -82,7 +82,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
   :::
 
-4. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+4. Push the configuration change. See [Apply a config change](https://www.astronomer.io/docs/software/apply-platform-config).
 5. For any existing Deployments, run the following command to sync the registry credentials.
 
     ```bash
@@ -120,7 +120,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
   :::
 
-2. Open your `config.yaml` file. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
+2. Open your `config.yaml` file. See [Apply a Config Change](https://www.astronomer.io/docs/software/apply-platform-config).
 
 3. Add the following to your `config.yaml` file:
 
@@ -155,7 +155,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
   :::
 
-4. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+4. Push the configuration change. See [Apply a config change](https://www.astronomer.io/docs/software/apply-platform-config).
 5. For any existing Deployments, run the following command to sync the registry credentials. If you're using different registries for each Deployment, you can skip this step.
 
     ```bash

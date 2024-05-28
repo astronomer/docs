@@ -67,7 +67,7 @@ These parameters help you configure the behavior of [Airflow callbacks](error-no
 
 :::tip
 
-On Astro, you can use Astro alerts instead of or in addition to Airflow callbacks. See [When to use Airflow or Astro alerts for your pipelines on Astro](https://docs.astronomer.io/astro/best-practices/airflow-vs-astro-alerts) for more information.
+On Astro, you can use Astro alerts instead of or in addition to Airflow callbacks. See [When to use Airflow or Astro alerts for your pipelines on Astro](https://www.astronomer.io/docs/astro/best-practices/airflow-vs-astro-alerts) for more information.
 
 :::
 
@@ -81,7 +81,7 @@ Other DAG parameters include:
 | `default_args`            | A dictionary of parameters that are applied to all tasks in the DAG. These parameters are passed directly to each operator, so they must be parameters that are part of the [`BaseOperator`](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html). You can override default arguments at the task level. |
 | `params`                  | A dictionary of DAG-level Airflow params. See [Airflow params](airflow-params.md) for more information. |
 | `dagrun_timeout`          | The time it takes for a DAG run of this DAG to time out and be marked as `failed`. |
-| `access_control`          | Specify optional permissions for roles specific to an individual DAG. See [DAG-level permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#dag-level-permissions). This cannot be implemented on Astro. Astronomer recommends customers to use [Astro's RBAC features](https://docs.astronomer.io/astro/user-permissions) instead. |
+| `access_control`          | Specify optional permissions for roles specific to an individual DAG. See [DAG-level permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#dag-level-permissions). This cannot be implemented on Astro. Astronomer recommends customers to use [Astro's RBAC features](https://www.astronomer.io/docs/astro/user-permissions) instead. |
 | `is_paused_upon_creation` | Whether the DAG is paused when it is created. When not set, the Airflow config `core.dags_are_paused_at_creation` is used, which defaults to `True`. |
 | `auto_register`           | Defaults to `True` and can be set to `False` to prevent DAGs using a `with` context from being automatically registered which can be relevant in some advanced dynamic DAG generation use cases. See [Registering dynamic DAGs](https://airflow.apache.org/docs/apache-airflow/stable/howto/dynamic-dag-generation.html#registering-dynamic-dags). |
 | `fail_stop`               |  In Airflow 2.7+ you can set this parameter to `True` to stop DAG execution as soon as one task in this DAG fails. Any tasks that are still running are marked as `failed` and any tasks that have not run yet are marked as `skipped`. Note that you cannot have any [trigger rule](managing-dependencies.md#trigger-rules) other than `all_success` in a DAG with `fail_stop` set to `True`. |

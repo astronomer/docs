@@ -15,9 +15,9 @@ Connection details in the Astro Environment Manager are not visible from the Air
 
 ### Prerequisites
 
-- The latest version of the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli)
+- The latest version of the [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli)
 - Either a Workspace or Deployment with at least one connection [configured through the Astro Environment Manager in the Astro UI](create-and-link-connections.md)
-- A local [Astro Project](https://docs.astronomer.io/astro/cli/develop-project#create-an-astro-project)
+- A local [Astro Project](https://www.astronomer.io/docs/astro/cli/develop-project#create-an-astro-project)
 - Astro Runtime 9.3.0 or greater
 - `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER` user permissions
 - An internet connection

@@ -25,13 +25,13 @@ You can forward Airflow task logs from a Deployment to [Datadog](https://www.dat
 1. Create a new Datadog API key or copy an existing API key. See [API and Application Keys](https://docs.datadoghq.com/account_management/api-app-keys/).
 2. Set the following [environment variable](environment-variables.md) on your Deployment:
 
-    - **Key 1**: `DD_API_KEY`
+    - **Key 1**: `DATADOG_API_KEY`
     - **Value 1**: Your Datadog API key.
 
     - **Key 2**: `ASTRO_DATADOG_TASK_LOGS_ENABLED`
     - **Value 2**: `true`
 
-    Select the **Secret?** checkbox for `DD_API_KEY`. This ensures that your Datadog API key is saved securely and is not available to Workspace users in plain text.
+    Select the **Secret?** checkbox for `DATADOG_API_KEY`. This ensures that your Datadog API key is saved securely and is not available to Workspace users in plain text.
 
   :::info
 
@@ -44,7 +44,7 @@ You can forward Airflow task logs from a Deployment to [Datadog](https://www.dat
 
 1. (Optional) Set the following [environment variable](environment-variables.md) on your Deployment to send your logs to a specific [Datadog site](https://docs.datadoghq.com/getting_started/site/):
 
-    - **Key**: `DD_SITE`
+    - **Key**: `DATADOG_SITE`
     - **Value**: Your Datadog **Site Parameter**. For example, `datadoghq.com`.
 
 2. (Optional) For Astro Runtime 9.2.0 and greater, set the following [environment variable](environment-variables.md) on your Deployment to [add specific tags to your logs](https://docs.datadoghq.com/getting_started/tagging/):
@@ -69,14 +69,14 @@ Astro does not export any [service checks](https://docs.datadoghq.com/integratio
 2. In the Astro UI, select a Workspace and then select an Astro Deployment for which you want to export metrics.
 3. Create a new [environment variable](manage-env-vars.md#using-the-astro-ui) in your Deployment with the Datadog API key from step 1:
 
-   - **Key:** `DD_API_KEY`
+   - **Key:** `DATADOG_API_KEY`
    - **Value:** `<Your-Datadog-API-key>`.
 
    Select the **Secret?** checkbox. This ensures that your Datadog API key is saved securely and is not available to Workspace users in plain text.
 
 4. (Optional) Add the following environment variable if your organization doesn't use the default Datadog site `datadoghq.com`:
 
-   - **Key:** `DD_SITE`
+   - **Key:** `DATADOG_SITE`
    - **Value:** `<Your-Datadog-Site>`
 
 5. (Optional) Add the following environment variables to create [custom Datadog tags](https://docs.datadoghq.com/getting_started/tagging/) associated with your Deployment:

@@ -19,7 +19,7 @@ If you're an Astronomer Software user, you might use the Astronomer CLI to do th
 - Create Astronomer Service Accounts, Users and Deployments
 - Append annotations to your Deployment's Pods
 
-This guide provides steps for installing the CLI, initializing an Astronomer project, and deploying to an Airflow instance on your local machine. For more information on specific CLI workflows and features, read the [Astronomer CLI Reference Guide](https://docs.astronomer.io/astro/cli/reference)
+This guide provides steps for installing the CLI, initializing an Astronomer project, and deploying to an Airflow instance on your local machine. For more information on specific CLI workflows and features, read the [Astronomer CLI Reference Guide](https://www.astronomer.io/docs/astro/cli/reference)
 
 ## Step 1: Install the Astronomer CLI
 

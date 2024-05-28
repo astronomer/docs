@@ -22,10 +22,10 @@ In this guide, you'll learn the basics of Airflow logging, including:
 
 You'll also use example code to:
 
-- Send logs to an S3 bucket using the [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- Send logs to an S3 bucket using the [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started).
 - Add multiple handlers to the Airflow task logger.
 
-In addition to standard logging, Airflow provides observability features that you can use to collect metrics, trigger callback functions with task events, monitor Airflow health status, and track errors and user activity. For more information about the monitoring options in Airflow, see [Logging & Monitoring](https://airflow.apache.org/docs/apache-airflow/stable/logging-monitoring/index.html). Astro builds on these features, providing more detailed metrics about how your tasks run and use resources in your cloud. To learn more, see [Deployment metrics](https://docs.astronomer.io/astro/deployment-metrics).
+In addition to standard logging, Airflow provides observability features that you can use to collect metrics, trigger callback functions with task events, monitor Airflow health status, and track errors and user activity. For more information about the monitoring options in Airflow, see [Logging & Monitoring](https://airflow.apache.org/docs/apache-airflow/stable/logging-monitoring/index.html). Astro builds on these features, providing more detailed metrics about how your tasks run and use resources in your cloud. To learn more, see [Deployment metrics](https://www.astronomer.io/docs/astro/deployment-metrics).
 
 ## Assumed knowledge
 
@@ -81,12 +81,12 @@ If you run Airflow locally, logging information is accessible in the following l
 
 - Scheduler: Logs are printed to the console and accessible in `$AIRFLOW_HOME/logs/scheduler`.
 - Webserver and Triggerer: Logs are printed to the console. Individual triggers' log messages can be found in the logs of tasks that use deferrable operators.
-- Task: Logs can be viewed in the Airflow UI or at `$AIRFLOW_HOME/logs/`. To view task logs directly in your terminal, run `astro dev run tasks test <dag_id> <task_id>` with the [Astro CLI](https://docs.astronomer.io/astro/cli/overview) or `airflow tasks test <dag_id> <task_id>` if you are running Airflow with other tools.
+- Task: Logs can be viewed in the Airflow UI or at `$AIRFLOW_HOME/logs/`. To view task logs directly in your terminal, run `astro dev run tasks test <dag_id> <task_id>` with the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview) or `airflow tasks test <dag_id> <task_id>` if you are running Airflow with other tools.
 - Metadata database: Logs are handled differently depending on which database you use.
 
 ### Docker Airflow environment
 
-If you run Airflow in Docker using the [Astro CLI](https://docs.astronomer.io/software/install-cli) or by [following the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html), you can find the logs for each Airflow component in the following locations:
+If you run Airflow in Docker using the [Astro CLI](https://www.astronomer.io/docs/software/install-cli) or by [following the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html), you can find the logs for each Airflow component in the following locations:
 
 - Scheduler: Logs are in `/usr/local/airflow/logs/scheduler` within the scheduler Docker container by default. To enter a docker container in a bash session, run `docker exec -it <container_id> /bin/bash`.
 - Webserver: Logs appear in the console by default. You can access the logs by running `docker logs <webserver_container_id>`.
@@ -96,7 +96,7 @@ If you run Airflow in Docker using the [Astro CLI](https://docs.astronomer.io/so
 
 ![Logs in Grid View](/img/guides/logging-task_logs_grid_view.gif)
 
-The Astro CLI includes a command to show webserver, scheduler, triggerer and Celery worker logs from the local Airflow environment. For more information, see [astro dev logs](https://docs.astronomer.io/astro/cli/astro-dev-logs).
+The Astro CLI includes a command to show webserver, scheduler, triggerer and Celery worker logs from the local Airflow environment. For more information, see [astro dev logs](https://www.astronomer.io/docs/astro/cli/astro-dev-logs).
 
 :::info
 
