@@ -105,7 +105,7 @@ If you are using lineage prior to Airflow 2.7, there are a few additional limita
 
 :::warning
 
-Running OpenLineage with Airflow On Astro prior to Astro Runtime 9 (Airflow 2.7) is not recommended. Prior to Airflow 2.7, OpenLineage could cause tasks to get stuck in the running status indefinitely.
+Running OpenLineage with Airflow on Astro prior to Astro Runtime 9 (Airflow 2.7) is not recommended. Prior to Airflow 2.7, OpenLineage could cause tasks to get stuck in the running status indefinitely.
 
 :::
 
