@@ -54,7 +54,7 @@ The following steps describe the different actions that the script performs to d
 
     ```bash
 
-   docker build -t imageRepository:imageTag --platform=linux/amd64 $AIRFLOW_PROJECT_PATH
+   docker build -t imageRepository:imageTag --platform=linux/amd64 $ASTRO_PROJECT_PATH
 
     ```
 
