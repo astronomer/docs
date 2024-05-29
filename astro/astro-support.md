@@ -82,7 +82,7 @@ To add a teammate to an existing support request, cc them when replying on the s
 
 To help Astronomer Support respond effectively to your support request, priorities are determined automatically by Astronomer. You can read more about ticket priorities and their SLAs [here](https://www.astronomer.io/legal/technical-support-success-packages/).
 
-Here are the four ticket priorities with descriptions and examples for each:
+The following sections show the four ticket priorities with examples and descriptions for each:
 
 ### P1: Critical impact
 
