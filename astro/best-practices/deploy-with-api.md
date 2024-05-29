@@ -37,8 +37,7 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
 
 The following steps describe the different actions that the script performs to deploy a complete Astro project.
 
-1. Create the `Deploy` API call. This action creates an object that represents the intent to deploy code to a Deployment.
-    - Use the `IMAGE_AND_DAG` type.
+1. Create the `Deploy` API call using the `IMAGE_AND_DAG` type. This action creates an object that represents the intent to deploy code to a Deployment.
 
 2. After you create the `deploy`, retrieve the `id`, `imageRepository`, `imageTag`, and `dagsUploadURL` values, using the [`GET` deploy API call](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/get-deploy), which you need in the following steps.
 
@@ -54,7 +53,7 @@ The following steps describe the different actions that the script performs to d
 
     ```bash
 
-   docker build -t imageRepository:imageTag --platform=linux/amd64 $ASTRO_PROJECT_PATH
+   docker build -t imageRepository:imageTag --platform=linux/amd64 $<astro_project_path>
 
     ```
 
@@ -94,7 +93,7 @@ The following steps describe the different actions that the script performs to d
     - It might take a few minutes for the changes to update in your Deployment.
 
 <details>
-  <summary><strong>Complete deploy script</strong></summary>
+  <summary><strong>Complete project deploy script</strong></summary>
 
     ```bash
 
@@ -171,11 +170,11 @@ The following steps describe the different actions that the script performs to d
 
 ### DAG-only deploy
 
-1. Create the `Deploy` API call. This action creates an object that represents the intent to deploy code to a Deployment.
-    - Use the `DAG_ONLY` type
-    - Retrieve the `id` and `dagsUploadURL`, which you need in the following steps.
+1. Create the `Deploy` API call using the `DAG_ONLY` type. This action creates an object that represents the intent to deploy code to a Deployment.
 
-2. Create a tar file of the DAGs folder, where you specify the path where you want to create the tar file.
+2. After you create the `deploy`, retrieve the `id` and `dagsUploadURL` values using the [`GET` deploy API call](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/get-deploy), which you need in the following steps.
+
+3. Create a tar file of the DAGs folder, where you specify the path where you want to create the tar file.
 
     ```bash
 
@@ -189,7 +188,7 @@ The following steps describe the different actions that the script performs to d
 
     :::
 
-3. Upload the tar file by making a `PUT` call using the `dagsUploadURL` that you retrieved in Step 1. In this call, it is mandatory to pass the following. Then, save the `versionID` from the response header.
+4. Upload the tar file by making a `PUT` call using the `dagsUploadURL` that you retrieved in Step 1. In this call, it is mandatory to pass the following. Then, save the `versionID` from the response header.
 
     ```bash
 
@@ -197,7 +196,7 @@ The following steps describe the different actions that the script performs to d
 
     ```
 
-4. Finalize the deploy
+5. Finalize the deploy. See [Finalize the deploy](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about the API request.
 
     - On `Success`, the deploy process has completed. Pass `versionID` in the requested body.
     - It might take a few minutes for the changes to update in your Deployment.
@@ -269,27 +268,27 @@ The following steps describe the different actions that the script performs to d
 
 ### Image-only deploy
 
-1. Create the `Deploy` API call. This action creates an object that represents the intent to deploy code to a Deployment.
-    - Use the `IMAGE` type
-    - Retrieve the `id`, `imageRepository`, and `imageTag`, which you need in the following steps.
+1. Create the `Deploy` API call using the `IMAGE` type. This action creates an object that represents the intent to deploy code to a Deployment.
 
-2. Log in to Docker with the `ASTRO_API_TOKEN` that you created.
+2. After you create the `deploy`, retrieve the `id`, `imageRepository`, and `imageTag` values using the [`GET` deploy API call](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/get-deploy), which you need in the following steps.
 
-    ```bash
-
-    docker login images.astronomer.cloud -u cli -p $ASTRO_API_TOKEN
-
-    ```
-
-3. Build the Docker image using the `imageRepository`, `imageTag`, and `ASTRO_PROJECT_PATH` values that you retrieved earlier.
+3. Log in to Docker with the Astro API token that you created.
 
     ```bash
 
-   docker build -t imageRepository:imageTag --platform=linux/amd64 $ASTRO_PROJECT_PATH
+    docker login images.astronomer.cloud -u cli -p <your_astro_api_token>
 
     ```
 
-4. Push the Docker image using the `imageRepository` and `imageTag` values that you retrieved earlier.
+4. Build the image using the `imageRepository`, `imageTag`, and Astro project path values that you retrieved earlier.
+
+    ```bash
+
+   docker build -t imageRepository:imageTag --platform=linux/amd64 $<astro_project_path>
+
+    ```
+
+5. Push the image using the `imageRepository` and `imageTag` values that you retrieved earlier.
 
     ```bash
 
@@ -297,7 +296,7 @@ The following steps describe the different actions that the script performs to d
 
     ```
 
-5. Finalize the deploy
+6. Finalize the deploy. See [Finalize the deploy](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about the API request.
 
     - On `Success`, the deploy process has completed. Pass the requested body as empty, `({})`.
     - It might take a few minutes for the changes to update in your Deployment.
@@ -362,26 +361,26 @@ You can only use complete project deploys if you have DAG-only deploys disabled.
 
 ### Project deploy
 
-1. Create the `Deploy` API call. This action creates an object that represents the intent to deploy code to a Deployment.
-    - Use the `IMAGE_AND_DAG` type
-    - Retrieve the `id`, `imageRepository`, and `imageTag`, which you need in the following steps.
+1. Create the `Deploy` API call using the `IMAGE_AND_DAG` type. This action creates an object that represents the intent to deploy code to a Deployment.
 
-2. Log in to Docker
+2. After you create the `deploy`, retrieve the `id`, `imageRepository`, and `imageTag` values using the [`GET` deploy API call](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/get-deploy), which you need in the following steps.
 
-    ```bash
-
-    docker login images.astronomer.cloud -u cli -p $ASTRO_API_TOKEN
-
-    ```
-
-3. Build the Docker image using the `imageRepository`, `imageTag`, and `ASTRO_PROJECT_PATH` values that you retrieved earlier.
+3. Log in to Docker
 
     ```bash
 
-    docker build -t imageRepository:imageTag --platform=linux/amd64 $ASTRO_PROJECT_PATH
+    docker login images.astronomer.cloud -u cli -p <your_astro_api_token>
 
     ```
-4. Push the Docker image using the `imageRepository` and `imageTag` values that you retrieved earlier.
+
+4. Build the Docker image using the `imageRepository`, `imageTag`, and Astro project path values that you retrieved earlier.
+
+    ```bash
+
+    docker build -t imageRepository:imageTag --platform=linux/amd64 <astro_project_path>
+
+    ```
+5. Push the Docker image using the `imageRepository` and `imageTag` values that you retrieved earlier.
 
     ```bash
 
@@ -389,13 +388,13 @@ You can only use complete project deploys if you have DAG-only deploys disabled.
 
     ```
 
-5. Finalize the deploy
+6. Finalize the deploy. See [Finalize the deploy](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about the API request.
 
     - On `Success`, the deploy process has completed. Pass the requested body as empty, `({})`.
     - It might take a few minutes for the changes to update in your Deployment.
 
 <details>
-  <summary><strong>Complete code deploy script</strong></summary>
+  <summary><strong>Complete project deploy script</strong></summary>
 
   ```bash
     #!/bin/bash
@@ -458,7 +457,7 @@ The following code example shows the steps you can use to create a bash script t
 
 1. Determine whether DAG files have been changed. If only DAGs have changed, then the script initiates a DAG-only deploy.
 
-2. Create a`Deploy` with the `CREATE` call.
+2. Create a`Deploy` with the `CREATE` API call.
 
 3. If only DAGs have changed, the script initiates a DAGs-only deploy. If more files have been changed, the script builds and deploys the project image, and then completes a DAG-only deploy.
 
