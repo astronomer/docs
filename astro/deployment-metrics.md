@@ -131,6 +131,6 @@ The **Worker CPU** and **Worker Memory** charts in the Astro UI provide visibili
 
 ## See also
 
-- [Organization reporting dashboard](reporting-dashboard.md)
+- [View Organization dashboards](organization-dashboard.md)
 - [Export task logs and metrics to Datadog](export-datadog.md)
 - [Export task logs to AWS Cloudwatch](export-cloudwatch.md)

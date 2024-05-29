@@ -387,9 +387,7 @@ To use a custom Oauth authorization code flow:
               enabled: true
               clientId: ffhsdf78f734h2fsd
               clientSecret: FSDFSLDFJELLGJLSDFGJL42353425
-              # URL works only when IdP group imports are disabled. To import IdP groups from Okta to Software,
-              # use "https://<MYIdP>.okta.com/oauth2/default/.well-known/openid-configuration" instead
-              discoveryUrl: "https://<MYIdP>.okta.com/.well-known/openid-configuration"
+              discoveryUrl: "https://<your-idp-url>.okta.com/oauth2/default/.well-known/openid-configuration"
               authUrlParams:
                 audience: "GYHWEYHTHR443fFEW"
     ```
@@ -504,7 +502,7 @@ SCIM works because the IdP pushes updates about users and teams to Astronomer So
             secretKey: "okta_provisioning_account_secret"
     ```
 
-14. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+14. Push the configuration change. See [Apply a config change](https://www.astronomer.io/docs/software/apply-platform-config).
 
 See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm?cshid=ext_Apps_App_Integration_Wizard-scim) for more information about configuring SCIM within Okta.
 
@@ -543,7 +541,7 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
             secretKey: "azure_provisioning_secret"
     ```
 
-3. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+3. Push the configuration change. See [Apply a config change](https://www.astronomer.io/docs/software/apply-platform-config).
 
 4. Log in to the [Microsoft Entra ID portal](https://aad.portal.azure.com/). 
    

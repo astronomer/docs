@@ -74,18 +74,25 @@ Functionality is added to a plugin by adding components to the class which defin
 
 Other types of plugin components not covered in this guide include:
 
-- `timetables` offer the option to register custom timetables that define schedules which cannot be expressed in CRON. See the [DAG Schedule DAGs in Airflow guide](https://docs.astronomer.io/learn/scheduling-in-airflow#timetables) for more information and a code example.
-- `executors` add the possibility to use a custom [executor](https://docs.astronomer.io/learn/airflow-executors-explained) in your Airflow instance.
+- `timetables` offer the option to register custom timetables that define schedules which cannot be expressed in CRON. See the [DAG Schedule DAGs in Airflow guide](https://www.astronomer.io/docs/learn/scheduling-in-airflow#timetables) for more information and a code example.
+- `executors` add the possibility to use a custom [executor](https://www.astronomer.io/docs/learn/airflow-executors-explained) in your Airflow instance.
 
 :::info
 
-Before Airflow 2.0 custom operators and hooks were added as plugins. This pattern has been deprecated and [custom operators and hooks](https://docs.astronomer.io/learn/airflow-importing-custom-hooks-operators) can now be used simply by importing a script located in `include`.
+Before Airflow 2.0 custom operators and hooks were added as plugins. This pattern has been deprecated and [custom operators and hooks](https://www.astronomer.io/docs/learn/airflow-importing-custom-hooks-operators) can now be used simply by importing a script located in `include`.
 
 :::
 
 ### Appbuilder menu items
 
 You can update the menu at the top of the Airflow UI to contain custom tabs with links to external websites. Adding top-level menu items and adding sub-items are both supported. 
+
+For example, the following code creates a plugin that adds two menu items.
+
+- `appbuilder_mitem_toplevel` is a top-level menu button named **Apache** that links to the [Apache homepage](https://www.apache.org/).
+- `appbuilder_mitem_subitem` is a sub-item which is added to the **Docs** menu. It has the name `Astro SDK Docs` and links out to [the documentation for the Astro SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html).
+
+Both additional menu items are added to the `app_builder_menu_items` component of a plugin called `Menu items plugin` which is defined in the `MyMenuItemsPlugin` class. 
 
 ```python
 from airflow.plugins_manager import AirflowPlugin
@@ -111,12 +118,7 @@ class MyMenuItemsPlugin(AirflowPlugin):
     appbuilder_menu_items = [appbuilder_mitem_toplevel, appbuilder_mitem_subitem]
 ```
 
-The code above creates a plugin that adds two menu items.
-
-- `appbuilder_mitem_toplevel` is a top-level menu button named **Apache** that links to the [Apache homepage](https://www.apache.org/).
-- `appbuilder_mitem_subitem` is a sub-item which is added to the **Docs** menu. It has the name `Astro SDK Docs` and links out to [the documentation for the Astro SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html).
-
-Both additional menu items are added to the `app_builder_menu_items` component of a plugin called `Menu items plugin` which is defined in the `MyMenuItemsPlugin` class. The screenshot below shows the additional menu items in the Airflow UI.
+The screenshot below shows the additional menu items in the Airflow UI.
 
 ![Plugins Menu items](/img/guides/plugins_menu_items.png)
 
@@ -146,6 +148,9 @@ You can add a view to render a simple templated HTML file on top of the Airflow 
     from airflow.plugins_manager import AirflowPlugin
     from flask import Blueprint
     from flask_appbuilder import expose, BaseView as AppBuilderBaseView
+    from airflow.configuration import conf
+    # from airflow.www.auth import has_access  # uncomment to use the plugin on Astro
+    # from airflow.security import permissions  # uncomment to use the plugin on Astro
 
     # define a Flask blueprint
     my_blueprint = Blueprint(
@@ -160,12 +165,16 @@ You can add a view to render a simple templated HTML file on top of the Airflow 
         default_view = "test"
 
         @expose("/")
+        # @has_access([(permissions.ACTION_CAN_ACCESS_MENU, "Custom Menu")]) # uncomment to use the plugin on Astro
         def test(self):
             # render the HTML file from the templates directory with content
             return self.render_template("test.html", content="awesome")
 
     # instantiate MyBaseView
     my_view = MyBaseView()
+
+    # get the base URL of the Airflow webserver
+    baseUrl = conf.get("webserver", "base_url")
 
     # define the path to my_view in the Airflow UI
     my_view_package = {
@@ -174,6 +183,7 @@ You can add a view to render a simple templated HTML file on top of the Airflow 
         # define the top-level menu item
         "category": "My Extra View",
         "view": my_view,
+        "href":  str(baseUrl) + "/testview",
     }
 
     # define the plugin class
@@ -194,6 +204,53 @@ This plugin will add a top-level menu item called **My Extra View** which contai
 By clicking on **Test View** you can access the Flask View that was defined as `my_view`. It shows the HTML template (`test.html`) rendered with the provided content.
 
 ![Test View](/img/guides/plugins_test_view.png)
+
+:::info
+
+If you want to use custom menu items in an Airflow environment hosted on Astro, you must make sure to give your plugin the necessary permissions. To do this, use the `@has_access` decorator to give your BaseView method `ACTION_CAN_ACCESS_MENU` permissions.
+
+    ```python
+    from airflow.www.auth import has_access
+    from airflow.security import permissions 
+
+    # ...
+
+    # create a flask appbuilder BaseView
+    class MyBaseView(AppBuilderBaseView):
+        default_view = "test"
+
+        @expose("/")
+        @has_access([(permissions.ACTION_CAN_ACCESS_MENU, "Custom Menu")]) 
+        def test(self):
+            # render the HTML file from the templates directory with content
+            return self.render_template("test.html", content="awesome")
+    ```
+
+Additionally you must make sure that the `baseURL` is correctly set for all new Airflow UI endpoints you are creating. You can import the `baseURL` dynamically from the Airflow configuration file as shown in the previous example and the following code snippet.
+
+    ```python
+    from airflow.configuration import conf
+
+    # ...
+
+    # instantiate MyBaseView
+    my_view = MyBaseView()
+
+    # get the base URL of the Airflow webserver
+    baseUrl = conf.get("webserver", "base_url")
+
+    # define the path to my_view in the Airflow UI
+    my_view_package = {
+        # define the menu sub-item name
+        "name": "Test View",
+        # define the top-level menu item
+        "category": "My Extra View",
+        "view": my_view,
+        "href":  str(baseUrl) + "/testview",
+    }
+    ```
+
+:::
 
 ### Operator extra links
 

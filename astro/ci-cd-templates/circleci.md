@@ -99,7 +99,7 @@ To automate code deploys to a Deployment using CircleCI for a single branch impl
 
 <TabItem value="multibranch">
 
-The following template can be used to create a multiple branch CI/CD pipeline using CircleCI. A multiple branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment. 
+The following template can be used to create a multiple branch CI/CD pipeline using CircleCI. A multiple branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment.
 
 #### Configuration requirements
 
@@ -256,6 +256,14 @@ This CI/CD pipeline deploys your DAGs to Astro when one or more files in your `d
 
 For each Deployment that you use with DAG deploy templates, you must [enable DAG deploys](deploy-dags.md).
 
+:::info
+
+If you stage multiple commits to DAG files and push them all at once to your remote branch, the template only deploys DAG code changes from the most recent commit. It will miss any code changes made in previous commits.
+
+To avoid this, either push commits individually or configure your repository to **Squash commits** for pull requests that merge multiple commits simultaneously.
+
+:::
+
 ### Single branch implementation
 
 To automate code deploys to a Deployment using [CircleCI](https://circleci.com/), complete the following setup in a Git-based repository that hosts an Astro project:
@@ -319,7 +327,7 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
                     - <YOUR-BRANCH-NAME>
     ```
 
-This script checks the diff between your current commit and the HEAD of your branch to which you are pushing the changes to. If the changes are only in `dags` then it executes a `dag-only` deploy. Otherwise, it executes an image-based deploy. Make sure to customize the script to use your specific branch and context. 
+This script checks the diff between your current commit and the HEAD of your branch to which you are pushing the changes to. If the changes are only in `dags` then it executes a `dag-only` deploy. Otherwise, it executes an image-based deploy. Make sure to customize the script to use your specific branch and context.
 
 You can customize this script to work for multiple branches as shown in the [image-based multi-branch deploy template](circleci?tab=multibranch#image-deploy-templates) by creating separate `job` and `workflow` for each branch.
 

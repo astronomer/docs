@@ -12,7 +12,7 @@ This guide walks you through the process of creating and configuring an Airflow 
 ## Prerequisites
 
 To create an Airflow Deployment, you'll need:
-* [The Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) installed.
+* [The Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli) installed.
 * An Astronomer platform at `app.BASEDOMAIN`.
 * An Astronomer [Workspace](manage-workspaces.md).
 
@@ -53,7 +53,7 @@ Astronomer supports 3 executors:
 
 Though it largely depends on your use case, we recommend the Local executor for development environments and the Celery or Kubernetes executors for production environments operating at scale.
 
-For a detailed breakdown of each executor, see [Airflow executors explained](https://docs.astronomer.io/learn/airflow-executors-explained).
+For a detailed breakdown of each executor, see [Airflow executors explained](https://www.astronomer.io/docs/learn/airflow-executors-explained).
 
 ## Scale core resources
 

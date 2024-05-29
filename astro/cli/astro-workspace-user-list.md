@@ -71,8 +71,8 @@ astro workspace user list
 
 ## Related documentation
 
-- [Manage Workspaces and Deployments on Astronomer](https://docs.astronomer.io/software/manage-workspaces)
-- [Manage User Permissions on Astronomer](https://docs.astronomer.io/software/workspace-permissions)
+- [Manage Workspaces and Deployments on Astronomer](https://www.astronomer.io/docs/software/manage-workspaces)
+- [Manage User Permissions on Astronomer](https://www.astronomer.io/docs/software/workspace-permissions)
 
 </TabItem>
 </Tabs>

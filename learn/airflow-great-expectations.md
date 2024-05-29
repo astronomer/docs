@@ -36,7 +36,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - Access to a SQL database. This tutorial uses a local Postgres instance.
 - (Optional) Local installation of the [`great_expectations` package](https://pypi.org/project/great-expectations/).
 
@@ -165,7 +165,7 @@ The easiest way to use GX with Airflow is to let the GreatExpectationsOperator c
 
 By default, the `GreatExpectationsOperator` pushes a [CheckpointResult object](https://docs.greatexpectations.io/docs/terms/checkpoint/#checkpointresult) to XCom. You can instead  return a json-serializable dictionary by setting the `return_json_dict` parameter to `True`.
 
-If you do not want to use this built-in serialization, you can either enable XCom pickling by setting the environment variable `AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True`, or use a custom serialization method in a [custom XCom backend](https://docs.astronomer.io/learn/xcom-backend-tutorial).
+If you do not want to use this built-in serialization, you can either enable XCom pickling by setting the environment variable `AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True`, or use a custom serialization method in a [custom XCom backend](https://www.astronomer.io/docs/learn/xcom-backend-tutorial).
 
 :::
 

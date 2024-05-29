@@ -32,7 +32,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 To complete this tutorial, you need:
 
 - Two ADF pipelines. If you do not currently have an ADF pipeline in your Azure account and are new to ADF, check out the [ADF quick start docs](https://docs.microsoft.com/en-us/azure/data-factory/quickstart-create-data-factory-portal) for help getting started.
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started).
 
 ## Step 1: Make your ADF pipelines runnable
 

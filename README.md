@@ -1,6 +1,6 @@
 # Astronomer Documentation
 
-This repository contains all of the code and content that powers [documentation](http://docs.astronomer.io) for Astro, Astronomer Software, the Astro CLI, and our open-source learning guides.
+This repository contains all of the code and content that powers [documentation](http://www.astronomer.io/docs) for Astro, Astronomer Software, the Astro CLI, and our open-source learning guides.
 
 Astronomer documentation is built with [Docusaurus](https://docusaurus.io/docs).
 

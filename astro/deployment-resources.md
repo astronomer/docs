@@ -83,13 +83,15 @@ Scheduler resources must be set for each Deployment and are managed separately f
 
 Unlike workers, schedulers do not autoscale. The resources you set for them are the resources you have regardless of usage. For more information about how scheduler configuration affects resources usage, see [Pricing](https://astronomer.io/pricing).
 
-Astronomer Deployments run a single scheduler. You can configure your scheduler to have different amounts of resources based on how many tasks you need to schedule. The following table lists all possible scheduler sizes for Astro Hosted:
+Astronomer Deployments run a single scheduler by default. You can configure your scheduler to have different amounts of resources based on how many tasks you need to schedule. You can also enable [High Availability](deployment-resources.md#enable-high-availability) to run two instances of PGBouncer and the Airflow Scheduler.
 
-| Scheduler size | vCPU | Memory | Ephemeral storage |
-| -------------- | ---- | ------ | ----------------- |
-| Small          | 1    | 2G     | 5Gi               |
-| Medium         | 2    | 4G     | 5Gi               |
-| Large          | 4    | 8G     | 5Gi              |
+The following table lists all possible scheduler sizes for Astro Hosted:
+
+| Scheduler size          | vCPU | Memory | Ephemeral storage |
+| ----------------------- | ---- | ------ | ----------------- |
+| Small (Up to ~50 DAGs)  | 1    | 2G     | 5Gi               |
+| Medium (Up to ~250 DAGs)| 2    | 4G     | 5Gi               |
+| Large (Up to ~1000 DAGs)| 4    | 8G     | 5Gi               |
 
 ### Update scheduler size
 
@@ -124,7 +126,12 @@ To configure the scheduler on an [Astro Hybrid](hybrid-overview.md) Deployment:
 
 ## Enable high availability
 
-By default, the Pods running your Deployment's Airflow components are distributed across multiple nodes. When you enable high availability, your Deployment runs two instances of [PgBouncer](https://www.pgbouncer.org/) and two instances of the Airflow Scheduler across different nodes. However, Astro makes a best effort to use different availability zones for your PGBouncer and Scheduler, which means it is possible but unlikely that they are both located in the same availability zone. This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node or availability zone.
+By default, the Pods running your Deployment's Airflow components are distributed across multiple nodes. When you enable high availability, Astro re-configures the Deployment to be more resilient. This includes:
+
+- Running nodes in different availability zones.
+- Running two schedulers so that at least one is always available.
+
+This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node or availability zone.
 
 Because this setting results in more resource usage, it can increase the cost of your Deployment. See [Pricing](https://astronomer.io/pricing).
 
@@ -172,7 +179,7 @@ You can hibernate a Deployment only if you enabled **Development Mode** when you
 
 Before you create a hibernation schedule for a Deployment, consider the following constraints:
 
-- The Deployment must have the **Development Mode** setting turned on. This setting can only be configured when you create a Deployment.
+- The Deployment must have the **Development Mode** setting turned on. This setting can be turned on only when you create a Deployment.
 - The **High Availability** feature is not supported. A Deployment with a hibernation schedule cannot be highly available.
 - The **Small Scheduler** (1 vCPU, 2 GiB RAM) is the only scheduler size supported.
 - Deployments with hibernation schedules are not required to meet the uptime SLAs of standard production Deployments.

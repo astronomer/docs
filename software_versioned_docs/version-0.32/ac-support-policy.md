@@ -21,7 +21,7 @@ This document provides information on the following:
 - Which versions of AC are currently available
 - The maintenance schedule and end-of-maintenance date for all versions
 
-For guidelines on how to upgrade, read [Upgrade Apache Airflow on Astronomer](manage-airflow-versions.md). For information about Astro Runtime's support policy, see [Runtime release and lifecycle policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy).
+For guidelines on how to upgrade, read [Upgrade Apache Airflow on Astronomer](manage-airflow-versions.md). For information about Astro Runtime's support policy, see [Runtime release and lifecycle policy](https://www.astronomer.io/docs/astro/runtime-version-lifecycle-policy).
 
 ## Release channels
 

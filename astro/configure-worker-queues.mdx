@@ -49,7 +49,7 @@ You can configure each worker queue on Astro with the following settings:
 - **Name:** The name of your worker queue. Use this name to assign tasks to the worker queue in your DAG code. Worker queue names must consist only of lowercase letters and hyphens. For example, `machine-learning-tasks` or `short-running-tasks` or `high-cpu`.
 - **Concurrency:** The maximum number of tasks that a single worker can run at a time. If the number of queued and running tasks exceeds this number, a new worker is added to run the remaining tasks. This value is equivalent to [worker concurrency](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) in Apache Airflow. The default for your worker type is suitable for most use cases.
 - **Min # Workers / Max # Workers**: The minimum and maximum number of workers that can run at a time. The number of workers autoscales based on **Concurrency** and the current number of tasks in a `queued` or `running` state.
-- **Worker Type:** The size of workers in the worker queue, for example A5 or A20. A worker’s total available CPU, memory, and storage is defined by its worker size. For more information, see the following section on hosted worker types.
+- **Worker Type:** The size of workers in the worker queue, for example A5 or A20. A worker's total available CPU, memory, and storage is defined by its worker size. For more information, see the following section on hosted worker types.
 
 ### Hosted worker types
 
@@ -118,7 +118,7 @@ By default, all tasks run in the default worker queue. To run tasks on a differe
 
 In your DAG code, add a `queue='<worker-queue-name>'` argument to the definition of the task. If a task is assigned to a queue that does not exist or is not referenced properly, the task might remain in a `queued` state and fail to execute. Make sure that the name of the queue in your DAG code matches the name of the queue in the Astro UI.
 
-Astronomer recommends using Apache Airflow's [Taskflow API](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/taskflow.html) to define your task argument. The Taskflow API is feature in Airflow 2 that includes a task [decorator](lhttps://docs.astronomer.io/learn/airflow-decorators) and makes DAGs easier to write. In the following examples, all instances of the task will run in the `machine-learning-tasks` queue. Choose an example based on whether or not you use the Taskflow API.
+Astronomer recommends using Apache Airflow's [Taskflow API](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/taskflow.html) to define your task argument. The Taskflow API is feature in Airflow 2 that includes a task [decorator](lhttps://www.astronomer.io/docs/learn/airflow-decorators) and makes DAGs easier to write. In the following examples, all instances of the task will run in the `machine-learning-tasks` queue. Choose an example based on whether or not you use the Taskflow API.
 
 <Tabs
     defaultValue="classicoperator"
@@ -189,7 +189,7 @@ If you need to change the worker type of an existing worker queue, Astronomer re
 
 If you see tasks getting stuck, it might be because the worker queue configuration doesn't align with the Airflow Pools, a component that allows you to control execution parallelism. Make sure to update your Airflow Pools to match the changes in potential maximum task parallelism caused by changes to the worker queue.
 
-For more information on limited parallelism, see [Airflow Pools](https://docs.astronomer.io/learn/airflow-pools).
+For more information on limited parallelism, see [Airflow Pools](https://www.astronomer.io/docs/learn/airflow-pools).
 
 :::
 

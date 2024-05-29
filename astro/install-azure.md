@@ -5,7 +5,7 @@ description: "Learn how to install Astro from the Azure marketplace, which is re
 id: install-azure
 ---
 
-[Astro](https://docs.astronomer.io/astro) is a managed service for data orchestration that is built for the cloud and powered by Apache Airflow. Your Airflow infrastructure is managed entirely by Astronomer, enabling you to shift your focus from infrastructure to data.
+[Astro](https://www.astronomer.io/docs/astro) is a managed service for data orchestration that is built for the cloud and powered by Apache Airflow. Your Airflow infrastructure is managed entirely by Astronomer, enabling you to shift your focus from infrastructure to data.
 
 If your company uses Azure or already manages applications using [Azure Native ISV Services](https://learn.microsoft.com/en-us/azure/partner-solutions/partners), Astronomer recommends installing and accessing Astro through the Azure Marketplace. When you install Astro as an Azure Native ISV Service, you can manage resource usage and billing alongside your existing Azure applications. Additionally, the Azure Native ISV Service is already integrated with Microsoft Entra ID, so you can add users from your team to Astro without any additional single sign-on (SSO) configuration.
 
@@ -50,7 +50,7 @@ An _Organization_ is the highest management level on Astro. An Organization cont
     
     ![The Azure SSO URL and the 'copy to clipboard' button](/img/docs/azure-sso.png)
     
-    Share this URL with anyone at your company who needs to access your newly created Organization. Any users that access Astro with this URL will automatically be added to your Organization as an Organization Member. You can add them to your Workspace from the Astro UI so they can start deploying code and running DAGs. See [Manage users in your Astro Workspace](https://docs.astronomer.io/astro/manage-workspace-users).
+    Share this URL with anyone at your company who needs to access your newly created Organization. Any users that access Astro with this URL will automatically be added to your Organization as an Organization Member. You can add them to your Workspace from the Astro UI so they can start deploying code and running DAGs. See [Manage users in your Astro Workspace](https://www.astronomer.io/docs/astro/manage-workspace-users).
 
     :::info 
 
@@ -67,7 +67,7 @@ An _Organization_ is the highest management level on Astro. An Organization cont
     :::
     
 2. Click **Go to Astro**. You will be redirected and logged in to the Astro UI, which is Astro’s primary interface for managing your Airflow environments. 
-3. Follow the [Astro quickstart](https://docs.astronomer.io/astro/first-dag-cli) to run your first DAG on Astro.
+3. Follow the [Astro quickstart](https://www.astronomer.io/docs/astro/first-dag-cli) to run your first DAG on Astro.
 
 ## Install Astro from the Azure Marketplace using a personal email
 
