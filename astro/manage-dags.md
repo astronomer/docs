@@ -17,13 +17,15 @@ To access the Airflow UI for your Deployment in the Astro UI:
 1. In the Astro UI, open your Deployment.
 2. Click **Open Airflow**.
 
-To access a Deployment's Airflow UI from the Astro CLI, run the following command:
+To access a Deployment's Airflow UI from the Astro CLI: 
 
-```sh
-astro deployment inspect -n <deployment-name> -k metadata.webserver_url
-```
+1. Run the following command to retrieve the URL for the Deployment's Airflow UI:
 
-This command returns the URL to access your Deployment's webserver. Copy the URL into a web browser and hit enter to directly open the Airflow UI for your Deployment.
+    ```sh
+    astro deployment inspect -n <deployment-name> -k metadata.webserver_url
+    ```
+
+2. Copy the URL into a web browser and hit enter to directly open the Airflow UI for your Deployment.
 
 ## Manage DAGs from the Astro UI
 
