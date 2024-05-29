@@ -29,9 +29,9 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Additional improvements
 
-- Added a centralized reference page with all OSS provider package versions listed for each Astro Runtime version. See [Provider package reference](https://www.astronomer.io/docs/astro/runtime-provider-reference)
 - The default resources for the Kubernetes executor and KubernetesPodOperator Pods are now `0.25Gi` instead of `10Gi`. You can still customize the resource allocation for Kubernetes pods depending on your needs. <!--https://github.com/astronomer/astro/pull/21215-->
 - Dedicated clusters are now available only to [**Team**](https://www.astronomer.io/pricing/) tier customers and above. <!--https://github.com/astronomer/astro/pull/21383-->
+- Added a centralized docs reference page with all OSS provider package versions listed for each Astro Runtime version. See [Provider package reference](https://www.astronomer.io/docs/astro/runtime-provider-reference) docs.
 
 ### Bug fixes
 
