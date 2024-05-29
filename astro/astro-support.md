@@ -84,7 +84,7 @@ To help Astronomer Support respond effectively to your support request, prioriti
 
 Here are the four ticket priorities with descriptions and examples for each:
 
-### **P1:** Critical impact
+### P1: Critical impact
 
 A Deployment is completely unavailable, or a DAG that was previously working in production is no longer working.
 
