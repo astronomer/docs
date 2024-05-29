@@ -140,6 +140,9 @@ Reasons for escalation include:
 * The ticket is taking much longer than expected to resolve.
 * Multiple attempts to solve the issue have failed.
 * The urgency of the ticket has increased substantially.
+
+When an escalation request is made, the on-call shift manager will be alerted to the ticket and will evaluate the escalation request. The on-call shift manager will either assume ownership of the ticket or ensure meaningful and timely progress is made on the ticket.
+
 ## Book office hours
 
 If you don't require break-fix support, Astronomer recommends scheduling a meeting with the Astronomer Data Engineering team during office hours. In an office hours meeting, you can ask questions, make feature requests, or get expert advice for your data pipelines.
