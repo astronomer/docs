@@ -52,13 +52,9 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 - Upgraded some OSS providers' minor and patch versions
 
-### Bug fixes
-
-- Fixed ([CVE-2024-30251](https://nvd.nist.gov/vuln/detail/CVE-2024-30251))
-
 ### Security fixes
 
-- See [Astro Runtime 11.3.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-11-3-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2024-30251
 
 ## Astro Runtime 11.2.0
 
@@ -82,7 +78,7 @@ Due to an [issue related to using custom FAB actions in Airflow plugins](https:/
 
 ### Security fixes
 
-- See [Astro Runtime 11.2.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-11-2-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2024-4340
 
 ## Astro Runtime 11.1.0
 
@@ -140,7 +136,7 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 
 ### Security fixes
 
-- See [Astro Runtime 11.0.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-11-0-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2024-32077
 
 ## Astro Runtime 10.8.0
 
@@ -155,7 +151,12 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 
 ### Security fixes
 
-- See [Astro Runtime 10.8.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-10-8-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2024-4340 
+- https://www.cve.org/CVERecord?id=CVE-2024-1135 
+
+#### Ignored CVEs
+
+- https://www.cve.org/CVERecord?id=CVE-2024-34069 Werkzeug was Ignored ( Can only be fixed from Airflow)
 
 ## Astro Runtime 10.7.0
 
@@ -172,7 +173,7 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 
 ### Security fixes
 
-- See [Astro Runtime 10.7.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-10-7-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2024-31869 
 
 ## Astro Runtime 10.6.0
 
@@ -194,7 +195,7 @@ For more information, see the [Apache Airflow release notes](https://airflow.apa
 
 ### Security fixes
 
-- See [Astro Runtime 10.6.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-10-6-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2022-48174
 
 ## Astro Runtime 10.5.0
 
@@ -212,7 +213,7 @@ For more information, see the [Apache Airflow release notes](https://airflow.apa
 
 ### Security fixes
 
-- See [Astro Runtime 10.5.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-10-5-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2024-28746 
 
 ## Astro Runtime 10.4.0
 
@@ -230,7 +231,10 @@ For more information, see the [Apache Airflow release notes](https://airflow.apa
 
 ### Security fixes
 
-- See [Astro Runtime 10.4.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-10-4-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2024-26130 
+- https://www.cve.org/CVERecord?id=CVE-2024-30251 
+- https://www.cve.org/CVERecord?id=CVE-2024-26280 
+- https://www.cve.org/CVERecord?id=CVE-2024-27906 
 
 ## Astro Runtime 10.3.0
 
@@ -268,7 +272,12 @@ For more information, see the [Apache Airflow release notes](https://airflow.apa
 
 ### Security fixes
 
-- See [Astro Runtime 10.2.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-10-2-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2023-50944
+- https://www.cve.org/CVERecord?id=CVE-2023-50943 
+
+#### Ignored CVEs
+
+ - https://www.cve.org/CVERecord?id=CVE-2024-25128 (does not apply)
 
 ## Astro Runtime 10.1.0
 
@@ -307,7 +316,10 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Security fixes
 
-- See [Astro Runtime 10.0.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-10-0-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2023-48291 
+- https://www.cve.org/CVERecord?id=CVE-2023-47265 
+- https://www.cve.org/CVERecord?id=CVE-2023-49920 
+- https://www.cve.org/CVERecord?id=CVE-2023-50783 
 
 ## Astro Runtime 9.14.0
 
@@ -325,7 +337,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Security fixes
 
-- See [Astro Runtime 9.14.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-9-14-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2024-30251 
 
 ## Astro Runtime 9.13.0
 
@@ -344,7 +356,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Security fixes
 
-- See [Astro Runtime 9.13.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-9-13-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2024-1135 
 
 ## Astro Runtime 9.12.0
 
@@ -361,7 +373,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Security fixes
 
-- See [Astro Runtime 9.12.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-9-12-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2022-48174
 
 ## Astro Runtime 9.11.0
 
@@ -381,7 +393,14 @@ For more information about the major changes in this release, see the [Airflow b
 - Check permissions for ImportError ([#37468](https://github.com/apache/airflow/pull/37468))
 
 ### Security fixes
-- See [Astro Runtime 9.11.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-9-11-0) for more information.
+
+- https://www.cve.org/CVERecord?id=CVE-2024-26130 
+- https://www.cve.org/CVERecord?id=CVE-2024-27906 
+- https://www.cve.org/CVERecord?id=CVE-2024-26280 
+
+#### Ignored CVEs
+
+- https://www.cve.org/CVERecord?id=CVE-2024-34069 Werkzeug was Ignored ( Can only be fixed from Airflow)
 
 ## Astro Runtime 9.10.2
 
@@ -415,7 +434,10 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Security fixes
 
-- See [Astro Runtime 9.10.1 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-9-10-1) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2024-4340 
+
+#### Ignored CVEs
+- https://www.cve.org/CVERecord?id=CVE-2024-25128 (does not apply because we don't use OID)
 
 ## Astro Runtime 9.10.0
 
@@ -444,7 +466,9 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Security fixes
 
-- See [Astro Runtime 9.9.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-9-9-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2023-50944 
+- https://www.cve.org/CVERecord?id=CVE-2023-50943 
+- https://www.cve.org/CVERecord?id=CVE-2023-50944 
 
 ## Astro Runtime 9.8.0
 
@@ -486,7 +510,12 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Security fixes
 
-- See [Astro Runtime 9.7.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-9-7-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2023-50783 
+- https://www.cve.org/CVERecord?id=CVE-2023-49920 
+- https://www.cve.org/CVERecord?id=CVE-2023-47265 
+- https://www.cve.org/CVERecord?id=CVE-2023-49920 
+- https://www.cve.org/CVERecord?id=CVE-2023-50783 
+- https://www.cve.org/CVERecord?id=CVE-2023-48291 
 
 ## Astro Runtime 9.6.0
 
@@ -501,7 +530,8 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Security fixes
 
-- See [Astro Runtime 9.6.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-9-6-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2023-47038
+- https://www.cve.org/CVERecord?id=CVE-2023-44487
 
 ## Astro Runtime 9.5.0
 
@@ -524,7 +554,8 @@ To learn more, see the [Apache Airflow 2.7.3 release notes](https://airflow.apac
 
 ### Security Fixes
 
-- See [Astro Runtime 9.5.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-9-5-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2023-47037 
+- https://www.cve.org/CVERecord?id=CVE-2023-42781 
 
 ## Astro Runtime 9.4.0
 
@@ -576,7 +607,10 @@ To learn more, see the [Apache Airflow 2.7.2 release notes](https://airflow.apac
 
 ### Security fixes
 
-- See [Astro Runtime 9.2.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-9-2-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2023-42780 
+- https://www.cve.org/CVERecord?id=CVE-2023-45348 
+- https://www.cve.org/CVERecord?id=CVE-2023-42792 
+- https://www.cve.org/CVERecord?id=CVE-2023-42663 
 
 ## Astro Runtime 9.1.0
 
@@ -599,9 +633,10 @@ To learn more, see the [Apache Airflow 2.7.1 release notes](https://airflow.apac
 - Upgraded `openlineage-airflow` to 1.1.0. See the [OpenLineage release notes](https://openlineage.io/docs/releases/1_1_0/) for a complete list of changes.
 - Upgraded `astro-sdk-python` to 1.7.0, which adds support for Excel files. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
 
-### Bug fixes
+### Security fixes
 
-- See [Astro Runtime 9.1.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-9-1-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2023-40712 
+- https://www.cve.org/CVERecord?id=CVE-2023-40611 
 
 ## Astro Runtime 9.0.0
 
@@ -653,7 +688,9 @@ The base image for Astro Runtime now uses Python 3.11. If you want to use a diff
 
 ### Security fixes
 
-- See [Astro Runtime 9.0.0 CVE fixes](https://www.astronomer.io/docs/astro/runtime-cve-fixes#astro-runtime-9-0-0) for more information.
+- https://www.cve.org/CVERecord?id=CVE-2023-39441 
+- https://www.cve.org/CVERecord?id=CVE-2023-40273 
+- https://www.cve.org/CVERecord?id=CVE-2023-37379 
 
 ## Astro Runtime 8.10.0
 
