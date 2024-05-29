@@ -460,7 +460,7 @@ Ingress controllers typically need elevated permissions (including a ClusterRole
 
 If you have complex regulatory requirements, you might need to use an internally-approved Ingress controller and disable Astronomer's integrated controller. You'll configure this detail later in the installation.
 
-## Step 4: Choose and configure the base domain {#choose-and-configure-the-base-domain}
+## Step 4: Choose and configure a base domain {#choose-and-configure-the-base-domain}
 
 When you install Astronomer Software, it will create a variety of services that your users will access to manage, monitor, and run Airflow.
 
@@ -481,28 +481,30 @@ Choose a base-domain (e.g. `astronomer.example.com`, `astro-sandbox.example.com`
 
 The base-domain itself does not need to be available and may even point to another service not associated with Astronomer or Airflow. If available, later sections of this document will establish a vanity redirect from `<base-domain>` to `app.<base-domain>`.
 
-When choosing a baseDomain, consider the following :
+When choosing a baseDomain, consider the following:
+
 - The name you choose must be be resolvable by both your users and Kubernetes itself
 - You will need to have or obtain a TLS certificate that is recognized as valid by your users (and if using the Astronomer Software integrated container registry, by Kubernetes itself)
-- Wildcardcard certificates are only valid one-level deep (e.g. an ingress controller using a certificate of `*.example.com` can provide service for `app.example.com` but not `app.astronomer-dev.example.com`).
-- The bottom-level hostnames (e.g. `app`, `registry`, `prometheus`) are fixed and cannot be changed.
-- Most kubernetes clusters refuse to resolve DNS hostnames with more than 5 segments (seperated by the dot character; e.g. `app.astronomer.sandbox.mygroup.example.com` is 6 segments and might be problematic, so choosing a baseDomain of `astronomer-sandbox.mygroup.example.com` instead of `astronomer.sandbox.mygroup.example.com` would be advisable).
-- The base-domain will be visible to end-users
-  - when accessing the Astronomer Software UI (e.g. `https://app.sandbox-astro.example.com`)
-  - when accessing an Airflow Deployment (e.g. `https://deployments.sandbox-astro.example.com/deployment-release-name/airflow`)
-  - when logging into the astro cli (e.g. `astro login sandbox-astro.example.com`)
-  
-:::tip
+- Wildcardcard certificates are only valid on level deep (for example, an ingress controller using a certificate of `*.example.com` can provide service for `app.example.com` but not `app.astronomer-dev.example.com`).
+- The bottom-level hostnames (such as `app`, `registry`, `prometheus`) are fixed and cannot be changed.
+- Most kubernetes clusters refuse to resolve DNS hostnames with more than 5 segments (separated by the dot character; for example, `app.astronomer.sandbox.mygroup.example.com` is 6 segments and might be problematic, so choosing a baseDomain of `astronomer-sandbox.mygroup.example.com` instead of `astronomer.sandbox.mygroup.example.com` is recommended).
 
-OpenShift customers who wish to use OpenShift's integrated ingress controller typically use the hostname of the default OpenShift ingress controller as their base-domain. Doing so results in a slightly-unwieldy user-visible hostname of `app.apps.<OpenShift-domain>` and requires permission to re-configure the route-admission policy for the standard ingress controller to `InterNamespaceAllowed` (covered later in this document). See [Third Party Ingress Controller - Configuration notes for OpenShift](third-party-ingress-controllers#configuration-notes-for-OpenShift) additional infomation and options.
+The base-domain will be visible to end users:
+
+  - When users access the Astronomer Software UI (for example, `https://app.sandbox-astro.example.com`)
+  - When users access an Airflow Deployment (for example, `https://deployments.sandbox-astro.example.com/deployment-release-name/airflow`)
+  - When users authenticate to the Astro CLI (for example, `astro login sandbox-astro.example.com`)
+  
+:::info
+
+If you are installing Astronomer Software on OpenShift and want to use OpenShift's integrated ingress controller, you would typically use the hostname of the default OpenShift ingress controller as your base domain (`app.apps.<OpenShift-domain>`). Doing this requires permission to reconfigure the route-admission policy for the standard ingress controller to `InterNamespaceAllowed`. See [Third Party Ingress Controller - Configuration notes for OpenShift](third-party-ingress-controllers#configuration-notes-for-OpenShift) for additional information and options.
 
 :::
 
 ### Configure the base domain
 
-Locate the `global.baseDomain` key already present in your `values.yaml` file and change it to your base-domain.
+Locate the `global.baseDomain` in your `values.yaml` file and change it to your base domain as shown in the following example:
 
-e.g.
 ```yaml
 global:
   # Base domain for all subdomains exposed through ingress
@@ -511,120 +513,110 @@ global:
 
 ## Step 5: Create the Astronomer Software platform namespace {#create-the-astronomer-software-platform-namespace}
 
-In your Kubernetes cluster, create a [kubernetes namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) (Astronomer generally recommends this namespace be named `astronomer`) to contain the Astronomer Software platform.
+In your Kubernetes cluster, create a [kubernetes namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). Astronomer generally recommends naming this namespace `astronomer`. The namespace will contain the Astronomer Software platform.
 
 ```sh
 kubectl create namespace astronomer
 ```
 
-The contents of this namespace will be used to provision and manage Airflow instances running in other namespaces. Each Airflow will have its own isolated namespace.
+The contents of this namespace will be used to provision and manage Airflow instances running in other namespaces. Each Airflow instance will have its own isolated namespace.
 
+## Step 6: (Optional) Configure third-party Ingress controller DNS {#third-party-ingress-controller-dns-configuration}
 
+Skip this step if you're using Astronomer Software's integrated ingress-controller.
 
-## Step 6: Third-Party Ingress-Controller DNS Configuration {#third-party-ingress-controller-dns-configuration}
-
-Skip this step if using Astronomer Software's integrated ingress-controller as equivalent procedures are performed [later in this procedure](#intigrated-ingress-controller-dns-configuration).
-
-Follow the instructions in this section to create DNS entries pointing to the third-party ingress-controller instance that will provide ingress service to Astronomer Software.
-
-:::info
-
-Third-party ingress-controllers are configured [later in this procedure](#configuring-a-third-party-ingress-controller).
-
-:::
+Follow the instructions in this section to create DNS entries pointing to the third-party ingress controller instance that will provide ingress service to Astronomer Software.
 
 ### Astronomer Software Third-Party DNS Requirements and Record Guidance {#third-party-dns-guidance}
 
-Astronomer Software requires the following domain-names be registered and resolvable within the Kubernetes Cluster and to users of Astronomer And Airflow.
-  - `<base-domain>` (optional but recommended, provides a vanity re-direct to `app.<base-domain>`)
+Astronomer Software requires the following domain-names be registered and resolvable within the Kubernetes cluster and to Astronomer Software users:
+
   - `app.<base-domain>` (required)
   - `deployments.<base-domain>` (required)
   - `houston.<base-domain>` (required)
+  - `prometheus.<base-domain>` (required)
   - `grafana.<base-domain>` (required if using Astronomer Software's integrated grafana)
   - `kibana.<base-domain>` (required if not using external elasticsearch)
-  - `install.<base-domain>` (optional)
-  - `alertmanager.<base-domain>` (required if using Astronomer Software's integrated Alert Manager)
-  - `prometheus.<base-domain>` (required)
   - `registry.<base-domain>` (required if using Astronomer Software's integrated container-registry)
+  - `alertmanager.<base-domain>` (required if using Astronomer Software's integrated Alert Manager)
+  - `<base-domain>` (optional but recommended, provides a vanity re-direct to `app.<base-domain>`)
+  - `install.<base-domain>` (optional)
 
 Astronomer generally recommends that:
-* the `<base-domain>` record be a zone-apex record (typically expressed by using a hostname of `@`) pointing to the IP(s) of the ingress-controller
-* all other records be CNAME records pointing to the `<base-domain>`
 
-For platform administrators unable to register the base-domain, Astronomer recommends that:
-* the `app.<baseDomain>` record be an A record pointing to the IP(s) of the ingress-controller
-* all other records be CNAME records pointing to `app.<base-domain>`
+- The `<base-domain>` record is a zone apex record (typically expressed by using a hostname of `@`) pointing to the IP(s) of the ingress-controller.
+- All other records are CNAME records pointing to the `<base-domain>`.
+
+For platform administrators unable to register the base domain, Astronomer recommends that:
+
+- The `app.<baseDomain>` record is an A record pointing to the IP(s) of the ingress controller.
+- All other records are CNAME records pointing to `app.<base-domain>`.
 
 :::tip
 
-For lower environments, Astronomer recommends a relatively short ttl-value (e.g. 60 seconds) when you first deploy Astronomer so that any errors can be quickly corrected.
+For lower environments, Astronomer recommends a relatively short ttl value, such as 60 seconds, when you first deploy Astronomer so that any errors can be quickly corrected.
 
 :::
 
+### Request ingress information from your ingress administrator {#get-ingress-info}
 
-### Request Ingress Information from your Ingress-Administrator {#get-ingress-info}
+Provide the details in [Astronomer Software Third-Party DNS Requirements and Record Guidance](#third-party-dns-guidance) with your ingress controller administrator, making sure to replace `<base-domain>` with your chosen base domain. Then, request the following information from the administrator:
 
-Provide your Ingress Controller Administrator with the [Astronomer Software Third-Party DNS Requirements and Record Guidance](#third-party-dns-guidance) above (replacing`<base-domain>` with the base-domain from [Choosing the Base Domain](#choosing-the-base-domain)) and guidance and request the following information:
-* what ingress class name you should use (or whether you should leave blank and use the default)
-* what IP address(es) you should use for DNS entries pointing to the ingress controller
-* whether DNS-records will be automatically created in reponse to Ingress rources that we will be created later in the install
-* if DNS-records need to be manually created, and if so who will coordinate their creation and who will create them
+- The ingress class name to use (or whether you should leave blank and use the default)
+- The IP address(es) to use for DNS entries pointing to the ingress controller.
+- Whether DNS records will be automatically created in response to Ingress sources that you will create later in the install.
+- Whether DNS records need to be manually created, and if so who will coordinate their creation and who will create them.
+
+Save this information for later in this setup.
+
 ### Create DNS records pointing to your third-party ingress-controller
 
-Create DNS records pointed to your third-party ingress-controller.
+Create DNS records pointed to your third-party ingress controller per your organization's standard workflows.
 
-### Verify DNS records are pointed to your third-party ingress-controller
+Use `dig <hostname>` or `getent hosts <hostname>` to verify each DNS entry is created and pointing to the IP address of the ingress controller you will be using.
 
-Use `dig <hostname>` or `getent hosts <hostname>` to verify each DNS entry is created and pointing to the IP address of the ingress-controller you will be using.
+## Step 7: Request and validate an Astronomer TLS certificate {#requesting-and-validating-an-astronomer-tls-certificate}
 
-## Step 7: Requesting and Validating an Astronomer TLS Certificate {#requesting-and-validating-an-astronomer-tls-certificate}
+In order to install Astronomer Software, you'll need a TLS certificate that is valid for several domains. One of the domains will be the primary name on the certificate (also known as the common name, or CN), and the rest will be equally-valid supplementary domains known as Subject Alternative Names (SANs).
 
-In order to install Astronomer Software, you'll need a TLS certificate that is valid for several domains - one of which will be the primary name on the certificate (referred to as the Common name or CN) and the rest will be equally-valid supplementary domains known as Subject Alternative Names (SAN)s.
+Astronomer requires a private certificate to be present in the Astronomer Software platform namespace, even if you're using a third-party ingress controller that doesn't otherwise require it.
 
-Astronomer requires a private certificate be present in the Astronomer Platform namespace, even if using a third-party ingress-controller that doesn't otherwise require it.
+### Request an ingress controller TLS Certificate {#request-a-certificate-bundle}
 
-### Requesting an Ingress-Controller TLS Certificate {#request-a-certificate-bundle}
+Request a TLS certificate from your security team for Astronomer Software. In your request, include the following:
 
-Request a TLS certificate and associated items (see below) from your enterprise security team.
-
-When requesting a certificate for Astronomer Software, use the [base domain you chose earlier](#choosing-the-base-domain) as the Common Name (CN). If your Certificate Authority will not issue certificates for the bare base domain, use `app.<base-domain>` as the Common Name instead.
-
-Additionally, you must include *either* a wildcard Subject Alternative Name (SAN) entry of `*.<base-domain>` *or* an explicit SAN entry for each of the following items:
-
-```sh
-app.<base-domain> (omit if already used as the Common Name)
-deployments.<base-domain>
-registry.<base-domain>
-houston.<base-domain>
-grafana.<base-domain>
-kibana.<base-domain>
-install.<base-domain>
-alertmanager.<base-domain>
-prometheus.<base-domain>
-```
+- Your chosen base domain as the Common Name (CN). If your certificate authority will not issue certificates for the bare base domain, use `app.<base-domain>` as the CN instead.
+- *Either* a wildcard Subject Alternative Name (SAN) entry of `*.<base-domain>` *or* an explicit SAN entry for each of the following items:
+    - `app.<base-domain>` (omit if already used as the Common Name)
+    - `deployments.<base-domain>`
+    - `registry.<base-domain>`
+    - `houston.<base-domain>`
+    - `grafana.<base-domain>`
+    - `kibana.<base-domain>`
+    - `install.<base-domain>`
+    - `alertmanager.<base-domain>`
+    - `prometheus.<base-domain>`
+* If you're using the Astronomer Software integrated container registry, specify that that the encryption type of the certificate *must* be RSA.
+* Request that the return format be as follows:
+  - A `key.pem` containing the private key in pem format
+  - **Either** a `full-chain.pem` (containing the public certificate additional certificates required to validate it, in pem format) **or** a bare `cert.pem` and explicit affirmation that there are no intermediate certificates and that the public certificate is the full chain.
+  - **Either** the `private-root-ca.pem` of the the private Certificate Authority used to create your certificate (in pem format) or a statement that the certificate is signed by public Certificate Authority.
 
 :::warning
 
-If using the Astronomer Software integrated container registry, the encryption-type used on your TLS certificate must be *RSA*. Cerbot users must include `-key-type rsa` when requesting certificates, most other solutions generate RSA-keys by default. If using the registry, we will confirm the received certificate encryption type [in later steps](#docker-registry-cert-encryption-restrictions).
+If you're using the Astronomer Software integrated container registry, the encryption type used on your TLS certificate must be *RSA*. Cerbot users must include `-key-type rsa` when requesting certificates. Most other solutions generate RSA keys by default. 
 
 :::
 
-In your request to your Security Team, include:
-* the Common Name and Subject Alternative Name(s) as per above
-* if using the Astronomer Software integrated container registry, the requirement that the encryption type of the certificate *must* be RSA
-* request that the return format be as follows:
-  - a key.pem - containing the private key in pem format
-  - **either** a full-chain.pem (containing the public certificate additional certificates required to validate it, in pem format) **or** a bare `cert.pem` and explicit affirmation that there are no intermediate certificates and that the public certificate is the full-chain
-  - **either** the private-root-ca.pem of the the private Certificate Authority used to create your certificate (in pem format) or a statement that the certificate is signed by public Certificate Authority
+### Validate the received certificate and associated items
 
-### Validating the received certficiate and associated items
-Ensure that you have received each of the follownig three items:
+Ensure that you have received each of the following three items:
 
-* a key.pem - containing the private key in pem format
-* **either** a full-chain.pem (containing the public certificate additional certificates required to validate it, in pem format) **or** a bare `cert.pem` and explicit affirmation that there are no intermediate 
-* **either** the private-root-ca.pem of the the private Certificate Authority used to create your certificate (in pem format) or a statement that the certificate is signed by public Certificate Authority
+- A `key.pem` containing the private key in pem format
+- **Either** a `full-chain.pem` (containing the public certificate additional certificates required to validate it, in pem format) **or** a bare `cert.pem` and explicit affirmation that there are no intermediate certificates and that the public certificate is the full chain.
+- **Either** the `private-root-ca.pem` of the the private Certificate Authority used to create your certificate (in pem format) or a statement that the certificate is signed by public Certificate Authority.
 
-Validate that your enterprise security team generated the correct certificate, run the following command using the `openssl` CLI:
+To validate that your security team generated the correct certificate, run the following command using the `openssl` CLI:
 
 ```sh
 openssl x509 -in  <your-certificate-filepath> -text -noout
@@ -644,21 +636,19 @@ The command generates a report of all certificates. Verify the order of the cert
 - Intermediate (optional)
 - Root
 
-### Additional Validation for the Astronomer Integrated Container Registry{#docker-registry-cert-encryption-restrictions}
-If you will not be storing images in Astronomer's integrated container registry and will instead be storing all container images an [external container registry](#configure-a-private-docker-registry-airflow)) skip this sub-step.
+### (Optional) Additional validation for the Astronomer integrated container registry {#docker-registry-cert-encryption-restrictions}
 
-The Astronomer Software integrated container-registry requires the key used to sign traffic originating from the Astronomer Software platform do so using the RSA encryption method.
+If you will not be storing images in Astronomer's integrated container registry and will instead be storing all container images an [external container registry](#configure-a-private-docker-registry-airflow), you can skip this step.
 
-Follow the following procedure to identify the encryption type associated with the certificate you were provided from your certificate authority.
+The Astronomer Software integrated container registry requires that your private key signs traffic originating from the Astronomer Software platform using the RSA encryption method. Confirm that the key is signing traffic correctly before proceeding to the next step.
 
-Extract the bare public cert (if it was not already included in the files provided by your certificate-authority) from the full-chain certificate file.
+Run the following command to extract the bare public cert (if it was not already included in the files provided by your certificate-authority) from the full-chain certificate file:
 
-e.g.
 ```sh
-openssl crl2pkcs7 -nocrl -certfile full-chain.pem | openssl pkcs7 -print_certs -noout > cert.pem`
+openssl crl2pkcs7 -nocrl -certfile full-chain.pem | openssl pkcs7 -print_certs -noout > cert.pem
 ```
 
-Examine the public certificate and ensure all Signature Alogithm's are listed as `sha1WithRSAEncryption`.
+Examine the public certificate and ensure all Signature Algorithms are listed as `sha1WithRSAEncryption`.
 
 ```sh
 openssl x509 -in cert.pem -text|grep Algorithm 
@@ -667,39 +657,34 @@ openssl x509 -in cert.pem -text|grep Algorithm
     Signature Algorithm: sha1WithRSAEncryption
 ```
 
-If your key is not compatible with the Astronomer Software integrated container registry, request your Certificate Authority [re-issue the credentials](#request-a-certificate-bundle) (re-emphasizing the need for an RSA cert) or [use an external container registry](#configure-a-private-docker-registry-airflow).
+If your key is not compatible with the Astronomer Software integrated container registry, ask your Certificate Authority to [re-issue the credentials](#request-a-certificate-bundle) (re-emphasizing the need for an RSA cert) or [use an external container registry](#configure-a-private-docker-registry-airflow).
 
+## Step 8: Store and configure the ingress controller public TLS full-chain certificate {#storing-and-configuring-the-public-tls-full-chain-certificate}
 
-## Step 8: Storing and configuring the Ingress Controller Public TLS Full-Chain Certificate {#storing-and-configuring-the-public-tls-full-chain-certificate}
-
-### Storing the full-chain TLS certificate in the Astronomre Platform Namespace
-Store the public full-chain certificate in the Astronomer Software Platform Namespace in a `tls`-type Kubernetes secret named `astronomer-tls` using the following command.
-
-If your enterprise-security organization has instructed you that there are no intermediate certifi
+Run the following command to store the public full-chain certificate in the Astronomer Software Platform Namespace in a `tls`-type Kubernetes secret named `astronomer-tls`
 
 ```sh
 kubectl -n <astronomer platform namespace> create secret tls astronomer-tls --cert <fullchain-pem-filepath> --key <your-private-key-filepath>
 ```
+
+If your security team has instructed you that there are no intermediate certificate
 
 E.g.
 ```sh
 kubectl -n astronomer create secret tls astronomer-tls --cert full-chain.pem --key server_private_key.pem
 ```
 
-Naming the secret `astronomer-tls` (no substitutions) is always recommended and is a strict requirement when using a third-party ingress-controller.
+Naming the secret `astronomer-tls` (no substitutions) is always recommended and is a strict requirement when using a third-party ingress controller.
 
-## Step 9: Configuring a third-party ingress-controller {#configuring-a-third-party-ingress-controller}
+## Step 9: Configure a third-party ingress controller {#configuring-a-third-party-ingress-controller}
 
-If using Astronomer Software's integrated ingress controller, skip this step.
+If you're using Astronomer Software's integrated ingress controller, you can skip this step.
 
-Follow procedures at [Third-party Ingress-Controllers](third-party-ingress-controllers), which includes steps to:
-* perform the standard configuration required to a third-party ingress-controller
-* perform any environment-specific configured required for ingress controllers in certain environments (like OpenShift)
-* perform any additional controller-specific required configuration (required for most ingress-controllers)
+Complete the full setup as described in [Third-party Ingress-Controllers](third-party-ingress-controllers.md), which includes steps to configure ingress controllers in specific environment types. When you're done, return to this page and continue to the next step.
 
-## Step 10: Configuring a Private Certificate Authority {#configuring-a-private-certificate-authority}
+## Step 10: Configure a private certificate authority {#configuring-a-private-certificate-authority}
 
-If you received a private certificate for the ingress controller, follow the instructions at [configuring private CAs](#extra-private-cas) to store the Certificate Authority's public root certificate used to create it in a Kubernetes seccret in the astronomer platform namespace and configure Astronomer Software platform components to trust it.
+If you received a private certificate for the ingress controller, follow the instructions at [configuring private CAs](#extra-private-cas) to store the Certificate Authority's public root certificate used to create it in a Kubernetes secret in the astronomer platform namespace and configure Astronomer Software platform components to trust it.
 
 Additionally, repeat the above procedure to configure Astronomer Software platform components to [trust the private CAs](#configuring-private-cas) for each service not already present in `global.privateCaCerts`.
 * email server (unless disabled)
@@ -712,7 +697,7 @@ Configure Astronomer Software platform components to [trust the private CAs](#co
 
 :::info
 
-astro-cli users must configure both their operating system and [Docker Desktop / podman]((#configure-desktop-container-solution-extra-cas) to trust the private-certificate Authority used to create the certificate used by the Astronomer Software ingress-controller and any third-party container registries.
+astro-cli users must configure both their operating system and [Docker Desktop / podman]((#configure-desktop-container-solution-extra-cas) to trust the private-certificate Authority used to create the certificate used by the Astronomer Software ingress controller and any third-party container registries.
 
 :::
 
@@ -1325,9 +1310,9 @@ Astronomer Software includes integrations for several of the most popular OAUTH2
 
 ## Step 26: Pre-creating the Load-Balancer {#creating-the-load-balancer}
 
-If using a third-party ingress-controller or provisioning domain-names for ingress objects using external-dns, skip this step.
+If using a third-party ingress controller or provisioning domain-names for ingress objects using external-dns, skip this step.
 
-Astronomer Software platform components require DNS entries be pointing to a load-balancer associated with your ingress-controller to install and function.
+Astronomer Software platform components require DNS entries be pointing to a load-balancer associated with your ingress controller to install and function.
 
 Perform a preliminary install of Astronomer Software to trigger the load-balancer creation.
 
@@ -1413,9 +1398,9 @@ nginx:
 This optional allows the cluster to request same Load Balancer IP at creation-time. Practically, re-builds immediately following tear-downs almost always can receive the same IP address but re-issuance is not guaranteed and installations will fail if the IP address has been assigned elsewhere or is otherwise not available.  As such, this option should not be used in higher environments unless you have taken special measures to guarantee re-issuence.
 
 
-## Step 27: Configure DNS for the integrated ingress-controller {#intigrated-ingress-controller-dns-configuration}
+## Step 27: Configure DNS for the integrated ingress controller {#intigrated-ingress-controller-dns-configuration}
 
-If using a third-party ingress-controller skip this step - you completed corresponding procedures in a [prior section](#third-party-ingress-controller-dns-configuration)).
+If using a third-party ingress controller skip this step - you completed corresponding procedures in a [prior section](#third-party-ingress-controller-dns-configuration)).
 
 The Astronomer load balancer routes incoming traffic to your NGINX ingress controller. After you install Astronomer Software, the load balancer will spin up in your cloud provider account.
 
