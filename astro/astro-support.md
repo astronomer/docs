@@ -88,9 +88,9 @@ The following sections show the four ticket priorities with examples and descrip
 
 A Deployment is completely unavailable, or a DAG that was previously working in production is no longer working.
 
-P1 tickets are handled with the highest levels of urgency, if Astronomer Support responds on a P1 ticket and subsequently does not hear back for 2 hours, the ticket priority will be automatically changed to P2.
+Astronomer handles P1 tickets with the highest levels of urgency. If Astronomer Support responds to a P1 ticket, and subsequently does not hear back from you for 2 hours, the ticket priority is automatically changed to P2.
 
-Additionally, if the immediate problem is solved but there are follow up investigations ongoing, those follow ups will be conducted in a separate ticket at a lower priority.
+Additionally, if the immediate problem is solved, but follow-up investigations continue, those investigations are conducted in a separate ticket at a lower priority.
 
 ### P2: High impact
 
