@@ -84,13 +84,17 @@ To help Astronomer Support respond effectively to your support request, prioriti
 
 Here are the four ticket priorities with descriptions and examples for each:
 
-**P1:** Critical impact. A Deployment is completely unavailable, or a DAG that was previously working in production is no longer working.
+### **P1:** Critical impact
+
+A Deployment is completely unavailable, or a DAG that was previously working in production is no longer working.
 
 P1 tickets are handled with the highest levels of urgency, if Astronomer Support responds on a P1 ticket and subsequently does not hear back for 2 hours, the ticket priority will be automatically changed to P2.
 
 Additionally, if the immediate problem is solved but there are follow up investigations ongoing, those follow ups will be conducted in a separate ticket at a lower priority.
 
-**P2:** High impact. Ability to use Astro is severely impaired but does not affect critical, previously working pipelines in production.
+### P2: High impact
+
+Ability to use Astro is severely impaired but does not affect critical, previously working pipelines in production.
 
 Examples:
 
@@ -100,7 +104,9 @@ Examples:
 - You need to [modify a Hybrid cluster setting](manage-hybrid-clusters.md) that is required for running tasks, such as adding a new worker instance type.
 - Task logs are missing in the Airflow UI.
 
-**P3:** Medium impact. Service is partially impaired.
+### P3: Medium impact
+
+Service is partially impaired.
 
 Examples:
 
@@ -111,7 +117,9 @@ Examples:
 - You received a log alert on Astronomer.
 - You have lost the ability to use a [Public Preview](https://docs.astronomer.io/astro/feature-previews) feature that does not affect general services.
 
-**P4:** Low impact. Astro is fully usable but you have a question for our team.
+### P4: Low impact
+
+Astro is fully usable but you have a question for our team.
 
 Examples:
 
