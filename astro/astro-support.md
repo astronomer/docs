@@ -94,13 +94,13 @@ Additionally, if the immediate problem is solved but there are follow up investi
 
 ### P2: High impact
 
-Ability to use Astro is severely impaired but does not affect critical, previously working pipelines in production.
+Your ability to use Astro is severely impaired, but does not affect any critical, previously working pipelines in production.
 
 Examples:
 
-- A newly deployed production DAG is not working, even though it ran successfully in a development or test environment.
+- A newly deployed production DAG is not working, even though it worked successfully in a development or test environment.
 - The Airflow UI is unavailable.
-- You are unable to deploy code to your Deployment, but existing DAGs and tasks are running as expected.
+- You can't deploy code to your Deployment, but existing DAGs and tasks run as expected.
 - You need to [modify a Hybrid cluster setting](manage-hybrid-clusters.md) that is required for running tasks, such as adding a new worker instance type.
 - Task logs are missing in the Airflow UI.
 
@@ -110,16 +110,16 @@ Service is partially impaired.
 
 Examples:
 
-- A newly deployed DAG is not working in a development Deployment, even though it ran successfully in a local environment using the Astro CLI.
-- You need to [modify a Hybrid cluster setting](manage-hybrid-clusters.md) that affects your cluster's performance but isn't required to run tasks, such as changing the size of your cluster's database or adding a new VPC peering connection.
-- Astro CLI usage is impaired (for example, there are incompatibility errors between installed packages).
+- A newly deployed DAG is not working in a development Deployment, even though it worked successfully in a local environment using the Astro CLI.
+- You need to [modify a Hybrid cluster setting](manage-hybrid-clusters.md) that affects your cluster's performance, but isn't required to run tasks, such as changing the size of your cluster's database or adding a new VPC peering connection.
+- Astro CLI usage is impaired. For example, there are incompatibility errors between installed packages.
 - There is an Airflow issue that has a code-based solution.
 - You received a log alert on Astronomer.
-- You have lost the ability to use a [Public Preview](https://docs.astronomer.io/astro/feature-previews) feature that does not affect general services.
+- You lost the ability to use a [Public Preview](https://docs.astronomer.io/astro/feature-previews) feature that does not affect general services.
 
 ### P4: Low impact
 
-Astro is fully usable but you have a question for our team.
+Astro is fully usable, but you have a question for the Support team.
 
 Examples:
 
@@ -129,7 +129,7 @@ Examples:
 ## Request an escalation for an existing support ticket
 <BusinessBadge/>
 
-Business and Enterprise customers are eligible to request escalated support for an existing ticket. To request a support escalation, email escalations@astronomer.io with the following information:
+Business and Enterprise customers can request escalated support for an existing ticket. To request a support escalation, email escalations@astronomer.io with the following information:
 
 * Ticket number
 * Issue summary
@@ -140,8 +140,6 @@ Reasons for escalation include:
 * The ticket is taking much longer than expected to resolve.
 * Multiple attempts to solve the issue have failed.
 * The urgency of the ticket has increased substantially.
-
-
 ## Book office hours
 
 If you don't require break-fix support, Astronomer recommends scheduling a meeting with the Astronomer Data Engineering team during office hours. In an office hours meeting, you can ask questions, make feature requests, or get expert advice for your data pipelines.
