@@ -35,7 +35,7 @@ Read below for instructions on how to configure them via all 3 methods.
 
 ### Using `.env` (_Local Only_)
 
-You can use the [Astro CLI](https://docs.astronomer.io/astro/cli/overview) to import environment variables from the `.env` file that was automatically generated when you initialized an Astro project on Astronomer using`$ astro dev init`.
+You can use the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview) to import environment variables from the `.env` file that was automatically generated when you initialized an Astro project on Astronomer using`$ astro dev init`.
 
 To add environment variables locally,
 

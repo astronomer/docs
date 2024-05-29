@@ -60,7 +60,7 @@ Workspace editors can configure a new or existing Airflow Deployment to use a pr
 4. In the **NFS Location** field that appears, enter the location of your volume-based DAG directory as `<IP>:/<path>` (for example: `192.168.0.1:/path/to/your/dags`).
 5. Save your changes.
 
-> **Note:** You can also use the  Astro CLI to configure NFS volumes. To do so, specify the `--nfs-location` flag when running [`astro deployment create`](https://docs.astronomer.io/astro/cli/astro-deployment-create) or [`astro deployment update`](https://docs.astronomer.io/astro/cli/astro-deployment-update).
+> **Note:** You can also use the  Astro CLI to configure NFS volumes. To do so, specify the `--nfs-location` flag when running [`astro deployment create`](https://www.astronomer.io/docs/astro/cli/astro-deployment-create) or [`astro deployment update`](https://www.astronomer.io/docs/astro/cli/astro-deployment-update).
 
 ## Create and mount an Azure file share
 

@@ -46,7 +46,7 @@ Now, when a DAG author deploys to either a production or development Deployment 
 
 Using branch-based Deployments with the Astro Environment Manager allows your team to focus on the parts of Astro that matter most for their roles. For example, using the Astro Environment Manager means that you only need one administrative user to manage connections across multiple Deployments:
 
-- A Workspace Owner [creates an Airflow connection](create-and-link-connections.md#create-a-connection) in the Astro Environment Manager that connects to external development resources. They share this connection to all Deployments by default by turning on the [**Linked to all Deployments** setting](https://docs.astronomer.io/astro/create-and-link-connections#configure-connection-sharing-for-a-workspace).
+- A Workspace Owner [creates an Airflow connection](create-and-link-connections.md#create-a-connection) in the Astro Environment Manager that connects to external development resources. They share this connection to all Deployments by default by turning on the [**Linked to all Deployments** setting](https://www.astronomer.io/docs/astro/create-and-link-connections#configure-connection-sharing-for-a-workspace).
 - In the production Deployment, the Workspace Owner [overrides the linked connection](create-and-link-connections.md#override-connection-fields) to instead connect to production resources on the same external system. Because the connection ID and code are the same, this override requires no updates at the DAG level.
 
 After a Workspace Owner creates connections, DAG authors can develop DAGs without needing to reconfigure connections between development and production:

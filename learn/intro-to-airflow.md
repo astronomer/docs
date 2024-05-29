@@ -83,7 +83,7 @@ Of course, these are just a few examples, you can orchestrate almost any kind of
 
 There are many ways to run Airflow, some of which are easier than others. Astronomer recommends: 
 
-- Using the open-source [**Astro CLI**](https://docs.astronomer.io/astro/cli/get-started-cli) to run Airflow locally. The Astro CLI is the easiest way to create a local Airflow instance running in [Docker](https://www.docker.com/) and is free to use for everyone.
+- Using the open-source [**Astro CLI**](https://www.astronomer.io/docs/astro/cli/get-started-cli) to run Airflow locally. The Astro CLI is the easiest way to create a local Airflow instance running in [Docker](https://www.docker.com/) and is free to use for everyone.
 - Using [**Astro**](https://astronomer.io/try-astro) to run Airflow in production. Astro is a fully-managed SaaS application for data orchestration that helps teams write and run data pipelines with Apache Airflow at any level of scale. A [free trial](https://astronomer.io/try-astro) is available.
 
 All Airflow installations include the mandatory Airflow components as part of their infrastructure: the webserver, scheduler, database, and executor. See [Airflow components](airflow-components.md) for more information.
@@ -127,7 +127,7 @@ There are a couple of special types of operators that are worth mentioning:
 
 Some commonly used building blocks, like the BashOperator, the `@task` decorator, or the PythonOperator, are part of core Airflow and automatically installed in all Airflow instances. Additionally, many operators are maintained separately to Airflow in **Airflow provider packages**, which group modules interacting with a specific service into a package.
 
-You can browse all available operators and find detailed information about their parameters in the [Astronomer Registry](https://registry.astronomer.io/). For many common data tools, there are [integration tutorials](https://docs.astronomer.io/learn/category/integrations--connections) available, showing a simple implementation of the provider package.
+You can browse all available operators and find detailed information about their parameters in the [Astronomer Registry](https://registry.astronomer.io/). For many common data tools, there are [integration tutorials](https://www.astronomer.io/docs/learn/category/integrations--connections) available, showing a simple implementation of the provider package.
 
 ### Additional concepts
 

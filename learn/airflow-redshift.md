@@ -28,7 +28,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 To use Redshift operators in Airflow, you first need to install the Redshift provider package and create a connection to your Redshift cluster.
 
-1. If you are working with the [Astro CLI](https://docs.astronomer.io/astro/install-cli), add `apache-airflow-providers-amazon` to the `requirements.txt` file of your Astro project. Otherwise, run `pip install apache-airflow-providers-amazon`.
+1. If you are working with the [Astro CLI](https://www.astronomer.io/docs/astro/install-cli), add `apache-airflow-providers-amazon` to the `requirements.txt` file of your Astro project. Otherwise, run `pip install apache-airflow-providers-amazon`.
 
 2. Connect your Airflow instance to Redshift. The most common way of doing this is by configuring an Airflow connection. In the Airflow UI, go to **Admin** > **Connections** and add the following connections:
 

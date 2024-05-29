@@ -26,7 +26,7 @@ When you run the project locally, you can see the project's datasets and their r
 
 Before you try this example, make sure you have:
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop).
 
 ## Clone the project
@@ -224,6 +224,6 @@ pred_file = aql.export_file(
 
 ## See also
 
-- Tutorial: [How to Write a DAG with the Astro SDK](https://docs.astronomer.io/learn/astro-python-sdk).
-- Documentation: [Airflow Datasets Guide](https://docs.astronomer.io/learn/airflow-datasets).
+- Tutorial: [How to Write a DAG with the Astro SDK](https://www.astronomer.io/docs/learn/astro-python-sdk).
+- Documentation: [Airflow Datasets Guide](https://www.astronomer.io/docs/learn/airflow-datasets).
 - Webinar: [How to Orchestrate Machine Learning Workflows With Airflow](https://www.astronomer.io/events/webinars/how-to-orchestrate-machine-learning-workflows-with-airflow/).

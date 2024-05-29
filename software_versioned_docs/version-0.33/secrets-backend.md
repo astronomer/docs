@@ -70,7 +70,7 @@ In this section, you'll learn how to use [Hashicorp Vault](https://www.vaultproj
 #### Prerequisites
 
 - A [Deployment](configure-deployment.md) on Astronomer.
-- [The Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
+- [The Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli).
 - A [Hashicorp Vault server](https://learn.hashicorp.com/tutorials/vault/getting-started-dev-server?in=vault/getting-started).
 - An Astro project initialized with `astro dev init`.
 - [The Vault CLI](https://www.vaultproject.io/docs/install).
@@ -216,7 +216,7 @@ Now, any Airflow variable or connection that you write to your Vault server can 
 #### Prerequisites
 
 - A [Deployment](configure-deployment.md).
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - An Astro project initialized with `astro dev init`.
 - Access to AWS Secrets Manager.
 - A valid AWS Access Key ID and Secret Access Key.
@@ -319,7 +319,7 @@ In this section, you'll learn how to use [AWS Systems Manager (SSM) Parameter St
 #### Prerequisites
 
 - A [Deployment](configure-deployment.md).
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - An Astro project initialized with `astro dev init`.
 - Access to AWS SSM Parameter Store.
 - A valid AWS Access Key ID and Secret Access Key.
@@ -424,7 +424,7 @@ In this section, you'll learn how to use [Google Cloud Secret Manager](https://c
 #### Prerequisites
 
 - A [Deployment](configure-deployment.md).
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - An Astro project initialized with `astro dev init`.
 - [Cloud SDK](https://cloud.google.com/sdk/gcloud).
 - A Google Cloud environment with [Secret Manager](https://cloud.google.com/secret-manager/docs/configuring-secret-manager) configured.
@@ -531,7 +531,7 @@ In this section, you'll learn how to use [Azure Key Vault](https://cloud.google.
 #### Prerequisites
 
 - A [Deployment](configure-deployment.md).
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - An Astro project initialized with `astro dev init`.
 - An existing Azure Key Vault linked to a resource group.
 - Your Key Vault URL. To find this, go to your Key Vault overview page > **Vault URI**.

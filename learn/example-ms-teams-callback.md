@@ -13,8 +13,8 @@ This example shows how to set up Airflow notifications in a [Microsoft Teams](ht
 Before trying this example, make sure you have:
 
 - [Teams](https://www.microsoft.com/en-us/microsoft-teams/log-in) with a Business account supporting team channels.
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
-- An Astro project running locally on your computer. See [Getting started with the Astro CLI](https://docs.astronomer.io/astro/cli/get-started-cli).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli).
+- An Astro project running locally on your computer. See [Getting started with the Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started-cli).
 
 ## Send task failure notifications to MS Teams
 

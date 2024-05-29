@@ -14,7 +14,7 @@ Alternatively, you can configure an external NFS volume for DAG deploys. For mor
 
 :::info
 
-Astronomer recommends that all users use the Astro CLI to test their code locally before pushing it to an Airflow Deployment on Astronomer. For guidelines on developing locally, see [CLI Quickstart](https://docs.astronomer.io/astro/cli/install-cli).
+Astronomer recommends that all users use the Astro CLI to test their code locally before pushing it to an Airflow Deployment on Astronomer. For guidelines on developing locally, see [CLI Quickstart](https://www.astronomer.io/docs/astro/cli/install-cli).
 
 :::
 
@@ -22,7 +22,7 @@ Astronomer recommends that all users use the Astro CLI to test their code locall
 
 In order to push up DAGs to a Deployment on Astronomer, you must have:
 
-* [The Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) installed.
+* [The Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli) installed.
 * Access to an Astronomer platform at `https://app.BASEDOMAIN`.
 * An Astronomer [Workspace](manage-workspaces.md) with at least one active [Airflow Deployment](configure-deployment.md).
 
@@ -58,7 +58,7 @@ To see the list of Deployments within a particular Workspace, run:
 astro deployment list
 ```
 
-For more specific CLI guidelines and commands, read [CLI quickstart](https://docs.astronomer.io/astro/cli/install-cli).
+For more specific CLI guidelines and commands, read [CLI quickstart](https://www.astronomer.io/docs/astro/cli/install-cli).
 
 ## Step 3: Deploy to Astronomer
 
@@ -74,7 +74,7 @@ This command returns a list of Airflow Deployments available in your Workspace a
 
 :::info
 
-If your code deploy fails and you configured your CLI to use Podman, you might need to set an additional environment variable. See [Troubleshoot your Podman configuration](https://docs.astronomer.io/astro/cli/configure-cli#troubleshoot-your-configuration). 
+If your code deploy fails and you configured your CLI to use Podman, you might need to set an additional environment variable. See [Troubleshoot your Podman configuration](https://www.astronomer.io/docs/astro/cli/configure-cli#troubleshoot-your-configuration). 
 
 :::
 

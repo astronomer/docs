@@ -10,7 +10,7 @@ import BusinessBadge from '@site/src/components/BusinessBadge';
 In addition to product documentation, the following resources are available to help you resolve issues:
 
 - [Astronomer knowledge base](https://support.astronomer.io/hc/en-us)
-- [Airflow guides](https://docs.astronomer.io/learn/)
+- [Airflow guides](https://www.astronomer.io/docs/learn/)
 If you're experiencing an issue or have a question that requires Astronomer expertise, use one of the following methods to contact Astronomer support:
 
 - Submit a support request in the [Astro UI](https://cloud.astronomer.io/open-support-request).

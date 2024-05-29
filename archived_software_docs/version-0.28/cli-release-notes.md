@@ -17,7 +17,7 @@ Release date: June 13, 2022
 
 ### Additional improvements
 
-- This release exclusively contains changes for [Astro users](https://docs.astronomer.io/astro/cli/release-notes).
+- This release exclusively contains changes for [Astro users](https://www.astronomer.io/docs/astro/cli/release-notes).
 
 ## Astro CLI v1.0.0
 
@@ -31,7 +31,7 @@ Astro CLI v1.0.0 includes breaking changes that might effect your existing CI/CD
 
 :::
 
-The Astro CLI is now a single CLI executable built for all Astronomer products. This new generation of the Astro CLI is optimized for a consistent local development experience and provides more value to Astronomer Software customers. For organizations moving from Astronomer Software to [Astro](https://docs.astronomer.io/astro), this change makes the transition easier.
+The Astro CLI is now a single CLI executable built for all Astronomer products. This new generation of the Astro CLI is optimized for a consistent local development experience and provides more value to Astronomer Software customers. For organizations moving from Astronomer Software to [Astro](https://www.astronomer.io/docs/astro), this change makes the transition easier.
 
 To establish a shared framework between products, the syntax of several Software CLI commands have been updated. Due to the quantity of these changes, all changes introduced in this release are documented in [Upgrade to Astro CLI v1.0](upgrade-astro-cli.md). Astro CLI v1.0.0 is only compatible with Astronomer Software v0.28+.
 

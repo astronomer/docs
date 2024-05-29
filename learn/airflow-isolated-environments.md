@@ -30,7 +30,7 @@ There are multiple resources for learning about this topic. See also:
 
 :::info
 
-This guide covers options to isolate individual tasks in Airflow. If you want to run all of your Airflow tasks in dedicated Kubernetes pods, consider using the [Kubernetes Executor](https://docs.astronomer.io/learn/airflow-executors-explained#kubernetes-executor). Astronomer customers can set their Deployments to use the KubernetesExecutor in the Astro UI, see [Manage Airflow executors on Astro](https://docs.astronomer.io/astro/executors-overview). 
+This guide covers options to isolate individual tasks in Airflow. If you want to run all of your Airflow tasks in dedicated Kubernetes pods, consider using the [Kubernetes Executor](https://www.astronomer.io/docs/learn/airflow-executors-explained#kubernetes-executor). Astronomer customers can set their Deployments to use the KubernetesExecutor in the Astro UI, see [Manage Airflow executors on Astro](https://www.astronomer.io/docs/astro/executors-overview). 
 
 :::
 
@@ -390,7 +390,7 @@ To get a list of all parameters of the `@task.virtualenv` decorator or PythonVir
 
 The Kubernetes operator, `@task.kubernetes` decorator or KubernetesPodOperator, runs an Airflow task in a dedicated Kubernetes pod. You can use the `@task.kubernetes` to run any custom Python code in a separate Kubernetes pod on a Docker image with Python installed, while the KubernetesPodOperator runs any existing Docker image.
 
-To use the `@task.kubernetes` decorator or the KubernetesPodOperator, you need to provide a Docker image and have access to a Kubernetes cluster. The following example shows how to use the modules to run a task in a separate Kubernetes pod in the same namespace and Kubernetes cluster as your Airflow environment. For more information on how to use the KubernetesPodOperator, see [Use the KubernetesPodOperator](kubepod-operator.md) and [Run the KubernetesPodOperator on Astro](https://docs.astronomer.io/astro/kubernetespodoperator).
+To use the `@task.kubernetes` decorator or the KubernetesPodOperator, you need to provide a Docker image and have access to a Kubernetes cluster. The following example shows how to use the modules to run a task in a separate Kubernetes pod in the same namespace and Kubernetes cluster as your Airflow environment. For more information on how to use the KubernetesPodOperator, see [Use the KubernetesPodOperator](kubepod-operator.md) and [Run the KubernetesPodOperator on Astro](https://www.astronomer.io/docs/astro/kubernetespodoperator).
 
 <Tabs
     defaultValue="taskflow"
