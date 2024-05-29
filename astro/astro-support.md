@@ -141,7 +141,7 @@ Reasons for escalation include:
 * Multiple attempts to solve the issue have failed.
 * The urgency of the ticket has increased substantially.
 
-When an escalation request is made, the on-call shift manager will be alerted to the ticket and will evaluate the escalation request. The on-call shift manager will either assume ownership of the ticket or ensure meaningful and timely progress is made on the ticket.
+When you make an escalation request, it alerts the on-call shift manager to the ticket, who evaluates the escalation request. The on-call shift manager either assumes ownership of the ticket or ensures meaningful and timely progress is made on the ticket.
 
 ## Book office hours
 
