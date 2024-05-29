@@ -8,7 +8,7 @@ While you can deploy code using the Astro GitHub Integration, the Astro CLI, or 
 
 If the Astro API has access to your Astro project files, you can use the Astro API `deploy` endpoints to complete an image deploy or DAG deploy. You can then implement scripts to automate deploys as a workaround to not using the Astro CLI or Astro GitHub integration.
 
-This best practice guide walks through the steps that are necessary to deploy code to Astro using the Astro API. It also provides example bash scripts that implement these steps for different types of deploy workflows in your own CI/CD pipelines.
+This best practice guide walks through the steps that are necessary to deploy code to Astro using the Astro API. It also provides example bash scripts that implement these steps for different types of deploy workflows in your own CI/CD pipelines. This example uses Docker to build the image, but you can use a similar tool like Kaniko.
 
 ## Feature overview
 
@@ -21,32 +21,36 @@ This guide highlights the following Astro features:
 These use cases assume you have:
 
 - Sufficient permissions to deploy code to your Astro Deployments
-- At least one Astro Deployment
-- The following values configured:
-    - `ORGANIZATION_ID`
-    - `DEPLOYMENT_ID`
-    - `ASTRO_API_TOKEN` - See [Create an API token](https://www.astronomer.io/docs/astro/automation-authentication#step-1-create-an-api-token)
-    - `AIRFLOW_PROJECT_PATH` - The path where your Airflow project exists.
+- At least one [Astro Deployment](create-deployment.md)
+- A container management tool. The following examples show commands using [Docker](https://www.docker.com/).
+- The following values:
+    - Your Organization ID - See [List Organizations](https://docs.astronomer.io/docs/api/platform-api-reference/organization/list-organizations)
+    - The Deployment ID - See [List Deployments](https://docs.astronomer.io/docs/api/platform-api-reference/deployment/list-deployments)
+    - Your Astro API token - See [Create an API token](https://www.astronomer.io/docs/astro/automation-authentication#step-1-create-an-api-token)
+    - The path where your Astro project exists.
 
 ## With DAG-only deploy enabled
 
-If you have DAG-only deploys enabled, you can create scripts for complete project deploys, DAG-only deploys, or image-only deploys.
+If you have DAG-only deploys enabled, you can create scripts for complete project deploys, DAG-only deploys, or image-only deploys. The following sections include a step by step description of the workflow followed by a bash script that executes the workflow.
 
 ### Project deploy
 
-1. Create the `Deploy`
-    - Use the `IMAGE_AND_DAG` type
-    - Retrieve the `id`, `imageRepository`, `imageTag`, and `dagsUploadURL`, which you need in the following steps.
+The following steps describe the different actions that the script performs to deploy a complete Astro project.
 
-2. Log in to Docker with the `ASTRO_API_TOKEN` that you created.
+1. Create the `Deploy` API call. This action creates an object that represents the intent to deploy code to a Deployment.
+    - Use the `IMAGE_AND_DAG` type.
+
+2. After you create the `deploy`, retrieve the `id`, `imageRepository`, `imageTag`, and `dagsUploadURL` values, using the [`GET` deploy API call](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/get-deploy), which you need in the following steps.
+
+3. Log in to Docker or your container management platform, using the Astro API token that you created.
 
     ```bash
 
-    docker login images.astronomer.cloud -u cli -p $ASTRO_API_TOKEN
+    docker login images.astronomer.cloud -u cli -p $<your-api-token>
 
     ```
 
-3. Build the Docker image using the `imageRepository`, `imageTag`, and `AIRFLOW_PROJECT_PATH` values that you retrieved earlier.
+4. Build the image using the `imageRepository`, `imageTag`, and Astro project path values that you retrieved earlier.
 
     ```bash
 
@@ -54,7 +58,7 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
 
     ```
 
-4. Push the Docker image using the `imageRepository` and `imageTag` values that you retrieved earlier.
+5. Push the image using the `imageRepository` and `imageTag` values that you retrieved in Step 2.
 
     ```bash
 
@@ -62,7 +66,7 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
 
     ```
 
-5. Create a tar file of the DAGs folder, where you specify the path where you want to create the tar file.
+6. Create a tar file of the DAGs folder, where you specify the path where you want to create the tar file.
 
     ```bash
 
@@ -76,7 +80,7 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
 
     :::
 
-6. Upload the tar file by making a `PUT` call using the `dagsUploadURL` that you retrieved in Step 1. In this call, it is mandatory to pass the following. Then, save the `versionID` from the response header.
+7. Upload the tar file by making a `PUT` call using the `dagsUploadURL` that you retrieved in Step 2. In this call, it is mandatory to pass the following. Then, save the `versionID` from the response header.
 
     ```bash
 
@@ -84,7 +88,7 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
 
     ```
 
-7. Finalize the deploy
+8. Finalize the deploy. See [Finalize the deploy](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about the API request.
 
     - On `Success`, the deploy process has completed. Pass `versionID` in the requested body.
     - It might take a few minutes for the changes to update in your Deployment.
@@ -99,7 +103,7 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
     ORGANIZATION_ID=<set organization id>
     DEPLOYMENT_ID=<set deployment id>
     ASTRO_API_TOKEN=<set api token>
-    AIRFLOW_PROJECT_PATH=<set path to your airflow project>
+    ASTRO_PROJECT_PATH=<set path to your Astro project>
 
     # Initializing Deploy
     echo -e "Initiating Deploy Process for deployment $DEPLOYMENT_ID\n"
@@ -117,21 +121,21 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
     REPOSITORY=$(echo $CREATE_DEPLOY | jq -r '.imageRepository')
     TAG=$(echo $CREATE_DEPLOY | jq -r '.imageTag')
     docker login images.astronomer.cloud -u cli -p $ASTRO_API_TOKEN
-    echo -e "\nBuilding Docker image $REPOSITORY:$TAG for $DEPLOYMENT_ID from $AIRFLOW_PROJECT_PATH"
-    docker build -t $REPOSITORY:$TAG --platform=linux/amd64 $AIRFLOW_PROJECT_PATH
+    echo -e "\nBuilding Docker image $REPOSITORY:$TAG for $DEPLOYMENT_ID from $ASTRO_PROJECT_PATH"
+    docker build -t $REPOSITORY:$TAG --platform=linux/amd64 $ASTRO_PROJECT_PATH
     echo -e "\nPushing Docker image $REPOSITORY:$TAG to $DEPLOYMENT_ID"
     docker push $REPOSITORY:$TAG
 
     # Upload dags tar file
     DAGS_UPLOAD_URL=$(echo $CREATE_DEPLOY | jq -r '.dagsUploadUrl')
-    echo -e "\nCreating a dags tar file from $AIRFLOW_PROJECT_PATH/dags and stored in $AIRFLOW_PROJECT_PATH/dags.tar\n"
+    echo -e "\nCreating a dags tar file from $ASTRO_PROJECT_PATH/dags and stored in $ASTRO_PROJECT_PATH/dags.tar\n"
     cd $AIRFLOW_PROJECT_PATH
-    tar -cvf "$AIRFLOW_PROJECT_PATH/dags.tar" "dags"
-    echo -e "\nUploading tar file $AIRFLOW_PROJECT_PATH/dags.tar\n"
+    tar -cvf "$ASTRO_PROJECT_PATH/dags.tar" "dags"
+    echo -e "\nUploading tar file $ASTRO_PROJECT_PATH/dags.tar\n"
     VERSION_ID=$(curl -i --request PUT $DAGS_UPLOAD_URL \
     --header 'x-ms-blob-type: BlockBlob' \
     --header 'Content-Type: application/x-tar' \
-    --upload-file "$AIRFLOW_PROJECT_PATH/dags.tar" | grep x-ms-version-id | awk -F': ' '{print $2}')
+    --upload-file "$ASTRO_PROJECT_PATH/dags.tar" | grep x-ms-version-id | awk -F': ' '{print $2}')
 
     VERSION_ID=$(echo $VERSION_ID | sed 's/\r//g') # Remove unexpected carriage return characters
     echo -e "\nTar file uploaded with version: $VERSION_ID\n"
@@ -158,8 +162,8 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
     fi
 
     # Cleanup
-    echo -e "\nCleaning up the created tar file from $AIRFLOW_PROJECT_PATH/dags.tar"
-    rm -rf "$AIRFLOW_PROJECT_PATH/dags.tar"
+    echo -e "\nCleaning up the created tar file from $ASTRO_PROJECT_PATH/dags.tar"
+    rm -rf "$ASTRO_PROJECT_PATH/dags.tar"
 
     ```
 
@@ -167,7 +171,7 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
 
 ### DAG-only deploy
 
-1. Create a`Deploy` with the `CREATE` call.
+1. Create the `Deploy` API call. This action creates an object that represents the intent to deploy code to a Deployment.
     - Use the `DAG_ONLY` type
     - Retrieve the `id` and `dagsUploadURL`, which you need in the following steps.
 
@@ -207,7 +211,7 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
     ORGANIZATION_ID=<set organization id>
     DEPLOYMENT_ID=<set deployment id>
     ASTRO_API_TOKEN=<set api token>
-    AIRFLOW_PROJECT_PATH=<set path to your airflow project>
+    ASTRO_PROJECT_PATH=<set path to your airflow project>
 
     # Initializing Deploy
     echo -e "Initiating Deploy Process for deployment $DEPLOYMENT_ID\n"
@@ -223,14 +227,14 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
 
     # Upload dags tar file
     DAGS_UPLOAD_URL=$(echo $CREATE_DEPLOY | jq -r '.dagsUploadUrl')
-    echo -e "\nCreating a dags tar file from $AIRFLOW_PROJECT_PATH/dags and stored in $AIRFLOW_PROJECT_PATH/dags.tar\n"
+    echo -e "\nCreating a dags tar file from $ASTRO_PROJECT_PATH/dags and stored in $ASTRO_PROJECT_PATH/dags.tar\n"
     cd $AIRFLOW_PROJECT_PATH
-    tar -cvf "$AIRFLOW_PROJECT_PATH/dags.tar" "dags"
-    echo -e "\nUploading tar file $AIRFLOW_PROJECT_PATH/dags.tar\n"
+    tar -cvf "$ASTRO_PROJECT_PATH/dags.tar" "dags"
+    echo -e "\nUploading tar file $ASTRO_PROJECT_PATH/dags.tar\n"
     VERSION_ID=$(curl -i --request PUT $DAGS_UPLOAD_URL \
     --header 'x-ms-blob-type: BlockBlob' \
     --header 'Content-Type: application/x-tar' \
-    --upload-file "$AIRFLOW_PROJECT_PATH/dags.tar" | grep x-ms-version-id | awk -F': ' '{print $2}')
+    --upload-file "$ASTRO_PROJECT_PATH/dags.tar" | grep x-ms-version-id | awk -F': ' '{print $2}')
 
     VERSION_ID=$(echo $VERSION_ID | sed 's/\r//g') # Remove unexpected carriage return characters
     echo -e "\nTar file uploaded with version: $VERSION_ID\n"
@@ -256,8 +260,8 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
     fi
 
     # Cleanup
-    echo -e "\nCleaning up the created tar file from $AIRFLOW_PROJECT_PATH/dags.tar"
-    rm -rf "$AIRFLOW_PROJECT_PATH/dags.tar"
+    echo -e "\nCleaning up the created tar file from $ASTRO_PROJECT_PATH/dags.tar"
+    rm -rf "$ASTRO_PROJECT_PATH/dags.tar"
 
   ```
 
@@ -265,7 +269,7 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
 
 ### Image-only deploy
 
-1. Create the `Deploy`
+1. Create the `Deploy` API call. This action creates an object that represents the intent to deploy code to a Deployment.
     - Use the `IMAGE` type
     - Retrieve the `id`, `imageRepository`, and `imageTag`, which you need in the following steps.
 
@@ -277,11 +281,11 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
 
     ```
 
-3. Build the Docker image using the `imageRepository`, `imageTag`, and `AIRFLOW_PROJECT_PATH` values that you retrieved earlier.
+3. Build the Docker image using the `imageRepository`, `imageTag`, and `ASTRO_PROJECT_PATH` values that you retrieved earlier.
 
     ```bash
 
-   docker build -t imageRepository:imageTag --platform=linux/amd64 $AIRFLOW_PROJECT_PATH
+   docker build -t imageRepository:imageTag --platform=linux/amd64 $ASTRO_PROJECT_PATH
 
     ```
 
@@ -307,7 +311,7 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
     ORGANIZATION_ID=<set organization id>
     DEPLOYMENT_ID=<set deployment id>
     ASTRO_API_TOKEN=<set api token>
-    AIRFLOW_PROJECT_PATH=<set path to your airflow project>
+    ASTRO_PROJECT_PATH=<set path to your airflow project>
 
     # Initializing Deploy
     echo -e "Initiating Deploy Process for deployment $DEPLOYMENT_ID\n"
@@ -325,8 +329,8 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
     REPOSITORY=$(echo $CREATE_DEPLOY | jq -r '.imageRepository')
     TAG=$(echo $CREATE_DEPLOY | jq -r '.imageTag')
     docker login images.astronomer.cloud -u cli -p $ASTRO_API_TOKEN
-    echo -e "\nBuilding Docker image $REPOSITORY:$TAG for $DEPLOYMENT_ID from $AIRFLOW_PROJECT_PATH"
-    docker build -t $REPOSITORY:$TAG --platform=linux/amd64 $AIRFLOW_PROJECT_PATH
+    echo -e "\nBuilding Docker image $REPOSITORY:$TAG for $DEPLOYMENT_ID from $ASTRO_PROJECT_PATH"
+    docker build -t $REPOSITORY:$TAG --platform=linux/amd64 $ASTRO_PROJECT_PATH
     echo -e "\nPushing Docker image $REPOSITORY:$TAG to $DEPLOYMENT_ID"
     docker push $REPOSITORY:$TAG
 
@@ -358,7 +362,7 @@ You can only use complete project deploys if you have DAG-only deploys disabled.
 
 ### Project deploy
 
-1. Create the `Deploy`
+1. Create the `Deploy` API call. This action creates an object that represents the intent to deploy code to a Deployment.
     - Use the `IMAGE_AND_DAG` type
     - Retrieve the `id`, `imageRepository`, and `imageTag`, which you need in the following steps.
 
@@ -370,11 +374,11 @@ You can only use complete project deploys if you have DAG-only deploys disabled.
 
     ```
 
-3. Build the Docker image using the `imageRepository`, `imageTag`, and `AIRFLOW_PROJECT_PATH` values that you retrieved earlier.
+3. Build the Docker image using the `imageRepository`, `imageTag`, and `ASTRO_PROJECT_PATH` values that you retrieved earlier.
 
     ```bash
 
-    docker build -t imageRepository:imageTag --platform=linux/amd64 $AIRFLOW_PROJECT_PATH
+    docker build -t imageRepository:imageTag --platform=linux/amd64 $ASTRO_PROJECT_PATH
 
     ```
 4. Push the Docker image using the `imageRepository` and `imageTag` values that you retrieved earlier.
@@ -399,7 +403,7 @@ You can only use complete project deploys if you have DAG-only deploys disabled.
     ORGANIZATION_ID=<set organization id>
     DEPLOYMENT_ID=<set deployment id>
     ASTRO_API_TOKEN=<set api token>
-    AIRFLOW_PROJECT_PATH=<set path to your airflow project>
+    ASTRO_PROJECT_PATH=<set path to your airflow project>
 
     # Initializing Deploy
     echo -e "Initiating Deploy Process for deployment $DEPLOYMENT_ID\n"
@@ -417,8 +421,8 @@ You can only use complete project deploys if you have DAG-only deploys disabled.
     REPOSITORY=$(echo $CREATE_DEPLOY | jq -r '.imageRepository')
     TAG=$(echo $CREATE_DEPLOY | jq -r '.imageTag')
     docker login images.astronomer.cloud -u cli -p $ASTRO_API_TOKEN
-    echo -e "\nBuilding Docker image $REPOSITORY:$TAG for $DEPLOYMENT_ID from $AIRFLOW_PROJECT_PATH"
-    docker build -t $REPOSITORY:$TAG --platform=linux/amd64 $AIRFLOW_PROJECT_PATH
+    echo -e "\nBuilding Docker image $REPOSITORY:$TAG for $DEPLOYMENT_ID from $ASTRO_PROJECT_PATH"
+    docker build -t $REPOSITORY:$TAG --platform=linux/amd64 $ASTRO_PROJECT_PATH
     echo -e "\nPushing Docker image $REPOSITORY:$TAG to $DEPLOYMENT_ID"
     docker push $REPOSITORY:$TAG
 
