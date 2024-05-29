@@ -25,13 +25,13 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
-## May 29, 2024
+## May 30, 2024
 
 ### Additional improvements
 
-- The default resources for the Kubernetes executor and KubernetesPodOperator Pods are now `0.25Gi` instead of `10Gi`. You can still customize the resource allocation for Kubernetes pods depending on your needs. <!--https://github.com/astronomer/astro/pull/21215-->
-- Dedicated clusters are now available only to [**Team**](https://www.astronomer.io/pricing/) tier customers and above. <!--https://github.com/astronomer/astro/pull/21383-->
-- Added a centralized docs reference page with all OSS provider package versions listed for each Astro Runtime version. See [Provider package reference](https://www.astronomer.io/docs/astro/runtime-provider-reference) docs.
+- The default resources for the Kubernetes executor and KubernetesPodOperator Pods are now `0.25Gi` instead of `10Gi`. You can still customize the resource allocation for Kubernetes pods depending on your needs. See [Configure Kubernetes Pod Resources](https://www.astronomer.io/docs/astro/deployment-resources#configure-kubernetes-pod-resources)
+- Dedicated clusters are now available only to [**Team**](https://www.astronomer.io/pricing/) tier customers and above.
+- Added a centralized docs reference page that lists all open source Apache Airflow provider packages and their versions for each Astro Runtime version. See [Provider package reference](https://www.astronomer.io/docs/astro/runtime-provider-reference) docs.
 
 ### Bug fixes
 
