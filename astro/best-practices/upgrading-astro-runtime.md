@@ -39,7 +39,7 @@ Use the process documented in [Upgrade Astro Runtime](https://www.astronomer.io/
 		- An upgraded `Dockerfile`.
 		- `pip freeze` output for both versions.
 		- A report with environment metadata and a Results table including any errors logged.
-		![Astro Upgrade Test Report](/img/guides/astro-upgrade_test_report.png)
+		![Astro Upgrade Test Report](/img/guides/dag_test_report.png)
 		- A Dependency Compare report listing the upgrades, additions and removals coming in the new Astro runtime version and underlying Airflow package. For example, a "Major Updates" section lists the packages receiving new major versions, and a "Minor Updates" lists the packages receiving new minor versions:
 		```text
 		Major Updates:
