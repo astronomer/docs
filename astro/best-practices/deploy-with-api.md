@@ -129,7 +129,7 @@ The following steps describe the different actions that the script performs to d
     # Upload dags tar file
     DAGS_UPLOAD_URL=$(echo $CREATE_DEPLOY | jq -r '.dagsUploadUrl')
     echo -e "\nCreating a dags tar file from $ASTRO_PROJECT_PATH/dags and stored in $ASTRO_PROJECT_PATH/dags.tar\n"
-    cd $AIRFLOW_PROJECT_PATH
+    cd $ASTRO_PROJECT_PATH
     tar -cvf "$ASTRO_PROJECT_PATH/dags.tar" "dags"
     echo -e "\nUploading tar file $ASTRO_PROJECT_PATH/dags.tar\n"
     VERSION_ID=$(curl -i --request PUT $DAGS_UPLOAD_URL \
@@ -228,7 +228,7 @@ The following steps describe the different actions that the script performs to d
     # Upload dags tar file
     DAGS_UPLOAD_URL=$(echo $CREATE_DEPLOY | jq -r '.dagsUploadUrl')
     echo -e "\nCreating a dags tar file from $ASTRO_PROJECT_PATH/dags and stored in $ASTRO_PROJECT_PATH/dags.tar\n"
-    cd $AIRFLOW_PROJECT_PATH
+    cd $ASTRO_PROJECT_PATH
     tar -cvf "$ASTRO_PROJECT_PATH/dags.tar" "dags"
     echo -e "\nUploading tar file $ASTRO_PROJECT_PATH/dags.tar\n"
     VERSION_ID=$(curl -i --request PUT $DAGS_UPLOAD_URL \
@@ -473,13 +473,13 @@ The following code example shows the steps you can use to create a bash script t
 ORGANIZATION_ID=<set organization id>
 DEPLOYMENT_ID=<set deployment id>
 ASTRO_API_TOKEN=<set api token>
-AIRFLOW_PROJECT_PATH=<set path to your airflow project>
+ASTRO_PROJECT_PATH=<set path to your airflow project>
 
 # Determine if only DAG files have changes
 files=$(git diff --name-only $(git rev-parse HEAD~1) -- .)
 dags_only=1
 for file in $files;do
-if [[ $file != "$AIRFLOW_PROJECT_PATH/dags"* ]];then
+if [[ $file != "$ASTRO_PROJECT_PATH/dags"* ]];then
     echo "$file is not a dag, triggering a full image build"
     dags_only=0
     break
@@ -503,14 +503,14 @@ if [ $dags_only == 1 ]
 then
 	# Upload dags tar file
 	DAGS_UPLOAD_URL=$(echo $CREATE_DEPLOY | jq -r '.dagsUploadUrl')
-	echo -e "\nCreating a dags tar file from $AIRFLOW_PROJECT_PATH/dags and stored in $AIRFLOW_PROJECT_PATH/dags.tar\n"
-	cd $AIRFLOW_PROJECT_PATH
-	tar -cvf "$AIRFLOW_PROJECT_PATH/dags.tar" "dags"
-	echo -e "\nUploading tar file $AIRFLOW_PROJECT_PATH/dags.tar\n"
+	echo -e "\nCreating a dags tar file from $ASTRO_PROJECT_PATH/dags and stored in $ASTRO_PROJECT_PATH/dags.tar\n"
+	cd $ASTRO_PROJECT_PATH
+	tar -cvf "$ASTRO_PROJECT_PATH/dags.tar" "dags"
+	echo -e "\nUploading tar file $ASTRO_PROJECT_PATH/dags.tar\n"
 	VERSION_ID=$(curl -i --request PUT $DAGS_UPLOAD_URL \
 	--header 'x-ms-blob-type: BlockBlob' \
 	--header 'Content-Type: application/x-tar' \
-	--upload-file "$AIRFLOW_PROJECT_PATH/dags.tar" | grep x-ms-version-id | awk -F': ' '{print $2}')
+	--upload-file "$ASTRO_PROJECT_PATH/dags.tar" | grep x-ms-version-id | awk -F': ' '{print $2}')
 
 	VERSION_ID=$(echo $VERSION_ID | sed 's/\r//g') # Remove unexpected carriage return characters
 	echo -e "\nTar file uploaded with version: $VERSION_ID\n"
@@ -536,8 +536,8 @@ then
 	fi
 
 	# Cleanup
-	echo -e "\nCleaning up the created tar file from $AIRFLOW_PROJECT_PATH/dags.tar"
-	rm -rf "$AIRFLOW_PROJECT_PATH/dags.tar"
+	echo -e "\nCleaning up the created tar file from $ASTRO_PROJECT_PATH/dags.tar"
+	rm -rf "$ASTRO_PROJECT_PATH/dags.tar"
 fi
 # If any other files changed build your Astro project into a Docker image, push the image to your Deployment, and then push and DAG changes
 if [ $dags_only == 0 ]
@@ -546,21 +546,21 @@ then
 	REPOSITORY=$(echo $CREATE_DEPLOY | jq -r '.imageRepository')
 	TAG=$(echo $CREATE_DEPLOY | jq -r '.imageTag')
 	docker login images.astronomer.cloud -u cli -p $ASTRO_API_TOKEN
-	echo -e "\nBuilding Docker image $REPOSITORY:$TAG for $DEPLOYMENT_ID from $AIRFLOW_PROJECT_PATH"
-	docker build -t $REPOSITORY:$TAG --platform=linux/amd64 $AIRFLOW_PROJECT_PATH
+	echo -e "\nBuilding Docker image $REPOSITORY:$TAG for $DEPLOYMENT_ID from $ASTRO_PROJECT_PATH"
+	docker build -t $REPOSITORY:$TAG --platform=linux/amd64 $ASTRO_PROJECT_PATH
 	echo -e "\nPushing Docker image $REPOSITORY:$TAG to $DEPLOYMENT_ID"
 	docker push $REPOSITORY:$TAG
 
 	# Upload dags tar file
 	DAGS_UPLOAD_URL=$(echo $CREATE_DEPLOY | jq -r '.dagsUploadUrl')
-	echo -e "\nCreating a dags tar file from $AIRFLOW_PROJECT_PATH/dags and stored in $AIRFLOW_PROJECT_PATH/dags.tar\n"
-	cd $AIRFLOW_PROJECT_PATH
-	tar -cvf "$AIRFLOW_PROJECT_PATH/dags.tar" "dags"
-	echo -e "\nUploading tar file $AIRFLOW_PROJECT_PATH/dags.tar\n"
+	echo -e "\nCreating a dags tar file from $ASTRO_PROJECT_PATH/dags and stored in $ASTRO_PROJECT_PATH/dags.tar\n"
+	cd $ASTRO_PROJECT_PATH
+	tar -cvf "$ASTRO_PROJECT_PATH/dags.tar" "dags"
+	echo -e "\nUploading tar file $ASTRO_PROJECT_PATH/dags.tar\n"
 	VERSION_ID=$(curl -i --request PUT $DAGS_UPLOAD_URL \
 	--header 'x-ms-blob-type: BlockBlob' \
 	--header 'Content-Type: application/x-tar' \
-	--upload-file "$AIRFLOW_PROJECT_PATH/dags.tar" | grep x-ms-version-id | awk -F': ' '{print $2}')
+	--upload-file "$ASTRO_PROJECT_PATH/dags.tar" | grep x-ms-version-id | awk -F': ' '{print $2}')
 
 	VERSION_ID=$(echo $VERSION_ID | sed 's/\r//g') # Remove unexpected carriage return characters
 	echo -e "\nTar file uploaded with version: $VERSION_ID\n"
@@ -587,8 +587,8 @@ then
 	fi
 
 	# Cleanup
-	echo -e "\nCleaning up the created tar file from $AIRFLOW_PROJECT_PATH/dags.tar"
-	rm -rf "$AIRFLOW_PROJECT_PATH/dags.tar"
+	echo -e "\nCleaning up the created tar file from $ASTRO_PROJECT_PATH/dags.tar"
+	rm -rf "$ASTRO_PROJECT_PATH/dags.tar"
 fi
 ```
 </details>
