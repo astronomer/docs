@@ -30,6 +30,14 @@ CI/CD templates that use the DAG deploy workflow:
     - If only DAG files in the `dags` folder have changed, run `astro deploy --dags`. This pushes your `dags` folder to your Deployment.
     - If any file not in the `dags` folder has changed, run `astro deploy`. This triggers two subprocesses. One that creates a Docker image for your Astro project, authenticates to Astro using your Deployment API token, and pushes the image to your Deployment. A second that pushes your `dags` folder to your Deployment.
 
+:::info
+
+If you stage multiple commits to DAG files and push them all at once to your remote branch, the template only deploys DAG code changes from the most recent commit. It will miss any code changes made in previous commits.
+
+To avoid this, either push commits individually or configure your repository to **Squash commits** for pull requests that merge multiple commits simultaneously.
+
+:::
+
 This process is equivalent to the following shell script:
 
 ```bash
@@ -92,7 +100,7 @@ To implement this feature, you need a CI/CD workflow that:
 - Deletes the preview Deployment when you delete the branch.
 - Deploys your changes to your base Deployment after you merge your changes into your main branch.
 
-If you use GitHub Actions as your CI/CD tool, you can find preview Deployment templates as part of the [Astronomer GitHub action in the GitHub Marketplace](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates). This GitHub action includes sub-actions for each of these four steps. To learn more, see [GitHub Actions](ci-cd-templates/github-actions-deployment-preview.md).
+If you use GitHub Actions as your CI/CD tool, you can find preview Deployment templates as part of the [Astronomer GitHub action in the GitHub Marketplace](https://github.com/astronomer/deploy-action?tab=readme-ov-file#deployment-preview-templates). This GitHub action includes sub-actions for each of these four steps. To learn more, see [GitHub Actions](ci-cd-templates/github-actions-deployment-preview.md).
 
 To configure your own automated workflow for preview Deployments with another CI/CD tool, use the following scripts. Each of the following four shell scripts is equivalent to the steps required to implement this feature with [GitHub Actions](ci-cd-templates/github-actions-deployment-preview.md).
 

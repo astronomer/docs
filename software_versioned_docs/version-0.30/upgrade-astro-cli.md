@@ -28,19 +28,19 @@ After you complete these steps, upgrade to Astro CLI version 1.0+ by following t
 
 For users making continuous changes to an Astro project locally, the Astro CLI now supports a new `astro dev restart` command. With this new command, you no longer need to run `astro dev stop` followed by `astro dev start` when you're testing locally.
 
-For more information, see [CLI command reference](https://docs.astronomer.io/astro/cli/astro-dev-restart).
+For more information, see [CLI command reference](https://www.astronomer.io/docs/astro/cli/astro-dev-restart).
 
 ### New command to run DAG unit tests with pytest
 
 You can now run custom unit tests for all DAGs in your Astro project with `astro dev pytest`, a new Astro CLI command that uses [pytest](https://docs.pytest.org/en/7.1.x/contents.html#), a common testing framework for Python. As part of this change, new Astro projects created with `astro dev init` now include a `tests` directory, which includes one example unit test built by Astronomer.
 
-In addition to running tests locally, you can also run `astro dev pytest` as part of the deploy process to Astronomer Software. For more information, see [CLI command reference](https://docs.astronomer.io/astro/cli/astro-dev-pytest).
+In addition to running tests locally, you can also run `astro dev pytest` as part of the deploy process to Astronomer Software. For more information, see [CLI command reference](https://www.astronomer.io/docs/astro/cli/astro-dev-pytest).
 
 ### New command to parse DAGs for errors
 
 The new `astro dev parse` command allows you to run a basic test against your Astro project to ensure that your DAGs are able to to render in the Airflow UI. This includes the DAG integrity test that is run with `astro dev pytest`, which checks that your DAGs are able to to render in the Airflow UI. Now, you can quickly run `astro dev parse` and see import and syntax errors directly in your terminal without having to restart all Airflow services locally.
 
-For more complex testing, Astronomer recommends using `astro dev pytest` to run custom tests in your project. For more information on `astro dev parse`, see the [CLI command reference](https://docs.astronomer.io/astro/cli/astro-dev-parse).
+For more complex testing, Astronomer recommends using `astro dev pytest` to run custom tests in your project. For more information on `astro dev parse`, see the [CLI command reference](https://www.astronomer.io/docs/astro/cli/astro-dev-parse).
 
 ## Breaking changes
 

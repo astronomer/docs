@@ -538,7 +538,7 @@ curl -v -k -X POST https://houston.BASEDOMAIN/v1 -H "Authorization: Bearer <toke
 Next, to make sure the registry is accepted by Astronomer's local docker client, try authenticating to Astronomer with the Astro CLI:
 
 ```sh
-astro auth login <your-astronomer-base-domain>
+astro login <your-astronomer-base-domain>
 ```
 
 If you can log in, then your Docker client trusts the registry. If Docker does not trust the Astronomer registry, run the following and restart Docker:
@@ -552,7 +552,7 @@ Finally, try running `$ astro deploy` on a test deployment. Create a deployment 
 ```sh
 $ mkdir demo
 $ cd demo
-$ astro dev init --use-astronomer-certified
+$ astro dev init
 $ astro deploy -f
 ```
 Check the Airflow namespace. If pods are changing at all, then the Houston API trusts the registry.

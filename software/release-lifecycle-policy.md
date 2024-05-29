@@ -17,7 +17,7 @@ For information on the latest Astronomer Software releases, see [Release notes](
 
 :::info
 
-These policies apply only to the Astronomer Software platform. For release and lifecycle policies related to Astro Runtime, see [Runtime release and lifecycle Policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy).
+These policies apply only to the Astronomer Software platform. For release and lifecycle policies related to Astro Runtime, see [Runtime release and lifecycle Policy](https://www.astronomer.io/docs/astro/runtime-version-lifecycle-policy).
 
 :::
 
@@ -77,7 +77,7 @@ If a major stability bug is identified by our team, a fix will be backported to 
 
 If a major security issue is identified, a fix will be backported and made available as a new patch version for _all_ supported stable and LTS releases. Major issues in this category are classified by a combination of impact and exploitability.
 
-In rare instances, the Astronomer team may make an exception and backport a bug or security fix to a release that is beyond the commitment stated above. To submit a request for consideration, please reach out to your customer success manager.
+In rare instances, the Astronomer team can make an exception and backport a bug or security fix to a release that is beyond the commitment stated above. To submit a request for consideration, submit a [support ticket](support.md).
 
 ## Software lifecycle schedule
 
@@ -89,16 +89,18 @@ The following tables contain the exact lifecycle for each published version of A
 
 | Software Version | Release Date      | End of Maintenance Date |
 | ---------------- | ----------------- | ----------------------- |
-| 0.30             | August 29, 2022   | August 2023             |
-| 0.32             | April 28, 2023    | April 2024              |
-| 0.33             | October 13, 2023  | April 2024              |
-| 0.34             | February 13, 2023 | August 2025             |
+| 0.33             | October 13, 2023  | June 2024               |
+| 0.34             | February 13, 2024 | August 2025             |
 
 ### LTS
 
 | Software Version | Release Date      | End of Maintenance Date |
 | ---------------- | ----------------- | ----------------------- |
+| 0.34             | February 13, 2024 | August 2025             |
+
+### Unsupported
+
+| Software Version | Release Date      | End of Maintenance Date |
+| ---------------- | ----------------- | ----------------------- |
 | 0.30             | Aug 29, 2022      | August 2023             |
 | 0.32             | April 28, 2023    | April 2024              |
-| 0.34             | February 13, 2023 | August 2025             |
-

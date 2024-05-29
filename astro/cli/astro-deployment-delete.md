@@ -77,7 +77,7 @@ astro deployment delete
 | Option                         | Description                                                                                                                                                                   | Possible Values         |
 | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
 | `<deployment-id>` (_Required_) | The ID of the Deployment to delete                                                                                                                                            | Any valid Deployment ID |
-| `-h`,`--hard`                  | Deletes all infrastructure and records for this Deployment. See [Hard delete a Deployment](https://docs.astronomer.io/software/configure-deployment#hard-delete-a-deployment) | None                    |
+| `-h`,`--hard`                  | Deletes all infrastructure and records for this Deployment. See [Hard delete a Deployment](https://www.astronomer.io/docs/software/configure-deployment#hard-delete-a-deployment) | None                    |
 
 </TabItem>
 </Tabs>

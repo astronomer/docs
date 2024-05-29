@@ -1,4 +1,4 @@
-name: Reload API spec
+name: Reload API spec - weekly
 
 on:
   repository_dispatch:
@@ -11,9 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Put current date into a variable
-      run: |
-        $NOW=& Get-Date -format yyyy-MM-dd
-        echo "NOW=$NOW" >> $env:GITHUB_ENV
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
     - name: Checkout repo
       uses: actions/checkout@v4
     - run: curl https://api.astronomer.io/spec/iam/v1beta1 > api/fern/apis/iam/openapi/openapi.yaml 
@@ -21,5 +20,6 @@ jobs:
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v6
       with:
-        git-token: ${{ secrets.API_PAT }}
-        title: '${{env.NOW}} - Generate API spec and changelog'
+        token: ${{secrets.GITHUB_TOKEN}}
+        title: '${{ steps.date.outputs.date }} - Generate API spec and changelog'
+        body: 'Weekly update to the Astro API specifications. Use the manual trigger action if the API release is delayed until after this action runs. To generate a preview site, close and reopen the PR manually - this triggers our preview GitHub action.'

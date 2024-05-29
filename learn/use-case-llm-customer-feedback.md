@@ -13,7 +13,7 @@ With recent advances in the field of Large Language Model Operations (LLMOps), y
 
 Before trying this example, make sure you have:
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop).
 
 ## Clone the project
@@ -519,7 +519,7 @@ Congratulations! You've successfully run a full MLOps pipeline with Airflow, Coh
 
 ## See also
 
-- Tutorial: [Orchestrate OpenSearch operations with Apache Airflow](https://docs.astronomer.io/learn/airflow-opensearch).
-- Tutorial: [Orchestrate Cohere LLMs with Apache Airflow](https://docs.astronomer.io/learn/airflow-cohere)
+- Tutorial: [Orchestrate OpenSearch operations with Apache Airflow](https://www.astronomer.io/docs/learn/airflow-opensearch).
+- Tutorial: [Orchestrate Cohere LLMs with Apache Airflow](https://www.astronomer.io/docs/learn/airflow-cohere)
 - Documentation: [Airflow OpenSearch provider documentation](https://airflow.apache.org/docs/apache-airflow-providers-opensearch/stable/index.html).
 - Documentation: [Airflow Cohere provider documentation](https://airflow.apache.org/docs/apache-airflow-providers-cohere/stable/index.html).

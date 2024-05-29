@@ -4,13 +4,13 @@ Deploying Astro Runtime is a requirement if your organization is using Astro. As
 
 - Timely support for new patch, minor, and major versions of Apache Airflow. This includes bug fixes that have not been released by the open source project but are backported to Astro Runtime and available to users earlier.
 - Exclusive features to enrich the task execution experience, including smart task concurrency defaults and high availability configurations.
-- The `openlineage-airflow` package. [OpenLineage](https://openlineage.io/) standardizes the definition of data lineage, the metadata that forms lineage metadata, and how data lineage metadata is collected from external systems. This package enables data lineage on Astro. See [OpenLineage and Airflow](https://docs.astronomer.io/learn/airflow-openlineage/).
+- The `openlineage-airflow` package. [OpenLineage](https://openlineage.io/) standardizes the definition of data lineage, the metadata that forms lineage metadata, and how data lineage metadata is collected from external systems. This package enables data lineage on Astro. See [OpenLineage and Airflow](https://www.astronomer.io/docs/learn/airflow-openlineage/).
 - A custom Airflow UI that includes links to Astronomer resources and exposes the currently running Docker image tag in the footer of all UI pages.
 - A custom logging module that ensures Airflow task logs are reliably available to the Astro data plane. (_Astro only_).
 - A custom security manager that enforces user roles and permissions as defined by Astro. (_Astro only_).
 - A monitoring DAG that the Astronomer team uses to monitor the health of Astro Deployments. (_Astro only_)
 
-For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes).
+For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime release notes](https://www.astronomer.io/docs/astro/runtime-release-notes).
 
 ## Runtime versioning
 
@@ -39,11 +39,11 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | 10            | 2.8                    |
 | 11            | 2.9                    |
 
-For version compatibility information, see the [Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes).
+For version compatibility information, see the [Runtime release notes](https://www.astronomer.io/docs/astro/runtime-release-notes).
 
 ## Default environment variables
 
-The following table lists the Airflow environment variables that have different default values on Astro Runtime as of version {{RUNTIME_VER}}. Unlike [global environment variables](https://docs.astronomer.io/astro/platform-variables) set on the Astro data plane, you can override the values of these variables for specific use cases.
+The following table lists the Airflow environment variables that have different default values on Astro Runtime as of version {{RUNTIME_VER}}. Unlike [global environment variables](https://www.astronomer.io/docs/astro/platform-variables) set on the Astro data plane, you can override the values of these variables for specific use cases.
 
 | Environment Variable                                            | Description                                                                                                                                                                                 | Value                                                                        |
 | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
@@ -59,7 +59,7 @@ Astro Runtime includes a monitoring DAG that is pre-installed in the Docker imag
 
 The `astronomer_monitoring_dag` runs a simple bash task every 5 minutes to ensure that your Airflow scheduler and workers are functioning as expected. If the task fails twice in a row or is not scheduled within a 10-minute interval, Astronomer support receives an alert and will work with you to troubleshoot. The DAG runs and appears in the Airflow UI only on Astro Deployments.
 
-Because this DAG is essential to Astro's managed service, you are not charged for its task runs. For the same reasons, this DAG can't be modified or disabled through the Airflow UI. To modify when this DAG runs on a Deployment, set the following [Deployment environment variable](https://docs.astronomer.io/astro/environment-variables):
+Because this DAG is essential to Astro's managed service, you are not charged for its task runs. For the same reasons, this DAG can't be modified or disabled through the Airflow UI. To modify when this DAG runs on a Deployment, set the following [Deployment environment variable](https://www.astronomer.io/docs/astro/environment-variables):
 
 - Key: `AIRFLOW_MONITORING_DAG_SCHEDULE_INTERVAL`
 - Value: An alternative schedule defined as a [cron expression](https://crontab.guru/)
@@ -68,10 +68,13 @@ Because this DAG is essential to Astro's managed service, you are not charged fo
 
 Astro Runtime {{RUNTIME_VER}} includes the following pre-installed open source provider packages. Providers marked with an asterisk (\*) are also installed by default on open source Apache Airflow.
 
+- Common IO [`apache-airflow-providers-common-io`](https://pypi.org/project/apache-airflow-providers-common-io/)\*
 - Common SQL [`apache-airflow-providers-common-sql`](https://pypi.org/project/apache-airflow-providers-common-sql/)\*
+- FAB [`apache-airflow-providers-fab`](https://pypi.org/project/apache-airflow-providers-fab/)\*
 - FTP [`apache-airflow-providers-ftp`](https://pypi.org/project/apache-airflow-providers-ftp/)\*
 - HTTP [`apache-airflow-providers-http`](https://pypi.org/project/apache-airflow-providers-http/)\*
 - IMAP [`apache-airflow-providers-imap`](https://pypi.org/project/apache-airflow-providers-imap/)\*
+- SMTP [`apache-airflow-providers-smtp`](https://pypi.org/project/apache-airflow-providers-smtp/)\*
 - SQLite [`apache-airflow-providers-sqlite`](https://pypi.org/project/apache-airflow-providers-sqlite/)\*
 - Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/)
 - Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)
@@ -82,25 +85,14 @@ Astro Runtime {{RUNTIME_VER}} includes the following pre-installed open source p
 - Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)
 - Google [`apache-airflow-providers-google`](https://pypi.org/project/apache-airflow-providers-google/)
 - Microsoft Azure [`apache-airflow-providers-microsoft-azure`](https://pypi.org/project/apache-airflow-providers-microsoft-azure/)
+- MySQL [`apache-airflow-providers-mysql`](https://pypi.org/project/apache-airflow-providers-mysql/)
 - OpenLineage [`apache-airflow-providers-openlineage`](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html)
 - PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)
 - Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)
 
 ### Provider package versioning
 
-If an Astro Runtime release includes changes to an installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), the version change is documented in the [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes).
-
-To determine the version of any provider package installed in your current Astro Runtime image, run:
-
-```
-docker run --rm <runtime-image> pip freeze | grep <provider>
-```
-
-For example, to find the version of the current package for Astronomer providers, run the following command:
-
-```
-astro dev bash pip freeze | grep astronomer-providers
-```
+Astronomer users specific provider package versions in each release of Astro Runtime. See [Astro Runtime provider package reference](https://www.astronomer.io/docs/astro/runtime-provider-reference) for a list of all providers installed in each release of Astro Runtime.
 
 ## Python versioning
 
@@ -141,30 +133,79 @@ In Airflow, the executor is responsible for determining how and where a task is 
 
 In all local environments created with the Astro CLI, Astro Runtime runs the [Local executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/local.html). On Astro and Astronomer Software, you can use either the Celery executor or the Kubernetes executor.
 
-## Distribution
+## Image types
 
-Astro Runtime is distributed as a Debian-based Docker image. For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
+Astro Runtime is distributed as a Debian-based Docker image. An Astro Runtime image must be specified in the `Dockerfile` of your Astro project. The default image tag is:
 
-### Base distributions
+```
+quay.io/astronomer/astro-runtime:<version>
+```
 
-The base Astro Runtime Docker images have the following format:
+You can modify this image tag in your Astro project Dockerfile to use different versions of Astro Runtime. The following sections explain each image type and how to specify them. For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
 
-- `quay.io/astronomer/astro-runtime:<version>`
-- `quay.io/astronomer/astro-runtime:<version>-base`
+### Base images
 
-An Astro Runtime image must be specified in the `Dockerfile` of your Astro project. Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component. A `base` Astro Runtime image is recommended for complex use cases that require additional customization, such as [installing Python packages from private sources](https://docs.astronomer.io/astro/cli/private-python-packages).
+The base Astro Runtime Docker image has the following format:
 
-### Python version distributions
+```
+quay.io/astronomer/astro-runtime:<version>-base
+```
 
-Starting with Astro Runtime 9, Astronomer maintains different distributions Astro Runtime for each supported Python version. Python version distribution images have the following format:
+A `base` Astro Runtime image is recommended for complex use cases that require additional customization, such as [installing Python packages from private sources](https://docs.astronomer.io/astro/cli/private-python-packages).
+
+For all other cases, Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the images running each core Airflow component. 
+
+### Python version images
+
+Starting with Astro Runtime 9, Astronomer maintains different Astro Runtime images for each supported Python version. Python version images have the following format:
 
 ```text
 quay.io/astronomer/astro-runtime:<runtime-version>-python-<python-version>
 ```
 
-Each Python distribution also has an alternative `quay.io/astronomer/astro-runtime:<version>-base` distribution that you can use to further customize the image.
+### Slim images 
 
-## System distribution
+Starting with Astro Runtime 11, Astronomer maintains a slim Astro Runtime image. Slim Astro Runtime images only include the dependencies required for the basic functionality of Astro. Providers marked with an asterisk (\*) are also installed by default on open source Apache Airflow. The providers installed in the slim image are:
+
+- Common IO [`apache-airflow-providers-common-io`](https://pypi.org/project/apache-airflow-providers-common-io/)\*
+- Common SQL [`apache-airflow-providers-common-sql`](https://pypi.org/project/apache-airflow-providers-common-sql/)\*
+- FAB [`apache-airflow-providers-fab`](https://pypi.org/project/apache-airflow-providers-fab/)\*
+- FTP [`apache-airflow-providers-ftp`](https://pypi.org/project/apache-airflow-providers-ftp/)\*
+- HTTP [`apache-airflow-providers-http`](https://pypi.org/project/apache-airflow-providers-http/)\*
+- IMAP [`apache-airflow-providers-imap`](https://pypi.org/project/apache-airflow-providers-imap/)\*
+- SMTP [`apache-airflow-providers-smtp`](https://pypi.org/project/apache-airflow-providers-smtp/)\*
+- SQLite [`apache-airflow-providers-sqlite`](https://pypi.org/project/apache-airflow-providers-sqlite/)\*
+- Celery [`apache-airflow-providers-celery`](https://pypi.org/project/apache-airflow-providers-celery/)
+- Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)
+- MySQL [`apache-airflow-providers-mysql`](https://pypi.org/project/apache-airflow-providers-mysql/)
+- PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)
+- `astronomer-kubernetes-executor`
+
+Use the slim Astro Runtime image if you want faster local builds and deploys, smaller footprint for security vulnerabilities and dependency conflicts, or you don't require the packages included in the default Astro Runtime distribution.
+
+### Combine image types
+
+Image types are additive, meaning that you can combine multiple types in your image tag to specify an image with multiple variations.
+
+Types must be specified in a specific order in your image tag. The order and format multi-type image tag is:
+
+```
+quay.io/astronomer/astro-runtime:<astro-runtime-version>-<python-version-type>-<slim-type>-<base-type>
+```
+
+You can add or remove any types as needed. For example, to use the base, slim Astro Runtime image with Python 3.11, your image tag would be:
+
+```
+quay.io/astronomer/astro-runtime:11.0.0-python-3.11-slim-base
+```
+
+If you wanted the same base image using Python 3.11, but you didn't want it to be slim, you would remove the `-slim-` from the image tag like in the following example:
+
+```
+quay.io/astronomer/astro-runtime:11.0.0-python-3.11-base
+```
+
+## Operating system support
 
 The following table lists the operating systems and architectures supported by each Astro Runtime version. If you're using a Mac computer with an M1 chip, Astronomer recommends using Astro Runtime 6.0.4 or later.
 

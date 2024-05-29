@@ -40,6 +40,10 @@ This document contains all available permissions that you can assign to a [custo
 
 - `deployment.airflow.clusterActivity.get`: View the **Cluster Activity** menu in the Airflow UI.
 
+## Deployment Airflow CustomMenu
+
+- `deployment.airflow.customMenu.get`: Create and use custom plugins for the Aiflow UI menu.
+
 ## Deployment Airflow Config
 
 - `deployment.airflow.configMenu.get`: View the **Config** menu in the Airflow UI.

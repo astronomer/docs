@@ -1,7 +1,9 @@
 .hybridBadge {
-  display: inline-block;
+  display: flex;
   overflow: hidden;
-  width: 180px;
+  width: 30%;
   height: 30%;
   min-width: 180px;
+  width: 180px;
+  margin-bottom: 0.5rem;
 }

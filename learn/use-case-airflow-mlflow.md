@@ -22,7 +22,7 @@ For more detailed instructions on using MLflow with Airflow, see the [MLflow tut
 
 Before trying this example, make sure you have:
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop).
 
 ## Clone the project

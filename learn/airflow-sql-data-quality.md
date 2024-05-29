@@ -38,7 +38,7 @@ To get the most out of this tutorial, you should have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - Access to a relational database. You can use an in-memory SQLite database for which you'll need to install the [SQLite provider](https://registry.astronomer.io/providers/apache-airflow-providers-sqlite/versions/latest). Note that currently the operators cannot support BigQuery `job_id`s.
 - A love for birds.
 

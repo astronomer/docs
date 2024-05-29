@@ -37,6 +37,25 @@ Unlike Workspace API tokens and Organization API tokens, Deployment API tokens a
 
 6. Copy the token and store it in a safe place. You will not be able to retrieve this value from Astro again.
 
+## Assign an Organization or Workspace API token to a Deployment
+
+To centralize API token management, you can add an Organization or Workspace API token to a Deployment instead of creating a dedicated Deployment API token. Deployment-scoped API tokens are useful if you want to manage API tokens from the Organization level on a single screen, or you want to use a single API token for multiple Deployments.
+
+Deployment-scoped API tokens are functionally identical to dedicated Deployment API tokens, except that you can only rotate, update, or delete them within their original scope.
+
+1. In the Astro UI, open your Workspace, then open the Deployment you want to create an API token for.
+
+2. Click **Access**.
+
+3. Click **API Tokens**, then click **+ Deployment API Token**. In the dropdown menu that appears, click either **Assign Workspace API token** or **Assign Organization API token**.
+
+4. Configure the new Deployment API token:
+
+    - **Workspace/ Organization API Token**: Select the API token you want to assign to the Deployment.
+    - **Deployment Role**: Select the role that the API token has in the Deployment.
+
+5. Click **Update API Token**.
+
 ## Update or delete a Deployment API token
 
 If you delete a Deployment API token, make sure that no existing CI/CD workflows are using it. After it's deleted, an API token cannot be recovered. If you unintentionally delete an API token, create a new one and update any CI/CD workflows that used the deleted API token.
@@ -47,7 +66,7 @@ If you delete a Deployment API token, make sure that no existing CI/CD workflows
 
 3. Update the name or description of your token, then click **Save Changes**.
 
-4. (Optional) To delete a Deployment API token, click **Delete API Token**, enter `Delete`, and then click **Yes, Continue**.
+4. (Optional) To delete a Deployment API token, click **Delete API Token**, enter `Delete`, and then click **Yes, Continue**. If you're editing a Deployment-scoped API token, click **Remove API token** instead to unassign the API token from the Deployment.
 
 ## Rotate a Deployment API token
 

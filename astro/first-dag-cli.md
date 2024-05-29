@@ -244,5 +244,5 @@ Now that you've created and run your first DAG on Astro, the next step is to add
 
 - [Develop a project](cli/develop-project.md).
 - [Install Docker](https://www.docker.com/products/docker-desktop/) to use the full capabilities of the Astro CLI, such as the ability to run Airflow locally and deploy the rest of your Astro project to Astro, including Python packages.
-- [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).
+- [Write your First DAG](https://www.astronomer.io/docs/learn/get-started-with-airflow).
 - [Deploy code to Astro](deploy-code.md).

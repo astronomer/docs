@@ -7,6 +7,9 @@ toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---
 
+:::privatepreview
+:::
+
 [Data lineage](https://en.wikipedia.org/wiki/Data_lineage) is the concept of tracking data from its origin to wherever it is consumed downstream as it flows through a data pipeline. This includes connections between datasets and tables in a database as well as rich metadata about the tasks that create and transform data. You can observe data lineage to:
 
 - Trace the history of a dataset.
@@ -123,7 +126,7 @@ To test that lineage was configured correctly on your Databricks cluster, run a 
 
 ### OpenLineage and dbt Core with Airflow
 
-Use the information provided here to set up lineage collection for dbt Core tasks. To learn how to create and productionize dbt tasks in Airflow, and how to automatically create dbt Core tasks based on a manifest, see [Orchestrate dbt with Airflow](https://docs.astronomer.io/learn/airflow-dbt).
+Use the information provided here to set up lineage collection for dbt Core tasks. To learn how to create and productionize dbt tasks in Airflow, and how to automatically create dbt Core tasks based on a manifest, see [Orchestrate dbt with Airflow](https://www.astronomer.io/docs/learn/airflow-dbt).
 
 If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
@@ -170,7 +173,7 @@ This guide outlines how to set up lineage collection for a Great Expectations pr
 
 #### Prerequisites
 
-- A [Great Expectations Data Context](https://legacy.docs.greatexpectations.io/en/latest/guides/tutorials/getting_started.html#tutorials-getting-started)
+- A [Great Expectations Data Context](https://docs.greatexpectations.io/docs/oss/guides/setup/configuring_data_contexts/instantiating_data_contexts/instantiate_data_context/)
 - If using a Checkpoint or Checkpoint config, your Astro base domain and OpenLineage API key.
 
 #### Setup

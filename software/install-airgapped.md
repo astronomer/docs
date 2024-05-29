@@ -60,11 +60,20 @@ The images and tags which are required for your Software installation depend on 
     ```
 
     This command sets all possible Helm values that could impact which images are required for your installation. By fetching all images now, you save time by eliminating the risk of missing an image.
-2. Run the following command to template the Airflow Helm chart and fetch its rendered image tags:
+    
+2. Run the following command to determine the Astronomer Airflow Helm chart version:
+ 
+    ```shell
+    helm template astronomer/astronomer --version <your-astronomer-version>|grep 'Static helm' -A4| grep "version: " | sed -e 's/"//g' -e 's/version:[ ]//' -e 's/^ */v/g'
+    ```
+
+3. Run the following command to template the Astronomer Airflow Helm chart and fetch its rendered image tags:
 
     ```shell
-    helm template --version <your-airflow-version> astronomer/airflow --set airflow.postgresql.enabled=false --set airflow.pgbouncer.enabled=true --set airflow.statsd.enabled=true --set airflow.executor=CeleryExecutor | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq
+    helm template --version <your-astronomer-airflow-chart-version> astronomer/airflow --set airflow.postgresql.enabled=false --set airflow.pgbouncer.enabled=true --set airflow.statsd.enabled=true --set airflow.executor=CeleryExecutor | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq
     ```
+
+    **Note:** The Astronomer Airflow Helm Chart version begins with the letter v and is versioned separately from Astronomer Software and Airflow.
 
 These commands generate a list of images required for your version of Astronomer. Add these images to a private image registry hosted within your organization's network. In Step 3, you will specify this private registry in your Astronomer configuration.
 
@@ -120,16 +129,16 @@ astronomer:
 There are two Helm charts required for Astronomer:
 
 - The [Astronomer Helm chart](https://github.com/astronomer/astronomer) for the Astronomer Platform
-- The [Airflow Helm chart](https://github.com/astronomer/airflow-chart) for Airflow deployments in Astronomer Platform
+- The [Astronomer Airflow Helm chart](https://github.com/astronomer/airflow-chart) for Airflow deployments in Astronomer Platform
 
 The Astronomer Helm chart can be downloaded using `helm pull` and applied locally if desired.
 
-Commander, which is Astronomer's provisioning component, uses the Airflow Helm chart to create Airflow deployments. You have two options to make the Helm chart available to Commander:
+Commander, which is Astronomer's provisioning component, uses the Astronomer Airflow Helm chart to create Airflow deployments. You have two options to make the Helm chart available to Commander:
 
-- Use the built-in Airflow Helm chart in the Commander Docker image.
-- Host the Airflow Helm chart within your network. Not every cloud provider has a managed Helm registry, so you might want to check out [JFrog Artifactory](https://jfrog.com/artifactory) or [ChartMuseum](https://github.com/helm/chartmuseum).
+- Use the built-in Astronomer Airflow Helm chart in the Commander Docker image.
+- Host the Astronomer Airflow Helm chart within your network. Not every cloud provider has a managed Helm registry, so you might want to check out [JFrog Artifactory](https://jfrog.com/artifactory) or [ChartMuseum](https://github.com/helm/chartmuseum).
 
-To use the built-in Airflow Helm chart in the Commander Docker image, add the following configuration to your `values.yaml` file:
+To use the built-in Astronomer Airflow Helm chart in the Commander Docker image, add the following configuration to your `values.yaml` file:
 
 ```yaml
 astronomer:
@@ -314,16 +323,51 @@ astronomer:
       deployments:
         helm:
           airflow:
-            extraEnv: |
+            extraEnv:
             - name: AIRFLOW__ASTRONOMER__UPDATE_URL
               value: http://astronomer-releases.astronomer.svc.cluster.local/astronomer-runtime
 ```
 
-## Step 6: Install Astronomer using Helm
+## Step 6: Create a Kubernetes TLS Secret
+
+Store the public TLS certificate in a kubernetes secret in the Astronomer platform namespace. If you use a third-party ingress controller, this secret must be named `astronomer-tls`. You must use `astronomer-tls` exactly. There is no substitution for platform release name. Additionally, make sure the value of `global.tlsSecret` in your `values.yaml` is also set to `astronomer-tls`.
+
+To store the secret in the Astronomer platform namespace, run the following command:
+
+```sh
+kubectl -n <astronomer platform namespace> create secret tls astronomer-tls --cert <your-certificate-filepath> --key <your-private-key-filepath>
+```
+
+Most third-party ingress-controllers require the public certificate to be available in the namespace of the various airflow instances. If using a third-party ingress-controller, run the following command to mark the secret for automatic replication into Astronomer-managed Airflow namespaces. When you run the command, substitute both instances of `<astronomer-platform-namespace>` with the name of the Astronomer Software platform namespace:
+
+```sh
+kubectl -n <astronomer-platform-namespace> annotate secret astronomer-tls "astronomer.io/commander-sync"="platform=<astronomer platform namespace>"
+```
+
+If you received a certificate from a private CA, you also need to follow these steps:
+
+1. Add the root certificate provided to you by your security team to an [Opaque Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#secret-types) in the Astronomer namespace by running the following command:
+
+    ```sh
+    kubectl create secret generic private-root-ca --from-file=cert.pem=./<your-certificate-filepath> -n astronomer
+    ```
+
+    The root certificate that you specify with this command must be the certificate of the authority that signed the Astronomer certificate, rather than the Astronomer certificate itself. This is the same certificate you need to install with all your clients for them to trust your services.
+
+    :::info
+    
+    The name of the secret file must be `cert.pem` for Astronomer to properly trust your certificate.
+    
+    :::
+    
+
+2. Note the value of `private-root-ca`. You need this value to configure your Helm chart in Step 7 to specify the `privateCaCerts` key-value pair with this value.
+
+## Step 7: Install Astronomer using Helm
 
 Before completing this step, double-check that the following statements are true:
 
-- You made Astronomer's Docker images, Airflow Helm chart, and updates JSON accessible inside your network.
+- You made Astronomer's Docker images, Astronomer Airflow Helm chart, and updates JSON accessible inside your network.
 - You completed Steps 1 through 8 in the [AWS](install-aws-standard.md), [Azure](install-azure-standard.md), or [GCP](install-gcp-standard.md) install guide.
 
 After this check, you can install the Astronomer Helm chart by running the following commands, making sure to replace `<your-image-tag>` with the version of Astronomer that you want to install:

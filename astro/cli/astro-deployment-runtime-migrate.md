@@ -17,7 +17,7 @@ Initializes the Runtime migration upgrade process on any Deployment on Astronome
 
 ## Usage
 
-Run `astro deployment runtime migrate --deployment-id=<deployment-id>` to initialize the Runtime upgrade process. To finalize the Runtime upgrade process, complete all of the steps in [Migrate to Astro Runtime](https://docs.astronomer.io/software/migrate-to-runtime).
+Run `astro deployment runtime migrate --deployment-id=<deployment-id>` to initialize the Runtime upgrade process. To finalize the Runtime upgrade process, complete all of the steps in [Migrate to Astro Runtime](https://www.astronomer.io/docs/software/migrate-to-runtime).
 
 The Astro CLI lists only the available Runtime versions that are later than the version currently specified in your `Dockerfile`.
 

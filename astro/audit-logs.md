@@ -9,7 +9,7 @@ import TeamBadge from '@site/src/components/TeamBadge';
 
 :::warning
 
-This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
+This feature is in [Public Preview](https://www.astronomer.io/docs/astro/feature-previews).
 
 :::
 

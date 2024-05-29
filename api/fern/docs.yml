@@ -1,6 +1,6 @@
 instances:
-  - url: astronomer.docs.buildwithfern.com/api
-    custom-domain: docs.astronomer.io/api
+  - url: astronomer.docs.buildwithfern.com/docs/api
+    custom-domain: www.astronomer.io/docs/api
 title: Astro API Reference
 navigation:
   - section: Astro API
@@ -28,7 +28,7 @@ colors:
 logo: 
   light: ./docs/assets/logo-light.svg
   dark: ./docs/assets/logo-dark.svg
-  href: https://docs.astronomer.io/api
+  href: https://www.astronomer.io/docs/api
 navbar-links:
   - type: primary
     text: Get Started Free
