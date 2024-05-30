@@ -1,18 +1,18 @@
 ---
-title: 'How to write best practice Airflow DAGs for Astro'
+title: 'How to optimize Airflow DAGs for Astro'
 sidebar_label: 'DAG writing on Astro'
 id: dag-writing-on-astro
 ---
 
 You can run any valid Airflow DAG on Astro. 
 
-However, there are a couple of best practices surrounding Astronomer tools and features that help you to:
+However, following best practices in using Astro features will help you:
 
 - Improve your development workflow.
 - Organize your deployment and DAGs. 
 - Optimize task execution efficiency.
 
-This best practice doc provides additional guidance on how to write Airflow DAGs for Astro, all [general Airflow best practices](https://docs.astronomer.io/learn/dag-best-practices) apply.
+While this best practice guide focuses on writing Airflow DAGs for Astro, all [general Airflow best practices](https://docs.astronomer.io/learn/dag-best-practices) also apply.
 
 :::info New to Airflow?
 
@@ -26,13 +26,15 @@ If you are new to Airflow in general, we recommend starting with the following r
 
 ## Feature overview
 
+In this guide, you'll learn when to use the following Astro and Airflow features to optimize your DAGs for Astro:
+
 - [Astro CLI](overview.md).
 - [CI/CD on Astro](set-up-ci-cd.md).
-- [Worker queues](configure-worker-queues.md).
-- [Astro Cloud UI Environment Manager](manage-connections-variables.md)
-- [Astro alerts](alerts.md)
-- [Kubernetes Executor](executors-overview.md)
-- [KubernetesPodOperator](kubernetespodoperator.md)
+- [Worker queues](configure-worker-queues.mdx).
+- [Astro Cloud UI Environment Manager](manage-connections-variables.md).
+- [Astro alerts](alerts.md).
+- [Kubernetes Executor](executors-overview.md).
+- [KubernetesPodOperator](kubernetespodoperator.md).
 
 ## Best practice guidance 
 
