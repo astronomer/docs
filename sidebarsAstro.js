@@ -332,6 +332,7 @@ module.exports = {
         'best-practices/dag-writing-on-astro'
         'best-practices/cross-deployment-dependencies',
         'best-practices/manage-dev-deployments',
+        'best-practices/upgrading-astro-runtime',
       ],
     },
     {
