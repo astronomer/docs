@@ -327,12 +327,12 @@ module.exports = {
       type: 'category',
       label: 'Best practices',
       items: [
+        'best-practices/upgrading-astro-runtime',
         'best-practices/airflow-vs-astro-alerts',
         'best-practices/connections-branch-deploys',
         'best-practices/dag-writing-on-astro'
         'best-practices/cross-deployment-dependencies',
         'best-practices/manage-dev-deployments',
-        'best-practices/upgrading-astro-runtime',
       ],
     },
     {
