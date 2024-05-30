@@ -213,7 +213,7 @@ For more information, see the [Apache Airflow release notes](https://airflow.apa
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2024-28746 
+- [CVE-2024-28746](https://www.cve.org/CVERecord?id=CVE-2024-28746) 
 
 ## Astro Runtime 10.4.0
 
