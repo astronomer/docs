@@ -54,7 +54,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2024-30251
+- [CVE-2024-30251](https://www.cve.org/CVERecord?id=CVE-2024-30251)
 
 ## Astro Runtime 11.2.0
 
@@ -78,7 +78,7 @@ Due to an [issue related to using custom FAB actions in Airflow plugins](https:/
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2024-4340
+- [CVE-2024-4340](https://www.cve.org/CVERecord?id=CVE-2024-4340)
 
 ## Astro Runtime 11.1.0
 
@@ -136,7 +136,7 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2024-32077
+- [CVE-2024-32077](https://www.cve.org/CVERecord?id=CVE-2024-32077)
 
 ## Astro Runtime 10.8.0
 
@@ -151,12 +151,12 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2024-4340 
-- https://www.cve.org/CVERecord?id=CVE-2024-1135 
+- [CVE-2024-4340](https://www.cve.org/CVERecord?id=CVE-2024-4340) 
+- [CVE-2024-1135](https://www.cve.org/CVERecord?id=CVE-2024-1135) 
 
 #### Ignored CVEs
 
-- https://www.cve.org/CVERecord?id=CVE-2024-34069 Werkzeug was Ignored ( Can only be fixed from Airflow)
+- [CVE-2024-34069](https://www.cve.org/CVERecord?id=CVE-2024-34069) (Airflow 2.8 can't use Werkzeug 3)
 
 ## Astro Runtime 10.7.0
 
@@ -173,7 +173,7 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2024-31869 
+- [CVE-2024-31869](https://www.cve.org/CVERecord?id=CVE-2024-31869) 
 
 ## Astro Runtime 10.6.0
 
@@ -195,7 +195,7 @@ For more information, see the [Apache Airflow release notes](https://airflow.apa
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2022-48174
+- [CVE-2022-48174](https://www.cve.org/CVERecord?id=CVE-2022-48174)
 
 ## Astro Runtime 10.5.0
 
@@ -231,10 +231,10 @@ For more information, see the [Apache Airflow release notes](https://airflow.apa
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2024-26130 
-- https://www.cve.org/CVERecord?id=CVE-2024-30251 
-- https://www.cve.org/CVERecord?id=CVE-2024-26280 
-- https://www.cve.org/CVERecord?id=CVE-2024-27906 
+- [CVE-2024-26130](https://www.cve.org/CVERecord?id=CVE-2024-26130) 
+- [CVE-2024-30251](https://www.cve.org/CVERecord?id=CVE-2024-30251) 
+- [CVE-2024-26280](https://www.cve.org/CVERecord?id=CVE-2024-26280) 
+- [CVE-2024-27906](https://www.cve.org/CVERecord?id=CVE-2024-27906)
 
 ## Astro Runtime 10.3.0
 
@@ -272,12 +272,12 @@ For more information, see the [Apache Airflow release notes](https://airflow.apa
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2023-50944
-- https://www.cve.org/CVERecord?id=CVE-2023-50943 
+- [CVE-2023-50944](https://www.cve.org/CVERecord?id=CVE-2023-50944)
+- [CVE-2023-50943](https://www.cve.org/CVERecord?id=CVE-2023-50943) 
 
 #### Ignored CVEs
 
- - https://www.cve.org/CVERecord?id=CVE-2024-25128 (does not apply)
+ - [CVE-2024-25128](https://www.cve.org/CVERecord?id=CVE-2024-25128) (does not apply)
 
 ## Astro Runtime 10.1.0
 
@@ -316,10 +316,10 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2023-48291 
-- https://www.cve.org/CVERecord?id=CVE-2023-47265 
-- https://www.cve.org/CVERecord?id=CVE-2023-49920 
-- https://www.cve.org/CVERecord?id=CVE-2023-50783 
+- [CVE-2023-48291](https://www.cve.org/CVERecord?id=CVE-2023-48291) 
+- [CVE-2023-47265](https://www.cve.org/CVERecord?id=CVE-2023-47265) 
+- [CVE-2023-49920](https://www.cve.org/CVERecord?id=CVE-2023-49920) 
+- [CVE-2023-50783](https://www.cve.org/CVERecord?id=CVE-2023-50783)
 
 ## Astro Runtime 9.14.0
 
@@ -337,7 +337,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2024-30251 
+- [CVE-2024-30251](https://www.cve.org/CVERecord?id=CVE-2024-30251) 
 
 ## Astro Runtime 9.13.0
 
@@ -373,7 +373,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2022-48174
+- [CVE-2022-48174](https://www.cve.org/CVERecord?id=CVE-2022-48174)
 
 ## Astro Runtime 9.11.0
 
@@ -394,13 +394,13 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2024-26130 
-- https://www.cve.org/CVERecord?id=CVE-2024-27906 
-- https://www.cve.org/CVERecord?id=CVE-2024-26280 
+- [CVE-2024-26130](https://www.cve.org/CVERecord?id=CVE-2024-26130)
+- [CVE-2024-27906](https://www.cve.org/CVERecord?id=CVE-2024-27906) 
+- [CVE-2024-26280](https://www.cve.org/CVERecord?id=CVE-2024-26280)
 
 #### Ignored CVEs
 
-- https://www.cve.org/CVERecord?id=CVE-2024-34069 Werkzeug was Ignored ( Can only be fixed from Airflow)
+- [CVE-2024-34069](https://www.cve.org/CVERecord?id=CVE-2024-34069) Werkzeug was Ignored ( Can only be fixed from Airflow)
 
 ## Astro Runtime 9.10.2
 
@@ -434,10 +434,10 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2024-4340 
+- [CVE-2024-4340](https://www.cve.org/CVERecord?id=CVE-2024-4340) 
 
 #### Ignored CVEs
-- https://www.cve.org/CVERecord?id=CVE-2024-25128 (does not apply because we don't use OID)
+- [CVE-2024-25128](https://www.cve.org/CVERecord?id=CVE-2024-25128) (does not apply because we don't use OID)
 
 ## Astro Runtime 9.10.0
 
@@ -466,9 +466,9 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2023-50944 
-- https://www.cve.org/CVERecord?id=CVE-2023-50943 
-- https://www.cve.org/CVERecord?id=CVE-2023-50944 
+- [CVE-2023-50944](https://www.cve.org/CVERecord?id=CVE-2023-50944)
+- [CVE-2023-50943](https://www.cve.org/CVERecord?id=CVE-2023-50943) 
+- [CVE-2023-50944](https://www.cve.org/CVERecord?id=CVE-2023-50944)
 
 ## Astro Runtime 9.8.0
 
@@ -510,12 +510,12 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2023-50783 
-- https://www.cve.org/CVERecord?id=CVE-2023-49920 
-- https://www.cve.org/CVERecord?id=CVE-2023-47265 
-- https://www.cve.org/CVERecord?id=CVE-2023-49920 
-- https://www.cve.org/CVERecord?id=CVE-2023-50783 
-- https://www.cve.org/CVERecord?id=CVE-2023-48291 
+- [CVE-2023-50783](https://www.cve.org/CVERecord?id=CVE-2023-50783)
+- [CVE-2023-49920](https://www.cve.org/CVERecord?id=CVE-2023-49920) 
+- [CVE-2023-47265](https://www.cve.org/CVERecord?id=CVE-2023-47265)
+- [CVE-2023-49920](https://www.cve.org/CVERecord?id=CVE-2023-49920) 
+- [CVE-2023-50783](https://www.cve.org/CVERecord?id=CVE-2023-50783) 
+- [CVE-2023-48291](https://www.cve.org/CVERecord?id=CVE-2023-48291) 
 
 ## Astro Runtime 9.6.0
 
@@ -530,8 +530,8 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2023-47038
-- https://www.cve.org/CVERecord?id=CVE-2023-44487
+- [CVE-2023-47038](https://www.cve.org/CVERecord?id=CVE-2023-47038)
+- [CVE-2023-44487](https://www.cve.org/CVERecord?id=CVE-2023-44487)
 
 ## Astro Runtime 9.5.0
 
@@ -554,8 +554,8 @@ To learn more, see the [Apache Airflow 2.7.3 release notes](https://airflow.apac
 
 ### Security Fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2023-47037 
-- https://www.cve.org/CVERecord?id=CVE-2023-42781 
+- [CVE-2023-47037](https://www.cve.org/CVERecord?id=CVE-2023-47037) 
+- [CVE-2023-42781](https://www.cve.org/CVERecord?id=CVE-2023-42781) 
 
 ## Astro Runtime 9.4.0
 
@@ -607,10 +607,10 @@ To learn more, see the [Apache Airflow 2.7.2 release notes](https://airflow.apac
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2023-42780 
-- https://www.cve.org/CVERecord?id=CVE-2023-45348 
-- https://www.cve.org/CVERecord?id=CVE-2023-42792 
-- https://www.cve.org/CVERecord?id=CVE-2023-42663 
+- [CVE-2023-42780](https://www.cve.org/CVERecord?id=CVE-2023-42780) 
+- [CVE-2023-45348](https://www.cve.org/CVERecord?id=CVE-2023-45348) 
+- [CVE-2023-42792](https://www.cve.org/CVERecord?id=CVE-2023-42792)
+- [CVE-2023-42663](https://www.cve.org/CVERecord?id=CVE-2023-42663) 
 
 ## Astro Runtime 9.1.0
 
@@ -635,8 +635,8 @@ To learn more, see the [Apache Airflow 2.7.1 release notes](https://airflow.apac
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2023-40712 
-- https://www.cve.org/CVERecord?id=CVE-2023-40611 
+- [CVE-2023-40712](https://www.cve.org/CVERecord?id=CVE-2023-40712) 
+- [CVE-2023-40611](https://www.cve.org/CVERecord?id=CVE-2023-40611) 
 
 ## Astro Runtime 9.0.0
 
@@ -688,9 +688,9 @@ The base image for Astro Runtime now uses Python 3.11. If you want to use a diff
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2023-39441 
-- https://www.cve.org/CVERecord?id=CVE-2023-40273 
-- https://www.cve.org/CVERecord?id=CVE-2023-37379 
+- [CVE-2023-39441](https://www.cve.org/CVERecord?id=CVE-2023-39441) 
+- [CVE-2023-40273](https://www.cve.org/CVERecord?id=CVE-2023-40273)
+- [CVE-2023-37379](https://www.cve.org/CVERecord?id=CVE-2023-37379) 
 
 ## Astro Runtime 8.10.0
 
