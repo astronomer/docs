@@ -1,5 +1,5 @@
 ---
-title: "Best practices for upgrading Astro Runtime"
+title: "Best practices for upgrading Astro Runtime on Astro"
 sidebar_label: "Astro Runtime upgrades"
 description: "A list of best practices to ensure that your Astro Runtime upgrades are safe and easy."
 id: upgrading-astro-runtime
