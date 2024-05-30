@@ -400,7 +400,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 #### Ignored CVEs
 
-- [CVE-2024-34069](https://www.cve.org/CVERecord?id=CVE-2024-34069) Werkzeug was Ignored ( Can only be fixed from Airflow)
+- [CVE-2024-34069](https://www.cve.org/CVERecord?id=CVE-2024-34069) (Airflow 2.8 can't use Werkzeug 3)
 
 ## Astro Runtime 9.10.2
 
