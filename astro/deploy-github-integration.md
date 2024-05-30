@@ -39,14 +39,14 @@ The Astro GitHub integration is not supported if any of the following are true:
 - You need to deploy images from an external or private Docker registry.
 - You use the `--image-only` flag in the Astro CLI, or you need to exclude DAGs from specific deploys. This is usually the case if you have a multiple-repository deploy strategy as described in [Develop a CI/CD strategy](https://www.astronomer.io/docs/astro/set-up-ci-cd#multiple-repositories).
 - Your repository is hosted in an on-premises GitHub Enterprise server. To deploy code from an on-premises repository, see [Private network CI/CD templates](https://www.astronomer.io/docs/astro/ci-cd-templates/github-actions-private-network).
-- If you trigger a deploy that includes a downgrade of Astro Runtime, the deploy will silently fail. Astronomer recommends only downgrading Deployments using [rollbacks](https://www.astronomer.io/docs//astro/deploy-history#roll-back-to-a-past-deploy).
+- If you trigger a deploy that includes a downgrade of Astro Runtime, the deploy will silently fail. Astronomer recommends only downgrading Deployments using [rollbacks](https://www.astronomer.io/docs/astro/deploy-history#roll-back-to-a-past-deploy).
 
 There is currently no limit or additional charge for deploying code to Astro with the GitHub integration, but Astronomer might reach out to discuss your usage if you trigger an unusually large number of deploys.
 
 ## Prerequisites
 
 - Workspace Admin permissions on an Astro Workspace.
-- A GitHub repository that contains an [Astro project](https://www.astronomer.io/docs//astro/cli/develop-project#create-an-astro-project). The Astro project can exist at any level in your repository.
+- A GitHub repository that contains an [Astro project](https://www.astronomer.io/docs/astro/cli/develop-project#create-an-astro-project). The Astro project can exist at any level in your repository.
 - A GitHub user account with read permissions to the repository containing your Astro project. If you don't have these permissions, send a request to your GitHub repository administrator when prompted by Astro. 
 
     The read permissions are required so that you can map Deployments to repositories in the Astro UI. To trigger a code deploy to Astro, you additionally need write permissions for the repository.
