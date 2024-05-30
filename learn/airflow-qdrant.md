@@ -75,6 +75,8 @@ Paste the following sample data into a file called `books.txt` within your `incl
 
 2. Copy the following code into the file.
 
+    <details>
+    <summary><strong>Recommend books DAG</strong></summary>
     ```python
     import os
     import requests
@@ -190,6 +192,7 @@ Paste the following sample data into a file called `books.txt` within your `incl
     recommend_book()
 
     ```
+    </details>
 
 This DAG consists of 6 tasks that generate embeddings in parallel for the data corpus and perform semantic retrieval based on user input.
 - `import_books`: This task reads a text file containing information about the books (such as title, genre, and description) and then returns the data as a list of dictionaries.
