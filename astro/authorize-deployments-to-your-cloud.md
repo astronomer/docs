@@ -194,7 +194,7 @@ In this setup, you'll authorize an existing user-assigned managed identity to a 
 
 :::caution
 
-You can only use the same user-assigned managed identity for up to five Deployments. If you need to authorize more than five Deployments to Azure, you need to create more than one user-managed identity. For more information, see [Microsoft Entra documentation](https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-considerations#general-federated-identity-credential-considerations).
+You can only use the same user-assigned managed identity for up to four Deployments. If you need to authorize more than four Deployments to Azure, you need to create more than one user-managed identity. For more information, see [Microsoft Entra documentation](https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-considerations#general-federated-identity-credential-considerations).
 
 :::
 
