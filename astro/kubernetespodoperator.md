@@ -168,12 +168,7 @@ By default, the KubernetesPodOperator expects to pull a Docker image that's host
 
 To run Docker images from a private registry on Astro, a Kubernetes Secret that contains credentials to your registry must be created. Injecting this secret into your Deployment's namespace will give your tasks access to Docker images within your private registry.
 
-1. Log in to your Docker registry and follow the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#log-in-to-docker-hub) to produce a `/.docker/config.json` file. If the generated `/docker/config.json` does not contain any credentials, copy your registry URL, username, and password.
-2. In the Astro UI, select a Workspace and then select the Deployment you want to use the KubernetesPodOperator with.
-3. Copy the value in the **NAMESPACE** field.
-4. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the namespace of the Deployment.
-
-Astronomer Support will give you instructions on how to securely send your credentials. Do not send this file by email, as it contains sensitive credentials to your registry. Astronomer will use these credentials to create a Kubernetes secret in your Deployment's namespace.
+Submit a request to [Astronomer support](https://cloud.astronomer.io/open-support-request) for creating a Kubernetes Secret to enable pulling images from private registries. Astronomer Support provide give you the necessary instructions on how to generate and securely send the credentials.
 
 #### Step 2: Specify the Kubernetes Secret in your DAG
 
