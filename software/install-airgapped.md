@@ -684,7 +684,9 @@ Complete the full setup as described in [Third-party Ingress-Controllers](third-
 
 ## Step 10: Configure a private certificate authority {#configuring-a-private-certificate-authority}
 
-If you received a private certificate for the ingress controller, follow the instructions at [configuring private CAs](#extra-private-cas) to store the Certificate Authority's public root certificate used to create it in a Kubernetes secret in the astronomer platform namespace and configure Astronomer Software platform components to trust it.
+<!-- Broken step, no link to configuring private CAs -->
+
+If you received a private certificate for the ingress controller, to store the Certificate Authority's public root certificate used to create it in a Kubernetes secret in the astronomer platform namespace and configure Astronomer Software platform components to trust it.
 
 Additionally, repeat the above procedure to configure Astronomer Software platform components to [trust the private CAs](#configuring-private-cas) for each service not already present in `global.privateCaCerts`.
 * email server (unless disabled)
@@ -701,31 +703,25 @@ astro-cli users must configure both their operating system and [Docker Desktop /
 
 :::
 
-## Step 11: Ensure your Kubernetes Cluster Trusts Required Certificate Authorities{#private-cas-for-kubernetes}
-Kubernetes must be able to pull images from one or more container registries for Astronomer Software to function.
+## Step 11: Confirm your Kubernetes cluster trusts required CAs {#private-cas-for-kubernetes}
 
-By default, Kubernetes **only** trusts publicly signed certificates.
+If at least one of the following circumstances apply to your installation, complete this step:
 
-You may need to add additional trusted certificate-authorities to your Kubernetes Cluster's store of trusted certificates when:
-* you have configured Astronomer software to pull platform [platform container images](#use-a-custom-image-repository-for-platform-images) from an external container registry that uses a certificate signed by a private certificate-authority
-* users will be deploying airflow images to Astronomer Software's integrated container registry **and** Astronomer is using a TLS certificate issued by a private Certificate Authority 
-* users will be deploying images to an external container registry **and** that registry is using a TLS certificate issued by a private Certificate Authority 
+- You have configured Astronomer software to pull platform [platform container images](#use-a-custom-image-repository-for-platform-images) from an external container registry that uses a certificate signed by a private CA.
+- Users will be deploying airflow images to Astronomer Software's integrated container registry *and* Astronomer is using a TLS certificate issued by a private CA.
+- Users will be deploying images to an external container registry *and* that registry is using a TLS certificate issued by a private CA. 
 
-If none of the above situations apply, skip this step.
+Otherwise, skip this step.
 
-Kubernetes does not honor the list of certificates [trusted by the Astronomer Software platform](#configuring-a-private-certificate-authority).
+Kubernetes must be able to pull images from one or more container registries for Astronomer Software to function. By default, Kubernetes only trusts publicly signed certificates.  This means that by default, Kubernetes does not honor the list of certificates [trusted by the Astronomer Software platform](#configuring-a-private-certificate-authority).
 
-Many enterprises configure Kubernetes to trust additional certificate-authorities as part of their standard cluter-creation procedure.
+Many enterprises configure Kubernetes to trust additional certificate-authorities as part of their standard cluter creation procedure. Contact your Kubernetes Administrator to find out what, if any, private certificates are currently trusted by your Kubernetes Cluster. Then, consult your Kubernetes administrator and Kubernetes provider's documentation for instructions on configuring Kubernetes trust additional CA.
 
-Contact your Kubernetes Administrator to find out what, if any, private certificaties are currently trusted by your Kubernetes Cluster.
-
-Consult your Kubernetes administrator and Kubernetes-provider's documentation for instructions on configuring Kubernetes trust additional Certificate Authorities.
-
-Follow procedures for your Kubernetes provider to configure Kubernetes to trust each certificate authority associated with container registries (including the integrated container registry, if applicable) that Kubernetes will be pulling images from.
+Follow procedures for your Kubernetes provider to configure Kubernetes to trust each CA associated with yor container registries (including the integrated container registry, if applicable).
 
 Certain clusters do not provide a mechanism to configure the list of certificates trusted by Kubernetes.
 
-While configuring Kubernetes list of cluster-certificates is a custeomer-responsibility, Astronomer Software includes an optional component that can, for certiain Kubernetes Cluster configurations, add certificates defined in `astronomer.privateCaCerts` to the list of certificates trusted by Kubernetes. This can be enabled by setting `astronomer.privateCaCertsAddToHost.enabled` and ``astronomer.privateCaCertsAddToHost.addToContainerd` to `true`. E.g.
+While configuring the Kubernetes list of cluster certificates is a custeomer responsibility, Astronomer Software includes an optional component that can, for certain Kubernetes cluster configurations, add certificates defined in `astronomer.privateCaCerts` to the list of certificates trusted by Kubernetes. This can be enabled by setting `astronomer.privateCaCertsAddToHost.enabled` and ``astronomer.privateCaCertsAddToHost.addToContainerd` to `true` in your `values.yaml` file. For example:
 
 ```yaml
   astronomer:
@@ -737,8 +733,9 @@ While configuring Kubernetes list of cluster-certificates is a custeomer-respons
 
 The above configuration is valid for most Kubernetes Clusters, including EKS and AKS.
 
-GKE users must additionally add a `containerdConfigToml` containing a pair of lines for each registry hostname (and the associated secret name) in the following format:
-```
+GKE users must additionally add a `containerdConfigToml` configuration containing a pair of lines for each registry hostname (and the associated secret name) in the following format:
+
+```yaml
   astronomer:
     privateCaCertsAddToHost:
       enabled: true
@@ -749,62 +746,55 @@ GKE users must additionally add a `containerdConfigToml` containing a pair of li
           ca = "/etc/containerd/certs.d/<registry hostname>/<secret name>.pem"
 ```
 
-## Step 12: Configure Outbound SMTP Email {#configure-outbound-smtp-email}
-
+## Step 12: Configure outbound SMTP email {#configure-outbound-smtp-email}
 
 Astronomer Software requires the ability to send email to:
-* notifying users of certain errors (e.g. users that try to deploy mis-matched Airflow image versions)
-* sending and accepting email invites from Astronomer
-* sending certain platform alerts (in the default configuration, configurable)
 
-Astronomer Software sends all outbound email via SMTP.
+- Notify users of errors with their Airflow Deployments.
+- Send emails to invite new users to Astronomer.
+- Send certain platform alerts (in the default configuration, configurable).
+
+Astronomer Software sends all outbound email using SMTP.
 
 :::info
 
-If evaluating Astronomer Software in an environment where outbound SMTP is not available, follow instructions in `Appendix: Configuring Astronomer Software To Not Send Outbound Email` and then skip the rest of this section.
+If SMTP is not available in the environment where you're installing Astronomer Software, follow instructions in [Configuring Astronomer Software To Not Send Outbound Email](#configuring-astronomer-software-to-not-send-outbound-email) and then skip the rest of this section.
 
 :::
 
-1. Obtain a valid set of SMTP credentials.
-2. Ensure that the Kubetes Cluster has access to send outbound email to the SMTP server.
-3. Change the reply values already present in `values.yaml` from `noreply@my.email.internal` to an email address that is valid for use with the SMTP credentials.
-4. Construct an email connection string (see guidance later in this section) and store it in a secret named `astronomer-tls` in the astronomer platform namespace. Make sure to *url-encode* the username and password if they contain special characters.
-  e.g.
-  ```sh
-  kubectl -n astronomer create secret generic astronomer-smtp --from-literal connection="smtp://my@40user:my%40pass@smtp.email.internal/?requireTLS=true"
-  ```
+1. Obtain a valid set of SMTP credentials. <!-- From where? -->
+2. Ensure that your Kubernetes cluster has access to send outbound email to the SMTP server.
+3. Change the configuration in `values.yaml` from `noreply@my.email.internal` to an email address that is valid to use with your SMTP credentials.
+4. Construct an email connection string and store it in a secret named `astronomer-tls` in the astronomer platform namespace. Make sure to *url-encode* the username and password if they contain special characters.
 
-In general, an SMTP URI will take the following form:
+    ```sh
+    kubectl -n astronomer create secret generic astronomer-smtp --from-literal connection="smtp://my@40user:my%40pass@smtp.email.internal/?requireTLS=true"
+    ```
 
-```text
-smtps://USERNAME:PASSWORD@HOST/?pool=true
-```
+    In general, an SMTP URI is formatted as `smtps://USERNAME:PASSWORD@HOST/?pool=true`. The following table contains examples of what the URI will look like for some of the most popular SMTP services:
 
-The following table contains examples of what the URI will look like for some of the most popular SMTP services:
+    | Provider          | Example SMTP URL                                                                                 |
+    |-------------------|--------------------------------------------------------------------------------------------------|
+    | AWS SES           | `smtp://AWS_SMTP_Username:AWS_SMTP_Password@email-smtp.us-east-1.amazonaws.com/?requireTLS=true` |
+    | SendGrid          | `smtps://apikey:SG.sometoken@smtp.sendgrid.net:465/?pool=true`                                   |
+    | Mailgun           | `smtps://xyz%40example.com:password@smtp.mailgun.org/?pool=true`                                 |
+    | Office365         | `smtp://xyz%40example.com:password@smtp.office365.com:587/?requireTLS=true`                      |
+    | Custom SMTP-relay | `smtp://smtp-relay.example.com:25/?ignoreTLS=true`                                               |
 
-| Provider          | Example SMTP URL                                                                                 |
-|-------------------|--------------------------------------------------------------------------------------------------|
-| AWS SES           | `smtp://AWS_SMTP_Username:AWS_SMTP_Password@email-smtp.us-east-1.amazonaws.com/?requireTLS=true` |
-| SendGrid          | `smtps://apikey:SG.sometoken@smtp.sendgrid.net:465/?pool=true`                                   |
-| Mailgun           | `smtps://xyz%40example.com:password@smtp.mailgun.org/?pool=true`                                 |
-| Office365         | `smtp://xyz%40example.com:password@smtp.office365.com:587/?requireTLS=true`                      |
-| Custom SMTP-relay | `smtp://smtp-relay.example.com:25/?ignoreTLS=true`                                               |
-
-If your SMTP provider is not listed, refer to the provider's documentation for information on creating an SMTP URI.
-
+    If your SMTP provider is not listed, refer to the provider's documentation for information on creating an SMTP URI.
 
 :::info 
 
-If there are `/` or other escape characters in your username or password, you may need to [URL encode](https://www.urlencoder.org/) those characters.
+If there is a `/` or any other escape character in your username or password, you may need to [URL encode](https://www.urlencoder.org/) those characters.
 
 :::
 
 ## Step 13: Configure volume storage classes
-Astronomer strongly recommends against backing any volumes used for Astronomer Software with mechanical hard-drives.
 
-If your cluster defines a volume-storage class, and you wish to use it for all volumes associated with Astronomer Software and the Airlfow deployments it you may skip this step.
+If your cluster defines a volume storage class, and you wish to use it for all volumes associated with Astronomer Software and its Airflow Deployments, you may skip this step.
+Astronomer strongly recommends against backing up any volumes used for Astronomer Software with mechanical hard drives.
 
-Replace `<desired-storage-class>` in the following configuration data with the storage class you wish to use for each respective component (removing any entries where you wish to use the default) and merge into `values.yaml` - either manually or by placing [merge_yaml.py](#merge_yaml) in your astro-platform project-directory and running `python merge_yaml.py storage-class-config.yaml values.yaml`.
+Replace `<desired-storage-class>` in the following configuration with the storage class you wish to use for each respective component. You can remove the configuration for any component where using the default storage is acceptable. 
 
 ```yaml
 alertmanager:
@@ -844,35 +834,33 @@ postgresql:
 
 ```
 
+Merge these values into `values.yaml`. You can do this manually or by placing [merge_yaml.py](#merge-yaml) in your project directory and running `python merge_yaml.py storage-class-config.yaml values.yaml`.
 
 ## Step 14: Configure the database {#configure-the-database}
-
-## Create a database instance
 
 Astronomer requires a central Postgres database that acts as the backend for Astronomer's Houston API and will host individual metadata databases for all Airflow Deployments spun up on the platform.
 
 :::info
 
-If, while evaluating Astronomer Software, you need to create a temporary environment where Postgres is not available, locate the `global.postgresqlEnabled` option already present in your `values.yaml` and set it to `true` then skip the remainder of this step.
+If, while evaluating Astronomer Software, you need to create a temporary environment where Postgres is not available, locate the `global.postgresqlEnabled` option already present in your `values.yaml` and set it to `true`, then skip the remainder of this step.
 
-Setting `global.postgresqlEnabled` to `true` is an **unsupported** configuration and **must not** be used on any development, staging, or production environment.
+Note that `global.postgresqlEnabled` to `true` is an unsupported configuration and should never be used on any development, staging, or production environment.
 
 :::
 
-
 :::info
 
-If using Azure Database for PostgreSQL or another Postgres instance that does not enable the `pg_trgm` by default, you **must** enable the `pg_trgm` extension prior to installing Astronomer Software. If `pg_trgm` is not enabled, the install will fail. `pg_tgrm` is enabled by default on Amazon RDS and Google Cooud SQL for PostgresQL. For instructions on enabling the `pg_trgm` extension for Azure Flexible Server, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
+If using Azure Database for PostgreSQL or another Postgres instance that does not enable the `pg_trgm` by default, you must enable the `pg_trgm` extension prior to installing Astronomer Software. If `pg_trgm` is not enabled, the install will fail. `pg_tgrm` is enabled by default on Amazon RDS and Google Cooud SQL for PostgresQL. For instructions on enabling the `pg_trgm` extension for Azure Flexible Server, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
 
 :::
 
 Additional requirements apply to the following databases:
-- AWS RDS:
-  * [t2 medium](https://aws.amazon.com/rds/instance-types/) is the minimum RDS instance size.
-- Azure Flexible Server:
-  * you must enable the `pg_trgm` extension as per the advisory earlier in this section
-  * Set `global.ssl.mode`to `prefer` in your `values.yaml`
 
+- AWS RDS:
+  - [t2 medium](https://aws.amazon.com/rds/instance-types/) is the minimum RDS instance size you can use.
+- Azure Flexible Server:
+  - You must enable the `pg_trgm` extension as per the advisory earlier in this section.
+  - Set `global.ssl.mode`to `prefer` in your `values.yaml` file.
 
 Create a Kubernetes Secret named `astronomer-bootstrap` that points to your database. You must URL encode any special characters in your Postgres password.
 
@@ -883,32 +871,33 @@ kubectl --namespace <astronomer platform namespace> create secret generic astron
   --from-literal connection="postgres://<url-encoded username>:<url-encoded password>@<database hostname>:<database port>"
 ```
 
-e.g. For a username named `bob` with password `abc@abc` at hostname `some.host.internal`:
+For example, for a username named `bob` with password `abc@abc` at hostname `some.host.internal`, you would run:
+
 ```sh
 kubectl --namespace astronomer create secret generic astronomer-bootstrap \
   --from-literal connection="postgres://bob:abc%40abc@some.host.internal:5432"
 ```
 
+## Step 15: Configure an external Docker registry for Airflow images {#configure-a-private-docker-registry-airflow}
 
-## Step 15: Configure an external docker registry for user-provided Airflow images {#configure-a-private-docker-registry-airflow}
-Astronomer Software users create customized Airflow container images. These images frequently contain sensitive information and **must** be stored in a secure location accessible to Kubernetes.
+By default, Astronomer Software users create customized Airflow container images when they deploy project code to the platform. These images frequently contain sensitive information and must be stored in a secure location accessible to Kubernetes.
 
-Astronomer software deploys an integrated image-registry that can be used for this purpose.
+Astronomer Software includes an integrated image registry that can be used for this purpose.
 
 Users may use images hosted in other container image repositories accessible to the Kubernetes cluster without additional platform-level configuration.
 
 See [Configure a custom registry for Deployment images](#custom-image-registry) for additional configurable options.
 
-## Step 16: Configure the docker registry used for platform images {#configure-a-private-docker-registry-platform}
+## Step 16: Configure the Docker registry used for platform images {#configure-a-private-docker-registry-platform}
 
-If you are installing Astronomer Software onto a Kubernetes Cluster that can pull container images from public image repositories and you do not wish to mirror these images locally skip this step.
+If you are installing Astronomer Software onto a Kubernetes cluster that can pull container images from public image repositories and you don't want to mirror these images locally, skip this step.
 
-### Configure values.yaml to to use a custom image repository for platform images {#use-a-custom-image-repository-for-platform-images}
+### Add configuration to use a custom image repository for platform images {#use-a-custom-image-repository-for-platform-images}
 
-Astronomer expects the images to be present using their normal names but prefixed by a string you define. E.g. if you specify `artifactory.example.com/astronomer`, when you mirror images later in this procedure, you would mirror:
-* `quay.io/astronomer/ap-houston-api` to `artifactory.example.com/astronomer/ap-houston-api`
-* `quay.io/astronomer/astronomer/ap-commander` to `artifactory.example.com/astronomer/ap-commander`
-* etc.
+Astronomer expects the images to be present using their normal names but prefixed by a string you define. E.g. if you specify `artifactory.example.com/astronomer`, when you mirror images later in this procedure, you would mirror `quay.io/astronomer/<image>` to `<custom-platform-repo-prefix>/astronomer/<image>`. For example:
+
+- `quay.io/astronomer/ap-houston-api` to `artifactory.example.com/astronomer/ap-houston-api`
+- `quay.io/astronomer/astronomer/ap-commander` to `artifactory.example.com/astronomer/ap-commander`
 
 Replace `<custom-platform-repo-prefix>` in the following configuration data with your platform image repository prefix and merge into `values.yaml` - either manually or by placing [merge_yaml.py](#merge_yaml) in your astro-platform project-directory and running `python merge_yaml.py private-platform-registry-snippet.yaml values.yaml`.
 
@@ -946,7 +935,7 @@ astronomer:
 
 ```
 
-e.g. for a custom platform image repository prefix of `012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer`:
+For example, if your custom platform image registry prefix was `012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer`, your configuration would look like the following:
 
 ```yaml
 astronomer:
@@ -977,10 +966,12 @@ astronomer:
                 repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-git-sync
 ```
 
-### Configuration authenticating to the platform registry
-Astronomer Software platform images are requently hosted internal repositories that do not require configuration. If your repostory requires you pass an image credential:
+### Configure authentication to a custom platform registry
+
+Astronomer Software platform images are usually hosted in internal repositories that do not require configuration. If your repository requires you pass an image credential:
 
 1. Log in to the registry and follow the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#log-in-to-docker-hub) to produce a `/.docker/config.json` file.
+   
 2. Run the following command to create an image pull secret named `platform-regcred` in the Astronomer Software platform namespace:
 
     ```sh
@@ -988,7 +979,8 @@ Astronomer Software platform images are requently hosted internal repositories t
     --from-file=.dockerconfigjson=<path/to/.docker/config.json> \
     --type=kubernetes.io/dockerconfigjson
     ```
-3. Set `global.privateRegistry.secretName` in `values.yaml` to `platform-regcred`, e.g.:
+
+3. Set `global.privateRegistry.secretName` in `values.yaml` to `platform-regcred`. For example:
 
     ```yaml
     global:
@@ -996,37 +988,31 @@ Astronomer Software platform images are requently hosted internal repositories t
         secretName: platform-regcred
     ```
 
-
 ## Step 17: Determine what version of Astronomer Software to install {#determine-what-version-of-astronomer-software-to-install}
 
-Astronomer recommends new Astronomer Software installations use the most-recently version of either the Stable or LTS (long-term support) release-channel.
-
-Current recommended versions:
-  * Stable Channel: v0.34.1 (0.34 is supported until August 2025)
-  * Long-term Support Channel: v0.34.1 (0.34 is supported until August 2025)
+Astronomer recommends new Astronomer Software installations use the most recent version available in either the Stable or Long Term Support (LTS) release-channel. Keep this version at hand for the following steps.
 
 See Astronomer Software's [lifecycle policy](release-lifecycle-policy) and [release notes](version-compatibility-reference) for more information.
 
-
 ## Step 18: Fetch Airflow Helm charts {#fetch-airflow-helm-charts}
 
-* If you have internet accces to `https://helm.astronomer.io` run the following command on the machine you will be installing Astronomer Software on:
+If you have internet access to `https://helm.astronomer.io` run the following command on the machine you will be installing Astronomer Software on:
+
 ```sh
 helm repo add astronomer https://helm.astronomer.io/
 helm repo update
 ```
-* If you do not have internet access to `https://helm.astronomer.io` download the Astronomer Software Platform helm chart file corresponding to the version of Astronomer Software they are installing or upgrading to from `https://helm.astronomer.io/astronomer-<version number>.tgz`. 
-  * e.g. if installing Astronomer Software v0.34.1 download `https://helm.astronomer.io/astronomer-0.34.1.tgz`.
-  * This file does not need to uploaded to an internal chart-repository.
 
+If you don't have internet access to `https://helm.astronomer.io`, download the Astronomer Software Platform helm chart file corresponding to the version of Astronomer Software you are installing or upgrading to from `https://helm.astronomer.io/astronomer-<version number>.tgz`. For example, for Astronomer Software v0.34.1 you would download `https://helm.astronomer.io/astronomer-0.34.1.tgz`. This file does not need to uploaded to an internal chart-repository.
 
 ## Step 19: Create and customize upgrade.sh {#create-and-customize-upgradesh}
 
-Create a file named `upgrade.sh` in your [platform-deployment project-directory](#platform-deployment-project-directory) containing the script below, then customize:
-* CHART_VERSION - v-prefixed version of the Astronomer Software version, including patch (e.g. v0.34.1)
-* RELEASE_NAME - helm release name, strongly recommended `astronomer`
-* NAMESPACE - namespace name to install platform components into, strongly recommend `astronomer`
-* CHART_NAME - set to `astronomer/astronomer` if fetching from the internet or the filename if installing from a file (e.g. `astronomer-0.34.1.tgz`)
+Create a file named `upgrade.sh` in your [platform-deployment project-directory](#platform-deployment-project-directory) containing the script below. Specify the following values at the beginning of the script:
+
+- `CHART_VERSION`: Your Astronomer Software version, including patch and a `v` prefix. For example, `v0.34.1`.
+- `RELEASE_NAME`: Your Helm release name. `astronomer` is strongly recommended.
+- `NAMESPACE`: The namespace to install platform components into. `astronomer` is strongly recommended.
+- `CHART_NAME`: Set to `astronomer/astronomer` if fetching platform images from the internet. Otherwise, specify the filename if you're installing from a file (for example `astronomer-0.34.1.tgz`).
 
 ```sh
 #!/bin/bash
@@ -1059,6 +1045,7 @@ helm upgrade --install --namespace $NAMESPACE \
             $RELEASE_NAME \
             $CHART_NAME $@
 ```
+
 ## Step 20: Fetch images from Astronomer's Helm template {#fetch-images-from-astronomer's-helm-template}
 
 The images and tags which are required for your Software installation depend on the version of Astronomer you're installing. To gather a list of exact images and tags required for your Astronomer version:
@@ -1499,6 +1486,7 @@ Congratulations, you have configured and installed an Astronomer Software platfo
 From the Astronomer Software UI, you'll be able to both invite and manage users as well as create and monitor Airflow Deployments on the platform.
 
 ## Addendum
+
 ### merge_yaml.py {#merge-yaml}
 
 When merging YAML files, you may do so manually or with a tool of your choosing.
