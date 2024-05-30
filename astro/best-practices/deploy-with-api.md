@@ -4,7 +4,7 @@ sidebar_label: 'Deploy with API'
 id: deploy-with-api
 ---
 
-While you can deploy code using the Astro GitHub Integration, the Astro CLI, or by configuring a CI/CD pipeline, you might prefer to use the Astro API to automate deploying code. Using the Astro API is the most straightforward way to deploy code and requires very few additional dependencies, meaning it is compatible with most CI/CD configurations.
+While you can deploy code using the Astro GitHub Integration, the Astro CLI, or by configuring a CI/CD pipeline, you might prefer to use the Astro API to automate deploying code. Using the Astro API is the most straightforward way to deploy code without using the Astro CLI and requires very few additional dependencies, meaning it is compatible with most CI/CD configurations.
 
 If the Astro API has access to your Astro project files, you can use the Astro API `deploy` endpoints to complete an image deploy or DAG deploy. You can then implement scripts to automate deploys as a workaround to not using the Astro CLI or Astro GitHub integration.
 
