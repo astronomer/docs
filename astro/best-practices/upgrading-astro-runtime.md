@@ -7,7 +7,7 @@ id: upgrading-astro-runtime
 
 Astro includes features that make upgrading to the latest version of Astro Runtime easy and, more importantly, safe. When leveraging these features, follow these best practices to ensure that your Deployments remain stable after you upgrade:
 
-- Monitor for upgrade opportunities using [Organization dashboards](organization-dashboard.md), as well as by following the [Astro Runtime maintenance and lifecycle policy](runtime-version-lifecycle-policy.md). 
+- Monitor for upgrade opportunities using [Organization dashboards](organization-dashboard.md), as well as by following the [Astro Runtime maintenance and lifecycle policy](runtime-version-lifecycle-policy.mdx). 
 - Check [Upgrade Astro Runtime](upgrade-runtime.md) for advisories on the specific version you're upgrading to.
 - Prepare to upgrade safely using [upgrade tests](cli/test-your-astro-project-locally.md#test-before-an-astro-runtime-upgrade). 
 - In the case of a malfunction after upgrading, revert to your original Astro Runtime version using [deploy rollbacks](deploy-history.md).
@@ -22,7 +22,7 @@ It's best practice to keep your running Astro Runtime versions up-to-date. Astro
 
 Astro users on the Enterprise tier can use Organization dashboards to check whether their currently running Astro Runtime versions are currently supported, as well as how much time is left before they become unsupported. This is especially helpful in cases where your organization has many Deployments to track. See [Organization dashboards](organization-dashboard.md#deployment-detail) for steps to access these dashboards.
 
-If you don't have the Enterprise tier of Astro, you can still reference the [Astro Runtime maintenance and lifecycle policy](runtime-version-lifecycle-policy.md#astro-runtime-maintenance-policy) to see when you'll need to upgrade your Deployments to a new version of Astro Runtime.
+If you don't have the Enterprise tier of Astro, you can still reference the [Astro Runtime maintenance and lifecycle policy](runtime-version-lifecycle-policy.mdx#astro-runtime-maintenance-policy) to see when you'll need to upgrade your Deployments to a new version of Astro Runtime.
 
 ### Performing an upgrade
 
