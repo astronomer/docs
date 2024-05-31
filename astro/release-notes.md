@@ -25,6 +25,20 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## June 6, 2024
+
+### API keys are no longer supported
+
+As of June 1, 2024, Deployment API keys are no longer supported. Replace your API keys with [Deployment API tokens](https://www.astronomer.io/docs/astro/deployment-api-tokens), confirm successful operation with your API tokens, and then delete your API keys.
+
+### Additional improvements
+
+- When you create a new Deployment in dev mode with hibernation mode enabled, Astro now validates CRON expressions that you enter and adds commonly used hibernation schedules that you can enable or disable. <!--https://github.com/astronomer/astro/pull/21337-->
+
+### Bug fixes
+
+- Fixed an issue where you could not use Airflow connection testing with Azure Managed Identities on Astro.  <!--https://github.com/astronomer/astro/pull/21380-->
+
 ## May 30, 2024
 
 ### Additional improvements
