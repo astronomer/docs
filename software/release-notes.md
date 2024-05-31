@@ -61,7 +61,6 @@ Release date: May 31, 2024
 ### Bug fixes
 
 - Fixed an issue where larger DAG deploys had significant performance issues.
-- Fixed an issue where
 - Fixed an issue where Deployments using custom resources would be reverted to using AUs when you upgraded the Astronomer Software platform using Helm. 
 - Fixed an issue where the default `astroUnitsEnabled` value in `values.yaml` was not respected when creating Deployments via the Houston API, resulting in Deployment creation failing when the resource strategy is not explicitly specified. <!-- https://github.com/astronomer/issues/issues/6216-->
 - Fixed an issue where using a service account to deploy DAGs without the Astro CLI would result in the service account's `lastUsedAt` value not updating as expected. <!-- https://github.com/astronomer/issues/issues/6308-->
