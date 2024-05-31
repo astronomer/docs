@@ -173,7 +173,7 @@ microk8s.config > /include/.kube/config
 
 #### Step 3: Create Kubernetes Connection in the Airflow UI
 
-To run a Kubernetes pod locally, you can use the following .json template to create a .json connection string that you can then use to create a Kubernetes connection via the Astro UI. First, edit the template with the values you gathered in the previous step:
+To run a Kubernetes pod locally, you can use the following .json template to create a .json connection string that you can then use to create a Kubernetes connection via the local Airflow UI. First, edit the template with the values you gathered in the previous step:
 
 ```json
 {
