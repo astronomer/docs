@@ -73,7 +73,7 @@ Paste the following sample data into a file called `books.txt` in your `include`
 
 1. In your `dags` folder, create a file called `books_recommend.py`.
 
-2. Copy the following code into the `books_recommend.py` file.
+2. Copy the following **Recommend books DAG** code into the `books_recommend.py` file.
 
     <details>
     <summary><strong>Recommend books DAG</strong></summary>
