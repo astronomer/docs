@@ -54,7 +54,7 @@ There is currently no limit or additional charge for deploying code to Astro wit
     - At least one GitHub branch that you want to deploy to Astro.
 
 **To create a new repository**:
-    - A GitHub user account. When you create a new repository, you automatically receive repository owner permissions.
+    - A GitHub user account with permission to create repositories. When you create a new repository, you automatically receive repository owner permissions. If you belong to a [GitHub Organization](https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/roles-in-an-organization#permissions-for-organization-roles) and don't have these permissions, send a request to your GitHub repository administrator when prompted by Astro.
     - After you create and connect to your repository from Astro, you need to add an [Astro project](https://www.astronomer.io/docs/astro/cli/develop-project#create-an-astro-project). The Astro project can exist at any level in your repository.
     - After you create and connect to your repository from Astro, you need to make at least one GitHub branch that you want to deploy to Astro.
 
