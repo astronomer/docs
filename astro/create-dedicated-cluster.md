@@ -6,6 +6,9 @@ id: 'create-dedicated-cluster'
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import TeamBadge from '@site/src/components/TeamBadge';
+
+<TeamBadge/>
 
 A _dedicated cluster_ exclusively runs Deployments from your Organization within a single-tenant environment on Astronomer's cloud. Dedicated clusters provide more configuration options for regions, connectivity, and security than standard clusters. You might want to create a dedicated cluster if:
 
@@ -88,7 +91,7 @@ To set a maintenance window, first choose a maintenance window time and read thr
 </TabItem>
 
 <TabItem value="azure">
-  
+
 1. In the Astro UI, click the name of of your Workspace in the upper left corner, then click **Organization Settings**.
 
 2. Click **Cluster** > **+ Cluster**.

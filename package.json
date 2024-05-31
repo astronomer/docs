@@ -6,7 +6,7 @@
     "script:buildRSS": "yarn node createRSSFeeds.mjs",
     "docusaurus": "docusaurus",
     "start": "yarn script:buildRSS && docusaurus start",
-    "build": "yarn script:buildRSS && docusaurus build",
+    "build": "yarn script:buildRSS && docusaurus build --out-dir build/docs",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",

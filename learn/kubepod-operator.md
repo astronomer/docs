@@ -126,11 +126,11 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
     ]}>
 <TabItem value="windows and mac">
 
-1. Copy the `docker-desktop` context from the Kubernetes configuration file and save it as a separate file in the `/include/.kube/` folder in your Astro project. The `config` file contains all the information the KubernetesPodOperator uses to connect to your cluster.
+1. Use the following commands to copy the `docker-desktop` context from the Kubernetes configuration file and save it as a separate file in the `/include/.kube/` folder in your Astro project. The `config` file contains all the information the KubernetesPodOperator uses to connect to your cluster.
 
     ```bash
-    kubectl config set-context docker-desktop
-    kubectl config view --minify --raw > <Astro project directory>/include/.kube/config
+    kubectl config use-context docker-desktop
+    kubectl config view --minify --raw > <Astro project directory>/include/.kube
     ```
 
     After running these commands, you will find a `config` file in the `/include/.kube/` folder of your Astro project which resembles this example:
@@ -171,13 +171,55 @@ microk8s.config > /include/.kube/config
 </TabItem>
 </Tabs>
 
-#### Step 3: Run your container
+#### Step 3: Create Kubernetes Connection in the Airflow UI
+
+To run a Kubernetes pod locally, you can use the following .json template to create a .json connection string that you can then use to create a Kubernetes connection via the local Airflow UI. First, edit the template with the values you gathered in the previous step:
+
+```json
+{
+    "apiVersion": "v1",
+    "clusters": [
+        {
+            "cluster": {
+                "certificate-authority-data": "<certificate-authority-data>",
+                "server": "https://kubernetes.docker.internal:6443"
+            },
+            "name": "docker-desktop"
+        }
+    ],
+    "contexts": [
+        {
+            "context": {
+                "cluster": "docker-desktop",
+                "user": "docker-desktop"
+            },
+            "name": "docker-desktop"
+        }
+    ],
+    "current-context": "docker-desktop",
+    "kind": "Config",
+    "preferences": {},
+    "users": [
+        {
+            "name": "docker-desktop",
+            "user": {
+                "client-certificate-data": "<client-certificate-data>",
+                "client-key-data": "<client-key-data>"
+            }
+        }
+    ]
+}
+```
+
+Then, run `astro dev start` with the Astro CLI to spin up a local Airflow environment. Once your environment has been created, open up the connection management UI, and create a new connection of the `Kubernetes Cluster Connection` type. Within the connection creation menu, copy the .json file you created using the above template into the `Kube config (JSON format)` field, and save the connection with the connection id `k8s_conn`. If you'd like to use another connection id, make sure to alter the following example DAG code. 
+
+
+
+#### Step 4: Run your container
 
 To use the KubernetesPodOperator, you must define the configuration of each task and the Kubernetes Pod in which it runs, including its namespace and Docker image.
 
-This example DAG runs a `hello-world` Docker image. The namespace is determined dynamically based on whether you're running the DAG in your local environment or on Astro. If you are using Linux, the `cluster_context` is `microk8s`. The `config_file` points to the edited `/include/.kube/config` file.
-
-Once you've updated the definition of KubernetesPodOperator tasks in your Astro project, run `astro dev start` with the Astro CLI to test your DAGs in a local Airflow environment.
+This example DAG runs a `hello-world` Docker image using the `k8s_conn` connection you defined in the previous step to run it on your local Kubernetes cluster.
 
 <CodeBlock language="python">{kpo_example_1}</CodeBlock>
 
