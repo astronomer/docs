@@ -1,5 +1,5 @@
 ---
-title: 'How to optimize Airflow DAGs for Astro'
+title: 'Optimize Airflow DAGs for Astro'
 sidebar_label: 'DAG writing on Astro'
 id: dag-writing-on-astro
 ---
@@ -10,18 +10,18 @@ That said, following best practices and taking full advantage of Astro features 
 
 - Produce DAGs more efficiently.
 - Improve your development workflow.
-- Organize your deployment and DAGs. 
-- Optimize task execution efficiency.
+- Better organize your deployment and DAGs. 
+- Optimize resource usage and task execution efficiency.
 
 While this best practice guide focuses on writing Airflow DAGs for Astro, all [general Airflow best practices](https://docs.astronomer.io/learn/dag-best-practices) are also recommended.
 
 :::info New to Airflow?
 
-If you are new to Airflow in general, we advise starting with the following resources:
+If you are new to Airflow, we advise starting with the following resources:
 
 - Hands-on tutorial: [Get started with Apache Airflow](https://docs.astronomer.io/learn/get-started-with-airflow).
 - Astronomer Academy: [Airflow 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
-- Webinar: Airflow 101: How to get started writing data pipelines with Apache Airflow.
+- Webinar: [Airflow 101: How to get started writing data pipelines with Apache Airflow](https://www.astronomer.io/events/webinars/airflow-101-how-to-get-started-writing-data-pipelines-with-apache-airflow-video/).
 
 :::
 
@@ -29,24 +29,28 @@ If you are new to Airflow in general, we advise starting with the following reso
 
 In this guide, you'll learn about a number of Astro and Airflow features for optimizing your DAGs for Astro:
 
-- [Astro Cloud IDE](https://docs.astronomer.io/astro/cloud-ide). A low-code option for writing DAGs pre-optimized for Astro.
-- [Astro CLI](overview.md). An OSS tool for developing DAGs and deploying projects to Astro.
-- [CI/CD on Astro](set-up-ci-cd.md). A recommended pipeline for testing and deployment supported by pre-built templates.
-- [Worker queues](configure-worker-queues.mdx). A feature of Astro that enables resource optimization.
+- [Astro Cloud IDE](https://docs.astronomer.io/astro/cloud-ide). A low-code, notebook-inspired IDE for writing and testing pipelines on Astro.
+- [Astro CLI](overview.md). An OSS tool for developing DAGs and deploying projects tailor-made for Astro.
+- [CI/CD on Astro](set-up-ci-cd.md). A recommended architecture for testing and deployment supported by pre-built templates.
+- [Worker queues](configure-worker-queues.mdx). A feature of Astro that enables resource optimization beyond what is possible using OSS Airflow.
 - [Astro Cloud UI Environment Manager](manage-connections-variables.md). A tool for managing connections across multiple deployments locally and on Astro.
 - [Astro alerts](alerts.md). No-code alerting on Astro configurable for various trigger types and communication channels.
 - [Kubernetes Executor](executors-overview.md). Support for running Airflow on dedicated Kubernetes pods on Astro.
-- [KubernetesPodOperator](kubernetespodoperator.md). Support for running specific tasks in dedicated Kubernetes pods.
+- [KubernetesPodOperator](kubernetespodoperator.md). Support for running specific tasks in dedicated Kubernetes pods on Astro.
 
-## Best practice guidance 
+## Best practice guidance
 
-This section provides a list of best practices for writing Airflow DAGs on Astro.
+### Use the Astro Cloud IDE for secure, low-code development in the cloud
 
-### Use the Astro Cloud IDE
+One of the highest barriers to using Airflow is writing boilerplate code for basic actions such as creating dependencies, passing data between tasks, and connecting to external services. The Cloud IDE enables you to configure all of these with the Astro UI and create pipelines by writing a minimal amount of Python or SQL code rather than entire DAGs.
 
-:::note
+Learn more and get started by following the guidance in [Cloud IDE](https://www.astronomer.io/docs/astro/cloud-ide).
 
-best for pipelines that do not utilize sensors or async operators
+:::info
+
+Async operators and task sensors, while supported, cannot currently be tested in the Cloud IDE prior to deployment. Test locally after [exporting your Cloud IDE pipelines](https://www.astronomer.io/docs/astro/cloud-ide/deploy-project#export-your-pipelines-to-a-local-astro-project). 
+
+Deployment of pipelines requires either the Astro CLI or a Git repository connected to Astro. For guidance on deploying Cloud IDE pipelines, see [Deploy a project from the Cloud IDE to Astro](https://www.astronomer.io/docs/astro/cloud-ide/deploy-project).
 
 :::
 
