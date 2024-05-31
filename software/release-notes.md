@@ -62,11 +62,11 @@ Release date: May 31, 2024
 
 - Fixed an issue where larger DAG deploys had significant performance issues.
 - Fixed an issue where Deployments using custom resources would be reverted to using AUs when you upgraded the Astronomer Software platform using Helm. 
-- Fixed an issue where the default `astroUnitsEnabled` value in `values.yaml` was not respected when creating Deployments via the Houston API, resulting in Deployment creation failing when the resource strategy is not explicitly specified. <!-- https://github.com/astronomer/issues/issues/6216-->
-- Fixed an issue where using a service account to deploy DAGs without the Astro CLI would result in the service account's `lastUsedAt` value not updating as expected. <!-- https://github.com/astronomer/issues/issues/6308-->
-- Fixed an issue where creating Deployments would fail when using the the `airflowStratV2` PGBouncer calculation strategy. <!--https://github.com/astronomer/issues/issues/6335-->
+- Fixed an issue where the default `astroUnitsEnabled` value in `values.yaml` was not respected when creating Deployments via the Houston API, resulting in Deployment creation failing when the resource strategy is not explicitly specified. 
+- Fixed an issue where using a service account to deploy DAGs without the Astro CLI would result in the service account's `lastUsedAt` value not updating as expected.
+- Fixed an issue where creating Deployments would fail when using the the `airflowStratV2` PGBouncer calculation strategy. 
 - Fixed an issue where upgrading within the 0.34 series could disrupt external Elasticsearch configurations.
-- Fixed an issue where tasks on a Deployment could start to fail if the Deployment used a custom resource strategy, used the Kubernetes executor, and attempted to run many tasks at once. <!-- https://github.com/astronomer/issues/issues/6367-->
+- Fixed an issue where tasks on a Deployment could start to fail if the Deployment used a custom resource strategy, used the Kubernetes executor, and attempted to run many tasks at once. 
 - Resolved the following vulnerabilities:
 
     - [GHSA-m425-mq94-257g](https://github.com/advisories/GHSA-m425-mq94-257g) 
