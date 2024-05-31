@@ -89,7 +89,7 @@ Use the following table to see the Airflow Helm chart version for each supported
 | 0.33.3                      | 1.9.5                                 |
 | 0.34.0                      | 1.10.0                                |
 | 0.34.1                      | 1.10.0                                |
-| 0.34.2                      | 1.10.0                                |
+| 0.34.2                      | 1.10.2                                |
 
 ## Legacy version compatibility reference
 
