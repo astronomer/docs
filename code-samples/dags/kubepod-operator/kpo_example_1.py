@@ -12,7 +12,6 @@ with DAG(
         image="hello-world",
         name="airflow-test-pod",
         task_id="task-one",
-        cluster_context="docker-desktop",
         is_delete_operator_pod=True,
         get_logs=True,
     )
