@@ -9,6 +9,7 @@ Deploy rollbacks are an emergency option if a Deployment unexpectedly stops work
 
 ## Prerequisites
 
+- You must be at least a Deployment Admin or otherwise have permissions to upgrade a Deployment.
 - Your Deployment must be on Astro Runtime 5 (Airflow 2.3) or later. Rolling back to any version before Astro Runtime 5 is not supported. 
 - Your Deployment must be configured to use standard image and DAG-only deploys. Rollbacks are not supported for NFS deploys and Git sync deploys.
   
@@ -36,5 +37,14 @@ A deploy rollback is a new deploy of a previous version of your code. This means
 When you trigger a rollback, the following information is rolled back:
 
 - All project code, including DAGs.
-- Your Astro Runtime version.
+- Your Astro Runtime version. Note that there are no limitations to rolling back to restricted Runtime versions, which can include major bugs and performance issues. 
 - Your Deployment's DAG deploy setting.
+
+The following information isn't rolled back:
+
+- Your Deployment's resource configurations, such as executor and scheduler configurations.
+- Your Deployment's environment variable values.
+- Any other Deployment settings that you configure through the Astro UI, such as your Deployment name and description. 
+- For Runtime version downgrades, any data related to features that are not available in the rollback version are erased from the metadata database and not recoverable.
+
+Logs related to the rollback are exported to Elasticsearch.
