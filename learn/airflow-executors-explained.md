@@ -143,7 +143,7 @@ The Kubernetes executor is available as part of the [CNCF Kubernetes provider](h
 
 #### Scale to near-zero
 
-With the Local and Celery executors, a deployment whose DAGs run once a day will operate with a fixed set of resources for the full 24 hours - only 1 hour of which actually puts those resources to use. That's 23 hours of resources you're paying for but don't deliver.
+With default implementations of the Local or Celery executors, a deployment whose DAGs run once a day will operate with a fixed set of resources for the full 24 hours - only 1 hour of which actually puts those resources to use. That's 23 hours of resources you're paying for but don't deliver.
 
 With the Kubernetes executor, your webserver and scheduler costs remain fixed, but the dynamic scaling of the actual Pods allow you to shed the fixed cost of having a Celery worker up for 24 hours a day.
 
