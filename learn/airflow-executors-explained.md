@@ -5,7 +5,7 @@ description: "An introduction to the Apache Airflow Executors: Celery, Local, an
 id: airflow-executors-explained
 ---
 
-If you're new to Apache Airflow, the world of Executors is difficult to navigate. Even if you're a veteran user overseeing 20 or more DAGs, knowing what Executor best suits your use case at any given time isn't always easy - especially as the OSS project (and its utilities) continues to grow and develop.
+If you're new to Apache Airflow, the world of Executors is difficult to navigate. Even if you're a veteran user overseeing 20 or more DAGs, knowing what Executor best suits your use case at any given time isn't always easy - especially as the OSS project and its utilities continue to grow and develop.
 
 This guide will help you:
 
@@ -41,7 +41,7 @@ When you're learning about task execution, you'll want to be familiar with these
 
 - `dag_concurrency`: Determines how many task instances your scheduler is able to schedule at once _per DAG_. Think of this as "maximum tasks that can be scheduled at once, per DAG." You might see: `ENV AIRFLOW__CORE__DAG_CONCURRENCY=16`
 
-- `worker_concurrency`: Determines how many tasks each worker can run at any given time. The CeleryExecutor for example, will [by default](https://github.com/apache/airflow/blob/main/airflow/config_templates/default_airflow.cfg#L723) run a max of 16 tasks concurrently. Think of it as "How many tasks each of my workers can take on at any given time." This number will naturally be limited by `dag_concurrency`. If you have 1 worker and want it to match your deployment's capacity, worker\_concurrency = parallelism. `ENV AIRFLOW__CELERY__WORKER_CONCURRENCY=9`
+- `worker_concurrency`: Determines how many tasks each worker can run at any given time. The CeleryExecutor, for example, will [by default](https://github.com/apache/airflow/blob/main/airflow/config_templates/default_airflow.cfg#L723) run a max of 16 tasks concurrently. Think of it as "How many tasks each of my workers can take on at any given time." This number will naturally be limited by `dag_concurrency`. If you have 1 worker and want it to match your deployment's capacity, worker\_concurrency = parallelism. `ENV AIRFLOW__CELERY__WORKER_CONCURRENCY=9`
 
 :::tip
 
@@ -49,7 +49,7 @@ Parallelism and concurrency are somewhat co-dependent. You're encouraged to keep
 
 :::
 
-- Pool: Configurable in the Airflow UI and are used to limit the _parallelism_ on any particular set of tasks. You could use it to give some tasks priority over others, or to put a cap on execution for things like hitting a third party API that has rate limits on it, for example.
+- Pool: Configurable in the Airflow UI and used to limit the _parallelism_ on any particular set of tasks. You could use it to give some tasks priority over others, or to put a cap on execution for things like hitting a third-party API that has rate limits on it, for example.
 
 - `parsing_processes`: Determines how many linear scheduling processes the scheduler can handle in parallel at any given time. The default value is 2, but adjusting this number gives you some control over CPU usage - the higher the value, the more resources you'll need.
 
@@ -76,7 +76,7 @@ In practice, this means that you don't need resources outside of that machine to
 ### Pros
 
 - It's straightforward and easy to set up.
-- It's cheap and resource light.
+- It's cheap and resource-light.
 - It still offers parallelism.
 
 ### Cons
@@ -88,9 +88,9 @@ In practice, this means that you don't need resources outside of that machine to
 
 The Local executor is ideal for testing.
 
-The obvious risk is that if something happens to your machine, your tasks will see a standstill until that machine is back up.
+The obvious risk is that if something happens to your machine, your tasks will be at a standstill until that machine is back up.
 
-Heavy Airflow users whose DAGs run in production will find themselves migrating from Local executor to Celery executor after some time, but you'll find plenty of use cases out there written by folks that run quite a bit on Local executor before making the switch. How much that executor can handle fully depends on your machine's resources and configuration. Until all resources on the server are used, the Local executor actually scales up quite well.
+Heavy Airflow users whose DAGs run in production will find themselves migrating from Local executor to Celery executor after some time, but you'll find plenty of use cases out there written by folks who run quite a bit on Local executor before making the switch. How much that executor can handle fully depends on your machine's resources and configuration. Until all resources on the server are used, the Local executor actually scales up quite well.
 
 ## Celery executor
 
@@ -100,7 +100,7 @@ At its core, the Celery executor is built for horizontal scaling.
 
 If a worker node is ever down or goes offline, the Celery executor quickly adapts and is able to assign that allocated task or tasks to another worker.
 
-If you're running native Airflow, adopting a Celery executor means you'll have to set up an underlying database to support it (RabbitMQ/Redis). The Celery executor is available as part of the [Celery provider](https://registry.astronomer.io/providers/apache-airflow-providers-celery/versions/latest) and may need to be installed separately from core Airflow.
+If you're running native Airflow, adopting a Celery executor means you'll have to set up an underlying database to support it (RabbitMQ/Redis). The Celery executor is available as part of the [Celery provider](https://registry.astronomer.io/providers/apache-airflow-providers-celery/versions/latest) and might need to be installed separately from core Airflow.
 
 :::info
 
@@ -118,11 +118,11 @@ When running Celery on top of a managed Kubernetes service, if a node that conta
 
 - It's pricier
 - It takes some work to set up
-- Worker maintenance
+- It requires worker maintenance
 
 ### When you should use it
 
-Astronomer recommends using the Celery executor for running DAGs in production, especially if you're running anything that's time sensitive.
+Astronomer recommends using the Celery executor for running DAGs in production, especially if you're running anything that's time-sensitive.
 
 ## Kubernetes executor
 
@@ -145,7 +145,7 @@ The Kubernetes executor is available as part of the [CNCF Kubernetes provider](h
 
 With default implementations of the Local or Celery executors, a deployment whose DAGs run once a day will operate with a fixed set of resources for the full 24 hours - only 1 hour of which actually puts those resources to use. That's 23 hours of resources you're paying for but don't deliver.
 
-With the Kubernetes executor, your webserver and scheduler costs remain fixed, but the dynamic scaling of the actual Pods allow you to shed the fixed cost of having a Celery worker up for 24 hours a day.
+With the Kubernetes executor, your webserver and scheduler costs remain fixed, but the dynamic scaling of the actual Pods allows you to shed the fixed cost of having a Celery worker up for 24 hours a day.
 
 :::tip
 On Astro, you can scale your Celery executor down to near-zero. For more information, see [Configure the Celery executor](https://www.astronomer.io/docs/astro/celery-executor).
@@ -164,7 +164,7 @@ Using the Kubernetes "Watcher" API, the scheduler reads event logs for anything 
 - Cost and resource efficient
 - Fault tolerant
 - Task-level configurations
-- No interruption to running tasks if a deploy is pushed
+- No interruption of running tasks if a deploy is pushed
 
 ### Cons
 
@@ -173,11 +173,11 @@ Using the Kubernetes "Watcher" API, the scheduler reads event logs for anything 
 
 ### When you should use it
 
-The Kubernetes executor offers extraordinary capabilities. If you're familiar with Kubernetes and want to give it a shot, Astronomer recommends doing so to be at the forefront of the modern Apache Airflow configuration.
+The Kubernetes executor offers extraordinary capabilities. If you're familiar with Kubernetes and want to give it a shot, Astronomer recommends doing so to be at the forefront of modern Apache Airflow configuration.
 
 :::tip
 
-If you have a high quantity of tasks that are intended to finish executing particularly quickly, note the extra handful of seconds it takes for each individual Pod to spin up might slow those tasks down.
+If you have a large quantity of tasks that are intended to finish executing particularly quickly, note that the extra handful of seconds it takes for each individual Pod to spin up might slow those tasks down.
 
 :::
 
