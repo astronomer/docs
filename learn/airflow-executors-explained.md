@@ -148,7 +148,7 @@ With default implementations of the Local or Celery executors, a deployment whos
 With the Kubernetes executor, your webserver and scheduler costs remain fixed, but the dynamic scaling of the actual Pods allows you to shed the fixed cost of having a Celery worker up for 24 hours a day.
 
 :::tip
-On Astro, you can scale your Celery executor down to near-zero. For more information, see [Configure the Celery executor](https://www.astronomer.io/docs/astro/celery-executor).
+On Astro, you can also scale your Celery executor down to near-zero to save costs. For more information, see [Configure the Celery executor](https://www.astronomer.io/docs/astro/celery-executor).
 :::
 
 ### Less work for your scheduler
