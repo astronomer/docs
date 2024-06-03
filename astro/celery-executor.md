@@ -50,7 +50,7 @@ For each worker queue on your Deployment, you have to specify certain settings t
 3. Configure the following settings:
 
     - **Worker type**: Choose the amount of resources that each worker will have.
-    - **Storage**: (Hosted only) Choose the amount of ephemeral storage in GiB assigned to each worker. This storage volume is transient and allows for the temporary storage and processing of data. The worker is assigned 0.25 GiB, the minimum, by default. The maximum quota is 100GiB.
+    - **Storage**: (Hosted only) Choose the amount of ephemeral storage in GiB assigned to each worker. This storage volume is transient and allows for the temporary storage and processing of data. The worker is assigned 10 GiB, the minimum, by default. The maximum quota is 100GiB. Only ephemeral storage requests that are greater than the default minimum of 10GiB are charged.
     - **Concurrency**: The maximum number of tasks that a single worker can run at a time. If the number of queued and running tasks exceeds this number, a new worker is added to run the remaining tasks. This value is equivalent to the Apache Airflow [worker concurrency](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) setting. It is 16 by default.
     - **Worker Count (Min-Max)**: The minimum and maximum number of workers that can run at a time. The number of running workers changes based on **Concurrency** and the current number of tasks in a queued or running state. By default, the minimum number of workers is 1 and the maximum is 10.
 

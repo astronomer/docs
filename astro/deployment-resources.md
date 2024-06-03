@@ -64,13 +64,15 @@ To manage Kubernetes resources programmatically, you can set default Pod limits 
     - **Default Pod Size**:
         - **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
         - **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
-        - **Storage**: (Hosted only) Choose the amount of ephemeral storage in GiB assigned to each worker. This storage volume is transient and allows for the temporary storage and processing of data. The worker is assigned 10 GiB, the minimum, by default. The maximum possible quota is 100GiB.
+        - **Storage**: (Hosted only) Choose the amount of ephemeral storage in GiB assigned to each worker. This storage volume is transient and allows for the temporary storage and processing of data. The worker is assigned 0.25 GiB, the minimum, by default. The maximum possible quota is 100GiB.
 
      For a Deployment running in a Hosted dedicated or shared cluster, the maximum possible **CPU** quota is 6400 vCPU and maximum **Memory** quota is 12800 GiB.
 
      :::warning Astro Hosted
 
-     For Astro Hosted environments, if you set resource requests to be less than the maximum limit, Astro automatically requests the maximum limit that you set. This means that you might consume more resources than you expected if you set the limit much higher than the resource request you need. Check your [Billing and usage](manage-billing.md) to view your resource use and associated charges.
+     For Astro Hosted environments, if you set your **CPU** and **Memory** resource requests to be less than the maximum limit, Astro automatically requests the maximum limit that you set. This means that you might consume more resources than you expected if you set the limit much higher than the resource request you need. Only ephemeral storage requests that are greater than the default minimum of 0.25GiB are charged.
+
+     Check your [Billing and usage](manage-billing.md) to view your resource use and associated charges.
 
      :::
 
