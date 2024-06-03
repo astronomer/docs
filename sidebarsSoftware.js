@@ -112,6 +112,18 @@ module.exports = {
           ],
         },
         {
+        type: 'category',
+        label: 'Platform observability',
+        items: [
+          'grafana-metrics',
+          'kibana-logging',
+          'platform-alerts',
+          'task-usage-metrics',
+          'logs-to-s3',
+          'export-task-logs',
+          ],
+        },
+        {
           type: 'category',
           label: 'Security and compliance',
           items: [
