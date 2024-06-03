@@ -1,6 +1,6 @@
 ---
-title: 'View Deployment logs'
-sidebar_label: 'View Deployment logs'
+title: 'View Airflow component and task logs for a Deployment'
+sidebar_label: 'Airflow logs'
 id: view-logs
 description: View logs for your Deployments both locally and on Astro.
 ---

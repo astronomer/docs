@@ -41,14 +41,14 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Develop",
+      label: "Develop DAGs",
       items: [
+        'dags-overview',
         {
           type: 'link',
-          label: 'Develop your Astro project',
+          label: 'Astro projects',
           href: 'https://www.astronomer.io/docs/astro/cli/develop-project',
         },
-        "kubernetespodoperator",
         {
           type: "category",
           label: "Connections and variables",
@@ -58,6 +58,12 @@ module.exports = {
             "import-export-connections-variables",
           ],
         },
+        "upgrade-runtime",
+        "kubernetespodoperator",
+        "dag-metrics",
+        "view-logs",
+        "manage-dags",
+        "airflow-api",
         {
           type: "category",
           label: "Cloud IDE",
@@ -76,8 +82,6 @@ module.exports = {
             "cloud-ide/custom-cell-reference"
           ],
         },
-        "upgrade-runtime",
-        "airflow-api",
       ],
     },
     {
@@ -128,7 +132,6 @@ module.exports = {
             "secrets-backend/gcp-secretsmanager",
           ],
         },
-        "manage-dags",
       ],
     },
     {
@@ -181,13 +184,12 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Observability",
+      label: "Platform observability",
       items: [
-        "view-logs",
         {
           type: "category",
           label: "View metrics",
-          items: ["dag-metrics",
+          items: [
             "deployment-metrics",
             {
               type: "category",
