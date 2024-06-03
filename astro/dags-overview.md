@@ -46,7 +46,11 @@ Astro includes several features that enhance open source Apache Airflow function
 
 In local Airflow environments, you can use the Airflow UI to check your DAG runs, task logs, and component logs just as you would in any other Airflow environment.
 
-On Astro, you have access to the **DAGs** page in addition to the Airflow UI. From here, you can manage DAG and task runs for any Deployment in your Workspace. See [View logs](view-logs.md) [Manage DAG runs](manage-dags.md) for more information.
+In the Astro UI, you have access to the **DAGs** page in addition to the Airflow UI. From here, you can manage DAG and task runs for any Deployment in your Workspace. See [View logs](view-logs.md) [Manage DAG runs](manage-dags.md) for more information.
+
+Astronomer recommends using the UI that best fits the need your team. If you prefer managing your DAGs from a single place and find the way that the way the Astro page is designed helpful, you don't need to use the Airflow UI. If you're a longtime user of Apache Airflow, you might feel more comfortable in the Airflow UI and don't need to use the Astro UI.
+
+See [View logs](view-logs.md) and [Manage DAG runs](manage-dags.md) for more information.
 
 ## Airflow alerts
 
