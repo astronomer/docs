@@ -80,21 +80,21 @@ Learn more and get started by following the guidance in [Astro CLI](https://www.
 
 ### Follow DevOps best practices
 
-Airflow pipelines are Python code, so all software engineering best practices apply: 
+Airflow pipelines are code, so all software engineering best practices apply: 
 
 - Store your code in a version control system like [GitHub](https://github.com/).
 - Create [dedicated branches for development, staging and production](https://docs.astronomer.io/astro/set-up-ci-cd#multiple-environments).
 - Use a CI/CD pipeline to automate testing and deployment. See [Develop a CI/CD workflow for deploying code to Astro](https://docs.astronomer.io/astro/set-up-ci-cd).
 
-![Airflow CI/CD pipeline showing a 3 branch structure with a dev branch corresponding to Local Development, a staging branch corresponding to a staging Deployment and a production branch corresponding to the Production deployment. CI/CD is present at all steps of the workflow.](/img/docs/airflow-cicd-3-branches.png)
+![Airflow CI/CD pipeline showing a 3-branch structure with a dev branch corresponding to Local Development, a staging branch corresponding to a staging Deployment and a production branch corresponding to the Production deployment. CI/CD is present at all steps of the workflow.](/img/docs/airflow-cicd-3-branches.png)
 
-Your Airflow pipelines should be tested and validated before deployment:
+Test and validate your Airflow pipelines prior to deployment:
 
-- Write **DAG validation tests** and store them in the `tests` directory to create rules for you DAGs, for example to enforce the use of specific operators, or restrict which schedules are allowed. See [Key DAG writing best practices for Astro](#key-dag-writing-best-practices-for-astro) for more information.
-- Write **unit tests** for all your custom code and store them in the `tests` directory. You can use any Python testing framework you like, for example `pytest` or `unittest`.
-- Consider writing **integration tests** for custom functions that connect to external tools and store them in the `tests` directory. You can use any Python testing framework you like, for example `pytest` or `unittest`.
+- Write **DAG validation tests** to create rules to, for example, enforce the use of specific operators or allow only certain schedules. Store all validation tests in the `tests` directory.
+- Write **unit tests** for all your custom code using your preferred Python testing framework. Popular options include `pytest` and `unittest`. Store all unit tests in the `tests` directory.
+- Consider writing **integration tests** for custom functions that connect to external tools and store them in the `tests` directory, as well. A Python testing framework can also be used for this purpose.
 
-You can run all tests stored in the `tests` directory with the `astro dev pytest` command and integrate this command into your CI/CD pipelines. For more information on testing Airflow DAGs see [Test Airflow DAGs](https://docs.astronomer.io/learn/testing-airflow).
+You can run all tests stored in the `tests` directory with the `astro dev pytest` command and integrate this command into your CI/CD pipelines. For more information on testing Airflow DAGs, see [Test Airflow DAGs](https://docs.astronomer.io/learn/testing-airflow).
 
 ### Key DAG writing best practices for Astro
 
