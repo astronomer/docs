@@ -47,19 +47,13 @@ One of the highest barriers to using Airflow is writing boilerplate code for bas
 To get the most out of the Astro Cloud IDE:
 
 - Connect a Git repository for deployment of your pipelines using the [Astro GitHub integration](https://www.astronomer.io/docs/astro/deploy-github-integration). Deployment using the Astro CLI is also supported, but the GitHub integration offers advantages such as easy enforcement of software development best practices without custom CI/CD scripts, faster iteration on DAG code for teams, and greater visibility into the status and logs of individual deploys. For detailed guidance on deploying Cloud IDE pipelines, see [Deploy a project from the Cloud IDE to Astro](https://www.astronomer.io/docs/astro/cloud-ide/deploy-project).
-- [Export](https://www.astronomer.io/docs/astro/cloud-ide/deploy-project#export-your-pipelines-to-a-local-astro-project) and locally test any DAGs employing async operators and task sensors prior to deployment. Although supported, these cannot currently be tested in the Cloud IDE.
+- Locally test any DAGs employing async operators and task sensors prior to deployment after [exporting them](https://www.astronomer.io/docs/astro/cloud-ide/deploy-project#export-your-pipelines-to-a-local-astro-project). Although supported, async operators and task sensors cannot currently be tested in the Cloud IDE.
 
 Learn more and get started by following the guidance in [Cloud IDE](https://www.astronomer.io/docs/astro/cloud-ide).
 
 ### Use the Astro CLI for local development
 
-:::info
-
-A container management tool such as Docker or Podman is required in order to use the Astro CLI.
-
-:::
-
-When writing DAGs intended for Astro Deployments, use the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) for local development. The Astro CLI is an open-source interface you can use to:
+When writing DAGs intended for Astro Deployments, use the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) for containerized local development. The Astro CLI is an open-source interface you can use to:
 - test Airflow DAGs locally
 - deploy code to Astro
 - automate key actions as part of a CI/CD process. 
@@ -94,44 +88,46 @@ Test and validate your Airflow pipelines prior to deployment:
 - Write **unit tests** for all your custom code using your preferred Python testing framework. Popular options include `pytest` and `unittest`. Store all unit tests in the `tests` directory.
 - Consider writing **integration tests** for custom functions that connect to external tools and store them in the `tests` directory, as well. A Python testing framework can also be used for this purpose.
 
-You can run all tests stored in the `tests` directory with the `astro dev pytest` command and integrate this command into your CI/CD pipelines. For more information on testing Airflow DAGs, see [Test Airflow DAGs](https://docs.astronomer.io/learn/testing-airflow).
+You can run all tests stored in the `tests` directory with the `astro dev pytest` command and integrate this command into your CI/CD pipelines. For more information about testing Airflow DAGs, see [Test Airflow DAGs](https://docs.astronomer.io/learn/testing-airflow).
 
-### Key DAG writing best practices for Astro
+### Follow DAG-writing best practices
 
-When writing Airflow DAGs for Astro, it is recommended that all of your DAGs have the following characteristics:
+We recommend that all your DAGs for Astro have the following characteristics:
 
 - **Docstring up front**: Include a docstring at the top of your DAG file that describes the purpose of the DAG, the author, and any other relevant information. This will help other data practitioners understand the purpose of the DAG and how to use it. Convert the docstring to a [DAG Doc](https://docs.astronomer.io/learn/custom-airflow-ui-docs-tutorial) by setting `doc_md=__doc__` in the DAG definition.
-- **Define an owner**: In the `default_args` dictionary, define the `owner` key with the name of the person responsible for the DAG. This will help other data practitioners know who to contact if they have questions about the DAG. Note that you can link the owner to any address by setting the DAG parameter `owner_links` to a dictionary with the owner name as the key and the desired link as the value.
-- **Use tags**: Use tags to categorize your DAGs. The Astro UI allows you to filter DAGs by tags across all deployments in a workspace.
-- **Set retries**: It is an important Airflow best practice to set the `retries` parameter in the `default_args` dictionary to a value greater than 0. This will allow your tasks to retry if they fail. If you do not want a specific task to retry, you can override the `retries` parameter in the task definition.
+- **Defined owner**: In the `default_args` dictionary, define the `owner` key with the name of the person responsible for the DAG. This will help other data practitioners know whom to contact if they have questions about the DAG. Note that you can link the owner to any address by setting the DAG parameter `owner_links` to a dictionary with the owner name as the key and the desired link as the value.
+- **Tags**: Use tags to categorize your DAGs. The Astro UI allows you to filter DAGs by tags across all deployments in a workspace.
+- **Retries set**: It is an important Airflow best practice to set the `retries` parameter in the `default_args` dictionary to a value greater than 0. This will allow your tasks to retry if they fail. If you do not want a specific task to retry, you can override the `retries` parameter in the task definition.
 
-Writing Airflow tasks for Astro is similar to writing tasks for any Airflow deployment and general [Airflow best practices](https://docs.astronomer.io/learn/dag-best-practices) apply. When writing DAGs for Astro you can also leverage the following features:
+### Leverage Astro resources for improved Airflow management
 
-- The [Astro Cloud UI Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables) to manage your connections. This allows you to define connections once and use them in multiple deployments (with or without overrides for individual fields), as well in your local development environment. Connections in the Environment Manager are stored in the Astronomer managed secrets backend.
-- [Deployment environment variables](environment-variables.md) to store environment variables. You can mark variables as secret to be stored in the Astronomer managed secrets backend. You can store [Airflow variables](https://docs.astronomer.io/learn/airflow-variables) as environment variables as well, by using the format `AIRFLOW_VAR_MYVARIABLENAME`.
-- [Worker queues](https://docs.astronomer.io/astro/configure-worker-queues) to optimize task execution efficiency. Worker queues allow you to define sets of workers with specific resources that execute tasks in parallel. You can assign tasks to specific worker queues to optimize resource usage. This feature is an improvement over OSS Airflow pools, which only manage concurrency and not resources. You can use both worker queues and pools in combination.
-- [Astro Alerts](alerts.md) to set up alerts for your DAGs. For more information, see [When to use Airflow or Astro alerts for your pipelines on Astro](airflow-vs-astro-alerts.md).
+We recommend taking advantage of the following features for easy management of your DAGs:
+
+- **[Astro Cloud UI Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables)** for managing connections. Allows you to define connections once and use them in multiple deployments (with or without overrides for individual fields), as well in your local development environment. Connections in the Environment Manager are stored in the Astronomer managed secrets backend.
+- **[Deployment environment variables](environment-variables.md)** for storing environment variables. You can mark variables as secret for storage in the Astronomer managed secrets backend. You can store [Airflow variables](https://docs.astronomer.io/learn/airflow-variables) as environment variables as well by using the format `AIRFLOW_VAR_MYVARIABLENAME`.
+- **[Worker queues](https://docs.astronomer.io/astro/configure-worker-queues)** for optimizing task execution efficiency. Worker queues allow you to define sets of workers with specific resources that execute tasks in parallel. You can assign tasks to specific worker queues to optimize resource usage. This feature is an improvement over OSS Airflow pools, which only manage concurrency and not resources. You can use both worker queues and pools in combination.
+- **[Astro Alerts](alerts.md)** for setting up alerts for your DAGs. For more information, see [When to use Airflow or Astro alerts for your pipelines on Astro](airflow-vs-astro-alerts.md).
 
 ### Kubernetes and Astro
 
 On Astro, Airflow runs on Kubernetes. To run Airflow tasks in dedicated Kubernetes pods you have two options:
 
-- Use the **Kubernetes Executor**: On Astro you can switch to the Kubernetes Executor in the deployment settings. This will run all tasks running in a deployment in dedicated Kubernetes pods. See [Manage Airflow executors on Astro](executors-overview.md).
-- Use the **KubernetesPodOperator**: If you are using the Celery Executor, you can use the KubernetesPodOperator to run specific tasks in dedicated Kubernetes pods. You can run your tasks on the same cluster as your Airflow deployment by using the `in_cluster` parameter, or on a different cluster by using the `cluster_context` parameter. See [Run the KubernetesPodOperator on Astro](kubernetespodoperator.md).
+- **Kubernetes Executor**: on Astro you can switch to the Kubernetes Executor in the deployment settings. This will run all tasks running in a deployment in dedicated Kubernetes pods. See [Manage Airflow executors on Astro](executors-overview.md).
+- **KubernetesPodOperator**: if you are using the Celery Executor, you can use the KubernetesPodOperator to run specific tasks in dedicated Kubernetes pods. You can run your tasks on the same cluster as your Airflow deployment by using the `in_cluster` parameter, or on a different cluster by using the `cluster_context` parameter. See [Run the KubernetesPodOperator on Astro](kubernetespodoperator.md).
 
-## Example 
+## Astro DAG Example 
 
-This example show a simple DAG that follows the best practices for writing Airflow DAGs for Astro.
+Create a simple DAG that follows best practices for writing Airflow DAGs for Astro.
 
 ### Prerequisites
 
 - At least one [Astro Deployment](create-deployment.md) with at least one [worker queue](https://docs.astronomer.io/astro/configure-worker-queues) defined.
-- An [Astro project](https://docs.astronomer.io/astro/cli/overview) initialized with the Astro CLI. If you do not have a project ready you can fork the [Astro CLI Codespaces](https://github.com/astronomer/astro-cli-codespaces) repository.
+- An [Astro project](https://docs.astronomer.io/astro/cli/overview) initialized with the Astro CLI or a fork of the [Astro CLI Codespaces](https://github.com/astronomer/astro-cli-codespaces) repository.
 
 ### Implementation
 
-1. Create a new DAG file in the `dags` directory of your Astro project.
-2. Create a DAG definition with the following characteristics:
+1. Create a new DAG file in the `dags` directory.
+2. Create an empty DAG definition using the Airflow `dag` decorator and the following arguments:
 
     ```python
     """
@@ -164,12 +160,12 @@ This example show a simple DAG that follows the best practices for writing Airfl
     my_dag()
     ```
 
-3. Add at least one task to your DAG definition. Set the `queue` parameter to assign the task to a specific worker queue. 
-4. Configure the pre-existing DAG validation tests in the `tests/dags` directory for your needs. A common test is to enforce the `catchup` parameter is set to `False`:
+3. Add at least one task to your DAG definition. Optional: set the `queue` parameter to assign the task to a specific worker queue. 
+4. Add a custom test to the DAG validation tests in the `tests/dags` directory. A commonly added test is one for enforcing that the `catchup` parameter is set to `False`:
 
     ```python
     @pytest.mark.parametrize(
-        "dag_id,dag, fileloc", get_dags(), ids=[x[2] for x in get_dags()]
+        "dag_id,dag,fileloc", get_dags(), ids=[x[2] for x in get_dags()]
     )
     def test_dag_has_catchup_false(dag_id, dag, fileloc):
         """
@@ -180,13 +176,16 @@ This example show a simple DAG that follows the best practices for writing Airfl
         ), f"{dag_id} in {fileloc} must have catchup set to False."
     ```
 
-5. Add unit tests for your custom code and functions to the `tests` directory. See [Test Airflow DAGs](https://docs.astronomer.io/learn/testing-airflow) for more information and examples.
-6. Use `astro dev pytest` to run all tests in the `tests` directory locally and integrate this command into your [CI/CD pipeline](set-up-ci-cd.md).
-7. Add any connections needed in your DAG in the [Astro Cloud UI Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables).
-8. Add any environment variables needed in your DAG as [deployment environment variables](environment-variables.md).
+5. Optional: add unit tests for your custom code and functions to the `tests` directory. See [Test Airflow DAGs](https://docs.astronomer.io/learn/testing-airflow) for more information and examples.
+6. Use `astro dev pytest` to run all tests in the `tests` directory locally. Optional: integrate this command into a [CI/CD pipeline](set-up-ci-cd.md).
+7. Add any connections required by your DAG to the [Astro Cloud UI Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables).
+8. Add any environment variables required by your DAG as [deployment environment variables](environment-variables.md).
 9. Configure a **DAG Failure** alert for your DAG. Use the communication channel of your choice. See [Set up Astro alerts](https://docs.astronomer.io/astro/alerts).
+10. [Deploy your project to Astro](https://www.astronomer.io/docs/astro/deploy-dags) and click on **Run** to run it.
 
-## See also 
+Congratulations! You've followed best practices in writing a DAG optimized for Astro and successfully deployed it!
+
+## See also
 
 - Webinar: [Best practices for managing Airflow across teams](https://www.astronomer.io/events/webinars/best-practices-for-managing-airflow-across-teams-video/).
 - Webinar: [DAG writing for data engineers and data scientists](https://www.astronomer.io/events/webinars/dag-writing-for-data-engineers-and-data-scientists-video/).
