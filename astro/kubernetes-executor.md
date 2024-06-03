@@ -5,7 +5,7 @@ id: 'kubernetes-executor'
 description: Learn how to configure the Pods that the Kubernetes executor runs your tasks in.
 ---
 
-The Kubernetes executor runs each Airflow task in a dedicated Kubernetes [Pod](https://kubernetes.io/docs/concepts/workloads/pods/). On Astro, you can customize these Pods on a per-task basis using a `pod_override` configuration. If a task doesn't contain a `pod_override` configuration, it runs using the default Pod as configured in your Deployment resource settings. 
+The Kubernetes executor runs each Airflow task in a dedicated Kubernetes [Pod](https://kubernetes.io/docs/concepts/workloads/pods/). On Astro, you can customize these Pods on a per-task basis using a `pod_override` configuration. If a task doesn't contain a `pod_override` configuration, it runs using the default Pod as configured in your Deployment resource settings.
 
 :::info
 
@@ -42,7 +42,7 @@ For each task running with the Kubernetes executor, you can customize its indivi
 2. Add a `pod_override` configuration to the DAG file containing the task. See the [`kubernetes-client`](https://github.com/kubernetes-client/python/blob/master/kubernetes/docs/V1Container.md) GitHub for a list of all possible settings you can include in the configuration.
 3. Specify the `pod_override` in the task's parameters.
 
-See [Manage task CPU and memory](#example-set-CPU-or-memory-limits-and-requests) for an example `pod_override` configuration.
+See the following example of a `pod_override` configuration.
 
 ### Example: Set CPU or memory limits and requests
 
