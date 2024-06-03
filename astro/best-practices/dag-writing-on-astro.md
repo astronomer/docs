@@ -87,13 +87,6 @@ We recommend taking advantage of the following features for easy management of y
 - **[Worker queues](https://docs.astronomer.io/astro/configure-worker-queues)** for optimizing task execution efficiency. Worker queues allow you to define sets of workers with specific resources that execute tasks in parallel. You can assign tasks to specific worker queues to optimize resource usage. This feature is an improvement over OSS Airflow pools, which only manage concurrency and not resources. You can use both worker queues and pools in combination.
 - **[Astro Alerts](alerts.md)** for setting up alerts for your DAGs. For more information, see [When to use Airflow or Astro alerts for your pipelines on Astro](airflow-vs-astro-alerts.md).
 
-### Kubernetes and Astro
-
-On Astro, Airflow runs on Kubernetes. To run Airflow tasks in dedicated Kubernetes pods you have two options:
-
-- **Kubernetes Executor**: on Astro you can switch to the Kubernetes Executor in the deployment settings. This will run all tasks running in a deployment in dedicated Kubernetes pods. See [Manage Airflow executors on Astro](executors-overview.md).
-- **KubernetesPodOperator**: if you are using the Celery Executor, you can use the KubernetesPodOperator to run specific tasks in dedicated Kubernetes pods. You can run your tasks on the same cluster as your Airflow deployment by using the `in_cluster` parameter, or on a different cluster by using the `cluster_context` parameter. See [Run the KubernetesPodOperator on Astro](kubernetespodoperator.md).
-
 ## Astro DAG Example 
 
 Create a simple DAG that follows best practices for writing Airflow DAGs for Astro.
