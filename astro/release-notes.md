@@ -31,6 +31,20 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 As of June 1, 2024, Deployment API keys are no longer supported. Replace your API keys with [Deployment API tokens](https://www.astronomer.io/docs/astro/deployment-api-tokens), confirm successful operation with your API tokens, and then delete your API keys.
 
+### Configurable ephemeral storage is now in Public Preview
+
+<HostedBadge/>
+
+:::publicpreview
+:::
+
+You can now customize the size of the available ephemeral storage for data intensive workloads on your Celery and Kubernetes workers. Previously, to accomodate larger workloads, you might need to integrate with other object storage or database options to accomodate large datasets. Now, you can customize the ephemeral storage in the Astro UI when creating or updating your Deployment.
+
+- **Celery worker**: 10 GiB minimum by default. 100 GiB maximum.
+- **Kubernetes executor/ Kubernetes pod operator**: 0.25 GiB minimum by default. 100 GiB maximum.
+
+You are only charged for resources used that are greater than the minimum defaults.
+
 ### Additional improvements
 
 - When you create a new Deployment in dev mode with hibernation mode enabled, Astro now validates CRON expressions that you enter and adds commonly used hibernation schedules that you can enable or disable. <!--https://github.com/astronomer/astro/pull/21337-->
