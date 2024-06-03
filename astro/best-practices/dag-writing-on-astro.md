@@ -59,11 +59,14 @@ A container management tool such as Docker or Podman is required in order to use
 
 :::
 
-Use the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) when you write DAGs intended for Astro Deployments. 
+When writing DAGs intended for Astro Deployments, use the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) for local development. The Astro CLI is an open-source interface you can use to:
+- test Airflow DAGs locally
+- deploy code to Astro
+- automate key actions as part of a CI/CD process. 
 
-After initializing a new project with the Astro CLI by running `astro dev init`, follow these guidelines to organize your project:
+To get the most out of the Astro CLI: 
 
-- Use the `dags` directory to store your DAGs. If you have multiple DAGs, consider organizing them into subdirectories.
+- Use the `dags` directory to store your DAGs. If you have multiple DAGs, you can use subdirectories to keep your environment organized.
 - Modularize your code and store all supporting classes, files and functions in the `include` directory.
 - Store all your [tests](#follow-devops-best-practices) in the `tests` directory.
 
@@ -72,6 +75,8 @@ After initializing a new project with the Astro CLI by running `astro dev init`,
 If you are unable to install the Astro CLI on your local machine, due to company policy or other reasons, you can use it in GitHub Codespaces by forking the [Astro CLI Codespaces](https://github.com/astronomer/astro-cli-codespaces) repository.
 
 :::
+
+Learn more and get started by following the guidance in [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 
 ### Follow DevOps best practices
 
