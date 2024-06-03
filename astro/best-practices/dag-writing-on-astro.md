@@ -37,7 +37,11 @@ In this guide, you'll learn about a number of Astro and Airflow features for opt
 
 ## Best practice guidance
 
-### Use the Astro Cloud IDE for secure, low-code development in the cloud
+### Writing DAG code for Astro
+
+When it comes to writing DAG code for Astro, you can use the Astro Cloud IDE or the Astro CLI. The Astro Cloud IDE is a low-code solution recommended for new Airflow users. The Astro CLI is recommended for more experienced users, particularly those migrating existing DAGs to Astro.
+
+#### Use the Astro Cloud IDE for secure, low-code development in the cloud
 
 One of the highest barriers to using Airflow is writing boilerplate code for basic actions such as creating dependencies, passing data between tasks, and connecting to external services. If a low-code option is preferred by your team, the Cloud IDE is convenient because it enables you to set up these actions with the Astro UI and create pipelines by writing a minimal amount of Python or SQL code rather than entire DAGs.
 
@@ -48,7 +52,7 @@ To get the most out of the Astro Cloud IDE:
 
 Learn more and get started by following the guidance in [Cloud IDE](https://www.astronomer.io/docs/astro/cloud-ide).
 
-### Use the Astro CLI for local development
+#### Use the Astro CLI for local development
 
 When writing DAGs intended for Astro Deployments, use the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) for containerized local development. The Astro CLI is an open-source interface you can use to:
 - test Airflow DAGs locally
@@ -69,14 +73,20 @@ If you are unable to install the Astro CLI on your local machine, due to company
 
 Learn more and get started by following the guidance in [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 
-### Leverage Astro resources for improved Airflow management
+### Managing DAG code on Astro
 
-We recommend taking advantage of the following features for easy management of your DAGs:
+Compared to open-source Airflow, Astro offers a distinct feature set for managing deployments that you should consider not only when writing new DAG code but also when migrating DAGs to Astro. Although it is true that your DAGs will just run when you migrate them, you also get access to an upgraded experience when it comes to managing connections, defining and storing environment variables, allocating resources, and implementing alerts.
 
-- **[Astro Cloud UI Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables)** for managing connections. Allows you to define connections once and use them in multiple deployments (with or without overrides for individual fields), as well in your local development environment. Connections in the Environment Manager are stored in the Astronomer managed secrets backend.
-- **[Deployment environment variables](environment-variables.md)** for storing environment variables. You can mark variables as secret for storage in the Astronomer managed secrets backend. You can store [Airflow variables](https://docs.astronomer.io/learn/airflow-variables) as environment variables as well by using the format `AIRFLOW_VAR_MYVARIABLENAME`.
-- **[Worker queues](https://docs.astronomer.io/astro/configure-worker-queues)** for optimizing task execution efficiency. Worker queues allow you to define sets of workers with specific resources that execute tasks in parallel. You can assign tasks to specific worker queues to optimize resource usage. This feature is an improvement over OSS Airflow pools, which only manage concurrency and not resources. You can use both worker queues and pools in combination.
-- **[Astro Alerts](alerts.md)** for setting up alerts for your DAGs. For more information, see [When to use Airflow or Astro alerts for your pipelines on Astro](airflow-vs-astro-alerts.md).
+::: note
+
+Making use of these features can require DAG code changes or adding config in Astro instead of Airflow.
+
+:::
+
+- **[Astro Cloud UI Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables)** for managing connections. Allows you to define connections once and use them in multiple deployments (with or without overrides for individual fields), as well as in your local development environment. Connections in the Environment Manager are stored in the Astronomer managed secrets backend. Requires adding packages to your Astro project and adding config in Astro.
+- **[Deployment environment variables](environment-variables.md)** for storing environment variables. A number of approaches are supported. For example, you can mark variables as secret for storage in the Astronomer managed secrets backend. You can store [Airflow variables](https://docs.astronomer.io/learn/airflow-variables) as environment variables as well by using the format `AIRFLOW_VAR_MYVARIABLENAME`. Astro project modification and additional config in Astro possibly required depending on the strategy chosen.
+- **[Worker queues](https://docs.astronomer.io/astro/configure-worker-queues)** for optimizing task execution efficiency. Worker queues allow you to define sets of workers with specific resources that execute tasks in parallel. You can assign tasks to specific worker queues to optimize resource usage. This feature is an improvement over OSS Airflow pools, which only manage concurrency and not resources. You can use both worker queues and pools in combination. Config in Astro and DAG code modification required.
+- **[Astro Alerts](alerts.md)** for setting up alerts for your DAGs. For more information, see [When to use Airflow or Astro alerts for your pipelines on Astro](airflow-vs-astro-alerts.md). Config in Astro required.
 
 ## See also
 
