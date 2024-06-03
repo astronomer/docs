@@ -684,18 +684,19 @@ Complete the full setup as described in [Third-party Ingress-Controllers](third-
 
 ## Step 10: Configure a private certificate authority {#configuring-a-private-certificate-authority}
 
-<!-- Broken step, no link to configuring private CAs -->
+If you are not using a private Certificate Authority (private CA) to sign the certificate used by your ingress-controller or any services the Astronomer Software platform interacts with (see list below) skip this step.
 
-If you received a private certificate for the ingress controller, to store the Certificate Authority's public root certificate used to create it in a Kubernetes secret in the astronomer platform namespace and configure Astronomer Software platform components to trust it.
+Astronomer Software trusts public Certificate Authorities automatically.
 
-Additionally, repeat the above procedure to configure Astronomer Software platform components to [trust the private CAs](#configuring-private-cas) for each service not already present in `global.privateCaCerts`.
+Astronomer Software must be configured to trust any private Certificate Authorities issuing certificates for systems Astronomer Software interacts with, including but not limited-to:
+* ingress-controller
 * email server (unless disabled)
 * any container registries that Kubernetes will pull from
 * if using OAUTH, the OAUTH provider
 * if using external elasticsearch, any external elasticsearch instances
 * if using external prometheus, any external prometheus instances
 
-Configure Astronomer Software platform components to [trust the private CAs](#configuring-private-cas) for each service not already present in `global.privateCaCerts`.
+Perform the procedure described at [Configuring private CAs](#configuring-private-cas) for each certificate-authority used to sign TLS certificates.
 
 :::info
 
@@ -762,7 +763,14 @@ If SMTP is not available in the environment where you're installing Astronomer S
 
 :::
 
-1. Obtain a valid set of SMTP credentials. <!-- From where? -->
+1. Obtain a set of SMTP credentials to use to send email from your email administator. Emails sent from Astronomer are not designed to be replied to via email - requesting an email address and display-name. Request all the following information:
+     * email address
+     * email display-name requirements (if any, e.g. some email servers require a from-line of: `Do Not Reply <donotreply@example.com>`)
+     * smtp username (usually the same as the email address)
+     * smtp password
+     * smtp hostname
+     * smtp port
+     * whether or not the connection supports TLS
 2. Ensure that your Kubernetes cluster has access to send outbound email to the SMTP server.
 3. Change the configuration in `values.yaml` from `noreply@my.email.internal` to an email address that is valid to use with your SMTP credentials.
 4. Construct an email connection string and store it in a secret named `astronomer-tls` in the astronomer platform namespace. Make sure to *url-encode* the username and password if they contain special characters.
@@ -1300,8 +1308,6 @@ If you're using a third-party ingress controller or provisioning domain names fo
 Astronomer Software platform components require DNS entries be pointing to a load-balancer associated with your ingress controller to install and function.
 
 Perform a preliminary install of Astronomer Software to trigger the load-balancer creation. This installation will intentionally and timeout after 30 seconds, but it will cause the load balancer to be created.
-
-<!-- Editor's note: Where is upgrade.sh coming from? Tabs don't seem to be right -->
 
 <Tabs
     defaultValue="script"
