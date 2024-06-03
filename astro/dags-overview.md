@@ -50,7 +50,7 @@ On Astro, you have access to the **DAGs** page in addition to the Airflow UI. Fr
 
 ## DAG Alerting
 
-Astro includes additional features, such as Astro alerts, for alerting on specific DAG statuses. There are some circumstances where Astronomer recommends configuring Astro alerts instead of Airflow SLAs or failure notifications because it can simplify your DAG code and make it easier to manage alerts across multiple DAGs. See [When to use Airflow or Astro alerts for your pipelines on Astro](best-practices/airflow-vs-astro-alerts.md).
+Astro supports a set of alerting features that in many cases replace Apache Airflow SLAs or failure notification. There are some circumstances where Astronomer recommends configuring Astro alerts instead of Airflow SLAs or failure notifications because it can simplify your DAG code and make it easier to manage alerts across multiple DAGs. See [When to use Airflow or Astro alerts for your pipelines on Astro](best-practices/airflow-vs-astro-alerts.md).
 
 ## Astro open source packages
 
