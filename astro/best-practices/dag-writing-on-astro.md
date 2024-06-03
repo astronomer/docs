@@ -66,7 +66,7 @@ To get the most out of the Astro CLI:
 
 :::tip
 
-If you are unable to install the Astro CLI on your local machine, due to company policy or other reasons, you can use it in GitHub Codespaces by forking the [Astro CLI Codespaces](https://github.com/astronomer/astro-cli-codespaces) repository.
+If you are unable to install the Astro CLI on your local machine, due to company policy or for other reasons, you can use it in GitHub Codespaces by forking the [Astro CLI Codespaces](https://github.com/astronomer/astro-cli-codespaces) repository.
 
 :::
 
@@ -127,7 +127,7 @@ Create a simple DAG that follows best practices for writing Airflow DAGs for Ast
 ### Implementation
 
 1. Create a new DAG file in the `dags` directory.
-2. Create an empty DAG definition using the Airflow `dag` decorator and the following arguments:
+2. Create a DAG with a docstring that will be converted to a DAG doc, a specified DAG owner, and an empty DAG definition:
 
     ```python
     """
