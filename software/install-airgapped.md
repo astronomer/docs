@@ -1478,6 +1478,8 @@ From the Astronomer Software UI, you'll be able to both invite and manage users 
 
 ## Additional information
 
+The following topics include optional information about one or multiple topics in the installation guide.
+
 ### Merge configurations with `merge_yaml.py` {#merge-yaml}
 
 When merging YAML configuration into `values.yaml`, you may do so manually or with a tool of your choosing.
@@ -1660,59 +1662,49 @@ if __name__ == "__main__":
 
 ```
                                        
-### Configuring Astronomer Software to not send outbound email
+### Disable outbound email 
 
 Astronomer Software can be configured to not send outbound email.
 
 :::info
 
-Setting `astronomer.houston.config.publicSignups` to `true` in conjunction with `astronomer.houston.config.email.enabled` to `false` is only secure when all non-OIDC authentication backends are explicitly disabled and the OIDC-provider provides sufficient user-validation to prevent untrusted users from accessing Astronomer Software.
+Setting `astronomer.houston.config.publicSignup: true` with `astronomer.houston.config.email.enabled: false` is only secure when all non-OIDC authentication backends are explicitly disabled and the OIDC provider provides sufficient user validation to prevent untrusted users from accessing Astronomer Software.
 
 :::
 
 To disable email transmission and email verision of users attempting to access the platform:
-1. Set `astronomer.houston.config.email.enabled` to `false`
-2. Set `astronomer.houston.config.publicSignups` to `true`
-3. Remove the `EMAIL__SMTP_URL` list-item from `astronomer.houston.secret`
 
-If the guide has not yet instructed you to install Astronomer software, skip the remainder of this section.
+1. In your `values.yaml` file, set `astronomer.houston.config.email.enabled` to `false`.
+2. Set `astronomer.houston.config.publicSignups` to `true`.
+3. Remove the `EMAIL__SMTP_URL` list-item from `astronomer.houston.secret`.
 
-Apply the configuration update to the Astronomer Software helm release using `upgrade.sh` (recommended for your first install) or directly from helm. 
+### Configure Astronomer Software to trust private certificate authorities (CAs) {#configuring-private-cas}
 
-### Configuring Astronomer Software to trust private Certificate Authorities (private CA's) {#configuring-private-cas}
-
-1. Store the Certificate Authority's root public certificate to an [Opaque Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#secret-types) in the Astronomer namespace with a descriptive name, e.g. `private-root-ca` by running the following command:
-
-    ```sh
-    kubectl -n <astronomer platform namespace> create secret generic <secret name> --from-file=cert.pem=./<your-ca-certificate>
-    ```
-
-    e.g.
+1. Store the CA's root public certificate to an [Opaque Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#secret-types) in the Astronomer namespace with a descriptive name, such as `private-root-ca`, by running the following command:
 
     ```sh
     kubectl -n astronomer create secret generic private-root-ca --from-file=cert.pem=./private-root-ca.pem
     ```
 
-    > **Note:** The root certificate which you specify here should be the certificate of the authority that signed the Astronomer certificate. This is not the certificate associated with Astronomer or any other service.
+    Before you run this command, keep the following in mind:
 
-    > **Note:** The name of the secret file must be `cert.pem` for your certificate to be trusted properly.
+    - The root certificate you specify should be the certificate of the authority that signed the Astronomer certificate. This is not the certificate associated with Astronomer or any other service.
+    - The name of the secret file must be `cert.pem` for your certificate to be trusted properly.
+    - The file must contain only a single certificate, it may not be a certificate bundle.
 
-    > **Note:** The file must contain only a single certificate, it may not be a certificate bundle.
-
-2. Add `<secret name>` to the list of secret names contained in `global.privateCaCerts` in `values.yaml`. E.g.
+2. Add `<secret name>` to the list of secret names contained in `global.privateCaCerts` in `values.yaml`:
+  
     ```yaml
     astronomer:
       privateCaCerts:
       - private-root-ca
     ```
 
-### Adding additional trusted Certificate Authorities (private CA's) to Docker Desktop {#configure-desktop-container-solution-extra-cas}
+### Add trusted certificate authorities (CAs) to Docker Desktop {#configure-desktop-container-solution-extra-cas}
 
-If your end-users will be deploying images to a container-registry (including the integrated container registry) that uses TLS certificate signed by a private Certificate Authority, Docker Desktop needs to be configured to trust the Certificate Authority's public certificate. 
+If your users will be deploying images to a container registry (including the integrated container registry) that uses a TLS certificate signed by a private CA, Docker Desktop needs to be configured to trust the CAs public certificate. 
 
-Obtain a copy of the Certificate Authority's public certificate in pem format and place it in `/etc/docker/certs.d` directory.
-
-e.g.
+Obtain a copy of the CAs public certificate in pem format and place it in `/etc/docker/certs.d`:
 
 ```sh
 mkdir -p /etc/docker/certs.d

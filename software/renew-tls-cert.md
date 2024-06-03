@@ -132,7 +132,7 @@ sudo certbot certonly --manual --preferred-challenges=dns -d -d *. --key-type=rs
    kubectl get certificates -n astronomer
    ```
 
-6. Note your certificate name for when you create a Kubernetes TLS secret and push it to your Software configuration as described in the Software installation guide ([AWS](install-aws-standard.md#step-5-create-a-kubernetes-tls-secret), [GCP](install-gcp-standard.md#step-5-create-a-kubernetes-tls-secret), [AKS](install-azure-standard.md#step-5-create-a-kubernetes-tls-secret)).
+6. Note your certificate name for when you create a Kubernetes TLS secret and push it to your Software configuration as described in the [Astronomer Software installation guide](install-airgapped.md)
 
 ## Manually renew TLS certificates
 
@@ -143,7 +143,7 @@ Use a manual process to renew TLS certificates when your organization has its ow
    kubectl delete secret astronomer-tls -n astronomer
    ```
 
-2. Follow the instructions for requesting a TLS certificate from your organization's security team as described in [Step 4: Configure TLS](install-aws-standard.md#step-4-configure-tls). The linked guide is written for users installing Astronomer on AWS, but this step is the same regardless of which service you use.
+2. Follow the instructions for requesting a TLS certificate from your organization's security team as described in [Step 4: Configure TLS](install-airgapped.md#requesting-and-validating-an-astronomer-tls-certificate). The linked guide is written for users installing Astronomer on AWS, but this step is the same regardless of which service you use.
 
 3. Restart your Houston, nginx, and registry pods to begin using the new certificate by running the following commands:
    ```sh

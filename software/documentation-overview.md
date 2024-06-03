@@ -9,17 +9,7 @@ Use this reference to learn what documentation resources are available to help y
 
 ## Install Astronomer Software 
 
-The following topics will help you install and configure a new Astronomer Software installation: 
-
-- [Install Astronomer on AWS](install-aws-standard.md)
-- [Install Astronomer on GCP](install-gcp-standard.md)
-- [Install Astronomer on Azure](install-azure-standard.md)
-
-The following topics are recommended when your organization needs optional configurations during the Astronomer Software installation: 
-
-- [Generate a self-signed certificate](self-signed-certificate.md)
-- [Renew TLS certificates on Astronomer Software](renew-tls-cert.md)
-- [Install Astronomer on an airgapped system](install-airgapped.md)
+Use the [Astronomer Software installation guide](install-airgapped.md) to create an Astronomer Software instance.
 
 ## DAG authoring
 
