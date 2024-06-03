@@ -77,7 +77,7 @@ Before you begin, ensure that you’re logged in to GitHub with permissions to r
 4. Select the organization that contains the repository you want to connect to your Deployment. If your GitHub organization isn't available, click **Add Organization on GitHub**. Select the organization that contains the repository you want to integrate with Astro, then click **Continue**. A new window prompts you to allow **Astro App** to access either all repositories or specific repositories within your GitHub Organization. Astronomer recommends **Only select repositories**. After you return to the Astro UI, refresh the page to make the GitHub organization appear as a selectable option.
 5. Choose which repositories you want to enable the app for. You can either select an existing repository, or create a new repository. Then, click **Create and Connect Repository.**
 
-    <img src={require("../static/img/docs/request-astro-app.png").default} alt="The GitHub installation screen for connecting a repository to Astro. GitHub requests for the Astro App to be installed in at least of your repositories." style={{ maxWidth: "400px", height: "auto" }} />
+    <img src={require("../static/img/docs/request-astro-app.png").default} alt="The GitHub installation screen for connecting a repository to Astro. GitHub requests for the Astro App to be installed in at least of your repositories."/>
 
 6. Configure the following fields:
 
