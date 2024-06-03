@@ -46,7 +46,7 @@ module.exports = {
       type: 'category',
       label: 'Administration',
       items: [
-        'install-arigapped',
+        'install-airgapped',
         'upgrade-astronomer',
         'apply-platform-config',
         {
