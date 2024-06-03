@@ -11,7 +11,7 @@ Use this documentation to learn about the key differences between managing DAGs 
 
 ## Project structure
 
-To develop and run DAGs on Astronomer products, your DAGs must belong to an Astro project. An _Astro project_ contains all files required to run your DAGs both locally and on Astronomer. In addition to DAG files, an Astro project includes Python and OS-level packages, your Astro Runtime version, and any other files your workers need access to when you run tasks.
+To develop and run DAGs on Astronomer products, your DAGs must belong to an Astro project. An _Astro project_ contains all files required to run your DAGs both locally and on Astronomer. In addition to DAG files, an Astro project includes Python and OS-level packages, your Astro Runtime version, and any other files your workers need to access when you run tasks.
 
 See [Create an Astro project](cli/get-started-cli.md) to learn more about how to create and run Astro projects.
 
@@ -28,7 +28,7 @@ When you migrate to Astro from another Apache Airflow service, there are a few d
 There are two ways to run DAGs within the Astro ecosystem: Either in a local Airflow environment or on a hosted Astro Deployment. Each has its own purpose in the development lifecycle.
 
 - **Local Airflow environment**: You can run DAGs on your local machine using the Astro CLI. This development method is most useful if you need to quickly iterate and test changes, such as when fixing a bug, or you're just getting started with Airflow. Testing locally is free and open source.
-- **Deployment**: When you deploy your DAGs to Astro, they run on a managed Deployment. Use Deployments to run production code, or create a development Deployment to test changes over a longer period of time than you could in a local Airflow environment. To test code on a Deployment, you must have an [Astro account](log-in-to-astro.md), and an administrator on your team must grant you access to the Deployment. For more information about how to structure Deployments for specific development workflows, see [Connections and branch-based deploys](best-practices/connections-branch-deploys.md).
+- **Deployment**: When you deploy your DAGs to Astro, they run on a managed Deployment. Use Deployments to run production code, or create a development Deployment to test changes over a longer period of time than you could in a local Airflow environment. To test code on a Deployment, you must have an [Astro account](log-in-to-astro.md) and an administrator on your team must grant you access to the Deployment. For more information about how to structure Deployments for specific development workflows, see [Connections and branch-based deploys](best-practices/connections-branch-deploys.md).
 
 ### Unit tests
 
