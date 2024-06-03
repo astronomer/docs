@@ -34,6 +34,7 @@ As of June 1, 2024, Deployment API keys are no longer supported. Replace your AP
 ### Additional improvements
 
 - When you create a new Deployment in dev mode with hibernation mode enabled, Astro now validates CRON expressions that you enter and adds commonly used hibernation schedules that you can enable or disable. <!--https://github.com/astronomer/astro/pull/21337-->
+- You can now create a GitHub repository when you authorize the GitHub Integration from the Astro UI, if you do not already have an existing repository to connect to. Previously, you could only connect Astro to existing repositories. See [Deploy code with GitHub](https://www.astronomer.io/docs/astro/deploy-github-integration).
 
 ### Bug fixes
 
