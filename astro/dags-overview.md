@@ -34,7 +34,7 @@ There are two ways to run DAGs within the Astro ecosystem: Either in a local Air
 
 Whether you're building your project locally or deploying to Astro, you can run unit tests with the Astro CLI to ensure that your code meets basic standards before you run your DAGs. The Astro CLI includes a default set of unit tests which you can run alongside your own tests in a single sequence. See [Test your DAGs](https://docs.astronomer.io/astro/cli/test-your-astro-project-locally) for more information.
 
-## Airflow feature integrations
+## Airflow feature enhancements
 
 Astro includes several features that enhance open source Apache Airflow functionality.
 
