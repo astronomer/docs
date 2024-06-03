@@ -30,6 +30,26 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 Release date: May 14, 2024
 
+### Use deploy rollbacks to run previous versions of your code
+
+Deploy rollbacks are a new way to ensure that your Deployments can keep running after a broken code deploy or upgrade. When you trigger a rollback to a past deploy, your previous image and/or DAG code are redeployed and start running. 
+
+To configure deploy rollbacks, see [LIKNK]
+
+### Support for MySQL
+
+You can now configure Astronomer Software to use a MySQL database as the backend for both Houston and your Airflow Deployments. To connect your Astronomer Software installation to a MySQL database, you update the `astronomer-bootstrap` secret in your cluster to point to your database:
+
+```sh
+kubectl create secret generic astronomer-bootstrap \
+  --from-literal connection="jdbc:mysql://host1:33060/mydb" \
+  --namespace astronomer
+```
+
+### Create Teams without using an IdP
+
+Astronomer [Teams](import-idp-groups.md) can now be created without associating the team to an existing identity provider (IdP) group. Use local Teams to efficiently manage permissions for users with only a local username and password. See [LINK] for configuration steps.
+
 ### Bug fixes
 
 - Fixed an issue where the `lastUsedAt` data for a service account was not updated when the service account deployed an Airflow image.
