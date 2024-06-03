@@ -49,23 +49,29 @@ There is currently no limit or additional charge for deploying code to Astro wit
 - At least one Astro Deployment.
 
 **To connect to an existing repository**:
-    - A GitHub user account with read permissions to the repository containing your Astro project. If you don't have these permissions, send a request to your GitHub repository administrator when prompted by Astro. The read permissions are required so that you can map Deployments to repositories in the Astro UI. To trigger a code deploy to Astro, you additionally need write permissions for the repository.
-    - A GitHub repository that contains an [Astro project](https://www.astronomer.io/docs/astro/cli/develop-project#create-an-astro-project). The Astro project can exist at any level in your repository.
-    - At least one GitHub branch that you want to deploy to Astro.
+    - A GitHub user account with read permissions to the repository containing your Astro project. If you don't have these permissions, send a request to your GitHub repository administrator when prompted by Astro. The read permissions are required so that you can map Deployments to repositories in the Astro UI.
+    - A GitHub repository that contains an [Astro project](https://www.astronomer.io/docs/astro/cli/develop-project#create-an-astro-project). The Astro project can exist at the root directory or any subdirectory in your repository.
+    - At least one branch, such as a `dev` or `production` branch, that you want to deploy to Astro.
 
 **To create a new repository**:
-    - A GitHub user account with permission to create repositories. When you create a new repository, you automatically receive repository owner permissions. If you belong to a [GitHub Organization](https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/roles-in-an-organization#permissions-for-organization-roles) and don't have these permissions, send a request to your GitHub repository administrator when prompted by Astro.
-    - After you create and connect to your repository from Astro, you need to add an [Astro project](https://www.astronomer.io/docs/astro/cli/develop-project#create-an-astro-project). The Astro project can exist at any level in your repository.
-    - After you create and connect to your repository from Astro, you need to make at least one GitHub branch that you want to deploy to Astro.
+    - A GitHub user account with permission to create repositories. If you belong to a [GitHub Organization](https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/roles-in-an-organization#permissions-for-organization-roles) and don't have these permissions, send a request to your GitHub repository administrator when prompted by Astro.
+    - After you create and connect to your repository from Astro, you need to add an [Astro project](https://www.astronomer.io/docs/astro/cli/develop-project#create-an-astro-project). The Astro project can exist at the root directory or any subdirectory in your repository.
+    - After you create and connect to your repository from Astro, you need to make at least one branch, such as a `dev` or `production` branch, that you want to deploy to Astro.
 
 ## Connect a GitHub repository to a Workspace
 
 Before you begin, ensure that you’re logged in to GitHub with permissions to read code from the repository where you want to deploy code.
 
 1. In your Workspace, click **Workspace Settings** > **Git Deploys.**
-2. Click **Connect Repository**. A window appears instructing you to authorize the **Astro App** on your personal GitHub account. Follow the prompts to authorize the application.
+2. Click **Authorize GitHub Application** to authorize Astro to a new GitHub account. A window appears instructing you to authorize the **Astro App** on your personal GitHub account. Follow the prompts to authorize the application.
 
      <img src={require("../static/img/docs/authorize-astro-app.png").default} alt="The GitHub authorization screen for connecting a repository to GitHub. GitHub requests for the Astro App to have some of the permissions of your GitHub account" style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
+
+    :::info
+
+    You only need to authorize the GitHub application once. After authorized, you can connect to additional repositories without re-authorizing.
+
+    :::
 
 3. Return to the Astro UI. From the **Git Deploys** screen, click **Connect Repository**.
 4. Select the organization that contains the repository you want to connect to your Deployment. If your GitHub organization isn't available, click **Add Organization on GitHub**. Select the organization that contains the repository you want to integrate with Astro, then click **Continue**. A new window prompts you to allow **Astro App** to access either all repositories or specific repositories within your GitHub Organization. Astronomer recommends **Only select repositories**. After you return to the Astro UI, refresh the page to make the GitHub organization appear as a selectable option.
