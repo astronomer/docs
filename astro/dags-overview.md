@@ -54,7 +54,7 @@ Astro includes additional features, such as Astro alerts, for alerting on specif
 
 ## Astro open source packages
 
-Although Astronomer's open source packages are not built into Astro, Astronomer recommends implementing them when possible to simplify your Airflow pipelines. Tools like the Astro SDK include prebuilt operators that eliminate boiler plate code from your Airflow DAGs.
+In addition to its commercial products, Astronomer maintains several open source packages that enhance Apache Airflow. Although Astronomer's open source packages are not built into Astro, Astronomer recommends implementing them when possible to simplify your Airflow pipelines. Tools like the Astro SDK include prebuilt operators that eliminate boiler plate code from your Airflow DAGs.
 
 ### Orchestrate dbt Core projects using Cosmos
 
