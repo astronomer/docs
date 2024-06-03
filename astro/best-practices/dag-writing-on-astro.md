@@ -13,7 +13,7 @@ That said, following best practices and taking full advantage of Astro features 
 - Better organize your deployment and DAGs. 
 - Optimize resource usage and task execution efficiency.
 
-While this best practice guide focuses on writing Airflow DAGs for Astro, all [general Airflow best practices](https://docs.astronomer.io/learn/dag-best-practices) are also recommended.
+This guide describes best practices for taking advantage of Astro features when writing DAGs. While this focuses on writing Airflow DAGs for Astro, all [general Airflow best practices](https://docs.astronomer.io/learn/dag-best-practices) are also recommended.
 
 :::info New to Airflow?
 
@@ -31,12 +31,9 @@ In this guide, you'll learn about a number of Astro and Airflow features for opt
 
 - [Astro Cloud IDE](https://docs.astronomer.io/astro/cloud-ide). A low-code, notebook-inspired IDE for writing and testing pipelines on Astro.
 - [Astro CLI](overview.md). An OSS tool for developing DAGs and deploying projects tailor-made for Astro.
-- [CI/CD on Astro](set-up-ci-cd.md). A recommended architecture for testing and deployment supported by pre-built templates.
 - [Worker queues](configure-worker-queues.mdx). A feature of Astro that enables resource optimization beyond what is possible using OSS Airflow.
 - [Astro Cloud UI Environment Manager](manage-connections-variables.md). A tool for managing connections across multiple deployments locally and on Astro.
 - [Astro alerts](alerts.md). No-code alerting on Astro configurable for various trigger types and communication channels.
-- [Kubernetes Executor](executors-overview.md). Supports running Airflow on dedicated Kubernetes pods on Astro.
-- [KubernetesPodOperator](kubernetespodoperator.md). Supports running specific tasks in dedicated Kubernetes pods on Astro.
 
 ## Best practice guidance
 
