@@ -145,4 +145,6 @@ Get a template for a custom deferrable operator and custom trigger class, by cli
 </div>
 </details>
 
+Note that when developing a custom trigger, you will need to restart your triggerer to pick up any changes you make, since the triggerer caches the trigger classes. Additionally, all information you pass between the triggerer and the worker must be JSON serializable.
+
 See [Writing Deferrable Operators](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html#writing-deferrable-operators) for more information.
