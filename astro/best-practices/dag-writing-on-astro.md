@@ -35,28 +35,31 @@ In this guide, you'll learn about a number of Astro and Airflow features for opt
 - [Worker queues](configure-worker-queues.mdx). A feature of Astro that enables resource optimization beyond what is possible using OSS Airflow.
 - [Astro Cloud UI Environment Manager](manage-connections-variables.md). A tool for managing connections across multiple deployments locally and on Astro.
 - [Astro alerts](alerts.md). No-code alerting on Astro configurable for various trigger types and communication channels.
-- [Kubernetes Executor](executors-overview.md). Support for running Airflow on dedicated Kubernetes pods on Astro.
-- [KubernetesPodOperator](kubernetespodoperator.md). Support for running specific tasks in dedicated Kubernetes pods on Astro.
+- [Kubernetes Executor](executors-overview.md). Supports running Airflow on dedicated Kubernetes pods on Astro.
+- [KubernetesPodOperator](kubernetespodoperator.md). Supports running specific tasks in dedicated Kubernetes pods on Astro.
 
 ## Best practice guidance
 
 ### Use the Astro Cloud IDE for secure, low-code development in the cloud
 
-One of the highest barriers to using Airflow is writing boilerplate code for basic actions such as creating dependencies, passing data between tasks, and connecting to external services. The Cloud IDE enables you to configure all of these with the Astro UI and create pipelines by writing a minimal amount of Python or SQL code rather than entire DAGs.
+One of the highest barriers to using Airflow is writing boilerplate code for basic actions such as creating dependencies, passing data between tasks, and connecting to external services. If a low-code option is preferred by your team, the Cloud IDE is convenient because it enables you to set up these actions with the Astro UI and create pipelines by writing a minimal amount of Python or SQL code rather than entire DAGs.
+
+To get the most out of the Astro Cloud IDE:
+
+- Connect a Git repository for deployment of your pipelines using the [Astro GitHub integration](https://www.astronomer.io/docs/astro/deploy-github-integration). Deployment using the Astro CLI is also supported, but the GitHub integration offers advantages such as easy enforcement of software development best practices without custom CI/CD scripts, faster iteration on DAG code for teams, and greater visibility into the status and logs of individual deploys. For detailed guidance on deploying Cloud IDE pipelines, see [Deploy a project from the Cloud IDE to Astro](https://www.astronomer.io/docs/astro/cloud-ide/deploy-project).
+- [Export](https://www.astronomer.io/docs/astro/cloud-ide/deploy-project#export-your-pipelines-to-a-local-astro-project) and locally test any DAGs employing async operators and task sensors prior to deployment. Although supported, these cannot currently be tested in the Cloud IDE.
 
 Learn more and get started by following the guidance in [Cloud IDE](https://www.astronomer.io/docs/astro/cloud-ide).
 
+### Use the Astro CLI for local development
+
 :::info
 
-Async operators and task sensors, while supported, cannot currently be tested in the Cloud IDE prior to deployment. Test locally after [exporting your Cloud IDE pipelines](https://www.astronomer.io/docs/astro/cloud-ide/deploy-project#export-your-pipelines-to-a-local-astro-project). 
-
-Deployment of pipelines requires either the Astro CLI or a Git repository connected to Astro. For guidance on deploying Cloud IDE pipelines, see [Deploy a project from the Cloud IDE to Astro](https://www.astronomer.io/docs/astro/cloud-ide/deploy-project).
+A container management tool such as Docker or Podman is required in order to use the Astro CLI.
 
 :::
 
-### Use the Astro CLI for local development
-
-The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) is Astronomer's OSS tool to develop Airflow DAGs locally in a controlled, containerized environment. 
+Use the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) when you write DAGs intended for Astro Deployments. 
 
 After initializing a new project with the Astro CLI by running `astro dev init`, follow these guidelines to organize your project:
 
