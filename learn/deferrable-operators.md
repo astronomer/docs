@@ -102,7 +102,7 @@ Previously, before the `deferrable` parameter was available in regular operators
 
 :::info
 
-The [Astronomer providers](https://github.com/astronomer/astronomer-providers) package, which contained many `-Async` operators, has been deprecated. The functionality from most of these operators has been integrated into their original operator version in the relevant Airflow provider package.
+The [Astronomer providers](https://github.com/astronomer/astronomer-providers) package, which contained many `-Async` operators, is deprecated. The functionality from most of these operators is integrated into their original operator version in the relevant Airflow provider package.
 
 :::
 
@@ -134,7 +134,7 @@ Triggers are designed to be highly available. You can implement this by starting
 
 ## Create a deferrable operator
 
-If you have an operator that would benefit from being asynchronous but does not yet exist in OSS Airflow, you can create your own by writing your own deferrable operator and trigger class. You can even defer a task several times if needed.
+If you have an operator that would benefit from being asynchronous, but does not exist in OSS Airflow yet, you can create your own by writing a deferrable operator and trigger class. You can also defer a task several times if needed.
 
 Get a template for a custom deferrable operator and custom trigger class, by clicking the dropdown below:
 
@@ -145,6 +145,6 @@ Get a template for a custom deferrable operator and custom trigger class, by cli
 </div>
 </details>
 
-Note that when developing a custom trigger, you will need to restart your triggerer to pick up any changes you make, since the triggerer caches the trigger classes. Additionally, all information you pass between the triggerer and the worker must be JSON serializable.
+Note that when developing a custom trigger, you need to restart your triggerer to pick up any changes you make, since the triggerer caches the trigger classes. Additionally, all information you pass between the triggerer and the worker must be JSON serializable.
 
 See [Writing Deferrable Operators](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html#writing-deferrable-operators) for more information.
