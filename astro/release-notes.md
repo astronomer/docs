@@ -50,9 +50,9 @@ You are only charged for requested resources which are greater than the minimum 
 :::publicpreview
 :::
 
-You can now use Terraform to automate setting up of organizations, workspaces, deployment, and teams with the Astronomer Terraform Provider package. The Terraform provider allows you to automate managing resources and changes to large organizations and Airflow infrastructure.
+You can now use Terraform to automate managing resources and changes to large organizations and Airflow infrastructure with the Astronomer Terraform provider package. The provider is available through both the Terraform Registry and a public Github repository, where you can review the provider's code, make issues, and create pull requests.
 
-Refer to the [Astronomer Terraform Provider](https://registry.terraform.io/providers/astronomer/astro/latest/docs) docs for more information.
+Refer to the Astronomer Terraform Provider  docs  in the [Terraform registry](https://registry.terraform.io/providers/astronomer/astro/latest/docs) or the [GitHub repository](https://github.com/astronomer/terraform-provider-astro) for more information.
 
 
 ### Additional improvements
