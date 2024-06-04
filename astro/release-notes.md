@@ -31,24 +31,25 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 As of June 1, 2024, Deployment API keys are no longer supported. Replace your API keys with [Deployment API tokens](https://www.astronomer.io/docs/astro/deployment-api-tokens), confirm successful operation with your API tokens, and then delete your API keys.
 
-### Configurable ephemeral storage is now in Public Preview
+### Configure ephemeral storage on worker Pods
 
 <HostedBadge/>
 
 :::publicpreview
 :::
 
-You can now customize the size of the available ephemeral storage for data intensive workloads on your Celery and Kubernetes workers. Previously, to accomodate larger workloads, you might need to integrate with other object storage or database options to accomodate large datasets. Now, you can customize the ephemeral storage in the Astro UI when creating or updating your Deployment.
+You can now customize the amount of ephemeral storage for data intensive workloads on Celery and Kubernetes workers. Previously, to accommodate larger workloads, you needed to integrate an external object storage or database tool to process large datasets within a single task. Now, you can customize the ephemeral storage when creating or updating your Deployment so that all data processing happens directly in your task Pod.
+
+You are only charged for used resources which are greater than the minimum defaults for each worker type:
 
 - **Celery worker**: 10 GiB minimum by default. 100 GiB maximum.
 - **Kubernetes executor/ Kubernetes pod operator**: 0.25 GiB minimum by default. 100 GiB maximum.
 
-You are only charged for resources used that are greater than the minimum defaults.
 
 ### Additional improvements
 
-- When you create a new Deployment in dev mode with hibernation mode enabled, Astro now validates CRON expressions that you enter and adds commonly used hibernation schedules that you can enable or disable. <!--https://github.com/astronomer/astro/pull/21337-->
-- You can now create a GitHub repository when you authorize the GitHub Integration from the Astro UI, if you do not already have an existing repository to connect to. Previously, you could only connect Astro to existing repositories. See [Deploy code with GitHub](https://www.astronomer.io/docs/astro/deploy-github-integration).
+- The Astro UI now validates cron expressions for development Deployment hibernation schedules and shows commonly used hibernation schedules that you can enable or disable. <!--https://github.com/astronomer/astro/pull/21337-->
+- If you don't already have a GitHub repository, you can now create one when you authorize the [GitHub Integration](https://www.astronomer.io/docs/astro/deploy-github-integration) from the Astro UI. Previously, you could only connect Astro to existing repositories.
 
 ### Bug fixes
 
