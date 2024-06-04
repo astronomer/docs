@@ -21,7 +21,7 @@ This tutorial takes approximately 30 minutes to complete.
 ## Prerequisites
 
 - A running Qdrant instance. A [free instance](https://cloud.qdrant.io) is available.
-- The Astro CLI. See [Install the Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
+- The Astro CLI. See [Install the Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli).
 - A [HuggingFace token](https://huggingface.co/docs/hub/en/security-tokens) to generate embeddings.
 
 ## Step 1: Set up the project
