@@ -226,7 +226,7 @@ When your hibernation schedule starts:
 - You can't access the Airflow UI for the Deployment.
 - You can't deploy project images or DAGs to the Deployment.
 
-When your hibernation schedule ends, the Deployment will start any DAG runs for data intervals that were missed during hibernation for DAGs with `catchup=true`. To avoid incurring additional resource costs, Astronomer recommends disabling catchup on DAGs in hibernating Deployments.
+When your hibernation schedule ends, the Deployment will start any DAG runs for data intervals that were missed during hibernation for DAGs with `catchup=True`. To avoid incurring additional resource costs, Astronomer recommends disabling catchup on DAGs in hibernating Deployments.
 
 ### Manually hibernate a Deployment
 
