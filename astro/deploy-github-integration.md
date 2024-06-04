@@ -87,7 +87,7 @@ Before you begin, ensure that you’re logged in to GitHub with permissions to r
 7. Click **Connect Repository**.
 8. Map specific branches in your repository to Deployments in your Workspace. For example, you can map a development branch and your production branch to separate Deployments, so that bugs in development don’t affect your production data pipelines. When you map a branch to a Deployment, any future commits to the Astro project in that branch trigger a code deploy to Astro.
 
-:::note
+:::info
 
 You can add and edit branch mappings to connected GitHub repositories at any time from the **Git Deploy** page in the Astro UI.
 
