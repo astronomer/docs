@@ -45,7 +45,7 @@ You are only charged for requested resources which are greater than the minimum 
 - **Celery worker**: 10 GiB minimum by default. 100 GiB maximum.
 - **Kubernetes executor/ Kubernetes pod operator**: 0.25 GiB minimum by default. 100 GiB maximum.
 
-### Astro Terraform provider
+### Automate Airflow, resource, and infrastucture management with the Astro Terraform Provider
 
 :::publicpreview
 :::
