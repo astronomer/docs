@@ -178,11 +178,11 @@ Ensure that this file is accessible from your Astro project. You will mount this
 
 1. (Optional) Copy and save any existing build steps in your `Dockerfile`.
 
-2. In your `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
+2. In your `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime X.Y.Z, your `FROM` line is:
 
-   ```text
-   quay.io/astronomer/astro-runtime:5.0.0-base AS stage1
-   ```
+    ```text
+    quay.io/astronomer/astro-runtime:X.Y.Z-base AS stage1
+    ```
 
    :::info
 
@@ -234,7 +234,7 @@ Ensure that this file is accessible from your Astro project. You will mount this
 
 4. (Optional) If you had any other commands in your original `Dockerfile`, add them after the line `FROM stage1 AS stage3`.
 
-#### Step 3: Build a custom Docker image
+#### Step 4: Build a custom Docker image
 
 1. Run the following command to test your DAGs locally with your privately installed packages:
 
