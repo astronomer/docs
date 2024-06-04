@@ -239,13 +239,13 @@ Ensure that this file is accessible from your Astro project. You will mount this
 1. Run the following command to test your DAGs locally with your privately installed packages:
 
     ```sh
-    astro dev start --build-secrets id=indexurl,src=$HOME/path/to/indexurl.txt .
+    astro dev start --build-secrets id=indexurl,src=$HOME/path/to/indexurl.txt
     ```
 
 2. (Optional) Run the following command to deploy to Astro:
 
     ```sh
-    astro deploy --build-secrets id=indexurl,src=$HOME/path/to/indexurl.txt .
+    astro deploy --build-secrets id=indexurl,src=$HOME/path/to/indexurl.txt
     ```
 
 Your Astro project can now use Python packages from your private PyPi index.
