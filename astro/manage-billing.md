@@ -5,6 +5,8 @@ id: manage-billing
 description: "Change your billing details and view your current spend from the Astro UI."
 ---
 import HostedBadge from '@site/src/components/HostedBadge';
+import Listener from '@site/src/components/Listener';
+
 
 <HostedBadge/>
 
@@ -65,3 +67,5 @@ You can check your available credit balance and total credit consumption in the 
 
 1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Billing**.
 2. Click **Credits**.
+
+<Listener />
