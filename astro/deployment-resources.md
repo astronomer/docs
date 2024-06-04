@@ -5,6 +5,8 @@ id: deployment-resources
 description: "Configure your Deployment resource settings to optimze Deployment performance."
 ---
 
+import HostedBadge from '@site/src/components/HostedBadge';
+
 Your Deployment resources are the computational resources Astro uses to run Airflow in the cloud. Update Deployment resource settings to optimize performance and reduce the cost of running Airflow in the cloud.
 
 ## Update Airflow configurations
@@ -159,6 +161,8 @@ Every Deployment has two PgBouncer Pods assigned to two different nodes to preve
 </details>
 
 ## Hibernate a development Deployment
+
+<HostedBadge/>
 
 :::publicpreview
 :::
