@@ -64,7 +64,7 @@ To manage Kubernetes resources programmatically, you can set default Pod limits 
     - **Default Pod Size**:
         - **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
         - **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
-        - **Storage**: Choose the amount of ephemeral storage in GiB assigned to each worker in the Astro UI. This storage volume is transient and allows for the temporary storage and processing of data. The worker is assigned 0.25 GiB, the minimum, by default. The maximum possible quota is 100GiB. Only ephemeral storage requests that are greater than the default minimum of 0.25 GiB are chargeable. Note that this feature is in [Public Preview](feature-previews.md).
+        - **Storage**: Choose the amount of ephemeral storage in GiB assigned to each worker in the Astro UI. This storage volume is transient and allows for the temporary storage and processing of data. The worker is assigned the minimum 0.25 GiB by default. The maximum possible quota is 100 GiB. Only ephemeral storage requests that are greater than the default minimum of 0.25 GiB are chargeable. Note that this feature is in [Public Preview](feature-previews.md).
 
      For a Deployment running in a Hosted dedicated or shared cluster, the maximum possible **CPU** quota is 6400 vCPU and maximum **Memory** quota is 12800 GiB.
 
