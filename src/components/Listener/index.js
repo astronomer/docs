@@ -11,11 +11,13 @@ export default function Listener() {
   });
 
   return (
-    <img
+    <iframe
       className="jw-img"
       style={{ 'display': 'none' }}
       src="/docs/img/docs/lifestyle.jpg"
       alt="Great job managing your bills. Now try managing my lifestyle. -JW"
+      width="100%"
+      height="600px"
       loading="lazy"
     />
   )
