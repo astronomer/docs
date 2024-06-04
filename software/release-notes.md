@@ -50,8 +50,17 @@ kubectl create secret generic astronomer-bootstrap \
 
 Astronomer [Teams](import-idp-groups.md) can now be created without associating the team to an existing identity provider (IdP) group. Use local Teams to efficiently manage permissions for users with only a local username and password. See [LINK] for configuration steps.
 
+### Additional improvements
+
+- DAG-only deploys are now fully compatible with OpenShift clusters.
+
 ### Bug fixes
 
+- The Astro CLI now shows an error if you attempt to deploy code to a Software installation where `astronomer.houston.config.deployments.registry.protectedCustomRegistry.updateRegistry.host` is not set.
+- Fixed an issue where Jetstream resources were being created even when `global.nats.jetStream.enabled = false` in the Software platform configuration. <!-- https://github.com/astronomer/issues/issues/6245-->
+- Fixed an issue where the default `astroUnitsEnabled` value in `values.yaml` was not respected when creating Deployments via the Houston API, resulting in Deployment creation failing when the resource strategy is not explicitly specified.
+- Fixed an issue where Houston could produce errors if the username for a Postgres database included an `@` symbol.
+- Fixed an issue where pagination on specific Software UI screens did not behave as expected. <!-- https://github.com/astronomer/issues/issues/6198-->
 - Fixed an issue where the `lastUsedAt` data for a service account was not updated when the service account deployed an Airflow image.
 - Resolved the following vulnerabilities:
 
