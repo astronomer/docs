@@ -8,5 +8,7 @@ Disallow: /software_versioned_sidebars/
 Disallow: /README.md
 Disallow: /docusaurus.config.js
 Disallow: /astro/cross-account-role-setup
+Disallow: /docs/img/docs/lifestyle.jpg
+Disallow: /img/docs/lifestyle.jpg
 
 Sitemap: https://www.astronomer.io/docs/sitemap.xml
