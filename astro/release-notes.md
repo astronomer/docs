@@ -45,6 +45,15 @@ You are only charged for used resources which are greater than the minimum defau
 - **Celery worker**: 10 GiB minimum by default. 100 GiB maximum.
 - **Kubernetes executor/ Kubernetes pod operator**: 0.25 GiB minimum by default. 100 GiB maximum.
 
+### Astro Terraform provider
+
+:::publicpreview
+:::
+
+You can now use Terraform to automate setting up of organizations, workspaces, deployment, and teams with the Astronomer Terraform Provider package. The Terraform provider allows you to automate managing resources and changes to large organizations and Airflow infrastructure.
+
+Refer to the [Astronomer Terraform Provider](https://registry.terraform.io/providers/astronomer/astro/latest/docs) docs for more information.
+
 
 ### Additional improvements
 
