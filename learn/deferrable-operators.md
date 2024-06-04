@@ -98,13 +98,13 @@ trigger_dag_run = TriggerDagRunOperator(
 
 You can find a list of operators that support deferrable mode in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/deferrable-operator-ref.html).
 
-### Use deferrable versions of operators
+Previously, before the `deferrable` parameter was available in regular operators, deferrable operators were implemented as standalone operators, usually with an `-Async` suffix. Some of these operators are still available. For example, the `DateTimeSensor` does not have a `deferrable` parameter, but has a deferrable version called `DateTimeSensorAsync`. 
 
-In previous versions of Airflow provider packages, before the `deferrable` parameter was available in operators, deferrable operators were implemented as standalone operators, usually with an `-Async` suffix. 
+:::info
 
-Some of these operators are still available. For example, the `DateTimeSensor` does not have a `deferrable` parameter, but has a deferrable version called `DateTimeSensorAsync`. 
+The [Astronomer providers](https://github.com/astronomer/astronomer-providers) package, which contained many `-Async` operators, has been deprecated. The functionality from most of these operators has been integrated into their original operator version in the relevant Airflow provider package.
 
-Many `-Async` operators were part of the [Astronomer Providers](https://github.com/astronomer/astronomer-providers) package. The functionality from most of these operators has been integrated into their original operator version in the relevant Airflow provider packages and the Astronomer Providers package has been deprecated as of version 1.19.0. For example, if you've used the EmrContainerOperatorAsync from Astronomer Providers, you can now use the EmrContainerOperator from the [Amazon Airflow provider](https://registry.astronomer.io/providers/apache-airflow-providers-amazon/versions/latest/modules/EmrContainerOperator) package and set `deferrable=True` in the operator definition to make the operator deferrable.
+:::
 
 ## Example workflow
 
