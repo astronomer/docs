@@ -38,9 +38,9 @@ As of June 1, 2024, Deployment API keys are no longer supported. Replace your AP
 :::publicpreview
 :::
 
-You can now customize the amount of ephemeral storage for data intensive workloads on Celery and Kubernetes workers. Previously, to accommodate larger workloads, you needed to integrate an external object storage or database tool to process large datasets within a single task. Now, you can customize the ephemeral storage when creating or updating your Deployment so that all data processing happens directly in your task Pod.
+You can now customize the amount of ephemeral storage for data intensive workloads on Celery, Kubernetes, and KubernetesPodOperator workers. Previously, to accommodate larger workloads, you needed to integrate an external object storage or database tool to process large datasets within a single task. Now, you can customize the ephemeral storage when creating or updating your Deployment so that all data processing happens directly in your task Pod.
 
-You are only charged for used resources which are greater than the minimum defaults for each worker type:
+You are only charged for requested resources which are greater than the minimum defaults for each worker type:
 
 - **Celery worker**: 10 GiB minimum by default. 100 GiB maximum.
 - **Kubernetes executor/ Kubernetes pod operator**: 0.25 GiB minimum by default. 100 GiB maximum.
