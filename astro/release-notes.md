@@ -48,12 +48,12 @@ You are only charged for used resources which are greater than the minimum defau
 
 ### Additional improvements
 
-- The Astro UI now validates cron expressions for development Deployment hibernation schedules and shows commonly used hibernation schedules that you can enable or disable. Refer to [Create a hibernation schedule](https://www.astronomer.io/docs/astro/deployment-resources#create-a-hibernation-schedule) for more information. <!--https://github.com/astronomer/astro/pull/21337-->
+- The Astro UI now validates cron expressions for development Deployment hibernation schedules and shows commonly used hibernation schedules that you can enable or disable. Refer to [Create a hibernation schedule](https://www.astronomer.io/docs/astro/deployment-resources#create-a-hibernation-schedule) for more information.
 - If you don't already have a GitHub repository, you can now create one when you authorize the [GitHub Integration](https://www.astronomer.io/docs/astro/deploy-github-integration) from the Astro UI. Previously, you could only connect Astro to existing repositories.
 
 ### Bug fixes
 
-- Fixed an issue where you could not use Airflow connection testing with Azure Managed Identities on Astro.  <!--https://github.com/astronomer/astro/pull/21380-->
+- Fixed an issue where you could not use Airflow connection testing with Azure Managed Identities on Astro.
 
 ## May 30, 2024
 
