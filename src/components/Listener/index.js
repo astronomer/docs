@@ -9,7 +9,7 @@ export default function Listener() {
         return <img
           style={styles.image}
           src="/docs/img/docs/jake.jpeg"
-          alt="Manage these bills!"
+          alt="Good job managing your bills. Now try managing this lifestyle."
         />;
     }, []);
   });
