@@ -147,10 +147,10 @@ For the previous DAG, the logs for the `extract` task show the following lines u
 
 Logging in Airflow is ready to use without any additional configuration. However, there are many use cases where customization of logging is beneficial. For example:
 
-- Changing the format of existing logs to contain additional information. For example, the full pathname of the source file from which the logging call was made.
-- Adding additional handlers -- for example, to log all critical errors in a separate file.
+- Changing the format of existing logs to contain additional information: for example, the full pathname of the source file from which the logging call was made.
+- Adding additional handlers: for example, to log all critical errors in a separate file.
 - Storing logs remotely.
-- Adding your own custom handlers -- for example, to log remotely to a destination not yet supported by existing providers.
+- Adding your own custom handlers: for example, to log remotely to a destination not yet supported by existing providers.
 
 ## How to configure logging
 
