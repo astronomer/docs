@@ -204,25 +204,20 @@ Ensure that this file is accessible from your Astro project. You will mount this
     RUN apt-get update && cat packages.txt | xargs apt-get install -y
     USER astro
 
-    FROM stage1 AS stage2
-    COPY requirements.txt .
+    LABEL maintainer="Astronomer <humans@astronomer.io>"
+    LABEL io.astronomer.docker=true
+
+    # Install OS-Level packages
+    COPY packages.txt .
     USER root
+    RUN apt-get update && cat packages.txt | xargs apt-get install -y
+
     # Install Python packages
+    COPY requirements.txt .
     RUN --mount=type=secret,id=indexurl \
-        pip install --no-cache-dir -q -r requirements.txt --extra-index-url=$(cat /run/secrets/indexurl)
+        pip install --no-cache-dir --root-user-action=ignore -r requirements.txt --extra-index-url=$(cat /run/secrets/indexurl)
 
     USER astro
-
-    FROM stage1 AS stage3
-    # Copy requirements directory
-    USER root
-    # Remove existing packages else you might be left with multiple versions of provider packages
-    RUN rm -rf /usr/local/lib/python3.9/site-packages/
-    COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
-    USER astro
-    COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
-    ENV PATH="/home/astro/.local/bin:$PATH"
-
     COPY . .
     ```
 
