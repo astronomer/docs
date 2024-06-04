@@ -192,23 +192,28 @@ To create a hibernation schedule:
 
 1. In the Astro UI, select a Workspace, click **Deployments**, then select a Deployment.
 2. Click **Details**. In the **Advanced** section of your Deployment configuration, click **Edit**.
-3. Configure the following values in **Hibernation schedules**:
+3. (Optional) Enable a suggested hibernation schedule for your Deployment.
+
+    When you enable Dev mode, Astro automatically includes the following suggested schedules for your Deployment. These hibernation schedules are disabled by default.
+
+    | Schedule                                               | Start schedule | End schedule |
+    | ------------------------------------------------------ | -------------- | ------------ |
+    | Hibernate from 5:00 PM to 9:00 AM                      | 0 17 * * *     | 0 9 * * *    |
+    | Hibernate on weekends (Friday 5:00PM to Monday 9:00AM) | 0 17 * * 5     | 0 9 * * 1    |
+
+4. Configure the following values in **Hibernation schedules** to create a new schedule:
      - **Start Schedule**: Specify a cron schedule for your Deployment resources to scale to zero.
      - **End Schedule**: Specify a cron schedule for Astro to restart your configured resources.
      - **Description**: (Optional) Give your hibernation schedule a description.
      - **Enabled**: Tick this checkbox if you want to activate the schedule after configuring it.
 
-4. (Optional) Specify additional hibernation schedules for your Deployment.
 5. Select **Update Deployment** to save your changes.
 
 :::tip
 
 You can use the following example cron expressions to implement common Deployment hibernation schedules:
 
-| Schedule                                               | Start schedule | End schedule |
-| ------------------------------------------------------ | -------------- | ------------ |
-| Hibernate from 5:00 PM to 9:00 AM                      | 0 17 * * *     | 0 9 * * *    |
-| Hibernate on weekends (Friday 5:00PM to Monday 9:00AM) | 0 17 * * 5     | 0 9 * * 1    |
+
 
 :::
 
