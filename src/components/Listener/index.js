@@ -8,8 +8,8 @@ export default function Listener() {
     const easterEgg = new Konami(() => {
         return <img
           style={styles.image}
-          src="/docs/img/docs/jake.jpeg"
-          alt="Good job managing your bills. Now try managing this lifestyle."
+          src="/docs/img/docs/money-spread.jpeg"
+          alt="Great job managing your bills. Now try managing this lifestyle. -JW"
         />;
     }, []);
   });
