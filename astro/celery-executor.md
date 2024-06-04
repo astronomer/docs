@@ -51,17 +51,8 @@ For each worker queue on your Deployment, you have to specify certain settings t
 
     - **Worker type**: Choose the amount of resources that each worker will have.
     - **Concurrency**: The maximum number of tasks that a single worker can run at a time. If the number of queued and running tasks exceeds this number, a new worker is added to run the remaining tasks. This value is equivalent to the Apache Airflow [worker concurrency](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) setting. It is 16 by default.
+    - **Storage**: Choose the amount of ephemeral storage in GiB that each worker has. This storage volume is transient and allows for temporary storage and processing of data within the worker. The worker is assigned 10 GiB, the minimum, by default. The maximum quota is 100GiB. Only ephemeral storage requests that are greater than the default minimum of 10 GiB are chargeable. Note that this feature is in [Public Preview](feature-previews.md).
     - **Worker Count (Min-Max)**: The minimum and maximum number of workers that can run at a time. The number of running workers changes based on **Concurrency** and the current number of tasks in a queued or running state. By default, the minimum number of workers is 1 and the maximum is 10.
-
-    :::info Public Preview - Ephemeral storage on Astro Hosted
-
-        You can configure the amount of storage assigned to each Celery worker.
-
-        **Storage**: Choose the amount of ephemeral storage in GiB assigned to each worker. This storage volume is transient and allows for the temporary storage and processing of data. The worker is assigned 10 GiB, the minimum, by default. The maximum quota is 100GiB. Only ephemeral storage requests that are greater than the default minimum of 10GiB are charged.
-
-        This feature is in [Public Preview](feature-previews.md).
-
-    :::
 
 4. Click **Update Queue**.
 
