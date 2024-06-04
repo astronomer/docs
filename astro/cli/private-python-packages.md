@@ -205,14 +205,12 @@ Ensure that this file is accessible from your Astro project. You will mount this
     USER astro
 
     FROM stage1 AS stage2
-    # Install Python packages
-    ARG PIP_EXTRA_INDEX_URL
-    RUN --mount=type=secret,id=indexurl \
-        PIP_EXTRA_INDEX_URL=$(cat indexurl)
-
     COPY requirements.txt .
     USER root
-    RUN pip install --no-cache-dir -q -r requirements.txt
+    # Install Python packages
+    RUN --mount=type=secret,id=indexurl \
+        pip install --no-cache-dir -q -r requirements.txt --extra-index-url=$(cat /run/secrets/indexurl)
+
     USER astro
 
     FROM stage1 AS stage3
