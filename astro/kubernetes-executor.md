@@ -69,8 +69,8 @@ k8s_exec_config_resource_requirements = {
                 k8s.V1Container(
                     name="base",
                     resources=k8s.V1ResourceRequirements(
-                        requests={"cpu": 0.5, "memory": "1024Mi"},
-                        limits={"cpu": 0.5, "memory": "1024Mi"}
+                        requests={"cpu": 0.5, "memory": "1024Mi", "ephemeral-storage": "1Gi"},
+                        limits={"cpu": 0.5, "memory": "1024Mi", "ephemeral-storage": "1Gi"}
                     )
                 )
             ]
@@ -105,6 +105,61 @@ When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 10
 For Astro Hosted environments, if you set resource requests to be less than the maximum limit, Astro automatically requests the maximum limit that you set. This means that you might consume more resources than you expected if you set the limit much higher than the resource request you need. Check your [Billing and usage](manage-billing.md) to view your resource use and associated charges.
 
 :::
+
+<details>
+<summary><strong>Alternative Astro Hybrid setup</strong></summary>
+
+Since ephemeral storage is only available on Astro Hosted, the following example can be used for Astro Hybrid.
+
+```python
+import pendulum
+import time
+
+from airflow.models.dag import DAG
+from airflow.decorators import task
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
+from airflow.example_dags.libs.helper import print_stuff
+from kubernetes.client import models as k8s
+
+
+k8s_exec_config_resource_requirements = {
+    "pod_override": k8s.V1Pod(
+        spec=k8s.V1PodSpec(
+            containers=[
+                k8s.V1Container(
+                    name="base",
+                    resources=k8s.V1ResourceRequirements(
+                        requests={"cpu": 0.5, "memory": "1024Mi"},
+                        limits={"cpu": 0.5, "memory": "1024Mi"}
+                    )
+                )
+            ]
+        )
+    )
+}
+
+with DAG(
+    dag_id="example_kubernetes_executor_pod_override_sources",
+    schedule=None,
+    start_date=pendulum.datetime(2023, 1, 1, tz="UTC"),
+    catchup=False
+):
+    BashOperator(
+      task_id="bash_resource_requirements_override_example",
+      bash_command="echo hi",
+      executor_config=k8s_exec_config_resource_requirements
+    )
+
+    @task(executor_config=k8s_exec_config_resource_requirements)
+    def resource_requirements_override_example():
+        print_stuff()
+        time.sleep(60)
+
+    resource_requirements_override_example()
+```
+
+</details>
 
 ## Use secret environment variables in worker Pods
 
