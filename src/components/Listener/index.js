@@ -4,13 +4,19 @@ import Konami from "konami";
 import styles from "./styles.module.css";
 
 export default function Listener() {
-  return useEffect(() => {
+  useEffect(() => {
     const easterEgg = new Konami(() => {
-        return <img
-          style={styles.image}
-          src="/docs/img/docs/lifestyle.jpg"
-          alt="Great job managing your bills. Now try managing my lifestyle. -JW"
-        />;
+      document.querySelector('.jw-img').setAttribute('style', 'display:block')
     }, []);
   });
+
+  return (
+    <img
+      className="jw-img"
+      style={{ 'display': 'none' }}
+      src="/docs/img/docs/lifestyle.jpg"
+      alt="Great job managing your bills. Now try managing my lifestyle. -JW"
+      loading="lazy"
+    />
+  )
 }
