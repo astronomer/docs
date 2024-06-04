@@ -68,13 +68,13 @@ Refer to the Astronomer Terraform Provider  docs  in the [Terraform registry](ht
 
 ### Additional improvements
 
-- The default resources for the Kubernetes executor and KubernetesPodOperator Pods are now `0.25Gi` instead of `10Gi`. You can still customize the resource allocation for Kubernetes pods depending on your needs. See [Configure Kubernetes Pod Resources](https://www.astronomer.io/docs/astro/deployment-resources#configure-kubernetes-pod-resources)
 - Dedicated clusters are now available only to [**Team**](https://www.astronomer.io/pricing/) tier customers and above.
 - Added a centralized docs reference page that lists all open source Apache Airflow provider packages and their versions for each Astro Runtime version. See [Provider package reference](https://www.astronomer.io/docs/astro/runtime-provider-reference) docs.
 
 ### Bug fixes
 
 - Fixed an issue where you could make changes to clusters and Deployments on an inactive Organization.
+- The default storage resources for the Kubernetes executor and KubernetesPodOperator Pods are now enforced with `0.25Gi` instead of `10Gi` in some cases. You can still customize the resource allocation for Kubernetes pods depending on your needs. See [Configure Kubernetes Pod Resources](https://www.astronomer.io/docs/astro/deployment-resources#configure-kubernetes-pod-resources)
 
 ## May 22, 2024
 
