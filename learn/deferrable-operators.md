@@ -102,7 +102,7 @@ You can find a list of operators that support deferrable mode in the [Airflow do
 
 In previous versions of Airflow provider packages, before the `deferrable` parameter was available in operators, deferrable operators were implemented as standalone operators, usually with an `-Async` suffix. 
 
-There are still a couple of these operators available, for example, the `DateTimeSensor` operator does not have a `deferrable` parameter but a deferrable version called `DateTimeSensorAsync`. 
+Some of these operators are still available. For example, the `DateTimeSensor` does not have a `deferrable` parameter, but has a deferrable version called `DateTimeSensorAsync`. 
 
 Many `-Async` operators were part of the [Astronomer Providers](https://github.com/astronomer/astronomer-providers) package. The functionality from most of these operators has been integrated into their original operator version in the relevant Airflow provider packages and the Astronomer Providers package has been deprecated as of version 1.19.0. For example, if you've used the EmrContainerOperatorAsync from Astronomer Providers, you can now use the EmrContainerOperator from the [Amazon Airflow provider](https://registry.astronomer.io/providers/apache-airflow-providers-amazon/versions/latest/modules/EmrContainerOperator) package and set `deferrable=True` in the operator definition to make the operator deferrable.
 
@@ -134,7 +134,7 @@ Triggers are designed to be highly available. You can implement this by starting
 
 ## Create a deferrable operator
 
-If you have an operator that would benefit from being asynchronous but does not yet exist in OSS Airflow or Astronomer Providers, you can create your own by writing your own deferrable operator and trigger class. You can even defer a task several times if needed.
+If you have an operator that would benefit from being asynchronous but does not yet exist in OSS Airflow, you can create your own by writing your own deferrable operator and trigger class. You can even defer a task several times if needed.
 
 Get a template for a custom deferrable operator and custom trigger class, by clicking the dropdown below:
 
