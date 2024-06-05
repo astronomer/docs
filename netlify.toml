@@ -13,3 +13,8 @@
   from = "/docs/api/*"
   to = "https://astronomer.docs.buildwithfern.com/docs/api/:splat"
   status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/docs/:splat"
+  status = 200
