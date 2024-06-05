@@ -75,6 +75,8 @@ The Airflow UI shows logs using a `read()` method on task handlers that is not p
 
 By default, Airflow outputs logs to the `base_log_folder` configured in `airflow.cfg`, which is located in your `$AIRFLOW_HOME` directory.
 
+Airflow also makes audit logs available in the Airflow UI under the "Browse" tab. For details about the log levels and events tracked, see [Audit logs in Airflow](https://airflow.apache.org/docs/apache-airflow/stable/security/audit_logs.html).
+
 ### Local Airflow environment
 
 If you run Airflow locally, logging information is accessible in the following locations:
