@@ -313,7 +313,7 @@ The KubernetesPodOperator can be instantiated like any other operator within the
 
     :::info
 
-    Astronomer customers can set default resource requests and limits for all KPO tasks in their deployment settings, see [Configure Kubernetes Pod resources](https://www.astronomer.io/docs/astro/deployment-resources#configure-kubernetes-pod-resources). Setting the `container_resources` argument in the KPO task will override the default settings. Note that using `ephemeral-storage` on Astro is currently in [Public Preview](https://astronomer.io/docs/astro/feature-previews).
+    Astronomer customers can set default resource requests and limits for all KPO tasks in their deployment settings, see [Configure Kubernetes Pod resources](https://www.astronomer.io/docs/astro/deployment-resources#configure-kubernetes-pod-resources). Setting the `container_resources` argument in the KPO task will override the default settings. Note that using `ephemeral-storage` for Astro Hosted is currently in [Public Preview](https://astronomer.io/docs/astro/feature-previews).
 
     :::
 
