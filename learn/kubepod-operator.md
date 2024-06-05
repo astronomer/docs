@@ -135,25 +135,26 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
 
     After running these commands, you will find a `config` file in the `/include/.kube/` folder of your Astro project which resembles this example:
 
-    ```
+    ```yaml
+    apiVersion: v1
     clusters:
     - cluster:
-    certificate-authority-data: <certificate-authority-data>
-    server: https://kubernetes.docker.internal:6443/
-    name: docker-desktop
+        certificate-authority-data: <certificate-authority-data>
+        server: https://kubernetes.docker.internal:6443/
+      name: docker-desktop
     contexts:
     - context:
-    cluster: docker-desktop
-    user: docker-desktop
-    name: docker-desktop
+        cluster: docker-desktop
+        user: docker-desktop
+      name: docker-desktop
     current-context: docker-desktop
     kind: Config
     preferences: {}
     users:
     - name: docker-desktop
-    user:
-    client-certificate-data: <client-certificate-data>
-    client-key-data: <client-key-data>
+      user:
+        client-certificate-data: <client-certificate-data>
+        client-key-data: <client-key-data>
     ```
 
 2. If you have issues connecting, check the server configuration in the `kubeconfig` file. If `server: https://localhost:6445` is present, change to `server: https://kubernetes.docker.internal:6443` to identify the localhost running Kubernetes Pods. If this doesn't work, try `server: https://host.docker.internal:6445`.
@@ -212,8 +213,6 @@ To run a Kubernetes pod locally, you can use the following .json template to cre
 ```
 
 Then, run `astro dev start` with the Astro CLI to spin up a local Airflow environment. Once your environment has been created, open up the connection management UI, and create a new connection of the `Kubernetes Cluster Connection` type. Within the connection creation menu, copy the .json file you created using the above template into the `Kube config (JSON format)` field, and save the connection with the connection id `k8s_conn`. If you'd like to use another connection id, make sure to alter the following example DAG code. 
-
-
 
 #### Step 4: Run your container
 
@@ -292,7 +291,32 @@ The KubernetesPodOperator can be instantiated like any other operator within the
 - `get_logs`: Determines whether to use the `stdout` of the container as task-logs to the Airflow logging system.
 - `log_events_on_failure`: Determines whether events are logged in case the Pod fails. The default is `False`.
 - `env_vars`: A dictionary of environment variables for the Pod.
-- `container_resources`: A dictionary with resource requests (keys: `request_memory`, `request_cpu`) and limits (keys: `limit_memory`, `limit_cpu`, `limit_gpu`). See the [Kubernetes Documentation on Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for more information.
+- `container_resources`: A [`k8s.V1ResourceRequirements`](https://github.com/kubernetes-client/python/blob/master/kubernetes/docs/V1ResourceRequirements.md) object containing the resource requests and/or limits for the Pod.
+
+    ```python
+    # from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import (
+    #     KubernetesPodOperator,
+    # )
+    # from kubernetes.client import CoreV1Api, V1Pod, models as k8s
+
+
+    KubernetesPodOperator(
+        # other arguments
+        container_resources=k8s.V1ResourceRequirements(
+            requests={"cpu": "100m", "memory": "64Mi", "ephemeral-storage": "1Gi"},
+            limits={"cpu": "200m", "memory": "420Mi", "ephemeral-storage": "2Gi"},
+        )
+    )
+    ```
+
+    See the [Kubernetes Documentation on Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for more information.
+
+    :::info
+
+    Astronomer customers can set default resource requests and limits for all KPO tasks in their deployment settings, see [Configure Kubernetes Pod resources](https://www.astronomer.io/docs/astro/deployment-resources#configure-kubernetes-pod-resources). Setting the `container_resources` argument in the KPO task will override the default settings. Note that using `ephemeral-storage` for Astro Hosted is currently in [Public Preview](https://astronomer.io/docs/astro/feature-previews).
+
+    :::
+
 - `volumes`: A list of `k8s.V1Volumes`, see also the [Kubernetes example DAG from the Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/_modules/tests/system/providers/cncf/kubernetes/example_kubernetes.html).
 - `affinity` and `tolerations`: Dictionaries of rules for [Pod to Node assignments](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/). Like the `volumes` parameter, these also require a `k8s` object.
 - `pod_template_file`: The path to a Pod template file.
