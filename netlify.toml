@@ -5,7 +5,7 @@
 
 
 [[redirects]]
-  from = "/docs/api*"
+  from = "/docs/api"
   to = "https://astronomer.docs.buildwithfern.com/docs/api/overview"
   status = 200
 
