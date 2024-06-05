@@ -329,8 +329,8 @@
 /astro/astro-use-case/use-case-astro-connections /astro/use-cases/connections-branch-deploys 301
 
 # API redirects
-/docs/api https://astronomer.docs.buildwithfern.com/docs/api/overview 200!
-/docs/api/* https://astronomer.docs.buildwithfern.com/docs/api/:splat 200!
+# /api https://astronomer.docs.buildwithfern.com/api/overview 200!
+# /api/* https://astronomer.docs.buildwithfern.com/api/:splat 200!
 # /astro/api/overview https://www.astronomer.io/docs/api/overview 301!
 # /astro/api/get-started https://www.astronomer.io/docs/api/get-started 301!
 # /astro/api/versioning-and-support https://www.astronomer.io/docs/api/versioning-and-support 301!
