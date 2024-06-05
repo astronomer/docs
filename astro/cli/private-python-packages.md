@@ -178,10 +178,10 @@ Ensure that this file is accessible from your Astro project. You will mount this
 
 1. (Optional) Copy and save any existing build steps in your `Dockerfile`.
 
-2. In your `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime X.Y.Z, your `FROM` line is:
+2. In your `Dockerfile`, add the following to the `FROM` line which specifies your Runtime image. For example, if you use Runtime X.Y.Z, your `FROM` line is:
 
     ```text
-    quay.io/astronomer/astro-runtime:X.Y.Z-base AS stage1
+    FROM quay.io/astronomer/astro-runtime:X.Y.Z-base
     ```
 
    :::info
