@@ -24,11 +24,13 @@ class MyTrigger(BaseTrigger):
         self,
         poll_interval: int = 60,
         my_kwarg_passed_into_the_trigger: str = "notset",
+        my_kwarg_passed_out_of_the_trigger: str = "notset",
         # you can add more arguments here
     ):
         super().__init__()
         self.poll_interval = poll_interval
         self.my_kwarg_passed_into_the_trigger = my_kwarg_passed_into_the_trigger
+        self.my_kwarg_passed_out_of_the_trigger = my_kwarg_passed_out_of_the_trigger
 
     def serialize(self) -> tuple[str, dict[str, Any]]:
         """
@@ -107,7 +109,6 @@ class MyOperator(BaseOperator):
     template_fields: Sequence[str] = (
         "wait_for_completion",
         "poke_interval",
-        "deferrable",
     )
     ui_color = "#73deff"
 
