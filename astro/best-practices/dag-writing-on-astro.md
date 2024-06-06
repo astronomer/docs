@@ -37,6 +37,8 @@ In this guide, you'll learn about a number of Astro and Airflow features for opt
 
 ## Best practice guidance
 
+The following guidance applies to two development functions: writing DAG code for Astro and managing DAG code on Astro.
+
 ### Writing DAG code for Astro
 
 When it comes to writing DAG code for Astro, you can use the Astro Cloud IDE or the Astro CLI. The Astro Cloud IDE is a low-code solution recommended for new Airflow users. The Astro CLI is recommended for more experienced users, particularly those migrating existing DAGs to Astro.
