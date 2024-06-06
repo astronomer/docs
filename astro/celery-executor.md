@@ -29,11 +29,16 @@ The number of Celery workers running per worker queue on your Deployment at a gi
 
 The calculation is made based on the following expression:
 
-`[Number of workers]= ([Queued tasks]+[Running tasks])/(Concurrency)`
+<img width="413" alt="image" src="https://github.com/astronomer/docs/assets/25823361/d4dafaee-3a73-4cfe-adb3-5f667fd7a0c8">
+
 
 Deployment [parallelism](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism) is the maximum number of tasks that can run concurrently across worker queues. To ensure that you can always run as many tasks as your worker queues allow, parallelism is calculated with the following expression:
 
-`[Parallelism]= ([The sum of all 'Max Worker Count' values for all worker queues] * [The sum of all 'Concurrency' values for all worker queues])`.
+<img width="425" alt="image" src="https://github.com/astronomer/docs/assets/25823361/2ea9867a-ebe3-4364-baf6-ec77980f737b">
+
+Where:
+
+Worker total represents the sum of all 'Max Worker Count' values for all worker queues and Concurrency total represents the sum of all 'Concurrency' values for all worker queues.
 
 [Kubernetes Event Driven Autoscaling](https://keda.sh/) (KEDA) computes these calculations every ten seconds. When KEDA determines that it can scale down a worker, it waits for five minutes after the last running task on the worker finishes before terminating the worker Pod.
 
