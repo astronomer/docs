@@ -1,8 +1,33 @@
 ---
-sidebar_label: 'Manage DAG runs'
+sidebar_label: 'DAG and task runs'
 title: "Manage DAG runs from the Astro UI"
 id: manage-dags
 ---
+
+As a data engineer or data scientist, you might need to view details about your DAGs' performance, including task logs, run status, and retries. You might additionally have to manually retry DAG runs or mark them as a specific status when troubleshooting any issues. 
+
+Use this document to learn how to manage your DAGs using either the Airflow UI or the Astro UI.
+
+## Access the Airflow UI for a Deployment
+
+Every Astro Deployment runs its own webserver and instance of the Airflow UI. If you want to manage your DAG and task runs through the Airflow UI, you can access it either through the Astro UI or the Astro CLI.
+
+To access the Airflow UI for your Deployment in the Astro UI:
+
+1. In the Astro UI, open your Deployment.
+2. Click **Open Airflow**.
+
+To access a Deployment's Airflow UI from the Astro CLI: 
+
+1. Run the following command to retrieve the URL for the Deployment's Airflow UI:
+
+    ```sh
+    astro deployment inspect -n <deployment-name> -k metadata.webserver_url
+    ```
+
+2. Copy the URL into a web browser and hit enter to directly open the Airflow UI for your Deployment.
+
+## Manage DAGs from the Astro UI
 
 You can perform some common Airflow UI actions from the Astro UI, including:
 
@@ -14,7 +39,7 @@ These actions are available on the **DAGs** page, where you can see detailed inf
 
 ![DAGs page](/img/docs/DAGs-overview.png)
 
-## Access the DAGs page in the Astro UI
+### Access the DAGs page in the Astro UI
 
 1. In the Astro UI, select a Deployment.
 2. Click **DAGs**.

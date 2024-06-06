@@ -7,9 +7,11 @@ description: "Learn how Astronomer releases and maintains versions of Astro Runt
 
 import LifecycleTable from "../docs-partials/runtime-lifecycle-table.mdx";
 
-Astro Runtime is a production ready, data orchestration tool based on Apache Airflow that is distributed as a Docker image and is required by all Astronomer products. It is intended to provide organizations with improved functionality, reliability, efficiency, and performance. Deploying Astro Runtime is a requirement if your organization is using Astro.
+Astro Runtime is a production-ready data orchestration tool based on Apache Airflow that is distributed as a Docker image and required by all Astronomer products. It provides organizations with improved functionality, reliability, efficiency, and performance in their pipelines. Deploying Astro Runtime is a requirement if your organization is using Astro.
 
-Astronomer maintenance and lifecycle policies are part of the distribution and define the period that specific Astro Runtime versions are supported and how frequently updates are provided.
+Astronomer maintenance and lifecycle policies are part of the distribution. These policies define: 
+- The maintenance window for specific Astro Runtime versions.
+- The frequency of updates.
 
 ## Release channels
 
@@ -20,7 +22,7 @@ To meet the unique needs of different operating environments, Astro Runtime vers
 
 All major Astro Runtime versions belong to the Astro Runtime stable release channel. The LTS release channel is a subset of the stable release channel and includes additional stability, reliability, and support. For more information on how Astro Runtime is versioned, see [Runtime versioning](runtime-image-architecture.mdx#runtime-versioning).
 
-For users that want to keep up with the latest Astronomer and Airflow features on an incremental basis, we recommend upgrading to new versions of Astro Runtime as soon as they are made generally available. This should be regardless of release channel. New versions of Runtime are issued regularly and include timely support for the latest major, minor, and patch versions of Airflow.
+For users who want to keep up with the latest Astronomer and Airflow features on an incremental basis, we recommend upgrading to new versions of Astro Runtime as soon as they are made generally available. This should be regardless of release channel. New versions of Runtime are issued regularly and include timely support for the latest major, minor, and patch versions of Airflow.
 
 For customers looking for less frequent upgrades and functional changes, we recommend following the LTS release channel exclusively.
 
@@ -39,17 +41,17 @@ For example, if you report an issue occurring on a Deployment running Astro Runt
 
 Within the maintenance window of each Astro Runtime version, the following is true:
 
-- A set of Docker images corresponding to that version are available for download on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
-- Astronomer will regularly publish bug or security fixes identified as high priority.
+- A set of Docker images corresponding to that version is available for download on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
+- Astronomer will regularly publish bug or security fixes identified as high-priority.
 - Support for paying customers running a maintained version of Astro Runtime is provided by [Astronomer Support](https://cloud.astronomer.io/open-support-request).
 - A user can create a new Deployment with the Astro UI, API, or Astro CLI with any supported `major.minor` version pair of Runtime. For new Deployments, the Astro UI assumes the latest patch.
 
 When the maintenance window for a given version of Runtime ends, the following is true:
 
 - Astronomer is not obligated to answer questions regarding a Deployment that is running an unsupported version.
-- New Deployments cannot be created on Astro with that version of Runtime. Versions that are no longer maintained will not render as an option in the Deployment creation process from the Astro UI, API, or Astro CLI.
-- The Deployment view of the Astro UI will show a warning that encourages the user to upgrade if the Deployment is running that version.
-- The latest version of the Astro CLI will show a warning if a user pushes an Astro Runtime image to Astronomer that corresponds to that version.
+- New Deployments cannot be created on Astro with an unsupported version of Runtime. Versions that are no longer maintained will not render as an option in the Deployment creation process from the Astro UI, API, or Astro CLI.
+- The Deployment view of the Astro UI will show a warning that encourages the user to upgrade if the Deployment is running an unsupported version.
+- The latest version of the Astro CLI will show a warning if a user pushes an Astro Runtime image to Astronomer that corresponds to an unsupported version.
 
 Astronomer will not interrupt service for Deployments running Astro Runtime versions that are no longer in maintenance. Unsupported versions of Astro Runtime are available for local development and testing with the Astro CLI.
 
@@ -59,7 +61,7 @@ Maintenance is discontinued the last day of the month for a given version. For e
 
 ### Restricted runtime versions
 
-There are some restricted versions of the Astro runtime that have known bugs and can't be used even if you enabled [deprecated Astro Runtime versions](https://docs.astronomer.io/astro/upgrade-runtime#run-a-deprecated-astro-runtime-version).
+There are some restricted versions of the Astro runtime that have known bugs and can't be used even if you enabled [deprecated Astro Runtime versions](https://www.astronomer.io/docs/astro/upgrade-runtime#run-a-deprecated-astro-runtime-version).
 
 #### Yanked versions
 
@@ -69,11 +71,11 @@ There are some restricted versions of the Astro runtime that have known bugs and
 | 9.0.0 - 9.6.0   | Has significant scheduling performance issues.          |
 | 11.0.0 - 11.1.0 | Has db migration issues when you have running triggers. |
 
-You can find a comprehensive list of available, deprecated, and restricted versions of the Astro Runtime versions at [`updates.astronomer.io`](https://updates.astronomer.io/astronomer-runtime). Restricted versions of the Astro Runtime have the status `"yanked":true` and include a description about why the version is unavailable.
+You can find a comprehensive list of available, deprecated, and restricted versions of the Astro Runtime versions at [`updates.astronomer.io`](https://updates.astronomer.io/astronomer-runtime). Restricted versions of the Astro Runtime have the status `"yanked":true` and include an explanation of why the version is unavailable.
 
 ## Security
 
-Astronomer continuously checks for available security fixes for software used in Astro Runtime. This process includes scanning language dependencies, container images, and open source threat intelligence sources. When a security fix is available, Astronomer evaluates potential risks for organizations using Astro Runtime and determines deployment priority. Low priority fixes are deployed following the regular maintenance policy as described in [Astro Runtime maintenance policy](runtime-version-lifecycle-policy.mdx#astro-runtime-maintenance-policy).
+Astronomer continuously checks for available security fixes for software used in Astro Runtime. This process includes scanning language dependencies, container images, and open source threat intelligence sources. When a security fix is available, Astronomer evaluates potential risks for organizations using Astro Runtime and determines deployment priority. Low-priority fixes are deployed following the regular maintenance policy as described in [Astro Runtime maintenance policy](runtime-version-lifecycle-policy.mdx#astro-runtime-maintenance-policy).
 
 If a vulnerability is not yet addressed in a third-party dependency and no official fix is available, Astronomer attempts to address the vulnerability or its impact with environmental mitigations. Whenever possible, Astronomer collaborates with the upstream project to support a timely delivery of the official fix. This process also covers images publicly available on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags) and provides context for their vulnerability scanning results.
 

@@ -223,6 +223,7 @@ module.exports = {
         'airflow-pgvector',
         'airflow-pinecone',
         'connections/postgres',
+        'airflow-qdrant',
         {
           type: 'category',
           label: 'Redshift',

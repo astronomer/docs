@@ -405,7 +405,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
     astro dev start
     ```
 
-4. Access the Airflow UI at `localhost:8080` and create an Airflow AWS connection named `aws_standard` with no credentials. See [Connections](https://docs.astronomer.io/learn/connections).
+4. Access the Airflow UI at `localhost:8080` and create an Airflow AWS connection named `aws_standard` with no credentials. See [Connections](https://www.astronomer.io/docs/learn/connections).
 
    When you use this connection in your DAG, it will fall back to using your configured user credentials. 
 
@@ -436,7 +436,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
     ```
 
 6. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run. 
-7. View logs for your DAG run. If the connection was successful, your masked secrets appear in your logs. See [Airflow logging](https://docs.astronomer.io/learn/logging).
+7. View logs for your DAG run. If the connection was successful, your masked secrets appear in your logs. See [Airflow logging](https://www.astronomer.io/docs/learn/logging).
 
 </TabItem>
 <TabItem value="gcp">
@@ -461,7 +461,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
     astro dev start
     ```
 
-4. Access the Airflow UI at `localhost:8080` and create an Airflow GCP connection named `gcp_standard` with no credentials. See [Connections](https://docs.astronomer.io/learn/connections).
+4. Access the Airflow UI at `localhost:8080` and create an Airflow GCP connection named `gcp_standard` with no credentials. See [Connections](https://www.astronomer.io/docs/learn/connections).
 
    When you use this connection in your DAG, it will fall back to using your configured user credentials. 
 
@@ -492,7 +492,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
     ```
 
 6. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run. 
-7. View logs for your DAG run. If the connection was successful, your masked secrets appear in your logs. See [Airflow logging](https://docs.astronomer.io/learn/logging). 
+7. View logs for your DAG run. If the connection was successful, your masked secrets appear in your logs. See [Airflow logging](https://www.astronomer.io/docs/learn/logging). 
 
 </TabItem>
 
@@ -505,7 +505,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
     
     For example, to use a secret named `mysecretvar` in your DAG, you must name the secret `airflow-variables-mysecretvar`.
 
-    You will need to store your connection in [URI format](https://docs.astronomer.io/learn/connections#define-connections-with-environment-variables). 
+    You will need to store your connection in [URI format](https://www.astronomer.io/docs/learn/connections#define-connections-with-environment-variables). 
 
 2. In your Astro project, add the following line to Astro project `requirements.txt` file:
 
@@ -528,7 +528,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
     astro dev start
     ```
 
-5. Access the Airflow UI at `localhost:8080` and create an Airflow Azure connection named `azure_standard` with no credentials. See [Connections](https://docs.astronomer.io/learn/connections).
+5. Access the Airflow UI at `localhost:8080` and create an Airflow Azure connection named `azure_standard` with no credentials. See [Connections](https://www.astronomer.io/docs/learn/connections).
 
    When you use this connection in your DAG, it will fall back to using your configured user credentials. 
 
@@ -559,7 +559,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
     ```
 
 7. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run. 
-8. View logs for your DAG run. If the connection was successful, your masked secrets appear in your logs. See [Airflow logging](https://docs.astronomer.io/learn/logging).
+8. View logs for your DAG run. If the connection was successful, your masked secrets appear in your logs. See [Airflow logging](https://www.astronomer.io/docs/learn/logging).
 
 </TabItem>
 </Tabs>

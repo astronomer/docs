@@ -57,7 +57,7 @@ A custom registry can still connect to public networks or internet. Therefore, t
 
   :::
 
-2. Open your `values.yaml` file. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
+2. Open your `values.yaml` file. See [Apply a Config Change](https://www.astronomer.io/docs/software/apply-platform-config).
 3. Add the following to your `values.yaml` file:
 
     ```yaml
@@ -81,7 +81,7 @@ A custom registry can still connect to public networks or internet. Therefore, t
   
   :::
 
-4. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+4. Push the configuration change. See [Apply a config change](https://www.astronomer.io/docs/software/apply-platform-config).
 5. For any existing Deployments, run the following command to sync the registry credentials.
 
     ```bash
@@ -119,7 +119,7 @@ A custom registry can still connect to public networks or internet. Therefore, t
 
   :::
 
-2. Open your `values.yaml` file. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
+2. Open your `values.yaml` file. See [Apply a Config Change](https://www.astronomer.io/docs/software/apply-platform-config).
 
 3. Add the following to your `values.yaml` file:
 
@@ -154,7 +154,7 @@ A custom registry can still connect to public networks or internet. Therefore, t
 
   :::
 
-4. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+4. Push the configuration change. See [Apply a config change](https://www.astronomer.io/docs/software/apply-platform-config).
 5. For any existing Deployments, run the following command to sync the registry credentials. If you're using different registries for each Deployment, you can skip this step.
 
     ```bash

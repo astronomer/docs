@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: "img/term-icon.png" }
 :::cliastroonly
 :::
 
-Manage Organization-level API tokens within a specific Workspace. See [Assign an Organization API token to a Workspace](https://docs.astronomer.io/astro/workspace-api-tokens#assign-an-organization-api-token-to-a-workspace).
+Manage Organization-level API tokens within a specific Workspace. See [Assign an Organization API token to a Workspace](https://www.astronomer.io/docs/astro/workspace-api-tokens#assign-an-organization-api-token-to-a-workspace).
 
 There are four sub-commands for managing a Workspace-scoped Organization token.
 

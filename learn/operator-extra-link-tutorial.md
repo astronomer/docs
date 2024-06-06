@@ -35,7 +35,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli).
 
 ## Step 1: Create an Astro project
 

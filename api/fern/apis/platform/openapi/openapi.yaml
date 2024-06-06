@@ -547,12 +547,12 @@ components:
     CreateDeployRequest:
       properties:
         description:
-          description: The Deploy's description.
+          description: The deploy's description.
           example: My deploy description
           maxLength: 500
           type: string
         type:
-          description: The type of the Deploy.
+          description: The type of the deploy.
           enum:
           - IMAGE_AND_DAG
           - IMAGE_ONLY
@@ -928,28 +928,28 @@ components:
     Deploy:
       properties:
         airflowVersion:
-          description: The Deploy's Airflow version.
+          description: The deploy's Airflow version.
           example: 2.7.2, if airflow version is not found, it will return NA
           type: string
         astroRuntimeVersion:
-          description: The Deploy's Astro Runtime version.
+          description: The deploy's Astro Runtime version.
           example: 9.1.0
           type: string
         createdAt:
-          description: The time when the Deploy was created in UTC, formatted as `YYYY-MM-DDTHH:MM:SSZ`.
+          description: The time when the deploy was created in UTC, formatted as `YYYY-MM-DDTHH:MM:SSZ`.
           example: "2022-11-22T04:37:12Z"
           format: date-time
           type: string
         createdBySubject:
           $ref: '#/components/schemas/BasicSubjectProfile'
         dagTarballVersion:
-          description: The Deploy's DAG tarball version, also known as the Bundle
+          description: The deploy's DAG tarball version, also known as the Bundle
             Version in the Astro UI.
           example: "2024-01-12T18:32:20.5898930Z"
           type: string
         dagsUploadUrl:
-          description: The Deploy's upload URL to upload DAG bundles. Appears only
-            if dag deploy is enabled on the Deployment.
+          description: The deploy's upload URL to upload DAG bundles. Appears only
+            if dag deploys are enabled on the Deployment.
           example: https://astroproddagdeploy.windows.core.net/clmh59gt0000308lbgswe5fvh/clmh57jtm000008lb58fe2wmv
           type: string
         deploymentId:
@@ -957,33 +957,34 @@ components:
           example: clmh57jtm000008lb58fe2wmv
           type: string
         description:
-          description: The Deploy's description.
+          description: The deploy's description.
           example: My deploy description
           type: string
         id:
-          description: The Deploy's ID.
+          description: The deploy's ID.
           example: clvetru2w000201mowqwua63n
           type: string
         imageRepository:
-          description: The URL of the Deploy's image repository.
+          description: The URL of the deploy's image repository.
           example: https://my-image-repository
           type: string
         imageTag:
-          description: The Deploy's image tag. Appears only if specified in the most
+          description: The deploy's image tag. Appears only if specified in the most
             recent deploy.
           example: my-image-tag
           type: string
         isDagDeployEnabled:
-          description: Whether the Deploy has DAG deploys enabled.
+          description: Whether the deploy was triggered on a Deployment with DAG deploys
+            enabled.
           example: true
           type: boolean
         rollbackFromId:
-          description: The Deploy's ID which was Rollback from. Appears only if a
-            rollback as been performed.
+          description: The ID of the deploy that you completed a rollback on. Appears
+            only if a rollback has been performed.
           example: clvcz1lrq000101oitxtp276e
           type: string
         status:
-          description: The status of the Deploy.
+          description: The status of the deploy.
           enum:
           - INITIALIZED
           - DEPLOYED
@@ -991,7 +992,7 @@ components:
           example: DEPLOYED
           type: string
         type:
-          description: The type of Deploy.
+          description: The type of deploy.
           enum:
           - IMAGE_AND_DAG
           - IMAGE_ONLY
@@ -999,7 +1000,7 @@ components:
           example: IMAGE_AND_DAG
           type: string
         updatedAt:
-          description: The time when the Deploy was last updated in UTC, formatted
+          description: The time when the deploy was last updated in UTC, formatted
             as `YYYY-MM-DDTHH:MM:SSZ`.
           example: "2022-11-22T04:37:12Z"
           format: date-time
@@ -1557,18 +1558,18 @@ components:
     DeploysPaginated:
       properties:
         deploys:
-          description: A list of Deploys in the current page.
+          description: A list of deploys in the current page.
           items:
             $ref: '#/components/schemas/Deploy'
           type: array
         limit:
-          description: The maximum number of Deploys in one page.
+          description: The maximum number of deploys in one page.
           type: integer
         offset:
-          description: The offset of the current page of Deploys.
+          description: The offset of the current page of deploys.
           type: integer
         totalCount:
-          description: The total number of Deploys.
+          description: The total number of deploys.
           type: integer
       required:
       - deploys
@@ -1594,9 +1595,9 @@ components:
     FinalizeDeployRequest:
       properties:
         dagTarballVersion:
-          description: The Deploy's DAG tarball version, also known as the Bundle
-            Version in the Astro UI. Required if DAG deploy is enabled on the deployment
-            and deploy type is IMAGE_AND_DAG or DAG_ONLY
+          description: The deploy's DAG tarball version, also known as the Bundle
+            Version in the Astro UI. Required if DAG deploys are enabled on the Deployment,
+            and deploy type is either IMAGE_AND_DAG or DAG_ONLY.
           type: string
       type: object
     HybridWorkerQueueRequest:
@@ -2233,7 +2234,7 @@ components:
     UpdateDeployRequest:
       properties:
         description:
-          description: The Deploy's description.
+          description: The deploy's description.
           example: My deploy description
           maxLength: 500
           type: string
@@ -4719,16 +4720,16 @@ tags:
 - description: A `cluster` object represents an Astro cluster, which is a Kubernetes
     cluster that hosts the infrastructure required to run Deployments. Make requests
     to `cluster` endpoints to manage your standard and dedicated clusters. See [Create
-    a dedicated cluster](https://docs.astronomer.io/astro/create-dedicated-cluster).
+    a dedicated cluster](https://www.astronomer.io/docs/astro/create-dedicated-cluster).
   name: Cluster
 - description: The `organization` object contains the metadata and configurations
     of an Astro Organization. It does not include objects within the Organization,
     such as users and clusters. Make requests to `organization` endpoints to view
     and update high level settings for your Organization, including settings related
     to authentication and billing. To manage resources within an Organization, make
-    requests to the endpoints related to those resources, such as `users`. See [Billing](https://docs.astronomer.io/astro/manage-billing),
-    [Set up single sign-on](https://docs.astronomer.io/astro/configure-idp), and [Manage
-    domains](https://docs.astronomer.io/astro/manage-domains).
+    requests to the endpoints related to those resources, such as `users`. See [Billing](https://www.astronomer.io/docs/astro/manage-billing),
+    [Set up single sign-on](https://www.astronomer.io/docs/astro/configure-idp), and [Manage
+    domains](https://www.astronomer.io/docs/astro/manage-domains).
   name: Organization
 - description: The `options` object represents all possible configurations for a given
     Astro component. Make requests to the `options` object to get the configuration
@@ -4741,5 +4742,5 @@ tags:
     high level details about your Workspace. To manage resources within a Workspace,
     make requests to the endpoints related to those resources, such as `users`, and
     use the `workspaceIds` parameter to filter results by Workspace. See [Configure
-    Workspaces](https://docs.astronomer.io/astro/manage-workspaces).
+    Workspaces](https://www.astronomer.io/docs/astro/manage-workspaces).
   name: Workspace

@@ -5,7 +5,7 @@ id: kubepodoperator
 description: Run the KubernetesPodOperator on Astronomer Software.
 ---
 
-The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most customizable Apache Airflow operators. A task using the KubernetesPodOperator runs in a dedicated, isolated Kubernetes Pod that terminates after the task completes. To learn more about the benefits and usage of the KubernetesPodOperator, see the [KubernetesPodOperator Learn guide](https://docs.astronomer.io/learn/kubepod-operator).
+The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most customizable Apache Airflow operators. A task using the KubernetesPodOperator runs in a dedicated, isolated Kubernetes Pod that terminates after the task completes. To learn more about the benefits and usage of the KubernetesPodOperator, see the [KubernetesPodOperator Learn guide](https://www.astronomer.io/docs/learn/kubepod-operator).
 
 This guide explains how to complete specific goals using the KubernetesPodOperator on Astronomer Software. 
 
@@ -202,6 +202,6 @@ To pull images from a private registry on Astronomer Software:
 
 ## Local testing
 
-Astronomer recommends testing your DAGs locally before pushing them to a Deployment on Astronomer. For more information, read [How to run the KubernetesPodOperator locally](https://docs.astronomer.io/learn/kubepod-operator). That guide provides information on how to use [MicroK8s](https://microk8s.io/) or [Docker for Kubernetes](https://matthewpalmer.net/kubernetes-app-developer/articles/how-to-run-local-kubernetes-docker-for-mac.html) to run tasks with the KubernetesPodOperator in a local environment.
+Astronomer recommends testing your DAGs locally before pushing them to a Deployment on Astronomer. For more information, read [How to run the KubernetesPodOperator locally](https://www.astronomer.io/docs/learn/kubepod-operator). That guide provides information on how to use [MicroK8s](https://microk8s.io/) or [Docker for Kubernetes](https://matthewpalmer.net/kubernetes-app-developer/articles/how-to-run-local-kubernetes-docker-for-mac.html) to run tasks with the KubernetesPodOperator in a local environment.
 
 > **Note:** To pull images from a private registry locally, you'll have to create a secret in your local namespace and similarly call it in your operator following the guidelines above.

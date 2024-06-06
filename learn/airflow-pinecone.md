@@ -40,7 +40,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started).
 - A [Pinecone account](https://app.pinecone.io/?sessionType=signup) with an [API key](https://docs.pinecone.io/docs/authentication). You can use a free tier account for this tutorial.
 - An OpenAI API key of at least [tier 1](https://platform.openai.com/docs/guides/rate-limits/usage-tiers) if you want to use OpenAI for vectorization. If you do not want to use OpenAI you can adapt the `create_embeddings` function at the start of the DAG to use a different vectorizer. Note that you will likely need to adjust the `EMBEDDING_MODEL_DIMENSIONS` parameter in the DAG if you use a different vectorizer.
 

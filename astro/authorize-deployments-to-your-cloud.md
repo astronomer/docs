@@ -12,7 +12,7 @@ import HostedBadge from '@site/src/components/HostedBadge';
 
 When you create an Airflow connection from a Deployment to access cloud resources, Airflow uses your connection details to access those services. You can add credentials to your Airflow connections to authenticate, but it can be risky to add secrets like passwords to your Airflow environment.
 
-To avoid adding secrets to your Airflow connection, you can directly authorize your Astro Deployment to access AWS or GCP cloud services using workload identity. Astronomer recommends using a workload identity in most cases to improve security and avoid managing credentials across your Deployments. If you have less strict security requirements, you can still use any of the methods described in [Airflow connection guides](https://docs.astronomer.io/learn/connections) to manage your connection authorization.
+To avoid adding secrets to your Airflow connection, you can directly authorize your Astro Deployment to access AWS or GCP cloud services using workload identity. Astronomer recommends using a workload identity in most cases to improve security and avoid managing credentials across your Deployments. If you have less strict security requirements, you can still use any of the methods described in [Airflow connection guides](https://www.astronomer.io/docs/learn/connections) to manage your connection authorization.
 
 This guide explains how to authorize your Deployment to a cloud using workload identity. For each Deployment, you will:
 
@@ -138,7 +138,7 @@ If your organization has requirements over how service accounts are managed outs
       - **Connection Id**: Enter a name for the connection.
       - **Impersonation Chain**: Enter the ID of the service account that your Deployment should impersonate.
 
-    Note that this implementation requires `apache-airflow-providers-google >= 10.8.0`. See [Add Python, OS-level packages, and Airflow providers](https://docs.astronomer.io/astro/cli/develop-project#add-python-os-level-packages-and-airflow-providers).
+    Note that this implementation requires `apache-airflow-providers-google >= 10.8.0`. See [Add Python, OS-level packages, and Airflow providers](https://www.astronomer.io/docs/astro/cli/develop-project#add-python-os-level-packages-and-airflow-providers).
 
    - Specify the impersonation chain in code when you instantiate a Google Cloud operator. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/connections/gcp.html#direct-impersonation-of-a-service-account). Note that if you configure both a connection type and an operator, the operator-level configuration takes precedence.
     - To access resources in a secrets backend, run the following command to create an environment variable that grants access to the secrets backend:
@@ -194,7 +194,7 @@ In this setup, you'll authorize an existing user-assigned managed identity to a 
 
 :::caution
 
-You can only use the same user-assigned managed identity for up to five Deployments. If you need to authorize more than five Deployments to Azure, you need to create more than one user-managed identity. For more information, see [Microsoft Entra documentation](https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-considerations#general-federated-identity-credential-considerations).
+You can only use the same user-assigned managed identity for up to four Deployments. If you need to authorize more than four Deployments to Azure, you need to create more than one user-managed identity. For more information, see [Microsoft Entra documentation](https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-considerations#general-federated-identity-credential-considerations).
 
 :::
 

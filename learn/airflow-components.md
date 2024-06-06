@@ -32,7 +32,7 @@ The following Apache Airflow core components are running at all times:
 - **[Database](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html):** A database where all DAG and task metadata are stored. This is typically a Postgres database, but MySQL and SQLite are also supported.
 - **[Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html):** The mechanism for running tasks. An executor is running within the scheduler whenever Airflow is operational.
 
-If you run Airflow locally using the [Astro CLI](https://docs.astronomer.io/astro/install-cli), you'll notice that when you start Airflow using `astro dev start`, it will spin up three containers, one for each of the core components.
+If you run Airflow locally using the [Astro CLI](https://www.astronomer.io/docs/astro/install-cli), you'll notice that when you start Airflow using `astro dev start`, it will spin up three containers, one for each of the core components.
 
 In addition to these core components, there are a few situational components that are used only to run tasks or make use of certain features:
 
@@ -60,7 +60,7 @@ You can use pre-configured Airflow executors, or you can create a [custom execut
 
 ## Managing Airflow infrastructure
 
-All Airflow components should be run on an infrastructure that is appropriate for the requirements of your organization. For example, using the [Astro CLI](https://docs.astronomer.io/astro/install-cli) to run Airflow on a local computer can be helpful when testing and for DAG development, but it is insufficient to support running DAGs in production. 
+All Airflow components should be run on an infrastructure that is appropriate for the requirements of your organization. For example, using the [Astro CLI](https://www.astronomer.io/docs/astro/install-cli) to run Airflow on a local computer can be helpful when testing and for DAG development, but it is insufficient to support running DAGs in production. 
 
 The following resources can help you manage Airflow components:
 

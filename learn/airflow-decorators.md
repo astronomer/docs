@@ -317,8 +317,8 @@ join_orders_customers(filter_orders(filtered_orders_table), customers_table)
 
 The Astro Python SDK offers much more functionality that greatly simplifies DAG authoring, for example an operator to load files from object storage directly into a relational table while inferring its schema. To learn more about the Astro Python SDK, check out: 
 
-- [Write a DAG with the Astro Python SDK tutorial](https://docs.astronomer.io/learn/astro-python-sdk)
-- [The Astro Python SDK for ETL guide](https://docs.astronomer.io/learn/astro-python-sdk-etl)
+- [Write a DAG with the Astro Python SDK tutorial](https://www.astronomer.io/docs/learn/astro-python-sdk)
+- [The Astro Python SDK for ETL guide](https://www.astronomer.io/docs/learn/astro-python-sdk-etl)
 - [Astro Python SDK documentation](https://astro-sdk-python.readthedocs.io/en/stable/)
 
 ## Available Airflow decorators

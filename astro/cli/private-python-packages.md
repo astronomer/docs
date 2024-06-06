@@ -13,7 +13,7 @@ Depending on where your private packages are stored, use one of the following se
 
 :::info
 
-Deploying a custom Runtime image with a CI/CD pipeline requires additional configurations. For an example implementation, see the GitHub Actions CI/CD templates for [Astro](https://docs.astronomer.io/astro/ci-cd-templates/github-actions-template?tab=custom#setup) and [Software](https://docs.astronomer.io/software/ci-cd#github-actions-cicd).
+Deploying a custom Runtime image with a CI/CD pipeline requires additional configurations. For an example implementation, see the GitHub Actions CI/CD templates for [Astro](https://www.astronomer.io/docs/astro/ci-cd-templates/github-actions-template?tab=custom#setup) and [Software](https://www.astronomer.io/docs/software/ci-cd#github-actions-cicd).
 
 :::
 
@@ -186,7 +186,7 @@ Ensure that this file is accessible from your Astro project. You will mount this
 
    :::info
 
-   If you use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](/astro/runtime-image-architecture.mdx#distribution).
+   If you use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](runtime-image-architecture.mdx#distribution).
 
    :::
 

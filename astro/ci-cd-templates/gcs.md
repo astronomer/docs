@@ -30,7 +30,7 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
 
 3. Add `astro_cli.tar.gz` to `cli_binary`.
 4. Create a [1st gen Cloud Function](https://cloud.google.com/functions/docs/console-quickstart-1st-gen#create_a_function) with the Python 3.9 Runtime in the same region as your storage bucket.
-5. Create a [Cloud Storage trigger](https://cloud.google.com/functions/docs/calling/storage) with the following configuration: 
+5. Create a [Cloud Storage trigger](https://cloud.google.com/functions/docs/calling/storage) with the following configuration:
 
     - **Event provider**: Select **Cloud Storage**.
     - **Event**: Select **On finalizing/creating file in the selected bucket**.
@@ -62,7 +62,7 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
     def untar(filename: str, destination: str) -> None:
         with tarfile.open(filename) as file:
             file.extractall(destination)
-    
+
     def run_command(cmd: str) -> None:
         p = subprocess.Popen("set -x; " + cmd, shell=True)
         p.communicate()
@@ -94,7 +94,7 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
 
         blob.download_to_filename(target)
         print("downloaded file")
-    
+
     def astro_deploy(event, context) -> None:
         """Triggered by a change to a Cloud Storage bucket.
         :param event: Event payload.
@@ -104,7 +104,7 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
         base_dir = '/tmp/astro'
         ## download dag files to temp local storage
         download_to_local(BUCKET, 'dags', f'{base_dir}/dags')
-    
+
         ## download astro cli binary and move to /tmp/astro
         download_to_local(BUCKET, 'cli_binary', base_dir)
 
@@ -117,4 +117,13 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
 
 10. If you haven't already, deploy your complete Astro project to your Deployment. See [Deploy code](deploy-code.md).
 11. Add your DAGs to the `dags` folder in your storage bucket.
-12. In the Astro UI, select a Workspace, click **Deployments**, and then select your Deployment. Confirm that your deploy worked by checking the Deployment **DAG bundle version**. The version's name should include the time that you added the DAGs to your GCS bucket. 
+
+    :::info
+
+    If you stage multiple commits to DAG files and push them all at once to your remote branch, the template only deploys DAG code changes from the most recent commit. It will miss any code changes made in previous commits.
+
+    To avoid this, either push commits individually or configure your repository to **Squash commits** for pull requests that merge multiple commits simultaneously.
+
+    :::
+
+12. In the Astro UI, select a Workspace, click **Deployments**, and then select your Deployment. Confirm that your deploy worked by checking the Deployment **DAG bundle version**. The version's name should include the time that you added the DAGs to your GCS bucket.

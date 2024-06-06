@@ -10,7 +10,7 @@ On Astro, you can configure Celery executor in the following ways:
 - The minimum and maximum number of workers that your Deployment can run at a time.
 - The number of tasks that each worker can run at a time.
 
-You can set these configurations per [worker queue](configure-worker-queues.mdx). With the celery executor, you can configure multiple worker queues for different types of tasks and assign tasks to those queues in your DAG code.
+You can set these configurations per [worker queue](configure-worker-queues.mdx). With the Celery executor, you can configure multiple worker queues for different types of tasks and assign tasks to those queues in your DAG code.
 
 The following document explains basic Celery executor configurations for a single worker queue. For instructions on how to configure multiple worker queues, see [Create a worker queue](configure-worker-queues.mdx#create-a-worker-queue).
 
@@ -51,6 +51,7 @@ For each worker queue on your Deployment, you have to specify certain settings t
 
     - **Worker type**: Choose the amount of resources that each worker will have.
     - **Concurrency**: The maximum number of tasks that a single worker can run at a time. If the number of queued and running tasks exceeds this number, a new worker is added to run the remaining tasks. This value is equivalent to the Apache Airflow [worker concurrency](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) setting. It is 16 by default.
+    - **Storage**: Choose the amount of ephemeral storage in GiB that each worker has. This storage volume is transient and allows for temporary storage and processing of data within the worker. The worker is assigned the minimum 10 GiB by default. The maximum quota is 100 GiB. Only ephemeral storage requests that are greater than the default minimum of 10 GiB are chargeable. Note that this feature is in [Public Preview](feature-previews.md).
     - **Worker Count (Min-Max)**: The minimum and maximum number of workers that can run at a time. The number of running workers changes based on **Concurrency** and the current number of tasks in a queued or running state. By default, the minimum number of workers is 1 and the maximum is 10.
 
 4. Click **Update Queue**.
@@ -58,4 +59,4 @@ For each worker queue on your Deployment, you have to specify certain settings t
 ## See also
 
 - [Configure worker queues](configure-worker-queues.mdx).
-- [Airflow Executors explained](https://docs.astronomer.io/learn/airflow-executors-explained)
+- [Airflow Executors explained](https://www.astronomer.io/docs/learn/airflow-executors-explained)

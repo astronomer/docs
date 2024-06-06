@@ -59,7 +59,7 @@ global:
           - <your-namespace-2>
 ```
 
-2. Save the changes in your `values.yaml` file and update your Astronomer Software. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+2. Save the changes in your `values.yaml` file and update your Astronomer Software. See [Apply a config change](https://www.astronomer.io/docs/software/apply-platform-config).
 
 Based on the namespace names that you specified, Astronomer creates the necessary namespaces and Kubernetes resources. These resources have permissions scoped appropriately for most use-cases.
 

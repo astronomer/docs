@@ -30,7 +30,7 @@ To get the most out of this guide, you should have an understanding of:
 
 To complete this tutorial, you need:
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started).
 - The [Jupyter Notebook](https://jupyter.org/install) package.
 
 ## Step 1: Create an Astro project and a Jupyter notebook

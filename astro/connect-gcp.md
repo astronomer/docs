@@ -79,7 +79,7 @@ This connection option is available only for dedicated Astro Hosted clusters and
 
 :::
 
-VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts. Because Astro uses source network address translation (SNAT) that performs many-to-one IP address translations for connections to your data sources, to minimize the risk and concern with IP overlap and exhaustion with dedicated GCP clusters, you might need to confirm that the default Astro subnet and peering ranges do not overlap with the ranges used by your target resource. See [create a dedicated GCP cluster](https://docs.astronomer.io/astro/create-dedicated-cluster?tab=gcp#create-a-cluster) for more information about default ranges and alternative configurations.
+VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts. Because Astro uses source network address translation (SNAT) that performs many-to-one IP address translations for connections to your data sources, to minimize the risk and concern with IP overlap and exhaustion with dedicated GCP clusters, you might need to confirm that the default Astro subnet and peering ranges do not overlap with the ranges used by your target resource. See [create a dedicated GCP cluster](https://www.astronomer.io/docs/astro/create-dedicated-cluster?tab=gcp#create-a-cluster) for more information about default ranges and alternative configurations.
 
 To create a VPC peering connection between an Astro VPC and a GCP VPC:
 
@@ -108,11 +108,14 @@ Use Private Service Connect (PSC) to create private connections from Astro to GC
 
 Astro clusters are by default configured with a PSC endpoint with a target of [All Google APIs](https://cloud.google.com/vpc/docs/private-service-connect-compatibility#google-apis-global). To provide a secure-by-default configuration, a DNS zone is created with a resource record that will route all requests made to `*.googleapis.com` through this PSC endpoint. This ensures that requests made to these services are made over PSC without any additional user configuration. As an example, requests to `storage.googleapis.com` will be routed through this PSC endpoint.
 
-A list of Google services and their associated service names are provided in the [Google APIs Explorer Directory](https://developers.google.com/apis-explorer). Alternatively, you can run the following command in the Google Cloud CLI to return a list of Google services and their associated service names:
+
+You can check if the service that you want to connect Airflow to is available through the **All Google APIs** target by running the following command:
 
 ```bash
 gcloud services list --available --filter="name:googleapis.com"
 ```
+
+If you don't see your service listed, open a support case with [Astronomer support](astro-support.md) to set up the necessary PSC connectivity.
 
 </TabItem>
 

@@ -164,7 +164,7 @@ Make changes as needed and rerun the upgrade command from Step 7. Do not continu
 
 Each Software version is compatible only with specific versions of the Astro CLI. Ensure that all users in your organization are using the latest compatible version of the Astro CLI for your Software version. See [Version compatibility reference](version-compatibility-reference.md).
 
-For standard upgrade steps, see [Upgrade the CLI](https://docs.astronomer.io/astro/cli/install-cli#upgrade-the-cli). To upgrade from a pre-1.0 version of the CLI to version 1.0+, see [Upgrade to Astro CLI version 1.0+](upgrade-astro-cli.md).
+For standard upgrade steps, see [Upgrade the CLI](https://www.astronomer.io/docs/astro/cli/install-cli#upgrade-the-cli). To upgrade from a pre-1.0 version of the CLI to version 1.0+, see [Upgrade to Astro CLI version 1.0+](upgrade-astro-cli.md).
 
 ## Upgrade considerations
 
@@ -176,12 +176,12 @@ To avoid extended service disruptions, Astronomer recommends upgrading Astronome
 
 If you're upgrading through multiple Astronomer Software versions in a single upgrade process, review the following table to ensure that you're following the correct upgrade path. If your combination of **Current version** and **Target version** isn't listed, you can upgrade directly from your current version to the target version. 
 
-| Current version | Target version | Upgrade path                |
-| --------------- | -------------- | --------------------------- |
-| 0.29            | 0.31 or later  | 0.29 > 0.30 > 0.31 or later |
-| 0.27            | 0.29 or later  | 0.27 > 0.28 > 0.29 or later |
-| 0.26            | 0.29 or later  | 0.26 > 0.28 > 0.29 or later |
-| 0.25            | 0.29 or later  | 0.25 > 0.28 > 0.29 or later |
+| Current version | Target version | Upgrade path         |
+| --------------- | -------------- | -------------------- |
+| 0.29            | 0.31 or later  | 0.29 -> 0.30 -> 0.34 |
+| 0.27            | 0.29 or later  | 0.27 -> 0.28 -> 0.34 |
+| 0.26            | 0.29 or later  | 0.26 -> 0.28 -> 0.34 |
+| 0.25            | 0.29 or later  | 0.25 -> 0.28 -> 0.34 |
 
 ### Upgrade to Kubernetes 1.25
 

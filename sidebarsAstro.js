@@ -41,14 +41,14 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Develop",
+      label: "Develop DAGs",
       items: [
+        'dags-overview',
         {
           type: 'link',
-          label: 'Develop your Astro project',
-          href: 'https://docs.astronomer.io/astro/cli/develop-project',
+          label: 'Astro projects',
+          href: 'https://www.astronomer.io/docs/astro/cli/develop-project',
         },
-        "kubernetespodoperator",
         {
           type: "category",
           label: "Connections and variables",
@@ -58,6 +58,12 @@ module.exports = {
             "import-export-connections-variables",
           ],
         },
+        "upgrade-runtime",
+        "kubernetespodoperator",
+        "dag-metrics",
+        "view-logs",
+        "manage-dags",
+        "airflow-api",
         {
           type: "category",
           label: "Cloud IDE",
@@ -76,8 +82,6 @@ module.exports = {
             "cloud-ide/custom-cell-reference"
           ],
         },
-        "upgrade-runtime",
-        "airflow-api",
       ],
     },
     {
@@ -128,7 +132,6 @@ module.exports = {
             "secrets-backend/gcp-secretsmanager",
           ],
         },
-        "manage-dags",
       ],
     },
     {
@@ -181,21 +184,20 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Observability",
+      label: "Platform observability",
       items: [
-        "view-logs",
         {
           type: "category",
           label: "View metrics",
-          items: ["dag-metrics",
-           "deployment-metrics",
-           {
-            type: "category",
-            label: "Organization dashboards",
-            items: ["organization-dashboard",
-            "org-dash-exports",
-            ],
-          },
+          items: [
+            "deployment-metrics",
+            {
+              type: "category",
+              label: "Organization dashboards",
+              items: ["organization-dashboard",
+                "org-dash-exports",
+              ],
+            },
           ],
         },
         {
@@ -263,7 +265,7 @@ module.exports = {
             "connect-aws",
             "connect-azure",
             "connect-gcp"
-        ],
+          ],
         },
         {
           type: "category",
@@ -318,7 +320,7 @@ module.exports = {
         {
           type: 'link',
           label: 'Astro CLI',
-          href: 'https://docs.astronomer.io/astro/cli/release-notes',
+          href: 'https://www.astronomer.io/docs/astro/cli/release-notes',
         },
         "release-notes-subscribe",
       ],
@@ -327,9 +329,11 @@ module.exports = {
       type: 'category',
       label: 'Best practices',
       items: [
+        'best-practices/upgrading-astro-runtime',
         'best-practices/airflow-vs-astro-alerts',
         'best-practices/connections-branch-deploys',
         'best-practices/cross-deployment-dependencies',
+        'best-practices/manage-dev-deployments',
       ],
     },
     {
@@ -372,7 +376,7 @@ module.exports = {
     {
       type: 'link',
       label: 'Astro API',
-      href: 'https://docs.astronomer.io/api',
+      href: 'https://www.astronomer.io/docs/api',
     },
   ],
   cli: [

@@ -12,8 +12,8 @@ This guide provides the basic setup for creating a Postgres connection.
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
-- A locally running [Astro project](https://docs.astronomer.io/astro/cli/get-started-cli).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
+- A locally running [Astro project](https://www.astronomer.io/docs/astro/cli/get-started-cli).
 - A Postgres database running in the cloud or on-premises.
 - [Permission](https://www.digitalocean.com/community/tutorials/how-to-use-roles-and-manage-grant-permissions-in-postgresql-on-a-vps-2) to access your Postgres database from your local Airflow environment.
 
@@ -75,4 +75,4 @@ Airflow uses the [psycopg2](https://pypi.org/project/psycopg2/) python library t
 
 - [Apache Airflow Postgres provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-postgres/stable/index.html)
 - [Postgres modules](https://registry.astronomer.io/modules?limit=24&sorts=updatedAt%3Adesc&query=postgres) and [example DAGs](https://registry.astronomer.io/dags?query=postgres) in the Astronomer Registry
-- [Import and export Airflow connections using Astro CLI](https://docs.astronomer.io/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
+- [Import and export Airflow connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
