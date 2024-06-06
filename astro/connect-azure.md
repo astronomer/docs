@@ -276,7 +276,7 @@ Retrieve the following information about your VPN device or application:
 
     - Public IP address
     - Subnet CIDR (multipple if needed) on your side of the connection
-    - Preferences regarding shared key
+    - Preferences regarding shared key and BGP usage
     - IKE settings for the tunnel
 
 #### Contact Astronomer support for VPN configuration on Astro side

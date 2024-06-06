@@ -69,6 +69,7 @@ Choose one of the following setups based on the security requirements of your co
     values={[
         {label: 'VPC peering', value: 'vpc'},
         {label: 'Private Service Connect', value: 'Private-Service-Connect'},
+        {label: 'VPN', value: 'VPN'},
     ]}>
 
 <TabItem value="vpc">
@@ -116,6 +117,31 @@ gcloud services list --available --filter="name:googleapis.com"
 ```
 
 If you don't see your service listed, open a support case with [Astronomer support](astro-support.md) to set up the necessary PSC connectivity.
+
+</TabItem>
+
+<TabItem value="VPN">
+
+:::info
+
+This connection option is available only for dedicated Astro Hosted clusters and Astro Hybrid.
+
+:::
+
+Use this connectivity type for access to on-premises resources or inside onther cloud providers.
+
+#### Perequisites
+
+Retrieve the following information about your VPN device or application:
+
+    - Public IP address
+    - Subnet CIDR (multipple if needed) on your side of the connection
+    - Preferences regarding shared key and BGP usage
+    - IKE settings for the tunnel
+
+#### Contact Astronomer support for VPN configuration on Astro side
+
+Submit all collected details to [Astronomer support](https://cloud.astronomer.io/open-support-request). CRE team will proceed with the required steps. In case of additional questions or clarifications, CRE team will contact you within Support request or let you know about connectivity tests.
 
 </TabItem>
 
