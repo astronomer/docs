@@ -158,7 +158,7 @@ Logging in Airflow is ready to use without any additional configuration. However
 
 :::info
 
-Options for configuring Logging on Astro differ from those described in this section. For guidance specific to Astro, see: [View Airflow component and task logs for a Deployment](https://www.astronomer.io/docs/astro/view-logs).
+Options for configuring logging on Astro differ from those described in this section. For guidance specific to Astro, see: [View Airflow component and task logs for a Deployment](https://www.astronomer.io/docs/astro/view-logs).
 
 :::
 
@@ -181,7 +181,7 @@ For example, to change your logging level from the default `INFO` to `LogRecords
 
 :::info
 
-Solutions for remote logging available on Astro differ from the solutions described in this section. For guidance specific to Astro, see:
+Options for configuring remote logging on Astro differ from those described in this section. For guidance specific to Astro, see:
 - [Export metrics and logs to Datadog](https://www.astronomer.io/docs/astro/export-datadog).
 - [Export logs to AWS CloudWatch](https://www.astronomer.io/docs/astro/export-cloudwatch).
 
