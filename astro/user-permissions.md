@@ -57,7 +57,7 @@ The following table lists the specific permissions that each Workspace role has:
 
 | Permission                                                                                                             | **Workspace Member** | **Workspace Author** | **Workspace Operator** | **Workspace Owner** |
 | ---------------------------------------------------------------------------------------------------------------------- | -------------------- | -------------------- | ---------------------- | ------------------- |
-| View Workspace users                                                                                                   | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| View Deployment and Workspace users and teams                                                                          | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
 | View all Deployments in the Astro UI                                                                                   | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
 | View DAGs in the Airflow UI                                                                                            | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
 | View Airflow task logs                                                                                                 | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
@@ -78,8 +78,9 @@ The following table lists the specific permissions that each Workspace role has:
 | Update Deployment configurations                                                                                       |                      |                      | ✔️                      | ✔️                   |
 | Create and delete Deployments                                                                                          |                      |                      | ✔️                      | ✔️                   |
 | Create, update, and delete Deployment environment variables                                                            |                      |                      | ✔️                      | ✔️                   |
-| Create, update, and delete Deployment and Workspace API tokens                                                         |                      |                      | ✔️                      | ✔️                   |
+| Create, update, and delete Workspace API tokens                                                                        |                      |                      | ✔️                      | ✔️                   |
 | Create, delete, pause, and unpause [hiberation schedules](deployment-resources.md#hibernate-a-development-deployment). |                      |                      | ✔️                      | ✔️                   |
+| Create, update, and delete Deployment API tokens                                                                       |                      |                      |                        | ✔️                   |
 | Update user roles and permissions                                                                                      |                      |                      |                        | ✔️                   |
 | Invite users to a Workspace                                                                                            |                      |                      |                        | ✔️                   |
 | Assign Teams to or remove from Workspaces                                                                              |                      |                      |                        | ✔️                   |
