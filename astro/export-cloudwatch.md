@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'AWS Cloudwatch'
-title: 'Export logs to AWS Cloudwatch'
+sidebar_label: 'AWS CloudWatch'
+title: 'Export logs to AWS CloudWatch'
 id: export-cloudwatch
 description: "Configure your Deployment to forward observability data to your AWS Cloudwatch instance."
 ---
