@@ -156,6 +156,12 @@ Logging in Airflow is ready to use without any additional configuration. However
 
 ## How to configure logging
 
+:::info
+
+Options for configuring Logging on Astro differ from those described in this section. For guidance specific to Astro, see: [View Airflow component and task logs for a Deployment](https://www.astronomer.io/docs/astro/view-logs).
+
+:::
+
 Logging in Airflow can be configured in `airflow.cfg` or by providing a custom `log_config.py` file. It is best practice not to declare configs or variables within the `.py` handler files except for testing or debugging purposes.
 
 In the Airflow CLI, run the following commands to return the current task handler and logging configuration. If you're running Airflow in Docker, make sure to enter your Docker container before running the commands:
