@@ -41,7 +41,7 @@ The guidance in this section is split into two categories: writing DAG code for 
 
 ### Writing DAG code for Astro
 
-Astro users have several options for developing DAGs: the Astro Cloud IDE or the Astro CLI. The Astro Cloud IDE is a low-code, cloud-based solution that does not require installing any software. It is recommended for new Airflow users or those who cannot install the Astro CLI or its prerequisites. The Astro CLI is recommended for those who want to develop code locally in a containerized setup using their preferred IDE. It is especially useful for those migrating existing DAGs to Astro.
+Astro users have options when it comes to developing DAGs: the Astro Cloud IDE or the Astro CLI. The Astro Cloud IDE is a low-code, cloud-based solution that does not require installing any software. It is recommended for new Airflow users or those who cannot install the Astro CLI or its prerequisites. The Astro CLI is recommended for those who want to develop code locally in a containerized setup using their preferred IDE. It is especially useful for those migrating existing DAGs to Astro.
 
 #### Use the Astro Cloud IDE for secure, low-code development in the cloud
 
@@ -50,7 +50,7 @@ One of the highest barriers to using Airflow is writing boilerplate code for bas
 To get the most out of the Astro Cloud IDE:
 
 - Connect a Git repository for deployment of your pipelines using the [Astro GitHub integration](https://www.astronomer.io/docs/astro/deploy-github-integration). Deployment using the Astro CLI is also supported, but the GitHub integration offers advantages such as easy enforcement of software development best practices without custom CI/CD scripts, faster iteration on DAG code for teams, and greater visibility into the status and logs of individual deploys. For detailed guidance on deploying Cloud IDE pipelines, see [Deploy a project from the Cloud IDE to Astro](https://www.astronomer.io/docs/astro/cloud-ide/deploy-project).
-- Make sure to locally test any DAGs employing async operators and sensors prior to deployment after [exporting them](https://www.astronomer.io/docs/astro/cloud-ide/deploy-project#export-your-pipelines-to-a-local-astro-project). Although supported, async operators and task sensors cannot currently be tested in the Cloud IDE.
+- Make sure to [export](https://www.astronomer.io/docs/astro/cloud-ide/deploy-project#export-your-pipelines-to-a-local-astro-project) and test locally any DAGs employing async operators and sensors prior to deployment. Although supported, async operators and task sensors cannot currently be tested in the Cloud IDE.
 
 Learn more and get started by following the guidance in [Cloud IDE](https://www.astronomer.io/docs/astro/cloud-ide).
 
