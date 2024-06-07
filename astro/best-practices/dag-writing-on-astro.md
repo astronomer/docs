@@ -58,8 +58,8 @@ Learn more and get started by following the guidance in [Cloud IDE](https://www.
 
 When writing DAGs intended for Astro Deployments, use the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) for containerized local development. The Astro CLI is an open-source interface you can use to:
 
-- Test Airflow DAGs locally
-- Deploy code to Astro
+- Test Airflow DAGs locally.
+- Deploy code to Astro.
 - Automate key actions as part of a CI/CD process. 
 
 To get the most out of the Astro CLI: 
