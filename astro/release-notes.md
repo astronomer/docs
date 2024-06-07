@@ -25,6 +25,16 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## June 11, 2024
+
+### Additional improvements
+- Now, at the end of your Astro Trial, your Deployments automatically hibernate. You can then add a credit card number to your user account to access your Deployments and Workspaces to wake your hibernating Deployment. See [Start a trial](trial.md) for more information about Astro Trial policies and available resources.<!--https://github.com/astronomer/astro/pull/21514, https://github.com/astronomer/astro/pull/21562-->
+- The ability to create, update, and delete Deployment API tokens is restricted to users with the Workspace Owner role. Read [Workspace user permissions](https://www.astronomer.io/docs/astro/user-permissions#workspace-roles) for more information. <!--https://github.com/astronomer/astro/pull/21736-->
+
+### Bug fixes
+
+- Fixed an issue where the Organization Settings Dashboard failed to load correctly. <!--https://github.com/astronomer/astro/pull/21628-->
+
 ## June 6, 2024
 
 ### API keys are no longer supported

@@ -35,9 +35,21 @@ You're now ready to start deploying and running DAGs on Astro. See [Run your fir
 
 You have 14 days and $300 to spend in credits before your trial ends. See [Manage billing](manage-billing.md) to view how much credit you've used over the course of your trial. See [Pricing](https://www.astronomer.io/pricing/) for a breakdown of how much it costs to run Airflow on Astro.
 
+### Trial resources
+
+Your Astro trial provides you access to specific kinds of Astronomer Deployment resources.
+
+- One workspace per trial
+- Two Deployments per trial
+- A maximum of 5 workers per worker queue
+- No high-availability enabled
+- A5, A10, or A20 workers
+
+To access additional resources or functionality, you need to add a credit card number or other payment method. You can read more about Deployment resources available for regular Astro plans in [Configure Deployment resources](deployment-resources.md).
+
 ## After your trial
 
-After your 14-day trial ends, you can no longer access your Deployments and Workspaces from the Astro UI. You can still access your user account page and Astronomer support forms.
+After your 14-day trial ends, you can no longer access your Deployments and Workspaces from the Astro UI. Your Deployments are hibernating. You can still access your user account page and Astronomer support forms. If you provie a credit card number or extend your trial, you can access your Deployments and Workspaces again, where you can wake your Deployments from hibernation.
 
 After your trial ends, all Deployments are automatically deleted. Any code that you deployed to Astro will be lost. If you need additional time to evaluate Astro, or you need to copy your configuration for future use, you can:
 
