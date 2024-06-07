@@ -5,6 +5,8 @@ id: deploy-github-integration
 description: Learn how to automatically deploy Apache Airflow code to Astro from GitHub with a built-in integration.
 ---
 
+import HostedBadge from '@site/src/components/HostedBadge';
+
 :::publicpreview
 :::
 

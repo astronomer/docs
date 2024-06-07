@@ -5,6 +5,8 @@ id: deploy-history
 description: View a historical record of code deploys to an Astro Deployment and roll back to specific deploys when something goes wrong.
 ---
 
+import HostedBadge from '@site/src/components/HostedBadge';
+
 <HostedBadge/>
 
 The **Deploy History** tab in the Astro UI shows you a record of all code deploys to your Deployment. Use this page to track the development of a Deployment and to pinpoint when your team made key changes to code.
