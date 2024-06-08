@@ -5,13 +5,14 @@ id: deploy-rollbacks
 description: Learn how to roll back to a deploy, which lets you run earlier version of your project code.
 ---
 
-Deploy rollbacks are an emergency option if a Deployment unexpectedly stops working after a recent deploy. For example, if one of your DAGs worked in development but suddenly fails in a mission-critical production Deployment, you can roll back to your previous deploy to quickly get your pipeline running again. This allows you to troubleshoot the issue more thoroughly in development before redeploying to production. You can roll back to any deploy in the last three months regardless of your Runtime version, DAG code, or Deployment settings.
+Deploy rollbacks are an emergency option if a Deployment unexpectedly stops working after a recent deploy. For example, if one of your DAGs worked in development but suddenly fails in a mission-critical production Deployment, you can roll back to your previous deploy to quickly get your pipeline running again. This allows you to revert your deployment to a known good state while you investigate the cause of the failure. You can roll back to any deploy in the last three months regardless of your DAG code or Deployment settings. However, rollbacks are only supported for Runtime 5.0.0 and above or its equivalent Airflow version, 2.3.0 and above.
 
 ## Prerequisites
 
-- You must be at least a Deployment Admin or otherwise have permissions to upgrade a Deployment.
+- You must be at least a Deployment Editor or otherwise have the permission `deployment.images.push` or `system.deployments.images.push` to roll back a Deployment.
 - Your Deployment must be on Astro Runtime 5 (Airflow 2.3) or later. Rolling back to any version before Astro Runtime 5 is not supported. 
-- Your Deployment must be configured to use standard image and DAG-only deploys. Rollbacks are not supported for NFS deploys and Git sync deploys.
+- Your Deployment must be configured to use image or DAG-only deploys. Rollbacks are not supported for NFS deploys and Git sync deploys.
+- Your Software installation must have `global.dagOnlyDeployment.enabled=True`
   
 ## Enable deploy rollbacks
 
