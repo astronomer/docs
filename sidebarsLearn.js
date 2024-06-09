@@ -119,6 +119,7 @@ module.exports = {
             'airflow-isolated-environments',
             'kubepod-operator',
             'airflow-mlops',
+            'airflow-parallelism',
             'using-airflow-plugins',
             'airflow-pools',
             'airflow-setup-teardown',
