@@ -720,29 +720,24 @@ Follow procedures for your Kubernetes provider to configure Kubernetes to trust 
 
 Certain clusters do not provide a mechanism to configure the list of certificates trusted by Kubernetes.
 
-While configuring the Kubernetes list of cluster certificates is a custeomer responsibility, Astronomer Software includes an optional component that can, for certain Kubernetes cluster configurations, add certificates defined in `astronomer.privateCaCerts` to the list of certificates trusted by Kubernetes. This can be enabled by setting `astronomer.privateCaCertsAddToHost.enabled` and ``astronomer.privateCaCertsAddToHost.addToContainerd` to `true` in your `values.yaml` file. For example:
+While configuring the Kubernetes list of cluster certificates is a customer responsibility, Astronomer Software includes an optional component that can, for certain Kubernetes cluster configurations, add certificates defined in `global.privateCaCerts` to the list of certificates trusted by Kubernetes. This can be enabled by setting `global.privateCaCertsAddToHost.enabled` and ``global.privateCaCertsAddToHost.addToContainerd` to `true` in your `values.yaml` file and setting `global.privateCaCertsAddToHost.containerdConfigToml` to:
 
-```yaml
-  astronomer:
-    privateCaCertsAddToHost:
-      enabled: true
-      addToContainerd: true
-      hostDirectory: /etc/containerd/certs.d
+```
+[host."https://registry.<baseApp>"]
+  ca = "/etc/containerd/certs.d/<registry hostname>/<secret name>.pem"
 ```
 
-The above configuration is valid for most Kubernetes Clusters, including EKS and AKS.
-
-GKE users must additionally add a `containerdConfigToml` configuration containing a pair of lines for each registry hostname (and the associated secret name) in the following format:
+For example, if your base domain is astro-sandbox.example.com and the CA public-certifice certificate is stored in the platform namespace in a secret named `my-private-ca`, the `global.privateCaCertsAddToHost` section would be:
 
 ```yaml
-  astronomer:
+  global:
     privateCaCertsAddToHost:
       enabled: true
       addToContainerd: true
       hostDirectory: /etc/containerd/certs.d
       containerdConfigToml: |-
-        [host."https://<registry hostname>"]
-          ca = "/etc/containerd/certs.d/<registry hostname>/<secret name>.pem"
+        [host."https://registry.astro-sandbox.example.com"]
+          ca = "/etc/containerd/certs.d/registry.astro-sandbox.example.com/my-private-ca.pem"      
 ```
 
 ## Step 12: Configure outbound SMTP email {#configure-outbound-smtp-email}
