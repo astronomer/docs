@@ -863,7 +863,9 @@ Note that `global.postgresqlEnabled` to `true` is an unsupported configuration a
 
 :::info
 
-If using Azure Database for PostgreSQL or another Postgres instance that does not enable the `pg_trgm` by default, you must enable the `pg_trgm` extension prior to installing Astronomer Software. If `pg_trgm` is not enabled, the install will fail. `pg_tgrm` is enabled by default on Amazon RDS and Google Cooud SQL for PostgresQL. For instructions on enabling the `pg_trgm` extension for Azure Flexible Server, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
+If you use Azure Database for either PostgreSQL or another Postgres instance that does not enable the `pg_trgm` by default, you must enable the `pg_trgm` extension prior to installing Astronomer Software. If `pg_trgm` is not enabled, the install will fail. `pg_tgrm` is enabled by default on Amazon RDS and Google Cooud SQL for PostgresQL. 
+
+For instructions on enabling the `pg_trgm` extension for Azure Flexible Server, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
 
 :::
 
