@@ -5,6 +5,8 @@ id: deployment-resources
 description: "Configure your Deployment resource settings to optimze Deployment performance."
 ---
 
+import HostedBadge from '@site/src/components/HostedBadge';
+
 Your Deployment resources are the computational resources Astro uses to run Airflow in the cloud. Update Deployment resource settings to optimize performance and reduce the cost of running Airflow in the cloud.
 
 ## Update Airflow configurations
@@ -64,14 +66,18 @@ To manage Kubernetes resources programmatically, you can set default Pod limits 
     - **Default Pod Size**:
         - **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
         - **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
+        - **Storage**: Choose the amount of ephemeral storage in GiB assigned to each pod in the Astro UI. This storage volume is transient and allows for the temporary storage and processing of data. The pod is assigned the minimum 0.25 GiB by default. The maximum possible quota is 100 GiB. Only ephemeral storage requests that are greater than the default minimum of 0.25 GiB are chargeable. Note that this feature is in [Public Preview](feature-previews.md).
 
-     For a Deployment running in a Hosted dedicated or shared cluster, the maximum possible **CPU** quota is 1600 vCPU and maximum **Memory** quota is 3200 GiB.
+     For a Deployment running in a Hosted dedicated or shared cluster, the maximum possible **CPU** quota is 6400 vCPU and maximum **Memory** quota is 12800 GiB.
 
      :::warning Astro Hosted
 
-     For Astro Hosted environments, if you set resource requests to be less than the maximum limit, Astro automatically requests the maximum limit that you set. This means that you might consume more resources than you expected if you set the limit much higher than the resource request you need. Check your [Billing and usage](manage-billing.md) to view your resource use and associated charges.
+     For Astro Hosted environments, if you set your **CPU** and **Memory** resource requests to be less than the maximum limit, Astro automatically requests the maximum limit that you set. This means that you might consume more resources than you expected if you set the limit much higher than the resource request you need.
+
+     Check your [Billing and usage](manage-billing.md) to view your resource use and associated charges.
 
      :::
+
 
 4. Click **Update Deployment**.
 
@@ -83,13 +89,15 @@ Scheduler resources must be set for each Deployment and are managed separately f
 
 Unlike workers, schedulers do not autoscale. The resources you set for them are the resources you have regardless of usage. For more information about how scheduler configuration affects resources usage, see [Pricing](https://astronomer.io/pricing).
 
-Astronomer Deployments run a single scheduler. You can configure your scheduler to have different amounts of resources based on how many tasks you need to schedule. The following table lists all possible scheduler sizes for Astro Hosted:
+Astronomer Deployments run a single scheduler by default. You can configure your scheduler to have different amounts of resources based on how many tasks you need to schedule. You can also enable [High Availability](deployment-resources.md#enable-high-availability) to run two instances of PGBouncer and the Airflow Scheduler.
 
-| Scheduler size | vCPU | Memory | Ephemeral storage |
-| -------------- | ---- | ------ | ----------------- |
-| Small          | 1    | 2G     | 5Gi               |
-| Medium         | 2    | 4G     | 5Gi               |
-| Large          | 4    | 8G     | 5Gi              |
+The following table lists all possible scheduler sizes for Astro Hosted:
+
+| Scheduler size          | vCPU | Memory | Ephemeral storage |
+| ----------------------- | ---- | ------ | ----------------- |
+| Small (Up to ~50 DAGs)  | 1    | 2G     | 5Gi               |
+| Medium (Up to ~250 DAGs)| 2    | 4G     | 5Gi               |
+| Large (Up to ~1000 DAGs)| 4    | 8G     | 5Gi               |
 
 ### Update scheduler size
 
@@ -124,7 +132,12 @@ To configure the scheduler on an [Astro Hybrid](hybrid-overview.md) Deployment:
 
 ## Enable high availability
 
-By default, the Pods running your Deployment's Airflow components are distributed across multiple nodes. When you enable high availability, your Deployment runs two instances of [PgBouncer](https://www.pgbouncer.org/) and two instances of the Airflow Scheduler across different nodes. However, Astro makes a best effort to use different availability zones for your PGBouncer and Scheduler, which means it is possible but unlikely that they are both located in the same availability zone. This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node or availability zone.
+By default, the Pods running your Deployment's Airflow components are distributed across multiple nodes. When you enable high availability, Astro re-configures the Deployment to be more resilient. This includes:
+
+- Running nodes in different availability zones.
+- Running two schedulers so that at least one is always available.
+
+This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node or availability zone.
 
 Because this setting results in more resource usage, it can increase the cost of your Deployment. See [Pricing](https://astronomer.io/pricing).
 
@@ -149,10 +162,9 @@ Every Deployment has two PgBouncer Pods assigned to two different nodes to preve
 
 ## Hibernate a development Deployment
 
-:::caution
+<HostedBadge/>
 
-This feature is in [Private Preview](feature-previews.md). To access this feature or learn more, [contact Astronomer](https://www.astronomer.io/contact/). All customers are eligible to use this feature upon request.
-
+:::publicpreview
 :::
 
 When you create a Deployment on Astro, you pay for the infrastructure resources that are required to run the Deployment for the duration that it's active. In development environments when you aren't always running tasks, you can _hibernate_, or scale down, all Deployment resources on a specified schedule. When you hibernate a Deployment, all Deployment configurations are preserved, but computing resources are scaled to zero.
@@ -175,7 +187,7 @@ You can hibernate a Deployment only if you enabled **Development Mode** when you
 
 Before you create a hibernation schedule for a Deployment, consider the following constraints:
 
-- The Deployment must have the **Development Mode** setting turned on. This setting can only be configured when you create a Deployment.
+- The Deployment must have the **Development Mode** setting turned on. This setting can be turned on only when you create a Deployment.
 - The **High Availability** feature is not supported. A Deployment with a hibernation schedule cannot be highly available.
 - The **Small Scheduler** (1 vCPU, 2 GiB RAM) is the only scheduler size supported.
 - Deployments with hibernation schedules are not required to meet the uptime SLAs of standard production Deployments.
@@ -184,23 +196,28 @@ To create a hibernation schedule:
 
 1. In the Astro UI, select a Workspace, click **Deployments**, then select a Deployment.
 2. Click **Details**. In the **Advanced** section of your Deployment configuration, click **Edit**.
-3. Configure the following values in **Hibernation schedules**:
+3. (Optional) Enable a suggested hibernation schedule for your Deployment.
+
+    When you enable Dev mode, Astro automatically includes the following suggested schedules for your Deployment. These hibernation schedules are disabled by default.
+
+    | Schedule                                               | Start schedule | End schedule |
+    | ------------------------------------------------------ | -------------- | ------------ |
+    | Hibernate from 5:00 PM to 9:00 AM                      | 0 17 * * *     | 0 9 * * *    |
+    | Hibernate on weekends (Friday 5:00PM to Monday 9:00AM) | 0 17 * * 5     | 0 9 * * 1    |
+
+4. Configure the following values in **Hibernation schedules** to create a new schedule:
      - **Start Schedule**: Specify a cron schedule for your Deployment resources to scale to zero.
      - **End Schedule**: Specify a cron schedule for Astro to restart your configured resources.
      - **Description**: (Optional) Give your hibernation schedule a description.
      - **Enabled**: Tick this checkbox if you want to activate the schedule after configuring it.
 
-4. (Optional) Specify additional hibernation schedules for your Deployment.
 5. Select **Update Deployment** to save your changes.
 
 :::tip
 
 You can use the following example cron expressions to implement common Deployment hibernation schedules:
 
-| Schedule                                               | Start schedule | End schedule |
-| ------------------------------------------------------ | -------------- | ------------ |
-| Hibernate from 5:00 PM to 9:00 AM                      | 0 17 * * *     | 0 9 * * *    |
-| Hibernate on weekends (Friday 5:00PM to Monday 9:00AM) | 0 17 * * 5     | 0 9 * * 1    |
+
 
 :::
 
@@ -222,7 +239,7 @@ When your hibernation schedule starts:
 - You can't access the Airflow UI for the Deployment.
 - You can't deploy project images or DAGs to the Deployment.
 
-When your hibernation schedule ends, the Deployment will start any DAG runs for data intervals that were missed during hibernation for DAGs with `catchup=true`. To avoid incurring additional resource costs, Astronomer recommends disabling catchup on DAGs in hibernating Deployments.
+When your hibernation schedule ends, the Deployment will start any DAG runs for data intervals that were missed during hibernation for DAGs with `catchup=True`. To avoid incurring additional resource costs, Astronomer recommends disabling catchup on DAGs in hibernating Deployments.
 
 ### Manually hibernate a Deployment
 

@@ -19,6 +19,7 @@ Consider implementing systematic testing of your DAGs to prevent common issues. 
 There are multiple resources for learning about this topic. See also:
 
 - Webinar: [Debugging your Airflow DAGs](https://www.astronomer.io/events/webinars/debugging-your-airflow-dags/).
+- Astronomer Academy: [Airflow: Debug DAGs](https://academy.astronomer.io/path/airflow-101/debug-dags).
 
 :::
 
@@ -35,24 +36,24 @@ To give yourself the best possible chance of fixing a bug in Airflow, contextual
 
 - Is the problem with Airflow, or is it with an external system connected to Airflow? Test if the action can be completed in the external system without using Airflow.
 - What is the state of your [Airflow components](airflow-components.md)? Inspect the logs of each component and restart your Airflow environment if necessary.
-- Does Airflow have access to all relevant files? This is especially relevant when running Airflow in Docker or when using the [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- Does Airflow have access to all relevant files? This is especially relevant when running Airflow in Docker or when using the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - Are your [Airflow connections](connections.md) set up correctly with correct credentials? See [Troubleshooting connections](#troubleshooting-connections).
 - Is the issue with all DAGs, or is it isolated to one DAG?
 - Can you collect the relevant logs? For more information on log location and configuration, see the [Airflow logging](logging.md) guide.
 - Which versions of Airflow and Airflow providers are you using? Make sure that you're using the correct version of the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/index.html).
-- Can you reproduce the problem in a new local Airflow instance using the [Astro CLI](https://docs.astronomer.io/astro/cli/overview)?
+- Can you reproduce the problem in a new local Airflow instance using the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview)?
 
 Answering these questions will help you narrow down what kind of issue you're dealing with and inform your next steps. 
 
 :::info
 
-You can debug your DAG code with IDE debugging tools using the `dag.test()` method, which was added in Airflow 2.5. See [Debug interactively with dag.test()](testing-airflow.md#debug-interactively-with-dagtest).
+You can debug your DAG code with IDE debugging tools using the `dag.test()` method. See [Debug interactively with dag.test()](testing-airflow.md#debug-interactively-with-dagtest).
 
 :::
 
 ## Airflow is not starting on the Astro CLI
 
-The 3 most common ways to run Airflow locally are using the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli), running a [standalone instance](https://airflow.apache.org/docs/apache-airflow/stable/start.html), or running [Airflow in Docker](https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html). This guide focuses on troubleshooting the Astro CLI, which is an open source tool for quickly running Airflow on a local machine. 
+The 3 most common ways to run Airflow locally are using the [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli), running a [standalone instance](https://airflow.apache.org/docs/apache-airflow/stable/start.html), or running [Airflow in Docker](https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html). This guide focuses on troubleshooting the Astro CLI, which is an open source tool for quickly running Airflow on a local machine. 
 
 The most common issues related to the Astro CLI are:
 
@@ -63,7 +64,7 @@ The most common issues related to the Astro CLI are:
 
 To troubleshoot infrastructure issues when running Airflow on other platforms, for example in Docker, on Kubernetes using the [Helm Chart](https://airflow.apache.org/docs/helm-chart/stable/index.html) or on managed services, please refer to the relevant documentation and customer support.
 
-You can learn more about [testing and troubleshooting locally](https://docs.astronomer.io/astro/cli/test-your-astro-project-locally) with the Astro CLI in the Astro documentation.
+You can learn more about [testing and troubleshooting locally](https://www.astronomer.io/docs/astro/cli/test-your-astro-project-locally) with the Astro CLI in the Astro documentation.
 
 ## Common DAG issues
 
@@ -126,7 +127,7 @@ If your DAGs are either not running or running differently than you intended, co
 
     ![Location of unpause toggle in the Airflow UI](/img/guides/paused_dag_2.png)
 
-    If you want all DAGs unpaused by default, you can set [`dags_are_paused_at_creation=False`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-dir-list-interval) in your Airflow config. If you do this, remember to set `catchup=False` in your DAGs to prevent automatic backfilling of DAG runs. In Airflow 2.2 and later, paused DAGs are unpaused automatically when you manually trigger them.
+    If you want all DAGs unpaused by default, you can set [`dags_are_paused_at_creation=False`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-dir-list-interval) in your Airflow config. If you do this, remember to set `catchup=False` in your DAGs to prevent automatic backfilling of DAG runs. Paused DAGs are unpaused automatically when you manually trigger them.
 
 - Double check that each DAG has a unique `dag_id`. If two DAGs with the same id are present in one Airflow instance the scheduler will pick one at random every 30 seconds to display.
 - Make sure your DAG has a `start_date` in the past. A DAG with a `start_date` in the future will result in a successful DAG run with no task runs. Do not use `datetime.now()` as a `start_date`.
@@ -135,7 +136,7 @@ If your DAGs are either not running or running differently than you intended, co
 using `astro dev logs -s`. 
 - If too many runs of your DAG are being scheduled after you unpause it, you most likely need to set `catchup=False` in your DAG's parameters.
 
-If your DAG is running but not on the schedule you expected, review the [DAG scheduling and timetables in Airflow](scheduling-in-airflow.md) guide. If you are using a custom timetable, ensure that the data interval for your DAG run does not precede the DAG start date.
+If your DAG is running, but not on the schedule you expected, review the [DAG Schedule DAGs in Airflow](scheduling-in-airflow.md) guide. If you are using a custom timetable, ensure that the data interval for your DAG run does not precede the DAG start date.
 
 ## Common task issues
 
@@ -151,7 +152,7 @@ It is possible for a DAG to start but its tasks to be stuck in various states or
 - When running many instances of a task or DAG, be mindful of scaling parameters and configurations. Airflow has default settings that limit the amount of concurrently running DAGs and tasks. See [Scaling Airflow to optimize performance](airflow-scaling-workers.md) to learn more.
 - If you are using task decorators and your tasks are not showing up in the **Graph** and **Grid** view, make sure you are calling your tasks. See also [Introduction to Airflow decorators](airflow-decorators.md).
 - Check your task dependencies and trigger rules. See [Manage DAG and task dependencies in Airflow](managing-dependencies.md). Consider recreating your DAG structure with [EmptyOperators](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/empty/index.html) to ensure that your dependencies are structured as expected.
-- As of Airflow 2.6, the [`task_queued_timeout`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#task-queued-timeout) parameter controls how long tasks can be in queued state before they are either retried or marked as failed. The default is 600 seconds.
+- The [`task_queued_timeout`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#task-queued-timeout) parameter controls how long tasks can be in queued state before they are either retried or marked as failed. The default is 600 seconds.
 - If you are using the CeleryExecutor in an Airflow version earlier than 2.6 and tasks get stuck in the `queued` state, consider turning on [`stalled_task_timeout`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#stalled-task-timeout).
 
 ### Tasks are failing 
@@ -185,7 +186,7 @@ After resolving your issue you may want to rerun your DAGs or tasks, see [Rerunn
 
 ### Issues with dynamically mapped tasks
 
-[Dynamic task mapping](dynamic-tasks.md) is a powerful feature that was introduced in Airflow 2.3 to allow you to dynamically adjust the number of tasks at runtime based on changing input parameters. Starting with Airflow 2.5.0 you can also dynamically map over task groups.
+[Dynamic task mapping](dynamic-tasks.md) is a powerful feature that allows you to dynamically adjust the number of tasks at runtime based on changing input parameters. It is also possible to [dynamically map over task groups](task-groups.md#generate-task-groups-dynamically-at-runtime).
 
 Possible causes of issues when working with dynamically mapped tasks include:
 
@@ -202,7 +203,7 @@ When creating complex patterns with dynamically mapped tasks, we recommend first
 
 :::tip
 
-It is very common that the output of an upstream operator is in a slightly different format than what you need to map over. Use [`.map()`](https://docs.astronomer.io/learn/dynamic-tasks#transform-outputs-with-map) to transform elements in a list using a Python function. 
+It is very common that the output of an upstream operator is in a slightly different format than what you need to map over. Use [`.map()`](https://www.astronomer.io/docs/learn/dynamic-tasks#transform-outputs-with-map) to transform elements in a list using a Python function. 
 
 :::
 
@@ -217,7 +218,7 @@ Generally, logs fail to appear when a process dies in your scheduler or worker a
 - Increase the resources available to your workers (if using the Celery executor) or scheduler (if using the local executor).
 - If you're using the Kubernetes executor and a task fails very quickly (in less than 15 seconds), the pod running the task spins down before the webserver has a chance to collect the logs from the pod. If possible, try building in some wait time to your task depending on which operator you're using. If that isn't possible, try to diagnose what could be causing a near-immediate failure in your task. This is often related to either lack of resources or an error in the task configuration.
 - Increase the CPU or memory for the task.
-- Ensure that your logs are retained until you need to access them. If you are an Astronomer customer see our documentation on how to [View logs](https://docs.astronomer.io/astro/view-logs).
+- Ensure that your logs are retained until you need to access them. If you are an Astronomer customer see our documentation on how to [View logs](https://www.astronomer.io/docs/astro/view-logs).
 - Check your scheduler and webserver logs for any errors that might indicate why your task logs aren't appearing.
 
 ## Troubleshooting connections

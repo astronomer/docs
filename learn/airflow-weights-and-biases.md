@@ -33,7 +33,7 @@ To get the most out of this tutorial, you should be familiar with:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - A [Weights and Biases](https://wandb.ai/site) account. Personal accounts are available for free.
 
 ## Quickstart  

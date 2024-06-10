@@ -317,8 +317,8 @@ join_orders_customers(filter_orders(filtered_orders_table), customers_table)
 
 The Astro Python SDK offers much more functionality that greatly simplifies DAG authoring, for example an operator to load files from object storage directly into a relational table while inferring its schema. To learn more about the Astro Python SDK, check out: 
 
-- [Write a DAG with the Astro Python SDK tutorial](https://docs.astronomer.io/learn/astro-python-sdk)
-- [The Astro Python SDK for ETL guide](https://docs.astronomer.io/learn/astro-python-sdk-etl)
+- [Write a DAG with the Astro Python SDK tutorial](https://www.astronomer.io/docs/learn/astro-python-sdk)
+- [The Astro Python SDK for ETL guide](https://www.astronomer.io/docs/learn/astro-python-sdk-etl)
 - [Astro Python SDK documentation](https://astro-sdk-python.readthedocs.io/en/stable/)
 
 ## Available Airflow decorators
@@ -328,6 +328,7 @@ There are several decorators available to use with Airflow. This list provides a
 - DAG decorator (`@dag()`), which creates a DAG.
 - TaskGroup decorator (`@task_group()`), which creates a [TaskGroup](task-groups.md).
 - Task decorator (`@task()`), which creates a Python task.
+- Bash decorator (`@task.bash()`) which creates a [BashOperator](bashoperator.md#how-to-use-the-bash-decorator) task.
 - Python Virtual Env decorator (`@task.virtualenv()`), which runs your Python task in a [virtual environment](https://www.astronomer.io/events/webinars/running-airflow-tasks-in-isolated-environments/).
 - Docker decorator (`@task.docker()`), which creates a [DockerOperator](https://registry.astronomer.io/providers/apache-airflow-providers-docker/versions/latest/modules/DockerOperator) task.
 - [Short circuit decorator](airflow-branch-operator.md#taskshort_circuit-shortcircuitoperator) (`@task.short_circuit()`), which evaluates a condition and skips downstream tasks if the condition is False.
@@ -335,7 +336,7 @@ There are several decorators available to use with Airflow. This list provides a
 - [BranchExternalPython decorator](airflow-branch-operator.md#other-branch-operators) (`@task.branch_external_python`), which creates a branch in your DAG running Python code in a pre-existing virtual environment.
 - [BranchPythonVirtualenvOperator](airflow-branch-operator.md#other-branch-operators) (`@task.branch_virtualenv`), which creates a branch in your DAG running Python code in a newly created virtual environment. The environment can be cached by providing a `venv_cache_path`.
 - Kubernetes pod decorator (`@task.kubernetes()`), which runs a [KubernetesPodOperator](kubepod-operator.md) task.
-- [Sensor decorator](what-is-a-sensor.md#sensor-decorator--pythonsensor) (`@task.sensor()`), which turns a Python function into a sensor. This sensor was introduced in Airflow 2.5.
+- [Sensor decorator](what-is-a-sensor.md#sensor-decorator--pythonsensor) (`@task.sensor()`), which turns a Python function into a sensor.
 - [Astro Python SDK decorators](https://github.com/astronomer/astro-sdk), which simplify writing ETL/ELT DAGs.
 - [PySpark decorator](https://airflow.apache.org/docs/apache-airflow-providers-apache-spark/stable/decorators/pyspark.html) (`@task.pyspark()`), which is injected with a SparkSession and SparkContext object if available.
 

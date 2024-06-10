@@ -2,12 +2,20 @@
 title: "Airflow components"
 sidebar_label: "Core components"
 id: airflow-components
-description: "Understand the core components of Apache Airflow 2.0+. Review their functions and find out which components to run for specific use cases."
+description: "Understand the core components of Apache Airflow. Review their functions and find out which components to run for specific use cases."
 ---
 
 When working with Airflow, understanding the underlying infrastructure components and how they function can help you develop and run your DAGs, troubleshoot issues, and successfully run Airflow.
 
 In this guide, you'll learn about the core components of Airflow and how to manage Airflow infrastructure for high availability. Some of the components and features described in this topic are unavailable in earlier Airflow versions.
+
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Airflow: Basics](https://academy.astronomer.io/path/airflow-101/airflow-basics) module.
+
+:::
 
 ## Assumed knowledge
 
@@ -24,7 +32,7 @@ The following Apache Airflow core components are running at all times:
 - **[Database](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html):** A database where all DAG and task metadata are stored. This is typically a Postgres database, but MySQL and SQLite are also supported.
 - **[Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html):** The mechanism for running tasks. An executor is running within the scheduler whenever Airflow is operational.
 
-If you run Airflow locally using the [Astro CLI](https://docs.astronomer.io/astro/install-cli), you'll notice that when you start Airflow using `astro dev start`, it will spin up three containers, one for each of the core components.
+If you run Airflow locally using the [Astro CLI](https://www.astronomer.io/docs/astro/install-cli), you'll notice that when you start Airflow using `astro dev start`, it will spin up three containers, one for each of the core components.
 
 In addition to these core components, there are a few situational components that are used only to run tasks or make use of certain features:
 
@@ -48,11 +56,11 @@ You can use pre-configured Airflow executors, or you can create a [custom execut
     - Your tasks require very specific resource configurations.
     - Your tasks run infrequently, and you don't want to incur worker resource costs when they aren't running.
 
-The [CeleryKubernetes Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery_kubernetes.html) and the [Dask Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/dask.html) are considered more experimental and are not as widely adopted as the other executors.
+- **[CeleryKubernetes Executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/celery_kubernetes.html)**: Allows you to run both a CeleryExecutor and a KubernetesExecutor in the same Airflow instance. The `queue` parameter determines which executor that a specific task uses. You need to install both, the [Celery](https://registry.astronomer.io/providers/apache-airflow-providers-celery/versions/latest) and [CNCF Kubernetes](https://registry.astronomer.io/providers/apache-airflow-providers-cncf-kubernetes/versions/latest) providers to use this executor.
 
 ## Managing Airflow infrastructure
 
-All Airflow components should be run on an infrastructure that is appropriate for the requirements of your organization. For example, using the [Astro CLI](https://docs.astronomer.io/astro/install-cli) to run Airflow on a local computer can be helpful when testing and for DAG development, but it is insufficient to support running DAGs in production. 
+All Airflow components should be run on an infrastructure that is appropriate for the requirements of your organization. For example, using the [Astro CLI](https://www.astronomer.io/docs/astro/install-cli) to run Airflow on a local computer can be helpful when testing and for DAG development, but it is insufficient to support running DAGs in production. 
 
 The following resources can help you manage Airflow components:
 

@@ -1,0 +1,25 @@
+[build]
+  base = "/"
+  publish = "build"
+  command = "yarn build"
+
+
+[[redirects]]
+  from = "/docs/api"
+  to = "https://astronomer.docs.buildwithfern.com/docs/api/overview"
+  status = 200
+
+[[redirects]]
+  from = "/docs/api/*"
+  to = "https://astronomer.docs.buildwithfern.com/docs/api/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/"
+  to = "/docs/"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/docs/:splat"
+  status = 200

@@ -47,6 +47,7 @@ module.exports = {
             'bashoperator',
             'connections',
             'dags',
+            'airflow-datasets',
             'what-is-a-hook',
             'managing-airflow-code',
             'airflow-openlineage',
@@ -74,6 +75,7 @@ module.exports = {
             'cross-dag-dependencies',
             'airflow-importing-custom-hooks-operators',
             'error-notifications-in-airflow',
+            'airflow-dag-parameters',
             'dag-best-practices',
             'debugging-dags',
             'dynamic-tasks',
@@ -113,7 +115,6 @@ module.exports = {
             'logging',
             'custom-xcom-backend-strategies',
             'data-quality',
-            'airflow-datasets',
             'deferrable-operators',
             'dynamically-generating-dags',
             'airflow-isolated-environments',
@@ -139,6 +140,7 @@ module.exports = {
       items: [
         'airflow-listeners',
         'operator-extra-link-tutorial',
+        'cleanup-dag-tutorial',
         'xcom-backend-tutorial',
         'pycharm-local-dev',
         'vscode-local-dev',
@@ -152,10 +154,10 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Integrations',
+      label: 'Integrations & connections',
       link: {
         type: 'generated-index',
-        title: 'Integrations',
+        title: 'Integrations & connections',
         description: 'Integrate Airflow with commonly used data engineering tools.',
       },
       items: [
@@ -222,6 +224,7 @@ module.exports = {
         'airflow-pgvector',
         'airflow-pinecone',
         'connections/postgres',
+        'airflow-qdrant',
         {
           type: 'category',
           label: 'Redshift',

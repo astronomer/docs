@@ -57,7 +57,7 @@ The following table lists the specific permissions that each Workspace role has:
 
 | Permission                                                                                                             | **Workspace Member** | **Workspace Author** | **Workspace Operator** | **Workspace Owner** |
 | ---------------------------------------------------------------------------------------------------------------------- | -------------------- | -------------------- | ---------------------- | ------------------- |
-| View Workspace users                                                                                                   | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| View Deployment and Workspace users and teams                                                                          | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
 | View all Deployments in the Astro UI                                                                                   | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
 | View DAGs in the Airflow UI                                                                                            | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
 | View Airflow task logs                                                                                                 | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
@@ -65,6 +65,7 @@ The following table lists the specific permissions that each Workspace role has:
 | View Astro Cloud IDE projects                                                                                          | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
 | View Astro alerts                                                                                                      | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
 | View the **Cluster Activity** tab in the Airflow UI                                                                                                      | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| Use custom plugins from the Airflow UI menu                                                                                  | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
 | Manually trigger DAG and task runs                                                                                     |                      | ✔️                    | ✔️                      | ✔️                   |
 | Pause or unpause a DAG                                                                                                 |                      | ✔️                    | ✔️                      | ✔️                   |
 | Clear/mark a task run or DAG run                                                                                       |                      | ✔️                    | ✔️                      | ✔️                   |
@@ -77,8 +78,9 @@ The following table lists the specific permissions that each Workspace role has:
 | Update Deployment configurations                                                                                       |                      |                      | ✔️                      | ✔️                   |
 | Create and delete Deployments                                                                                          |                      |                      | ✔️                      | ✔️                   |
 | Create, update, and delete Deployment environment variables                                                            |                      |                      | ✔️                      | ✔️                   |
-| Create, update, and delete Deployment and Workspace API tokens                                                         |                      |                      | ✔️                      | ✔️                   |
+| Create, update, and delete Workspace API tokens                                                                        |                      |                      | ✔️                      | ✔️                   |
 | Create, delete, pause, and unpause [hiberation schedules](deployment-resources.md#hibernate-a-development-deployment). |                      |                      | ✔️                      | ✔️                   |
+| Create, update, and delete Deployment API tokens                                                                       |                      |                      |                        | ✔️                   |
 | Update user roles and permissions                                                                                      |                      |                      |                        | ✔️                   |
 | Invite users to a Workspace                                                                                            |                      |                      |                        | ✔️                   |
 | Assign Teams to or remove from Workspaces                                                                              |                      |                      |                        | ✔️                   |
@@ -89,7 +91,7 @@ To manage a user's Workspace permissions, see [Manage Worksapce users](manage-wo
 
 There are two types of Deployment roles: the default Deployment Admin role and [custom Deployment roles](customize-deployment-roles.md).
 
-Deployment Admin roles have the same permissions as the [Workspace Operator](#workspace-roles) role but only Deplyment-level operations in a specific Deployment. For example, a Deployment Admin can create a Deployment [environment variable](environment-variables.md) but, unlike a Workspace Operator, they can't create an [Astro alert](alerts.md) because alerts are configured at the Workspace level.
+Deployment Admin roles have the same permissions as the [Workspace Operator](#workspace-roles) role but only Deployment-level operations in a specific Deployment. For example, a Deployment Admin can create a Deployment [environment variable](environment-variables.md) but, unlike a Workspace Operator, they can't create an [Astro alert](alerts.md) because alerts are configured at the Workspace level.
 
 A custom Deployment role is a role that your Organization has configured to have specific Deployment-level permissions. For a complete list of available custom Deployment role permissions, see [Deployment role reference](deployment-role-reference.md).
 

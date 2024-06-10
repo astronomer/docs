@@ -24,7 +24,7 @@ This is a proof of concept pipeline, please do not make any financial decisions 
 
 Before trying this example, make sure you have:
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop).
 - An [Alpha Vantage API key](https://www.alphavantage.co/support/#api-key). A free tier is available.
 - An [OpenAI API key](https://platform.openai.com/docs/api-reference/introduction). Note that you either need to have an OpenAI API key of [at least tier 1](https://platform.openai.com/docs/guides/rate-limits/usage-tiers) or switch the DAG to use local embeddings by setting `EMBEDD_LOCALLY` to `True`. 
@@ -150,7 +150,7 @@ Since this ingestion pipeline runs incrementally, the `start_time` is set to the
 
 :::info
 
-For more information on how Airflow handles DAG run dates see the [DAG scheduling and timetables in Airflow](scheduling-in-airflow.md) guide and for a full list of available templates, see the [Airflow Templates reference](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html).
+For more information on how Airflow handles DAG run dates see the [Schedule DAGs in Airflow](scheduling-in-airflow.md) guide and for a full list of available templates, see the [Airflow Templates reference](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html).
 
 :::
 

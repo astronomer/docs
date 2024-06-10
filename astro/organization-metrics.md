@@ -20,5 +20,5 @@ To export this data as a `.csv` file, click the **Export** button above the lege
 
 ## See also
 
-- [DAG metrics](dag-metrics.md)
+- [View DAG runs](dag-metrics.md)
 - [Deployment metrics](deployment-metrics.md)

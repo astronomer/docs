@@ -65,7 +65,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started).
 - A Snowflake account. A [30-day free trial](https://trial.snowflake.com/?owner=SPN-PID-365384) is available. You need to have at least one database and one schema created to store the data and models used in this tutorial.
 
 - (Optional) This tutorial includes instructions on how to use the Snowflake [custom XCom backend](custom-xcom-backend-strategies.md) included in the provider. If you want to this custom XCom backend you will need to either:
@@ -172,7 +172,7 @@ The Astro Snowflake provider is currently in beta. Classes from this provider mi
 
 :::info
 
-For more information on creating a Snowflake connection, see [Create a Snowflake connection in Airflow](https://docs.astronomer.io/learn/connections/snowflake).
+For more information on creating a Snowflake connection, see [Create a Snowflake connection in Airflow](https://www.astronomer.io/docs/learn/connections/snowflake).
 
 :::
 

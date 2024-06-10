@@ -7,7 +7,7 @@ description: 'Use tutorials and guides to make the most out of Airflow and Astro
 
 Developing data pipelines has never been easier than when using the Astro Cloud IDE.
 
-The Astro Cloud IDE automatically generates DAGs based on configurations you set in its notebook-style visual interface. Using the Astro Cloud IDE, you can create a complete data pipeline using Python, SQL, existing [Airflow operators](https://docs.astronomer.io/astro/cloud-ide/use-airflow-operators) from [over 100 providers](https://registry.astronomer.io/providers), or [custom cells](https://docs.astronomer.io/astro/cloud-ide/custom-cell-reference) without setting dependencies or connections in code. 
+The Astro Cloud IDE automatically generates DAGs based on configurations you set in its notebook-style visual interface. Using the Astro Cloud IDE, you can create a complete data pipeline using Python, SQL, existing [Airflow operators](https://www.astronomer.io/docs/astro/cloud-ide/use-airflow-operators) from [over 100 providers](https://registry.astronomer.io/providers), or [custom cells](https://www.astronomer.io/docs/astro/cloud-ide/custom-cell-reference) without setting dependencies or connections in code. 
 
 This tutorial is for Astro customers who want to create their first simple ML pipeline in the Astro Cloud IDE using Python and SQL. To explore Astro Cloud IDE functionality, you will create a pipeline that runs a random forest model to predict dog breed intelligence, then schedule and deploy the pipeline to Astro.
 
@@ -41,7 +41,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
 - Basic SQL. See the [W3 Schools SQL tutorial](https://www.w3schools.com/sql/).
-- The Astro Cloud IDE. See [Astro Cloud IDE](https://docs.astronomer.io/astro/cloud-ide).
+- The Astro Cloud IDE. See [Astro Cloud IDE](https://www.astronomer.io/docs/astro/cloud-ide).
 
 ## Prerequisites
 
@@ -49,8 +49,8 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 (Optional) To complete steps [11](#step-11-optional-connect-your-github-to-the-astro-cloud-ide) - [14](#step-14-optional-run-your-dag-on-astro) at the end of this tutorial, you will also need:
 
-- An Astro Deployment in your Workspace. See [Create a Deployment](https://docs.astronomer.io/astro/cli/develop-project#create-an-astro-projectt).
-- A GitHub account with access to a private or public repository that contains an Airflow Project created by the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
+- An Astro Deployment in your Workspace. See [Create a Deployment](https://www.astronomer.io/docs/astro/cli/develop-project#create-an-astro-projectt).
+- A GitHub account with access to a private or public repository that contains an Airflow Project created by the [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli).
 - A Personal Access Token for your GitHub account. To create a personal access token, see the [official GitHub documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 - An account in one of the following database services, which are currently supported in the Astro Cloud IDE: [GCP BigQuery](https://cloud.google.com/bigquery/docs/quickstarts), [Postgres](https://www.postgresql.org/docs/current/tutorial-start.html), [Snowflake](https://docs.snowflake.com/en/user-guide-getting-started.html) or [AWS Redshift](https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html). Additionally you will need your login credentials to create the connection to your database. If you do not have a database account, you can still complete the main steps in this tutorial by using the in-memory database and skipping Steps [3](#step-3-optional-configure-a-connection) and [11](#step-11-optional-connect-your-github-to-the-astro-cloud-ide) - [14](#step-14-optional-run-your-dag-on-astro).
 
@@ -306,7 +306,7 @@ Setting a schedule for your pipeline will determine how this pipeline will be sc
 
 Through this tutorial, the Astro Cloud IDE was building a DAG based on the configurations you set in the Astro UI. Export your pipeline as DAG code to see the results of your work.
 
-1. Click **Code**. You can see that your pipeline was automatically converted to DAG code using the [Astro SDK](https://docs.astronomer.io/learn/astro-python-sdk-etl).
+1. Click **Code**. You can see that your pipeline was automatically converted to DAG code using the [Astro SDK](https://www.astronomer.io/docs/learn/astro-python-sdk-etl).
 
     ![Code tab of the Cloud IDE showing the full DAG code for the DAG we created in this tutorial.](/img/tutorials/cloud-ide-tutorial_code_view.png)
 
@@ -326,7 +326,7 @@ Now that you have finished creating a pipeline, you can connect GitHub to the As
 
 :::tip
 
-If you are writing pipelines that need access to additional files from your `include` directory in your GitHub repository, toggle `Clone GitHub repo during cell execution to` to `True`. See also the [Cloud IDE documentation](https://docs.astronomer.io/astro/cloud-ide/pass-data-between-cells#pass-external-data-to-cells).
+If you are writing pipelines that need access to additional files from your `include` directory in your GitHub repository, toggle `Clone GitHub repo during cell execution to` to `True`. See also the [Cloud IDE documentation](https://www.astronomer.io/docs/astro/cloud-ide/pass-data-between-cells#pass-external-data-to-cells).
 
 :::
 
@@ -358,7 +358,7 @@ Export your pipeline by committing it to your connected GitHub repository.
 
 Astro supports CI/CD with GitHub Actions. You can use GitHub Actions to deploy your DAG to Astro automatically when you commit changes to your DAG from within the Cloud IDE to a branch that is configured for CI/CD.
 
-1. Follow the steps in the Astro documentation on setting up a [GitHub Actions workflow](https://docs.astronomer.io/astro/ci-cd-templates/github-actions-template) for your `cloud-ide-branch` branch.
+1. Follow the steps in the Astro documentation on setting up a [GitHub Actions workflow](https://www.astronomer.io/docs/astro/ci-cd-templates/github-actions-template) for your `cloud-ide-branch` branch.
 
 2. Make a small change to your code, such as adding a comment in the `train_model` cell and commit the change. This second commit will trigger GitHub Actions again.
 
@@ -399,4 +399,4 @@ You now know how to use the Astro Cloud IDE to write a simple ML pipeline! More 
 - Commit your pipeline to GitHub.
 - Use GitHub Actions to deploy your new DAG to Astro.
 
-See the [Astro Cloud IDE documentation](https://docs.astronomer.io/astro/cloud-ide) to learn more about this next-generation DAG writing environment.
+See the [Astro Cloud IDE documentation](https://www.astronomer.io/docs/astro/cloud-ide) to learn more about this next-generation DAG writing environment.

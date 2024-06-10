@@ -6,11 +6,13 @@ export default (function () {
   }
 
   return {
-    onRouteDidUpdate() {
-      if (!window.analytics) return;
-      setTimeout(() => {
-        window.analytics.page();
-      }, 0);
+    onRouteDidUpdate({ location, previousLocation }) {
+      if (previousLocation && location.pathname !== previousLocation.pathname) {
+        if (!window.analytics) return;
+        setTimeout(() => {
+          window.analytics.page();
+        }, 0);
+      }
     },
   };
 })();

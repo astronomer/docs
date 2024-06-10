@@ -38,7 +38,7 @@ To implement this use case:
 1. As a Workspace Operator or Admin, create connections in the Astro Environment manager to your development-level resources. See [Create a connection](create-and-link-connections.md#create-a-connection).
 2. Set these connections to be available to all Deployments in the Workspace by default. See [Configure connection sharing for a Workspace](create-and-link-connections.md#configure-connection-sharing-for-a-workspace). Your DAG authors can now access external development and testing resources across all Deployments.
 3. Choose a Deployment in your Workspace that you want to run your production workflows. In the Deployment, override the connections you configured to instead connect to your production resources. See [Override connection fields](create-and-link-connections.md#override-connection-fields).
-4. In the Git repository for your Astro project, define a multi-branch CI/CD pipeline for deploying to Astro. For an example of how to do this in GitHub, see the multibranch option in [CI/CD deploy action templates](/ci-cd-templates/github-actions-deploy-action.md#setup).
+4. In the Git repository for your Astro project, define a multi-branch CI/CD pipeline for deploying to Astro. For an example of how to do this in Astro, see the [Astro Github integration](deploy-github-integration.md).
 
 Now, when a DAG author deploys to either a production or development Deployment through CI/CD, they can run their DAGs in Astro without needing to configure connections. Additionally, because your production connection shares the same connection ID as your default development connection, DAG authors don't have to update their code to point towards different connections when promoting their code to production.
 
@@ -46,7 +46,7 @@ Now, when a DAG author deploys to either a production or development Deployment 
 
 Using branch-based Deployments with the Astro Environment Manager allows your team to focus on the parts of Astro that matter most for their roles. For example, using the Astro Environment Manager means that you only need one administrative user to manage connections across multiple Deployments:
 
-- A Workspace Owner [creates an Airflow connection](create-and-link-connections.md#create-a-connection) in the Astro Environment Manager that connects to external development resources. They share this connection to all Deployments by default by turning on the [**Linked to all Deployments** setting](https://docs.astronomer.io/astro/create-and-link-connections#configure-connection-sharing-for-a-workspace).
+- A Workspace Owner [creates an Airflow connection](create-and-link-connections.md#create-a-connection) in the Astro Environment Manager that connects to external development resources. They share this connection to all Deployments by default by turning on the [**Linked to all Deployments** setting](https://www.astronomer.io/docs/astro/create-and-link-connections#configure-connection-sharing-for-a-workspace).
 - In the production Deployment, the Workspace Owner [overrides the linked connection](create-and-link-connections.md#override-connection-fields) to instead connect to production resources on the same external system. Because the connection ID and code are the same, this override requires no updates at the DAG level.
 
 After a Workspace Owner creates connections, DAG authors can develop DAGs without needing to reconfigure connections between development and production:

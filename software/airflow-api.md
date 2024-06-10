@@ -71,7 +71,7 @@ To use the Astro CLI to create a Deployment-level Service Account:
 With the information from Step 1, you can now execute requests against any supported endpoints in the [Airflow Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) at the following base URL:
 
 ```
-https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-NAME>/airflow/api/v1
+https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-RELEASE-NAME>/airflow/api/v1
 ```
 
 ## Example API Requests

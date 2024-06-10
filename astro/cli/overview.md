@@ -3,7 +3,7 @@ sidebar_label: 'Overview'
 title: 'Astro CLI'
 id: overview
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 import LinkCardGrid from '@site/src/components/LinkCardGrid';
@@ -24,7 +24,7 @@ brew install astro
 For alternative installation steps, see [Install the Astro CLI](install-cli.md).
 
 :::
- 
+
 The Astro CLI is open source and built for data practitioners everywhere. The binary is maintained in the public [Astro CLI GitHub repository](https://github.com/astronomer/astro-cli), where pull requests and GitHub issues are welcome.
 
 ## Astro CLI features
@@ -39,6 +39,6 @@ With the Astro CLI, you can:
 
 <LinkCardGrid>
   <LinkCard truncate label="Astro CLI Quickstart" description="Start a new Airflow project with just a few commands." href="/astro/cli/get-started-cli" />
-  <LinkCard truncate label="Release notes" description="Review the latest changes to the Astro CLI." href="/astro/cli/local-airflow-overview" />
+  <LinkCard truncate label="Release notes" description="Review the latest changes to the Astro CLI." href="/astro/cli/release-notes" />
   <LinkCard truncate label="Command reference" description="Learn about all available Astro CLI commands." href="/astro/cli/reference" />
 </LinkCardGrid>

@@ -21,7 +21,7 @@ An Astro Hybrid cluster runs your Astro Deployments in isolated namespaces on yo
 
 Cluster modifications typically take only a few minutes to complete and don't require downtime. In these cases, the Astro UI and Airflow UI continue to be available and your Airflow tasks are not interrupted.
 
-If you don't have a cluster on Astro, see [Install Astro](https://docs.astronomer.io/astro/category/install-astro-hybrid).
+If you don't have a cluster on Astro, see [Install Astro](https://www.astronomer.io/docs/astro/category/install-astro-hybrid).
 
 ## Create a cluster
 
@@ -212,7 +212,7 @@ For example, consider the following configurations within a cluster:
 - 1 of the 3 worker queues has a maximum worker count of 10.
 - 2 of the 3 worker queues have a maximum worker count of 5.
 
-In this scenario, the maximum node count for the `m5.2xlarge` node pool in your cluster must be equal to or greater than 15 to make sure that each worker queue can scale to its limit.
+In this scenario, the maximum node count for the `m5.2xlarge` node pool in your cluster would need to be more than 20 to make sure that each worker queue can scale to its limit. However, you can also decrease the setting to less than 20 if you don't expect your worker queues to reach their maximum worker counts and want to limit resource usage.
 
 Astronomer regularly monitors your usage and the number of nodes deployed in your cluster. As your usage of Airflow increases, Astronomer support might contact you and recommend that you increase or decrease your maximum node count to limit infrastructure cost or ensure that you can support a growing number of tasks and Deployments. If your maximum node count is reached, you will be contacted.
 

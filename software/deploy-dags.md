@@ -28,7 +28,7 @@ When you [update a Deployment](#configure-dag-only-deploys-on-a-deployment) to s
 
 ## Enable the feature on an Astronomer cluster
 
-By default, DAG-only deploys are disabled for all Deployments on Astronomer Software. To enable the feature, set both `astronomer.houston.config.deployments.configureDagDeployment` and `global.dagOnlyDeployment.enabled` to `true` in your `config.yaml` file:
+By default, DAG-only deploys are disabled for all Deployments on Astronomer Software. To enable the feature, set both `astronomer.houston.config.deployments.configureDagDeployment` and `global.dagOnlyDeployment.enabled` to `true` in your `values.yaml` file:
 
 ```yaml
 global:
@@ -77,7 +77,7 @@ If you use a [third-party ingress controller](third-party-ingress-controllers.md
 
 :::
 
-Then, push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+Then, push the configuration change. See [Apply a config change](https://www.astronomer.io/docs/software/apply-platform-config).
 
 ## Configure DAG-only deploys on a deployment
 

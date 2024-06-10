@@ -14,10 +14,10 @@ This document includes all release notes for Astronomer Software v0.28.
 0.30 is the latest long-term support (LTS) version of Astronomer Software. To upgrade to 0.30, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Astronomer Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). For more Astronomer Software release notes, see:
 
 - [Astro CLI release notes](cli-release-notes.md)
-- [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes)
-- [Astronomer Software 0.29 release notes](https://docs.astronomer.io/software/0.29/release-notes)
-- [Astronomer Software 0.28 release notes](https://docs.astronomer.io/software/0.28/release-notes)
-- [Astronomer Software 0.25 release notes](https://docs.astronomer.io/software/0.25/release-notes)
+- [Astro Runtime release notes](https://www.astronomer.io/docs/astro/runtime-release-notes)
+- [Astronomer Software 0.29 release notes](https://www.astronomer.io/docs/software/0.29/release-notes)
+- [Astronomer Software 0.28 release notes](https://www.astronomer.io/docs/software/0.28/release-notes)
+- [Astronomer Software 0.25 release notes](https://www.astronomer.io/docs/software/0.25/release-notes)
 
 All Astronomer Software versions are tested for scale, reliability and security on Amazon EKS, Google GKE, and Azure AKS. If you have questions or an issue to report, contact [Astronomer support](https://support.astronomer.io).
 

@@ -30,7 +30,7 @@ There are multiple resources for learning about this topic. See also:
 
 :::info
 
-This guide covers options to isolate individual tasks in Airflow. If you want to run all of your Airflow tasks in dedicated Kubernetes pods, consider using the [Kubernetes Executor](https://docs.astronomer.io/learn/airflow-executors-explained#kubernetes-executor). Astronomer customers can set their Deployments to use the KubernetesExecutor in the Astro UI, see [Manage Airflow executors on Astro](https://docs.astronomer.io/astro/executors-overview). 
+This guide covers options to isolate individual tasks in Airflow. If you want to run all of your Airflow tasks in dedicated Kubernetes pods, consider using the [Kubernetes Executor](https://www.astronomer.io/docs/learn/airflow-executors-explained#kubernetes-executor). Astronomer customers can set their Deployments to use the KubernetesExecutor in the Astro UI, see [Manage Airflow executors on Astro](https://www.astronomer.io/docs/astro/executors-overview). 
 
 :::
 
@@ -47,7 +47,7 @@ To get the most out of this guide, you should have an understanding of:
 
 There are two situations when you might want to run a task in an isolated environment:
 
-- Your task requires a **different version of Python** than your Airflow environment. Apache Airflow is compatible with and available in Python 3.8, 3.9, 3.10 and 3.11. The Astro Runtime has [images](https://quay.io/repository/astronomer/astro-runtime?tab=tags) available for all supported Python versions, so you can run Airflow inside Docker in a reproducible environment. See [Prerequisites](https://airflow.apache.org/docs/apache-airflow/stable/installation/prerequisites.html) for more information.
+- Your task requires a **different version of Python** than your Airflow environment. Apache Airflow is compatible with and available in Python 3.8, 3.9, 3.10, 3.11, and 3.12. The Astro Runtime has [images](https://quay.io/repository/astronomer/astro-runtime?tab=tags) available for all supported Python versions, so you can run Airflow inside Docker in a reproducible environment. See [Prerequisites](https://airflow.apache.org/docs/apache-airflow/stable/installation/prerequisites.html) for more information.
 - Your task requires **different versions of Python packages** that conflict with the package versions installed in your Airflow environment. To know which Python packages are pinned to which versions within Airflow, you can retrieve the full list of constraints for each Airflow version by going to:
 
     ```text
@@ -390,7 +390,7 @@ To get a list of all parameters of the `@task.virtualenv` decorator or PythonVir
 
 The Kubernetes operator, `@task.kubernetes` decorator or KubernetesPodOperator, runs an Airflow task in a dedicated Kubernetes pod. You can use the `@task.kubernetes` to run any custom Python code in a separate Kubernetes pod on a Docker image with Python installed, while the KubernetesPodOperator runs any existing Docker image.
 
-To use the `@task.kubernetes` decorator or the KubernetesPodOperator, you need to provide a Docker image and have access to a Kubernetes cluster. The following example shows how to use the modules to run a task in a separate Kubernetes pod in the same namespace and Kubernetes cluster as your Airflow environment. For more information on how to use the KubernetesPodOperator, see [Use the KubernetesPodOperator](kubepod-operator.md) and [Run the KubernetesPodOperator on Astro](https://docs.astronomer.io/astro/kubernetespodoperator).
+To use the `@task.kubernetes` decorator or the KubernetesPodOperator, you need to provide a Docker image and have access to a Kubernetes cluster. The following example shows how to use the modules to run a task in a separate Kubernetes pod in the same namespace and Kubernetes cluster as your Airflow environment. For more information on how to use the KubernetesPodOperator, see [Use the KubernetesPodOperator](kubepod-operator.md) and [Run the KubernetesPodOperator on Astro](https://www.astronomer.io/docs/astro/kubernetespodoperator).
 
 <Tabs
     defaultValue="taskflow"

@@ -21,7 +21,7 @@ Consider the following when you integrate IAM roles:
 
 ## Prerequisites
 
-* [The Astro CLI](https://docs.astronomer.io/astro/cli/install-cli)
+* [The Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli)
 * Admin access on an Astronomer Workspace
 * Direct access to your Kubernetes cluster (for example, permission to run `$ kubectl describe po`)
 * A compatible version of Kubernetes as described in Astronomer's [Version compatibility reference](version-compatibility-reference.md)

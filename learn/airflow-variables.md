@@ -20,7 +20,7 @@ This concept guide covers how to create Airflow variables and access them progra
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: Variables 101](https://academy.astronomer.io/astro-runtime-variables-101) module.
+- Astronomer Academy: [Airflow: Variables 101](https://academy.astronomer.io/path/airflow-101/astro-runtime-variables-101) module.
 
 :::
 
@@ -84,7 +84,7 @@ astro dev run variables set my_var my_value
 astro dev run variables set -j my_json_var '{"key": "value"}'
 ```
 
-Note that [`astro dev run`](https://docs.astronomer.io/astro/cli/astro-dev-run) executes Airflow commands only in your local Airflow environment and can't be used on Astro Deployments. To set Airflow variables for an Astro Deployment, either create them using the Deployment's Airflow UI or using [Astro environment variables](https://docs.astronomer.io/astro/environment-variables).
+Note that [`astro dev run`](https://www.astronomer.io/docs/astro/cli/astro-dev-run) executes Airflow commands only in your local Airflow environment and can't be used on Astro Deployments. To set Airflow variables for an Astro Deployment, either create them using the Deployment's Airflow UI or using [Astro environment variables](https://www.astronomer.io/docs/astro/environment-variables).
 
 </TabItem>
 
@@ -111,13 +111,13 @@ AIRFLOW_VAR_MYJSONVAR='{"hello":"world"}'
 
 To fetch the Airflow variable in the DAG, you can then use the following methods:
 
-- `Variable.get('<VAR_NAME>', '<default-value>')`: This method is recommended and the most secure for fetching secret values. However, if used in top-level DAG code, this method can affect the performance because it makes a request to the Airflow metadata database every time your DAGs are parsed, which can occur every 30 seconds. See [DAG writing best practices](dag-best-practices.md#avoid-top-level-code-in-your-dag-file) for more information about avoiding repeated requests in top level code.
+- `Variable.get('<VAR_NAME>', '<default-value>')`: This method is recommended as it is the most secure way to fetch secret values. However, if used in top-level DAG code or as an argument in the operator, this method can affect the performance because it makes a request to the Airflow metadata database every time your DAGs are parsed, which can occur every 30 seconds. An alternative approach is to use the [Jinja template](templating.md) `{{ var.value.get(<var_name>, '<default-value>') }}`, which is evaluated only at runtime. See [DAG writing best practices](dag-best-practices.md#avoid-top-level-code-in-your-dag-file) for more information about avoiding repeated requests in top level code.
 
 - `os.getenv('AIRFLOW_VAR_<VAR_NAME>','<default-value>')`: This method is faster because it reduces the number of Airflow metadata database requests. However, it's less secure. Astronomer does not recommend using `os.getenv` with secret values because retrieving environment variables with this method can print them to your logs.
 
 If Airflow can't find the environment variable, replace `<default_value>` with a default value.
 
-To learn more about how to set environment variables on Astro, see [Environment Variables](https://docs.astronomer.io/astro/manage-env-vars).
+To learn more about how to set environment variables on Astro, see [Environment Variables](https://www.astronomer.io/docs/astro/manage-env-vars).
 
 ### Programmatically from a DAG or task
 
@@ -265,7 +265,7 @@ As seen in the screenshot at the beginning of this guide, some Airflow variables
 
 This list can be extended by adding comma separated strings to the [`sensitive_var_conn_names`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#sensitive-var-conn-names) configuration. See [Masking sensitive data](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/mask-sensitive-values.html).
 
-On Astro you can also manually mark Airflow variables as secrets when creating them as an environment variable. See [Set environment variables on Astro](https://docs.astronomer.io/astro/environment-variables).
+On Astro you can also manually mark Airflow variables as secrets when creating them as an environment variable. See [Set environment variables on Astro](https://www.astronomer.io/docs/astro/environment-variables).
 
 :::info
 

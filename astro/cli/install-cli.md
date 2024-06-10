@@ -14,7 +14,7 @@ This document explains all of the possible ways to install, upgrade, and uninsta
 
 :::info
 
-If you can't install the Astro CLI on your local machine, you can still run Astro CLI commands and deploy to Astro using [GitHub Actions](first-dag-github-actions.md). 
+If you can't install the Astro CLI on your local machine, you can still run Astro CLI commands and deploy to Astro using [GitHub Actions](first-dag-github-actions.md).
 
 :::
 
@@ -35,10 +35,10 @@ Install the Astro CLI on Mac OS with a single command.
 
 ### Prerequisites
 
-- [Homebrew](https://brew.sh/)
-- (Optional) [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
+- [Homebrew](https://brew.sh/).
+- A container service like [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher) or Podman.
 
-By default, the Astro CLI uses Docker as its container management engine for running Airflow locally. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](https://docs.astronomer.io/astro/cli/use-podman?tab=mac#configure-the-astro-cli-to-use-podman) for prerequisites and configuration steps.
+By default, the Astro CLI uses Docker as its container management engine for running Airflow locally. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](https://www.astronomer.io/docs/astro/cli/use-podman?tab=mac#configure-the-astro-cli-to-use-podman) for prerequisites and configuration steps.
 
 ### Installation
 
@@ -73,14 +73,14 @@ Follow this procedure when Homebrew fails to install the latest Astro CLI versio
     ```sh
     brew update
     ```
-    
+
 2. Re-run the installation again:
-   
+
     ```sh
     brew install astro
     ```
 
-3. If this is the first time you're installing the CLI and updating Homebrew doesn't work, check to see if `astronomer/tap` is in your [Homebrew tap list](https://docs.brew.sh/Taps): 
+3. If this is the first time you're installing the CLI and updating Homebrew doesn't work, check to see if `astronomer/tap` is in your [Homebrew tap list](https://docs.brew.sh/Taps):
 
     ```sh
     brew tap astronomer/tap
@@ -92,24 +92,24 @@ Follow this procedure when Homebrew fails to install the latest Astro CLI versio
 
    ```sh
    brew install astro
-   ``` 
+   ```
 
 </TabItem>
 
 <TabItem value="windowswithwinget">
 
-Starting with Astro CLI version 1.6, you can use the Windows Package Manager winget command-line tool to install the Astro CLI. To install an older version of the Astro CLI, you'll need to follow the [alternate Windows installation process](https://docs.astronomer.io/astro/cli/install-cli?tab=windows#install-the-astro-cli).
+Starting with Astro CLI version 1.6, you can use the Windows Package Manager winget command-line tool to install the Astro CLI. To install an older version of the Astro CLI, you'll need to follow the [alternate Windows installation process](https://www.astronomer.io/docs/astro/cli/install-cli?tab=windows#install-the-astro-cli).
 
 The winget command line tool is supported on Windows 10 1709 (build 16299) or later, and is bundled with Windows 11 and modern versions of Windows 10 by default as the App Installer. If you're running an earlier version of Windows 10 and you don't have the App Installer installed, you can download it from the [Microsoft Store](https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1?hl=en-ca&gl=ca). If you've installed the App Installer previously, make sure you're using the latest version before running commands.
 
 ### Prerequisites
 
-- Microsoft Hyper-V enabled. See [How to Enable Hyper-V On Windows](https://www.wintips.org/how-to-enable-hyper-v-on-windows-10-11-home/).
+- Microsoft Hyper-V enabled. See [Install Hyper-V On Windows]( https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v) or [Step-By-Step: Enabling Hyper-V on Windows 11](https://techcommunity.microsoft.com/t5/educator-developer-blog/step-by-step-enabling-hyper-v-for-use-on-windows-11/ba-p/3745905).
 - The latest version of the Windows [App Installer](https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1?hl=en-ca&gl=ca).
 - Windows 10 1709 (build 16299) or later or Windows 11.
-- Optional. [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
+- A container service, like [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher) or Podman.
 
-By default, the Astro CLI uses Docker as its container management engine for running Airflow locally. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](https://docs.astronomer.io/astro/cli/use-podman?tab=mac#configure-the-astro-cli-to-use-podman) for prerequisites and configuration steps.
+By default, the Astro CLI uses Docker as its container management engine for running Airflow locally. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](https://www.astronomer.io/docs/astro/cli/use-podman?tab=mac#configure-the-astro-cli-to-use-podman) for prerequisites and configuration steps.
 
 ### Installation
 
@@ -125,23 +125,13 @@ By default, the Astro CLI uses Docker as its container management engine for run
     winget install -e --id Astronomer.Astro -v {{CLI_VER_LATEST}}
     ```
 
-1. Run the following command to access the location of the CLI executable:
-
-    ```sh
-    $env:path.split(";")
-    ```
-    
-    From the text that appears, copy the path for the Astro CLI executable. It should be similar to `C:\Users\myname\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe`. 
-
-2. Paste the path into File Explorer or open the file path in terminal, then rename the Astro executable to `astro.exe`.
-
-3. Run `astro version` to confirm the Astro CLI is installed properly.
+2. Run `astro version` to confirm the Astro CLI is installed properly.
 
 ### Resolve installation issues
 
 If an error message appears indicating that the term winget is not recognized as an internal or external command when you attempt to run winget commands, see this [troubleshooting document](https://github.com/microsoft/winget-cli/tree/master/doc/troubleshooting#common-issues) provided by Microsoft.
 
-If you're still struggling to install the Astro CLI with winget, retry the install using the alternative instructions in [Windows (Manual)](https://docs.astronomer.io/astro/cli/install-cli?tab=windows#install-the-astro-cli).
+If you're still struggling to install the Astro CLI with winget, retry the install using the alternative instructions in [Windows (Manual)](https://www.astronomer.io/docs/astro/cli/install-cli?tab=windows#install-the-astro-cli).
 
 </TabItem>
 
@@ -151,11 +141,11 @@ Manually installing the Astro CLI to Windows is recommended only if you're upgra
 
 ### Prerequisites
 
-- [Docker Desktop](https://docs.docker.com/desktop/windows/install/).
-- Microsoft Hyper-V enabled. See [How to Enable Hyper-V On Windows](https://www.wintips.org/how-to-enable-hyper-v-on-windows-10-11-home/).
+- Microsoft Hyper-V enabled. See [Install Hyper-V On Windows]( https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v) or [Step-By-Step: Enabling Hyper-V on Windows 11](https://techcommunity.microsoft.com/t5/educator-developer-blog/step-by-step-enabling-hyper-v-for-use-on-windows-11/ba-p/3745905).
 - Windows 10 or Windows 11.
+- A container service like [Docker Desktop](https://docs.docker.com/desktop/windows/install/) or Podman.
 
-By default, the Astro CLI uses Docker as its container management engine. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](https://docs.astronomer.io/astro/cli/use-podman?tab=mac#configure-the-astro-cli-to-use-podman) for prerequisites and configuration steps.
+By default, the Astro CLI uses Docker as its container management engine. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](https://www.astronomer.io/docs/astro/cli/use-podman?tab=mac#configure-the-astro-cli-to-use-podman) for prerequisites and configuration steps.
 
 ### Installation
 
@@ -175,9 +165,9 @@ By default, the Astro CLI uses Docker as its container management engine. Howeve
 
 ### Prerequisites
 
-- (Optional) [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
+- A container service like [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher) or Podman.
 
-By default, the Astro CLI uses Docker as its container management engine for running Airflow locally. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](https://docs.astronomer.io/astro/cli/use-podman?tab=mac#configure-the-astro-cli-to-use-podman) for prerequisites and configuration steps.
+By default, the Astro CLI uses Docker as its container management engine for running Airflow locally. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](https://www.astronomer.io/docs/astro/cli/use-podman?tab=mac#configure-the-astro-cli-to-use-podman) for prerequisites and configuration steps.
 
 ### Installation
 
@@ -230,7 +220,7 @@ Starting with Astro CLI version 1.6, you can use the winget command line tool to
 winget install -e --id Astronomer.Astro
 ```
 
-Note that if you're upgrading from Astro CLI version 1.5.1 or earlier to a later Astro CLI version, you still need to [install the upgrade version manually](https://docs.astronomer.io/astro/cli/install-cli?tab=windows#upgrade-the-cli).
+Note that if you're upgrading from Astro CLI version 1.5.1 or earlier to a later Astro CLI version, you still need to [install the upgrade version manually](https://www.astronomer.io/docs/astro/cli/install-cli?tab=windows#upgrade-the-cli).
 
 </TabItem>
 
@@ -285,7 +275,7 @@ brew uninstall astro
 
 <TabItem value="windowswithwinget">
 
-Starting with Astro CLI version 1.6, you can use the winget command line tool to uninstall the Astro CLI. To uninstall an older version of the Astro CLI, you'll need to follow the [alternate Windows uninstall process](https://docs.astronomer.io/astro/cli/install-cli?tab=windows#uninstall-the-cli).
+Starting with Astro CLI version 1.6, you can use the winget command line tool to uninstall the Astro CLI. To uninstall an older version of the Astro CLI, you'll need to follow the [alternate Windows uninstall process](https://www.astronomer.io/docs/astro/cli/install-cli?tab=windows#uninstall-the-cli).
 
 To uninstall the Astro CLI, open Windows PowerShell as an administrator and run the following command:
 

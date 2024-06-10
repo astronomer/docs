@@ -2,7 +2,7 @@
 title: "Airflow sensors"
 sidebar_label: "Sensors"
 id: what-is-a-sensor
-description: "Get an overview of Airflow sensors and see the new sensor-related features included in Airflow 2. Learn best practices for implementing sensors in production."
+description: "Get an overview of Airflow sensors and learn best practices for implementing sensors in production."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -22,7 +22,7 @@ In this guide, you'll learn how sensors are used in Airflow, best practices for 
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: Sensors](https://academy.astronomer.io/sensors-course) module.
+- Astronomer Academy: [Airflow: Sensors](https://academy.astronomer.io/path/airflow-101/sensors-course) module.
 
 :::
 
@@ -90,7 +90,7 @@ This DAG waits for data to be available in a Postgres database before running va
 
 ## Sensor decorator / PythonSensor
 
-If no sensor exists for your use case you can create your own using either the [`@task.sensor` decorator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/decorators/sensor/index.html) (added in Airflow 2.5) or the [PythonSensor](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/PythonSensor). The `@task.sensor` decorator returns a `PokeReturnValue` as an instance of the BaseSensorOperator. The PythonSensor takes a `python_callable` that returns `True` or `False`.
+If no sensor exists for your use case, you can create your own using either the [`@task.sensor` decorator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/decorators/sensor/index.html) or the [PythonSensor](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/PythonSensor). The `@task.sensor` decorator returns a `PokeReturnValue` as an instance of the BaseSensorOperator. The PythonSensor takes a `python_callable` that returns `True` or `False`.
 
 The following DAG shows how to use either the sensor decorator or the PythonSensor to create the same custom sensor:
 
@@ -131,7 +131,7 @@ When using sensors, keep the following in mind to avoid potential performance is
 
 ## Deferrable operators
 
-[Deferrable operators](deferrable-operators.md) (sometimes referred to as asynchronous operators) were released with Airflow 2.2 and are designed to eliminate the problem of any operator or sensor taking up a full worker slot for the entire time they are running. Many operators have a `deferrable` parameter which can be set to `True` to make the operator deferrable. For the sensors where this parameter is not available, deferrable versions exist in open source Airflow and in the [Astronomer Providers package](https://github.com/astronomer/astronomer-providers). Astronomer recommends using these in most cases to reduce resource costs.
+[Deferrable operators](deferrable-operators.md) (sometimes referred to as asynchronous operators) eliminate the problem of having any operator or sensor using a full worker slot for the entire time they run. Many operators have a `deferrable` parameter that can be set to `True` to make the operator deferrable. For the sensors where this parameter is not available, deferrable versions exist in open source Airflow and in the [Astronomer Providers package](https://github.com/astronomer/astronomer-providers). Astronomer recommends using these in most cases to reduce resource costs.
 
 For DAG authors, using deferrable sensors is no different from using regular sensors. All you need is to do is run a `triggerer` process in Airflow and either:
 

@@ -17,7 +17,7 @@ Both these tools are needed to deploy Astronomer onto a Kubernetes cluster. We a
 The initial `helm install` command to deploy Astronomer requires a namespace to deploy the base platform pods into.
 
 ```
-helm install -f config.yaml . datarouter
+helm install -f values.yaml . datarouter
 ```
 This deploys a randomly named [release](https://helm.sh/docs/glossary/#release) of our helm charts into the `datarouter` [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/).
 

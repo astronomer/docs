@@ -39,7 +39,7 @@ If you have a GitHub account, you can use the [quickstart repository](https://gi
 ## Prerequisites
 
 - A Kafka cluster with a topic. This tutorial uses a cluster hosted by [Confluent Cloud](https://www.confluent.io/), which has a free trial option. See the [Confluent documentation](https://developer.confluent.io/quickstart/kafka-on-confluent-cloud/) for how to create a Kafka cluster and topic in Confluent Cloud.
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started).
 
 :::info
 
@@ -176,9 +176,9 @@ Airflow can run a function when a specific message appears in your Kafka topic. 
 
 :::info
 
-When working locally, you need to restart your Airflow instance to apply changes to the `apply_function` of the AwaitMessageTriggerFunctionSensor because the function is imported into the [Triggerer](https://docs.astronomer.io/learn/deferrable-operators#terms-and-concepts), which does not periodically restart. To restart Airflow, run `astro dev restart` in your terminal. Changes to the `event_triggered_function` of the AwaitMessageTriggerFunctionSensor do not require a restart of your Airflow instance.
+When working locally, you need to restart your Airflow instance to apply changes to the `apply_function` of the AwaitMessageTriggerFunctionSensor because the function is imported into the [Triggerer](https://www.astronomer.io/docs/learn/deferrable-operators#terms-and-concepts), which does not periodically restart. To restart Airflow, run `astro dev restart` in your terminal. Changes to the `event_triggered_function` of the AwaitMessageTriggerFunctionSensor do not require a restart of your Airflow instance.
 
-On Astro, the Triggerer is restarted automatically when a new image is deployed, but not on dag-only deploys, see [Deploy DAGs to Astro](https://docs.astronomer.io/astro/deploy-dags).
+On Astro, the Triggerer is restarted automatically when a new image is deployed, but not on dag-only deploys, see [Deploy DAGs to Astro](https://www.astronomer.io/docs/astro/deploy-dags).
 
 :::
 

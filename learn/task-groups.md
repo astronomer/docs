@@ -236,7 +236,7 @@ There are a few things to consider when passing information into and out of task
 
 ## Generate task groups dynamically at runtime
 
-As of Airflow 2.5, you can use [dynamic task mapping](dynamic-tasks.md) with the `@task_group` decorator to dynamically map over task groups. The following DAG shows how you can dynamically map over a task group with different inputs for a given parameter.
+You can use [dynamic task mapping](dynamic-tasks.md) with the `@task_group` decorator to dynamically map over task groups. The following DAG shows how you can dynamically map over a task group with different inputs for a given parameter.
 
 <CodeBlock language="python">{task_group_mapping_example}</CodeBlock>
 

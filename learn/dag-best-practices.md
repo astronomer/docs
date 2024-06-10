@@ -36,6 +36,19 @@ To get the most out of this guide, you should have an understanding of:
 
 In the context of Airflow, a DAG is considered idempotent if rerunning the same DAG Run with the same inputs multiple times has the same effect as running it only once. This can be achieved by designing each individual task in your DAG to be idempotent. Designing idempotent DAGs and tasks decreases recovery time from failures and prevents data loss.
 
+Idempotency paves the way for one of Airflow's most useful features: Retries.
+
+## Set retries
+
+In a distributed environment where task containers are executed on shared hosts, it's possible for tasks to be killed off unexpectedly. When this happens, you might see  a [zombie process](https://en.wikipedia.org/wiki/Zombie_process) in the Airflow logs.
+
+You can resolve issues like zombies by using task retries. Retries can be set at different levels with the following precedence:
+1. **Tasks:**  Pass the `retries` parameter to the task's Operator.
+2. **DAGs:** Include `retries` in a DAG's `default_args` object.
+3. **Deployments:** Set the environment variable `AIRFLOW__CORE__DEFAULT_TASK_RETRIES`.
+
+Setting retries to `2` will protect a task from most problems common to distributed environments. For more on using retries, see [Rerun DAGs and Tasks](rerunning-dags.md).
+
 ## DAG design
 
 The following DAG design principles will help to make your DAGs idempotent, efficient, and readable.
@@ -243,14 +256,3 @@ You should always use a static `start_date` with your DAGs. A dynamic `start_dat
 Additionally, if you change the `start_date` of your DAG you should also change the DAG name. Changing the `start_date` of a DAG creates a new entry in the Airflow database. This can confuse the Scheduler because there are two DAGs with the same name but different schedules.
 
 Changing the name of a DAG also creates a new entry in the database that powers the dashboard. Follow a consistent naming convention since changing a DAG's name doesn't delete the entry in the database for the old name.
-
-### Set retries
-
-In a distributed environment where task containers are executed on shared hosts, it's possible for tasks to be killed off unexpectedly. When this happens, you might see  a [zombie process](https://en.wikipedia.org/wiki/Zombie_process) in the Airflow logs.
-
-You can resolve issues like zombies by using task retries. Retries can be set at different levels with the following precedence:
-1. **Tasks:**  Pass the `retries` parameter to the task's Operator.
-2. **DAGs:** Include `retries` in a DAG's `default_args` object.
-3. **Deployments:** Set the environment variable `AIRFLOW__CORE__DEFAULT_TASK_RETRIES`.
-
-Setting retries to `2` will protect a task from most problems common to distributed environments. For more on using retries, see [Rerun DAGs and Tasks](rerunning-dags.md).

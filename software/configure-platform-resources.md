@@ -34,9 +34,9 @@ By default, Astronomer needs around 10 CPUs and 44Gi of memory:
 
 ### Changing values
 
-You can change the request and limit of any of the components above in your `config.yaml` or in `values.yaml` (`config.yaml` will overwrite `values.yaml`).
+You can change the request and limit of any of the components above in your `values.yaml` or in `values.yaml` (`values.yaml` will overwrite `values.yaml`).
 
-To change something like the resources allocated to `astro-ui`, add the following fields to your `config.yaml`:
+To change something like the resources allocated to `astro-ui`, add the following fields to your `values.yaml`:
 
 ```yaml
 #####
@@ -57,7 +57,7 @@ astronomer:
 Once all the changes are made, run `helm upgrade` to switch your platform to the new config:
 
 ```shell
-helm upgrade <platform-release-name> -f config.yaml --version=<platform-version> astronomer/astronomer -n <your-namespace>
+helm upgrade <platform-release-name> -f values.yaml --version=<platform-version> astronomer/astronomer -n <your-namespace>
 ```
 
 Be sure to specify the platform namespace, not an Airflow namespace.

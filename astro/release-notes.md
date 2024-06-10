@@ -12,8 +12,8 @@ import BusinessBadge from '@site/src/components/BusinessBadge';
 
 
 <p class="rssButton">
-  <a href="/astro-release-notes.xml" target="_blank">
-    <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
+  <a href="/docs/astro-release-notes.xml" target="_blank">
+    <img src="/docs/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
   </a>
 </p>
 
@@ -25,11 +25,182 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## June 6, 2024
+
+### API keys are no longer supported
+
+As of June 1, 2024, Deployment API keys are no longer supported. Replace your API keys with [Deployment API tokens](https://www.astronomer.io/docs/astro/deployment-api-tokens), confirm successful operation with your API tokens, and then delete your API keys.
+
+### Configure ephemeral storage on worker Pods
+
+<HostedBadge/>
+
+:::publicpreview
+:::
+
+You can now customize the amount of ephemeral storage for data intensive workloads on Celery, Kubernetes, and KubernetesPodOperator workers. Previously, to accommodate larger workloads, you needed to integrate an external object storage or database tool to process large datasets within a single task. Now, you can customize the ephemeral storage when creating or updating your Deployment so that all data processing happens directly in your task Pod.
+
+You are only charged for requested resources which are greater than the minimum defaults for each worker type:
+
+- **Celery worker**: 10 GiB minimum by default. 100 GiB maximum.
+- **Kubernetes executor/ Kubernetes pod operator**: 0.25 GiB minimum by default. 100 GiB maximum.
+
+### Automate Airflow, resource, and infrastucture management with the Astro Terraform Provider
+
+:::publicpreview
+:::
+
+You can now use Terraform to automate managing resources and changes to large organizations and Airflow infrastructure with the Astronomer Terraform provider package. The provider is available through both the Terraform Registry and a public Github repository, where you can review the provider's code, make issues, and create pull requests.
+
+Refer to the Astronomer Terraform Provider  docs  in the [Terraform registry](https://registry.terraform.io/providers/astronomer/astro/latest/docs) or the [GitHub repository](https://github.com/astronomer/terraform-provider-astro) for more information.
+
+
+### Additional improvements
+
+- The Astro UI now validates cron expressions for development Deployment hibernation schedules and shows commonly used hibernation schedules that you can enable or disable. Refer to [Create a hibernation schedule](https://www.astronomer.io/docs/astro/deployment-resources#create-a-hibernation-schedule) for more information.
+- If you don't already have a GitHub repository, you can now create one when you authorize the [GitHub Integration](https://www.astronomer.io/docs/astro/deploy-github-integration) from the Astro UI. Previously, you could only connect Astro to existing repositories.
+
+### Bug fixes
+
+- Fixed an issue where you could not use Airflow connection testing with Azure Managed Identities on Astro.
+
+## May 30, 2024
+
+### Additional improvements
+
+- Dedicated clusters are now available only to [**Team**](https://www.astronomer.io/pricing/) tier customers and above.
+- Added a centralized docs reference page that lists all open source Apache Airflow provider packages and their versions for each Astro Runtime version. See [Provider package reference](https://www.astronomer.io/docs/astro/runtime-provider-reference) docs.
+
+### Bug fixes
+
+- Fixed an issue where you could make changes to clusters and Deployments on an inactive Organization.
+- The default storage resources for the Kubernetes executor and KubernetesPodOperator Pods are now enforced with `0.25Gi` instead of `10Gi` in some cases. You can still customize the resource allocation for Kubernetes pods depending on your needs. See [Configure Kubernetes Pod Resources](https://www.astronomer.io/docs/astro/deployment-resources#configure-kubernetes-pod-resources)
+
+## May 22, 2024
+
+### The Astro GitHub integration is now in Public Preview
+
+:::publicpreview
+:::
+
+The ability to deploy automatically from GitHub using the official Astro GitHub integration is now in Public Preview.
+
+The Astro GitHub integration is a new way to automatically deploy code from a GitHub repository to Astro by merging pull requests or making commits directly to specific branches, without needing to configure a GitHub Action. Additionally, the GitHub integration displays Git metadata directly in the Astro UI, including Git commit descriptions and gives you greater visibility into the status and logs of individual code deploys.
+
+See [Deploy code with the Astro GitHub integration](deploy-github-integration.md) for more information.
+
+### Bug fixes
+
+- Fixed an issue where users with custom roles could see roles that could not be assigned in the Astro UI.
+
+## May 15, 2024
+
+### Additional improvements
+
+- Airflow connections that you configure through the Astro UI environment manager are now mounted to Deployment schedulers, meaning that scheduler processes can now make use of these Airflow connections.
+
+### Bug fixes
+
+- Fixed an issue where you couldn't update users who were added through SCIM but didn't belong to an Organization.
+- Fixed an issue where a user with a custom role could create API Tokens, users, or teams with greater permissions than their own.
+
+## May 8, 2024
+
+### Updates to address ranges for dedicated clusters on Google Cloud Provider
+
+Astro on GCP Dedicated Clusters uses source network address translation (SNAT) that performs many-to-one IP address translations for connections to your data sources and defaults secondary ranges to RFC 6598 address space (non-standard Private IP addresses), to minimize the risk and concern with IP overlap and exhaustion. Your target data sources will see connections from Astro using the VPC Subnet Range when using private networking, like VPC Peering or VPN. If you want to configure private connectivity, ensure the default subnet and peering ranges do not overlap with your target data source network when you're creating your dedicated cluster. See [Create a dedicated Astro cluster](https://www.astronomer.io/docs/astro/create-dedicated-cluster?tab=gcp#create-a-cluster) for more details.
+
+### Improvements to Astro performance
+
+As part of continued investment in the reliability, performance, and scalability of Astro, Astronomer is embarking on a migration of public and private image registries. Astro Runtime clusters will benefit from more performant, globally distributed and geo-replicated image registries, with built-in registry resilience if a regional outage occurs. This is in addition to the previous release of the registry cache local to every Astro cluster.
+
+No end user or task runtime change or impact is expected as part of the backend cutover during the week of May 6th, 2024.
+
+### Additional improvements
+
+- You can no longer create Deployments using Astro Runtime versions marked as `yanked` in `https://updates.astronomer.io/astronomer-runtime`, even if your Organization has enabled creating Deployments with deprecated Runtime versions. These versions of the Astro Runtime have known issues and should not be used. For more information, see [Restricted Runtime Versions](https://www.astronomer.io/docs/astro/runtime-version-lifecycle-policy#restricted-runtime-versions).
+
+### Bug fixes
+
+- Fixed a bug where multiple users could not access [Organization Dashboards](https://www.astronomer.io/docs/astro/organization-dashboard) simultaneously.
+
+## April 30, 2024
+
+### Deploy automatically from GitHub using the official Astro GitHub integration
+
+:::privatepreview
+:::
+
+
+The Astro GitHub integration is a new way to automatically deploy code from a GitHub repository to Astro without needing to configure a GitHub Action. Compared to using GitHub Actions, the Astro GitHub integration:
+
+- Allows you to enforce software development best practices without maintaining custom CI/CD scripts.
+- Enables developers to iterate on DAG code quickly.
+- Shows Git metadata directly in the Astro UI, including Git commit descriptions.
+- Gives you greater visibility into the status and detailed logs of an individual deploy.
+
+See [Deploy code with the Astro GitHub integration](deploy-github-integration.md) for more information.
+
+## April 23, 2024
+
+### Restrict a custom Deployment role to specific Workspaces
+
+You can now restrict the use of a custom Deployment role to specific Workspaces. Use Workspace role restriction when some Workspaces in your Organization have different requirements for how users interact with Deployments. See [Restrict a custom Deployment role to specific Workspaces](https://www.astronomer.io/docs/astro/customize-deployment-roles#restrict-a-custom-deployment-role-to-specific-workspaces) for setup steps.
+
+### Additional improvements
+
+- The [custom Deployment roles](https://www.astronomer.io/docs/astro/customize-deployment-roles) feature is now generally available.
+- You can now promote a [development Deployment](https://www.astronomer.io/docs/astro/deployment-resources#hibernate-a-development-deployment) to a production Deployment by switching off the **Development Mode** toggle in the Deployment's configuration.
+- Workspace Members can now see and use [custom Airflow menu items](https://www.astronomer.io/docs/learn/using-airflow-plugins#appbuilder-menu-items). To give a custom role this permission, you can add `deployment.airflow.customMenu.get` to the role's permissions list. This permission works only on Deployments running Astro Runtime 9 or later.
+
+    Note that you might have to modify the code for your menu item plugins to make them work on Astro. See [Appbuilder menu items](https://www.astronomer.io/docs/learn/using-airflow-plugins#appbuilder-menu-items) for more information.
+
+- You can now filter the Workspaces and clusters lists in the Astro UI by name.
+
+### Bug fixes
+
+- To improve the reliability of data lineage for customers who leverage it, data lineage is now a private preview feature that can be enabled upon request. To reenable data lineage for an Astro Organization, reach out to your account team.
+
+## April 16, 2024
+
+### Bug fixes
+
+- Fixed an issue where you couldn't grant a custom Deployment role to a Deployment API token using the Astro API.
+
+## April 9, 2024
+
+### Additional improvements
+
+- You can now manage [custom Deployment roles](https://www.astronomer.io/docs/astro/customize-deployment-roles) using the Astro API.
+- Improved the time it takes to load Deployment analytics in the Astro UI.
+- You can now view info-level incidents from the Deployment health status indicator in the Astro UI.
+- It is now possible for workers to use up to 6400 CPUs and 12800 GiB of memory on a single Deployment.
+
+### Bug fixes
+
+- Fixed an issue where you couldn't configure boolean values for Airflow connections in the Astro UI.
+- Fixed an issue where Airflow connections configured through the Astro UI did not work with deferrable tasks.
+
+## April 3, 2024
+
+### Additional improvements
+
+- [Deployment health incidents](https://www.astronomer.io/docs/astro/deployment-health-incidents) are now generally available.
+- [Deployment hibernation](https://www.astronomer.io/docs/astro/deployment-resources#hibernate-a-development-deployment) is now in public preview.
+
+### Bug fixes
+
+- Fixed an issue where connections configured in the Astro UI were not mounted to triggerer Pods, resulting in failed runs for tasks that use deferrable operators.
+- Fixed an issue where a field in the **Snowflake - Private Key (Content)** connection type was not parsed correctly.
+- Fixed an issue where Organization Members could delete and update Astro alerts.
+- Fixed an issue where the Astro UI didn't show the correct amount of available ephemeral storage for the default worker queue.
+- Removed additional dependencies to make Astro more resilient to Quay outages.
+
 ## March 26, 2024
 
 ### Refactored Astro API documentation
 
-Astro API documentation is now hosted at [https://docs.astronomer.io/api](https://docs.astronomer.io/api). In the new API documentation center, you can:
+Astro API documentation is now hosted at [https://www.astronomer.io/docs/api](https://www.astronomer.io/docs/api). In the new API documentation center, you can:
 
 - Format and test API requests directly in your browser.
 - Export requests to Python, Javascript, and curl.
@@ -37,9 +208,9 @@ Astro API documentation is now hosted at [https://docs.astronomer.io/api](https:
 
 ### Create Deployments with deprecated versions of Astro Runtime
 
-You can now use the Astro API to create Deployments with deprecated versions of Astro Runtime. Using deprecated Astro Runtime versions is sometimes necessary if you're migrating existing Airflow environments to Astro, or if you need to maintain deprecated environments for testing purposes. 
+You can now use the Astro API to create Deployments with deprecated versions of Astro Runtime. Using deprecated Astro Runtime versions is sometimes necessary if you're migrating existing Airflow environments to Astro, or if you need to maintain deprecated environments for testing purposes.
 
-Note that this feature is disabled by default. To use this feature, reach out to your account team and request for the feature to be enabled. See [Run a deprecated Astro Runtime version](https://docs.astronomer.io/astro/upgrade-runtime#run-a-deprecated-astro-runtime-version) for more information.
+Note that this feature is disabled by default. To use this feature, reach out to your account team and request for the feature to be enabled. See [Run a deprecated Astro Runtime version](https://www.astronomer.io/docs/astro/upgrade-runtime#run-a-deprecated-astro-runtime-version) for more information.
 
 ### New GCP database instance types available
 
@@ -49,8 +220,8 @@ You can now use the following node instance types for database instances in GCP 
 
 - XLarge Compute Optimized (24 CPU, 48 GiB MEM)
 - XXLarge Compute Optimized (32 CPU, 64 GiB MEM)
-  
-See [GCP Hybrid cluster settings](https://docs.astronomer.io/astro/resource-reference-gcp-hybrid#supported-cloud-sql-instance-types) for a list of all available database instance types.
+
+See [GCP Hybrid cluster settings](https://www.astronomer.io/docs/astro/resource-reference-gcp-hybrid#supported-cloud-sql-instance-types) for a list of all available database instance types.
 
 ### Additional improvements
 
@@ -74,7 +245,7 @@ You can now create Hosted dedicated clusters in the following Azure regions:
 - `westus3`
 - `southcentralus`
 
-See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted) for more information.
+See [Astro Hosted resource reference](https://www.astronomer.io/docs/astro/resource-reference-hosted) for more information.
 
 ### Custom Deployment roles are now in Public Preview
 
@@ -83,9 +254,9 @@ See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-
 :::publicpreview
 :::
 
-The ability to customize Deployment-level permissions with Deployment roles is now in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
+The ability to customize Deployment-level permissions with Deployment roles is now in [Public Preview](https://www.astronomer.io/docs/astro/feature-previews).
 
-You can additionally use the new **Workplace Accessor** and **Deployment Admin** roles to define which users have access to specific Deployments in your Workspace. See more in [User permissions reference](https://docs.astronomer.io/astro/user-permissions#workspace-roles) and and [Create and assign custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles).
+You can additionally use the new **Workplace Accessor** and **Deployment Admin** roles to define which users have access to specific Deployments in your Workspace. See more in [User permissions reference](https://www.astronomer.io/docs/astro/user-permissions#workspace-roles) and and [Create and assign custom Deployment roles](https://www.astronomer.io/docs/astro/customize-deployment-roles).
 
 
 ### Export data from reporting dashboards using webhooks
@@ -95,29 +266,29 @@ You can additionally use the new **Workplace Accessor** and **Deployment Admin**
 :::publicpreview
 :::
 
-In addition to exporting report data with downloads or email, you can now [export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) using webhooks. Use webhooks to send your reporting data to services such as Segment, Airtable, or Marketo.
+In addition to exporting report data with downloads or email, you can now [export reporting data](https://www.astronomer.io/docs/astro/org-dash-exports) using webhooks. Use webhooks to send your reporting data to services such as Segment, Airtable, or Marketo.
 
 Note that webhook exports are a [Sigma feature in beta](https://help.sigmacomputing.com/docs/webhook-exports) and might experience behavior changes.
 
 ### Additional improvements
 
-- You can now use the new **Credits** tab in the [Organization Billing page](https://docs.astronomer.io/astro/manage-billing) to see your credit balance.
+- You can now use the new **Credits** tab in the [Organization Billing page](https://www.astronomer.io/docs/astro/manage-billing) to see your credit balance.
 - On Astro Hybrid, the maximum worker concurrency on a worker queue has increased from `64` to `256`.
 
 ## March 7, 2024
 
 ### Reporting dashboards are now in public preview
 
-[Organization dashboards](https://docs.astronomer.io/astro/reporting-dashboard) are now in [Public Preview](https://docs.astronomer.io/astro/feature-previews) to use for examining key metrics across your Organization.
+[Organization dashboards](https://www.astronomer.io/docs/astro/organization-dashboard) are now in [Public Preview](https://www.astronomer.io/docs/astro/feature-previews) to use for examining key metrics across your Organization.
 
-You can also export data from reporting dashboards in the format of your choice. Exports can be triggered on a regular schedule or as an alert when specific criteria are met in your data. Export reporting data to share with other team members or to keep a record of key performance indicators. See [Export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) for more information.
+You can also export data from dashboards in the format of your choice. Exports can be triggered on a regular schedule or as an alert when specific criteria are met in your data. Export reporting data to share with other team members or to keep a record of key performance indicators. See [Export reporting data](https://www.astronomer.io/docs/astro/org-dash-exports) for more information.
 
 ### Customize Deployment-level permissions using Deployment roles
 
 :::privatepreview
 :::
 
-Custom Deployment roles are a new way to define granular permissions for Astro users. For the first time, you can set a user's permissions at the Deployment level and define which specific parts of a Deployment they can access or modify. Use custom Deployment roles to have users collaborate in the same Workspace with only the minimum permissions they require. See [Customize Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles) for more information.
+Custom Deployment roles are a new way to define granular permissions for Astro users. For the first time, you can set a user's permissions at the Deployment level and define which specific parts of a Deployment they can access or modify. Use custom Deployment roles to have users collaborate in the same Workspace with only the minimum permissions they require. See [Customize Deployment roles](https://www.astronomer.io/docs/astro/customize-deployment-roles) for more information.
 
 ### New Deployment registry cache to improve resiliency
 
@@ -139,7 +310,7 @@ Deployments now include a cache of Astronomer's image registry that stores the c
 
 ### Use a custom service account to authorize Deployments to GCP
 
-You can now attach a custom GCP [service account](https://cloud.google.com/iam/docs/service-account-overview) to your Deployment to grant the Deployment all of the service account's permissions to your cloud. Using a custom service account provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing service accounts on new Deployments, or your can attach a single service account to multiple Deployments that should all have the same level of access to your cloud. For setup steps, see [Authorize Deployments to your cloud](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud).
+You can now attach a custom GCP [service account](https://cloud.google.com/iam/docs/service-account-overview) to your Deployment to grant the Deployment all of the service account's permissions to your cloud. Using a custom service account provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing service accounts on new Deployments, or your can attach a single service account to multiple Deployments that should all have the same level of access to your cloud. For setup steps, see [Authorize Deployments to your cloud](https://www.astronomer.io/docs/astro/authorize-deployments-to-your-cloud).
 
 ### Bug fixes
 
@@ -151,7 +322,7 @@ You can now attach a custom GCP [service account](https://cloud.google.com/iam/d
 
 <HostedBadge/>
 
-Astro Hosted Deployments now support A120 and A160 workers, which include enough CPU and memory to handle the most resource-intensive tasks in your DAGs. See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted#deployment-resources) for more information about each worker type.
+Astro Hosted Deployments now support A120 and A160 workers, which include enough CPU and memory to handle the most resource-intensive tasks in your DAGs. See [Astro Hosted resource reference](https://www.astronomer.io/docs/astro/resource-reference-hosted#deployment-resources) for more information about each worker type.
 
 ### New platform variables to improve Celery executor reliability
 
@@ -164,7 +335,7 @@ AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__SOCKET_KEEPALIVE=True
 AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__RETRY_ON_TIMEOUT=True
 ```
 
-For more information about each of these variables, see [Platform variables](https://docs.astronomer.io/astro/platform-variables)
+For more information about each of these variables, see [Platform variables](https://www.astronomer.io/docs/astro/platform-variables)
 
 ### Ephemeral storage limit on schedulers
 
@@ -186,15 +357,15 @@ It is rare for schedulers to require more than 5Gi of ephemeral storage. If your
 
 :::warning
 
-This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-previews). Please reach out to your customer success manager to enable this feature.
+This feature is in [Private Preview](https://www.astronomer.io/docs/astro/feature-previews). Please reach out to your customer success manager to enable this feature.
 
 :::
 
-The new **Dashboards** page includes a suite of dashboards that you can use to asses the performance of Deployments and DAGs across your entire Organization. Each dashboard focuses on a different aspect of your data pipelines to show you opportunities for cost and performance improvements. You can additionally configure Astro to send you alerts when a given metric reaches a specific threshold. See [Reporting dashboards](https://docs.astronomer.io/astro/reporting-dashboard) for summaries of each available dashboard.
+The new **Dashboards** page includes a suite of dashboards that you can use to asses the performance of Deployments and DAGs across your entire Organization. Each dashboard focuses on a different aspect of your data pipelines to show you opportunities for cost and performance improvements. You can additionally configure Astro to send you alerts when a given metric reaches a specific threshold. See [Organization Dashboards](https://www.astronomer.io/docs/astro/organization-dashboard) for summaries of each available dashboard.
 
 ### Additional improvements
 
-- When you submit a support request from the Astro UI, you must now define an **Active Engagement Period** when you or a member of your team can engage with a member of Astronomer support. 
+- When you submit a support request from the Astro UI, you must now define an **Active Engagement Period** when you or a member of your team can engage with a member of Astronomer support.
 - Workspace Members can now access the **Clusters** view in the Airflow UI for a Deployment.
 
 ### Bug fixes
@@ -218,13 +389,13 @@ The new **Dashboards** page includes a suite of dashboards that you can use to a
 
 :::warning
 
-This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
+This feature is in [Public Preview](https://www.astronomer.io/docs/astro/feature-previews).
 
 :::
 
 Astro now automatically monitors Deployments and notifies you when a Deployment isn't running as expected, such as when it can't detect a heartbeat in a scheduler. These notifications, known as Deployment incidents, appear in your Deployment's health status in the Astro UI.
 
-See [Deployment health incidents](https://docs.astronomer.io/astro/deployment-health-incidents) to learn more about each available incident type and how to address them.
+See [Deployment health incidents](https://www.astronomer.io/docs/astro/deployment-health-incidents) to learn more about each available incident type and how to address them.
 
 ![An example of an incident message in a Deployment health status](/img/release-notes/incident-unfurl.png)
 
@@ -244,11 +415,11 @@ See [Deployment health incidents](https://docs.astronomer.io/astro/deployment-he
 
 :::warning
 
-This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
+This feature is in [Public Preview](https://www.astronomer.io/docs/astro/feature-previews).
 
 :::
 
-You can now configure a network connection between Astro and an AWS VPC without contacting Astronomer support. Astro automatically handles creating a connection request and provides instructions for completing the setup yourself. After you create a VPC connection, you can configure routes whenever you need to connect to an additional service in your external VPC. See [Create a private connection between Astro and AWS](https://docs.astronomer.io/astro/connect-aws?tab=VPC%20peering#create-a-private-connection-between-astro-and-aws).
+You can now configure a network connection between Astro and an AWS VPC without contacting Astronomer support. Astro automatically handles creating a connection request and provides instructions for completing the setup yourself. After you create a VPC connection, you can configure routes whenever you need to connect to an additional service in your external VPC. See [Create a private connection between Astro and AWS](https://www.astronomer.io/docs/astro/connect-aws?tab=VPC%20peering#create-a-private-connection-between-astro-and-aws).
 
 ### Additional improvements
 
@@ -297,7 +468,7 @@ You can now configure a network connection between Astro and an AWS VPC without 
 
 ### Additional improvements
 
-- The [Astro Environment Manager](https://docs.astronomer.io/astro/create-and-link-connections) is now generally available. This feature allows you to create and manage Airflow connections in the Astro UI.
+- The [Astro Environment Manager](https://www.astronomer.io/docs/astro/create-and-link-connections) is now generally available. This feature allows you to create and manage Airflow connections in the Astro UI.
 
 ### Bug fixes
 
@@ -309,7 +480,7 @@ You can now configure a network connection between Astro and an AWS VPC without 
 
 ### Support for Microsoft Entra Workload ID
 
-You can now use [Microsoft Entra Workload ID](https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-workload-id) to authorize Deployments to resources in Azure. Workload identity is a simple and secure way to authorize access external resources, as it doesn't require creating or storing long-term credentials. To set up Microsoft Entra Workload ID, see [Authorize Deployments to cloud resources](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud?tab=azure#setup).
+You can now use [Microsoft Entra Workload ID](https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-workload-id) to authorize Deployments to resources in Azure. Workload identity is a simple and secure way to authorize access external resources, as it doesn't require creating or storing long-term credentials. To set up Microsoft Entra Workload ID, see [Authorize Deployments to cloud resources](https://www.astronomer.io/docs/astro/authorize-deployments-to-your-cloud?tab=azure#setup).
 
 ### Bug fixes
 
@@ -325,17 +496,17 @@ Astro is now available as an Azure Native ISV Service. If your team is consideri
 - Microsoft Entra ID is pre-configured for all Organizations.
 - It's easier to create Astro resources and get started directly from Azure.
 
-See [Install Astro from the Astro marketplace](https://docs.astronomer.io/astro/install-azure) for setup steps. To learn more about Astronomer's partnership with Microsoft, see [Introducing Apache Airflow™ on Astro – an Azure Native ISV Service](https://www.astronomer.io/blog/introducing-apache-airflow-on-astro-an-azure-native-isv-service/).
+See [Install Astro from the Astro marketplace](https://www.astronomer.io/docs/astro/install-azure) for setup steps. To learn more about Astronomer's partnership with Microsoft, see [Introducing Apache Airflow™ on Astro – an Azure Native ISV Service](https://www.astronomer.io/blog/introducing-apache-airflow-on-astro-an-azure-native-isv-service/).
 
 ### Create Airflow connections in the Astro UI and link them to Deployments
 
-You can now create Airflow connections in the Astro UI through the new Environment Manager menu. The Environment Manager lets you create Airflow connections directly in the Astro UI and stores all connections in an Astro-managed secrets backend. You can then share connections between Deployments and set default connections so that your team members always have access to external resources when they create new Deployments. See [Create Airflow connections in the Astro UI](https://docs.astronomer.io/astro/create-and-link-connections).
+You can now create Airflow connections in the Astro UI through the new Environment Manager menu. The Environment Manager lets you create Airflow connections directly in the Astro UI and stores all connections in an Astro-managed secrets backend. You can then share connections between Deployments and set default connections so that your team members always have access to external resources when they create new Deployments. See [Create Airflow connections in the Astro UI](https://www.astronomer.io/docs/astro/create-and-link-connections).
 
 Note that this feature is currently available only for Deployments running the Celery executor.
 
 ### Trigger a DAG from an Astro alert
 
-You can now configure [Astro alerts](https://docs.astronomer.io/astro/alerts) to trigger any DAG in your Workspace through the Airflow REST API. You can configure the triggered DAG to complete any action, such as sending an alert through a custom communication channel or writing data about the incident to a table.
+You can now configure [Astro alerts](https://www.astronomer.io/docs/astro/alerts) to trigger any DAG in your Workspace through the Airflow REST API. You can configure the triggered DAG to complete any action, such as sending an alert through a custom communication channel or writing data about the incident to a table.
 
 ### New Azure regions available on Astro Hosted
 
@@ -351,7 +522,7 @@ You can now create Hosted dedicated clusters in the following Azure regions:
 - `francecentral`
 - `japaneast`
 
-See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted) for more information.
+See [Astro Hosted resource reference](https://www.astronomer.io/docs/astro/resource-reference-hosted) for more information.
 
 ## November 7, 2023
 
@@ -359,13 +530,13 @@ See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-
 
 :::warning
 
-This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
+This feature is in [Public Preview](https://www.astronomer.io/docs/astro/feature-previews).
 
 :::
 
 Astro now maintains snapshots of your past deploys, including your Deployment image and DAG code, for the previous three months. If you need to quickly revert a Deployment back to a working version of your code, you can roll back to a past deploy from the **Deploy History** page in the Astro UI.
 
-Deploy rollbacks are a powerful safety mechanism to ensure that your production pipelines continue to run when something unexpected happens after a deploy. See [Roll back to a past deploy](https://docs.astronomer.io/astro/deploy-history#roll-back-to-a-past-deploy) for more information and configuration steps.
+Deploy rollbacks are a powerful safety mechanism to ensure that your production pipelines continue to run when something unexpected happens after a deploy. See [Roll back to a past deploy](https://www.astronomer.io/docs/astro/deploy-history#roll-back-to-a-past-deploy) for more information and configuration steps.
 
 ### Bug fixes
 
@@ -377,7 +548,7 @@ Deploy rollbacks are a powerful safety mechanism to ensure that your production 
 
 ### Deployment API keys are now deprecated
 
-Deployment API keys have been officially deprecated in favor of [Deployment API tokens](https://docs.astronomer.io/astro/deployment-api-tokens). This means:
+Deployment API keys have been officially deprecated in favor of [Deployment API tokens](https://www.astronomer.io/docs/astro/deployment-api-tokens). This means:
 
 - You can't create new Deployment API keys.
 - If a Deployment has no configured Deployment API keys, the **API keys** tab will not appear.
@@ -403,7 +574,7 @@ You can now create Deployments in standard clusters in the following Azure regio
 - `westus2`
 - `westeurope`
 
-See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted) for more information.
+See [Astro Hosted resource reference](https://www.astronomer.io/docs/astro/resource-reference-hosted) for more information.
 
 ### Bug fixes
 
@@ -414,7 +585,7 @@ See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-
 
 ### Additional improvements
 
-- You can now view deploy history for both Hosted and Hybrid Astro Deployments in the Astro UI. For more information, see [View deploy history](https://docs.astronomer.io/astro/deploy-history).
+- You can now view deploy history for both Hosted and Hybrid Astro Deployments in the Astro UI. For more information, see [View deploy history](https://www.astronomer.io/docs/astro/deploy-history).
 
 ### Bug fixes
 
@@ -424,9 +595,9 @@ See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-
 
 ### Deployment API tokens
 
-Deployment API tokens are now generally available and replace Deployment API keys as the most secure and customizable way to programmatically update Deployments. This includes using them to [deploy code](https://docs.astronomer.io/astro/deploy-code) and update [environment variables](https://docs.astronomer.io/astro/environment-variables).
+Deployment API tokens are now generally available and replace Deployment API keys as the most secure and customizable way to programmatically update Deployments. This includes using them to [deploy code](https://www.astronomer.io/docs/astro/deploy-code) and update [environment variables](https://www.astronomer.io/docs/astro/environment-variables).
 
-See [Deployment API tokens](https://docs.astronomer.io/astro/deployment-api-tokens) to learn how to create and manage Deployment API tokens.
+See [Deployment API tokens](https://www.astronomer.io/docs/astro/deployment-api-tokens) to learn how to create and manage Deployment API tokens.
 
 :::warning
 
@@ -438,13 +609,13 @@ After October 31, 2023, you will not be able to create new API keys. While you c
 
 ### New Edit Deployments in the Astro UI
 
-Editing Deployments in the Astro UI has a new, consolidated flow. All of the configuration options are now editable in a single form, similar to Deployment creation, instead of spread across multiple forms. See [Deployment Settings](https://docs.astronomer.io/astro/deployment-settings) for a detailed description of how to create, update, and configure your Deployment options.
+Editing Deployments in the Astro UI has a new, consolidated flow. All of the configuration options are now editable in a single form, similar to Deployment creation, instead of spread across multiple forms. See [Deployment Settings](https://www.astronomer.io/docs/astro/deployment-settings) for a detailed description of how to create, update, and configure your Deployment options.
 
 ## October 3, 2023
 
 ### Additional Improvements
 
-- Added a **DAG Success** alert so you can now set up an alert for successful completion events. See how to set up [Astro alerts](https://docs.astronomer.io/astro/alerts).
+- Added a **DAG Success** alert so you can now set up an alert for successful completion events. See how to set up [Astro alerts](https://www.astronomer.io/docs/astro/alerts).
 
 ### Bug Fixes
 
@@ -456,13 +627,13 @@ Editing Deployments in the Astro UI has a new, consolidated flow. All of the con
 
 :::info
 
-The Astro API is currently in beta. See [Astro API versioning and support](https://docs.astronomer.io/astro/api/versioning-and-support).
+The Astro API is currently in beta. See [Astro API versioning and support](https://www.astronomer.io/docs/astro/api/versioning-and-support).
 
 :::
 
-You can now use the [Astro API](https://docs.astronomer.io/astro/api/overview) to create applications and scripts to programmatically interact with Astro. The Astro API is a standard REST API that includes endpoints for interacting with all key resources and components on Astro.
+You can now use the [Astro API](https://www.astronomer.io/docs/astro/api/overview) to create applications and scripts to programmatically interact with Astro. The Astro API is a standard REST API that includes endpoints for interacting with all key resources and components on Astro.
 
-Using the Astro API, you can create robust and secure applications for managing Deployment resources, updating user permissions, and performing many other key Astro operations. To make your first API call, see [Get started with the Astro API](https://docs.astronomer.io/astro/api/get-started).
+Using the Astro API, you can create robust and secure applications for managing Deployment resources, updating user permissions, and performing many other key Astro operations. To make your first API call, see [Get started with the Astro API](https://www.astronomer.io/docs/astro/api/get-started).
 
 ## September 19, 2023
 
@@ -470,11 +641,11 @@ Using the Astro API, you can create robust and secure applications for managing 
 
 Deployment API tokens replace Deployment API keys as the most secure and customizable way to manage Deployments programmatically. You can use Deployment API tokens to perform all of the same actions as a Deployment API key, including:
 
-- [Pushing code](https://docs.astronomer.io/astro/deploy-code) to a Deployment.
-- Updating a Deployment's [environment variables](https://docs.astronomer.io/astro/environment-variables).
-- Making requests to update your Deployment's Airflow environment using the [Airflow REST API](https://docs.astronomer.io/astro/airflow-api).
+- [Pushing code](https://www.astronomer.io/docs/astro/deploy-code) to a Deployment.
+- Updating a Deployment's [environment variables](https://www.astronomer.io/docs/astro/environment-variables).
+- Making requests to update your Deployment's Airflow environment using the [Airflow REST API](https://www.astronomer.io/docs/astro/airflow-api).
 
-Unlike Deployment API keys, you can set an expiration date for Deployment API tokens and rotate them to better manage access to your Deployment. See [Deployment API tokens](https://docs.astronomer.io/astro/deployment-api-tokens) to learn how to create and manage Deployment API tokens.
+Unlike Deployment API keys, you can set an expiration date for Deployment API tokens and rotate them to better manage access to your Deployment. See [Deployment API tokens](https://www.astronomer.io/docs/astro/deployment-api-tokens) to learn how to create and manage Deployment API tokens.
 
 :::warning
 
@@ -552,7 +723,7 @@ To migrate from using cluster workload identities to Deployment workload identit
 
 3. For each Deployment that you specified in your trust policies, open the Deployment in the Astro UI and click **Details**, then click **Edit Details**. In the **Workload Identity** section, select the new Deployment identity from the dropdown list, then click **Update**. To avoid disruption to tasks, do not complete this step until you have added the Deployment workload identity to all of the trust policies it needs for access.
 
-4. [Upgrade](https://docs.astronomer.io/astro/cli/install-cli#upgrade-the-cli) to the latest Astro CLI release, which includes support for Per Deployment IAM Workload Identity.
+4. [Upgrade](https://www.astronomer.io/docs/astro/cli/install-cli#upgrade-the-cli) to the latest Astro CLI release, which includes support for Per Deployment IAM Workload Identity.
 
 5. After you've tested the policies with your Deployment workload identities, remove the cluster workload identity from your trust policies
 
@@ -562,9 +733,9 @@ To migrate from using cluster workload identities to Deployment workload identit
 
 ### Additional improvements
 
-- The Astro UI [**Usage** page](https://docs.astronomer.io/astro/organization-metrics#astro-usage) now shows task usage for deleted Deployments. If you're an Astro Hybrid Billing Admin, this means that task usage metrics now better reflect your billable usage.
+- The Astro UI [**Usage** page](https://www.astronomer.io/docs/astro/organization-metrics#astro-usage) now shows task usage for deleted Deployments. If you're an Astro Hybrid Billing Admin, this means that task usage metrics now better reflect your billable usage.
 - When you create a Deployment through the Astro UI and choose an Astro Runtime version, you can now select only the most recent supported patch for each major version of Astro Runtime.
-- You can now filter task logs by log level or source from the [**DAGs** page](https://docs.astronomer.io/astro/manage-dags) in the Astro UI.
+- You can now filter task logs by log level or source from the [**DAGs** page](https://www.astronomer.io/docs/astro/manage-dags) in the Astro UI.
 
 ## September 6, 2023
 
@@ -574,7 +745,7 @@ To migrate from using cluster workload identities to Deployment workload identit
 
 When you view a Deployment in the Astro UI, you can now open the **Deploy History** tab to view a table of all code deploys. The table shows who made deploys, when they made the deploys, and what Astro Runtime image they used for the deploy.
 
-You can also now use the Astro CLI to specify an optional description for your deploys using the `--description` flag. Deploy descriptions appear in the **Deploy History** table and are useful for telling other Workspace members why you made a deploy or what changes it contains. For more information, see [View deploy history](https://docs.astronomer.io/astro/deploy-history).
+You can also now use the Astro CLI to specify an optional description for your deploys using the `--description` flag. Deploy descriptions appear in the **Deploy History** table and are useful for telling other Workspace members why you made a deploy or what changes it contains. For more information, see [View deploy history](https://www.astronomer.io/docs/astro/deploy-history).
 
 ### View rendered data figures in the Astro Cloud IDE
 
@@ -588,7 +759,7 @@ Python cells that generate figures using [Matplotlib](https://matplotlib.org/), 
 
 :::info Upgrade the Astro CLI
 
-To take advantage of these new user roles programmatically, you must [upgrade the Astro CLI](https://docs.astronomer.io/astro/cli/install-cli#upgrade-the-cli) to version 1.19 or later.
+To take advantage of these new user roles programmatically, you must [upgrade the Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli#upgrade-the-cli) to version 1.19 or later.
 
 :::
 
@@ -599,7 +770,7 @@ To increase granularity and better serve each user persona on Astro, Workspace r
 - The Workspace Editor role has been renamed to **Workspace Operator**. In addition to pushing code changes, Workspace Editors can now also edit Airflow objects such as variables, connections, and XComs. Users with this role are responsible for managing the environments that DAGs run in.
 - The Workspace Viewer role has been renamed to **Workspace Member**. Users with this role only need viewing permissions for a Deployment and don't have permissions to make any code or configuration changes.
 
-For more information about these role changes, see [User permissions reference](https://docs.astronomer.io/astro/user-permissions#workspace-roles) and [Enhanced Astro Workspace Roles for more granular permissions](https://www.astronomer.io/blog/introducing-updated-astro-workspace-roles-for-more-granular-permissions/)
+For more information about these role changes, see [User permissions reference](https://www.astronomer.io/docs/astro/user-permissions#workspace-roles) and [Enhanced Astro Workspace Roles for more granular permissions](https://www.astronomer.io/blog/introducing-updated-astro-workspace-roles-for-more-granular-permissions/)
 
 ### Additional improvements
 
@@ -616,7 +787,7 @@ For more information about these role changes, see [User permissions reference](
 
 ### Additional improvements
 
-- You can now configure [task log forwarding to Datadog](https://docs.astronomer.io/astro/view-logs#export-task-logs-to-datadog-aws-only) at the Deployment level.
+- You can now configure [task log forwarding to Datadog](https://www.astronomer.io/docs/astro/view-logs#export-task-logs-to-datadog-aws-only) at the Deployment level.
 - In the **DAGs** view of the Astro UI, you can now double click a task run node in the graph view to view the task run's logs and mapped tasks.
 - The A50 worker type has been renamed to A60 to make it consistent in scale with other worker types.
 - The max possible **CPU quota** and **Memory quota** for a Deployment running in a Hosted dedicated cluster has increased to 1600 vCPU/ 3200 GiB respectively.
@@ -638,7 +809,7 @@ For more information about these role changes, see [User permissions reference](
 
 <HostedBadge/>
 
-You can now configure Deployments with the `A50` machine type, which has 12 vCPU and 24 GiB. See [Astro hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted).
+You can now configure Deployments with the `A50` machine type, which has 12 vCPU and 24 GiB. See [Astro hosted resource reference](https://www.astronomer.io/docs/astro/resource-reference-hosted).
 
 ### Additional improvements
 
@@ -657,19 +828,19 @@ You can now configure Deployments with the `A50` machine type, which has 12 vCPU
 
 <HostedBadge/>
 
-New Astro Hosted Deployments now have [DAG-only deploys](https://docs.astronomer.io/astro/deploy-dags) enabled by default. When DAG-only deploys are enabled, some workflows for your Deployment, including image-based deploys, are different compared to when DAG-only deploys are disabled. For more information about how code and image deploys work when DAG-only deploys are enabled, see [What happens during a project deploy](https://docs.astronomer.io/astro/deploy-project-image#what-happens-during-a-project-deploy). To disable DAG-only deploys, see [Enable/ disable DAG-only deploys on a Deployment](https://docs.astronomer.io/astro/deploy-dags#enable-or-disable-dag-only-deploys-on-a-deployment).
+New Astro Hosted Deployments now have [DAG-only deploys](https://www.astronomer.io/docs/astro/deploy-dags) enabled by default. When DAG-only deploys are enabled, some workflows for your Deployment, including image-based deploys, are different compared to when DAG-only deploys are disabled. For more information about how code and image deploys work when DAG-only deploys are enabled, see [What happens during a project deploy](https://www.astronomer.io/docs/astro/deploy-project-image#what-happens-during-a-project-deploy). To disable DAG-only deploys, see [Enable/ disable DAG-only deploys on a Deployment](https://www.astronomer.io/docs/astro/deploy-dags#enable-or-disable-dag-only-deploys-on-a-deployment).
 
 ### Teams now have Organization-level roles
 
-All Teams on Astro now have an Organization role. Existing Teams have been given the [Organization Member](https://docs.astronomer.io/astro/user-permissions#organization-roles) role, which doesn't result in any additional automatic permissions.
+All Teams on Astro now have an Organization role. Existing Teams have been given the [Organization Member](https://www.astronomer.io/docs/astro/user-permissions#organization-roles) role, which doesn't result in any additional automatic permissions.
 
-Coupled with [SCIM user groups](https://docs.astronomer.io/astro/set-up-scim-provisioning), you can now manage your Organization Owners and Billing Admins from your identity provider. See [Manage teams](https://docs.astronomer.io/astro/manage-teams) for more information.
+Coupled with [SCIM user groups](https://www.astronomer.io/docs/astro/set-up-scim-provisioning), you can now manage your Organization Owners and Billing Admins from your identity provider. See [Manage teams](https://www.astronomer.io/docs/astro/manage-teams) for more information.
 
 ### Additional improvements
 
 - The Astro UI now shows how many Workspaces, DAGs, clusters, and Astro Cloud IDE projects you have in the left sidebar.
 - You can now create Deployments in standard clusters hosted in `europe-west2` on GCP and `eu-central-1` on AWS.
-- The default metadata database instance type for new Deployments on GCP clusters in Astro Hybrid has been reduced to `Small General Purpose` with 2 vCPUs and 8GiB. See [GCP Hybrid cluster settings](https://docs.astronomer.io/astro/resource-reference-gcp-hybrid).
+- The default metadata database instance type for new Deployments on GCP clusters in Astro Hybrid has been reduced to `Small General Purpose` with 2 vCPUs and 8GiB. See [GCP Hybrid cluster settings](https://www.astronomer.io/docs/astro/resource-reference-gcp-hybrid).
 
 ### Bug fixes
 
@@ -688,7 +859,7 @@ Coupled with [SCIM user groups](https://docs.astronomer.io/astro/set-up-scim-pro
 
 ### Additional improvements
 
-- The templates for [Astro alert](https://docs.astronomer.io/astro/alerts) messages have been updated to include more information about the Deployment that the alert was triggered in, including a link to the DAG that triggered the alert.
+- The templates for [Astro alert](https://www.astronomer.io/docs/astro/alerts) messages have been updated to include more information about the Deployment that the alert was triggered in, including a link to the DAG that triggered the alert.
 
 ### Bug fixes
 
@@ -700,7 +871,7 @@ Coupled with [SCIM user groups](https://docs.astronomer.io/astro/set-up-scim-pro
 
 <HostedBadge/>
 
-You can now configure the default minimum CPU and memory for tasks that you run with the Kubernetes executor or KubernetesPodOperator. If you don't specify CPU or memory in a task definition, Astro runs the task in a Pod that uses your default resource configurations. Configure default minimum resources to ensure that tasks always have enough CPU and memory to run successfully. See [Deployment settings](https://docs.astronomer.io/astro/deployment-settings#configure-kubernetes-pod-resources).
+You can now configure the default minimum CPU and memory for tasks that you run with the Kubernetes executor or KubernetesPodOperator. If you don't specify CPU or memory in a task definition, Astro runs the task in a Pod that uses your default resource configurations. Configure default minimum resources to ensure that tasks always have enough CPU and memory to run successfully. See [Deployment settings](https://www.astronomer.io/docs/astro/deployment-settings#configure-kubernetes-pod-resources).
 
 ### New regions available on Astro Hosted
 
@@ -765,7 +936,7 @@ You can now create Hosted dedicated clusters in the following regions:
     - `us-west3` - Salt Lake City, North America
     - `us-west4` - Nevada, North America
 
-See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted#dedicated-cluster-regions) for all available configurations.
+See [Astro Hosted resource reference](https://www.astronomer.io/docs/astro/resource-reference-hosted#dedicated-cluster-regions) for all available configurations.
 
 ### Bug fixes
 
@@ -775,21 +946,21 @@ See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-
 
 ### Send Astro alerts to email
 
-You can now send Astro alerts to multiple email addresses. Sending Astro alerts to email requires no configuration outside of Astro, which makes it a quick option to improve your alerting infrastructure. See [Configure Astro alerts](https://docs.astronomer.io/astro/alerts?tab=Email#step-1-configure-your-communication-channel) for setup steps.
+You can now send Astro alerts to multiple email addresses. Sending Astro alerts to email requires no configuration outside of Astro, which makes it a quick option to improve your alerting infrastructure. See [Configure Astro alerts](https://www.astronomer.io/docs/astro/alerts?tab=Email#step-1-configure-your-communication-channel) for setup steps.
 
 ### Configure SCIM provisioning for Azure AD
 
-If your Organization uses Azure for single sign-on (SSO), you can now set up SCIM provisioning for Astro. SCIM provisioning simplifies user management by allowing you to add and remove Astro users from Okta based on your existing user groups. See [Set up SCIM provisioning](https://docs.astronomer.io/astro/set-up-scim-provisioning?tab=Azure#setup) for more information.
+If your Organization uses Azure for single sign-on (SSO), you can now set up SCIM provisioning for Astro. SCIM provisioning simplifies user management by allowing you to add and remove Astro users from Okta based on your existing user groups. See [Set up SCIM provisioning](https://www.astronomer.io/docs/astro/set-up-scim-provisioning?tab=Azure#setup) for more information.
 
 ### Additional improvements
 
-- On Astro Hosted deployments, the [`astronomer_monitoring_dag`](https://docs.astronomer.io/astro/runtime-image-architecture#astro-monitoring-dag-hybrid-only) has been paused for all image-based Deployments and removed entirely from all Deployments with DAG deploys enabled. It has been replaced with an implementation that allows workers on Deployments to fully scale to 0.
+- On Astro Hosted deployments, the [`astronomer_monitoring_dag`](https://www.astronomer.io/docs/astro/runtime-image-architecture#astro-monitoring-dag-hybrid-only) has been paused for all image-based Deployments and removed entirely from all Deployments with DAG deploys enabled. It has been replaced with an implementation that allows workers on Deployments to fully scale to 0.
 
 ## July 5, 2023
 
 ### Configure SCIM provisioning for Okta
 
-If your Organization uses Okta for single sign-on (SSO), you can now set up SCIM provisioning for Astro. SCIM provisioning simplifies user management by allowing you to add and remove Astro users from Okta based on your existing user groups. See [Set up SCIM provisioning](https://docs.astronomer.io/astro/set-up-scim-provisioning?tab=Okta#setup) for more information.
+If your Organization uses Okta for single sign-on (SSO), you can now set up SCIM provisioning for Astro. SCIM provisioning simplifies user management by allowing you to add and remove Astro users from Okta based on your existing user groups. See [Set up SCIM provisioning](https://www.astronomer.io/docs/astro/set-up-scim-provisioning?tab=Okta#setup) for more information.
 
 ### See pricing estimate when creating a Deployment
 
@@ -801,7 +972,7 @@ The Deployment creation page in the Astro UI has been reorganized to make it eas
 
 ### Additional improvements
 
-- You can now configure Deployments with the `A40` machine type, which has 8 vCPU and 16 GiB. See [Astro hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted).
+- You can now configure Deployments with the `A40` machine type, which has 8 vCPU and 16 GiB. See [Astro hosted resource reference](https://www.astronomer.io/docs/astro/resource-reference-hosted).
 - You can now access your Organization settings from a Workspace by clicking the name of your Organization/ Workspace.
 - On Astro Hybrid, the default Azure DB instance is now `Standard D2ds_v4`.
 - The Deployment creation screen for Astro Hybrid has received several updates that were previously only available on Astro Hosted.
@@ -848,13 +1019,13 @@ See [Astro Hosted resource reference](resource-reference-hosted.mdx) for more in
 
 ### Manage billing and track usage for Astro Hosted
 
-Use the new **Billing** page in the Astro UI to see both high-level and detailed metrics about your spend in Astro Hosted. You can also use this page to configure your billing details and view invoices. See [Manage billing](https://docs.astronomer.io/astro/manage-billing) for more details.
+Use the new **Billing** page in the Astro UI to see both high-level and detailed metrics about your spend in Astro Hosted. You can also use this page to configure your billing details and view invoices. See [Manage billing](https://www.astronomer.io/docs/astro/manage-billing) for more details.
 
 ### New cell type for using Airflow operators in the Astro Cloud IDE
 
-You can now use any Airflow operator available on the Astronomer Registry in your Astro Cloud IDE pipeline. Operator cells apply formatting and checks for parameter inputs, making it easy to configure operators as part of your pipeline. See [Use Airflow operators in the Astro Cloud IDE](https://docs.astronomer.io/astro/cloud-ide/use-airflow-operators).
+You can now use any Airflow operator available on the Astronomer Registry in your Astro Cloud IDE pipeline. Operator cells apply formatting and checks for parameter inputs, making it easy to configure operators as part of your pipeline. See [Use Airflow operators in the Astro Cloud IDE](https://www.astronomer.io/docs/astro/cloud-ide/use-airflow-operators).
 
-Additionally, you can configure custom cells to use your team's custom operators in a pipeline. See [Create custom operator cells](https://docs.astronomer.io/astro/cloud-ide/use-airflow-operators#create-custom-operator-cells).
+Additionally, you can configure custom cells to use your team's custom operators in a pipeline. See [Create custom operator cells](https://www.astronomer.io/docs/astro/cloud-ide/use-airflow-operators#create-custom-operator-cells).
 
 ### IMDSv2 is now enforced on AWS clusters
 
@@ -870,7 +1041,7 @@ Astronomer now enforces IMDSv2 on all AWS clusters. Any requests for resources o
 
 ### Additional improvements
 
-- Trial Deployments now have [DAG-only deploys](https://docs.astronomer.io/astro/deploy-code#deploy-dags-only) enabled by default.
+- Trial Deployments now have [DAG-only deploys](https://www.astronomer.io/docs/astro/deploy-code#deploy-dags-only) enabled by default.
 - The Astro UI now shows your **Organization Short Name** and **Astro SAML Connection Name** in the Astro UI.
 - You can now view mapped tasks from the **DAGs** page in the Astro UI.
 
@@ -895,7 +1066,7 @@ You can now export audit logs from the Astro UI to view all actions taken in you
 
 Configure Teams from the Astro UI to manage the permissions for many users across Workspaces from a single page. _Teams_ are a group of users in an Organization that you grant the same Workspace permissions, without needing to define them individually.
 
-See [Make a Team](https://docs.astronomer.io/astro/manage-teams) for setup steps.
+See [Make a Team](https://www.astronomer.io/docs/astro/manage-teams) for setup steps.
 
 ### Bug fixes
 
@@ -908,7 +1079,7 @@ See [Make a Team](https://docs.astronomer.io/astro/manage-teams) for setup steps
 
 _Astro Hosted_ is a new way to run Airflow on Astronomer's cloud. On Astro Hosted, Airflow environments are managed and hosted entirely by Astronomer, enabling you to shift your focus from infrastructure to data.
 
-For more information about how Astro Hosted works, see the [Architecture overview](https://docs.astronomer.io/astro/astro-architecture).
+For more information about how Astro Hosted works, see the [Architecture overview](https://www.astronomer.io/docs/astro/astro-architecture).
 
 If you're already an Astro user and your Deployments run in your company's own cloud, you're using _Astro Hybrid_. This version of Astro was formerly known as Astro - Bring Your Own Cloud.
 
@@ -926,7 +1097,7 @@ See [Configure Kubernetes Pod resources](deployment-resources.md#configure-kuber
 
 The following updates have been made to documentation to accommodate new Astro Hosted information:
 
-- Astro Hybrid documentation now has a dedicated menu under "Administration" that contains all docs related to Hybrid installation and cluster management. See [Astro Hybrid overview](https://docs.astronomer.io/astro/hybrid-overview).
+- Astro Hybrid documentation now has a dedicated menu under "Administration" that contains all docs related to Hybrid installation and cluster management. See [Astro Hybrid overview](https://www.astronomer.io/docs/astro/hybrid-overview).
 - All other docs now assume Astro Hosted by default. If a feature is functionally different between Hosted and Hybrid, the documentation for that feature will include a note about how that setup differs for Hybrid. Look for the blue **Alternative Astro Hybrid setup** notes throughout documentation.
 
 ## May 16, 2023
@@ -1758,7 +1929,7 @@ You can now [create an Astro cluster on GCP](manage-hybrid-clusters.md#create-a-
 
 ### Bug fixes
 
-- Fixed an issue where you could not use the KubernetesPodOperator to execute tasks in a Kubernetes cluster outside of your Astro cluster. See [KubernetesPodOperator](https://docs.astronomer.io/astro/kubernetespodoperator).
+- Fixed an issue where you could not use the KubernetesPodOperator to execute tasks in a Kubernetes cluster outside of your Astro cluster. See [KubernetesPodOperator](https://www.astronomer.io/docs/astro/kubernetespodoperator).
 
 ## June 23, 2022
 
@@ -1848,7 +2019,7 @@ For example, if an Airflow task failed because the schema of a database changed,
 
 To learn more about data lineage and how you can configure it on Astro, see:
 
-- [Integrate Airflow and OpenLineage](https://docs.astronomer.io/learn/airflow-openlineage)
+- [Integrate Airflow and OpenLineage](https://www.astronomer.io/docs/learn/airflow-openlineage)
 - [Enable data lineage for External Services](set-up-data-lineage.md)
 - [Data lineage on Astro](data-lineage.md)
 - [OpenLineage Compatibility Matrix](https://openlineage.io/docs/integrations/about#capability-matrix)
@@ -1939,7 +2110,7 @@ A few additional notes about this upgrade:
 - Because Astronomer is upgrading each customer individually over time, the exact date that you will start seeing these logs will vary.
 - When you push code to a Deployment on Runtime 4.2.0+ and trigger this update, all other Deployments on Runtime 4.2.0+ in the same Workspace will also restart in order to receive the lineage backend update. If you plan to push code to any Deployment affected by this change, then we recommend doing so at a time where you can tolerate some Airflow components restarting. For more information about expected behavior, see [What Happens During a Code Deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
 
-For more information about what to expect when lineage tools go live, read Astronomer's [OpenLineage and Airflow guide](https://docs.astronomer.io/learn/airflow-openlineage).
+For more information about what to expect when lineage tools go live, read Astronomer's [OpenLineage and Airflow guide](https://www.astronomer.io/docs/learn/airflow-openlineage).
 
 ### New AWS regions available
 
@@ -2033,7 +2204,7 @@ This week's release introduces a reimagined Astronomer brand that embraces **Ast
 
 ![New branding](/img/release-notes/new-branding.png)
 
-The new Astronomer brand is now reflected both in the [Astro UI](https://cloud.astronomer.io) as well as in the main [Astronomer website](https://astronomer.io) and [documentation](https://docs.astronomer.io).
+The new Astronomer brand is now reflected both in the [Astro UI](https://cloud.astronomer.io) as well as in the main [Astronomer website](https://astronomer.io) and [documentation](https://www.astronomer.io/docs).
 
 In addition to visual changes, we've renamed the following high-level Astro components:
 
@@ -2203,7 +2374,7 @@ You can now create new clusters in:
 - `us-west-1`
 - `us-west-2`
 
-For a full list of AWS regions supported on Astro, see [Resources required for Astro on AWS](https://docs.astronomer.io/resource-reference-aws#aws-region).
+For a full list of AWS regions supported on Astro, see [Resources required for Astro on AWS](https://www.astronomer.io/docs/resource-reference-aws#aws-region).
 
 ### Additional improvements
 
@@ -2350,7 +2521,7 @@ This release introduces a breaking change to code deploys via the Astro CLI. Sta
 
     ![Deployment Health text in the UI](/img/docs/deployment-health.png)
 
-- The documentation home for Astro has been moved to `docs.astronomer.io`, and you no longer need a password to access the page.
+- The documentation home for Astro has been moved to `www.astronomer.io/docs`, and you no longer need a password to access the page.
 
 ### Bug fixes
 

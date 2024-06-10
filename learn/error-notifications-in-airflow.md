@@ -149,7 +149,7 @@ smtp_mail_from = noreply@astronomer.io
 
 You can also set these values using environment variables. In this case, all parameters are preceded by `AIRFLOW__SMTP__`. For example, `smtp_host` can be specified by setting the `AIRFLOW__SMTP__SMTP_HOST` variable. For more on Airflow email configuration, see [Email Configuration](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html). 
 
-If you are using Astro, [use environment variables](https://docs.astronomer.io/astro/environment-variables) to set up SMTP because the `airflow.cfg` cannot be directly edited.
+If you are using Astro, [use environment variables](https://www.astronomer.io/docs/astro/environment-variables) to set up SMTP because the `airflow.cfg` cannot be directly edited.
 
 ### Custom email notifications
 
@@ -200,15 +200,16 @@ In Airflow you can define actions to be taken due to different DAG or task state
 
 - `on_success_callback`: Invoked when a task or DAG succeeds.
 - `on_failure_callback`: Invoked when a task or DAG fails.
+- `on_skipped_callback` : Invoked when a task is skipped. Added in Airflow 2.9, this callback only exists at the task level, and is only invoked when an AiflowSkipException is raised, not when a task is skipped due to other reasons, like a trigger rule. See [Callback Types](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/callbacks.html#callback-types).
 - `on_execute_callback`: Invoked right before a task begins executing. This callback only exists at the task level.
 - `on_retry_callback`: Invoked when a task is retried. This callback only exists at the task level.
 - `sla_miss_callback`: Invoked when a task or DAG misses its defined [Service Level Agreement (SLA)](#airflow-service-level-agreements). This callback is defined at the DAG level for DAGs with defined SLAs and will be applied to every task.
 
-You can provide any Python callable to the `*_callback` parameters. As of Airflow 2.6, you can also use [notifiers](#notifiers) for your callbacks, and you can provide several callback items to the same callback parameter in a list.
+You can provide any Python callable to the `*_callback` parameters or [Airflow notifiers](#notifiers). To execute multiple functions, you can provide several callback items to the same callback parameter in a list.
 
 ### Notifiers
 
-Airflow 2.6 added [notifiers](https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html), which are pre-built or custom classes and can be used to standardize and modularize the functions you use to send notifications. Notifiers can be passed to the relevant `*_callback` parameter of your DAG depending on what event you want to trigger the notification.
+[Airflow notifiers](https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html) are pre-built or custom classes and can be used to standardize and modularize the functions you use to send notifications. Notifiers can be passed to the relevant `*_callback` parameter of your DAG depending on what event you want to trigger the notification.
 
 :::info
 
@@ -334,6 +335,9 @@ def my_success_callback_function(context):
 def my_failure_callback_function(context):
     pass
 
+def my_skipped_callback_function(context):
+    pass
+
 
 @dag(
     start_date=datetime(2023,4,25),
@@ -343,7 +347,8 @@ def my_failure_callback_function(context):
         "on_execute_callback": my_execute_callback_function,
         "on_retry_callback": my_retry_callback_function,
         "on_success_callback": my_success_callback_function,
-        "on_failure_callback": my_failure_callback_function
+        "on_failure_callback": my_failure_callback_function,
+        "on_skipped_callback": my_skipped_callback_function,
     }
 )
 ```
@@ -377,11 +382,16 @@ def my_failure_callback_function(context):
     pass
 
 
+def my_skipped_callback_function(context):
+    pass
+
+
 @task(
     on_execute_callback=my_execute_callback_function,
     on_retry_callback=my_retry_callback_function,
     on_success_callback=my_success_callback_function,
     on_failure_callback=my_failure_callback_function,
+    on_skipped_callback=my_skipped_callback_function,
 )
 def t1():
     return "hello"
@@ -407,6 +417,10 @@ def my_failure_callback_function(context):
     pass
 
 
+def my_skipped_callback_function(context):
+    pass
+
+
 def say_hello():
     return "hello"
 
@@ -418,6 +432,7 @@ t1 = PythonOperator(
     on_retry_callback=my_retry_callback_function,
     on_success_callback=my_success_callback_function,
     on_failure_callback=my_failure_callback_function,
+    on_skipped_callback=my_skipped_callback_function,
 )
 ```
 
@@ -430,7 +445,7 @@ t1 = PythonOperator(
 
 :::tip
 
-Airflow SLAs can be unintuitive, and do not work the way most users expect. If you are an Astronomer customer, consider using the [Astro Task duration or Absolute time alerts](https://docs.astronomer.io/astro/alerts#trigger-types). 
+Airflow SLAs can be unintuitive, and do not work the way most users expect. If you are an Astronomer customer, consider using the [Astro Task duration or Absolute time alerts](https://www.astronomer.io/docs/astro/alerts#trigger-types). 
 
 :::
 
@@ -496,4 +511,4 @@ There is no functionality to disable email alerting for SLAs. If you have an `'e
 
 ## Astronomer notifications
 
-Airflow's built-in notification mechanisms are great for common use cases, but they have some limitations. For the cases where Airflow notifications aren't sufficient, [Astro alerts](https://docs.astronomer.io/astro/alerts) provide an additional level of observability. For guidance on when to choose Airflow notifications or Astro alerts, see [When to use Airflow or Astro alerts for your pipelines on Astro](https://docs.astronomer.io/astro/best-practices/airflow-vs-astro-alerts).
+Airflow's built-in notification mechanisms are great for common use cases, but they have some limitations. For the cases where Airflow notifications aren't sufficient, [Astro alerts](https://www.astronomer.io/docs/astro/alerts) provide an additional level of observability. For guidance on when to choose Airflow notifications or Astro alerts, see [When to use Airflow or Astro alerts for your pipelines on Astro](https://www.astronomer.io/docs/astro/best-practices/airflow-vs-astro-alerts).

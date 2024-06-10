@@ -104,9 +104,9 @@ Complete this setup only if you want to import Microsoft Entra ID groups to Astr
 10. Click **Add**.
 11. Encrypt the secret value you copied as a Kubernetes Secret on your Astronomer installation. See [Store and encrypt identity provider secrets](#store-and-encrypt-identity-provider-secrets).
 
-#### Step 3: Enable Microsoft Entra ID in your config.yaml file
+#### Step 3: Enable Microsoft Entra ID in your values.yaml file
 
-Add the following values to your `config.yaml` file:
+Add the following values to your `values.yaml` file:
 
 ```yaml
 astronomer:
@@ -151,7 +151,7 @@ Then, push the configuration change to your platform. See [Apply a config change
 
 #### Step 2: Integrate Okta with Astronomer Software
 
-Add the following to your `config.yaml` file in your `astronomer` directory:
+Add the following to your `values.yaml` file in your `astronomer` directory:
 
 ```yaml
 astronomer:
@@ -207,9 +207,9 @@ Follow steps in the the Auth0 [connection guide](https://auth0.com/docs/identity
 11. Under **Identifier**, enter `astronomer-ee`.
 12. Leave the value under **Signing Algorithm** as `RS256`.
 
-#### Step 4: Enable Auth0 in your config.yaml file
+#### Step 4: Enable Auth0 in your values.yaml file
 
-Add the following to your `config.yaml` file in your `astronomer` directory:
+Add the following to your `values.yaml` file in your `astronomer` directory:
 
 ```yaml
 astronomer:
@@ -248,7 +248,7 @@ Then, switch to the **Domain name** tab and select a unique domain name to use f
 
 #### Step 2: Edit your Astronomer configuration
 
-Add the following values to your `config.yaml` file in the `astronomer/` directory:
+Add the following values to your `values.yaml` file in the `astronomer/` directory:
 
 ```yaml
 astronomer:
@@ -266,14 +266,14 @@ astronomer:
 
 Your Cognito pool ID can be found in the `General settings` tab of the Cognito portal. Your client ID is found in the `App clients` tab.
 
-After you save your `config.yaml` file with these values, push it to your platform. See [Apply a config change](apply-platform-config.md).
+After you save your `values.yaml` file with these values, push it to your platform. See [Apply a config change](apply-platform-config.md).
 
 </TabItem>
 <TabItem value="localauth">
 
 To let users authenticate to Astronomer with a local username and password, follow the steps below.
 
-1. Enable `local auth` in your `config.yaml` file:
+1. Enable `local auth` in your `values.yaml` file:
   
     ```yaml
     astronomer:
@@ -289,7 +289,7 @@ To let users authenticate to Astronomer with a local username and password, foll
 </TabItem>
 <TabItem value="oidc">
 
-Astronomer supports a generic OIDC configuration to accommodate all OIDC-compliant providers. If there are no specific setup instructions for your OIDC provider in this document, you can add the following configuration to your `config.yaml` file.
+Astronomer supports a generic OIDC configuration to accommodate all OIDC-compliant providers. If there are no specific setup instructions for your OIDC provider in this document, you can add the following configuration to your `values.yaml` file.
 
 For example:
 
@@ -322,7 +322,7 @@ If your install is configured _without_ a direct connection to the internet you 
 
 To configure the proxy server used we need to set the `GLOBAL_AGENT_HTTPS_PROXY` Environment Variable for the Houston deployment.
 
-To do so, add the following to the Houston section of the `config.yaml` file in your `astronomer` directory:
+To do so, add the following to the Houston section of the `values.yaml` file in your `astronomer` directory:
 
 ```yaml
 astronomer:
@@ -353,7 +353,7 @@ This setup must be completed only during a scheduled maintenance window. There s
 
 To use a custom Oauth authorization code flow:
 
-1. In your `config.yaml` file, set the `astronomer.houston.config.auth.openidConnect.flow` value to `"code"`:
+1. In your `values.yaml` file, set the `astronomer.houston.config.auth.openidConnect.flow` value to `"code"`:
 
     ```yaml
     astronomer:
@@ -369,7 +369,7 @@ To use a custom Oauth authorization code flow:
           flow: "code"
     ```
 
-2. Configure the section of your `config.yaml` file specific to your identity provider with each of the following values:
+2. Configure the section of your `values.yaml` file specific to your identity provider with each of the following values:
 
     - `enabled`: Set this value to `true` under the section for your own identity provider.
     - `clientId` and `clientSecret`: Your [Client ID and Client secret](https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/)
@@ -387,9 +387,7 @@ To use a custom Oauth authorization code flow:
               enabled: true
               clientId: ffhsdf78f734h2fsd
               clientSecret: FSDFSLDFJELLGJLSDFGJL42353425
-              # URL works only when IdP group imports are disabled. To import IdP groups from Okta to Software,
-              # use "https://<MYIdP>.okta.com/oauth2/default/.well-known/openid-configuration" instead
-              discoveryUrl: "https://<MYIdP>.okta.com/.well-known/openid-configuration"
+              discoveryUrl: "https://<your-idp-url>.okta.com/oauth2/default/.well-known/openid-configuration"
               authUrlParams:
                 audience: "GYHWEYHTHR443fFEW"
     ```
@@ -398,7 +396,7 @@ To use a custom Oauth authorization code flow:
 
 :::tip
 
-You can also pass your auth configurations as environment variables in the Houston section of your `config.yaml` file. If you choose to configure your installation this way, set the following variables in the `astronomer.houston.env` list instead of setting values in `astronomer.auth`:
+You can also pass your auth configurations as environment variables in the Houston section of your `values.yaml` file. If you choose to configure your installation this way, set the following variables in the `astronomer.houston.env` list instead of setting values in `astronomer.auth`:
 
 ```yaml
 # Replace <idp-provider> with OKTA, AUTH0, or CUSTOM
@@ -493,19 +491,18 @@ SCIM works because the IdP pushes updates about users and teams to Astronomer So
         okta_provisioning_account_secret: {{ "<your-provisioning-account-username>:<your-provisioning-account-password>" | b64enc | quote }}
     ```
 
-13. Add the following lines to your `config.yaml` file:
+13. Add the following lines to your `values.yaml` file:
 
     ```yaml
     astronomer:
       houston:
-        config:
-          secret:
-            - envName: "SCIM_AUTH_CODE_OKTA"
-              secretName: "okta-provisioning-secret"
-              secretKey: "okta_provisioning_account_secret"
+        secret:
+          - envName: "SCIM_AUTH_CODE_OKTA"
+            secretName: "okta-provisioning-secret"
+            secretKey: "okta_provisioning_account_secret"
     ```
 
-14. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+14. Push the configuration change. See [Apply a config change](https://www.astronomer.io/docs/software/apply-platform-config).
 
 See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm?cshid=ext_Apps_App_Integration_Wizard-scim) for more information about configuring SCIM within Okta.
 
@@ -533,19 +530,18 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
         azure_provisioning_secret: {{ "<your-generated-string>" | b64enc | quote }}
     ```
 
-2. In your `config.yaml` file, add the following configuration:
+2. In your `values.yaml` file, add the following configuration:
 
     ```yaml
     astronomer:
       houston:
-        config:
-          secret:
-            - envName: "SCIM_AUTH_CODE_MICROSOFT"
-              secretName: "azure-provisioning-secret"
-              secretKey: "azure_provisioning_secret"
+        secret:
+          - envName: "SCIM_AUTH_CODE_MICROSOFT"
+            secretName: "azure-provisioning-secret"
+            secretKey: "azure_provisioning_secret"
     ```
 
-3. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+3. Push the configuration change. See [Apply a config change](https://www.astronomer.io/docs/software/apply-platform-config).
 
 4. Log in to the [Microsoft Entra ID portal](https://aad.portal.azure.com/). 
    
@@ -609,16 +605,15 @@ This setup is primarily used for encrypting the required secrets for [configurin
     kubectl apply -f ./secret.yaml
     ```
 
-3. Reference your secret name, key, and the environment variable you want the key to apply towards in your `config.yaml` file. To configure the example secret from Step 1 as an Okta client secret, you would add the following:
+3. Reference your secret name, key, and the environment variable you want the key to apply towards in your `values.yaml` file. To configure the example secret from Step 1 as an Okta client secret, you would add the following:
 
     ```yaml
     astronomer:
       houston:
-        config:
-          secret:
-            - envName: "AUTH__OPENID_CONNECT__OKTA__CLIENT_SECRET"
-              secretName: "okta-secret"
-              secretKey: "okta_client_secret"
+        secret:
+          - envName: "AUTH__OPENID_CONNECT__OKTA__CLIENT_SECRET"
+            secretName: "okta-secret"
+            secretKey: "okta_client_secret"
     ```
 
 4. Save and push your changes. See [Apply a config change](apply-platform-config.md).

@@ -9,14 +9,102 @@ import HostedBadge from '@site/src/components/HostedBadge';
 import HybridBadge from '@site/src/components/HybridBadge';
 
 <p>
-    <a href="/astro-cli-release-notes.xml" target="_blank">
-        <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
+    <a href="/docs/astro-cli-release-notes.xml" target="_blank">
+        <img src="/docs/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
     </a>
 </p>
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
-- **Stable versions**: {{CLI_VER_LATEST}}, {{CLI_VER_2}}, and {{CLI_VER_3}}. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md).
+- **Stable versions**: {{CLI_VER_LATEST}}, {{CLI_VER_2}}, and {{CLI_VER_3}}. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md) for more information about support for CLI versions.
+
+## Astro CLI 1.27.1
+
+Release date: May 16, 2024
+
+### Bug fixes
+
+- Fixed an issue where the API token expiration check was causing login failures with API tokens that did not have an expiration date.
+
+## Astro CLI 1.27.0
+
+Release date: May 16, 2024
+
+### New flags for the Deployment logs commands:
+
+You can now filter logs for specific Deployment components using the following new flags for `astro deployment logs`:
+
+- `--webserver`
+- `--scheduler`
+- `--triggerer`
+- `--worker`
+
+### Exclude DAG files from parse test
+
+You can now exclude DAG files from being tested when you run `astro dev parse`.
+
+All new Astro projects that you create with `astro dev init` now include a file named `.astro/dag_integrity_exceptions.txt`. Add the names of DAGs to this file to exclude them from being tested when you run `astro dev parse`. This allows you to exclude DAGs that you know will not pass your tests.
+
+To use this feature in an existing Astro project, delete the `.astro/test_dag_integrity_default.py` file  in your Astro project, then run `astro dev init`. After you run this command, the Astro CLI creates a new default test file along with a `.astro/dag_integrity_exceptions.txt` text file.
+
+### Additional improvements
+
+- Astro projects no longer have to include DAGs in order to run `astro deploy --image`.
+- You can now append `2>/dev/null | head` to commands to disregard upgrade messages. For example, running `astro completion bash 2>/dev/null | head` ensures that the resulting bash script remains unaffected by the upgrade message.
+- You can now use the `--development-mode disable` flag with `astro deployment update` to turn off [development mode](https://docs.astronomer.io/astro/deployment-resources#hibernate-a-development-deployment) for an existing Deployment. Note that you still cannot turn on development mode for an existing Deployment.
+
+### Bug fixes
+
+- Fixed an issue where you couldn't create two Deployments with identical names across different Workspaces.
+- The `upgrade-test` command now returns the correct error code, ensuring accurate feedback during testing and CI/CD.
+
+## Astro CLI 1.26.0
+
+Release date: April 24, 2024
+
+### New commands to assign Organization and Workspace API tokens at different levels
+
+You can now use the Astro CLI to manage Organization and Workspace API tokens at the Workspace and Deployment level using the following commands:
+
+- [`astro deployment token organization-token`](https://www.astronomer.io/docs/astro/cli/astro-deployment-token-organization-token)
+- [`astro deployment token workspace-token`](https://www.astronomer.io/docs/astro/cli/astro-deployment-workspace-token)
+- [`astro workspace token organization-token`](https://www.astronomer.io/docs/astro/cli/astro-workspace-token-organization-token)
+
+For more information about this feature, see:
+- [Assign an Organization or Workspace API token to a Deployment](deployment-api-tokens.md#assign-an-organization-or-workspace-api-token-to-a-deployment).
+- [Assign an Organization API token to a Workspace](https://www.astronomer.io/docs/astro/workspace-api-tokens#assign-an-organization-api-token-to-a-workspace)
+
+### Bug fixes
+
+- Fixed an issue where existing secret environment variables in a Deployment file could be applied to the Deployment with an empty value. The secret variable value now persists.
+- Fixed an issue where `astro deployment inspect` generated an incorrect Airflow API URL.
+- Fixed a bug that caused some input checks for `astro deployment upgrade-checks` to fail against valid inputs.
+
+## Astro CLI 1.25.0
+
+Release date: March 28, 2024
+
+### Manage Deployment API tokens with the Astro CLI
+
+You can now manage [Deployment API tokens](deployment-api-tokens.md) using the following CLI commands:
+
+- `astro deployment token create`
+- `astro deployment token list`
+- `astro deployment token update`
+- `astro deployment token rotate`
+- `astro deployment token delete`
+
+### Additional improvements
+
+- Updated the example DAGs that the Astro CLI creates when you run `astro dev init`.
+- The CLI now tells you if your API token is invalid.
+
+### Bug fixes
+
+- Fixed an issue with `deployment variable create` where it would cut off the new variables value at the first "=" character.
+- Fixed an issue where running a deployment command in a workspace without a deployment caused an error. Now users will be asked if they want to create a deployment if one does not exist.
+- Fixed an issue where `astro dev start —deployment-id` was not creating local connections correctly in some scenarios.
+- Fixed an issue where `astro deployment` commands could only list 20 deployments. Now the commands will list up to 1000 for each workspace.
 
 ## Astro CLI 1.24.1
 
@@ -37,20 +125,20 @@ You can now use the Astro CLI to hibernate or wake up a development Deployment. 
 
 Use the following new commands to hibernate development Deployments regardless of their existing hibernation schedule:
 
-- [`astro deployment hibernate`](https://docs.astronomer.io/astro/cli/astro-deployment-hibernate)
-- [`astro deployment wake-up`](https://docs.astronomer.io/astro/cli/astro-deployment-wake-up)
+- [`astro deployment hibernate`](https://www.astronomer.io/docs/astro/cli/astro-deployment-hibernate)
+- [`astro deployment wake-up`](https://www.astronomer.io/docs/astro/cli/astro-deployment-wake-up)
 
 Additionally, you can create new development Deployments and configure long-term hibernation schedules for them using `astro deployment create`.
 
 ### Additional improvements
 
-- You can now configure a custom workload identity when you create a Deployment using a Deployment file. 
+- You can now configure a custom workload identity when you create a Deployment using a Deployment file.
 - Added support for the upcoming custom role management feature on Astro
 
 ### Bug fixes
 
 - Fixed an issue where `astro deployment variable list --save` didn't format secret environment variables correctly.
-- Fixed an issue where you couldn't update a Deployment with a Deployment file using a Deployment API token. 
+- Fixed an issue where you couldn't update a Deployment with a Deployment file using a Deployment API token.
 
 ## Astro CLI 1.23.0
 
@@ -83,7 +171,7 @@ Instead, you can use the new `--default-task-pod-cpu`, `--default-task-pod-memor
 
 The following changes have been made to the format of [Deployment files](deployment-file-reference.md):
 
-- You no longer have to specify a `cluster_name` for standard Deployment files. 
+- You no longer have to specify a `cluster_name` for standard Deployment files.
 - `scheduler_size` is no longer case sensitive.
 - Possible values for `cloud_provider` are now `gcp`, `aws`, and `azure`. This input is not case sensitive.
 - Possible values for `deployment_type` now include `standard`, `dedicated`, and `hybrid` in addition to the existing values of `hosted_shared`, `hosted_dedicated`, and `hosted_standard`. This input is not case sensitive
@@ -93,7 +181,7 @@ The following changes have been made to the format of [Deployment files](deploym
 
 ### Additional improvements
 
-- You can now trigger a DAG-only deploy on Astronomer Software using `astro deploy --dags`. See [Deploy DAGs on Astronomer Software](https://docs.astronomer.io/software/deploy-dags).
+- You can now trigger a DAG-only deploy on Astronomer Software using `astro deploy --dags`. See [Deploy DAGs on Astronomer Software](https://www.astronomer.io/docs/software/deploy-dags).
 - `astro deployment logs --key-word` is a new flag that allows you to search your audit logs for an exact key word or phrase.
 - If you log in to Astro from the CLI, you need to select a Deployment when you deploy code. Previously, the Astro CLI used auto-select to automatically choose a Deployment for code deploys based on the CLI context. Now, by default, the CLI does not auto-selects the Deployments where your code deploys when you use it. However there are the following exceptions:
     - If you log in to Astro with an API token using the `ASTRO_API_TOKEN`, `ASTRONOMER_KEY_ID`, or `ASTRONOMER_KEY_SECRET` environment variables, auto-select is enabled. This is important because it ensures that if you have CI/CD scripts that rely on auto-select, they will continue to work.
@@ -118,7 +206,7 @@ Use the new `--build-secrets` flag with the following commands to mount a secret
 - `astro dev start`
 - `astro dev upgrade test`
 
-This flag is equivalent to running [`docker build --secret`](https://docs.docker.com/build/building/secrets/#secret-mounts) for your Astro Runtime image build. Use this flag to simplify build steps for customizing the Astro Runtime image, for example when you need to [install Python packages from a private source](https://docs.astronomer.io/astro/cli/private-python-packages?tab=pypi#install-python-packages-from-private-sources) .
+This flag is equivalent to running [`docker build --secret`](https://docs.docker.com/build/building/secrets/#secret-mounts) for your Astro Runtime image build. Use this flag to simplify build steps for customizing the Astro Runtime image, for example when you need to [install Python packages from a private source](https://www.astronomer.io/docs/astro/cli/private-python-packages?tab=pypi#install-python-packages-from-private-sources) .
 
 ## Astro CLI 1.21.0
 
@@ -126,7 +214,7 @@ Release date: December 4, 2023
 
 ### New command to deploy only images
 
-You can use the new `astro deploy --image` command to deploy only the image to you Deployment. Previously, you could either complete a full code deploy with `astro deploy` or only update your DAGs with a DAGs-only deploy. See [Trigger an image-only deploy](https://docs.astronomer.io/astro/deploy-dags#trigger-an-image-only-deploy) for more information.
+You can use the new `astro deploy --image` command to deploy only the image to you Deployment. Previously, you could either complete a full code deploy with `astro deploy` or only update your DAGs with a DAGs-only deploy. See [Trigger an image-only deploy](https://www.astronomer.io/docs/astro/deploy-dags#trigger-an-image-only-deploy) for more information.
 
 ### Bug fixes
 
@@ -486,7 +574,7 @@ Release date: February 27, 2023
 
 You can now configure the Astro CLI to run Airflow locally and deploy to Astro using [Podman](https://podman.io/). Podman is an alternative container engine to Docker that doesn't require root access and orchestrates containers without using a centralized daemon.
 
-To configure the Astro CLI to use Podman, see [Run the Astro CLI using Podman](https://docs.astronomer.io/astro/cli/use-podman).
+To configure the Astro CLI to use Podman, see [Run the Astro CLI using Podman](https://www.astronomer.io/docs/astro/cli/use-podman).
 
 ### Bug fixes
 
@@ -712,7 +800,7 @@ Release date: September 2, 2022
 ### Bug fixes
 
 - Fixed an issue where some environment variable values could be truncated when using `astro deployment variable create --load`.
-- Fixed an issue where users with access to more than one Astro Organization could only log in to their primary Organization. Now, users can authenticate to multiple Organizations with a [token login](https://docs.astronomer.io/astro/cli/astro-login). Native support for organization commands is coming soon.
+- Fixed an issue where users with access to more than one Astro Organization could only log in to their primary Organization. Now, users can authenticate to multiple Organizations with a [token login](https://www.astronomer.io/docs/astro/cli/astro-login). Native support for organization commands is coming soon.
 
 ## Astro CLI 1.4.0
 
@@ -1083,7 +1171,7 @@ For users making quick and continuous changes to an Astro project locally, the A
 
 ### Support for the triggerer in local Airflow environments
 
-The Astro CLI now supports the Apache Airflow [triggerer component](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html?) in a local environment. This means that you can test DAGs that use [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators) locally before pushing them to a Deployment on Astronomer. Additionally, triggerer logs appear alongside webserver and scheduler logs when you run `astro dev logs`.
+The Astro CLI now supports the Apache Airflow [triggerer component](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html?) in a local environment. This means that you can test DAGs that use [deferrable operators](https://www.astronomer.io/docs/learn/deferrable-operators) locally before pushing them to a Deployment on Astronomer. Additionally, triggerer logs appear alongside webserver and scheduler logs when you run `astro dev logs`.
 
 The triggerer will only be created in local environments running Astro Runtime 4.0.0+.
 

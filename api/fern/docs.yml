@@ -1,6 +1,6 @@
 instances:
-  - url: astronomer.docs.buildwithfern.com/api
-    custom-domain: docs.astronomer.io/api
+  - url: astronomer.docs.buildwithfern.com/docs/api
+    custom-domain: www.astronomer.io/docs/api
 title: Astro API Reference
 navigation:
   - section: Astro API
@@ -11,10 +11,10 @@ navigation:
         path: ./docs/pages/get-started.mdx
       - page: Versioning and support
         path: ./docs/pages/versioning-and-support.mdx
-  - api: IAM API Reference
-    api-name: iam
   - api: Platform API Reference
     api-name: platform
+  - api: IAM API Reference
+    api-name: iam
 layout: 
   searchbar-placement: header
 favicon: ./docs/assets/favicon.svg
@@ -28,7 +28,7 @@ colors:
 logo: 
   light: ./docs/assets/logo-light.svg
   dark: ./docs/assets/logo-dark.svg
-  href: https://docs.astronomer.io/api
+  href: https://www.astronomer.io/docs/api
 navbar-links:
   - type: primary
     text: Get Started Free

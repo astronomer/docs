@@ -20,7 +20,7 @@ If you only need to implement notifications for specific DAGs and tasks, conside
 
 :::caution
 
-Listeners are currently considered experimental and might be subject to breaking changes in future releases.
+The `on_dataset_created` and `on_dataset_changed` listeners are currently considered experimental and might be subject to breaking changes in future releases.
 
 :::
 
@@ -38,7 +38,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started) using [Astro Runtime](https://docs.astronomer.io/astro/runtime-release-notes) 10+ (Airflow 2.8+).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started) using [Astro Runtime](https://www.astronomer.io/docs/astro/runtime-release-notes) 10+ (Airflow 2.8+).
 - A Slack workspace with an [Incoming Webhook](https://api.slack.com/messaging/webhooks) configured.
 
 ## Step 1: Configure your Astro project

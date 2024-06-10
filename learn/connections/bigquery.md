@@ -22,13 +22,13 @@ Using a Kubernetes service account is the most secure method because it doesn't 
 
 :::tip
 
-If you're an Astro user, Astronomer recommends using workload identity to authorize to your Deployments to BigQuery. This eliminates the need to specify secrets in your Airflow connections or copying credentials file to your Astro project. See [Authorize Deployments to your cloud](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud).
+If you're an Astro user, Astronomer recommends using workload identity to authorize to your Deployments to BigQuery. This eliminates the need to specify secrets in your Airflow connections or copying credentials file to your Astro project. See [Authorize Deployments to your cloud](https://www.astronomer.io/docs/astro/authorize-deployments-to-your-cloud).
 
 :::
 
 ## Prerequisites
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
-- A locally running [Astro project](https://docs.astronomer.io/astro/cli/get-started-cli).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
+- A locally running [Astro project](https://www.astronomer.io/docs/astro/cli/get-started-cli).
 - A Google Cloud project with [BigQuery API](https://cloud.google.com/bigquery/docs/enable-transfer-service#enable-api) enabled.
 - Permissions to create an IAM service account or use an existing one. See [Google documentation](https://cloud.google.com/iam/docs/manage-access-service-accounts).
 
@@ -78,7 +78,7 @@ This method requires you to mount your service account key file to your Airflow 
 
 <TabItem value="key-file-in-secrets-backend">
 
-You can save your service account key file to any secrets backend. See [Configure a secrets backend](https://docs.astronomer.io/astro/secrets-backend) for steps on how to configure several popular secrets backend services to use with Airflow on Astro. For example, if you use Google Secret Manager as a secrets backend:
+You can save your service account key file to any secrets backend. See [Configure a secrets backend](https://www.astronomer.io/docs/astro/secrets-backend) for steps on how to configure several popular secrets backend services to use with Airflow on Astro. For example, if you use Google Secret Manager as a secrets backend:
 
 1. In the Google Cloud console, select your Google Cloud project and copy its **ID**.
 2. [Create a new service account](https://cloud.google.com/iam/docs/service-accounts-create). 
@@ -86,7 +86,7 @@ You can save your service account key file to any secrets backend. See [Configur
 4. [Add a new JSON key file](https://cloud.google.com/iam/docs/keys-create-delete#iam-service-account-keys-create-console) to the service account.
 5. Download the key file.
 6. [Create a secret](https://cloud.google.com/secret-manager/docs/create-secret-quickstart) in Google Secret Manager and upload the key file from Step 5 as a secret value. Then, copy the ID of your secret name.
-7. Follow Astronomer's documentation to [configure secrets backend](https://docs.astronomer.io/astro/secrets-backend) for your Astro project.
+7. Follow Astronomer's documentation to [configure secrets backend](https://www.astronomer.io/docs/astro/secrets-backend) for your Astro project.
 
 You can now use this secret in your Airflow connections.
 
@@ -237,4 +237,4 @@ Airflow uses the [`python-bigquery`](https://github.com/googleapis/python-bigque
 
 - [Apache Airflow Google provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/connections/gcp.html)
 - [BigQuery Modules](https://registry.astronomer.io/modules?query=bigquery) and [Example DAGs](https://registry.astronomer.io/dags?limit=24&sorts=updatedAt%3Adesc&query=bigquery) in the Astronomer Registry
-- [Import and export Airflow connections using the Astro CLI](https://docs.astronomer.io/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
+- [Import and export Airflow connections using the Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)

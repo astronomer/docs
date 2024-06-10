@@ -18,16 +18,16 @@ import AstroCard from '@site/src/components/AstroCard';
 ## Run on the cloud
 
 <LinkCardGrid>
-  <LinkCard topIcon label="Create a Deployment" description="A Deployment is an instance of Apache Airflow hosted on Astro." href="/astro/create-deployment" icon="/img/deployment.svg" />
-  <LinkCard topIcon label="Deploy code" description="Get your DAGs up and running on Astro." href="/astro/deploy-code" icon="/img/code.svg" />
-  <LinkCard topIcon label="Automate with CI/CD" description="Push code to Astro using templates for popular CI/CD tools." href="/astro/ci-cd-templates/template-overview" icon="/img/automation.svg" />
+  <LinkCard topIcon label="Create a Deployment" description="A Deployment is an instance of Apache Airflow hosted on Astro." href="/astro/create-deployment" icon="/docs/img/deployment.svg" />
+  <LinkCard topIcon label="Deploy code" description="Get your DAGs up and running on Astro." href="/astro/deploy-code" icon="/docs/img/code.svg" />
+  <LinkCard topIcon label="Automate with CI/CD" description="Push code to Astro using templates for popular CI/CD tools." href="/astro/ci-cd-templates/template-overview" icon="/docs/img/automation.svg" />
 </LinkCardGrid>
 
 ## Get started
 
 <LinkCardGrid>
-  <LinkCard label="I'm unfamiliar with Apache Airflow" description="Use tutorials and concepts to learn everything you need to know about running Airflow." href="/learn/" icon="/img/airflow-logo.png" />
-  <LinkCard label="I'm ready to create my first project" description="Learn how to create an Astro project and run it locally with the Astro command-line interface (CLI)." href="/astro/first-dag-cli" icon="/img/astro-monogram.svg" />
+  <LinkCard label="I'm unfamiliar with Apache Airflow" description="Use tutorials and concepts to learn everything you need to know about running Airflow." href="/learn/" icon="/docs/img/airflow-logo.png" />
+  <LinkCard label="I'm ready to create my first project" description="Learn how to create an Astro project and run it locally with the Astro command-line interface (CLI)." href="/astro/first-dag-cli" icon="/docs/img/astro-monogram.svg" />
 </LinkCardGrid>
 
 ## Featured Astro docs
