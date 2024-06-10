@@ -57,9 +57,11 @@ Hover over the graph to view a graph legend. If a given worker queue spins a wor
     :::
 
 - **Network Usage Per Pod (MB)**: This metric graphs each worker/ scheduler Pod's peak network usage over time. Sudden, irregular spikes in this metric should be investigated as a possible error in your project code.
-- **Pod Count per Status**: This metric graphs the number of worker/ scheduler Pods in a given Kubernetes container state. Because Astro operates on a one-container-per-pod model, the state of the container state is also the Pod state. For more information about container states, read the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-states).
+- **Pod Count per Status**: This metric graphs the number of worker and scheduler Pods in a given Kubernetes container state. Because Astro operates on a one-container-per-pod model, the state of the container state is also the Pod state. Use this metric to understand how many workers and schedulers are currently running in your Deployment. This can help you determine the values for **Worker Count (Min-Max)** that best fit your usage.
 
-    If a pod is stuck in a `Waiting` state, it could indicate that your Deployment did not successfully pull and run your Runtime image.
+  Note that **Maximum Worker Count** applies only to workers in the `Running` state. This means that the number of worker Pods in **Pod Count per Status** might at times be higher than **Maximum Worker Count** if there workers are scaling down at the same time that new workers are being created. For example, let's say that a Deployment has a **Maximum Worker Count** of 20. If you have 5 workers running tasks for an hour and you deploy code that requires 20 workers, Astro will trigger a scale-down event for the existing 5 workers and create 20 new workers to run tasks according to your new code. This means that your Deployment will temporarily run 25 workers.
+
+    If a pod is stuck in a `Waiting` state, it could indicate that your Deployment did not successfully pull and run your Runtime image. For more information about container states, read the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-states).
 
 - **Scheduler Heartbeat (_Scheduler Only_)**: A scheduler emits a heartbeat at a regular rate to signal that it's healthy to other Airflow components. This metric graphs a scheduler's average heartbeats per minute over a given time.
 
