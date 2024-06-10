@@ -857,7 +857,7 @@ Astronomer requires a central Postgres database that acts as the backend for Ast
 
 If, while evaluating Astronomer Software, you need to create a temporary environment where Postgres is not available, locate the `global.postgresqlEnabled` option already present in your `values.yaml` and set it to `true`, then skip the remainder of this step.
 
-Note that `global.postgresqlEnabled` to `true` is an unsupported configuration and should never be used on any development, staging, or production environment.
+Note that `global.postgresqlEnabled` to `true` is an unsupported configuration, and should never be used on any development, staging, or production environment.
 
 :::
 
