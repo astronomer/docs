@@ -7,7 +7,7 @@ description: Use a pre-existing ingress controller on Astronomer Software.
 
 By default, Astronomer comes with an ingress controller to service Kubernetes ingress objects. The default Astronomer ingress controller can co-exist with any other ingress controllers on the cluster.
 
-While using the default ingress controller is the best choice for most organizations, you might need to exclusively use a pre-existing ingress controller due to complex regulatory and compliance requirements. This guide provides steps for configuring your own ingress controller for use with the Astronomer platform.
+Using the default ingress controller is the best choice for most organizations, but you might need to use a pre-existing ingress controller exclusively due to complex regulatory and compliance requirements. This guide provides steps for configuring your own ingress controller to use with the Astronomer platform.
 
 ## Step 1: Review general requirements for third-party ingress controllers
 
