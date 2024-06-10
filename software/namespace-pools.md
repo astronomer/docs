@@ -208,7 +208,7 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
     ```
 
 2. Save this file and name it `commander.yaml`.
-3. For each namespace in your pool, run `kubectl -n <airflow namespace> apply -f commander.yaml`.
+3. For each namespace you configured in `astronomer.houston.config.deployments.preCreatedNamespaces`, run `kubectl -n <airflow namespace> apply -f commander.yaml`.
 
 ### Step 2: Configure a namespace pool in Astronomer
 
