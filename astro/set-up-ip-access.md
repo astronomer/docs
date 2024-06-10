@@ -30,3 +30,13 @@ After you enable the IP Access List, neither Airflow API no Astro API requests c
 
     :::
 
+## Restore access
+
+Because the IP Access List completely restricts access to the Astro UI to specific IP addresses, if you do not have access to their VPN or to an authorized network, you cannot access the Astro UI at all.
+
+To restore access for a user that is blocked the Organization Owner needs to either:
+
+- Disable the IP Access list setting
+- Add the specific blocked user's IP address to the IP Access list.
+
+After resolving the user's access issue, be sure to enable IP Access list again to maintain the IP addres restrictions.
