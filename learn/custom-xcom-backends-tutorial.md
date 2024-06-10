@@ -44,7 +44,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) with an Astro project running Astro Runtime 11.0.0 or higher (Airflow 2.9.0 or higher). To set up a custom XCom backend with older versions of Airflow, see [Custom XCom backends](custom-xcom-backend-strategies.md).
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) with an Astro project running Astro Runtime 11.5.0 or higher (Airflow 2.9.2 or higher). To set up a custom XCom backend with older versions of Airflow, see [Custom XCom backends](custom-xcom-backend-strategies.md).
 - An account in either [AWS](https://aws.amazon.com/), [GCP](https://cloud.google.com/), or [Azure](https://azure.microsoft.com/) with permissions to create and configure an object storage container.
 
 ## Step 1: Set up your object storage container
@@ -177,7 +177,7 @@ To use the Object Storage XCom Backend, you need to install the Common IO provid
 Add the [Common IO](https://registry.astronomer.io/providers/apache-airflow-providers-common-io/versions/latest) and [Amazon](https://registry.astronomer.io/providers/apache-airflow-providers-amazon/versions/latest) provider packages to your `requirements.txt` file. Note that you need to install the `s3fs` extra to use the Amazon provider package with the [object storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) feature.
 
     ```text
-    apache-airflow-providers-common-io==1.3.0
+    apache-airflow-providers-common-io==1.3.2
     apache-airflow-providers-amazon[s3fs]==8.19.0
     ```
 
@@ -188,7 +188,7 @@ Add the [Common IO](https://registry.astronomer.io/providers/apache-airflow-prov
 Add the [Common IO](https://registry.astronomer.io/providers/apache-airflow-providers-common-io/versions/latest) and [Google](https://registry.astronomer.io/providers/apache-airflow-providers-google/versions/latest) provider packages to your `requirements.txt` file.
 
     ```text
-    apache-airflow-providers-common-io==1.3.0
+    apache-airflow-providers-common-io==1.3.2
     apache-airflow-providers-google==10.17.0
     ```
 
@@ -199,7 +199,7 @@ Add the [Common IO](https://registry.astronomer.io/providers/apache-airflow-prov
 Add the [Common IO](https://registry.astronomer.io/providers/apache-airflow-providers-common-io/versions/latest) and [Microsoft Azure](https://registry.astronomer.io/providers/apache-airflow-providers-microsoft-azure/versions/latest) provider packages to your `requirements.txt` file.
 
     ```text
-    apache-airflow-providers-common-io==1.3.0
+    apache-airflow-providers-common-io==1.3.2
     apache-airflow-providers-microsoft-azure==9.0.0
     ```
 
@@ -349,7 +349,7 @@ We will use a simple DAG to test your custom XCom backend.
 
 2. Manually trigger the `custom_xcom_backend_test` DAG in the Airflow UI and navigate to the XCom tab of the `push_objects` task. You should see that the `small_obj` XCom shows its value, meaning it was stored in the metadata database, since it is smaller than 1KB. The `big_dict` XCom shows shows the path to the object in the object storage containing the serialized value of the XCom. 
 
-    ![XCom tab of the push_objects task showing two key-value pairs: "big_obj": "s3://ce-2-9-examples-bucket/xcom/custom_xcom_backend_test/manual__2024-03-27T13:18:52.642382+00:00/push_objects/8cf94ef7-b92e-4c65-a775-4e338c941f58.zip", "small_obj": a dictionary containing'a': 23.](/img/tutorials/custom-xcom-backends-tutorial_small_big_obj.png)
+    ![XCom tab of the push_objects task showing two key-value pairs showing the "big_obj" being serialized to the custom XCom backend and the "small_obj": a dictionary containing'a': 23, which was stored in the metadata database.](/img/tutorials/custom-xcom-backends-tutorial_small_big_obj.png)
 
 ## Conclusion
 

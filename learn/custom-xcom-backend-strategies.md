@@ -53,7 +53,7 @@ Additionally, some provider packages offer custom XCom backends that you can use
 
 ### Use the Object Storage XCom Backend
 
-Airflow 2.9+ added the possibility to create a custom XCom backend using object storage. The Object Storage XCom Backend is part of the [Common IO](https://registry.astronomer.io/providers/apache-airflow-providers-common-io/versions/latest) provider and can be defined using the following environment variables:
+Airflow 2.9.2 added the possibility to create a custom XCom backend using object storage. The Object Storage XCom Backend is part of the [Common IO](https://registry.astronomer.io/providers/apache-airflow-providers-common-io/versions/latest) provider and can be defined using the following environment variables:
 
 - `AIRFLOW__CORE__XCOM_BACKEND`: The XCom backend to use. Set this to `airflow.providers.common.io.xcom.backend.XComObjectStoreBackend` to use the Object Storage XCom Backend.
 - `AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH`: The path to the object storage where XComs are stored. The path should be in the format `<your-scheme>://<your-connection-id@<your-bucket>/xcom`. For example, `s3://my-s3-connection@my-bucket/xcom`. The most common schemes are `s3`, `gs`, and `abfs` for Amazon S3, Google Cloud Storage, and Azure Blob Storage, respectively.
