@@ -27,6 +27,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## June 11, 2024
 
+### Restrict Astro access to specific IP Address ranges with IP Access list
+
+<EnterpriseBadge/>
+
+Organization owners can now limit the IP addresses of users to control who can access the Astro UI or programmatically work with the Astro API for their organization. This allows you to restrict access to your Astro Organization to users on a VPN or to specific network ranges. See [Set up IP Access list](https://astronomer.io/docs/astro/ip-access-list). <!--https://github.com/astronomer/docs/issues/3776-->
+
 ### Additional improvements
 
 - When using the GitHub Integration, you can now retry a failed deploy or trigger a Git deploy directly from your Deployment settings page in the Astro UI. Refer to the [GitHub Integration](https://www.astronomer.io/docs/astro/deploy-github-integration) for more information. <!--https://github.com/astronomer/docs/pull/3839-->
