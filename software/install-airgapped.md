@@ -1713,7 +1713,7 @@ To disable email transmission and email verision of users attempting to access t
 
 ### Add trusted certificate authorities (CAs) to Docker Desktop {#configure-desktop-container-solution-extra-cas}
 
-If your users will be deploying images to a container registry (including the integrated container registry) that uses a TLS certificate signed by a private CA, Docker Desktop needs to be configured to trust the CAs public certificate. 
+If your users will deploy images to a container registry, including the integrated container registry, that uses a TLS certificate signed by a private CA, you need to configure Docker Desktop to trust the CA's public certificate. 
 
 Obtain a copy of the CA's public certificate in pem format and place it in `/etc/docker/certs.d`:
 
