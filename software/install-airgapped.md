@@ -804,10 +804,11 @@ If there is a `/` or any other escape character in your username or password, yo
 
 ## Step 13: Configure volume storage classes
 
-If your cluster defines a volume storage class, and you wish to use it for all volumes associated with Astronomer Software and its Airflow Deployments, you may skip this step.
-Astronomer strongly recommends against backing up any volumes used for Astronomer Software with mechanical hard drives.
+Skip this step if your cluster defines a volume storage class, and you want to use it for all volumes associated with Astronomer Software and its Airflow Deployments.
 
-Replace `<desired-storage-class>` in the following configuration with the storage class you wish to use for each respective component. You can remove the configuration for any component where using the default storage is acceptable. 
+Astronomer strongly recommends that you do not back any volumes used for Astronomer Software with mechanical hard drives.
+
+Replace `<desired-storage-class>` in the following configuration with the storage class you want to use for each respective component. You can remove the configuration for any component where using the default storage is acceptable. 
 
 ```yaml
 alertmanager:
