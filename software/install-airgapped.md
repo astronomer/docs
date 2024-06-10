@@ -1691,7 +1691,18 @@ To disable email transmission and email verision of users attempting to access t
 
 ### Configure Astronomer Software to trust private certificate authorities (CAs) {#configuring-private-cas}
 
-1. Store the CA's root public certificate to an [Opaque Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#secret-types) in the Astronomer namespace with a descriptive name, such as `private-root-ca`, by running the following command:
+1. Store the CA's root public certificate to an [Opaque Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#secret-types) in the Astronomer namespace with a descriptive name, such as `private-root-ca`, by running the following command.
+
+    :::tip
+    
+    Before you run this command, keep the following in mind:
+    
+     - The root certificate you specify should be the certificate of the authority that signed the Astronomer certificate. This is not the certificate associated with Astronomer or any other service.
+    - The name of the secret file must be `cert.pem` for your certificate to be trusted properly.
+    - The file must contain only a single certificate, it can't be a certificate bundle.
+    
+    :::
+
 
     ```sh
     kubectl -n astronomer create secret generic private-root-ca --from-file=cert.pem=./private-root-ca.pem
