@@ -1715,7 +1715,7 @@ To disable email transmission and email verision of users attempting to access t
 
 If your users will be deploying images to a container registry (including the integrated container registry) that uses a TLS certificate signed by a private CA, Docker Desktop needs to be configured to trust the CAs public certificate. 
 
-Obtain a copy of the CAs public certificate in pem format and place it in `/etc/docker/certs.d`:
+Obtain a copy of the CA's public certificate in pem format and place it in `/etc/docker/certs.d`:
 
 ```sh
 mkdir -p /etc/docker/certs.d
