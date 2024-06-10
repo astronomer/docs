@@ -851,7 +851,7 @@ Merge these values into `values.yaml`. You can do this manually or by placing [m
 
 ## Step 14: Configure the database {#configure-the-database}
 
-Astronomer requires a central Postgres database that acts as the backend for Astronomer's Houston API and will host individual metadata databases for all Airflow Deployments spun up on the platform.
+Astronomer requires a central Postgres database that acts as the backend for Astronomer's Houston API and hosts individual metadata databases for all Deployments created on the platform.
 
 :::info
 
