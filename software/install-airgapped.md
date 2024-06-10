@@ -1697,7 +1697,6 @@ To disable email transmission and email verision of users attempting to access t
     kubectl -n astronomer create secret generic private-root-ca --from-file=cert.pem=./private-root-ca.pem
     ```
 
-    Before you run this command, keep the following in mind:
 
 
 2. Add `<secret name>` to the list of secret names contained in `global.privateCaCerts` in `values.yaml`:
