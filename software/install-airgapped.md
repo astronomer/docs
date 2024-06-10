@@ -759,7 +759,7 @@ Astronomer Software sends all outbound email using SMTP.
 
 :::info
 
-If SMTP is not available in the environment where you're installing Astronomer Software, follow instructions in [Configuring Astronomer Software To Not Send Outbound Email](#configuring-astronomer-software-to-not-send-outbound-email) and then skip the rest of this section.
+If SMTP is not available in the environment where you're installing Astronomer Software, follow instructions in [configure Astronomer Software to not send outbound email](#configure-astronomer-software-to-not-send-outbound-email), and then skip the rest of this section.
 
 :::
 
