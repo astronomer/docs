@@ -763,17 +763,24 @@ If SMTP is not available in the environment where you're installing Astronomer S
 
 :::
 
-1. Obtain a set of SMTP credentials to use to send email from your email administator. Emails sent from Astronomer are not designed to be replied to via email - requesting an email address and display-name. Request all the following information:
-     * email address
-     * email display-name requirements (if any, e.g. some email servers require a from-line of: `Do Not Reply <donotreply@example.com>`)
-     * smtp username (usually the same as the email address)
-     * smtp password
-     * smtp hostname
-     * smtp port
-     * whether or not the connection supports TLS
+1. Obtain a set of SMTP credentials from your email administrator for you to use to send email from Astronomer Software. When you request an email address and display name, remember that these emails are not designed for users to reply directly to them. Request all the following information:
+     * Email address
+     * Email display name requirements. Some email servers require a **From** line of: `Do Not Reply <donotreply@example.com>`. 
+     * SMTP username. This is usually the same as the email address.
+     * SMTP password
+     * SMTP hostname
+     * SMTP port
+     * Whether or not the connection supports TLS
+     
+     :::info 
+
+    If there is a `/` or any other escape character in your username or password, you may need to [URL encode](https://www.urlencoder.org/) those characters.
+
+    :::
+    
 2. Ensure that your Kubernetes cluster has access to send outbound email to the SMTP server.
 3. Change the configuration in `values.yaml` from `noreply@my.email.internal` to an email address that is valid to use with your SMTP credentials.
-4. Construct an email connection string and store it in a secret named `astronomer-tls` in the astronomer platform namespace. Make sure to *url-encode* the username and password if they contain special characters.
+4. Construct an email connection string and store it in a secret named `astronomer-tls` in the Astronomer platform namespace. Make sure to *url-encode* the username and password if they contain special characters.
 
     ```sh
     kubectl -n astronomer create secret generic astronomer-smtp --from-literal connection="smtp://my@40user:my%40pass@smtp.email.internal/?requireTLS=true"
