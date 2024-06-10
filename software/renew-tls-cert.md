@@ -132,7 +132,7 @@ sudo certbot certonly --manual --preferred-challenges=dns -d -d *. --key-type=rs
    kubectl get certificates -n astronomer
    ```
 
-6. Note your certificate name for when you create a Kubernetes TLS secret and push it to your Software configuration as described in the [Astronomer Software installation guide](install-airgapped.md)
+6. Note your certificate name. You will need it later when you create a Kubernetes TLS secret and push it to your Software configuration. See the [Astronomer Software installation guide](install-airgapped.md) for the procedure.
 
 ## Manually renew TLS certificates
 
