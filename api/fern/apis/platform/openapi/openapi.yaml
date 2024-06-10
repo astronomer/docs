@@ -106,6 +106,7 @@ components:
           - CREATE_FAILED
           - UPDATE_FAILED
           - UPDATING
+          - ACCESS_DENIED
           example: CREATED
           type: string
         tags:
