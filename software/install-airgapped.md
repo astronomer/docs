@@ -1699,9 +1699,6 @@ To disable email transmission and email verision of users attempting to access t
 
     Before you run this command, keep the following in mind:
 
-    - The root certificate you specify should be the certificate of the authority that signed the Astronomer certificate. This is not the certificate associated with Astronomer or any other service.
-    - The name of the secret file must be `cert.pem` for your certificate to be trusted properly.
-    - The file must contain only a single certificate, it may not be a certificate bundle.
 
 2. Add `<secret name>` to the list of secret names contained in `global.privateCaCerts` in `values.yaml`:
   
