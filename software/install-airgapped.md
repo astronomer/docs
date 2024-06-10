@@ -786,7 +786,7 @@ If SMTP is not available in the environment where you're installing Astronomer S
     kubectl -n astronomer create secret generic astronomer-smtp --from-literal connection="smtp://my@40user:my%40pass@smtp.email.internal/?requireTLS=true"
     ```
 
-    In general, an SMTP URI is formatted as `smtps://USERNAME:PASSWORD@HOST/?pool=true`. The following table contains examples of what the URI will look like for some of the most popular SMTP services:
+    In general, an SMTP URI is formatted as `smtps://USERNAME:PASSWORD@HOST/?pool=true`. The following table contains examples of the URI for some of the most popular SMTP services:
 
     | Provider          | Example SMTP URL                                                                                 |
     |-------------------|--------------------------------------------------------------------------------------------------|
