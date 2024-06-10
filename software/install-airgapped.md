@@ -847,7 +847,7 @@ postgresql:
 
 ```
 
-Merge these values into `values.yaml`. You can do this manually or by placing the configuration as a new file, as well as [merge_yaml.py](#merge-yaml) in your project directory and running `python merge_yaml.py storage-class-config.yaml values.yaml`.
+Merge these values into `values.yaml`. You can do this manually or by placing [merge_yaml.py](#merge-yaml) and the configuration as a new file in your project directory and running `python merge_yaml.py storage-class-config.yaml values.yaml`.
 
 ## Step 14: Configure the database {#configure-the-database}
 
