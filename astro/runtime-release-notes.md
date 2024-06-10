@@ -38,6 +38,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 Astro Runtime 11.5.0 includes same-day support for Apache Airflow 2.9.2. Airflow 2.9.2 contains a number of bug fixes including:
 
+- Resolved a bug where valid DAGs that worked in Airflow 2.8.x and had tasks with outlets with specific URIs stopped working depending on how the URI was formatted [(#39670)](https://github.com/apache/airflow/pull/39670)
 - Fixed a bug affecting the webserver's static file caching, improving performance and response in the Airflow UI. [(#39345)](https://github.com/apache/airflow/pull/39345)
 - Resolved an issue where the object storage XCOM backend did not serialize correctly, causing custom XCOM backends to sometimes fail. [(#39313)](https://github.com/apache/airflow/pull/39313)
 
