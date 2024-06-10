@@ -667,9 +667,7 @@ Run the following command to store the public full-chain certificate in the Astr
 kubectl -n <astronomer platform namespace> create secret tls astronomer-tls --cert <fullchain-pem-filepath> --key <your-private-key-filepath>
 ```
 
-If your security team has instructed you that there are no intermediate certificate
-
-E.g.
+However, if your security team has instructed you that there are no intermediate certificates, run the following code example.
 ```sh
 kubectl -n astronomer create secret tls astronomer-tls --cert full-chain.pem --key server_private_key.pem
 ```
