@@ -49,9 +49,9 @@ To access additional resources or functionality, you need to add a credit card n
 
 ## After your trial
 
-After your 14-day trial ends, you can no longer access your Deployments and Workspaces from the Astro UI. Your Deployments are hibernating. You can still access your user account page and Astronomer support forms. If you provie a credit card number or extend your trial, you can access your Deployments and Workspaces again, where you can wake your Deployments from hibernation.
+After your 14-day trial ends, you can no longer access your Deployments and Workspaces from the Astro UI. Your Deployments are hibernating. Even with hibernating Deployments, you can still access your user account page and Astronomer support forms. If you provie a credit card number or extend your trial, you can access your Deployments and Workspaces again, where you can wake your Deployments from hibernation.
 
-After your trial ends, all Deployments are automatically deleted. Any code that you deployed to Astro will be lost. If you need additional time to evaluate Astro, or you need to copy your configuration for future use, you can:
+You have 30 days after your trial ends to extend it before all Deployments are automatically deleted. When your Deployments are deleted, any code that you deployed to Astro will be lost. If you need additional time to evaluate Astro, or you need to copy your configuration for future use, you can:
 
 - Contact [sales](https://astronomer.io/contact/) to request a trial extension.
 - Run `astro deployment inspect` with the Astro CLI to save your existing Deployment configuration as a JSON or YAML file. See [Astro CLI command reference](cli/astro-deployment-inspect.md).
