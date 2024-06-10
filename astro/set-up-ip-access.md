@@ -1,9 +1,8 @@
 ---
 sidebar_label: "Set up IP Access List"
 title: "Set up IP Access List on Astro"
-id: set-up-ip-access-list
+id: ip-access-list
 description: Configure IP Access list to control the IP addresses from where your users can log in to Astro.
-toc_max_heading_level: 3
 ---
 
 import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
