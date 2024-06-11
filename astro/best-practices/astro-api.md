@@ -12,7 +12,7 @@ The Astro API is Astronomer's REST API that enables you to manage resources on A
 
 ## Use the latest API version
 
-The version of the Astro API is contained in the URL. Take for example the following URL: `https://api.astronomer.io/platform/v1beta1/organizations/organizationId/deployments`. The value `v1beta1` indicates you're querying version `v1beta1` of the Astro API. It's a best practice to upgrade soon to ensure no last-minute hectic upgrades are needed. Read more details on the Astro API's versioning and support policy [here](api/versioning-and-support).
+The version of the Astro API is contained in the URL. Take for example the following URL: `https://api.astronomer.io/platform/v1beta1/organizations/organizationId/deployments`. The value `v1beta1` indicates you're querying version `v1beta1` of the Astro API. It's a best practice to upgrade soon to ensure no last-minute hectic upgrades are needed. Read more details on the Astro API's versioning and support policy [here](https://www.astronomer.io/docs/astro/api/versioning-and-support).
 
 ## Error handling
 
