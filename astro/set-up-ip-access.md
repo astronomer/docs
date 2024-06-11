@@ -9,9 +9,9 @@ import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
 
 <EnterpriseBadge/>
 
-You can restrict which IP addresses or IP address ranges can access the Astro service for your specific Organization. This means that if your organization uses a VPN or other mechanism that limits the IP addresses your users might have, you can restrict access to your Astro Deployments to the IP addresses that you define in the the Astro UI.
+You can restrict which IP addresses or IP address ranges can access the Astro service for your specific Organization. By default, Astro allows users to access their Organization from unsecured networks. However, by creating an IP access list, if your organization uses a VPN or other mechanism that limits the IP addresses your users might have, you can restrict access to Astro based on the IP addresses that you define in the the Astro UI.
 
-After you enable the IP Access List, neither Airflow API no Astro API requests can access the Astro Organization, whether by using the Astro UI or programmatically through API requests.
+After you enable the IP access list, users and user-privileged resources can only interact with Astro while using a network with a permitted IP address, whether by using the Astro UI or programmatically with Astro API or Airflow API requests.
 
 ## Prerequisites
 
