@@ -73,12 +73,14 @@ For traceability purposes, you could also include the `requestId` in your logs, 
 
 ## API tokens
 
-In automated scripts such as CI/CD pipelines where there's no human in the loop, the Astro API can be queried using an API token. An API token grants access to certain Astronomer resources and it's therefore important to keep the token safe. Do **_not_** hardcode the token in code! Instead, store the token in a secret and expose it as an environment variable:
+In automated scripts such as CI/CD pipelines where there's no human in the loop, the Astro API can be queried using an API token. An API token grants access to certain Astronomer resources and it's therefore important to keep the token safe. Do **_not_** hardcode the token in code! Instead, store the token in a secret and expose it as an environment variable `ASTRO_API_TOKEN`:
 
 ```shell
-export API_TOKEN=...
+export ASTRO_API_TOKEN=...
 ... run script ...
 ```
+
+Storing API tokens in a system dedicated for storing secret values, for example [GitHub Actions Secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository), ensures secret values are not visible to humans and only referenced by code when needed. 
 
 Additionally, a best security practice is the principle of least privilege, where you grant only the required permissions to an API token and no more. This reduces the attack surface (the number of ways to cause damage) in case of a leaked API token. Astronomer provides three levels of API tokens, from least to most privilege:
 
