@@ -35,8 +35,8 @@ Organization owners can now limit the IP addresses of users to control who can a
 
 ### Additional improvements
 
-- When using the GitHub Integration, you can now retry a failed deploy or trigger a Git deploy directly from your Deployment settings page in the Astro UI. Refer to the [GitHub Integration](https://www.astronomer.io/docs/astro/deploy-github-integration) for more information. <!--https://github.com/astronomer/docs/pull/3839-->
-- Now, at the end of your Astro Trial, your Deployments automatically hibernate. You can then add a credit card number to your user account to access your Deployments and Workspaces to wake your hibernating Deployment. After 30 days, your hibernating Deployments and data are deleted. See [Start a trial](trial.md) for more information about Astro Trial policies and available resources.<!--https://github.com/astronomer/astro/pull/21514, https://github.com/astronomer/astro/pull/21562-->
+- When using the GitHub integration, you can now retry a failed deploy or trigger a Git deploy directly from your Deployment settings page in the Astro UI. See [GitHub Integration](https://www.astronomer.io/docs/astro/deploy-github-integration) for more information. <!--https://github.com/astronomer/docs/pull/3839-->
+- Deployments at the end of an Astro trial now automatically hibernate and are not immediately deleted. If your trial has ended, add a credit card number to your Organization to access your Workspaces and wake your hibernating Deployment. While in hibernation, Deployment settings and configurations are preserved. If you do not enter a payment method within 30 days, your hibernating Deployments and all corresponding data are deleted. See [Start a trial](trial.md) for more information.
 - The ability to create, update, and delete Deployment API tokens is restricted to users with the Workspace Owner role. Read [Workspace user permissions](https://www.astronomer.io/docs/astro/user-permissions#workspace-roles) for more information. <!--https://github.com/astronomer/astro/pull/21736-->
 
 ### Bug fixes

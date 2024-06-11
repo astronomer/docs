@@ -37,21 +37,26 @@ You have 14 days and $300 to spend in credits before your trial ends. See [Manag
 
 ### Trial resources
 
-Your Astro trial provides you access to specific kinds of Astronomer Deployment resources.
+An Astro trial provides you a level of access to Deployment resources that Astro considers sufficient to run an initial number of Apache Airflow DAGs and ensure that Astro meets the needs of your Organization.
 
-- One workspace per trial
-- Two Deployments per trial
-- A maximum of 5 workers per worker queue
-- No high-availability enabled
-- A5, A10, or A20 workers
+During a 14-day Astro trial, you can:
 
-To access additional resources or functionality, you need to add a credit card number or other payment method. You can read more about Deployment resources available for regular Astro plans in [Configure Deployment resources](deployment-resources.md).
+- Create one Workspace
+- Create up to two Deployments
+- Configure **Worker Count** to a maximum of 5 workers per worker queue
+- Use A5, A10, or A20 workers
+
+You cannot use high-availability (HA) mode during an Astro trial. To access additional resources or functionality, add a credit card number or other payment method to your Organization.
+
+To learn more about Deployment resources and features available to Astro customers, see [Configure Deployment resources](deployment-resources.md). To learn more about Astro pricing, see [Pricing](https://www.astronomer.io/pricing/).
 
 ## After your trial
 
-After your 14-day trial ends, you can no longer access your Deployments and Workspaces from the Astro UI. Your Deployments are hibernating. Even with hibernating Deployments, you can still access your user account page and Astronomer support forms. If you provie a credit card number or extend your trial, you can access your Deployments and Workspaces again, where you can wake your Deployments from hibernation.
+After your 14-day trial ends, you can no longer access your Workspace from the Astro UI and your Deployments enter [hibernation](deployment-resources.md#hibernate-a-development-deployment) for 30 days. You can still access your user account page and Astronomer support forms. To regain access to your Deployments and Workspace, you must enter a payment method or contact Astronomer to extend your trial. After you enter a payment method, you can wake your Deployments from hibernation and continue to run Apache Airflow DAGs.
 
-You have 30 days after your trial ends to extend it before all Deployments are automatically deleted. When your Deployments are deleted, any code that you deployed to Astro will be lost. If you need additional time to evaluate Astro, or you need to copy your configuration for future use, you can:
+All Deployment configurations are preserved during hibernation for 30 days from the last day of your Astro trial. After 30 days, your Deployment and all of its metadata are permanently deleted. When your Deployments are deleted, any code that you deployed to Astro will be lost.
+
+If you need additional time to evaluate Astro, or you need to copy your configuration for future use, you can:
 
 - Contact [sales](https://astronomer.io/contact/) to request a trial extension.
 - Run `astro deployment inspect` with the Astro CLI to save your existing Deployment configuration as a JSON or YAML file. See [Astro CLI command reference](cli/astro-deployment-inspect.md).
