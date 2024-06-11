@@ -31,7 +31,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 ## Astro Runtime 11.5.0
 
-- Release date: June 10, 2024
+- Release date: June 11, 2024
 - Airflow version: 2.9.2
 
 ## Airflow 2.9.2
@@ -39,13 +39,13 @@ If you're upgrading to receive a specific change, ensure the release note for th
 Astro Runtime 11.5.0 includes same-day support for Apache Airflow 2.9.2. Airflow 2.9.2 contains a number of bug fixes including:
 
 - Resolved a bug where valid DAGs that worked in Airflow 2.8 and had outlet datasets with specific URIs stopped working depending on how the URI was formatted [(#39670)](https://github.com/apache/airflow/pull/39670)
-- Resolved an issue where the object storage XCOM backend did not serialize correctly, causing custom XCOM backends to sometimes fail. [(#39313)](https://github.com/apache/airflow/pull/39313)
+- Resolved an issue where the object storage XCOM backend did not serialize correctly, causing custom XCOM backends to sometimes fail [(#39313)](https://github.com/apache/airflow/pull/39313)
 
 For more information, see the [Apache Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-9-2-2024-06-10).
 
 ### Additional improvements
 
-- Upgraded some OSS providers' minor and patch versions. See [Astro Runtime 11.5.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-1150)
+- Upgraded the minor and patch versions of some Astro open source provider packages. See [Astro Runtime 11.5.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-1150).
 
 ## Astro Runtime 11.4.0
 
