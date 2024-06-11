@@ -3,7 +3,7 @@ title: "Orchestrate semantic querying in Qdrant with Airflow"
 sidebar_label: "Qdrant"
 description: "Learn how to integrate Qdrant and Airflow."
 id: airflow-qdrant
-sidebar_custom_props: { icon: 'img/integrations/qdrant.png' }
+sidebar_custom_props: { icon: 'img/integrations/qdrant-logo.png' }
 ---
 
 import CodeBlock from '@theme/CodeBlock';
