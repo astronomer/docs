@@ -104,8 +104,9 @@ Any commits to your mapped branches will now trigger a code deploy to the corres
 To deploy code from your GitHub repository to Astro, you can:
 
 - Make a direct commit to one of your mapped branches.
-- Merge a pull request against one of our mapped branches.
-- Select **Trigger Git Deploy** from the **More actions** menu in your Deployment settings.
+- Merge a pull request against one of your mapped branches.
+- Select **Trigger Git Deploy** from the **More actions** menu in your Deployment settings. This deploys the latest commit from your branch. Astronomer recommends this action when your Git branch and Astro fall out of sync and you don't want to create a new commit to get them back in sync.
+- Select **Trigger Git Deploy** from the **More actions** menu for a previously failed deploy. This redeploys that particular Git commit even if it's not necessarily the latest commit in your repository or branch. Astronomer recommends this action when a deploy fails and you want to try it again without creating a new commit.
 
 Any of these actions triggers the Astro App to deploy your Astro project to the mapped Astro Deployment. When DAG-only deploys are enabled, your GitHub repository triggers:
 
