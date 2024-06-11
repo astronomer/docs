@@ -5,14 +5,15 @@ description: "Several best practices to ensure a great experience using the Astr
 id: astro-api-best-practices
 ---
 
-The Astro API is Astronomer's REST API that enables you to manage resources on Astro. Below are several best practices to ensure an optimal user experience:
+The Astro API is Astronomer's REST API for managing resources on Astro, for example to create a deployment. Below are several topics regarding best practices for the Astro API to ensure a safe and optimal user experience:
 
 - Use the latest API version
 - Error handling
+- API tokens
 
 ## Use the latest API version
 
-The version of the Astro API is contained in the URL. Take for example the following URL: `https://api.astronomer.io/platform/v1beta1/organizations/organizationId/deployments`. The value `v1beta1` indicates you're querying version `v1beta1` of the Astro API. It's a best practice to upgrade soon to ensure no last-minute hectic upgrades are needed. Read more details on the Astro API's versioning and support policy [here](https://www.astronomer.io/docs/astro/api/versioning-and-support).
+The version of the Astro API is contained in the URL. Take for example the following URL: `https://api.astronomer.io/platform/v1beta1/organizations/organizationId/deployments`. The value `v1beta1` indicates you're querying version `v1beta1` of the Astro API. It's a best practice to upgrade soon to ensure no last-minute hectic upgrades are needed, and newer versions of the same endpoints are generally more stable. Read more details on the Astro API's versioning and support policy [here](https://www.astronomer.io/docs/astro/api/versioning-and-support).
 
 ## Error handling
 
@@ -69,3 +70,18 @@ The complete error response structure is:
 ```
 
 For traceability purposes, you could also include the `requestId` in your logs, which is an internal Astronomer identifier that Astronomer support can use to track down your request.
+
+## API tokens
+
+In automated scripts such as CI/CD pipelines where there's no human in the loop, the Astro API can be queried using an API token. An API token grants access to certain Astronomer resources and it's therefore important to keep the token safe. Do **_not_** hardcode the token in code! Instead, store the token in a secret and expose it as an environment variable:
+
+```shell
+export API_TOKEN=...
+... run script ...
+```
+
+Additionally, a best security practice is the principle of least privilege, where you grant only the required permissions to an API token and no more. This reduces the attack surface (the number of ways to cause damage) in case of a leaked API token. Astronomer provides three levels of API tokens, from least to most privilege:
+
+- [Deployment API tokens](astro/deployment-api-tokens)
+- [Workspace API tokens](astro/workspace-api-tokens)
+- [Organization API tokens](astro/organization-api-tokens)
