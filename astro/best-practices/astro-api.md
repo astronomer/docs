@@ -16,7 +16,7 @@ The version of the Astro API is contained in the URL. Take for example the follo
 
 ## Error handling
 
-It's a best practice to always expect the unexpected. Meaning, ensure your code handles unexpected situations such as errors properly. For example, deployment names are unique within a workspace. If you were to request a second deployment with an already-existing name, the Astro API would return an error. To ensure your code handles errors properly, wrap requests in a try/except block:
+It's a best practice to always expect the unexpected. Meaning, ensure your code handles unexpected situations such as errors properly. For example, deployment names are unique within a workspace. If you were to create a second deployment with an already-existing name, the Astro API would return an error. To ensure your code handles errors properly, wrap requests in a try/except block:
 
 ```python
 import requests
@@ -58,9 +58,7 @@ The statement `response.raise_for_status()` raises an exception on any HTTP code
 Failed creating deployment. Reason: Invalid request: Deployment name 'my_deployment' already exists in this workspace
 ```
 
-This log shows us a deployment with name `my_deployment` already exists within the workspace, and therefore we must choose a different deployment name.
-
-The full error response structure is:
+The complete error response structure is:
 
 ```json
 {
@@ -70,4 +68,4 @@ The full error response structure is:
 }
 ```
 
-For traceability purposes, you could also print the `requestId` in your logs, which is an internal Astronomer identifier that Astronomer support can use to track down your request.
+For traceability purposes, you could also include the `requestId` in your logs, which is an internal Astronomer identifier that Astronomer support can use to track down your request.
