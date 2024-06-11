@@ -77,6 +77,8 @@ Astronomer continuously checks for available security fixes for software used in
 
 If a vulnerability is not yet addressed in a third-party dependency and no official fix is available, Astronomer attempts to address the vulnerability or its impact with environmental mitigations. Whenever possible, Astronomer collaborates with the upstream project to support a timely delivery of the official fix. This process also covers images publicly available on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags) and provides context for their vulnerability scanning results.
 
+Astro Runtime releases may or may not include a fix to a Common Vulnerability and Exposure (CVE).  When you use a particular Astro Runtime version the day of release, the CVE fixes that version contains might be undisclosed. For security purposes, a description of these fixes will be retroactively added to release notes only once the CVE resolution is published or announced by the upstream project.
+
 If you identify a vulnerability that results in relevant risk for your organization, contact [Astronomer security](mailto:security@astronomer.io).
 
 ### Backport policy for bug and security fixes
