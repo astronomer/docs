@@ -156,7 +156,7 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 
 #### Ignored CVEs
 
-- [CVE-2024-34069](https://www.cve.org/CVERecord?id=CVE-2024-34069) (Airflow 2.8 can't use Werkzeug 3)
+- [CVE-2024-34069](https://www.cve.org/CVERecord?id=CVE-2024-34069) The underlying vulnerability of this CVE is only relevant to a small set of use cases and scenarios that don't affect the majority of Airflow users. Since the resolution would require significant changes to Airflow and its dependencies, this CVE has not been addressed at this time.
 
 ## Astro Runtime 10.7.0
 
@@ -356,7 +356,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Security fixes
 
-- https://www.cve.org/CVERecord?id=CVE-2024-1135
+- [CVE-2024-1135](https://www.cve.org/CVERecord?id=CVE-2024-1135)
 
 ## Astro Runtime 9.12.0
 
@@ -400,7 +400,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 #### Ignored CVEs
 
-- [CVE-2024-34069](https://www.cve.org/CVERecord?id=CVE-2024-34069) (Airflow 2.8 can't use Werkzeug 3)
+- [CVE-2024-34069](https://www.cve.org/CVERecord?id=CVE-2024-34069) The underlying vulnerability of this CVE is only relevant to a small set of use cases and scenarios that don't affect the majority of Airflow users. Since the resolution would require significant changes to Airflow and its dependencies, this CVE has not been addressed at this time.
 
 ## Astro Runtime 9.10.2
 
