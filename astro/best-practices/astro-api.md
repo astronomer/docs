@@ -82,6 +82,6 @@ export API_TOKEN=...
 
 Additionally, a best security practice is the principle of least privilege, where you grant only the required permissions to an API token and no more. This reduces the attack surface (the number of ways to cause damage) in case of a leaked API token. Astronomer provides three levels of API tokens, from least to most privilege:
 
-- [Deployment API tokens](astro/deployment-api-tokens)
-- [Workspace API tokens](astro/workspace-api-tokens)
-- [Organization API tokens](astro/organization-api-tokens)
+- [Deployment API tokens](deployment-api-tokens.md)
+- [Workspace API tokens](workspace-api-tokens.md)
+- [Organization API tokens](organization-api-tokens.md)
