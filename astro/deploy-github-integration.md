@@ -134,6 +134,12 @@ To review code deploys:
 
 ![The status of a specific deploy in the Astro UI. The deploy is currently running and generating logs.](/img/docs/deploy-status.png)
 
+## Retry a failed deploy
+
+If your deploy fails, you can retry the deploy from Github by viewing the **Deploy History** in your Deployment settings, and selecting **Retry Deploy**. You can only retry the most recent failed deploy.
+
+If you have multiple failed deploys in a row, you can only retry the most recent failed deployment by clicking **Retry Deploy** in the deploy history.
+
 ## How it works
 
 The Astro GitHub integration works through a [GitHub app](https://docs.github.com/en/apps/overview) that you install in your GitHub repository. The app is also authorized to act on behalf of your personal account so that it can see the GitHub organizations and repositories you have access to.
