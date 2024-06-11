@@ -48,7 +48,7 @@ try:
     )
     response.raise_for_status()
 except requests.exceptions.HTTPError as e:
-    print("Failed creating deployment. Reason: " + response.json()["message"])
+    print("Failed creating deployment. Reason: " + e.response.json()["message"])
     raise e
 ```
 
@@ -59,3 +59,15 @@ Failed creating deployment. Reason: Invalid request: Deployment name 'my_deploym
 ```
 
 This log shows us a deployment with name `my_deployment` already exists within the workspace, and therefore we must choose a different deployment name.
+
+The full error response structure is:
+
+```json
+{
+    "message": "Invalid request: Deployment name 'my_deployment' already exists in this workspace",
+    "requestId": "f004d12a-29c8-40d8-b239-2b1b615ea45b",
+    "statusCode": 400
+}
+```
+
+For traceability purposes, you could also print the `requestId` in your logs, which is an internal Astronomer identifier that Astronomer support can use to track down your request.
