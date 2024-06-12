@@ -271,7 +271,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 ## Astro Runtime 9.15.0
 
-- Release date: June 11, 2024
+- Release date: June 12, 2024
 - Airflow version: 2.7.3
 
 ### Early access Airflow bug fixes
@@ -281,6 +281,7 @@ For more information about the major changes in this release, see the [Airflow b
 ### Additional improvements
 
 - Upgraded the minor and patch versions of some Astro open source provider packages. See [Astro Runtime 9.15.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-9150)
+- Includes `astronomer-providers-logging` version 1.1.5.1
 
 ### Bug fixes
 
