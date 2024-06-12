@@ -15,6 +15,8 @@ There are three options for deploying code to a Deployment:
 
 For each deploy option, you can either trigger the deploy manually or through CI/CD. CI/CD pipelines can include both image deploys and DAG-only deploys, and they can deploy to multiple different Deployments based on different branches in your git repository. See [CI/CD overview](set-up-ci-cd.md).
 
+If multiple deploys are triggered simultaneously or additional deploys are triggered while a deploy is still processing, whether manually or through CI/CD, the first deploy is processed and then the subsequent deploys are completed. This behavior is different from how Astro processes simultaneous code deploys with the [GitHub integration](deploy-github-integration.md#deploys), which cancels the first deploy, and applies the most recent.
+
 ## See also
 
 - [Create an Astro project](cli/develop-project.md#create-an-astro-project)
