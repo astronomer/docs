@@ -27,7 +27,6 @@ try:
         headers={"Authorization": f"Bearer {astro_api_token}"},
         json={
             "astroRuntimeVersion": "{{RUNTIME_VER}}",
-            "clusterId": "cabcdefgh12ij34klmn567op8",
             "defaultTaskPodCpu": "0.25",
             "defaultTaskPodMemory": "0.5Gi",
             "executor": "CELERY",
@@ -38,7 +37,7 @@ try:
             "resourceQuotaCpu": "10",
             "resourceQuotaMemory": "20Gi",
             "schedulerSize": "SMALL",
-            "type": "DEDICATED",
+            "type": "STANDARD",
             "workspaceId": workspace_id,
         },
     )
