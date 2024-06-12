@@ -9,6 +9,7 @@ The Astro API is Astronomer's REST API for managing resources on Astro, for exam
 
 - Error handling
 - API tokens
+- Use a graphical REST API client for development
 
 ## Error handling
 
@@ -83,4 +84,12 @@ Additionally, a best security practice is the principle of least privilege, wher
 - [Organization API tokens](organization-api-tokens.md)
 
 We advise creating API tokens with as little privileges as possible. When using an API token for actions on deployment-level, consider [custom Deployment roles](customize-deployment-roles.md) too.
+
+## Use a graphical REST API client for development
+
+The Astro API documentation already provides a convenient interface to try out the API:
+
+![Astro API documentation](/img/docs/fern.png)
+
+A graphical REST API client can be a helpful addition when developing against any REST API. Popular tools are [Postman](https://www.postman.com) and [Insomnia](https://insomnia.rest/products/insomnia). The Astro API documentation provides downloads to the API specifications which are YAML files that define the API structure, which you can load into your tool of choice: https://www.astronomer.io/docs/api/overview#download-openapi-specifications. Graphical REST API clients often provide convenience features over web-based documentation such as query history, sharing values via variables, ability to define environments with different values, create chained requests (use result from one query in a follow-up query), etc.
 
