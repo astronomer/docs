@@ -36,7 +36,7 @@ Organization owners can now limit the IP addresses of users to control who can a
 ### Additional improvements
 
 - When using the GitHub integration, you can now retry a failed deploy or trigger a Git deploy directly from your Deployment settings page in the Astro UI. See [GitHub Integration](https://www.astronomer.io/docs/astro/deploy-github-integration) for more information.
-- Deployments at the end of an Astro trial now automatically hibernate and are not immediately deleted. If your trial has ended, add a credit card number to your Organization to access your Workspaces and wake your hibernating Deployment. While in hibernation, Deployment settings and configurations are preserved. If you do not enter a payment method within 30 days, your hibernating Deployments and all corresponding data are deleted. See [Start a trial](trial.md) for more information.
+- Deployments at the end of an Astro trial now automatically hibernate and are not immediately deleted. If your trial has ended, add a credit card number to your Organization to access your Workspaces and wake your hibernating Deployment. While in hibernation, Deployment settings and configurations are preserved. If you do not enter a payment method within 30 days, your hibernating Deployments and all corresponding data are deleted. See [Start a trial](https://www.astronomer.io/docs/astro/trial) for more information.
 - The ability to create, update, and delete Deployment API tokens is restricted to users with the Workspace Owner role. Read [Workspace user permissions](https://www.astronomer.io/docs/astro/user-permissions#workspace-roles) for more information.
 
 ### Bug fixes
