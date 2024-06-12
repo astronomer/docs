@@ -35,7 +35,7 @@ Because the IP Access List limits access to the Astro UI only to specific IP add
 
 To restore access for a user that is blocked, an Organization Owner needs to either:
 
-- Disable the IP Access list setting or
+- Disable the IP Access list setting by deleting the list or
 - Add the specific blocked user's IP address to the IP Access list.
 
 If you disable the IP Access List setting to resolve the user's access issue temporarily, remember to enable the setting again to maintain the IP address restrictions.
