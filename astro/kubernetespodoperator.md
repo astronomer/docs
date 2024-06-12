@@ -436,7 +436,8 @@ In order to be able to connect to your external EKS cluster you need to install 
     ```dockerfile
     USER root
 
-    RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
+    RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    # Note: if you are testing your pipeline locally you may need to adjust the zip version to your dev local environment
     RUN unzip awscliv2.zip
     RUN ./aws/install
 
