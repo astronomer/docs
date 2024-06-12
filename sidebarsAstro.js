@@ -228,6 +228,7 @@ module.exports = {
             "manage-workspace-users",
             "manage-teams",
             "configure-idp",
+            "ip-access-list",
             "set-up-scim-provisioning",
             "manage-domains",
             "user-permissions",
