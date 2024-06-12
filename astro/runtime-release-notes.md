@@ -156,7 +156,7 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 
 #### Ignored CVEs
 
-- [CVE-2024-34069](https://www.cve.org/CVERecord?id=CVE-2024-34069) The underlying vulnerability of this CVE is only relevant to a small set of use cases and scenarios that don't affect the majority of Airflow users. Since the resolution would require significant changes to Airflow and its dependencies, this CVE has not been addressed at this time.
+- [CVE-2024-34069](https://www.cve.org/CVERecord?id=CVE-2024-34069) The underlying vulnerability of this CVE is only relevant to a small set of use cases and scenarios, such as when hosting Airflow publicly on the internet, and is considered low risk for Astro and Software users. Because the resolution would require significant changes to Airflow and its dependencies, this CVE has not been addressed at this time.
 
 ## Astro Runtime 10.7.0
 
@@ -277,7 +277,7 @@ For more information, see the [Apache Airflow release notes](https://airflow.apa
 
 #### Ignored CVEs
 
- - [CVE-2024-25128](https://www.cve.org/CVERecord?id=CVE-2024-25128) This CVE applies to OAuth 2.0 users. Attackers can gain unauthorized access to custom-built applications created with only certain versions of Flask-AppBuilder that use the OpenID 2.0 authorization protocol. This scenario does not apply to Astro Runtime users.
+ - [CVE-2024-25128](https://www.cve.org/CVERecord?id=CVE-2024-25128) This CVE applies to OpenID users only. Attackers can gain unauthorized access to the Airflow UI by impersonating any Airflow user. Note this impacts OpenID only, which is long deprecated, and should not be confused with the more common OpenID Connect (ODIC). This scenario does not apply to Astro Runtime users.
 
 ## Astro Runtime 10.1.0
 
@@ -400,7 +400,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 #### Ignored CVEs
 
-- [CVE-2024-34069](https://www.cve.org/CVERecord?id=CVE-2024-34069) The underlying vulnerability of this CVE is only relevant to a small set of use cases and scenarios that don't affect the majority of Airflow users. Since the resolution would require significant changes to Airflow and its dependencies, this CVE has not been addressed at this time.
+- [CVE-2024-34069](https://www.cve.org/CVERecord?id=CVE-2024-34069) The underlying vulnerability of this CVE is only relevant to a small set of use cases and scenarios such as when hosting Airflow publicly on the internet, and is considered low risk for Astro and Software users. Because the resolution would require significant changes to Airflow and its dependencies, this CVE has not been addressed at this time.
 
 ## Astro Runtime 9.10.2
 
@@ -437,7 +437,7 @@ For more information about the major changes in this release, see the [Airflow b
 - [CVE-2024-4340](https://www.cve.org/CVERecord?id=CVE-2024-4340)
 
 #### Ignored CVEs
-- [CVE-2024-25128](https://www.cve.org/CVERecord?id=CVE-2024-25128) This CVE applies to OAuth 2.0 users. Attackers can gain unauthorized access to custom-built applications created with only certain versions of Flask-AppBuilder that use the OpenID 2.0 authorization protocol. This scenario does not apply to Astro Runtime users.
+- [CVE-2024-25128](https://www.cve.org/CVERecord?id=CVE-2024-25128) This CVE applies to OpenID users only. Attackers can gain unauthorized access to the Airflow UI by impersonating any Airflow user. Note this impacts OpenID only, which is long deprecated, and should not be confused with the more common OpenID Connect (ODIC). This scenario does not apply to Astro Runtime users.
 
 ## Astro Runtime 9.10.0
 
