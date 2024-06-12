@@ -76,8 +76,11 @@ export ASTRO_API_TOKEN=...
 
 Storing API tokens in a system dedicated for storing secret values, for example [GitHub Actions Secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository), ensures secret values are not visible to humans and only referenced by code when needed. 
 
-Additionally, a best security practice is the principle of least privilege, where you grant only the required permissions to an API token and no more. This reduces the attack surface (the number of ways to cause damage) in case of a leaked API token. Astronomer provides three levels of API tokens, from least to most privilege:
+Additionally, a best security practice is the principle of least privilege, where you grant only the permissions necessary to perform an action and no more. This reduces the attack surface (the number of ways to cause damage) in case of a leaked API token. Astronomer provides three levels of API tokens, from least to most privilege:
 
 - [Deployment API tokens](deployment-api-tokens.md)
 - [Workspace API tokens](workspace-api-tokens.md)
 - [Organization API tokens](organization-api-tokens.md)
+
+We advise creating API tokens with as little privileges as possible. When using an API token for actions on deployment-level, consider [custom Deployment roles](customize-deployment-roles.md) too.
+
