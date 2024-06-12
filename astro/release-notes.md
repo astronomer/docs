@@ -31,17 +31,17 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <EnterpriseBadge/>
 
-Organization owners can now limit the IP addresses of users to control who can access the Astro UI or programmatically work with the Astro API for their organization. This allows you to restrict access to your Astro Organization to users on a VPN or to specific network ranges. See [Set up IP Access list](https://astronomer.io/docs/astro/ip-access-list). <!--https://github.com/astronomer/docs/issues/3776-->
+Organization owners can now limit the IP addresses of users to control who can access the Astro UI or programmatically work with the Astro API for their organization. This allows you to restrict access to your Astro Organization to users on a VPN or to specific network ranges. See [Set up IP Access list](https://astronomer.io/docs/astro/ip-access-list).
 
 ### Additional improvements
 
-- When using the GitHub integration, you can now retry a failed deploy or trigger a Git deploy directly from your Deployment settings page in the Astro UI. See [GitHub Integration](https://www.astronomer.io/docs/astro/deploy-github-integration) for more information. <!--https://github.com/astronomer/docs/pull/3839-->
+- When using the GitHub integration, you can now retry a failed deploy or trigger a Git deploy directly from your Deployment settings page in the Astro UI. See [GitHub Integration](https://www.astronomer.io/docs/astro/deploy-github-integration) for more information.
 - Deployments at the end of an Astro trial now automatically hibernate and are not immediately deleted. If your trial has ended, add a credit card number to your Organization to access your Workspaces and wake your hibernating Deployment. While in hibernation, Deployment settings and configurations are preserved. If you do not enter a payment method within 30 days, your hibernating Deployments and all corresponding data are deleted. See [Start a trial](trial.md) for more information.
-- The ability to create, update, and delete Deployment API tokens is restricted to users with the Workspace Owner role. Read [Workspace user permissions](https://www.astronomer.io/docs/astro/user-permissions#workspace-roles) for more information. <!--https://github.com/astronomer/astro/pull/21736-->
+- The ability to create, update, and delete Deployment API tokens is restricted to users with the Workspace Owner role. Read [Workspace user permissions](https://www.astronomer.io/docs/astro/user-permissions#workspace-roles) for more information.
 
 ### Bug fixes
 
-- Fixed an issue where the Organization Settings Dashboard failed to load correctly. <!--https://github.com/astronomer/astro/pull/21628-->
+- Fixed an issue where the Organization Settings Dashboard failed to load correctly.
 
 ## June 6, 2024
 
