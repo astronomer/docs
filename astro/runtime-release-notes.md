@@ -332,8 +332,27 @@ For more information about the major changes in this release, see the [Airflow b
 - Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_CLIENT_ID` as an environment variable.
 - Fixed an issue where Astro audit logs listed a user's name as `User` for trigger events instead of their IDs.
 
+## Astro Runtime 9.15.0
+
+- Release date: June 12, 2024
+- Airflow version: 2.7.3
+
+### Early access Airflow bug fixes
+
+- Fixed an issue where Airflow might accidentally store dynamic content in a cache, possibly storing sensitive data [(#39550)](https://github.com/apache/airflow/pull/39550)
+
+### Additional improvements
+
+- Upgraded the minor and patch versions of some Astro open source provider packages. See [Astro Runtime 9.15.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-9150)
+- Includes `astronomer-providers-logging` version 1.1.5.1
+
+### Bug fixes
+
+- Fixed a bug where liveness/readiness probes might periodically fail when trying to remove a configuration file that did not exist.
+
 ### Security fixes
 
+- [CVE-2024-25142](https://www.cve.org/CVERecord?id=CVE-2024-25142)
 - [CVE-2023-48291](https://www.cve.org/CVERecord?id=CVE-2023-48291)
 - [CVE-2023-47265](https://www.cve.org/CVERecord?id=CVE-2023-47265)
 - [CVE-2023-49920](https://www.cve.org/CVERecord?id=CVE-2023-49920)
