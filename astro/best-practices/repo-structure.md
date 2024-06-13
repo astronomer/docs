@@ -22,7 +22,7 @@ In general, implementing Continuous Integration and Continuous Delivery (CI/CD) 
 - supports improved code quality
 - streamlines development workflows
 - enables consistent deployments across environments
-- decreases the time spent getting code in production
+- decreases the time spent getting code to production
 - facilitates collaboration.
 
 All the CI/CD strategies that Astro supports require utilization of a version control tool such as [GitHub](https://github.com/) or [GitLab](https://about.gitlab.com/). Implementation of version control is a longstanding software development best practice that enables:
@@ -34,6 +34,15 @@ All the CI/CD strategies that Astro supports require utilization of a version co
 With a version control system in place, you can configure automated deploys of your latest changes to Astro using CI/CD pipelines. How you choose to organize the code in your shared repository and deploy it to Astro should reflect the size and needs of your team.
 
 ### Option 1: one repo to one Deployment
+
+Creating a single Git repository for each Astro project is the strategy Astronomer recommends for smaller teams (under 30 members).
+
+Pro of this approach:
+- Your code history and project configuration are centralized, making it easy for developers to contribute changes to DAGs and Deployment configuration while avoiding synchronization problems across files.
+
+Cons of this approach:
+- You can't take this approach and simultaneously collect DAGs used in multiple Deployments in a single repository.
+- You can't take this approach and keep Deployment configuration code and DAG code separate, which is required in cases when you want to [configure Deployments programmatically](https://www.astronomer.io/docs/astro/manage-deployments-as-code) and when you want to restrict access to Deployment configuration.
 
 ### Option 2: one repo with multiple projects to multiple Deployments with CI/CD
 
