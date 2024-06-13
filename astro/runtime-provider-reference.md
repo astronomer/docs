@@ -365,7 +365,7 @@ docker run --rm quay.io/astronomer/astro-runtime:11.0.0 pip freeze | grep apache
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon  |  8.24.0 |
 | apache-airflow-providers-celery  |  3.7.2 |
-| | apache-airflow-providers-cncf-kubernetes  |  7.14.0 |
+| apache-airflow-providers-cncf-kubernetes  |  7.14.0 |
 | apache-airflow-providers-common-io  |  1.3.2 |
 | apache-airflow-providers-common-sql  |  1.14.0 |
 | apache-airflow-providers-datadog  |  3.6.1 |
