@@ -12,7 +12,7 @@ This guide uses the following terms to describe cross-deployment dependencies:
 - **Upstream deployment**: A deployment where a DAG must reach a specified state before a DAG in another deployment can run.
 - **Downstream deployment**: A deployment in which a DAG cannot run until a DAG in an upstream deployment reaches a specified state.
 
-Cross-deployment dependencies require special implementation because some methods, like the TriggerDagRunOperator, ExternalTaskSensor and direct Airflow Dataset dependencies, are only designed for DAGs in the same deployment. On Astro, there are two recommended methods available for implementing cross-deployment dependencies: Astro Alerts and triggering updates to Airflow Datasets using the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/create_dataset_event).
+Cross-deployment dependencies require special implementation because some methods, like the TriggerDagRunOperator, ExternalTaskSensor, and direct Airflow Dataset dependencies, are only designed for DAGs in the same deployment. On Astro, there are two recommended methods available for implementing cross-deployment dependencies: Astro Alerts and triggering updates to Airflow Datasets using the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/create_dataset_event).
 
 ## Feature overview
 
