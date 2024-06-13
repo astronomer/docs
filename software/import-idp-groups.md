@@ -98,9 +98,9 @@ astronomer:
       auth:
       # Local database (user/pass) configuration.
         local:
-          enabled: false
+          enabled: true
           teams:
-            enabled: false
+            enabled: true
 ```
 
 Then, to create a local Team:
