@@ -74,9 +74,9 @@ For more information, see the [Apache Airflow release notes](https://airflow.apa
 
 - Upgraded some OSS providers' minor and patch versions
 
-### Bug fixes
+### Security fixes
 
-- Fixed ([CVE-2024-30251](https://nvd.nist.gov/vuln/detail/CVE-2024-30251))
+- [CVE-2024-30251](https://www.cve.org/CVERecord?id=CVE-2024-30251)
 
 ## Astro Runtime 11.2.0
 
@@ -97,6 +97,10 @@ Due to an [issue related to using custom FAB actions in Airflow plugins](https:/
 
 - Added the [`apache-airflow-providers-mysql`](https://airflow.apache.org/docs/apache-airflow-providers-mysql/stable/index.html) provider
 - Upgraded some OSS providers' minor and patch versions
+
+### Security fixes
+
+- [CVE-2024-4340](https://www.cve.org/CVERecord?id=CVE-2024-4340)
 
 ## Astro Runtime 11.1.0
 
@@ -170,8 +174,10 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 - Fixed a bug where liveness/readiness probes might periodically fail when trying to remove a configuration file that did not exist.
 
 ### Security fixes
+
 - [CVE-2024-30251](https://nvd.nist.gov/vuln/detail/CVE-2024-30251)
 - [CVE-2024-25142](https://www.cve.org/CVERecord?id=CVE-2024-25142)
+- [CVE-2024-32077](https://www.cve.org/CVERecord?id=CVE-2024-32077)
 
 ## Astro Runtime 10.8.0
 
@@ -183,6 +189,15 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 - Added functionality for using plugins to generate custom menu items in the Airflow UI. This feature will be fully available on Astro in a future release.
 - Updated `sqlparse` to `0.5.0`.
 - Upgraded [Gunicorn](https://gunicorn.org/) to `22.0.0`.
+
+### Security fixes
+
+- [CVE-2024-4340](https://www.cve.org/CVERecord?id=CVE-2024-4340)
+- [CVE-2024-1135](https://www.cve.org/CVERecord?id=CVE-2024-1135)
+
+#### Ignored CVEs
+
+- [CVE-2024-34069](https://www.cve.org/CVERecord?id=CVE-2024-34069) The underlying vulnerability of this CVE is only relevant to a small set of use cases and scenarios, such as when hosting Airflow publicly on the internet, and is considered low risk for Astro and Software users. Because the resolution would require significant changes to Airflow and its dependencies, this CVE has not been addressed at this time.
 
 ## Astro Runtime 10.7.0
 
@@ -196,6 +211,10 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 - Load `consuming_dags` attr eagerly before dataset listener ([#36247](https://github.com/apache/airflow/pull/36247))
 - Add "return" statement to "yield" within a while loop in core triggers ([#38389](https://github.com/apache/airflow/pull/38389))
 - Improve ExternalTaskSensor Async Implementation ([#36916](https://github.com/apache/airflow/pull/36916))
+
+### Security fixes
+
+- [CVE-2024-31869](https://www.cve.org/CVERecord?id=CVE-2024-31869)
 
 ## Astro Runtime 10.6.0
 
@@ -215,6 +234,10 @@ For more information, see the [Apache Airflow release notes](https://airflow.apa
 
 - Upgraded `apache-airflow-providers-google` to version `10.16.0`
 
+### Security fixes
+
+- [CVE-2022-48174](https://www.cve.org/CVERecord?id=CVE-2022-48174)
+
 ## Astro Runtime 10.5.0
 
 - Release date: March 11, 2024
@@ -229,6 +252,10 @@ Astro Runtime 10.5.0 includes same-day support for Apache Airflow 2.8.3. Airflow
 
 For more information, see the [Apache Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-8-3-2024-03-11).
 
+### Security fixes
+
+- [CVE-2024-28746](https://www.cve.org/CVERecord?id=CVE-2024-28746)
+
 ## Astro Runtime 10.4.0
 
 - Release date: February 26, 2024
@@ -242,6 +269,13 @@ Astro Runtime 10.4.0 includes same-day support for Apache Airflow 2.8.2. Airflow
 - Change AirflowTaskTimeout to inherit BaseException ([#35653](https://github.com/apache/airflow/pull/35653))
 
 For more information, see the [Apache Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-8-2-2024-02-26).
+
+### Security fixes
+
+- [CVE-2024-26130](https://www.cve.org/CVERecord?id=CVE-2024-26130)
+- [CVE-2024-30251](https://www.cve.org/CVERecord?id=CVE-2024-30251)
+- [CVE-2024-26280](https://www.cve.org/CVERecord?id=CVE-2024-26280)
+- [CVE-2024-27906](https://www.cve.org/CVERecord?id=CVE-2024-27906)
 
 ## Astro Runtime 10.3.0
 
@@ -276,6 +310,15 @@ Astro Runtime 10.2.0 includes same-day support for Apache Airflow 2.8.1. Airflow
 - Fix Callback exception when a removed task is the last one in the task instance list ([#36693](https://github.com/apache/airflow/pull/36693))
 
 For more information, see the [Apache Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-8-1-2024-01-19).
+
+### Security fixes
+
+- [CVE-2023-50944](https://www.cve.org/CVERecord?id=CVE-2023-50944)
+- [CVE-2023-50943](https://www.cve.org/CVERecord?id=CVE-2023-50943)
+
+#### Ignored CVEs
+
+ - [CVE-2024-25128](https://www.cve.org/CVERecord?id=CVE-2024-25128) This CVE applies to OpenID users only. Attackers can gain unauthorized access to the Airflow UI by impersonating any Airflow user. Note this impacts OpenID only, which is long deprecated, and should not be confused with the more common OpenID Connect (ODIC). This scenario does not apply to Astro Runtime users.
 
 ## Astro Runtime 10.1.0
 
@@ -312,6 +355,13 @@ For more information about the major changes in this release, see the [Airflow b
 - Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_CLIENT_ID` as an environment variable.
 - Fixed an issue where Astro audit logs listed a user's name as `User` for trigger events instead of their IDs.
 
+### Security fixes
+
+- [CVE-2023-48291](https://www.cve.org/CVERecord?id=CVE-2023-48291)
+- [CVE-2023-47265](https://www.cve.org/CVERecord?id=CVE-2023-47265)
+- [CVE-2023-49920](https://www.cve.org/CVERecord?id=CVE-2023-49920)
+- [CVE-2023-50783](https://www.cve.org/CVERecord?id=CVE-2023-50783)
+
 ## Astro Runtime 9.14.0
 
 - Release date: May 13, 2024
@@ -325,6 +375,10 @@ For more information about the major changes in this release, see the [Airflow b
 ### Bug fixes
 
 - Fixed ([CVE-2024-30251](https://nvd.nist.gov/vuln/detail/CVE-2024-30251))
+
+### Security fixes
+
+- [CVE-2024-30251](https://www.cve.org/CVERecord?id=CVE-2024-30251)
 
 ## Astro Runtime 9.13.0
 
@@ -341,6 +395,10 @@ For more information about the major changes in this release, see the [Airflow b
 
 - Fixed a bug where the **Cluster Activity** tab was missing from the Airflow UI.
 
+### Security fixes
+
+- [CVE-2024-1135](https://www.cve.org/CVERecord?id=CVE-2024-1135)
+
 ## Astro Runtime 9.12.0
 
 - Release date: April 11, 2024
@@ -353,6 +411,10 @@ For more information about the major changes in this release, see the [Airflow b
 - Load `consuming_dags` attr eagerly before dataset listener ([#36247](https://github.com/apache/airflow/pull/36247))
 - Add "return" statement to "yield" within a while loop in core triggers ([#38389](https://github.com/apache/airflow/pull/38389))
 - Improve ExternalTaskSensor Async Implementation ([#36916](https://github.com/apache/airflow/pull/36916))
+
+### Security fixes
+
+- [CVE-2022-48174](https://www.cve.org/CVERecord?id=CVE-2022-48174)
 
 ## Astro Runtime 9.11.0
 
@@ -370,6 +432,16 @@ For more information about the major changes in this release, see the [Airflow b
 - Revert "Fix future DagRun rarely triggered by race conditions when max_active_runs reached its upper limit. ([#37596](https://github.com/apache/airflow/pull/37596))
 - Revoking audit_log permission from all users except admin ([#37501](https://github.com/apache/airflow/pull/37501))
 - Check permissions for ImportError ([#37468](https://github.com/apache/airflow/pull/37468))
+
+### Security fixes
+
+- [CVE-2024-26130](https://www.cve.org/CVERecord?id=CVE-2024-26130)
+- [CVE-2024-27906](https://www.cve.org/CVERecord?id=CVE-2024-27906)
+- [CVE-2024-26280](https://www.cve.org/CVERecord?id=CVE-2024-26280)
+
+#### Ignored CVEs
+
+- [CVE-2024-34069](https://www.cve.org/CVERecord?id=CVE-2024-34069) The underlying vulnerability of this CVE is only relevant to a small set of use cases and scenarios such as when hosting Airflow publicly on the internet, and is considered low risk for Astro and Software users. Because the resolution would require significant changes to Airflow and its dependencies, this CVE has not been addressed at this time.
 
 ## Astro Runtime 9.10.2
 
@@ -401,6 +473,13 @@ For more information about the major changes in this release, see the [Airflow b
 
 - Fixed a bug where the **Cluster Activity** tab was missing from the Airflow UI.
 
+### Security fixes
+
+- [CVE-2024-4340](https://www.cve.org/CVERecord?id=CVE-2024-4340)
+
+#### Ignored CVEs
+- [CVE-2024-25128](https://www.cve.org/CVERecord?id=CVE-2024-25128) This CVE applies to OpenID users only. Attackers can gain unauthorized access to the Airflow UI by impersonating any Airflow user. Note this impacts OpenID only, which is long deprecated, and should not be confused with the more common OpenID Connect (ODIC). This scenario does not apply to Astro Runtime users.
+
 ## Astro Runtime 9.10.0
 
 - Release date: January 31, 2024
@@ -425,6 +504,12 @@ For more information about the major changes in this release, see the [Airflow b
 
 - Stop deserializing pickle when enable_xcom_pickling is False ([#36255](https://github.com/apache/airflow/pull/36255))
 - Check DAG read permission before accessing DAG code ([#36257](https://github.com/apache/airflow/pull/36257))
+
+### Security fixes
+
+- [CVE-2023-50944](https://www.cve.org/CVERecord?id=CVE-2023-50944)
+- [CVE-2023-50943](https://www.cve.org/CVERecord?id=CVE-2023-50943)
+- [CVE-2023-50944](https://www.cve.org/CVERecord?id=CVE-2023-50944)
 
 ## Astro Runtime 9.8.0
 
@@ -464,6 +549,15 @@ For more information about the major changes in this release, see the [Airflow b
 
 - Fixed an issue where task logs on Astro Azure clusters were not encoded properly, resulting in authentication errors.
 
+### Security fixes
+
+- [CVE-2023-50783](https://www.cve.org/CVERecord?id=CVE-2023-50783)
+- [CVE-2023-49920](https://www.cve.org/CVERecord?id=CVE-2023-49920)
+- [CVE-2023-47265](https://www.cve.org/CVERecord?id=CVE-2023-47265)
+- [CVE-2023-49920](https://www.cve.org/CVERecord?id=CVE-2023-49920)
+- [CVE-2023-50783](https://www.cve.org/CVERecord?id=CVE-2023-50783)
+- [CVE-2023-48291](https://www.cve.org/CVERecord?id=CVE-2023-48291)
+
 ## Astro Runtime 9.6.0
 
 - Release date: November 30, 2023
@@ -474,6 +568,11 @@ For more information about the major changes in this release, see the [Airflow b
 - Upgraded `astronomer-providers` to 1.18.3. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1183-2023-11-29) for a complete list of changes.
 - Fixed an issue where logging defaulted to `latin-1` encoding, causing a `UnicodeEncodeError`. The default encoding is now set to `utf-8`.
 - Fixed S3 logging read issues to now use regional endpoint instead of the legacy global endpoint, resolving compatibility problems with 2.x AWS clusters in Astro.
+
+### Security fixes
+
+- [CVE-2023-47038](https://www.cve.org/CVERecord?id=CVE-2023-47038)
+- [CVE-2023-44487](https://www.cve.org/CVERecord?id=CVE-2023-44487)
 
 ## Astro Runtime 9.5.0
 
@@ -493,6 +592,11 @@ To learn more, see the [Apache Airflow 2.7.3 release notes](https://airflow.apac
 ### Additional improvements
 
 - You can now customize the color of the Airflow UI navigation bar by setting the `AIRFLOW__WEBSERVER__NAVBAR_COLOR` environment variable.
+
+### Security Fixes
+
+- [CVE-2023-47037](https://www.cve.org/CVERecord?id=CVE-2023-47037)
+- [CVE-2023-42781](https://www.cve.org/CVERecord?id=CVE-2023-42781)
 
 ## Astro Runtime 9.4.0
 
@@ -542,6 +646,13 @@ To learn more, see the [Apache Airflow 2.7.2 release notes](https://airflow.apac
 
 - On Astro, you can now create custom tags when exporting Airflow task logs to Datadog, which allows you to easily filter, aggregate, and compare data. See [Export task logs to Datadog](export-datadog.md) for setup instructions.
 
+### Security fixes
+
+- [CVE-2023-42780](https://www.cve.org/CVERecord?id=CVE-2023-42780)
+- [CVE-2023-45348](https://www.cve.org/CVERecord?id=CVE-2023-45348)
+- [CVE-2023-42792](https://www.cve.org/CVERecord?id=CVE-2023-42792)
+- [CVE-2023-42663](https://www.cve.org/CVERecord?id=CVE-2023-42663)
+
 ## Astro Runtime 9.1.0
 
 - Release date: September 7, 2023
@@ -562,6 +673,11 @@ To learn more, see the [Apache Airflow 2.7.1 release notes](https://airflow.apac
 - You can now [export task logs to Datadog](export-datadog.md) from Azure and GCP clusters.
 - Upgraded `openlineage-airflow` to 1.1.0. See the [OpenLineage release notes](https://openlineage.io/docs/releases/1_1_0/) for a complete list of changes.
 - Upgraded `astro-sdk-python` to 1.7.0, which adds support for Excel files. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
+
+### Security fixes
+
+- [CVE-2023-40712](https://www.cve.org/CVERecord?id=CVE-2023-40712)
+- [CVE-2023-40611](https://www.cve.org/CVERecord?id=CVE-2023-40611)
 
 ## Astro Runtime 9.0.0
 
@@ -610,6 +726,12 @@ The base image for Astro Runtime now uses Python 3.11. If you want to use a diff
 ### Bug fixes
 
 - Fixed an issue where you could not set DAG or task notes in the Airflow UI for environments running on Astro.
+
+### Security fixes
+
+- [CVE-2023-39441](https://www.cve.org/CVERecord?id=CVE-2023-39441)
+- [CVE-2023-40273](https://www.cve.org/CVERecord?id=CVE-2023-40273)
+- [CVE-2023-37379](https://www.cve.org/CVERecord?id=CVE-2023-37379)
 
 ## Astro Runtime 8.10.0
 
