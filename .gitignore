@@ -32,3 +32,4 @@ static/astro-software-runtime-release-notes.xml
 **/.definition/**
 
 .yarn
+yarn.lock
