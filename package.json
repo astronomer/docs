@@ -46,7 +46,8 @@
     "xml": "^1.0.1"
   },
   "engines": {
-    "node": ">=18.0"
+    "node": ">=18.0",
+    "yarn": ">2.4.3"
   },
   "browserslist": {
     "production": [
