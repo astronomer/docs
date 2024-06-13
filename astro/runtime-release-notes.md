@@ -271,7 +271,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 ## Astro Runtime 9.15.0
 
-- Release date: June 12, 2024
+- Release date: June 13, 2024
 - Airflow version: 2.7.3
 
 ### Early access Airflow bug fixes
@@ -286,6 +286,10 @@ For more information about the major changes in this release, see the [Airflow b
 ### Bug fixes
 
 - Fixed a bug where liveness/readiness probes might periodically fail when trying to remove a configuration file that did not exist.
+
+### Security fixes
+
+- [CVE-2024-25142](https://www.cve.org/CVERecord?id=CVE-2024-25142)
 
 ## Astro Runtime 9.14.0
 
