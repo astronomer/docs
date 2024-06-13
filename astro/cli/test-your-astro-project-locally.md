@@ -59,7 +59,7 @@ The `tests` directory in your Astro project includes an example DAG test called 
 - DAGs have no cycles.
 - There are no general import or syntax errors.
 
-This test is just an example of the kinds of pytests one could run to test thier DAGs. You may want to alter this test or create new ones that better fit the context of your DAGs. `astro dev pytest` will run any pytest file that you add to the `tests` directory. For more information about this command, see the [CLI command reference](cli/astro-dev-pytest.md).
+This test is just an example of the kinds of pytests one could run to test their DAGs. You may want to alter this test or create new ones that better fit the context of your DAGs. `astro dev pytest` will run any pytest file that you add to the `tests` directory. For more information about this command, see the [CLI command reference](cli/astro-dev-pytest.md).
 
 ## Test before an Astro Runtime upgrade
 
