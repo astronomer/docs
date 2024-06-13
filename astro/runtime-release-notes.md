@@ -45,7 +45,11 @@ For more information, see the [Apache Airflow release notes](https://airflow.apa
 
 ### Additional improvements
 
-- Upgraded the minor and patch versions of some Astro open source provider packages. See [Astro Runtime 11.5.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-1150).
+- Upgraded the minor and patch versions of some Astro open source provider packages. See [Astro Runtime 11.5.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-1150)
+
+### Security fixes
+
+- [CVE-2024-25142](https://www.cve.org/CVERecord?id=CVE-2024-25142)
 
 ## Astro Runtime 11.4.0
 
@@ -152,8 +156,27 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 - Fixed a bug where Airflow would show `failed_upstream` when a dynamically mapped task was `skipped`.
 - In the Python task decorator, you can only have `None` as the default parameter for context parameters.
 
+## Astro Runtime 10.9.0
+
+- Release date: June 13, 2024
+- Airflow version: 2.8.4
+
+### Early access Airflow bug fixes
+
+- Fixed an issue where Airflow might accidentally store dynamic content in a cache, possibly storing sensitive data [(#39550)](https://github.com/apache/airflow/pull/39550)
+
+### Additional improvements
+
+- Upgraded the minor and patch versions of some Astro open source provider packages. See [Astro Runtime 10.9.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-1090)
+- Includes `astronomer-providers-logging` version 1.1.5.1
+
+### Bug fixes
+- Fixed a bug where liveness/readiness probes might periodically fail when trying to remove a configuration file that did not exist.
+
 ### Security fixes
 
+- [CVE-2024-30251](https://nvd.nist.gov/vuln/detail/CVE-2024-30251)
+- [CVE-2024-25142](https://www.cve.org/CVERecord?id=CVE-2024-25142)
 - [CVE-2024-32077](https://www.cve.org/CVERecord?id=CVE-2024-32077)
 
 ## Astro Runtime 10.8.0
