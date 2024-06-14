@@ -167,7 +167,7 @@ To set up a private connection between an Astro Virtual Network (VNet) and an Az
     - Resource Group ID.
     - Optional. Firewall IP address if you use any on the VHub side.
 
-2. Prepare JSON file `astro-vhub-peering-creator-role.json` with the following permisisons (`{customer-subscription-id}` has to be replaced with your value):
+2. Prepare a `astro-vhub-peering-creator-role.json` JSON file with the following permissions. Replace `{customer-subscription-id}` with your value:
 
     ```sh
     {
