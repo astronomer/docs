@@ -321,7 +321,7 @@ Contact your internal network team or engineer and ask for the following informa
 
 #### Contact Astronomer support for VPN configuration on Astro side
 
-Submit all collected details via Support portal. CRE team will proceed with the required steps. In case of additional questions or clarifications, CRE team will contact you within Support request or let you know about connectivity tests.
+Submit all collected details to [Astronomer support](https://cloud.astronomer.io/open-support-request). The Astronomer CRE team will proceed with the required steps. The CRE team will contact you using your support ticket to ask follow-up questions, request clarification, or let you know about connectivity tests.
 
 </TabItem>
 
