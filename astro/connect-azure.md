@@ -264,7 +264,7 @@ Note that you'll incur additional Azure infrastructure costs for every Azure pri
 
 :::info
 
-This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
+This connection option is not available for standard Astro Hosted clusters. It is available for dedicated clusters and Astro Hybrid.
 
 :::
 
