@@ -275,7 +275,7 @@ Use this connectivity type to access on-premises resources or resources in other
 Retrieve the following information about your VPN device or application:
 
     - Public IP address
-    - Subnet CIDR (multipple if needed) on your side of the connection
+    - Subnet CIDR range, multiple if needed, for your side of the connection
     - Preferences regarding shared key and BGP usage
     - IKE settings for the tunnel
 
