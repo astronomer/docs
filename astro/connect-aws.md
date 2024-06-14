@@ -307,18 +307,17 @@ Use this connectivity type to access on-premises resources or resources in other
 
 #### Prerequisites
 
-1. Resources what you need at the beginning:
 
-- An Astro cluster
-- Configured Gateway device or Application with Public IP address (or 2 addresses for HA setup)
+- An Astro Deployment with a dedicated cluster.
+- Configured gateway device or application with Public IP address. You need 2 addresses for an HA setup.
 
-2. Contact internal Network team or engineer and ask for the following information:
+Contact your internal network team or engineer and ask for the following information:
 
 - Public IP addresses for the tunnels configuration.
-- IKE pre-shared key, if your team wants to use a particular one.
-- Preferable settings for phase 1 and phase 2 (BGP only) IKE negotionations.
-- ASN for BGP or IP Prefixes for Static configuration.
-- Optional. A size /30 IPv4 CIDR block from the 169.254.0.0/16 range for the inside tunnel IPv4 addresses.
+- IKE pre-shared key, if your team wants to use a particular key.
+- Preferable settings for phase 1 and phase 2 (BGP only) IKE negotiations.
+- ASN for BGP or IP prefixes for static configuration.
+- (Optional) A size /30 IPv4 CIDR block from the 169.254.0.0/16 range for the inside tunnel IPv4 addresses.
 
 #### Contact Astronomer support for VPN configuration on Astro side
 
