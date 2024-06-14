@@ -124,7 +124,7 @@ If you don't see your service listed, open a support case with [Astronomer suppo
 
 :::info
 
-This connection option is available only for dedicated Astro Hosted clusters and Astro Hybrid.
+This connection option is not available for standard Astro Hosted clusters. It is available for dedicated clusters and Astro Hybrid.
 
 :::
 
