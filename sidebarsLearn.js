@@ -113,6 +113,7 @@ module.exports = {
           },
           items: [
             'logging',
+            'custom-xcom-backend-strategies',
             'data-quality',
             'deferrable-operators',
             'dynamically-generating-dags',

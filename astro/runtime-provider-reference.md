@@ -26,6 +26,63 @@ docker run --rm quay.io/astronomer/astro-runtime:11.0.0 pip freeze | grep apache
 
 :::
 
+## Astro Runtime 11.5.0
+
+<Tabs
+    groupid="astro-runtime-1150"
+    defaultValue="standard"
+    values={[
+        {label: 'Standard', value: 'standard'},
+        {label: 'Slim', value: 'slim'},
+    ]}>
+<TabItem value="standard">
+| Package Name                             | Version |
+| :--------------------------------------- | :------ |
+| apache-airflow-providers-amazon          | 8.24.0    |
+| apache-airflow-providers-celery          | 3.7.2     |
+| apache-airflow-providers-cncf-kubernetes | 8.3.1     |
+| apache-airflow-providers-common-io       | 1.3.2     |
+| apache-airflow-providers-common-sql      | 1.14.0    |
+| apache-airflow-providers-datadog         | 3.6.1     |
+| apache-airflow-providers-elasticsearch   | 5.4.1     |
+| apache-airflow-providers-fab             | 1.1.1     |
+| apache-airflow-providers-ftp             | 3.9.1     |
+| apache-airflow-providers-google          | 10.19.0   |
+| apache-airflow-providers-http            | 4.11.1    |
+| apache-airflow-providers-imap            | 3.6.1     |
+| apache-airflow-providers-microsoft-azure | 9.0.1     |
+| apache-airflow-providers-mysql           | 5.6.1     |
+| apache-airflow-providers-openlineage     | 1.8.0     |
+| apache-airflow-providers-postgres        | 5.11.1    |
+| apache-airflow-providers-redis           | 3.7.1     |
+| apache-airflow-providers-smtp            | 1.7.1     |
+| apache-airflow-providers-sqlite          | 3.8.1     |
+| astro-sdk-python                         | 1.8.0     |
+| astronomer-providers                     | 1.19.1    |
+| astronomer-providers-logging             | 1.5.1     |
+
+</TabItem>
+<TabItem value="slim">
+
+| Package Name                           | Version |
+| :------------------------------------- | :------ |
+| apache-airflow-providers-celery        | 3.7.2     |
+| apache-airflow-providers-common-io     | 1.3.2     |
+| apache-airflow-providers-common-sql    | 1.14.0    |
+| apache-airflow-providers-elasticsearch | 5.4.1     |
+| apache-airflow-providers-fab           | 1.1.1     |
+| apache-airflow-providers-ftp           | 3.9.1     |
+| apache-airflow-providers-http          | 4.11.1    |
+| apache-airflow-providers-imap          | 3.6.1     |
+| apache-airflow-providers-mysql         | 5.6.1     |
+| apache-airflow-providers-postgres      | 5.11.1    |
+| apache-airflow-providers-smtp          | 1.7.1     |
+| apache-airflow-providers-sqlite        | 3.8.1     |
+| astronomer-providers-logging           | 1.5.1     |
+
+</TabItem>
+</Tabs>
+
 ## Astro Runtime 11.4.0
 
 <Tabs
@@ -302,6 +359,32 @@ docker run --rm quay.io/astronomer/astro-runtime:11.0.0 pip freeze | grep apache
 </TabItem>
 </Tabs>
 
+## Astro Runtime 10.9.0
+
+| Package Name                             | Version |
+| :--------------------------------------- | :------ |
+| apache-airflow-providers-amazon  |  8.24.0 |
+| apache-airflow-providers-celery  |  3.7.2 |
+| apache-airflow-providers-cncf-kubernetes  |  7.14.0 |
+| apache-airflow-providers-common-io  |  1.3.2 |
+| apache-airflow-providers-common-sql  |  1.14.0 |
+| apache-airflow-providers-datadog  |  3.6.1 |
+| apache-airflow-providers-elasticsearch  |  5.4.1 |
+| apache-airflow-providers-ftp  |  3.9.1 |
+| apache-airflow-providers-google  |  10.19.0 |
+| apache-airflow-providers-http  |  4.11.1 |
+| apache-airflow-providers-imap  |  3.6.1 |
+| apache-airflow-providers-microsoft-azure  |  8.5.1 |
+| apache-airflow-providers-openlineage  |  1.8.0 |
+| apache-airflow-providers-postgres  |  5.11.1 |
+| apache-airflow-providers-redis  |  3.7.1 |
+| apache-airflow-providers-smtp  |  1.7.1 |
+| apache-airflow-providers-sqlite  |  3.8.1 |
+| astro-sdk-python  |  1.8.0 |
+| astronomer-providers  |  1.18.4 |
+| astronomer-providers-logging  |  1.5.1 |
+
+
 ## Astro Runtime 10.8.0
 
 | Package Name                             | Version |
@@ -519,6 +602,30 @@ docker run --rm quay.io/astronomer/astro-runtime:11.0.0 pip freeze | grep apache
 | astro-sdk-python                         | 1.7.0   |
 | astronomer-providers                     | 1.18.4  |
 | astronomer-providers-logging             | 1.4.4   |
+
+## Astro Runtime 9.15.0
+
+| Package Name                             | Version |
+| :--------------------------------------- | :------ |
+| apache-airflow-providers-amazon |  8.24.0 |
+| apache-airflow-providers-celery  | 3.7.2 |
+| apache-airflow-providers-cncf-kubernetes |  7.14.0 |
+| apache-airflow-providers-common-sql |  1.14.0 |
+| apache-airflow-providers-datadog |  3.6.1 |
+| apache-airflow-providers-elasticsearch |  5.4.1 |
+| apache-airflow-providers-ftp |  3.9.1 |
+| apache-airflow-providers-google  | 10.12.0 |
+| apache-airflow-providers-http |  4.11.1 |
+| apache-airflow-providers-imap |  3.6.1 |
+| apache-airflow-providers-microsoft-azure |  6.3.0 |
+| apache-airflow-providers-mysql |  5.6.1 |
+| apache-airflow-providers-openlineage  | 1.8.0 |
+| apache-airflow-providers-postgres |  5.11.1 |
+| apache-airflow-providers-redis |  3.7.1 |
+| apache-airflow-providers-sqlite  | 3.8.1 |
+| astro-sdk-python  | 1.8.0 |
+| astronomer-providers  | 1.18.4 |
+| astronomer-providers-logging  | 1.5.1 |
 
 ## Astro Runtime 9.14.0
 
