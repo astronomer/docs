@@ -303,7 +303,7 @@ This connection option is not available for standard Astro Hosted clusters. It i
 
 :::
 
-Use this connectivity type for access to on-premises resources or inside onther cloud providers.
+Use this connectivity type to access on-premises resources or resources in other cloud providers.
 
 #### Prerequisites
 
