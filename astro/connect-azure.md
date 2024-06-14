@@ -154,7 +154,7 @@ When the network connection is confirmed, you can delete the temporary roles you
 
 :::info
 
-This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
+This connection option is not available for standard Astro Hosted clusters. It is available for dedicated clusters and Astro Hybrid.
 
 :::
 
