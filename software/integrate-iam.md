@@ -18,6 +18,7 @@ Consider the following when you integrate IAM roles:
 * You must use the Astro CLI to pass IAM role annotations.
 * Only Workspace Admins can pass IAM role annotations.
 * Once a Deployment is created or updated with an IAM role, the annotation can't be deleted.
+* When using XCom or secret backends that store values in resources governed by your cloud-provider's IAM solution, grant [the set of service-accounts used by that namespace](#sas-that-use-backends) access to the associated cloud-resources.
 
 ## Prerequisites
 
@@ -292,7 +293,7 @@ astronomer:
     astro deployment create <deployment-name> --executor=celery --cloud-role=<gsa-name>@<project-id>.iam.gserviceaccount.com
     ```
 
-2. Note the name of the worker and scheduler service accounts that appear when you run the following command:
+2. Note the name of the worker, triggerer, scheduler, webserver, cleanup, and migrate-database-job service accounts that appear when you run the following command:
 
     ```bash
     kubectl get sa -n <your-airflow-namespace>
@@ -326,3 +327,16 @@ astronomer:
     ```
 
     If Workload Identity is working, you should see a list of credentialed accounts related to your GCP service account.
+
+## Granting Access to Airflow Components Using XCom and Secret Backends {sas-that-use-backends}
+Astronomer Software creates a set of service-accounts for each Airflow instance it manages.
+The following roles can require access to Airflow Xcom-backends or secret-backends to function:
+
+| Component                   | Rationale                                                                                                 |
+|-----------------------------|-----------------------------------------------------------------------------------------------------------|
+| `<release name>-scheduler`         | Customer-provided dag-code is regularly interpreted to determine what tasks are part of dags, and that code may incorporate references to values stored in secret storage or XCom.                  |
+| `<release name>-worker`            | Customer-provided dag-code is interpreted at task-run time and may incorporate references to values stored in secret storage or XCom.             |
+| `<release name>-triggerer`         | Customer-provided dag-code is interpreted at task-run time and may incorporate references to values stored in secret storage or XCom.            |
+| `<release name>-webserver`         | Provides users a mechanism to view and set secrets and to view XCom entries.|
+| `<release name>-cleanup`           |  Accesses task instances and other data which may include serialized references to values stored in secret-backends or xcom-backends.       |
+| `<release name>-migrate-database-job` | Analyzes serialized dag models which may include serialized references to values stored in secret-backends or xcom-backends. |
