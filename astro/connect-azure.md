@@ -158,7 +158,7 @@ This connection option is not available for standard Astro Hosted clusters. It i
 
 :::
 
-To set up a private connection between an Astro Virtual Network (VNet) and an Azure VHub, you can create a VHub peering connection. VHub peering ensures private and secure connectivity, reduces network transit costs, and attach Astro environment to centralized managed network.
+To set up a private connection between an Astro Virtual Network (VNet) and an Azure VHub, you can create a VHub peering connection. VHub peering ensures private and secure connectivity, reduces network transit costs, and attaches the Astro environment to a centralized managed network.
 
 1. Retrieve the following information from the target Azure environment that you want to connect with:
 
