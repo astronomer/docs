@@ -190,7 +190,7 @@ To set up a private connection between an Astro Virtual Network (VNet) and an Az
     }
     ```
 
-3. Run the following Azure CLI commands to give Astronomer support temporary permissions to establish a VHub peering connection:
+3. Run the following Azure CLI commands to give Astronomer Support temporary permissions to establish a VHub peering connection:
 
     ```sh
     # Add Astronomer Service Principal
