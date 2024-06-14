@@ -133,7 +133,7 @@ To set up a private connection between an Astro Virtual Network (VNet) and an Az
     az role assignment list --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 --all -o table
     ```
 
-4. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) to tell them that you have granted permissions to the Astronomer Service Principal. In addition, provide the following details in your request:
+4. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) to tell them that you granted permissions to the Astronomer Service Principal. In addition, provide the following details in your request:
 
     - Astro Cluster ID 
     - Azure Tenant ID and Subscription ID of the target VNet
