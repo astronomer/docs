@@ -89,7 +89,7 @@ To set up a private connection between an Astro Virtual Network (VNet) and an Az
     - VNet ID.
     - Resource Group ID.
 
-2. Prepare JSON file `astro-vnet-peering-creator-role.json` with the following permisisons (`{customer-subscription-id}` has to be replaced with your value):
+2. Prepare the `astro-vnet-peering-creator-role.json` JSON file with the following permissions. Replace `{customer-subscription-id}` with your value:
 
     ```sh
     {
