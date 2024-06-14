@@ -16,8 +16,6 @@ Astro supports a number of CI/CD strategies. You can:
 1. Maintain a single Git repository for all files in a *single* Astro project (one-to-one).
 2. Separate your DAGs from other files and maintain multiple Git repositories for a *single* Astro project (many-to-one).
 3. Host multiple Astro projects in a single repository for deployment to *multiple* Astro projects (one-to-many).
-4. Separate your DAGs from other files and maintain multiple Git repositories for *multiple* Astro projects (many-to-many).
-5. Store your DAGs in a cloud provider solution, such as AWS S3, and the rest of your Astro project files in a dedicated Git repository (many-to-one or many-to-many).
 
 ## Best practice guidance
 
@@ -35,7 +33,7 @@ All the CI/CD strategies that Astro supports require utilization of a version co
 - safe and secure experimentation on new features and fixes
 - improved traceability and auditing.
 
-With a version control system in place, you can set up CI/CD by following the guidance in [Develop a CI/CD workflow for deploying code to Astro](https://docs.astronomer.io/astro/set-up-ci-cd). The way you organize the code in your shared repository and deploy it to Astro should reflect the size and needs of your team.
+With a version control system in place, you can set up CI/CD by following the guidance in [Develop a CI/CD workflow for deploying code to Astro](https://astronomer.io/docs/astro/set-up-ci-cd). The way you organize the code in your shared repository and deploy it to Astro should reflect the size and needs of your team.
 
 ### Option 1: one repo to one Deployment
 
@@ -49,6 +47,12 @@ Cons of this approach:
 - You can't easily restrict access to sensitive project settings.
 - You can't take this approach and simultaneously collect DAGs used in multiple Deployments in a single repository.
 - You can't also keep Deployment configuration code separate from DAG code, which is required when you want to [manage Deployments programmatically](https://www.astronomer.io/docs/astro/manage-deployments-as-code) and when you want to restrict access to Deployment settings.
+
+:::info 
+
+Repo options for setting up one-to-one deploys with CI/CD include AWS S3. Supported CI/CD tools include Jenkins, GitHub Actions, and AWS CodeBuild. For details about setting up CI/CD workflows using these and other systems, see [Automate actions on Astro](https://www.astronomer.io/docs/astro/automation-overview).
+
+:::
 
 ### Option 2: multiple repos to one Deployment
 
@@ -91,9 +95,3 @@ Pros of this approach:
 Cons of this approach:
 - Restricting access to Astro settings or particular projects is more difficult to implement than at the repo level.
 - Dependencies and environments might be more difficult to manage, to the extent that they differ from project to project.
-
-### Option 4: multiple repos to multiple Deployments with CI/CD
-
-Pros of this approach:
-- Managing Astro settings is potentially much easier, as keeping configuration code in a separate repository allows for the sharing of Astro settings among multiple Deployments.
-
