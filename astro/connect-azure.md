@@ -142,7 +142,7 @@ To set up a private connection between an Astro Virtual Network (VNet) and an Az
 
 After receiving your request, Astronomer support creates a VNet peering connection between the two VNets. No other actions are required from you. Astronomer support will notify you when the connection is ready to use.
 
-When the network connection is confirmed, you can delete the temporary roles you created using command (`{customer-subscription-id}` has to be replaced with your value):
+When the network connection is confirmed, you can delete the temporary roles you created using the following command. Replace `{customer-subscription-id}` with your value:
 
     ```sh
     az role assignment delete --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 --role "Astro VNET Peering Contributor" --scope "/subscriptions/{customer-subscription-id}"
