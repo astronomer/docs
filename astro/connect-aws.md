@@ -299,7 +299,7 @@ You'll incur additional AWS infrastructure costs for every AWS PrivateLink endpo
 
 :::info
 
-This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
+This connection option is not available for standard Astro Hosted clusters. It is available for dedicated clusters and Astro Hybrid.
 
 :::
 
