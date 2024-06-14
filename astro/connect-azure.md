@@ -215,7 +215,7 @@ To set up a private connection between an Astro Virtual Network (VNet) and an Az
     - Azure Tenant ID and Subscription ID with a VHub
     - Resource group ID
     - VHub name and preferable name for the peering
-    - Optional. Firewall IP address if you use any on the VHub side.
+    - (Optional) Firewall IP address if you use any on the VHub side.
 
 After receiving your request, Astronomer support creates a VHub peering connection to Astro VNet. No other actions are required from you. Astronomer support will notify you when the connection is ready to use.
 
