@@ -27,14 +27,13 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## June 18, 2024
 
-### Authorize Deployments to AWS with custom workload identity
+### Additional Improvements
 
-<HostedBadge/>
+- Moved the **Environment variable** tab in **Deployment Settings** to the **Environment** tab. Renamed to **Airflow Variables** to more accurately reflect its function.
 
-:::publicpreview
-:::
+### Bug fixes
 
-You can now use [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) to authorize Deployments to resources in AWS. Using IAM roles as a way to manage workload identity is a simple and secure way to authorize access to external resources, as it doesn't require creating or storing long-term credentials. To set up AWS IAM roles with your Astro resources, see [Authorize Deployments to cloud resources](https://www.astronomer.io/docs/astro/authorize-deployments-to-your-cloud?tab=aws#setup).
+- Fixed a bug where a duplicate **Customer managed identity** option displayed when configuring Deployment settings.
 
 ## June 11, 2024
 
