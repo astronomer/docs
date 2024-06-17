@@ -44,15 +44,15 @@ You can send Astro alerts to the following communication channels
 - Slack
 - PagerDuty
 - Email
-- DAG trigger
+- (Private Preview) DAG trigger
 
-:::warning
+:::info Private Preview - DAG Trigger
 
-The DAG trigger communication channel feature is in Private Preview. Please reach out to your customer success manager to enable this feature.
-
-:::
+This feature is in [Private Preview](feature-previews.md). Please reach out to your customer success manager to enable this feature.
 
 The **DAG Trigger** communication channel works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through the Airflow REST API to trigger a DAG on Astro. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table.
+
+:::
 
 ## Prerequisites
 
