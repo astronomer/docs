@@ -46,7 +46,7 @@ You can send Astro alerts to the following communication channels
 - Email
 - (Private Preview) DAG trigger
 
-:::info Private Preview - DAG Trigger
+:::warning Private Preview - DAG Trigger
 
 This feature is in [Private Preview](feature-previews.md). Please reach out to your customer success manager to enable this feature.
 
@@ -134,10 +134,7 @@ No external configuration is required for the email integration. Astronomer reco
 </TabItem>
 <TabItem value="DAG">
 
-:::warning
-
-This feature is in [Private Preview](https://www.astronomer.io/docs/astro/feature-previews). Please reach out to your customer success manager to enable this feature.
-
+:::privatepreview
 :::
 
 The **DAG Trigger** communication channel works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through the `DagRuns` endpoint of the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) to trigger any DAG in your Workspace. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table. 
