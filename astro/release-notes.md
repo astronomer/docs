@@ -29,7 +29,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Additional Improvements
 
-- Moved the **Environment variable** tab in **Deployment Settings** to the **Environment** tab. Renamed to **Airflow Variables** to more accurately reflect its function.
+- Moved the **Environment variable** tab in **Deployment Settings** to the **Environment** tab, and renamed it to **Environment Variables**. This helps reduce confusion about where to update Environment Variables and where to update Airflow Variables. Refer to [Manage environment variables](https://www.astronomer.io/docs/astro/manage-env-vars#using-the-astro-ui) for more information about the different methods to set up and manage Environment variables.
 
 ### Bug fixes
 
