@@ -731,8 +731,6 @@ If at least one of the following circumstances apply to your installation, compl
 - You plan for your users to deploy Airflow images to Astronomer Software's integrated container registry *and* Astronomer is using a TLS certificate issued by a private CA.
 - Users will deploy images to an external container registry *and* that registry is using a TLS certificate issued by a private CA. 
 
-Otherwise, skip this step.
-
 Kubernetes must be able to pull images from one or more container registries for Astronomer Software to function. By default, Kubernetes only trusts publicly signed certificates.  This means that by default, Kubernetes does not honor the list of certificates [trusted by the Astronomer Software platform](#configuring-a-private-certificate-authority).
 
 Many enterprises configure Kubernetes to trust additional certificate authorities as part of their standard cluster creation procedure. Contact your Kubernetes Administrator to find out what, if any, private certificates are currently trusted by your Kubernetes Cluster. Then, consult your Kubernetes administrator and Kubernetes provider's documentation for instructions on configuring Kubernetes to trust additional CAs.
@@ -1039,7 +1037,7 @@ If you don't have internet access to `https://helm.astronomer.io`, download the 
 
 ## Step 19: Create and customize upgrade.sh {#create-and-customize-upgradesh}
 
-Create a file named `upgrade.sh` in your [platform-deployment project-directory](#platform-deployment-project-directory) containing the script below. Specify the following values at the beginning of the script:
+Create a file named `upgrade.sh` in your [platform-deployment project-directory](#platform-deployment-project-directory) containing the following script. Specify the following values at the beginning of the script:
 
 - `CHART_VERSION`: Your Astronomer Software version, including patch and a `v` prefix. For example, `v0.34.1`.
 - `RELEASE_NAME`: Your Helm release name. `astronomer` is strongly recommended.
@@ -1080,7 +1078,7 @@ helm upgrade --install --namespace $NAMESPACE \
 
 ## Step 20: Fetch images from Astronomer's Helm template {#fetch-images-from-astronomer's-helm-template}
 
-The images and tags which are required for your Software installation depend on the version of Astronomer you're installing. To gather a list of exact images and tags required for your Astronomer version:
+The images and tags that are required for your Software installation depend on the version of Astronomer you want to install. To gather a list of exact images and tags required for your Astronomer version:
 
 1. Configure your current session by setting the following environment variables locally:
   - `CHART_VERSION` - Your Astronomer Software version, including patch and a `v` prefix. For example, `v0.34.1`.
@@ -1113,9 +1111,9 @@ You can pass `-f/--values values.yaml` to `helm template` to only show images th
 
 :::
 
-## Step 21: Fetch Airflow/ Astrp Runtime updates {#fetch-airflow-updates}
+## Step 21: Fetch Airflow/Astro Runtime updates {#fetch-airflow-updates}
 
-By default, Astronomer checks for Airflow/ Astro Runtime updates once a day at midnight by querying `https://updates.astronomer.io/astronomer-runtime`, which returns a JSON file with details about the latest available Astro Runtime versions. However, this URL is not accessible in an airgapped environment. There are several options for making these updates accessible in an airgapped environment:
+By default, Astronomer checks for Airflow/Astro Runtime updates once a day at midnight by querying `https://updates.astronomer.io/astronomer-runtime`, which returns a JSON file with details about the latest available Astro Runtime versions. However, this URL is not accessible in an airgapped environment. There are several options for making these updates accessible in an airgapped environment:
 
 - You can download the JSON and host it in a location that's accessible within your airgapped environment, for example:
     - AWS S3
@@ -1127,7 +1125,7 @@ This setup assumes that the updates JSON will be manually downloaded and added t
 
 ### Exposing Airflow updates using an Nginx endpoint
 
-The following topic provides an example implementation of hosting the Airflow updates JSON files in your airgapped environment and accessing them using an Nginx endpoint. Depending on your organization's platform and use cases, your own installation might vary from this setup.
+This procedure provides an example implementation for how to host the Airflow updates JSON files in your airgapped environment and then access them using an Nginx endpoint. Depending on your organization's platform and use cases, your own installation might vary from this setup.
 
 To complete this setup:
 
@@ -1280,7 +1278,7 @@ astronomer:
             
 ```
 
-## Step 22: Openshift only - apply openshift-specific configuration {#openshift-configuration}
+## Step 22: (OpenShift only) Apply OpenShift-specific configuration {#openshift-configuration}
 
 If you're not installing Astronomer Software into an OpenShift Kubernetes cluster, skip this step.
 
@@ -1305,13 +1303,13 @@ elasticsearch:
     enabled: false
 ```
 
-Astronomer Software on Openshift is only supported when using [a third-party ingress-controller](#elect-to-use-a-third-party-ingress-controller) and using the [logging sidecar](#configure-sidecar-logging) feature of Astronomer Software. The above configuration enables both of these items.
+Astronomer Software on OpenShift is only supported when using [a third-party ingress-controller](#elect-to-use-a-third-party-ingress-controller) and using the [logging sidecar](#configure-sidecar-logging) feature of Astronomer Software. The above configuration enables both of these items.
 
 ## Step 23: (Optional) Limit Astronomer to a namespace pool {#configure-namespace-pools}
 
 By default, Astronomer Software automatically creates namespaces for each new Airflow Deployment.
 
-You may restrict the airflow-management components of Astronomre Software to a list of pre-defined namespaces and configure it to operate without a ClusterRole by following instructions in [Configure a Kubernetes namespace pool for Astronomer Software](namespace-pools.md) and setting`global.clusterRoles` to `false`. 
+You can restrict the Airflow management components of Astronomer Software to a list of predefined namespaces and configure it to operate without a ClusterRole by following the instructions in [Configure a Kubernetes namespace pool for Astronomer Software](namespace-pools.md) and setting `global.clusterRoles` to `false`. 
 
 ## Step 24: (Optional) Enable sidecar logging {#configure-sidecar-logging}
 
@@ -1319,19 +1317,19 @@ Running a logging sidecar to export Airflow task logs is essential for running A
 
 By default, Astronomer Software creates a privileged DaemonSet to aggregate logs from Airflow components for viewing from within Airflow and the Astronomer Software UI.
 
-You may replace this privileged daemonset with unprivileged logging sidecars by following instructions at [Export logs using container sidecars](export-task-logs.md#export-logs-using-container-sidecars).
+You can replace this privileged Daemonset with unprivileged logging sidecars by following instructions in [Export logs using container sidecars](export-task-logs.md#export-logs-using-container-sidecars).
 
 ## Step 25: (Optional) Integrate an external identity provider {#integrate-an-external-identity-provider}
 
 Astronomer Software includes integrations for several of the most popular OAUTH2 identity providers (IdPs), such as Okta and Microsoft Entra ID. Configuring an external IdP allows you to automatically provision and manage users in accordance with your organization's security requirements. See [Integrate an auth system](integrate-auth-system.md) to configure the identity provider of your choice in your `values.yaml` file. 
 
-## Step 26: Pre-creating the load balancer {#creating-the-load-balancer}
+## Step 26: Create the load balancer {#creating-the-load-balancer}
 
-If you're using a third-party ingress controller or provisioning domain names for ingress objects using external DNS, skip this step.
+Skip this step if you're using a third-party ingress controller or provisioning domain names for ingress objects using external DNS.
 
-Astronomer Software platform components require DNS entries be pointing to a load-balancer associated with your ingress controller to install and function.
+To install and function, Astronomer Software platform components require DNS entries to point to a load balancer associated with your ingress controller.
 
-Perform a preliminary install of Astronomer Software to trigger the load-balancer creation. This installation will intentionally and timeout after 30 seconds, but it will cause the load balancer to be created.
+Perform a preliminary install of Astronomer Software to trigger your ingress controller to create the load balancer. This installation intentionally times out after 30 seconds, but it causes the ingress controller to still create the load balancer.
 
 <Tabs
     defaultValue="script"
@@ -1353,7 +1351,7 @@ Perform a preliminary install of Astronomer Software to trigger the load-balance
 - `CHART_VERSION`: Your Astronomer Software version, including patch and a `v` prefix. For example, `v0.34.1`.
 - `RELEASE_NAME`: Your Helm release name. `astronomer` is strongly recommended.
 - `NAMESPACE`: The namespace to install platform components into. `astronomer` is strongly recommended.
-- `CHART_NAME`: Set to `astronomer/astronomer` if fetching platform images from the internet. Otherwise, specify the filename if you're installing from a file (for example `astronomer-0.34.1.tgz`).
+- `CHART_NAME`: Set to `astronomer/astronomer` if fetching platform images from the internet. Otherwise, specify the filename, if you're installing from a file. For example `astronomer-0.34.1.tgz`.
   
 ```sh
 #!/bin/bash
@@ -1383,7 +1381,7 @@ helm upgrade --install --namespace $NAMESPACE \
 </TabItem>
 </Tabs>
 
-Run `kubectl -n <astronomer platformm namespace> get service -l component=ingress-controller` and verify that a service-type LoadBalancer resource has been created and received an External IP in a range that is accessible to your end-users but **not** accessible to the general internet. For example:
+Run `kubectl -n <astronomer platformm namespace> get service -l component=ingress-controller` and verify that a `service-type LoadBalancer` resource was created and that it received an External IP in a range that is accessible to your end-users, but **not** accessible to the general internet. For example:
 
 
 ```shell
@@ -1393,9 +1391,9 @@ astronomer-nginx           LoadBalancer   172.30.239.161   10.42.42.17     80:32
 astronomer-nginx-metrics   ClusterIP      172.30.245.154   <none>          10254/TCP                    39m
 ```
 
-If the Astronomer Software platfrom chart is uninstalled and re-installed, the ingress controller will virtually always receive a new IP address, which requires DNS entries to be updated.
+If you uninstall and re-install the Astronomer Software platform chart, the ingress controller almost always receives a new IP address, which requires updating the DNS entries.
 
-In lower environments, you may set `nginx.loadBalancerIP` in `values.yaml` to the External-IP address:
+In lower environments, you can set `nginx.loadBalancerIP` in `values.yaml` to the External-IP address:
 
 ```
 nginx:
@@ -1403,15 +1401,15 @@ nginx:
   loadBalancerIP: "10.42.42.17"
 ```
 
-This option allows the cluster to request same Load Balancer IP at creation time. Practically, re-builds immediately following teardowns can almost always receive the same IP address, but re-issuance is not guaranteed and installations will fail if the IP address has been assigned elsewhere or is otherwise not available. As such, this option should not be used in higher environments unless you have taken special measures to guarantee reissuence.
+This option allows the cluster to request the same Load Balancer IP at creation time. Rebuilds immediately following teardowns can almost always receive the same IP address, but issuance is not guaranteed and installations will fail if the IP address has been assigned elsewhere, or is otherwise not available. Therefore, this option should not be used in higher environments unless you have taken special measures to guarantee the same IP address is reissued.
 
-## Step 27: Configure DNS for the integrated ingress controller {#intigrated-ingress-controller-dns-configuration}
+## Step 27: Configure DNS for the integrated ingress controller {#integrated-ingress-controller-dns-configuration}
 
 If you're using a third-party ingress controller, you can skip this step.
 
 The Astronomer load balancer routes incoming traffic to your NGINX ingress controller. After you install Astronomer Software, the load balancer will spin up in your cloud provider account.
 
-Run `$ kubectl get svc -n <astronomer platform namespace>`to view your load balancer's CNAME, located under the `EXTERNAL-IP` column for the `astronomer-nginx` service. It should look similar to the following:
+Run `$ kubectl get svc -n <astronomer platform namespace>`to view your load balancer's CNAME, located in the `EXTERNAL-IP` column for the `astronomer-nginx` service and look similar to the following:
 
 ```sh
 $ kubectl get svc -n astronomer
@@ -1442,7 +1440,7 @@ Astronomer Software requires the following domain-names be registered and resolv
 
 ## Step 28: Install Astronomer Software using Helm {#install-astronomer-using-helm}
 
-Install the Astronomer Software Helm chart using `upgrade.sh` (recommended for your first install) or directly from helm.
+Install the Astronomer Software Helm chart using `upgrade.sh`, which is recommended for your first install, or directly from Helm.
 
 <Tabs
     defaultValue="script"
@@ -1476,7 +1474,7 @@ helm upgrade --install --namespace <astronomer-platform-namespace> \
 </TabItem>
 </Tabs>
 
-## Step 29: Verify Pods are up {#verify-pods-are-up}
+## Step 29: Verify Pods creation {#verify-pods}
 
 To verify all pods are up and running, run:
 
@@ -1484,7 +1482,7 @@ To verify all pods are up and running, run:
 kubectl get pods --namespace <astronomer-platform-namespace>
 ```
 
-All pods should be in Running status. E.g.:
+All pods should be in Running status. For example, 
 
 ```command
 $ kubectl get pods --namespace astronomer
@@ -1498,7 +1496,7 @@ astronomer-astro-ui-7f94c9bbcc-lkn5b                       1/1     Running      
 
 If all pods are not in running status, check the [guide on debugging your installation](debug-install.md) or contact [Astronomer support](https://support.astronomer.io) for additional configuration assistance.
 
-## Step 30: Verify you can access the Software UI {#verify-you-can-access-the-software-ui}
+## Step 30: Verify you can access the Software UI {#verify-software-ui}
 
 Visit `https://app.<base-domain>` in your web-browser to view Astronomer Software's web interface.
 
@@ -1512,9 +1510,10 @@ The following topics include optional information about one or multiple topics i
 
 ### Merge configurations with `merge_yaml.py` {#merge-yaml}
 
-When merging YAML configuration into `values.yaml`, you may do so manually or with a tool of your choosing.
+When merging YAML configurations into `values.yaml`, you can merge manually or with a tool of your choosing.
 
-The following `merge_yaml.py` script can be used to merge YAML excerpts into `values.yaml` automatically. This script requires python and the `ruamel.yaml` package, which you can install using `pip install ruamel.yaml`. To run the program, ensure that both `merge_yaml.py`, `values.yaml`, and the `yaml` file containing the configuration you want to add are all in your project directory. Then, run:
+You can use the following`merge_yaml.py` script to merge YAML excerpts into `values.yaml` automatically. This script requires both Python and the `ruamel.yaml` package, which you can install using `pip install ruamel.yaml`.
+To run the program, ensure that `merge_yaml.py`, `values.yaml`, and the `yaml` file that contains the configuration you want to add are all in your project directory. Then, run:
 
 ```sh
 python merge_yaml.py values-to-merge.yaml values.yaml
@@ -1694,7 +1693,7 @@ if __name__ == "__main__":
                                        
 ### Disable outbound email 
 
-Astronomer Software can be configured to not send outbound email.
+You can configure Astronomer Software to not send outbound email.
 
 :::info
 
@@ -1708,7 +1707,7 @@ To disable email transmission and email verision of users attempting to access t
 2. Set `astronomer.houston.config.publicSignups` to `true`.
 3. Remove the `EMAIL__SMTP_URL` list-item from `astronomer.houston.secret`.
 
-### Configure Astronomer Software to trust private certificate authorities (CAs) {#configuring-private-cas}
+### Configure Astronomer Software to trust private certificate authorities (CAs) {#configure-private-cas}
 
 1. Store the CA's root public certificate to an [Opaque Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#secret-types) in the Astronomer namespace with a descriptive name, such as `private-root-ca`, by running the following command.
 
