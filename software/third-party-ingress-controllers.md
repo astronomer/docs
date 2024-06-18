@@ -95,7 +95,7 @@ Enable authSidecar and disable Astronomer's integrated ingress controller.
 global:
   nginxEnabled: false
 
-  authSidecar:  
+  authSidecar:
     enabled: true
   # must be named exactly astronomer-tls when using a third-party ingress controller
     tlsSecret: astronomer-tls
@@ -154,7 +154,7 @@ Contour ships with support for websockets disabled by default. To use a Contour 
       routes:
         - conditions:
           - prefix: /ws
-          enableWebsockets: true  
+          enableWebsockets: true
           services:
             - name: astronomer-houston
               port: 8871
@@ -166,11 +166,14 @@ Contour ships with support for websockets disabled by default. To use a Contour 
    kubectl apply -n <your-platform-namespace> -f proxy.yaml
    ```
 
-> **Note:** Depending on the version of Contour, upgrading from using the default ingress controller to a Contour controller might cause issues. If you are upgrading a platform that used the built-in ingress controller, manually delete the Astronomer Platform Ingress objects in the Astronomer Platform namespace before updating your `values.yaml` file. You can do so using the following commands:
->
->    ```sh
->    $ kubectl -n <your-platform-namespace> delete ingress -l release=<your-platform-release-name>
->    $ helm upgrade --install -f values.yaml --version=<your-platform-version> --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
+:::info
+
+Depending on the version of Contour, upgrading from using the default ingress controller to a Contour controller might cause issues. If you are upgrading a platform that used the built-in ingress controller, manually delete the Astronomer Platform Ingress objects in the Astronomer Platform namespace before updating your `values.yaml` file. You can do so using the following commands:
+
+  ```sh
+  $ kubectl -n <your-platform-namespace> delete ingress -l release=<your-platform-release-name>
+  $ helm upgrade --install -f values.yaml --version=<your-platform-version> --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
+  ```
 
 ### Required configuration Openshift Ingress Controller
 
@@ -181,6 +184,6 @@ See [Required Environment Configuration for OpenShift](#required-environment-con
 If performing a new installation, skip this step and do not apply changes until the install guide instructs you to do so.
 
 If this is an existing installation, apply your updated configuration using the following command:
-```bash 
+```bash
 helm upgrade --install -f values.yaml --version=<your-platform-version> --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
 ```
