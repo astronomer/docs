@@ -151,11 +151,15 @@ Certain files in the project directory might contain secrets when you set up you
 
 Astronomer Software uses Helm to apply platform-level configurations. Use one of the following templates as the basis for your Astronomer Software platform configuration by copying the template into a local file named `values.yaml` in your platform project directory. As you continue to extend the functionality of your Astronomer Software instances, you can continually modify this file to take advantage of new features.
 
+:::warning
+
 As you copy the template configuration, keep the following in mind.
 
 - Do not make any changes to this file until instructed to do so in later steps.
 - Do not run `helm upgrade` or `upgrade.sh` until instructed to do so in later steps. 
 - Ignore any instructions to run `helm upgrade` from other Astronomer documentation until you've completed this installation.
+
+:::
 
 <Tabs
     defaultValue="aws"
@@ -202,7 +206,7 @@ nginx:
   loadBalancerIP: ~
   #  set privateLoadbalancer to 'false' to make nginx request a LoadBalancer on a public vnet
   privateLoadBalancer: true
-  # Dict of arbitrary annotations to add to the nginx ingress. For full configuration options, see https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/advanced-configuration-with-annotations/
+  # Dictionary of arbitrary annotations to add to the nginx ingress. For full configuration options, see https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/advanced-configuration-with-annotations/
   ingressAnnotations: {service.beta.kubernetes.io/aws-load-balancer-type: nlb} # Change to 'elb' if your node group is private and doesn't utilize a NAT gateway
   # If all subnets are private, auto-discovery may fail.
   # You must enter the subnet IDs manually in the annotation below. 
@@ -458,11 +462,11 @@ astronomer:
 </TabItem>
 </Tabs>
 
-## Step 3: Decide whether to use a third-party Ingress controller {#elect-to-use-a-third-party-ingress-controller}
+## Step 3: Decide whether to use a third-party Ingress controller {#decide-ingress-controller}
 
 Astronomer Software requires a Kubernetes Ingress controller to function and provides an integrated Ingress controller by default.
 
-Astronomer generally recommends you use the integrated Ingress controller, but Astronomer Software also supports certain third-party [third-party ingress-controllers](#third-party-ingress-controllers).
+Astronomer generally recommends you use the integrated Ingress controller, but Astronomer Software also supports certain third-party [ingress-controllers](#third-party-ingress-controllers).
 
 Ingress controllers typically need elevated permissions (including a ClusterRole) to function. Specifically, the Astronomer Software Ingress controller requires the ability to: 
 
@@ -470,16 +474,16 @@ Ingress controllers typically need elevated permissions (including a ClusterRole
 - View ingresses in the namespaces.
 - Retrieve secrets in the namespaces to locate and use private TLS certificates that service the ingresses.
 
-If you have complex regulatory requirements, you might need to use an internally-approved Ingress controller and disable Astronomer's integrated controller. You'll configure this detail later in the installation.
+If you have complex regulatory requirements, you might need to use an Ingress controller that's approved by your organization and disable Astronomer's integrated controller. You configure this detail later in the installation.
 
-## Step 4: Choose and configure a base domain {#choose-and-configure-the-base-domain}
+## Step 4: Choose and configure a base domain {#choose-base-domain}
 
-When you install Astronomer Software, it will create a variety of services that your users will access to manage, monitor, and run Airflow.
+When you install Astronomer Software, it creates a variety of services that your users access to manage, monitor, and run Airflow.
 
-Choose a base-domain (e.g. `astronomer.example.com`, `astro-sandbox.example.com`, `astro-prod.example.internal`) for which:
+Choose a base domain such as `astronomer.example.com`, `astro-sandbox.example.com`, `astro-prod.example.internal` for which:
 
 - You have the ability to create and edit DNS records
-- You have the ability to issue TLS-certificates
+- You have the ability to issue TLS certificates
 - The following addresses are available:
   - `app.<base-domain>`
   - `deployments.<base-domain>`
@@ -491,25 +495,25 @@ Choose a base-domain (e.g. `astronomer.example.com`, `astro-sandbox.example.com`
   - `prometheus.<base-domain>`
   - `registry.<base-domain>`
 
-The base-domain itself does not need to be available and may even point to another service not associated with Astronomer or Airflow. If available, later sections of this document will establish a vanity redirect from `<base-domain>` to `app.<base-domain>`.
+The base domain itself does not need to be available and can point to another service not associated with Astronomer or Airflow. If the base domain is available, you can choose to establish a vanity redirect from `<base-domain>` to `app.<base-domain>` later in the installation process.
 
-When choosing a baseDomain, consider the following:
+When choosing a base domain, consider the following:
 
-- The name you choose must be be resolvable by both your users and Kubernetes itself
-- You will need to have or obtain a TLS certificate that is recognized as valid by your users (and if using the Astronomer Software integrated container registry, by Kubernetes itself)
-- Wildcardcard certificates are only valid on level deep (for example, an ingress controller using a certificate of `*.example.com` can provide service for `app.example.com` but not `app.astronomer-dev.example.com`).
-- The bottom-level hostnames (such as `app`, `registry`, `prometheus`) are fixed and cannot be changed.
-- Most kubernetes clusters refuse to resolve DNS hostnames with more than 5 segments (separated by the dot character; for example, `app.astronomer.sandbox.mygroup.example.com` is 6 segments and might be problematic, so choosing a baseDomain of `astronomer-sandbox.mygroup.example.com` instead of `astronomer.sandbox.mygroup.example.com` is recommended).
+- The name you choose must be be resolvable by both your users and Kubernetes itself.
+- You need to have or obtain a TLS certificate that is recognized as valid by your users. If you use the Astronomer Software integrated container registry, the TLS certification must also be recognized as valid by Kubernetes itself.
+- Wildcard certificates are only valid one level deep. For example, an ingress controller that uses a certificate called `*.example.com` can provide service for `app.example.com` but not `app.astronomer-dev.example.com`.
+- The bottom-level hostnames, such as `app`, `registry`, `prometheus`, are fixed and cannot be changed.
+- Most Kubernetes clusters don't resolve DNS hostnames with more than five segments, each separated by the dot character, `.`. For example, `app.astronomer.sandbox.mygroup.example.com` is six segments and might cause problems. Astronomer recommends choosing a base domain of `astronomer-sandbox.mygroup.example.com` instead of `astronomer.sandbox.mygroup.example.com`.
 
-The base-domain will be visible to end users:
+The base domain is visible to end users. They can view the base domain in the following scenarios:
 
-  - When users access the Astronomer Software UI (for example, `https://app.sandbox-astro.example.com`)
-  - When users access an Airflow Deployment (for example, `https://deployments.sandbox-astro.example.com/deployment-release-name/airflow`)
-  - When users authenticate to the Astro CLI (for example, `astro login sandbox-astro.example.com`)
+  - When users access the Astronomer Software UI. For example, `https://app.sandbox-astro.example.com`.
+  - When users access an Airflow Deployment. For example, `https://deployments.sandbox-astro.example.com/deployment-release-name/airflow`.
+  - When users authenticate to the Astro CLI. For example, `astro login sandbox-astro.example.com`.
   
 :::info
 
-If you are installing Astronomer Software on OpenShift and want to use OpenShift's integrated ingress controller, you would typically use the hostname of the default OpenShift ingress controller as your base domain (`app.apps.<OpenShift-domain>`). Doing this requires permission to reconfigure the route-admission policy for the standard ingress controller to `InterNamespaceAllowed`. See [Third Party Ingress Controller - Configuration notes for OpenShift](third-party-ingress-controllers#configuration-notes-for-OpenShift) for additional information and options.
+If you install Astronomer Software on OpenShift and also want to use OpenShift's integrated ingress controller, you can use the the hostname of the default OpenShift ingress controller as your base domain, such as `app.apps.<OpenShift-domain>`. Doing this requires permission to reconfigure the route admission policy for the standard ingress controller to `InterNamespaceAllowed`. See [Third Party Ingress Controller - Configuration notes for OpenShift](third-party-ingress-controllers.md#configuration-notes-for-OpenShift) for additional information and options.
 
 :::
 
@@ -523,25 +527,25 @@ global:
   baseDomain: sandbox-astro.example.com
 ```
 
-## Step 5: Create the Astronomer Software platform namespace {#create-the-astronomer-software-platform-namespace}
+## Step 5: Create the Astronomer Software platform namespace {#create-astronomer-namespace}
 
-In your Kubernetes cluster, create a [kubernetes namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). Astronomer generally recommends naming this namespace `astronomer`. The namespace will contain the Astronomer Software platform.
+In your Kubernetes cluster, create a [Kubernetes namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) to contain the Astronomer Software platform. Astronomer recommends naming this namespace `astronomer`. 
 
 ```sh
 kubectl create namespace astronomer
 ```
 
-The contents of this namespace will be used to provision and manage Airflow instances running in other namespaces. Each Airflow instance will have its own isolated namespace.
+Astronomer Software uses the contents of this namespace to provision and manage Airflow instances running in other namespaces. Each Airflow instance has its own isolated namespace.
 
-## Step 6: (Optional) Configure third-party Ingress controller DNS {#third-party-ingress-controller-dns-configuration}
+## Step 6: (Optional) Configure third-party Ingress controller DNS {#ingress-controller-dns-configuration}
 
-Skip this step if you're using Astronomer Software's integrated ingress-controller.
+Skip this step if you use Astronomer Software's integrated ingress controller.
 
-Follow the instructions in this section to create DNS entries pointing to the third-party ingress controller instance that will provide ingress service to Astronomer Software.
+Follow the instructions in this section to create DNS entries pointing to the third-party ingress controller instance that provides ingress service to Astronomer Software.
 
 ### Astronomer Software Third-Party DNS Requirements and Record Guidance {#third-party-dns-guidance}
 
-Astronomer Software requires the following domain-names be registered and resolvable within the Kubernetes cluster and to Astronomer Software users:
+Astronomer Software requires the following domain names be registered and resolvable within the Kubernetes cluster and to Astronomer Software users:
 
   - `app.<base-domain>` (required)
   - `deployments.<base-domain>` (required)
@@ -556,8 +560,8 @@ Astronomer Software requires the following domain-names be registered and resolv
 
 Astronomer generally recommends that:
 
-- The `<base-domain>` record is a zone apex record (typically expressed by using a hostname of `@`) pointing to the IP(s) of the ingress-controller.
-- All other records are CNAME records pointing to the `<base-domain>`.
+- The `<base-domain>` record is a zone apex record, that is typically expressed by using a hostname of `@`, and points to the IP(s) of the ingress controller.
+- All other records are CNAME records that point to the `<base-domain>`.
 
 For platform administrators unable to register the base domain, Astronomer recommends that:
 
