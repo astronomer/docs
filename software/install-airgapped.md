@@ -25,9 +25,14 @@ Astronomer recommends platform administrators perform their first Astronomer Sof
     ]}>
 
 <TabItem value="aws">
-The following prerequisites apply when running Astronomer Software on Amazon EKS (see the 'Other' tab if running a different version of Kubernetes on AWS).
 
-- An EKS Kubernetes cluster, running a version of Kubernetes certified as compatible on the [Version Compatibility Reference](version-compatibility-reference.md) providing the following components.
+:::info
+
+The following prerequisites apply when running Astronomer Software on Amazon EKS. See the **Other** tab if you run a different version of Kubernetes on AWS.
+
+:::
+
+- An EKS Kubernetes cluster, running a version of Kubernetes certified as compatible on the [Version Compatibility Reference](version-compatibility-reference.md) that provides the following components:
     * The [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) (or an alternative CSI) must be installed on the Kubernetes Cluster.
     * An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).  
 - A PostgreSQL instance, accessible from your Kubernetes cluster, and running a version of Postgres certified as compatible on the [Version Compatibility Reference]
@@ -38,59 +43,66 @@ The following prerequisites apply when running Astronomer Software on Amazon EKS
 - An SMTP service and credentials. For example, Mailgun or Sendgrid.
 - The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
 - (Optional) [`eksctl`](https://eksctl.io/) for creating and managing your Astronomer cluster on EKS.
-- A machine with access to the Kubernetes API Server meeting the following criteria:
-    * Network access to the Kubernetes API Server - either directly or VPN.
-    * Network access to load-balancer resources created when Astronomer Software is installed later in the procedure - either directly or via vpn.
-    * Configured to use the DNS servers where Astronomer Software DNS records will be created.
+- A machine meeting the following criteria with access to the Kubernetes API Server:
+    * Network access to the Kubernetes API Server - either direct access or VPN.
+    * Network access to load-balancer resources that are created when Astronomer Software is installed later in the procedure - either direct access or VPN.
+    * Configured to use the DNS servers where Astronomer Software DNS records can be created.
     * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
     * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
-- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
+- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) might be required to troubleshoot certain certificate-related conditions.
+- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) might be required to troubleshoot certain certificate-related conditions.
 
 </TabItem>
 
 <TabItem value="gcp">
-The following prerequisites apply when running Astronomer Software on Google GKE (see the 'Other' tab if running a different version of Kubernetes on GCP).
+:::info 
 
-- A GKE Kubernetes cluster, running a version of Kubernetes certified as compatible on the [Version Compatibility Reference](version-compatibility-reference.md).
-- A PostgreSQL instance, accessible from your Kubernetes cluster, and running a version of Postgres certified as compatible on the [Version Compatibility Reference]
+The following prerequisites apply when running Astronomer Software on Google GKE. See the **Other** tab if you run a different version of Kubernetes on GCP.
+
+:::
+
+- A GKE Kubernetes cluster, running a version of Kubernetes listed as compatible on the [Version Compatibility Reference](version-compatibility-reference.md).
+- A PostgreSQL instance, accessible from your Kubernetes cluster, and running a version of Postgres certified as compatible on the [Version Compatibility Reference](version-compatibility-reference.md).
 - PostgreSQL superuser permissions.
-- Permission to create and modify resources on Google Cloud Platform
+- Permission to create and modify resources on Google Cloud Platform.
 - Permission to generate a certificate that covers a defined set of subdomains.
 - An SMTP service and credentials. For example, Mailgun or Sendgrid.
-- [Google Cloud SDK](https://cloud.google.com/sdk/install)
-- A machine with access to the Kubernetes API Server meeting the following criteria:
-    * Network access to the Kubernetes API Server - either directly or VPN.
-    * Network access to load-balancer resources created when Astronomer Software is installed later in the procedure - either directly or via vpn.
-    * Configured to use the DNS servers where Astronomer Software DNS records will be created.
-    * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
+- [Google Cloud SDK](https://cloud.google.com/sdk/install).
+- A machine that meets the following criteria with access to the Kubernetes API Server:
+    * Network access to the Kubernetes API Server - either direct access or VPN.
+    * Network access to load-balancer resources that are created when Astronomer Software is installed later in the procedure - either direct access or VPN.
+    * Configured to use the DNS servers where Astronomer Software DNS records can be created.
+    * [Helm with minimum version 3.6](https://helm.sh/docs/intro/install).
     * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
     * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
+- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) might be required to troubleshoot certain certificate-related conditions.
 
 
 </TabItem>
 
 <TabItem value="azure">
-The following prerequisites apply when running Astronomer Software on Azure AKS (see the 'Other' tab if running a different version of Kubernetes on Azure).
+:::info
 
-- A Kubernetes cluster, running a version of Kubernetes certified as compatible on the [Version Compatibility Reference](version-compatibility-reference.md).
-- A PostgreSQL instance, accessible from your Kubernetes cluster, and running a version of Postgres certified as compatible on the [Version Compatibility Reference]
-  * If your organization uses Azure Database for PostgreSQL as the database backend, you need to enable the `pg_trgm` extension using the Azure portal or the Azure CLI before you install Astronomer Software. If you don't enable the `pg_trgm` extension, the install will fail. For more information about enabling the `pg_trgm` extension, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
+The following prerequisites apply when running Astronomer Software on Azure AKS. See the **Other** tab if you run a different version of Kubernetes on Azure.
+
+:::
+
+- A Kubernetes cluster, running a version of Kubernetes listed as compatible on the [Version Compatibility Reference](version-compatibility-reference.md).
+- A PostgreSQL instance, accessible from your Kubernetes cluster, and running a version of Postgres certified as compatible on the [Version Compatibility Reference](version-compatibility-reference.md).
+  * If your organization uses Azure Database for PostgreSQL as the database backend, you need to enable the `pg_trgm` extension using the Azure portal or the Azure CLI before you install Astronomer Software. If you don't enable the `pg_trgm` extension, the install fails. For more information about enabling the `pg_trgm` extension, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
 - PostgreSQL superuser permissions.
-- Permission to create and modify resources on Azure
-- Permission to generate a certificate that covers a defined set of subdomains
+- Permission to create and modify resources on Azure.
+- Permission to generate a certificate that covers a defined set of subdomains.
 - An SMTP service and credentials. For example, Mailgun or Sendgrid.
 - The [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
-- A machine with access to the Kubernetes API Server meeting the following criteria:
-    * Network access to the Kubernetes API Server - either directly or VPN.
-    * Network access to load-balancer resources created when Astronomer Software is installed later in the procedure - either directly or via vpn.
+- A machine meeting the following criteria with access to the Kubernetes API Server:
+    * Network access to the Kubernetes API Server - either direct access or VPN.
+    * Network access to load-balancer resources created when Astronomer Software is installed later in the procedure - either direct access or VPN.
     * Configured to use the DNS servers where Astronomer Software DNS records will be created.
     * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
     * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
     * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
-
+- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) might be required to trouble-shoot certain certificate-related conditions.
 
 </TabItem>
 
@@ -105,39 +117,39 @@ The following prerequisites apply when running Astronomer Software on Kubernetes
 - PostgreSQL superuser permissions.
 - The ability to create DNS records.
 - A machine with access to the Kubernetes API Server meeting the following criteria:
-  * Network access to the Kubernetes API Server - either directly or VPN.
-  * Network access to load-balancer resources created when Astronomer Software is installed later in the procedure - either directly or via vpn.
+  * Network access to the Kubernetes API Server - either direct access or VPN.
+  * Network access to load-balancer resources created when Astronomer Software is installed later in the procedure - either direct access or VPN.
   * Configured to use the DNS servers where Astronomer Software DNS records will be created.
   * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
   * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) may be required to trouble-shoot certain certificate-related conditions.
+- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) might be required to trouble-shoot certain certificate-related conditions.
 </TabItem>
 
 </Tabs>
 
-## Step 1: Plan the structure of your Astronomer Software environments {#determining-how-to-structure-and-organize-your-platform-environments}
+## Step 1: Plan the structure of your Astronomer Software environments {#structure-platform-environments}
 
-Before installing Astronomer Software, consider how many instances of the platform you want to host. Each of these instances will need to be installed on separate Kubernetes clusters following the instructions in this document.
+Before installing Astronomer Software, consider how many instances of the platform you want to host because you install each of these instances on separate Kubernetes clusters following the instructions in this document.
 
 Each instance of Astronomer Software can host multiple Airflow environments, or Deployments. Some common types of Astronomer Software instances you might consider hosting are:
 
-- Sandbox : Lowest environment, contains no sensitive-data, used only by system-administrators to experiment, not subject to change-control.
-- Development : User-accessible, subject to most of the restrictions of higher environments, relaxed change-control.
-- Staging : All network/security/patch-versions in lock-step with production, no availability guarantees, relaxed change-control.
-- Production : Hosts production Airflow environments. Development Airflow environments can be hosted here or in lower environments.
+- Sandbox: The lowest environment that contains no sensitive data, used only by system-administrators to experiment, and not subject to change control.
+- Development: User-accessible environment that is subject to most of the same restrictions of higher environments, with relaxed change control rules.
+- Staging: All network, security, and patch versions are maintained at the same level as in the production environment. However, it provides no availability guarantees and includes relaxed change control rules.
+- Production: The production instance hosts your production Airflow environments. You can choose to host development Airflow environments can be here or in environments with lower levels of support and restrictions.
 
-For each instance of the platform that you plan to host, create a project folder that will host the platform instance's configurations. For example, if you are installing a development environment, create a folder named `~/astronomer-dev`.
+For each instance of the platform that you plan to host, create a project folder to contain the platform instance's configurations. For example, if you want to install a development environment, create a folder named `~/astronomer-dev`.
 
 
 :::info
 
-Certain files in this directory may contain secrets. For your first install, keep these in a secure place on a suitable machine. As you progress to higher environments, vault these files separately and use the remaining files to serve as the basis for your CI/CD deployment.
+Certain files in the project directory might contain secrets when you set up your sandbox or development environments. For your first install, keep these secrets in a secure place on a suitable machine. As you progress to higher environments, such as staging or production, secure these files separately in a vault and use the remaining project files in your directory to serve as the basis for your CI/CD deployment.
 
 :::
 
-## Step 2: Create `values.yaml` from a template {#create-valuesyaml-from-a-template}
+## Step 2: Create `values.yaml` from a template {#create-valuesyaml}
 
-Astronomer Software uses Helm to apply platform-level configurations. Use one of the following templates as the basis for your Astronomer Software platform configuration. Copy the template into a local file named `values.yaml` in your platform project directory. You'll continually modify this file as you grow with Astronomer Software and want to take advantage of new features.
+Astronomer Software uses Helm to apply platform-level configurations. Use one of the following templates as the basis for your Astronomer Software platform configuration by copying the template into a local file named `values.yaml` in your platform project directory. As you continue to extend the functionality of your Astronomer Software instances, you can continually modify this file to take advantage of new features.
 
 As you copy the template configuration, keep the following in mind.
 
