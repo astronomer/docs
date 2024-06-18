@@ -54,44 +54,42 @@ To complete this setup, you need to supply your own ingress controller. Astronom
 
 If you want to use an ingress controller that isn't listed here, please contact your Astronomer representative.
 
-## Step 3: Perform any required configuration specific to your Kubernetes environment {#required-environment-configuration}
+## Step 3: (OpenShift Only) Perform required configuration to your Kubernetes environment {#required-environment-configuration-openshift}
 If not using OpenShift, skip this step.
 
-### Required configuration for OpenShift {#required-environment-configuration-openshift}
 
-OpenShift's standard ingress controller restricts hostname usage to a single namespace - a setting not compatible with Astronomer Software.
+OpenShift's standard ingress controller restricts hostname use to a single namespace, which is not a compatible setting with Astronomer Software. You can disable this setting for the default IngressController instance using the following command:
 
-You can disable this setting for the default IngressController instance using the following command.
 
 ```sh
 kubectl -n openshift-ingress-operator patch ingresscontroller/default --patch '{"spec":{"routeAdmission":{"namespaceOwnership":"InterNamespaceAllowed"}}}' --type=merge
 ```
 
-Alternatively, see use Openshift Ingress Sharding to create an additional Ingress instance with the required routeAdmission policy.. 
-For more information, including information about security implications for multi-tenant clusters, see the [Openshift Ingress operator documentation](https://docs.openshift.com/container-platform/4.9/networking/ingress-operator.html).
+Alternatively, see [Use Openshift Ingress Sharding](https://docs.openshift.com/container-platform/4.15/networking/ingress-sharding.html) to create an additional Ingress instance with the required routeAdmission policy.
+For more information, including information about security implications for multi-tenant clusters, see the [Openshift Ingress operator documentation](https://docs.openshift.com/container-platform/4.15/networking/ingress-operator.html).
 
-OpenShift clusters with multi-tenant isolation enabled will need to explicitly allow traffic from the ingress controller's namespace to services associated with ingresses in other namespaces.
+OpenShift clusters with multi-tenant isolation enabled need to explicitly allow traffic from the ingress controller's namespace to services associated with ingresses in other namespaces.
 
-This is typically done by labeling the namespace containing your ingress controller with the `network.openshift.io/policy-group=ingress` label, but this may vary based on the specific policy and configuration on your cluster. For example, you might run the following:
+Label the namespace containing your ingress controller with the `network.openshift.io/policy-group=ingress` label. However, the label can vary based on the specific policy and configuration on your cluster. For example, you might run the following:
 
 ```sh
 kubectl label namespace/<ingress namespace> network.openshift.io/policy-group=ingress
 ```
 
-For more information, see the [OpenShift documentation](https://docs.openshift.com/container-platform/4.1/networking/configuring-networkpolicy.html) on configuring network policy.
+For more information, see the [OpenShift documentation](https://docs.openshift.com/container-platform/4.15/networking/network_policy/about-network-policy.html) on configuring network policy.
 
 ## Step 4: Mark the astronomer-tls secret for replication
 
-Most third-party ingress-controllers require the `astronomer-tls` secret be replicated into each Airflow namespace.
+Most third-party ingress controllers require the `astronomer-tls` secret to be replicated into each Airflow namespace.
 
-Annotate the secret and set `"astronomer.io/commander-sync` to `platform=<astronomer platform release name>`, e.g.:
+Annotate the secret and set `"astronomer.io/commander-sync"` to `platform=<astronomer platform release name>`. For example:
 ```sh
 kubectl -n <astronomer platform namespace> annotate secret astronomer-tls "astronomer.io/commander-sync"="platform=astronomer"
 ```
 
 ## Step 5: Set required settings in values.yaml
 
-Enable authSidecar and Disable Astronomer's integrated ingress controller.
+Enable authSidecar and disable Astronomer's integrated ingress controller.
 
 ```yaml
 global:
@@ -99,11 +97,11 @@ global:
 
   authSidecar:  
     enabled: true
-  # must be named exactly astronomer-tls when using a third-party ingress-controller
+  # must be named exactly astronomer-tls when using a third-party ingress controller
     tlsSecret: astronomer-tls
 ```
 
-## Step 6: Perform required configuration for your specific ingress-controller
+## Step 6: Perform required configuration for your specific ingress controller
 
 ### Required configuration for nginx
 
