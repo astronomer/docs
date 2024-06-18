@@ -73,7 +73,7 @@ Astro includes connection management system that behaves like you are using an A
 - If you create a connection in the Astro UI, you also need to add its related provider package to the `requirements.txt` file in your Astro project.
 - Only available with Astro Runtime 9.3.0 and greater.
 - You can't see connections defined in the Astro UI in the Airflow UI.
-- You need`WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` user permissions.
+- You need `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` user permissions.
 - You can't programmatically import connections to the Environment Manager from your local environment.
 
 :::info

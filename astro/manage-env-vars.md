@@ -7,7 +7,7 @@ description: Learn how to manage environment variables on Astro
 
 On Astro, you can create, update, or delete environment variables for a Deployment in the following ways:
 
-- Using the Deployment's **Variables** tab in the Astro UI.
+- Using the Deployment's **Environment Variables** tab in your Deployment's **Environment** settings.
 - Using your Astro project `Dockerfile`.
 
 The way you manage environment variables can affect security and access for your variable data. See [Choose a strategy](environment-variables.md#choose-a-strategy) to determine which management strategy is right for your use case.
@@ -20,13 +20,15 @@ Setting environment variables using the Astro UI is the quickest and easiest way
 
 1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
-2. Click the **Variables** tab.
+2. Click the **Environment** tab.
 
-3. Click **Edit Variables**.
+3. Click **Environment variables**.
 
-4. Enter an environment variable key and value. For sensitive credentials that should be treated with an additional layer of security, select the **Secret** checkbox. This permanently hides the variable's value from all users in your Workspace.
+4. Click **Edit Variables**.
 
-5. Click **Update Environment Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for new variables to be applied to your Deployment.
+5. Enter an environment variable key and value. For sensitive credentials that should be treated with an additional layer of security, select the **Secret** checkbox. This permanently hides the variable's value from all users in your Workspace.
+
+6. Click **Update Environment Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for new variables to be applied to your Deployment.
 
 ### Edit or delete existing values
 
@@ -34,15 +36,17 @@ After you set an environment variable key, only the environment variable value c
 
 1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
-2. Click the **Variables** tab.
+2. Click the **Environment** tab.
 
-3. Click **Edit Variables**. 
+3. Click the **Environment Variables** tab.
 
-4. Modify the value of the variable you want to edit.
+4. Click **Edit Variables**.
+
+5. Modify the value of the variable you want to edit.
 
     ![Edit value location](/img/docs/variables-edit.png)
 
-5. Click **Update Environment Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for updated variables to be applied to your Deployment.
+6. Click **Update Environment Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for updated variables to be applied to your Deployment.
 
 ## Using your Dockerfile
 
@@ -117,7 +121,7 @@ astro deployment variable create AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT=60 ENVIRON
 ```
 :::
 
-After you deploy environment variables, your Deployment automatically restarts to and applies the variables. To verify if the environment variables were applied correctly, go to the **Variables** tab of your Deployment in the Astro UI. 
+After you deploy environment variables, your Deployment automatically restarts to and applies the variables. To verify if the environment variables were applied correctly, go to **Environment** > **Environment Variables** of your Deployment settings in the Astro UI.
 
 ### Use multiple .env files
 
