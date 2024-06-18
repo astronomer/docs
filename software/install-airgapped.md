@@ -565,39 +565,39 @@ Astronomer generally recommends that:
 
 For platform administrators unable to register the base domain, Astronomer recommends that:
 
-- The `app.<baseDomain>` record is an A record pointing to the IP(s) of the ingress controller.
+- The `app.<baseDomain>` record is a record pointing to the IPs of the ingress controller.
 - All other records are CNAME records pointing to `app.<base-domain>`.
 
 :::tip
 
-For lower environments, Astronomer recommends a relatively short ttl value, such as 60 seconds, when you first deploy Astronomer so that any errors can be quickly corrected.
+For lower environments like sandboxes or development environments, Astronomer recommends a relatively short ttl value, such as 60 seconds, when you first deploy Astronomer so that any errors can be quickly corrected.
 
 :::
 
 ### Request ingress information from your ingress administrator {#get-ingress-info}
 
-Provide the details in [Astronomer Software Third-Party DNS Requirements and Record Guidance](#third-party-dns-guidance) with your ingress controller administrator, making sure to replace `<base-domain>` with your chosen base domain. Then, request the following information from the administrator:
+Provide the details you gathered in [Astronomer Software Third-Party DNS Requirements and Record Guidance](#third-party-dns-guidance) to your ingress controller administrator, making sure to replace `<base-domain>` with your chosen base domain. Then, request the following information from the administrator:
 
-- The ingress class name to use (or whether you should leave blank and use the default)
-- The IP address(es) to use for DNS entries pointing to the ingress controller.
-- Whether DNS records will be automatically created in response to Ingress sources that you will create later in the install.
-- Whether DNS records need to be manually created, and if so who will coordinate their creation and who will create them.
+- The ingress class name to use, or whether you should leave the class name blank and use the default.
+- The IP addresses to use for DNS entries pointing to the ingress controller.
+- Whether DNS records are automatically created in response to ingress sources that you create later in the install.
+- Whether DNS records need to be manually created, and if so, who coordinates their creation and who creates them.
 
 Save this information for later in this setup.
 
-### Create DNS records pointing to your third-party ingress-controller
+### Create DNS records pointing to your third-party Ingress controller
 
-Create DNS records pointed to your third-party ingress controller per your organization's standard workflows.
+Create DNS records that point to your third-party ingress controller, based. on your organization's standard workflows.
 
-Use `dig <hostname>` or `getent hosts <hostname>` to verify each DNS entry is created and pointing to the IP address of the ingress controller you will be using.
+Use `dig <hostname>` or `getent hosts <hostname>` to verify that each DNS entry is created and points to the IP address of the ingress controller you use.
 
-## Step 7: Request and validate an Astronomer TLS certificate {#requesting-and-validating-an-astronomer-tls-certificate}
+## Step 7: Request and validate an Astronomer TLS certificate {#astronomer-tls-certificate}
 
-In order to install Astronomer Software, you'll need a TLS certificate that is valid for several domains. One of the domains will be the primary name on the certificate (also known as the common name, or CN), and the rest will be equally-valid supplementary domains known as Subject Alternative Names (SANs).
+To install Astronomer Software, you need a TLS certificate that is valid for several domains. One of the domains is the primary name on the certificate, also known as the common name (CN). The additional domains are equally valid, supplementary domains known as Subject Alternative Names (SANs).
 
-Astronomer requires a private certificate to be present in the Astronomer Software platform namespace, even if you're using a third-party ingress controller that doesn't otherwise require it.
+Astronomer requires a private certificate to be present in the Astronomer Software platform namespace, even if you use a third-party ingress controller that doesn't otherwise require it.
 
-### Request an ingress controller TLS Certificate {#request-a-certificate-bundle}
+### Request an ingress controller TLS certificate {#request-a-certificate-bundle}
 
 Request a TLS certificate from your security team for Astronomer Software. In your request, include the following:
 
@@ -612,25 +612,25 @@ Request a TLS certificate from your security team for Astronomer Software. In yo
     - `install.<base-domain>`
     - `alertmanager.<base-domain>`
     - `prometheus.<base-domain>`
-* If you're using the Astronomer Software integrated container registry, specify that that the encryption type of the certificate *must* be RSA.
-* Request that the return format be as follows:
+* If you use the Astronomer Software integrated container registry, specify that that the encryption type of the certificate must be RSA.
+* Request the following return format:
   - A `key.pem` containing the private key in pem format
   - **Either** a `full-chain.pem` (containing the public certificate additional certificates required to validate it, in pem format) **or** a bare `cert.pem` and explicit affirmation that there are no intermediate certificates and that the public certificate is the full chain.
-  - **Either** the `private-root-ca.pem` of the the private Certificate Authority used to create your certificate (in pem format) or a statement that the certificate is signed by public Certificate Authority.
+  - **Either** the `private-root-ca.pem` in pem format of the private Certificate Authority used to create your certificate or a statement that the certificate is signed by a public Certificate Authority.
 
 :::warning
 
-If you're using the Astronomer Software integrated container registry, the encryption type used on your TLS certificate must be *RSA*. Cerbot users must include `-key-type rsa` when requesting certificates. Most other solutions generate RSA keys by default. 
+If you're using the Astronomer Software integrated container registry, the encryption type used on your TLS certificate must be **RSA**. Cerbot users must include `-key-type rsa` when requesting certificates. Most other solutions generate RSA keys by default. 
 
 :::
 
 ### Validate the received certificate and associated items
 
-Ensure that you have received each of the following three items:
+Ensure that you received each of the following three items:
 
-- A `key.pem` containing the private key in pem format
-- **Either** a `full-chain.pem` (containing the public certificate additional certificates required to validate it, in pem format) **or** a bare `cert.pem` and explicit affirmation that there are no intermediate certificates and that the public certificate is the full chain.
-- **Either** the `private-root-ca.pem` of the the private Certificate Authority used to create your certificate (in pem format) or a statement that the certificate is signed by public Certificate Authority.
+- A `key.pem` containing the private key in pem format.
+- **Either** a `full-chain.pem`, in pem format, that contains the public certificate additional certificates required to validate it **or** a bare `cert.pem` and explicit affirmation that there are no intermediate certificates and that the public certificate is the full chain.
+- **Either** the `private-root-ca.pem` in pem format of the the private Certificate Authority used to create your certificate **or** a statement that the certificate is signed by public Certificate Authority.
 
 To validate that your security team generated the correct certificate, run the following command using the `openssl` CLI:
 
@@ -646,7 +646,7 @@ Confirm that your full-chain certificate chain is ordered correctly. To determin
 openssl crl2pkcs7 -nocrl -certfile <your-full-chain-certificate-filepath> | openssl pkcs7 -print_certs -noout
 ```
 
-The command generates a report of all certificates. Verify the order of the certificates is as follows:
+The command generates a report of all certificates. Verify that the certificates are in the following order:
 
 - Domain
 - Intermediate (optional)
@@ -654,11 +654,16 @@ The command generates a report of all certificates. Verify the order of the cert
 
 ### (Optional) Additional validation for the Astronomer integrated container registry {#docker-registry-cert-encryption-restrictions}
 
-If you will not be storing images in Astronomer's integrated container registry and will instead be storing all container images an [external container registry](#configure-a-private-docker-registry-airflow), you can skip this step.
 
-The Astronomer Software integrated container registry requires that your private key signs traffic originating from the Astronomer Software platform using the RSA encryption method. Confirm that the key is signing traffic correctly before proceeding to the next step.
+:::info
 
-Run the following command to extract the bare public cert (if it was not already included in the files provided by your certificate-authority) from the full-chain certificate file:
+If you don't plan to store images in Astronomer's integrated container registry and instead plan to store all container images using an [external container registry](#configure-a-private-docker-registry-airflow), you can skip this step.
+
+:::
+
+The Astronomer Software integrated container registry requires that your private key signs traffic originating from the Astronomer Software platform using the RSA encryption method. Confirm that the key is signing traffic correctly before proceeding.
+
+Run the following command to extract the bare public cert, if it was not already included in the files provided by your certificate authority, from the full-chain certificate file:
 
 ```sh
 openssl crl2pkcs7 -nocrl -certfile full-chain.pem | openssl pkcs7 -print_certs -noout > cert.pem
@@ -673,11 +678,11 @@ openssl x509 -in cert.pem -text|grep Algorithm
     Signature Algorithm: sha1WithRSAEncryption
 ```
 
-If your key is not compatible with the Astronomer Software integrated container registry, ask your Certificate Authority to [re-issue the credentials](#request-a-certificate-bundle) (re-emphasizing the need for an RSA cert) or [use an external container registry](#configure-a-private-docker-registry-airflow).
+If your key is not compatible with the Astronomer Software integrated container registry, ask your Certificate Authority to [re-issue the credentials](#request-a-certificate-bundle) and emphasize the need for an RSA cert, or [use an external container registry](#configure-a-private-docker-registry-airflow).
 
-## Step 8: Store and configure the ingress controller public TLS full-chain certificate {#storing-and-configuring-the-public-tls-full-chain-certificate}
+## Step 8: Store and configure the ingress controller public TLS full-chain certificate {#public-tls-full-chain-certificate}
 
-Run the following command to store the public full-chain certificate in the Astronomer Software Platform Namespace in a `tls`-type Kubernetes secret named `astronomer-tls`
+Run the following command to store the public full-chain certificate in the Astronomer Software Platform Namespace in a `tls`-type Kubernetes secret named `astronomer-tls`. 
 
 ```sh
 kubectl -n <astronomer platform namespace> create secret tls astronomer-tls --cert <fullchain-pem-filepath> --key <your-private-key-filepath>
@@ -688,33 +693,33 @@ However, if your security team has instructed you that there are no intermediate
 kubectl -n astronomer create secret tls astronomer-tls --cert full-chain.pem --key server_private_key.pem
 ```
 
-Naming the secret `astronomer-tls` (no substitutions) is always recommended and is a strict requirement when using a third-party ingress controller.
+Naming the secret `astronomer-tls` with no substitutions is always recommended and a strict requirement when using a third-party ingress controller.
 
-## Step 9: Configure a third-party ingress controller {#configuring-a-third-party-ingress-controller}
+## Step 9: (Optional) Configure a third-party ingress controller {#configure-third-party-ingress-controller}
 
-If you're using Astronomer Software's integrated ingress controller, you can skip this step.
+If you use Astronomer Software's integrated ingress controller, you can skip this step.
 
 Complete the full setup as described in [Third-party Ingress-Controllers](third-party-ingress-controllers.md), which includes steps to configure ingress controllers in specific environment types. When you're done, return to this page and continue to the next step.
 
-## Step 10: Configure a private certificate authority {#configuring-a-private-certificate-authority}
+## Step 10: Configure a private certificate authority {#configure-private-certificate-authority}
 
-If you are not using a private Certificate Authority (private CA) to sign the certificate used by your ingress-controller or any services the Astronomer Software platform interacts with (see list below) skip this step.
+Skip this step if you don't use a private Certificate Authority (private CA) to sign the certificate used by your ingress-controller. Or, if you don't use a private CA for any of the following services that the Astronomer Software platform interacts with.
 
 Astronomer Software trusts public Certificate Authorities automatically.
 
 Astronomer Software must be configured to trust any private Certificate Authorities issuing certificates for systems Astronomer Software interacts with, including but not limited-to:
-* ingress-controller
-* email server (unless disabled)
-* any container registries that Kubernetes will pull from
+* ingress controller
+* email server, unless disabled
+* any container registries that Kubernetes pulls from
 * if using OAUTH, the OAUTH provider
 * if using external elasticsearch, any external elasticsearch instances
 * if using external prometheus, any external prometheus instances
 
-Perform the procedure described at [Configuring private CAs](#configuring-private-cas) for each certificate-authority used to sign TLS certificates.
+Perform the procedure described in [Configuring private CAs](#configuring-private-cas) for each certificate authority used to sign TLS certificates.
 
 :::info
 
-astro-cli users must configure both their operating system and [Docker Desktop / podman]((#configure-desktop-container-solution-extra-cas) to trust the private-certificate Authority used to create the certificate used by the Astronomer Software ingress controller and any third-party container registries.
+Astro CLI users must also configure both their operating system and container solution, [Docker Desktop or Podman]((#configure-desktop-container-solution-extra-cas), to trust the private certificate Authority that was used to create the certificate used by the Astronomer Software ingress controller and any third-party container registries.
 
 :::
 
@@ -722,17 +727,17 @@ astro-cli users must configure both their operating system and [Docker Desktop /
 
 If at least one of the following circumstances apply to your installation, complete this step:
 
-- You have configured Astronomer software to pull platform [platform container images](#use-a-custom-image-repository-for-platform-images) from an external container registry that uses a certificate signed by a private CA.
-- Users will be deploying airflow images to Astronomer Software's integrated container registry *and* Astronomer is using a TLS certificate issued by a private CA.
-- Users will be deploying images to an external container registry *and* that registry is using a TLS certificate issued by a private CA. 
+- You configured Astronomer Software to pull [platform container images](#use-a-custom-image-repository-for-platform-images) from an external container registry that uses a certificate signed by a private CA.
+- You plan for your users to deploy Airflow images to Astronomer Software's integrated container registry *and* Astronomer is using a TLS certificate issued by a private CA.
+- Users will deploy images to an external container registry *and* that registry is using a TLS certificate issued by a private CA. 
 
 Otherwise, skip this step.
 
 Kubernetes must be able to pull images from one or more container registries for Astronomer Software to function. By default, Kubernetes only trusts publicly signed certificates.  This means that by default, Kubernetes does not honor the list of certificates [trusted by the Astronomer Software platform](#configuring-a-private-certificate-authority).
 
-Many enterprises configure Kubernetes to trust additional certificate-authorities as part of their standard cluter creation procedure. Contact your Kubernetes Administrator to find out what, if any, private certificates are currently trusted by your Kubernetes Cluster. Then, consult your Kubernetes administrator and Kubernetes provider's documentation for instructions on configuring Kubernetes trust additional CA.
+Many enterprises configure Kubernetes to trust additional certificate authorities as part of their standard cluster creation procedure. Contact your Kubernetes Administrator to find out what, if any, private certificates are currently trusted by your Kubernetes Cluster. Then, consult your Kubernetes administrator and Kubernetes provider's documentation for instructions on configuring Kubernetes to trust additional CAs.
 
-Follow procedures for your Kubernetes provider to configure Kubernetes to trust each CA associated with yor container registries (including the integrated container registry, if applicable).
+Follow procedures for your Kubernetes provider to configure Kubernetes to trust each CA associated with your container registries, including the integrated container registry, if applicable.
 
 Certain clusters do not provide a mechanism to configure the list of certificates trusted by Kubernetes.
 
@@ -762,7 +767,7 @@ Astronomer Software requires the ability to send email to:
 
 - Notify users of errors with their Airflow Deployments.
 - Send emails to invite new users to Astronomer.
-- Send certain platform alerts (in the default configuration, configurable).
+- Send certain platform alerts, enabled by default but can be configured.
 
 Astronomer Software sends all outbound email using SMTP.
 
@@ -891,7 +896,7 @@ Additional requirements apply to the following databases:
 
 Create a Kubernetes Secret named `astronomer-bootstrap` that points to your database. You must URL encode any special characters in your Postgres password.
 
-To create this secret, run the following command replacing the astronomer platform namespace, username, password, database hostname, and database port with their respective values (username and password must be url-encoded if they contain special-characters):
+To create this secret, run the following command replacing the astronomer platform namespace, username, password, database hostname, and database port with their respective values. Remember that username and password must be url-encoded if they contain special-characters:
 
 ```sh
 kubectl --namespace <astronomer platform namespace> create secret generic astronomer-bootstrap \
@@ -909,24 +914,24 @@ kubectl --namespace astronomer create secret generic astronomer-bootstrap \
 
 By default, Astronomer Software users create customized Airflow container images when they deploy project code to the platform. These images frequently contain sensitive information and must be stored in a secure location accessible to Kubernetes.
 
-Astronomer Software includes an integrated image registry that can be used for this purpose.
+Astronomer Software includes an integrated image registry for this purpose.
 
-Users may use images hosted in other container image repositories accessible to the Kubernetes cluster without additional platform-level configuration.
+Users can use images hosted in other container image repositories accessible to the Kubernetes cluster without additional platform-level configuration.
 
 See [Configure a custom registry for Deployment images](#custom-image-registry) for additional configurable options.
 
 ## Step 16: Configure the Docker registry used for platform images {#configure-a-private-docker-registry-platform}
 
-If you are installing Astronomer Software onto a Kubernetes cluster that can pull container images from public image repositories and you don't want to mirror these images locally, skip this step.
+Skip this step if you are installing Astronomer Software onto a Kubernetes cluster that can pull container images from public image repositories and you don't want to mirror these images locally.
 
-### Add configuration to use a custom image repository for platform images {#use-a-custom-image-repository-for-platform-images}
+### Configure your install use a custom image repository for platform images {#use-custom-image-repository-for-platform-images}
 
-Astronomer expects the images to be present using their normal names but prefixed by a string you define. E.g. if you specify `artifactory.example.com/astronomer`, when you mirror images later in this procedure, you would mirror `quay.io/astronomer/<image>` to `<custom-platform-repo-prefix>/astronomer/<image>`. For example:
+Astronomer expects the images to use their normal names, but prefixed by a string you define. For example, if you specify `artifactory.example.com/astronomer`, when you mirror images later in this procedure, you mirror `quay.io/astronomer/<image>` as `<custom-platform-repo-prefix>/astronomer/<image>`. The following show additional examples:
 
 - `quay.io/astronomer/ap-houston-api` to `artifactory.example.com/astronomer/ap-houston-api`
 - `quay.io/astronomer/astronomer/ap-commander` to `artifactory.example.com/astronomer/ap-commander`
 
-Replace `<custom-platform-repo-prefix>` in the following configuration data with your platform image repository prefix and merge into `values.yaml` - either manually or by placing [merge_yaml.py](#merge_yaml) in your astro-platform project-directory and running `python merge_yaml.py private-platform-registry-snippet.yaml values.yaml`.
+Replace `<custom-platform-repo-prefix>` in the following configuration data with your platform image repository prefix and merge into `values.yaml` either manually or by placing [merge_yaml.py](#merge_yaml) in your astro-platform project-directory and running `python merge_yaml.py private-platform-registry-snippet.yaml values.yaml`.
 
 ```yaml
 global:
@@ -1015,22 +1020,22 @@ Astronomer Software platform images are usually hosted in internal repositories 
         secretName: platform-regcred
     ```
 
-## Step 17: Determine what version of Astronomer Software to install {#determine-what-version-of-astronomer-software-to-install}
+## Step 17: Determine which version of Astronomer Software to install {#determine-version-of-astronomer-software}
 
-Astronomer recommends new Astronomer Software installations use the most recent version available in either the Stable or Long Term Support (LTS) release-channel. Keep this version at hand for the following steps.
+Astronomer recommends new Astronomer Software installations use the most recent version available in either the Stable or Long Term Support (LTS) release-channel. Keep this version number available for the following steps.
 
 See Astronomer Software's [lifecycle policy](release-lifecycle-policy) and [release notes](version-compatibility-reference) for more information.
 
 ## Step 18: Fetch Airflow Helm charts {#fetch-airflow-helm-charts}
 
-If you have internet access to `https://helm.astronomer.io` run the following command on the machine you will be installing Astronomer Software on:
+If you have internet access to `https://helm.astronomer.io`, run the following command on the machine where you want to install Astronomer Software:
 
 ```sh
 helm repo add astronomer https://helm.astronomer.io/
 helm repo update
 ```
 
-If you don't have internet access to `https://helm.astronomer.io`, download the Astronomer Software Platform helm chart file corresponding to the version of Astronomer Software you are installing or upgrading to from `https://helm.astronomer.io/astronomer-<version number>.tgz`. For example, for Astronomer Software v0.34.1 you would download `https://helm.astronomer.io/astronomer-0.34.1.tgz`. This file does not need to uploaded to an internal chart-repository.
+If you don't have internet access to `https://helm.astronomer.io`, download the Astronomer Software Platform Helm chart file corresponding to the version of Astronomer Software you are installing or upgrading to from `https://helm.astronomer.io/astronomer-<version number>.tgz`. For example, for Astronomer Software v0.34.1 you would download `https://helm.astronomer.io/astronomer-0.34.1.tgz`. This file does not need to uploaded to an internal chart repository.
 
 ## Step 19: Create and customize upgrade.sh {#create-and-customize-upgradesh}
 
