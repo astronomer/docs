@@ -25,6 +25,16 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## June 18, 2024
+
+### Additional Improvements
+
+- Moved the **Environment variable** tab in **Deployment Settings** to the **Environment** tab, and renamed it to **Environment Variables**. This helps disambiguate between Environment Variables and Airflow Variables in the Astro UI. Refer to [Manage environment variables](https://www.astronomer.io/docs/astro/manage-env-vars#using-the-astro-ui) for more information about the different methods to set up and manage Environment variables.
+
+### Bug fixes
+
+- Fixed a bug where a duplicate **Customer managed identity** option displayed when configuring Deployment settings.
+
 ## June 11, 2024
 
 ### Restrict Astro access to specific IP Address ranges with IP Access list
