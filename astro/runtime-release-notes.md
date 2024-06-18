@@ -170,9 +170,6 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 - Upgraded the minor and patch versions of some Astro open source provider packages. See [Astro Runtime 10.9.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-1090)
 - Includes `astronomer-providers-logging` version 1.1.5.1
 
-### Bug fixes
-- Fixed a bug where liveness/readiness probes might periodically fail when trying to remove a configuration file that did not exist.
-
 ### Security fixes
 
 - [CVE-2024-30251](https://nvd.nist.gov/vuln/detail/CVE-2024-30251)
