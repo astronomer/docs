@@ -103,7 +103,8 @@ Additionally, a best security practice is the principle of least privilege, wher
 - [Workspace API tokens](workspace-api-tokens.md)
 - [Organization API tokens](organization-api-tokens.md)
 
-We advise using roles with as little privileges as possible. For actions on deployment-level, consider [custom Deployment roles](customize-deployment-roles.md) (<EnterpriseBadge/>).
+<EnterpriseBadge/>
+For actions on deployment-level, consider [custom Deployment roles](customize-deployment-roles.md).
 
 ## Use a graphical REST API client for development
 
