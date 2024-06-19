@@ -11,11 +11,12 @@ The [Astro API](https://www.astronomer.io/docs/api) is Astronomer's REST API for
 
 - Considerations for using the [Astro API](https://www.astronomer.io/docs/api), [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview), and [Astro Terraform provider](https://github.com/astronomer/terraform-provider-astro)
 - Error handling
-- API tokens
+- Authenticating scripts using API tokens
 - Use a graphical REST API client for development
 - Handle rate limiting with exponential backoff retries
+- Reuse HTTP connections
 
-## Considerations for using the Astro API, CLI, and Terraform
+## Considerations for using the Astro API, Astro CLI, and Astro Terraform provider
 
 Astronomer provides several tools to manage Astro resources. Each tool comes with its own use cases:
 
@@ -93,7 +94,7 @@ The complete error response structure is:
 
 For traceability purposes, you could also include the `requestId` in your logs, which is an internal Astronomer identifier that Astronomer support can use to track down your request.
 
-## API tokens
+## Authenticating scripts using API tokens
 
 In automated scripts such as CI/CD pipelines where there's no human in the loop, the Astro API can be queried using an API token. An API token grants access to certain Astronomer resources and it's therefore important to keep the token safe. Do **_not_** hardcode the token in code! Instead, store the token in a secret and expose it as an environment variable `ASTRO_API_TOKEN`. Storing API tokens in a system dedicated for storing secret values, for example [GitHub Actions Secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository), ensures secret values are not visible to humans and only referenced by code when needed. 
 
