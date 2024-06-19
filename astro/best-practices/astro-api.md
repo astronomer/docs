@@ -108,7 +108,7 @@ For actions on deployment-level, consider [custom Deployment roles](customize-de
 
 ## Use a graphical REST API client for development
 
-The Astro API documentation provides a convenient interface to try out the API:
+The Astro API documentation provides a convenient web interface to try out the API:
 
 ![Astro API documentation](/img/docs/fern.png)
 
@@ -179,7 +179,7 @@ response = session.get(...)
 
 `requests.session()` creates a persistent session between requests and replaces `requests.get(...)` by `session.get(...)` to use the settings configured in the session. This way you don't have to duplicate the same `if e.response.status_code == 429` business logic for every request. In the code example, we configure the `urllib3.Retry` exponential backoff logic for HTTP status code 429 and up to 10 attempts, meaning it will wait 1, 2, 4, ..., 128, 256, 512 seconds in between the 10 attempts.
 
-One more code simplification using Python's `requests` library is setting a default value for `headers`. While you could write `headers={"Authorization": f"Bearer {astro_api_token}"}` with every request, it's cleaner to define this only once and automatically apply it to every request using the `session` object:
+One more code simplification using Python's requests library is setting a default value for `headers`. While you could write `headers={"Authorization": f"Bearer {astro_api_token}"}` with every request, it's cleaner to define this only once and automatically apply it to every request using the `session` object:
 
 ```python
 import requests
