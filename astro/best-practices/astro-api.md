@@ -105,7 +105,7 @@ Additionally, a best security practice is the principle of least privilege, wher
 - [Organization API tokens](organization-api-tokens.md)
 
 <EnterpriseBadge/>
-For actions on deployment-level, consider [custom Deployment roles](customize-deployment-roles.md).
+Consider [custom Deployment roles](customize-deployment-roles.md) for configuring deployment-level roles with only the necessary permissions.
 
 ## Use a graphical REST API client for development
 
