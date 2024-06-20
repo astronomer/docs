@@ -38,7 +38,7 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
 
 The following steps describe the different actions that the script performs to deploy a complete Astro project.
 
-1. Make a `POST` request to the `Deploy` endpoint to create a new `deploy` object. In your call, specify `type` as `IMAGE_AND_DAG`. This action creates an object that represents the intent to deploy code to a Deployment. See the [Astro API documentation](https://www.astronomer.io/docs/api/platform-api-reference/deploy/create-deploy) for request usage and examples.
+1. Make a `POST` request to the `Deploy` endpoint to create a new `deploy` object. In your call, specify `type` as `IMAGE_AND_DAG`. Store the value for the `DeployID` that is returned. This action creates an object that represents the intent to deploy code to a Deployment. See the [Astro API documentation](https://www.astronomer.io/docs/api/platform-api-reference/deploy/create-deploy) for request usage and examples.
 
 2. Make a `GET` request to the `Deploy` endpoint. Copy the values for `id`, `imageRepository`, `imageTag`, and `dagsUploadURL` to use in the following steps. See the [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/get-deploy) for request usage and examples.
 
@@ -46,7 +46,7 @@ The following steps describe the different actions that the script performs to d
 
    ```bash
 
-   docker login images.astronomer.cloud -u cli -p $<your-api-token>
+   docker login images.astronomer.cloud -u cli -p <your-api-token>
 
    ```
 
@@ -54,7 +54,7 @@ The following steps describe the different actions that the script performs to d
 
    ```bash
 
-   docker build -t imageRepository:imageTag --platform=linux/amd64 $<astro_project_path>
+   docker build -t imageRepository:imageTag --platform=linux/amd64 <astro_project_path>
 
    ```
 
@@ -166,7 +166,7 @@ The following steps describe the different actions that the script performs to d
 
 ### DAG-only deploy
 
-1. Make a `POST` request to the `Deploy` endpoint to create a new `deploy` object. In your call, specify `type` as `DAG_ONLY`. This action creates an object that represents the intent to deploy code to a Deployment. See the [Astro API documentation](https://www.astronomer.io/docs/api/platform-api-reference/deploy/create-deploy) for request usage and examples.
+1. Make a `POST` request to the `Deploy` endpoint to create a new `deploy` object. In your call, specify `type` as `DAG_ONLY`. Store the value for the `DeployID` that is returned. This action creates an object that represents the intent to deploy code to a Deployment. See the [Astro API documentation](https://www.astronomer.io/docs/api/platform-api-reference/deploy/create-deploy) for request usage and examples.
 
 2. Make a `GET` request to the `Deploy` endpoint. Copy the values for `id` and `dagsUploadURL` to use in the following steps. See the [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/get-deploy) for request usage and examples.
 
@@ -260,7 +260,7 @@ The following steps describe the different actions that the script performs to d
 
 ### Image-only deploy
 
-1.  Make a `POST` request to the `Deploy` endpoint to create a new `deploy` object. In your call, specify `type` as `IMAGE`. This action creates an object that represents the intent to deploy code to a Deployment. See the [Astro API documentation](https://www.astronomer.io/docs/api/platform-api-reference/deploy/create-deploy) for request usage and examples.
+1.  Make a `POST` request to the `Deploy` endpoint to create a new `deploy` object. In your call, specify `type` as `IMAGE`. Store the value for the `DeployID` that is returned. This action creates an object that represents the intent to deploy code to a Deployment.  See the [Astro API documentation](https://www.astronomer.io/docs/api/platform-api-reference/deploy/create-deploy) for request usage and examples.
 
 2. Make a `GET` request to the `Deploy` endpoint. Copy the values for `id`, `imageRepository`, and `imageTag` to use in the following steps. See the [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/get-deploy) for request usage and examples.
 
@@ -276,7 +276,7 @@ The following steps describe the different actions that the script performs to d
 
    ```bash
 
-   docker build -t imageRepository:imageTag --platform=linux/amd64 $<astro_project_path>
+   docker build -t imageRepository:imageTag --platform=linux/amd64 <astro_project_path>
 
    ```
 
