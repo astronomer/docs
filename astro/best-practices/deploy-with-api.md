@@ -38,11 +38,11 @@ If you have DAG-only deploys enabled, you can create scripts for complete projec
 
 The following steps describe the different actions that the script performs to deploy a complete Astro project.
 
-1. Make a `POST` request to the `Deploy` endpoint to create a new `deploy` object. In your call, specify `type` as `IMAGE_AND_DAG`. Store the value for the `DeployID` that is returned. This action creates an object that represents the intent to deploy code to a Deployment. See the [Astro API documentation](https://www.astronomer.io/docs/api/platform-api-reference/deploy/create-deploy) for request usage and examples.
+1. Make a `POST` request to the `Deploy` endpoint to create a new `deploy` object. In your call, specify `type` as `IMAGE_AND_DAG`. Store the values for `id`, `imageRepository`, `imageTag`, and `dagsUploadURL` that are returned in the response to use in the following steps.
 
-2. Make a `GET` request to the `Deploy` endpoint. Copy the values for `id`, `imageRepository`, `imageTag`, and `dagsUploadURL` to use in the following steps. See the [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/get-deploy) for request usage and examples.
+        This action creates an object that represents the intent to deploy code to a Deployment. See the [Astro API documentation](https://www.astronomer.io/docs/api/platform-api-reference/deploy/create-deploy) for request usage and examples.
 
-3. Authenticate to Astronomer's image registry using your Astro API token:
+2. Authenticate to Astronomer's image registry using your Astro API token:
 
    ```bash
 
@@ -50,7 +50,7 @@ The following steps describe the different actions that the script performs to d
 
    ```
 
-4. Build the image using the `imageRepository` and `imageTag` values that you retrieved in Step 2, as well as your Astro project path.
+3. Build the image using the `imageRepository` and `imageTag` values that you retrieved in Step 2, as well as your Astro project path.
 
    ```bash
 
@@ -58,7 +58,7 @@ The following steps describe the different actions that the script performs to d
 
    ```
 
-5. Push the image using the `imageRepository` and `imageTag` values that you retrieved in Step 2.
+4. Push the image using the `imageRepository` and `imageTag` values that you retrieved in Step 2.
 
    ```bash
 
@@ -66,7 +66,7 @@ The following steps describe the different actions that the script performs to d
 
    ```
 
-6. Create a tar file of your Astro project DAGs folder:
+5. Create a tar file of your Astro project DAGs folder:
 
    ```bash
 
@@ -80,9 +80,9 @@ The following steps describe the different actions that the script performs to d
 
    :::
 
-7. Upload the tar file by making a `PUT` call using the `dagsUploadURL` that you retrieved in Step 2. In this call, it is mandatory to pass the `x-ms-blob-type` as `BlockBlob`. Then, save the `versionID` from the response header.
+6. Upload the tar file by making a `PUT` call using the `dagsUploadURL` that you retrieved in Step 2. In this call, it is mandatory to pass the `x-ms-blob-type` as `BlockBlob`. Then, save the `versionID` from the response header.
 
-8. Using your `DeployId`, make a request to finalize the deploy. See [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about formatting the API request.
+7. Using your `DeployId`, make a request to finalize the deploy. See [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about formatting the API request.
 
    - On `Success`, your DAGs have successfully uploaded and a `versionID` of the DAGs tarball is generated. Pass this `versionID` in the requested body to finish your updates.
    - It might take a few minutes for the changes to update in your Deployment.
@@ -100,7 +100,7 @@ The following steps describe the different actions that the script performs to d
     ASTRO_API_TOKEN=<set api token>
     ASTRO_PROJECT_PATH=<set path to your Astro project>
 
-    # Initializing Deploy
+    # Step 1: Initialize deploy
     echo -e "Initiating Deploy Process for deployment $DEPLOYMENT_ID\n"
     CREATE_DEPLOY=$(curl --location --request POST "https://api.astronomer.io/platform/v1beta1/organizations/$ORGANIZATION_ID/deployments/$DEPLOYMENT_ID/deploys" \
     --header "X-Astro-Client-Identifier: script" \
@@ -115,17 +115,23 @@ The following steps describe the different actions that the script performs to d
     TAG=$(echo $CREATE_DEPLOY | jq -r '.imageTag')
     DAGS_UPLOAD_URL=$(echo $CREATE_DEPLOY | jq -r '.dagsUploadUrl')
 
-    # Log in to docker and build docker image
+    # Step 2: Log in to Docker
     docker login images.astronomer.cloud -u cli -p $ASTRO_API_TOKEN
     echo -e "\nBuilding Docker image $REPOSITORY:$TAG for $DEPLOYMENT_ID from $ASTRO_PROJECT_PATH"
+
+    # Step 3: Build image
     docker build -t $REPOSITORY:$TAG --platform=linux/amd64 $ASTRO_PROJECT_PATH
+
+    # Step 4: Push image
     echo -e "\nPushing Docker image $REPOSITORY:$TAG to $DEPLOYMENT_ID"
     docker push $REPOSITORY:$TAG
 
-    # Step 7: Upload dags tar file
+    # Step 5: Create tar file
     echo -e "\nCreating a dags tar file from $ASTRO_PROJECT_PATH/dags and stored in $ASTRO_PROJECT_PATH/dags.tar\n"
     cd $ASTRO_PROJECT_PATH
     tar -cvf "$ASTRO_PROJECT_PATH/dags.tar" "dags"
+
+    # Step 6: Upload DAGs tar file
     echo -e "\nUploading tar file $ASTRO_PROJECT_PATH/dags.tar\n"
     VERSION_ID=$(curl -i --request PUT $DAGS_UPLOAD_URL \
     --header 'x-ms-blob-type: BlockBlob' \
@@ -135,7 +141,7 @@ The following steps describe the different actions that the script performs to d
     VERSION_ID=$(echo $VERSION_ID | sed 's/\r//g') # Remove unexpected carriage return characters
     echo -e "\nTar file uploaded with version: $VERSION_ID\n"
 
-    # Step 8: Finalizing Deploy
+    # Step 7: Finalizing Deploy
     FINALIZE_DEPLOY=$(curl --location --request POST "https://api.astronomer.io/platform/v1beta1/organizations/$ORGANIZATION_ID/deployments/$DEPLOYMENT_ID/deploys/$DEPLOY_ID/finalize" \
     --header "X-Astro-Client-Identifier: script" \
     --header "Content-Type: application/json" \
