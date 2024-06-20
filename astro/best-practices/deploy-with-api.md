@@ -8,7 +8,7 @@ While you can deploy code using the Astro GitHub integration, the Astro CLI, or 
 
 If the Astro API has access to your Astro project files, you can use the Astro API `deploy` endpoints to complete an image deploy or DAG deploy. You can then implement scripts to automate deploys as an alternative to using the Astro CLI or Astro GitHub integration.
 
-This best practice guide walks through the steps that are necessary to deploy code to Astro using the Astro API. It also provides example bash scripts that implement these steps for different types of deploy workflows in your own CI/CD pipelines. This example uses Docker to build the image, but you can use a similar tool like Kaniko.
+This best practice guide walks through the steps that are necessary to deploy code to Astro using the Astro API. It also provides example bash scripts that implement these steps for different types of deploy workflows in your own CI/CD pipelines. This example uses Docker to build the image, but you can use a similar tool like Kaniko. You can also use a different scripting language, like Python, instead of bash.
 
 ## Feature overview
 
