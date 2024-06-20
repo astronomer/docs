@@ -329,8 +329,7 @@ astronomer:
     If Workload Identity is working, you should see a list of credentialed accounts related to your GCP service account.
 
 ## Granting Access to Airflow components using XCom and secrets backends {sas-that-use-backends}
-Astronomer Software creates a set of service-accounts for each Airflow instance it manages.
-The following roles can require access to Airflow Xcom-backends or secret-backends to function:
+Astronomer Software creates a set of service-accounts for each Airflow instance it manages. The following roles can require access to Airflow Xcom backends or secrets backends to function:
 
 | Component                   | Rationale                                                                                                 |
 |-----------------------------|-----------------------------------------------------------------------------------------------------------|
