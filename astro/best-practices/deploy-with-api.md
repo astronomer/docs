@@ -23,6 +23,7 @@ These use cases assume you have:
 - An [API token](deployment-api-tokens.md) with sufficient permissions to deploy code to Astro.
 - At least one [Astro Deployment](create-deployment.md).
 - An [Astro project](cli/develop-project.md) that's accessible from the machine where you're using the Astro API.
+- A container management tool. The following examples use [Docker](https://www.docker.com/).
 - The following values:
   - Your Organization ID - See [List Organizations](https://docs.astronomer.io/docs/api/platform-api-reference/organization/list-organizations).
   - The Deployment ID - See [List Deployments](https://docs.astronomer.io/docs/api/platform-api-reference/deployment/list-deployments).
