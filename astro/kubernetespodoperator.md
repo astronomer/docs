@@ -427,7 +427,32 @@ Astronomer recommends creating a Kubernetes cluster connection because it's more
 
 You can now specify this connection in the configuration of any KubernetesPodOperator task that needs to access your external cluster. 
 
-### Step 4: Configure your task
+### Step 4: Install the AWS CLI in your Astro environment
+
+To connect to your external EKS cluster, you need to install the AWS CLI in your Astro project. 
+
+1. Add the following to your `Dockerfile` to install the AWS CLI:
+
+    ```dockerfile
+    USER root
+
+    RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    # Note: if you are testing your pipeline locally you may need to adjust the zip version to your dev local environment
+    RUN unzip awscliv2.zip
+    RUN ./aws/install
+
+    USER astro
+    ```
+
+2. Add the `unzip` package to your `requirements.txt` file to make the `unzip` command available in your Docker container:
+
+    ```txt
+    unzip
+    ```
+
+If you are working locally, you need to restart your Astro project to apply the changes.
+
+### Step 5: Configure your task
 
 In your KubernetesPodOperator task configuration, ensure that you set `cluster-context` and `namespace` for your remote cluster. In the following example, the task launches a Pod in an external cluster based on the configuration defined in the `k8s` connection.
 
