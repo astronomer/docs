@@ -169,7 +169,7 @@ The following steps describe the different actions that the script performs to d
 
 2. Make a `GET` request to the `Deploy` endpoint. Copy the values for `id` and `dagsUploadURL` to use in the following steps. See the [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/get-deploy) for request usage and examples.
 
-3. Create a tar file of the DAGs folder, where you specify the path where you want to create the tar file.
+3. Create a tar file of your Astro project DAGs folder:
 
    ```bash
 
@@ -183,15 +183,9 @@ The following steps describe the different actions that the script performs to d
 
    :::
 
-4. Upload the tar file by making a `PUT` call using the `dagsUploadURL` that you retrieved in Step 1. In this call, it is mandatory to pass the following. Then, save the `versionID` from the response header.
+4. Upload the tar file by making a `PUT` call using the `dagsUploadURL` that you retrieved in Step 2. In this call, it is mandatory to pass the `x-ms-blob-type` as `BlockBlob`. Then, save the `versionID` from the response header.
 
-   ```bash
-
-   --header 'x-ms-blob-type: BlockBlob'
-
-   ```
-
-5. Finalize the deploy. See [Finalize the deploy](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about the API request.
+5. Using your `DeployId`, make a request to finalize the deploy. See [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about formatting the API request.
 
    - On `Success`, the deploy process has completed. Pass `versionID` in the requested body.
    - It might take a few minutes for the changes to update in your Deployment.
@@ -199,65 +193,67 @@ The following steps describe the different actions that the script performs to d
 <details>
   <summary><strong>DAG-only deploy script</strong></summary>
 
-```bash
-#!/bin/bash
+        ```bash
 
-  ORGANIZATION_ID=<set organization id>
-  DEPLOYMENT_ID=<set deployment id>
-  ASTRO_API_TOKEN=<set api token>
-  ASTRO_PROJECT_PATH=<set path to your airflow project>
+        # Prerequisites
+        #!/bin/bash
 
-  # Initializing Deploy
-  echo -e "Initiating Deploy Process for deployment $DEPLOYMENT_ID\n"
-  CREATE_DEPLOY=$(curl --location --request POST "https://api.astronomer.io/platform/v1beta1/organizations/$ORGANIZATION_ID/deployments/$DEPLOYMENT_ID/deploys" \
-  --header "X-Astro-Client-Identifier: script" \
-  --header "Content-Type: application/json" \
-  --header "Authorization: Bearer $ASTRO_API_TOKEN" \
-  --data '{
-  "type": "DAG_ONLY"
-  }' | jq '.')
+        ORGANIZATION_ID=<set organization id>
+        DEPLOYMENT_ID=<set deployment id>
+        ASTRO_API_TOKEN=<set api token>
+        ASTRO_PROJECT_PATH=<set path to your airflow project>
 
-  DEPLOY_ID=$(echo $CREATE_DEPLOY | jq -r '.id')
+        # Step 1: Initializing deploy
+        echo -e "Initiating Deploy Process for deployment $DEPLOYMENT_ID\n"
+        CREATE_DEPLOY=$(curl --location --request POST "https://api.astronomer.io/platform/v1beta1/organizations/$ORGANIZATION_ID/deployments/$DEPLOYMENT_ID/deploys" \
+        --header "X-Astro-Client-Identifier: script" \
+        --header "Content-Type: application/json" \
+        --header "Authorization: Bearer $ASTRO_API_TOKEN" \
+        --data '{
+        "type": "DAG_ONLY"
+        }' | jq '.')
 
-  # Upload dags tar file
-  DAGS_UPLOAD_URL=$(echo $CREATE_DEPLOY | jq -r '.dagsUploadUrl')
-  echo -e "\nCreating a dags tar file from $ASTRO_PROJECT_PATH/dags and stored in $ASTRO_PROJECT_PATH/dags.tar\n"
-  cd $ASTRO_PROJECT_PATH
-  tar -cvf "$ASTRO_PROJECT_PATH/dags.tar" "dags"
-  echo -e "\nUploading tar file $ASTRO_PROJECT_PATH/dags.tar\n"
-  VERSION_ID=$(curl -i --request PUT $DAGS_UPLOAD_URL \
-  --header 'x-ms-blob-type: BlockBlob' \
-  --header 'Content-Type: application/x-tar' \
-  --upload-file "$ASTRO_PROJECT_PATH/dags.tar" | grep x-ms-version-id | awk -F': ' '{print $2}')
+        DEPLOY_ID=$(echo $CREATE_DEPLOY | jq -r '.id')
 
-  VERSION_ID=$(echo $VERSION_ID | sed 's/\r//g') # Remove unexpected carriage return characters
-  echo -e "\nTar file uploaded with version: $VERSION_ID\n"
+        # Step 2-4: Copy Deploy ID and Upload URL, create tar file, and upload DAGs tar file
+        DAGS_UPLOAD_URL=$(echo $CREATE_DEPLOY | jq -r '.dagsUploadUrl')
+        echo -e "\nCreating a dags tar file from $ASTRO_PROJECT_PATH/dags and stored in $ASTRO_PROJECT_PATH/dags.tar\n"
+        cd $ASTRO_PROJECT_PATH
+        tar -cvf "$ASTRO_PROJECT_PATH/dags.tar" "dags"
+        echo -e "\nUploading tar file $ASTRO_PROJECT_PATH/dags.tar\n"
+        VERSION_ID=$(curl -i --request PUT $DAGS_UPLOAD_URL \
+        --header 'x-ms-blob-type: BlockBlob' \
+        --header 'Content-Type: application/x-tar' \
+        --upload-file "$ASTRO_PROJECT_PATH/dags.tar" | grep x-ms-version-id | awk -F': ' '{print $2}')
 
-  # Finalizing Deploy
-  FINALIZE_DEPLOY=$(curl --location --request POST "https://api.astronomer.io/platform/v1beta1/organizations/$ORGANIZATION_ID/deployments/$DEPLOYMENT_ID/deploys/$DEPLOY_ID/finalize" \
-  --header "X-Astro-Client-Identifier: script" \
-  --header "Content-Type: application/json" \
-  --header "Authorization: Bearer $ASTRO_API_TOKEN" \
-  --data '{"dagTarballVersion": "'$VERSION_ID'"}')
+        VERSION_ID=$(echo $VERSION_ID | sed 's/\r//g') # Remove unexpected carriage return characters
+        echo -e "\nTar file uploaded with version: $VERSION_ID\n"
 
-  ID=$(echo $FINALIZE_DEPLOY | jq -r '.id')
-  if [[ "$ID" != null ]]; then
-          echo -e "\nDeploy is Finalized. DAG changes for deployment $DEPLOYMENT_ID should be live in a few minutes"
-          echo "Deployed DAG Tarball Version: $VERSION_ID"
-  else
-          MESSAGE=$(echo $FINALIZE_DEPLOY | jq -r '.message')
-          if  [[ "$MESSAGE" != null ]]; then
-                  echo $MESSAGE
-          else
-                  echo "Something went wrong. Reach out to astronomer support for assistance"
-          fi
-  fi
+        # Step 5: Finalizing Deploy
+        FINALIZE_DEPLOY=$(curl --location --request POST "https://api.astronomer.io/platform/v1beta1/organizations/$ORGANIZATION_ID/deployments/$DEPLOYMENT_ID/deploys/$DEPLOY_ID/finalize" \
+        --header "X-Astro-Client-Identifier: script" \
+        --header "Content-Type: application/json" \
+        --header "Authorization: Bearer $ASTRO_API_TOKEN" \
+        --data '{"dagTarballVersion": "'$VERSION_ID'"}')
 
-  # Cleanup
-  echo -e "\nCleaning up the created tar file from $ASTRO_PROJECT_PATH/dags.tar"
-  rm -rf "$ASTRO_PROJECT_PATH/dags.tar"
+        ID=$(echo $FINALIZE_DEPLOY | jq -r '.id')
+        if [[ "$ID" != null ]]; then
+                echo -e "\nDeploy is Finalized. DAG changes for deployment $DEPLOYMENT_ID should be live in a few minutes"
+                echo "Deployed DAG Tarball Version: $VERSION_ID"
+        else
+                MESSAGE=$(echo $FINALIZE_DEPLOY | jq -r '.message')
+                if  [[ "$MESSAGE" != null ]]; then
+                        echo $MESSAGE
+                else
+                        echo "Something went wrong. Reach out to astronomer support for assistance"
+                fi
+        fi
 
-```
+        # Cleanup
+        echo -e "\nCleaning up the created tar file from $ASTRO_PROJECT_PATH/dags.tar"
+        rm -rf "$ASTRO_PROJECT_PATH/dags.tar"
+
+        ```
 
 </details>
 
