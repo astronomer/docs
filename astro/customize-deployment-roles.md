@@ -44,9 +44,11 @@ Deployment roles are additive, meaning that a user with multiple Deployment role
 
 5. In the **Permissions** table, check the boxes of all permissions that you want the new role to have. See [Deployment role permission reference](deployment-role-reference.md) for more information about each available permission.
 
-    :::tip
-
     Use the dropdown menu above the permissions table to automatically load the permissions of a templated role or an existing custom role as the basis for your new role. See [Deployment role templates](#deployment-role-templates) for more information about the available default templates.
+
+    :::tip Custom Deployment role permissions
+
+    To deploy with the Astro CLI when using a Deployment API token and a custom Deployment role, the minimum required permissions are [`deployment.get`](https://www.astronomer.io/docs/api/platform-api-reference/deployment/get-deployment) and [`deployment.deploys.create`](https://www.astronomer.io/docs/api/platform-api-reference/deploy/create-deploy).
 
     :::
 
@@ -80,7 +82,7 @@ By default, a custom role is available to use in all Workspaces. After you creat
 
 2. Go to **Access Management**, then click **Roles**.
 
-3. Click **Custom**, then select the custom role that you want to restrict. 
+3. Click **Custom**, then select the custom role that you want to restrict.
 
 4. In the menu that appears, click **Restricted Workspaces**, then click **Edit**.
 

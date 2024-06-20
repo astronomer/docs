@@ -26,7 +26,7 @@ There are many benefits to configuring a CI/CD workflow on Astro. Specifically, 
 
 :::tip
 
-If you use [custom Deployment roles](customize-deployment-roles.md) and Deployment API tokens, the minimum required permissions are [`deployment.get`](deployment-role-reference.md#deployment) and [`deployment.deploys.create`](deployment-role-reference.md#deployment-deploys) to run `astro deploy` with the Astro CLI.
+If you use [custom Deployment roles](customize-deployment-roles.md) and Deployment API tokens, you might need to configure custom permissions instead of using a template. See [Create a custom Deployment role](customize-deployment-roles.md#create-a-custom-deployment-role) for more information.
 
 :::
 
