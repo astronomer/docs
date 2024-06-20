@@ -100,7 +100,7 @@ The following steps describe the different actions that the script performs to d
     ASTRO_API_TOKEN=<set api token>
     ASTRO_PROJECT_PATH=<set path to your Astro project>
 
-    # Step 1: Initializing Deploy
+    # Initializing Deploy
     echo -e "Initiating Deploy Process for deployment $DEPLOYMENT_ID\n"
     CREATE_DEPLOY=$(curl --location --request POST "https://api.astronomer.io/platform/v1beta1/organizations/$ORGANIZATION_ID/deployments/$DEPLOYMENT_ID/deploys" \
     --header "X-Astro-Client-Identifier: script" \
@@ -111,10 +111,11 @@ The following steps describe the different actions that the script performs to d
     }' | jq '.')
 
     DEPLOY_ID=$(echo $CREATE_DEPLOY | jq -r '.id')
-
-    # Step 2-6: Build and Push Docker Image
     REPOSITORY=$(echo $CREATE_DEPLOY | jq -r '.imageRepository')
     TAG=$(echo $CREATE_DEPLOY | jq -r '.imageTag')
+    DAGS_UPLOAD_URL=$(echo $CREATE_DEPLOY | jq -r '.dagsUploadUrl')
+
+    # Log in to docker and build docker image
     docker login images.astronomer.cloud -u cli -p $ASTRO_API_TOKEN
     echo -e "\nBuilding Docker image $REPOSITORY:$TAG for $DEPLOYMENT_ID from $ASTRO_PROJECT_PATH"
     docker build -t $REPOSITORY:$TAG --platform=linux/amd64 $ASTRO_PROJECT_PATH
@@ -122,7 +123,6 @@ The following steps describe the different actions that the script performs to d
     docker push $REPOSITORY:$TAG
 
     # Step 7: Upload dags tar file
-    DAGS_UPLOAD_URL=$(echo $CREATE_DEPLOY | jq -r '.dagsUploadUrl')
     echo -e "\nCreating a dags tar file from $ASTRO_PROJECT_PATH/dags and stored in $ASTRO_PROJECT_PATH/dags.tar\n"
     cd $ASTRO_PROJECT_PATH
     tar -cvf "$ASTRO_PROJECT_PATH/dags.tar" "dags"
