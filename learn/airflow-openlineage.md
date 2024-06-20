@@ -103,6 +103,12 @@ If you are interested in exploring lineage locally with open source tools, you c
 
 If you are using lineage prior to Airflow 2.7, there are a few additional limitations:
 
+:::warning
+
+Running OpenLineage with Airflow on Astro prior to Astro Runtime 9 (Airflow 2.7) is not recommended. Prior to Airflow 2.7, OpenLineage could cause tasks to get stuck in the running status indefinitely.
+
+:::
+
 - The external integration (for Airflow 2.3 - 2.6) only bundles extractors for some operators. Extractors are needed in order to collect lineage metadata out of the box. To see which extractors exist, check out the [OpenLineage repo](https://github.com/OpenLineage/OpenLineage/tree/main/integration/airflow/openlineage/airflow/extractors). To get lineage metadata from other operators, you can create your own [custom extractor](https://openlineage.io/blog/extractors/) or leverage the [default extractor](https://openlineage.io/docs/integrations/airflow/default-extractors) (in Airflow 2.3+) to modify your Airflow operators to gather lineage metadata.
 - For lineage metadata via the external integration from an external system connected to Airflow, such as [Apache Spark](https://openlineage.io/docs/integrations/spark/), you'll need to configure an [OpenLineage integration](https://openlineage.io/docs/integrations/about) with that system in addition to Airflow.
 

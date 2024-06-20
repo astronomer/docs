@@ -1,27 +1,28 @@
 ---
-sidebar_label: 'AWS Cloudwatch'
-title: 'Export logs to AWS Cloudwatch'
+sidebar_label: 'AWS CloudWatch'
+title: 'Export logs to AWS CloudWatch'
 id: export-cloudwatch
-description: "Configure your Deployment to forward observability data to your AWS Cloudwatch instance."
+description: "Configure your Deployment to forward observability data to your AWS CloudWatch instance."
 ---
 
-By forwarding Astro data to AWS Cloudwatch, you can integrate Astro into your existing observability practices by analyzing information about your Deployments' performance with Cloudwatch monitoring tools. Currently, you can send the following data to AWS Cloudwatch:
+By forwarding Astro data to AWS Cloudwatch, you can integrate Astro into your existing observability practices by analyzing information about your Deployments' performance with CloudWatch monitoring tools. Currently, you can send the following data to AWS Cloudwatch:
 
 - Airflow task logs
 
-Complete the following setup to authenticate your Deployments to AWS Cloudwatch and forward your observability data to your AWS Cloudwatch instance.
+Complete the following setup to authenticate your Deployments to AWS CloudWatch and forward your observability data to your AWS CloudWatch instance.
 
 :::info
 
-At this time, you can only export Airflow task logs from Astro to Cloudwatch. Metrics exporting is supported only on [Datadog](export-datadog.md).
+At this time, you can export only Airflow task logs to CloudWatch from Astro.
+You can export both Airflow metrics and task logs to [Datadog](export-datadog.md) from Astro.
 
 :::
 
 ## Export task logs to AWS CloudWatch
 
-You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://aws.amazon.com/cloudwatch/) using an IAM role or user. This allows you to view and manage task logs across all Deployments from a centralized observability plane.
+You can forward Airflow task logs from a Deployment to [AWS CloudWatch](https://aws.amazon.com/cloudwatch/) using an IAM role or user. This allows you to view and manage task logs across all Deployments from a centralized observability plane.
 
-By default, Astro sets a unique log stream for each Deployment, and log groups are defined to include log streams from Deployments which share the same Workspace and cluster. You can override these definitions using Deployment environment variables if you want to change how your task logs are organized on Cloudwatch. See [AWS documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html) for more information about log groups and log streams.
+By default, Astro sets a unique log stream for each Deployment, and log groups are defined to include log streams from Deployments which share the same Workspace and cluster. You can override these definitions using Deployment environment variables if you want to change how your task logs are organized on CloudWatch. See [AWS documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html) for more information about log groups and log streams.
 
 ### Prerequisites
 
@@ -29,7 +30,7 @@ By default, Astro sets a unique log stream for each Deployment, and log groups a
 
 ### Setup
 
-1. On AWS, create an IAM role and a trust policy that allows your Deployment to write logs to Cloudwatch. See [Authorize Deployments to your cloud](authorize-deployments-to-your-cloud.md?tab=aws#step-1-authorize-the-deployment-in-your-cloud).
+1. On AWS, create an IAM role and a trust policy that allows your Deployment to write logs to CloudWatch. See [Authorize Deployments to your cloud](authorize-deployments-to-your-cloud.md?tab=aws#step-1-authorize-the-deployment-in-your-cloud).
 2. Create a permissions policy with the following configuration:
 
     ```json
@@ -69,7 +70,7 @@ By default, Astro sets a unique log stream for each Deployment, and log groups a
 
     :::
 
-4. (Optional) Set the following environment variables if you require custom naming for your log streams or log groups. For example, you might set these names to make them more readable for Cloudwatch admins who need to set targeted policies for log groups, or to organize log streams only by cluster instead of cluster and Workspace:
+4. (Optional) Set the following environment variables if you require custom naming for your log streams or log groups. For example, you might set these names to make them more readable for CloudWatch admins who need to set targeted policies for log groups, or to organize log streams only by cluster instead of cluster and Workspace:
 
     - **Key 1**: `ASTRO_CLOUDWATCH_TASK_LOGS_LOG_GROUP`
     - **Value 1**: Your log group name.

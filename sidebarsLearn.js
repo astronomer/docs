@@ -113,6 +113,7 @@ module.exports = {
           },
           items: [
             'logging',
+            'custom-xcom-backend-strategies',
             'data-quality',
             'deferrable-operators',
             'dynamically-generating-dags',
@@ -223,6 +224,7 @@ module.exports = {
         'airflow-pgvector',
         'airflow-pinecone',
         'connections/postgres',
+        'airflow-qdrant',
         {
           type: 'category',
           label: 'Redshift',

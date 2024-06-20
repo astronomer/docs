@@ -6,6 +6,9 @@ id: 'create-dedicated-cluster'
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import TeamBadge from '@site/src/components/TeamBadge';
+
+<TeamBadge/>
 
 A _dedicated cluster_ exclusively runs Deployments from your Organization within a single-tenant environment on Astronomer's cloud. Dedicated clusters provide more configuration options for regions, connectivity, and security than standard clusters. You might want to create a dedicated cluster if:
 
@@ -28,6 +31,7 @@ Dedicated clusters offer the self-service convenience of a fully managed service
 
 <TabItem value="aws">
 
+
 1. In the Astro UI, click the name of of your Workspace in the upper left corner, then click **Organization Settings**.
 
 2. Click **Cluster** > **+ Cluster**.
@@ -37,7 +41,7 @@ Dedicated clusters offer the self-service convenience of a fully managed service
     - **Cloud Provider**: Select **AWS**.
     - **Name**: The name for your cluster.
     - **Region**: Select the region that you want your cluster to run in.
-    - **VPC Subnet Range**: Provide a subnet range for Astro to connect to your existing AWS resources through VPC peering. The default is `172.20.0.0/20`.
+    - **VPC Subnet Range**: Provide a subnet range for Astro to connect to your existing AWS resources through VPC peering. The default is `172.20.0.0/20`, and the minimum size you can use is `/21`.
 
 4. Click **Create cluster**. After Astro finishes creating the cluster, users in your Organization can select the cluster when they [create a Deployment](create-deployment.md).
 

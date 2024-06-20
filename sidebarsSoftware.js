@@ -74,32 +74,26 @@ module.exports = {
           ],
         },
         {
-          type: 'category',
-          label: 'Manage Deployments',
-          items: [
-            'configure-deployment',
-            'environment-variables',
-            'customize-resource-usage',
-            {
-              type: 'category',
-              label: 'Deploy options',
-              items: [
-                'deploy-cli',
-                'deploy-dags',
-                'deploy-git-sync',
-                'deploy-nfs',
-              ],
-            },
-          ],
-        },
-        {
-          type: 'category',
-          label: 'CI/CD and automation',
-          items: [
-            'ci-cd',
-            'houston-api',
+        type: 'category',
+        label: 'Manage Deployments',
+        items: [
+          'configure-deployment',
+          'create-deployment',
+          'deployment-resources',
+          'clean-up-and-delete-deployment',
+          'environment-variables',
+          'customize-resource-usage',
+          {
+            type: 'category',
+            label: 'Deploy options',
+            items: [
+            'deploy-code-overview',
+            'deploy-cli',
+            'deploy-dags',
             'deploy-git-sync',
             'deploy-nfs',
+              ],
+            },
           ],
         },
         {
@@ -115,8 +109,18 @@ module.exports = {
                 'houston-api-examples',
               ],
             },
-            'deploy-git-sync',
-            'deploy-nfs',
+          ],
+        },
+        {
+        type: 'category',
+        label: 'Platform observability',
+        items: [
+          'grafana-metrics',
+          'kibana-logging',
+          'platform-alerts',
+          'task-usage-metrics',
+          'logs-to-s3',
+          'export-task-logs',
           ],
         },
         {

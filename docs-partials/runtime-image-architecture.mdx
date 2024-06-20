@@ -107,7 +107,7 @@ Astronomer users specific provider package versions in each release of Astro Run
 | 10            | 2.8                    | 3.11           |
 | 11            | 2.9                    | 3.11           |
 
-Starting with Astro Runtime 9, if you require a different version of Python than what's included in the base distribution, you can use a Python distribution of Astro Runtime. See [Distribution](#distribution).
+Starting with Astro Runtime 9, if you require a different version of Python than what's included in the base image, you can use a Python versions of Astro Runtime. See [Image types](#image-types).
 
 If you're running Astro Runtime 6.0 (based on Airflow 2.4) to Runtime 8, Astronomer recommends that you use the `ExternalPythonOperator` to run different Python versions in Airflow. See [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#externalpythonoperator).
 
@@ -153,7 +153,7 @@ quay.io/astronomer/astro-runtime:<version>-base
 
 A `base` Astro Runtime image is recommended for complex use cases that require additional customization, such as [installing Python packages from private sources](https://docs.astronomer.io/astro/cli/private-python-packages).
 
-For all other cases, Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the images running each core Airflow component. 
+For all other cases, Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the images running each core Airflow component.
 
 ### Python version images
 
@@ -163,7 +163,7 @@ Starting with Astro Runtime 9, Astronomer maintains different Astro Runtime imag
 quay.io/astronomer/astro-runtime:<runtime-version>-python-<python-version>
 ```
 
-### Slim images 
+### Slim images
 
 Starting with Astro Runtime 11, Astronomer maintains a slim Astro Runtime image. Slim Astro Runtime images only include the dependencies required for the basic functionality of Astro. Providers marked with an asterisk (\*) are also installed by default on open source Apache Airflow. The providers installed in the slim image are:
 

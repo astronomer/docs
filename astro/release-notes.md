@@ -19,11 +19,90 @@ import BusinessBadge from '@site/src/components/BusinessBadge';
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro CLI Version**: {{CLI_VER_LATEST}} ([Release notes](runtime-release-notes.md))
+**Latest Astro CLI Version**: {{CLI_VER_LATEST}} ([Release notes](cli/release-notes.md))
 
 **Latest Astro Runtime Version**: {{RUNTIME_VER}} ([Release notes](runtime-release-notes.md))
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
+
+## June 18, 2024
+
+### Additional Improvements
+
+- Moved the **Environment variable** tab in **Deployment Settings** to the **Environment** tab, and renamed it to **Environment Variables**. This helps disambiguate between Environment Variables and Airflow Variables in the Astro UI. Refer to [Manage environment variables](https://www.astronomer.io/docs/astro/manage-env-vars#using-the-astro-ui) for more information about the different methods to set up and manage Environment variables.
+
+### Bug fixes
+
+- Fixed a bug where a duplicate **Customer managed identity** option displayed when configuring Deployment settings.
+
+## June 11, 2024
+
+### Restrict Astro access to specific IP Address ranges with IP Access list
+
+<EnterpriseBadge/>
+
+Organization owners can now limit the IP addresses of users to control who can access the Astro UI or programmatically work with the Astro API for their organization. This allows you to restrict access to your Astro Organization to users on a VPN or to specific network ranges. See [Set up IP Access list](https://astronomer.io/docs/astro/ip-access-list).
+
+### Additional improvements
+
+- When using the GitHub integration, you can now retry a failed deploy or trigger a Git deploy directly from your Deployment settings page in the Astro UI. See [GitHub Integration](https://www.astronomer.io/docs/astro/deploy-github-integration) for more information.
+- Deployments at the end of an Astro trial now automatically hibernate and are not immediately deleted. If your trial has ended, add a credit card number to your Organization to access your Workspaces and wake your hibernating Deployment. While in hibernation, Deployment settings and configurations are preserved. If you do not enter a payment method within 30 days, your hibernating Deployments and all corresponding data are deleted. See [Start a trial](https://www.astronomer.io/docs/astro/trial) for more information.
+- The ability to create, update, and delete Deployment API tokens is restricted to users with the Workspace Owner role. Read [Workspace user permissions](https://www.astronomer.io/docs/astro/user-permissions#workspace-roles) for more information.
+
+### Bug fixes
+
+- Fixed an issue where the Organization Settings Dashboard failed to load correctly.
+
+## June 6, 2024
+
+### API keys are no longer supported
+
+As of June 1, 2024, Deployment API keys are no longer supported. Replace your API keys with [Deployment API tokens](https://www.astronomer.io/docs/astro/deployment-api-tokens), confirm successful operation with your API tokens, and then delete your API keys.
+
+### Configure ephemeral storage on worker Pods
+
+<HostedBadge/>
+
+:::publicpreview
+:::
+
+You can now customize the amount of ephemeral storage for data intensive workloads on Celery, Kubernetes, and KubernetesPodOperator workers. Previously, to accommodate larger workloads, you needed to integrate an external object storage or database tool to process large datasets within a single task. Now, you can customize the ephemeral storage when creating or updating your Deployment so that all data processing happens directly in your task Pod.
+
+You are only charged for requested resources which are greater than the minimum defaults for each worker type:
+
+- **Celery worker**: 10 GiB minimum by default. 100 GiB maximum.
+- **Kubernetes executor/ Kubernetes pod operator**: 0.25 GiB minimum by default. 100 GiB maximum.
+
+### Automate Airflow, resource, and infrastucture management with the Astro Terraform Provider
+
+:::publicpreview
+:::
+
+You can now use Terraform to automate managing resources and changes to large organizations and Airflow infrastructure with the Astronomer Terraform provider package. The provider is available through both the Terraform Registry and a public Github repository, where you can review the provider's code, make issues, and create pull requests.
+
+Refer to the Astronomer Terraform Provider  docs  in the [Terraform registry](https://registry.terraform.io/providers/astronomer/astro/latest/docs) or the [GitHub repository](https://github.com/astronomer/terraform-provider-astro) for more information.
+
+
+### Additional improvements
+
+- The Astro UI now validates cron expressions for development Deployment hibernation schedules and shows commonly used hibernation schedules that you can enable or disable. Refer to [Create a hibernation schedule](https://www.astronomer.io/docs/astro/deployment-resources#create-a-hibernation-schedule) for more information.
+- If you don't already have a GitHub repository, you can now create one when you authorize the [GitHub Integration](https://www.astronomer.io/docs/astro/deploy-github-integration) from the Astro UI. Previously, you could only connect Astro to existing repositories.
+
+### Bug fixes
+
+- Fixed an issue where you could not use Airflow connection testing with Azure Managed Identities on Astro.
+
+## May 30, 2024
+
+### Additional improvements
+
+- Dedicated clusters are now available only to [**Team**](https://www.astronomer.io/pricing/) tier customers and above.
+- Added a centralized docs reference page that lists all open source Apache Airflow provider packages and their versions for each Astro Runtime version. See [Provider package reference](https://www.astronomer.io/docs/astro/runtime-provider-reference) docs.
+
+### Bug fixes
+
+- Fixed an issue where you could make changes to clusters and Deployments on an inactive Organization.
+- The default storage resources for the Kubernetes executor and KubernetesPodOperator Pods are now enforced with `0.25Gi` instead of `10Gi` in some cases. You can still customize the resource allocation for Kubernetes pods depending on your needs. See [Configure Kubernetes Pod Resources](https://www.astronomer.io/docs/astro/deployment-resources#configure-kubernetes-pod-resources)
 
 ## May 22, 2024
 
