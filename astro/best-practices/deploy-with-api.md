@@ -4,9 +4,9 @@ sidebar_label: 'Deploy with API'
 id: deploy-with-api
 ---
 
-While you can deploy code using the Astro GitHub Integration, the Astro CLI, or by configuring a CI/CD pipeline, you might prefer to use the Astro API to automate deploying code. Using the Astro API is the most straightforward way to deploy code without using the Astro CLI and requires very few additional dependencies, meaning it is compatible with most CI/CD configurations.
+While you can deploy code using the Astro GitHub integration, the Astro CLI, or by configuring a CI/CD pipeline, there are some environments where you can only use the Astro API to deploy code. This is because using the Astro API has very few dependencies, making it compatible with almost all CI/CD environments and security requirements.
 
-If the Astro API has access to your Astro project files, you can use the Astro API `deploy` endpoints to complete an image deploy or DAG deploy. You can then implement scripts to automate deploys as a workaround to not using the Astro CLI or Astro GitHub integration.
+If the Astro API has access to your Astro project files, you can use the Astro API `deploy` endpoints to complete an image deploy or DAG deploy. You can then implement scripts to automate deploys as an alternative to using the Astro CLI or Astro GitHub integration.
 
 This best practice guide walks through the steps that are necessary to deploy code to Astro using the Astro API. It also provides example bash scripts that implement these steps for different types of deploy workflows in your own CI/CD pipelines. This example uses Docker to build the image, but you can use a similar tool like Kaniko.
 
@@ -20,9 +20,9 @@ This guide highlights the following Astro features:
 
 These use cases assume you have:
 
-- Sufficient permissions to deploy code to your Astro Deployments
+- An [API token](deployment-api-tokens.md) with sufficient permissions to deploy code to Astro
 - At least one [Astro Deployment](create-deployment.md)
-- A container management tool. The following examples show commands using [Docker](https://www.docker.com/).
+- An [Astro project](cli/develop-project.md) that's accessible from the machine where you're using the Astro API
 - The following values:
     - Your Organization ID - See [List Organizations](https://docs.astronomer.io/docs/api/platform-api-reference/organization/list-organizations)
     - The Deployment ID - See [List Deployments](https://docs.astronomer.io/docs/api/platform-api-reference/deployment/list-deployments)
