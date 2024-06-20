@@ -24,12 +24,12 @@ These use cases assume you have:
 - At least one [Astro Deployment](create-deployment.md)
 - An [Astro project](cli/develop-project.md) that's accessible from the machine where you're using the Astro API
 - The following values:
-    - Your Organization ID - See [List Organizations](https://docs.astronomer.io/docs/api/platform-api-reference/organization/list-organizations)
-    - The Deployment ID - See [List Deployments](https://docs.astronomer.io/docs/api/platform-api-reference/deployment/list-deployments)
-    - Your Astro API token - See [Create an API token](https://www.astronomer.io/docs/astro/automation-authentication#step-1-create-an-api-token)
+    - Your Organization ID - See [List Organizations](https://docs.astronomer.io/docs/api/platform-api-reference/organization/list-organizations).
+    - The Deployment ID - See [List Deployments](https://docs.astronomer.io/docs/api/platform-api-reference/deployment/list-deployments).
+    - Your Astro API token - See [Create an API token](https://www.astronomer.io/docs/astro/automation-authentication#step-1-create-an-api-token).
     - The path where your Astro project exists.
 
-## With DAG-only deploy enabled
+## With DAG-only deploys enabled
 
 If you have DAG-only deploys enabled, you can create scripts for complete project deploys, DAG-only deploys, or image-only deploys. The following sections include a step by step description of the workflow followed by a bash script that executes the workflow.
 
@@ -39,9 +39,9 @@ The following steps describe the different actions that the script performs to d
 
 1. Create the `Deploy` API call using the `IMAGE_AND_DAG` type. This action creates an object that represents the intent to deploy code to a Deployment.
 
-2. After you create the `deploy`, retrieve the `id`, `imageRepository`, `imageTag`, and `dagsUploadURL` values, using the [`GET` deploy API call](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/get-deploy), which you need in the following steps.
+2. Make a  `GET` request to the `Deploy` endpoint.  Copy the values for `id`, `imageRepository`, `imageTag`, and `dagsUploadURL` to use in the following steps. See the [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/get-deploy) for request usage and examples.
 
-3. Log in to Docker or your container management platform, using the Astro API token that you created.
+3. Authenticate to Astronomer's image registry using your Astro API token:
 
     ```bash
 
@@ -49,7 +49,7 @@ The following steps describe the different actions that the script performs to d
 
     ```
 
-4. Build the image using the `imageRepository`, `imageTag`, and Astro project path values that you retrieved earlier.
+4. Build the image using the `imageRepository` and `imageTag` values that you retrieved in Step 2, as well as your Astro project path.
 
     ```bash
 
@@ -65,15 +65,15 @@ The following steps describe the different actions that the script performs to d
 
     ```
 
-6. Create a tar file of the DAGs folder, where you specify the path where you want to create the tar file.
+6. Create a tar file of your Astro project DAGs folder:
 
     ```bash
 
-    tar -cvf <path to create the tar file>/dags.tar "dags"
+    tar -cvf <path-to-create-tar-file>/dags.tar "dags"
 
     ```
 
-    :::note
+    :::info
 
     Make sure to clean up the `dags.tar` file after uploading.
 
@@ -87,7 +87,7 @@ The following steps describe the different actions that the script performs to d
 
     ```
 
-8. Finalize the deploy. See [Finalize the deploy](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about the API request.
+8. Using your `DeployId`, make a request to finalize the deploy. See [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about formatting the API request.
 
     - On `Success`, the deploy process has completed. Pass `versionID` in the requested body.
     - It might take a few minutes for the changes to update in your Deployment.
