@@ -334,9 +334,9 @@ The following roles can require access to Airflow Xcom-backends or secret-backen
 
 | Component                   | Rationale                                                                                                 |
 |-----------------------------|-----------------------------------------------------------------------------------------------------------|
-| `<release name>-scheduler`         | Customer-provided dag-code is regularly interpreted to determine what tasks are part of dags, and that code may incorporate references to values stored in secret storage or XCom.                  |
-| `<release name>-worker`            | Customer-provided dag-code is interpreted at task-run time and may incorporate references to values stored in secret storage or XCom.             |
-| `<release name>-triggerer`         | Customer-provided dag-code is interpreted at task-run time and may incorporate references to values stored in secret storage or XCom.            |
+| `<release name>-scheduler`         | Customer-provided DAG code is regularly interpreted to determine what tasks are part of DAGs, and that code might incorporate references to values stored in secret storage or XCom.                  |
+| `<release name>-worker`            | Customer-provided DAG code is interpreted at task-run time and might incorporate references to values stored in secret storage or XCom.             |
+| `<release name>-triggerer`         | Customer-provided DAG code is interpreted at task run time and might incorporate references to values stored in secrets storage or XCom.            |
 | `<release name>-webserver`         | Provides users a mechanism to view and set secrets and to view XCom entries.|
-| `<release name>-cleanup`           |  Accesses task instances and other data which may include serialized references to values stored in secret-backends or xcom-backends.       |
-| `<release name>-migrate-database-job` | Analyzes serialized dag models which may include serialized references to values stored in secret-backends or xcom-backends. |
+| `<release name>-cleanup`           |  Accesses task instances and other data that might include serialized references to values stored in secrets backends or XCOM backends.       |
+| `<release name>-migrate-database-job` | Analyzes serialized DAG models that might include serialized references to values stored in secrets backends or XCOM backends. |
