@@ -429,7 +429,7 @@ You can now specify this connection in the configuration of any KubernetesPodOpe
 
 ### Step 4: Install the AWS CLI in your Astro environment
 
-In order to be able to connect to your external EKS cluster you need to install the AWS CLI in your Astro project. 
+To connect to your external EKS cluster, you need to install the AWS CLI in your Astro project. 
 
 1. Add the following to your `Dockerfile` to install the AWS CLI:
 
