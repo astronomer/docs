@@ -447,15 +447,15 @@ You can only use complete project deploys if you have DAG-only deploys disabled.
 
 In addition to manually triggering project, DAG, and image deploys, you can create scripts that trigger specific code deploys depending on whether there have been changes to DAGs or files used to build the project image.
 
-The following code example shows the steps you can use to create a bash script that triggers different code deploys depending on the files changed in your project.
+The following code example shows the steps you can use to create a bash script that triggers different code deploys depending on the files changed in your project. This example demonstrates a recommended way for combining all three types of deploys and the conditional logic for when to deploy each.
 
 ### Workflow example steps
 
 1. Determine whether DAG files have been changed. If only DAGs have changed, then the script initiates a DAG-only deploy.
 
-2. Create a`Deploy` with the `CREATE` API call.
+2. Make a `POST` request to the `Deploy` endpoint to create a new `deploy` object.
 
-3. If only DAGs have changed, the script initiates a DAGs-only deploy. If more files have been changed, the script builds and deploys the project image, and then completes a DAG-only deploy.
+3. If only DAGs have changed, the script initiates a DAGs-only deploy. If you changed more files, the script builds and deploys the project image, and then completes a DAG-only deploy.
 
 4. The script cleans up any tar files created during the build process.
 
