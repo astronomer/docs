@@ -107,6 +107,7 @@ components:
           - UPDATE_FAILED
           - UPDATING
           - ACCESS_DENIED
+          - UPGRADE_PENDING
           example: CREATED
           type: string
         tags:
