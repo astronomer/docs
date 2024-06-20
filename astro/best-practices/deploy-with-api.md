@@ -259,11 +259,11 @@ The following steps describe the different actions that the script performs to d
 
 ### Image-only deploy
 
-1. Create the `Deploy` API call using the `IMAGE` type. This action creates an object that represents the intent to deploy code to a Deployment.
+1.  Make a `POST` request to the `Deploy` endpoint to create a new `deploy` object. In your call, specify `type` as `IMAGE`. This action creates an object that represents the intent to deploy code to a Deployment. See the [Astro API documentation](https://www.astronomer.io/docs/api/platform-api-reference/deploy/create-deploy) for request usage and examples.
 
-2. After you create the `deploy`, retrieve the `id`, `imageRepository`, and `imageTag` values using the [`GET` deploy API call](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/get-deploy), which you need in the following steps.
+2. Make a `GET` request to the `Deploy` endpoint. Copy the values for `id`, `imageRepository`, and `imageTag` to use in the following steps. See the [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/get-deploy) for request usage and examples.
 
-3. Log in to Docker with the Astro API token that you created.
+3. Log in to Docker with your Astro API token.
 
    ```bash
 
@@ -271,7 +271,7 @@ The following steps describe the different actions that the script performs to d
 
    ```
 
-4. Build the image using the `imageRepository`, `imageTag`, and Astro project path values that you retrieved earlier.
+4. Build the image using the `imageRepository` and `imageTag` values that you retrieved in Step 2, as well as your Astro project path.
 
    ```bash
 
@@ -287,9 +287,9 @@ The following steps describe the different actions that the script performs to d
 
    ```
 
-6. Finalize the deploy. See [Finalize the deploy](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about the API request.
+6. Using your `DeployId`, make a request to finalize the deploy. See [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about formatting the API request.
 
-   - On `Success`, the deploy process has completed. Pass the requested body as empty, `({})`.
+   - On `Success`, the deploy process has completed. Pass `versionID` in the requested body.
    - It might take a few minutes for the changes to update in your Deployment.
 
 <details>
@@ -389,55 +389,57 @@ You can only use complete project deploys if you have DAG-only deploys disabled.
 <details>
   <summary><strong>Complete project deploy script</strong></summary>
 
-```bash
-  #!/bin/bash
+        ```bash
 
-  ORGANIZATION_ID=<set organization id>
-  DEPLOYMENT_ID=<set deployment id>
-  ASTRO_API_TOKEN=<set api token>
-  ASTRO_PROJECT_PATH=<set path to your airflow project>
+        #Prerequisites
+        #!/bin/bash
 
-  # Initializing Deploy
-  echo -e "Initiating Deploy Process for deployment $DEPLOYMENT_ID\n"
-  CREATE_DEPLOY=$(curl --location --request POST "https://api.astronomer.io/platform/v1beta1/organizations/$ORGANIZATION_ID/deployments/$DEPLOYMENT_ID/deploys" \
-  --header "X-Astro-Client-Identifier: script" \
-  --header "Content-Type: application/json" \
-  --header "Authorization: Bearer $ASTRO_API_TOKEN" \
-  --data '{
-  "type": "IMAGE_AND_DAG"
-  }' | jq '.')
+        ORGANIZATION_ID=<set organization id>
+        DEPLOYMENT_ID=<set deployment id>
+        ASTRO_API_TOKEN=<set api token>
+        ASTRO_PROJECT_PATH=<set path to your airflow project>
 
-  DEPLOY_ID=$(echo $CREATE_DEPLOY | jq -r '.id')
+        # Step 1: Initializing Deploy
+        echo -e "Initiating Deploy Process for deployment $DEPLOYMENT_ID\n"
+        CREATE_DEPLOY=$(curl --location --request POST "https://api.astronomer.io/platform/v1beta1/organizations/$ORGANIZATION_ID/deployments/$DEPLOYMENT_ID/deploys" \
+        --header "X-Astro-Client-Identifier: script" \
+        --header "Content-Type: application/json" \
+        --header "Authorization: Bearer $ASTRO_API_TOKEN" \
+        --data '{
+        "type": "IMAGE_AND_DAG"
+        }' | jq '.')
 
-  # Build and Push Docker Image
-  REPOSITORY=$(echo $CREATE_DEPLOY | jq -r '.imageRepository')
-  TAG=$(echo $CREATE_DEPLOY | jq -r '.imageTag')
-  docker login images.astronomer.cloud -u cli -p $ASTRO_API_TOKEN
-  echo -e "\nBuilding Docker image $REPOSITORY:$TAG for $DEPLOYMENT_ID from $ASTRO_PROJECT_PATH"
-  docker build -t $REPOSITORY:$TAG --platform=linux/amd64 $ASTRO_PROJECT_PATH
-  echo -e "\nPushing Docker image $REPOSITORY:$TAG to $DEPLOYMENT_ID"
-  docker push $REPOSITORY:$TAG
+        DEPLOY_ID=$(echo $CREATE_DEPLOY | jq -r '.id')
 
-  # Finalizing Deploy
-  FINALIZE_DEPLOY=$(curl --location --request POST "https://api.astronomer.io/platform/v1beta1/organizations/$ORGANIZATION_ID/deployments/$DEPLOYMENT_ID/deploys/$DEPLOY_ID/finalize" \
-  --header "X-Astro-Client-Identifier: script" \
-  --header "Content-Type: application/json" \
-  --header "Authorization: Bearer $ASTRO_API_TOKEN" \
-  --data '{}')
+        # Step 2-5: Build and Push Docker Image
+        REPOSITORY=$(echo $CREATE_DEPLOY | jq -r '.imageRepository')
+        TAG=$(echo $CREATE_DEPLOY | jq -r '.imageTag')
+        docker login images.astronomer.cloud -u cli -p $ASTRO_API_TOKEN
+        echo -e "\nBuilding Docker image $REPOSITORY:$TAG for $DEPLOYMENT_ID from $ASTRO_PROJECT_PATH"
+        docker build -t $REPOSITORY:$TAG --platform=linux/amd64 $ASTRO_PROJECT_PATH
+        echo -e "\nPushing Docker image $REPOSITORY:$TAG to $DEPLOYMENT_ID"
+        docker push $REPOSITORY:$TAG
 
-  ID=$(echo $FINALIZE_DEPLOY | jq -r '.id')
-  if [[ "$ID" != null ]]; then
-          echo -e "\nDeploy is Finalized. Image and DAG changes for deployment $DEPLOYMENT_ID should be live in a few minutes"
-          echo "Deployed Image tag: $TAG"
-  else
-          MESSAGE=$(echo $FINALIZE_DEPLOY | jq -r '.message')
-          if  [[ "$MESSAGE" != null ]]; then
-                  echo $MESSAGE
-          else
-                  echo "Something went wrong. Reach out to astronomer support for assistance"
-          fi
-  fi
-```
+        # Step 6: Finalizing Deploy
+        FINALIZE_DEPLOY=$(curl --location --request POST "https://api.astronomer.io/platform/v1beta1/organizations/$ORGANIZATION_ID/deployments/$DEPLOYMENT_ID/deploys/$DEPLOY_ID/finalize" \
+        --header "X-Astro-Client-Identifier: script" \
+        --header "Content-Type: application/json" \
+        --header "Authorization: Bearer $ASTRO_API_TOKEN" \
+        --data '{}')
+
+        ID=$(echo $FINALIZE_DEPLOY | jq -r '.id')
+        if [[ "$ID" != null ]]; then
+                echo -e "\nDeploy is Finalized. Image and DAG changes for deployment $DEPLOYMENT_ID should be live in a few minutes"
+                echo "Deployed Image tag: $TAG"
+        else
+                MESSAGE=$(echo $FINALIZE_DEPLOY | jq -r '.message')
+                if  [[ "$MESSAGE" != null ]]; then
+                        echo $MESSAGE
+                else
+                        echo "Something went wrong. Reach out to astronomer support for assistance"
+                fi
+        fi
+        ```
 
 </details>
 
