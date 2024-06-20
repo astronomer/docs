@@ -18,7 +18,7 @@ Consider the following when you integrate IAM roles:
 * You must use the Astro CLI to pass IAM role annotations.
 * Only Workspace Admins can pass IAM role annotations.
 * Once a Deployment is created or updated with an IAM role, the annotation can't be deleted.
-* When using XCom or secret backends that store values in resources governed by your cloud-provider's IAM solution, grant [the set of service-accounts used by that namespace](#sas-that-use-backends) access to the associated cloud-resources.
+* When using XCom or secrets backends that store values in resources governed by your cloud-provider's IAM solution, grant [the set of service-accounts used by that namespace](#sas-that-use-backends) access to the associated cloud-resources.
 
 ## Prerequisites
 
