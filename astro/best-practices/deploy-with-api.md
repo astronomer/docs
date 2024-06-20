@@ -83,7 +83,7 @@ The following steps describe the different actions that the script performs to d
 
 8. Using your `DeployId`, make a request to finalize the deploy. See [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about formatting the API request.
 
-   - On `Success`, the deploy process has completed. Pass `versionID` in the requested body.
+   - On `Success`, your DAGs have successfully uploaded and a `versionID` of the DAGs tarball is generated. Pass this `versionID` in the requested body to finish your updates.
    - It might take a few minutes for the changes to update in your Deployment.
 
 <details>
@@ -187,7 +187,7 @@ The following steps describe the different actions that the script performs to d
 
 5. Using your `DeployId`, make a request to finalize the deploy. See [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about formatting the API request.
 
-   - On `Success`, the deploy process has completed. Pass `versionID` in the requested body.
+   - On `Success`, your DAGs have successfully uploaded and a `versionID` of the DAGs tarball is generated. Pass this `versionID` in the requested body to finish your updates.
    - It might take a few minutes for the changes to update in your Deployment.
 
 <details>
@@ -289,7 +289,7 @@ The following steps describe the different actions that the script performs to d
 
 6. Using your `DeployId`, make a request to finalize the deploy. See [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about formatting the API request.
 
-   - On `Success`, the deploy process has completed. Pass `versionID` in the requested body.
+   - On `Success`, your DAGs have successfully uploaded and a `versionID` of the DAGs tarball is generated. Pass this `versionID` in the requested body to finish your updates.
    - It might take a few minutes for the changes to update in your Deployment.
 
 <details>
@@ -383,7 +383,7 @@ You can only use complete project deploys if you have DAG-only deploys disabled.
 
 6. Finalize the deploy. See [Finalize the deploy](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about the API request.
 
-   - On `Success`, the deploy process has completed. Pass the requested body as empty, `({})`.
+   - On `Success`, the new image has successfully uploaded. Since you didn't update any DAGs in this deploy, pass the requested body as empty, `({})`.
    - It might take a few minutes for the changes to update in your Deployment.
 
 <details>
