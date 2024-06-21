@@ -164,15 +164,15 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
 
 :::
 
-#### Step 2: Define your extra index URL
+#### Step 2: Create an environment variable for your index URL
 
-Create a new file called `indexurl.txt` that contains the extra index URL used to access your private PuPI index. For example:
+In your local environment or CI/CD system, add the `INDEX_URL_ENV_VAR` environment variable with the URL to access your private PyPI index. For example:
 
 ```text
 https://myuser:example.com/api/pypi/pypi/simple
 ```
 
-Ensure that this file is accessible from your Astro project. You will mount this value as a secret when you build your Astro project image.
+Later, you mount this value as a secret when you build your Astro project image.
 
 #### Step 3: Update Dockerfile
 
@@ -210,9 +210,7 @@ Ensure that this file is accessible from your Astro project. You will mount this
     In order, these commands:
 
     - Install any OS-level packages specified in `packages.txt`.
-    - Add `PIP_EXTRA_INDEX_URL` as an environment variable that contains authentication information for your private PyPI index.
     - Install public and private Python-level packages from your `requirements.txt` file.
-
 
 #### Step 4: Build a custom Docker image
 
