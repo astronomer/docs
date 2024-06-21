@@ -193,20 +193,6 @@ Ensure that this file is accessible from your Astro project. You will mount this
 3. After the `FROM` line specifying your Runtime image, add the following configuration:
 
     ```docker
-    LABEL maintainer="Astronomer <humans@astronomer.io>"
-    ARG BUILD_NUMBER=-1
-    LABEL io.astronomer.docker=true
-    LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
-    LABEL io.astronomer.docker.airflow.onbuild=true
-    # Install OS-Level packages
-    COPY packages.txt .
-    USER root
-    RUN apt-get update && cat packages.txt | xargs apt-get install -y
-    USER astro
-
-    LABEL maintainer="Astronomer <humans@astronomer.io>"
-    LABEL io.astronomer.docker=true
-
     # Install OS-Level packages
     COPY packages.txt .
     USER root
