@@ -215,10 +215,10 @@ Ensure that this file is accessible from your Astro project. You will mount this
     # Install Python packages
     COPY requirements.txt .
     RUN --mount=type=secret,id=indexurl \
-        pip install --no-cache-dir --root-user-action=ignore -r requirements.txt --extra-index-url=$(cat /run/secrets/indexurl)
+        pip install --no-cache-dir --root-user-action=ignore -r requirements.txt --index-url=$(cat /run/secrets/indexurl)
 
     USER astro
-    COPY . .
+    COPY --chown=astro:0 . .
     ```
 
     In order, these commands:
@@ -227,20 +227,19 @@ Ensure that this file is accessible from your Astro project. You will mount this
     - Add `PIP_EXTRA_INDEX_URL` as an environment variable that contains authentication information for your private PyPI index.
     - Install public and private Python-level packages from your `requirements.txt` file.
 
-4. (Optional) If you had any other commands in your original `Dockerfile`, add them after the line `FROM stage1 AS stage3`.
 
 #### Step 4: Build a custom Docker image
 
 1. Run the following command to test your DAGs locally with your privately installed packages:
 
     ```sh
-    astro dev start --build-secrets id=indexurl,src=$HOME/path/to/indexurl.txt
+    astro dev start --build-secrets id=indexurl,env=INDEX_URL_ENV_VAR
     ```
 
 2. (Optional) Run the following command to deploy to Astro:
 
     ```sh
-    astro deploy --build-secrets id=indexurl,src=$HOME/path/to/indexurl.txt
+    astro deploy --build-secrets id=indexurl,env=INDEX_URL_ENV_VAR
     ```
 
 Your Astro project can now use Python packages from your private PyPi index.
