@@ -14,6 +14,8 @@ Trigger rules are used to determine when a task should run in relation to the pr
 
 ## Define a trigger rule
 
+You can override the default trigger rule by setting the `trigger_rule` parameter in the task definition.
+
 <Tabs
     defaultValue="taskflow"
     groupId= "branching-and-trigger-rules"
