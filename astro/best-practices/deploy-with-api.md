@@ -4,11 +4,11 @@ sidebar_label: 'Deploy with API'
 id: deploy-with-api
 ---
 
-While you can deploy code using the Astro GitHub integration, the Astro CLI, or by configuring a CI/CD pipeline, there are some environments where you can only use the Astro API to deploy code. This is because using the Astro API has very few dependencies, making it compatible with almost all CI/CD environments and security requirements.
+While you can deploy your Apache Airflow code to Astro using the Astro GitHub integration, the Astro CLI, or by configuring a CI/CD pipeline, your organization might prefer to use the Astro API to deploy code. This is because using the Astro API has very few dependencies, making it compatible with almost all CI/CD environments and security requirements.
 
-If the Astro API has access to your Astro project files, you can use the Astro API `deploy` endpoints to complete an image deploy or DAG deploy. You can then implement scripts to automate deploys as an alternative to using the Astro CLI or Astro GitHub integration.
+If the Astro API has access to your Astro project files, you can use the `deploy` endpoints in the Astro API to complete either an image deploy or DAG-only deploy. You can then implement scripts to automate deploys as an alternative to using the Astro CLI or the Astro GitHub integration.
 
-This best practice guide walks through the steps that are necessary to deploy code to Astro using the Astro API. It also provides example bash scripts that implement these steps for different types of deploy workflows in your own CI/CD pipelines. This example uses Docker to build the image, but you can use a similar tool like Kaniko. You can also use a different scripting language, like Python, instead of bash.
+This best practice guide walks through the steps that are necessary to deploy code to Astro using the Astro API. It also provides example bash scripts that implement these steps for different types of deploy workflows in your own CI/CD pipelines. This example uses Docker to build the image, but you can use a similar tool like [kaniko](https://github.com/GoogleContainerTools/kaniko). You can also use a different scripting language, like Python, instead of bash.
 
 ## Feature overview
 
@@ -22,8 +22,8 @@ These use cases assume you have:
 
 - An [API token](deployment-api-tokens.md) with sufficient permissions to deploy code to Astro.
 - At least one [Astro Deployment](create-deployment.md).
-- An [Astro project](cli/develop-project.md) that's accessible from the machine where you're using the Astro API.
-- A container management tool. The following examples use [Docker](https://www.docker.com/).
+- An [Astro project](cli/develop-project.md) that's accessible from the machine that is making a request to the Astro API.
+- [Docker](https://www.docker.com/), or an alternative container service like Podman.
 - The following values:
   - Your Organization ID - See [List Organizations](https://docs.astronomer.io/docs/api/platform-api-reference/organization/list-organizations).
   - The Deployment ID - See [List Deployments](https://docs.astronomer.io/docs/api/platform-api-reference/deployment/list-deployments).
@@ -34,7 +34,7 @@ These use cases assume you have:
 
 If you have DAG-only deploys enabled, you can create scripts for complete project deploys, DAG-only deploys, or image-only deploys. The following sections include a step by step description of the workflow followed by a bash script that executes the workflow.
 
-### Project deploy
+### Complete project deploy
 
 The following steps describe the different actions that the script performs to deploy a complete Astro project.
 
@@ -50,7 +50,7 @@ The following steps describe the different actions that the script performs to d
 
    ```
 
-3. Build the image using the `imageRepository` and `imageTag` values that you retrieved in Step 2, as well as your Astro project path.
+3. Build the image using the `imageRepository` and `imageTag` values that you retrieved in Step 1, as well as your Astro project path.
 
    ```bash
 
@@ -58,7 +58,7 @@ The following steps describe the different actions that the script performs to d
 
    ```
 
-4. Push the image using the `imageRepository` and `imageTag` values that you retrieved in Step 2.
+4. Push the image using the `imageRepository` and `imageTag` values that you retrieved in Step 1.
 
    ```bash
 
@@ -80,7 +80,7 @@ The following steps describe the different actions that the script performs to d
 
    :::
 
-6. Upload the tar file by making a `PUT` call using the `dagsUploadURL` that you retrieved in Step 2. In this call, it is mandatory to pass the `x-ms-blob-type` as `BlockBlob`. Then, save the `versionID` from the response header.
+6. Upload the tar file by making a `PUT` call using the `dagsUploadURL` that you retrieved in Step 1. In this call, it is mandatory to pass the `x-ms-blob-type` as `BlockBlob`. Then, save the `x-ms-version-id` from the response header.
 
 7. Using your deploy `id`, make a request to finalize the deploy. See [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about formatting the API request.
 
@@ -369,7 +369,7 @@ The following steps describe the different actions that the script performs to d
 
 You can only use complete project deploys if you have DAG-only deploys disabled. Image-only and DAG-only deploys do not work.
 
-### Project deploy
+### Complete project deploy
 
 1. Create the `Deploy` API call using the `IMAGE_AND_DAG` type. This action creates an object that represents the intent to deploy code to a Deployment.
 
