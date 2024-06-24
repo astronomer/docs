@@ -60,7 +60,7 @@ chain(upstream_task, downstream_task)
 </TabItem>
 </Tabs>
 
-## Available trigger rules
+## Available trigger rules in Airflow
 
 The following trigger rules are available:
 
