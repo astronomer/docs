@@ -93,7 +93,7 @@ Now that your Deployment is authorized, you can connect it to your cloud using a
 
 If you don't see **Amazon Web Services** as a connection type in the Airflow UI, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Amazon/versions/latest) for the latest package.
 
-### Custom IAM identity
+### Attach an IAM role to your Deployment
 
 :::publicpreview
 :::
