@@ -408,4 +408,4 @@ The following options are available:
 - `none_skipped`: The task runs only when no upstream task is in a skipped state.
 - `always`: The task runs at any time.
 
-Learn more about trigger rules in the [Select the right trigger rule for your task](airflow-trigger-rules.md) guide.
+Learn more about trigger rules in the [Airflow trigger rules](airflow-trigger-rules.md) guide.

@@ -1,5 +1,5 @@
 ---
-title: "Select the right trigger rule for your task"
+title: "Airflow trigger rules"
 sidebar_label: "Trigger rules"
 id: airflow-trigger-rules
 description: "Learn about available trigger rules and how to use them."
