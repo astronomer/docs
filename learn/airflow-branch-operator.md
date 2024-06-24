@@ -206,7 +206,7 @@ In this DAG, `random.choice()` returns one random option out of a list of four b
 
 ![Branching Graph View](/img/guides/branching_decorator_graph.png)
 
-If you have downstream tasks that need to run regardless of which branch is taken, like the `join` task in the previous example, you need to update the trigger rule. The default trigger rule in Airflow is `all_success`, which means that if upstream tasks are skipped, then the downstream task will not run. In the previous example, `none_failed_min_one_success` is specified to indicate that the task should run as long as one upstream task succeeded and no tasks failed.
+If you have downstream tasks that need to run regardless of which branch is taken, like the `join` task in the previous example, you need to update the [trigger rule](airflow-trigger-rules.md). The default trigger rule in Airflow is `all_success`, which means that if upstream tasks are skipped, then the downstream task will not run. In the previous example, `none_failed_min_one_success` is specified to indicate that the task should run as long as one upstream task succeeded and no tasks failed.
 
 Finally, note that with the `@task.branch` decorator your Python function *must* return at least one task ID for whichever branch is chosen (i.e. it can't return nothing). If one of the paths in your branching should do nothing, you can use an EmptyOperator in that branch.
 
