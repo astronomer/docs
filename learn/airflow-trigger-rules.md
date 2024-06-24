@@ -80,7 +80,7 @@ The following trigger rules are available:
 
 Additionally to the trigger rules, you have the option of defining a DAG in which any task failure stops the DAG execution, setting all tasks that are still running to `failed` and marking any tasks that have not run yet as `skipped`. This is done by setting [DAG parameter](airflow-dag-parameters.md) `fail_stop` to `True`. Note that you cannot have any trigger rule other than `all_success` in a DAG with `fail_stop` set to `True`.
 
-Another advanced feature that influences trigger rules are [Setup and Teardown tasks](airflow-setup-and-teardown-tasks.md), a special type of task to create and delete resources.
+Another advanced feature that influences trigger rules are [Setup and Teardown tasks](airflow-setup-teardown.md), a special type of task to create and delete resources.
 
 :::
 
