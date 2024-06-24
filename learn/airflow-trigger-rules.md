@@ -7,6 +7,7 @@ description: "Learn about available trigger rules and how to use them."
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
 import branch_example_taskflow from '!!raw-loader!../code-samples/dags/airflow-trigger-rules/branch_example_taskflow.py';
 import branch_example_traditional from '!!raw-loader!../code-samples/dags/airflow-trigger-rules/branch_example_traditional.py';
 
