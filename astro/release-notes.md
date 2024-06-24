@@ -25,6 +25,27 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## June 25, 2024
+
+### Custom workload identity for AWS
+
+<HostedBadge/>
+
+:::publicpreview
+:::
+
+You can now assign a workload identity, specifically an AWS IAM role, to your Airflow Deployments on Astro. The Deployment and configured Airflow connections authorize the Deployment's access to customer data services using the customer managed identity. This also adds the following benefits:
+    - Re-use or share a customer managed identity across many Deployments, either ephemeral or static.
+    - Leverage existing identities when migrating from MWAA or OSS environments
+    - Reduced migration friction and change risk
+
+See [Attach an IAM role to your Deployment](/docs/astro/authorize-deployments-to-your-cloud#attach-an-iam-role-to-your-deployment) for detailed information.
+
+### Additional Improvements
+
+### Bug fixes
+
+
 ## June 18, 2024
 
 ### Additional Improvements
