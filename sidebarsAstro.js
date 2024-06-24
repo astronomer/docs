@@ -209,6 +209,7 @@ module.exports = {
         "alerts",
         "airflow-email-notifications",
         "audit-logs",
+        "metrics-export",
         {
           type: "category",
           label: "Integrate with data tools",
