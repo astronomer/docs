@@ -102,7 +102,7 @@ If you don't see **Amazon Web Services** as a connection type in the Airflow UI,
 
 You can attach an AWS IAM role to your Deployment to grant the Deployment all of the role's permissions.
 
-Using IAM roles provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing IAM roles on new Deployments, or your can attach a single IAM role to multiple Deployments that all have the same level of access to your cloud.
+Using IAM roles provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing IAM roles on new Deployments, or your can attach a single IAM role to multiple Deployments hat all require the same level of access to your cloud.
 
 #### Prerequisites
 
@@ -148,7 +148,7 @@ If you want to share or re-use the same customer managed identity on static or e
 
 #### Step 2: Create an Airflow connection
 
-Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Either create an **Amazon Web Services** connection in the [Astro UI](create-and-link-connections.md) or the Airflow UI for your Deployment and specify the following fields:
+Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Create an **Amazon Web Services** connection in either the [Astro UI](create-and-link-connections.md) or the Airflow UI for your Deployment, and specify the following fields:
 
 - **Connection Id**: Enter a name for the connection.
 
