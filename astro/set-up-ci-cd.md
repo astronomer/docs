@@ -24,6 +24,12 @@ There are many benefits to configuring a CI/CD workflow on Astro. Specifically, 
 - Automate promoting code across development and production environments on Astro when pull requests to certain branches are merged.
 - Enforce automated testing, which increases code quality and allows your team to respond quickly in case of an error or a failure.
 
+:::tip
+
+If you use [custom Deployment roles](customize-deployment-roles.md) and Deployment API tokens, you might need to configure custom permissions instead of using a template. See [Create a custom Deployment role](customize-deployment-roles.md#create-a-custom-deployment-role) for more information.
+
+:::
+
 ## Choose a deploy strategy
 
 You can set up CI/CD pipelines to manage multiple Deployments and repositories based on your team structure. Before you create your pipeline, you need to determine how many project environments and repositories you want to maintain.
