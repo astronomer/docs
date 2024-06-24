@@ -105,14 +105,14 @@ If you don't see **Amazon Web Services** as a connection type in the Airflow UI,
     - 10.9.0
     - 11.5.0
 
-#### Step 1: Authorize the Deployment to your cloud
+#### Step 1: Authorize the Deployment to your IAM role
 
 You can now assign a workload identity, specifically an AWS IAM role, to your Airflow Deployments on Astro. The Deployment and configured Airflow connections authorize the Deployment's access to customer data services using the customer managed identity. This adds the following benefits:
     - Re-use or share a customer managed identity across many Deployments, either ephemeral or static.
     - Leverage existing identities when migrating from MWAA or OSS environments
     - Reduced migration friction and change risk
 
-To authorize your Deployment, create an IAM role that is assumed by the Deployment's workload identity:
+To authorize your Deployment, create an IAM role to assign as your Deployment's workload identity:
 
 1. In the Astro UI, select your Deployment and then click **Details**. Copy the Deployment's **Workload Identity**.
 2. In the Airflow UI, click the **Admin** tab and go to you **Configurations** page. Copy the **Deployment Namespace**.
