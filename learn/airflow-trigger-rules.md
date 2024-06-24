@@ -75,6 +75,14 @@ The following trigger rules are available:
 - `none_skipped`: The task runs only when no upstream task is in a skipped state.
 - `always`: The task runs at any time.
 
+:::info 
+
+Additionally to the trigger rules, you have the option of defining a DAG in which any task failure stops the DAG execution, setting all tasks that are still running to `failed` and marking any tasks that have not run yet as `skipped`. This is done by setting [DAG parameter](airflow-dag-parameters.md) `fail_stop` to `True`. Note that you cannot have any trigger rule other than `all_success` in a DAG with `fail_stop` set to `True`.
+
+Another advanced feature that influences trigger rules are [Setup and Teardown tasks](airflow-setup-and-teardown-tasks.md), a special type of task to create and delete resources.
+
+:::
+
 ## Branching and trigger rules
 
 One common scenario where you might need to implement trigger rules is if your DAG contains conditional logic such as [branching](airflow-branch-operator.md). In these cases, `one_success` or `none_failed` is likely more helpful than `all_success`, because unless all branches are run, at least one upstream task will always be in a `skipped` state.
