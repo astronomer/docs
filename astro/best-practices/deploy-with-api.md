@@ -34,9 +34,11 @@ These use cases assume you have:
 
 If you have DAG-only deploys enabled, you can create scripts for complete project deploys, DAG-only deploys, or image-only deploys. The following sections include a step by step description of the workflow followed by a bash script that executes the workflow.
 
+See [Deploy code to Astro](deploy-code.md) for more information about the different ways to update your DAGs and Airflow images.
+
 ### Complete project deploy
 
-The following steps describe the different actions that the script performs to deploy a complete Astro project.
+The following steps describe the different actions that the script performs to deploy a complete Astro project. Refer to [What happens during a project deploy](deploy-project-image.md#what-happens-during-a-project-deploy) to learn the details about how a project deploy builds and deploys a new Astro image along with deploying DAGs. 
 
 1. Make a `POST` request to the `Deploy` endpoint to create a new `deploy` object. In your call, specify `type` as `IMAGE_AND_DAG`. Store the values for `id`, `imageRepository`, `imageTag`, and `dagsUploadURL` that are returned in the response to use in the following steps.
 
@@ -172,6 +174,8 @@ The following steps describe the different actions that the script performs to d
 
 ### DAG-only deploy
 
+The following script allows you to update only your DAG files. Refer to [DAG deploys](deploy-dags.md) to learn the details about how Astro deploys DAGs. 
+
 1. Make a `POST` request to the `Deploy` endpoint to create a new `deploy` object. In your call, specify `type` as `DAG_ONLY`. Store the values for `id` and `dagsUploadURL` that are returned in the response to use in the following steps.
 
         This action creates an object that represents the intent to deploy code to a Deployment. See the [Astro API documentation](https://www.astronomer.io/docs/api/platform-api-reference/deploy/create-deploy) for request usage and examples.
@@ -268,6 +272,8 @@ The following steps describe the different actions that the script performs to d
 </details>
 
 ### Image-only deploy
+
+The following script allows you to update only your Astro project by building and deploying a new Docker image. Refer to [What happens during a project deploy](deploy-project-image.md#what-happens-during-a-project-deploy) to learn the details about how Astro deploys image updates. 
 
 1.  Make a `POST` request to the `Deploy` endpoint to create a new `deploy` object. In your call, specify `type` as `IMAGE`. Store the value for the `DeployID` that is returned. This action creates an object that represents the intent to deploy code to a Deployment.  See the [Astro API documentation](https://www.astronomer.io/docs/api/platform-api-reference/deploy/create-deploy) for request usage and examples.
 
@@ -368,6 +374,8 @@ The following steps describe the different actions that the script performs to d
 ## With DAG-only deploy disabled
 
 You can only use complete project deploys if you have DAG-only deploys disabled. Image-only and DAG-only deploys do not work.
+
+See [Deploy code to Astro](deploy-code.md) for more information about the different ways to update your DAGs and Airflow images.
 
 ### Complete project deploy
 
