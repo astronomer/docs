@@ -61,8 +61,7 @@ This feature is automatically enabled for the Astro Hosted infrastructure and do
 
 ### Bug fixes
 
-- `europe-west6` is no longer available as a region for dedicated clusters on GCP. <!--https://github.com/astronomer/astro/pull/21994-->
-
+- `europe-west6` is no longer available as a region for dedicated clusters on GCP.
 
 ## June 18, 2024
 
