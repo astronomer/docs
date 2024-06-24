@@ -95,8 +95,14 @@ If you don't see **Amazon Web Services** as a connection type in the Airflow UI,
 
 ### Attach an IAM role to your Deployment
 
+<HostedBadge/>
+
 :::publicpreview
 :::
+
+You can attach an AWS IAM role to your Deployment to grant the Deployment all of the role's permissions.
+
+Using IAM roles provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing IAM roles on new Deployments, or your can attach a single IAM role to multiple Deployments that all have the same level of access to your cloud.
 
 #### Prerequisites
 
@@ -104,43 +110,29 @@ If you don't see **Amazon Web Services** as a connection type in the Airflow UI,
     - 9.15.0
     - 10.9.0
     - 11.5.0
+- A new or existing IAM role in your data sources with the required permissions you want your Deployment to have.
+- If using [AWS CloudShell](https://aws.amazon.com/cloudshell/),
+the required CLIs are enabled by default.
+- If you use a local terminal, the following CLIs are required:
+  - [AWS CLI](https://aws.amazon.com/cli/)
+  - [jq](https://jqlang.github.io/jq/)
+  - [openSSL](https://www.openssl.org/source/)
 
 #### Step 1: Authorize the Deployment to your IAM role
 
-You can now assign a workload identity, specifically an AWS IAM role, to your Airflow Deployments on Astro. The Deployment and configured Airflow connections authorize the Deployment's access to customer data services using the customer managed identity. This adds the following benefits:
-    - Re-use or share a customer managed identity across many Deployments, either ephemeral or static.
-    - Leverage existing identities when migrating from MWAA or OSS environments
-    - Reduced migration friction and change risk
-
 To authorize your Deployment, create an IAM role to assign as your Deployment's workload identity:
 
-1. In the Astro UI, select your Deployment and then click **Details**. Copy the Deployment's **Workload Identity**.
-2. In the Airflow UI, click the **Admin** tab and go to you **Configurations** page. Copy the **Deployment Namespace**.
-3. In the AWS account that contains your AWS service, create an IAM role. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
-4. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
-5. Click **Roles** and in the **Role name** column, select the role you created in Step 2.
-6. Click **Trust relationships**.
-7. Click **Edit trust policy** and paste the workload identity you copied from Step 1 and the Deployment namespace from Step 2 in the trust policy. Your policy should look like the following:
+1. [Create an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) to delegate permissions to in an AWS service. Grant the role any permission that the Deployment will need in your AWS account. Copy the IAM role ID to use later in this setup.
+2. In the Astro UI, select your Deployment and then click **Details**. In the **Advanced** section, click **Edit**.
+3. In the **Workload Identity** menu, select **Customer Managed Identity**.
+4. Enter your IAM role ID when prompted, then copy and run the provided CLI command.
+5. Click **Update Deployment**. The service account is now selectable as a workload identity for the Deployment.
 
-```json
-    {
-    "Effect": "Allow",
-    "Principal": {
-        "Federated": "<your-workload-identity-role"
-    },
-    "Action": "sts:AssumeRoleWithWebIdentity",
-    "Condition": {
-        "StringLike": {
-            "<clusterOIDCIssuerUrl>:aud": "sts.amazonaws.com",
-            "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:*"
-        }
-    }
-    }
-```
+Repeat these steps for each Astro Deployment that needs to access your AWS resources.
 
-:::tip
+:::tip Dedicated Cluster only
 
-If you want to enable custom managed identities on ephemeral Deployments, change the `<DeploymentNamespace>` value in `Condition` to include a wildcard. The following shows an example:
+If you want to share or re-use the same customer managed identity on static or ephemeral Deployments for dedicated clusters, without having to update your Trust Policy in your AWS account for every net new Deployment, change the `<DeploymentNamespace>` value in `Condition` to include a wildcard. The following shows an example:
 
     ```json
     {
@@ -154,23 +146,11 @@ If you want to enable custom managed identities on ephemeral Deployments, change
     ```
 :::
 
-7. Click **Update policy**.
-
-Repeat these steps for each Astro Deployment that needs to access your AWS resources.
-
 #### Step 2: Create an Airflow connection
 
 Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Either create an **Amazon Web Services** connection in the [Astro UI](create-and-link-connections.md) or the Airflow UI for your Deployment and specify the following fields:
 
 - **Connection Id**: Enter a name for the connection.
-- **Extra**:
-
-  ```json
-  {
-    "role_arn": "<your-role-arn>",
-    "region_name": "<your-region>"
-  }
-  ```
 
 If you don't see **Amazon Web Services** as a connection type in the Airflow UI, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Amazon/versions/latest) for the latest package.
 
@@ -187,7 +167,7 @@ You can attach a custom GCP service account to your Deployment to grant the Depl
 Using service accounts provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing service accounts on new Deployments, or your can attach a single service account to multiple Deployments that all have the same level of access to your cloud.
 
 1. [Create a service account](https://cloud.google.com/iam/docs/service-accounts-create) in the GCP project that you want your Deployment to access. Grant the service account any permissions that the Deployment will need in your GCP project. Copy the service account ID to use later in this setup.
-2. In the Cloud UI, select your Deployment, then click **Details**. In the **Advanced** section, click **Edit**.
+2. In the Astro UI, select your Deployment, then click **Details**. In the **Advanced** section, click **Edit**.
 3. In the **Workload Identity** menu, select **Customer Managed Identity**
 4. Enter your GCP service account ID when prompted, then copy and run the provided gcloud CLI command.
 5. Click **Update Deployment**. The service account is now selectable as a workload identity for the Deployment.
