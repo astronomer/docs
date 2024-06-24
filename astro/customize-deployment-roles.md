@@ -48,7 +48,7 @@ Deployment roles are additive, meaning that a user with multiple Deployment role
 
     :::tip Custom Deployment role permissions
 
-    To deploy with the Astro CLI when using a Deployment API token and a custom Deployment role, the minimum required permissions are [`deployment.get`](deployment-role-reference.md#deployment) and [`deployment.deploys.create`](deployment-role-reference.md#deployment-deploys).
+    To deploy with the Astro CLI when using a Deployment API token with a custom Deployment role, the minimum required permissions for the token's Deployment role are [`deployment.get`](deployment-role-reference.md#deployment) and [`deployment.deploys.create`](deployment-role-reference.md#deployment-deploys).
 
     :::
 
