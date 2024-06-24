@@ -131,7 +131,7 @@ As soon as any upstream tasks are state of `failed` or `upstream_failed`, the do
 
 ![Screenshot of the Airflow UI with a DAG graph showing 2 successful, 1 running and 1 failed upstream tasks and one downstream task in upstream_failed state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_all_success_2.png)
 
-Analogously, as soon as any upstream task is in the state `skipped`, the downstream task is set to the state `skipped` and does not run.
+Similarly, as soon as any upstream task is in the state `skipped`, the downstream task is set to the state `skipped` and does not run.
 
 ![Screenshot of the Airflow UI with a DAG graph showing 2 successful, 1 running and 1 skipped upstream tasks and one downstream task in skipped state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_all_success_3.png)
 
@@ -147,7 +147,7 @@ As soon as any upstream task is in the state `success`, the downstream task is s
 
 ![Screenshot of the Airflow UI with a DAG graph showing 1 failed, 1 successful, 1 upstream failed and 1 running upstream tasks and one downstream task in skipped state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_all_failed_2.png)
 
-Similarly, as soon as any upstream task is in the state `skipped`, the downstream task is set to the state `skipped` and does not run.
+Analogously, as soon as any upstream task is in the state `skipped`, the downstream task is set to the state `skipped` and does not run.
 
 ![Screenshot of the Airflow UI with a DAG graph showing 1 failed, 1 running and 1 skipped, 1 upstream failed upstream tasks and one downstream task in skipped state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_all_failed_3.png)
 
