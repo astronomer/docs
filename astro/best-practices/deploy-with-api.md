@@ -86,7 +86,7 @@ The following steps describe the different actions that the script performs to d
 
 7. Using your deploy `id`, make a request to finalize the deploy. See [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about formatting the API request.
 
-   - On `Success`, your DAGs have successfully uploaded and a `versionID` of the DAGs tarball is generated. Pass this `versionID` in the requested body to finish your updates.
+   - On `Success`, your DAGs have successfully uploaded and a `x-ms-version-id` of the DAGs tarball is generated. Pass this `x-ms-version-id` in the requested body to finish your updates.
    - It might take a few minutes for the changes to update in your Deployment.
 
 <details>
@@ -194,11 +194,11 @@ The following script allows you to update only your DAG files. Refer to [DAG dep
 
    :::
 
-3. Upload the tar file by making a `PUT` call using the `dagsUploadURL` that you retrieved in Step 2. In this call, it is mandatory to pass the `x-ms-blob-type` as `BlockBlob`. Then, save the `versionID` from the response header.
+3. Upload the tar file by making a `PUT` call using the `dagsUploadURL` that you retrieved in Step 2. In this call, it is mandatory to pass the `x-ms-blob-type` as `BlockBlob`. Then, save the `x-ms-version-id` from the response header.
 
 4. Using your deploy `id`, make a request to finalize the deploy. See [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about formatting the API request.
 
-   - On `Success`, your DAGs have successfully uploaded and a `versionID` of the DAGs tarball is generated. Pass this `versionID` in the requested body to finish your updates.
+   - On `Success`, your DAGs have successfully uploaded and a `x-ms-version-id` of the DAGs tarball is generated. Pass this `x-ms-version-id` in the requested body to finish your updates.
    - It might take a few minutes for the changes to update in your Deployment.
 
 <details>
@@ -307,7 +307,7 @@ The following script allows you to update only your Astro project by building an
 
 5. Using your deploy `id`, make a request to finalize the deploy. See [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about formatting the API request.
 
-   - On `Success`, your DAGs have successfully uploaded and a `versionID` of the DAGs tarball is generated. Pass this `versionID` in the requested body to finish your updates.
+   - On `Success`, your DAGs have successfully uploaded and a `x-ms-version-id` of the DAGs tarball is generated. Pass this `x-ms-version-id` in the requested body to finish your updates.
    - It might take a few minutes for the changes to update in your Deployment.
 
 <details>
