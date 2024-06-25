@@ -38,7 +38,7 @@ A deploy rollback is a new deploy of a previous version of your code. This means
 When you trigger a rollback, the following information is rolled back:
 
 - All project code, including DAGs.
-- Your Astro Runtime version. Note that you cannot roll back to a restricted Runtime version, as they can include major bugs and performance issues.
+- Your Astro Runtime version. Note that if you roll back to a restricted Runtime version they can include major bugs and performance issues.
 - Your Deployment's DAG deploy setting.
 
 The following information isn't rolled back:
@@ -47,11 +47,5 @@ The following information isn't rolled back:
 - Your Deployment's environment variable values.
 - Any other Deployment settings that you configure through the Astro UI, such as your Deployment name and description. 
 - For Runtime version downgrades, any data related to features that are not available in the rollback version are erased from the metadata database and not recoverable.
-
-    :::danger Airgapped Environments Only
-
-    Some versions of the Astro runtime are restricted, and you cannot rollback to or create new Deployments with these restricted versions. However, if you work in an Airgapped environment, the JSON list of available Astro Runtime versions must be [manually updated](software/install-airgapped.md#step-5-fetch-airflow-updates). Depending on the cadence that your organization updates the list of available Runtime versions, you might be able to roll back to a restricted Astro Runtime version, which can include major bugs and performance issues.
-
-    :::
 
 Logs related to the rollback are exported to Elasticsearch.
