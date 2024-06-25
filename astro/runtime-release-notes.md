@@ -29,6 +29,19 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## Astro Runtime 11.6.0
+
+- Release date: June 25, 2024
+- Airflow version: 2.9.2
+
+### Early access Airflow bug fixes
+
+- Fixed a bug by adding `[webserver]update_fab_perms` to the deprecated config list, so that you can now use `[fab]update_fab_perms`, the preferred option, instead ([#40317](https://github.com/apache/airflow/pull/40317))
+
+### Additional improvements
+
+- Upgraded the minor and patch versions of some Astro open source provider packages. See [Astro Runtime 11.6.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-1160)
+
 ## Astro Runtime 11.5.0
 
 - Release date: June 11, 2024
