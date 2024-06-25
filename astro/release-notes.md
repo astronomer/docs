@@ -39,7 +39,7 @@ The **Customer Managed Identity** Deployment setting is now available on AWS. Th
     - Re-use or share a customer managed identity across many Deployments, either ephemeral or static.
     - Leverage existing identities when migrating from MWAA or open source Airflow environments
 
-This can reduce friction when migrating to Astro. See [Attach an IAM role to your Deployment](/docs/astro/authorize-deployments-to-your-cloud#attach-an-iam-role-to-your-deployment) for detailed information.
+This can reduce friction when migrating to Astro. See [Attach an IAM role to your Deployment](https://www.astronomer.io/docs/astro/authorize-deployments-to-your-cloud#attach-an-iam-role-to-your-deployment) for detailed information.
 
 ### Catatonic Celery worker healer automatically addresses stuck queued tasks
 
