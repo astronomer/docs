@@ -12,9 +12,7 @@ import CodeBlock from '@theme/CodeBlock';
 import create_dag_example from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/create_dag_example.py';
 import create_dag_example_traditional from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/create_dag_example_traditional.py';
 import dags_from_var_example from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_var_example.py';
-import dags_from_connections from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_connections.py';
 import dags_from_var_example_traditional from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_var_example_traditional.py';
-import dags_from_connections_traditional from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_connections_traditional.py';
 
 In Airflow, [DAGs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html) are defined as Python code. Airflow executes all Python code in the `dags_folder` and loads any `DAG` objects that appear in `globals()`. The simplest way to create a DAG is to write it as a static Python file. 
 
@@ -143,13 +141,17 @@ The DAGs appear in the Airflow UI:
 
 ![DAGs from Loop](/img/guides/dag_from_loop_zoom.png)
 
-### Example: Generate DAGs from variables
+### Example: Generate DAGs from environment variables
 
-As mentioned previously, the input parameters don't have to exist in the DAG file. Another common form of generating DAGs is by setting values in a Variable object.
+As mentioned previously, the input parameters don't have to exist in the DAG file. Another common form of generating DAGs is by setting values using environment variables. 
 
-![Airflow UI variables tab with a DAG Number variable](/img/guides/dag_number_variable.png)
+You can define environment variables locally in the `.env` file of you Astro project or in the [Astro UI](https://www.astronomer.io/docs/astro/manage-env-vars) for your Astro deployments.
 
-You can retrieve this value by importing the Variable class and passing it into your `range`. The `default_var` is set to 3 because you want the interpreter to register this file as valid regardless of whether the variable exists.
+```text
+DYNAMIC_DAG_NUMBER=10
+```
+
+You can retrieve this value by fetching the environment variable and passing it into your `range`. The `default` is set to 3 because you want the interpreter to register this file as valid regardless of whether the variable exists.
 
 <Tabs
     defaultValue="taskflow"
@@ -173,39 +175,6 @@ You can retrieve this value by importing the Variable class and passing it into 
 The DAGs appear in the Airflow UI:
 
 ![DAGs from Variables in the Airflow UI](/img/guides/dag_from_variables.png)
-
-### Example: Generate DAGs from connections
-
-Another way to define input parameters for dynamically generated DAGs is to define Airflow connections. This can be a good option if each of your DAGs connects to a database or an API. Because you'll be setting up the connections anyway, creating the DAGs from that source avoids redundant work. 
-
-To implement this method, you pull the connections from your Airflow metadata database by instantiating the session and querying the connection table. You can also filter this query so that it only pulls connections that match a specific criteria.
-
-![List of connections in the Airflow UI](/img/guides/connections.png)
-
-<Tabs
-    defaultValue="taskflow"
-    groupId="example-generate-dags-from-connections"
-    values={[
-        {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional syntax', value: 'traditional'},
-    ]}>
-<TabItem value="taskflow">
-
-<CodeBlock language="python">{dags_from_connections}</CodeBlock>
-
-</TabItem>
-<TabItem value="traditional">
-
-<CodeBlock language="python">{dags_from_connections_traditional}</CodeBlock>
-
-</TabItem>
-</Tabs>
-
-You are accessing the Models library to bring in the `Connection` class (as you did previously with the `Variable` class). You are also accessing the `Session()` class from `settings`, which will allow us to query the current database session.
-
-![DAGs created from connections](/img/guides/dag_from_connections.png)
-
-All of the connections that match our filter have now been created as a unique DAG.
 
 ## Multiple-file methods
 
