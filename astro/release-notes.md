@@ -45,11 +45,11 @@ See [Attach an IAM role to your Deployment](/docs/astro/authorize-deployments-to
 
 <HostedBadge/>
 
-A new improvement to the Astro Data Plane now automatically identifies when Celery workers are onlin and healthy, but not actually processing new tasks. When this happens, it looks like many tasks are stuck in a `queued` state. With this new feature, you will experience a lower frequency of tasks stuck in a `queued` state, which cause performance and reliability issues for your Airflow implementation.
+A new improvement to the Astro Data Plane now automatically identifies when Celery workers are online and healthy, but not actually processing new tasks. When this happens, it looks like many tasks are stuck in a `queued` state. With this new feature, you will experience a lower frequency of tasks stuck in a `queued` state, which causes performance and reliability issues for your Airflow implementation.
 
 The Catatonic Celery worker healer uses the following process:
 
-- It first identifies workers that have both tasks stuck in a `queued` state for an extensive time period and are in Deployments where the concurrency available means that tasks should not be queued.
+- It first identifies workers that both have tasks stuck in a `queued` state for an extensive time period and are in Deployments where the concurrency available means that tasks should not be queued.
 - The healer then kills catatonic workers that are not running tasks, or enters workers that are still running tasks into a warm shutdown period.
 - After the catatonic worker is shut down, a new healthy, worker comes online and resumes tasks.
 
