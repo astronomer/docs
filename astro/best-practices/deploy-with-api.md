@@ -6,7 +6,7 @@ id: deploy-with-api
 
 While you can deploy your Apache Airflow code to Astro using the Astro GitHub integration, the Astro CLI, or by configuring a CI/CD pipeline, your organization might prefer to use the Astro API to deploy code. This is because using the Astro API has very few dependencies, making it compatible with almost all CI/CD environments and security requirements.
 
-If the Astro API has access to your Astro project files, you can use the `deploy` endpoints in the Astro API to complete either an image deploy or DAG-only deploy. You can then implement scripts to automate deploys as an alternative to using the Astro CLI or the Astro GitHub integration.
+If the Astro API has access to your Astro project files, you can use the `deploy` endpoints in the Astro API to complete either a complete project deploy, image-only deploy or DAG-only deploy. You can then implement scripts to automate deploys as an alternative to using the Astro CLI or the Astro GitHub integration.
 
 This best practice guide first walks through the steps that are necessary to deploy code to Astro using the Astro API for three different code deploy methods, a complete project deploy, an image deploy, and a DAGs-only deploy. Then, the guide shows you the recommended way to combine these three automated processes to create a script with conditional logic that can automatically deploy code to Astro, depending on which types of files change in your Astro project.
 
@@ -479,7 +479,7 @@ The following code example shows the recommended steps for you to use to create 
 
 :::info
 
-This recommended process requires that you enable DAG-only deploys.
+This recommended process requires that you enable [DAG-only deploys](deploy-dags.md).
 
 :::
 
