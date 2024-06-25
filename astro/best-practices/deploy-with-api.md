@@ -8,7 +8,9 @@ While you can deploy your Apache Airflow code to Astro using the Astro GitHub in
 
 If the Astro API has access to your Astro project files, you can use the `deploy` endpoints in the Astro API to complete either an image deploy or DAG-only deploy. You can then implement scripts to automate deploys as an alternative to using the Astro CLI or the Astro GitHub integration.
 
-This best practice guide walks through the steps that are necessary to deploy code to Astro using the Astro API. It also provides example bash scripts that implement these steps for different types of deploy workflows in your own CI/CD pipelines. This example uses Docker to build the image, but you can use a similar tool like [kaniko](https://github.com/GoogleContainerTools/kaniko). You can also use a different scripting language, like Python, instead of bash.
+This best practice guide first walks through the steps that are necessary to deploy code to Astro using the Astro API for three different code deploy methods, a complete project deploy, an image deploy, and a DAGs-only deploy. Then, the guide shows you the recommended way to combine these three automated processes to create a script with conditional logic that can automatically deploy code to Astro, depending on which types of files change in your Astro project.
+
+These examples are bash scripts that use Docker to build the image, but you can use a similar tool like [kaniko](https://github.com/GoogleContainerTools/kaniko). You can also use a different scripting language, like Python, instead of bash.
 
 ## Feature overview
 
@@ -38,7 +40,7 @@ See [Deploy code to Astro](deploy-code.md) for more information about the differ
 
 ### Complete project deploy
 
-The following steps describe the different actions that the script performs to deploy a complete Astro project. Refer to [What happens during a project deploy](deploy-project-image.md#what-happens-during-a-project-deploy) to learn the details about how a project deploy builds and deploys a new Astro image along with deploying DAGs. 
+The following steps describe the different actions that the script performs to deploy a complete Astro project. Refer to [What happens during a project deploy](deploy-project-image.md#what-happens-during-a-project-deploy) to learn the details about how a project deploy builds and deploys a new Astro image along with deploying DAGs.
 
 1. Make a `POST` request to the `Deploy` endpoint to create a new `deploy` object. In your call, specify `type` as `IMAGE_AND_DAG`. Store the values for `id`, `imageRepository`, `imageTag`, and `dagsUploadURL` that are returned in the response to use in the following steps.
 
@@ -174,7 +176,7 @@ The following steps describe the different actions that the script performs to d
 
 ### DAG-only deploy
 
-The following script allows you to update only your DAG files. Refer to [DAG deploys](deploy-dags.md) to learn the details about how Astro deploys DAGs. 
+The following script allows you to update only your DAG files. Refer to [DAG deploys](deploy-dags.md) to learn the details about how Astro deploys DAGs.
 
 1. Make a `POST` request to the `Deploy` endpoint to create a new `deploy` object. In your call, specify `type` as `DAG_ONLY`. Store the values for `id` and `dagsUploadURL` that are returned in the response to use in the following steps.
 
@@ -273,7 +275,7 @@ The following script allows you to update only your DAG files. Refer to [DAG dep
 
 ### Image-only deploy
 
-The following script allows you to update only your Astro project by building and deploying a new Docker image. Refer to [What happens during a project deploy](deploy-project-image.md#what-happens-during-a-project-deploy) to learn the details about how Astro deploys image updates. 
+The following script allows you to update only your Astro project by building and deploying a new Docker image. Refer to [What happens during a project deploy](deploy-project-image.md#what-happens-during-a-project-deploy) to learn the details about how Astro deploys image updates.
 
 1.  Make a `POST` request to the `Deploy` endpoint to create a new `deploy` object. In your call, specify `type` as `IMAGE`. Store the value for the `DeployID` that is returned. This action creates an object that represents the intent to deploy code to a Deployment.  See the [Astro API documentation](https://www.astronomer.io/docs/api/platform-api-reference/deploy/create-deploy) for request usage and examples.
 
@@ -469,13 +471,19 @@ See [Deploy code to Astro](deploy-code.md) for more information about the differ
 
 </details>
 
-## Trigger deploys when files change
+## (Recommended) Trigger deploys when files change
 
 In addition to manually triggering project, DAG, and image deploys, you can create scripts that trigger specific code deploys depending on whether there have been changes to DAGs or files used to build the project image.
 
-The following code example shows the steps you can use to create a bash script that triggers different code deploys depending on the files changed in your project. This example demonstrates a recommended way for combining all three types of deploys and the conditional logic for when to deploy each.
+The following code example shows the recommended steps for you to use to create a bash script that triggers different code deploys depending on the files changed in your project. This example demonstrates how to combine all three types of deploys and the conditional logic for when to deploy each.
 
-### Workflow example steps
+:::info
+
+This recommended process requires that you enable DAG-only deploys.
+
+:::
+
+### Recommended workflow
 
 1. Determine whether DAG files have been changed. If only DAGs have changed, then the script initiates a DAG-only deploy.
 
@@ -486,7 +494,7 @@ The following code example shows the steps you can use to create a bash script t
 4. The script cleans up any tar files created during the build process.
 
 <details>
-<summary><strong>Trigger deploys code example</strong></summary>
+<summary><strong>Trigger deploys when files change code example</strong></summary>
 
 ```bash
 #!/bin/bash
