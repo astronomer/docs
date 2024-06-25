@@ -102,7 +102,7 @@ If you don't see **Amazon Web Services** as a connection type in the Airflow UI,
 
 You can attach an AWS IAM role to your Deployment to grant the Deployment all of the role's permissions.
 
-Using IAM roles provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing IAM roles on new Deployments, or your can attach a single IAM role to multiple Deployments hat all require the same level of access to your cloud.
+Using IAM roles provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing IAM roles on new Deployments, or your can attach a single IAM role to multiple Deployments that all require the same level of access to your cloud.
 
 #### Prerequisites
 
@@ -122,11 +122,11 @@ the required CLIs are enabled by default.
 
 To authorize your Deployment, create an IAM role to assign as your Deployment's workload identity:
 
-1. [Create an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) to delegate permissions to in an AWS service. Grant the role any permission that the Deployment will need in your AWS account. Copy the IAM role ID to use later in this setup.
+1. [Create an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) to delegate permissions to in an AWS service. Grant the role any permission that the Deployment will need in your AWS account. Copy the IAM role ARN to use later in this setup.
 2. In the Astro UI, select your Deployment and then click **Details**. In the **Advanced** section, click **Edit**.
 3. In the **Workload Identity** menu, select **Customer Managed Identity**.
-4. Enter your IAM role ID when prompted, then copy and run the provided CLI command.
-5. Click **Update Deployment**. The service account is now selectable as a workload identity for the Deployment.
+4. Enter your IAM role ARN when prompted, then copy and run the provided CLI command.
+5. Click **Update Deployment**. The IAM role is now selectable as a workload identity for the Deployment.
 
 Repeat these steps for each Astro Deployment that needs to access your AWS resources.
 
