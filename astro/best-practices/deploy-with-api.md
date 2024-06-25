@@ -88,7 +88,7 @@ The following steps describe the different actions that the script performs to d
 
 7. Using your deploy `id`, make a request to finalize the deploy. See [Astro API documentation](https://docs.astronomer.io/docs/api/platform-api-reference/deploy/finalize-deploy) for more information about formatting the API request.
 
-   - On `Success`, your DAGs have successfully uploaded and a `x-ms-version-id` of the DAGs tarball is generated. Pass this `x-ms-version-id` in the requested body to finish your updates.
+   - On `Success`, your DAGs have successfully uploaded and a `x-ms-version-id` of the DAGs tarball is generated in the response headers. Pass this `x-ms-version-id` in the requested body to finish your updates.
    - It might take a few minutes for the changes to update in your Deployment.
 
 <details>
