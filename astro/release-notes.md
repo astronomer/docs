@@ -50,7 +50,7 @@ A new improvement to the Astro Data Plane now automatically identifies when Cele
 The Catatonic Celery worker healer uses the following process:
 
 - It first identifies workers that both have tasks stuck in a `queued` state for an extensive time period and are in Deployments where the concurrency available means that tasks should not be queued.
-- The healer then kills catatonic workers that are not running tasks, or enters workers that are still running tasks into a warm shutdown period.
+- The healer then kills catatonic workers that are not running tasks or shifts workers that are still running tasks into a warm shutdown period.
 - After the catatonic worker is shut down, a new healthy, worker comes online and resumes tasks.
 
 This feature is automatically enabled for the Astro Hosted infrastructure and does not require any action.
