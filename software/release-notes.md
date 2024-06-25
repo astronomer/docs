@@ -28,7 +28,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 ## 0.35.0
 
-Release date: May 14, 2024
+Release date: June 28, 2024
 
 ### Use deploy rollbacks to run previous versions of your code
 
@@ -62,7 +62,7 @@ Astronomer [Teams](import-idp-groups.md) can now be created without associating 
 - The Astro CLI now shows an error if you attempt to deploy code to a Software installation where `astronomer.houston.config.deployments.registry.protectedCustomRegistry.updateRegistry.host` is not set.
 - Fixed an issue where Jetstream resources were being created even when `global.nats.jetStream.enabled = false` in the Software platform configuration. <!-- https://github.com/astronomer/issues/issues/6245-->
 - Fixed an issue where the default `astroUnitsEnabled` value in `values.yaml` was not respected when creating Deployments via the Houston API, resulting in Deployment creation failing when the resource strategy is not explicitly specified.
-- Fixed an issue where Houston could produce errors if the username for a Postgres database included an `@` symbol.
+- Fixed an issue where Houston could produce errors if the username for a Postgres database included special characters.
 - Fixed an issue where pagination on specific Software UI screens did not behave as expected. <!-- https://github.com/astronomer/issues/issues/6198-->
 - Fixed an issue where the `lastUsedAt` data for a service account was not updated when the service account deployed an Airflow image.
 - Fixed a bug causing disruption to retrieval of logs for users with External Elasticsearch. <!--https://github.com/astronomer/issues/issues/6339-->
@@ -74,7 +74,7 @@ Astronomer [Teams](import-idp-groups.md) can now be created without associating 
 - Fixed a bug where containerd images failed to load for some cloud providers. <!--https://github.com/astronomer/issues/issues/6341-->
 - Fixed an issue where a patch error occured during an Astro Runtime upgrade when Pod Disruption Budget (PDB) was enabled. <!--https://github.com/astronomer/issues/issues/6295-->
 - Resolved an issue where custom based resource Deployments were converted to AU-based after a platform upgrade. <!--https://github.com/astronomer/issues/issues/6381-->
-- Fixed a bug where the the STS pod failed in OpenShift due to an fsGroup error. <!--https://github.com/astronomer/issues/issues/6135-->
+- Fixed a bug where the the dag-deploy server pod failed in OpenShift due to an fsGroup error. <!--https://github.com/astronomer/issues/issues/6135-->
 - Fixed a bug that sometimes prevented `dagDeployment` server and client resources from being configurable. <!--https://github.com/astronomer/issues/issues/6348-->
 - Resolved the following vulnerabilities:
 
