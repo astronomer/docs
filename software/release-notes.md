@@ -48,7 +48,7 @@ kubectl create secret generic astronomer-bootstrap \
 
 ### Create Teams without using an IdP
 
-Astronomer [Teams](import-idp-groups.md) can now be created without associating the team to an existing identity provider (IdP) group. Use local Teams to efficiently manage permissions for users with only a local username and password. See [LINK] for configuration steps.
+Astronomer [Teams](import-idp-groups.md) can now be created without associating the team to an existing identity provider (IdP) group. Use local Teams to efficiently manage permissions for groups that might not exist in your identity provider. See [LINK] for configuration steps.
 
 ### Additional improvements
 
