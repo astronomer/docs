@@ -96,6 +96,12 @@ This strategy is required when [configuring Deployments programmatically](https:
 
 ### Option 3: one repository with multiple permanent branches to multiple Deployments with CI/CD
 
+:::tip
+
+This option is recommended for most teams.
+
+:::
+
 When your DAGs are critical to your business, the ability to test your DAGs is critical, as well. Setting up automated deploys from multiple permanent branches of a single repository allows you to implement a robust testing regime for the code you intend to deploy to production. Astronomer recommends this approach when:
 - You have business-critical DAGs.
 - You can set up and maintain a somewhat complex CI/CD pipeline.
