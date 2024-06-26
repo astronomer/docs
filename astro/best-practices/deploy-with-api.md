@@ -477,7 +477,7 @@ See [Deploy code to Astro](deploy-code.md) for more information about the differ
 
 In addition to manually triggering project, DAG, and image deploys, you can create scripts that trigger specific code deploys depending on whether there have been changes to DAGs or files used to build the project image.
 
-The following code example shows the recommended steps for you to use to create a bash script that triggers different code deploys depending on the files changed in your project. This example demonstrates how to combine all three types of deploys and the conditional logic for when to deploy each.
+In this section, you can read a description of the process that the following code example shows the recommended way to combine the previous scripts to  trigger different code deploys depending on the files changed in your project. This example demonstrates how to combine all three types of deploys and the conditional logic for when to deploy each.
 
 :::info
 
@@ -485,7 +485,9 @@ This recommended process requires that you enable [DAG-only deploys](deploy-dags
 
 :::
 
-### Dynamic deploys workflow
+### Dynamic deploys description
+
+In the following code example, the script completes the following processes:
 
 1. Determine whether DAG files have been changed. If only DAGs have changed, then the script initiates a DAG-only deploy.
 
@@ -495,18 +497,22 @@ This recommended process requires that you enable [DAG-only deploys](deploy-dags
 
 4. The script cleans up any tar files created during the build process.
 
+To run the script, set the different environment variables to the values for your environment.
+
 <details>
 <summary><strong>Trigger deploys when files change code example</strong></summary>
 
 ```bash
 #!/bin/bash
 
+# Prerequisites
+
 ORGANIZATION_ID=<set organization id>
 DEPLOYMENT_ID=<set deployment id>
 ASTRO_API_TOKEN=<set api token>
 ASTRO_PROJECT_PATH=<set path to your airflow project>
 
-# Determine if only DAG files have changes
+# Step 1: Determine if only DAG files have changes
 files=$(git diff --name-only $(git rev-parse HEAD~1) -- .)
 dags_only=1
 for file in $files;do
@@ -517,7 +523,7 @@ if [[ $file != "$ASTRO_PROJECT_PATH/dags"* ]];then
 fi
 done
 
-# Initializing Deploy
+# Step 2: Initializing Deploy
 echo -e "Initiating Deploy Process for deployment $DEPLOYMENT_ID\n"
 CREATE_DEPLOY=$(curl --location --request POST "https://api.astronomer.io/platform/v1beta1/organizations/$ORGANIZATION_ID/deployments/$DEPLOYMENT_ID/deploys" \
 --header "X-Astro-Client-Identifier: script" \
@@ -529,7 +535,7 @@ CREATE_DEPLOY=$(curl --location --request POST "https://api.astronomer.io/platfo
 
 DEPLOY_ID=$(echo $CREATE_DEPLOY | jq -r '.id')
 
-# If only DAGs changed deploy only the DAGs in your 'dags' folder to your Deployment
+# Step 3: If only DAGs changed deploy only the DAGs in your 'dags' folder to your Deployment
 if [ $dags_only == 1 ]
 then
 	# Upload dags tar file
@@ -566,11 +572,11 @@ then
 	        fi
 	fi
 
-	# Cleanup
+	# Step 4: Cleanup
 	echo -e "\nCleaning up the created tar file from $ASTRO_PROJECT_PATH/dags.tar"
 	rm -rf "$ASTRO_PROJECT_PATH/dags.tar"
 fi
-# If any other files changed build your Astro project into a Docker image, push the image to your Deployment, and then push and DAG changes
+# Step 3: If any other files changed build your Astro project into a Docker image, push the image to your Deployment, and then push and DAG changes
 if [ $dags_only == 0 ]
 then
    # Build and Push Docker Image
@@ -617,7 +623,7 @@ then
 	        fi
 	fi
 
-	# Cleanup
+	# Step 4: Cleanup
 	echo -e "\nCleaning up the created tar file from $ASTRO_PROJECT_PATH/dags.tar"
 	rm -rf "$ASTRO_PROJECT_PATH/dags.tar"
 fi
