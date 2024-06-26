@@ -47,6 +47,26 @@ When the maintenance window for a given version of Runtime ends, the following i
 - Only System Admins can create new Deployments on Astronomer Software with that version of Runtime. Versions that are no longer maintained will not render as an option in the Deployment creation process from the Software UI.
 - The latest version of the Astro CLI will show a warning if a user pushes an Astro Runtime image to Astronomer that corresponds to that version.
 
+### Restricted runtime versions
+
+There are some restricted versions of the Astro Runtime that have known bugs or performance issues, and can't be used to create new Deployments. These are called `yanked` or **Restricted** Runtime versions.
+
+:::danger Airgapped Environments Only
+
+If you work in an Airgapped environment, the JSON list of available Astro Runtime versions must be [manually updated](software/install-airgapped.md#step-5-fetch-airflow-updates) by your administrator. Depending on the cadence that your organization updates the list of available Runtime versions, you might be able to roll back to or create a Deployment that uses a restricted Astro Runtime version. Check with your adminstrator if you use any of the following restricted versions and your organization works with an airgapped configuration.
+
+:::
+
+#### Yanked versions
+
+| Runtime version | Yanked reason                                           |
+| --------------- | ------------------------------------------------------- |
+| 8.0.0           | Does not apply cluster policies defined through pluggy. |
+| 9.0.0 - 9.6.0   | Has significant scheduling performance issues.          |
+| 11.0.0 - 11.1.0 | Has db migration issues when you have running triggers. |
+
+You can find a comprehensive list of available, deprecated, and restricted versions of the Astro Runtime versions at [`updates.astronomer.io`](https://updates.astronomer.io/astronomer-runtime). Restricted versions of the Astro Runtime have the status `"yanked":true` and include an explanation of why the version is unavailable.
+
 ### End of maintenance date
 
 Maintenance is discontinued the last day of the month for a given version. For example, if the maintenance window for a version of Astro Runtime is January - June of a given year, that version will be maintained by Astronomer until the last day of June.
