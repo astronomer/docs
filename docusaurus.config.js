@@ -140,12 +140,12 @@ module.exports = {
       items: [
         {
           label: '0.35 (Latest)',
-          to: '/software/',
+          to: '/docs/software/',
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
         },
         {
           label: '0.34',
-          to: '/software/0.34/',
+          to: '/docs/software/0.34/',
           activeBaseRegex: `(software\/0.34)+`,
         },
         {
