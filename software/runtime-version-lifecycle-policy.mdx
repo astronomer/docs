@@ -51,6 +51,20 @@ When the maintenance window for a given version of Runtime ends, the following i
 
 Maintenance is discontinued the last day of the month for a given version. For example, if the maintenance window for a version of Astro Runtime is January - June of a given year, that version will be maintained by Astronomer until the last day of June.
 
+### Restricted runtime versions
+
+There are some restricted versions of the Astro runtime that have known performance issues and bugs.
+
+#### Yanked versions
+
+| Runtime version | Yanked reason                                           |
+| --------------- | ------------------------------------------------------- |
+| 8.0.0           | Does not apply cluster policies defined through pluggy. |
+| 9.0.0 - 9.6.0   | Has significant scheduling performance issues.          |
+| 11.0.0 - 11.1.0 | Has db migration issues when you have running triggers. |
+
+You can find a comprehensive list of available, deprecated, and restricted versions of the Astro Runtime versions at [`updates.astronomer.io`](https://updates.astronomer.io/astronomer-runtime). Restricted versions of the Astro Runtime have the status `"yanked":true` and include an explanation of why the version is unavailable.
+
 ## Security
 
 Astronomer continuously checks for available security fixes for software used in Astro Runtime. This process includes scanning language dependencies, container images, and open source threat intelligence sources. When a security fix is available, Astronomer evaluates potential risks for organizations using Astro Runtime and determines deployment priority. Low priority fixes are deployed following the regular maintenance policy as described in [Astro Runtime maintenance policy](runtime-version-lifecycle-policy.mdx#astro-runtime-maintenance-policy).
