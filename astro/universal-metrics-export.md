@@ -49,7 +49,7 @@ You can export comprehensive metrics about your Astro Deployments from Astro dir
 
 ## Enable metrics export
 
-You can enable metrics export at either the Deployment and Workspace level for Astro Hosted.
+You can enable metrics export at both the Workspace and Deployment level for Astro Hosted, but only in individual Deployments for Astro Hybrid.
 
 ### Workspace metrics
 
@@ -70,11 +70,19 @@ You can enable metrics export at either the Deployment and Workspace level for A
 4. Enter the required information for your export.
 5. Click **Create metrics export**.
 
+If you successfully connected your metrics export to your observability service endpoint, after five minutes, your Astro metrics begin to populate in your observability service.
+
 ## Share metrics exports across Deployments
 
-After you configure metrics export at the Workspace level, you can link it to multiple Deployments. Linking an export target is useful for standardizing observability pipelines and streamlining monitoring.
+<HostedBadge/>
 
-For the most flexibility, you can set a default server to export development environment metrics to, and then later override the configuration per-Deployment based on your needs.
+You can configure Astro to link Workspace-level metrics exports to all Deployments in the Workspace by default.
+
+This is useful, for example, when you need to configure a metrics export for development environments that all Deployments in a Workspace should start with. Then, when you create new Deployments, they automatically have a default metrics export configuration to your development resources.
+
+When you're ready to move your Deployments' metrics exports to production configurations, you can either replace the metrics export or [override the configuration](#override-configuration) values with your production resource information.
+
+If you change the setting from **Restricted** to **Linked to all Deployments**, Astro respects any metrics exports fields that you might have configured for existing linked Deployments.
 
 1. Click **Environment** in the main menu and open the **Metrics Export** page.
 2. Click the name of the export target that you want to add per-Deployment field overrides to.
@@ -83,3 +91,18 @@ For the most flexibility, you can set a default server to export development env
    - **Linked to all Deployments**: Link to all current and future Deployments in this Workspace.
 4. (Optional) Change the default field values.
 5. Click **Update metrics export** to save.
+
+## Override configuration fields
+
+<HostedBadge/>
+
+If you create a metrics export at the Workspace level and link it to a Deployment, you can later edit the endpoint within the Deployment to specify field overrides. When you override a field, you specify values that you want to use for a one Deployment, but not for others. This way, you can configure a metrics export for a single time, but still have the flexibility to customize it at the Deployment level.
+
+For example, you might have created a metrics connection to a dev or internal observability endpoint, and then later you can add field overrides to specify production details you want each Deployment to use.
+
+1. Click **Environment** in the main menu, and click the **Metrics Export** tab.
+2. Click the metrics export that you want to add per-Deployment field overrides to.
+3. (Optional) Click **Deployment Sharing** and choose if you want to **Restrict** or **Link to all Deployments**. You can also change the default field values. Click **Update metrics export** to save.
+4. Click **Edit** to open the metrics export configurations for a specific linked Deployment.
+5. Add the override values to the fields you want to edit. You might need to open **More options** to find the full list of available fields.
+6. Click **Update metrics export**.
