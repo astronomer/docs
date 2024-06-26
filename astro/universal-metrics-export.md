@@ -1,7 +1,7 @@
 ---
-sidebar_label: 'Universal Metrics Export'
-title: 'Export metrics from Astro'
-id: metrics-export
+sidebar_label: "Export metrics"
+title: "Export metrics from Astro"
+id: export-metrics
 ---
 
 import Tabs from '@theme/Tabs';
@@ -14,20 +14,38 @@ import HostedBadge from '@site/src/components/HostedBadge';
 :::publicpreview
 :::
 
-You can export comprehensive metrics about your Astro Deployments from Astro directly to any third-party monitoring and alerting systems. The universal metrics exporter uses the[OpenTelemetry (OTel)](https://opentelemetry.io/docs/) protocol to ensure that measurements about your Astro Deployments can be exported and used across any OTel compatible tool.
-
-This functionality allows you to move operational data about your Astro Deployments to your prefferred monitoring tools, like Prometheus.
+You can export comprehensive metrics about your Astro Deployments from Astro directly to any third-party monitoring and alerting systems. The universal metrics exporter uses the [Prometheus data model](https://prometheus.io/docs/concepts/data_model/) format using the remote-write capability to ensure that measurements about your Astro Deployments to your preferred monitoring tools.
 
 ## Metric types
 
-- Application level metrics: Metrics defined by Airflow, or custom metrics you write, about the health, success, and performance of data pipelines orchestrated and executed by Airflow.
+- Airflow application level metrics: Metrics defined by Airflow, or custom metrics you write, about the health, success, and performance of data pipelines orchestrated and executed by Airflow. You can see the specific list of [application metrics](https://github.com/astronomer/ap-vendor/blob/main/statsd-exporter/include/mappings-gen2.yml) and read their corresponding descriptions in the [Airflow metrics descriptions](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/metrics.html#metric-descriptions).
 
 - Infrastructure level metrics: Metrics about running pods for the different Airflow components. These indicate of the use, health, and performance of the pods based on your workload and pipelines.
 
+  | Name                                        | Description           |
+  | ------------------------------------------- | --------------------- |
+  | `container_cpu_usage_seconds_total`         | CPU use               |
+  | `container_memory_working_set_bytes`        | Memory use            |
+  | `kubelet_stats_ephemeral_storage_pod_usage` | Ephemeral storage use |
+  | `kube_pod_status_*`                         | Kubernetes pod status |
+  | `kube_pod_labels`                           | Kubernetes pod label  |
+
+- Metadata labels: Both application and infrastructure metrics have the following metadata labels associated with them.
+  - `cloud_provider`
+  - `cloud_region`
+  - `cluster_organization_id`
+  - `container`
+  - `namespace`
+  - `pod`
+  - `deploymentId`
+  - `organizationId`
+  - `workspaceId`
+
 ## Prerequisites
 
-- A data observability Prometheus server
-- Bearer token or license key of your target Prometheus server.
+- Bearer token or license key of your target data observability server
+- A Prometheus data endpoint
+- Network connectivity between your Astro resources and Prometheus endpoint
 
 ## Enable metrics export
 
@@ -52,8 +70,6 @@ You can enable metrics export at either the Deployment and Workspace level for A
 4. Enter the required information for your export.
 5. Click **Create metrics export**.
 
-<!-- HOW TO CONFIRM SUCCESSFUL EXPORT?-->
-
 ## Share metrics exports across Deployments
 
 After you configure metrics export at the Workspace level, you can link it to multiple Deployments. Linking an export target is useful for standardizing observability pipelines and streamlining monitoring.
@@ -63,7 +79,7 @@ For the most flexibility, you can set a default server to export development env
 1. Click **Environment** in the main menu and open the **Metrics Export** page.
 2. Click the name of the export target that you want to add per-Deployment field overrides to.
 3. Click **Export sharing** and toggle the setting to choose either:
-    - **Restricted**: Only share individually to Deployments.
-    - **Linked to all Deployments**: Link to all current and future Deployments in this Workspace.
+   - **Restricted**: Only share individually to Deployments.
+   - **Linked to all Deployments**: Link to all current and future Deployments in this Workspace.
 4. (Optional) Change the default field values.
 5. Click **Update metrics export** to save.
