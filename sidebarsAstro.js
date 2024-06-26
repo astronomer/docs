@@ -335,6 +335,7 @@ module.exports = {
         'best-practices/connections-branch-deploys',
         'best-practices/cross-deployment-dependencies',
         'best-practices/dag-writing-on-astro',
+        'best-practices/deploy-with-api',
         'best-practices/manage-dev-deployments',
       ],
     },
