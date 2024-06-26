@@ -68,7 +68,9 @@ The option that you choose is determined by the security requirements of your co
     groupId="create-a-private-connection-between-astro-and-azures"
     values={[
         {label: 'VNet peering', value: 'VNet peering'},
+        {label: 'VHub peering', value: 'VHub peering'},
         {label: 'Azure Private Link', value: 'Azure Private Link'},
+        {label: 'VPN', value: 'VPN'},
     ]}>
 
 <TabItem value="VNet peering">
@@ -81,44 +83,145 @@ This connection option is only available for dedicated Astro Hosted clusters and
 
 To set up a private connection between an Astro Virtual Network (VNet) and an Azure VNet, you can create a VNet peering connection. VNet peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
 
-1. Retrieve the following information from the target Azure cluster that you want to connect with:
+1. Retrieve the following information from the target Azure environment that you want to connect with:
 
-    - Azure Subscription ID.
+    - Azure Tenant ID and Subscription ID.
     - VNet ID.
     - Resource Group ID.
 
-2. Run the following Azure CLI commands to give Astronomer support temporary permissions to establish a VNet peering connection:
+2. Prepare the `astro-vnet-peering-creator-role.json` JSON file with the following permissions. Replace `{customer-subscription-id}` with your value:
 
     ```sh
-    # add Astronomer Service Principal
-    az ad sp create --id a67e6057-7138-4f78-bbaf-fd9db7b8aab0
-    
-    # Grant sets of permissions to the Astronomer Service Principal
-    az role assignment create \
-      --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 \
-      --role "Network Contributor" \
-      --scope <vnet-id>
-    
-    az role assignment create \
-      --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 \
-      --role "Network Contributor" \
-      --scope <resource-group-id>
-    
-    az role assignment create \
-      --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 \
-      --role "Network Contributor" \
-      --scope <subscription-id>
+    {
+        "Name": "Astro VNET Peering Contributor",
+        "IsCustom": true,
+        "Description": "Can create VNET peering with Astro.",
+        "Actions": [
+            "Microsoft.Resources/subscriptions/resourceGroups/read",
+            "Microsoft.Resources/subscriptions/read",
+            "Microsoft.Network/virtualNetworks/read",
+            "Microsoft.Network/virtualNetworks/write",
+            "Microsoft.Network/virtualNetworks/peer/action",
+            "Microsoft.Network/virtualNetworks/virtualNetworkPeerings/write",
+            "Microsoft.Network/virtualNetworks/virtualNetworkPeerings/read"
+        ],
+        "NotActions": [
+      
+        ],
+        "AssignableScopes": [
+          "/subscriptions/{customer-subscription-id}"
+        ]
+    }
     ```
 
-3. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) to tell them that you have granted permissions to the Astronomer Service Principal. In addition, provide the following details in your request:
+3. Run the following Azure CLI commands to give Astronomer support temporary permissions to establish a VNet peering connection:
+
+    ```sh
+    # Add Astronomer Service Principal
+    az ad sp create --id a67e6057-7138-4f78-bbaf-fd9db7b8aab0
+    
+    # Create a Custom role with permissions prepared in previous step
+    az role definition create --role-definition ~/astro-vnet-peering-creator-role.json
+
+    # Assign Custom role to the Astronomer Service Principal ({customer-subscription-id} has to be replaced with your value)
+    az role assignment create \
+    --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 \
+    --role "Astro VNET Peering Contributor" \
+    --scope "/subscriptions/{customer-subscription-id}"
+
+    # Verify an assignment
+    az role assignment list --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 --all -o table
+    ```
+
+4. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) to tell them that you granted permissions to the Astronomer Service Principal. In addition, provide the following details in your request:
 
     - Astro Cluster ID 
     - Azure Tenant ID and Subscription ID of the target VNet
-    - VNet ID of the target VNet
+    - Resource group ID
+    - VNet ID for the peering
 
 After receiving your request, Astronomer support creates a VNet peering connection between the two VNets. No other actions are required from you. Astronomer support will notify you when the connection is ready to use.
 
-When the network connection is confirmed, you can delete the temporary roles you created using the [Azure CLI](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove#azure-cli).
+When the network connection is confirmed, you can delete the temporary roles you created using the following command. Replace `{customer-subscription-id}` with your value:
+
+    ```sh
+    az role assignment delete --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 --role "Astro VNET Peering Contributor" --scope "/subscriptions/{customer-subscription-id}"
+    ```
+
+</TabItem>
+
+<TabItem value="VHub peering">
+
+:::info
+This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
+:::
+
+To set up a private connection between an Astro Virtual Network (VNet) and an Azure VHub, you can create a VHub peering connection. VHub peering ensures private and secure connectivity, reduces network transit costs, and attaches the Astro environment to a centralized managed network.
+
+1. Retrieve the following information from the target Azure environment that you want to connect with:
+
+    - Azure Tenant ID and Subscription ID.
+    - VHub name.
+    - Resource Group ID.
+    - Optional. Firewall IP address if you use any on the VHub side.
+
+2. Prepare a `astro-vhub-peering-creator-role.json` JSON file with the following permissions. Replace `{customer-subscription-id}` with your value:
+
+    ```sh
+    {
+        "Name": "Astro VHub Peering Contributor",
+        "IsCustom": true,
+        "Description": "Can create VNET peering with Astro.",
+        "Actions": [
+            "Microsoft.Resources/subscriptions/resourceGroups/read",
+            "Microsoft.Resources/subscriptions/read",
+            "Microsoft.Network/virtualHubs/hubVirtualNetworkConnections/write",
+            "Microsoft.Network/virtualHubs/read",
+            "Microsoft.Network/virtualWans/virtualHubs/read"
+        ],
+        "NotActions": [
+      
+        ],
+        "AssignableScopes": [
+          "/subscriptions/{customer-subscription-id}"
+        ]
+    }
+    ```
+
+3. Run the following Azure CLI commands to give Astronomer Support temporary permissions to establish a VHub peering connection:
+
+    ```sh
+    # Add Astronomer Service Principal
+    az ad sp create --id a67e6057-7138-4f78-bbaf-fd9db7b8aab0
+    
+    # Create a Custom role with permissions prepared in previous step
+    az role definition create --role-definition ~/astro-vhub-peering-creator-role.json
+
+    # Assign Custom role to the Astronomer Service Principal ({customer-subscription-id} has to be replaced with your value)
+    az role assignment create \
+    --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 \
+    --role "Astro VHub Peering Contributor" \
+    --scope "/subscriptions/{customer-subscription-id}"
+
+    # Verify an assignment
+    az role assignment list --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 --all -o table
+    ```
+
+4. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) to tell them that you granted them permissions to the Astronomer Service Principal. In addition, provide the following details in your request:
+
+    - Astro Cluster ID 
+    - Azure Tenant ID and Subscription ID with a VHub
+    - Resource group ID
+    - VHub name and preferable name for the peering
+    - (Optional) Firewall IP address if you use any on the VHub side.
+
+After receiving your request, Astronomer support creates a VHub peering connection to Astro VNet. No other actions are required from you. Astronomer support will notify you when the connection is ready to use.
+
+When the network connection is confirmed, you can delete the temporary roles you created using the following command. Replace `{customer-subscription-id}` with your value:
+
+    ```sh
+    az role assignment delete --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 --role "Astro VHub Peering Contributor" --scope "/subscriptions/{customer-subscription-id}"
+    ```
 
 </TabItem>
 
@@ -152,6 +255,29 @@ For example, to connect with Azure Container Registry:
 After Astronomer configures the connection, you can create Airflow connections to your resource. In some circumstances, you might need to modify your DAGs to address the service by its private link name (For example, `StorageAccountA.privatelink.blob.core.windows.net` instead of `StorageAccountA.blob.core.windows.net`).
 
 Note that you'll incur additional Azure infrastructure costs for every Azure private endpoint that you use. See [Azure Private Link pricing](https://azure.microsoft.com/en-us/pricing/details/private-link/).
+
+</TabItem>
+
+<TabItem value="VPN">
+
+:::info
+This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
+:::
+
+Use this connectivity type to access on-premises resources or resources in other cloud providers.
+
+#### Perequisites
+
+Retrieve the following information about your VPN device or application:
+
+    - Public IP address
+    - Subnet CIDR range, multiple if needed, for your side of the connection
+    - Preferences regarding shared key and BGP usage
+    - IKE settings for the tunnel
+
+#### Contact Astronomer support for VPN configuration on Astro side
+
+Submit all collected details to [Astronomer support](https://cloud.astronomer.io/open-support-request). The Astronomer CRE team will proceed with the required steps. The CRE team will contact you using your support ticket to ask follow-up questions, request clarification, or let you know about connectivity tests.
 
 </TabItem>
 
