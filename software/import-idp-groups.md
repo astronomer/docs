@@ -82,7 +82,35 @@ By default, Astronomer assumes that the name of your group claim is `groups`. If
 
 After configuring your IdP group, at least one user belonging to the group has to log in to Software before the group appears as a Team in the Software UI. To quickly import many groups at once, add a user to all groups and then log in to Astronomer Software UI with the user's credentials.
 
-After configuring and importing user groups, Workspace Admins and Deployment Admins can configure those groups as Teams using the Astronomer Software UI.
+After configuring and importing user groups, Workspace Admins and Deployment Admins can configure those groups as Teams using the Software UI. You can add Teams to Workspace and Deployments in the same way that you add individual users.
+
+## Create local Teams
+
+If you want to create a Team of Astronomer users, and the team doesn't map to a group in the IdP, you can enable local team creation. 
+
+To enable the feature, add the following configuration to your `values.yaml` file and [apply the change to your installation](apply-platform-config.md).
+
+```yaml
+astronomer: 
+  houston:
+    config:
+      # Auth configuration.
+      auth:
+      # Local database (user/pass) configuration.
+        local:
+          enabled: true
+          teams:
+            enabled: true
+```
+
+Then, to create a local Team:
+
+1. In the Software UI, open the **System Admin** menu, then click **Teams**.
+2. Click **Create Team**.
+3. Give the team a name and a description, then select all the users that you want in the Team.
+4. (Optional) Grant the Team a **System Level Role** if the Team needs system-level permissions.
+
+You can now add the local Team to a Workspace or Deployment as you would with an IdP Team or an individual user. 
 
 ## Disable individual user management 
 
