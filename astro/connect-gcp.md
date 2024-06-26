@@ -123,9 +123,7 @@ If you don't see your service listed, open a support case with [Astronomer suppo
 <TabItem value="VPN">
 
 :::info
-
-This connection option is not available for standard Astro Hosted clusters. It is available for dedicated clusters and Astro Hybrid.
-
+This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
 :::
 
 Use this connectivity type to access on-premises resources or resources in other cloud providers.

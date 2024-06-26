@@ -153,9 +153,7 @@ When the network connection is confirmed, you can delete the temporary roles you
 <TabItem value="VHub peering">
 
 :::info
-
-This connection option is not available for standard Astro Hosted clusters. It is available for dedicated clusters and Astro Hybrid.
-
+This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
 :::
 
 To set up a private connection between an Astro Virtual Network (VNet) and an Azure VHub, you can create a VHub peering connection. VHub peering ensures private and secure connectivity, reduces network transit costs, and attaches the Astro environment to a centralized managed network.
@@ -263,9 +261,7 @@ Note that you'll incur additional Azure infrastructure costs for every Azure pri
 <TabItem value="VPN">
 
 :::info
-
-This connection option is not available for standard Astro Hosted clusters. It is available for dedicated clusters and Astro Hybrid.
-
+This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
 :::
 
 Use this connectivity type to access on-premises resources or resources in other cloud providers.
