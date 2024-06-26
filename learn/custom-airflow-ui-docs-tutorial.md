@@ -28,7 +28,7 @@ This tutorial takes approximately 15 minutes to complete.
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli).
 
 ## Step 1: Create an Astro project
 
@@ -88,7 +88,7 @@ def docs_example_dag():
 
     @task
     def tell_me_what_to_do():
-        response = requests.get("https://www.boredapi.com/api/activity")
+        response = requests.get("https://bored-api.appbrewery.com/random")
         return response.json()["activity"]
 
     tell_me_what_to_do()
@@ -107,7 +107,7 @@ from pendulum import datetime
 import requests
 
 def query_api():
-    response = requests.get("https://www.boredapi.com/api/activity")
+    response = requests.get("https://bored-api.appbrewery.com/random")
     return response.json()["activity"]
 
 with DAG(
@@ -127,7 +127,7 @@ with DAG(
 
 </Tabs>
 
-This DAG has one task called `tell_me_what_to_do`, which queries an [API](https://www.boredapi.com/api/activity) that provides a random activity for the day and prints it to the logs. 
+This DAG has one task called `tell_me_what_to_do`, which queries an [API](https://bored-api.appbrewery.com/random) that provides a random activity for the day and prints it to the logs. 
 
 ## Step 3: Add docs to your DAG
 
@@ -139,7 +139,7 @@ You can add Markdown-based documentation to your DAGs that will render in the **
     doc_md_DAG = """
     ### The Activity DAG
 
-    This DAG will help me decide what to do today. It uses the [BoredAPI](https://www.boredapi.com/) to do so.
+    This DAG will help me decide what to do today. It uses the [BoredAPI](https://bored-api.appbrewery.com/random) to do so.
 
     Before I get to do the activity I will have to:
 
@@ -292,7 +292,7 @@ To add documentation to your task, follow these steps:
     doc_rst=doc_rst_task
 )
 def tell_me_what_to_do():
-    response = requests.get("https://www.boredapi.com/api/activity")
+    response = requests.get("https://bored-api.appbrewery.com/random")
     return response.json()["activity"]
 
 tell_me_what_to_do()

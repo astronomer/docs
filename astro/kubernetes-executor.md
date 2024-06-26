@@ -5,7 +5,7 @@ id: 'kubernetes-executor'
 description: Learn how to configure the Pods that the Kubernetes executor runs your tasks in.
 ---
 
-The Kubernetes executor runs each Airflow task in a dedicated Kubernetes [Pod](https://kubernetes.io/docs/concepts/workloads/pods/). On Astro, you can customize these Pods on a per-task basis using a `pod_override` configuration. If a task doesn't contain a `pod_override` configuration, it runs using the default Pod as configured in your Deployment resource settings. 
+The Kubernetes executor runs each Airflow task in a dedicated Kubernetes [Pod](https://kubernetes.io/docs/concepts/workloads/pods/). On Astro, you can customize these Pods on a per-task basis using a `pod_override` configuration. If a task doesn't contain a `pod_override` configuration, it runs using the default Pod as configured in your Deployment resource settings.
 
 :::info
 
@@ -42,13 +42,74 @@ For each task running with the Kubernetes executor, you can customize its indivi
 2. Add a `pod_override` configuration to the DAG file containing the task. See the [`kubernetes-client`](https://github.com/kubernetes-client/python/blob/master/kubernetes/docs/V1Container.md) GitHub for a list of all possible settings you can include in the configuration.
 3. Specify the `pod_override` in the task's parameters.
 
-See [Manage task CPU and memory](#example-set-CPU-or-memory-limits-and-requests) for an example `pod_override` configuration.
+See the following example of a `pod_override` configuration.
 
 ### Example: Set CPU or memory limits and requests
 
 You can request a specific amount of resources for a Kubernetes worker Pod so that a task always has enough resources to run successfully. When requesting resources, make sure that your requests don't exceed the resource limits in your [default Pod](deployment-resources.md#configure-kubernetes-pod-resources).
 
 The following example shows how you can use a `pod_override` configuration in your DAG code to request custom resources for a task:
+
+```python
+import pendulum
+import time
+
+from airflow.models.dag import DAG
+from airflow.decorators import task
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
+from airflow.example_dags.libs.helper import print_stuff
+from kubernetes.client import models as k8s
+
+
+k8s_exec_config_resource_requirements = {
+    "pod_override": k8s.V1Pod(
+        spec=k8s.V1PodSpec(
+            containers=[
+                k8s.V1Container(
+                    name="base",
+                    resources=k8s.V1ResourceRequirements(
+                        requests={"cpu": 0.5, "memory": "1024Mi", "ephemeral-storage": "1Gi"},
+                        limits={"cpu": 0.5, "memory": "1024Mi", "ephemeral-storage": "1Gi"}
+                    )
+                )
+            ]
+        )
+    )
+}
+
+with DAG(
+    dag_id="example_kubernetes_executor_pod_override_sources",
+    schedule=None,
+    start_date=pendulum.datetime(2023, 1, 1, tz="UTC"),
+    catchup=False
+):
+    BashOperator(
+      task_id="bash_resource_requirements_override_example",
+      bash_command="echo hi",
+      executor_config=k8s_exec_config_resource_requirements
+    )
+
+    @task(executor_config=k8s_exec_config_resource_requirements)
+    def resource_requirements_override_example():
+        print_stuff()
+        time.sleep(60)
+
+    resource_requirements_override_example()
+```
+
+When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory, as long as that infrastructure is available in your Deployment. After the task finishes, the Pod terminates gracefully.
+
+:::warning Astro Hosted
+
+For Astro Hosted environments, if you set resource requests to be less than the maximum limit, Astro automatically requests the maximum limit that you set. This means that you might consume more resources than you expected if you set the limit much higher than the resource request you need. Check your [Billing and usage](manage-billing.md) to view your resource use and associated charges.
+
+:::
+
+<details>
+<summary><strong>Alternative Astro Hybrid setup</strong></summary>
+
+Since ephemeral storage is only available on Astro Hosted, the following example can be used for Astro Hybrid.
 
 ```python
 import pendulum
@@ -98,13 +159,7 @@ with DAG(
     resource_requirements_override_example()
 ```
 
-When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory, as long as that infrastructure is available in your Deployment. After the task finishes, the Pod terminates gracefully.
-
-:::warning Astro Hosted
-
-For Astro Hosted environments, if you set resource requests to be less than the maximum limit, Astro automatically requests the maximum limit that you set. This means that you might consume more resources than you expected if you set the limit much higher than the resource request you need. Check your [Billing and usage](manage-billing.md) to view your resource use and associated charges.
-
-:::
+</details>
 
 ## Use secret environment variables in worker Pods
 
@@ -216,4 +271,4 @@ A Deployment on Astro Hybrid that uses the Kubernetes executor runs worker Pods 
 - [Configure Kubernetes Pod resources](deployment-resources.md#configure-kubernetes-pod-resources)
 - [How to use cluster ConfigMaps, Secrets, and Volumes with Pods](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)
 - [Run the KubernetesPodOperator on Astro](kubernetespodoperator.md)
-- [Airflow Executors explained](https://docs.astronomer.io/learn/airflow-executors-explained)
+- [Airflow Executors explained](https://www.astronomer.io/docs/learn/airflow-executors-explained)

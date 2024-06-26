@@ -12,7 +12,7 @@ Incorporating a notification framework is critical to the health of your data pi
 - Email notifications
 - Custom callbacks and notifiers
 
-Use this guide to integrate with an SMTP service to have Astro send email notifications whenever a task run fails. To configure DAG alerts for Slack and PagerDuty, see [Astro alerts](alerts.md). For best practices and instructions on configuring other notifications in Airflow, including notifiers and custom callbacks, see [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow).
+Use this guide to integrate with an SMTP service to have Astro send email notifications whenever a task run fails. To configure DAG alerts for Slack and PagerDuty, see [Astro alerts](alerts.md). For best practices and instructions on configuring other notifications in Airflow, including notifiers and custom callbacks, see [Manage Airflow DAG notifications](https://www.astronomer.io/docs/learn/error-notifications-in-airflow).
 
 ## Configure Airflow email notifications
 
@@ -115,7 +115,7 @@ Use your existing Amazon SES instance to send Airflow notifications by email.
     - `AIRFLOW__SMTP__SMTP_MAIL_FROM`: Enter your from email.
     - `AIRFLOW__EMAIL__EMAIL_BACKEND`: Enter `airflow.utils.email.send_email_smtp`.
 
-    See [Set environment variables on Astro](https://docs.astronomer.io/astro/environment-variables).
+    See [Set environment variables on Astro](https://www.astronomer.io/docs/astro/environment-variables).
 
 9. To begin receiving Airflow notifications by email for task failures within a given DAG, configure the following values in the DAG's `default_args`:
 

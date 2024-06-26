@@ -19,7 +19,7 @@ To add a feed to a public channel, the Slack Primary Owner role might be require
 
 Run the following Slack slash commands to subscribe to different Astro release notes:
 
-- Astro product release notes: `/feed subscribe https://docs.astronomer.io/astro-release-notes.xml`
-- Astro Runtime release notes: `/feed subscribe https://docs.astronomer.io/astro-runtime-release-notes.xml`
-- Astro CLI release notes: `/feed subscribe https://docs.astronomer.io/astro-cli-release-notes.xml`
+- Astro product release notes: `/feed subscribe https://www.astronomer.io/docs/astro-release-notes.xml`
+- Astro Runtime release notes: `/feed subscribe https://www.astronomer.io/docs/astro-runtime-release-notes.xml`
+- Astro CLI release notes: `/feed subscribe https://www.astronomer.io/docs/astro-cli-release-notes.xml`
 

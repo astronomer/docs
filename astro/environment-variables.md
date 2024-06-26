@@ -18,7 +18,7 @@ Some examples of customizing core settings of Airflow or any of its pre-installe
 - Changing the import timeout of DAGBag using `AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT`.
 - Setting up an SMTP service to receive [Airflow alerts](airflow-email-notifications.md) by email.
 
-You can also use environment variables to store [Airflow connections](https://docs.astronomer.io/learn/connections#define-connections-with-environment-variables) and [variables](https://docs.astronomer.io/learn/airflow-variables#using-environment-variables).
+You can also use environment variables to store [Airflow connections](https://www.astronomer.io/docs/learn/connections#define-connections-with-environment-variables) and [variables](https://www.astronomer.io/docs/learn/airflow-variables#using-environment-variables).
 
 Some environment variables on Astro are set globally and cannot be overridden for individual Deployments, while others are used by Astro Runtime to enhance your Airflow experience. For more information on these, see [Global environment variables](platform-variables.md).
 
@@ -30,7 +30,7 @@ Environment variables can be used in many different contexts on Airflow. To choo
 
 On Astro, you can manage environment variables from two different locations:
 
-- Your Deployment's **Variables** tab in the Astro UI. This is the fastest and easiest way to set an environment variable. See [Using the Astro UI](manage-env-vars.md#using-the-astro-ui) for setup steps.
+- Your Deployment's **Environment Variables** tab in your Deployment's **Environment** settings in the Astro UI. This is the fastest and easiest way to set an environment variable. See [Using the Astro UI](manage-env-vars.md#using-the-astro-ui) for setup steps.
 - Your Astro project `Dockerfile`. Storing environment variables in your Dockerfile allows you to manage them as code in a version control tool like GitHub. However, environment variables stored in the Dockerfile do not appear in the Astro UI and might be harder to reference from DAG code.  Using the Dockerfile is recommended for more complex production use cases, such as implementing a secrets backend. See [Using your Dockerfile](manage-env-vars.md#using-your-dockerfile) for setup steps.
 
 At the local development level, you can use your Astro project `.env` file to set and test environment variables. When you're ready to push these environment variables to a Deployment, you can use the Astro CLI to export and store them in the Astro UI for your Deployment.

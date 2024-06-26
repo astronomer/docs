@@ -26,7 +26,7 @@ For more detailed instructions on using Databricks with the Astro Databricks pro
 
 Before you try this example, make sure you have:
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop).
 - Access to a Databricks workspace. See [Databricks documentation](https://docs.databricks.com/getting-started/index.html) for instructions. You can use any workspace that has access to the [Databricks Workflows](https://docs.databricks.com/workflows/index.html) feature. You need a user account with permissions to create notebooks and Databricks jobs. You can use any underlying cloud service, and a [14-day free trial](https://www.databricks.com/try-databricks) is available.
 - Access to an [object storage supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_file.html). This example uses an [AWS S3](https://aws.amazon.com/s3/) bucket.

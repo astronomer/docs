@@ -89,7 +89,7 @@ async function createRssFeed(feedTitle, feedDescription, feedPageURL, content) {
 
   const posts = getPosts(content);
 
-  const websiteURL = "https://docs.astronomer.io/";
+  const websiteURL = "https://www.astronomer.io/docs/";
   const feedSlug = feedTitle.replace(/ /g, "-",).toLowerCase();
   const feedRSSLink = websiteURL + feedSlug + '.xml';
 
@@ -136,12 +136,12 @@ async function createRssFeed(feedTitle, feedDescription, feedPageURL, content) {
   await fs.writeFile(`./static/${feedTitle.toLowerCase().replace(/ /g, '-').replace(',', '')}.xml`, feed, "utf8");
 };
 
-createRssFeed("Astro Release Notes", "Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.", "https://docs.astronomer.io/astro/release-notes", astro);
+createRssFeed("Astro Release Notes", "Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.", "https://www.astronomer.io/docs/astro/release-notes", astro);
 
-createRssFeed("Astro Runtime Release Notes", "Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro Runtime.", "https://docs.astronomer.io/astro/runtime-release-notes", astroRuntime);
+createRssFeed("Astro Runtime Release Notes", "Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro Runtime.", "https://www.astronomer.io/docs/astro/runtime-release-notes", astroRuntime);
 
-createRssFeed("Astro CLI Release Notes", "Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro CLI.", "https://docs.astronomer.io/astro/cli/release-notes", astroCLI);
+createRssFeed("Astro CLI Release Notes", "Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro CLI.", "https://www.astronomer.io/docs/astro/cli/release-notes", astroCLI);
 
-createRssFeed("Astro Software Release Notes", "Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro Software.", "https://docs.astronomer.io/software/release-notes", software);
+createRssFeed("Astro Software Release Notes", "Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro Software.", "https://www.astronomer.io/docs/software/release-notes", software);
 
-createRssFeed("Astro Software Runtime Release Notes", "Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro Software.", "https://docs.astronomer.io/software/runtime-release-notes", softwareRuntime);
+createRssFeed("Astro Software Runtime Release Notes", "Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro Software.", "https://www.astronomer.io/docs/software/runtime-release-notes", softwareRuntime);

@@ -59,7 +59,7 @@ The `tests` directory in your Astro project includes an example DAG test called 
 - DAGs have no cycles.
 - There are no general import or syntax errors.
 
-This test is just an example of the kinds of pytests one could run to test thier DAGs. You may want to alter this test or create new ones that better fit the context of your DAGs. `astro dev pytest` will run any pytest file that you add to the `tests` directory. For more information about this command, see the [CLI command reference](cli/astro-dev-pytest.md).
+This test is just an example of the kinds of pytests one could run to test their DAGs. You may want to alter this test or create new ones that better fit the context of your DAGs. `astro dev pytest` will run any pytest file that you add to the `tests` directory. For more information about this command, see the [CLI command reference](cli/astro-dev-pytest.md).
 
 ## Test before an Astro Runtime upgrade
 
@@ -82,7 +82,7 @@ If the tests are successful, the Astro CLI creates a folder in your Astro projec
 - `Dockerfile`: The updated file used in the upgrade test.
 - `dag-test-results.html`: The results of the DAG test.
 
-Use the test results to fix any major package changes or broken DAGs before you upgrade. Refer to the Airflow and Provider package release notes to assist in upgrading your DAGs. After you resolve all conflicts and DAG import errors, you can [upgrade Astro Runtime](upgrade-runtime.md) and [deploy your project](https://docs.astronomer.io/astro/deploy-dags) to an Astro Deployment.
+Use the test results to fix any major package changes or broken DAGs before you upgrade. Refer to the Airflow and Provider package release notes to assist in upgrading your DAGs. After you resolve all conflicts and DAG import errors, you can [upgrade Astro Runtime](upgrade-runtime.md) and [deploy your project](https://www.astronomer.io/docs/astro/deploy-dags) to an Astro Deployment.
 
 :::info
 
@@ -124,5 +124,5 @@ astro dev upgrade-test --dag-test
 
 ## See also
 
-- [Debug DAGs](https://docs.astronomer.io/learn/debugging-dags)
+- [Debug DAGs](https://www.astronomer.io/docs/learn/debugging-dags)
 - [`astro dev pytest`](./astro-dev-pytest.md)

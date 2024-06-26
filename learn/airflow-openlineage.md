@@ -12,7 +12,7 @@ It follows that data lineage has a natural integration with Apache Airflow. Airf
 
 In this guide, you’ll learn about core data lineage concepts and understand how lineage works with Airflow.
 
-Astro offers robust support for extracting and visualizing data lineage. To learn more, see [Data lineage on Astro](https://docs.astronomer.io/astro/data-lineage).
+Astro offers robust support for extracting and visualizing data lineage. To learn more, see [Data lineage on Astro](https://www.astronomer.io/docs/astro/data-lineage).
 
 :::tip Other ways to learn
 
@@ -67,7 +67,7 @@ The following terms are used frequently when discussing data lineage in general 
 
 - **Integration**: a means of gathering lineage metadata from a source system such as a scheduler or data platform. For example, the OpenLineage Airflow Provider allows lineage metadata to be collected from Airflow DAGs. Supported operators automatically gather lineage metadata from the source system every time a job runs, preparing and transmitting OpenLineage events to a lineage backend.
 - **Extractor**: an extractor is a module that gathers lineage metadata from a specific hook or operator. For example, in the OpenLineage Airflow Provider, extractors exist for the `PythonOperator` and `BashOperator`, meaning that if the provider is installed and running in your Airflow environment, lineage metadata will be generated automatically from these operators when your DAG runs. Also, the provider's `OperatorLineage` extractor class enables custom extraction in many additional operators such as the `SQLExecuteQueryOperator` and AWS `AthenaOperator`. An extractor must exist for a specific operator to get lineage metadata from it.
-- **Job**: a process that consumes or produces datasets. Jobs can be viewed on your lineage graph. In the case of the provider, an OpenLineage job corresponds to a task in your DAG. Note that only tasks that come from operators with extractors will have input and output metadata; other tasks in your DAG will show up as orphans on the lineage graph. On Astro, jobs appear as nodes on your lineage graphs in the [lineage UI](https://docs.astronomer.io/astro/data-lineage).
+- **Job**: a process that consumes or produces datasets. Jobs can be viewed on your lineage graph. In the case of the provider, an OpenLineage job corresponds to a task in your DAG. Note that only tasks that come from operators with extractors will have input and output metadata; other tasks in your DAG will show up as orphans on the lineage graph. On Astro, jobs appear as nodes on your lineage graphs in the [lineage UI](https://www.astronomer.io/docs/astro/data-lineage).
 - **Dataset**: a representation of a set of data in your lineage metadata and graph. For example, it might correspond to a table in your database or a set of data on which you run a Great Expectations check. Typically, a dataset is registered as part of your lineage metadata when a job writing to the dataset is completed (e.g., data is inserted into a table).
 - **Run**: an instance of a job in which lineage metadata is generated. An OpenLineage run is generated with each DAG run, for example.
 - **Facet**: a piece of lineage metadata about a job, dataset, or run (e.g., you might hear “job facet” in reference to a piece of metadata attached to a job).
@@ -90,7 +90,7 @@ These capabilities translate into real world benefits by:
 
 ## Lineage on Astro
 
-For Astronomer customers using [Astro](https://www.astronomer.io/product/), OpenLineage is built in. The **Lineage** tab in the Astronomer UI provides multiple pages that can help you troubleshoot issues with your data pipelines and understand the movement of data across your organization. OpenLineage also powers Astro's own [alerts](https://docs.astronomer.io/astro/alerts), which is why you need to make sure OpenLineage is enabled to configure them. For more on lineage capabilities with Astro, see [View lineage on Astro](https://docs.astronomer.io/astro/data-lineage) or [contact Astronomer](https://www.astronomer.io). 
+For Astronomer customers using [Astro](https://www.astronomer.io/product/), OpenLineage is built in. The **Lineage** tab in the Astronomer UI provides multiple pages that can help you troubleshoot issues with your data pipelines and understand the movement of data across your organization. OpenLineage also powers Astro's own [alerts](https://www.astronomer.io/docs/astro/alerts), which is why you need to make sure OpenLineage is enabled to configure them. For more on lineage capabilities with Astro, see [View lineage on Astro](https://www.astronomer.io/docs/astro/data-lineage) or [contact Astronomer](https://www.astronomer.io). 
 
 ## Getting started locally
 
@@ -102,6 +102,12 @@ If you are interested in exploring lineage locally with open source tools, you c
 - Two core operators, `PythonOperator` and `BashOperator`, support OpenLineage, but as these are "black boxes" capable of running any code, your mileage may vary.
 
 If you are using lineage prior to Airflow 2.7, there are a few additional limitations:
+
+:::warning
+
+Running OpenLineage with Airflow on Astro prior to Astro Runtime 9 (Airflow 2.7) is not recommended. Prior to Airflow 2.7, OpenLineage could cause tasks to get stuck in the running status indefinitely.
+
+:::
 
 - The external integration (for Airflow 2.3 - 2.6) only bundles extractors for some operators. Extractors are needed in order to collect lineage metadata out of the box. To see which extractors exist, check out the [OpenLineage repo](https://github.com/OpenLineage/OpenLineage/tree/main/integration/airflow/openlineage/airflow/extractors). To get lineage metadata from other operators, you can create your own [custom extractor](https://openlineage.io/blog/extractors/) or leverage the [default extractor](https://openlineage.io/docs/integrations/airflow/default-extractors) (in Airflow 2.3+) to modify your Airflow operators to gather lineage metadata.
 - For lineage metadata via the external integration from an external system connected to Airflow, such as [Apache Spark](https://openlineage.io/docs/integrations/spark/), you'll need to configure an [OpenLineage integration](https://openlineage.io/docs/integrations/about) with that system in addition to Airflow.

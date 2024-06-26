@@ -74,7 +74,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - Access to a data warehouse supported by dbt Core. See [dbt documentation](https://docs.getdbt.com/docs/supported-data-platforms) for all supported warehouses. This tutorial uses a Postgres database.
 
 You do not need to have dbt Core installed locally in order to complete this tutorial.

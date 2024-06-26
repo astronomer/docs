@@ -1,48 +1,35 @@
 ---
-sidebar_label: 'Configure a Deployment'
+sidebar_label: 'Overview'
 title: 'Configure a Deployment on Astronomer Software'
 id: configure-deployment
-description: Configure your Airflow Deployment's resources on Astronomer Software.
+description: Learn the ways you can configure individual Airflow Deployments on Astronomer Software
 ---
 
-An Airflow Deployment on Astronomer is an instance of Apache Airflow that was created using the Software UI or the Astro CLI. Each Airflow Deployment on Astronomer is hosted on a single Kubernetes namespace, has a dedicated set of resources, and operates with an isolated Postgres metadata database.
+An Airflow Deployment on Astronomer is an instance of Apache Airflow that runs in your Astronomer Software cluster. Each Astronomer Software Deployment is hosted on a dedicated Kubernetes namespace, has a dedicated set of resources, and operates with an isolated Postgres metadata database.
 
-This guide walks you through the process of creating and configuring an Airflow Deployment on Astronomer.
+A Deployment typically encapsulates a single use case or context. Each Deployment has a number of settings that you can fine-tune so that you're running Airflow optimally for this context. Use the following topics to learn more about each available configuration option on an Astronomer Software Deployment.
 
-## Prerequisites
+## Deployment creation and deletion
 
-To create an Airflow Deployment, you'll need:
-* [The Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) installed.
-* An Astronomer platform at `app.BASEDOMAIN`.
-* An Astronomer [Workspace](manage-workspaces.md).
+Creating and deleting Deployments can become an operational complexity when you run Airflow across many teams. See the following documentation to learn about all of the options for creating Deployments, deleting Deployments, and ensuring that Deployment resources are returned back to your cluster for future use.
 
-## Create a Deployment
+## Deployment resources
 
-To create an Airflow Deployment on Astronomer:
+The amount of CPU and memory available to your Deployment defines how many tasks it can run in parallel. See [Deployment resources](deployment-resources.md) to learn how to configure your Deployment's scheduler, executor, and webserver resources.
 
-1. Log in to your Astronomer platform at `app.BASEDOMAIN`, select a Workspace, and then click **New Deployment**.
-2. Complete the following fields:
+## Environment variables
 
-    - **Name**: Enter a descriptive name for the Deployment.
-    - **Description**: (Optional)
-    - **Airflow Version**: Astronomer recommends using the latest version.
-    - **Executor**: Astronomer recommends starting with Local.
+Each Deployment has its own set of environment variables that you can use to define both Airflow-level configurations and DAG objects such as connections. See [Environment variables](environment-variables.md) to learn more about setting these
 
-3. Click **Create Deployment** and give the Deployment a few moments to be created. After the Deployment is created, you'll be able to access the **Settings** page of your new Deployment:
+## Deploy methods
 
-   ![New Deployment Celery Dashboard](/img/software/v0.23-new_deployment-dashboard.png)
+Astronomer supports several different methods for deploying DAGs and code-based project configurations to Astro. See [Deploy methods overview](deploy-code-overview.md).
 
-    On this tab you can modify resources for your Deployment. Specifically, you can:
+When you're ready to automate a deploy mechanism at scale for your team, see [CI/CD](ci-cd.md) to learn how to configure API credentials and examples of CI/CD pipelines in different version management tools.
 
-    - Choose a strategy for how you configure resources to Airflow components. See [Customize resource usage](customize-resource-usage.md).
-    - Select an Airflow executor
-    - Allocate resources to your Airflow scheduler and webserver
-    - Set scheduler count (*Airflow 2.0+ only*)
-    - Add extra capacity (*Kubernetes only*)
-    - Set worker count (*Celery only*)
-    - Adjust your worker termination grace period (*Celery only*)
+## Upgrade Deployments
 
-## Select an executor
+To take advantage of the latest features in Apache Airflow and stay in support, you must upgrade your Deployments over time. See [Upgrade Astro Runtime](manage-airflow-versions.md) for setup steps.
 
 The Airflow [executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html) works closely with the Airflow scheduler to decide what resources will complete tasks as they're queued. The difference between executors comes down to their available resources and how they utilize those resources to distribute work.
 
@@ -91,7 +78,7 @@ If a function within the Airflow UI is slow or unavailable, Astronomer recommend
 
 The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks once dependencies have been met.
 
-If you experience delays in task execution, which you can track via the [Gantt Chart](https://airflow.apache.org/docs/apache-airflow/stable/ui.html#gantt-chart) view of the Airflow UI, Astronomer recommends increasing the resources allocated towards the scheduler. 
+If you experience delays in task execution, which you can track via the [Gantt Chart](https://airflow.apache.org/docs/apache-airflow/stable/ui.html#gantt-chart) view of the Airflow UI, Astronomer recommends increasing the resources allocated towards the scheduler.
 
 > **Tip:** To set alerts that notify you via email when your Airflow scheduler is underprovisioned, refer to [Airflow alerts](airflow-alerts.md).
 
@@ -117,7 +104,7 @@ The Kubernetes executor and KubernetesPodOperator each spin up an individual Kub
 
 The amount of CPU and Memory allocated to **Extra Capacity** maps to [resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/) on the [Kubernetes Namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) in which your Airflow Deployment lives on Astronomer. More specifically, **Extra Capacity** represents the maximum possible resources that could be provisioned to a pod at any given time.
 
-Resources allocated to **Extra Capacity** do not affect scheduler or webserver performance and do not represent actual usage. 
+Resources allocated to **Extra Capacity** do not affect scheduler or webserver performance and do not represent actual usage.
 
 ## Celery executor: Configure workers
 
@@ -177,7 +164,7 @@ Deploying code is the process of applying code from your local machine to an Ast
 
 ### Astro CLI deploys
 
-By default, you can deploy code to an Airflow Deployment by building it into a Docker image and pushing that image to the Astronomer Registry via the CLI or API. This workflow is described in [Deploy code via the CLI](deploy-cli.md). 
+By default, you can deploy code to an Airflow Deployment by building it into a Docker image and pushing that image to the Astronomer Registry via the CLI or API. This workflow is described in [Deploy code via the CLI](deploy-cli.md).
 
 This mechanism builds your DAGs into a Docker image alongside all other files in your Astro project directory, including your Python and OS-level packages, your Dockerfile, and your plugins.
 
@@ -201,9 +188,9 @@ To deploy DAGs via git-sync, you add DAGs to a repository that has been configur
 
 ## Delete a Deployment
 
-You can delete an Airflow Deployment using the **Delete Deployment** button at the bottom of the Deployment's **Settings** tab. 
+You can delete an Airflow Deployment using the **Delete Deployment** button at the bottom of the Deployment's **Settings** tab.
 
-When you delete a Deployment, you delete your Airflow webserver, scheduler, metadata database, and deploy history, and you lose any configurations set in the Airflow UI. 
+When you delete a Deployment, you delete your Airflow webserver, scheduler, metadata database, and deploy history, and you lose any configurations set in the Airflow UI.
 
 By default, Astro performs a _soft delete_ when you delete a Deployment. After you delete a Deployment, your Astronomer database, the corresponding `Deployment` record receives a `deletedAt` value and continues to persist until permanently deleted through a _hard delete_. A hard delete includes both the Deployment's metadata database and the Deployment entry in your Astronomer database. 14 days after your Deployment's soft delete, Astronomer automatically runs a hard delete cronjob that deletes any values that remained after your soft delete.
 
@@ -213,11 +200,11 @@ Astronomer recommends regularly doing a database audit to confirm that you hard 
 
 :::
 
-### Automate Deployment deletion clean up 
+### Automate Deployment deletion clean up
 
 Astronomer runs a cronjob to hard delete the deleted Deployment's metadata database and Deployment entry in your Astronomer database at midnight on a specified day. You can enable whether this cronjob runs or not, how many days after your soft delete to run the cronjob, and what time of day to run the cronjob by editing `astronomer.houston.cleanupDeployments` in your Astronomer Helm chart.
 
-The following is an example of how you might configure the cronjob in your Helm chart: 
+The following is an example of how you might configure the cronjob in your Helm chart:
 
 ```yaml
 # Cleanup deployments that have been soft-deleted
@@ -235,15 +222,15 @@ The following is an example of how you might configure the cronjob in your Helm 
 
 ### Hard delete a Deployment
 
-To reuse a custom release name given to an existing Deployment after a soft delete but before Astronomer automatically cleans up any persisting Deployment records, you need to hard delete both the Deployment's metadata database and the Deployment's entry in your Astronomer database. 
+To reuse a custom release name given to an existing Deployment after a soft delete but before Astronomer automatically cleans up any persisting Deployment records, you need to hard delete both the Deployment's metadata database and the Deployment's entry in your Astronomer database.
 
 1. Enable hard delete as an option at the platform level. To enable this feature, set `astronomer.houston.config.deployments.hardDeleteDeployment: true` in your `values.yaml` file and push the changes to your platform as described in [Apply a config change](apply-platform-config.md).
 
 2. Hard delete a Deployment with the Software UI or Astro CLI.
-  - **Software UI:** Go to the Deployment's **Settings** tab and select **Delete Deployment**. Then, select the **Hard Delete?** checkbox before confirming **Delete Deployment**. 
-  
+  - **Software UI:** Go to the Deployment's **Settings** tab and select **Delete Deployment**. Then, select the **Hard Delete?** checkbox before confirming **Delete Deployment**.
+
     ![Hard delete checkbox](/img/software/hard-delete.png)
-    
+
   - **Astro CLI:** Run `astro deployment delete --hard`.
 
 This action permanently deletes all data associated with a Deployment, including the database and underlying Kubernetes resources.
@@ -255,7 +242,7 @@ You can programmatically create or update Deployments with all possible configur
 
 ## Clean Deployment task metadata
 
-You can run a cron job to automatically archive task and DAG metadata from your Deployment. This job runs [`airflow db clean`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#clean) programmatically for all of your Deployments and exports the results each Deployment as files to your external storage service. To run this job for a Deployment, you must install the Astronomer-maintained `airflow-dbcleanup-plugin` on the Deployment. This plugin executes the cleanup job from your Deployment's `webserver` Pod. 
+You can run a cron job to automatically archive task and DAG metadata from your Deployment. This job runs [`airflow db clean`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#clean) programmatically for all of your Deployments and exports the results each Deployment as files to your external storage service. To run this job for a Deployment, you must install the Astronomer-maintained `airflow-dbcleanup-plugin` on the Deployment. This plugin executes the cleanup job from your Deployment's `webserver` Pod.
 
 
 1. For Deployments running Runtime 7 or earlier, add the following line to the `requirements.txt` file of your Deployment's Astro project. Replace `<latest-version>` with the latest available version in the [`airflow-dbcleanup-plugin` GitHub repository](https://github.com/astronomer/airflow-dbcleanup-plugin/releases).
@@ -265,48 +252,48 @@ You can run a cron job to automatically archive task and DAG metadata from your 
     ```
 
     You can skip this step for Deployments running Astro Runtime 8 or later.
-    
+
 2. Authorize your Deployments to your external storage service so that the webserver Pod can export the results of your cleanup jobs in JSON or URI Format. You can authorize your Deployment using one of the following methods:
 
     - Configure an [Airflow connection] in the Deployment that connects to your external storage service.
-    - To configure a global connection for all Deployments, create a [Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret) containing an Airflow connection to your external storage service. The connection must be defined in either JSON or URI format. To pass the secret to all the Deployments, annotate the secret using the following command: 
-    
+    - To configure a global connection for all Deployments, create a [Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret) containing an Airflow connection to your external storage service. The connection must be defined in either JSON or URI format. To pass the secret to all the Deployments, annotate the secret using the following command:
+
     ```sh
     kubectl annotate secret <secret-name> "astronomer.io/commander-sync"="platform=astronomer"
     ```
 
 3. Add the following configuration to your `values.yaml` file and change the default values as needed.
-   
+
     ```yaml
     houston:
       cleanupAirflowDb:
         # Enable cleanup CronJob
         enabled: false
-     
+
         # Default run is at 5:23 every morning https://crontab.guru/#23_5_*_*_*
         schedule: "23 5 * * *"
-     
+
         # Cleanup deployments older than this many days
         olderThan: 365
-     
+
         # Output path of archived data csv export
         outputPath: "/tmp"
-     
+
         # Delete archived tables
         purgeArchive: true
-     
+
         # Print out the deployments that should be cleaned up and skip actual cleanup
         dryRun: false
-     
+
         # Name of file storage provider, supported providers - aws/azure/gcp/local
         provider: local
-     
+
         # Name of the provider bucket name / local file path
         bucketName: "/tmp"
-     
+
         # The name of the Kubernetes Secret containing your Airflow connection
         providerEnvSecretName: "<your-secret-name>"
-     
+
         # Run cleanup on specific table or list of tables in a comma separated format
         tables: ""
     ```
@@ -321,6 +308,6 @@ Set `dryRun: true` to test this feature without deleting any data. When dry runs
 
 :::danger
 
-The cleanup job deletes any data that's older than the number of days specified in your `olderThan` configuration. Ensure that none of your historical data is required to run current DAGs or tasks before enabling this feature. 
+The cleanup job deletes any data that's older than the number of days specified in your `olderThan` configuration. Ensure that none of your historical data is required to run current DAGs or tasks before enabling this feature.
 
 :::

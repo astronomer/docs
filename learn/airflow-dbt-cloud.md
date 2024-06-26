@@ -33,7 +33,7 @@ This tutorial takes approximately 30 minutes to complete.
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - A dbt Cloud account. A [14-day free trial](https://www.getdbt.com/signup/) is available.
 - Access to a data warehouse supported by dbt Cloud. View the [dbt documentation](https://docs.getdbt.com/docs/supported-data-platforms) for an up-to-date list of adapters.
 

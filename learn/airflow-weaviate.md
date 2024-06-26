@@ -47,7 +47,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started).
 - (Optional) An OpenAI API key of at least [tier 1](https://platform.openai.com/docs/guides/rate-limits/usage-tiers) if you want to use OpenAI for vectorization. The tutorial can be completed using local vectorization with `text2vec-transformers` if you don't have an OpenAI API key.
 
 This tutorial uses a local Weaviate instance created as a Docker container. You do not need to install the Weaviate client locally.

@@ -70,8 +70,8 @@ The tables that are currently monitored for size are:
 - `xcom`
 
 If `xcom` is listed in the affected tables, consider taking one of the following actions:
-- Configure an external backend for XCom data, such as AWS S3. See the [Astronomer XCom Backend Tutorial](https://docs.astronomer.io/learn/xcom-backend-tutorial).
-- Implement intermediary data storage for tasks so that Airflow doesn't store large amounts of data when passing data between tasks. See [Intermediary data storage](https://docs.astronomer.io/learn/airflow-passing-data-between-tasks#intermediary-data-storage).
+- Configure an external backend for XCom data, such as AWS S3. See the [Astronomer XCom Backend Tutorial](https://www.astronomer.io/docs/learn/xcom-backend-tutorial).
+- Implement intermediary data storage for tasks so that Airflow doesn't store large amounts of data when passing data between tasks. See [Intermediary data storage](https://www.astronomer.io/docs/learn/airflow-passing-data-between-tasks#intermediary-data-storage).
 
 For additional assistance in cleaning up large tables, submit a request to [Astronomer Support](https://cloud.astronomer.io/open-support-request).
 
@@ -79,7 +79,7 @@ For additional assistance in cleaning up large tables, submit a request to [Astr
 
 At least one worker queue in your Deployment is running the maximum possible number of tasks and workers. Tasks will continue to run but new tasks will not be scheduled until worker resources become available. Click **View details** on the incident to view the affected worker queue(s).
 
-To limit this notification for a worker queue, increase its **Max # Workers** setting or choose a larger **Worker Type**. See [Configure worker queues](https://docs.astronomer.io/astro/configure-worker-queues).
+To limit this notification for a worker queue, increase its **Max # Workers** setting or choose a larger **Worker Type**. See [Configure worker queues](https://www.astronomer.io/docs/astro/configure-worker-queues).
 
 ### Worker Queue Does Not Exist
 

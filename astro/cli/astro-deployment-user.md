@@ -105,7 +105,7 @@ astro deployment user update --email=<email=address> --deployment-id=<deployment
 
 #### Related documentation
 
-- [Manage User Permissions on Astronomer](https://docs.astronomer.io/software/workspace-permissions)
+- [Manage User Permissions on Astronomer](https://www.astronomer.io/docs/software/workspace-permissions)
 
 </TabItem>
 <TabItem value="software">
@@ -134,7 +134,7 @@ astro deployment user add --email=<user-email-address> --deployment-id=<user-dep
 
 #### Related documentation
 
-- [Manage User Permissions on Astronomer](https://docs.astronomer.io/software/workspace-permissions)
+- [Manage User Permissions on Astronomer](https://www.astronomer.io/docs/software/workspace-permissions)
 
 ### astro deployment user remove
 
@@ -155,7 +155,7 @@ astro deployment user remove --deployment-id=<deployment-id> --email=<user-email
 
 #### Related documentation
 
-- [Manage User Permissions on Astronomer](https://docs.astronomer.io/software/workspace-permissions)
+- [Manage User Permissions on Astronomer](https://www.astronomer.io/docs/software/workspace-permissions)
 
 ### astro deployment user list
 
@@ -177,7 +177,7 @@ astro deployment user list --deployment-id=<deployment-id>
 
 #### Related documentation
 
-- [Manage User Permissions on Astronomer](https://docs.astronomer.io/software/workspace-permissions)
+- [Manage User Permissions on Astronomer](https://www.astronomer.io/docs/software/workspace-permissions)
 
 ### astro deployment user update
 
@@ -198,7 +198,7 @@ astro deployment user update --deployment-id=<deployment-id>
 
 #### Related documentation
 
-- [Manage User Permissions on Astronomer](https://docs.astronomer.io/software/workspace-permissions)
+- [Manage User Permissions on Astronomer](https://www.astronomer.io/docs/software/workspace-permissions)
 
 </TabItem>
 </Tabs>

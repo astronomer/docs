@@ -106,6 +106,8 @@ components:
           - CREATE_FAILED
           - UPDATE_FAILED
           - UPDATING
+          - ACCESS_DENIED
+          - UPGRADE_PENDING
           example: CREATED
           type: string
         tags:
@@ -544,6 +546,24 @@ components:
       - type
       - workspaceId
       type: object
+    CreateDeployRequest:
+      properties:
+        description:
+          description: The deploy's description.
+          example: My deploy description
+          maxLength: 500
+          type: string
+        type:
+          description: The type of the deploy.
+          enum:
+          - IMAGE_AND_DAG
+          - IMAGE_ONLY
+          - DAG_ONLY
+          example: IMAGE_AND_DAG
+          type: string
+      required:
+      - type
+      type: object
     CreateDeploymentRequest:
       oneOf:
       - $ref: '#/components/schemas/CreateDedicatedDeploymentRequest'
@@ -906,6 +926,104 @@ components:
           type: string
       required:
       - name
+      type: object
+    Deploy:
+      properties:
+        airflowVersion:
+          description: The deploy's Airflow version.
+          example: 2.7.2, if airflow version is not found, it will return NA
+          type: string
+        astroRuntimeVersion:
+          description: The deploy's Astro Runtime version.
+          example: 9.1.0
+          type: string
+        createdAt:
+          description: The time when the deploy was created in UTC, formatted as `YYYY-MM-DDTHH:MM:SSZ`.
+          example: "2022-11-22T04:37:12Z"
+          format: date-time
+          type: string
+        createdBySubject:
+          $ref: '#/components/schemas/BasicSubjectProfile'
+        dagTarballVersion:
+          description: The deploy's DAG tarball version, also known as the Bundle
+            Version in the Astro UI.
+          example: "2024-01-12T18:32:20.5898930Z"
+          type: string
+        dagsUploadUrl:
+          description: The deploy's upload URL to upload DAG bundles. Appears only
+            if dag deploys are enabled on the Deployment.
+          example: https://astroproddagdeploy.windows.core.net/clmh59gt0000308lbgswe5fvh/clmh57jtm000008lb58fe2wmv
+          type: string
+        deploymentId:
+          description: The Deployment's ID.
+          example: clmh57jtm000008lb58fe2wmv
+          type: string
+        description:
+          description: The deploy's description.
+          example: My deploy description
+          type: string
+        id:
+          description: The deploy's ID.
+          example: clvetru2w000201mowqwua63n
+          type: string
+        imageRepository:
+          description: The URL of the deploy's image repository.
+          example: https://my-image-repository
+          type: string
+        imageTag:
+          description: The deploy's image tag. Appears only if specified in the most
+            recent deploy.
+          example: my-image-tag
+          type: string
+        isDagDeployEnabled:
+          description: Whether the deploy was triggered on a Deployment with DAG deploys
+            enabled.
+          example: true
+          type: boolean
+        rollbackFromId:
+          description: The ID of the deploy that you completed a rollback on. Appears
+            only if a rollback has been performed.
+          example: clvcz1lrq000101oitxtp276e
+          type: string
+        status:
+          description: The status of the deploy.
+          enum:
+          - INITIALIZED
+          - DEPLOYED
+          - FAILED
+          example: DEPLOYED
+          type: string
+        type:
+          description: The type of deploy.
+          enum:
+          - IMAGE_AND_DAG
+          - IMAGE_ONLY
+          - DAG_ONLY
+          example: IMAGE_AND_DAG
+          type: string
+        updatedAt:
+          description: The time when the deploy was last updated in UTC, formatted
+            as `YYYY-MM-DDTHH:MM:SSZ`.
+          example: "2022-11-22T04:37:12Z"
+          format: date-time
+          type: string
+        updatedBySubject:
+          $ref: '#/components/schemas/BasicSubjectProfile'
+      required:
+      - createdAt
+      - deploymentId
+      - id
+      - imageRepository
+      - imageTag
+      - isDagDeployEnabled
+      - status
+      - type
+      type: object
+    DeployRollbackRequest:
+      properties:
+        description:
+          maxLength: 500
+          type: string
       type: object
     Deployment:
       properties:
@@ -1439,6 +1557,28 @@ components:
       - offset
       - totalCount
       type: object
+    DeploysPaginated:
+      properties:
+        deploys:
+          description: A list of deploys in the current page.
+          items:
+            $ref: '#/components/schemas/Deploy'
+          type: array
+        limit:
+          description: The maximum number of deploys in one page.
+          type: integer
+        offset:
+          description: The offset of the current page of deploys.
+          type: integer
+        totalCount:
+          description: The total number of deploys.
+          type: integer
+      required:
+      - deploys
+      - limit
+      - offset
+      - totalCount
+      type: object
     Error:
       properties:
         message:
@@ -1453,6 +1593,14 @@ components:
       - message
       - requestId
       - statusCode
+      type: object
+    FinalizeDeployRequest:
+      properties:
+        dagTarballVersion:
+          description: The deploy's DAG tarball version, also known as the Bundle
+            Version in the Astro UI. Required if DAG deploys are enabled on the Deployment,
+            and deploy type is either IMAGE_AND_DAG or DAG_ONLY.
+          type: string
       type: object
     HybridWorkerQueueRequest:
       properties:
@@ -2084,6 +2232,14 @@ components:
       - schedulerSize
       - type
       - workspaceId
+      type: object
+    UpdateDeployRequest:
+      properties:
+        description:
+          description: The deploy's description.
+          example: My deploy description
+          maxLength: 500
+          type: string
       type: object
     UpdateDeploymentRequest:
       oneOf:
@@ -3699,6 +3855,437 @@ paths:
       - Deployment
       x-permission:
       - action: deployment.update
+  /organizations/{organizationId}/deployments/{deploymentId}/deploys:
+    get:
+      description: List deploys for a deployment
+      operationId: ListDeploys
+      parameters:
+      - description: The ID of the Organization to which the Deployment belongs.
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+      - description: The Deployment's ID.
+        in: path
+        name: deploymentId
+        required: true
+        schema:
+          type: string
+      - description: The number of results to skip before returning values.
+        in: query
+        name: offset
+        schema:
+          default: 0
+          minimum: 0
+          type: integer
+      - description: The maximum number of results to return.
+        in: query
+        name: limit
+        schema:
+          default: 20
+          maximum: 1000
+          minimum: 0
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploysPaginated'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      security:
+      - JWT: []
+      summary: List deploys for a deployment
+      tags:
+      - Deploy
+      x-permission:
+      - action: deployment.deploys.get
+    post:
+      description: Create a new Deploy. A Deploy represents an intent to deploy new
+        DAG code to an Astro Deployment.
+      operationId: CreateDeploy
+      parameters:
+      - description: The ID of the Organization in which to create the Deployment.
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+      - description: The Deployment's ID.
+        in: path
+        name: deploymentId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeployRequest'
+        description: The Request body for creating a Deploy.
+        required: true
+        x-originalParamName: body
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deploy'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      security:
+      - JWT: []
+      summary: Create a Deploy
+      tags:
+      - Deploy
+      x-permission:
+      - action: deployment.deploys.create
+  /organizations/{organizationId}/deployments/{deploymentId}/deploys/{deployId}:
+    get:
+      description: Get a deploy for a deployment
+      operationId: GetDeploy
+      parameters:
+      - description: The ID of the Organization in which to create the Deployment.
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+      - description: The Deployment's ID.
+        in: path
+        name: deploymentId
+        required: true
+        schema:
+          type: string
+      - description: The Deploy's ID.
+        in: path
+        name: deployId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deploy'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      security:
+      - JWT: []
+      summary: Get a deploy for a deployment
+      tags:
+      - Deploy
+      x-permission:
+      - action: deployment.deploys.get
+    post:
+      description: Update an existing Deploy. A Deploy represents an intent to deploy
+        new DAG code to an Astro Deployment.
+      operationId: UpdateDeploy
+      parameters:
+      - description: The ID of the Organization in which to create the Deployment.
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+      - description: The Deployment's ID.
+        in: path
+        name: deploymentId
+        required: true
+        schema:
+          type: string
+      - description: The Deploy's ID.
+        in: path
+        name: deployId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDeployRequest'
+        description: The Request body for updating a Deploy.
+        required: true
+        x-originalParamName: body
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deploy'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      security:
+      - JWT: []
+      summary: Update a Deploy
+      tags:
+      - Deploy
+      x-permission:
+      - action: deployment.deploys.update
+  /organizations/{organizationId}/deployments/{deploymentId}/deploys/{deployId}/finalize:
+    post:
+      description: Finalize a deploy that you initialized using the `deploys` endpoint.
+      operationId: FinalizeDeploy
+      parameters:
+      - description: The ID of the Organization to which the Deployment belongs.
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+      - description: The Deployment's ID.
+        in: path
+        name: deploymentId
+        required: true
+        schema:
+          type: string
+      - description: The deploy's ID.
+        in: path
+        name: deployId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinalizeDeployRequest'
+        description: The Request body for finalizing a deploy.
+        required: true
+        x-originalParamName: body
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deploy'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      security:
+      - JWT: []
+      summary: Finalize a deploy
+      tags:
+      - Deploy
+      x-permission:
+      - action: deployment.deploys.update
+  /organizations/{organizationId}/deployments/{deploymentId}/deploys/{deployId}/rollback:
+    post:
+      description: Deploy rollback of a deployment
+      operationId: DeployRollback
+      parameters:
+      - description: The ID of the Organization in which to create the Deployment.
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+      - description: The Deployment's ID.
+        in: path
+        name: deploymentId
+        required: true
+        schema:
+          type: string
+      - description: The Deploy's ID.
+        in: path
+        name: deployId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeployRollbackRequest'
+        description: The Request body to rollback a Deploy.
+        required: true
+        x-originalParamName: body
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deploy'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      security:
+      - JWT: []
+      summary: Deploy rollback of a deployment
+      tags:
+      - Deploy
+      x-permission:
+      - action: deployment.deploys.update
   /organizations/{organizationId}/deployments/{deploymentId}/hibernation-override:
     delete:
       operationId: DeleteDeploymentHibernationOverride
@@ -4135,16 +4722,16 @@ tags:
 - description: A `cluster` object represents an Astro cluster, which is a Kubernetes
     cluster that hosts the infrastructure required to run Deployments. Make requests
     to `cluster` endpoints to manage your standard and dedicated clusters. See [Create
-    a dedicated cluster](https://docs.astronomer.io/astro/create-dedicated-cluster).
+    a dedicated cluster](https://astronomer.io/docs/astro/create-dedicated-cluster).
   name: Cluster
 - description: The `organization` object contains the metadata and configurations
     of an Astro Organization. It does not include objects within the Organization,
     such as users and clusters. Make requests to `organization` endpoints to view
     and update high level settings for your Organization, including settings related
     to authentication and billing. To manage resources within an Organization, make
-    requests to the endpoints related to those resources, such as `users`. See [Billing](https://docs.astronomer.io/astro/manage-billing),
-    [Set up single sign-on](https://docs.astronomer.io/astro/configure-idp), and [Manage
-    domains](https://docs.astronomer.io/astro/manage-domains).
+    requests to the endpoints related to those resources, such as `users`. See [Billing](https://astronomer.io/docs/astro/manage-billing),
+    [Set up single sign-on](https://astronomer.io/docs/astro/configure-idp), and [Manage
+    domains](https://astronomer.io/docs/astro/manage-domains).
   name: Organization
 - description: The `options` object represents all possible configurations for a given
     Astro component. Make requests to the `options` object to get the configuration
@@ -4157,5 +4744,5 @@ tags:
     high level details about your Workspace. To manage resources within a Workspace,
     make requests to the endpoints related to those resources, such as `users`, and
     use the `workspaceIds` parameter to filter results by Workspace. See [Configure
-    Workspaces](https://docs.astronomer.io/astro/manage-workspaces).
+    Workspaces](https://astronomer.io/docs/astro/manage-workspaces).
   name: Workspace

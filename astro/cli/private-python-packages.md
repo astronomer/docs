@@ -13,7 +13,7 @@ Depending on where your private packages are stored, use one of the following se
 
 :::info
 
-Deploying a custom Runtime image with a CI/CD pipeline requires additional configurations. For an example implementation, see the GitHub Actions CI/CD templates for [Astro](https://docs.astronomer.io/astro/ci-cd-templates/github-actions-template?tab=custom#setup) and [Software](https://docs.astronomer.io/software/ci-cd#github-actions-cicd).
+Deploying a custom Runtime image with a CI/CD pipeline requires additional configurations. For an example implementation, see the GitHub Actions CI/CD templates for [Astro](https://www.astronomer.io/docs/astro/ci-cd-templates/github-actions-template?tab=custom#setup) and [Software](https://www.astronomer.io/docs/software/ci-cd#github-actions-cicd).
 
 :::
 
@@ -164,90 +164,66 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
 
 :::
 
-#### Step 2: Define your extra index URL
+#### Step 2: Create an environment variable for your index URL
 
-Create a new file called `indexurl.txt` that contains the extra index URL used to access your private PuPI index. For example:
+In your local environment or CI/CD system, add the `INDEX_URL_ENV_VAR` environment variable with the URL to access your private PyPI index. For example:
 
 ```text
 https://myuser:example.com/api/pypi/pypi/simple
 ```
 
-Ensure that this file is accessible from your Astro project. You will mount this value as a secret when you build your Astro project image.
+Later, you mount this value as a secret when you build your Astro project image.
 
 #### Step 3: Update Dockerfile
 
 1. (Optional) Copy and save any existing build steps in your `Dockerfile`.
 
-2. In your `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
+2. In your `Dockerfile`, add the following to the `FROM` line which specifies your Runtime image. For example, if you use Runtime X.Y.Z, your `FROM` line is:
 
-   ```text
-   quay.io/astronomer/astro-runtime:5.0.0-base AS stage1
-   ```
+    ```text
+    FROM quay.io/astronomer/astro-runtime:X.Y.Z-base
+    ```
 
    :::info
 
-   If you use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](/astro/runtime-image-architecture.mdx#distribution).
+   If you use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](runtime-image-architecture.mdx#distribution).
 
    :::
 
 3. After the `FROM` line specifying your Runtime image, add the following configuration:
 
     ```docker
-    LABEL maintainer="Astronomer <humans@astronomer.io>"
-    ARG BUILD_NUMBER=-1
-    LABEL io.astronomer.docker=true
-    LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
-    LABEL io.astronomer.docker.airflow.onbuild=true
     # Install OS-Level packages
     COPY packages.txt .
     USER root
     RUN apt-get update && cat packages.txt | xargs apt-get install -y
-    USER astro
 
-    FROM stage1 AS stage2
     # Install Python packages
-    ARG PIP_EXTRA_INDEX_URL
-    RUN --mount=type=secret,id=indexurl \
-        PIP_EXTRA_INDEX_URL=$(cat indexurl)
-
     COPY requirements.txt .
-    USER root
-    RUN pip install --no-cache-dir -q -r requirements.txt
-    USER astro
+    RUN --mount=type=secret,id=indexurl \
+        pip install --no-cache-dir --root-user-action=ignore -r requirements.txt --index-url=$(cat /run/secrets/indexurl)
 
-    FROM stage1 AS stage3
-    # Copy requirements directory
-    USER root
-    # Remove existing packages else you might be left with multiple versions of provider packages
-    RUN rm -rf /usr/local/lib/python3.9/site-packages/
-    COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
     USER astro
-    COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
-    ENV PATH="/home/astro/.local/bin:$PATH"
-
-    COPY . .
+    COPY --chown=astro:0 . .
     ```
 
     In order, these commands:
 
     - Install any OS-level packages specified in `packages.txt`.
-    - Add `PIP_EXTRA_INDEX_URL` as an environment variable that contains authentication information for your private PyPI index.
     - Install public and private Python-level packages from your `requirements.txt` file.
 
-4. (Optional) If you had any other commands in your original `Dockerfile`, add them after the line `FROM stage1 AS stage3`.
-
-#### Step 3: Build a custom Docker image
+#### Step 4: Build a custom Docker image
 
 1. Run the following command to test your DAGs locally with your privately installed packages:
 
     ```sh
-    astro dev start --build-secrets id=indexurl,src=$HOME/path/to/indexurl.txt .
+    astro dev start --build-secrets id=indexurl,env=INDEX_URL_ENV_VAR
     ```
 
 2. (Optional) Run the following command to deploy to Astro:
 
     ```sh
-    astro deploy --build-secrets id=indexurl,src=$HOME/path/to/indexurl.txt .
+    astro deploy --build-secrets id=indexurl,env=INDEX_URL_ENV_VAR
     ```
 
 Your Astro project can now use Python packages from your private PyPi index.

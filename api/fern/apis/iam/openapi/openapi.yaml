@@ -2954,12 +2954,12 @@ tags:
 - description: The `team` object represents an Astro Team, which is a group of users
     that share the same permissions across your Organization and Workspaces. Make
     requests to `team` endpoints to create, update, and delete Teams across an Organization.
-    See [Configure Teams on Astro](https://docs.astronomer.io/astro/manage-teams).
+    See [Configure Teams on Astro](https://astronomer.io/docs/astro/manage-teams).
   name: Team
 - description: The `apitoken` object represents a single API token within your Organization.
     API tokens are used to authenticate automated tools and processes to your Organization.
     They have varying levels of access to your resources based on their Organization,
-    Workspace, and Deployment roles. See [Workspace API tokens])(workspace-api-tokens.md)
+    Workspace, and Deployment roles. See [Workspace API tokens](workspace-api-tokens.md)
     and [Organization API tokens](organization-api-tokens.md).
   name: ApiToken
 - description: The `invite` object represents the record of a user invite generated
@@ -2968,6 +2968,6 @@ tags:
     invitations through an identity provider. An `invite` record persists until its
     associated invite expires. Make requests to `invite` endpoints to create, delete,
     or audit invites for users across your Organization. See [Manage Organization
-    users](https://docs.astronomer.io/astro/manage-organization-users) and [Manage
-    Workspace users](https://docs.astronomer.io/astro/manage-workspace-users).
+    users](https://astronomer.io/docs/astro/manage-organization-users) and [Manage
+    Workspace users](https://astronomer.io/docs/astro/manage-workspace-users).
   name: Invite

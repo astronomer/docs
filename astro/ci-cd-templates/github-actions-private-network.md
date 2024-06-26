@@ -8,7 +8,13 @@ description: Use pre-built Astronomer CI/CD templates to automate deploying Apac
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-If you don't have access to the Astronomer [deploy action](https://github.com/astronomer/deploy-action) because you can't access the public internet from your GitHub repository, use one of the following private network templates to deploy to Astro. 
+:::tip
+
+The Astro GitHub integration can automatically deploy code from a GitHub repository to Astro without you needing to configure a GitHub action. In addition, the Astro UI shows Git metadata for each deploy on your Deployment information screen. See [Deploy code with the Astro GitHub integration](deploy-github-integration.md) for setup steps.
+
+:::
+
+If you don't have access to the Astronomer [deploy action](https://github.com/astronomer/deploy-action) because you can't access the public internet from your GitHub repository, use one of the following private network templates to deploy to Astro.
 
 Read the following sections to choose the right template for your use case. If you have one Deployment and one environment on Astro, use the _single branch implementation_. If you have multiple Deployments that support development and production environments, use the _multiple branch implementation_. If your team builds custom Docker images, use the _custom image_ implementation.
 

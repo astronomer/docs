@@ -51,7 +51,7 @@ See the following table for all supported Kubernetes versions in each maintained
 |       0.33.2        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
 |       0.33.3        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
 |       0.34.0        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
-|       0.34.1        |                 |                 |                |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️         |
+|       0.34.1 - 0.34.2        |                 |                 |                |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️         |
 |       0.35.0        |                 |                 |                |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️         |
 
 For more information on upgrading Kubernetes versions, follow the guidelines offered by your cloud provider.
@@ -63,7 +63,7 @@ For more information on upgrading Kubernetes versions, follow the guidelines off
 
 ## Airflow chart compatibility reference
 
-Astronomer Software Deployments utilize the [Astronomer-distributed Helm chart for Apache Airflow](https://github.com/astronomer/airflow-chart). A Deployment's Airflow chart defines how a Deployment autoscales Pods and interacts with other components in your cluster. 
+Astronomer Software Deployments utilize the [Astronomer-distributed Helm chart for Apache Airflow](https://github.com/astronomer/airflow-chart). A Deployment's Airflow chart defines how a Deployment autoscales Pods and interacts with other components in your cluster.
 
 Use the following table to see the Airflow Helm chart version for each supported version of Astronomer Software. To view the Airflow Helm chart for an unsupported version of Astronomer Software, open the default Astronomer Helm chart in the [`astronomer/astronomer` repository](https://github.com/astronomer/astronomer/blob/master/charts/astronomer/values.yaml) and select the **Tag** that corresponds to the unsupported version. The value of `airflowChartVersion` is the Airflow Helm chart version.
 
@@ -90,6 +90,8 @@ Use the following table to see the Airflow Helm chart version for each supported
 | 0.33.2                      | 1.9.5                                 |
 | 0.33.3                      | 1.9.5                                 |
 | 0.34.0                      | 1.10.0                                |
+| 0.34.1                      | 1.10.0                                |
+| 0.34.2                      | 1.10.2                                |
 
 ## Legacy version compatibility reference
 

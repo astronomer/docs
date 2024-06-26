@@ -78,9 +78,9 @@ Astronomer recommends testing new versions of Astro Runtime locally before upgra
 
 4. (Optional) Run DAGs locally to ensure that all of your code works as expected. If you encounter errors after your upgrade, it's possible that your new Astro Runtime version includes a breaking provider package change. If you encounter one of these breaking changes, follow the steps in [Upgrade or pin provider package versions](#optional-upgrade-or-pin-provider-package-versions) to check your provider package versions and, if required, pin the provider package version from your previous Runtime version in your `requirements.txt` file.
 
-### Step 6: (Optional) Upgrade and test provider packages
+## Step 6: (Optional) Upgrade and test provider packages
 
-If you pinned provider package versions before your upgrade, upgrade your provider packages by changing the pinned version in your `requirements.txt` file. Test east provider package upgrade locally before deploying to Astro.
+If you pinned provider package versions before your upgrade, upgrade your provider packages by changing the pinned version in your `requirements.txt` file. Test each provider package upgrade locally before deploying to Astro.
 
 ## Step 7: Deploy to Astronomer
 
@@ -143,7 +143,7 @@ When you choose a deprecated version of Astro Runtime, Astronomer recommends alw
 
     :::
 
-3. Create a Deployment using the [Astro API](https://docs.astronomer.io/api/platform-api-reference/deployment/create-deployment). In your request, specify your PAT in the authorization header, and your deprecated Astro Runtime version using the `astroRuntimeVersions` property.
+3. Create a Deployment using the [Astro API](https://www.astronomer.io/docs/api/platform-api-reference/deployment/create-deployment). In your request, specify your PAT in the authorization header, and your deprecated Astro Runtime version using the `astroRuntimeVersions` property.
 
 After you create the Deployment, you can manage the Deployment using any interface, including the Astro CLI and [Astro UI](deployment-settings.md). You can also create additional Deployments with deprecated Runtimes using the Astro API and either a Workspace or Organization API token.
 
@@ -159,6 +159,13 @@ If an Astro Runtime version isn't included in this section, then there are no sp
 
 #### Runtime 11 (Airflow 2.9)
 
+##### Restricted versions of Runtime 11
+
+You cannot create new Deployments or upgrade to the following versions of Runtime 11, which are `yanked`. These [restricted runtime versions](runtime-version-lifecycle-policy.mdx#restricted-runtime-versions) prevent you from upgrading to or creating a Deployment with a version that contains a known limitation or bug.
+
+- 11.0.0
+- 11.1.0
+
 ##### Bug affecting users running a local Astro Runtime environment
 
 In Airflow 2.9, a bug affecting custom actions in Airflow plugins ([#39421](https://github.com/apache/airflow/pull/39421)) prevented users from running the Astro Runtime environment locally for Astro Runtime versions 11.0.0, 11.1.0, and 11.2.0. Deployments running these versions on Astro are not affected.
@@ -166,6 +173,18 @@ In Airflow 2.9, a bug affecting custom actions in Airflow plugins ([#39421](http
 To continue using these versions of the Astro runtime locally, set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
 
 #### Runtime 9 (Airflow 2.7)
+
+##### Restricted versions of Runtime 9
+
+You cannot create new Deployments or upgrade to the following versions of Runtime 9, which are `yanked`. These [restricted runtime versions](runtime-version-lifecycle-policy.mdx#restricted-runtime-versions) prevent you from upgrading to or creating a Deployment with a version that contains a known limitation or bug.
+
+- 9.0.0
+- 9.1.0
+- 9.2.0
+- 9.3.0
+- 9.4.0
+- 9.5.0
+- 9.6.0
 
 ##### Connection testing in the Airflow UI disabled by default
 
@@ -184,6 +203,8 @@ The base distribution of Astro Runtime 9 uses Python 3.11 by default. Some provi
 To continue using these packages with a compatible version of Python, upgrade to the [Astro Runtime Python distribution](runtime-image-architecture.mdx#python-version-images) for your desired Python version.
 
 #### Runtime 8 (Airflow 2.6)
+
+Astro Runtime version 8.0.0 is a restricted version of the Astro Runtime (`yanked`), which means you can't create Deployments on Astro with this runtime version. These [restricted runtime versions](runtime-version-lifecycle-policy.mdx#restricted-runtime-versions) prevent you from upgrading to or creating a Deployment with a version that contains a known limitation or bug.
 
 ##### Breaking change to `apache-airflow-providers-cncf-kubernetes` in version 8.4.0
 
@@ -227,7 +248,7 @@ This incompatibility results in breaking the GKEStartPodOperator. This operator 
 
 #### Runtime 6 (Airflow 2.4)
 
-Smart Sensors were deprecated in Airflow 2.2.4 and removed in Airflow 2.4.0. If your organization is still using Smart Sensors, you'll need to start using deferrable operators. See [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
+Smart Sensors were deprecated in Airflow 2.2.4 and removed in Airflow 2.4.0. If your organization is still using Smart Sensors, you'll need to start using deferrable operators. See [Deferrable operators](https://www.astronomer.io/docs/learn/deferrable-operators).
 
 #### Runtime 5 (Airflow 2.3)
 

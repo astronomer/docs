@@ -43,7 +43,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started).
 - A object storage system to interact with. This tutorial uses [Amazon S3](https://aws.amazon.com/s3/), but you can use [Google Cloud Storage](https://cloud.google.com/storage), [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) or local file storage as well.
 
 ## Step 1: Configure your Astro project

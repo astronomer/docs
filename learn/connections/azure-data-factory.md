@@ -12,8 +12,8 @@ This guide provides the basic setup for creating an ADF connection. For a comple
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview)
-- A locally running [Astro project](https://docs.astronomer.io/astro/cli/get-started-cli)
+- The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview)
+- A locally running [Astro project](https://www.astronomer.io/docs/astro/cli/get-started-cli)
 - Permissions to [access your data factory](https://learn.microsoft.com/en-us/azure/data-factory/concepts-roles-permissions#roles-and-requirements)
 - A [Microsoft Entra ID application](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal)
 
@@ -84,6 +84,6 @@ Airflow uses the [`azure-mgmt-datafactory`](https://pypi.org/project/azure-mgmt-
 ## See also
 
 - [Apache Airflow Microsoft Azure provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/6.1.1/connections/adf.html)
-- [Import and export Airflow connections using Astro CLI](https://docs.astronomer.io/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
+- [Import and export Airflow connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
 - [Azure Data Factory modules](https://registry.astronomer.io/modules?query=azuredatafactory) and [example DAGs](https://registry.astronomer.io/dags?limit=24&sorts=updatedAt%3Adesc&query=azure+data+factory) in the Astronomer Registry
 - [Run Azure Data Factory pipelines in Airflow](airflow-azure-data-factory-integration.md)

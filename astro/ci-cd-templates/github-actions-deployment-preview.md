@@ -8,6 +8,12 @@ description: Use pre-built Astronomer CI/CD templates to automate deploying Apac
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+:::tip
+
+The Astro GitHub integration can automatically deploy code from a GitHub repository to Astro without you needing to configure a GitHub action. In addition, the Astro UI shows Git metadata for each deploy on your Deployment information screen. See [Deploy code with the Astro GitHub integration](deploy-github-integration.md) for setup steps.
+
+:::
+
 The Astronomer [deploy action](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates) includes several sub-actions that can be used together to create a complete [Deployment preview](ci-cd-templates/template-overview.md#preview-deployment-templates) pipeline, a configuration that allows you to test your code changes in an ephemeral development Deployment before promoting your changes to a production Astro Deployment.
 
 The Deployment preview templates use GitHub secrets to manage the credentials needed for GitHub to authenticate to Astro. You can specify the credentials for your [secrets backend](secrets-backend.md) so that preview Deployments have access to secret Airflow variables or connections during tests. See [Deployment preview template with secrets backend implementation](#deployment-preview-template-with-secrets-backend-implementation).
