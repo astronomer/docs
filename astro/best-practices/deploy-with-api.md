@@ -16,7 +16,6 @@ This best practice guide first walks through the steps that are necessary to dep
 
 Then, the guide shows you the recommended way to combine these three automated processes to create a script with conditional logic that can automatically deploy code to Astro, depending on which types of files change in your Astro project. These examples are bash scripts that use Docker to build the image, but you can use a similar tool like [kaniko](https://github.com/GoogleContainerTools/kaniko). You can also use a different scripting language, like Python, instead of bash.
 
-
 ## Feature overview
 
 This guide highlights the following Astro features:
@@ -283,7 +282,6 @@ The following script allows you to update only your DAG files. Refer to [Deploy 
 The following script allows you to update only your Astro project by building and deploying a new Docker image. Refer to [What happens during a project deploy](deploy-project-image.md#what-happens-during-a-project-deploy) to learn the details about how Astro deploys image updates.
 
 1.  Make a `POST` request to the `Deploy` endpoint to create a new `deploy` object. In your request, specify `type` as `IMAGE`. Store the value for the `DeployID` that is returned. This action creates an object that represents the intent to deploy code to a Deployment.  See the [Astro API documentation](https://www.astronomer.io/docs/api/platform-api-reference/deploy/create-deploy) for request usage and examples.
-
 
 2. Log in to Docker with your Astro API token.
 
