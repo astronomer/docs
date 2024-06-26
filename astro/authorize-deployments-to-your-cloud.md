@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Authorize Deployments to cloud resources'
-title: 'Authorize an Astro Deployment to cloud resources using workload identity'
+sidebar_label: "Authorize Deployments to cloud resources"
+title: "Authorize an Astro Deployment to cloud resources using workload identity"
 id: authorize-deployments-to-your-cloud
 description: Give Astro Deployments access to your cloud resources using a Kubernetes workload identity
 toc_max_heading_level: 2
@@ -36,13 +36,13 @@ A workload identity is a Kubernetes service account that provides an identity to
 ## Setup
 
 <Tabs
-    defaultValue="aws"
-    groupId="setup"
-    values={[
-        {label: 'AWS', value: 'aws'},
-        {label: 'GCP', value: 'gcp'},
-        {label: 'Azure', value: 'azure'},
-    ]}>
+defaultValue="aws"
+groupId="setup"
+values={[
+{label: 'AWS', value: 'aws'},
+{label: 'GCP', value: 'gcp'},
+{label: 'Azure', value: 'azure'},
+]}>
 <TabItem value="aws">
 
 ### Step 1: Authorize the Deployment in your cloud
@@ -58,22 +58,20 @@ To authorize your Deployment, create an IAM role that is assumed by the Deployme
 5. Click **Trust relationships**.
 6. Click **Edit trust policy** and paste the workload identity you copied from Step 1 in the trust policy. Your policy should look like the following:
 
-    ```json
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Effect": "Allow",
-                "Principal": {
-                    "AWS": [
-                        "<workload-identity-role>"
-                    ]
-                },
-                "Action": "sts:AssumeRole"
-            }
-        ]
-    }
-    ```
+   ```json
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Effect": "Allow",
+         "Principal": {
+           "AWS": ["<workload-identity-role>"]
+         },
+         "Action": "sts:AssumeRole"
+       }
+     ]
+   }
+   ```
 
 7. Click **Update policy**.
 
@@ -86,12 +84,73 @@ Now that your Deployment is authorized, you can connect it to your cloud using a
 - **Connection Id**: Enter a name for the connection.
 - **Extra**:
 
-    ```json
-    {
+  ```json
+  {
     "role_arn": "<your-role-arn>",
     "region_name": "<your-region>"
+  }
+  ```
+
+If you don't see **Amazon Web Services** as a connection type in the Airflow UI, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Amazon/versions/latest) for the latest package.
+
+### Attach an IAM role to your Deployment
+
+<HostedBadge/>
+
+:::publicpreview
+:::
+
+You can attach an AWS IAM role to your Deployment to grant the Deployment all of the role's permissions.
+
+Using IAM roles provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing IAM roles on new Deployments, or your can attach a single IAM role to multiple Deployments that all require the same level of access to your cloud.
+
+#### Prerequisites
+
+- Minimum Astro Runtime version:
+    - 9.15.0
+    - 10.9.0
+    - 11.5.0
+- A new or existing IAM role in your data sources with the required permissions you want your Deployment to have.
+- If using [AWS CloudShell](https://aws.amazon.com/cloudshell/),
+the required CLIs are enabled by default.
+- If you use a local terminal, the following CLIs are required:
+  - [AWS CLI](https://aws.amazon.com/cli/)
+  - [jq](https://jqlang.github.io/jq/)
+  - [openSSL](https://www.openssl.org/source/)
+
+#### Step 1: Authorize the Deployment to your IAM role
+
+To authorize your Deployment, create an IAM role to assign as your Deployment's workload identity:
+
+1. [Create an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) to delegate permissions to in an AWS service. Grant the role any permission that the Deployment will need in your AWS account. Copy the IAM role ARN to use later in this setup.
+2. In the Astro UI, select your Deployment and then click **Details**. In the **Advanced** section, click **Edit**.
+3. In the **Workload Identity** menu, select **Customer Managed Identity**.
+4. Enter your IAM role ARN when prompted, then copy and run the provided CLI command.
+5. Click **Update Deployment**. The IAM role is now selectable as a workload identity for the Deployment.
+
+Repeat these steps for each Astro Deployment that needs to access your AWS resources.
+
+:::tip Dedicated Cluster only
+
+If you want to share or re-use the same customer managed identity on static or ephemeral Deployments for dedicated clusters, without having to update your Trust Policy in your AWS account for every net new Deployment, change the `<DeploymentNamespace>` value in `Condition` to include a wildcard. The following shows an example:
+
+    ```json
+    {
+        "Condition": {
+            "StringLike": {
+                "<clusterOIDCIssuerUrl>:aud": "sts.amazonaws.com",
+                "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:*:*"
+            }
+        }
     }
     ```
+:::
+
+#### Step 2: Create an Airflow connection
+
+Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Create an **Amazon Web Services** connection in either the [Astro UI](create-and-link-connections.md) or the Airflow UI for your Deployment, and specify the following fields:
+
+- **Connection Id**: Enter a name for the connection.
 
 If you don't see **Amazon Web Services** as a connection type in the Airflow UI, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Amazon/versions/latest) for the latest package.
 
@@ -108,21 +167,22 @@ You can attach a custom GCP service account to your Deployment to grant the Depl
 Using service accounts provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing service accounts on new Deployments, or your can attach a single service account to multiple Deployments that all have the same level of access to your cloud.
 
 1. [Create a service account](https://cloud.google.com/iam/docs/service-accounts-create) in the GCP project that you want your Deployment to access. Grant the service account any permissions that the Deployment will need in your GCP project. Copy the service account ID to use later in this setup.
-2. In the Cloud UI, select your Deployment, then click **Details**. In the **Advanced** section, click **Edit**.
+2. In the Astro UI, select your Deployment, then click **Details**. In the **Advanced** section, click **Edit**.
 3. In the **Workload Identity** menu, select **Customer Managed Identity**
 4. Enter your GCP service account ID when prompted, then copy and run the provided gcloud CLI command.
 5. Click **Update Deployment**. The service account is now selectable as a workload identity for the Deployment.
 6. Complete one of the following options for your Deployment to access your cloud resources:
 
-    - Create a **Google Cloud** connection type in Airflow and configure the following values:
-      - **Connection Id**: Enter a name for the connection.
-      - **Impersonation Chain**: Enter the ID of the service account that your Deployment should impersonate.
+   - Create a **Google Cloud** connection type in Airflow and configure the following values:
 
-    - To access resources in a secrets backend, run the following command to create an environment variable that grants access to the secrets backend:
+     - **Connection Id**: Enter a name for the connection.
+     - **Impersonation Chain**: Enter the ID of the service account that your Deployment should impersonate.
 
-    ```zsh
-    astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "project_id": "<your-secret-manager-project-id>", "impersonation_chain": "<your-gcp-service-account>"}
-    ```
+   - To access resources in a secrets backend, run the following command to create an environment variable that grants access to the secrets backend:
+
+   ```zsh
+   astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "project_id": "<your-secret-manager-project-id>", "impersonation_chain": "<your-gcp-service-account>"}
+   ```
 
 ### Alternative setup: Authorize your Deployment through GCP service account impersonation
 
@@ -134,18 +194,18 @@ If your organization has requirements over how service accounts are managed outs
 4. In the **Actions** column, click **Manage Permissions**, then click **Grant Access**. In the modal that appears, enter your Deployment's workload identity service account in the **Add Principals** field and select the [`Service Account Token Creator`](https://cloud.google.com/iam/docs/understanding-roles#iam.serviceAccountTokenCreator) in the **Assign Roles** field.
 5. Complete one of the following options for your Deployment to access your cloud resources:
 
-    - Create a **Google Cloud** connection type in Airflow and configure the following values:
-      - **Connection Id**: Enter a name for the connection.
-      - **Impersonation Chain**: Enter the ID of the service account that your Deployment should impersonate.
+   - Create a **Google Cloud** connection type in Airflow and configure the following values:
+     - **Connection Id**: Enter a name for the connection.
+     - **Impersonation Chain**: Enter the ID of the service account that your Deployment should impersonate.
 
-    Note that this implementation requires `apache-airflow-providers-google >= 10.8.0`. See [Add Python, OS-level packages, and Airflow providers](https://www.astronomer.io/docs/astro/cli/develop-project#add-python-os-level-packages-and-airflow-providers).
+   Note that this implementation requires `apache-airflow-providers-google >= 10.8.0`. See [Add Python, OS-level packages, and Airflow providers](https://www.astronomer.io/docs/astro/cli/develop-project#add-python-os-level-packages-and-airflow-providers).
 
    - Specify the impersonation chain in code when you instantiate a Google Cloud operator. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/connections/gcp.html#direct-impersonation-of-a-service-account). Note that if you configure both a connection type and an operator, the operator-level configuration takes precedence.
-    - To access resources in a secrets backend, run the following command to create an environment variable that grants access to the secrets backend:
+   - To access resources in a secrets backend, run the following command to create an environment variable that grants access to the secrets backend:
 
-    ```zsh
-    astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "project_id": "<your-secret-manager-project-id>", "impersonation_chain": "<your-gcp-service-account>"}
-    ```
+   ```zsh
+   astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "project_id": "<your-secret-manager-project-id>", "impersonation_chain": "<your-gcp-service-account>"}
+   ```
 
 ### Alternative setup: Grant an IAM role to your Deployment workload identity
 
@@ -161,11 +221,11 @@ To authorize your Deployment, grant the required access to your Deployment's wor
 
 2. Grant your Deployment's workload identity an IAM role that has access to your external data service. To do this with the Google Cloud CLI, run:
 
-    ```bash
-    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:<workload-identity> --role=roles/viewer
-    ```
+   ```bash
+   gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:<workload-identity> --role=roles/viewer
+   ```
 
-    To grant your workload identity an IAM role using the Google Cloud console, see [Grant an IAM role](https://cloud.google.com/iam/docs/grant-role-console#grant_an_iam_role).
+   To grant your workload identity an IAM role using the Google Cloud console, see [Grant an IAM role](https://cloud.google.com/iam/docs/grant-role-console#grant_an_iam_role).
 
 Repeat these steps for each Deployment that needs to access your GCP resources.
 
@@ -210,12 +270,12 @@ You can only use the same user-assigned managed identity for up to four Deployme
 
 1. In your Azure portal, open the **Managed Identities** menu.
 2. Search for your managed identity, click **Properties**, then copy its **Name**, **Client ID**, **Tenant ID**, and **Resource group** name.
-4. In the Astro UI, select your Deployment, click **Details**, then click **How to Configure...** under **Workload Identity**.
-5. In **Managed Identity**, enter the Name of the managed identity you assigned to the resource.
-6. In **Resource Group**, enter the **Resource group** name that your managed identity belongs to.
-7. Using the Azure CLI, copy and run the provided command in your local terminal.
-8. After the command completes, click **Close** on the modal in the Astro UI.
-9. (Optional) repeat Steps 4 - 8 for any other Deployments that need to be authorized to Azure.
+3. In the Astro UI, select your Deployment, click **Details**, then click **How to Configure...** under **Workload Identity**.
+4. In **Managed Identity**, enter the Name of the managed identity you assigned to the resource.
+5. In **Resource Group**, enter the **Resource group** name that your managed identity belongs to.
+6. Using the Azure CLI, copy and run the provided command in your local terminal.
+7. After the command completes, click **Close** on the modal in the Astro UI.
+8. (Optional) repeat Steps 4 - 8 for any other Deployments that need to be authorized to Azure.
 
 #### Step 3: Create an Airflow connection
 
@@ -231,5 +291,6 @@ Any DAG that uses your connection will now be authorized to Azure through your m
 </Tabs>
 
 ## See also
+
 - [Manage Airflow connections and variables](manage-connections-variables.md)
 - [Deploy code to Astro](deploy-code.md)
