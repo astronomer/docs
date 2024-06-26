@@ -9,12 +9,35 @@ Deploy rollbacks are an emergency option if a Deployment unexpectedly stops work
 
 ## Prerequisites
 
+- You must be at least a Workspace Editor to add deploy rollbacks for your entire Software installation.
 - You must be at least a Deployment Editor or otherwise have the permission `deployment.images.push` or `system.deployments.images.push` to roll back a Deployment.
 - Your Deployment must be on Astro Runtime 5 (Airflow 2.3) or later. Rolling back to any version before Astro Runtime 5 is not supported. 
 - Your Deployment must be configured to use image or DAG-only deploys. Rollbacks are not supported for NFS deploys and Git sync deploys.
 - Your Software installation must have `global.dagOnlyDeployment.enabled=True`
   
+## Configure deploy rollbacks
+
+To enable deploy rollbacks, you must have them enabled for your entire installation. This configuration allows individual Deployment users with sufficient permissions can choose to enable them in specific Deployments.
+
+Configure the following values in your `values.yaml` file:
+  ```yaml
+   # Enable rollback feature flag
+  global:
+      deployRollbackEnabled
+  # Enable cleanup feature flag
+  houston:
+      cleanupDeployRevisions:
+          enabled:  true
+  # Configure which data to clean up
+  houston:
+      cleanupDeployRevisions:
+          olderThan:  90
+  ```
+After you set this configuration, your users with sufficient permissions can enable deploy rollbacks for their Deployments. This configuration also enables cleanup of any deploy information that are older than 90 days.
+
 ## Enable deploy rollbacks
+
+If deploy rollbacks are configured for your installtion, you can enable them in individual Deployments through the Deployment Settings page.
 
 1. In the Software UI, open your Deployment.
 2. On the **Settings** page, toggle **Rollback Deploy** to **Enable**.
