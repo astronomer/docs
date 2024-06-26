@@ -6,16 +6,16 @@ id: repo-structure
 
 Astro supports a range of options when it comes to organizing your project code and setting up Continuous Integration and Continuous Delivery (CI/CD) pipelines for automated deploys to Astro. 
 
-Astronomer recommends considering the pros and cons of each option, along with the needs of your team and structure of your organization, when organizing your Astro project code and developing your CI/CD pipelines.
+Astronomer recommends keeping in mind the needs of your team and structure of your organization as you explore the options.
 
 This guide covers the options along with their pros and cons, so you can choose the best option for your team.
 
 ## Feature overview
 
 Astro supports a number of CI/CD strategies. You can:
-1. Maintain a *single* Git repository for all files in a *single* Astro project (one-to-one).
-2. Separate your DAGs from other files and maintain *multiple* Git repositories for a *single* Astro project (many-to-one).
-3. Host multiple Astro projects in a *single* repository for deployment to *multiple* Astro projects (one-to-many).
+1. Maintain a *single* Git repository for all files in a *single* Astro Deployment (one-to-one).
+2. Separate your DAGs from other files and maintain *multiple* Git repositories for a *single* Astro Deployment (many-to-one).
+3. Host multiple Astro projects in a *single* repository for deployment to *multiple* Astro Deployments (one-to-many).
 
 ## Best practice guidance
 
@@ -58,7 +58,10 @@ Cons of this approach:
 
 :::info 
 
-Repository options for setting up one-to-one deploys with CI/CD include AWS S3. Supported CI/CD tools include Jenkins, GitHub Actions, and AWS CodeBuild. For details about setting up CI/CD workflows using these and other systems, see [Automate actions on Astro](https://www.astronomer.io/docs/astro/automation-overview).
+Astronomer maintains guides with code templates for a number of popular CI/CD tools. For details about setting up CI/CD workflows, see:
+
+- [Automate actions on Astro](https://www.astronomer.io/docs/astro/automation-overview).
+- [Deploy code with the Astro GitHub integration](https://www.astronomer.io/docs/astro/deploy-github-integration).
 
 :::
 
@@ -74,6 +77,7 @@ This strategy requires:
 - One Workspace for your project.
 - Multiple repositories.
 - One Astro Deployment.
+- [**DAG-only deploys**](https://www.astronomer.io/docs/astro/deploy-dags#enable-or-disable-dag-only-deploys-on-a-deployment) on the target Deployment and CI/CD pipeline setup for both Git repositories.
 
 Pros of this approach:
 - You have more options when it comes to maintaining Deployments and deploying code.
@@ -85,12 +89,6 @@ Cons of this approach:
 - Team members might have inconsistencies in their local environments if they lack access to the configuration repository. For this reason, Astronomer recommends [setting up a dev Deployment](manage-dev-deployments) where DAG authors can see and modify project configurations for testing purposes.
 
 :::info
-
-This strategy requires [DAG-only deploys](https://www.astronomer.io/docs/astro/deploy-dags#enable-or-disable-dag-only-deploys-on-a-deployment) on the target Deployment and CI/CD pipeline setup for both Git repositories.
-
-:::
-
-:::warning
 
 This strategy is required when [configuring Deployments programmatically](https://www.astronomer.io/docs/astro/manage-deployments-as-code).
 
@@ -114,7 +112,7 @@ Pros of this approach:
 - It supports separate environment configurations. If you use Snowflake, for example, your development Deployment on Astro can use a virtual data warehouse for development (`DWH Dev`), and your production Deployment can use a different virtual data warehouse for production (`DWH Prod`).
 
 Cons of this approach:
-- Restricting access to Astro settings or to particular Astro projects is more complicated at the level of sud to implement and maintain in sudirectories.
+- Restricting access to Astro settings or to particular Astro projects is more complicated to implement and maintain in subdirectories.
 - Dependencies and environments might be more difficult to manage, to the extent that they differ from project to project.
 
 :::tip
