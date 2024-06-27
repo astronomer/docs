@@ -4,6 +4,18 @@ sidebar_label: 'Organizing code for CI/CD'
 id: repo-structure
 ---
 
+export const Highlight = ({children, color}) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: '4px',
+      color: '#fff',
+      padding: '0.2rem 0.5rem',
+    }}>
+    {children}
+  </span>
+);
+
 Astro supports a range of options when it comes to organizing your project code and setting up Continuous Integration and Continuous Delivery (CI/CD) pipelines for automated deploys to Astro. 
 
 Astronomer recommends keeping in mind the needs of your team and structure of your organization as you explore the options.
@@ -94,7 +106,7 @@ This strategy is required when [configuring Deployments programmatically](https:
 
 :::
 
-### Option 3: one repository with multiple permanent branches to multiple Deployments with CI/CD
+### Option 3: one repository with multiple permanent branches to multiple Deployments with CI/CD <Highlight color="#9478d2">Most common</Highlight>
 
 :::tip
 
