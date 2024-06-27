@@ -15,7 +15,7 @@ Trigger rules are used to determine when a task should run in relation to the pr
 
 :::info
 
-Trigger rules define whether a task runs based on its direct upstream dependencies. To learn how to set task dependencies, see the [Manage task and task group dependencies in Airflow](airflow-managing-dependencies.md) guide.
+Trigger rules define whether a task runs based on its direct upstream dependencies. To learn how to set task dependencies, see the [Manage task and task group dependencies in Airflow](managing-dependencies.md) guide.
 
 :::
 
