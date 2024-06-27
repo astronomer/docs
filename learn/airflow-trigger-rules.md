@@ -78,15 +78,15 @@ The following trigger rules are available:
 
 :::info 
 
-Additionally to the trigger rules, you have the option of defining a DAG in which any task failure stops the DAG execution, setting all tasks that are still running to `failed` and marking any tasks that have not run yet as `skipped`. This is done by setting [DAG parameter](airflow-dag-parameters.md) `fail_stop` to `True`. Note that you cannot have any trigger rule other than `all_success` in a DAG with `fail_stop` set to `True`.
+There are several advanced Airflow features that influence trigger rules. You can define a DAG in which any task failure stops the DAG execution by setting [DAG parameter](airflow-dag-parameters.md) `fail_stop` to `True`. This will set all tasks that are still running to `failed` and marking any tasks that have not run yet as `skipped`. Note that you cannot have any trigger rule other than `all_success` in a DAG with `fail_stop` set to `True`.
 
-Another advanced feature that influences trigger rules are [Setup and Teardown tasks](airflow-setup-teardown.md), a special type of task to create and delete resources.
+[Setup and Teardown tasks](airflow-setup-teardown.md) are a special type of task to create and delete resources that also influence trigger rules.
 
 :::
 
 ## Branching and trigger rules
 
-One common scenario where you might need to implement trigger rules is if your DAG contains conditional logic such as [branching](airflow-branch-operator.md). In these cases, `one_success` or `none_failed` is likely more helpful than `all_success`, because unless all branches are run, at least one upstream task will always be in a `skipped` state.
+One common scenario where you might need to implement trigger rules is if your DAG contains conditional logic such as [branching](airflow-branch-operator.md). In these cases, `one_success` or `none_failed` are likely more helpful than `all_success`, because unless all branches are run, at least one upstream task will always be in a `skipped` state.
 
 In the following example DAG there is a simple branch with a downstream task that needs to run if either of the branches are followed. With the `all_success` rule, the `end` task never runs because all but one of the `branch` tasks is always ignored and therefore doesn't have a success state. If you change the trigger rule to `one_success`, then the `end` task can run so long as one of the branches successfully completes.
 
