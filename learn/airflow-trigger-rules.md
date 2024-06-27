@@ -13,6 +13,12 @@ import branch_example_traditional from '!!raw-loader!../code-samples/dags/airflo
 
 Trigger rules are used to determine when a task should run in relation to the previous task. By default, Airflow runs a task when all directly upstream tasks are successful. However, you can change this behavior using the `trigger_rule` parameter in the task definition.
 
+:::info
+
+Trigger rules define whether a task runs based on its direct upstream dependencies. To learn how to set task dependencies, see the [Manage task and task group dependencies in Airflow](airflow-managing-dependencies.md) guide.
+
+:::
+
 ## Define a trigger rule
 
 You can override the default trigger rule by setting the `trigger_rule` parameter in the task definition.
@@ -78,7 +84,7 @@ The following trigger rules are available:
 
 :::info 
 
-There are several advanced Airflow features that influence trigger rules. You can define a DAG in which any task failure stops the DAG execution by setting [DAG parameter](airflow-dag-parameters.md) `fail_stop` to `True`. This will set all tasks that are still running to `failed` and marking any tasks that have not run yet as `skipped`. Note that you cannot have any trigger rule other than `all_success` in a DAG with `fail_stop` set to `True`.
+There are several advanced Airflow features that influence trigger rules. You can define a DAG in which any task failure stops the DAG execution by setting the [DAG parameter](airflow-dag-parameters.md) `fail_stop` to `True`. This will set all tasks that are still running to `failed` and mark any tasks that have not run yet as `skipped`. Note that you cannot have any trigger rule other than `all_success` in a DAG with `fail_stop` set to `True`.
 
 [Setup and Teardown tasks](airflow-setup-teardown.md) are a special type of task to create and delete resources that also influence trigger rules.
 
@@ -118,140 +124,3 @@ This image shows the resulting DAG:
 
 </TabItem>
 </Tabs>
-
-## Examples
-
-### Trigger rule `all_success`
-
-A task with the trigger rule `all_success` only runs when all upstream tasks have succeeded.
-
-![Screenshot of the Airflow UI with a DAG graph showing 4 successful upstream tasks and one successful downstream task depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_all_success_1.png)
-
-As soon as any upstream tasks are state of `failed` or `upstream_failed`, the downstream task is set to the state `upstream_failed` and does not run. 
-
-![Screenshot of the Airflow UI with a DAG graph showing 2 successful, 1 running and 1 failed upstream tasks and one downstream task in upstream_failed state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_all_success_2.png)
-
-Similarly, as soon as any upstream task is in the state `skipped`, the downstream task is set to the state `skipped` and does not run.
-
-![Screenshot of the Airflow UI with a DAG graph showing 2 successful, 1 running and 1 skipped upstream tasks and one downstream task in skipped state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_all_success_3.png)
-
-If a task with the trigger rule `all_success` has one upstream task that is skipped and one that is failed, whether the downstream task is set to `skipped` or `upstream_failed` depends on which of the upstream tasks finishes first.
-
-### Trigger rule `all_failed`
-
-A task with the trigger rule `all_failed` only runs when all upstream tasks are in a failed or upstream_failed state.
-
-![Screenshot of the Airflow UI with a DAG graph showing 2 failed and two upstream failed upstream tasks and one successful downstream task depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_all_failed_1.png)
-
-As soon as any upstream task is in the state `success`, the downstream task is set to the state `skipped` and does not run.
-
-![Screenshot of the Airflow UI with a DAG graph showing 1 failed, 1 successful, 1 upstream failed and 1 running upstream tasks and one downstream task in skipped state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_all_failed_2.png)
-
-Analogously, as soon as any upstream task is in the state `skipped`, the downstream task is set to the state `skipped` and does not run.
-
-![Screenshot of the Airflow UI with a DAG graph showing 1 failed, 1 running and 1 skipped, 1 upstream failed upstream tasks and one downstream task in skipped state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_all_failed_3.png)
-
-### Trigger rule `all_done`
-
-The `all_done` trigger rule will make a task wait until all upstream tasks are done with their execution.
-
-![Screenshot of the Airflow UI with a DAG graph showing 1 failed, 1 running, 1 skipped and one upstream failed upstream tasks and one downstream task in running state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_all_done_1.png)
-
-As soon as all tasks finish, no matter what their state is, the downstream task will run.
-
-![Screenshot of the Airflow UI with a DAG graph showing 1 failed, 1 successful, 1 skipped and one upstream failed upstream tasks and one downstream task in success state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_all_done_2.png)
-
-### Trigger rule `all_skipped`
-
-A task with the trigger rule `all_skipped` only runs when all upstream tasks have been skipped.
-
-![Screenshot of the Airflow UI with a DAG graph showing 4 skipped upstream tasks and one successful downstream task depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_all_skipped_1.png)
-
-As soon as any upstream task is in the state `success`, `failed`, or `upstream_failed`, the downstream task with the trigger rule `all_skipped` is set to the state `skipped` and does not run.
-
-![Screenshot of the Airflow UI with a DAG graph showing 1 successful, 3 running and one queued upstream task and one downstream task in skipped state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_all_skipped_2.png)
-
-### Trigger rule `one_failed`
-
-The `one_failed` trigger rule will make a task run as soon as at least one of its upstream tasks are in either the `failed` or `upstream_failed` state.
-
-![Screenshot of the Airflow UI with a DAG graph showing 1 failed, 3 running and 1 queued upstream tasks and one downstream task in success state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_one_failed_1.png)
-
-![Screenshot of the Airflow UI with a DAG graph showing 1 upstream failed, 3 running and 1 queued upstream tasks and one downstream task in success state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_one_failed_2.png)
-
-If all upstream tasks have completed and none of them are in the `failed` or `upstream_failed` state, the downstream task will be set to the state `skipped`.
-
-![Screenshot of the Airflow UI with a DAG graph showing 2 successful and 2 skipped upstream tasks and one downstream task in skipped state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_one_failed_3.png)
-
-### Trigger rule `one_success`
-
-The `one_success` trigger rule will make a task run as soon as at least one of its upstream tasks are in the `success` state.
-
-![Screenshot of the Airflow UI with a DAG graph showing 1 successful, 3 running and 1 queued upstream tasks and one downstream task in success state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_one_success_1.png)
-
-If all upstream tasks have been skipped, the downstream task with the `one_success` trigger rule is set to the state `skipped` as well.
-
-![Screenshot of the Airflow UI with a DAG graph showing 4 skipped upstream tasks and one downstream task in skipped state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_one_success_2.png)
-
-If all upstream tasks have completed and at least one of them is in the `failed` or `upstream_failed` state, the downstream task will be set to the state `upstream_failed`.
-
-![Screenshot of the Airflow UI with a DAG graph showing 2 failed, 1 upstream failed and 1 skipped upstream tasks and one downstream task in upstream_failed state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_one_success_3.png)
-
-### Trigger rule `one_done`
-
-The `one_done` trigger rule makes a task run as soon as at least one of its upstream tasks is in either the `success` or `failed` state. Upstream tasks with `skipped` or `upstream_failed` states are not considered.
-
-![Screenshot of the Airflow UI with a DAG graph showing 1 upstream failed, 1 skipped and 2 running upstream tasks and one downstream task in queued state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_one_done_1.png)
-
-Once one upstream task finishes (either in the `success` or `failed` state), the downstream task runs.
-
-![Screenshot of the Airflow UI with a DAG graph showing 1 successful, 1 upstream failed, 1 skipped and 1 running upstream tasks and one downstream task in success state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_one_done_2.png)
-
-If all upstream tasks are either in `skipped` or `upstream_failed` states, the downstream task with the `one_done` trigger rule is set to the state `skipped`.
-
-![Screenshot of the Airflow UI with a DAG graph showing 2 upstream failed and 2 skipped tasks and one downstream task in skipped state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_one_done_3.png)
-
-### Trigger rule `none_failed`
-
-The `none_failed` trigger rule makes a task run only when all upstream tasks have either succeeded or been skipped.
-
-![Screenshot of the Airflow UI with a DAG graph showing 2 successful and 2 skipped upstream tasks and one downstream task in success state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_none_failed_1.png)
-
-As soon as any upstream task is in the state `failed` or `upstream_failed`, the downstream task is set to the state `upstream_failed` and does not run.
-
-![Screenshot of the Airflow UI with a DAG graph showing 1 failed, 3 running upstream tasks and one downstream task in upstream_failed state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_none_failed_2.png)
-
-### Trigger rule `none_failed_min_one_success`
-
-Tasks using the `none_failed_min_one_success` trigger rule run only when three conditions are met:
-
-1. All upstream tasks are finished.
-2. No upstream tasks are in the `failed` or `upstream_failed` state.
-3. At least one upstream task is in the `success` state.
-
-![Screenshot of the Airflow UI with a DAG graph showing 2 successful and 2 skipped upstream tasks and one downstream task in success state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_none_failed_min_one_success_1.png)
-
-If any upstream task is in the `failed` or `upstream_failed` state, the downstream task is set to the state `upstream_failed` and does not run.
-
-![Screenshot of the Airflow UI with a DAG graph showing 1 failed, 1 successful, 1 skipped and 1 upstream failed upstream task and one downstream task in upstream_failed state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_none_failed_min_one_success_2.png)
-
-If all upstream tasks are in the `skipped` state, the downstream task is set to the state `skipped` and does not run.
-
-![Screenshot of the Airflow UI with a DAG graph showing 4 skipped upstream tasks and one downstream task in skipped state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_none_failed_min_one_success_3.png)
-
-### Trigger rule `none_skipped`
-
-Tasks using the `none_skipped` trigger rule run only when no upstream task is in the `skipped` state. Upstream tasks can be in any other state: `success`, `failed`, or `upstream_failed`.
-
-![Screenshot of the Airflow UI with a DAG graph showing 2 successful, 1 failed and 1 upstream failed upstream tasks and one downstream task in success state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_none_skipped_1.png)
-
-If any upstream task is in the `skipped` state, the downstream task is set to the state `skipped` and does not run.
-
-![Screenshot of the Airflow UI with a DAG graph showing 1 successful, 1 failed, 1 skipped and 1 upstream failed upstream tasks and one downstream task in skipped state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_none_skipped_2.png)
-
-### Trigger rule `always`
-
-A task with the trigger rule `always` runs as soon as the DAG run is started, regardless of the state of its upstream tasks.
-
-![Screenshot of the Airflow UI with a DAG graph showing 4 running upstream tasks and one downstream task in running state depending on all 4 upstream tasks](/img/guides/airflow-trigger-rules_always_1.png)
-
