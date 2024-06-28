@@ -252,7 +252,7 @@ Instead of creating a regular hibernation schedule, you can manually hibernate a
 If you need to run a task or DAG on a Deployment that is currently in hibernation, you can manually wake up a Deployment from hibernation before the end of its schedule.
 
 1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
-2. Click the **More Actions** menu of the Deployment you want to update, then select **Wake up from Hibernation**.
+2. Click the **More Actions** menu of the Deployment you want to update, then select **Wake Up Deployment**.
 3. Select one of the following options for how you want your Deployment to wake up:
 
     - **Wake until further notice**: Your Deployment wakes up immediately for an indefinite period and ignores any configured hibernation schedules.
