@@ -36,7 +36,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 ### Early access Airflow bug fixes
 
-- Fixed a bug where FAB config options, such as `[fab] update_fab_perms`, were not checking for values in the deprecated webserver config section, for example, `[webserver] update_fab_perms` ([#40317](https://github.com/apache/airflow/pull/40317))
+- Fixed a bug where FAB config options, such as `[fab] update_fab_perms`, were not checking for values in the deprecated webserver config section. For example, `[webserver] update_fab_perms` ([#40317](https://github.com/apache/airflow/pull/40317))
 
 ### Additional improvements
 

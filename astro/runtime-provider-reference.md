@@ -29,7 +29,7 @@ docker run --rm quay.io/astronomer/astro-runtime:11.0.0 pip freeze | grep apache
 ## Astro Runtime 11.6.0
 
 <Tabs
-    groupid="astro-runtime-1150"
+    groupid="astro-runtime-1160"
     defaultValue="standard"
     values={[
         {label: 'Standard', value: 'standard'},
