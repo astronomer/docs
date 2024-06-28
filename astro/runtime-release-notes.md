@@ -31,7 +31,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 ## Astro Runtime 11.6.0
 
-- Release date: June 25, 2024
+- Release date: June 28, 2024
 - Airflow version: 2.9.2
 
 ### Early access Airflow bug fixes
