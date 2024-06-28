@@ -116,7 +116,7 @@ You can check if the service that you want to connect Airflow to is available th
 gcloud services list --available --filter="name:googleapis.com"
 ```
 
-If you don't see your service listed, open a support case with [Astronomer support](astro-support.md) to set up the necessary PSC connectivity.
+If you don't see your service listed, open a support case with [Astronomer support](astro-support.md) to set up the necessary PSC connectivity and provide a Service attachment URI in the following format: `projects/SERVICE_PROJECT/regions/REGION/serviceAttachments/SERVICE_NAME`.
 
 </TabItem>
 
