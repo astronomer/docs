@@ -102,7 +102,7 @@ This section explains how to use the [Airflow API's Datasets endpoint](https://a
 1. In your upstream Deployment, which is the Deployment for which you did **not** create an API Token, in the Deployment's **Environment Variables** tab in your Deployment's **Environment** settings, create an environment variable for your API token and use `API_TOKEN` for the key.
 2. For your downstream Deployment, follow the guidance in [Make requests to the Airflow REST API - Step 2](https://docs.astronomer.io/astro/airflow-api#step-2-retrieve-the-deployment-url) to obtain the Deployment URL for your downstream Deployment. The Deployment URL should be in the format of `clq52ag32000108i8e3v3acml.astronomer.run/dz3uu847`.
 3. In your upstream Deployment, use Variables in the Astro UI to create an environment variable where you can store your downstream Deployment URL, using `DEPLOYMENT_URL` for the key.
-4. In the upstream Deployment, add the following DAG to your Astro project running in the upstream Deployment. In the `get_bear` task, the TaskFlow API automatically registers `MY_DATASET` as an outlet Dataset. This creates an update to this Dataset in the _same_ Airflow deployment. The dependent `on_dataset_changed` task creates or updates the Dataset via a request to the Airflow API Datasets endpoint in a _different_ Airflow deployment.
+4. In the upstream Deployment, add the following DAG to your Astro project running in the upstream Deployment. In the `get_bear` task, the TaskFlow API automatically registers `MY_DATASET` as an outlet Dataset. This creates an update to this Dataset in the _same_ Airflow deployment. The dependent `update_dataset_via_api` task creates or updates the Dataset via a request to the Airflow API Datasets endpoint in a _different_ Airflow deployment.
 
 ```python
 from airflow.datasets import Dataset
@@ -128,7 +128,7 @@ def producer_dag():
         return MY_DATASET
 
     @task
-    def on_dataset_changed(dataset: Dataset):
+    def update_dataset_via_api(dataset: Dataset):
         print('Oh! This is the bears dataset!')
         payload = {
             'dataset_uri': dataset.uri
@@ -145,7 +145,7 @@ def producer_dag():
         print(response.json())
 
     bear = get_bear()
-    on_dataset_changed(bear)
+    update_dataset_via_api(bear)
 
 producer_dag()
 
