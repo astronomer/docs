@@ -91,8 +91,6 @@ To use Airflow Datasets to create cross-deployment dependencies, you should have
 
 This section explains how to use the [Airflow API's Datasets endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Dataset) to trigger the downstream DAG in another deployment when a dataset is updated. Typical dataset implementation only works for DAGs in the same Airflow deployment, but by using the Airflow API, you can implement this pattern across deployments.
 
-While you can also use the HttpOperator or a custom Python function in an `@task` decorated task to make the API request to update the dataset, an advantage of using a listener is that the dataset is updated and the downstream DAG runs whenever _any_ DAG updates the dataset. This means you don't need to implement an API call in every upstream DAG that updates the same dataset.
-
 #### Prerequisites
 
 - Two [Astro Deployments](https://docs.astronomer.io/astro/create-deployment).
