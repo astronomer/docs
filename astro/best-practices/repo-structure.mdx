@@ -4,17 +4,7 @@ sidebar_label: 'Organizing code for CI/CD'
 id: repo-structure
 ---
 
-export const Highlight = ({children, color}) => (
-  <span
-    style={{
-      backgroundColor: color,
-      borderRadius: '4px',
-      color: '#fff',
-      padding: '0.2rem 0.5rem',
-    }}>
-    {children}
-  </span>
-);
+import MostCommonBadge from '@site/src/components/MostCommonBadge';
 
 Astro supports a range of options when it comes to organizing your project code and setting up Continuous Integration and Continuous Delivery (CI/CD) pipelines for automated deploys to Astro. 
 
@@ -77,7 +67,36 @@ Astronomer maintains guides with code templates for a number of popular CI/CD to
 
 :::
 
-### Option 2: multiple repositories to one Deployment
+### Option 2: one repository with multiple permanent branches to multiple Deployments with CI/CD
+
+<MostCommonBadge/>
+
+When your DAGs are critical to your business, the ability to test your DAGs is critical, as well. Setting up automated deploys from multiple permanent branches of a single repository allows you to implement a robust testing regime for the code you intend to deploy to production. Astronomer recommends this approach when:
+- You have business-critical DAGs.
+- You can set up and maintain a somewhat complex CI/CD pipeline.
+
+This strategy requires:
+- One Astro project.
+- One Astro Workspace for your project.
+- At least two permanent branches in your repository, each representing an environment. Astro recommends naming the branches `main` and `dev`.
+- At least two Astro Deployments.
+
+Pros of this approach:
+- You can test code changes to your DAGs in an isolated environment on Astro before deploying the changes to production.
+- It is scaleable: you can map additional branches to additional Deployments, allowing for more testing or ephemeral Deployments for feature development. See [Manage dev Deployments on Astro](manage-dev-deployments). Also, if you work at a larger organization, you can create a Workspace and Astro project for each team or business use case.
+- It supports separate environment configurations. If you use Snowflake, for example, your development Deployment on Astro can use a virtual data warehouse for development (`DWH Dev`), and your production Deployment can use a different virtual data warehouse for production (`DWH Prod`).
+
+Cons of this approach:
+- Restricting access to Astro settings or to particular Astro projects is more complicated to implement and maintain in subdirectories.
+- Dependencies and environments might be more difficult to manage, to the extent that they differ from project to project.
+
+:::tip
+
+For more guidance on setting up CI/CD for deploys to multiple Deployments from a single repository, see [Multiple environments](https://www.astronomer.io/docs/astro/set-up-ci-cd#multiple-environments).
+
+:::
+
+### Option 3: multiple repositories to one Deployment
 
 A common use case for multiple repositories is keeping configuration code separate from DAG code. Astronomer recommends this approach when:
 - You have strict security requirements for who can update particular project files, such as Astro Deployment settings.
@@ -106,35 +125,4 @@ This strategy is required when [configuring Deployments programmatically](https:
 
 :::
 
-### Option 3: one repository with multiple permanent branches to multiple Deployments with CI/CD <Highlight color="#9478d2">Most common</Highlight>
 
-:::tip
-
-This option is recommended for most teams.
-
-:::
-
-When your DAGs are critical to your business, the ability to test your DAGs is critical, as well. Setting up automated deploys from multiple permanent branches of a single repository allows you to implement a robust testing regime for the code you intend to deploy to production. Astronomer recommends this approach when:
-- You have business-critical DAGs.
-- You can set up and maintain a somewhat complex CI/CD pipeline.
-
-This strategy requires:
-- One Astro project.
-- One Astro Workspace for your project.
-- At least two permanent branches in your repository, each representing an environment. Astro recommends naming the branches `main` and `dev`.
-- At least two Astro Deployments.
-
-Pros of this approach:
-- You can test code changes to your DAGs in an isolated environment on Astro before deploying the changes to production.
-- It is scaleable: you can map additional branches to additional Deployments, allowing for more testing or ephemeral Deployments for feature development. See [Manage dev Deployments on Astro](manage-dev-deployments). Also, if you work at a larger organization, you can create a Workspace and Astro project for each team or business use case.
-- It supports separate environment configurations. If you use Snowflake, for example, your development Deployment on Astro can use a virtual data warehouse for development (`DWH Dev`), and your production Deployment can use a different virtual data warehouse for production (`DWH Prod`).
-
-Cons of this approach:
-- Restricting access to Astro settings or to particular Astro projects is more complicated to implement and maintain in subdirectories.
-- Dependencies and environments might be more difficult to manage, to the extent that they differ from project to project.
-
-:::tip
-
-For more guidance on setting up CI/CD for deploys to multiple Deployments from a single repository, see [Multiple environments](https://www.astronomer.io/docs/astro/set-up-ci-cd#multiple-environments).
-
-:::
