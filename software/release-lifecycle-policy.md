@@ -91,7 +91,7 @@ The following tables contain the exact lifecycle for each published version of A
 | ---------------- | ----------------- | ----------------------- |
 | 0.33             | October 13, 2023  | June 2024               |
 | 0.34             | February 13, 2024 | August 2025             |
-| 0.35             | May 31, 2024 | August 2025             |
+| 0.35             | July 1, 2024      | January 2026            |
 
 ### LTS
 
