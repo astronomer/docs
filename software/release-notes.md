@@ -34,7 +34,7 @@ Release date: July 1, 2024
 
 Deploy rollbacks are a new way to ensure that your Deployments can keep running after a broken code deploy or upgrade. When you trigger a rollback to a past deploy, your previous image and/or DAG code are redeployed and start running.
 
-To configure deploy rollbacks, see [LIKNK]
+To configure deploy rollbacks, see [Deploy rollbacks](deploy-rollbacks.md).
 
 ### Support for MySQL
 
@@ -48,7 +48,7 @@ kubectl create secret generic astronomer-bootstrap \
 
 ### Create Teams without using an IdP
 
-Astronomer [Teams](import-idp-groups.md) can now be created without associating the team to an existing identity provider (IdP) group. Use local Teams to efficiently manage permissions for groups that might not exist in your identity provider. See [LINK] for configuration steps.
+Astronomer [Teams](import-idp-groups.md) can now be created without associating the team to an existing identity provider (IdP) group. Use local Teams to efficiently manage permissions for groups that might not exist in your identity provider.
 
 ### Addiitonal improvements
 
