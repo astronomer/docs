@@ -28,7 +28,7 @@ Configure the following values in your `values.yaml` file:
           enableUpdateDeploymentImageEndpoint: true
   # Enable rollback feature flag
   global:
-      deployRollbackEnabled
+      deployRollbackEnabled: true
   # Enable cleanup feature flag
   houston:
       cleanupDeployRevisions:
