@@ -13,11 +13,10 @@ Deploy rollbacks are an emergency option if a Deployment unexpectedly stops work
 - Your Deployment must be on Astro Runtime 5 (Airflow 2.3) or later. Rolling back to any version before Astro Runtime 5 is not supported. 
 - Your Deployment must be configured to use image or DAG-only deploys. Rollbacks are not supported for NFS deploys and Git sync deploys.
 - Your Software installation must have `global.dagOnlyDeployment.enabled=True`
-- Your Software installation must have `enableUpdateDeploymentImageEndpoint: true`
   
 ## Configure deploy rollbacks
 
-To enable deploy rollbacks, you must have them enabled for your entire installation. This configuration allows individual Deployment users with sufficient permissions can choose to enable them in specific Deployments.
+To use deploy rollbacks, you must have them enabled for your entire installation. This configuration allows individual Deployment users with sufficient permissions to optionally enable them in specific Deployments.
 
 Configure the following values in your `values.yaml` file:
   ```yaml
@@ -40,7 +39,7 @@ Configure the following values in your `values.yaml` file:
           olderThan:  90
   ```
 
-After you set this configuration, you can enable deploy rollbacks for individual Deployments. This configuration also enables cleanup of any deploy information that are older than 90 days.
+After you set this configuration, you can enable deploy rollbacks for individual Deployments. This configuration also enables cleanup of any deploy information that are older than 90 days. See [Apply a Config Change](software/apply-platform-config.md) for more information on how to modify these values.
 
 ## Enable deploy rollbacks
 
