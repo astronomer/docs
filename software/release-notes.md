@@ -28,7 +28,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 ## 0.35.0
 
-Release date: June 28, 2024
+Release date: July 1, 2024
 
 ### Use deploy rollbacks to run previous versions of your code
 
