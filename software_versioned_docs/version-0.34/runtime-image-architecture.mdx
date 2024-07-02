@@ -1,3 +1,10 @@
+---
+sidebar_label: "Architecture"
+title: "Astro Runtime architecture"
+id: runtime-image-architecture
+description: Reference documentation for Astro Runtime, a differentiated distribution of Apache Airflow.
+---
+
 Astro Runtime is a production ready, data orchestration tool based on Apache Airflow that is distributed as a Docker image and is required by all Astronomer products. It is intended to provide organizations with improved functionality, reliability, efficiency, and performance.
 
 Deploying Astro Runtime is a requirement if your organization is using Astro. Astro Runtime includes the following features:
@@ -20,7 +27,7 @@ Astro Runtime versions are released regularly and use [semantic versioning](http
 - **Minor** versions are released for functional changes. This includes API or DAG specification changes that are backward compatible, which might include new minor versions of `astronomer-providers` and `openlineage-airflow`.
 - **Patch** versions are released for bug and security fixes that resolve unwanted behavior. This includes new patch versions of Apache Airflow, `astronomer-providers`, and `openlineage-airflow`.
 
-Every version of Astro Runtime correlates to an Apache Airflow version. All Deployments on <span>{props.product}</span> must run only one version of Astro Runtime, but you can run different versions of Astro Runtime on different Deployments within a given cluster or Workspace.
+Every version of Astro Runtime correlates to an Apache Airflow version. All Deployments must run only one version of Astro Runtime, but you can run different versions of Astro Runtime on different Deployments within a given cluster or Workspace.
 
 For a list of supported Astro Runtime versions and more information on the Astro Runtime maintenance policy, see [Astro Runtime versioning and lifecycle policy](runtime-version-lifecycle-policy).
 
@@ -221,3 +228,10 @@ The following table lists the operating systems and architectures supported by e
 | 11            | 2.9                    | Debian 11.8 (bullseye) | AMD64 and ARM64 |
 
 Astro Runtime 6.0.4 and later images are multi-arch and support AMD64 and ARM64 processor architectures for local development. Docker automatically uses the correct processor architecture based on the computer you are using.
+
+
+## Related documentation
+
+- [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes)
+- [Upgrade Astro Runtime](manage-airflow-versions.md)
+- [Astro Runtime versioning and lifecycle policy](runtime-version-lifecycle-policy)

@@ -139,9 +139,14 @@ module.exports = {
     softwareNav: {
       items: [
         {
-          label: '0.34 (Latest)',
+          label: '0.35 (Latest)',
           to: '/docs/software/',
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
+        },
+        {
+          label: '0.34',
+          to: '/docs/software/0.34/',
+          activeBaseRegex: `(software\/0.34)+`,
         },
         {
           label: '0.33',
@@ -297,7 +302,7 @@ module.exports = {
         lastVersion: 'current',
         versions: {
           current: {
-            label: '0.34',
+            label: '0.35',
             path: '',
             banner: 'none',
           },
