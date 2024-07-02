@@ -21,6 +21,7 @@ The following table shows version compatibility information for all currently su
 | v0.32               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions |
 | v0.33               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions |
 | v0.34               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions |
+| v0.35               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions |
 
 See [Kubernetes version support table and policy](#kubernetes-version-support-table-and-policy) for Astronomer platform compatibility with Kubernetes.
 
@@ -51,6 +52,7 @@ See the following table for all supported Kubernetes versions in each maintained
 |       0.33.3        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
 |       0.34.0        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
 |       0.34.1 - 0.34.2        |                 |                 |                |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️         |
+|       0.35.0        |                 |                 |                |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️         |
 
 For more information on upgrading Kubernetes versions, follow the guidelines offered by your cloud provider.
 
@@ -61,7 +63,7 @@ For more information on upgrading Kubernetes versions, follow the guidelines off
 
 ## Airflow chart compatibility reference
 
-Astronomer Software Deployments utilize the [Astronomer-distributed Helm chart for Apache Airflow](https://github.com/astronomer/airflow-chart). A Deployment's Airflow chart defines how a Deployment autoscales Pods and interacts with other components in your cluster. 
+Astronomer Software Deployments utilize the [Astronomer-distributed Helm chart for Apache Airflow](https://github.com/astronomer/airflow-chart). A Deployment's Airflow chart defines how a Deployment autoscales Pods and interacts with other components in your cluster.
 
 Use the following table to see the Airflow Helm chart version for each supported version of Astronomer Software. To view the Airflow Helm chart for an unsupported version of Astronomer Software, open the default Astronomer Helm chart in the [`astronomer/astronomer` repository](https://github.com/astronomer/astronomer/blob/master/charts/astronomer/values.yaml) and select the **Tag** that corresponds to the unsupported version. The value of `airflowChartVersion` is the Airflow Helm chart version.
 

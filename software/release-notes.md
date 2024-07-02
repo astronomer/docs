@@ -26,6 +26,75 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## 0.35.0
+
+Release date: July 1, 2024
+
+### Use deploy rollbacks to run previous versions of your code
+
+Deploy rollbacks are a new way to ensure that your Deployments can keep running after a broken code deploy or upgrade. When you trigger a rollback to a past deploy, your previous image and/or DAG code are redeployed and start running.
+
+To configure deploy rollbacks, see [Deploy rollbacks](deploy-rollbacks.md).
+
+### Support for MySQL
+
+You can now configure Astronomer Software to use a MySQL database as the backend for both Houston and your Airflow Deployments. To connect your Astronomer Software installation to a MySQL database, you update the `astronomer-bootstrap` secret in your cluster to point to your database:
+
+```sh
+kubectl create secret generic astronomer-bootstrap \
+  --from-literal connection="jdbc:mysql://host1:33060/mydb" \
+  --namespace astronomer
+```
+
+### Create Teams without using an IdP
+
+Astronomer [Teams](import-idp-groups.md) can now be created without associating the team to an existing identity provider (IdP) group. Use local Teams to efficiently manage permissions for groups that might not exist in your identity provider.
+
+### Addiitonal improvements
+
+- DAG-only deploys are now fully compatible with OpenShift clusters.
+- You can now set a `priorityClass` to pods created by `templates/trust-private-ca-on-all-nodes/containerd-daemonset.yaml`. This allows you to set a high priority class for certain pods to force an evication for important processes.
+
+### Bug fixes
+
+- The Astro CLI now shows an error if you attempt to deploy code to a Software installation where `astronomer.houston.config.deployments.registry.protectedCustomRegistry.updateRegistry.host` is not set.
+- Fixed an issue where Jetstream resources were being created even when `global.nats.jetStream.enabled = false` in the Software platform configuration.
+- Fixed an issue where the default `astroUnitsEnabled` value in `values.yaml` was not respected when creating Deployments via the Houston API, resulting in Deployment creation failing when the resource strategy is not explicitly specified.
+- Fixed an issue where Houston could produce errors if the username for a Postgres database included special characters.
+- Fixed an issue where pagination on specific Software UI screens did not behave as expected.
+- Fixed an issue where the `lastUsedAt` data for a service account was not updated when the service account deployed an Airflow image.
+- Fixed a bug causing disruption to retrieval of logs for users with External Elasticsearch.
+- Fixed a bug where a blank page is displayed when navigating to the user detail of a user who has been invited to a Workspace, but have not yet accepted an invitation.
+- Fixed an issue where a pod limit was enforced for a custom resource based Deployment with the K8s executor.
+- Fixed a bug where the pgbouncer calculator failed to provision Deployment resources.
+- Resolved an issue where switching from DAG deploy to image deploy caused an error state.
+- Fixed an issue where the Astro Runtime 11.2.0 wouldn't load the webserver when creating a Deployment.
+- Fixed a bug where containerd images failed to load for some cloud providers.
+- Fixed an issue where a patch error occured during an Astro Runtime upgrade when Pod Disruption Budget (PDB) was enabled.
+- Resolved an issue where custom based resource Deployments were converted to AU-based after a platform upgrade.
+- Fixed a bug where the the dag-deploy server pod failed in OpenShift due to an fsGroup error.
+- Fixed a bug that sometimes prevented `dagDeployment` server and client resources from being configurable.
+- Resolved the following vulnerabilities:
+
+    - [GHSA-m425-mq94-257g](https://github.com/advisories/GHSA-m425-mq94-257g)
+    - [GHSA-36jr-mh4h-2g58](https://github.com/advisories/GHSA-36jr-mh4h-2g58)
+    - [GHSA-xpw8-rcwv-8f8p](https://github.com/advisories/GHSA-xpw8-rcwv-8f8p)
+    - [GHSA-9763-4f94-gfch](https://github.com/advisories/GHSA-9763-4f94-gfch)
+    - [CVE-2021-33194](https://nvd.nist.gov/vuln/detail/CVE-2021-33194)
+    - [CVE-2021-38561](https://nvd.nist.gov/vuln/detail/CVE-2021-38561)
+    - [CVE-2022-21698](https://nvd.nist.gov/vuln/detail/CVE-2022-21698)
+    - [CVE-2023-1370](https://nvd.nist.gov/vuln/detail/CVE-2023-1370)
+    - [CVE-2023-36665](https://nvd.nist.gov/vuln/detail/CVE-2023-36665)
+    - [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/CVE-2023-39325)
+    - [CVE-2023-45283](https://nvd.nist.gov/vuln/detail/CVE-2023-45283)
+    - [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/CVE-2023-45288)
+    - [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/CVE-2024-21626)
+    - [CVE-2024-25710](https://nvd.nist.gov/vuln/detail/CVE-2024-25710)
+    - [CVE-2024-26147](https://nvd.nist.gov/vuln/detail/CVE-2024-26147)
+    - [CVE-2024-26308](https://nvd.nist.gov/vuln/detail/CVE-2024-26308)
+    - [CVE-2024-28757](https://nvd.nist.gov/vuln/detail/CVE-2024-28757)
+    - [CVE-2024-36361](https://nvd.nist.gov/vuln/detail/CVE-2024-36361)
+
 ## 0.34.2
 
 Release date: May 31, 2024
@@ -48,7 +117,7 @@ Release date: May 31, 2024
             memory: 400Mi
     ```
 
-- You can now configure a priorityClass for all Pods created by the Containerd daemonset. This ensures that Pods generated by the daemonset can be reliably spun up on new nodes whenever they're removed from an existing node. To configure this, add the following lines to your `values.yaml` file and apply the configuration to your platform: <!-- https://github.com/astronomer/issues/issues/6366 -->
+- You can now configure a priorityClass for all Pods created by the Containerd daemonset. This ensures that Pods generated by the daemonset can be reliably spun up on new nodes whenever they're removed from an existing node. To configure this, add the following lines to your `values.yaml` file and apply the configuration to your platform:
 
     ```yaml
     global:
