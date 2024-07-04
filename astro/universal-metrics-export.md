@@ -14,19 +14,21 @@ import HostedBadge from '@site/src/components/HostedBadge';
 :::publicpreview
 :::
 
-You can export comprehensive metrics about your Astro Deployments from Astro directly to any third-party monitoring and alerting systems. The universal metrics exporter uses the [Prometheus data model](https://prometheus.io/docs/concepts/data_model/) format using the remote-write capability to ensure that measurements about your Astro Deployments to your preferred monitoring tools.
+You can export comprehensive metrics about your Astro Deployments directly to any third-party monitoring and alerting system using the universal metrics exporter in Astro. The universal metrics exporter uses the [Prometheus data model](https://prometheus.io/docs/concepts/data_model/) format using the remote-write capability to export metrics about your Astro Deployments to your preferred monitoring tools.
 
 ## Metric types
 
-- Airflow application level metrics: Metrics defined by Airflow, or custom metrics you write, about the health, success, and performance of data pipelines orchestrated and executed by Airflow. You can see the specific list of [application metrics](https://github.com/astronomer/ap-vendor/blob/main/statsd-exporter/include/mappings-gen2.yml) and read their corresponding descriptions in the [Airflow metrics descriptions](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/metrics.html#metric-descriptions).
+You can export the following types of metrics using the universal metrics exporter: 
 
-- Infrastructure level metrics: Metrics about running pods for the different Airflow components. These indicate of the use, health, and performance of the pods based on your workload and pipelines.
+- Airflow application level metrics: These are metrics defined by Apache Airflow that are related to the health, success, and performance of the DAGs that are orchestrated and executed by Airflow. You can see the specific list of [application metrics](https://github.com/astronomer/ap-vendor/blob/main/statsd-exporter/include/mappings-gen2.yml) and read their corresponding descriptions in the [Airflow metrics descriptions](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/metrics.html#metric-descriptions). For example, Airflow application metrics include the number of task instance failures, the number of SLA misses, and number of zombie tasks killed.
+
+- Infrastructure level metrics: Metrics about running pods for the different Airflow components. These indicate the usage, health, and performance of the pods based on your workload and pipelines. See the table below for the list of infrastructure metrics that Astro supports.
 
   | Name                                        | Description           |
   | ------------------------------------------- | --------------------- |
-  | `container_cpu_usage_seconds_total`         | CPU use               |
-  | `container_memory_working_set_bytes`        | Memory use            |
-  | `kubelet_stats_ephemeral_storage_pod_usage` | Ephemeral storage use |
+  | `container_cpu_usage_seconds_total`         | CPU usage               |
+  | `container_memory_working_set_bytes`        | Memory usage            |
+  | `kubelet_stats_ephemeral_storage_pod_usage` | Ephemeral storage usage |
   | `kube_pod_status_*`                         | Kubernetes pod status |
   | `kube_pod_labels`                           | Kubernetes pod label  |
 
@@ -43,7 +45,7 @@ You can export comprehensive metrics about your Astro Deployments from Astro dir
 
 ## Prerequisites
 
-- Bearer token or license key of your target data observability server
+- Supported Auth: Bearer token or license key, username and password, or custom HTTP header(s) of your target data observability server _(Optional)_
 - A Prometheus data endpoint
 - Network connectivity between your Astro resources and Prometheus endpoint
 
