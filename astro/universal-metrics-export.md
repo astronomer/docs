@@ -18,21 +18,13 @@ You can export comprehensive metrics about your Astro Deployments directly to an
 
 ## Metric types
 
-You can export the following types of metrics using the universal metrics exporter: 
+There are two types of metrics that you can export using the universal metrics exporter:
 
-- Airflow application level metrics: These are metrics defined by Apache Airflow that are related to the health, success, and performance of the DAGs that are orchestrated and executed by Airflow. You can see the specific list of [application metrics](https://github.com/astronomer/ap-vendor/blob/main/statsd-exporter/include/mappings-gen2.yml) and read their corresponding descriptions in the [Airflow metrics descriptions](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/metrics.html#metric-descriptions). For example, Airflow application metrics include the number of task instance failures, the number of SLA misses, and number of zombie tasks killed.
+- Airflow application level metrics
+- Infrastructure level metrics
 
-- Infrastructure level metrics: Metrics about running pods for the different Airflow components. These indicate the usage, health, and performance of the pods based on your workload and pipelines. See the table below for the list of infrastructure metrics that Astro supports.
+Both application and infrastructure metrics have the following metadata labels associated with them:
 
-  | Name                                        | Description           |
-  | ------------------------------------------- | --------------------- |
-  | `container_cpu_usage_seconds_total`         | CPU usage               |
-  | `container_memory_working_set_bytes`        | Memory usage            |
-  | `kubelet_stats_ephemeral_storage_pod_usage` | Ephemeral storage usage |
-  | `kube_pod_status_*`                         | Kubernetes pod status |
-  | `kube_pod_labels`                           | Kubernetes pod label  |
-
-- Metadata labels: Both application and infrastructure metrics have the following metadata labels associated with them.
   - `cloud_provider`
   - `cloud_region`
   - `cluster_organization_id`
@@ -42,6 +34,33 @@ You can export the following types of metrics using the universal metrics export
   - `deploymentId`
   - `organizationId`
   - `workspaceId`
+
+Use these metadata labels to indentify each individual metric with its corresponding environment in Astro.
+
+### Airflow application metrics
+
+Airflow application metrics are defined by Apache Airflow and are related to the health, success, and performance of the DAGs that are orchestrated and executed by Airflow. 
+
+For example, Airflow application metrics include:
+- The number of task instance failures in your Deployment
+- The number of SLA misses in your Deployment
+- The number of zombie tasks killed
+- The historical count of scheduler hearbeats
+
+To see the complete list of Airflow application metrics that Astro supports, see [the Astro StatsD repository](https://github.com/astronomer/ap-vendor/blob/main/statsd-exporter/include/mappings-gen2.yml). To learn more, read the [descriptions of each metric Airflow metrics descriptions in Airflow documentation.
+](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/metrics.html#metric-descriptions).
+
+### Infrastructure level metrics
+
+Infrastructure level metrics can help you understand information about the individual nodes and pods that run each Airflow component. These metrics indicate the usage, health, and performance of the pods based on your workload and use case. See the table below for the list of infrastructure metrics that Astro supports.
+
+  | Name                                        | Description           |
+  | ------------------------------------------- | --------------------- |
+  | `container_cpu_usage_seconds_total`         | CPU usage               |
+  | `container_memory_working_set_bytes`        | Memory usage            |
+  | `kubelet_stats_ephemeral_storage_pod_usage` | Ephemeral storage usage |
+  | `kube_pod_status_*`                         | Kubernetes pod status |
+  | `kube_pod_labels`                           | Kubernetes pod label  |
 
 ## Prerequisites
 
