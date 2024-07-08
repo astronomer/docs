@@ -61,6 +61,7 @@ Infrastructure level metrics can help you understand information about the indiv
   | `kubelet_stats_ephemeral_storage_pod_usage` | Ephemeral storage usage |
   | `kube_pod_status_*`                         | Kubernetes pod status |
   | `kube_pod_labels`                           | Kubernetes pod label  |
+  | `kube_pod_container_status_terminated_reason` | Kubernetes container termination reason |
 
 ## Prerequisites
 
