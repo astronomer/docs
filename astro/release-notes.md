@@ -40,11 +40,16 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 :::publicpreview
 :::
 
-You can now export comprehensive, operational metrics about the performance of your Astro Deployments to third-party observability tools, such as New Relic, using the new universal Metrics Exporter. This new feature allows you to configure an endpoint to send Astro metrics formatted using the Prometheus data model using remote-write capability, which means you can integrate your Astro observability metrics directly into your existing monitoring tools.
+You can now export comprehensive, operational metrics about the performance of your Astro Deployments to third-party observability tools, such as New Relic, using the new universal Metrics Exporter. This new feature allows you to configure an endpoint to send Astro metrics using the Prometheus data model, which means you can integrate your Astro observability metrics directly into your existing monitoring tools. See [Export metrics from Astro](https://www.astronomer.io/docs/astro/export-metrics) for setup instructions.
 
 ### Added ephemeral storage metrics to Astro Deployment Analytics
 
+To assist you in determining the amount of custom ephemeral storage to configure for your workers and schedulers, you can now use Deployment Analytics to see relevant usage metrics. These include:
 
+- **Ephemeral Storage Usage** metric that shows a % of usage against the configured limit for your Celery Workers, KubernetesPodOperator, Kubernetes Executor, and Scheduler.
+- **Dynamic Y-axis Scaling** to the Celery Worker, KPO/KE, and Scheduler Deployment analytics panel to include dynamic zooming.
+
+See [Deployment Analytics](https://www.astronomer.io/docs/astro/deployment-metrics#deployment-analytics) for more information.
 
 ### Additional improvements
 
