@@ -285,7 +285,7 @@ All Astro clusters are pre-configured with the following AWS PrivateLink endpoin
 - Elastic Load Balancing (ELB)  - Interface Endpoint
 - AWS Security Token Service (AWS STS) - Interface Endpoint
 
-To request additional endpoints, or assistance connecting to other AWS services please follow the next steps:
+To request additional endpoints, or assistance connecting to other AWS services, complete the following steps:
 
 #### AWS Service Endpoint
 
