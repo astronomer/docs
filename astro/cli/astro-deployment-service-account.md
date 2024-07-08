@@ -4,12 +4,12 @@ title: "astro deployment service-account"
 id: astro-deployment-service-account
 description: Manage service accounts (Software only).
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-:::info 
+:::info
 
-This command is available only if you're authenticated to an Astronomer Software installation. 
+This command is available only if you're authenticated to an Astronomer Software installation.
 
 :::
 
@@ -21,12 +21,12 @@ This command includes three subcommands: `create`, `delete`, and `list`
 
 ```sh
 # Creates a Deployment-level service account
-astro deployment service-account create --deployment-id=<your-deployment-id> --label=<your-service-account-label> 
+astro deployment service-account create --deployment-id=<your-deployment-id> --label=<your-service-account-label>
 
 # Deletes a Deployment-level service account
-astro deployment service-account delete <your-service-account-label> 
+astro deployment service-account delete <your-service-account-label>
 
-# Shows the name, ID, and API key for each service account in a specific Deployment.
+# Shows the name, ID, and API token for each service account in a specific Deployment.
 astro deployment service-account list
 ```
 

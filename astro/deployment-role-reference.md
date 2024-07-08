@@ -153,13 +153,6 @@ This document contains all available permissions that you can assign to a [custo
 - `deployment.alerts.update`: Update Deployment-level Astro alerts in the Astro UI or through the Astro API.
 - `deployment.alerts.delete`: Delete Deployment-level Astro alerts in the Astro UI or through the Astro API.
 
-## Deployment ApiKeys (Deprecated)
-
-Astro API Keys are deprecated and will no longer be available on June 1, 2024. If you still use API Keys, you can use these permissions. Learn more about using [Deployment API Tokens](deployment-api-tokens.md), which replace Deployment API Key functionality.
-
-- `deployment.apiKeys.get`: View Deployment API keys.
-- `deployment.apiKeys.delete`: Delete Deployment API keys.
-
 ## Deployment ApiTokens
 
 - `deployment.apiTokens.get`: View Deployment API tokens in the Astro UI or through the Astro API.

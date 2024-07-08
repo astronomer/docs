@@ -5,7 +5,7 @@ id: deployment-api-tokens
 description: Use Deployment API tokens to automate code deploys and configuration changes to a Deployment.
 ---
 
-A Deployment API token is a credential that you can use to programmatically access a specific Deployment. They are a direct replacement for [Deployment API keys](api-keys.md), which are deprecated. Using a Deployment API token, you can:
+A Deployment API token is a credential that you can use to programmatically access a specific Deployment. They are a direct replacement for [Deployment API keys](api-keys.md), which are not supported. Using a Deployment API token, you can:
 
 - [Push code](deploy-code.md) to a Deployment.
 - Update the Deployment's [environment variables](environment-variables.md).
@@ -93,12 +93,6 @@ export ASTRO_API_TOKEN=<your-token>
 ```
 
 After you configure the `ASTRO_API_TOKEN` environment variable, you can run Astro CLI commands related to the Deployment for which the Deployment API token was created. For example, [`astro deployment inspect`](cli/astro-deployment-inspect.md) or [`astro deployment logs`](cli/astro-deployment-logs.md).
-
-:::info
-
-If you have configured both a Deployment API token using `ASTRO_API_TOKEN` and Deployment API keys (deprecated) with `ASTRONOMER_KEY_ID` or `ASTRONOMER_KEY_SECRET`, the Deployment API token takes precedence.
-
-:::
 
 When using a Deployment API token for automation, Astronomer recommends storing `ASTRO_API_TOKEN` as a secret.
 
