@@ -149,4 +149,5 @@ Use a manual process to renew TLS certificates when your organization has its ow
    ```sh
    kubectl rollout restart deployments -n astronomer
    kubectl rollout restart statefulsets -n astronomer
+   kubectl rollout restart daemonsets -n astronomer
    ```
