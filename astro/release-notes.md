@@ -25,6 +25,31 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## July 9, 2024
+
+### Additional improvements
+
+- Fixed a bug that prevented adding a date input for a DAG filter in the Astro UI.
+
+## July 2, 2024
+
+### Export metrics about your Astro Deployments to observability tools
+
+<TeamBadge/>
+
+:::publicpreview
+:::
+
+You can now export comprehensive, operational metrics about the performance of your Astro Deployments to third-party observability tools, such as New Relic, using the new universal Metrics Exporter. This new feature allows you to configure an endpoint to send Astro metrics formatted using the Prometheus data model using remote-write capability, which means you can integrate your Astro observability metrics directly into your existing monitoring tools.
+
+### Added ephemeral storage metrics to Astro Deployment Analytics
+
+
+
+### Additional improvements
+
+- The `Scheduler heartbeat not found` Deployment health incident is downgraded to `Warning` from `Critical`.
+
 ## June 25, 2024
 
 ### Customer managed workload identity for AWS
