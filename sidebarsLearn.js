@@ -114,6 +114,7 @@ module.exports = {
           items: [
             'logging',
             'custom-xcom-backend-strategies',
+            'airflow-cluster-policies',
             'data-quality',
             'deferrable-operators',
             'dynamically-generating-dags',
@@ -124,8 +125,7 @@ module.exports = {
             'airflow-pools',
             'airflow-setup-teardown',
             'sharing-code-multiple-projects',
-            'testing-airflow',
-            'airflow-cluster-policies'
+            'testing-airflow'
           ],
         },
       ],

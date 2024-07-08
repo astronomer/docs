@@ -38,6 +38,7 @@ There are three types of cluster policies you can use in Airflow:
 - `dag_policy`: This policy is applicable to a DAG object, and takes a DAG object `dag` as a parameter. It runs at the time the DAG is loaded from the `DagBag`.
 - `task_policy` : This policy is applicable to a Task object. It gets executed when the task is created during parsing of the task from DagBag at load time. This means that the whole task definition can be altered in the task policy. It does not relate to a specific task running in a `DagRun`. The `task_policy` defined is applied to all the task instances that will be executed in the future.
 - `task_instance_mutation_hook` : This policy is applicable to a Task Instance, which is an instance of a Task object and is created at run time. It takes a TaskInstance object `task_instance` as a parameter. This policy applies not to a task but to the instance of a task that relates to a particular `DagRun`. It is only applied to the currently executed run (i.e. instance) of that task. It is applied to a task instance in an Airflow worker, not in the dag file processor, just before the task instance is executed. 
+- `pod_mutation_hook`: This policy is applicable to a Kubernetes Pod launched by `KubernetesPodOperator` or `KubernetesExecutor` at runtime. It takes a Pod object `pod` as a parameter. This policy is applied to the `kubernetes.client.models.V1Pod` object before it is passed to the Kubernetes client for scheduling. 
 
 ## How cluster policies work
 
@@ -45,7 +46,7 @@ Cluster policies can be implemented using either your `airflow_local_settings.py
 
 Once implemented, if any DAGs or tasks are not compliant with your set policies, the policy will raise the `AirflowClusterPolicyViolation` exception and the DAG will not be loaded. This is exception is displayed on the Airflow web UI as an `import error`. 
 
-You can use `AirflowClusterPolicySkipDag` exception to skip a DAG. Note that this exception will not be displayed on the Airflow web UI.
+You can also use `AirflowClusterPolicySkipDag` exception to skip a DAG. For example, you might want to skip month-end DAGs from daily processing, or skip any DAGs that have the wrong environment tag. Another possible use case could be when you are migrating from a deprecated source system to a new one. You might want to skip the old DAGs to avoid any failures and alerts. Note that this exception will not be displayed on the Airflow web UI.
 
 ### DAG policy
 
@@ -119,9 +120,15 @@ Note that since priority weight is determined dynamically using weight rules, yo
 
 ### Pod mutation hook
 
-This policy is applicable to Kubernetes Pod created at run time when using the `KubernetesPodOperator` or `KubernetesExecutor`. This is a original policy function that allows altering `kubernetes.client.models.V1Pod` object before they are passed to the Kubernetes client for scheduling.
+This policy is applicable to Kubernetes Pod created at run time when using the `KubernetesPodOperator` or `KubernetesExecutor`. This is an original policy function that allows altering `kubernetes.client.models.V1Pod` object before they are passed to the Kubernetes client for scheduling.
 
-This could be used, for instance, to add sidecar or init containers to every worker pod launched.
+This could be used, for instance, to add sidecar or init containers to every worker pod launched. For example, you could use an init container to preload environment configuration or a sidecar container to collect metrics using StatsD. 
+
+:::tip
+
+Astro does not allow adding init or sidecar containers. Astro provides advanced logging, metrics collection, and multiple ways to manage your environment without the need to run separate containers. 
+
+:::
 
 Some example implementations include:
 
@@ -162,14 +169,16 @@ Using the `pluggy` method is available only in Airflow version 2.6 and above. Fo
 
 :::
 
-### Create a package for your plugin
+### Create a package for your policies
 
-Create a package with the following structure for your plugin named `my_plugin`.
+You can build a package for the cluster policies you want to apply to your Airflow environment. You can add this package to the `include` folder of your Astro project. You could then install it by [customizing your `Dockerfile`](https://www.astronomer.io/docs/astro/cli/customize-dockerfile). 
+
+For example, you can create a package `my_package` with the following structure:
 
 ```bash
-my_plugin/
+my_package/
 │
-├── my_plugin/
+├── my_package/
 │   ├── __init__.py
 │   ├── policy.py
 │
@@ -181,67 +190,67 @@ my_plugin/
 
 1. In the `pyproject.toml` file, add the following:
 
-```bash
-[build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
+    ```bash
+    [build-system]
+    requires = ["setuptools", "wheel"]
+    build-backend = "setuptools.build_meta"
 
-[project]
-name = "my_plugin"
-version = "0.1.0"
+    [project]
+    name = "my_package"
+    version = "0.1.0"
 
-dependencies = ["apache-airflow>=2.6"]
-[project.entry-points.'airflow.policy']
-_ = 'my_plugin.policy'
-```
+    dependencies = ["apache-airflow>=2.6"]
+    [project.entry-points.'airflow.policy']
+    _ = 'my_package.policy'
+    ```
 
 2. Define the policies in `policy.py`
 
-```python
-from airflow.policies import hookimpl
-from airflow.exceptions import AirflowClusterPolicyViolation
+    ```python
+    from airflow.policies import hookimpl
+    from airflow.exceptions import AirflowClusterPolicyViolation
 
-@hookimpl
-def task_policy(task):
-    print("Hello from task_policy")
-    doc_str = "This is a test doc string"
-    task.doc = doc_str
+    @hookimpl
+    def task_policy(task):
+        print("Hello from task_policy")
+        doc_str = "This is a test doc string"
+        task.doc = doc_str
 
-@hookimpl
-def dag_policy(dag):
-    """Ensure that DAG has at least one tag and skip the DAG with `only_for_beta` tag."""
-    print("Hello from DAG policy")
-    if not dag.tags:
-        raise AirflowClusterPolicyViolation(
-            f"DAG {dag.dag_id} has no tags. At least one tag required. File path: {dag.fileloc}"
-        )
-```
+    @hookimpl
+    def dag_policy(dag):
+        """Ensure that DAG has at least one tag and skip the DAG with `only_for_beta` tag."""
+        print("Hello from DAG policy")
+        if not dag.tags:
+            raise AirflowClusterPolicyViolation(
+                f"DAG {dag.dag_id} has no tags. At least one tag required. File path: {dag.fileloc}"
+            )
+    ```
 
 3. In `setup.cfg` add the following:
 
-```bash
+    ```bash
 
-[metadata]
-name = my-plugin
-version = 0.1.0
-author = your name
-author_email = youremail@email.com
-description = Policy plugin
+    [metadata]
+    name = my-package
+    version = 0.1.0
+    author = your name
+    author_email = youremail@email.com
+    description = Policy package
 
-[options]
-packages = my_plugin
+    [options]
+    packages = my_package
 
-[options.entry_points]
-airflow.policy =
-policy = my_plugin.policy
+    [options.entry_points]
+    airflow.policy =
+    policy = my_package.policy
 
-```
+    ```
 
 4. Build the `wheel` file:
 
-```bash
-python3 -m pip wheel . 
-```
+    ```bash
+    python3 -m pip wheel . 
+    ```
 
 ### Setup your Astro project
 
@@ -249,12 +258,12 @@ python3 -m pip wheel .
     
 2. Run `astro dev init` to initialize a new Astro project or open your Astro project. 
     
-3. Copy over the `wheel` file you built in [Create a package for your plugin](#create-a-package-for-your-plugin) to the `include` folder of your Astro project.
+3. Copy over the `wheel` file you built in [Create a package for your policies](#create-a-package-for-your-policies) to the `include` folder of your Astro project.
 
 4. Add the following line to your `Dockerfile`
 
-```docker
-RUN pip install include/my_plugin-0.1.0-py3-none-any.whl
-```
+    ```docker
+    RUN pip install include/my_package-0.1.0-py3-none-any.whl
+    ```
 
 5. For local Airflow, run `astro dev restart` to rebuild the Astro project. For Astro, run `astro deploy` to build and deploy to your Deployment.
