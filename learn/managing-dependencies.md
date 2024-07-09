@@ -11,8 +11,6 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import dependencies_example_1 from '!!raw-loader!../code-samples/dags/managing-dependencies/dependencies_example_1.py';
 import dependencies_example_2_taskflow from '!!raw-loader!../code-samples/dags/managing-dependencies/dependencies_example_2_taskflow.py';
-import dependencies_branch_example_taskflow from '!!raw-loader!../code-samples/dags/managing-dependencies/dependencies_branch_example_taskflow.py';
-import dependencies_branch_example_traditional from '!!raw-loader!../code-samples/dags/managing-dependencies/dependencies_branch_example_traditional.py';
 
 [Dependencies](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#relationships) are a powerful and popular Airflow feature. In Airflow, your pipelines are defined as Directed Acyclic Graphs (DAGs). Each task is a node in the graph and dependencies are the directed edges that determine how to move through the graph. Because of this, dependencies are key to following data engineering best practices because they help you define flexible pipelines with atomic tasks.
 
@@ -410,41 +408,4 @@ The following options are available:
 - `none_skipped`: The task runs only when no upstream task is in a skipped state.
 - `always`: The task runs at any time.
 
-### Branching and trigger rules
-
-One common scenario where you might need to implement trigger rules is if your DAG contains conditional logic such as [branching](airflow-branch-operator.md). In these cases, `one_success` might be a more appropriate rule than `all_success`.
-
-In the following example DAG there is a simple branch with a downstream task that needs to run if either of the branches are followed. With the `all_success` rule, the `end` task never runs because all but one of the `branch` tasks is always ignored and therefore doesn't have a success state. If you change the trigger rule to `one_success`, then the `end` task can run so long as one of the branches successfully completes.
-
-<Tabs
-    defaultValue="taskflow"
-    groupId= "branching-and-trigger-rules"
-    values={[
-        {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional syntax', value: 'traditional'},
-    ]}>
-
-<TabItem value="taskflow">
-
-<CodeBlock language="python">{dependencies_branch_example_taskflow}</CodeBlock>
-
-This image shows the resulting DAG:
-
-![Branch Dependencies](/img/guides/managing-dependencies_branch_decorator.png)
-
-</TabItem>
-
-<TabItem value="traditional">
-
-<CodeBlock language="python">{dependencies_branch_example_traditional}</CodeBlock>
-
-This image shows the resulting DAG:
-
-![Branch Dependencies](/img/guides/managing-dependencies_branch_traditional.png)
-
-</TabItem>
-</Tabs>
-
-
-
-
+Learn more about trigger rules in the [Airflow trigger rules](airflow-trigger-rules.md) guide.
