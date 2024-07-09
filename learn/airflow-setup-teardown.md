@@ -79,7 +79,7 @@ The following DAG is not using Airflow setup and teardown functionality. It sets
 
 ![DAG without Setup/ teardown - all successful](/img/guides/airflow-setup-teardown_nosutd_dag.png)
 
-The way this DAG is set up, a failure in any of the worker tasks will lead to the `tear_down_cluster` task not running. This means that the resources will not be torn down and will continue to incur costs. Additionally, any downstream tasks depending on `tear_down_cluster` will also fail to run unless they have [trigger rules](airflow-trigger-rules.md) to run independent of upstream failures.
+The way this DAG is set up, a failure in any of the worker tasks will lead to the `tear_down_cluster` task not running. This means that the resources will not be torn down and will continue to incur costs. Additionally, any downstream tasks depending on `tear_down_cluster` will also fail to run unless they have [trigger rules](airflow-trigger-rules.md) to run independently of upstream failures.
 
 ![DAG without setup/ teardown - upstream failure](/img/guides/airflow-setup-teardown_nosutd_dag_fail.png)
 

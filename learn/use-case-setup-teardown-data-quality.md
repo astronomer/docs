@@ -253,7 +253,7 @@ def validate():
     )
 ```
 
-No matter the outcome of the data quality checks in the `validate` task group, the pipeline will continue because the `sql_check_done` task uses the [trigger rule](airflow-trigger-rules.md) `all_done` to always be successful. 
+No matter the outcome of the data quality checks in the `validate` task group, the pipeline will continue because the `sql_check_done` task uses the [trigger rule](airflow-trigger-rules.md) `all_done` to be successful always. 
 
 ```python
 @task(trigger_rule="all_done")
