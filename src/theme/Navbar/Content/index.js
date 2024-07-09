@@ -47,7 +47,7 @@ export default function NavbarContent() {
             <>
               {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
               <NavbarLogo />
-              <a href="/" className={styles.navbar__logolink}>Docs</a>
+              <a href="/docs" className={styles.navbar__logolink}>Docs</a>
               {!searchBarItem && (
                 <NavbarSearch>
                   <SearchBar />
