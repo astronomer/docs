@@ -372,7 +372,6 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Additional improvements
 
-- Validates the provider description for URLs shown in the Provider List view.
 - Upgraded the minor and patch versions of some Astro open source provider packages. See [Astro Runtime 9.16.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-9160)
 
 ## Astro Runtime 9.15.0
