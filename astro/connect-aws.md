@@ -297,10 +297,10 @@ By default, Astronomer support activates the **Enable DNS Name** option on suppo
 #### Custom VPC Endpoint
 
 - Open a list of your clusters in the [Astro UI](https://cloud.astronomer.io/clusters).
-- Click on the target cluster and get a value for **ACCOUNT ID** field.
+- Click on the target cluster and retrieve the value for the `ACCOUNT ID` field.
 - Go to your VPCe Service configuration and add `arn:aws:iam::<Astro account_id>:role/astronomer-remote-management` into a list of the Allowed principals.
 - Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide a VPCe Service name for the custom Service.
-- Add to request a preferable DNS name for Endpoint, if Route53 alias is required for the proper connectivity (i.e. Snowflake, EKS). Otherwise you can skip this step.
+- (Optional)  If Route53 alias is required for the proper connectivity by your service such as Snowflake or EKS, add a preferable DNS name for the Endpoint to your request. Otherwise, you can skip this step.
 
 You'll incur additional AWS infrastructure costs for every AWS PrivateLink endpoint service that you use.  See [AWS PrivateLink pricing](https://aws.amazon.com/privatelink/pricing/).
 
