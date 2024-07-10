@@ -179,7 +179,6 @@ module.exports = {
             "manage-deployments-as-code",
             "deployment-file-reference"],
         },
-        "api-keys",
       ],
     },
     {
