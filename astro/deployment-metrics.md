@@ -36,7 +36,7 @@ These metrics contain information about your Deployment's DAG runs and task runs
 
     This metric can both help you understand how your pipelines are performing overall, as well as identify DAG/ task runs that didn't result in a failure but still took longer to run than expected.
 
-- **Ephemeral storage usage (_Kubernetes executor/KubernetesPodOperator_)**: View how your Kubernetes resources uses your available ephemeral storage as a metric of the percentage used of total ephemeral storage configured. Click on **Dynamic y-axis scaling** to adjust the graph's y-axis to better fit your data or zoom in to view details.
+- **Ephemeral storage usage (_Kubernetes Executor/KubernetesPodOperator_)**: View how your Kubernetes tasks use your available ephemeral storage as a metric of the percentage used of total ephemeral storage configured. Click on **Dynamic y-axis scaling** to adjust the graph's y-axis to better fit your data or zoom in to view details.
 
 ### Airflow workers and schedulers
 

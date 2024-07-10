@@ -40,7 +40,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 :::publicpreview
 :::
 
-You can now export comprehensive, operational metrics about the performance of your Astro Deployments to third-party observability tools, such as New Relic, using the new universal Metrics Exporter. This new feature allows you to configure an endpoint to send Astro metrics using the Prometheus data model, which means you can integrate your Astro observability metrics directly into your existing monitoring tools. See [Export metrics from Astro](https://www.astronomer.io/docs/astro/export-metrics) for setup instructions.
+You can now export comprehensive, operational metrics about the performance of your Astro Deployments to third-party observability tools, such as New Relic, using the new Universal Metrics Exporter. This new feature allows you to configure a Prometheus endpoint to export metrics using the Prometheus data model, which means you can integrate your Astro observability metrics directly into your existing monitoring tools. See [Export metrics from Astro](https://www.astronomer.io/docs/astro/export-metrics) for setup instructions.
 
 ### Added ephemeral storage metrics to Astro Deployment Analytics
 
