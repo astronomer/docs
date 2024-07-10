@@ -60,7 +60,7 @@ Astronomer [Teams](import-idp-groups.md) can now be created without associating 
 - The Astro CLI now shows an error if you attempt to deploy code to a Software installation where `astronomer.houston.config.deployments.registry.protectedCustomRegistry.updateRegistry.host` is not set.
 - Fixed an issue where Jetstream resources were being created even when `global.nats.jetStream.enabled = false` in the Software platform configuration.
 - Fixed an issue where the default `astroUnitsEnabled` value in `values.yaml` was not respected when creating Deployments via the Houston API, resulting in Deployment creation failing when the resource strategy is not explicitly specified.
-- Fixed an issue where Houston could produce errors if the username for a Postgres database included special characters.
+- Fixed an issue where Houston could produce errors if the password for a Postgres database included special characters.
 - Fixed an issue where pagination on specific Software UI screens did not behave as expected.
 - Fixed an issue where the `lastUsedAt` data for a service account was not updated when the service account deployed an Airflow image.
 - Fixed a bug causing disruption to retrieval of logs for users with External Elasticsearch.
