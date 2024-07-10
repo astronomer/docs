@@ -86,7 +86,7 @@ The following sections show the four ticket priorities with examples and descrip
 
 ### P1: Critical impact
 
-A production Deployment is completely unavailable, or a DAG that was previously working in production is no longer working without having been modified.
+A production Deployment is completely unavailable, or a DAG that was previously working in production stops working, even though it was not changed.
 
 Astronomer handles P1 tickets with the highest levels of urgency. If Astronomer Support responds to a P1 ticket, and subsequently does not hear back from you for 2 hours, the ticket priority is automatically changed to P2.
 
