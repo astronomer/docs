@@ -36,6 +36,8 @@ These metrics contain information about your Deployment's DAG runs and task runs
 
     This metric can both help you understand how your pipelines are performing overall, as well as identify DAG/ task runs that didn't result in a failure but still took longer to run than expected.
 
+- **Ephemeral storage usage (_Kubernetes Executor/KubernetesPodOperator_)**: View how your Kubernetes tasks use your available ephemeral storage as a metric of the percentage used of total ephemeral storage configured. Click on **Dynamic y-axis scaling** to adjust the graph's y-axis to better fit your data or zoom in to view details.
+
 ### Airflow workers and schedulers
 
 These metrics contain infrastructure use information about your workers and schedulers. Unique worker and scheduler instances appear on these charts as different colored lines.
@@ -62,6 +64,8 @@ Hover over the graph to view a graph legend. If a given worker queue spins a wor
   **Maximum Worker Count** applies only to workers in the `Running` state. This means that the number of worker Pods in **Pod Count per Status** might be greater than **Maximum Worker Count** at times if Astro scales down these workers at the same time that it creates new workers. For example, let's say that a Deployment has a **Maximum Worker Count** of 20. If you have five workers running tasks for an hour and you deploy code that requires 20 workers, Astro will trigger a scale-down event for the existing five workers and create 20 new workers to run tasks according to your new code. This means that your Deployment temporarily runs 25 workers.
 
     If a pod is stuck in a `Waiting` state, it can indicate that your Deployment did not successfully pull and run your Runtime image. For more information about container states, read the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-states).
+
+- **Ephemeral storage usage (_Celery workers_)**: View how your Celery worker uses your available ephemeral storage as a metric of the percentage used of total ephemeral storage configured. Click on **Dynamic y-axis scaling** to adjust the graph's y-axis to better fit your data or zoom in to view details.
 
 - **Scheduler Heartbeat (_Scheduler Only_)**: A scheduler emits a heartbeat at a regular rate to signal that it's healthy to other Airflow components. This metric graphs a scheduler's average heartbeats per minute over a given time.
 
