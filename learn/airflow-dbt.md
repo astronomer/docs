@@ -6,6 +6,9 @@ sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
 descriptions: "Learn how to use Cosmos to orchestrate dbt Core jobs with Airflow."
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 import CodeBlock from '@theme/CodeBlock';
 import cosmos_dag from '!!raw-loader!../code-samples/dags/airflow-dbt/cosmos_dag.py';
 import airflow_dbt_bashoperator from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_bashoperator.py';
@@ -109,6 +112,16 @@ To use dbt with Airflow install dbt Core in a virtual environment and Cosmos in 
 
 ## Step 2: Prepare your dbt project
 
+<Tabs
+    defaultValue="open-source"
+    groupId="preparing-your-dbt-project"
+    values={[
+        {label: 'Open-source Airflow', value: 'open-source'},
+        {label: 'Astro', value: 'astro'},
+    ]}>
+
+<TabItem value="open-source">
+
 To integrate your dbt project with Airflow, you need to add the project folder to your Airflow environment. For this step you can either add your own project in a new `dbt` folder in your `dags` directory, or follow the steps below to create a simple project using two models.
 
 1. Create a folder called `dbt` in your `dags` folder. 
@@ -139,7 +152,7 @@ To integrate your dbt project with Airflow, you need to add the project folder t
 
     `model1.sql` selects the variable `my_name`. `model2.sql` depends on `model1.sql` and selects everything from the upstream model.
 
-You should now have the following structure within your Astro project:
+You should now have the following structure within your Airflow environment:
 
 ```text
 .
@@ -151,6 +164,14 @@ You should now have the following structure within your Astro project:
                ├── model1.sql
                └── model2.sql
 ```
+</TabItem>
+
+<TabItem value="astro">
+
+On Astro, you do not need to maintain your dbt project in your Astro project, so you can complete this step in the dbt environment of your choice.
+
+</TabItem>
+</Tabs>   
 
 ## Step 3: Create an Airflow connection to your data warehouse
 
