@@ -61,3 +61,5 @@ terraform init # only needed the first time - initializes a working directory an
 terraform plan # creates a plan that make your resources match your configuration
 terraform apply # performs a plan, just like terraform plan does, and also carries out the planned changes to each resource by using the relevant infrastructure provider's API
 ```
+
+Now that you've initialited a working directory and downloaded required provider plugins and modules, you can start updating your Astro Workspace or Organizations with Terraform.
