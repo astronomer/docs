@@ -1,11 +1,11 @@
 ---
-title: 'Get started with the Astro Terraform Provider'
+title: 'Get started with Astro Terraform Provider'
 sidebar_label: 'Get Started'
 id: terraform-provider-get-started
 description: Get started using the Astro Terraform Provider to work with your Astro implementations.
 ---
 
-To use the Astro Terraform Provider with you
+To use Terraform with Astro, you must set up authorize the Astro Terraform Provider to access and modify your Astro Organization resources. Then, you can programattically update your Astro Organization using Terraform files.
 
 ## Prerequisites
 

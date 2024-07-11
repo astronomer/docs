@@ -11,4 +11,6 @@ Terraform providers act as an interface between Terraform and different platform
 
 The Astro Terraform Provider is open source and available through the [Terraform registry](https://registry.terraform.io/providers/astronomer/astro/0.3.0). You can also clone the provider from its [GitHub Repo](https://github.com/astronomer/terraform-provider-astro), if you also want to adapt it for your custom use case, or submit a suggesiont with a pull request.
 
+## Next Steps
 
+- [Get started with Astro Terraform Provider](terraform-provider-get-started.md)
