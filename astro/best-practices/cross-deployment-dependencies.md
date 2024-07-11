@@ -190,5 +190,5 @@ After deploying both projects to their respective Deployments on Astro, you shou
 
 ## See also
 
-- Creating [cross-DAG dependencies](https://docs.astronomer.io/learn/cross-dag-dependencies.md).
+- Creating [cross-DAG dependencies](https://www.astronomer.io/docs/learn/cross-dag-dependencies).
 - Setting up [alerts](https://docs.astronomer.io/astro/alerts).
