@@ -171,6 +171,13 @@ module.exports = {
               ],
             },
           ],
+          type: "category",
+          label: "Astro Terraform Provider",
+          items: [
+            "terraform-provider",
+            "terraform-provider-get-started",
+            "terraform-workflow-examples",
+          ],
         },
         {
           type: "category",
