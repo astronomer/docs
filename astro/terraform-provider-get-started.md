@@ -53,7 +53,7 @@ provider "astro" {
 
 If you want to use an example Terraform file, the [`workspace_per_team.tf`](https://github.com/astronomer/terraform-provider-astro/blob/main/examples/scenarios/workspace_per_team.tf) example shows how to create three [Astro Teams](manage-teams.md) and development, staging, and production Deployments for each.
 
-2. Using the API Token you made in Step 1, run the following commands to apply the provider to your Astro implementation.
+3. Using the API Token you made in Step 1, run the following commands to apply the provider to your Astro implementation.
 
 ```bash
 export ASTRO_API_TOKEN=<your-api-token>
