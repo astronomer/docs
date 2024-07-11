@@ -14,6 +14,47 @@ After you finish your first Terraform initialization, you can begin using Terraf
 - Astro Organization Owner [user permissions](user-permissions.md)
 - Organization ID
 
+## Example: Import existing resources
+
+
+
+## Example: Define variables with Terraform
+
+
+
+<details>
+<summary><strong>Terraform code example</strong></summary>
+
+```
+
+variable "teams" {
+  type = map(object({
+    name = string
+    default_worker_queue_size = string
+    contact_emails = list
+  }))
+  default = {
+    finance = {
+      name = "finance"
+      default_worker_queue_size = "A5"
+      contact_emails = ["foo@bar.com", "john@doe.com"]
+    }
+    ads = {
+      name = "ads"
+      default_worker_queue_size = "A10"
+      contact_emails = ["foo@bar.com", "john@doe.com"]
+    }
+    ml = {
+      name = "ml"
+      default_worker_queue_size = "A40"
+      contact_emails = ["foo@bar.com", "john@doe.com"]
+    }
+  }
+}
+
+```
+
+</details>
 
 ## Example: Create a Workspace per Team
 
