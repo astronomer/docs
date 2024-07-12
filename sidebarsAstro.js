@@ -176,7 +176,7 @@ module.exports = {
           items: [
             "terraform-provider",
             "terraform-provider-get-started",
-            "terraform-workflow-examples",
+            "terraform-provider-examples",
           ],
         },
         {
