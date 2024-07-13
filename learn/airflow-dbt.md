@@ -6,10 +6,7 @@ sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
 descriptions: "Learn how to use Cosmos to orchestrate dbt Core jobs with Airflow."
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-import CodeBlock from '@theme/CodeBlock';
+iimport CodeBlock from '@theme/CodeBlock';
 import cosmos_dag from '!!raw-loader!../code-samples/dags/airflow-dbt/cosmos_dag.py';
 import airflow_dbt_bashoperator from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_bashoperator.py';
 
