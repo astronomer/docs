@@ -15,6 +15,8 @@ import airflow_dbt_bashoperator from '!!raw-loader!../code-samples/dags/airflow-
 
 [dbt Core](https://docs.getdbt.com/) is an open-source library for analytics engineering that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses. 
 
+### dbt on Airflow with Cosmos and the Astro CLI
+
 The open-source provider package [Cosmos](https://astronomer.github.io/astronomer-cosmos/) allows you to integrate dbt jobs into Airflow by automatically creating Airflow tasks from dbt models. You can turn your dbt Core projects into an Airflow task group with just a few lines of code:
 
 ```python
@@ -37,6 +39,12 @@ DbtTaskGroup(
 )
 ```
 
+:::tip dbt on Astro
+
+Astro supports direct deployment of dbt projects using the Astro CLI. With a single command, you can deploy any valid dbt project to an Astro Deployment. For more information, see [LINK TO NEW DOC].
+
+:::
+
 :::tip Other ways to learn
 
 There are multiple resources for learning about this topic. See also:
@@ -50,7 +58,9 @@ For a tutorial on how to use dbt Cloud with Airflow, see [Orchestrate dbt Cloud 
 
 ## Why use Airflow with dbt Core?
 
-dbt Core offers the possibility to build modular, reuseable SQL components with built-in dependency management and [incremental builds](https://docs.getdbt.com/docs/build/incremental-models). With [Cosmos](https://astronomer.github.io/astronomer-cosmos/) you can integrate dbt jobs into your Airflow orchestration environment as a standalone DAG or as a task group within a DAG. 
+dbt Core offers the possibility to build modular, reuseable SQL components with built-in dependency management and [incremental builds](https://docs.getdbt.com/docs/build/incremental-models). 
+
+With [Cosmos](https://astronomer.github.io/astronomer-cosmos/), you can integrate dbt jobs into your open-source Airflow orchestration environment as standalone DAGs or as task groups within DAGs.
 
 The benefits of using Airflow with dbt Core include:
 
@@ -59,6 +69,8 @@ The benefits of using Airflow with dbt Core include:
 - Run `dbt test` on tables created by individual models immediately after a model has completed. Catch issues before moving downstream and integrate additional [data quality checks](data-quality.md) with your preferred tool to run alongside dbt tests.
 - Run dbt projects using [Airflow connections](connections.md) instead of dbt profiles. You can store all your connections in one place, directly within Airflow or by using a [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html).
 - Leverage native support for installing and running dbt in a virtual environment to avoid dependency conflicts with Airflow.
+
+With Astro, you get all the benefits above without having to modify your Airflow environment or create connections. You can deploy directly from a dbt project using the Astro CLI.
 
 ## Time to complete
 
@@ -112,16 +124,6 @@ To use dbt with Airflow install dbt Core in a virtual environment and Cosmos in 
 
 ## Step 2: Prepare your dbt project
 
-<Tabs
-    defaultValue="open-source"
-    groupId="preparing-your-dbt-project"
-    values={[
-        {label: 'Open-source Airflow', value: 'open-source'},
-        {label: 'Astro', value: 'astro'},
-    ]}>
-
-<TabItem value="open-source">
-
 To integrate your dbt project with Airflow, you need to add the project folder to your Airflow environment. For this step you can either add your own project in a new `dbt` folder in your `dags` directory, or follow the steps below to create a simple project using two models.
 
 1. Create a folder called `dbt` in your `dags` folder. 
@@ -164,14 +166,6 @@ You should now have the following structure within your Airflow environment:
                ├── model1.sql
                └── model2.sql
 ```
-</TabItem>
-
-<TabItem value="astro">
-
-On Astro, you do not need to maintain your dbt project in your Astro project, so you can complete this step in the dbt environment of your choice.
-
-</TabItem>
-</Tabs>   
 
 ## Step 3: Create an Airflow connection to your data warehouse
 
