@@ -31,6 +31,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 Release date: July 16, 2024
 
 ### Bug fixes
+- Fixed a bug where if you had DAG-only deploys enabled, it was possible for users in one Deployment to access DAGs in other Deployments, even if the user did not have access to other DAG-only Deployments.
 
 - Resolved the following vulnerabilities:
     - [CVE-2021-33194](https://nvd.nist.gov/vuln/detail/CVE-2021-33194)
@@ -44,7 +45,6 @@ Release date: July 16, 2024
     - [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/CVE-2023-45288)
     - [CVE-2023-50868](https://nvd.nist.gov/vuln/detail/CVE-2023-50868)
     - [CVE-2023-50387](https://nvd.nist.gov/vuln/detail/CVE-2023-50387)
-
 
     - [CVE-2024-2961](https://nvd.nist.gov/vuln/detail/CVE-2024-2961)
     - [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/CVE-2024-21626)
