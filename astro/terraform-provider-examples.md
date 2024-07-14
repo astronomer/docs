@@ -16,14 +16,55 @@ After you finish your first Terraform initialization, you can begin using Terraf
 
 ## Example: Import existing resources
 
+You can import new resources into an existing Deployment or Workspace by adding both an `import` command and defining the new configuration to your Terraform file. Then, use `terraform apply` to add the new configuation.
 
+:::tip
+
+Your Terraform file takes the highest priority in defining your Astro resource configuration. This means that when you import resources using Terraform, you need to specify all required fields if your Terraform file is different from any resource configurations that you configured through the Terraform CLI, Astro CLI, Astro API, or Astro UI. If the Terraform file and your actual Workspace are different, Terraform overrides your Workspace settings to match the configurations in your Terraform file.
+
+:::
+
+<details>
+<summary><strong> Import resources to an existing Deployment example</strong></summary>
+
+In a Terraform file, add the following configuration.
+
+```
+// Import the new configuration to an existing Deployment. After you use `terraform apply` to apply this new configuration once, you can remove this section of code from your Terraform file.
+import {
+  id = "<your-deployment-ID>" // ID of the existing deployment
+  to = astro_deployment.imported_deployment
+}
+// The new resource configuration.
+resource "astro_deployment" "imported_deployment" {
+  name                    = "import me"
+  description             = "an existing deployment"
+  type                    = "DEDICATED"
+  cluster_id              = "<your-cluster-ID>"
+  contact_emails          = ["preview@astronomer.test"]
+  default_task_pod_cpu    = "0.25"
+  default_task_pod_memory = "0.5Gi"
+  executor                = "KUBERNETES"
+  is_cicd_enforced        = true
+  is_dag_deploy_enabled   = true
+  is_development_mode     = false
+  is_high_availability    = true
+  resource_quota_cpu      = "10"
+  resource_quota_memory   = "20Gi"
+  scheduler_size          = "SMALL"
+  workspace_id            = "<your-workspace-ID>"
+  environment_variables   = []
+}
+```
+
+</details>
 
 ## Example: Define variables with Terraform
 
-
+You can define variables in a separate file, and then call it from within other Terraform commands.
 
 <details>
-<summary><strong>Terraform code example</strong></summary>
+<summary><strong>Define variables in Terraform code example</strong></summary>
 
 ```
 
@@ -61,7 +102,7 @@ variable "teams" {
 You can use Terraform to script creating a Workspace for multiple Teams. The following example shows how to create a Workspace, Team within that Workspace, and three Deployments for that Team. You can use the full code example in the [Astro Terraform Provider's GitHub](https://github.com/astronomer/terraform-provider-astro/blob/main/examples/scenarios/workspace_per_team.tf) to create multiple teams, following the same pattern.
 
 <details>
-<summary><strong>Terraform code example</strong></summary>
+<summary><strong>Terraform Workspaces and Teams code example</strong></summary>
 
 Before using the code example, be sure to add your Astro Organization ID for the `organization_id` parameter.
 
