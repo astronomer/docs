@@ -11,7 +11,7 @@ To use Terraform with Astro, you must set up authorize the Astro Terraform Provi
 
 - [Go](https://go.dev/doc/install) version 1.21 or higher
 - [Terraform](https://developer.hashicorp.com/terraform/install) version 1.0 or higher
-- Astro Organization Owner [user permissions](user-permissions.md)
+- Astro Workspace Owner [user permissions](user-permissions.md)
 
 ## Step 1: Create an API Token
 
@@ -32,7 +32,9 @@ When you create an API token for your environment, keep the following best pract
 
 1. Retrieve your **Organization ID** from the Astro UI by clicking on your **Organization Settings** in your **Organization Details** section.
 
-2. Create a `main.tf` file with the following code. This code example declares the Astro provider as a requirement, and includes the Organization ID for your Astro resources. You can add your own custom terraform commands, or use one of the examples shared in the [Astro Terraform Provider Github Repo]
+2. Create a `main.tf` file with the following code. This code example declares the Astro provider as a requirement, and includes the Organization ID for your Astro resources. You can add your own custom terraform commands, or use one of the example scenarios shared in the [Astro Terraform Provider Github Repo](https://github.com/astronomer/terraform-provider-astro/tree/main/examples/scenarios).
+
+The following example sets up a new Workspace with a hosted Deployment.
 
 ```
 terraform {
@@ -47,11 +49,45 @@ provider "astro" {
   organization_id = "<you-astro-organization-id>"
 }
 
-# your terraform commands here
+# Create a Workspace
+resource "astro_workspace" "my_workspace" {
+  name                  = "My Terraform Workspace"
+  description           = "Managed by Terraform"
+  cicd_enforced_default = true
+}
+# Create a standard Hosted Deployment in that wWrkspace
+resource "astro_deployment" "my_standard_deployment" {
+  name                    = "My Terraform Deployment"
+  description             = "Managed by Terraform"
+  type                    = "STANDARD"
+  cloud_provider          = "AWS"
+  region                  = "us-east-1"
+  contact_emails          = []
+  default_task_pod_cpu    = "0.25"
+  default_task_pod_memory = "0.5Gi"
+  executor                = "CELERY"
+  is_cicd_enforced        = true
+  is_dag_deploy_enabled   = true
+  is_development_mode     = true
+  is_high_availability    = false
+  resource_quota_cpu      = "10"
+  resource_quota_memory   = "20Gi"
+  scheduler_size          = "SMALL"
+  workspace_id            = astro_workspace.my_workspace.id
+  environment_variables   = []
+  worker_queues = [{
+    name               = "default"
+    is_default         = true
+    astro_machine      = "A5"
+    max_worker_count   = 10
+    min_worker_count   = 0
+    worker_concurrency = 1
+  }]
+}
 
 ```
 
-If you want to use an example Terraform file, the [`workspace_per_team.tf`](https://github.com/astronomer/terraform-provider-astro/blob/main/examples/scenarios/workspace_per_team.tf) example shows how to create three [Astro Teams](manage-teams.md) and development, staging, and production Deployments for each.
+If you want to use a different example Terraform file, the [`workspace_per_team.tf`](https://github.com/astronomer/terraform-provider-astro/blob/main/examples/scenarios/workspace_per_team.tf) example shows how to create three [Astro Teams](manage-teams.md) and development, staging, and production Deployments for each.
 
 3. Using the API Token you made in Step 1, run the following commands to apply the provider to your Astro implementation.
 
@@ -62,4 +98,17 @@ terraform plan # creates a plan that make your resources match your configuratio
 terraform apply # performs a plan, just like terraform plan does, and also carries out the planned changes to each resource by using the relevant infrastructure provider's API
 ```
 
-Now that you've initialited a working directory and downloaded required provider plugins and modules, you can start updating your Astro Workspace or Organizations with Terraform.
+After `terraform apply` completes, Terraform either prints that your configuration was successful or it shares error codes that includes how to resolve any problems.
+
+4. (Optional) You can continue to import additional resources or experiment with Terraform using the [Terraform Provider docs](https://registry.terraform.io/providers/astronomer/astro/latest/docs). After you're done, to prevent any unexpected charges or activity in your account from working with you Terraform example, you can delete any resources you created on Astro by using the following code example:
+
+```bash
+
+terraform destroy
+
+```
+
+## Next Steps
+
+You can continue to explore how to work with Terraform and Astro with the examples in the [Astro Terraform Provider GitHub](https://github.com/astronomer/terraform-provider-astro/tree/main/examples/scenarios) or [Terraform Provider Examples](terraform-provider-examples.md).
+
