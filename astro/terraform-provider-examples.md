@@ -11,7 +11,7 @@ After you finish your first Terraform initialization, you can begin using Terraf
 
 - [Go](https://go.dev/doc/install) version 1.21 or higher
 - [Terraform](https://developer.hashicorp.com/terraform/install) version 1.0 or higher
-- Astro Organization Owner [user permissions](user-permissions.md)
+- Astro Workspace Owner [user permissions](user-permissions.md)
 - Organization ID
 
 ## Example: Import existing resources
