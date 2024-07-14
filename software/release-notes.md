@@ -26,6 +26,38 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## 0.35.1
+
+Release date: July 16, 2024
+
+### Bug fixes
+
+- Resolved the following vulnerabilities:
+    - [CVE-2021-33194](https://nvd.nist.gov/vuln/detail/CVE-2021-33194)
+    - [CVE-2021-38561](https://nvd.nist.gov/vuln/detail/CVE-2021-38561)
+
+    - [CVE-2022-21698](https://nvd.nist.gov/vuln/detail/CVE-2022-21698)
+
+    - [CVE-2023-1370](https://www.cve.org/CVERecord?id=CVE-2023-1370)
+    - [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/CVE-2023-39325)
+    - [CVE-2023-45283](https://nvd.nist.gov/vuln/detail/CVE-2023-45283)
+    - [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/CVE-2023-45288)
+    - [CVE-2023-50868](https://nvd.nist.gov/vuln/detail/CVE-2023-50868)
+    - [CVE-2023-50387](https://nvd.nist.gov/vuln/detail/CVE-2023-50387)
+
+
+    - [CVE-2024-2961](https://nvd.nist.gov/vuln/detail/CVE-2024-2961)
+    - [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/CVE-2024-21626)
+    - [CVE-2024-24790](https://nvd.nist.gov/vuln/detail/CVE-2024-24790)
+    - [CVE-2024-25710](https://nvd.nist.gov/vuln/detail/CVE-2024-25710)
+    - [CVE-2024-26308](https://nvd.nist.gov/vuln/detail/CVE-2024-26308)
+    - [CVE-2024-28757](https://nvd.nist.gov/vuln/detail/CVE-2024-28757)
+    - [CVE-2024-33599](https://nvd.nist.gov/vuln/detail/CVE-2024-33599)
+
+    - [GHSA-xpw8-rcwv-8f8p](https://nvd.nist.gov/vuln/detail/CVE-2023-44487)
+    - [GHSA-36jr-mh4h-2g58](https://security.snyk.io/vuln/SNYK-JS-D3COLOR-1076592)
+    - [GHSA-m425-mq94-257g]() -> https://nvd.nist.gov/vuln/detail/CVE-2023-44487 ?
+
 ## 0.35.0
 
 Release date: July 1, 2024
