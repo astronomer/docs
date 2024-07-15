@@ -16,7 +16,7 @@ The DAG Factory can be used with all Astronomer products and any Apache Airflow 
 - Python version 3.6.0 or greater
 - Apache Airflow version 2.0 or greater
 
-If you're an Astronomer customer, you must have an Astro project with a supported version of Astro Runtime. See [Astro Runtime lifecycle schedule](/astro/runtime-version-lifecycle-policy.mdx#astro-runtime-lifecycle-schedule) for a list of currently supported Runtime versions.
+If you're an Astronomer customer, you must have an Astro project with a supported version of Astro Runtime. See [Astro Runtime lifecycle schedule](https://www.astronomer.io/docs/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule) for a list of currently supported Runtime versions.
 
 ## Step 1: Install DAG Factory
 
