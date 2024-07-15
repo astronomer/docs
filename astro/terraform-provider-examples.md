@@ -19,7 +19,7 @@ After you finish your first [Terraform](https://www.terraform.io/) initializatio
 
 ## Example: Import existing resources
 
-You can import new resources into an existing Deployment or Workspace by adding both an `import` command and defining the new configuration to your Terraform file. Then, use `terraform apply` to add the new configuation.
+By adding both an `import` command and defining the configuration to your Terraform file, you can import existing Astro resources, such as Deployments or Workspaces, for Terraform to manage. After you successfully import your resources, Terraform can fully manage them and you can update or delete them by updating the Terraform configuration file.
 
 :::tip
 
@@ -64,18 +64,19 @@ resource "astro_deployment" "imported_deployment" {
 
 ## Example: Define variables with Terraform
 
-You can define variables in a separate file, and then call it from within other Terraform commands.
+You can define variables in a separate file and then call it from within other Terraform commands.
 
 <details>
 <summary><strong>Define variables in Terraform code example</strong></summary>
 
+In a Terraform `variables.tf` file, you can define your variables:
 ```
 
 variable "teams" {
   type = map(object({
     name = string
     default_worker_queue_size = string
-    contact_emails = list
+    contact_emails = list(string)
   }))
   default = {
     finance = {
@@ -98,11 +99,23 @@ variable "teams" {
 
 ```
 
+Then, in your Terraform configuration file, `main.tf`, you can refer to those variables to create resources:
+
+```
+resource "astro_workspace" "team_workspaces" {
+  for_each = var.teams
+
+  name                  = "${each.value.name} Workspace"
+  description           = "${each.value.name} Workspace"
+  cicd_enforced_default = true
+}
+```
+
 </details>
 
 ## Example: Create a Workspace per Team
 
-You can use Terraform to script creating a Workspace for multiple Teams. The following example shows how to create a Workspace, Team within that Workspace, and three Deployments for that Team. You can use the full code example in the [Astro Terraform Provider's GitHub](https://github.com/astronomer/terraform-provider-astro/blob/main/examples/scenarios/workspace_per_team.tf) to create multiple teams, following the same pattern.
+You can use Terraform to script creating a Workspace for multiple Teams. The following example shows how to create a Workspace, a Team within that Workspace, and three Deployments for that Team. You can use the full code example in the [Astro Terraform Provider's GitHub](https://github.com/astronomer/terraform-provider-astro/blob/main/examples/scenarios/workspace_per_team.tf) to create multiple teams following the same pattern.
 
 <details>
 <summary><strong>Terraform Workspaces and Teams code example</strong></summary>
