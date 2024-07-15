@@ -25,20 +25,20 @@ To use the DAG Factory, install it as a Python package into your Apache Airflow 
 If you're an Astronomer customer:
 
 1. In your Astro project, open your `requirements.txt` file.
-2. Add `dag-factory==0.19.0` to the file.
+2. Add `dag-factory<=1.0.0` to the file.
 3. Save the changes to your `requirements.txt` file.
 
 If you're not an Astronomer customer, install the Python package according to the standards at your organization:
 
 ```python
 
-pip install dag-factory==0.19.0
+pip install dag-factory<=1.0.0
 
 ```
 
 ## Step 2: Create a YAML file for your DAG
 
-1. In the `dags` directory of your Astro project, create a new YAML file for each DAG you want to create. For example, `my_dag.yaml`. Astronomer recommends creating a new sub-directory for all of your DAGs defined in YAML and keeping them separate from standard DAG files written in Python.
+1. In the `dags` directory of your Astro project, create a new YAML file for each DAG you want to create. For example, `my_dag.yaml`. Astronomer recommends creating a new sub-directory for all your DAGs defined in YAML and keeping them separate from standard DAG files written in Python.
 2. Copy the contents of the following example configuration file into each YAML file.
 
 ```YAML
@@ -86,7 +86,7 @@ pip install dag-factory==0.19.0
 All YAML files in your `dags` directory must be parsed and converted into Python in order to run on Apache Airflow. In this step, you will create a new DAG Factory file in your Astro project that includes the conversion logic. You only need to do this once and do not need a separate DAG Factory file for each of your DAGs or YAML files.
 
 1. In the `dags` directory of your Astro project, create a new Python file called `dag_factory.py`.
-2. Copy the following contents into your empty Python file. This file represents an Apache Airflow DAG and includes two commands that convert each of your YAML file(s) into DAGs. Make sure to replace `/path/to/dags/config_file.yml` with the absolute path to your config file. For Astro CLI users the absolute path to the DAG directory is `/usr/local/airflow/dags`. 
+2. Copy the following contents into your empty Python file. This file represents an Apache Airflow DAG and includes two commands that convert each of your YAML file(s) into DAGs. Make sure to replace `/path/to/dags/config_file.yml` with the absolute path to your config file. For Astro CLI users, the absolute path to the DAG directory is `/usr/local/airflow/dags`. 
 
 ```python
 
