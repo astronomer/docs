@@ -14,10 +14,10 @@ Follow this guide to upgrade to any stable or patch version of Astronomer Softwa
 
 A few notes before you get started:
 - The following guidelines are only for upgrading to the latest Astronomer v0.23 patch version. To determine whether the latest version of Astronomer is a minor or patch version, read the Astronomer Platform Versioning guidelines below.
-- The patch upgrade process will NOT affect running Airflow tasks as long as `upgradeDeployments.enabled=false` is set in the script below.
+- The patch upgrade process will NOT affect running Apache Airflow® tasks as long as `upgradeDeployments.enabled=false` is set in the script below.
 - Patch version updates will NOT cause any downtime to Astronomer services (Software UI, Houston API, Astronomer CLI).
 
-> **Note:** Astronomer v0.16.5 and beyond includes an improved upgrade process that allows Airflow Deployments to remain unaffected through a platform upgrade that includes changes to the [Astronomer Airflow Chart](https://github.com/astronomer/airflow-chart).
+> **Note:** Astronomer v0.16.5 and beyond includes an improved upgrade process that allows Apache Airflow® Deployments to remain unaffected through a platform upgrade that includes changes to the [Astronomer Airflow Chart](https://github.com/astronomer/airflow-chart).
 >
 > Now, Airflow Chart changes only take effect when another restart event is triggered by a user (e.g. a code push, Environment Variable change, resource or executor adjustment, etc).
 
@@ -72,7 +72,7 @@ ASTRO_VERSION=0.23.<astronomer-patch-version>
 helm3 repo add astronomer https://helm.astronomer.io
 helm3 repo update
 
-# upgradeDeployments false ensures that Airflow charts are not upgraded when this script is ran
+# upgradeDeployments false ensures that Apache Airflow® charts are not upgraded when this script is ran
 # If you deployed a config change that is intended to reconfigure something inside Airflow,
 # then you may set this value to "true" instead. When it is "true", then each Airflow chart will
 # restart.

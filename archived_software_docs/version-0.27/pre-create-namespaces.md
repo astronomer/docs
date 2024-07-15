@@ -244,7 +244,7 @@ To give the Astronomer Commander service permissions to an individual namespace:
     kubectl apply -f commander.yaml
     ```
 
-4. To confirm that the configuration was successful, create a new Deployment with a [custom release name](configure-deployment.md#customize-release-names) in your custom namespace. If you check the logs of the Commander pod running in your custom namespace, you should see that Commander was able to immediately install Airflow charts for the new Deployment:
+4. To confirm that the configuration was successful, create a new Deployment with a [custom release name](configure-deployment.md#customize-release-names) in your custom namespace. If you check the logs of the Commander pod running in your custom namespace, you should see that Commander was able to immediately install Apache Airflow®® charts for the new Deployment:
 
     ```text
     time="2021-07-21T16:30:23Z" level=info msg="releaseName <release-name>, chart astronomer-ee/airflow,     chartVersion 0.20.0, namespace <your-namespace-name>" function=InstallRelease package=helm

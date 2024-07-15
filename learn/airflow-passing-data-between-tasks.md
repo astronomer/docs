@@ -2,7 +2,7 @@
 title: "Pass data between tasks"
 sidebar_label: "Pass data between tasks"
 id: airflow-passing-data-between-tasks
-description: "Learn more about the most common methods to implement data sharing between your Airflow tasks, including an in-depth explanation of XCom."
+description: "Learn more about the most common methods to implement data sharing between your Apache Airflow® tasks, including an in-depth explanation of XCom."
 ---
 
 import CodeBlock from '@theme/CodeBlock';
@@ -14,7 +14,7 @@ import airflow_passing_data_between_tasks_s3_decorator from '!!raw-loader!../cod
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Sharing data between tasks is a very common use case in Airflow. If you've been writing DAGs, you probably know that breaking them up into smaller tasks is a best practice for debugging and recovering quickly from failures. What do you do when one of your downstream tasks requires metadata about an upstream task, or processes the results of the task immediately before it?
+Sharing data between tasks is a very common use case in Apache Airflow®. If you've been writing DAGs, you probably know that breaking them up into smaller tasks is a best practice for debugging and recovering quickly from failures. What do you do when one of your downstream tasks requires metadata about an upstream task, or processes the results of the task immediately before it?
 
 There are a few methods you can use to implement data sharing between your Airflow tasks. In this guide, you'll walk through the two most commonly used methods, learn when to use them, and use some example DAGs to understand how they can be implemented.
 

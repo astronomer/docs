@@ -1,7 +1,7 @@
 ---
-title: "Datasets and data-aware scheduling in Airflow"
+title: "Datasets and data-aware scheduling in Apache Airflow®"
 sidebar_label: "Datasets and data-aware scheduling"
-description: "Using datasets to implement DAG dependencies and scheduling in Airflow."
+description: "Using datasets to implement DAG dependencies and scheduling in Apache Airflow®."
 id: airflow-datasets
 ---
 
@@ -14,7 +14,7 @@ import dataset_consumer from '!!raw-loader!../code-samples/dags/airflow-datasets
 import dataset_consumer_traditional from '!!raw-loader!../code-samples/dags/airflow-datasets/dataset_consumer_traditional.py';
 import example_sdk_datasets from '!!raw-loader!../code-samples/dags/airflow-datasets/example_sdk_datasets.py';
 
-With Datasets, DAGs that access the same data can have explicit, visible relationships, and DAGs can be scheduled based on updates to these datasets. This feature helps make Airflow data-aware and expands Airflow scheduling capabilities beyond time-based methods such as cron.
+With Datasets, DAGs that access the same data can have explicit, visible relationships, and DAGs can be scheduled based on updates to these datasets. This feature helps make Apache Airflow® data-aware and expands Airflow scheduling capabilities beyond time-based methods such as cron.
 
 Datasets can help resolve common issues. For example, consider a data engineering team with a DAG that creates a dataset and an analytics team with a DAG that analyses the dataset. Using datasets, the data analytics DAG runs only when the data engineering team's DAG publishes the dataset.
 
@@ -55,7 +55,7 @@ Datasets allow you to define explicit dependencies between DAGs and updates to y
 
 :::note Listening for dataset changes
 
-As of Airflow 2.8, you can use [listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) to enable Airflow to notify you when certain dataset events occur. There are two listener hooks for the following events: 
+As of Airflow 2.8, you can use [listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) to enable Apache Airflow® to notify you when certain dataset events occur. There are two listener hooks for the following events: 
 
 - on_dataset_created
 - on_dataset_changed

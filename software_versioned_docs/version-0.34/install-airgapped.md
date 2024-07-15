@@ -61,7 +61,7 @@ The images and tags which are required for your Software installation depend on 
 
     This command sets all possible Helm values that could impact which images are required for your installation. By fetching all images now, you save time by eliminating the risk of missing an image.
     
-2. Run the following command to determine the Astronomer Airflow Helm chart version:
+2. Run the following command to determine the Astronomer Apache Airflow® Helm chart version:
  
     ```shell
     helm template astronomer/astronomer --version <your-astronomer-version>|grep 'Static helm' -A4| grep "version: " | sed -e 's/"//g' -e 's/version:[ ]//' -e 's/^ */v/g'
@@ -124,7 +124,7 @@ astronomer:
                 repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-git-sync
 ```
 
-## Step 4: Fetch Airflow Helm charts
+## Step 4: Fetch Apache Airflow® Helm charts
 
 There are two Helm charts required for Astronomer:
 
@@ -161,7 +161,7 @@ If you configure both options in your `values.yaml` file, then `astronomer.comma
 
 :::
 
-## Step 5: Fetch Airflow updates
+## Step 5: Fetch Apache Airflow® updates
 
 By default, Astronomer checks for Airflow updates once a day at midnight by querying `https://updates.astronomer.io/astronomer-runtime`, which returns a JSON file with version details. However, this URL is not accessible in an airgapped environment. There are several options for making these updates accessible in an airgapped environment:
 
@@ -173,7 +173,7 @@ By default, Astronomer checks for Airflow updates once a day at midnight by quer
 
 This setup assumes that the updates JSON will be manually downloaded and added to your environment. For guidance on how to automate this process, reach out to your Astronomer contact.
 
-### Exposing Airflow updates using an Nginx endpoint
+### Exposing Apache Airflow® updates using an Nginx endpoint
 
 The following topic provides an example implementation of hosting the Airflow updates JSON files in your airgapped environment and accessing them via an Nginx endpoint. Depending on your organization's platform and use cases, your own installation might vary from this setup.
 

@@ -5,7 +5,7 @@ id: create-deployment
 description: "Learn how to create an Astro Deployment. After you’ve created a Deployment, you can deploy DAGs to it from the Astro command-line interface (CLI), or from a continuous integration and continuous delivery (CI/CD) pipeline."
 ---
 
-An Astro Deployment is an Airflow environment that is powered by [Astro Runtime](runtime-image-architecture.mdx). It runs all core Airflow components, including the Airflow webserver, scheduler, and workers, plus additional tooling for reliability and observability.
+An Astro Deployment is an Apache Airflow® environment that is powered by [Astro Runtime](runtime-image-architecture.mdx). It runs all core Airflow components, including the Airflow webserver, scheduler, and workers, plus additional tooling for reliability and observability.
 
 There are three ways to create a Deployment:
 
@@ -31,7 +31,7 @@ Every Deployment is hosted on an Astro cluster with its own dedicated resources 
 
 :::info
 
-If you're migrating to Astro from OSS Airflow or another Astronomer product, and you currently use an older version of Airflow, you can still create Deployments with the corresponding version of Astro Runtime even if it is deprecated according to the [Astro Runtime maintenance policy](runtime-version-lifecycle-policy.mdx#astro-runtime-maintenance-policy). This allows you to migrate your DAGs to Astro without needing to make any code changes and then immediately upgrade to a new version of Airflow. Note that after you migrate your DAGs, Astronomer recommends upgrading to a supported version of Astro Runtime as soon as you can.
+If you're migrating to Astro from OSS Airflow or another Astronomer product, and you currently use an older version of Airflow, you can still create Deployments with the corresponding version of Astro Runtime even if it is deprecated according to the [Astro Runtime maintenance policy](runtime-version-lifecycle-policy.mdx#astro-runtime-maintenance-policy). This allows you to migrate your DAGs to Astro without needing to make any code changes and then immediately upgrade to a new version of Apache Airflow®. Note that after you migrate your DAGs, Astronomer recommends upgrading to a supported version of Astro Runtime as soon as you can.
 
 See [Run a deprecated Astro Runtime version](upgrade-runtime.md#run-a-deprecated-astro-runtime-version).
 

@@ -1,14 +1,14 @@
 ---
 title: "Use a listener to send a Slack notification when a dataset is updated"
 sidebar_label: "Create Airflow listeners"
-description: "Learn how to use Airflow listeners."
+description: "Learn how to use Apache Airflow® listeners."
 id: airflow-listeners
 ---
 
 import CodeBlock from '@theme/CodeBlock';
 import producer_dag from '!!raw-loader!../code-samples/dags/airflow-listeners/producer_dag.py';
 
-[Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Airflow instance, for example when any DAG run fails or any dataset is updated.
+[Apache Airflow® listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Apache Airflow® instance, for example when any DAG run fails or any dataset is updated.
 
 Listeners are implemented as an [Airflow plugin](using-airflow-plugins.md) and can contain any code. In this tutorial, you'll use a listener to send a Slack notification whenever any dataset is updated.
 

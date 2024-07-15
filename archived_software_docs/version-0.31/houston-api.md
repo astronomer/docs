@@ -10,7 +10,7 @@ The Astronomer Houston API is the source of truth across the entire Astronomer p
 For Astronomer Software users, our API is an easy way to do any of the following:
 
 - Query the platform's database for information about a user, Workspace, or Deployment
-- Perform CRUD operations on entities scoped to the Astronomer platform, including Airflow Deployments, Workspaces, and users
+- Perform CRUD operations on entities scoped to the Astronomer platform, including Apache Airflow® Deployments, Workspaces, and users
 
 For example, you can:
 - Delete a deployment
@@ -73,7 +73,7 @@ Once authenticated, you should be able to query all endpoints your user has acce
 
 Read below for commonly used queries. For those not in this doc, reference the "Schema" on the right-hand side as referenced above.
 
-### Query an Airflow Deployment
+### Query an Apache Airflow® Deployment
 
 The `workspaceDeployments` query requires the following inputs:
 

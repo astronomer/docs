@@ -1,7 +1,7 @@
 ---
-title: "Use setup and teardown tasks in Airflow"
+title: "Use setup and teardown tasks in Apache Airflow®"
 sidebar_label: "Setup/ teardown tasks"
-description: "Learn how to use setup and teardown tasks to manage task resources in Airflow."
+description: "Learn how to use setup and teardown tasks to manage task resources in Apache Airflow®."
 id: airflow-setup-teardown
 ---
 
@@ -11,7 +11,7 @@ import CodeBlock from '@theme/CodeBlock';
 import setup_teardown_example_methods from '!!raw-loader!../code-samples/dags/airflow-setup-teardown/setup_teardown_example_methods.py';
 import setup_teardown_example_decorators from '!!raw-loader!../code-samples/dags/airflow-setup-teardown/setup_teardown_example_decorators.py';
 
-In production Airflow environments, it's best practice to set up resources and configurations before certain tasks can run, then tear the resources down even if the tasks fail. This pattern can reduce resource utilization and save costs.
+In production Apache Airflow® environments, it's best practice to set up resources and configurations before certain tasks can run, then tear the resources down even if the tasks fail. This pattern can reduce resource utilization and save costs.
 
 Starting in Airflow 2.7, you can use a special type of task to create and delete resources. In this guide, you will learn all about _setup_ and _teardown tasks_ in Airflow.
 
@@ -222,7 +222,7 @@ worker_task_obj >> my_teardown_task_obj.as_teardown()
 </TabItem>
 </Tabs>
 
-After you have defined your setup and teardown tasks you need to [define their workflow](#creating-setup-teardown-workflows) in order for Airflow to know which setup and teardown tasks perform actions on the same resources.
+After you have defined your setup and teardown tasks you need to [define their workflow](#creating-setup-teardown-workflows) in order for Apache Airflow® to know which setup and teardown tasks perform actions on the same resources.
 
 ### `@setup` and `@teardown` decorators
 

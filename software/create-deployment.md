@@ -14,7 +14,7 @@ Use this document to learn how to create a Deployment on Astronomer Software.
 
 ## Create a Deployment in the Software UI
 
-To create an Airflow Deployment on Astronomer:
+To create an Apache Airflow® Deployment on Astronomer:
 
 1. Log in to your Astronomer platform at `app.BASEDOMAIN`, select a Workspace, and then click **New Deployment**.
 2. Complete the following fields:

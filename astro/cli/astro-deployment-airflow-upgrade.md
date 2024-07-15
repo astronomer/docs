@@ -13,7 +13,7 @@ This command is available only if you're authenticated to an Astronomer Software
 
 :::
 
-Initializes the Airflow version upgrade process on any Airflow Deployment on Astronomer. See [Upgrade Airflow on Astronomer Software](https://www.astronomer.io/docs/software/manage-airflow-versions)
+Initializes the Apache Airflow® version upgrade process on any Airflow Deployment on Astronomer. See [Upgrade Airflow on Astronomer Software](https://www.astronomer.io/docs/software/manage-airflow-versions)
 
 ## Usage
 
@@ -34,7 +34,7 @@ If you do not specify `--desired-airflow-version`, this command creates a list o
 ## Examples 
 
 ```sh
-# Upgrade to Airflow 2.4 
+# Upgrade to Apache Airflow® 2.4 
 $ astro deployment airflow --deployment-id telescopic-sky-4599 --desired-airflow-version 2.2.0
 ```
 

@@ -121,7 +121,7 @@ kubectl -n astronomer get secret  astronomer-houston-backend -o jsonpath='{.data
 
 In the case of an incident, you’re always free to restore either:
 
-*   A single Airflow Deployment
+*   A single Apache Airflow® Deployment
 *   The Whole Platform (all Airflow Deployments)
 
 The guidelines below will cover both, including specifics for restoring both deleted and non-deleted Airflow Deployments.
@@ -130,7 +130,7 @@ The guidelines below will cover both, including specifics for restoring both del
 
 The steps below are valid for the Astronomer Platform on Helm3 (Astronomer v0.14+).
 
-#### Non-Deleted Airflow Deployment
+#### Non-Deleted Apache Airflow® Deployment
 
 To restore a previous version of a deployment that has NOT been deleted via the Software UI (or CLI/API) and that has been backed up with Velero, follow the steps below.
 
@@ -150,7 +150,7 @@ To restore a previous version of a deployment that has NOT been deleted via the 
     velero restore create --from-backup <BACKUP NAME> --include-namespaces <NAMESPACE NAME>
     ```
 
-#### Deleted Airflow Deployment
+#### Deleted Apache Airflow® Deployment
 
 To restore a single Airflow Deployment that _was_ deleted via the Software UI (or CLI/API), first perform the steps detailed above for restoring its namespace with Velero.
 

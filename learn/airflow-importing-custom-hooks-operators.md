@@ -11,7 +11,7 @@ import CodeBlock from '@theme/CodeBlock';
 import custom_operator_example_taskflow from '!!raw-loader!../code-samples/dags/airflow-importing-custom-hooks-operators/custom_operator_example_taskflow.py';
 import custom_operator_example_traditional from '!!raw-loader!../code-samples/dags/airflow-importing-custom-hooks-operators/custom_operator_example_traditional.py';
 
-One of the great benefits of Airflow is its vast network of provider packages that provide hooks, operators, and sensors for many common use cases. Another great benefit of Airflow is that it is highly customizable because everything is defined in Python code. If a hook, operator, or sensor you need doesn't exist in the open source, you can easily define your own. 
+One of the great benefits of Apache Airflow® is its vast network of provider packages that provide hooks, operators, and sensors for many common use cases. Another great benefit of Airflow is that it is highly customizable because everything is defined in Python code. If a hook, operator, or sensor you need doesn't exist in the open source, you can easily define your own. 
 
 In this guide, you'll learn how to define your own custom Airflow operators and hooks to use in your DAGs. To explore existing hooks, operators, and sensors, visit the [Astronomer Registry](https://registry.astronomer.io/).
 
@@ -55,7 +55,7 @@ class MyOperator(BaseOperator):
         self.my_parameter = my_parameter
 
     # define the .execute() method that runs when a task uses this operator.
-    # The Airflow context must always be passed to '.execute()', so make
+    # The Apache Airflow® context must always be passed to '.execute()', so make
     # sure to include the 'context' kwarg.
     def execute(self, context):
         # write to Airflow task logs

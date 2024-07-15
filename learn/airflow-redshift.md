@@ -1,7 +1,7 @@
 ---
-title: "Orchestrate Redshift operations with Airflow"
+title: "Orchestrate Redshift operations with Apache Airflow®"
 sidebar_label: "Tutorial"
-description: "Orchestrate Redshift queries from your Airflow DAGs."
+description: "Orchestrate Redshift queries from your Apache Airflow® DAGs."
 id: airflow-redshift
 tags: [Database, SQL, DAGs, Integrations, AWS]
 sidebar_custom_props: { icon: 'img/integrations/redshift.png' }
@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/integrations/redshift.png' }
 
 Amazon Redshift is a fully-managed cloud data warehouse. It has become the most popular cloud data warehouse in part because of its ability to analyze exabytes of data and run complex analytical queries.
 
-Developing a dimensional data mart in Redshift requires automation and orchestration for repeated queries, data quality checks, and overall cluster operations. This makes Airflow the perfect orchestrator to pair with Redshift. With Airflow, you can orchestrate each step of your Redshift pipeline, integrate with services that clean your data, and store and publish your results using SQL and Python code.
+Developing a dimensional data mart in Redshift requires automation and orchestration for repeated queries, data quality checks, and overall cluster operations. This makes Apache Airflow® the perfect orchestrator to pair with Redshift. With Airflow, you can orchestrate each step of your Redshift pipeline, integrate with services that clean your data, and store and publish your results using SQL and Python code.
 
 In this tutorial, you'll learn about the Redshift modules that are available in the [AWS Airflow provider package](https://registry.astronomer.io/providers/amazon). You'll also complete sample implementations that execute SQL in a Redshift cluster, pause and resume a Redshift cluster, and transfer data between Amazon S3 and a Redshift cluster.
 
@@ -220,7 +220,7 @@ This DAG copies the `fct.listing` table from a Redshift cluster to the Amazon S3
 
 In this example, based on the parameters set in the DAG, the delimiter for the blob has been specified as a comma and the format of the blob has been specified as a CSV. Any existing files are overwritten, data is not written in parallel across multiple files, and a header line containing column names is included at the top of the file.
 
-## Pause and resume a Redshift cluster from Airflow
+## Pause and resume a Redshift cluster from Apache Airflow®
 
 Amazon Redshift supports the ability to pause and resume a cluster, allowing customers to suspend on-demand billing when the cluster isn't being used. For more information, see [Amazon Redshift launches pause and resume](https://aws.amazon.com/about-aws/whats-new/2020/03/amazon-redshift-launches-pause-resume/#:~:text=Amazon%20Redshift%20now%20supports%20the,suspended%20when%20not%20in%20use.).
 

@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import HostedBadge from '@site/src/components/HostedBadge';
 
-When you create an Airflow connection from a Deployment to access cloud resources, Airflow uses your connection details to access those services. You can add credentials to your Airflow connections to authenticate, but it can be risky to add secrets like passwords to your Airflow environment.
+When you create an Apache Airflow® connection from a Deployment to access cloud resources, Airflow uses your connection details to access those services. You can add credentials to your Airflow connections to authenticate, but it can be risky to add secrets like passwords to your Airflow environment.
 
 To avoid adding secrets to your Airflow connection, you can directly authorize your Astro Deployment to access AWS or GCP cloud services using workload identity. Astronomer recommends using a workload identity in most cases to improve security and avoid managing credentials across your Deployments. If you have less strict security requirements, you can still use any of the methods described in [Airflow connection guides](https://www.astronomer.io/docs/learn/connections) to manage your connection authorization.
 
@@ -77,7 +77,7 @@ To authorize your Deployment, create an IAM role that is assumed by the Deployme
 
 Repeat these steps for each Astro Deployment that needs to access your AWS resources.
 
-### Step 2: Create an Airflow connection
+### Step 2: Create an Apache Airflow® connection
 
 Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Either create an **Amazon Web Services** connection in the [Astro UI](create-and-link-connections.md) or the Airflow UI for your Deployment and specify the following fields:
 
@@ -146,7 +146,7 @@ If you want to share or re-use the same customer managed identity on static or e
     ```
 :::
 
-#### Step 2: Create an Airflow connection
+#### Step 2: Create an Apache Airflow® connection
 
 Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Create an **Amazon Web Services** connection in either the [Astro UI](create-and-link-connections.md) or the Airflow UI for your Deployment, and specify the following fields:
 
@@ -198,7 +198,7 @@ If your organization has requirements over how service accounts are managed outs
      - **Connection Id**: Enter a name for the connection.
      - **Impersonation Chain**: Enter the ID of the service account that your Deployment should impersonate.
 
-   Note that this implementation requires `apache-airflow-providers-google >= 10.8.0`. See [Add Python, OS-level packages, and Airflow providers](https://www.astronomer.io/docs/astro/cli/develop-project#add-python-os-level-packages-and-airflow-providers).
+   Note that this implementation requires `apache-airflow-providers-google >= 10.8.0`. See [Add Python, OS-level packages, and Apache Airflow® providers](https://www.astronomer.io/docs/astro/cli/develop-project#add-python-os-level-packages-and-airflow-providers).
 
    - Specify the impersonation chain in code when you instantiate a Google Cloud operator. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/connections/gcp.html#direct-impersonation-of-a-service-account). Note that if you configure both a connection type and an operator, the operator-level configuration takes precedence.
    - To access resources in a secrets backend, run the following command to create an environment variable that grants access to the secrets backend:
@@ -229,7 +229,7 @@ To authorize your Deployment, grant the required access to your Deployment's wor
 
 Repeat these steps for each Deployment that needs to access your GCP resources.
 
-#### Step 2: Create an Airflow connection
+#### Step 2: Create an Apache Airflow® connection
 
 Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Either create a **Google Cloud** connection in the [Astro UI](create-and-link-connections.md) or the Airflow UI for your Deployment and specify the following fields:
 

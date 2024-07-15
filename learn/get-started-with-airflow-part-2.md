@@ -1,14 +1,14 @@
 ---
-title: "Get started with Apache Airflow, Part 2: Providers, connections, and variables"
+title: "Get started with Apache Airflow®, Part 2: Providers, connections, and variables"
 sidebar_label: "Part 2: Providers, connections, and variables"
-description: "Learn the core Apache Airflow concepts of using providers and connections."
+description: "Learn the core Apache Airflow® concepts of using providers and connections."
 id: get-started-with-airflow-part-2
 ---
 
 import CodeBlock from '@theme/CodeBlock';
 import find_the_iss from '!!raw-loader!../code-samples/dags/get-started-with-airflow-part-2/find_the_iss.py';
 
-Use this tutorial after completing [Part 1: Write your first DAG](get-started-with-airflow.md) to learn about how to connect Airflow to external systems.
+Use this tutorial after completing [Part 1: Write your first DAG](get-started-with-airflow.md) to learn about how to connect Apache Airflow® to external systems.
 
 After you complete this tutorial, you'll be able to:
 
@@ -80,13 +80,13 @@ The new DAG interacts with GitHub and two external APIs to print the location of
 5. Paste the provider name and version into the `requirements.txt` file of your Astro project. Make sure to only add `apache-airflow-providers-github=<version>` without `pip install`.
 6. Restart your Airflow environment by running `astro dev restart`. Unlike DAG code changes, package dependency changes require a complete restart of Airflow.
 
-## Step 3: Add an Airflow variable
+## Step 3: Add an Apache Airflow® variable
 
 After restarting your Airflow instance, you should not see the DAG import error from [Step 2](#step-2-add-a-provider-package). Next, you need to add an Airflow variable to be used in the [GithubSensor](https://registry.astronomer.io/providers/apache-airflow-providers-github/versions/latest/modules/GithubSensor).
 
 [**Airflow variables**](airflow-variables.md) are key value pairs that can be accessed from any DAG in your Airflow environment. Because the variable `my_github_repo` is used in the DAG code with a default of `apache/airflow`, you'll need to create the variable and give it a value in the Airflow UI to wait for a commit in your own repository.
 
-1. Go to **Admin** > **Variables** to open the list of Airflow variables. Since no Airflow variables have been defined yet, it is empty.
+1. Go to **Admin** > **Variables** to open the list of Apache Airflow® variables. Since no Airflow variables have been defined yet, it is empty.
 
     ![Screenshot of the Airflow UI with the Admin tab menu expanded to show the Variables option.](/img/tutorials/get-started-with-airflow-part-2_AdminVariables.png)
 

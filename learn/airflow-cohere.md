@@ -1,7 +1,7 @@
 ---
-title: "Orchestrate Cohere LLMs with Apache Airflow"
+title: "Orchestrate Cohere LLMs with Apache Airflow®"
 sidebar_label: "Cohere"
-description: "Learn how to integrate Cohere and Airflow."
+description: "Learn how to integrate Cohere and Apache Airflow®."
 id: airflow-cohere
 sidebar_custom_props: { icon: 'img/integrations/cohere.png' }
 ---
@@ -9,11 +9,11 @@ sidebar_custom_props: { icon: 'img/integrations/cohere.png' }
 import CodeBlock from '@theme/CodeBlock';
 import recipe_suggestions from '!!raw-loader!../code-samples/dags/airflow-cohere/recipe_suggestions.py';
 
-[Cohere](https://cohere.com/) is a natural language processing (NLP) platform that provides an API to access cutting-edge large language models (LLMs). The [Cohere Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-cohere/stable/index.html) offers modules to easily integrate Cohere with Airflow.
+[Cohere](https://cohere.com/) is a natural language processing (NLP) platform that provides an API to access cutting-edge large language models (LLMs). The [Cohere Apache Airflow® provider](https://airflow.apache.org/docs/apache-airflow-providers-cohere/stable/index.html) offers modules to easily integrate Cohere with Airflow.
 
 In this tutorial, you use Airflow and the Cohere Airflow provider to generate recipe suggestions based on a list of ingredients and countries of recipe origin. Additionally, you create embeddings of the recipes and perform dimensionality reduction using principal component analysis (PCA) to plot recipe similarity in two dimensions.
 
-## Why use Airflow with Cohere?
+## Why use Apache Airflow® with Cohere?
 
 Cohere provides highly specialized out-of-the box and custom LLMs. Countless applications use these models for both user-facing needs, such as to moderate user-generated content, and internal purposes, like providing insight into customer support tickets.
 

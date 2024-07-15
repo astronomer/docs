@@ -2,10 +2,10 @@
 sidebar_label: 'View DAG runs'
 title: 'View DAG runs in Astro'
 id: dag-metrics
-description: "Learn how to monitor the performance, health, and total task volume across your Apache Airflow DAGs. These metrics in Astro can help you with resource allocation and  troubleshooting."
+description: "Learn how to monitor the performance, health, and total task volume across your Apache Airflow® DAGs. These metrics in Astro can help you with resource allocation and  troubleshooting."
 ---
 
-The **DAGs** page in the Astro UI lets you view and manage all DAGs in your Workspace from a single place. You can view high level metrics about each DAG in a summary table, or select specific DAGs to view DAG code and the status of DAG runs without needing to open the Airflow UI. Use the **DAGs** page to check the performance of DAGs and debug issues in your DAG code based on your DAG run statuses.
+The **DAGs** page in the Astro UI lets you view and manage all DAGs in your Workspace from a single place. You can view high level metrics about each DAG in a summary table, or select specific DAGs to view DAG code and the status of DAG runs without needing to open the Apache Airflow® UI. Use the **DAGs** page to check the performance of DAGs and debug issues in your DAG code based on your DAG run statuses.
 
 To access the **DAGs** page, either click **DAGs** on the left sidebar or click **View DAGs** on a Deployment's information page.
 

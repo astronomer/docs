@@ -27,7 +27,7 @@ These policies apply only to the Astronomer Software platform. For release and l
 
 To meet the unique needs of different operating environments, we offer all Astronomer customers two release channels:
 
-- **Stable:** Includes the latest Astronomer and Airflow features
+- **Stable:** Includes the latest Astronomer and Apache Airflow® features
 - **Long-term Support (LTS):** Includes long-term testing, stability, and maintenance for a core set of features
 
 All releases of AC are considered stable. The LTS release channel is a subset of the stable release channel that promises additional stability, reliability, and support from our team.

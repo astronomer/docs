@@ -1,14 +1,14 @@
 ---
-title: "An introduction to Apache Airflow"
+title: "An introduction to Apache Airflow®"
 sidebar_label: "Introduction to Airflow"
 id: intro-to-airflow
-description: "Learn what Apache Airflow is and what problems it solves. Get free access to valuable learning resources."
+description: "Learn what Apache Airflow® is and what problems it solves. Get free access to valuable learning resources."
 ---
 
 import CodeBlock from '@theme/CodeBlock';
 import example_astronauts from '!!raw-loader!../code-samples/dags/intro-to-airflow/example_astronauts.py';
 
-[Apache Airflow](https://airflow.apache.org/) is an open source tool for programmatically authoring, scheduling, and monitoring data pipelines. Every month, millions of new and returning users download Airflow and it has a large, active open source [community](https://airflow.apache.org/community/). The core principle of Airflow is to define data pipelines as code, allowing for dynamic and scalable workflows.
+[Apache Airflow®](https://airflow.apache.org/) is an open source tool for programmatically authoring, scheduling, and monitoring data pipelines. Every month, millions of new and returning users download Airflow and it has a large, active open source [community](https://airflow.apache.org/community/). The core principle of Airflow is to define data pipelines as code, allowing for dynamic and scalable workflows.
 
 This guide offers an introduction to Apache Airflow and its core concepts. You'll learn about:
 
@@ -35,7 +35,7 @@ To get the most out of this guide, you should have an understanding of:
 
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
 
-## Airflow history
+## Apache Airflow® history
 
 Over the past ten years, Airflow grew to be the open source standard for data orchestration:
 
@@ -47,7 +47,7 @@ Over the past ten years, Airflow grew to be the open source standard for data or
 
 Airflow has come a long way since Maxime's first commit. As of March 2024, Airflow has over 2,800 contributors, 23,300 commits and 33,700 stars on [GitHub](https://github.com/apache/airflow).
 
-## Why use Airflow
+## Why use Apache Airflow®
 
 [Apache Airflow](https://airflow.apache.org/index.html) is a platform for programmatically authoring, scheduling, and monitoring workflows. It is especially useful for creating and orchestrating complex data pipelines.
 

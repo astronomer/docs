@@ -1,13 +1,13 @@
 ---
-title: "Integrate OpenLineage and Airflow with Marquez"
+title: "Integrate OpenLineage and Apache Airflow® with Marquez"
 sidebar_label: "Marquez"
-description: "Use OpenLineage and Marquez to get lineage metadata locally from your Airflow DAGs."
+description: "Use OpenLineage and Marquez to get lineage metadata locally from your Apache Airflow® DAGs."
 id: marquez
 tags: [Lineage]
 sidebar_custom_props: { icon: 'img/integrations/marquez.png' }
 ---
 
-[OpenLineage](https://openlineage.io/) is the open source industry standard framework for data lineage. Integrating OpenLineage with Airflow gives you greater observability over your data pipelines and helps with everything from data governance to tracking the blast radius of a task failure across DAGs to managing PII.
+[OpenLineage](https://openlineage.io/) is the open source industry standard framework for data lineage. Integrating OpenLineage with Apache Airflow® gives you greater observability over your data pipelines and helps with everything from data governance to tracking the blast radius of a task failure across DAGs to managing PII.
 
 Viewing and interacting with lineage metadata requires running a lineage front end. [Marquez](https://github.com/MarquezProject/marquez) is the most common open source choice for this purpose, and integrates easily with Airflow.
 
@@ -121,7 +121,7 @@ To show the lineage metadata that can result from Airflow DAG runs, you'll use t
         ('2022-08-07', 'Rabbit', 'Hops', 3);
     ```
 
-## Step 4: Configure your Airflow connection
+## Step 4: Configure your Apache Airflow® connection
 
 The connection you configure will connect to the Postgres database you created in [Step 3](#step-3-configure-your-database).
 

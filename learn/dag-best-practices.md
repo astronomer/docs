@@ -1,8 +1,8 @@
 ---
-title: "DAG writing best practices in Apache Airflow"
+title: "DAG writing best practices in Apache Airflow®"
 sidebar_label: "DAG writing best practices"
 id: dag-best-practices
-description: "Keep up to date with the best practices for developing efficient, secure, and scalable DAGs using Airflow. Learn about DAG design and data orchestration."
+description: "Keep up to date with the best practices for developing efficient, secure, and scalable DAGs using Apache Airflow®. Learn about DAG design and data orchestration."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -14,7 +14,7 @@ import bad_practices_dag_2 from '!!raw-loader!../code-samples/dags/dag-best-prac
 import good_practices_dag_1 from '!!raw-loader!../code-samples/dags/dag-best-practices/good_practices_dag_1.py';
 import good_practices_dag_2 from '!!raw-loader!../code-samples/dags/dag-best-practices/good_practices_dag_2.py';
 
-Because Airflow is 100% code, knowing the basics of Python is all it takes to get started writing DAGs. However, writing DAGs that are efficient, secure, and scalable requires some Airflow-specific finesse. In this guide, you'll learn how you can develop DAGs that make the most of what Airflow has to offer.
+Because Apache Airflow® is 100% code, knowing the basics of Python is all it takes to get started writing DAGs. However, writing DAGs that are efficient, secure, and scalable requires some Airflow-specific finesse. In this guide, you'll learn how you can develop DAGs that make the most of what Airflow has to offer.
 
 In general, best practices fall into one of two categories: 
 
@@ -78,7 +78,7 @@ A better way of implementing this is by using an Airflow variable:
 
 ```python
 # Variables used by tasks
-# Good example - Define yesterday's date with an Airflow variable
+# Good example - Define yesterday's date with an Apache Airflow® variable
 yesterday = {{ yesterday_ds_nodash }}
 ```
 
@@ -198,7 +198,7 @@ Try to be consistent with something like this:
 task_1 >> task_2 >> [task_3, task_4]
 ```
 
-## Leverage Airflow features
+## Leverage Apache Airflow® features
 
 To get the most out of Airflow, leverage built-in features and the broader Airflow ecosystem, namely provider packages for third-party integrations, to fulfill specific use cases. Using Airflow in this way makes it easier to scale and pull in the right tools based on your needs.
 

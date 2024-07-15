@@ -1,7 +1,7 @@
 ---
-title: "Run tasks in an isolated environment in Apache Airflow"
+title: "Run tasks in an isolated environment in Apache Airflow®"
 sidebar_label: "Isolated Environments"
-description: "Learn how to run an Airflow task in an isolated environment."
+description: "Learn how to run an Apache Airflow® task in an isolated environment."
 id: airflow-isolated-environments
 ---
 
@@ -13,7 +13,7 @@ import python_virtualenv_operator_dag from '!!raw-loader!../code-samples/dags/ai
 import external_python_decorator_dag from '!!raw-loader!../code-samples/dags/airflow-isolated-environments/external_python_decorator_dag.py';
 import external_python_operator_dag from '!!raw-loader!../code-samples/dags/airflow-isolated-environments/external_python_operator_dag.py';
 
-It is very common to run a task with different dependencies than your Airflow environment. Your task might need a different Python version than core Airflow, or it has packages that conflict with your other tasks. In these cases, running tasks in an isolated environment can help manage dependency conflicts and enable compatibility with your execution environments.
+It is very common to run a task with different dependencies than your Apache Airflow® environment. Your task might need a different Python version than core Airflow, or it has packages that conflict with your other tasks. In these cases, running tasks in an isolated environment can help manage dependency conflicts and enable compatibility with your execution environments.
 
 In Airflow, you have several options for running custom Python code in isolated environments. This guide teaches you how to choose the right isolated environment option for your use case, implement different virtual environment operators and decorators, and access Airflow context and variables in isolated environments.
 
@@ -30,7 +30,7 @@ There are multiple resources for learning about this topic. See also:
 
 :::info
 
-This guide covers options to isolate individual tasks in Airflow. If you want to run all of your Airflow tasks in dedicated Kubernetes pods, consider using the [Kubernetes Executor](https://www.astronomer.io/docs/learn/airflow-executors-explained#kubernetes-executor). Astronomer customers can set their Deployments to use the KubernetesExecutor in the Astro UI, see [Manage Airflow executors on Astro](https://www.astronomer.io/docs/astro/executors-overview). 
+This guide covers options to isolate individual tasks in Airflow. If you want to run all of your Airflow tasks in dedicated Kubernetes pods, consider using the [Kubernetes Executor](https://www.astronomer.io/docs/learn/airflow-executors-explained#kubernetes-executor). Astronomer customers can set their Deployments to use the KubernetesExecutor in the Astro UI, see [Manage Apache Airflow® executors on Astro](https://www.astronomer.io/docs/astro/executors-overview). 
 
 :::
 
@@ -564,7 +564,7 @@ my_isolated_task = BranchPythonVirtualenvOperator(
 </TabItem>
 </Tabs>
 
-## Use Airflow context variables in isolated environments
+## Use Apache Airflow® context variables in isolated environments
 
 Some variables from the [Airflow context](airflow-context.md) can be passed to isolated environments, for example the `logical_date` of the DAG run. Due to compatibility issues, other objects from the context such as `ti` cannot be passed to isolated environments. For more information, see the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#id1).
 

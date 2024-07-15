@@ -1,11 +1,11 @@
 ---
-title: "Best practices for orchestrating MLOps pipelines with Airflow"
+title: "Best practices for orchestrating MLOps pipelines with Apache Airflow®"
 sidebar_label: "MLOps"
-description: "Learn how to use Airflow to run machine learning in production."
+description: "Learn how to use Apache Airflow® to run machine learning in production."
 id: airflow-mlops
 ---
 
-**Machine Learning Operations** (MLOps) is a broad term encompassing everything needed to run machine learning models in production. MLOps is a rapidly evolving field with many different best practices and behavioral patterns, with Apache Airflow providing tool agnostic orchestration capabilities for all steps.
+**Machine Learning Operations** (MLOps) is a broad term encompassing everything needed to run machine learning models in production. MLOps is a rapidly evolving field with many different best practices and behavioral patterns, with Apache Airflow® providing tool agnostic orchestration capabilities for all steps.
 
 In this guide you learn:
 
@@ -32,7 +32,7 @@ To get the most benefits from this guide, you need an understanding of:
 - The basics of [Machine Learning](https://www.coursera.org/specializations/machine-learning-introduction).
 - Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
 
-## Why use Airflow for MLOps?
+## Why use Apache Airflow® for MLOps?
 
 **Machine learning operations** (MLOps) encompasses all patterns, tools, and best practices related to running machine learning models in production.
 
@@ -51,7 +51,7 @@ The benefits of using Airflow for MLOps are:
 - **Shared platform**: Both data engineers and ML engineers use Airflow, which allows teams to create direct dependencies between their pipelines, such as using [Airflow Datasets](airflow-datasets.md).
 - **Use existing expertise**: Many organizations are already using Apache Airflow for their data engineering workflows and have developed best practices and custom tooling around it. This means that data engineers and ML engineers alike can build upon existing processes and tools to orchestrate and monitor ML pipelines.
 
-## Why use Airflow for LLMOps?
+## Why use Apache Airflow® for LLMOps?
 
 **Large Language Model Operations** (LLMOps) is a subset of MLOps that describes interactions with large language models (LLMs). In contrast to traditional ML models, LLMs are often too large to be trained from scratch and LLMOps techniques instead revolve around adapting existing LLMs to new use cases.
 
@@ -157,7 +157,7 @@ When using Apache Airflow for MLOps, there are three main patterns you can follo
 - Combine orchestration of actions in other tools with ML operations running within Airflow. For example, you can create vector embeddings in a Python function in Airflow and then use these embeddings to train a model in [Google Datalab](https://cloud.google.com/monitoring/datalab/set-up-datalab). Modules like the [`@task.kubernetes`](kubepod-operator.md#use-the-taskkubernetes-decorator) or [`@task.external_python_operator`](airflow-isolated-environments.md) make it easy to run any Python code in isolation with optimized environments and resources.
 - Run all your MLOps using Python modules inside Airflow tasks. Since Airflow can run any Python code and [scale indefinitely](airflow-scaling-workers.md), you can use it as an all-purpose MLOps tool.
 
-### Airflow features for MLOps
+### Apache Airflow® features for MLOps
 
 A specific set of Airflow features can help you implement MLOps best practices:
 

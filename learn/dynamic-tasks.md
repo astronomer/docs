@@ -1,7 +1,7 @@
 ---
-title: "Create dynamic Airflow tasks"
+title: "Create dynamic Apache Airflow® tasks"
 sidebar_label: "Dynamic tasks"
-description: "How to dynamically create tasks at runtime in your Airflow DAGs."
+description: "How to dynamically create tasks at runtime in your Apache Airflow® DAGs."
 id: dynamic-tasks
 ---
 
@@ -12,7 +12,7 @@ import CodeBlock from '@theme/CodeBlock';
 import mapping_elt_taskflow from '!!raw-loader!../code-samples/dags/dynamic-tasks/mapping_elt_taskflow.py';
 import mapping_elt_traditional from '!!raw-loader!../code-samples/dags/dynamic-tasks/mapping_elt_traditional.py';
 
-With **dynamic task mapping**, you can write DAGs that dynamically generate parallel tasks at runtime. This feature is a paradigm shift for DAG design in Airflow, since it allows you to create tasks based on the current runtime environment without having to change your DAG code.
+With **dynamic task mapping**, you can write DAGs that dynamically generate parallel tasks at runtime. This feature is a paradigm shift for DAG design in Apache Airflow®, since it allows you to create tasks based on the current runtime environment without having to change your DAG code.
 
 In this guide, you'll learn about dynamic task mapping and complete an example implementation for a common use case.
 
@@ -58,7 +58,7 @@ In the following example, the task uses both, `.partial()` and `.expand()`, to d
 
 ```python
 @task(
-    # optionally, you can set a custom index to display in the UI (Airflow 2.9+)
+    # optionally, you can set a custom index to display in the UI (Apache Airflow® 2.9+)
     map_index_template="{{ my_custom_map_index }}"
 )
 def add(x: int, y: int):

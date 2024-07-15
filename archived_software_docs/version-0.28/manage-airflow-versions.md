@@ -1,5 +1,5 @@
 ---
-title: "Upgrade Apache Airflow on Astronomer Software"
+title: "Upgrade Apache Airflow® on Astronomer Software"
 sidebar_label: "Upgrade Airflow"
 id: manage-airflow-versions
 description: Adjust and upgrade Airflow versions on Astronomer Software.
@@ -7,7 +7,7 @@ description: Adjust and upgrade Airflow versions on Astronomer Software.
 
 ## Overview
 
-On Astronomer, the process of pushing up your code to an individual Airflow Deployment involves customizing a locally built Docker image —— with your DAG code, dependencies, plugins, and so on —— that's then bundled, tagged, and pushed to your Docker Registry.
+On Astronomer, the process of pushing up your code to an individual Apache Airflow® Deployment involves customizing a locally built Docker image —— with your DAG code, dependencies, plugins, and so on —— that's then bundled, tagged, and pushed to your Docker Registry.
 
 Included in that build is your `Dockerfile`, a file that is automatically generated when you initialize an Airflow project on Astronomer via our CLI. Every successful build on Astronomer must include a `Dockerfile` that references an Astronomer Certified Docker Image. Astronomer Certified (AC) is a production-ready distribution of Apache Airflow that mirrors the open source project and undergoes additional levels of rigorous testing conducted by our team.
 
@@ -37,7 +37,7 @@ Starting with Astronomer Software v0.23, new versions of Astronomer Certified ar
 
 The first step to upgrading your Deployment to a higher version of Apache Airflow is to indicate your intent to do so via the Software UI or CLI.
 
-> **Note:** The Software UI and CLI will only make available versions of Airflow that are _higher_ than the version you're currently running in your `Dockerfile`. For example, Airflow `1.10.7` would not be available for an Airflow Deployment running `1.10.10`.
+> **Note:** The Software UI and CLI will only make available versions of Apache Airflow® that are _higher_ than the version you're currently running in your `Dockerfile`. For example, Airflow `1.10.7` would not be available for an Airflow Deployment running `1.10.10`.
 
 ### via the Software UI
 
@@ -111,7 +111,7 @@ First, open the `Dockerfile` within your Astronomer directory. When you used the
 ├── Dockerfile # For Astronomer's Docker image and runtime overrides
 ├── include # For any other files you'd like to include
 ├── packages.txt # For OS-level packages
-├── plugins # For any custom or community Airflow plugins
+├── plugins # For any custom or community Apache Airflow® plugins
 └── requirements.txt # For any Python packages
 ```
 
@@ -173,7 +173,7 @@ If you need to minimize the upgrade time for a given Deployment, reach out to [A
 
 :::
 
-### 5. Confirm your version in the Airflow UI
+### 5. Confirm your version in the Apache Airflow® UI
 
 Once you've issued that command, navigate to your Airflow UI to confirm that you're now running the correct Airflow version.
 

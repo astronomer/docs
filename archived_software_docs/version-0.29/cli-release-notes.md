@@ -112,4 +112,4 @@ For more information, see the [CLI Reference Guide](cli-reference.md#astro-deplo
 
 ### Additional improvements
 
-- When running `astro dev start`, the containers running Airflow components now include your project directory in their names.
+- When running `astro dev start`, the containers running Apache Airflow® components now include your project directory in their names.

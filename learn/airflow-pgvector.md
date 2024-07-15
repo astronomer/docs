@@ -1,7 +1,7 @@
 ---
-title: "Orchestrate pgvector operations with Apache Airflow"
+title: "Orchestrate pgvector operations with Apache Airflow®"
 sidebar_label: "pgvector"
-description: "Learn how to integrate pgvector and Airflow."
+description: "Learn how to integrate pgvector and Apache Airflow®."
 id: airflow-pgvector
 sidebar_custom_props: { icon: 'img/integrations/postgres.png' }
 ---
@@ -9,11 +9,11 @@ sidebar_custom_props: { icon: 'img/integrations/postgres.png' }
 import CodeBlock from '@theme/CodeBlock';
 import query_book_vectors from '!!raw-loader!../code-samples/dags/airflow-pgvector/query_book_vectors.py';
 
-[Pgvector](https://github.com/pgvector/pgvector) is an open source extension for PostgreSQL databases that adds the possibility to store and query high-dimensional object embeddings. The [pgvector Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-pgvector/stable/index.html) offers modules to easily integrate pgvector with Airflow.
+[Pgvector](https://github.com/pgvector/pgvector) is an open source extension for PostgreSQL databases that adds the possibility to store and query high-dimensional object embeddings. The [pgvector Apache Airflow® provider](https://airflow.apache.org/docs/apache-airflow-providers-pgvector/stable/index.html) offers modules to easily integrate pgvector with Airflow.
 
 In this tutorial, you use Airflow to orchestrate the embedding of book descriptions with the OpenAI API, ingest the embeddings into a PostgreSQL database with pgvector installed, and query the database for books that match a user-provided mood.
 
-## Why use Airflow with pgvector?
+## Why use Apache Airflow® with pgvector?
 
 Pgvector allows you to store objects alongside their vector embeddings and to query these objects based on their similarity. Vector embeddings are key components of many modern machine learning models such as [LLMs](https://en.wikipedia.org/wiki/Large_language_model) or [ResNet](https://arxiv.org/abs/1512.03385).
 

@@ -1,5 +1,5 @@
 ---
-title: "Create an Amazon Redshift Connection in Airflow"
+title: "Create an Amazon Redshift Connection in Apache Airflow®"
 id: redshift
 sidebar_label: Connection 
 description: Learn how to create an Amazon Redshift connection in Airflow.
@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/integrations/redshift.png' }
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-[Amazon Redshift](https://aws.amazon.com/redshift/) is a data warehouse product from AWS. Integrating Redshift with Airflow allows you to automate, schedule and monitor a variety of tasks. These tasks include creating, deleting, and resuming a cluster, ingesting or exporting data to and from Redshift, as well as running SQL queries against Redshift. 
+[Amazon Redshift](https://aws.amazon.com/redshift/) is a data warehouse product from AWS. Integrating Redshift with Apache Airflow® allows you to automate, schedule and monitor a variety of tasks. These tasks include creating, deleting, and resuming a cluster, ingesting or exporting data to and from Redshift, as well as running SQL queries against Redshift. 
 
 This document covers two different methods to connect Airflow to Amazon Redshift:
 

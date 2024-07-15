@@ -1,8 +1,8 @@
 ---
-title: "Using Airflow to Execute SQL"
+title: "Using Apache Airflow® to Execute SQL"
 id: airflow-sql
 sidebar_label: "Run SQL"
-description: "Learn the best practices for executing SQL from your DAG. Get to know Airflow’s SQL-related operators and see how to use Airflow for common SQL use cases."
+description: "Learn the best practices for executing SQL from your DAG. Get to know Apache Airflow®’s SQL-related operators and see how to use Apache Airflow® for common SQL use cases."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -15,7 +15,7 @@ import cat_data_s3_to_snowflake_decorators_dag from '!!raw-loader!../code-sample
 import cat_data_s3_to_snowflake_traditional_dag from '!!raw-loader!../code-samples/dags/airflow-sql/cat_data_s3_to_snowflake_traditional_dag.py';
 
 
-Executing SQL queries is one of the most common use cases for data pipelines. Whether you're extracting and loading data, calling a stored procedure, or executing a complex query for a report, Airflow has you covered. Using Airflow, you can orchestrate all of your SQL tasks elegantly with just a few lines of boilerplate code.
+Executing SQL queries is one of the most common use cases for data pipelines. Whether you're extracting and loading data, calling a stored procedure, or executing a complex query for a report, Apache Airflow® has you covered. Using Airflow, you can orchestrate all of your SQL tasks elegantly with just a few lines of boilerplate code.
 
 In this guide you'll learn about the best practices for executing SQL from your DAG, review the  most commonly used Airflow SQL-related operators, and then use sample code to implement a few common SQL use cases.
 

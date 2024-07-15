@@ -11,7 +11,7 @@ Use Organization API tokens to automate across all Workspaces in your Organizati
 - Inviting users to an Organization or Workspace. See [Add a group of users to Astro using the Astro CLI](manage-workspace-users.md#add-a-group-of-users-to-a-workspace-using-the-astro-cli).
 - Creating and updating Deployments using a [Deployment file](manage-deployments-as-code.md).
 - Exporting audit logs.
-- Gathering metadata about Deployments using the Airflow REST API.
+- Gathering metadata about Deployments using the Apache Airflow® REST API.
 - Completing any of the actions you can complete with a Workspace API token or Deployment API token across all Deployments in your Organization.
 
 ## Create an Organization API token

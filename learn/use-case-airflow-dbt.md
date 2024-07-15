@@ -1,6 +1,6 @@
 ---
-title: "ELT with Airflow and dbt Core"
-description: "Use Airflow, dbt Core, Cosmos and the Astro Python SDK in an ELT pipeline to analyze energy data."
+title: "ELT with Apache Airflow® and dbt Core"
+description: "Use Apache Airflow®, dbt Core, Cosmos and the Astro Python SDK in an ELT pipeline to analyze energy data."
 id: use-case-airflow-dbt
 sidebar_label: "ELT with Airflow + dbt"
 sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
@@ -42,7 +42,7 @@ To run the example project, first make sure Docker Desktop is running. Then, nav
 astro dev start
 ```
 
-This command builds your project and spins up 4 Docker containers on your machine to run it. After the command finishes, open the Airflow UI at `https://localhost:8080/` and trigger the `my_energy_dag` DAG using the play button.
+This command builds your project and spins up 4 Docker containers on your machine to run it. After the command finishes, open the Apache Airflow® UI at `https://localhost:8080/` and trigger the `my_energy_dag` DAG using the play button.
 
 ## Project contents
 

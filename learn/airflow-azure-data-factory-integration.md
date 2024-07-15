@@ -1,12 +1,12 @@
 ---
-title: "Run Azure Data Factory pipelines with Airflow"
+title: "Run Azure Data Factory pipelines with Apache Airflow®"
 sidebar_label: "Tutorial"
-description: "Learn how to orchestrate remote jobs in Azure Data Factory with your Apache Airflow DAGs."
+description: "Learn how to orchestrate remote jobs in Azure Data Factory with your Apache Airflow® DAGs."
 id: airflow-azure-data-factory-integration
 sidebar_custom_props: { icon: 'img/integrations/azure-data-factory.png' }
 ---
 
-Azure Data Factory (ADF) is a commonly used service for constructing data pipelines and jobs. With a little preparation, it can be used in combination with Airflow to leverage the best of both tools. In this tutorial, you'll learn why you might want to use these two tools together and how to run your ADF pipeline from your Airflow DAG.
+Azure Data Factory (ADF) is a commonly used service for constructing data pipelines and jobs. With a little preparation, it can be used in combination with Apache Airflow® to leverage the best of both tools. In this tutorial, you'll learn why you might want to use these two tools together and how to run your ADF pipeline from your Airflow DAG.
 
 :::info
 
@@ -44,7 +44,7 @@ Before you can orchestrate your ADF pipelines with Airflow, you have to make the
 
     Click the app associated with your resource group, and note the **Application (client) Id**. You'll need this to connect Airflow to ADF.
 
-2. Go to **Certificates & Secrets** -> **New client secret** and create a **Client Secret** which will be used to connect Data Factory in Airflow.
+2. Go to **Certificates & Secrets** -> **New client secret** and create a **Client Secret** which will be used to connect Data Factory in Apache Airflow®.
 
 3. Connect your **Client Secret** API key to your Data Factory instance. Go back to the overview of your Data Factory and click **Access Control** -> **Add role assignments** and add your **Application** as a contributor to the Data Factory.
 
@@ -88,7 +88,7 @@ Now that you have your Azure resources configured, you can move on to setting up
     astro dev start
     ```
 
-## Step 3: Create an Airflow connection to ADF
+## Step 3: Create an Apache Airflow® connection to ADF
 
 Add a connection that Airflow will use to connect to ADF. In the Airflow UI, go to **Admin** -> **Connections**.
 
@@ -171,7 +171,7 @@ The DAG will execute both ADF pipelines in parallel (tasks `run_pipeline1` and `
 
 To learn more about all of the ADF modules in the Microsoft Azure provider, check out the [Astronomer Registry](https://registry.astronomer.io/providers/microsoft-azure).
 
-## Why use Airflow with ADF
+## Why use Apache Airflow® with ADF
 
 ADF is an easy to learn tool that allows you to quickly create jobs without writing code. It integrates seamlessly with on-premises data sources and other Azure services. However, it has some disadvantages when used alone - namely:
 

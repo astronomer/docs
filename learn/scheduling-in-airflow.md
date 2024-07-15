@@ -1,14 +1,14 @@
 ---
-title: "Schedule DAGs in Airflow"
+title: "Schedule DAGs in Apache Airflow®"
 sidebar_label: "Schedule DAGs"
 id: scheduling-in-airflow
-description: "Get to know Airflow scheduling concepts and different ways to schedule a DAG."
+description: "Get to know Apache Airflow® scheduling concepts and different ways to schedule a DAG."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-One of the fundamental features of Apache Airflow is the ability to schedule jobs. Historically, Airflow users scheduled their DAGs by specifying a `schedule` with a cron expression, a timedelta object, or a preset Airflow schedule. Recent versions of Airflow have added new ways to schedule DAGs, including [data-aware scheduling with datasets](#data-aware-scheduling) and the option to define complex custom schedules with [timetables](#timetables).
+One of the fundamental features of Apache Airflow® is the ability to schedule jobs. Historically, Airflow users scheduled their DAGs by specifying a `schedule` with a cron expression, a timedelta object, or a preset Airflow schedule. Recent versions of Airflow have added new ways to schedule DAGs, including [data-aware scheduling with datasets](#data-aware-scheduling) and the option to define complex custom schedules with [timetables](#timetables).
 
 In this guide, you'll learn Airflow scheduling concepts and the different ways you can schedule a DAG.
 
@@ -144,7 +144,7 @@ dataset2 = Dataset(f"{DATASETS_PATH}/dataset_2.txt")
     start_date=datetime(2024, 4, 1),
     schedule=[dataset1, dataset2],  
     # Passing a list of datasets will create an AND condition, 
-    # This scheduling option is available in Airflow 2.4+
+    # This scheduling option is available in Apache Airflow® 2.4+
 )
 ```
 

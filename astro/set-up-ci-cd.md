@@ -6,7 +6,7 @@ id: set-up-ci-cd
 
 Continuous Integration and Continuous Delivery (CI/CD) pipelines are programmatic workflows that automate key parts of the software development lifecycle, including code changes, builds, and testing. CI/CD helps your organization develop faster, more securely, and more reliably.
 
-There are many strategies for organizing your source code and building CI/CD pipelines for Apache Airflow on Astro, and each has its own benefits and limitations. Use this document to:
+There are many strategies for organizing your source code and building CI/CD pipelines for Apache Airflow® on Astro, and each has its own benefits and limitations. Use this document to:
 
 - Learn the benefits of CI/CD.
 - Determine what kind of Deployment and CI/CD strategy you want your data team to use.

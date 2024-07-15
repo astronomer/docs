@@ -74,7 +74,7 @@ A number of configurations, including those for user permissions and identity pr
     helm upgrade <your-platform-release-name> astronomer/astronomer -f <your-updated-config-yaml-file> -n <your-platform-namespace> --set astronomer.houston.upgradeDeployments.enabled=false
     ```
 
-    Setting `astronomer.houston.upgradeDeployments.enabled=false` ensures that no Airflow components in Deployments are restarted during your upgrade.
+    Setting `astronomer.houston.upgradeDeployments.enabled=false` ensures that no Apache Airflow® components in Deployments are restarted during your upgrade.
 
 3. Run the following command to confirm that your configuration was applied:
 

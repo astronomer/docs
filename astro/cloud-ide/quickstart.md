@@ -39,7 +39,7 @@ The Cloud IDE is available to all Astro customers and can be accessed in the Ast
 After you create your project, the Cloud IDE opens your project home page with the following tabs:
 
 - The **Pipelines** tab stores all of the Python and SQL code that your project executes.
-- The **Connections** tab stores Airflow connections for connecting your project to external services.
+- The **Connections** tab stores Apache Airflow® connections for connecting your project to external services.
 - The **Variables** tab stores Airflow variables used in your pipeline code.
 - The **Requirements** tab stores the required Python and OS-level dependencies for running your pipelines.
 

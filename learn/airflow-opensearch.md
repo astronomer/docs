@@ -1,7 +1,7 @@
 ---
-title: "Orchestrate OpenSearch operations with Apache Airflow"
+title: "Orchestrate OpenSearch operations with Apache Airflow®"
 sidebar_label: "OpenSearch"
-description: "Learn how to integrate OpenSearch and Airflow."
+description: "Learn how to integrate OpenSearch and Apache Airflow®."
 id: airflow-opensearch
 sidebar_custom_props: { icon: 'img/integrations/opensearch.png' }
 ---
@@ -9,11 +9,11 @@ sidebar_custom_props: { icon: 'img/integrations/opensearch.png' }
 import CodeBlock from '@theme/CodeBlock';
 import search_hamilton from '!!raw-loader!../code-samples/dags/airflow-opensearch/search_hamilton.py';
 
-[OpenSearch](https://opensearch.org/) is an open source distributed search and analytics engine based on [Apache Lucene](https://lucene.apache.org/). It offers advanced search capabilities on large bodies of text alongside powerful machine learning plugins. The [OpenSearch Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-opensearch/stable/index.html) offers modules to easily integrate OpenSearch with Airflow.
+[OpenSearch](https://opensearch.org/) is an open source distributed search and analytics engine based on [Apache Lucene](https://lucene.apache.org/). It offers advanced search capabilities on large bodies of text alongside powerful machine learning plugins. The [OpenSearch Apache Airflow® provider](https://airflow.apache.org/docs/apache-airflow-providers-opensearch/stable/index.html) offers modules to easily integrate OpenSearch with Airflow.
 
 In this tutorial you'll use Airflow to create an index in OpenSearch, ingest the lyrics of the musical [Hamilton](https://hamiltonmusical.com/new-york/) into the index, and run a search query on the index to see which character most often sings a specific word.
 
-## Why use Airflow with OpenSearch?
+## Why use Apache Airflow® with OpenSearch?
 
 OpenSearch allows you to perform complex search queries on indexed text documents. Additionally, the tool comes with a variety of plugins for use cases such as security analytics, semantic search, and neural search. 
 

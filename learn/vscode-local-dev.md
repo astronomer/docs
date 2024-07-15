@@ -1,12 +1,12 @@
 ---
-title: "Develop Airflow DAGs locally with VS Code"
-description: "Integrate the Astro CLI with VS Code for local Airflow development."
+title: "Develop Apache Airflow® DAGs locally with VS Code"
+description: "Integrate the Astro CLI with VS Code for local Apache Airflow® development."
 id: vscode-local-dev
 sidebar_label: "Develop with VS Code"
 sidebar_custom_props: { icon: 'img/examples/vscode_logo.png' }
 ---
 
-This example shows how to set up [VS Code](https://code.visualstudio.com/) for local development with Airflow and the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview). Setting up a local development environment allows you to iterate more quickly when developing DAGs by taking advantage of IDE features like code autocompletion, identifying deprecated or unused imports, and error and warning syntax highlighting.
+This example shows how to set up [VS Code](https://code.visualstudio.com/) for local development with Apache Airflow® and the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview). Setting up a local development environment allows you to iterate more quickly when developing DAGs by taking advantage of IDE features like code autocompletion, identifying deprecated or unused imports, and error and warning syntax highlighting.
 
 ## Before you start
 
@@ -17,7 +17,7 @@ Before trying this example, make sure you have:
 - The [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli)
 - An Astro project running locally on your computer. See [Getting started with the Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started-cli)
 
-## Write Airflow code with VS Code
+## Write Apache Airflow® code with VS Code
 
 Follow these steps to start writing your DAGs in VS Code.
 

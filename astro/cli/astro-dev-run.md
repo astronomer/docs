@@ -7,7 +7,7 @@ hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-Run [Airflow CLI commands](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html) in your local Airflow environment. This command is for local development only and cannot be applied to Deployments running on Astro.
+Run [Apache Airflow® CLI commands](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html) in your local Airflow environment. This command is for local development only and cannot be applied to Deployments running on Astro.
 
 ## Usage
 
@@ -19,7 +19,7 @@ astro dev run <airflow-command>
 
 ```sh
 $ astro dev run users create --role Admin --username admin --email <your-email-address> --firstname <your-first-name> --lastname <your-last-name> --password admin
-# Create a user in your local Airflow environment using the `airflow user create` Airflow CLI command
+# Create a user in your local Apache Airflow® environment using the `airflow user create` Airflow CLI command
 
 $ astro dev run connections export - --file-format=env --serialization-format=json
 # Export connections in your local Airflow environment to STDOUT in a JSON format 

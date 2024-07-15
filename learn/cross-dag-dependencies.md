@@ -1,7 +1,7 @@
 ---
 title: "Cross-DAG dependencies"
 sidebar_label: "Cross-DAG dependencies"
-description: "How to implement dependencies between your Airflow DAGs."
+description: "How to implement dependencies between your Apache Airflow® DAGs."
 id: cross-dag-dependencies
 ---
 
@@ -16,7 +16,7 @@ import rest_api_example_taskflow from '!!raw-loader!../code-samples/dags/cross-d
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-When designing Airflow DAGs, it is often best practice to put all related tasks in the same DAG. However, it's sometimes necessary to create dependencies between your DAGs. In this scenario, one node of a DAG is its own complete DAG, rather than just a single task. Throughout this guide, the following terms are used to describe DAG dependencies:
+When designing Apache Airflow® DAGs, it is often best practice to put all related tasks in the same DAG. However, it's sometimes necessary to create dependencies between your DAGs. In this scenario, one node of a DAG is its own complete DAG, rather than just a single task. Throughout this guide, the following terms are used to describe DAG dependencies:
 
 - **Upstream DAG**: A DAG that must reach a specified state before a downstream DAG can run
 - **Downstream DAG**: A DAG that cannot run until an upstream DAG reaches a specified state
@@ -71,7 +71,7 @@ dataset1 = Dataset('s3://folder1/dataset_1.txt')
 # producing task in the upstream DAG
 EmptyOperator(
     task_id="producing_task",
-    outlets=[dataset1]  # flagging to Airflow that dataset1 was updated
+    outlets=[dataset1]  # flagging to Apache Airflow® that dataset1 was updated
 )
 ```
 
@@ -181,7 +181,7 @@ If you want the downstream DAG to wait for the entire upstream DAG to finish ins
 
 In the previous example, the upstream DAG (`example_dag`) and downstream DAG (`external-task-sensor-dag`) must have the same start date and schedule interval. This is because the ExternalTaskSensor will look for completion of the specified task or DAG at the same `logical_date` (previously called `execution_date`). To look for completion of the external task at a different date, you can make use of either of the `execution_delta` or `execution_date_fn` parameters (these are described in more detail in the documentation linked above).
 
-### Airflow API
+### Apache Airflow® API
 
 The [Airflow API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) is another way of creating cross-DAG dependencies. To use the API to trigger a DAG run, you can make a POST request to the `DAGRuns` endpoint as described in the [Airflow API documentation](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run).
 

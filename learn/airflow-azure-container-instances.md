@@ -1,12 +1,12 @@
 ---
-title: "Run a task in Azure Container Instances with Airflow"
+title: "Run a task in Azure Container Instances with Apache Airflow®"
 sidebar_label: "Azure Container Instances"
-description: "Learn how to orchestrate containers with Azure Container Instances from your Airflow DAGs."
+description: "Learn how to orchestrate containers with Azure Container Instances from your Apache Airflow® DAGs."
 id: airflow-azure-container-instances
 sidebar_custom_props: { icon: 'img/integrations/azure-container-instances.png' }
 ---
 
-[Azure Container Instances](https://azure.microsoft.com/en-us/services/container-instances/) (ACI) is one service that Azure users can leverage for working with containers. In this tutorial, you'll learn how to orchestrate ACI using Airflow and create a DAG that runs a task in an ACI container.
+[Azure Container Instances](https://azure.microsoft.com/en-us/services/container-instances/) (ACI) is one service that Azure users can leverage for working with containers. In this tutorial, you'll learn how to orchestrate ACI using Apache Airflow® and create a DAG that runs a task in an ACI container.
 
 :::info
 
@@ -63,7 +63,7 @@ Now that you have your Azure resources configured, you can move on to setting up
     astro dev start
     ```
 
-## Step 3: Add an Airflow connection to ACI
+## Step 3: Add an Apache Airflow® connection to ACI
 
 Add a connection that Airflow will use to connect to ACI. In the Airflow UI, go to **Admin** -> **Connections**.
 

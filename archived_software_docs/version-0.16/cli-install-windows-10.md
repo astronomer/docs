@@ -116,7 +116,7 @@ Astronomer CLI Version: 0.8.2
 Git Commit: f5cdab8f832da3c6184a7ac167b491e3bac3c022
 ```
 
-If you get a response like the above, you're all set! Happy Airflow-ing.
+If you get a response like the above, you're all set! Happy Apache Airflow®-ing.
 
 ## Potential Postgres Error
 

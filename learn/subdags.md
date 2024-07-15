@@ -1,11 +1,11 @@
 ---
-title: "Airflow SubDAGs"
+title: "Apache Airflow® SubDAGs"
 sidebar_label: "SubDAGs"
-description: "Use SubDAGs to create Airflow modular workflows."
+description: "Use SubDAGs to create Apache Airflow® modular workflows."
 id: subdags
 ---
 
-SubDAGs are a legacy Airflow feature that allowed the creation of reusable task patterns in DAGs. SubDAGs caused performance and functional issues, and they were [deprecated](https://github.com/apache/airflow/issues/12292) Airflow 2.0. Astronomer recommends that you don't use SubDAGs and instead use an alternative supported Airflow feature.
+SubDAGs are a legacy Apache Airflow® feature that allowed the creation of reusable task patterns in DAGs. SubDAGs caused performance and functional issues, and they were [deprecated](https://github.com/apache/airflow/issues/12292) Airflow 2.0. Astronomer recommends that you don't use SubDAGs and instead use an alternative supported Airflow feature.
 
 In this guide, you'll learn about SubDAG alternatives and SubDAG issues.
 

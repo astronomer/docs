@@ -5,7 +5,7 @@ id: astro-architecture
 description: Learn about how Astro is structured to maximize the power of Apache Airflow.
 ---
 
-Astro is a fully-managed SaaS application for data orchestration that helps teams write and run data pipelines with Apache Airflow at any level of scale. The infrastructure to run Airflow is managed entirely by Astronomer, enabling you to shift your focus from infrastructure to using data to grow your business.
+Astro is a fully-managed SaaS application for data orchestration that helps teams write and run data pipelines with Apache Airflow® at any level of scale. The infrastructure to run Airflow is managed entirely by Astronomer, enabling you to shift your focus from infrastructure to using data to grow your business.
 
 This document provides an overview of the architecture and key concepts in Astro that enable your team to make the most of your data pipelines. See [Astro Features](features.md) to learn more about Astro functionality. To get started with Astro, see [Start a trial](trial.md).
 
@@ -13,7 +13,7 @@ This document provides an overview of the architecture and key concepts in Astro
 
 Astro, also known as Astro Hosted, is built to both simplify and optimize Airflow so you can customize the parts of your environment that matter most to you, with Astro taking care of the rest. Whether you use Astro to power internal analytics or to train machine learning models, learning how Astro works can help you decide which deployment and connectivity model works best for you and enables your team to start running DAGs.
 
-You can work with Astro using the [Astro UI](#astro-ui) in your web browser, the [Astro CLI](#astro-cli), or the Astro API. Astro makes it easy for Airflow environments, called [Deployments](#deployment), to securely connect to external data services.
+You can work with Astro using the [Astro UI](#astro-ui) in your web browser, the [Astro CLI](#astro-cli), or the Astro API. Astro makes it easy for Apache Airflow® environments, called [Deployments](#deployment), to securely connect to external data services.
 
 The _Astro Hypervisor_ is an Astronomer-managed component of the Astro platform that scales and optimizes your Deployments and the [clusters](#cluster) they're hosted on.
 

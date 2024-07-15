@@ -4,7 +4,7 @@ title: 'Kibana Logging on Astronomer Software'
 id: kibana-logging
 ---
 
-All Airflow logs from your Astronomer logs will flow to Elasticsearch and can be visualized on Kibana. Like Grafana, this view is only available to system admins.
+All Apache Airflow® logs from your Astronomer logs will flow to Elasticsearch and can be visualized on Kibana. Like Grafana, this view is only available to system admins.
 
 ## Setup
 

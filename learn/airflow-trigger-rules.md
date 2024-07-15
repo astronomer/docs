@@ -1,5 +1,5 @@
 ---
-title: "Airflow trigger rules"
+title: "Apache Airflow® trigger rules"
 sidebar_label: "Trigger rules"
 id: airflow-trigger-rules
 description: "Learn about available trigger rules and how to use them."
@@ -11,7 +11,7 @@ import CodeBlock from '@theme/CodeBlock';
 import branch_example_taskflow from '!!raw-loader!../code-samples/dags/airflow-trigger-rules/branch_example_taskflow.py';
 import branch_example_traditional from '!!raw-loader!../code-samples/dags/airflow-trigger-rules/branch_example_traditional.py';
 
-Trigger rules are used to determine when a task should run in relation to the previous task. By default, Airflow runs a task when all directly upstream tasks are successful. However, you can change this behavior using the `trigger_rule` parameter in the task definition.
+Trigger rules are used to determine when a task should run in relation to the previous task. By default, Apache Airflow® runs a task when all directly upstream tasks are successful. However, you can change this behavior using the `trigger_rule` parameter in the task definition.
 
 :::info
 
@@ -66,7 +66,7 @@ chain(upstream_task, downstream_task)
 </TabItem>
 </Tabs>
 
-## Available trigger rules in Airflow
+## Available trigger rules in Apache Airflow®
 
 The following trigger rules are available:
 

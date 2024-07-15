@@ -13,7 +13,7 @@ The behavior and format of this command are the same for both Astro and Software
 
 :::
 
-Run a bash command in a locally running Docker container for an Airflow component. This command is equivalent to running `docker exec -it <container-id>`.
+Run a bash command in a locally running Docker container for an Apache Airflow® component. This command is equivalent to running `docker exec -it <container-id>`.
 
 ## Usage
 

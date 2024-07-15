@@ -37,7 +37,7 @@ Release date: September 13, 2021
 
 ### Minor Improvements
 
-- When upgrading Astronomer, you can now specify `astronomer.houston.upgradeDeployments.enabled=false` in your Helm chart. This setting prevents Deployments from having their Airflow chart upgraded automatically during your platform upgrade. You can use this setting if you want your administrative team to manually upgrade Deployments from within your Houston pods.
+- When upgrading Astronomer, you can now specify `astronomer.houston.upgradeDeployments.enabled=false` in your Helm chart. This setting prevents Deployments from having their Apache Airflow® chart upgraded automatically during your platform upgrade. You can use this setting if you want your administrative team to manually upgrade Deployments from within your Houston pods.
 
 ### Bug Fixes
 
@@ -47,7 +47,7 @@ Release date: September 13, 2021
 
 Release Date: April 27, 2021
 
-### Support for Airflow 2.0.2
+### Support for Apache Airflow® 2.0.2
 
 Astronomer Software v0.23 now offers full support for [Airflow 2.0.2](https://github.com/apache/airflow/releases/tag/2.0.2). Airflow 2.0.2 builds upon the success of Airflow 2.0.0 and 2.0.1 with more bug fixes and performance improvements, including:
 
@@ -69,7 +69,7 @@ In addition, some bug fixes from Airflow 2.0.2 have been backported to Astronome
 
 Release Date: April 13, 2021
 
-### Zero Webserver Downtime for Airflow 2.0+ Deployments
+### Zero Webserver Downtime for Apache Airflow® 2.0+ Deployments
 
 We're excited to announce that Astronomer v0.23.13 introduces zero Webserver downtime for Deployments running Airflow 2.0+. This feature is automatically enabled and requires no configuration in your system.
 
@@ -107,7 +107,7 @@ Then, push the changes to your platform as described in [Apply a Config Change](
 
 In private networks, you might want to disable Alertmanager clustering to avoid failures due to a gossip protocol. To do so, you can now configure `alertmanager.disableClustering` in your `config.yaml` file and push the change to your platform as described in [Apply a Config Change](apply-platform-config.md).
 
-### Support for Airflow 1.10.15
+### Support for Apache Airflow® 1.10.15
 
 [Airflow 1.10.15](https://github.com/apache/airflow/releases/tag/1.10.15) comes with a suite of enhancements and bug fixes that follow [Airflow 1.10.14](https://github.com/apache/airflow/releases/tag/1.10.14), which was released in December of 2020 to make the migration to [Airflow 2.0](https://www.astronomer.io/blog/introducing-airflow-2-0) as easy as possible. If you haven't migrated to Airflow 2.0 yet, you _must_ upgrade to Airflow 1.10.14+ first.
 
@@ -212,7 +212,7 @@ Previously, the number of Celery Worker replicas that could be immediately creat
 
 For users, this change will result in a quicker, more efficient, and more graceful deploy process.
 
-> **Note:** This improvement applies only to those running Airflow with the Celery Executor on Astronomer. For more information on Airflow Executors, refer to ["Airflow Executors Explained"](https://www.astronomer.io/guides/airflow-executors-explained) or [Configure an Airflow Deployment on Astronomer](configure-deployment.md).
+> **Note:** This improvement applies only to those running Apache Airflow® with the Celery Executor on Astronomer. For more information on Airflow Executors, refer to ["Airflow Executors Explained"](https://www.astronomer.io/guides/airflow-executors-explained) or [Configure an Airflow Deployment on Astronomer](configure-deployment.md).
 
 ### Houston API Improvements
 

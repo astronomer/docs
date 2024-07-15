@@ -1,7 +1,7 @@
 ---
-title: "Access the Apache Airflow context"
+title: "Access the Apache Airflow® context"
 sidebar_label: "Context"
-description: "Access the Airflow context in your tasks."
+description: "Access the Apache Airflow® context in your tasks."
 id: airflow-context
 ---
 
@@ -10,12 +10,12 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import context_and_xcom from '!!raw-loader!../code-samples/dags/airflow-context/context_and_xcom.py';
 
-The Airflow context is a dictionary containing information about a running DAG and its Airflow environment that can be accessed from a task. One of the most common values to retrieve from the Airflow context is the [`ti` / `task_instance` keyword](#ti--task_instance), which allows you to access attributes and methods of the [`taskinstance` object](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/taskinstance/index.html).
+The Apache Airflow® context is a dictionary containing information about a running DAG and its Airflow environment that can be accessed from a task. One of the most common values to retrieve from the Airflow context is the [`ti` / `task_instance` keyword](#ti--task_instance), which allows you to access attributes and methods of the [`taskinstance` object](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/taskinstance/index.html).
 
 Other common reasons to access the Airflow context are:
 
 - You want to use [DAG-level parameters](airflow-params.md) in your Airflow tasks.
-- You want to use the DAG run's [logical date](scheduling-in-airflow.md#scheduling-concepts) in an Airflow task, for example as part of a file name.
+- You want to use the DAG run's [logical date](scheduling-in-airflow.md#scheduling-concepts) in an Apache Airflow® task, for example as part of a file name.
 - You want to explicitly push and pull values to [XCom](airflow-passing-data-between-tasks.md#xcom) with a custom key.
 - You want to make an action in your task conditional on the setting of a specific [Airflow configuration](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html).
 
@@ -29,7 +29,7 @@ To get the most out of this guide, you should have an understanding of:
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 
-## Access the Airflow context
+## Access the Apache Airflow® context
 
 The Airflow context is available in all Airflow tasks. You can access information from the context using the following methods:
 
@@ -39,7 +39,7 @@ The Airflow context is available in all Airflow tasks. You can access informatio
 
 You cannot access the Airflow context dictionary outside of an Airflow task.
 
-### Retrieve the Airflow context using the `@task` decorator or PythonOperator
+### Retrieve the Apache Airflow® context using the `@task` decorator or PythonOperator
 
 To access the Airflow context in a `@task` decorated task or PythonOperator task, you need to add a `**context` argument to your task function. This will make the context available as a dictionary in your task.
 

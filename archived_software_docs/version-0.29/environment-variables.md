@@ -5,7 +5,7 @@ id: environment-variables
 description: Manage environment variables on Astronomer Software.
 ---
 
-Environment Variables on Astronomer can be used to set both Airflow configurations ([reference here](https://airflow.apache.org/docs/stable/configurations-ref.html)) or custom values, which are then applied to your Airflow Deployment either locally or on Astronomer.
+Environment Variables on Astronomer can be used to set both Apache Airflow® configurations ([reference here](https://airflow.apache.org/docs/stable/configurations-ref.html)) or custom values, which are then applied to your Airflow Deployment either locally or on Astronomer.
 
 Environment variables can be used to set any of the following (and much more):
 
@@ -141,7 +141,7 @@ To set them,
 
 ![Astro UI Env Vars Config](/img/software/v0.16-Astro-UI-EnvVars.png)
 
-> **Note:** Input for all configurations officially supported by Airflow are pre-templated, but you're free to specify your own values.
+> **Note:** Input for all configurations officially supported by Apache Airflow® are pre-templated, but you're free to specify your own values.
 
 #### Mark environment variables as "secret"
 
@@ -189,7 +189,7 @@ Environment variables are _not_ stored in Airflow's metadata Database and are _n
 
 For information on how Airflow connections and variables are encrypted on Astronomer, refer to [this forum post](https://forum.astronomer.io/t/how-are-connections-variables-and-env-vars-encrypted-on-astronomer/173).
 
-## Adding Airflow connections and variables as environment variables
+## Adding Apache Airflow® connections and variables as environment variables
 
 For users who regularly leverage Airflow connections and variables, we'd recommend storing and fetching them using environment variables.
 
@@ -197,7 +197,7 @@ As mentioned above, Airflow connections and variables are stored in Airflow's me
 
 Read below for instructions on both.
 
-### Airflow connections
+### Apache Airflow® connections
 
 The Environment Variable naming convention for Airflow connections is:
 
@@ -218,7 +218,7 @@ ENV AIRFLOW_CONN_MY_PROD_DB=my-conn-type://login:password@host:5432/schema
 
 You're free to set this environment variable via an `.env` file locally, via your Dockerfile or via the Software UI as explained above. For more information on how to generate your Connection URI, refer to [Airflow's documentation](https://airflow.apache.org/docs/stable/howto/connection/index.html#generating-connection-uri).
 
-### Airflow variables
+### Apache Airflow® variables
 
 The environment variable naming convention for Airflow variables is:
 

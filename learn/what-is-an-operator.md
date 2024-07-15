@@ -1,8 +1,8 @@
 ---
-title: "Airflow operators"
+title: "Apache Airflow® operators"
 sidebar_label: "Operators"
 id: what-is-an-operator
-description: "Learn the basics of operators, which are the building blocks of Airflow DAGs. See an example of how to implement several common operators available in Apache Airflow."
+description: "Learn the basics of operators, which are the building blocks of Airflow DAGs. See an example of how to implement several common operators available in Apache Airflow®."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -12,7 +12,7 @@ import CodeBlock from '@theme/CodeBlock';
 import operator_example_taskflow from '!!raw-loader!../code-samples/dags/what-is-an-operator/operator_example_taskflow.py';
 import operator_example_traditional from '!!raw-loader!../code-samples/dags/what-is-an-operator/operator_example_traditional.py';
 
-Operators are the building blocks of Airflow DAGs. They contain the logic of how data is processed in a pipeline. Each task in a DAG is defined by instantiating an operator.
+Operators are the building blocks of Apache Airflow® DAGs. They contain the logic of how data is processed in a pipeline. Each task in a DAG is defined by instantiating an operator.
 
 There are many different types of operators available in Airflow. Some operators such as Python functions execute general code provided by the user, while other operators perform very specific actions such as transferring data from one system to another.
 

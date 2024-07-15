@@ -13,7 +13,7 @@ This command is only available on Astro.
 
 :::
 
-Update the value for a Deployment's Airflow variable.
+Update the value for a Deployment's Apache Airflow® variable.
 
 ## Usage
 

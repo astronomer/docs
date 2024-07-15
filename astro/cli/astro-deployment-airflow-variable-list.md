@@ -13,7 +13,7 @@ This command is only available on Astro.
 
 :::
 
-List the Airflow variables stored in a Deployment's metadata database.
+List the Apache Airflow® variables stored in a Deployment's metadata database.
 
 ## Usage
 

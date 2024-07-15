@@ -12,7 +12,7 @@ import Listener from '@site/src/components/Listener';
 
 Astro Hosted meters and bills based on consumption of cloud resources associated with clusters, Deployments, and workers. Pricing is charged at an hourly rate, but is measured by the second. See [Pricing](https://www.astronomer.io/pricing/) for complete pricing and billing details.
 
-You can configure payment information and check your total Astro spend from the Astro UI so that you don't go over your budget for running Airflow.
+You can configure payment information and check your total Astro spend from the Astro UI so that you don't go over your budget for running Apache Airflow®.
 
 ## View billing details
 

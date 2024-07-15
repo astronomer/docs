@@ -5,7 +5,7 @@ id: version-compatibility-reference
 description: A reference of all adjacent tooling required to run Astronomer Software and corresponding version compatibility.
 ---
 
-Astronomer Software ships with and requires a number of adjacent technologies that support it, including Kubernetes, Helm, and Apache Airflow itself. This guide provides a reference of all required tools and versions for running Astronomer Software. This guide also includes a version compatibility reference table for running [Astronomer Certified](image-architecture.md) outside of the context of the Astronomer platform.
+Astronomer Software ships with and requires a number of adjacent technologies that support it, including Kubernetes, Helm, and Apache Airflow® itself. This guide provides a reference of all required tools and versions for running Astronomer Software. This guide also includes a version compatibility reference table for running [Astronomer Certified](image-architecture.md) outside of the context of the Astronomer platform.
 
 While the tables below reference the minimum compatible versions, we typically recommend running the latest versions of all tooling if and when possible.
 
@@ -76,4 +76,4 @@ For more detail on each version of Astronomer Certified and upgrade instructions
 
 > **Note:** While the Astronomer Certified Python Wheel supports Python versions 3.6, 3.7, and 3.8, Astronomer Certified Docker images have been tested and built only with Python 3.7. To run Astronomer Certified on Docker with Python versions 3.6 or 3.8, you can create a custom image with a different Python version specified. For more information, read [Change Python Versions](customize-image.md#build-with-a-different-python-version).
 
-> **Note:** MySQL 5.7 is compatible with Airflow and Astronomer Certified 2.0 but it does NOT support the ability to run more than 1 scheduler and is not recommended. If you'd like to leverage Airflow's new Highly-Available scheduler, make sure you're running MySQL 8.0+.
+> **Note:** MySQL 5.7 is compatible with Apache Airflow® and Astronomer Certified 2.0 but it does NOT support the ability to run more than 1 scheduler and is not recommended. If you'd like to leverage Airflow's new Highly-Available scheduler, make sure you're running MySQL 8.0+.

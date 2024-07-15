@@ -1,7 +1,7 @@
 ---
-title: "Airflow pools"
+title: "Apache Airflow® pools"
 sidebar_label: "Pools"
-description: "Use pools to control Airflow task parallelism."
+description: "Use pools to control Apache Airflow® task parallelism."
 id: airflow-pools
 ---
 
@@ -13,7 +13,7 @@ import pool_example_1_taskflow from '!!raw-loader!../code-samples/dags/airflow-p
 import pool_example_2_traditional from '!!raw-loader!../code-samples/dags/airflow-pools/pool_example_2_traditional.py';
 import pool_example_2_taskflow from '!!raw-loader!../code-samples/dags/airflow-pools/pool_example_2_taskflow.py';
 
-One of the benefits of Apache Airflow is that it is built to scale. With the right supporting infrastructure, you can run many tasks in parallel seamlessly. Unfortunately, horizontal scalability also necessitates some guardrails. For example, you might have many tasks that interact with the same source system, such as an API or database, that you don't want to overwhelm with requests. Airflow [pools](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/pools.html) are designed for exactly this use case.
+One of the benefits of Apache Airflow® is that it is built to scale. With the right supporting infrastructure, you can run many tasks in parallel seamlessly. Unfortunately, horizontal scalability also necessitates some guardrails. For example, you might have many tasks that interact with the same source system, such as an API or database, that you don't want to overwhelm with requests. Airflow [pools](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/pools.html) are designed for exactly this use case.
 
 Pools allow you to limit parallelism for an arbitrary set of tasks, allowing you to control when your tasks are run. They are often used in cases where you want to limit the number of parallel tasks that do a certain thing. For example, tasks that make requests to the same API or database, or tasks that run on a GPU node of a Kubernetes cluster.
 
@@ -42,7 +42,7 @@ There are three ways you can create and manage pools in Airflow:
 
     ![Pools UI](/img/guides/pools_ui.png)
 
-- The Airflow CLI: Run the `airflow pools` command with the `set` subcommand to create a new pool. See the [Airflow CLI documentation](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#pools) for the full list of pool commands. With the Airflow CLI, you can also import pools from a JSON file with the `import` subcommand. This can be useful if you have a large number of pools to define and doing so programmatically would be more efficient.
+- The Airflow CLI: Run the `airflow pools` command with the `set` subcommand to create a new pool. See the [Airflow CLI documentation](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#pools) for the full list of pool commands. With the Apache Airflow® CLI, you can also import pools from a JSON file with the `import` subcommand. This can be useful if you have a large number of pools to define and doing so programmatically would be more efficient.
 - The Airflow REST API: This option is available with Airflow version 2.0 and later. To create a pool, submit a POST request with the name and number of slots as the payload. For more information on working with pools from the API, see the [API documentation](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_pool).
 
 

@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-Use the following CI/CD templates to automate deploying Apache Airflow DAGs from a Git repository to Astro with [Jenkins](https://www.jenkins.io/).
+Use the following CI/CD templates to automate deploying Apache Airflow® DAGs from a Git repository to Astro with [Jenkins](https://www.jenkins.io/).
 
 The following templates for Jenkins are available:
 

@@ -8,7 +8,7 @@ description: 'Learn how to add operator extra links using the AirflowExtraLinkPl
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Airflow includes plugins for customizing the Airflow UI. One small but impactful customization is adding extra links in the **Details** view for operators in the UI. These extra links can point to static websites, such as documentation for the operator, or dynamic links created from information during the task instance run. 
+Apache Airflow® includes plugins for customizing the Airflow UI. One small but impactful customization is adding extra links in the **Details** view for operators in the UI. These extra links can point to static websites, such as documentation for the operator, or dynamic links created from information during the task instance run. 
 
 ![BashOperator with extra link](/img/guides/extra_links_tutorial_bashoperator.png)
 

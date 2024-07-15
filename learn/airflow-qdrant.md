@@ -1,7 +1,7 @@
 ---
-title: "Orchestrate semantic querying in Qdrant with Airflow"
+title: "Orchestrate semantic querying in Qdrant with Apache Airflow®"
 sidebar_label: "Qdrant"
-description: "Learn how to integrate Qdrant and Airflow."
+description: "Learn how to integrate Qdrant and Apache Airflow®."
 id: airflow-qdrant
 sidebar_custom_props: { icon: 'img/integrations/qdrant-logo.png' }
 ---
@@ -11,7 +11,7 @@ import recommend_books_dag from '!!raw-loader!../code-samples/dags/airflow-qdran
 
 [Qdrant](https://qdrant.tech/) is an open-source vector database and similarity search engine designed for AI applications.
 
-In this tutorial, you'll use the [Qdrant Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-qdrant/stable/index.html) to write a DAG that generates embeddings in parallel and performs semantic retrieval based on user input.
+In this tutorial, you'll use the [Qdrant Apache Airflow® provider](https://airflow.apache.org/docs/apache-airflow-providers-qdrant/stable/index.html) to write a DAG that generates embeddings in parallel and performs semantic retrieval based on user input.
 
 Airflow provides useful operational and orchestration when running operations in Qdrant based on data events or building parallel tasks for generating vector embeddings. By using Airflow, you can set up monitoring and alerts for your pipelines for full observability.
 

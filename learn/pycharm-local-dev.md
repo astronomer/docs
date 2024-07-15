@@ -1,12 +1,12 @@
 ---
-title: "Develop Airflow DAGs locally with PyCharm"
+title: "Develop Apache Airflow® DAGs locally with PyCharm"
 description: "Integrate the Astro CLI with PyCharm for local development."
 id: pycharm-local-dev
 sidebar_label: "Develop with PyCharm"
 sidebar_custom_props: { icon: 'img/examples/pycharm_logo.png' }
 ---
 
-This example shows how to set up [PyCharm](https://www.jetbrains.com/pycharm/) for local development with Airflow and the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview). Setting up a local development environment allows you to iterate more quickly when developing DAGs by taking advantage of IDE features.
+This example shows how to set up [PyCharm](https://www.jetbrains.com/pycharm/) for local development with Apache Airflow® and the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview). Setting up a local development environment allows you to iterate more quickly when developing DAGs by taking advantage of IDE features.
 
 ## Before you start
 
@@ -42,7 +42,7 @@ To develop Airflow DAGs in PyCharm, you need to configure at least one Python in
 
     ![Image settings](/img/examples/pycharm_local_dev_complete_setup.png)
 
-## Write Airflow code with PyCharm
+## Write Apache Airflow® code with PyCharm
 
 After you configure PyCharm to use the correct interpreter for Airflow, you get multiple advantages like code autocompletion, identifying deprecated or unused imports, and error syntax highlighting.
 
@@ -62,7 +62,7 @@ Lastly, here is an example of PyCharm autocompleting code and showing built-in d
 
 ![Code Autocompletion](/img/examples/pycharm_local_dev_autocomplete.png)
 
-## Manage Airflow Docker containers with PyCharm
+## Manage Apache Airflow® Docker containers with PyCharm
 
 With PyCharm configured to use the Python interpreter from Docker, you can connect to your Docker containers directly from PyCharm using the ***Services*** pane. If you do not see this pane, try pressing `cmd+8`.
 

@@ -1,8 +1,8 @@
 ---
-title: "Use Airflow templates"
+title: "Use Apache Airflow® templates"
 sidebar_label: "Jinja templates"
 id: templating
-description: "Learn about Jinja templating in Apache Airflow and see examples of how to pass dynamic information into task instances at runtime."
+description: "Learn about Jinja templating in Apache Airflow® and see examples of how to pass dynamic information into task instances at runtime."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -19,7 +19,7 @@ BashOperator(
 
 In this example, the value in the double curly braces `{{ }}` is the templated code that is evaluated at runtime. If you execute this code on a Wednesday, the BashOperator  prints `Today is Wednesday`. Templates have numerous applications. For example, you can use templating to create a new directory named after a task's execution date for storing daily data (`/data/path/20210824`). Alternatively, you can select a specific partition (`/data/path/yyyy=2021/mm=08/dd=24`) so that only the relevant data for a given execution date is scanned.
 
-Airflow leverages [Jinja](https://jinja.palletsprojects.com), a Python templating framework, as its templating engine. In this guide, you'll learn the following:
+Apache Airflow® leverages [Jinja](https://jinja.palletsprojects.com), a Python templating framework, as its templating engine. In this guide, you'll learn the following:
 
 - How to apply Jinja templates in your code.
 - Which variables and functions are available when templating.
@@ -43,7 +43,7 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Jinja templating. See [Jinja basics](https://jinja.palletsprojects.com/en/3.1.x/api/#basics). 
 
-## Templating variables in Airflow
+## Templating variables in Apache Airflow®
 
 Templating in Airflow works the same as Jinja templating in Python. You enclose the code you want evaluated between double curly braces, and the expression is evaluated at runtime. 
 

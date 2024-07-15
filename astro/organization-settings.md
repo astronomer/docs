@@ -28,7 +28,7 @@ Your Organization name is a human-readable name that appears in the Astro UI and
 
 ## Configure environment secrets fetching for the Astro Environment Manager
 
-When members of your Organization create a local Airflow environment using the Astro CLI, they can pull connections configured in the [Astro Environment Manager](create-and-link-connections.md) based on their Workspace credentials. This enables users to share connection details between Astro and their local Airflow environments and avoid creating connections twice. See [Import and export Airflow connections and variables](cli/local-connections.md) for more details.
+When members of your Organization create a local Apache Airflow® environment using the Astro CLI, they can pull connections configured in the [Astro Environment Manager](create-and-link-connections.md) based on their Workspace credentials. This enables users to share connection details between Astro and their local Airflow environments and avoid creating connections twice. See [Import and export Airflow connections and variables](cli/local-connections.md) for more details.
 
 You can enable or disable this feature based on whether you want Organization members to access Astro-configured connection details from their local machines.
 

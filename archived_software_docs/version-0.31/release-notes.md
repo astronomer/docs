@@ -17,7 +17,7 @@ Release date: February 24, 2023
 
 - You can now configure `extraVolumes` and `extraVolumeMounts` in the Alertmanager Helm chart, which can be useful for storing secret credentials for services that read your alerts.
 - You can now use `astronomer.houston.ingress.annotation` in the Astronomer Helm chart to configure custom ingress annotations for Houston.
-- You can now upgrade the Airflow Helm chart for individual Deployments by running `yarn upgrade-deployments <deployment-id>` from within the Houston Pod.
+- You can now upgrade the Apache Airflow® Helm chart for individual Deployments by running `yarn upgrade-deployments <deployment-id>` from within the Houston Pod.
 
 ### Bug fixes 
 

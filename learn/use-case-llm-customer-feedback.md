@@ -5,7 +5,7 @@ id: use-case-llm-customer-feedback
 sidebar_label: "LLMOps with Cohere + OpenSearch"
 ---
 
-With recent advances in the field of Large Language Model Operations (LLMOps), you can now combine the power of different language models to more efficiently get an answer to a query. This use case shows how you can use Apache Airflow to orchestrate an MLOps pipeline using two different models: You'll use embeddings and text classification by [Cohere](https://cohere.com/) with an [OpenSearch](https://opensearch.org/) search engine to analyze synthetic customer feedback data.  
+With recent advances in the field of Large Language Model Operations (LLMOps), you can now combine the power of different language models to more efficiently get an answer to a query. This use case shows how you can use Apache Airflow® to orchestrate an MLOps pipeline using two different models: You'll use embeddings and text classification by [Cohere](https://cohere.com/) with an [OpenSearch](https://opensearch.org/) search engine to analyze synthetic customer feedback data.  
 
 ![Screenshot of the Airflow UI Grid view with the Graph view selected showing a successful run of the full use case DAG with 17 tasks.](/img/examples/use-case-airflow-cohere-opensearch_full_dag.png)
 

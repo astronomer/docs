@@ -5,7 +5,7 @@ id: cli-reference
 description: A list of every command and setting in the Astro CLI.
 ---
 
-The Astronomer [open source CLI](https://github.com/astronomer/astro-cli) is the easiest way to run Apache Airflow on your local machine. From the CLI, you can create a local Apache Airflow instance with a dedicated Webserver, Scheduler and Postgres Database. If you're an Astronomer customer, you can use the Astro CLI to create and manage users, Workspaces, Airflow Deployments, service accounts, and more.
+The Astronomer [open source CLI](https://github.com/astronomer/astro-cli) is the easiest way to run Apache Airflow® on your local machine. From the CLI, you can create a local Apache Airflow instance with a dedicated Webserver, Scheduler and Postgres Database. If you're an Astronomer customer, you can use the Astro CLI to create and manage users, Workspaces, Airflow Deployments, service accounts, and more.
 
 This document contains information about all commands and settings available in the Astro CLI, including examples and flags. It does not contain detailed guidelines on each command, but each section provides resources for additional information in a **Related documentation** section if it's available.
 
@@ -193,7 +193,7 @@ Deploys code in your Airflow project directory to any Airflow Deployment on Astr
 
 ### Usage
 
-Run `astro deploy <your-deployment-release-name> [flags]` in your terminal to push a local Airflow project as a Docker image to your Airflow Deployment on Astronomer.
+Run `astro deploy <your-deployment-release-name> [flags]` in your terminal to push a local Apache Airflow® project as a Docker image to your Airflow Deployment on Astronomer.
 
 If you have the appropriate Workspace and Deployment-level permissions, your code is packaged into a Docker image, pushed to Astronomer's Docker Registry, and applied to your Airflow webserver, scheduler(s), and worker(s).
 
@@ -560,7 +560,7 @@ When you run this command, the following skeleton files are generated in your cu
 │   └── example-dag.py # An example DAG that comes with the initialized project
 ├── Dockerfile # For Astronomer's Docker image and runtime overrides
 ├── include # For any other files you'd like to include
-├── plugins # For any custom or community Airflow plugins
+├── plugins # For any custom or community Apache Airflow® plugins
 ├── airflow_settings.yaml # For your Airflow connections, variables and pools (local only)
 ├── packages.txt # For OS-level packages
 └── requirements.txt # For any Python packages

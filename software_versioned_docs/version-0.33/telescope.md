@@ -7,7 +7,7 @@ description: Use the Telescope CLI to collect Airflow metrics and usage data for
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-[Telescope](https://github.com/astronomer/telescope) is a CLI developed by Astronomer for generating additional metrics from your Airflow environments. It connects directly to Airflow and generates snapshots of your usage and configurations at different times. This information can help Astronomer support diagnose and resolve issues in  your environments.
+[Telescope](https://github.com/astronomer/telescope) is a CLI developed by Astronomer for generating additional metrics from your Apache Airflow® environments. It connects directly to Airflow and generates snapshots of your usage and configurations at different times. This information can help Astronomer support diagnose and resolve issues in  your environments.
 
 Telescope assumes your current permissions whenever you run a command. If you have the correct permissions, Telescope can observe your Airflow environments for a specific period and then generate a report that you can share with Astronomer support.
 
@@ -98,7 +98,7 @@ telescope --docker --organization-name <your-organization-name>
 
 This command observes scheduler containers on Docker and outputs the results of the observation to a file named `<observation-date>.<your-organization-name>.data.json`.
 
-## Observe standalone Airflow environments
+## Observe standalone Apache Airflow® environments
 
 You can use Telescope to observe both Apache Airflow environments and standalone Astronomer Certified environments. This setup assumes you have two machines:
 

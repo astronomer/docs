@@ -1,11 +1,11 @@
 ---
-title: "Orchestrate machine learning pipelines with Airflow datasets"
-description: "Using Airflow Datasets to create a Producer/Consumer ML pipeline in Airflow "
+title: "Orchestrate machine learning pipelines with Apache Airflow® datasets"
+description: "Using Apache Airflow® Datasets to create a Producer/Consumer ML pipeline in Apache Airflow® "
 id: use-case-airflow-ml-datasets
 sidebar_label: "ML orchestration with Airflow datasets"
 ---
 
-Airflow can play a pivotal role in machine learning (ML) workflows. You can use Airflow DAGs to manage complex ML workflows, handle data dependencies, and ensure fault tolerance, making it easier for your data engineers to handle data inconsistencies, reprocess failed tasks, and maintain the integrity of your data pipelines. 
+Apache Airflow® can play a pivotal role in machine learning (ML) workflows. You can use Airflow DAGs to manage complex ML workflows, handle data dependencies, and ensure fault tolerance, making it easier for your data engineers to handle data inconsistencies, reprocess failed tasks, and maintain the integrity of your data pipelines. 
 
 ML pipelines are sometimes run by two teams in a producer/consumer relationship. One team produces the clean data, while another team consumes the data in their ML models. This relationship can include friction when there's not a clear mechanism for delivering clean data to the producing team on a predictable, reliable basis. You can use Airflow datasets and data-driven scheduling to remove this friction by scheduling a consumer DAG to run only when its related producer DAG has completed.
 

@@ -61,7 +61,7 @@ You can now configure a custom OAuth flow as an alternative to Astronomer's defa
 
 ### Deploy DAGs via Git Sync
 
-You can now configure a Git repo to continually push DAGs to an Astronomer Deployment via git-sync. DAGs deployed via git-sync automatically appear in the Airflow UI without requiring additional action or causing downtime. For more information, read [Deploy DAGs via Git Sync](deploy-git-sync.md).
+You can now configure a Git repo to continually push DAGs to an Astronomer Deployment via git-sync. DAGs deployed via git-sync automatically appear in the Apache Airflow® UI without requiring additional action or causing downtime. For more information, read [Deploy DAGs via Git Sync](deploy-git-sync.md).
 
 ### External ElasticSearch Logging
 

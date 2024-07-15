@@ -1,7 +1,7 @@
 ---
-title: "Use Fivetran with Apache Airflow"
+title: "Use Fivetran with Apache Airflow®"
 sidebar_label: "Fivetran"
-description: "Learn how to orchestrate Fivetran syncs using Airflow"
+description: "Learn how to orchestrate Fivetran syncs using Apache Airflow®"
 id: airflow-fivetran
 sidebar_custom_props: { icon: 'img/integrations/fivetran.png' }
 ---
@@ -10,7 +10,7 @@ import CodeBlock from '@theme/CodeBlock';
 import fivetran_tutorial_dag_1 from '!!raw-loader!../code-samples/dags/airflow-fivetran/fivetran_tutorial_dag_1.py';
 
 [Fivetran](https://www.fivetran.com/) is a popular ELT platform that automates ingesting data from a variety of sources into a database, offering pre-built integrations for many common data tools.
-Using Airflow with Fivetran allows you to schedule your Fivetran syncs based on events in your larger data ecosystem, as well as trigger downstream actions after a sync has finished.
+Using Apache Airflow® with Fivetran allows you to schedule your Fivetran syncs based on events in your larger data ecosystem, as well as trigger downstream actions after a sync has finished.
 
 In this tutorial, you'll learn how to install and use the Airflow Fivetran provider to submit and monitor Fivetran syncs.
 
@@ -115,7 +115,7 @@ To connect Airflow to Fivetran, create a Fivetran API key.
 
 2. Click **Generate API Key**. Copy the API key information to a secure place for later.
 
-## Step 6: Create an Airflow connection to Fivetran
+## Step 6: Create an Apache Airflow® connection to Fivetran
 
 1. In a web browser, go to `localhost:8080` to access the Airflow UI.
 
@@ -125,7 +125,7 @@ To connect Airflow to Fivetran, create a Fivetran API key.
 
 4. Click **Save**.
 
-## Step 7: Create your Airflow DAG
+## Step 7: Create your Apache Airflow® DAG
 
 For this tutorial you will create a DAG that triggers your Fivetran sync to ingest the GitHub repo metadata to your destination.
 

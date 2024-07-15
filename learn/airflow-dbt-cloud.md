@@ -1,9 +1,9 @@
 ---
-title: "Orchestrate dbt Cloud jobs with Airflow"
+title: "Orchestrate dbt Cloud jobs with Apache Airflow®"
 sidebar_label: "Tutorial"
 id: airflow-dbt-cloud
 sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
-description: "Learn how to use the dbt Cloud Provider to orchestrate dbt Cloud jobs with Airflow."
+description: "Learn how to use the dbt Cloud Provider to orchestrate dbt Cloud jobs with Apache Airflow®."
 ---
 
 import CodeBlock from '@theme/CodeBlock';
@@ -11,7 +11,7 @@ import airflow_dbt_simple from '!!raw-loader!../code-samples/dags/airflow-dbt-cl
 
 [dbt Cloud](https://getdbt.com/) is a managed service that provides a hosted architecture to run dbt, a tool that helps you build interdependent SQL models for in-warehouse data transformation.
 
-The [dbt Cloud Airflow provider](https://registry.astronomer.io/providers/apache-airflow-providers-dbt-cloud/) allows users to orchestrate and execute actions in dbt Cloud as DAGs. Running dbt with Airflow ensures a reliable, scalable environment for models, as well as the ability to trigger models based on upstream dependencies in your data ecosystem.
+The [dbt Cloud Apache Airflow® provider](https://registry.astronomer.io/providers/apache-airflow-providers-dbt-cloud/) allows users to orchestrate and execute actions in dbt Cloud as DAGs. Running dbt with Airflow ensures a reliable, scalable environment for models, as well as the ability to trigger models based on upstream dependencies in your data ecosystem.
 
 :::info
 

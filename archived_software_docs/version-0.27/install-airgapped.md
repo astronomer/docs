@@ -112,7 +112,7 @@ astronomer:
     cliInstall:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-cli-install
       tag: 0.26.0
-  # Additionally, you can configure the images used for each Airflow deployment under astronomer.houston.config.deployments.helm
+  # Additionally, you can configure the images used for each Apache Airflow®® deployment under astronomer.houston.config.deployments.helm
   houston:
     config:
       deployments:
@@ -223,7 +223,7 @@ stan:
       tag: 0.22.0-2
 ```
 
-## Step 4: Fetch Airflow Helm Charts
+## Step 4: Fetch Apache Airflow® Helm Charts
 
 There are two Helm charts required for Astronomer:
 
@@ -272,7 +272,7 @@ By default, Astronomer checks for Airflow updates once a day at midnight by quer
 
 This setup assumes that the updates JSON will be manually downloaded and added to your environment. For guidance on how to automate this process, reach out to your Astronomer contact.
 
-### Exposing Airflow updates via an Nginx endpoint
+### Exposing Apache Airflow® updates via an Nginx endpoint
 
 The following topic provides an example implementation of hosting the Airflow updates JSON in your airgapped environment and accessing it via an Nginx endpoint. Depending on your organization's platform and use cases, your own installation might vary from this setup.
 

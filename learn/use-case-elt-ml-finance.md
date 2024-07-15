@@ -1,11 +1,11 @@
 ---
-title: "Run an integrated ELT and ML pipeline on Stripe data in Airflow"
-description: "Use Airflow, the Astro Python SDK and Datasets in a data-driven way."
+title: "Run an integrated ELT and ML pipeline on Stripe data in Apache Airflow®"
+description: "Use Apache Airflow®, the Astro Python SDK and Datasets in a data-driven way."
 id: use-case-elt-ml-finance
 sidebar_label: "Financial ELT and ML pipeline"
 ---
 
-ELT/ETL and ML orchestration are two of the most common use cases for Airflow. This project shows how to use Airflow, the [Astro Python SDK](astro-python-sdk.md), and [Airflow Datasets](airflow-datasets.md) to build a data-driven pipeline that combines ETL and ML. For this example, we use mock financial data modeled after the [Stripe API](https://stripe.com/docs/api/charges). Based on different customer satisfaction scores and product type we'll try to predict the total amount spent per customer, hoping to get some insight into which areas of customer satisfaction to focus on. You can adjust the model class and hyperparameters to improve model fit. What R2 can you achieve?
+ELT/ETL and ML orchestration are two of the most common use cases for Apache Airflow®. This project shows how to use Airflow, the [Astro Python SDK](astro-python-sdk.md), and [Airflow Datasets](airflow-datasets.md) to build a data-driven pipeline that combines ETL and ML. For this example, we use mock financial data modeled after the [Stripe API](https://stripe.com/docs/api/charges). Based on different customer satisfaction scores and product type we'll try to predict the total amount spent per customer, hoping to get some insight into which areas of customer satisfaction to focus on. You can adjust the model class and hyperparameters to improve model fit. What R2 can you achieve?
 
 ![Two plots side by side showing the results of the RandomForestRegressor model. The left plot shows the results of the train set with an R2 of 0.95. Three clusters are discernible, one around very low numbers for predicted and true values, one linear cluster around values of 500-1500 with a linear relationship and the biggest cluster with more noise in higher values. The test plot to the right shows a similar picture but with more noise and an R2 of 0.85.](/img/examples/use-case-elt-ml-finance_model_result_plot.png)
 
@@ -300,7 +300,7 @@ If the environment is `local`, a regular `@task` decorator is used.
 
 ```python
 if ENVIRONMENT == "prod":
-    # get the current Kubernetes namespace Airflow is running in
+    # get the current Kubernetes namespace Apache Airflow® is running in
     namespace = conf.get("kubernetes", "NAMESPACE")
 
     @task.kubernetes(

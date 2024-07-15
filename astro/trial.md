@@ -7,7 +7,7 @@ sidebar_label: 'Start a trial'
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Use this guide to get started with Astro, the best place to run Apache Airflow.
+Use this guide to get started with Astro, the best place to run Apache Airflow®.
 
 ## Start a trial
 

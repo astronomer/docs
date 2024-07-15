@@ -38,7 +38,7 @@ To configure deploy rollbacks, see [Deploy rollbacks](deploy-rollbacks.md).
 
 ### Support for MySQL
 
-You can now configure Astronomer Software to use a MySQL database as the backend for both Houston and your Airflow Deployments. To connect your Astronomer Software installation to a MySQL database, you update the `astronomer-bootstrap` secret in your cluster to point to your database:
+You can now configure Astronomer Software to use a MySQL database as the backend for both Houston and your Apache Airflow® Deployments. To connect your Astronomer Software installation to a MySQL database, you update the `astronomer-bootstrap` secret in your cluster to point to your database:
 
 ```sh
 kubectl create secret generic astronomer-bootstrap \
@@ -693,7 +693,7 @@ You can now clean task data from your Deployments by exporting it to an external
 
 You can now programmatically create or update Deployments using the Houston API `upsertDeployment` mutation. Unlike `createDeployment`, the `upsertDeployment` mutation includes keys for configuring Deployment resources such as environment variables. See [Create or update a Deployment with configurations](houston-api.md#create-or-update-a-deployment-with-configurations).
 
-### Reduce resource requests for Airflow components in development environments
+### Reduce resource requests for Apache Airflow® components in development environments
 
 You can reduce the amount of CPU and memory that an Airflow component requests in development environments, allowing you to more efficiently provision resources based on the requirements for your development Deployments. See [Underprovision Airflow resources](cluster-resource-provisioning) for configuration steps.
 
@@ -1598,7 +1598,7 @@ Release date: December 11, 2021
 
 Release date: November 22, 2021
 
-### Support for Airflow 2.2.0
+### Support for Apache Airflow® 2.2.0
 
 [Apache Airflow 2.2.0](https://airflow.apache.org/blog/airflow-2.2.0/) is an exciting milestone in the open source project. Most notably, this release introduces custom timetables and deferrable operators.
 

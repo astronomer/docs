@@ -6,9 +6,9 @@ id: manage-dags
 
 As a data engineer or data scientist, you might need to view details about your DAGs' performance, including task logs, run status, and retries. You might additionally have to manually retry DAG runs or mark them as a specific status when troubleshooting any issues. 
 
-Use this document to learn how to manage your DAGs using either the Airflow UI or the Astro UI.
+Use this document to learn how to manage your DAGs using either the Apache Airflow® UI or the Astro UI.
 
-## Access the Airflow UI for a Deployment
+## Access the Apache Airflow® UI for a Deployment
 
 Every Astro Deployment runs its own webserver and instance of the Airflow UI. If you want to manage your DAG and task runs through the Airflow UI, you can access it either through the Astro UI or the Astro CLI.
 

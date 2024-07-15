@@ -9,7 +9,7 @@ Use the information provided here when the Astronomer platform is not functionin
 
 ## Houston and Grafana stuck in CrashLoopBackOff
 
-When deploying the base Astronomer platform, the Houston (API) and Grafana pods connect directly to the database. All other database connections are created from Airflow deployments created on Astronomer.
+When deploying the base Astronomer platform, the Houston (API) and Grafana pods connect directly to the database. All other database connections are created from Apache Airflow® deployments created on Astronomer.
 
 ```
 $ kubectl get pods -n astro-demo

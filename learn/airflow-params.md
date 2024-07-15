@@ -1,7 +1,7 @@
 ---
-title: "Create and use params in Airflow"
+title: "Create and use params in Apache Airflow®"
 sidebar_label: "Params"
-description: "Create and use DAG and task-level params in Airflow."
+description: "Create and use DAG and task-level params in Apache Airflow®."
 id: airflow-params
 ---
 
@@ -15,7 +15,7 @@ import tdro_example_downstream_traditional from '!!raw-loader!../code-samples/da
 import simple_param_dag from '!!raw-loader!../code-samples/dags/airflow-params/simple_param_dag.py';
 import simple_param_dag_traditional from '!!raw-loader!../code-samples/dags/airflow-params/simple_param_dag_traditional.py';
 
-Params are arguments which you can pass to an Airflow DAG or task at runtime and are stored in the [Airflow context dictionary](airflow-context.md) for each DAG run. You can pass DAG and task-level params by using the `params` parameter.
+Params are arguments which you can pass to an Apache Airflow® DAG or task at runtime and are stored in the [Airflow context dictionary](airflow-context.md) for each DAG run. You can pass DAG and task-level params by using the `params` parameter.
 
 Params are ideal to store information that is specific to individual DAG runs like changing dates, file paths or ML model configurations. Params are not encrypted and therefore not suitable to pass secrets. See also [Best practices for storing information in Airflow](airflow-variables.md#best-practices-for-storing-information-in-airflow).
 
@@ -119,7 +119,7 @@ You can use a `--conf` flag with the following Airflow CLI sub-commands:
 
 ### TriggerDagRunOperator
 
-The [TriggerDagRunOperator](cross-dag-dependencies.md#triggerdagrunoperator) is a core Airflow operator that allows you to start a DAG run from within another DAG. You can use the TriggerDAGRunOperator `conf` param to trigger the dependent DAG with a specific configuration.
+The [TriggerDagRunOperator](cross-dag-dependencies.md#triggerdagrunoperator) is a core Apache Airflow® operator that allows you to start a DAG run from within another DAG. You can use the TriggerDAGRunOperator `conf` param to trigger the dependent DAG with a specific configuration.
 
 The DAG below uses the TriggerDagRunOperator to trigger the `tdro_example_downstream` DAG while passing a dynamic value for the `upstream_color` param via the `conf` parameter. The value for `upstream_color` is passed via a [Jinja template](templating.md) pulling the return value of an upstream task via [XCom](airflow-passing-data-between-tasks.md#xcom).
 
@@ -231,7 +231,7 @@ Aside from the `type` attribute, the `Param` class has several other attributes 
 
 All `Param` attributes are optional to set. For string type params, you can additionally set `minLength` and `maxLength` to define the minimum and maximum length of the input. Similarly, integer and number type params can have a `minimum` and `maximum` value.
 
-### Param examples in the Airflow UI
+### Param examples in the Apache Airflow® UI
 
 This section presents a few examples of params and how they are rendered in the **Trigger DAG** UI.
 

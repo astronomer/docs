@@ -21,7 +21,7 @@ Release date: November 3, 2022
 
 Release date: September 28, 2022 
 
-### New commands to manage Airflow objects 
+### New commands to manage Apache Airflow®® objects 
 
 You can use the new `astro dev object` commands to better manage Airflow connections, variables, and pools between your local testing environment and Astro Deployments. 
 
@@ -72,7 +72,7 @@ astro config set -g page_size <page_size>
 
 Release date: August 18, 2022
 
-### New command to run commands in local Airflow containers
+### New command to run commands in local Apache Airflow® containers
 
 You can now run bash commands in any locally running Airflow container using `astro dev bash`. 
 

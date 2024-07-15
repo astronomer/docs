@@ -6,7 +6,7 @@ id: aws-secretsmanager
 
 This topic provides setup steps for configuring [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) as a secrets backend on Astro.
 
-For more information about Airflow and AWS connections, see [Amazon Web Services Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
+For more information about Apache Airflow® and AWS connections, see [Amazon Web Services Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
 
 If you use a different secrets backend tool or want to learn the general approach on how to integrate one, see [Configure a Secrets Backend](secrets-backend.md).
 
@@ -17,7 +17,7 @@ If you use a different secrets backend tool or want to learn the general approac
 - An [Astro project](cli/develop-project.md#create-an-astro-project) with `apache-airflow-providers-amazon` version 5.1.0 or later. See [Add Python and OS-level packages](cli/develop-project.md#add-python-os-level-packages-and-airflow-providers).
 - An IAM role with the `SecretsManagerReadWrite` policy that your Astro cluster can assume. See [AWS IAM roles](https://www.astronomer.io/docs/astro/connect-aws?tab=AWS%20IAM%20roles#authorization-options).
 
-## Step 1: Add Airflow secrets to Secrets Manager
+## Step 1: Add Apache Airflow® secrets to Secrets Manager
 
 Create directories for Airflow variables and connections in AWS Secrets Manager that you want to store as secrets. You can use real or test values.
 

@@ -20,11 +20,11 @@ This document contains all available permissions that you can assign to a [custo
 - `deployment.update`: Update information about the Deployment, including its details and resource configurations.
 - `deployment.delete`: Delete the Deployment.
 
-## Deployment Airflow AdminMenu
+## Deployment Apache Airflow®® AdminMenu
 
 - `deployment.airflow.adminMenu.get`: View the **Admin** menu in the Airflow UI.
 
-## Deployment Airflow Astronomer
+## Deployment Apache Airflow® Astronomer
 
 - `deployment.airflow.astronomer.get`: View the **Astronomer** menu in the Airflow UI.
 
@@ -48,7 +48,7 @@ This document contains all available permissions that you can assign to a [custo
 
 - `deployment.airflow.configMenu.get`: View the **Config** menu in the Airflow UI.
 
-### Deployment Airflow Connection
+### Deployment Apache Airflow® Connection
 
 - `deployment.airflow.connection.get`: View connections in the Airflow UI.
 - `deployment.airflow.connection.create`: Create connections in the Airflow UI.

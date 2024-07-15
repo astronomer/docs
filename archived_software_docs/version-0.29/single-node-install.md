@@ -5,7 +5,7 @@ id: single-node-install
 description: Configure a simple Apache Airflow environment with the Astronomer Certified Python wheel on a virtual machine.
 ---
 
-The Astronomer Certified Python wheel is a distribution of Apache Airflow maintained by Astronomer. While functionally identical to Apache Airflow, the Astronomer Certified Python wheel includes additional bug and security fixes, as well as extended support from the Astronomer team.
+The Astronomer Certified Python wheel is a distribution of Apache Airflow® maintained by Astronomer. While functionally identical to Apache Airflow, the Astronomer Certified Python wheel includes additional bug and security fixes, as well as extended support from the Astronomer team.
 
 If you want to run Astronomer's distribution of Airflow without using Docker, you can install the Astronomer Certified Python wheel on either one or many virtual machines.
 
@@ -40,11 +40,11 @@ You also need a database on the machine that will run your Airflow instance. Thi
 - MySQL: 5.7, 8
 - SQLite: 3.15.0+
 
-> **Note:** MySQL 5.7 is compatible with Airflow, but is not recommended for users running Airflow 2.0+, as it does not support the ability to run more than 1 scheduler. If you'd like to leverage Airflow's new [Highly-Available Scheduler](https://www.astronomer.io/blog/airflow-2-scheduler), make sure you're running MySQL 8.0+.
+> **Note:** MySQL 5.7 is compatible with Apache Airflow®, but is not recommended for users running Airflow 2.0+, as it does not support the ability to run more than 1 scheduler. If you'd like to leverage Airflow's new [Highly-Available Scheduler](https://www.astronomer.io/blog/airflow-2-scheduler), make sure you're running MySQL 8.0+.
 
 Lastly, this guide assumes that you are installing Airflow 2.0+. The differences for installing pre-2.0 versions of Airflow are noted throughout the guide.
 
-## Step 1: Set Up Airflow's metadata database
+## Step 1: Set Up Apache Airflow®'s metadata database
 
 In Airflow, the metadata database is responsible for keeping a record of all tasks across DAGs and their corresponding status (queued, scheduled, running, success, failed, etc). To set up the metadata database:
 
@@ -73,7 +73,7 @@ If you'd like to use an existing PostgreSQL database instead of creating a new o
 
 When you specify the `AIRFLOW__CORE__SQL_ALCHEMY_CONN` environment variable in step 2F, replace the connection string with one that corresponds to your database.
 
-## Step 2: Create a system user to run Airflow
+## Step 2: Create a system user to run Apache Airflow®
 
 Airflow can run as any user, but for this setup we configure a new user called `astro`. Run the following command to add this user to your machine:
 

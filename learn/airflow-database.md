@@ -1,12 +1,12 @@
 ---
-title: "Understanding the Airflow metadata database"
+title: "Understanding the Apache Airflow® metadata database"
 sidebar_label: "Metadata database"
-description: "Learn about everything you need to use the Apache Airflow metadata database."
+description: "Learn about everything you need to use the Apache Airflow® metadata database."
 id: airflow-database
 tags: [Database, SQL, Components]
 ---
 
-The metadata database is a core component of Airflow. It stores crucial information such as the configuration of your Airflow environment's roles and permissions, as well as all metadata for past and present DAG and task runs.
+The metadata database is a core component of Apache Airflow®. It stores crucial information such as the configuration of your Airflow environment's roles and permissions, as well as all metadata for past and present DAG and task runs.
 
 A healthy metadata database is critical for your Airflow environment. Losing data stored in the metadata database can both interfere with running DAGs and prevent you from accessing data for past DAG runs. As with any core Airflow component, having a backup and disaster recovery plan in place for the metadata database is essential.
 
@@ -86,7 +86,7 @@ There are additional tables in the metadata database storing data ranging from D
 - Import errors appear at the top of the **DAGs** view in the UI.
 - DAG tags will appear underneath their respective DAG with a cyan background.
 
-## Airflow metadata database best practices
+## Apache Airflow® metadata database best practices
 
 - When upgrading or downgrading Airflow, always follow the [recommended steps for changing Airflow versions](https://airflow.apache.org/docs/apache-airflow/stable/installation/upgrading.html?highlight=upgrade): back up the metadata database, check for deprecated features, pause all DAGs, and make sure no tasks are running.
 
@@ -102,7 +102,7 @@ There are additional tables in the metadata database storing data ranging from D
 
 - Never directly modifying the metadata database except in extremely rare circumstances, as this can cause dependency issues and corrupt your Airflow instance.
 
-## Use the Airflow REST API to access the metadata database
+## Use the Apache Airflow® REST API to access the metadata database
 
 The best method for retrieving data from the metadata database is using the Airflow UI or making a GET request to the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html). 
 
@@ -141,7 +141,7 @@ req = requests.get(
 print(req.json()["total_entries"])
 ```
 
-It is also possible to navigate to **Browse** -> **Task Instances** in the Airflow UI and filter the task instances for all with a state of `success`. The `Record Count` will be on the right side of your screen.
+It is also possible to navigate to **Browse** -> **Task Instances** in the Apache Airflow® UI and filter the task instances for all with a state of `success`. The `Record Count` will be on the right side of your screen.
 
 ![Count successful tasks Airflow UI](/img/guides/successful_tasks_UI.png)
 

@@ -7,7 +7,7 @@ description: "Learn how to upgrade the Astro Runtime version on your Deployments
 
 import HostedBadge from '@site/src/components/HostedBadge';
 
-New versions of Astro Runtime are released regularly to support new Astro and Apache Airflow functionality. To take advantage of new features and bug and security fixes, Astronomer recommends upgrading Astro Runtime as new versions are available.
+New versions of Astro Runtime are released regularly to support new Astro and Apache Airflow® functionality. To take advantage of new features and bug and security fixes, Astronomer recommends upgrading Astro Runtime as new versions are available.
 
 ## Prerequisites
 
@@ -157,7 +157,7 @@ If an Astro Runtime version isn't included in this section, then there are no sp
 
 :::
 
-#### Runtime 11 (Airflow 2.9)
+#### Runtime 11 (Apache Airflow® 2.9)
 
 ##### Restricted versions of Runtime 11
 
@@ -172,7 +172,7 @@ In Airflow 2.9, a bug affecting custom actions in Airflow plugins ([#39421](http
 
 To continue using these versions of the Astro runtime locally, set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
 
-#### Runtime 9 (Airflow 2.7)
+#### Runtime 9 (Apache Airflow® 2.7)
 
 ##### Restricted versions of Runtime 9
 
@@ -186,7 +186,7 @@ You cannot create new Deployments or upgrade to the following versions of Runtim
 - 9.5.0
 - 9.6.0
 
-##### Connection testing in the Airflow UI disabled by default
+##### Connection testing in the Apache Airflow® UI disabled by default
 
 In Airflow 2.7, connection testing in the Airflow UI is disabled by default. Astronomer does not recommend reenabling the feature unless you fully trust all users with edit/ delete permissions for Airflow connections.
 

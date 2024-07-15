@@ -5,7 +5,7 @@ id: features
 description: Set environment variables on Astro to specify Airflow configurations and custom logic.
 ---
 
-Astro offers a suite of first-class features that make it easy to author, run, and monitor Airflow DAGs.
+Astro offers a suite of first-class features that make it easy to author, run, and monitor Apache Airflow® DAGs.
 
 ## Feature list
 

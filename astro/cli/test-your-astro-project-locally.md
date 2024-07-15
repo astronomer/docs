@@ -5,7 +5,7 @@ id: test-your-astro-project-locally
 description: Check your Airflow DAGs for errors before you run them locally or deploy to Astro.
 ---
 
-One of the Astro CLI's main features is the ability to run Astro projects in a local Airflow environment. It additionally includes commands that you can use to test and debug DAGs both inside and outside of a locally running Airflow environment.
+One of the Astro CLI's main features is the ability to run Astro projects in a local Apache Airflow® environment. It additionally includes commands that you can use to test and debug DAGs both inside and outside of a locally running Airflow environment.
 
 Use the following document to learn more about how you can test locally with the Astro CLI before deploying your code changes to a production environment.
 
@@ -50,7 +50,7 @@ To run unit tests on your Astro project, run:
 astro dev pytest
 ```
 
-This command runs all tests in your project's `tests` directory with [pytest](https://docs.pytest.org/en/7.0.x/index.html#), a testing framework for Python. With pytest, you can test custom Python code and operators locally without having to start a local Airflow environment.
+This command runs all tests in your project's `tests` directory with [pytest](https://docs.pytest.org/en/7.0.x/index.html#), a testing framework for Python. With pytest, you can test custom Python code and operators locally without having to start a local Apache Airflow® environment.
 
 The `tests` directory in your Astro project includes an example DAG test called `test_dag_example.py`. This test checks that:
 
@@ -100,7 +100,7 @@ Read the following sections to learn more about the contents of each test report
 
 ### Dependency test
 
-To prepare for an upgrade, it's helpful to identify all Python packages which will modified as a result of the upgrade. You can do this using the dependency test. When you run the test, the Astro CLI generates a report called `dependency_compare.txt` in `upgrade-test-<current-version>--<upgrade-version>`. The report shows all Airflow providers and packages that have been removed, added, or updated. 
+To prepare for an upgrade, it's helpful to identify all Python packages which will modified as a result of the upgrade. You can do this using the dependency test. When you run the test, the Astro CLI generates a report called `dependency_compare.txt` in `upgrade-test-<current-version>--<upgrade-version>`. The report shows all Apache Airflow® providers and packages that have been removed, added, or updated. 
 
 When you read the results of this test, pay close attention to the `Major Updates` section. Major updates to Python packages are more likely to cause your DAGs to fail. Visit the changelog for any providers listed in this section (for example, the [HTTP provider changelog](https://airflow.apache.org/docs/apache-airflow-providers-http/stable/changelog.html)) to see if the major upgrade will affect your environment. You should also pay attention to anything listed under `Unknown Updates`. These are updates that Astro CLI could not categorize, which can include major upgrades that might cause DAGs to break.
 

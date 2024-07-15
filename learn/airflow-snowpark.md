@@ -1,7 +1,7 @@
 ---
-title: "Orchestrate Snowpark Machine Learning Workflows with Apache Airflow"
+title: "Orchestrate Snowpark Machine Learning Workflows with Apache Airflow®"
 sidebar_label: "Snowpark Tutorial"
-description: "Learn how to integrate Snowpark and Airflow."
+description: "Learn how to integrate Snowpark and Apache Airflow®."
 id: airflow-snowpark
 sidebar_custom_props: { icon: 'img/integrations/snowpark.png' }
 ---
@@ -17,7 +17,7 @@ In this tutorial, you'll learn how to:
 
 - Create a [custom XCom backend](custom-xcom-backend-strategies.md) in Snowflake.
 - Create and use the Snowpark Model Registry in Snowflake.
-- Use Airflow decorators to run code in Snowpark, both in a pre-built and custom virtual environment.
+- Use Apache Airflow® decorators to run code in Snowpark, both in a pre-built and custom virtual environment.
 - Run a [Logistic Regression model](https://mlu-explain.github.io/logistic-regression/) on a synthetic dataset to predict skiers' afternoon beverage choice.
 
 :::warning
@@ -28,7 +28,7 @@ The provider used in this tutorial is currently in beta and both its contents an
 
 ![A plot showing a confusion matrix and ROC curve with a high AUC for hot_chocolate, a medium AUC for snow_mocha and tea, and low predictive power for wine and coffee.](/img/tutorials/airflow-snowpark_plot_metrics.png)
 
-## Why use Airflow with Snowpark?
+## Why use Apache Airflow® with Snowpark?
 
 Snowpark allows you to use Python to perform transformations and machine learning operations on data stored in Snowflake.
 

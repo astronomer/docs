@@ -7,7 +7,7 @@ description: Run and configure the Kubernetes executor on Astronomer.
 
 The [Kubernetes Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html) creates individual Pods that dynamically delegate work and resources to individual tasks. For each task that needs to run, the executor works with the Kubernetes API and dynamically launches Pods which terminate when the task is completed.
 
-You can customize your Kubernetes Pods to scale depending on how many Airflow tasks you're running at a given time. It also means you can configure the following for each individual Airflow task:
+You can customize your Kubernetes Pods to scale depending on how many Apache Airflow® tasks you're running at a given time. It also means you can configure the following for each individual Airflow task:
 
 - Memory allocation
 - Service accounts

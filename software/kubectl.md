@@ -67,7 +67,7 @@ singed-chimp                     	3       	Thu May  9 12:08:36 2019	DEPLOYED	ast
 ```
 There is a release for Astronomer (`single-chimp`) and postgres (`cautious-seal`) in the `datarouter` namespace.
 
-### Creating new Airflow deployments
+### Creating new Apache Airflow®® deployments
 
 If you navigate to the Software UI and create a new deployment, it will create a new helm release in a new namespace.
 

@@ -5,7 +5,7 @@ id: version-compatibility-reference
 description: A reference of all adjacent tooling required to run Astronomer Software and corresponding version compatibility.
 ---
 
-Astronomer Software ships with and requires a number of adjacent technologies that support it, including Kubernetes, Helm, and Apache Airflow itself. This guide provides a reference of all required tools and versions for running Astronomer Software.
+Astronomer Software ships with and requires a number of adjacent technologies that support it, including Kubernetes, Helm, and Apache Airflow® itself. This guide provides a reference of all required tools and versions for running Astronomer Software.
 
 While the tables below reference the minimum compatible versions, we typically recommend running the latest versions of all tooling if and when possible.
 
@@ -59,7 +59,7 @@ For more information on upgrading Kubernetes versions, follow the guidelines off
 - [Google GKE](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-upgrades)
 - [RedHat OpenShift](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.11/html/updating_clusters/index)
 
-## Airflow chart compatibility reference
+## Apache Airflow® chart compatibility reference
 
 Astronomer Software Deployments utilize the [Astronomer-distributed Helm chart for Apache Airflow](https://github.com/astronomer/airflow-chart). A Deployment's Airflow chart defines how a Deployment autoscales Pods and interacts with other components in your cluster. 
 

@@ -1,14 +1,14 @@
 ---
-title: "Integrate OpenLineage and Airflow"
+title: "Integrate OpenLineage and Apache Airflow®"
 sidebar_label: "OpenLineage"
-description: "Learn about OpenLineage concepts and benefits of integrating with Airflow."
+description: "Learn about OpenLineage concepts and benefits of integrating with Apache Airflow®."
 id: airflow-openlineage
 tags: [Lineage]
 ---
 
 [Data lineage](https://en.wikipedia.org/wiki/Data_lineage) is the concept of tracking and visualizing data from its origin to wherever it flows and is consumed downstream. Lineage is growing in importance as companies must rely on increasingly complex data ecosystems to make business-critical decisions. Data lineage can help with everything from understanding your data sources, to troubleshooting job failures, to managing PII, to ensuring compliance with data regulations.
 
-It follows that data lineage has a natural integration with Apache Airflow. Airflow is often used as a one-stop-shop orchestrator for an organization’s data pipelines, which makes it an ideal platform for integrating data lineage to understand the movement of and interactions within your data.
+It follows that data lineage has a natural integration with Apache Airflow®. Airflow is often used as a one-stop-shop orchestrator for an organization’s data pipelines, which makes it an ideal platform for integrating data lineage to understand the movement of and interactions within your data.
 
 In this guide, you’ll learn about core data lineage concepts and understand how lineage works with Airflow.
 
@@ -72,7 +72,7 @@ The following terms are used frequently when discussing data lineage in general 
 - **Run**: an instance of a job in which lineage metadata is generated. An OpenLineage run is generated with each DAG run, for example.
 - **Facet**: a piece of lineage metadata about a job, dataset, or run (e.g., you might hear “job facet” in reference to a piece of metadata attached to a job).
 
-## Why OpenLineage with Airflow?
+## Why OpenLineage with Apache Airflow®?
 
 In the previous section, you learned *what* lineage is, but a question remains: *why* would you want to have data lineage in conjunction with Airflow? Using OpenLineage with Airflow allows you to have more insight into the operation and structure of complex data ecosystems and supports better data governance. Airflow is a natural place to integrate data lineage because it is often used as a one-stop-shop orchestrator that touches data across many parts of an organization.
 

@@ -5,7 +5,7 @@ id: networking-overview
 description: Learn about the fundamentals of creating network connections from Astro.
 ---
 
-To maximize the power of Airflow, your DAGs need to be able access data and services that exist outside of Astro. A _network connection_ is the basic requirement for accessing external resources from Astro. After you create a network connection, you can configure an Airflow connection to access specific resources that are available through the connection.
+To maximize the power of Apache Airflow®, your DAGs need to be able access data and services that exist outside of Astro. A _network connection_ is the basic requirement for accessing external resources from Astro. After you create a network connection, you can configure an Airflow connection to access specific resources that are available through the connection.
 
 Network connections can be either public or private, and each type of connection has a different implementation for security and authorization.
 

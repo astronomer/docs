@@ -1,5 +1,5 @@
 ---
-title: "Create a Microsoft Entra Workload ID connection in Airflow"
+title: "Create a Microsoft Entra Workload ID connection in Apache Airflow®"
 id: entra-workload-identity
 sidebar_label: "Microsoft Entra Workload ID"
 description: Learn how to create an Azure Workload Identity connection in Airflow.
@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/integrations/azure.png' }
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-A [workload identity](https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview) is an identity you can assign to your Airflow environment which is authorized to access external services and resources. On Azure, a single workload identity can be authorized to multiple Azure resources through Azure resource groups.
+A [workload identity](https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview) is an identity you can assign to your Apache Airflow® environment which is authorized to access external services and resources. On Azure, a single workload identity can be authorized to multiple Azure resources through Azure resource groups.
 
 The new generic **Azure** connection type lets you assign a workload identity to your Airflow environment so that Airflow can access multiple Azure resources using a single Airflow connection. This configuration greatly simplifies the number of credentials and connections you need to manage for Azure workflows. 
 

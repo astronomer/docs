@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 Use this document to learn how you can grant Astro cluster and its Deployments access to your external AWS resources.
 
-Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to AWS through an Airflow connection. If your cloud restricts IP addresses, you can add the external IPs of your Deployment or cluster to an AWS resource's allowlist.
+Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to AWS through an Apache Airflow® connection. If your cloud restricts IP addresses, you can add the external IPs of your Deployment or cluster to an AWS resource's allowlist.
 
 If you have stricter security requirements, you can [create a private connection](#create-a-private-connection-between-astro-and-aws) to AWS in a few different ways.
 
@@ -386,7 +386,7 @@ To use this solution, make sure Astro can connect to the DNS server using a VPC 
 - The domain name for forwarding requests
 - The IP address of the DNS server where requests are forwarded
 
-#### Create an Airflow connection to confirm connectivity (optional)
+#### Create an Apache Airflow® connection to confirm connectivity (optional)
 
 When Astronomer support confirms that DNS forwarding was successfully implemented, you can confirm that it works by creating an Airflow connection to a resource running in a VPC or on-premises. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 

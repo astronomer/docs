@@ -7,7 +7,7 @@ description: A reference of all adjacent tooling required to run Astronomer Soft
 
 ## Overview
 
-Astronomer Software ships with and requires a number of adjacent technologies that support it, including Kubernetes, Helm, and Apache Airflow itself. This guide provides a reference of all required tools and versions for running Astronomer Software. This guide also includes a version compatibility reference table for running [Astronomer Certified](image-architecture.md) outside of the context of the Astronomer platform.
+Astronomer Software ships with and requires a number of adjacent technologies that support it, including Kubernetes, Helm, and Apache Airflow® itself. This guide provides a reference of all required tools and versions for running Astronomer Software. This guide also includes a version compatibility reference table for running [Astronomer Certified](image-architecture.md) outside of the context of the Astronomer platform.
 
 While the tables below reference the minimum compatible versions, we typically recommend running the latest versions of all tooling if and when possible.
 
@@ -29,7 +29,7 @@ For more detail on changes between Software versions, see [Astronomer Software R
 
 > **Note:** Due to the [deprecation of Dockershim](https://kubernetes.io/blog/2020/12/02/dockershim-faq/), Azure does not support private CAs starting with Kubernetes 1.19. If you use a private CA, contact [Astronomer Support](https://support.astronomer.io) before upgrading to Kubernetes 1.19 on AKS.
 
-> **Note:** While Astronomer v0.25 is compatible with Astronomer Certified 2.2.0, support for the Airflow Triggerer is available only in Astronomer v0.26+. To use [Deferrable Operators](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html), which require the Airflow Triggerer, you must upgrade.
+> **Note:** While Astronomer v0.25 is compatible with Astronomer Certified 2.2.0, support for the Apache Airflow® Triggerer is available only in Astronomer v0.26+. To use [Deferrable Operators](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html), which require the Airflow Triggerer, you must upgrade.
 
 ### Kubernetes Version Support Policy
 

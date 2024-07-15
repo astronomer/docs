@@ -28,7 +28,7 @@ These metrics contain information about your Deployment's DAG runs and task runs
 
   :::warning
 
-  The DAG runs metric does not record DAG run timeouts as failed runs. To see timed out DAG runs, you must go into the Airflow UI to check on the statuses of each DAG run there.
+  The DAG runs metric does not record DAG run timeouts as failed runs. To see timed out DAG runs, you must go into the Apache Airflow® UI to check on the statuses of each DAG run there.
 
   :::
 
@@ -38,7 +38,7 @@ These metrics contain information about your Deployment's DAG runs and task runs
 
 - **Ephemeral storage usage (_Kubernetes Executor/KubernetesPodOperator_)**: View how your Kubernetes tasks use your available ephemeral storage as a metric of the percentage used of total ephemeral storage configured. Click on **Dynamic y-axis scaling** to adjust the graph's y-axis to better fit your data or zoom in to view details.
 
-### Airflow workers and schedulers
+### Apache Airflow® workers and schedulers
 
 These metrics contain infrastructure use information about your workers and schedulers. Unique worker and scheduler instances appear on these charts as different colored lines.
 

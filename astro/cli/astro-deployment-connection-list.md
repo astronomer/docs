@@ -13,7 +13,7 @@ This command is only available on Astro.
 
 :::
 
-List the Airflow connections stored in a Deployment's metadata database.
+List the Apache Airflow® connections stored in a Deployment's metadata database.
 
 ## Usage
 

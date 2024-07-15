@@ -38,7 +38,7 @@ To have the same testing process in DAG deploys, run `astro deploy --dags --pyte
 
 Even if you primarily use DAG-only deploys, you still need to occasionally make image deploys to update your Astro Runtime version or install dependencies. However, depending on your CI/CD strategy, triggering a full project deploy with `astro deploy` might affect your existing DAGs.
 
-When you trigger an image-only deploy, it builds every non-DAG file in your Astro project as a Docker image and deploys the image to all Airflow components in a Deployment. This includes your `Dockerfile`, plugins, and all Python and OS-level packages. DAGs are not deployed, and your Deployment DAG folder and DAG bundle version are not affected. Image-only deploys are only available when you have DAGs-only deploys enabled.
+When you trigger an image-only deploy, it builds every non-DAG file in your Astro project as a Docker image and deploys the image to all Apache Airflow® components in a Deployment. This includes your `Dockerfile`, plugins, and all Python and OS-level packages. DAGs are not deployed, and your Deployment DAG folder and DAG bundle version are not affected. Image-only deploys are only available when you have DAGs-only deploys enabled.
 
 :::warning
 

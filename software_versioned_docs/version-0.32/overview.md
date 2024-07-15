@@ -10,13 +10,13 @@ hide_table_of_contents: true
 import LinkCardGrid from '@site/src/components/LinkCardGrid';
 import LinkCard from '@site/src/components/LinkCard';
 
-<p class="DocItem__header-description">Astronomer Software is the best way to run Apache Airflow in your private cloud. Using Astronomer's tooling, you can have fine-tuned control over every aspect of your Airflow experience.</p>
+<p class="DocItem__header-description">Astronomer Software is the best way to run Apache Airflow® in your private cloud. Using Astronomer's tooling, you can have fine-tuned control over every aspect of your Apache Airflow® experience.</p>
 
 import AstroCard from '@site/src/components/AstroCard';
 
 <AstroCard title="Need a managed Airflow solution?" />
 
-## Run Airflow in your private cloud using Astronomer Software
+## Run Apache Airflow® in your private cloud using Astronomer Software
 
 The following diagram shows how you can run Airflow in your private cloud using Astronomer Software:
 

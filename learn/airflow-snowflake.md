@@ -1,6 +1,6 @@
 ---
-title: "Orchestrate Snowflake Queries with Airflow"
-description: "Get enhanced observability and compute savings while orchestrating Snowflake jobs from your Airflow DAGs."
+title: "Orchestrate Snowflake Queries with Apache Airflow®"
+description: "Get enhanced observability and compute savings while orchestrating Snowflake jobs from your Apache Airflow® DAGs."
 id: airflow-snowflake
 sidebar_label: Snowflake Tutorial
 sidebar_custom_props: { icon: 'img/integrations/snowflake.png' }
@@ -10,7 +10,7 @@ import CodeBlock from '@theme/CodeBlock';
 import airflow_snowflake_complex from '!!raw-loader!../code-samples/dags/airflow-snowflake/airflow_snowflake_complex.py';
 import airflow_snowflake_sdk from '!!raw-loader!../code-samples/dags/airflow-snowflake/airflow_snowflake_sdk.py';
 
-[Snowflake](https://www.snowflake.com/) is one of the most commonly used data warehouses. Orchestrating Snowflake queries as part of a data pipeline is one of the most common Airflow use cases. Using Airflow with Snowflake is straightforward, and there are multiple open source packages, tools, and integrations that can help you realize the full potential of your existing Snowflake instance.
+[Snowflake](https://www.snowflake.com/) is one of the most commonly used data warehouses. Orchestrating Snowflake queries as part of a data pipeline is one of the most common Apache Airflow® use cases. Using Airflow with Snowflake is straightforward, and there are multiple open source packages, tools, and integrations that can help you realize the full potential of your existing Snowflake instance.
 
 This tutorial covers an example of orchestrating complex Snowflake operations with Airflow, including:
 
@@ -281,7 +281,7 @@ Using deferrable operators from the [Astronomer providers package](https://regis
 
      ![Load tasks deferred state](/img/guides/snowflake_example_deferred_state.png)
 
-## More on the Airflow Snowflake integration
+## More on the Apache Airflow® Snowflake integration
 
 This section provides additional information on orchestrating actions in Snowflake with Airflow.
 

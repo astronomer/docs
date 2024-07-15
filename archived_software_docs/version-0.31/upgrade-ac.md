@@ -6,7 +6,7 @@ description: Upgrade your Apache Airflow environment by installing the latest ve
 ---
 
 > **Warning**
-> No versions of Astronomer Certified (AC) are currently supported by Astronomer. Astronomer stopped releasing new versions of AC with the release of Apache Airflow 2.4. Astronomer recommends creating all new Deployments with Astro Runtime, as well as migrating existing Deployments from AC to Astro Runtime as soon as your organization is ready. See [Migrate to Runtime](migrate-to-runtime.md) and [Runtime image architecture](runtime-image-architecture.mdx).
+> No versions of Astronomer Certified (AC) are currently supported by Astronomer. Astronomer stopped releasing new versions of AC with the release of Apache Airflow® 2.4. Astronomer recommends creating all new Deployments with Astro Runtime, as well as migrating existing Deployments from AC to Astro Runtime as soon as your organization is ready. See [Migrate to Runtime](migrate-to-runtime.md) and [Runtime image architecture](runtime-image-architecture.mdx).
 
 ## Overview
 
@@ -14,7 +14,7 @@ New versions of Astronomer Certified (AC) are released regularly to support new 
 
 Follow this guide to upgrade your Airflow environment either on a virtual machine with the AC Python Wheel or on Docker with the AC Docker image.
 
->**Note:** Upgrading to Airflow 2.0 requires additional steps and precautions. If you're upgrading from Airflow 1.10 to Airflow 2.0+, we recommend following Apache Airflow's [Upgrading to Airflow 2.0 guide](https://airflow.apache.org/docs/apache-airflow/stable/upgrading-to-2.html).
+>**Note:** Upgrading to Apache Airflow® 2.0 requires additional steps and precautions. If you're upgrading from Airflow 1.10 to Airflow 2.0+, we recommend following Apache Airflow's [Upgrading to Airflow 2.0 guide](https://airflow.apache.org/docs/apache-airflow/stable/upgrading-to-2.html).
 
 > **Note:** Once you upgrade Airflow versions, you cannot downgrade to an earlier version. The Airflow metadata database structurally changes with each release, which results in backwards incompatibility across versions.
 

@@ -64,7 +64,7 @@ See [Deployment Analytics](https://www.astronomer.io/docs/astro/deployment-metri
 :::publicpreview
 :::
 
-The **Customer Managed Identity** Deployment setting is now available on AWS. This means that you can now assign an existing workload identity and AWS IAM role to your Airflow Deployments on Astro. When you use this setting, your Deployment uses the identity to assume the permissions of your IAM role and gain secure access to your data services. With this feature, you can:
+The **Customer Managed Identity** Deployment setting is now available on AWS. This means that you can now assign an existing workload identity and AWS IAM role to your Apache Airflow® Deployments on Astro. When you use this setting, your Deployment uses the identity to assume the permissions of your IAM role and gain secure access to your data services. With this feature, you can:
 
     - Re-use or share a customer managed identity across many Deployments, either ephemeral or static.
     - Leverage existing identities when migrating from MWAA or open source Airflow environments
@@ -141,7 +141,7 @@ You are only charged for requested resources which are greater than the minimum 
 - **Celery worker**: 10 GiB minimum by default. 100 GiB maximum.
 - **Kubernetes executor/ Kubernetes pod operator**: 0.25 GiB minimum by default. 100 GiB maximum.
 
-### Automate Airflow, resource, and infrastucture management with the Astro Terraform Provider
+### Automate Apache Airflow®, resource, and infrastucture management with the Astro Terraform Provider
 
 :::publicpreview
 :::
@@ -594,7 +594,7 @@ Astro is now available as an Azure Native ISV Service. If your team is consideri
 
 See [Install Astro from the Astro marketplace](https://www.astronomer.io/docs/astro/install-azure) for setup steps. To learn more about Astronomer's partnership with Microsoft, see [Introducing Apache Airflow® on Astro – an Azure Native ISV Service](https://www.astronomer.io/blog/introducing-apache-airflow-on-astro-an-azure-native-isv-service/).
 
-### Create Airflow connections in the Astro UI and link them to Deployments
+### Create Apache Airflow® connections in the Astro UI and link them to Deployments
 
 You can now create Airflow connections in the Astro UI through the new Environment Manager menu. The Environment Manager lets you create Airflow connections directly in the Astro UI and stores all connections in an Astro-managed secrets backend. You can then share connections between Deployments and set default connections so that your team members always have access to external resources when they create new Deployments. See [Create Airflow connections in the Astro UI](https://www.astronomer.io/docs/astro/create-and-link-connections).
 
@@ -1117,7 +1117,7 @@ See [Astro Hosted resource reference](resource-reference-hosted.mdx) for more in
 
 Use the new **Billing** page in the Astro UI to see both high-level and detailed metrics about your spend in Astro Hosted. You can also use this page to configure your billing details and view invoices. See [Manage billing](https://www.astronomer.io/docs/astro/manage-billing) for more details.
 
-### New cell type for using Airflow operators in the Astro Cloud IDE
+### New cell type for using Apache Airflow® operators in the Astro Cloud IDE
 
 You can now use any Airflow operator available on the Astronomer Registry in your Astro Cloud IDE pipeline. Operator cells apply formatting and checks for parameter inputs, making it easy to configure operators as part of your pipeline. See [Use Airflow operators in the Astro Cloud IDE](https://www.astronomer.io/docs/astro/cloud-ide/use-airflow-operators).
 

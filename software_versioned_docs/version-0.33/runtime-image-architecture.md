@@ -5,7 +5,7 @@ id: runtime-image-architecture
 description: Reference documentation for Astro Runtime, a differentiated distribution of Apache Airflow.
 ---
 
-Astro Runtime is a production ready, data orchestration tool based on Apache Airflow that is distributed as a Docker image and is required by all Astronomer products. It provides organizations with improved functionality, reliability, efficiency, and performance.
+Astro Runtime is a production ready, data orchestration tool based on Apache Airflow® that is distributed as a Docker image and is required by all Astronomer products. It provides organizations with improved functionality, reliability, efficiency, and performance.
 
 Astro Runtime includes the following features for Astronomer Software:
 

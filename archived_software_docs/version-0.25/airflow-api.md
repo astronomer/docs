@@ -6,7 +6,7 @@ id: airflow-api
 
 ## Overview
 
-Apache Airflow is an extensible orchestration tool that offers multiple ways to define and orchestrate data workflows. For users looking to automate actions around those workflows, Airflow exposes a [stable REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) in Airflow 2.0, and an ["experimental" REST API](https://airflow.apache.org/docs/stable/rest-api-ref.html) for users running Airflow 1.10. You're free to leverage both on Astronomer.
+Apache Airflow® is an extensible orchestration tool that offers multiple ways to define and orchestrate data workflows. For users looking to automate actions around those workflows, Airflow exposes a [stable REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) in Airflow 2.0, and an ["experimental" REST API](https://airflow.apache.org/docs/stable/rest-api-ref.html) for users running Airflow 1.10. You're free to leverage both on Astronomer.
 
 If you're looking to externally trigger DAG runs without needing to access your Airflow Deployment directly, for example, you can make an HTTP request (in Python, cURL etc.) to the corresponding endpoint in Airflow's API that calls for that exact action.
 
@@ -18,7 +18,7 @@ The first step to calling the Airflow API on Astronomer is to create a Deploymen
 
 You can create a Service Account via either the Software UI or the Astronomer CLI.
 
-> **Note:** If you just need to call the Airflow API once, you can create a temporary Authentication Token (_expires in 24 hours_) on Astronomer in place of a long-lasting Service Account. To do so, simply navigate to: `https://<your-base-domain>/token` and skip to Step 2.
+> **Note:** If you just need to call the Apache Airflow® API once, you can create a temporary Authentication Token (_expires in 24 hours_) on Astronomer in place of a long-lasting Service Account. To do so, simply navigate to: `https://<your-base-domain>/token` and skip to Step 2.
 
 ### Create a Service Account via the Software UI
 
@@ -54,7 +54,7 @@ To create a Deployment-level Service Account via the Astronomer CLI:
    ```
 4.  Save the API Key that was generated. Depending on your use case, you might want to store this key in an Environment Variable or secret management tool of choice.
 
-## Step 2: Make an Airflow API Request
+## Step 2: Make an Apache Airflow® API Request
 
 Now that you've created a Service Account, you're free to generate both `GET` or `POST` requests to any supported endpoints in Airflow's [Rest API Reference](https://airflow.apache.org/docs/stable/rest-api-ref.html) via the following base URL:
 
@@ -152,7 +152,7 @@ To run this, replace the following placeholder values:
 - `<API-Key>`: API Key from your Service Account
 - `<deployment-release-name>`: Your Airflow Deployment Release Name
 
-## Airflow 2.0 Stable REST API
+## Apache Airflow® 2.0 Stable REST API
 
 ### What's new
 

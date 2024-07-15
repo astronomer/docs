@@ -7,7 +7,7 @@ description: "Common Vulnerabilities and Exposures identified within our Astrono
 
 :::danger
 
-No versions of Astronomer Certified (AC) are currently supported by Astronomer. Astronomer stopped releasing new versions of AC with the release of Apache Airflow 2.4. Astronomer recommends creating all new Deployments with Astro Runtime, as well as migrating existing Deployments from AC to Astro Runtime as soon as your organization is ready. See [Migrate to Runtime](migrate-to-runtime.md) and [Runtime image architecture](runtime-image-architecture.mdx).
+No versions of Astronomer Certified (AC) are currently supported by Astronomer. Astronomer stopped releasing new versions of AC with the release of Apache Airflow® 2.4. Astronomer recommends creating all new Deployments with Astro Runtime, as well as migrating existing Deployments from AC to Astro Runtime as soon as your organization is ready. See [Migrate to Runtime](migrate-to-runtime.md) and [Runtime image architecture](runtime-image-architecture.mdx).
 
 :::
 
@@ -28,7 +28,7 @@ When we receive a request, our dedicated security team will evaluate and validat
 
 Once a resolution has been confirmed, we'll release it in the next major, minor, or patch Astronomer Certified image and publish details to this page in the section below.
 
-> **Note:** All other Airflow and product support requests should be directed to [Astronomer's Support Portal](https://support.astronomer.io), where our team's Airflow Engineers are ready to help.
+> **Note:** All other Apache Airflow® and product support requests should be directed to [Astronomer's Support Portal](https://support.astronomer.io), where our team's Airflow Engineers are ready to help.
 
 ## Previously Announced Vulnerabilities
 

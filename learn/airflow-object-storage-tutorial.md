@@ -1,14 +1,14 @@
 ---
-title: "Use Airflow object storage to interact with cloud storage in an ML pipeline"
+title: "Use Apache Airflow® object storage to interact with cloud storage in an ML pipeline"
 sidebar_label: "Object storage"
-description: "Learn how to use Airflow object storage."
+description: "Learn how to use Apache Airflow® object storage."
 id: airflow-object-storage-tutorial
 ---
 
 import CodeBlock from '@theme/CodeBlock';
 import object_storage_use_case from '!!raw-loader!../code-samples/dags/airflow-object-storage-tutorial/object_storage_use_case.py';
 
-Airflow 2.8 introduced the [Airflow object storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) feature to simplify how you interact with remote and local object storage systems.
+Apache Airflow® 2.8 introduced the [Airflow object storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) feature to simplify how you interact with remote and local object storage systems.
 
 This tutorial demonstrates the object storage feature using a simple machine learning pipeline. The pipeline trains a classifier to predict whether a sentence is more likely to have been said by Star Trek's Captain Kirk or Captain Picard.
 
@@ -18,7 +18,7 @@ Object storage is currently considered experimental and might be subject to brea
 
 :::
 
-## Why use Airflow object storage?
+## Why use Apache Airflow® object storage?
 
 Object stores are ubiquitous in modern data pipelines. They are used to store raw data, model-artifacts, image, video, text and audio files, and more. Because each object storage system has different file naming and path conventions, it can be challenging to work with data across many different object stores.
 

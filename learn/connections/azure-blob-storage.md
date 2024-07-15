@@ -1,5 +1,5 @@
 ---
-title: "Create an Azure Blob Storage connection in Airflow"
+title: "Create an Azure Blob Storage connection in Apache Airflow®"
 id: azure-blob-storage
 sidebar_label: "Azure Blob Storage"
 description: Learn how to create an Azure Blob Storage connection in Airflow.
@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/integrations/azure-blob-storage.png' }
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-[Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview) provides the storage for all of your Azure Storage data objects, including blobs, files, queues, and tables. Integrating your Azure storage account with Airflow lets you perform different kind of operations on blob objects stored in the cloud. For example, you can create or delete a container, upload or read a blob, or download blobs using Airflow.
+[Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview) provides the storage for all of your Azure Storage data objects, including blobs, files, queues, and tables. Integrating your Azure storage account with Apache Airflow® lets you perform different kind of operations on blob objects stored in the cloud. For example, you can create or delete a container, upload or read a blob, or download blobs using Airflow.
 
 This guide explains how to set up an Azure Blob Storage connection using the **Azure Blob Storage** connection type. Astronomer recommends using this connection type because it utilizes the `wasb` protocol, which means you can connect with any Azure Storage account including Azure Data Lake Gen 1 and Azure Data Lake Gen 2.
 
@@ -101,7 +101,7 @@ Complete the following steps to retrieve these values:
 1. In your Azure portal, open your storage account.
 2. Follow [Azure documentation](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-get-info?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json&tabs=portal#get-service-endpoints-for-the-storage-account) to copy your **Blob Service URL**. It should be in the format `https://mystorageaccount.blob.core.windows.net/`.
 3. Open your Microsoft Entra ID application. Then, from the **Overview** tab, copy the **Application (client) ID** and **Directory (tenant) ID**.
-4. [Create a new client secret](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal#option-3-create-a-new-application-secret) for your application to be used in the Airflow connection. Copy the **VALUE** of the client secret that appears.
+4. [Create a new client secret](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal#option-3-create-a-new-application-secret) for your application to be used in the Apache Airflow® connection. Copy the **VALUE** of the client secret that appears.
 5. [Assign](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal#assign-a-role-to-the-application) the [Storage Blob Data Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor) role to your app so that Airflow can access blob objects in your storage account.
 
 </TabItem>

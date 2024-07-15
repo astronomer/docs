@@ -10,7 +10,7 @@ import sql_data_quality from '!!raw-loader!../code-samples/dags/airflow-sql-data
 
 Data quality is key to the success of an organization's data systems. With in-DAG quality checks, you can halt pipelines and alert stakeholders before bad data makes its way to a production lake or warehouse.
 
-The SQL check operators in the [Common SQL provider](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/versions/latest) provide a simple and effective way to implement data quality checks in your Airflow DAGs. Using this set of operators, you can quickly develop a pipeline specifically for checking data quality, or you can add data quality checks to existing pipelines with just a few more lines of code.
+The SQL check operators in the [Common SQL provider](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/versions/latest) provide a simple and effective way to implement data quality checks in your Apache Airflow® DAGs. Using this set of operators, you can quickly develop a pipeline specifically for checking data quality, or you can add data quality checks to existing pipelines with just a few more lines of code.
 
 This tutorial shows how to use three SQL check operators (SQLColumnCheckOperator, SQLTableCheckOperator, and SQLCheckOperator) to build a robust data quality suite for your DAGs.
 
@@ -141,7 +141,7 @@ To use SQL check operators, install the [Common SQL provider](https://registry.a
 
 ## How it works
 
-The SQL check operators abstract SQL queries to streamline data quality checks. One difference between the SQL check operators and the standard [`BaseSQLOperator`](https://airflow.apache.org/docs/apache-airflow-providers-common-sql/stable/_api/airflow/providers/common/sql/operators/sql/index.html#airflow.providers.common.sql.operators.sql.BaseSQLOperator) is that the SQL check operators respond with a boolean, meaning the task fails when any of the resulting queries fail. This is particularly helpful for stopping a data pipeline before bad data makes it to a given destination. The lines of code and values that fail the check are observable in the Airflow logs.
+The SQL check operators abstract SQL queries to streamline data quality checks. One difference between the SQL check operators and the standard [`BaseSQLOperator`](https://airflow.apache.org/docs/apache-airflow-providers-common-sql/stable/_api/airflow/providers/common/sql/operators/sql/index.html#airflow.providers.common.sql.operators.sql.BaseSQLOperator) is that the SQL check operators respond with a boolean, meaning the task fails when any of the resulting queries fail. This is particularly helpful for stopping a data pipeline before bad data makes it to a given destination. The lines of code and values that fail the check are observable in the Apache Airflow® logs.
 
 The following SQL check operators are recommended for implementing data quality checks:
 

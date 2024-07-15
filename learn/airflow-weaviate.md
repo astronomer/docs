@@ -1,7 +1,7 @@
 ---
-title: "Orchestrate Weaviate operations with Apache Airflow"
+title: "Orchestrate Weaviate operations with Apache Airflow®"
 sidebar_label: "Weaviate"
-description: "Learn how to integrate Weaviate and Airflow."
+description: "Learn how to integrate Weaviate and Apache Airflow®."
 id: airflow-weaviate
 sidebar_custom_props: { icon: 'img/integrations/weaviate.png' }
 ---
@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/integrations/weaviate.png' }
 import CodeBlock from '@theme/CodeBlock';
 import query_movie_vectors from '!!raw-loader!../code-samples/dags/airflow-weaviate/query_movie_vectors.py';
 
-[Weaviate](https://weaviate.io/developers/weaviate) is an open source vector database, which store high-dimensional embeddings of objects like text, images, audio or video. The [Weaviate Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-weaviate/stable/index.html) offers modules to easily integrate Weaviate with Airflow.
+[Weaviate](https://weaviate.io/developers/weaviate) is an open source vector database, which store high-dimensional embeddings of objects like text, images, audio or video. The [Weaviate Apache Airflow® provider](https://airflow.apache.org/docs/apache-airflow-providers-weaviate/stable/index.html) offers modules to easily integrate Weaviate with Airflow.
 
 In this tutorial you'll use Airflow to ingest movie descriptions into Weaviate, use Weaviate's automatic vectorization to create vectors for the descriptions, and query Weaviate for movies that are thematically close to user-provided concepts.
 
@@ -21,7 +21,7 @@ There are multiple resources for learning about this topic. See also:
 
 :::
 
-## Why use Airflow with Weaviate?
+## Why use Apache Airflow® with Weaviate?
 
 Weaviate allows you to store objects alongside their vector embeddings and to query these objects based on their similarity. Vector embeddings are key components of many modern machine learning models such as [LLMs](https://en.wikipedia.org/wiki/Large_language_model) or [ResNet](https://arxiv.org/abs/1512.03385).
 

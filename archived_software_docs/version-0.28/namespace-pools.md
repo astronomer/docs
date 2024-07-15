@@ -26,7 +26,7 @@ A pre-created namespace pool can also enable resource protection. By default, As
 
 :::info Technical Deep Dive
 
-When a user creates a new Deployment via the UI or CLI, Astronomer Software creates the necessary Airflow components and isolates them in a dedicated Kubernetes namespace. These Airflow components depend on Kubernetes resources, some of which are stored as secrets.
+When a user creates a new Deployment via the UI or CLI, Astronomer Software creates the necessary Apache Airflow® components and isolates them in a dedicated Kubernetes namespace. These Airflow components depend on Kubernetes resources, some of which are stored as secrets.
 
 By default, Astronomer protects your Deployment's Kubernetes secrets by using dedicated service accounts for parts of your Deployment that need to interact with external components. To manage this process, Astronomer Software needs extensive cluster-level permissions that provide it some level of access to all namespaces running in your cluster.
 

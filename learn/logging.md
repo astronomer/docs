@@ -1,7 +1,7 @@
 ---
-title: "Airflow logging"
+title: "Apache Airflow® logging"
 sidebar_label: "Airflow logging"
-description: "An introduction to Airflow logging."
+description: "An introduction to Apache Airflow® logging."
 id: logging
 ---
 
@@ -11,7 +11,7 @@ import CodeBlock from '@theme/CodeBlock';
 import custom_logs_taskflow from '!!raw-loader!../code-samples/dags/logging/custom_logs_taskflow.py';
 import custom_logs_traditional from '!!raw-loader!../code-samples/dags/logging/custom_logs_traditional.py';
 
-Airflow provides an extensive logging system for monitoring and debugging your data pipelines. Your webserver, scheduler, metadata database, and individual tasks all generate logs. You can export these logs to a local file, your console, or to a specific remote storage solution.
+Apache Airflow® provides an extensive logging system for monitoring and debugging your data pipelines. Your webserver, scheduler, metadata database, and individual tasks all generate logs. You can export these logs to a local file, your console, or to a specific remote storage solution.
 
 In this guide, you'll learn the basics of Airflow logging, including:
 
@@ -34,7 +34,7 @@ To get the most out of this guide, you should have an understanding of:
 - Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
 - Airflow core components. See [Airflow's components](airflow-components.md).
 
-## Airflow logging
+## Apache Airflow® logging
 
 Logging in Airflow leverages the [Python stdlib `logging` module](https://docs.python.org/3/library/logging.html). The `logging` module includes the following classes:
 
@@ -83,16 +83,16 @@ For details about the log levels and events tracked, see [Audit logs in Airflow]
 
 
 
-### Local Airflow environment
+### Local Apache Airflow® environment
 
 If you run Airflow locally, logging information is accessible in the following locations:
 
 - Scheduler: Logs are printed to the console and accessible in `$AIRFLOW_HOME/logs/scheduler`.
 - Webserver and Triggerer: Logs are printed to the console. Individual triggers' log messages can be found in the logs of tasks that use deferrable operators.
-- Task: Logs can be viewed in the Airflow UI or at `$AIRFLOW_HOME/logs/`. To view task logs directly in your terminal, run `astro dev run tasks test <dag_id> <task_id>` with the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview) or `airflow tasks test <dag_id> <task_id>` if you are running Airflow with other tools.
+- Task: Logs can be viewed in the Airflow UI or at `$AIRFLOW_HOME/logs/`. To view task logs directly in your terminal, run `astro dev run tasks test <dag_id> <task_id>` with the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview) or `airflow tasks test <dag_id> <task_id>` if you are running Apache Airflow® with other tools.
 - Metadata database: Logs are handled differently depending on which database you use.
 
-### Docker Airflow environment
+### Docker Apache Airflow® environment
 
 If you run Airflow in Docker using the [Astro CLI](https://www.astronomer.io/docs/software/install-cli) or by following the relevant guidance in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html), you can find the logs for each Airflow component in the following locations:
 

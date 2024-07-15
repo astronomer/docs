@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 Use this document to learn how you can grant an Astro cluster and its Deployments access to your external Azure resources.
 
-Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to Azure through an Airflow connection. If your cloud restricts IP addresses, you can add the external IPs of your Deployment or cluster to an Azure resource's allowlist.
+Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to Azure through an Apache Airflow® connection. If your cloud restricts IP addresses, you can add the external IPs of your Deployment or cluster to an Azure resource's allowlist.
 
 If you have stricter security requirements, you can [create a private connection](#create-a-private-connection-between-astro-and-azure) to Azure in a few different ways.
 

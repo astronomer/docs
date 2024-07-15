@@ -8,7 +8,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-An Astro project contains all of the files necessary to test and run DAGs in a local Airflow environment and on Astro. This guide provides information about adding and organizing Astro project files, including:
+An Astro project contains all of the files necessary to test and run DAGs in a local Apache Airflow® environment and on Astro. This guide provides information about adding and organizing Astro project files, including:
 
 - Adding DAGs
 - Adding Python and OS-level packages
@@ -43,7 +43,7 @@ This command generates the following files in your directory:
 ├── .env # Local environment variables
 ├── dags # Where your DAGs go
 │   ├── example-dag-basic.py # Example DAG that showcases a simple ETL data pipeline
-│   └── example-dag-advanced.py # Example DAG that showcases more advanced Airflow features, such as the TaskFlow API
+│   └── example-dag-advanced.py # Example DAG that showcases more advanced Apache Airflow® features, such as the TaskFlow API
 ├── Dockerfile # For the Astro Runtime Docker image, environment variables, and overrides
 ├── include # For any other files you'd like to include
 ├── plugins # For any custom or community Airflow plugins
@@ -69,7 +69,7 @@ DAGs are stored in the `dags` folder of your Astro project. To add a DAG to your
 
 :::tip
 
-Use the `astro run <dag-id>` command to run and debug a DAG from the command line without starting a local Airflow environment. This is an alternative to testing your entire Astro project with the Airflow webserver and scheduler. See [Test your Astro project locally](cli/test-your-astro-project-locally.md).
+Use the `astro run <dag-id>` command to run and debug a DAG from the command line without starting a local Apache Airflow® environment. This is an alternative to testing your entire Astro project with the Airflow webserver and scheduler. See [Test your Astro project locally](cli/test-your-astro-project-locally.md).
 
 :::
 
@@ -103,7 +103,7 @@ In the following example, the `dags` folder includes both types of utility files
 
 Utility files in the `/dags` directory will not be parsed by Airflow, so you don't need to specify them in `.airflowignore` to prevent parsing. If you're using [DAG-only deploys](https://www.astronomer.io/docs/astro/deploy-code#deploy-dags-only) on Astro, changes to this folder are deployed when you run `astro deploy --dags` and do not require rebuilding your Astro project into a Docker image and restarting your Deployment. 
 
-## Add Airflow connections, pools, variables
+## Add Apache Airflow® connections, pools, variables
 
 Airflow connections connect external applications such as databases and third-party services to Apache Airflow. See [Manage connections in Apache Airflow](https://www.astronomer.io/docs/learn/connections#airflow-connection-basics) or [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 

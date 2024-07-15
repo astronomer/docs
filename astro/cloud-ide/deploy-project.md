@@ -125,7 +125,7 @@ Astronomer recommends creating a feature branch for every new pipeline and creat
 
    Your changes are automatically pushed to your Git repository, then deployed from your repository to your configured Deployments.
 
-6. Based on which branch you committed to, open the Deployment in the Astro UI and click **Open Airflow** to confirm that your changes were successfully deployed.
+6. Based on which branch you committed to, open the Deployment in the Astro UI and click **Open Apache Airflow®** to confirm that your changes were successfully deployed.
 
 :::tip
 

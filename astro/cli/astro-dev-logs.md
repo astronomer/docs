@@ -13,7 +13,7 @@ The behavior and format of this command are the same for both Astro and Software
 
 :::
 
-Show webserver, scheduler, and triggerer logs from your local Airflow environment.
+Show webserver, scheduler, and triggerer logs from your local Apache Airflow® environment.
 
 ## Usage
 
@@ -35,7 +35,7 @@ astro dev logs
 
 ```sh
 $ astro dev logs
-# Show the most recent logs from both the Airflow webserver and Scheduler
+# Show the most recent logs from both the Apache Airflow® webserver and Scheduler
 
 $ astro dev logs --follow
 # Stream all new webserver and scheduler logs to the terminal

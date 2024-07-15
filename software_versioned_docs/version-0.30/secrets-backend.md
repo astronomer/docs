@@ -8,7 +8,7 @@ description: Configure a secrets backend on Astronomer Software to store Airflow
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Apache Airflow [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) and [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#) often contain sensitive information about your external systems that should be kept [secret](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/secrets/index.html) in a secure, centralized location that complies with your organization's security requirements. While secret values of Airflow variables and connections are encrypted in the Airflow metadata database of every Deployment, Astronomer recommends integrating with a secrets backend tool.
+Apache Airflow® [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) and [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#) often contain sensitive information about your external systems that should be kept [secret](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/secrets/index.html) in a secure, centralized location that complies with your organization's security requirements. While secret values of Apache Airflow® variables and connections are encrypted in the Airflow metadata database of every Deployment, Astronomer recommends integrating with a secrets backend tool.
 
 ## Secrets backend tool integration benefits
 
@@ -106,7 +106,7 @@ To use Vault as a secrets backend, Astronomer recommends configuring a Vault App
 
     Save these values for Step 3.
 
-#### Step 2: Write an Airflow variable or connection to Vault
+#### Step 2: Write an Apache Airflow® variable or connection to Vault
 
 To test whether your Vault server is set up properly, create a test Airflow variable or connection to store as a secret.
 
@@ -222,7 +222,7 @@ In this section, you'll learn how to use [AWS Systems Manager (SSM) Parameter St
 - Access to AWS SSM Parameter Store.
 - A valid AWS Access Key ID and Secret Access Key.
 
-#### Step 1: Write an Airflow variable or connection to AWS Parameter Store
+#### Step 1: Write an Apache Airflow® variable or connection to AWS Parameter Store
 
 To start, add an Airflow variable or connection as a secret to Parameter Store for testing. For instructions, see the AWS documentation on how to do so using the [AWS Systems Manager Console](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-create-console.html), the [AWS CLI](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-cli.html), or [Tools for Windows PowerShell](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-ps.html).
 

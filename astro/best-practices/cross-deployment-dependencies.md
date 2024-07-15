@@ -1,7 +1,7 @@
 ---
 title: "Cross-deployment dependencies"
 sidebar_label: "Cross-deployment dependencies"
-description: "How to implement dependencies between your Airflow deployments."
+description: "How to implement dependencies between your Apache Airflow® deployments."
 id: cross-deployment-dependencies
 ---
 
@@ -12,7 +12,7 @@ This guide uses the following terms to describe cross-deployment dependencies:
 - **Upstream deployment**: A deployment where a DAG must reach a specified state before a DAG in another deployment can run.
 - **Downstream deployment**: A deployment in which a DAG cannot run until a DAG in an upstream deployment reaches a specified state.
 
-Cross-deployment dependencies require special implementation because some methods, like the TriggerDagRunOperator, ExternalTaskSensor, and direct Airflow Dataset dependencies, are only designed for DAGs in the same deployment. On Astro, there are two recommended methods available for implementing cross-deployment dependencies: Astro Alerts and triggering updates to Airflow Datasets using the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/create_dataset_event).
+Cross-deployment dependencies require special implementation because some methods, like the TriggerDagRunOperator, ExternalTaskSensor, and direct Apache Airflow® Dataset dependencies, are only designed for DAGs in the same deployment. On Astro, there are two recommended methods available for implementing cross-deployment dependencies: Astro Alerts and triggering updates to Airflow Datasets using the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/create_dataset_event).
 
 ## Feature overview
 
@@ -89,7 +89,7 @@ To use Airflow Datasets to create cross-deployment dependencies, you should have
 
 ### Implementation
 
-This section explains how to use the [Airflow API's Datasets endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Dataset) to trigger the downstream DAG in another deployment when a dataset is updated. Typical dataset implementation only works for DAGs in the same Airflow deployment, but by using the Airflow API, you can implement this pattern across deployments.
+This section explains how to use the [Airflow API's Datasets endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Dataset) to trigger the downstream DAG in another deployment when a dataset is updated. Typical dataset implementation only works for DAGs in the same Apache Airflow® deployment, but by using the Airflow API, you can implement this pattern across deployments.
 
 #### Prerequisites
 

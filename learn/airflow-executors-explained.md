@@ -1,11 +1,11 @@
 ---
-title: "Airflow Executors"
+title: "Apache Airflow® Executors"
 sidebar_label: "Executor"
-description: "An introduction to the Apache Airflow Executors: Celery, Local, and Kubernetes."
+description: "An introduction to the Apache Airflow® Executors: Celery, Local, and Kubernetes."
 id: airflow-executors-explained
 ---
 
-If you're new to Apache Airflow, the world of Executors is difficult to navigate. Even if you're a veteran user overseeing 20 or more DAGs, knowing what Executor best suits your use case at any given time isn't always easy - especially as the OSS project and its utilities continue to grow and develop.
+If you're new to Apache Airflow®, the world of Executors is difficult to navigate. Even if you're a veteran user overseeing 20 or more DAGs, knowing what Executor best suits your use case at any given time isn't always easy - especially as the OSS project and its utilities continue to grow and develop.
 
 This guide will help you:
 

@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import custom_xcom_backend_test from '!!raw-loader!../code-samples/dags/xcom-backend-tutorial/custom_xcom_backend_test.py';
 
-By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. For production environments that use XCom to pass data between tasks, Astronomer recommends using a custom XCom backend. [Custom XCom backends](custom-xcom-backend-strategies.md) allow you to configure where Airflow stores information that is passed between tasks using [XComs](airflow-passing-data-between-tasks.md#xcom). 
+By default, Apache Airflow® uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. For production environments that use XCom to pass data between tasks, Astronomer recommends using a custom XCom backend. [Custom XCom backends](custom-xcom-backend-strategies.md) allow you to configure where Airflow stores information that is passed between tasks using [XComs](airflow-passing-data-between-tasks.md#xcom). 
 
 The Object Storage XCom Backend available in the [Common IO provider](https://airflow.apache.org/docs/apache-airflow-providers-common-io/stable/index.html) is the easiest way to store XComs in a remote object storage solution.
 
@@ -207,7 +207,7 @@ Add the [Common IO](https://registry.astronomer.io/providers/apache-airflow-prov
 
 </Tabs>
 
-## Step 3: Set up your Airflow connection
+## Step 3: Set up your Apache Airflow® connection
 
 An Airflow connection is necessary to connect Airflow with your object storage container provider. In this tutorial, you'll use the Airflow UI to configure your connection.
 
@@ -291,7 +291,7 @@ If you are setting up a custom XCom backend for an Astro deployment, you have to
     ]}>
 <TabItem value="aws">
 
-2. Add the `AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH` environment variable to your `.env` file to define the path in your S3 bucket where the XComs will be stored in the form of `<connection id>@<bucket name>/<path>`. Use the connection id of the Airflow connection you defined in [step 2](#step-2-set-up-your-airflow-connection) and replace `<my-bucket>` with your S3 bucket name.
+2. Add the `AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH` environment variable to your `.env` file to define the path in your S3 bucket where the XComs will be stored in the form of `<connection id>@<bucket name>/<path>`. Use the connection id of the Apache Airflow® connection you defined in [step 2](#step-2-set-up-your-airflow-connection) and replace `<my-bucket>` with your S3 bucket name.
 
     ```text
     AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH="s3://my_aws_conn@<my-bucket>/xcom"

@@ -1,11 +1,11 @@
 ---
 title: "Debug DAGs"
 sidebar_label: "Debug DAGs"
-description: "Troubleshoot Airflow DAGs"
+description: "Troubleshoot Apache Airflow® DAGs"
 id: debugging-dags
 ---
 
-This guide explains how to identify and resolve common Airflow DAG issues. It also includes resources to try out if you can't find a solution to an Airflow issue.
+This guide explains how to identify and resolve common Apache Airflow® DAG issues. It also includes resources to try out if you can't find a solution to an Airflow issue.
 While the focus of the troubleshooting steps provided lies on local development, much of the information is also relevant for running Airflow in a production context.
 
 :::tip
@@ -30,7 +30,7 @@ To get the most out of this guide, you should have an understanding of:
 - Basic Airflow concepts. See [Get started with Airflow tutorial](get-started-with-airflow.md).
 - Basic knowledge of Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
 
-## General Airflow debugging approach
+## General Apache Airflow® debugging approach
 
 To give yourself the best possible chance of fixing a bug in Airflow, contextualize the issue by asking yourself the following questions:
 
@@ -51,7 +51,7 @@ You can debug your DAG code with IDE debugging tools using the `dag.test()` meth
 
 :::
 
-## Airflow is not starting on the Astro CLI
+## Apache Airflow® is not starting on the Astro CLI
 
 The 3 most common ways to run Airflow locally are using the [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli), running a [standalone instance](https://airflow.apache.org/docs/apache-airflow/stable/start.html), or running [Airflow in Docker](https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html). This guide focuses on troubleshooting the Astro CLI, which is an open source tool for quickly running Airflow on a local machine. 
 
@@ -70,7 +70,7 @@ You can learn more about [testing and troubleshooting locally](https://www.astro
 
 This section covers common issues related to DAG code that you might encounter when developing.
 
-### DAGs don't appear in the Airflow UI
+### DAGs don't appear in the Apache Airflow® UI
 
 If a DAG isn't appearing in the Airflow UI, it's typically because Airflow is unable to parse the DAG. If this is the case, you'll see an `Import Error` in the Airflow UI. 
 
@@ -131,7 +131,7 @@ If your DAGs are either not running or running differently than you intended, co
 
 - Double check that each DAG has a unique `dag_id`. If two DAGs with the same id are present in one Airflow instance the scheduler will pick one at random every 30 seconds to display.
 - Make sure your DAG has a `start_date` in the past. A DAG with a `start_date` in the future will result in a successful DAG run with no task runs. Do not use `datetime.now()` as a `start_date`.
-- Test the DAG using `astro dev dags test <dag_id>`. With the Airflow CLI, run `airflow dags test <dag_id>`.
+- Test the DAG using `astro dev dags test <dag_id>`. With the Apache Airflow® CLI, run `airflow dags test <dag_id>`.
 - If no DAGs are running, check the state of your scheduler 
 using `astro dev logs -s`. 
 - If too many runs of your DAG are being scheduled after you unpause it, you most likely need to set `catchup=False` in your DAG's parameters.

@@ -9,7 +9,7 @@ description: Run an upgrade progress to migrate your Software Deployment from As
 
 Astro Runtime builds on the reliability of Astronomer Certified (AC) with new features that center on usability and performance.
 
-Apache Airflow 2.3 will be the last Airflow version supported by AC. To avoid future disruptions, Astronomer recommends migrating Deployments from AC to Astro Runtime as soon as your organization is ready.
+Apache Airflow® 2.3 will be the last Airflow version supported by AC. To avoid future disruptions, Astronomer recommends migrating Deployments from AC to Astro Runtime as soon as your organization is ready.
 
 Migrating a Deployment to Astro Runtime is similar to the standard upgrade process. There are no known disruptions when migrating a Deployment from AC to the equivalent version of Astro Runtime.
 

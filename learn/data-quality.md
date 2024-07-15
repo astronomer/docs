@@ -1,6 +1,6 @@
 ---
-title: "Data quality and Airflow"
-description: "Check the quality of your data using Airflow."
+title: "Data quality and Apache Airflow®"
+description: "Check the quality of your data using Apache Airflow®."
 id: data-quality
 sidebar_label: "Data quality"
 ---
@@ -9,7 +9,7 @@ import CodeBlock from '@theme/CodeBlock';
 import example_dag_sql_check_operators from '!!raw-loader!../code-samples/dags/data-quality/example_dag_sql_check_operators.py';
 import gx_example_dag from '!!raw-loader!../code-samples/dags/data-quality/gx_example_dag.py';
 
-Checking the quality of your data is essential to getting actionable insights from your data pipelines. Airflow offers many ways to orchestrate data quality checks directly from your DAGs.
+Checking the quality of your data is essential to getting actionable insights from your data pipelines. Apache Airflow® offers many ways to orchestrate data quality checks directly from your DAGs.
 
 This guide covers:
 

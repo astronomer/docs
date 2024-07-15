@@ -1,14 +1,14 @@
 ---
-title: "Scaling Airflow to optimize performance"
+title: "Scaling Apache Airflow® to optimize performance"
 sidebar_label: "Scaling Airflow"
 id: airflow-scaling-workers
-description: "See which parameters to modify when scaling up data pipelines to make the most of Airflow. Learn about the environment, DAG, and task-level settings."
+description: "See which parameters to modify when scaling up data pipelines to make the most of Apache Airflow®. Learn about the environment, DAG, and task-level settings."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-One of the biggest strengths of Apache Airflow is its ability to scale to meet the changing demands of your organization. To make the most of Airflow, there are a few key settings that you should consider modifying as you scale up your data pipelines.
+One of the biggest strengths of Apache Airflow® is its ability to scale to meet the changing demands of your organization. To make the most of Airflow, there are a few key settings that you should consider modifying as you scale up your data pipelines.
 
 Airflow exposes a number of parameters that are closely related to DAG and task-level performance. These include:
 
@@ -43,7 +43,7 @@ The reason Airflow allows so many adjustments is that, as an agnostic orchestrat
 
 ### Environment-level settings
 
-Environment-level settings are those that impact your entire Airflow environment (all DAGs). They all have default values that can be overridden by setting the appropriate environment variable or modifying your `airflow.cfg` file. Generally, all default values can be found in the [Airflow Configuration Reference](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html). To check current values for an existing Airflow environment, go to **Admin** > **Configurations** in the Airflow UI. For more information, see [Setting Configuration Options](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-config.html) in the Apache Airflow documentation.
+Environment-level settings are those that impact your entire Airflow environment (all DAGs). They all have default values that can be overridden by setting the appropriate environment variable or modifying your `airflow.cfg` file. Generally, all default values can be found in the [Airflow Configuration Reference](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html). To check current values for an existing Airflow environment, go to **Admin** > **Configurations** in the Apache Airflow® UI. For more information, see [Setting Configuration Options](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-config.html) in the Apache Airflow documentation.
 
 If you're running Airflow on Astronomer, you should modify these parameters with Astronomer environment variables. For more information, see [Environment Variables on Astronomer](https://www.astronomer.io/docs/astro/environment-variables).
 
@@ -93,7 +93,7 @@ Core settings control the number of processes running concurrently and how long 
 
 - `max_tis_per_query`: Changes the batch size of queries to the metastore in the main scheduling loop. A higher value allows more `tis` to be processed per query, but your query may become too complex and cause performance issues. The default value is 16 queries. Note that the `scheduler.max_tis_per_query` value needs to be lower than the `core.parallelism` value.
 
-### DAG-level Airflow settings
+### DAG-level Apache Airflow® settings
 
 DAG-level settings apply only to specific DAGs and are defined in your DAG code. You should modify DAG-level settings if you want to performance tune a particular DAG, especially in cases where that DAG is hitting an external system such as an API or a database that might cause performance issues if hit too frequently. When a setting exists at both the DAG-level and environment-level, the DAG-level setting takes precedence.
 
@@ -134,7 +134,7 @@ with DAG("my_dag_id", concurrency=10, max_active_runs=3):
 </TabItem>
 </Tabs>
 
-### Task-level Airflow settings
+### Task-level Apache Airflow® settings
 
 Task-level settings are defined by task operators that you can use to implement additional performance adjustments. Modify task-level settings when specific types of tasks are causing performance issues. 
 

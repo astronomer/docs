@@ -1,8 +1,8 @@
 ---
-title: "Airflow task groups"
+title: "Apache Airflow® task groups"
 sidebar_label: "Task groups"
 id: task-groups
-description: "Follow Astronomer’s step-by-step guide to use task groups for organizing tasks within the grid view of the Airflow user interface."
+description: "Follow Astronomer’s step-by-step guide to use task groups for organizing tasks within the grid view of the Apache Airflow® user interface."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -14,7 +14,7 @@ import task_group_mapping_example from '!!raw-loader!../code-samples/dags/task-g
 import custom_task_group_example from '!!raw-loader!../code-samples/dags/task-groups/custom_task_group_example.py';
 import custom_task_group_example_dag from '!!raw-loader!../code-samples/dags/task-groups/custom_task_group_example_dag.py';
 
-Airflow [task groups](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#taskgroups) are a tool to organize tasks into groups within your DAGs. Using task groups allows you to:
+Apache Airflow® [task groups](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#taskgroups) are a tool to organize tasks into groups within your DAGs. Using task groups allows you to:
 
 - Organize complicated DAGs, visually grouping tasks that belong together in the Airflow UI **Grid View**.
 - Apply `default_args` to sets of tasks, instead of at the DAG level using [DAG parameters](dags.md#dag-parameters).
@@ -48,7 +48,7 @@ Task groups are most often used to visually organize complicated DAGs. For examp
 - In MLOps DAGs, where you have a task group per model being trained. 
 - In DAGs owned by several teams, where you have task groups to visually separate the tasks that belong to each team. Although in this case, it might be better to separate the DAG into multiple DAGs and use [Datasets](airflow-datasets.md) to connect them.
 - When you are using the same patterns of tasks in multiple DAGs and want to create a reusable module.
-- When you have an input of unknown length, for example an unknown number of files in a directory. You can use task groups to [dynamically map](#generate-task-groups-dynamically-at-runtime) over the input and create a task group performing sets of actions for each file. This is the only way to dynamically map sequential tasks in Airflow.
+- When you have an input of unknown length, for example an unknown number of files in a directory. You can use task groups to [dynamically map](#generate-task-groups-dynamically-at-runtime) over the input and create a task group performing sets of actions for each file. This is the only way to dynamically map sequential tasks in Apache Airflow®.
 
 ## Define task groups
 

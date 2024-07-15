@@ -5,7 +5,7 @@ id: create-project
 description: Get started on Astronomer Software.
 ---
 
-This is where you'll find information about creating a project and running it in a local Airflow environment.
+This is where you'll find information about creating a project and running it in a local Apache Airflow® environment.
 
 ## Prerequisites
 
@@ -34,7 +34,7 @@ This generates the following files:
 │   └── example-dag.py # An example DAG that comes with the initialized project
 ├── Dockerfile # For the Astronomer Runtime Docker image and runtime overrides
 ├── include # For any other files you'd like to include
-├── plugins # For any custom or community Airflow plugins
+├── plugins # For any custom or community Apache Airflow® plugins
 ├── airflow_settings.yaml # For your Airflow connections, variables and pools (local only)
 ├── packages.txt # For OS-level packages
 └── requirements.txt # For any Python packages
@@ -79,7 +79,7 @@ This command builds your project and spins up 4 Docker containers on your machin
 - **Scheduler:** The Airflow component responsible for monitoring and triggering tasks
 - **Triggerer:** The Airflow component responsible for running Triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with deferrable operators.
 
-## Step 3: Access the Airflow UI
+## Step 3: Access the Apache Airflow® UI
 
 Once your project builds successfully, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password.
 

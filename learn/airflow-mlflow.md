@@ -1,7 +1,7 @@
 ---
-title: "Use MLflow with Apache Airflow"
+title: "Use MLflow with Apache Airflow®"
 sidebar_label: "MLflow"
-description: "How to use MLflow with Airflow in three different ways."
+description: "How to use MLflow with Apache Airflow® in three different ways."
 id: airflow-mlflow
 sidebar_custom_props: { icon: 'img/integrations/mlflow.png' }
 ---
@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/integrations/mlflow.png' }
 import CodeBlock from '@theme/CodeBlock';
 import mlflow_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-mlflow/mlflow_tutorial_dag.py';
 
-[MLflow](https://mlflow.org/) is a popular tool for tracking and managing machine learning models. It can be used together with Airflow for ML orchestration (MLOx), leveraging both tools for what they do best. In this tutorial, you’ll learn about three different ways you can use MLflow with Airflow.
+[MLflow](https://mlflow.org/) is a popular tool for tracking and managing machine learning models. It can be used together with Apache Airflow® for ML orchestration (MLOx), leveraging both tools for what they do best. In this tutorial, you’ll learn about three different ways you can use MLflow with Airflow.
 
 :::tip Other ways to learn
 
@@ -19,7 +19,7 @@ There are multiple resources for learning about this topic. See also:
 
 :::
 
-## Three ways to use MLflow with Airflow
+## Three ways to use MLflow with Apache Airflow®
 
 The DAG in this tutorial shows three different ways Airflow can interact with MLflow:
 
@@ -71,7 +71,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
     mlflow-skinny==2.3.2
     ```
 
-## Step 2: Configure your Airflow connection
+## Step 2: Configure your Apache Airflow® connection
 
 To connect Airflow to your MLflow instance, you need to create a [connection in Airflow](connections.md). 
 

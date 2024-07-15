@@ -9,7 +9,7 @@ description: Use Podman instead of Docker to run specific Astronomer CLI command
 
 By default, the Astronomer CLI uses Docker to execute a few specific commands:
 
-- `astro dev [...]`: For running an Airflow environment on your local machine
+- `astro dev [...]`: For running an Apache Airflow® environment on your local machine
 - `astro auth login`: For authenticating to Astronomer Software
 - `astro deploy`: For pushing code to a Deployment
 

@@ -6,13 +6,13 @@ description: How to push DAGs to your Airflow Deployment on Astronomer Software 
 ---
 
 
-If you've used the Astro CLI to develop locally, the process for deploying your DAGs to an Airflow Deployment on Astronomer should be equally familiar. The Astro CLI builds your DAGs into a Docker image alongside all the other files in your Astro project directory, including your Python and OS-level packages, your Dockerfile, and your plugins. The resulting image is then used to generate a set of Docker containers for each core Airflow component.
+If you've used the Astro CLI to develop locally, the process for deploying your DAGs to an Apache Airflow® Deployment on Astronomer should be equally familiar. The Astro CLI builds your DAGs into a Docker image alongside all the other files in your Astro project directory, including your Python and OS-level packages, your Dockerfile, and your plugins. The resulting image is then used to generate a set of Docker containers for each core Airflow component.
 
 For guidance on automating this process, refer to [Deploy to Astronomer via CI/CD](ci-cd.md). To learn how to add Python and OS-level packages or otherwise customize your Docker image, read [Customize your image](customize-image.md).
 
 Alternatively, you can configure an external NFS volume for DAG deploys. For more information, read [Deploy DAGs to an NFS volume](deploy-nfs.md).
 
-> **Note:** Astronomer recommends that all users use the Astro CLI to test their code locally before pushing it to an Airflow Deployment on Astronomer. For guidelines on developing locally, see [CLI Quickstart](install-cli.md).
+> **Note:** Astronomer recommends that all users use the Astro CLI to test their code locally before pushing it to an Apache Airflow® Deployment on Astronomer. For guidelines on developing locally, see [CLI Quickstart](install-cli.md).
 
 ## Prerequisites
 

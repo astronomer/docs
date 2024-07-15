@@ -6,7 +6,7 @@ id: registry-backend
 
 ## Overview
 
-Astronomer Software requires a Docker Registry to store the Docker Images generated every time a user either pushes code or a configuration change to an Airflow Deployment on Astronomer.
+Astronomer Software requires a Docker Registry to store the Docker Images generated every time a user either pushes code or a configuration change to an Apache Airflow® Deployment on Astronomer.
 
 The default storage backend for this Docker Registry is a [Kubernetes Persistent Volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/). While this may be sufficient for teams just getting started on Astronomer, we strongly recommend backing the registry with an external storage solution for any team running in production.
 

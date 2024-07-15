@@ -9,7 +9,7 @@ Use this document to configure resource usage for a Deployment's executor , webs
 
 ## Select an executor
 
-The Airflow [executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html) works closely with the Airflow scheduler to determine what resources complete tasks as they queue. The main difference between executors is their available resources and how they utilize those resources to distribute work.
+The Apache Airflow® [executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html) works closely with the Airflow scheduler to determine what resources complete tasks as they queue. The main difference between executors is their available resources and how they utilize those resources to distribute work.
 
 Astronomer supports three executors:
 
@@ -48,7 +48,7 @@ To scale these resources, adjust the corresponding slider in the Software UI to 
 
 Read the following sections to help you determine which core resources to scale and when.
 
-### Airflow webserver
+### Apache Airflow® webserver
 
 The Airflow webserver is responsible for rendering the [Airflow UI](https://airflow.apache.org/docs/apache-airflow/stable/ui.html), where users can monitor DAGs, view task logs, and set various non-code configurations.
 

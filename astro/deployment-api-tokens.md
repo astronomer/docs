@@ -10,7 +10,7 @@ A Deployment API token is a credential that you can use to programmatically acce
 - [Push code](deploy-code.md) to a Deployment.
 - Update the Deployment's [environment variables](environment-variables.md).
 - Update a Deployment's configurations. See [Manage Deployments as code](manage-deployments-as-code.md).
-- Make requests to update your Deployment's Airflow environment using the [Airflow REST API](airflow-api.md).
+- Make requests to update your Deployment's Apache Airflow® environment using the [Airflow REST API](airflow-api.md).
 
 Use this document to learn how to create and manage API tokens. To use your API token in an automated process, see [Authenticate an automation tool](automation-authentication.md).
 

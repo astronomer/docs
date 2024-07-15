@@ -62,7 +62,7 @@ Release date: March 14, 2022
 
 - Fixed an issue where `astro dev logs` and `astro dev start` didn't work when using custom Docker container names
 - Fixed an issue where `astro deploy` did not work when using Podman in specific circumstances
-- Fixed an issue where `airflow_settings.yaml` was not properly imported to the Airflow UI when running Astro in a local Podman environment
+- Fixed an issue where `airflow_settings.yaml` was not properly imported to the Apache Airflow® UI when running Astro in a local Podman environment
 - Fixed an issue where updating a Deployment's deployment type via `astro deployment update` would generate an error in the Software UI
 - Added a timeout for failing to connect to Houston
 

@@ -1,7 +1,7 @@
 ---
 title: "Use the KubernetesPodOperator"
 sidebar_label: "KubernetesPodOperator"
-description: "Use the KubernetesPodOperator in Airflow to run tasks in Kubernetes Pods"
+description: "Use the KubernetesPodOperator in Apache Airflow® to run tasks in Kubernetes Pods"
 id: kubepod-operator
 ---
 
@@ -15,7 +15,7 @@ import kpo_xcom_example_taskflow from '!!raw-loader!../code-samples/dags/kubepod
 import kpo_xcom_example_traditional from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_xcom_example_traditional.py';
 import kpo_separate_cluster_example from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_separate_cluster_example.py';
 
-The KubernetesPodOperator (KPO) runs a Docker image in a dedicated Kubernetes Pod. By abstracting calls to the Kubernetes API, the KubernetesPodOperator lets you start and run Pods from Airflow using DAG code.
+The KubernetesPodOperator (KPO) runs a Docker image in a dedicated Kubernetes Pod. By abstracting calls to the Kubernetes API, the KubernetesPodOperator lets you start and run Pods from Apache Airflow® using DAG code.
 
 In this guide, you'll learn:
 
@@ -61,7 +61,7 @@ If you use the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview), y
 ```text
 apache-airflow-providers-cncf-kubernetes==<version>
 ```
-Review the [Airflow Kubernetes provider Documentation](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/index.html#requirements) to make sure you install the correct version of the provider package for your version of Airflow.
+Review the [Airflow Kubernetes provider Documentation](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/index.html#requirements) to make sure you install the correct version of the provider package for your version of Apache Airflow®.
 
 You also need an existing Kubernetes cluster to connect to. This is commonly the same cluster that Airflow is running on, but it doesn't have to be.
 
@@ -172,7 +172,7 @@ microk8s.config > /include/.kube/config
 </TabItem>
 </Tabs>
 
-#### Step 3: Create Kubernetes Connection in the Airflow UI
+#### Step 3: Create Kubernetes Connection in the Apache Airflow® UI
 
 To run a Kubernetes pod locally, you can use the following .json template to create a .json connection string that you can then use to create a Kubernetes connection via the local Airflow UI. First, edit the template with the values you gathered in the previous step:
 

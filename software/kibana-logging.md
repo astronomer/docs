@@ -5,7 +5,7 @@ id: kibana-logging
 description: Use Kibana to monitor platform-wide Airflow logs from Astronomer Software.
 ---
 
-All Airflow logs from your Astronomer logs will flow to Elasticsearch and can be visualized on Kibana. Like Grafana, this view is only available to system admins.
+All Apache Airflow® logs from your Astronomer logs will flow to Elasticsearch and can be visualized on Kibana. Like Grafana, this view is only available to system admins.
 
 ## Setup
 

@@ -1,14 +1,14 @@
 ---
-title: "Manage connections in Apache Airflow"
+title: "Manage connections in Apache Airflow®"
 sidebar_label: "Connections"
 id: connections
-description: "Learn how to set up, manage, and maintain different types of connections in Apache Airflow. Use example connection configurations as the basis for your own connections."
+description: "Learn how to set up, manage, and maintain different types of connections in Apache Airflow®. Use example connection configurations as the basis for your own connections."
 ---
 
 import CodeBlock from '@theme/CodeBlock';
 import snowflake_to_slack_dag from '!!raw-loader!../code-samples/dags/connections/snowflake_to_slack_dag.py';
 
-Connections in Airflow are sets of configurations used to connect with other tools in the data ecosystem. Because most hooks and operators rely on connections to send and retrieve data from external systems, understanding how to create and configure them is essential for running Airflow in a production environment.
+Connections in Apache Airflow® are sets of configurations used to connect with other tools in the data ecosystem. Because most hooks and operators rely on connections to send and retrieve data from external systems, understanding how to create and configure them is essential for running Airflow in a production environment.
 
 In this guide you'll:
 
@@ -27,7 +27,7 @@ There are multiple resources for learning about this topic. See also:
 
 :::info
 
-For Astro customers, Astronomer recommends to take advantage of the [Astro Environment Manager](https://www.astronomer.io/docs/astro/manage-connections-variables#astro-cloud-ui-environment-manager) to store connections in an Astro-managed secrets backend. These connections can be shared across multiple deployed and local Airflow environments. See [Manage Astro connections in branch-based deploy workflows](https://www.astronomer.io/docs/astro/astro-use-case/use-case-astro-connections).
+For Astro customers, Astronomer recommends to take advantage of the [Astro Environment Manager](https://www.astronomer.io/docs/astro/manage-connections-variables#astro-cloud-ui-environment-manager) to store connections in an Astro-managed secrets backend. These connections can be shared across multiple deployed and local Apache Airflow® environments. See [Manage Astro connections in branch-based deploy workflows](https://www.astronomer.io/docs/astro/astro-use-case/use-case-astro-connections).
 
 :::
 
@@ -39,7 +39,7 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow hooks. See [Hooks 101](what-is-a-hook.md).
 
-## Airflow connection basics
+## Apache Airflow® connection basics
 
 An Airflow connection is a set of configurations that send requests to the API of an external tool. In most cases, a connection requires login credentials or a private key to authenticate Airflow to the external tool.
 
@@ -102,7 +102,7 @@ You can test some connection types from the Airflow UI with the **Test** button 
 
 Connections can also be defined using environment variables. If you use the Astro CLI, you can use the `.env` file for local development or specify environment variables in your project's Dockerfile.
 
-> **Note**: If you are synchronizing your project to a remote repository, don't save sensitive information in your Dockerfile. In this case, using either a secrets backend, Airflow connections defined in the UI, or `.env` locally are preferred to avoid exposing secrets in plain text.
+> **Note**: If you are synchronizing your project to a remote repository, don't save sensitive information in your Dockerfile. In this case, using either a secrets backend, Apache Airflow® connections defined in the UI, or `.env` locally are preferred to avoid exposing secrets in plain text.
 
 The environment variable used for the connection must be formatted as `AIRFLOW_CONN_YOURCONNID` and can be provided as a Uniform Resource Identifier (URI) or in JSON.
 

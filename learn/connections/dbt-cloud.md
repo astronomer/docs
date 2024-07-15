@@ -1,12 +1,12 @@
 ---
-title: "Create a dbt Cloud connection in Airflow"
+title: "Create a dbt Cloud connection in Apache Airflow®"
 id: dbt-cloud
 sidebar_label: Connection
 description: Learn how to create a dbt Cloud connection in Airflow.
 sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
 ---
 
-[dbt Cloud](https://www.getdbt.com/product/what-is-dbt/) is a SaaS product that runs SQL-first transformation workflows. Integrating dbt Cloud with Airflow allows you to trigger dbt cloud jobs and check their status from an Airflow DAG.
+[dbt Cloud](https://www.getdbt.com/product/what-is-dbt/) is a SaaS product that runs SQL-first transformation workflows. Integrating dbt Cloud with Apache Airflow® allows you to trigger dbt cloud jobs and check their status from an Airflow DAG.
 
 This guide provides the basic setup for creating a dbt Cloud Airflow connection. For a complete integration tutorial, see [Orchestrate dbt Cloud jobs with Airflow](airflow-dbt-cloud.md). To run your dbt core jobs using Airflow, see [Orchestrate dbt-core Jobs with Airflow](airflow-dbt.md).
 

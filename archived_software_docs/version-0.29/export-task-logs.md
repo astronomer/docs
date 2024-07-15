@@ -8,7 +8,7 @@ description: Configure how Astronomer exports task logs to your ElasticSearch in
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Airflow task logs are stored in a logging backend to ensure you can access them after your Pods terminate. By default, Astronomer uses [Fluentd](https://www.fluentd.org/) to collect task logs and export them to an ElasticSearch instance.
+Apache Airflow® task logs are stored in a logging backend to ensure you can access them after your Pods terminate. By default, Astronomer uses [Fluentd](https://www.fluentd.org/) to collect task logs and export them to an ElasticSearch instance.
 
 You can configure how Astronomer collects Deployment task logs and exports them to ElasticSearch. The following are the supported methods for exporting task logs to ElasticSearch:
 
@@ -73,7 +73,7 @@ To revert to the default behavior and export task logs using a Fluentd Daemonset
 
 :::
 
-## Use an external Elasticsearch instance for Airflow task log management
+## Use an external Elasticsearch instance for Apache Airflow® task log management
 
 Add Airflow task logs from your Astronomer Deployment to an existing Elasticsearch instance on [Elastic Cloud](https://www.elastic.co/cloud/) to centralize log management and analysis. Centralized log management allows you to quickly identify, troubleshoot, and resolve task failure issues. Although these examples use Elastic Cloud, you can also use AWS Managed OpenSearch Service.
 
@@ -188,7 +188,7 @@ After you've created an Elastic deployment and endpoint, you have two options to
 </TabItem>
 </Tabs>
 
-### View Airflow task logs in Elastic
+### View Apache Airflow® task logs in Elastic
 
 1. On the Elastic dashboard in the **Elastichsearch Service** area, click the Deployment name.
   ![ElasticDeployment name location](/img/software/elasticsearch-deployment-name.png)
@@ -197,4 +197,4 @@ After you've created an Elastic deployment and endpoint, you have two options to
     ![Discover menu location](/img/software/elasticsearch-discover.png)
 
 3. Enter `fluentd.*` in the **Name** field, enter `@timestamp` in the **Timestamp field**, and then click **Create index pattern**.
-4. Click **Menu** > **Dashboard** to view all of the Airflow task logs for your Deployment on Astronomer.
+4. Click **Menu** > **Dashboard** to view all of the Apache Airflow® task logs for your Deployment on Astronomer.

@@ -2,10 +2,10 @@
 sidebar_label: 'Import and export connections and variables'
 title: 'Import and export Airflow connections and variables'
 id: import-export-connections-variables
-description: "Learn how to import and export Apache Airflow objects between Airflow environments on Astro"
+description: "Learn how to import and export Apache Airflow® objects between Airflow environments on Astro"
 ---
 
-After you create connections and variables in an Airflow environment, you might want to move export and import them between environments for any of the following reasons:
+After you create connections and variables in an Apache Airflow® environment, you might want to move export and import them between environments for any of the following reasons:
 
 - You are launching a production Airflow environment on Astro based on a locally running Airflow environment.
 - You need to replicate a production Airflow environment on your local machine.
@@ -19,11 +19,11 @@ If you use the Astro Environment Manager to [create connections](create-and-link
 
 :::
 
-## From the Airflow UI and metadata database
+## From the Apache Airflow® UI and metadata database
 
 When you use the Airflow UI to store your Airflow connections and variables, they are stored in Airflow's metadata database. If your variables are stored in Airflow's metadata database, you can use the Airflow UI to import and export them in bulk.
 
-### Using the Airflow UI
+### Using the Apache Airflow® UI
 
 To export variables from a local Airflow environment or Astro Deployment, complete the following steps:
 

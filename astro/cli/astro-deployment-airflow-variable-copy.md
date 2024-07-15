@@ -13,7 +13,7 @@ This command is only available on Astro.
 
 :::
 
-Copy Airflow variables from one Astro Deployment to another. Airflow variables are stored in the target Deployment's metadata database and appear in the Airflow UI.
+Copy Apache Airflow® variables from one Astro Deployment to another. Airflow variables are stored in the target Deployment's metadata database and appear in the Airflow UI.
 
 ## Usage
 

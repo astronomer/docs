@@ -1,8 +1,8 @@
 ---
-title: "Airflow hooks"
+title: "Apache Airflow® hooks"
 sidebar_label: "Hooks"
 id: what-is-a-hook
-description: "Learn about hooks and how they should be used in Apache Airflow. See an example of implementing two different hooks in a DAG."
+description: "Learn about hooks and how they should be used in Apache Airflow®. See an example of implementing two different hooks in a DAG."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -12,7 +12,7 @@ import CodeBlock from '@theme/CodeBlock';
 import hook_tutorial_taskflow from '!!raw-loader!../code-samples/dags/what-is-a-hook/hook_tutorial_taskflow.py';
 import hook_tutorial_traditional from '!!raw-loader!../code-samples/dags/what-is-a-hook/hook_tutorial_traditional.py';
 
-A hook is an abstraction of a specific API that allows Airflow to interact with an external system. Hooks are built into many operators, but they can also be used directly in DAG code.
+A hook is an abstraction of a specific API that allows Apache Airflow® to interact with an external system. Hooks are built into many operators, but they can also be used directly in DAG code.
 
 In this guide, you'll learn about using hooks in Airflow and when you should use them directly in DAG code. You'll also implement two different hooks in a DAG.
 

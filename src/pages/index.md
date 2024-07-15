@@ -15,7 +15,7 @@ import NewsletterForm from '@site/src/components/NewsletterForm';
 
 # Astronomer Docs
 
-<p className="DocItem__header-description">Learn everything you need to know about Astro and [Apache Airflow®](https://airflow.apache.org/).</p>
+<p className="DocItem__header-description">Learn everything you need to know about Astro and [Apache Airflow®®](https://airflow.apache.org/).</p>
 
 ---
 

@@ -1,7 +1,7 @@
 ---
-title: "Orchestrate OpenAI operations with Apache Airflow"
+title: "Orchestrate OpenAI operations with Apache Airflow®"
 sidebar_label: "OpenAI"
-description: "Learn how to integrate OpenAI and Airflow."
+description: "Learn how to integrate OpenAI and Apache Airflow®."
 id: airflow-openai
 sidebar_custom_props: { icon: 'img/integrations/openai.png' }
 ---
@@ -9,11 +9,11 @@ sidebar_custom_props: { icon: 'img/integrations/openai.png' }
 import CodeBlock from '@theme/CodeBlock';
 import captains_dag from '!!raw-loader!../code-samples/dags/airflow-openai/captains_dag.py';
 
-[OpenAI](https://openai.com/) is an AI research and deployment company that provides an API for accessing state of the art models like [GPT-4](https://openai.com/gpt-4) and [DALL·E 3](https://openai.com/dall-e-3). The [OpenAI Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-openai/stable/index.html) offers modules to easily integrate OpenAI with Airflow.
+[OpenAI](https://openai.com/) is an AI research and deployment company that provides an API for accessing state of the art models like [GPT-4](https://openai.com/gpt-4) and [DALL·E 3](https://openai.com/dall-e-3). The [OpenAI Apache Airflow® provider](https://airflow.apache.org/docs/apache-airflow-providers-openai/stable/index.html) offers modules to easily integrate OpenAI with Airflow.
 
 In this tutorial you'll use Airflow and the OpenAI Airflow provider to ask a question to Star Trek captains, create embeddings of the answers from each captain, and plot them in two dimensions. 
 
-## Why use Airflow with OpenAI?
+## Why use Apache Airflow® with OpenAI?
 
 OpenAI offers a variety of powerful model endpoints for different tasks like text generation, vector embedding, and translation tasks. These models are used in both user-facing applications, such as chatbots, and internal applications, such as a smart search for internal knowledge base content.
 

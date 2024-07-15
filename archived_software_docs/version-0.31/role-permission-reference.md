@@ -15,7 +15,7 @@ System roles apply to all Workspaces, users, and Deployments within a single Ast
 
 The System Viewer has the following permissions by default:
 
-- `system.airflow.get`: View the Airflow UI for any Deployment
+- `system.airflow.get`: View the Apache Airflow® UI for any Deployment
 - `system.deployment.variables.get`: View [environment variables](environment-variables.md) for any Deployment
 - `system.deployments.get`: View any setting for any Deployment in the Software UI
 - `system.invites.get`: View all pending user invites in the **System Admin** tab of the Software UI

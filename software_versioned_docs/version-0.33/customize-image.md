@@ -8,7 +8,7 @@ description: Customize your Astronomer image, including adding dependencies and 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The Astro CLI is intended to make it easier to develop with Apache Airflow, whether you're developing on your local machine or deploying code to Astronomer. The following guidelines describe a few of the methods you can use to customize the Docker Image that gets pushed to Airflow every time you rebuild your image locally using `$ astro dev start` or deploy to Astronomer using `$ astro deploy`.
+The Astro CLI is intended to make it easier to develop with Apache Airflow®, whether you're developing on your local machine or deploying code to Astronomer. The following guidelines describe a few of the methods you can use to customize the Docker Image that gets pushed to Airflow every time you rebuild your image locally using `$ astro dev start` or deploy to Astronomer using `$ astro deploy`.
 
 More specifically, this doc includes instructions for how to:
 
@@ -132,7 +132,7 @@ If you're interested in programmatically managing Airflow connections, Variables
 
 :::
 
-### Add Airflow connections, pools, variables
+### Add Apache Airflow® connections, pools, variables
 
 By default, the `airflow_settings.yaml` file includes the following template:
 
@@ -221,7 +221,7 @@ drwxrwxr-x    2 1000     1000          4096 Oct  8 00:07 plugins
 
 > **Note:** The Astro CLI does _not_ support overrides to Environment Variables. For more information on how to set, configure and customize those values, see ["Environment Variables" doc](environment-variables.md).
 
-## Access to the Airflow CLI
+## Access to the Apache Airflow® CLI
 
 You're free to use native Airflow CLI commands on Astronomer when developing locally by wrapping them around docker commands.
 

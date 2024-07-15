@@ -5,7 +5,7 @@ id: integrate-iam
 description: Append IAM roles to an Airflow Deployment on Astronomer Software.
 ---
 
-On Astronomer, IAM roles can be appended to the webserver, scheduler and worker pods within any individual Airflow Deployment on the platform.
+On Astronomer, IAM roles can be appended to the webserver, scheduler and worker pods within any individual Apache Airflow® Deployment on the platform.
 
 IAM roles on [AWS](https://aws.amazon.com/iam/faqs/) and other platforms are often used to manage the level of access a specific user (or object, or group of users) has to some resource (or set of resources). The resource in question could be an S3 bucket or Secret Backend, both of which are commonly used in tandem with Airflow and Astronomer and can now be configured to be accessible only to a subset of Kubernetes pods within your wider Astronomer cluster.
 
@@ -207,7 +207,7 @@ In order to apply your IAM role to any Airflow Deployment on Astronomer, you'll 
 
 2. Push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
 
-### Step 6: Create or update an Airflow Deployment with an attached IAM role
+### Step 6: Create or update an Apache Airflow® Deployment with an attached IAM role
 
 1. To create a new Airflow Deployment with your IAM role attached, run the following Astro CLI command:
 
@@ -234,7 +234,7 @@ In order to apply your IAM role to any Airflow Deployment on Astronomer, you'll 
     AWS_WEB_IDENTITY_TOKEN_FILE: /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     ```
 
-> **Note:** If using Airflow `1.10.5`, you'll need to add `boto3 >=1.9` and `botocore >= 1.12` to your `requirements.txt` file.
+> **Note:** If using Apache Airflow® `1.10.5`, you'll need to add `boto3 >=1.9` and `botocore >= 1.12` to your `requirements.txt` file.
 
 ## GCP
 
@@ -284,7 +284,7 @@ astronomer:
         serviceAccountAnnotationKey: iam.gke.io/gcp-service-account
 ```
 
-### Step 4: Create an Airflow Deployment
+### Step 4: Create an Apache Airflow® Deployment
 
 1. Create an Airflow Deployment with your GCP service account attached by running the following command:
 

@@ -1,12 +1,12 @@
 ---
-title: "Train a machine learning model with SageMaker and Airflow"
+title: "Train a machine learning model with SageMaker and Apache Airflow®"
 sidebar_label: "Amazon SageMaker"
-description: "Follow a step-by-step tutorial for using Airflow to orchestrate the training and testing of a SageMaker model."
+description: "Follow a step-by-step tutorial for using Apache Airflow® to orchestrate the training and testing of a SageMaker model."
 id: airflow-sagemaker
 sidebar_custom_props: { icon: 'img/integrations/sagemaker.png' }
 ---
 
-[Amazon SageMaker](https://aws.amazon.com/sagemaker/) is a comprehensive AWS machine learning (ML) service that is frequently used by data scientists to develop and deploy ML models at scale. With Airflow, you can orchestrate every step of your SageMaker pipeline, integrate with services that clean your data, and store and publish your results using only Python code.
+[Amazon SageMaker](https://aws.amazon.com/sagemaker/) is a comprehensive AWS machine learning (ML) service that is frequently used by data scientists to develop and deploy ML models at scale. With Apache Airflow®, you can orchestrate every step of your SageMaker pipeline, integrate with services that clean your data, and store and publish your results using only Python code.
 
 This tutorial demonstrates how to orchestrate a full ML pipeline including creating, training, and testing a new SageMaker model. This use case is relevant if you want to automate the model training, testing, and deployment components of your ML pipeline.
 
@@ -99,7 +99,7 @@ Now that you have your AWS resources configured, you can move on to Airflow setu
     astro dev start
     ```
 
-## Step 4: Add Airflow Variables
+## Step 4: Add Apache Airflow® Variables
 
 Add two Airflow variables that will be used by your DAG. In the Airflow UI, go to **Admin** -> **Variables**.
 
@@ -113,7 +113,7 @@ Add two Airflow variables that will be used by your DAG. In the Airflow UI, go t
     - **Key**: `s3_bucket`
     - **Val**: `<your-s3-bucket-name>`
 
-## Step 5: Add an Airflow connection to SageMaker
+## Step 5: Add an Apache Airflow® connection to SageMaker
 
 Add a connection that Airflow will use to connect to SageMaker and S3. In the Airflow UI, go to **Admin** -> **Connections**.
 

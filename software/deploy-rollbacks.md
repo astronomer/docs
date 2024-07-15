@@ -5,7 +5,7 @@ id: deploy-rollbacks
 description: Learn how to roll back to a deploy, which lets you run earlier version of your project code.
 ---
 
-Deploy rollbacks are an emergency option if a Deployment unexpectedly stops working after a recent deploy. For example, if one of your DAGs worked in development but suddenly fails in a mission-critical production Deployment, you can roll back to your previous deploy to quickly get your pipeline running again. This allows you to revert your deployment to a known good state while you investigate the cause of the failure. You can roll back to any deploy in the last three months regardless of your DAG code or Deployment settings. However, rollbacks are only supported for Runtime 5.0.0 and above or its equivalent Airflow version, 2.3.0 and above.
+Deploy rollbacks are an emergency option if a Deployment unexpectedly stops working after a recent deploy. For example, if one of your DAGs worked in development but suddenly fails in a mission-critical production Deployment, you can roll back to your previous deploy to quickly get your pipeline running again. This allows you to revert your deployment to a known good state while you investigate the cause of the failure. You can roll back to any deploy in the last three months regardless of your DAG code or Deployment settings. However, rollbacks are only supported for Runtime 5.0.0 and above or its equivalent Apache Airflow® version, 2.3.0 and above.
 
 ## Prerequisites
 

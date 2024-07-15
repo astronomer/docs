@@ -5,7 +5,7 @@ id: install-azure
 description: Install Astronomer Software on Azure Kubernetes Service (AKS).
 ---
 
-Install Astronomer Software on Azure to deploy and scale [Apache Airflow](https://airflow.apache.org/) on a [Microsoft Azure Kubernetes Service](https://azure.microsoft.com/en-us/services/kubernetes-service/) (AKS) cluster.
+Install Astronomer Software on Azure to deploy and scale [Apache Airflow®](https://airflow.apache.org/) on a [Microsoft Azure Kubernetes Service](https://azure.microsoft.com/en-us/services/kubernetes-service/) (AKS) cluster.
 
 ## Prerequisites
 

@@ -6,7 +6,7 @@ id: customize-image
 
 ## Overview
 
-The Astronomer CLI was built to be the easiest way to develop with Apache Airflow, whether you're developing on your local machine or deploying code to Astronomer. The guidelines below will cover a few ways you can customize the Docker Image that gets pushed up to Airflow every time you rebuild your image locally via `$ astro dev start` or deploy to Astronomer via `$ astro deploy`.
+The Astronomer CLI was built to be the easiest way to develop with Apache Airflow®, whether you're developing on your local machine or deploying code to Astronomer. The guidelines below will cover a few ways you can customize the Docker Image that gets pushed up to Airflow every time you rebuild your image locally via `$ astro dev start` or deploy to Astronomer via `$ astro deploy`.
 
 More specifically, this doc includes instructions for how to:
 
@@ -71,7 +71,7 @@ docker exec -it <scheduler-container-id> pip freeze | grep pymongo
 pymongo==3.7.2
 ```
 
-> **Note:** Astronomer Certified, Astronomer's distribution of Apache Airflow, is available both as a Debian and Alpine base. We strongly recommend using Debian, as it's much easier to install dependencies and often presents less incompatibility issues than an Alpine Linux image. For details on both, refer to our [Airflow Versioning Doc](manage-airflow-versions.md).
+> **Note:** Astronomer Certified, Astronomer's distribution of Apache Airflow, is available both as a Debian and Alpine base. We strongly recommend using Debian, as it's much easier to install dependencies and often presents less incompatibility issues than an Alpine Linux image. For details on both, refer to our [Apache Airflow® Versioning Doc](manage-airflow-versions.md).
 
 ## Add Other Dependencies
 
@@ -126,7 +126,7 @@ For security reasons, the `airflow_settings.yaml` file is currently _only_ for l
 
 > **Note:** If you're interested in programmatically managing Airflow Connections, Variables or Environment Variables, we'd recommend integrating a ["Secret Backend"](secrets-backend.md) to help you do so.
 
-### Add Airflow Connections, Pools, Variables
+### Add Apache Airflow® Connections, Pools, Variables
 
 By default, the `airflow_settings.yaml` file will be structured as following:
 
@@ -213,7 +213,7 @@ drwxrwxr-x    2 1000     1000          4096 Oct  8 00:07 plugins
 
 > **Note:** The Astronomer CLI does _not_ currently support overrides to Environment Variables. For more information on how to set, configure and customize those values, refer to our ["Environment Variables" doc](environment-variables.md).
 
-## Access to the Airflow CLI
+## Access to the Apache Airflow® CLI
 
 You're free to use native Airflow CLI commands on Astronomer when developing locally by wrapping them around docker commands.
 

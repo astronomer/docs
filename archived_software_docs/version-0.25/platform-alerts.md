@@ -8,7 +8,7 @@ id: platform-alerts
 
 You can use two built-in alerting solutions for monitoring the health of Astronomer:
 
-- Deployment-level alerts, which notify you when the health of an Airflow Deployment is low or if any of Airflow's underlying components are underperforming, including the Airflow Scheduler.
+- Deployment-level alerts, which notify you when the health of an Apache Airflow® Deployment is low or if any of Airflow's underlying components are underperforming, including the Airflow Scheduler.
 - Platform-level alerts, which notify you when a component of your Software installation is unhealthy, such as Elasticsearch, Astronomer's Houston API, or your Docker Registry.
 
 These alerts fire based on metrics collected by Prometheus. If the conditions of an alert are met, [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager) handles the process of sending the alert to the appropriate communication channel.

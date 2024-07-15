@@ -7,7 +7,7 @@ description: Learn about the various tools and services that make up Astronomer 
 
 ## Overview
 
-Astronomer Software utilizes a variety of tools to run Airflow securely and reliably in your private cloud. This guide contains names and descriptions of all system components required to run Astronomer Software.
+Astronomer Software utilizes a variety of tools to run Apache Airflow® securely and reliably in your private cloud. This guide contains names and descriptions of all system components required to run Astronomer Software.
 
 ## Platform Components
 
@@ -29,7 +29,7 @@ Astronomer Software brings together best-of-class components into a complete "Ma
 * [Astronomer Helm](https://github.com/astronomer/astronomer) - Helm charts for the Astronomer Platform
 * [Docker images](https://quay.io/astronomer/) - Docker images for deploying and running Astronomer on DockerHub.
 
-## Airflow Components
+## Apache Airflow® Components
 
 When you create an Airflow deployment in Astronomer, the following components are installed:
 

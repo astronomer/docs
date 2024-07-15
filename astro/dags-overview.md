@@ -5,7 +5,7 @@ id: dags-overview
 description: 'Learn how to use code-level features specific to Astro in your Apache Airflow DAGs.'
 ---
 
-Astro includes several features that enhance the Apache Airflow development experience, from DAG writing to testing. To use these features, you might need to modify how you write your DAGs and manage the rest of your code.
+Astro includes several features that enhance the Apache Airflow® development experience, from DAG writing to testing. To use these features, you might need to modify how you write your DAGs and manage the rest of your code.
 
 Use this documentation to learn about the key differences between managing DAGs on Astro versus on other platforms. 
 
@@ -15,7 +15,7 @@ To develop and run DAGs on Astronomer products, your DAGs must belong to an Astr
 
 See [Create an Astro project](cli/get-started-cli.md) to learn more about how to create and run Astro projects.
 
-## Airflow and Astro Runtime versioning
+## Apache Airflow® and Astro Runtime versioning
 
 When you migrate to Astro from another Apache Airflow service, there are a few differences to note with regards to how Astro handles versioning, upgrades, and runtime builds.
 
@@ -34,7 +34,7 @@ There are two ways to run DAGs within the Astro ecosystem: Either in a local Air
 
 Whether you're building your project locally or deploying to Astro, you can run unit tests with the Astro CLI to ensure that your code meets basic standards before you run your DAGs. The Astro CLI includes a default set of unit tests which you can run alongside your own tests in a single sequence. See [Test your DAGs](https://docs.astronomer.io/astro/cli/test-your-astro-project-locally) for more information.
 
-## Airflow feature enhancements
+## Apache Airflow® feature enhancements
 
 Astro includes several features that enhance open source Apache Airflow functionality.
 

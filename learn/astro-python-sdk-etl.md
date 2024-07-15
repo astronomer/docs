@@ -1,14 +1,14 @@
 ---
 title: "The Astro Python SDK for ETL"
 sidebar_label: "Astro Python SDK for ETL"
-description: "Use the Astro Python SDK to implement ELT use cases in Airflow."
+description: "Use the Astro Python SDK to implement ELT use cases in Apache Airflow®."
 id: "astro-python-sdk-etl"
 ---
 
 import CodeBlock from '@theme/CodeBlock';
 import astro_python_sdk_etl from '!!raw-loader!../code-samples/dags/astro-python-sdk-etl/astro_python_sdk_etl.py';
 
-The [Astro Python SDK](https://github.com/astronomer/astro-sdk/) is an open source tool and Python package for DAG development that is built and maintained by Astronomer. The purpose of the SDK is to remove the complexity of writing DAGs in Apache Airflow, particularly in the context of Extract, Load, Transform (ELT) use cases. This enables pipeline authors to focus more on writing business logic in Python, and less on setting Airflow configurations.
+The [Astro Python SDK](https://github.com/astronomer/astro-sdk/) is an open source tool and Python package for DAG development that is built and maintained by Astronomer. The purpose of the SDK is to remove the complexity of writing DAGs in Apache Airflow®, particularly in the context of Extract, Load, Transform (ELT) use cases. This enables pipeline authors to focus more on writing business logic in Python, and less on setting Airflow configurations.
 
 The Astro SDK uses Python [decorators](https://realpython.com/primer-on-python-decorators/) and the TaskFlow API to simplify Python functions for common data orchestration use cases. Specifically, the Astro SDK decorators include eight python functions that make it easier to:
 

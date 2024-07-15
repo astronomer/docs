@@ -19,7 +19,7 @@ The following are possible health statuses your Deployments can have:
 
 - **Creating** (Grey): Astro is still provisioning Deployment resources. It is not yet available to run DAGs. See [Create a Deployment](create-deployment.md).
 - **Deploying** (Grey): A code deploy or environment update is in progress. Hover over the status indicator to view specific information about the deploy, including whether it was an image deploy or a DAG-only deploy.
-- **Healthy** (Green): The Airflow webserver and scheduler are both healthy and running as expected.
+- **Healthy** (Green): The Apache Airflow® webserver and scheduler are both healthy and running as expected.
 - **Unhealthy** (Red): Your Deployment webserver or scheduler are restarting or otherwise not in a healthy, running state.
 - **Hibernating** (Grey): Your Deployment is currently hibernating.
 - **Unknown** (Grey): The Deployment status can't be determined.
@@ -57,7 +57,7 @@ The scheduler has not sent a heartbeat for longer than 10 minutes. This could be
 
 If you receive this incident notification, Astronomer Support has already been notified and no action is required from you. Ensure that you [configured a Deployment contact email](deployment-details.md#configure-deployment-contact-emails) so that you can be notified if this issue requires additional follow-ups.
 
-### Airflow Database Storage Unusually High
+### Apache Airflow® Database Storage Unusually High
 
 Your Deployment metadata database is currently storing tables that are larger than 50GiB (Info) or 75GiB (Warning). Click **View details** on the incident to view the affected tables. Even with large tables, Airflow will continue to operate as normal, but tables that are larger than 75GiB might cause degraded scheduler performance. As a result, you may need to clean up the relevant tables in the metadata database to avoid the risk of delayed task runs.
 

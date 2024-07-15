@@ -1,7 +1,7 @@
 ---
-title: "Orchestrate Great Expectations with Airflow"
+title: "Orchestrate Great Expectations with Apache Airflow®"
 sidebar_label: "Great Expectations"
-description: "Orchestrate Great Expectations data quality checks with your Airflow DAGs."
+description: "Orchestrate Great Expectations data quality checks with your Apache Airflow® DAGs."
 id: airflow-great-expectations
 sidebar_custom_props: { icon: 'img/integrations/great-expectations.png' }
 ---
@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/integrations/great-expectations.png' }
 import CodeBlock from '@theme/CodeBlock';
 import gx_dag from '!!raw-loader!../code-samples/dags/airflow-great-expectations/gx_dag.py';
 
-[Great Expectations](https://greatexpectations.io) (GX) is an open source Python-based data validation framework. You can test your data by expressing what you “expect” from it as simple declarative statements in JSON or YAML, then run validations using those [Expectation Suites](https://docs.greatexpectations.io/docs/terms/expectation_suite/) against data in a [Source Data System](https://docs.greatexpectations.io/docs/oss/guides/setup/optional_dependencies/cloud/connect_gx_source_data_system) or a [pandas DataFrame](https://docs.greatexpectations.io/docs/oss/guides/connecting_to_your_data/fluent/in_memory/connect_in_memory_data). Astronomer, with help from Superconductive, maintains the [Great Expectations Airflow Provider](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest) that gives users a convenient method for running validations directly from their DAGs.
+[Great Expectations](https://greatexpectations.io) (GX) is an open source Python-based data validation framework. You can test your data by expressing what you “expect” from it as simple declarative statements in JSON or YAML, then run validations using those [Expectation Suites](https://docs.greatexpectations.io/docs/terms/expectation_suite/) against data in a [Source Data System](https://docs.greatexpectations.io/docs/oss/guides/setup/optional_dependencies/cloud/connect_gx_source_data_system) or a [pandas DataFrame](https://docs.greatexpectations.io/docs/oss/guides/connecting_to_your_data/fluent/in_memory/connect_in_memory_data). Astronomer, with help from Superconductive, maintains the [Great Expectations Apache Airflow® Provider](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest) that gives users a convenient method for running validations directly from their DAGs.
 
 This tutorial shows how to use the [`GreatExpectationsOperator`](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest/modules/GreatExpectationsOperator) in an Airflow DAG, leveraging automatic creation of a default [Checkpoint](https://docs.greatexpectations.io/docs/terms/checkpoint) and connecting via an [Airflow connection](connections.md).
 

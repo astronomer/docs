@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-The `KubernetesPodOperator` is an Airflow operator that completes tasks in Kubernetes Pods. The `KubernetesPodOperator` provides an isolated, containerized execution environment for each task and lets you run custom Docker images and Python versions, set task-level resource requests, and more.
+The `KubernetesPodOperator` is an Apache Airflow® operator that completes tasks in Kubernetes Pods. The `KubernetesPodOperator` provides an isolated, containerized execution environment for each task and lets you run custom Docker images and Python versions, set task-level resource requests, and more.
 
 The Kubernetes infrastructure required to run the `KubernetesPodOperator` is built in. To test the `KubernetesPodOperator` operator locally, you need a local Kubernetes environment.
 

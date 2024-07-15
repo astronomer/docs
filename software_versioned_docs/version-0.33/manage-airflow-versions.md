@@ -1,5 +1,5 @@
 ---
-title: "Upgrade Astro Runtime (Airflow version) on Astronomer Software"
+title: "Upgrade Astro Runtime (Apache Airflow® version) on Astronomer Software"
 sidebar_label: "Upgrade Astro Runtime (Airflow version)"
 id: manage-airflow-versions
 description: Adjust and upgrade Airflow versions on Astronomer Software.
@@ -7,7 +7,7 @@ description: Adjust and upgrade Airflow versions on Astronomer Software.
 
 ## Overview
 
-Regularly upgrading your Software Deployments ensures that your Deployments continue to be supported and that your Airflow instance has the latest features and functionality.
+Regularly upgrading your Software Deployments ensures that your Deployments continue to be supported and that your Apache Airflow® instance has the latest features and functionality.
 
 To upgrade your Airflow Deployment to a later version of Airflow:
 
@@ -37,7 +37,7 @@ Starting the upgrade process doesn't interrupt or otherwise impact your Airflow 
 
 ### With the Software UI
 
-1. Go to **Deployment** > **Settings** > **Basics** > **Airflow Version**.
+1. Go to **Deployment** > **Settings** > **Basics** > **Apache Airflow® Version**.
 2. Select an Airflow version.
 3. Click **Upgrade**.
 
@@ -132,7 +132,7 @@ Astronomer recommends testing new versions of Astro Runtime locally to ensure th
 2. In the Software UI, open your Deployment and click **Open Airflow**.
 3. In the Airflow UI, scroll to the bottom of any page. You should see your new Runtime version in the footer.
 
-## Cancel Airflow upgrade
+## Cancel Apache Airflow® upgrade
 
 As a System Admin, you can cancel an Airflow Deployment upgrade at any time if you haven't yet changed the Astronomer Runtime image in your `Dockerfile` and deployed it.
 
@@ -186,9 +186,9 @@ If an Astro Runtime version isn't included in this section, then there are no sp
 
 :::
 
-#### Runtime 9 (Airflow 2.7)
+#### Runtime 9 (Apache Airflow® 2.7)
 
-##### Connection testing in the Airflow UI disabled by default
+##### Connection testing in the Apache Airflow® UI disabled by default
 
 In Airflow 2.7, connection testing in the Airflow UI is disabled by default. Astronomer does not recommend reenabling the feature unless you fully trust all users with edit/ delete permissions for Airflow connections.
 

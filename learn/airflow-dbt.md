@@ -1,5 +1,5 @@
 ---
-title: "Orchestrate dbt Core jobs with Airflow and Cosmos"
+title: "Orchestrate dbt Core jobs with Apache Airflow® and Cosmos"
 sidebar_label: "dbt Core"
 id: airflow-dbt
 sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
@@ -12,7 +12,7 @@ import airflow_dbt_bashoperator from '!!raw-loader!../code-samples/dags/airflow-
 
 [dbt Core](https://docs.getdbt.com/) is an open-source library for analytics engineering that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses. 
 
-The open-source provider package [Cosmos](https://astronomer.github.io/astronomer-cosmos/) allows you to integrate dbt jobs into Airflow by automatically creating Airflow tasks from dbt models. You can turn your dbt Core projects into an Airflow task group with just a few lines of code:
+The open-source provider package [Cosmos](https://astronomer.github.io/astronomer-cosmos/) allows you to integrate dbt jobs into Apache Airflow® by automatically creating Airflow tasks from dbt models. You can turn your dbt Core projects into an Airflow task group with just a few lines of code:
 
 ```python
 from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig, ExecutionConfig
@@ -45,7 +45,7 @@ For a tutorial on how to use dbt Cloud with Airflow, see [Orchestrate dbt Cloud 
 
 :::
 
-## Why use Airflow with dbt Core?
+## Why use Apache Airflow® with dbt Core?
 
 dbt Core offers the possibility to build modular, reuseable SQL components with built-in dependency management and [incremental builds](https://docs.getdbt.com/docs/build/incremental-models). With [Cosmos](https://astronomer.github.io/astronomer-cosmos/) you can integrate dbt jobs into your Airflow orchestration environment as a standalone DAG or as a task group within a DAG. 
 
@@ -152,7 +152,7 @@ You should now have the following structure within your Astro project:
                └── model2.sql
 ```
 
-## Step 3: Create an Airflow connection to your data warehouse
+## Step 3: Create an Apache Airflow® connection to your data warehouse
 
 Cosmos allows you to apply Airflow connections to your dbt project. 
 

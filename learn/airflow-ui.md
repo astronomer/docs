@@ -1,11 +1,11 @@
 ---
-title: "An introduction to the Airflow UI"
+title: "An introduction to the Apache Airflow® UI"
 sidebar_label: "The Airflow UI"
 id: airflow-ui
-description: "Explore the Airflow UI, which helps you monitor and troubleshoot your data pipelines. Learn about some of its key features and visualizations."
+description: "Explore the Apache Airflow® UI, which helps you monitor and troubleshoot your data pipelines. Learn about some of its key features and visualizations."
 ---
 
-One of the main features of Airflow is its [user interface (UI)](https://airflow.apache.org/docs/apache-airflow/stable/ui.html), which provides insights into your DAGs and DAG runs. The UI is essential for understanding, monitoring, and troubleshooting your pipelines.
+One of the main features of Apache Airflow® is its [user interface (UI)](https://airflow.apache.org/docs/apache-airflow/stable/ui.html), which provides insights into your DAGs and DAG runs. The UI is essential for understanding, monitoring, and troubleshooting your pipelines.
 
 This guide is an overview of some of the most useful features and visualizations in the Airflow UI. If you're not already using Airflow and want to get it up and running to follow along, see [Install the Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started) to quickly run Airflow locally.
 

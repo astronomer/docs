@@ -19,7 +19,7 @@ This command copies **all** connections from one instance to another, but does n
 
 :::
 
-Copy Airflow connections from one Astro Deployment to another. Airflow connections are stored in the target Deployment's metadata database and appear in the Airflow UI.
+Copy Apache Airflow® connections from one Astro Deployment to another. Airflow connections are stored in the target Deployment's metadata database and appear in the Airflow UI.
 
 ## Usage
 

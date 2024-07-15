@@ -1,17 +1,17 @@
 ---
-title: "Upgrade to Airflow 2"
+title: "Upgrade to Apache Airflow® 2"
 sidebar_label: "Upgrade to Airflow 2"
 id: upgrade-to-airflow-2
-description: "Prepare for and upgrade to Airflow 2 on Astronomer."
+description: "Prepare for and upgrade to Apache Airflow® 2 on Astronomer."
 ---
 
-This guide explains how to upgrade an Astronomer Software Deployment from Airflow 1.10.15 to 2.3.
+This guide explains how to upgrade an Astronomer Software Deployment from Apache Airflow® 1.10.15 to 2.3.
 
 As a follow up to Airflow 2, Airflow 2.3 was released in May 2022 with new features like dynamic task mapping and a Grid view in the Airflow UI. Given the significance of this release, Astronomer is providing full support for Airflow 2.3 until October 2023.
 
 Astronomer strongly recommends upgrading any Astronomer Software Deployments currently running Airflow 1.10.15 to Airflow 2.3.
 
-## The benefits of Airflow 2
+## The benefits of Apache Airflow® 2
 
 Airflow 2 was built to be fast, reliable, and infinitely scalable. Among the hundreds of new features both large and small, Airflow 2 includes:
 
@@ -31,7 +31,7 @@ This setup requires:
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - An Astro project running Airflow 1.10.15. If your Astro project uses Airflow 1.10.14 or earlier, upgrade to 1.10.15 using the [standard upgrade process](manage-airflow-versions.md).
 
-## Step 1: Run the Airflow upgrade check script
+## Step 1: Run the Apache Airflow® upgrade check script
 
 Not all Airflow 1.10.15 DAGs work in Airflow 2,. The Airflow 2 upgrade check script can check for compatibility issues in your DAG code.
 
@@ -65,7 +65,7 @@ All Airflow 2 providers supported a backported package version for Airflow 1.10.
 
 For more information, see [1.10.15 Backport Providers](https://airflow.apache.org/docs/apache-airflow/1.10.15/backport-providers.html) in Apache Airflow documentation, or see the collection of [Backport Providers in PyPi](https://pypi.org/search/?q=apache-airflow-backport-providers&o=).
 
-### b. Modify Airflow DAGs
+### b. Modify Apache Airflow® DAGs
 
 Depending on your DAGs, you might need to make the following changes to make sure your code is compatible with Airflow 2:
 

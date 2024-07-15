@@ -29,7 +29,7 @@ To recover the Astronomer platform in the case of an incident, back up the follo
 - The Kubernetes cluster state and Astronomer Postgres database.
 - ElasticSearch, Prometheus, and Alertmanager persistent volume claims (PVCs).
 
-You should never back up Redis PVCs. Restoring Redis can result in conflicting Airflow and Celery task state information.
+You should never back up Redis PVCs. Restoring Redis can result in conflicting Apache Airflow® and Celery task state information.
 
 Read below for specific instructions for how to backup these components.
 
@@ -131,7 +131,7 @@ The guidelines below will cover both, including specifics for restoring both del
 
 The steps below are valid for the Astronomer Platform on Helm3 (Astronomer v0.14+).
 
-#### Non-deleted Airflow Deployment
+#### Non-deleted Apache Airflow® Deployment
 
 To restore a previous version of a deployment that has not been deleted in the Astronomer Software UI (or CLI/API) and that has been backed up with Velero, follow the steps below.
 
@@ -151,7 +151,7 @@ To restore a previous version of a deployment that has not been deleted in the A
     velero restore create --from-backup <BACKUP NAME> --include-namespaces <NAMESPACE NAME>
     ```
 
-#### Deleted Airflow Deployment
+#### Deleted Apache Airflow® Deployment
 
 To restore a single Airflow Deployment that _was_ deleted in the Astronomer Software UI (or CLI/API), perform the previous steps to restore its Velero namespace.
 

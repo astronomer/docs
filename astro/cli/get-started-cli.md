@@ -5,7 +5,7 @@ id: get-started-cli
 description: Create an Airflow project and run it locally on your computer in just a few minutes.
 ---
 
-One of the Astro CLI's main features is its ability to run Airflow on your local machine. After you install the Astro CLI and Docker Desktop, follow this quickstart to build an Airflow project and run it in a local Airflow environment using just a few commands. At the end of the tutorial, you'll have all of the files and components you need to develop and test Airflow DAGs locally.
+One of the Astro CLI's main features is its ability to run Apache Airflow® on your local machine. After you install the Astro CLI and Docker Desktop, follow this quickstart to build an Airflow project and run it in a local Airflow environment using just a few commands. At the end of the tutorial, you'll have all of the files and components you need to develop and test Airflow DAGs locally.
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ astro dev init
 
 This command generates all of the project files you need to run Airflow locally, including example DAGs that you can run out of the box. See [Create an Astro project](develop-project.md#create-an-astro-project) for more information about the default project structure.
 
-## Step 2: Run Airflow locally
+## Step 2: Run Apache Airflow® locally
 
 Running your project locally allows you to test your DAGs before you deploy them to a production environment. While this step is not required for deploying and running your code on Astro, Astronomer recommends always using the Astro CLI to test locally before deploying.
 

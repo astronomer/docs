@@ -13,7 +13,7 @@ This command is only available on Astro.
 
 :::
 
-Create an Airflow connection in a Deployment's metadata database.
+Create an Apache Airflow® connection in a Deployment's metadata database.
 
 ## Usage
 

@@ -12,7 +12,7 @@ The **Lineage** tab in the Astro UI can help you troubleshoot issues with your d
 
 From the **Lineage** tab on Astro, you can access the following four pages:
 
-- **Runs**: A real-time overview of all runs that emit data lineage across your Organization. A run can be an Airflow task run or any other process configured to emit lineage metadata to Astronomer, such as a Spark job.
+- **Runs**: A real-time overview of all runs that emit data lineage across your Organization. A run can be an Apache Airflow® task run or any other process configured to emit lineage metadata to Astronomer, such as a Spark job.
 - **Datasets**: A real-time overview of all recent **datasets** that your DAGs have read or written to.
 - **Issues**: A view of potential issues or statistical inconsistencies related to your runs or datasets.
 - **Lineage**: A graph view that visualizes data lineage.

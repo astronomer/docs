@@ -1,5 +1,5 @@
 ---
-title: "Manage Airflow DAG notifications"
+title: "Manage Apache Airflow® DAG notifications"
 sidebar_label: "DAG notifications"
 id: error-notifications-in-airflow
 description: Master the basics of Apache Airflow notifications. Learn how to set up automatic email and Slack notifications to be alerted of events in your DAGs.
@@ -17,7 +17,7 @@ import sla_task_level_example_taskflow from '!!raw-loader!../code-samples/dags/e
 import sla_task_level_example_traditional from '!!raw-loader!../code-samples/dags/error-notifications-in-airflow/sla_task_level_example_traditional.py';
 import slack_notifier_example_dag from '!!raw-loader!../code-samples/dags/error-notifications-in-airflow/slack_notifier_example_dag.py';
 
-When you're using a data orchestration tool, how do you know when something has gone wrong? Airflow users can check the Airflow UI to determine the status of their DAGs, but this is an inefficient way of managing errors systematically, especially if certain failures need to be addressed promptly or by multiple team members. Fortunately, Airflow has built-in notification mechanisms that can be leveraged to configure error notifications in a way that works for your organization. 
+When you're using a data orchestration tool, how do you know when something has gone wrong? Apache Airflow® users can check the Airflow UI to determine the status of their DAGs, but this is an inefficient way of managing errors systematically, especially if certain failures need to be addressed promptly or by multiple team members. Fortunately, Airflow has built-in notification mechanisms that can be leveraged to configure error notifications in a way that works for your organization. 
 
 In this guide, you'll learn the basics of Airflow notifications and how to set up common notification mechanisms including email, pre-built and custom notifiers, and SLAs. You'll also learn how to leverage Airflow alerting when using Astro.
 
@@ -36,7 +36,7 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
 - Task dependencies. See [Managing dependencies in Apache Airflow](managing-dependencies.md).
 
-## Airflow notification types
+## Apache Airflow® notification types
 
 Airflow has a few options for notifying you on the status of your DAGs and tasks:
 
@@ -194,7 +194,7 @@ def success_email_function(context):
 )
 ```
 
-## Airflow callbacks 
+## Apache Airflow® callbacks 
 
 In Airflow you can define actions to be taken due to different DAG or task states using `*_callback` parameters:
 

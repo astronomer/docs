@@ -5,9 +5,9 @@ id: use-airflow-operators
 description: Learn how to run Airflow operators by creating and configuring operator cells in the Astro Cloud IDE.
 ---
 
-You can import any Airflow operator available on the Astronomer Registry and run it as part of your Cloud IDE pipeline. In most cases, the Cloud IDE can parse parameters and provides you with a detailed form for configuring the operator. 
+You can import any Apache Airflow® operator available on the Astronomer Registry and run it as part of your Cloud IDE pipeline. In most cases, the Cloud IDE can parse parameters and provides you with a detailed form for configuring the operator. 
 
-## Use Airflow operator cells
+## Use Apache Airflow® operator cells
 
 1. In the Astro UI, select **Cloud IDE**.
 

@@ -19,7 +19,7 @@ An Astro Hybrid cluster runs your Astro Deployments in isolated namespaces on yo
 - Increase or decrease the maximum number of worker nodes for a given worker type that your cluster can scale-up to.
 - Create a VPC connection or a transit gateway connection between your Astro cluster and a target VPC.
 
-Cluster modifications typically take only a few minutes to complete and don't require downtime. In these cases, the Astro UI and Airflow UI continue to be available and your Airflow tasks are not interrupted.
+Cluster modifications typically take only a few minutes to complete and don't require downtime. In these cases, the Astro UI and Apache Airflow® UI continue to be available and your Airflow tasks are not interrupted.
 
 If you don't have a cluster on Astro, see [Install Astro](https://www.astronomer.io/docs/astro/category/install-astro-hybrid).
 

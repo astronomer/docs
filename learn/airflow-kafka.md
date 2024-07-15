@@ -1,7 +1,7 @@
 ---
-title: "Use Apache Kafka with Apache Airflow"
+title: "Use Apache Kafka with Apache Airflow®"
 sidebar_label: "Apache Kafka/Confluent"
-description: "How to produce to and consume from Kafka topics using the Kafka Airflow provider"
+description: "How to produce to and consume from Kafka topics using the Kafka Apache Airflow® provider"
 id: airflow-kafka
 sidebar_custom_props: { icon: 'img/integrations/kafka.png' }
 ---
@@ -11,7 +11,7 @@ import produce_consume_treats from '!!raw-loader!../code-samples/dags/airflow-ka
 import listen_to_the_stream from '!!raw-loader!../code-samples/dags/airflow-kafka/listen_to_the_stream.py';
 import walking_my_pet from '!!raw-loader!../code-samples/dags/airflow-kafka/walking_my_pet.py';
 
-[Apache Kafka](https://kafka.apache.org/documentation/) is an open source tool for handling event streaming. Combining Kafka and Airflow allows you to build powerful pipelines that integrate streaming data with batch processing.
+[Apache Kafka](https://kafka.apache.org/documentation/) is an open source tool for handling event streaming. Combining Kafka and Apache Airflow® allows you to build powerful pipelines that integrate streaming data with batch processing.
 In this tutorial, you'll learn how to install and use the [Kafka Airflow provider](https://registry.astronomer.io/providers/apache-airflow-providers-apache-kafka/versions/latest) to interact directly with Kafka topics.
 
 :::warning
@@ -43,7 +43,7 @@ If you have a GitHub account, you can use the [quickstart repository](https://gi
 
 :::info
 
-To connect a [local Kafka cluster](https://kafka.apache.org/documentation/#quickstart) to an Airflow instance running in Docker, set the following properties in your Kafka cluster's `server.properties` file before starting your Kafka cluster:
+To connect a [local Kafka cluster](https://kafka.apache.org/documentation/#quickstart) to an Apache Airflow® instance running in Docker, set the following properties in your Kafka cluster's `server.properties` file before starting your Kafka cluster:
 
 ```text
 listeners=PLAINTEXT://:9092,DOCKER_HACK://:19092

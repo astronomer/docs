@@ -23,7 +23,7 @@ For information on compatibility between all versioned software, see [Software V
 
 To meet the unique needs of different operating environments, we offer all Astronomer customers two release channels:
 
-- **Stable:** Includes the latest Astronomer and Airflow features
+- **Stable:** Includes the latest Astronomer and Apache Airflow® features
 - **Long-term Support (LTS):** Includes long-term testing, stability, and maintenance for a core set of features
 
 For customers looking to access Astronomer's newest features on an incremental basis, we recommend following the stable release channel and upgrading to new versions as soon as they are made generally available. Stable releases are issued roughly once per month for Astronomer Software and the Astronomer CLI.

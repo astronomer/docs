@@ -41,7 +41,7 @@ Release date: October 11, 2022
 ### Bug fixes 
 
 - Fixed an issue where upgrading Astronomer Software with a custom `houston.deployments.components` value in Helm could break the Software UI.
-- Fixed an issue where upgrading a Deployment from Airflow 1.10.15 to 2.3 can prevent you from configuring the Deployment's resources in the Software UI.
+- Fixed an issue where upgrading a Deployment from Apache Airflow® 1.10.15 to 2.3 can prevent you from configuring the Deployment's resources in the Software UI.
 - Fixed the following CVEs:
 
     - [CVE-2022-40674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40674)
@@ -85,7 +85,7 @@ Release date: July 18, 2022
 
 ### Additional improvements
 
-- You can now configure Vector on [logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) to send Airflow task logs to third-party log management systems.
+- You can now configure Vector on [logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) to send Apache Airflow® task logs to third-party log management systems.
 - Resolved several high and critical CVEs.
 - You can now assign System Viewer and System Editor permissions to a [Team](import-idp-groups.md).
 - You can now assign System Viewer and System Editor permissions to a user from the Software UI.

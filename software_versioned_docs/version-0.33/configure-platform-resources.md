@@ -60,7 +60,7 @@ Once all the changes are made, run `helm upgrade` to switch your platform to the
 helm upgrade <platform-release-name> -f config.yaml --version=<platform-version> astronomer/astronomer -n <your-namespace>
 ```
 
-Be sure to specify the platform namespace, not an Airflow namespace.
+Be sure to specify the platform namespace, not an Apache Airflow® namespace.
 
 ### Infrastructure cost estimates
 

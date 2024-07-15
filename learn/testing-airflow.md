@@ -1,8 +1,8 @@
 ---
-title: "Test Airflow DAGs"
+title: "Test Apache Airflow® DAGs"
 sidebar_label: "Test DAGs"
 id: testing-airflow
-description: "Learn about testing Airflow DAGs and gain insight into various types of tests — validation testing, unit testing, and data and pipeline integrity testing."
+description: "Learn about testing Apache Airflow® DAGs and gain insight into various types of tests — validation testing, unit testing, and data and pipeline integrity testing."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -14,7 +14,7 @@ Effectively testing DAGs requires an understanding of their structure and their 
 
 There are multiple resources for learning about this topic. See also:
 
-- Webinar: [How to easily test your Airflow DAGs with the new dag.test() function](https://www.astronomer.io/events/webinars/how-to-easily-test-your-airflow-dags-with-the-new-dag-test-function/).
+- Webinar: [How to easily test your Apache Airflow® DAGs with the new dag.test() function](https://www.astronomer.io/events/webinars/how-to-easily-test-your-airflow-dags-with-the-new-dag-test-function/).
 
 :::
 
@@ -36,7 +36,7 @@ DAG validation tests ensure that your DAGs fulfill a list of criteria. Using val
 - Test DAGs automatically in a CI/CD pipeline.
 - Enable power users to test DAGs from the CLI.
 
-At a minimum, you should run DAG validation tests to check for [import errors](#prevent-import-errors). Additional tests can check things like custom logic, ensuring that `catchup` is set to False for every DAG in your Airflow instance, or making sure only `tags` from a defined list are used in the DAGs.
+At a minimum, you should run DAG validation tests to check for [import errors](#prevent-import-errors). Additional tests can check things like custom logic, ensuring that `catchup` is set to False for every DAG in your Apache Airflow® instance, or making sure only `tags` from a defined list are used in the DAGs.
 
 DAG validation tests apply to all DAGs in your Airflow environment, so you only need to create one test suite.
 
@@ -147,7 +147,7 @@ def test_dag_tags(dag_id, dag, fileloc):
 
 Airflow offers different ways to run DAG validation tests using any Python test runner. This section gives an overview of the most common implementation methods. If you are new to testing Airflow DAGs, you can quickly get started by using Astro CLI commands.
 
-### Airflow CLI 
+### Apache Airflow® CLI 
 
 The Airflow CLI offers two commands related to local testing:
 
@@ -265,7 +265,7 @@ You can run the `.test()` method with popular debugging tools such as:
 
 ### Use `dag.test()` with the Astro CLI
 
-If you use the Astro CLI exclusively and do not have the `airflow` package installed locally, you can still debug using `dag.test()` by running `astro dev start`, entering the scheduler container with `astro dev bash -s`, and executing `python <path-to-dag-file>` from within the Docker container. Unlike using the base `airflow` package, this testing method requires starting up a complete Airflow environment. 
+If you use the Astro CLI exclusively and do not have the `airflow` package installed locally, you can still debug using `dag.test()` by running `astro dev start`, entering the scheduler container with `astro dev bash -s`, and executing `python <path-to-dag-file>` from within the Docker container. Unlike using the base `airflow` package, this testing method requires starting up a complete Apache Airflow® environment. 
 
 ### Use variables and connections in dag.test()
 

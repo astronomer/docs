@@ -1,8 +1,8 @@
 ---
-title: "Dynamically generate DAGs in Airflow"
+title: "Dynamically generate DAGs in Apache Airflow®"
 sidebar_label: "Dynamically generate DAGs"
 id: dynamically-generating-dags
-description: "Get to know the best ways to dynamically generate DAGs in Apache Airflow. Use examples to generate DAGs using single- and multiple-file methods."
+description: "Get to know the best ways to dynamically generate DAGs in Apache Airflow®. Use examples to generate DAGs using single- and multiple-file methods."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -14,7 +14,7 @@ import create_dag_example_traditional from '!!raw-loader!../code-samples/dags/dy
 import dags_from_var_example from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_var_example.py';
 import dags_from_var_example_traditional from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_var_example_traditional.py';
 
-In Airflow, [DAGs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html) are defined as Python code. Airflow executes all Python code in the `dags_folder` and loads any `DAG` objects that appear in `globals()`. The simplest way to create a DAG is to write it as a static Python file. 
+In Apache Airflow®, [DAGs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html) are defined as Python code. Airflow executes all Python code in the `dags_folder` and loads any `DAG` objects that appear in `globals()`. The simplest way to create a DAG is to write it as a static Python file. 
 
 Sometimes, manually writing DAGs isn't practical. Maybe you have hundreds or thousands of DAGs that do similar things with just a parameter changing between them. Or maybe you need a set of DAGs to load tables, but don't want to manually update DAGs every time the tables change. In these cases, and others, it makes more sense to dynamically generate DAGs. 
 
@@ -369,5 +369,5 @@ Dynamically generating DAGs can cause performance issues when used at scale. Whe
 - If you are reaching out to a database to create your DAGs, you will be querying frequently. Be conscious of your database's ability to handle such frequent connections and any costs you may incur for each request from your data provider.
 - To help with potential performance issues, you can increase the `min_file_processing_interval` to a higher value. Consider this option if you know that your DAGs are not changing frequently and if you can tolerate some delay in the dynamic DAGs changing in response to the external source that generates them.
 
-[Fine-tuning your scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html#fine-tuning-your-scheduler-performance) helps resolve potential performance issues. There is no single right way to implement or scale dynamically generated DAGs, but the flexibility of Airflow means there are many ways to arrive at a solution that works for your organization.
+[Fine-tuning your scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html#fine-tuning-your-scheduler-performance) helps resolve potential performance issues. There is no single right way to implement or scale dynamically generated DAGs, but the flexibility of Apache Airflow® means there are many ways to arrive at a solution that works for your organization.
 

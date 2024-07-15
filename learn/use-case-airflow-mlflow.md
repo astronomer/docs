@@ -1,12 +1,12 @@
 ---
-title: "Predict possum tail length using MLflow, Airflow, and linear regression"
-description: "Use Airflow and MLflow to conduct and track a regression model."
+title: "Predict possum tail length using MLflow, Apache Airflow®, and linear regression"
+description: "Use Apache Airflow® and MLflow to conduct and track a regression model."
 id: use-case-airflow-mlflow
 sidebar_label: "Regression with Airflow + MLflow"
 sidebar_custom_props: { icon: 'img/integrations/mlflow.png' }
 ---
 
-[MLflow](https://mlflow.org/) is a popular tool for tracking and managing machine learning models. When combined, Airflow and MLflow make a powerful platform for ML orchestration (MLOx).
+[MLflow](https://mlflow.org/) is a popular tool for tracking and managing machine learning models. When combined, Apache Airflow® and MLflow make a powerful platform for ML orchestration (MLOx).
 
 This use case shows how to use MLflow with Airflow to engineer machine learning features, train a [scikit-learn Ridge linear regression model](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.RidgeCV.html), and create predictions based on the trained model.
 

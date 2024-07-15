@@ -1,5 +1,5 @@
 ---
-title: "Create a Snowflake Connection in Airflow"
+title: "Create a Snowflake Connection in Apache Airflow®"
 id: snowflake
 sidebar_label: Connection
 description: Learn how to create a Snowflake connection in Airflow.
@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/integrations/snowflake.png' }
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-[Snowflake](https://www.snowflake.com/en/) is a cloud data warehouse where you can store and analyze your data. Integrating Snowflake with Airflow allows you to do all of the following and more from a DAG:
+[Snowflake](https://www.snowflake.com/en/) is a cloud data warehouse where you can store and analyze your data. Integrating Snowflake with Apache Airflow® allows you to do all of the following and more from a DAG:
 
 - Run SQL
 - Monitor the status of SQL queries

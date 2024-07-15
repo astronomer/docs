@@ -8,7 +8,7 @@ description: Get Astronomer Software support when you need it.
 In addition to product documentation, the following resources are available to help you resolve issues:
 
 - [Astronomer Forum](https://forum.astronomer.io)
-- [Airflow Guides](https://www.astronomer.io/guides/)
+- [Apache Airflow® Guides](https://www.astronomer.io/guides/)
 
 If you're experiencing an issue or have a question that requires Astronomer expertise, you can use one of the following methods to contact Astronomer support:
 

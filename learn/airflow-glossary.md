@@ -5,7 +5,7 @@ id: airflow-glossary
 description: A list of key Apache Airflow terms and definitions that can help you learn important concepts.
 ---
 
-Whether you're new to Airflow or not, use this glossary to quickly reference key Airflow terms, components, and concepts.
+Whether you're new to Apache Airflow® or not, use this glossary to quickly reference key Airflow terms, components, and concepts.
 
 | Term | Definition |
 |------|-------------|
@@ -19,7 +19,7 @@ Whether you're new to Airflow or not, use this glossary to quickly reference key
 | Deferrable operator | A [deferrable operator](deferrable-operators.md), also known as an async operator, is an operator that suspends itself while waiting for its condition to be met and resumes on receiving the job status. Tasks that use deferrable operators consume resources more efficiently than sensors because they do not occupy a worker slot when they are in a deferred state. Instead, deferred tasks use the triggerer to poll for job statuses. |
 | Docker image | An Airflow [Docker image](https://www.techtarget.com/searchitoperations/definition/Docker-image) is a template used to build the Docker containers which run Airflow components and execute DAG code. Both Apache Airflow and Astronomer distribute Docker images for Airflow with different build instructions and pre-installed packages. |
 | Dynamic DAG | A [Dynamic DAG](dynamically-generating-dags.md) is a DAG that is generated automatically when the scheduler parses the `dags` folder. You can dynamically create DAGs based on code in one or more Python files or by using tools like `gusty` or `dag-factory`.  |
-| Dynamic task | A [Dynamic task](dynamic-tasks.md#dynamic-task-concepts) is a task instance that's generated at runtime based on a set of parameters in DAG code. Dynamic task mapping, the Airflow feature that creates dynamic tasks, allows users to create an arbitrary number of parallel tasks at runtime based on an input parameter. |
+| Dynamic task | A [Dynamic task](dynamic-tasks.md#dynamic-task-concepts) is a task instance that's generated at runtime based on a set of parameters in DAG code. Dynamic task mapping, the Apache Airflow® feature that creates dynamic tasks, allows users to create an arbitrary number of parallel tasks at runtime based on an input parameter. |
 | Environment variable| An environment variable is a key-value pair that can be used to define an Airflow environment configuration. You typically set environment variables in the `airflow.cfg` file. |
 | Executor | An [executor](airflow-executors-explained.md) is a core process within the Airflow scheduler that is responsible for assigning scheduled tasks to a worker process that will complete the function of a task. Airflow supports multiple executors that differ based on the types of workers they use. |
 | Hook | A [hook](what-is-a-hook.md) is an abstraction of a specific API that allows Airflow to interact with an external system. Hooks are built into many operators, but they can also be used directly in DAG code. |

@@ -18,7 +18,7 @@ A pre-created namespace pool provides the following benefits:
 
 :::info Technical Details
 
-When a user creates a new Deployment with the UI or CLI, Astronomer Software creates the necessary Airflow components and isolates them in a dedicated Kubernetes namespace. These Airflow components depend on Kubernetes resources, some of which are stored as secrets.
+When a user creates a new Deployment with the UI or CLI, Astronomer Software creates the necessary Apache Airflow® components and isolates them in a dedicated Kubernetes namespace. These Airflow components depend on Kubernetes resources, some of which are stored as secrets.
 
 To protect your Deployment Kubernetes secrets, Astronomer uses dedicated service accounts for parts of your Deployment that need to interact with external components. To enable this interaction, Astronomer Software needs extensive cluster-level permissions for all namespaces running in a cluster.
 

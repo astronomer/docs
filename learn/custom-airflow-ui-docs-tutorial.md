@@ -2,13 +2,13 @@
 title: 'Create DAG documentation in Apache Airflow'
 sidebar_label: 'Write DAG documentation'
 id: custom-airflow-ui-docs-tutorial
-description: "Use Apache Airflow's built-in documentation features to generate documentation for your DAGs in the Airflow UI."
+description: "Use Apache Airflow®'s built-in documentation features to generate documentation for your DAGs in the Airflow UI."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-One of the more powerful and lesser-known features of Airflow is that you can create Markdown-based DAG documentation that appears in the Airflow UI
+One of the more powerful and lesser-known features of Apache Airflow® is that you can create Markdown-based DAG documentation that appears in the Airflow UI
 
 ![DAG Docs Intro Example](/img/guides/DAG_docs_intro_example.png)
 

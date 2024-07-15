@@ -5,7 +5,7 @@ id: secrets-backend
 description: Configure a secret backend tool on Astronomer Software to store Airflow Connections and Variables.
 ---
 
-As of [Airflow 1.10.10](https://airflow.apache.org/docs/1.10.10/howto/use-alternative-secrets-backend.html), users can manage and sync Airflow Connections and Variables from a variety of external secrets backend tools, including [Hashicorp Vault](https://www.vaultproject.io/), [AWS SSM Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html), and [GCP Secret Manager](https://cloud.google.com/secret-manager).
+As of [Apache Airflow® 1.10.10](https://airflow.apache.org/docs/1.10.10/howto/use-alternative-secrets-backend.html), users can manage and sync Airflow Connections and Variables from a variety of external secrets backend tools, including [Hashicorp Vault](https://www.vaultproject.io/), [AWS SSM Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html), and [GCP Secret Manager](https://cloud.google.com/secret-manager).
 
 This guide will walk you through how to leverage Airflow's latest feature on Astronomer with specific instructions for the following tools:
 
@@ -49,7 +49,7 @@ This methodology should apply to any secret that is expressed as a Connection UR
 vault kv put secret/connections/smtp_default conn_uri=smtps://user:host@relay.example.com:465
 ```
 
-> **Note:** We recommend setting the path to `secret/connections/<your-connection>` to keep all of your Airflow connections organized in the `connections` directory of the mount point.
+> **Note:** We recommend setting the path to `secret/connections/<your-connection>` to keep all of your Apache Airflow® connections organized in the `connections` directory of the mount point.
 
 #### Confirm your secret was written successfully
 

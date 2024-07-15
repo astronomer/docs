@@ -1,11 +1,11 @@
 ---
-title: "Airflow plugins"
+title: "Apache Airflow® plugins"
 sidebar_label: "Plugins"
-description: "How to use Airflow plugins."
+description: "How to use Apache Airflow® plugins."
 id: using-airflow-plugins
 ---
 
-Plugins are external features that can be added to customize your Airflow installation. They are automatically imported upon starting your Airflow instance if they have been added to `plugins` folder of an Airflow project. 
+Plugins are external features that can be added to customize your Apache Airflow® installation. They are automatically imported upon starting your Airflow instance if they have been added to `plugins` folder of an Airflow project. 
 
 In this guide, you'll learn how to add a plugin to your Airflow instance and what Airflow components can be part of a plugin.
 
@@ -139,7 +139,7 @@ You can add a view to render a simple templated HTML file on top of the Airflow 
 
     ```html
     <!DOCTYPE html>
-    <p>Airflow is {{ content }}!</p>
+    <p>Apache Airflow® is {{ content }}!</p>
     ```
 
 3. In the `plugins` directory, add a Python file called `my_first_view_plugin.py`. Copy the code below.
@@ -173,7 +173,7 @@ You can add a view to render a simple templated HTML file on top of the Airflow 
     # instantiate MyBaseView
     my_view = MyBaseView()
 
-    # get the base URL of the Airflow webserver
+    # get the base URL of the Apache Airflow® webserver
     baseUrl = conf.get("webserver", "base_url")
 
     # define the path to my_view in the Airflow UI
@@ -347,7 +347,7 @@ use_plugin_macro = BashOperator(
 )
 ```
 
-### Airflow listeners
+### Apache Airflow® listeners
 
 [Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Airflow instance, for example whenever any DAG run fails or an update to any dataset is detected. 
 

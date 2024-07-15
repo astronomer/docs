@@ -28,7 +28,7 @@ Setting environment variables using the Astro UI is the quickest and easiest way
 
 5. Enter an environment variable key and value. For sensitive credentials that should be treated with an additional layer of security, select the **Secret** checkbox. This permanently hides the variable's value from all users in your Workspace.
 
-6. Click **Update Environment Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for new variables to be applied to your Deployment.
+6. Click **Update Environment Variables** to save your changes. Your Apache Airflow® scheduler, webserver, and workers restart. After saving, it can take up to two minutes for new variables to be applied to your Deployment.
 
 ### Edit or delete existing values
 

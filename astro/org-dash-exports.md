@@ -21,7 +21,7 @@ When you export reporting data, Astro exports the last [one million rows of data
 
 :::tip
 
-Watch the Astro Academy [Reporting](https://academy.astronomer.io/learning-bytes-reporting) Learning Byte video to learn more about how observe your teams' Airflow Deployments.
+Watch the Astro Academy [Reporting](https://academy.astronomer.io/learning-bytes-reporting) Learning Byte video to learn more about how observe your teams' Apache Airflow® Deployments.
 
 :::
 

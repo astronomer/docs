@@ -1,7 +1,7 @@
 ---
-title: "Orchestrate Databricks jobs with Airflow"
+title: "Orchestrate Databricks jobs with Apache Airflow®"
 sidebar_label: "Tutorial"
-description: "Orchestrate Databricks jobs with your Airflow DAGs."
+description: "Orchestrate Databricks jobs with your Apache Airflow® DAGs."
 id: airflow-databricks
 tags: [Integrations, DAGs]
 sidebar_custom_props: { icon: 'img/integrations/databricks.png' }
@@ -12,7 +12,7 @@ import databricks_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-d
 
 [Databricks](https://databricks.com/) is a popular unified data and analytics platform built around [Apache Spark](https://spark.apache.org/) that provides users with fully managed Apache Spark clusters and interactive workspaces.
 
-The open source [Astro Databricks provider](https://github.com/astronomer/astro-provider-databricks) provides full observability and control from Airflow so you can manage your Workflows from one place, which enables you to orchestrate your Databricks notebooks from Airflow and execute them as Databricks Workflows.
+The open source [Astro Databricks provider](https://github.com/astronomer/astro-provider-databricks) provides full observability and control from Apache Airflow® so you can manage your Workflows from one place, which enables you to orchestrate your Databricks notebooks from Airflow and execute them as Databricks Workflows.
 
 You can create a Databricks Workflow from existing Databricks notebooks as a task group in your Airflow DAG with just a few lines of code:
 
@@ -53,7 +53,7 @@ There are multiple resources for learning about this topic. See also:
 
 :::
 
-## Why use Airflow with Databricks
+## Why use Apache Airflow® with Databricks
 
 Many data teams leverage Databricks' optimized Spark engine to run heavy workloads like machine learning models, data transformations, and data analysis. While Databricks offers some orchestration with Databricks Workflows, they are limited in functionality and do not integrate with the rest of your data stack. Using a tool-agnostic orchestrator like Airflow gives you several advantages, like the ability to:
 
@@ -189,7 +189,7 @@ If you only want to rerun specific tasks within your Workflow, you can use the *
 
 ![Repair a single failed task OEL](/img/guides/repair_single_failed_databricks_task_oel.png)
 
-## Alternative ways to run Databricks with Airflow
+## Alternative ways to run Databricks with Apache Airflow®
 
 The Astro Databricks provider is under active development, and support for more Databricks task types is still being added. If you want to orchestrate an action in your Databricks environment that is not yet supported by the Astro Databricks provider such as [updating a Databricks repository](https://registry.astronomer.io/providers/apache-airflow-providers-databricks/versions/latest/modules/DatabricksReposUpdateOperator), check the [community-managed Databricks provider](https://registry.astronomer.io/providers/apache-airflow-providers-databricks/versions/latest) for relevant operators. 
 

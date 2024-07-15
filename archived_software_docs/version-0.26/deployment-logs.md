@@ -6,7 +6,7 @@ description: View and search Airflow Webserver, Scheduler, and Worker logs via t
 ---
 ## Overview
 
-As of Astronomer v0.8, the Software UI allows you to look up and search Airflow logs emitted by your Webserver, Scheduler and Worker(s) for any deployment you have access to.
+As of Astronomer v0.8, the Software UI allows you to look up and search Apache Airflow® logs emitted by your Webserver, Scheduler and Worker(s) for any deployment you have access to.
 
 ### Interpreting Logs
 

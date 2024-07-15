@@ -1,12 +1,12 @@
 ---
 title: "Microsoft Teams notifications"
-description: "Configure notifications in Microsoft teams for DAG runs and tasks using Airflow callbacks."
+description: "Configure notifications in Microsoft teams for DAG runs and tasks using Apache Airflow® callbacks."
 id: example-ms-teams-callback
 sidebar_label: "Microsoft Teams Notifications"
 sidebar_custom_props: { icon: 'img/examples/ms_teams_logo.png' }
 ---
 
-This example shows how to set up Airflow notifications in a [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software) channel by using [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks). Teams notifications about DAG runs and tasks let you quickly inform many team members about the status of your data pipelines.
+This example shows how to set up Apache Airflow® notifications in a [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software) channel by using [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks). Teams notifications about DAG runs and tasks let you quickly inform many team members about the status of your data pipelines.
 
 ## Before you start
 

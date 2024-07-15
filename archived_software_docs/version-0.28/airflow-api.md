@@ -8,7 +8,7 @@ description: Call the Apache Airflow REST API on Astronomer Software.
 
 ## Overview
 
-Apache Airflow is an extensible orchestration tool that offers multiple ways to define and orchestrate data workflows. For users looking to automate actions around those workflows, Airflow exposes a [stable REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) in Airflow 2 and an [experimental REST API](https://airflow.apache.org/docs/stable/rest-api-ref.html) for users running Airflow 1.10. You can use both on Astronomer.
+Apache Airflow® is an extensible orchestration tool that offers multiple ways to define and orchestrate data workflows. For users looking to automate actions around those workflows, Airflow exposes a [stable REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) in Airflow 2 and an [experimental REST API](https://airflow.apache.org/docs/stable/rest-api-ref.html) for users running Airflow 1.10. You can use both on Astronomer.
 
 To externally trigger DAG runs without needing to access your Airflow Deployment directly, for example, you can make an HTTP request in Python or cURL to the corresponding endpoint in the Airflow REST API that calls for that exact action.
 
@@ -34,7 +34,7 @@ To create a Service Account via the Software UI:
 2. Go to **Deployment** > **Service Accounts**.
    ![New Service Account](/img/software/ci-cd-new-service-account.png)
 3. Give your Service Account a **Name**, **User Role**, and **Category** (_Optional_).
-   > **Note:** In order for a Service Account to have permission to push code to your Airflow Deployment, it must have either the Editor or Admin role. For more information on Workspace roles, refer to [Roles and Permissions](workspace-permissions.md).
+   > **Note:** In order for a Service Account to have permission to push code to your Apache Airflow® Deployment, it must have either the Editor or Admin role. For more information on Workspace roles, refer to [Roles and Permissions](workspace-permissions.md).
 
    ![Name Service Account](/img/software/ci-cd-name-service-account.png)
 4. Save the API Key that was generated. Depending on your use case, you may want to store this key in an Environment Variable or secret management tool of choice.
@@ -65,7 +65,7 @@ To use the Astro CLI to create a Deployment-level Service Account:
 
 4.  Save the API Key that was generated. Depending on your use case, you might want to store this key in an Environment Variable or secret management tool.
 
-## Step 2: Make an Airflow REST API Request
+## Step 2: Make an Apache Airflow® REST API Request
 
 With the information from Step 1, you can now execute requests against any supported endpoints in the [Airflow Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) via the following base URL:
 
@@ -182,7 +182,7 @@ print(resp.json())
 # {'pools': [{'name': 'default_pool', 'occupied_slots': 0, 'open_slots': 128, 'queued_slots': 0, 'running_slots': 0, 'slots': 128}], 'total_entries': 1}
 ```
 
-## Notes on the Airflow 2 Stable REST API
+## Notes on the Apache Airflow® 2 Stable REST API
 
 As of its momentous [2.0 release](https://www.astronomer.io/blog/introducing-airflow-2-0), the Apache Airflow project now supports an official and more robust Stable REST API. Among other things, Airflow's new REST API:
 

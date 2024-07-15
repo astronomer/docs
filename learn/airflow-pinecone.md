@@ -1,7 +1,7 @@
 ---
-title: "Orchestrate Pinecone operations with Apache Airflow"
+title: "Orchestrate Pinecone operations with Apache Airflow®"
 sidebar_label: "Pinecone"
-description: "Learn how to integrate Pinecone and Airflow."
+description: "Learn how to integrate Pinecone and Apache Airflow®."
 id: airflow-pinecone
 sidebar_custom_props: { icon: 'img/integrations/pinecone.png' }
 ---
@@ -9,11 +9,11 @@ sidebar_custom_props: { icon: 'img/integrations/pinecone.png' }
 import CodeBlock from '@theme/CodeBlock';
 import query_series_vectors from '!!raw-loader!../code-samples/dags/airflow-pinecone/query_series_vectors.py';
 
-[Pinecone](https://www.pinecone.io/) is a proprietary vector database platform designed for handling large-scale vector based AI applications. The [Pinecone Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-pinecone/stable/index.html) offers modules to easily integrate Pinecone with Airflow.
+[Pinecone](https://www.pinecone.io/) is a proprietary vector database platform designed for handling large-scale vector based AI applications. The [Pinecone Apache Airflow® provider](https://airflow.apache.org/docs/apache-airflow-providers-pinecone/stable/index.html) offers modules to easily integrate Pinecone with Airflow.
 
 In this tutorial you'll use Airflow to create vector embeddings of series descriptions, create an index in your Pinecone project, ingest the vector embeddings into that index, and query Pinecone to get a suggestion for your next binge-watchable series based on your current mood.
 
-## Why use Airflow with Pinecone?
+## Why use Apache Airflow® with Pinecone?
 
 Integrating Pinecone with Airflow provides a robust solution for managing large-scale vector search workflows in your AI applications. Pinecone specializes in efficient vector storage and similarity search, which is essential for leveraging advanced models like language transformers or deep neural networks.
 

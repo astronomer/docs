@@ -5,7 +5,7 @@ id: deploy-git-sync
 description: Push DAGs to your Airflow Deployment on Astronomer Software using git-sync.
 ---
 
-Starting with Astronomer v0.27, you can deploy DAGs to an Astronomer Deployment using [git-sync](https://github.com/kubernetes/git-sync). After setting up this feature, you can deploy DAGs from a Git repository without any additional CI/CD. DAGs deployed with git-sync automatically appear in the Airflow UI without requiring additional action or causing downtime.
+Starting with Astronomer v0.27, you can deploy DAGs to an Astronomer Deployment using [git-sync](https://github.com/kubernetes/git-sync). After setting up this feature, you can deploy DAGs from a Git repository without any additional CI/CD. DAGs deployed with git-sync automatically appear in the Apache Airflow® UI without requiring additional action or causing downtime.
 
 This guide provides setup steps for configuring git-sync as a DAG deploy option.
 

@@ -11,7 +11,7 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
 
 - An IDE project and pipeline. See [Step 2: Create a pipeline](/astro/cloud-ide/quickstart.md#step-2-create-a-pipeline).
 - For Warehouse SQL cells, you need: 
-    - A database connection. See [Configure Airflow connections](/astro/cloud-ide/configure-project-environment.md#configure-airflow-connections).
+    - A database connection. See [Configure Apache Airflow® connections](/astro/cloud-ide/configure-project-environment.md#configure-airflow-connections).
     - Write permissions to the data warehouse in your database connection. 
 
 ## Choose a SQL cell type

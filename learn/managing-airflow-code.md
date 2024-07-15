@@ -1,11 +1,11 @@
 ---
-title: "Manage Airflow code"
+title: "Manage Apache Airflow® code"
 sidebar_label: "Manage Airflow code"
 id: managing-airflow-code
-description: "Learn best practices for Airflow project organization, such as when to separate out DAGs into multiple projects and how to manage code used across different projects."
+description: "Learn best practices for Apache Airflow® project organization, such as when to separate out DAGs into multiple projects and how to manage code used across different projects."
 ---
 
-One of the tenets of Apache Airflow is that pipelines are defined as code. This allows you to treat your pipelines as you would any other piece of software and use best practices such as version control and CI/CD. As you scale the use of Airflow within your organization, it becomes important to manage your Airflow code in a way that is organized and sustainable.
+One of the tenets of Apache Airflow® is that pipelines are defined as code. This allows you to treat your pipelines as you would any other piece of software and use best practices such as version control and CI/CD. As you scale the use of Airflow within your organization, it becomes important to manage your Airflow code in a way that is organized and sustainable.
 
 In this guide, you'll learn how to organize your Airflow projects, when to separate your DAGs into multiple projects, how to manage code that is used in different projects, and review a typical development flow.
 
@@ -43,7 +43,7 @@ Astronomer uses the following project structure:
 │   └── sql
 │       └── transforms.sql
 ├── packages.txt                # For OS-level packages
-├── plugins                     # For any custom or community Airflow plugins
+├── plugins                     # For any custom or community Apache Airflow® plugins
 │   └── example-plugin.py
 └── requirements.txt            # For any Python packages
 ```

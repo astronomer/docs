@@ -1,5 +1,5 @@
 ---
-title: "Upgrade Airflow on Astronomer Software"
+title: "Upgrade Apache Airflow® on Astronomer Software"
 sidebar_label: "Upgrade Airflow"
 id: manage-airflow-versions
 description: Adjust and upgrade Airflow versions on Astronomer Software.
@@ -9,7 +9,7 @@ description: Adjust and upgrade Airflow versions on Astronomer Software.
 
 ## Overview
 
-Regularly upgrading your Software Deployments ensures that your Deployments continue to be supported and that your Airflow instance has the latest features and functionality.
+Regularly upgrading your Software Deployments ensures that your Deployments continue to be supported and that your Apache Airflow® instance has the latest features and functionality.
 
 To upgrade your Airflow Deployment to a later version of Airflow:
 
@@ -38,7 +38,7 @@ The Software UI and CLI only provide Airflow versions that are later than the ve
 
 ### With the Software UI
 
-1. Go to **Deployment** > **Settings** > **Basics** > **Airflow Version**.
+1. Go to **Deployment** > **Settings** > **Basics** > **Apache Airflow® Version**.
 2. Select an Airflow version.
 3. Click **Upgrade**.
 
@@ -107,7 +107,7 @@ The Software UI and CLI only provide Airflow versions that are later than the ve
 3. In the Airflow UI, scroll to the bottom of any page. You should see your new Runtime version in the footer.
 
 
-## Cancel Airflow upgrade
+## Cancel Apache Airflow® upgrade
 
 You can cancel an Airflow Deployment upgrade at any time if you haven't yet changed the Astronomer image in your `Dockerfile` and deployed it.
 

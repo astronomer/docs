@@ -11,6 +11,6 @@ Astro leverages AZs for both the control and data planes. The control plane leve
 
 Astronomer utilizes automated backup features on public clouds. If a region experiences a partial outage or some other incident that affects your clusters, Astronomer can use these backups to restore all details of your cluster, including the metadata database. 
 
-In the case of a full region failure of the control plane, the services and data would be recovered in an alternate region by Astronomer. In the case of a full region failure of the data plane, clusters impacted by a full regional outage will be restored to an alternate region. Some Deployment data, including the Airflow metadata database, cannot be restored after a full region outage. See [Disaster recovery](disaster-recovery.md) for more details.
+In the case of a full region failure of the control plane, the services and data would be recovered in an alternate region by Astronomer. In the case of a full region failure of the data plane, clusters impacted by a full regional outage will be restored to an alternate region. Some Deployment data, including the Apache Airflow® metadata database, cannot be restored after a full region outage. See [Disaster recovery](disaster-recovery.md) for more details.
 
 Astro also provides DDoS protection with always-on traffic monitoring, detection, and automatic attack mitigation for all inbound network traffic, along with suspicious IP throttling and brute-force protection as part of our secure authentication service.

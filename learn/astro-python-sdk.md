@@ -39,7 +39,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - Basic Python and SQL.
 - Basic knowledge of [Amazon S3](https://aws.amazon.com/s3/getting-started/) and [Snowflake](https://docs.snowflake.com/en/user-guide-getting-started.html).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
+- Apache Airflow® fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
 
 ## Prerequisites
 
@@ -73,7 +73,7 @@ For this example, you first need to load a file into S3 and create a destination
 
     These commands create all of the required data stores for the load step of your pipeline. Ensure that you have `ACCOUNTADMIN` permissions for your newly created database.
 
-## Step 2: Set up your Airflow environment
+## Step 2: Set up your Apache Airflow® environment
 
 Now that you have a staging table in Snowflake and some example data ready to load, you need to set up a local Airflow environment for your DAG to run in. This is easy with the Astro CLI.
 
@@ -114,7 +114,7 @@ Now that you have a staging table in Snowflake and some example data ready to lo
     astro dev start
     ```
 
-## Step 3: Create Airflow connections to S3 and Snowflake
+## Step 3: Create Apache Airflow® connections to S3 and Snowflake
 
 1. Open the Airflow UI at `http://localhost:8080/`
 2. Go to **Admin** > **Connections**.

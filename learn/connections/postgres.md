@@ -1,12 +1,12 @@
 ---
-title: "Create a Postgres connection in Airflow"
+title: "Create a Postgres connection in Apache Airflow®"
 id: postgres
 sidebar_label: Postgres
 description: Learn how to create a Postgres connection in Airflow.
 sidebar_custom_props: { icon: 'img/integrations/postgres.png' }
 ---
 
-[Postgres](https://www.postgresql.org/) is a free and open source relational database system. Integrating Postgres with Airflow allows you to interact with your Postgres database, run queries, ans load or export data from an Airflow DAG.
+[Postgres](https://www.postgresql.org/) is a free and open source relational database system. Integrating Postgres with Apache Airflow® allows you to interact with your Postgres database, run queries, ans load or export data from an Airflow DAG.
 
 This guide provides the basic setup for creating a Postgres connection. 
 

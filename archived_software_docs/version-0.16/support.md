@@ -5,7 +5,7 @@ id: support
 description: Get the most from Astronomer Support.
 ---
 
-Our mission at Astronomer is to help organizations adopt [Apache Airflow](https://airflow.apache.org/).
+Our mission at Astronomer is to help organizations adopt [Apache Airflow®](https://airflow.apache.org/).
 
 Since our inception, we've garnered a group of Airflow aficionados and experts who are dedicated to doing what they can to see that your team succeeds.
 

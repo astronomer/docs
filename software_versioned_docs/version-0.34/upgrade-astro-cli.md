@@ -38,7 +38,7 @@ In addition to running tests locally, you can also run `astro dev pytest` as par
 
 ### New command to parse DAGs for errors
 
-The new `astro dev parse` command allows you to run a basic test against your Astro project to ensure that your DAGs are able to to render in the Airflow UI. This includes the DAG integrity test that is run with `astro dev pytest`, which checks that your DAGs are able to to render in the Airflow UI. Now, you can quickly run `astro dev parse` and see import and syntax errors directly in your terminal without having to restart all Airflow services locally.
+The new `astro dev parse` command allows you to run a basic test against your Astro project to ensure that your DAGs are able to to render in the Apache Airflow® UI. This includes the DAG integrity test that is run with `astro dev pytest`, which checks that your DAGs are able to to render in the Airflow UI. Now, you can quickly run `astro dev parse` and see import and syntax errors directly in your terminal without having to restart all Airflow services locally.
 
 For more complex testing, Astronomer recommends using `astro dev pytest` to run custom tests in your project. For more information on `astro dev parse`, see the [CLI command reference](https://docs.astronomer.io/astro/cli/astro-dev-parse).
 

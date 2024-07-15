@@ -13,7 +13,7 @@ Whether you're exploring our Software or Cloud offering, we've designed this to 
 
 ## Step 1: Install the Astronomer CLI
 
-The [Astronomer CLI](https://github.com/astronomer/astro-cli) is the easiest way to run Apache Airflow on your machine. From the CLI, you can establish a local testing environment and deploy to Astro whenever you're ready.
+The [Astronomer CLI](https://github.com/astronomer/astro-cli) is the easiest way to run Apache Airflow® on your machine. From the CLI, you can establish a local testing environment and deploy to Astro whenever you're ready.
 
 There are two ways to install any version of the Astronomer CLI:
 
@@ -76,7 +76,7 @@ This will generate the following files:
 │   └── example-dag.py # An example DAG that comes with the initialized project
 ├── Dockerfile # For Astronomer's Docker image and runtime overrides
 ├── include # For any other files you'd like to include
-├── plugins # For any custom or community Airflow plugins
+├── plugins # For any custom or community Apache Airflow® plugins
 ├── airflow_settings.yaml # For your Airflow Connections, Variables and Pools (local only)
 ├── packages.txt # For OS-level packages
 └── requirements.txt # For any Python packages
@@ -134,7 +134,7 @@ You'll be prompted to authenticate and select the Workspace that you want to ope
 
 The first user to log in to the Astronomer platform will become a System Admin by default. Additional users can be added via the Software UI or CLI. For more information on user permissions at the platform level, read [Manage Users on Astronomer Software](manage-platform-users.md).
 
-## Step 7: Create an Airflow Deployment
+## Step 7: Create an Apache Airflow® Deployment
 
 In the Software UI, use the **New Deployment** menu to configure the following:
 
@@ -173,7 +173,7 @@ You can now use Astronomer to start Airflow locally and deploy code. To do so:
     docker ps
     ```
 
-    > **Note**: Running `$ astro dev start` will start your project with the Airflow Webserver exposed at port 8080 and Postgres exposed at port 5432. If you already have either of those ports allocated, you can either [stop existing docker containers](https://forum.astronomer.io/t/docker-error-in-cli-bind-for-0-0-0-0-5432-failed-port-is-already-allocated/151) or [change the port](https://forum.astronomer.io/t/i-already-have-the-ports-that-the-cli-is-trying-to-use-8080-5432-occupied-can-i-change-the-ports-when-starting-a-project/48).
+    > **Note**: Running `$ astro dev start` will start your project with the Apache Airflow® Webserver exposed at port 8080 and Postgres exposed at port 5432. If you already have either of those ports allocated, you can either [stop existing docker containers](https://forum.astronomer.io/t/docker-error-in-cli-bind-for-0-0-0-0-5432-failed-port-is-already-allocated/151) or [change the port](https://forum.astronomer.io/t/i-already-have-the-ports-that-the-cli-is-trying-to-use-8080-5432-occupied-can-i-change-the-ports-when-starting-a-project/48).
 
 
 3. Deploy the `example-dag` from `hello-astro` to Airflow by running the following command:

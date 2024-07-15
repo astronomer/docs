@@ -10,7 +10,7 @@ The Astro GitHub integration can automatically deploy code from a GitHub reposit
 
 :::
 
-Astro is the industry's leading managed service for Apache Airflow. To quickly learn how Astro works, follow the steps in this quickstart to create an Airflow environment and run your first DAG with GitHub Actions.
+Astro is the industry's leading managed service for Apache Airflow®. To quickly learn how Astro works, follow the steps in this quickstart to create an Airflow environment and run your first DAG with GitHub Actions.
 
 Specifically, you will:
 

@@ -1,14 +1,14 @@
 ---
-title: "Use Airflow variables"
+title: "Use Apache Airflow® variables"
 sidebar_label: "Variables"
-description: "Create and use Airflow variables."
+description: "Create and use Apache Airflow® variables."
 id: airflow-variables
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-An Airflow variable is a key-value pair that can be used to store information in your Airflow environment. They are commonly used to store instance level information that rarely changes, including secrets like an API key or the path to a configuration file. 
+An Apache Airflow® variable is a key-value pair that can be used to store information in your Airflow environment. They are commonly used to store instance level information that rarely changes, including secrets like an API key or the path to a configuration file. 
 
 There are two distinct types of Airflow variables: regular values and JSON serialized values. 
 
@@ -31,7 +31,7 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 
-## Best practices for storing information in Airflow
+## Best practices for storing information in Apache Airflow®
 
 [Airflow variables](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/variables.html#variables) store key-value pairs or short JSON objects that need to be accessible in your whole Airflow instance. They are Airflow’s runtime configuration concept and defined using the [`airflow.model.variable`](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/variable/index.html#module-airflow.models.variable) object. 
 
@@ -51,7 +51,7 @@ Aside from Airflow variables, there are other ways of storing information in Air
 - [XComs](airflow-passing-data-between-tasks.md) can be used to pass small pieces of information between Airflow tasks. Use XComs when the information is likely to change with each DAG run and mostly needs to be accessed by individual tasks in or outside of the DAG from within which the XCom is created. Default XComs are not encrypted and should not be used to store secrets.
 
 
-## Create an Airflow variable
+## Create an Apache Airflow® variable
 
 There are several ways to create Airflow variables:
 
@@ -60,7 +60,7 @@ There are several ways to create Airflow variables:
 - Using an environment variable.
 - Programmatically from within an Airflow task.
 
-### Using the Airflow UI
+### Using the Apache Airflow® UI
 
 To create an Airflow variable in the UI, click on the **Admin** tab and select **Variables**. Then click on the **+** button and enter a key, value and an optional description for your Airflow variable. You also have the option to **Import Variables** from a file.
 
@@ -111,7 +111,7 @@ AIRFLOW_VAR_MYJSONVAR='{"hello":"world"}'
 
 To fetch the Airflow variable in the DAG, you can then use the following methods:
 
-- `Variable.get('<VAR_NAME>', '<default-value>')`: This method is recommended as it is the most secure way to fetch secret values. However, if used in top-level DAG code or as an argument in the operator, this method can affect the performance because it makes a request to the Airflow metadata database every time your DAGs are parsed, which can occur every 30 seconds. An alternative approach is to use the [Jinja template](templating.md) `{{ var.value.get(<var_name>, '<default-value>') }}`, which is evaluated only at runtime. See [DAG writing best practices](dag-best-practices.md#avoid-top-level-code-in-your-dag-file) for more information about avoiding repeated requests in top level code.
+- `Variable.get('<VAR_NAME>', '<default-value>')`: This method is recommended as it is the most secure way to fetch secret values. However, if used in top-level DAG code or as an argument in the operator, this method can affect the performance because it makes a request to the Apache Airflow® metadata database every time your DAGs are parsed, which can occur every 30 seconds. An alternative approach is to use the [Jinja template](templating.md) `{{ var.value.get(<var_name>, '<default-value>') }}`, which is evaluated only at runtime. See [DAG writing best practices](dag-best-practices.md#avoid-top-level-code-in-your-dag-file) for more information about avoiding repeated requests in top level code.
 
 - `os.getenv('AIRFLOW_VAR_<VAR_NAME>','<default-value>')`: This method is faster because it reduces the number of Airflow metadata database requests. However, it's less secure. Astronomer does not recommend using `os.getenv` with secret values because retrieving environment variables with this method can print them to your logs.
 

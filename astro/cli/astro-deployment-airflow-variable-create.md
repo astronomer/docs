@@ -13,7 +13,7 @@ This command is only available on Astro.
 
 :::
 
-Create Airflow variables on a Deployment. Airflow variables are stored in the Deployment's metadata database and appear in the Airflow UI.
+Create Apache Airflow® variables on a Deployment. Airflow variables are stored in the Deployment's metadata database and appear in the Airflow UI.
 
 ## Usage
 

@@ -7,7 +7,7 @@ description: "Common Vulnerabilities and Exposures identified within our Astrono
 
 ## Overview
 
-This page is the source of truth for any Common Vulnerabilities and Exposures (CVEs) identified within any of our supported Astronomer Certified images for Apache Airflow.
+This page is the source of truth for any Common Vulnerabilities and Exposures (CVEs) identified within any of our supported Astronomer Certified images for Apache Airflow®.
 
 Currently, all supported Astronomer Certified images are listed in two places:
 
@@ -24,7 +24,7 @@ When we receive a request, our dedicated security team will evaluate and validat
 
 Once a resolution has been confirmed, we'll release it in the next major, minor, or patch Astronomer Certified image and publish details to this page in the section below.
 
-> **Note:** All other Airflow and product support requests should be directed to [Astronomer's Support Portal](https://support.astronomer.io), where our team's Airflow Engineers are ready to help.
+> **Note:** All other Apache Airflow® and product support requests should be directed to [Astronomer's Support Portal](https://support.astronomer.io), where our team's Airflow Engineers are ready to help.
 
 ## Previously Announced Vulnerabilities
 

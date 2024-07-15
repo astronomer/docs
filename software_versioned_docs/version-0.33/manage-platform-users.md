@@ -70,7 +70,7 @@ On Astronomer, System Admins specifically can:
 
 - List and search all users.
 - List and search all Deployments.
-- Access the Airflow UI for all Deployments.
+- Access the Apache Airflow® UI for all Deployments.
 - Delete a user.
 - Delete a Deployment.
 - Access Grafana and Kibana for cluster-level monitoring.

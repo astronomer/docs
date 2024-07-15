@@ -12,7 +12,7 @@ The behavior and format of this command are the same for both Astro and Software
 
 :::
 
-Import Airflow variables, connections, and pools from a configuration file to a locally running Airflow environment.
+Import Apache Airflow® variables, connections, and pools from a configuration file to a locally running Airflow environment.
 
 ## Usage
 
@@ -38,7 +38,7 @@ By default, the command imports all variables, connections, and pools from `airf
 
 ```sh
 astro dev object import --pools
-# Imports pools from `airflow_settings.yaml` to a locally running Airflow environment
+# Imports pools from `airflow_settings.yaml` to a locally running Apache Airflow® environment
 
 astro dev object import --settingsfile="myairflowobjects.yaml"
 # Imports all Airflow objects from `myairflowobjects.yaml` to a locally running Airflow environment

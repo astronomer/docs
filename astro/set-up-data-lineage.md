@@ -17,9 +17,9 @@ toc_max_heading_level: 2
 - Manage personally identifiable information (PII).
 - Ensure compliance with data regulations.
 
-This guide provides information about how lineage metadata is automatically extracted from Apache Airflow tasks on Astro and how to integrate external systems, including Databricks and dbt, that require additional configuration. To learn about how to view data lineage on Astro, see [View data lineage](data-lineage.md).
+This guide provides information about how lineage metadata is automatically extracted from Apache Airflow® tasks on Astro and how to integrate external systems, including Databricks and dbt, that require additional configuration. To learn about how to view data lineage on Astro, see [View data lineage](data-lineage.md).
 
-## Extract lineage metadata from Airflow operators using supported extractors
+## Extract lineage metadata from Apache Airflow® operators using supported extractors
 
 Astro uses the [OpenLineage Airflow library](https://openlineage.io/docs/integrations/airflow/) (`openlineage-airflow`) to extract lineage from Airflow tasks and stores that data in the Astro control plane. This package includes [default extractors](https://openlineage.io/docs/integrations/airflow/default-extractors) for popular Airflow operators.
 
@@ -27,7 +27,7 @@ The latest version of the OpenLineage Airflow library is installed on [Astro Run
 
 Each operator generates different lineage metadata based on its default extractor. For more information about operators with default extractors and what lineage metadata they generate, see [OpenLineage documentation](https://openlineage.io/docs/integrations/about#capability-matrix).
 
-## Extract lineage metadata from Airflow operators using custom extractors
+## Extract lineage metadata from Apache Airflow® operators using custom extractors
 
 If you want to extract lineage metadata from an Airflow operator that doesn't have a default extractor, you can write a custom extractor and add it to your Astro project.
 
@@ -57,7 +57,7 @@ To locate your Deployment namespace in the Astro UI, open the Deployment and cop
 
 Use the following topics to configure these values in supported external systems and send lineage metadata from those systems to Astro.
 
-### Snowflake and OpenLineage with Airflow
+### Snowflake and OpenLineage with Apache Airflow®
 
 Lineage data emitted from [Snowflake](https://www.snowflake.com/en/) is similar to what is collected from other SQL databases, including Amazon Redshift and Google BigQuery. However, Snowflake is unique in that it emits [query tags](https://docs.snowflake.com/en/user-guide/object-tagging.html#what-is-a-tag) that provide additional task execution details.
 

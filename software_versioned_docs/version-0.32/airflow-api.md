@@ -6,7 +6,7 @@ description: Call the Apache Airflow REST API on Astronomer Software.
 
 ---
 
-Apache Airflow is an extensible orchestration tool that offers multiple ways to define and orchestrate data workflows. For users looking to automate actions around those workflows, Airflow exposes a [stable REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) in Airflow 2 and an [experimental REST API](https://airflow.apache.org/docs/stable/rest-api-ref.html) for users running Airflow 1.10. You can use both on Astronomer.
+Apache Airflow® is an extensible orchestration tool that offers multiple ways to define and orchestrate data workflows. For users looking to automate actions around those workflows, Airflow exposes a [stable REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) in Airflow 2 and an [experimental REST API](https://airflow.apache.org/docs/stable/rest-api-ref.html) for users running Airflow 1.10. You can use both on Astronomer.
 
 To externally trigger DAG runs without needing to access your Airflow Deployment directly, for example, you can make an HTTP request in Python or cURL to the corresponding endpoint in the Airflow REST API that calls for that exact action.
 
@@ -66,7 +66,7 @@ To use the Astro CLI to create a Deployment-level Service Account:
 
 4.  Save the API key that was generated. Depending on your use case, you might want to store this key in an Environment Variable or secret management tool.
 
-## Step 2: Make an Airflow REST API request
+## Step 2: Make an Apache Airflow® REST API request
 
 With the information from Step 1, you can now execute requests against any supported endpoints in the [Airflow Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) at the following base URL:
 
@@ -183,7 +183,7 @@ print(resp.json())
 # {'pools': [{'name': 'default_pool', 'occupied_slots': 0, 'open_slots': 128, 'queued_slots': 0, 'running_slots': 0, 'slots': 128}], 'total_entries': 1}
 ```
 
-## Notes on the Airflow 2 stable REST API
+## Notes on the Apache Airflow® 2 stable REST API
 
 As of its momentous [2.0 release](https://www.astronomer.io/blog/introducing-airflow-2-0), the Apache Astro project now supports an official and more robust Stable REST API. Among other things, Airflow's new REST API:
 

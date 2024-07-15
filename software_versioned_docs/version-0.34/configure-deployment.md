@@ -5,7 +5,7 @@ id: configure-deployment
 description: Configure your Airflow Deployment's resources on Astronomer Software.
 ---
 
-An Airflow Deployment on Astronomer is an instance of Apache Airflow that was created using the Software UI or the Astro CLI. Each Airflow Deployment on Astronomer is hosted on a single Kubernetes namespace, has a dedicated set of resources, and operates with an isolated Postgres metadata database.
+An Apache Airflow® Deployment on Astronomer is an instance of Apache Airflow that was created using the Software UI or the Astro CLI. Each Airflow Deployment on Astronomer is hosted on a single Kubernetes namespace, has a dedicated set of resources, and operates with an isolated Postgres metadata database.
 
 This guide walks you through the process of creating and configuring an Airflow Deployment on Astronomer.
 
@@ -81,19 +81,19 @@ To scale either resource, adjust the corresponding slider in the Software UI to 
 
 Read the following sections to help you determine which core resources to scale and when.
 
-### Airflow webserver
+### Apache Airflow® webserver
 
 The Airflow webserver is responsible for rendering the [Airflow UI](https://airflow.apache.org/docs/apache-airflow/stable/ui.html), where users can monitor DAGs, view task logs, and set various non-code configurations.
 
 If a function within the Airflow UI is slow or unavailable, Astronomer recommends increasing the resources allocated towards the webserver.
 
-### Airflow scheduler
+### Apache Airflow® scheduler
 
 The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks once dependencies have been met.
 
 If you experience delays in task execution, which you can track via the [Gantt Chart](https://airflow.apache.org/docs/apache-airflow/stable/ui.html#gantt-chart) view of the Airflow UI, Astronomer recommends increasing the resources allocated towards the scheduler. 
 
-> **Tip:** To set alerts that notify you via email when your Airflow scheduler is underprovisioned, refer to [Airflow alerts](airflow-alerts.md).
+> **Tip:** To set alerts that notify you via email when your Apache Airflow® scheduler is underprovisioned, refer to [Airflow alerts](airflow-alerts.md).
 
 #### Scheduler count
 

@@ -7,7 +7,7 @@ description: Learn about the available options for deploying code to Astronomer 
 
 Deploying code is the process of pushing code to an Astronomer Software Deployment. A code deploy can include an entire Astro project as a Docker image, or just the code in your Astro project `dags` directory. Astronomer Software supports a few different methods for deploying code to a Deployment. You can:
 
-- Deploy [project images](deploy-cli.md) or [DAGs only](deploy-dags.md) using the Astro CLI. Deploying a project image is the only way to deploy Airflow-level configurations and dependencies to a Deployment.
+- Deploy [project images](deploy-cli.md) or [DAGs only](deploy-dags.md) using the Astro CLI. Deploying a project image is the only way to deploy Apache Airflow®-level configurations and dependencies to a Deployment.
 - Deploy DAGs using an [NFS volume](deploy-nfs.md).
 - Deploy DAGs using [Git sync](deploy-git-sync.md).
 

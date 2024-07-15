@@ -11,7 +11,7 @@ import LinkCardGrid from '@site/src/components/LinkCardGrid';
 import LinkCard from '@site/src/components/LinkCard';
 import AstroCard from '@site/src/components/AstroCard';
 
-<p class="DocItem__header-description">Use tutorials and concepts to learn everything you need to know about [Apache Airflow®](https://airflow.apache.org/) and Astro.</p>
+<p class="DocItem__header-description">Use tutorials and concepts to learn everything you need to know about [Apache Airflow®®](https://airflow.apache.org/) and Astro.</p>
 
 ## New to Apache Airflow® and Astro?
 
@@ -20,7 +20,7 @@ import AstroCard from '@site/src/components/AstroCard';
   <LinkCard label="Start your Astro trial" description="Learn how to get started running Airflow with Astro and run your first DAG in the cloud." href="https://www.astronomer.io/docs/astro/trial" icon="/docs/img/astro-monogram.svg" />
 </LinkCardGrid>
 
-## Featured Airflow concepts
+## Featured Apache Airflow® concepts
 
 <LinkCardGrid>
   <LinkCard label="Datasets and Data-Aware Scheduling in Airflow" description="Schedule Airflow DAGs based on updates to datasets." href="/learn/airflow-datasets" truncate />

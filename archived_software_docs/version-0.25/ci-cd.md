@@ -6,7 +6,7 @@ id: ci-cd
 
 ## Overview
 
-Astronomer's support for Service Accounts allows users to push code and deploy to an Airflow Deployment on Astronomer via a Continuous Integration/Continuous Delivery (CI/CD) tool of your choice.
+Astronomer's support for Service Accounts allows users to push code and deploy to an Apache Airflow® Deployment on Astronomer via a Continuous Integration/Continuous Delivery (CI/CD) tool of your choice.
 
 There are many benefits to deploying DAGs and other changes to Airflow via a CI/CD workflow. Specifically, you can:
 
@@ -118,7 +118,7 @@ Upon creating a Service Account, make sure to:
 * Give it a Category (optional)
 * Grant it a User Role
 
-> **Note:** In order for a Service Account to have permission to push code to your Airflow Deployment, it must have either the "Editor" or "Admin" role. For more information on Workspace roles, refer to our ["Roles and Permissions"](workspace-permissions.md) doc.
+> **Note:** In order for a Service Account to have permission to push code to your Apache Airflow® Deployment, it must have either the "Editor" or "Admin" role. For more information on Workspace roles, refer to our ["Roles and Permissions"](workspace-permissions.md) doc.
 
 ![Name Service Account](/img/software/ci-cd-name-service-account.png)
 

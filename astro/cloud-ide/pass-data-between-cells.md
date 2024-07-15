@@ -64,7 +64,7 @@ where col_a > 10
 
 There are currently two ways to use external data sources in your cells:
 
-- Access the data through an API or Airflow connection.
+- Access the data through an API or Apache Airflow® connection.
 - Include the data in your IDE project, deploy the project to GitHub, and [connect the repository to the Astro Cloud IDE](deploy-project.md#connect-your-repository). You can then load the data into your cell as you would from an Astro project. 
 
 This applies to all cell types.

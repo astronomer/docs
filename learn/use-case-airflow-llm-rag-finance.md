@@ -1,6 +1,6 @@
 ---
-title: "LLMOps: Automatic retrieval-augmented generation with Airflow, GPT-4 and Weaviate"
-description: "Use Airflow and Weaviate in a RAG pipeline."
+title: "LLMOps: Automatic retrieval-augmented generation with Apache Airflow®, GPT-4 and Weaviate"
+description: "Use Apache Airflow® and Weaviate in a RAG pipeline."
 id: use-case-airflow-llm-rag-finance
 sidebar_label: "LLMOps RAG with Airflow + Weaviate"
 ---
@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 In the emerging field of Large Language Model Operations (LLMOps), retrieval-augmented generation (RAG) has quickly become a key way to tailor large langage model (LLM) applications to domain specific queries. 
 
-This use case shows how to use Weaviate and Airflow to create an automatic RAG pipeline ingesting and embedding data from two sources of news articles ([Alpha Vantage](https://www.alphavantage.co/) and [Spaceflight News](https://www.spaceflightnewsapi.net/)) as a knowledge base for a [GPT-4](https://openai.com/gpt-4) powered [Streamlit](https://streamlit.io/) application giving trading advice. The pipeline structure follows Astronomers' RAG reference architecture, [Ask Astro](https://github.com/astronomer/ask-astro).
+This use case shows how to use Weaviate and Apache Airflow® to create an automatic RAG pipeline ingesting and embedding data from two sources of news articles ([Alpha Vantage](https://www.alphavantage.co/) and [Spaceflight News](https://www.spaceflightnewsapi.net/)) as a knowledge base for a [GPT-4](https://openai.com/gpt-4) powered [Streamlit](https://streamlit.io/) application giving trading advice. The pipeline structure follows Astronomers' RAG reference architecture, [Ask Astro](https://github.com/astronomer/ask-astro).
 
 :::info Disclaimer
 

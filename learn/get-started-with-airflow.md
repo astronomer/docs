@@ -9,7 +9,7 @@ pagination_next: get-started-with-airflow-part-2
 import CodeBlock from '@theme/CodeBlock';
 import my_astronauts_dag from '!!raw-loader!../code-samples/dags/get-started-with-airflow/my_astronauts_dag.py';
 
-Getting started with [Apache Airflow](https://airflow.apache.org/docs/apache-airflow/stable/index.html) is easy with the [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli).
+Getting started with [Apache Airflow®](https://airflow.apache.org/docs/apache-airflow/stable/index.html) is easy with the [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli).
 
 Follow this tutorial if you're new to Apache Airflow and want to create and run your first data pipeline.
 
@@ -74,7 +74,7 @@ The default Astro project structure includes a collection of folders and files t
 - `/dags`: A directory of DAG files. Each Astro project includes an example DAG called `example_astronauts`. For more information on DAGs, see [Introduction to Airflow DAGs](dags.md).
 - `Dockerfile`: This is where you specify your version of [Astro Runtime](https://www.astronomer.io/docs/astro/runtime-image-architecture), which is a runtime software based on Apache Airflow that is built and maintained by Astronomer. The CLI generates new Astro projects with the latest version of Runtime, which is equivalent to the latest version of Airflow. For advanced use cases, you can also configure this file with Docker-based commands to run locally at build time.
 
-## Step 2: Start Airflow
+## Step 2: Start Apache Airflow®
 
 Now that you have an Astro project ready, the next step is to actually start Airflow on your machine. In your terminal, open your Astro project directory and run the following command:
 
@@ -95,7 +95,7 @@ astro config set postgres.port <available-port>
 
 :::
 
-## Step 3: Log in to the Airflow UI
+## Step 3: Log in to the Apache Airflow® UI
 
 The [Airflow UI](airflow-ui.md) is essential for managing Airflow. It contains information about your DAGs and is the best place to create and update Airflow connections to third-party data services.
 

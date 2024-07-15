@@ -1,5 +1,5 @@
 ---
-title: "Create a BigQuery connection in Airflow"
+title: "Create a BigQuery connection in Apache Airflow®"
 id: bigquery
 sidebar_label: BigQuery
 description: Learn how to create a BigQuery connection in Airflow.
@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/integrations/bigquery.png' }
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-[BigQuery](https://cloud.google.com/bigquery) is Google's fully managed and serverless data warehouse. Integrating BigQuery with Airflow lets you execute BigQuery jobs from a DAG. 
+[BigQuery](https://cloud.google.com/bigquery) is Google's fully managed and serverless data warehouse. Integrating BigQuery with Apache Airflow® lets you execute BigQuery jobs from a DAG. 
 
 There are multiple ways to connect Airflow and BigQuery, all of which require a [GCP Service Account](https://cloud.google.com/docs/authentication#service-accounts):
 

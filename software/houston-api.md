@@ -5,7 +5,7 @@ id: houston-api
 description: Learn how to make requests to your Astronomer Software installation using the Houston API.
 ---
 
-The Houston API allows you to build applications that provision and manage resources on Astronomer Software. You can use the Houston API to perform CRUD operations on entities scoped to the Astronomer platform, including Airflow Deployments, Workspaces, and users.
+The Houston API allows you to build applications that provision and manage resources on Astronomer Software. You can use the Houston API to perform CRUD operations on entities scoped to the Astronomer platform, including Apache Airflow® Deployments, Workspaces, and users.
 
 For example, you can:
 

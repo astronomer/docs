@@ -1,16 +1,16 @@
 ---
-title: "Use DuckDB with Apache Airflow"
+title: "Use DuckDB with Apache Airflow®"
 sidebar_label: "DuckDB"
 id: airflow-duckdb
 sidebar_custom_props: { icon: 'img/integrations/duckdb.png' }
-description: "Learn how to use DuckDB with Airflow."
+description: "Learn how to use DuckDB with Apache Airflow®."
 ---
 
 import CodeBlock from '@theme/CodeBlock';
 import duckdb_tutorial_dag_1 from '!!raw-loader!../code-samples/dags/airflow-duckdb/duckdb_tutorial_dag_1.py';
 import duckdb_tutorial_dag_2 from '!!raw-loader!../code-samples/dags/airflow-duckdb/duckdb_tutorial_dag_2.py';
 
-[DuckDB](https://duckdb.org/) is an open-source in-process SQL OLAP database management system. It allows you to run complex queries on relational datasets using either local, file-based DuckDB instances, or the cloud service [MotherDuck](https://motherduck.com/). The ability to create a local DuckDB instance is useful for testing complex Airflow pipelines without the need to connect to a remote database.
+[DuckDB](https://duckdb.org/) is an open-source in-process SQL OLAP database management system. It allows you to run complex queries on relational datasets using either local, file-based DuckDB instances, or the cloud service [MotherDuck](https://motherduck.com/). The ability to create a local DuckDB instance is useful for testing complex Apache Airflow® pipelines without the need to connect to a remote database.
 
 Airflow can interact with DuckDB in three key ways:
 
@@ -94,7 +94,7 @@ You can use the [duckdb Python package](https://pypi.org/project/duckdb/) direct
 
     ![DuckDB tutorial DAG 1 Grid view](/img/tutorials/airflow-duckdb_tutorial_dag_1_grid_view.png)
 
-## Step 3: Create a DuckDB Airflow connection
+## Step 3: Create a DuckDB Apache Airflow® connection
 
 Next, you will create a DAG that instead uses the DuckDB Airflow provider. To use the provider, you will need to define an Airflow connection to your DuckDB database.
 
@@ -116,7 +116,7 @@ If you are connecting to MotherDuck, you will need to add your [MotherDuck Servi
 
 :::
 
-## Step 4: Create a DAG using the Airflow DuckDB provider
+## Step 4: Create a DAG using the Apache Airflow® DuckDB provider
 
 1. Create a new file in your `dags` folder called `duckdb_tutorial_dag_2.py`.
 

@@ -1,12 +1,12 @@
 ---
-title: "ELT with Airflow and Databricks"
-description: "Use Airflow, Databricks and the Astro Python SDK in an ELT pipeline to analyze energy data."
+title: "ELT with Apache Airflow® and Databricks"
+description: "Use Apache Airflow®, Databricks and the Astro Python SDK in an ELT pipeline to analyze energy data."
 id: use-case-airflow-databricks
 sidebar_label: "ELT with Airflow + Databricks"
 sidebar_custom_props: { icon: 'img/integrations/databricks.png' }
 ---
 
-[Databricks](https://databricks.com/) is a popular unified data and analytics platform built around fully managed Apache Spark clusters. Using the [Astro Databricks provider package](https://github.com/astronomer/astro-provider-databricks), you can create a Databricks Workflow from Databricks notebooks and run the Databricks Workflow in an Airflow DAG. This lets you use Airflow's orchestration features in combination with Databricks' cheapest compute. To get data in and out of Databricks, you can use the open-source [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html), which greatly simplifies common ELT tasks like loading data and creating pandas DataFrames from data in your warehouse. 
+[Databricks](https://databricks.com/) is a popular unified data and analytics platform built around fully managed Apache Spark clusters. Using the [Astro Databricks provider package](https://github.com/astronomer/astro-provider-databricks), you can create a Databricks Workflow from Databricks notebooks and run the Databricks Workflow in an Apache Airflow® DAG. This lets you use Airflow's orchestration features in combination with Databricks' cheapest compute. To get data in and out of Databricks, you can use the open-source [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html), which greatly simplifies common ELT tasks like loading data and creating pandas DataFrames from data in your warehouse. 
 
 This example uses a DAG to extract data from three local CSV files containing the share of solar, hydro and wind electricity in different countries over several years, run a transformation on each file, load the results to S3, and create a line chart of the aggregated data. 
 

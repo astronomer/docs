@@ -10,7 +10,7 @@ For Astronomer Software customers, new product features are regularly made avail
 Follow this guide to upgrade to any version of Astronomer Software. For information on new features and changes, refer to [Software release notes](release-notes.md).
 
 A few notes before you get started:
-- The upgrade process will not affect running Airflow tasks as long as `upgradeDeployments.enabled=false` is set in your upgrade script.
+- The upgrade process will not affect running Apache Airflow® tasks as long as `upgradeDeployments.enabled=false` is set in your upgrade script.
 - Updates will not cause any downtime to Astronomer services, including the Software UI, the Astro CLI, and the Houston API.
 - To avoid potential complications, perform Astronomer Software upgrades in order and include all minor versions in your upgrade sequence. 
 
@@ -88,7 +88,7 @@ ASTRO_VERSION=<astronomer-version>
 helm repo add astronomer https://helm.astronomer.io
 helm repo update
 
-# upgradeDeployments false ensures that Airflow charts are not upgraded when this script is ran
+# upgradeDeployments false ensures that Apache Airflow® charts are not upgraded when this script is ran
 # If you deployed a config change that is intended to reconfigure something inside Airflow,
 # then you may set this value to "true" instead. When it is "true", then each Airflow chart will
 # restart. Note that some stable version upgrades require setting this value to true regardless of your own configuration.
@@ -239,7 +239,7 @@ If you set `sysAdminScalabilityImprovementsEnabled` in your `config.yaml` file, 
 
 ### Upgrade to Astronomer Software 0.31
 
-#### Upgrade Airflow Helm chart to 1.9.4 for all Deployments
+#### Upgrade Apache Airflow® Helm chart to 1.9.4 for all Deployments
 
 If your Deployments are using version 1.9.3 or earlier of the Airflow Helm chart, their task logs will be missing when you upgrade to Astronomer Software 0.31. To upgrade your Deployments' Airflow Helm chart versions during your platform upgrade, ensure that you set ` --set astronomer.houston.upgradeDeployments.enabled=true` for your upgrade command like in the following example:
 
@@ -387,7 +387,7 @@ Before upgrading to 0.25, ensure that the following software is updated to the a
     quay.io/astronomer/ap-airflow:1.10.5-9-buster
     ```
 
-    > **Note:** While `-onbuild` and `<build-number>` are optional, we recommend including them for most upgrades. If you have your own build, test, and publish workflows that are layered on top of the Astronomer Airflow images, then removing `<build-number>` is appropriate because images including `<build-number>` are immutable.
+    > **Note:** While `-onbuild` and `<build-number>` are optional, we recommend including them for most upgrades. If you have your own build, test, and publish workflows that are layered on top of the Astronomer Apache Airflow® images, then removing `<build-number>` is appropriate because images including `<build-number>` are immutable.
 
 - **Helm**: Your version must be 3.6 or greater.
 

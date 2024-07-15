@@ -5,7 +5,7 @@ id: manage-workspaces
 description: Manage Astronomer Workspaces and Airflow Deployments via the Software UI.
 ---
 
-A Workspace is the highest level of organization on Astronomer. From a Workspace, you can manage a collection of Airflow Deployments and a set of users with varying levels of access to those Deployments.
+A Workspace is the highest level of organization on Astronomer. From a Workspace, you can manage a collection of Apache Airflow® Deployments and a set of users with varying levels of access to those Deployments.
 
 If you're not a member of any Workspaces already, you'll be prompted to create one as soon as you log in to the Software UI. If you already have access to at least 1 Workspace, you can create a new one using the **New Workspace** button in the sidebar of the Software UI.
 

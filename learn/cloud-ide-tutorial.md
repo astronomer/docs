@@ -7,7 +7,7 @@ description: 'Use tutorials and guides to make the most out of Airflow and Astro
 
 Developing data pipelines has never been easier than when using the Astro Cloud IDE.
 
-The Astro Cloud IDE automatically generates DAGs based on configurations you set in its notebook-style visual interface. Using the Astro Cloud IDE, you can create a complete data pipeline using Python, SQL, existing [Airflow operators](https://www.astronomer.io/docs/astro/cloud-ide/use-airflow-operators) from [over 100 providers](https://registry.astronomer.io/providers), or [custom cells](https://www.astronomer.io/docs/astro/cloud-ide/custom-cell-reference) without setting dependencies or connections in code. 
+The Astro Cloud IDE automatically generates DAGs based on configurations you set in its notebook-style visual interface. Using the Astro Cloud IDE, you can create a complete data pipeline using Python, SQL, existing [Apache Airflow® operators](https://www.astronomer.io/docs/astro/cloud-ide/use-airflow-operators) from [over 100 providers](https://registry.astronomer.io/providers), or [custom cells](https://www.astronomer.io/docs/astro/cloud-ide/custom-cell-reference) without setting dependencies or connections in code. 
 
 This tutorial is for Astro customers who want to create their first simple ML pipeline in the Astro Cloud IDE using Python and SQL. To explore Astro Cloud IDE functionality, you will create a pipeline that runs a random forest model to predict dog breed intelligence, then schedule and deploy the pipeline to Astro.
 

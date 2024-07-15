@@ -23,7 +23,7 @@ If you want to use an ingress controller that isn't listed here, please contact 
 
 Additionally, all of the following must be true:
 
-- Your ingress controller must service ingresses from the Astronomer Platform namespace, as well as all namespaces that host Airflow.
+- Your ingress controller must service ingresses from the Astronomer Platform namespace, as well as all namespaces that host Apache Airflow®.
 - Ingresses should work in newly created namespaces prior to installing Astronomer Software.
 - Your third-party ingress controller must be able to resolve the DNS entries associated with your Software installation.
 - Your third-party ingress controller must support SSL connections on port 443 and must present a certificate valid for all of the following hostnames:

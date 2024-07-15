@@ -1,6 +1,6 @@
 ---
-title: "Run Soda Core checks with Airflow"
-description: "Learn how to orchestrate Soda Core data quality checks with your Airflow DAGs."
+title: "Run Soda Core checks with Apache Airflow®"
+description: "Learn how to orchestrate Soda Core data quality checks with your Apache Airflow® DAGs."
 id: soda-data-quality
 sidebar_label: "Soda Core"
 sidebar_custom_props: { icon: 'img/integrations/soda.png' }
@@ -12,7 +12,7 @@ Soda Core lets you:
 
 - Define checks as YAML configuration, including many preset checks.
 - Provide a SQL query within the YAML file and check against a returned value if no preset checks fit your use case.
-- Integrate data quality checks with commonly used data engineering tools such as Airflow, Apache Spark, PostgreSQL, Snowflake [and more](https://www.soda.io/integrations).
+- Integrate data quality checks with commonly used data engineering tools such as Apache Airflow®, Apache Spark, PostgreSQL, Snowflake [and more](https://www.soda.io/integrations).
 
 In this tutorial, you'll learn about the key features of Soda Core and how to use Airflow to run data quality checks on a database.
 

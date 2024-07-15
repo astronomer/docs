@@ -37,7 +37,7 @@ Release Date: November 3, 2021
 
 Release Date: January 5, 2021
 
-#### Support for Airflow 1.10.14
+#### Support for Apache Airflow®® 1.10.14
 
 Airflow 1.10.14 was built to make testing and migration to [Airflow 2.0](https://www.astronomer.io/blog/introducing-airflow-2-0) as easy as possible. Highlights include:
 
@@ -56,7 +56,7 @@ FROM quay.io/astronomer/ap-airflow:1.10.14-buster-onbuild
 
 For detailed guidelines on how to upgrade Airflow on Astronomer, read [Upgrade Airflow](manage-airflow-versions.md). For more information on 1.10.14, check out the [Airflow Release](https://github.com/apache/airflow/releases/tag/1.10.14) or the corresponding [AC 1.10.14 changelog](https://github.com/astronomer/ap-airflow/blob/master/1.10.14/CHANGELOG.md).
 
-> **Note:** In an effort to standardize our offering and optimize for reliability, we will only support a Debian-based image for AC 1.10.14. Alpine-based images for AC 1.10.5 - 1.10.12 will continue to be supported. For guidelines on how to migrate from Alpine, go to [Upgrade Airflow](manage-airflow-versions.md).
+> **Note:** In an effort to standardize our offering and optimize for reliability, we will only support a Debian-based image for AC 1.10.14. Alpine-based images for AC 1.10.5 - 1.10.12 will continue to be supported. For guidelines on how to migrate from Alpine, go to [Upgrade Apache Airflow®](manage-airflow-versions.md).
 
 #### Support for latest Astronomer Certified Patch Releases
 
@@ -115,7 +115,7 @@ For guidelines, refer to our forum post on ["Using Private CAs on Astronomer"](h
 
 Release Date: October 8, 2020
 
-#### Support for Airflow 1.10.12
+#### Support for Apache Airflow® 1.10.12
 
 Astronomer v0.16.9 comes with support for [Airflow 1.10.12](https://airflow.apache.org/blog/airflow-1.10.12/) in addition to 3 patch versions of previously released images.
 
@@ -168,7 +168,7 @@ Release Date: September 9, 2020
 
 Release Date: September 4, 2020
 
-#### Allow Users to Define Custom Platform and Airflow Deployment-level Alerts in `config.yaml`
+#### Allow Users to Define Custom Platform and Apache Airflow® Deployment-level Alerts in `config.yaml`
 
 Astronomer v0.16.6 allows users to define custom alerts via the `config.yaml` file and successfully pass those to Prometheus, a monitoring tool that Astronomer uses to collect metrics from a variety of endpoints and push them to Grafana for visualization.
 

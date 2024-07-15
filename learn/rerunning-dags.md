@@ -1,7 +1,7 @@
 ---
-title: "Rerun Airflow DAGs and tasks"
+title: "Rerun Apache Airflow® DAGs and tasks"
 sidebar_label: "Rerun DAGs and tasks"
-description: "How to configure retries, catchup, backfill, and clear task instances in Airflow."
+description: "How to configure retries, catchup, backfill, and clear task instances in Apache Airflow®."
 id: rerunning-dags
 ---
 
@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import retry_example from '!!raw-loader!../code-samples/dags/rerunning-dags/retry_example.py';
 
-You can set when to run Airflow DAGs using a wide variety of [scheduling](scheduling-in-airflow.md) options. Some uses cases where you might want tasks or DAGs to run outside of their regular schedule include:
+You can set when to run Apache Airflow® DAGs using a wide variety of [scheduling](scheduling-in-airflow.md) options. Some uses cases where you might want tasks or DAGs to run outside of their regular schedule include:
 
 - You want one or more tasks to automatically run again if they fail.
 - You need to manually rerun a failed task for one or multiple DAG runs.
@@ -106,7 +106,7 @@ The `max_consecutive_failed_dag_runs` config and DAG-level parameter is currentl
 
 ## Manually rerun tasks or DAGs
 
-[Rerunning tasks](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html#re-run-tasks) or full DAGs in Airflow is a common workflow. 
+[Rerunning tasks](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html#re-run-tasks) or full DAGs in Apache Airflow® is a common workflow. 
 
 To rerun a task in Airflow you clear the task status to update the `max_tries` and current task instance state values in the metastore. After the task reruns, the `max_tries` value updates to `0`, and the current task instance state updates to `None`.
 

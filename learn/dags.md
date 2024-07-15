@@ -1,8 +1,8 @@
 ---
-title: "Introduction to Airflow DAGs"
+title: "Introduction to Apache Airflow® DAGs"
 sidebar_label: "DAGs"
 id: dags
-description: "Learn how to write DAGs and get tips on how to define an Airflow DAG in Python. Learn all about DAG parameters and their settings."
+description: "Learn how to write DAGs and get tips on how to define an Apache Airflow® DAG in Python. Learn all about DAG parameters and their settings."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -12,11 +12,11 @@ import CodeBlock from '@theme/CodeBlock';
 import example_astronauts_three_tasks from '!!raw-loader!../code-samples/dags/dags/example_astronauts_three_tasks.py';
 import complex_dag_structure from '!!raw-loader!../code-samples/dags/dags/complex_dag_structure.py';
 
-In Airflow, a **DAG** is a data pipeline or workflow. DAGs are the main organizational unit in Airflow; they contain a collection of tasks and dependencies that you want to execute on a schedule. 
+In Apache Airflow®, a **DAG** is a data pipeline or workflow. DAGs are the main organizational unit in Airflow; they contain a collection of tasks and dependencies that you want to execute on a schedule. 
 
 A DAG is defined in Python code and visualized in the Airflow UI. DAGs can be as simple as a single task or as complex as hundreds or thousands of tasks with complicated dependencies.
 
-The following screenshot shows a [complex DAG graph](#example-complex-dag-run) in the Airflow UI. After reading this guide, you'll be able to understand the elements in this graph, as well as know how to define DAGs and use DAG parameters.
+The following screenshot shows a [complex DAG graph](#example-complex-dag-run) in the Apache Airflow® UI. After reading this guide, you'll be able to understand the elements in this graph, as well as know how to define DAGs and use DAG parameters.
 
 ![Screenshot from the Graph tab of the Airflow UI of a complex DAG with dynamically mapped tasks, task groups and setup/teardown tasks.](/img/guides/dags_complex_DAG.png)
 

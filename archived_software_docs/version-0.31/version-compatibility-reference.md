@@ -5,7 +5,7 @@ id: version-compatibility-reference
 description: A reference of all adjacent tooling required to run Astronomer Software and corresponding version compatibility.
 ---
 
-Astronomer Software ships with and requires a number of adjacent technologies that support it, including Kubernetes, Helm, and Apache Airflow itself. This guide provides a reference of all required tools and versions for running Astronomer Software.
+Astronomer Software ships with and requires a number of adjacent technologies that support it, including Kubernetes, Helm, and Apache Airflow® itself. This guide provides a reference of all required tools and versions for running Astronomer Software.
 
 While the tables below reference the minimum compatible versions, we typically recommend running the latest versions of all tooling if and when possible.
 

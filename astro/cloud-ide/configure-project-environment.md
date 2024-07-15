@@ -5,7 +5,7 @@ id: configure-project-environment
 description: Learn how to configure environment variables, connections, and dependencies for use in your Astro cloud IDE pipelines.
 ---
 
-Configure your Astro Cloud IDE project environment, including Airflow dependencies, variables, and connections, in the Astro UI. You can use your environment configurations in any pipeline within your project.
+Configure your Astro Cloud IDE project environment, including Apache Airflow® dependencies, variables, and connections, in the Astro UI. You can use your environment configurations in any pipeline within your project.
 
 Environment configuration in the Astro Cloud IDE is similar to Astro project and Airflow configuration, but more options are provided to minimize the time you spend configuring text files.
 
@@ -59,7 +59,7 @@ In the Astro Cloud IDE, you can additionally specify whether an environment vari
 
 The environment variable appears in the **Variables** list. To edit the environment variable, click **Edit** in the **Variables** list.
 
-### Call Airflow variables in cells
+### Call Apache Airflow® variables in cells
 
 Call Airflow variable values in Python cells using `Variable.get('<variable-key>')`. For example:
 
@@ -74,7 +74,7 @@ Call Airflow variables in SQL or Warehouse SQL cells using jinja templating. For
 SELECT {{ var.value.MY_KEY }} FROM mytable;
 ```
 
-## Configure Airflow connections
+## Configure Apache Airflow® connections
 
 You can configure Airflow connections in the Astro Cloud IDE in the same way that you can in the [Airflow UI](https://www.astronomer.io/docs/learn/connections). You can then reference the connection in your Python cells as code or in SQL cells as a configuration.
 

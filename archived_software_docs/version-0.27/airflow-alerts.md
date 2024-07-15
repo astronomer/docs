@@ -7,7 +7,7 @@ description: Configure Email Alerts on Astronomer Software to monitor the health
 
 ## Overview
 
-Whether you're just starting to use Apache Airflow or your team is running it at scale, incorporating an alerting framework is critical to the health of your data. On Astronomer Software, users have access to three types of alerting solutions:
+Whether you're just starting to use Apache Airflow® or your team is running it at scale, incorporating an alerting framework is critical to the health of your data. On Astronomer Software, users have access to three types of alerting solutions:
 
 - Airflow task and DAG-level alerts, which notify you via email when an Airflow task or DAG fails, succeeds, or retries.
 - Deployment-level alerts, which notify you when the health of an Airflow Deployment is low or if any of Airflow's underlying components are underperforming, including the Airflow Scheduler.
@@ -26,7 +26,7 @@ If your team isn't already using an SMTP service, we recommend the following:
 
 Step-by-step instructions on how to integrate these two services with Astronomer are provided below, but you can use any SMTP service for this purpose.
 
-> **Note:** By default, email alerts for process failures are sent whenever individual tasks fail. To receive only 1 email per DAG failure, refer to the Limit Alerts to the DAG Level topic below. For more information and best practices on Airflow alerts, read [Error Notifications in Airflow](https://www.astronomer.io/docs/learn/error-notifications-in-airflow/).
+> **Note:** By default, email alerts for process failures are sent whenever individual tasks fail. To receive only 1 email per DAG failure, refer to the Limit Alerts to the DAG Level topic below. For more information and best practices on Apache Airflow® alerts, read [Error Notifications in Airflow](https://www.astronomer.io/docs/learn/error-notifications-in-airflow/).
 
 ### Integrate SendGrid with Astronomer
 

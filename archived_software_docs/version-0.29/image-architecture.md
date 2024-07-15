@@ -5,7 +5,7 @@ id: image-architecture
 description: Reference documentation for Astronomer Certified, Astronomer Software's Docker image for Apache Airflow.
 ---
 
-The Astronomer Certified Docker image for Apache Airflow extends the community-developed Airflow image in a way that makes running Airflow more secure, reliable, and extensible. It is the default image for Airflow Deployments on Astronomer.
+The Astronomer Certified Docker image for Apache Airflow® extends the community-developed Airflow image in a way that makes running Airflow more secure, reliable, and extensible. It is the default image for Airflow Deployments on Astronomer.
 
 This guide provides reference information for the building blocks of Astronomer Certified, as well as information on its release and distribution. For reference information on Astro Runtime, see [Runtime image architecture](runtime-image-architecture.mdx).
 

@@ -2,14 +2,14 @@
 sidebar_label: 'With Astro CLI'
 title: 'Run your first DAG with the Astro CLI'
 id: 'first-dag-cli'
-description: "Learn how to run your first Apache Airflow DAG on Astro with the Astro CLI."
+description: "Learn how to run your first Apache Airflow® DAG on Astro with the Astro CLI."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-Astro is the industry's leading managed service for Apache Airflow. To quickly learn how Astro works, follow the steps in this quickstart to create an Airflow environment and run your first DAG with the Astro CLI.
+Astro is the industry's leading managed service for Apache Airflow®. To quickly learn how Astro works, follow the steps in this quickstart to create an Airflow environment and run your first DAG with the Astro CLI.
 
 Specifically, you will:
 
@@ -174,7 +174,7 @@ An _Astro project_ contains the set of files necessary to run Airflow, including
     ├── .env # Local environment variables
     ├── dags # Where your DAGs go
     │   ├── example-dag-basic.py # Example DAG that showcases a simple ETL data pipeline
-    │   └── example-dag-advanced.py # Example DAG that showcases more advanced Airflow features, such as the TaskFlow API
+    │   └── example-dag-advanced.py # Example DAG that showcases more advanced Apache Airflow® features, such as the TaskFlow API
     ├── Dockerfile # For the Astro Runtime Docker image, environment variables, and overrides
     ├── include # For any other files you'd like to include
     ├── plugins # For any custom or community Airflow plugins

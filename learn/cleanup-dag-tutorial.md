@@ -8,7 +8,7 @@ description: 'Learn how to remove unnecessary data from the Airflow metadata dat
 import CodeBlock from '@theme/CodeBlock';
 import db_cleanup from '!!raw-loader!../code-samples/dags/cleanup-dag-tutorial/db_cleanup.py';
 
-In addition to storing configurations about your Airflow environment, the Airflow [metadata database](https://docs.astronomer.io/learn/airflow-database) stores data about past and present task runs. Airflow never automatically removes metadata, so the longer you use it, the more task run data is stored in your metadata DB. Over a long enough time, this can result in a bloated metadata DB, which can affect performance across your Airflow environment.
+In addition to storing configurations about your Apache Airflow® environment, the Airflow [metadata database](https://docs.astronomer.io/learn/airflow-database) stores data about past and present task runs. Airflow never automatically removes metadata, so the longer you use it, the more task run data is stored in your metadata DB. Over a long enough time, this can result in a bloated metadata DB, which can affect performance across your Airflow environment.
 
 When a table in the metadata DB is larger than 50GB, you might start to experience degraded scheduler performance. This can result in:
 
@@ -30,7 +30,7 @@ To keep your Airflow environment running at optimal performance, you can clean t
 
 :::danger
 
-Even when using `airflow db clean`, deleting data from the metadata database can destroy important data. Read the [Warnings](#warnings) section carefully before implementing this tutorial DAG in any production Airflow environment.
+Even when using `airflow db clean`, deleting data from the metadata database can destroy important data. Read the [Warnings](#warnings) section carefully before implementing this tutorial DAG in any production Apache Airflow® environment.
 
 :::
 

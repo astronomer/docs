@@ -1,12 +1,12 @@
 ---
-title: "Create a Microsoft SQL Server connection in Airflow"
+title: "Create a Microsoft SQL Server connection in Apache Airflow®"
 id: ms-sqlserver
 sidebar_label: Microsoft SQL Server
 description: Learn how to create a Microsoft SQL Server connection in Airflow.
 sidebar_custom_props: { icon: 'img/integrations/ms-sqlserver.png' }
 ---
 
-[Microsoft SQL Server](https://www.microsoft.com/en-in/sql-server/sql-server-downloads) is a proprietary relational database management system developed by Microsoft. Integrating SQL Server with Airflow allows you to interact with the database or export the data from a SQL server to an external system using an Airflow DAG
+[Microsoft SQL Server](https://www.microsoft.com/en-in/sql-server/sql-server-downloads) is a proprietary relational database management system developed by Microsoft. Integrating SQL Server with Apache Airflow® allows you to interact with the database or export the data from a SQL server to an external system using an Airflow DAG
 
 This guide provides the basic setup for creating a Microsoft SQL Server connection. 
 

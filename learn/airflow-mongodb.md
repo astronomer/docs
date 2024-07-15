@@ -1,7 +1,7 @@
 ---
-title: "Load data to MongoDB with Apache Airflow"
+title: "Load data to MongoDB with Apache Airflow®"
 sidebar_label: "MongoDB"
-description: "Learn how to load data into MongoDB with your Apache Airflow DAGs."
+description: "Learn how to load data into MongoDB with your Apache Airflow® DAGs."
 id: "airflow-mongodb"
 sidebar_custom_props: { icon: 'img/integrations/mongodb.png' }
 ---
@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/integrations/mongodb.png' }
 import CodeBlock from '@theme/CodeBlock';
 import load_data_to_mongodb from '!!raw-loader!../code-samples/dags/airflow-mongodb/load_data_to_mongodb.py';
 
-[MongoDB](https://www.mongodb.com/) is an open-source general purpose database built by developers, for developers. MongoDB's popularity is driven by its use of flexible document schemas and horizontal scalability. By leveraging the [Mongo provider](https://registry.astronomer.io/providers/mongo), you can easily orchestrate many use cases with Airflow such as:
+[MongoDB](https://www.mongodb.com/) is an open-source general purpose database built by developers, for developers. MongoDB's popularity is driven by its use of flexible document schemas and horizontal scalability. By leveraging the [Mongo provider](https://registry.astronomer.io/providers/mongo), you can easily orchestrate many use cases with Apache Airflow® such as:
 
 - Machine learning pipelines.
 - Automating database administration operations.
@@ -76,7 +76,7 @@ Use the Astro CLI to create and run an Airflow project locally.
     astro dev start
     ```
 
-## Step 3: Configure your Airflow connections
+## Step 3: Configure your Apache Airflow® connections
 
 The connections you configure will connect to MongoDB and the API providing sample data.
 

@@ -19,7 +19,7 @@ To migrate to Astro Runtime, you must have Astronomer Software 0.29 or later. Se
 
 Functionally, Runtime images are similar to AC images. They both include:
 
-- Timely support for new patch, minor, and major versions of Apache Airflow.
+- Timely support for new patch, minor, and major versions of Apache Airflow®.
 - Support lifecycles that extend beyond those offered by the open source community.
 - Regularly backported bug and security fixes.
 

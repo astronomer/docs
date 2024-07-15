@@ -2,14 +2,14 @@
 sidebar_label: 'Create connections in Astro'
 title: 'Create Airflow connections in the Astro UI'
 id: create-and-link-connections
-description: "Create Airflow connections and link them to multiple Deployments in the Astro Environment Manager."
+description: "Create Apache Airflow® connections and link them to multiple Deployments in the Astro Environment Manager."
 ---
 
 import HostedBadge from '@site/src/components/HostedBadge';
 
 <HostedBadge/>
 
-You can create and manage Airflow connections for Deployments with the Astro Environment Manager in the Astro UI. The Environment Manager uses an Astro-managed secrets backend to store connection configurations as Kubernetes Secrets.
+You can create and manage Apache Airflow® connections for Deployments with the Astro Environment Manager in the Astro UI. The Environment Manager uses an Astro-managed secrets backend to store connection configurations as Kubernetes Secrets.
 
 Using the Environment Manager, you can quickly and securely create connections once and share them to multiple Deployments without having to set up your own secrets backend. You can also create a connection once and use it across multiple Airflow Deployments.
 
@@ -94,7 +94,7 @@ For the most flexibility, you can set default connections and override the conne
 
 ### Step 2: (Optional) Add provider packages to your Deployment
 
-Some connection types require installing dependencies on your Deployment through provider packages. If your connection type requires a provider package and the provider package is neither [included in Astro Runtime](https://www.astronomer.io/docs/astro/runtime-image-architecture#provider-packages) nor included in the `requirements.txt` file of your Astro project, Airflow won't be able to use your connection.
+Some connection types require installing dependencies on your Deployment through provider packages. If your connection type requires a provider package and the provider package is neither [included in Astro Runtime](https://www.astronomer.io/docs/astro/runtime-image-architecture#provider-packages) nor included in the `requirements.txt` file of your Astro project, Apache Airflow® won't be able to use your connection.
 
 1. Open the local Astro project for your Deployment.
 2. Add the required provider package name to your project's `requirements.txt`. Save your changes.

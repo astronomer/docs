@@ -6,7 +6,7 @@ description: Access Airflow's Postgres metadata database on Astronomer Software.
 
 ---
 
-On Astronomer, each Airflow deployment is equipped with a PostgreSQL database that serves as Airflow's underlying metadata database and the scheduler's source of truth.
+On Astronomer, each Apache Airflow® deployment is equipped with a PostgreSQL database that serves as Airflow's underlying metadata database and the scheduler's source of truth.
 
 On Astronomer Software, a Postgres metadata database will be created for each individual Airflow Deployment and hosted within your wider platform database.
 
@@ -18,7 +18,7 @@ This guide will cover guidelines for the following:
 - Access to Airflow's database on Astronomer
 - Example DAG that incorporates a query to the database
 
-> **Note:** Airflow's "Ad-Hoc Query" feature used to be a common way to test DB connections and query the Airflow metadata database via the Airflow UI but was deprecated in 1.10 for security reasons.
+> **Note:** Apache Airflow®'s "Ad-Hoc Query" feature used to be a common way to test DB connections and query the Airflow metadata database via the Airflow UI but was deprecated in 1.10 for security reasons.
 
 ### Risk associated with database access
 
@@ -37,7 +37,7 @@ A few examples of what you can query for:
 
 Read below for DB access guidelines both locally and on Astronomer.
 
-## Local access to the Airflow database
+## Local access to the Apache Airflow® database
 
 To successfully query from your Airflow Deployment's database, you'll need to set up your local Postgres connection.
 
@@ -124,7 +124,7 @@ docker exec -it <postgres_container_id> /bin/bash
 psql -U postgres
 ```
 
-## Access to the Airflow database on Astronomer
+## Access to the Apache Airflow® database on Astronomer
 
 The easiest way to pull from Airflow's metadata database on Astronomer is to leverage the `AIRFLOW_CONN_AIRFLOW_DB` environment variable, which we set [here](https://github.com/astronomer/airflow-chart/blob/master/templates/_helpers.yaml#L16-L20).
 

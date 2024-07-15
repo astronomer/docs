@@ -5,7 +5,7 @@ id: workspace-permissions
 description: Manage user roles and permissions on any Astronomer Workspace and all Airflow Deployments within it.
 ---
 
-Astronomer supports a permissions and role-based access control (RBAC) framework that allows users to configure varying levels of access both at the Workspace and Airflow Deployment levels.
+Astronomer supports a permissions and role-based access control (RBAC) framework that allows users to configure varying levels of access both at the Workspace and Apache Airflow® Deployment levels.
 
 Workspace and Deployment-level access can each be configured with 3 user roles (_Admin_, _Editor_, _Viewer_), all of which can be set and changed via the Software UI and CLI. Each role maps to a combination of permissions to both Astronomer and Apache Airflow itself.
 
@@ -87,7 +87,7 @@ If a user already exists on a Workspace before being invited via a Team, the use
 
 The ability to invite Workspace users to an Airflow Deployment within it is limited to Deployment _Admins_, who can also grant the _Admin_ role to other users. Deployment _Editors_ and _Viewers_ cannot invite or otherwise manage users. A user who creates a Deployment is automatically granted the _Admin_ role within it.
 
-> **Note:** In order for a user to be granted access to an Airflow Deployment, they must _first_ be invited to and assigned a role within the Workspace. On the other hand, a user could be a part of a Workspace but have no access or role to any Airflow Deployments within it.
+> **Note:** In order for a user to be granted access to an Apache Airflow® Deployment, they must _first_ be invited to and assigned a role within the Workspace. On the other hand, a user could be a part of a Workspace but have no access or role to any Airflow Deployments within it.
 
 #### Using the Software UI
 

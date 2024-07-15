@@ -5,7 +5,7 @@ id: view-logs
 description: View logs for your Deployments both locally and on Astro.
 ---
 
-View task and Airflow component logs to troubleshoot your data pipelines and better understand the health of both your tasks and their execution environment.
+View task and Apache Airflow® component logs to troubleshoot your data pipelines and better understand the health of both your tasks and their execution environment.
 
 Airflow has two different log types:
 
@@ -17,7 +17,7 @@ Task logs can additionally be exported to third-party observability platforms. S
 - [Export task logs and metrics to Datadog](export-datadog.md)
 - [Export task logs to AWS Cloudwatch](export-cloudwatch.md)
 
-## Airflow Component Logs
+## Apache Airflow® Component Logs
 
 Airflow has four core components: the scheduler, triggerer, worker, and webserver. Each component records its process in component logs. These logs can be used to monitor overall performance, troubleshoot errors, and optimize resources.
 
@@ -29,7 +29,7 @@ Airflow has four core components: the scheduler, triggerer, worker, and webserve
 
 - _Webserver logs_ relate to the health and performance of [the Airflow UI](https://www.astronomer.io/docs/learn/intro-to-airflow#airflow-components). If the Airflow UI at any point does not load, for example, webserver logs might indicate why.
 
-### Airflow component log levels
+### Apache Airflow® component log levels
 
 Logs and messages might also be associated with one of the following _log levels_:
 
@@ -37,7 +37,7 @@ Logs and messages might also be associated with one of the following _log levels
 - **Warn**: Emitted when Airflow detects an issue that may or may not be of concern but does not require immediate action. This often includes deprecation notices marked as `DeprecationWarning`. For example, Airflow might recommend that you upgrade your Deployment if there was a change to the Airflow database or task execution logic.
 - **Info**: Emitted frequently by Airflow to show that a standard scheduler process, such as DAG parsing, has started. These logs are frequent and can contain useful information. If you run dynamically generated DAGs, for example, these logs will show how many DAGs were created per DAG file and how long it took the scheduler to parse each of them.
 
-### View Airflow component logs in the Astro UI
+### View Apache Airflow® component logs in the Astro UI
 
 You can access scheduler, triggerer, and task logs in the Astro UI to find the past 24 hours of logs for any Deployment on its **Logs** page.
 

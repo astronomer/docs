@@ -29,7 +29,7 @@ If you primarily write and deploy DAGs, the following topics can help you get st
 - [Create an Astro project](create-project.md)
 - [Deploy code using the Astro CLI](deploy-cli.md)
 - [Set environment variables](environment-variables.md)
-- [Upgrade Airflow](manage-airflow-versions.md)
+- [Upgrade Apache Airflow®](manage-airflow-versions.md)
 
 ## Administration
 

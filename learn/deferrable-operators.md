@@ -1,7 +1,7 @@
 ---
 title: "Deferrable operators"
 sidebar_label: "Deferrable operators"
-description: "Implement deferrable operators to save cost and resources with Airflow."
+description: "Implement deferrable operators to save cost and resources with Apache Airflow®."
 id: deferrable-operators
 ---
 
@@ -19,7 +19,7 @@ Deferrable operators leverage the Python [asyncio](https://docs.python.org/3/lib
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: Deferrable Operators](https://academy.astronomer.io/astro-runtime-deferrable-operators) module.
+- Astronomer Academy: [Apache Airflow®: Deferrable Operators](https://academy.astronomer.io/astro-runtime-deferrable-operators) module.
 
 :::
 
@@ -36,7 +36,7 @@ Review the following terms and concepts to gain a better understanding of deferr
 
 - [asyncio](https://docs.python.org/3/library/asyncio.html): A Python library used as the foundation for multiple asynchronous frameworks. This library is core to deferrable operator functionality, and is used when writing triggers.
 - Triggers: Small, asynchronous sections of Python code. Due to their asynchronous nature, they coexist efficiently in a single process known as the triggerer.
-- Triggerer: An Airflow service similar to a scheduler or a worker that runs an [asyncio event loop](https://docs.python.org/3/library/asyncio-eventloop.html#asyncio-event-loop) in your Airflow environment. Running a triggerer is essential for using deferrable operators.
+- Triggerer: An Airflow service similar to a scheduler or a worker that runs an [asyncio event loop](https://docs.python.org/3/library/asyncio-eventloop.html#asyncio-event-loop) in your Apache Airflow® environment. Running a triggerer is essential for using deferrable operators.
 - Deferred: An Airflow task state indicating that a task has paused its execution, released the worker slot, and submitted a trigger to be picked up by the triggerer process.
 
 The terms deferrable, async, and asynchronous are used interchangeably and have the same meaning.

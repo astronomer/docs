@@ -13,7 +13,7 @@ import bash_two_commands_example_dag from '!!raw-loader!../code-samples/dags/bas
 import bash_script_example_dag from '!!raw-loader!../code-samples/dags/bashoperator/bash_script_example_dag.py';
 import print_ISS_info_dag from '!!raw-loader!../code-samples/dags/bashoperator/print_ISS_info_dag.py';
 
-The [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator) is one of the most commonly used operators in Airflow. It executes bash commands or a bash script from within your Airflow DAG.
+The [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator) is one of the most commonly used operators in Apache Airflow®. It executes bash commands or a bash script from within your Airflow DAG.
 
 In this guide you'll learn:
 

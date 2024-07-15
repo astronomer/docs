@@ -1,11 +1,11 @@
 ---
-title: "DAG-level parameters in Airflow" 
+title: "DAG-level parameters in Apache Airflow®" 
 sidebar_label: "DAG parameters"
 id: airflow-dag-parameters
-description: "Learn about all important DAG-level parameters in Airflow."
+description: "Learn about all important DAG-level parameters in Apache Airflow®."
 ---
 
-In Airflow, you can configure when and how your DAG runs by setting parameters in the DAG object. DAG-level parameters affect how the entire DAG behaves, as opposed to task-level parameters which only affect a single task or [Airflow configs](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html) which affect the entire Airflow instance. 
+In Apache Airflow®, you can configure when and how your DAG runs by setting parameters in the DAG object. DAG-level parameters affect how the entire DAG behaves, as opposed to task-level parameters which only affect a single task or [Airflow configs](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html) which affect the entire Airflow instance. 
 
 This guide covers all user-relevant DAG-level parameters in Airflow.
 

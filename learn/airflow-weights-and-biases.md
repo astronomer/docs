@@ -1,7 +1,7 @@
 ---
-title: "Manage your ML models with Weights and Biases and Airflow"
+title: "Manage your ML models with Weights and Biases and Apache Airflow®"
 sidebar_label: "Weights and Biases"
-description: "Learn how to use Airflow and Weights and Biases to manage and visualize your ML model lifecycle."
+description: "Learn how to use Apache Airflow® and Weights and Biases to manage and visualize your ML model lifecycle."
 id: airflow-weights-and-biases
 sidebar_custom_props: { icon: 'img/integrations/wandb_logo.svg' }
 ---
@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/integrations/wandb_logo.svg' }
 import CodeBlock from '@theme/CodeBlock';
 import weights_and_biases from '!!raw-loader!../code-samples/dags/airflow-weights-and-biases/weights_and_biases.py';
 
-[Weights and Biases](https://wandb.ai/site) (W&B) is a machine learning platform for model management that includes features like experiment tracking, dataset versioning, and model performance evaluation and visualization. Using W&B with Airflow gives you a powerful ML orchestration stack with first-class features for building, training, and managing your models.
+[Weights and Biases](https://wandb.ai/site) (W&B) is a machine learning platform for model management that includes features like experiment tracking, dataset versioning, and model performance evaluation and visualization. Using W&B with Apache Airflow® gives you a powerful ML orchestration stack with first-class features for building, training, and managing your models.
 
 In this tutorial, you'll learn how to create an Airflow DAG that completes feature engineering, model training, and predictions with the Astro Python SDK and scikit-learn, and registers the model with W&B for evaluation and visualization.
 

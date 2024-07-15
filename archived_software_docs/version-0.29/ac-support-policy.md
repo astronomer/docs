@@ -5,7 +5,7 @@ id: ac-support-policy
 description: Versioning and lifecycle policy for Astronomer Certified, our Apache Airflow offering for Astronomer Software.
 ---
 
-Astronomer Certified (AC) is a Debian-based, production-ready distribution of Apache Airflow that mirrors the open source project and undergoes additional levels of rigorous testing. New versions of AC are issued regularly and follow the Apache Airflow release schedule.
+Astronomer Certified (AC) is a Debian-based, production-ready distribution of Apache Airflow® that mirrors the open source project and undergoes additional levels of rigorous testing. New versions of AC are issued regularly and follow the Apache Airflow release schedule.
 
 This Docker image is hosted on the [Astronomer Docker registry](https://quay.io/repository/astronomer/ap-airflow?tab=tags) and allows you to run Airflow on Astronomer. All projects require that you specify an AC image in your `Dockerfile`.
 

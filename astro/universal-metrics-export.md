@@ -20,7 +20,7 @@ You can export comprehensive metrics about your Astro Deployments directly to an
 
 There are two types of metrics that you can export using the universal metrics exporter:
 
-- Airflow application level metrics
+- Apache Airflow® application level metrics
 - Infrastructure level metrics
 
 Both application and infrastructure metrics have the following metadata labels associated with them:
@@ -37,7 +37,7 @@ Both application and infrastructure metrics have the following metadata labels a
 
 Use these metadata labels to indentify each individual metric with its corresponding environment in Astro.
 
-### Airflow application metrics
+### Apache Airflow® application metrics
 
 Airflow application metrics are defined by Apache Airflow and are related to the health, success, and performance of the DAGs that are orchestrated and executed by Airflow. 
 

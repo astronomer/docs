@@ -8,7 +8,7 @@ description: Commonly asked questions and answers for Astronomer Software.
 
 ### Do ports or services need to be configured when installing Astronomer Software? Do I need to provide an IP address?
 
-Yes. You must provide an IP for the NAT gateway to access the Astronomer and Airflow user interfaces, and also to interact with the platform with the astro-cli tool. Reviewing our Terraform scripts and installation guides are helpful to better understand this requirement.
+Yes. You must provide an IP for the NAT gateway to access the Astronomer and Apache Airflow® user interfaces, and also to interact with the platform with the astro-cli tool. Reviewing our Terraform scripts and installation guides are helpful to better understand this requirement.
 
 ### Does Astronomer accept inbound connections? Do those connections have to be secured or is that something we need to configure?
 

@@ -42,7 +42,7 @@ Release date: December 11, 2021
 
 Release date: November 22, 2021
 
-### Support for Airflow 2.2.0
+### Support for Apache Airflow®® 2.2.0
 
 [Apache Airflow 2.2.0](https://airflow.apache.org/blog/airflow-2.2.0/) is an exciting milestone in the open source project. Most notably, this release introduces custom timetables and deferrable operators.
 

@@ -14,7 +14,7 @@ description: A summary of the latest Astro Runtime features and functionality. A
     </a>
 </p>
 
-Astro Runtime is a Docker image built and published by Astronomer that extends the Apache Airflow project to provide a differentiated data orchestration experience. This document provides a summary of changes made to each available version of Astro Runtime.
+Astro Runtime is a Docker image built and published by Astronomer that extends the Apache Airflow® project to provide a differentiated data orchestration experience. This document provides a summary of changes made to each available version of Astro Runtime.
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
@@ -34,7 +34,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 - Release date: June 28, 2024
 - Airflow version: 2.9.2
 
-### Early access Airflow bug fixes
+### Early access Apache Airflow® bug fixes
 
 - Fixed a bug where FAB config options, such as `[fab] update_fab_perms`, were not checking for values in the deprecated webserver config section. For example, `[webserver] update_fab_perms` ([#40317](https://github.com/apache/airflow/pull/40317))
 
@@ -47,7 +47,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 - Release date: June 11, 2024
 - Airflow version: 2.9.2
 
-## Airflow 2.9.2
+## Apache Airflow® 2.9.2
 
 Astro Runtime 11.5.0 includes same-day support for Apache Airflow 2.9.2. Airflow 2.9.2 contains a number of bug fixes including:
 
@@ -79,7 +79,7 @@ For more information, see the [Apache Airflow release notes](https://airflow.apa
 - Release date: May 6, 2024
 - Airflow version: 2.9.1
 
-### Early access Airflow bug fixes
+### Early access Apache Airflow® bug fixes
 
 - Fixed a bug affecting custom actions in Airflow plugins that prevents users from running an Astro Runtime environment locally for Astro Runtime versions `11.0.0`-`11.2.0`. Deployments running these versions on Astro are not affected. To continue using `11.0.0`-`11.2.0` locally, set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file ([#39421](https://github.com/apache/airflow/pull/39421))
 

@@ -1,14 +1,14 @@
 ---
-title: "Branching in Airflow"
+title: "Branching in Apache Airflow®"
 sidebar_label: "Branches"
 id: airflow-branch-operator
-description: "Learn about Airflow’s multiple options for building conditional logic and branching within DAGs, including the BranchPythonOperator and ShortCircuitOperator."
+description: "Learn about Apache Airflow®’s multiple options for building conditional logic and branching within DAGs, including the BranchPythonOperator and ShortCircuitOperator."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-When designing your data pipelines, you may encounter use cases that require more complex task flows than "Task A > Task B > Task C". For example, you may have a use case where you need to decide between multiple tasks to execute based on the results of an upstream task. Or you may have a case where part of your pipeline should only run under certain external conditions. Fortunately, Airflow has multiple options for building conditional logic and/or branching into your DAGs.
+When designing your data pipelines, you may encounter use cases that require more complex task flows than "Task A > Task B > Task C". For example, you may have a use case where you need to decide between multiple tasks to execute based on the results of an upstream task. Or you may have a case where part of your pipeline should only run under certain external conditions. Fortunately, Apache Airflow®® has multiple options for building conditional logic and/or branching into your DAGs.
 
 In this guide, you'll learn how you can use `@task.branch` (BranchPythonOperator) and `@task.short_circuit` (ShortCircuitOperator), other available branching operators, and additional resources to implement conditional logic in your Airflow DAGs.
 
@@ -327,7 +327,7 @@ Airflow offers a few other branching operators that work similarly to the Branch
 - [BranchSQLOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/branchsqloperator): Branches based on whether a given SQL query returns `true` or `false`.
 - [BranchDayOfWeekOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchdayofweekoperator): Branches based on whether the current day of week is equal to a given `week_day` parameter.
 - [BranchDateTimeOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchdatetimeoperator): Branches based on whether the current time is between `target_lower` and `target_upper` times.
-- [ExternalBranchPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/python/index.html#airflow.operators.python.ExternalBranchPythonOperator): Branches based on a Python function like the [BranchPythonOperator](#taskbranch-branchpythonoperator), but runs in a preexisting virtual environment like the [ExternalPythonOperator](airflow-isolated-environments.md) (available in Airflow 2.7+).
+- [ExternalBranchPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/python/index.html#airflow.operators.python.ExternalBranchPythonOperator): Branches based on a Python function like the [BranchPythonOperator](#taskbranch-branchpythonoperator), but runs in a preexisting virtual environment like the [ExternalPythonOperator](airflow-isolated-environments.md) (available in Apache Airflow® 2.7+).
 - [BranchPythonVirtualenvOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/python/index.html#airflow.operators.python.BranchPythonVirtualenvOperator): Branches based on a Python function like the [BranchPythonOperator](#taskbranch-branchpythonoperator), but runs in newly created virtual environment like the [PythonVirtualenvOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/PythonVirtualenvOperator) (available in Airflow 2.8+). The environment can be cached by providing a `venv_cache_path`.
 
 All of these operators take `follow_task_ids_if_true` and `follow_task_ids_if_false` parameters which provide the list of task(s) to include in the branch based on the logic returned by the operator.

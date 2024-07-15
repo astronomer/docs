@@ -1,7 +1,7 @@
 ---
-title: "Introduction to the TaskFlow API and Airflow decorators"
+title: "Introduction to the TaskFlow API and Apache Airflow® decorators"
 sidebar_label: "TaskFlow API & decorators"
-description: "An overview of Airflow decorators and how they can improve the DAG authoring experience."
+description: "An overview of Apache Airflow® decorators and how they can improve the DAG authoring experience."
 id: airflow-decorators
 ---
 
@@ -16,7 +16,7 @@ import TabItem from '@theme/TabItem';
 
 The _TaskFlow API_ is a functional API for using decorators to define DAGs and tasks, which simplifies the process for passing data between tasks and defining dependencies. You can use TaskFlow decorator functions (for example, `@task`) to pass data between tasks by providing the output of one task as an argument to another task. Decorators are a simpler, cleaner way to define your tasks and DAGs and can be used in combination with traditional operators.
 
-In this guide, you'll learn about the benefits of decorators and the decorators available in Airflow. You'll also review an example DAG and learn when you should use decorators and how you can combine them with traditional operators in a DAG.
+In this guide, you'll learn about the benefits of decorators and the decorators available in Apache Airflow®. You'll also review an example DAG and learn when you should use decorators and how you can combine them with traditional operators in a DAG.
 
 :::tip Other ways to learn
 
@@ -321,7 +321,7 @@ The Astro Python SDK offers much more functionality that greatly simplifies DAG 
 - [The Astro Python SDK for ETL guide](https://www.astronomer.io/docs/learn/astro-python-sdk-etl)
 - [Astro Python SDK documentation](https://astro-sdk-python.readthedocs.io/en/stable/)
 
-## Available Airflow decorators
+## Available Apache Airflow® decorators
 
 There are several decorators available to use with Airflow. This list provides a reference of currently available decorators:
 

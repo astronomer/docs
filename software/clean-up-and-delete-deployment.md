@@ -9,7 +9,7 @@ This document explains how to manage the deletion and cleanup of Deployments on 
 
 ## Delete a Deployment
 
-You can delete an Airflow Deployment using the **Delete Deployment** button at the bottom of the Deployment's **Settings** tab. 
+You can delete an Apache Airflow® Deployment using the **Delete Deployment** button at the bottom of the Deployment's **Settings** tab. 
 
 When you delete a Deployment, you delete your Airflow webserver, scheduler, metadata database, and deploy history, and you lose any configurations set in the Airflow UI. 
 
@@ -97,7 +97,7 @@ You can run a cronjob to automatically archive task and DAG metadata from your D
         # Name of the provider bucket name / local file path
         bucketName: "/tmp"
      
-        # The name of the Kubernetes Secret containing your Airflow connection
+        # The name of the Kubernetes Secret containing your Apache Airflow® connection
         providerEnvSecretName: "<your-secret-name>"
      
         # Run cleanup on specific table or list of tables in a comma separated format

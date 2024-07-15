@@ -1,12 +1,12 @@
 ---
-title: "Create an Azure Data Factory connection in Airflow"
+title: "Create an Azure Data Factory connection in Apache Airflow®"
 id: azure-data-factory
 sidebar_label: "Connection"
 description: Learn how to create an Azure Data Factory connection in Airflow.
 sidebar_custom_props: { icon: 'img/integrations/azure-data-factory.png' }
 ---
 
-[Azure Data Factory](https://learn.microsoft.com/en-us/azure/data-factory/) (ADF) is a cloud-based data integration and transformation service used to build data pipelines. Integrating ADF with Airflow allows you to run ADF pipelines and check their status from an Airflow DAG. 
+[Azure Data Factory](https://learn.microsoft.com/en-us/azure/data-factory/) (ADF) is a cloud-based data integration and transformation service used to build data pipelines. Integrating ADF with Apache Airflow® allows you to run ADF pipelines and check their status from an Airflow DAG. 
 
 This guide provides the basic setup for creating an ADF connection. For a complete integration tutorial, see [Run Azure Data Factory pipelines in Airflow](airflow-azure-data-factory-integration.md).
 
@@ -34,7 +34,7 @@ Complete the following steps to retrieve all of these values:
 2. Copy the **Name** of your data factory and the **Resource group**.
 3. Click on the subscription for your data factory, then copy the **Subscription ID** from the subscription window.
 4. Open your Microsoft Entra ID application. Then, from the **Overview** tab, copy the **Application (client) ID** and **Directory (tenant) ID**.
-5. [Create a new client secret](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal#option-3-create-a-new-application-secret) for your application to be used in the Airflow connection. Copy the **VALUE** of the client secret that appears.
+5. [Create a new client secret](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal#option-3-create-a-new-application-secret) for your application to be used in the Apache Airflow® connection. Copy the **VALUE** of the client secret that appears.
 6. [Assign](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal#assign-a-role-to-the-application) the [Data Factory Contributor](https://learn.microsoft.com/en-us/azure/data-factory/concepts-roles-permissions#set-up-permissions) role to your app so that Airflow can access the data factory.
 
 ## Create your connection
