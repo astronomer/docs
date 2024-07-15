@@ -3,7 +3,7 @@ title: 'Learn'
 sidebar_label: 'Overview'
 id: overview
 slug: /
-description: 'Use tutorials and concepts to learn everything you need to know about Apache Airflow and Astro'
+description: 'Use tutorials and concepts to learn everything you need to know about Apache Airflow® and Astro'
 hide_table_of_contents: true
 ---
 
@@ -11,9 +11,9 @@ import LinkCardGrid from '@site/src/components/LinkCardGrid';
 import LinkCard from '@site/src/components/LinkCard';
 import AstroCard from '@site/src/components/AstroCard';
 
-<p class="DocItem__header-description">Use tutorials and concepts to learn everything you need to know about Apache Airflow and Astro.</p>
+<p class="DocItem__header-description">Use tutorials and concepts to learn everything you need to know about [Apache Airflow®](https://airflow.apache.org/) and Astro.</p>
 
-## New to Airflow and Astro?
+## New to Apache Airflow® and Astro?
 
 <LinkCardGrid>
   <LinkCard label="Get started with Apache Airflow - Tutorial" description="Set up Airflow locally and run your first DAG in under an hour." href="/learn/get-started-with-airflow" icon="/docs/img/airflow-logo.png" />

@@ -3,14 +3,14 @@ title: 'Astronomer Software documentation'
 sidebar_label: 'Overview'
 id: overview
 slug: /
-description: 'Documentation for how to run Airflow at enterprise scale with Astronomer Software.'
+description: 'Documentation for how to run Apache Airflow® at enterprise scale with Astronomer Software.'
 hide_table_of_contents: true
 ---
 
 import LinkCardGrid from '@site/src/components/LinkCardGrid';
 import LinkCard from '@site/src/components/LinkCard';
 
-<p class="DocItem__header-description">Astronomer Software is the best way to run Apache Airflow in your private cloud. Using Astronomer's tooling, you can have fine-tuned control over every aspect of your Airflow experience.</p>
+<p class="DocItem__header-description">Astronomer Software is the best way to run [Apache Airflow®](https://airflow.apache.org/) in your private cloud. Using Astronomer's tooling, you can have fine-tuned control over every aspect of your Airflow experience.</p>
 
 import AstroCard from '@site/src/components/AstroCard';
 

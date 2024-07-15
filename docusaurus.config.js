@@ -109,7 +109,7 @@ module.exports = {
     },
     astroCard: {
       title: "What is Astro?",
-      description: "Astro is a cloud solution that helps you focus on your data pipelines and spend less time managing Apache Airflow, with capabilities enabling you to build, run, and observe data all in one place.",
+      description: "Astro is a cloud solution that helps you focus on your data pipelines and spend less time managing Apache Airflow®, with capabilities enabling you to build, run, and observe data all in one place.",
       buttons: {
         primary: {
           label: "Try Astro",
