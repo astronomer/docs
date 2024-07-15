@@ -11,7 +11,7 @@ import LinkCardGrid from '@site/src/components/LinkCardGrid';
 import LinkCard from '@site/src/components/LinkCard';
 import AstroCard from '@site/src/components/AstroCard';
 
-<p class="DocItem__header-description">Everything you need to know about Astronomer’s modern data orchestration tool for the cloud, powered by [Apache Airflow®®](https://airflow.apache.org/).</p>
+<p class="DocItem__header-description">Everything you need to know about Astronomer’s modern data orchestration tool for the cloud, powered by [Apache Airflow®](https://airflow.apache.org/).</p>
 
 <AstroCard />
 

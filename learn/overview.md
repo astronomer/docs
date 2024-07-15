@@ -11,7 +11,7 @@ import LinkCardGrid from '@site/src/components/LinkCardGrid';
 import LinkCard from '@site/src/components/LinkCard';
 import AstroCard from '@site/src/components/AstroCard';
 
-<p class="DocItem__header-description">Use tutorials and concepts to learn everything you need to know about [Apache Airflow®®](https://airflow.apache.org/) and Astro.</p>
+<p class="DocItem__header-description">Use tutorials and concepts to learn everything you need to know about [Apache Airflow®](https://airflow.apache.org/) and Astro.</p>
 
 ## New to Apache Airflow® and Astro?
 

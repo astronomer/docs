@@ -10,7 +10,7 @@ import LinkCardGrid from '@site/src/components/LinkCardGrid';
 import LinkCard from '@site/src/components/LinkCard';
 import AstroCard from '@site/src/components/AstroCard';
 
-<p class="DocItem__header-description">The Astro CLI is the command line interface for data orchestration. It's the easiest way to get started with [Apache Airflow®®](https://airflow.apache.org/) and can be used with all Astronomer products.</p>
+<p class="DocItem__header-description">The Astro CLI is the command line interface for data orchestration. It's the easiest way to get started with [Apache Airflow®](https://airflow.apache.org/) and can be used with all Astronomer products.</p>
 
 :::highlight
 __Install the CLI__
