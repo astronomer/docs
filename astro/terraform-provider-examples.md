@@ -5,7 +5,10 @@ id: terraform-provider-examples
 description: Explore examples of common Terraform actions or configurations.
 ---
 
-After you finish your first Terraform initialization, you can begin using Terraform scripts to automate, templatize, or programmatically manage your Astro environments.
+:::publicpreview
+:::
+
+After you finish your first [Terraform](https://www.terraform.io/) initialization, you can begin using Terraform scripts to automate, templatize, or programmatically manage your Astro environments.
 
 ## Prerequisites
 

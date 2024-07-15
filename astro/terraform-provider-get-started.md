@@ -5,7 +5,10 @@ id: terraform-provider-get-started
 description: Get started using the Astro Terraform Provider to work with your Astro implementations.
 ---
 
-To use Terraform with Astro, you must set up authorize the Astro Terraform Provider to access and modify your Astro Organization resources. Then, you can programattically update your Astro Organization using Terraform files.
+:::publicpreview
+:::
+
+To use [Terraform](https://www.terraform.io/) with Astro, you must set up authorize the [Astro Terraform Provider](https://registry.terraform.io/providers/astronomer/astro/0.3.0) to access and modify your Astro Organization resources. Then, you can programattically update your Astro Organization using Terraform files.
 
 ## Prerequisites
 
