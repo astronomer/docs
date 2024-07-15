@@ -100,9 +100,9 @@ dag_factory.generate_dags(globals())
 
 ```
 
-    :::tip Multiple config files
+:::tip Multiple config files
 
-    If you have multiple YAML configuration files, you can import them with the following code:
+If you have multiple YAML configuration files, you can import them with the following code:
 
     ```python
 
@@ -113,7 +113,7 @@ dag_factory.generate_dags(globals())
 
     ```
 
-    :::
+:::
 
 ## Step 4: Add a DAG-level callback
 
