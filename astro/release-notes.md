@@ -27,6 +27,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## July 16, 2024
 
+### Astronomer to support DAG Factory
+
+Astronomer is assuming maintenance responsibility for Adam Boscarino’s [DAG Factory](https://github.com/astronomer/dag-factory), an open source project that generates DAGs from YAML files.
+
+DAG Factory is an important resource for Airflow users that prefer to work with tools other than Python for their data analysis, such as SQL and dbt. Astronomer is committed to supporting the open source community and the ongoing health and development of this project. Going forward, DAG factory will remain open source, and we’ll be working with both Astro customers and Airflow community members to add support for datasets, XCOMs, new operators, and new DAG authoring capabilities as Airflow continues to evolve. See
+
 ### Additional improvements
 
 - Added the following metrics to [Metrics Export](https://www.astronomer.io/docs/astro/export-metrics):
