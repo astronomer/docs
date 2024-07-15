@@ -82,7 +82,6 @@ module.exports = {
             "cloud-ide/custom-cell-reference"
           ],
         },
-        "dag-factory",
       ],
     },
     {

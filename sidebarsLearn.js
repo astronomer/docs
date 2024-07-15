@@ -78,6 +78,7 @@ module.exports = {
             'error-notifications-in-airflow',
             'airflow-dag-parameters',
             'dag-best-practices',
+            "dag-factory",
             'debugging-dags',
             'dynamic-tasks',
             'templating',
