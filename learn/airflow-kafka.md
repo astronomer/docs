@@ -92,9 +92,9 @@ The Kafka Airflow provider uses a Kafka connection assigned to the `kafka_conn_i
 
 2. Click **Admin** > **Connections** > **+** to create a new connection.
 
-3. Name your connection `kafka_default` and select the **Apache Kafka** connection type. Provide the details for the connection to your Kafka cluster as JSON in the **Extra** field.
+3. Name your connection `kafka_default` and select the **Apache Kafka** connection type. Provide the details for the connection to your Kafka cluster as JSON in the **Extra** field.
 
-    If you connect to a local Kafka cluster created with the `server.properties` in the info box from the [Prerequisites](#prerequisites) section, use the following configuration:
+    If you connect to a local Kafka cluster created with the `server.properties` in the info box from the [Prerequisites](#prerequisites) section, use the following configuration:
 
     ```json
     {
@@ -105,7 +105,7 @@ The Kafka Airflow provider uses a Kafka connection assigned to the `kafka_conn_i
     }
     ```
 
-    The key-value pairs for your connection depend on what kind of Kafka cluster you are connecting to. Most operators in the Kafka Airflow provider mandate that you define the `bootstrap.servers` key. You can find a full list of optional connection parameters in the [librdkafka documentation](https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md).
+    The key-value pairs for your connection depend on what kind of Kafka cluster you are connecting to. Most operators in the Kafka Airflow provider mandate that you define the `bootstrap.servers` key. You can find a full list of optional connection parameters in the [librdkafka documentation](https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md).
 
 4. Click **Save**.
 
@@ -150,7 +150,7 @@ If you defined a schema for your Kafka topic, the generator needs to return comp
 
 :::tip
 
-The ConsumeFromTopicOperator can replace classical sinks by containing the logic to write messages to a storage destination in its `apply_function`. This gives you the advantage of being able to use Airflow to schedule message consumption from a Kafka topic based on complex logic embedded in your wider data ecosystem. For example, you can write messages to S3 using the [S3CreateObjectOperator](https://registry.astronomer.io/providers/amazon/modules/s3createobjectoperator), which depends on other upstream task having completed successfully, such as the creation of a specific S3 bucket.
+The ConsumeFromTopicOperator can replace classical sinks by containing the logic to write messages to a storage destination in its `apply_function`. This gives you the advantage of being able to use Airflow to schedule message consumption from a Kafka topic based on complex logic embedded in your wider data ecosystem. For example, you can write messages to S3 using the [S3CreateObjectOperator](https://registry.astronomer.io/providers/amazon/modules/s3createobjectoperator), which depends on other upstream task having completed successfully, such as the creation of a specific S3 bucket.
 
 :::
 

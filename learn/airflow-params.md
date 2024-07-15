@@ -15,7 +15,7 @@ import tdro_example_downstream_traditional from '!!raw-loader!../code-samples/da
 import simple_param_dag from '!!raw-loader!../code-samples/dags/airflow-params/simple_param_dag.py';
 import simple_param_dag_traditional from '!!raw-loader!../code-samples/dags/airflow-params/simple_param_dag_traditional.py';
 
-Params are arguments which you can pass to an Airflow DAG or task at runtime and are stored in the [Airflow context dictionary](airflow-context.md) for each DAG run. You can pass DAG and task-level params by using the `params` parameter.
+Params are arguments which you can pass to an Airflow DAG or task at runtime and are stored in the [Airflow context dictionary](airflow-context.md) for each DAG run. You can pass DAG and task-level params by using the `params` parameter.
 
 Params are ideal to store information that is specific to individual DAG runs like changing dates, file paths or ML model configurations. Params are not encrypted and therefore not suitable to pass secrets. See also [Best practices for storing information in Airflow](airflow-variables.md#best-practices-for-storing-information-in-airflow).
 

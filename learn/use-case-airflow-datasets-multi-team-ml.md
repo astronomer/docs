@@ -43,7 +43,7 @@ astro dev start
 
 This command builds your Astro project into a Docker image and spins up Docker containers on your machine to run it. This project requires containers for your scheduler, webserver, executor, and workers, as well as a container for a local minio S3Filesystem and one for an ML flow instance.
 
-After the command finishes, open the Airflow UI at `https://localhost:8080/` and toggle on the `astro_ml_producer` and `astro_ml_consumer` DAGs. Then trigger the `astro_ml_producer` DAG using the play button. You'll see that the `astro_ml_consumer` DAG starts after `astro_ml_producer` completes.
+After the command finishes, open the Airflow UI at `https://localhost:8080/` and toggle on the `astro_ml_producer` and `astro_ml_consumer` DAGs. Then trigger the `astro_ml_producer` DAG using the play button. You'll see that the `astro_ml_consumer` DAG starts after `astro_ml_producer` completes.
 
 ![Airflow UI View screenshot](/img/examples/use-case-airflow-ml-datasets_airflowuiview.png)
 

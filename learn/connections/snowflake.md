@@ -80,7 +80,7 @@ Complete the following steps to retrieve these values:
 
 2. Click on your account name in the top right corner and hover over **Switch Role** to see a list of all available roles. Copy your **Role**.
 
-    ![Screenshot roles in Snowflake classic console.](/img/tutorials/connections-snowflake_classic_role.png)
+    ![Screenshot roles in Snowflake classic console.](/img/tutorials/connections-snowflake_classic_role.png)
 
 3. Copy your **Warehouse** from the **Warehouses** tab.
 

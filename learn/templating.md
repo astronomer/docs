@@ -49,8 +49,8 @@ Templating in Airflow works the same as Jinja templating in Python. You enclose 
 
 Some of the most commonly used Airflow variables that you can use in templates are:
 
-- `{{ ds }}`: The DAG Run’s logical date as `YYYY-MM-DD`.
-- `{{ ds_nodash }}`: The DAG run’s logical date as `YYYYMMDD`.
+- `{{ ds }}`: The DAG Run’s logical date as `YYYY-MM-DD`.
+- `{{ ds_nodash }}`: The DAG run’s logical date as `YYYYMMDD`.
 - `{{ data_interval_start }}`: The start of the data interval.
 - `{{ data_interval_end }}`: The end of the data interval.
 

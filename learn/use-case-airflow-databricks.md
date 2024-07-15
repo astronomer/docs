@@ -50,7 +50,7 @@ To run the example project, first make sure Docker Desktop is running. Then, ope
 astro dev start
 ```
 
-This command builds your project and spins up 4 Docker containers on your machine to run it. After the command finishes, open the Airflow UI at `https://localhost:8080/` and trigger the `renewable_analysis_dag` DAG using the play button.
+This command builds your project and spins up 4 Docker containers on your machine to run it. After the command finishes, open the Airflow UI at `https://localhost:8080/` and trigger the `renewable_analysis_dag` DAG using the play button.
 
 ## Project contents
 
