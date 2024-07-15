@@ -592,7 +592,7 @@ Astro is now available as an Azure Native ISV Service. If your team is consideri
 - Microsoft Entra ID is pre-configured for all Organizations.
 - It's easier to create Astro resources and get started directly from Azure.
 
-See [Install Astro from the Astro marketplace](https://www.astronomer.io/docs/astro/install-azure) for setup steps. To learn more about Astronomer's partnership with Microsoft, see [Introducing Apache Airflow™ on Astro – an Azure Native ISV Service](https://www.astronomer.io/blog/introducing-apache-airflow-on-astro-an-azure-native-isv-service/).
+See [Install Astro from the Astro marketplace](https://www.astronomer.io/docs/astro/install-azure) for setup steps. To learn more about Astronomer's partnership with Microsoft, see [Introducing Apache Airflow® on Astro – an Azure Native ISV Service](https://www.astronomer.io/blog/introducing-apache-airflow-on-astro-an-azure-native-isv-service/).
 
 ### Create Airflow connections in the Astro UI and link them to Deployments
 

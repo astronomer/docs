@@ -23,7 +23,7 @@ To run and manage Astro from Azure, you need to create an Astro Azure resource. 
 
 An _Organization_ is the highest management level on Astro. An Organization contains _Workspaces_, which are collections of _Deployments_, or Airflow environments, that are typically owned by a single team. You can manage user roles and permissions both at the Organization and Workspace levels.
 
-1. In the search bar for Azure Portal, search `astro` or `airflow`. Then, select **Apache Airflow™ on Astro - An Azure Native ISV Service.**
+1. In the search bar for Azure Portal, search `astro` or `airflow`. Then, select **Apache Airflow® on Astro - An Azure Native ISV Service.**
     
     ![The Azure marketplace search bar. The text 'astro' is entered and the search bar returns the Astro Azure Native ISC Service as a result.](/img/docs/azure-search.png)
     
