@@ -247,7 +247,7 @@ No matter what option you choose, the commands that you run should return the up
 
 ### Configuring a custom updates JSON URL
 
-After you have made the updates JSON accessible within your premises, you must configure the Helm chart to fetch updates from the custom URL:  
+After you have made the updates JSON accessible within your premises, you must configure the Helm chart to fetch updates from the custom URL:
 
 ```yaml
 astronomer:

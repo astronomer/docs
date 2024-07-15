@@ -36,22 +36,22 @@ To get the most out of this tutorial, you should be familiar with:
 - The [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview).
 - A [Weights and Biases](https://wandb.ai/site) account. Personal accounts are available for free.
 
-## Quickstart  
-  
+## Quickstart
+
 If you have a Github account, you can get started quickly by cloning the demo repository. For more detailed instructions for setting up the project, start with [Step 1](#step-1-configure-your-astro-project).
 
 1. Clone the demo repository:
-      
-    ```sh 
+
+    ```sh
     git clone https://github.com/astronomer/airflow-wandb-demo
     cd airflow-wandb-demo
     ```
-      
+
 2. Update the .env file with your WANDB_API_KEY.
 
 3. Start Airflow by running:
 
-    ```sh 
+    ```sh
     astro dev start
     ```
 
@@ -96,11 +96,11 @@ Before feature engineering and training, the data needs to be transformed. This 
 
     ```sql
     with subscription_periods as (
-        select subscription_id, 
-            customer_id, 
-            cast(start_date as date) as start_date, 
-            cast(end_date as date) as end_date, 
-            monthly_amount 
+        select subscription_id,
+            customer_id,
+            cast(start_date as date) as start_date,
+            cast(end_date as date) as end_date,
+            monthly_amount
             from {{subscription_periods}}
     ),
 
@@ -305,10 +305,10 @@ You'll use environment variables to create Airflow connections to Snowflake and 
 
 1. Open the (Airflow UI)[http://localhost:8080], unpause the `customer_analytics` DAG, and trigger the DAG.
 
-2. The logs in the `train` and `predict` tasks will contain a link to your W&B project which shows plotted results from the training and prediction. 
+2. The logs in the `train` and `predict` tasks will contain a link to your W&B project which shows plotted results from the training and prediction.
 
     ![wandb task logs](/img/guides/wandb_task_logs.png)
 
-    Go to one of the links to view the results in W&B. 
+    Go to one of the links to view the results in W&B.
 
     ![wandb results](/img/guides/wandb_results.png)

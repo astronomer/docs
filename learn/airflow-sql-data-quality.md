@@ -102,12 +102,12 @@ To use SQL check operators, install the [Common SQL provider](https://registry.a
 
     This DAG creates and populates a small SQlite table `birds` with information about birds. Then, three tasks containing data quality checks are run on the table:
 
-    - The `column_checks` task uses the `SQLColumnCheckOperator` to run the column-level checks provided to the `column_mapping` dictionary. The task also uses an operator-level [`partition_clause`](#partition_clause) to only run the checks on rows where the `bird_name` column is not null. 
-    
+    - The `column_checks` task uses the `SQLColumnCheckOperator` to run the column-level checks provided to the `column_mapping` dictionary. The task also uses an operator-level [`partition_clause`](#partition_clause) to only run the checks on rows where the `bird_name` column is not null.
+
     - The `table_checks` task uses the `SQLTableCheckOperator` to run two checks on the whole table:
       - `row_count_check`: This check makes sure the table has a least three rows.
       - `average_happiness_check`: This check makes sure the average happiness of the birds is at least 9. This check has a check-level `partition_clause` which means the check only runs on rows with observations from 2021 onwards.
-    
+
     - The `custom_check` task uses the `SQLCheckOperator`. This operator can run any SQL statement that returns a single row and will deem the data quality check failed if the that row contains any value [Python bool casting](https://docs.python.org/3/library/stdtypes.html) evaluates as `False`, for example `0`. Otherwise, the data quality check and the task will be marked as successful. This task will run the SQL statement in the file `include/custom_check.sql` on the `table_name` passed as a parameter. Note that in order to run SQL stored in a file, the path to the SQL file has to be added to the `template_searchpath` parameter of the DAG.
 
 4. Open Airflow at `http://localhost:8080/`. Run the DAG manually by clicking the play button, then click the DAG name to view the DAG in the **Grid** view. All checks are set up to pass.
@@ -209,13 +209,13 @@ The `SQLCheckOperator` returns a single row from a provided SQL query and checks
 - Comparisons between multiple tables.
 - The results of any other function that can be written as a SQL query.
 
-The target table(s) for the `SQLCheckOperator` has to be specified within the SQL statement. The `sql` parameter of this operator can be either a complete SQL query as a string or, as in this tutorial, a reference to a query stored in a local file. 
+The target table(s) for the `SQLCheckOperator` has to be specified within the SQL statement. The `sql` parameter of this operator can be either a complete SQL query as a string or, as in this tutorial, a reference to a query stored in a local file.
 
 ### `partition_clause`
 
 With the SQLColumnCheckOperator and SQLTableCheckOperator, you can run checks on a subset of your table using either a check-level or task-level `partition_clause` parameter. This parameter takes a SQL `WHERE`-clause (without the `WHERE` keyword) and uses it to filter your table before running a given check or group of checks in a task.
 
-The code snippet below shows a SQLColumnCheckOperator defined with a `partition_clause` at the operator level, as well as a `partition_clause` in one of the two column checks defined in the `column_mapping`. 
+The code snippet below shows a SQLColumnCheckOperator defined with a `partition_clause` at the operator level, as well as a `partition_clause` in one of the two column checks defined in the `column_mapping`.
 
 In the following example, the operator checks whether:
 

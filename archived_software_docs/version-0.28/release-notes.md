@@ -27,7 +27,7 @@ Release date: January 26, 2023
 
 ### Bug fixes
 
-- Fixed the following vulnerabilities: 
+- Fixed the following vulnerabilities:
 
     - [CVE-2021-44716](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44716)
     - [CVE-2022-27664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27664)
@@ -51,7 +51,7 @@ Release date: January 26, 2023
 
 Release date: October 14, 2022
 
-### Bug fixes 
+### Bug fixes
 
 - Fixed the following vulnerabilities:
     - [CVE-2022-40674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40674)
@@ -162,7 +162,7 @@ For more information about configuring this feature, read [Import IDP Groups](im
 - Removed root user permissions for authSidecar
 - Added AWS RDS certificates to list of trusted certificates
 - Removed support for Kubernetes 1.18
-- Fixed some confusing behavior with the Git-Sync **SSH Key** field in the UI  
+- Fixed some confusing behavior with the Git-Sync **SSH Key** field in the UI
 - Fixed an issue where the Astronomer platform and Airflow could not communicate in environments where inter-namespace communication is disabled
 - Fixed an issue where users would frequently get 502 errors when logging in to the Astronomer UI
 - Fixed an issue where users would get timeout issues when attempting to log in to an Astronomer installation on OpenShift

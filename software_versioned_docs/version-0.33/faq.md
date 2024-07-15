@@ -57,7 +57,7 @@ Astronomer defines the required Roles or ClusterRoles. The default mode requires
 
 ### Are there separate credentials or accesses that Astronomer provisions?
 
-No. Review the [Astronomer Helm chart repo](https://github.com/astronomer/astronomer) to learn more about Astronomer Software default configurations. 
+No. Review the [Astronomer Helm chart repo](https://github.com/astronomer/astronomer) to learn more about Astronomer Software default configurations.
 
 ## Deployment
 

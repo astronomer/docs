@@ -1,7 +1,7 @@
 """
 ## Use the OpenSearch provider to ingest and search Hamilton lyrics
 
-This DAG uses the OpenSearch provider to create an index in OpenSearch, 
+This DAG uses the OpenSearch provider to create an index in OpenSearch,
 ingest Hamilton lyrics into the index, and search for which character and which song
 mention a keyword the most.
 """

@@ -1,7 +1,7 @@
 """
 ## Use the Pinecone Airflow Provider to generate and query vectors for series descriptions
 
-This DAG runs a simple MLOps pipeline that uses the Pinecone Airflow Provider to import 
+This DAG runs a simple MLOps pipeline that uses the Pinecone Airflow Provider to import
 series descriptions, generate vectors for them, and query the vectors for series based on
 a user-provided mood.
 """

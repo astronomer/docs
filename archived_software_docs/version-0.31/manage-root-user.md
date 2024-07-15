@@ -9,7 +9,7 @@ When you install Astronomer Software, a root user with the username `root` and a
 
 ## Log in as the root user
 
-1. Run the following command to retrieve the default password created by Astronomer: 
+1. Run the following command to retrieve the default password created by Astronomer:
 
     ```sh
     kubectl get secret astronomer-root-admin-credentials -o jsonpath='{.data.password}' -n <your-platform-namespace> | base64 --decode
@@ -21,7 +21,7 @@ When you install Astronomer Software, a root user with the username `root` and a
 
 You can use a custom root user password to prevent employees who leave your organization from accessing the root user account.
 
-To configure a custom password for the root user, run the following command: 
+To configure a custom password for the root user, run the following command:
 
 ```sh
 kubectl patch secret -n <your-platform-namespace> astronomer-root-admin-credentials --type=json -p='[{ "op" : "replace" , "path" : "/data/password" , "value" : "'$(echo -n "<your-new-password>" | base64)'"}]' && kubectl create job --from=cronjob/<your-release-name>-update-root-admin-password-cronjob manual3 -n <your-platform-namespace>

@@ -106,7 +106,7 @@ To set up a private connection between an Astro Virtual Network (VNet) and an Az
             "Microsoft.Network/virtualNetworks/virtualNetworkPeerings/read"
         ],
         "NotActions": [
-      
+
         ],
         "AssignableScopes": [
           "/subscriptions/{customer-subscription-id}"
@@ -119,7 +119,7 @@ To set up a private connection between an Astro Virtual Network (VNet) and an Az
     ```sh
     # Add Astronomer Service Principal
     az ad sp create --id a67e6057-7138-4f78-bbaf-fd9db7b8aab0
-    
+
     # Create a Custom role with permissions prepared in previous step
     az role definition create --role-definition ~/astro-vnet-peering-creator-role.json
 
@@ -135,7 +135,7 @@ To set up a private connection between an Astro Virtual Network (VNet) and an Az
 
 4. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) to tell them that you granted permissions to the Astronomer Service Principal. In addition, provide the following details in your request:
 
-    - Astro Cluster ID 
+    - Astro Cluster ID
     - Azure Tenant ID and Subscription ID of the target VNet
     - Resource group ID
     - VNet ID for the peering
@@ -180,7 +180,7 @@ To set up a private connection between an Astro Virtual Network (VNet) and an Az
             "Microsoft.Network/virtualWans/virtualHubs/read"
         ],
         "NotActions": [
-      
+
         ],
         "AssignableScopes": [
           "/subscriptions/{customer-subscription-id}"
@@ -193,7 +193,7 @@ To set up a private connection between an Astro Virtual Network (VNet) and an Az
     ```sh
     # Add Astronomer Service Principal
     az ad sp create --id a67e6057-7138-4f78-bbaf-fd9db7b8aab0
-    
+
     # Create a Custom role with permissions prepared in previous step
     az role definition create --role-definition ~/astro-vhub-peering-creator-role.json
 
@@ -209,7 +209,7 @@ To set up a private connection between an Astro Virtual Network (VNet) and an Az
 
 4. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) to tell them that you granted them permissions to the Astronomer Service Principal. In addition, provide the following details in your request:
 
-    - Astro Cluster ID 
+    - Astro Cluster ID
     - Azure Tenant ID and Subscription ID with a VHub
     - Resource group ID
     - VHub name and preferable name for the peering

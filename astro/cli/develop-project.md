@@ -55,7 +55,7 @@ This command generates the following files in your directory:
 └── requirements.txt # For Python packages
 ```
 
-Use the rest of this document to understand how to interact with each of these folders and files. 
+Use the rest of this document to understand how to interact with each of these folders and files.
 
 ## Add DAGs
 
@@ -76,11 +76,11 @@ Use the `astro run <dag-id>` command to run and debug a DAG from the command lin
 ## Add utility files
 
 Airflow DAGs sometimes require utility files to run workflows. This can include:
- 
+
 - SQL files.
 - Custom Airflow operators.
 - Python functions.
- 
+
 When more than one DAG in your Astro project needs a certain function or query, creating a shared utility file helps make your DAGs idempotent, more readable, and minimizes the amount of code you have in each DAG.
 
 You can store utility files in the `/dags` directory of your Astro project. In most cases, Astronomer recommends adding your utility files to the `/dags` directory and organizing them into sub-directories based on whether they're needed for a single DAG or for multiple DAGs.
@@ -96,12 +96,12 @@ In the following example, the `dags` folder includes both types of utility files
         └── common_utils.py # common utils
 ```
 
-1. To add utility files which are shared between all your DAGs, create a folder named `utils` in the `dags` directory of your Astro project. To add utility files only for a specific DAG, create a new folder in `dags` to store both your DAG file and your utility file. 
+1. To add utility files which are shared between all your DAGs, create a folder named `utils` in the `dags` directory of your Astro project. To add utility files only for a specific DAG, create a new folder in `dags` to store both your DAG file and your utility file.
 2. Add your utility files to the folder you created.
 3. Reference your utility files in your DAG code.
 4. Apply your changes. If you're developing locally, refresh the Airflow UI in your browser.
 
-Utility files in the `/dags` directory will not be parsed by Airflow, so you don't need to specify them in `.airflowignore` to prevent parsing. If you're using [DAG-only deploys](https://www.astronomer.io/docs/astro/deploy-code#deploy-dags-only) on Astro, changes to this folder are deployed when you run `astro deploy --dags` and do not require rebuilding your Astro project into a Docker image and restarting your Deployment. 
+Utility files in the `/dags` directory will not be parsed by Airflow, so you don't need to specify them in `.airflowignore` to prevent parsing. If you're using [DAG-only deploys](https://www.astronomer.io/docs/astro/deploy-code#deploy-dags-only) on Astro, changes to this folder are deployed when you run `astro deploy --dags` and do not require rebuilding your Astro project into a Docker image and restarting your Deployment.
 
 ## Add Airflow connections, pools, variables
 
@@ -120,7 +120,7 @@ Astronomer recommends using the `airflow_settings.yaml` file so that you don’t
 
 ## Add test data or files for local testing
 
-Use the `include` folder of your Astro project to store files for testing locally, such as test data or a dbt project file. The files in your `include` folder are included in your deploys to Astro, but they are not parsed by Airflow. Therefore, you don't need to specify them in `.airflowignore` to prevent parsing. 
+Use the `include` folder of your Astro project to store files for testing locally, such as test data or a dbt project file. The files in your `include` folder are included in your deploys to Astro, but they are not parsed by Airflow. Therefore, you don't need to specify them in `.airflowignore` to prevent parsing.
 
 If you're running Airflow locally, apply your changes by refreshing the Airflow UI.
 
@@ -149,7 +149,7 @@ The `airflow_settings.yaml` file includes a template with the default values for
       variables: ## variable_name and variable_value are required
         - variable_name: my_variable
           variable_value: my_value
-    
+
     ```
 
 2. Save the modified `airflow_settings.yaml` file in your code editor. If you use a Mac computer, for example, use **Command-S**.
@@ -163,13 +163,13 @@ The `airflow_settings.yaml` file includes a template with the default values for
 5. Optional. To add another connection, pool, or variable, you append it to this file within its corresponding section. To create another variable, add it under the existing `variables` section of the same file. For example:
 
   ```yaml
-  
+
   variables:
     - variable_name: <my-variable-1>
       variable_value: <my-variable-value>
     - variable_name: <my-variable-2>
       variable_value: <my-variable-value-2>
-  
+
   ```
 
 ## Add Python, OS-level packages, and Airflow providers
@@ -223,7 +223,7 @@ If your environment variables contain sensitive information or credentials that 
 
 3. [Restart your local environment](cli/run-airflow-locally.md#restart-a-local-airflow-environment).
 4. Run the following command to confirm that your environment variables were applied locally:
-   
+
     ```sh
     astro dev bash --scheduler "/bin/bash && env"
     ```
@@ -265,15 +265,15 @@ my_project
     └── prod.env
 ```
 
-## Add Airflow plugins 
+## Add Airflow plugins
 
 If you need to build a custom view in the Airflow UI or build an application on top of the Airflow metadata database, you can use Airflow plugins. To use an Airflow plugin, add your plugin files to the `plugins` folder of your Astro project. To apply changes from this folder to a local Airflow environment, [restart your local environment](cli/run-airflow-locally.md#restart-a-local-airflow-environment).
 
 To learn more about Airflow plugins and how to build them, see [Airflow Plugins](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/plugins.html) in Airflow documentation or the Astronomer [Airflow plugins](https://www.astronomer.io/docs/learn/using-airflow-plugins) guide.
 
-## Unsupported project configurations 
+## Unsupported project configurations
 
-You can't use `airflow.cfg` or `airflow_local_settings.py` files in an Astro project. `airflow_local_settings.py` has no effect on Astro Deployments, and `airflow.cfg` has no effect on local environments and Astro Deployments. 
+You can't use `airflow.cfg` or `airflow_local_settings.py` files in an Astro project. `airflow_local_settings.py` has no effect on Astro Deployments, and `airflow.cfg` has no effect on local environments and Astro Deployments.
 
 An alternative to using `airflow.cfg` is to set Airflow environment variables in your `.env` file. See [Set environment variables locally](#set-environment-variables-locally).
 

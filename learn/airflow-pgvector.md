@@ -48,7 +48,7 @@ This tutorial uses a local PostgreSQL database created as a Docker container. [T
 
 :::info
 
-The example code from this tutorial is also available on [GitHub](https://github.com/astronomer/airflow-pgvector-tutorial). 
+The example code from this tutorial is also available on [GitHub](https://github.com/astronomer/airflow-pgvector-tutorial).
 
 :::
 
@@ -117,9 +117,9 @@ The example code from this tutorial is also available on [GitHub](https://github
 
 ## Step 2: Add your data
 
-The DAG in this tutorial runs a query on vectorized book descriptions from [Goodreads](https://www.goodreads.com/), but you can adjust the DAG to use any data you want. 
+The DAG in this tutorial runs a query on vectorized book descriptions from [Goodreads](https://www.goodreads.com/), but you can adjust the DAG to use any data you want.
 
-1. Create a new file called `book_data.txt` in the `include` directory. 
+1. Create a new file called `book_data.txt` in the `include` directory.
 
 2. Copy the book description from the [book_data.txt](https://github.com/astronomer/airflow-pgvector-tutorial/blob/main/include/book_data.txt) file in Astronomer's GitHub for a list of great books.
 
@@ -139,7 +139,7 @@ One book corresponds to one line in the file.
 
 1. In your `dags` folder, create a file called `query_book_vectors.py`.
 
-2. Copy the following code into the file. If you want to use a vectorizer other than OpenAI, make sure to adjust both the `create_embeddings` function at the start of the DAG and provide the correct `MODEL_VECTOR_LENGTH`. 
+2. Copy the following code into the file. If you want to use a vectorizer other than OpenAI, make sure to adjust both the `create_embeddings` function at the start of the DAG and provide the correct `MODEL_VECTOR_LENGTH`.
 
     <CodeBlock language="python">{query_book_vectors}</CodeBlock>
 
@@ -147,12 +147,12 @@ One book corresponds to one line in the file.
 
     - The `enable_vector_extension_if_not_exists` task uses a [PostgresOperator](https://registry.astronomer.io/providers/apache-airflow-providers-postgres/versions/latest/modules/PostgresOperator) to enable the pgvector extension in the PostgreSQL database.
     - The `create_table_if_not_exists` task creates the `Book` table in PostgreSQL. Note the `VECTOR()` datatype used for the `vector` column. This datatype is added to PostgreSQL by the pgvector extension and needs to be defined with the vector length of the vectorizer you use as an argument. This example uses the OpenAI's `text-embedding-ada-002` to create 1536-dimensional vectors, so we define the columns with the type `VECTOR(1536)` using parameterized SQL.
-    - The `get_already_imported_book_ids` task queries the `Book` table to return all `book_id` values of books that were already stored with their vectors in previous DAG runs. 
+    - The `get_already_imported_book_ids` task queries the `Book` table to return all `book_id` values of books that were already stored with their vectors in previous DAG runs.
     - The `import_book_data` task uses the [`@task` decorator](airflow-decorators.md) to read the book data from the `book_data.txt` file and return it as a list of dictionaries with keys corresponding to the columns of the `Book` table.
     - The `create_embeddings_book_data` task is [dynamically mapped](dynamic-tasks.md) over the list of dictionaries returned by the `import_book_data` task to parallelize vector embedding of all book descriptions that have not been added to the `Book` table in previous DAG runs. The `create_embeddings` function defines how the embeddings are computed and can be modified to use other embedding models. If all books in the list have already been added to the `Book` table, then all mapped task instances are skipped.
-    - The `create_embeddings_query` task applies the same `create_embeddings` function to the desired book mood the user provided via [Airflow params](airflow-params.md). 
+    - The `create_embeddings_query` task applies the same `create_embeddings` function to the desired book mood the user provided via [Airflow params](airflow-params.md).
     - The `import_embeddings_to_pgvector` task uses the [PgVectorIngestOperator](https://registry.astronomer.io/providers/apache-airflow-providers-pgvector/versions/latest/modules/PgVectorIngestOperator) to insert the book data including the embedding vectors into the PostgreSQL database. This task is dynamically mapped to import the embeddings from one book at a time. The dynamically mapped task instances of books that have already been imported in previous DAG runs are skipped.
-    - The `get_a_book_suggestion` task queries the PostgreSQL database for the book that is most similar to the user-provided mood using nearest neighbor search. Note how the vector of the user-provided book mood (`query_vector`) is cast to the `VECTOR` datatype before similarity search: `ORDER BY vector <-> CAST(%(query_vector)s AS VECTOR)`.  
+    - The `get_a_book_suggestion` task queries the PostgreSQL database for the book that is most similar to the user-provided mood using nearest neighbor search. Note how the vector of the user-provided book mood (`query_vector`) is cast to the `VECTOR` datatype before similarity search: `ORDER BY vector <-> CAST(%(query_vector)s AS VECTOR)`.
     - The `print_book_suggestion` task prints the book suggestion to the task logs.
 
     ![Screenshot of the Airflow UI showing the successful completion of the `query_book_vectors` DAG in the Grid view with the Graph tab selected.](/img/tutorials/airflow-pgvector_successful_dag.png)

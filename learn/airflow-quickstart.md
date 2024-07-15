@@ -25,5 +25,5 @@ If you are new to Airflow and want more instructions for getting started, check 
 The pre-built pipeline and exercises in this quickstart show the implementation of several key Airflow features, which you can learn more about in our Learn resources:
 
 - [Datasets](https://www.astronomer.io/docs/learn/airflow-datasets): This feature helps make Airflow data-aware and expands Airflow scheduling capabilities. Using datasets, you can schedule DAGs to run only when other tasks that update shared data have completed.
-- [Dynamic task mapping](https://www.astronomer.io/docs/learn/dynamic-tasks): This feature allows you to write DAGs that dynamically generate parallel tasks at runtime based on the results of previous tasks or external criteria. 
+- [Dynamic task mapping](https://www.astronomer.io/docs/learn/dynamic-tasks): This feature allows you to write DAGs that dynamically generate parallel tasks at runtime based on the results of previous tasks or external criteria.
 - The [Astro Python SDK](https://www.astronomer.io/docs/learn/astro-python-sdk): This open source package built on top of Airflow provides functions and classes that simplify common ELT operations such as loading files or using SQL or Pandas to transform data.

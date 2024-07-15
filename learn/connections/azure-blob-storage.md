@@ -36,7 +36,7 @@ To create an Azure Blob Storage connection in Airflow, you can use any of the fo
 
 <TabItem value="shared-access-key">
 
-Microsoft generates two [shared access keys](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal) by default for every storage account. You can use them to give Airflow access to the data in your storage account. 
+Microsoft generates two [shared access keys](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal) by default for every storage account. You can use them to give Airflow access to the data in your storage account.
 
 An Azure Blob Storage connection using a shared access key requires the following information:
 
@@ -45,7 +45,7 @@ An Azure Blob Storage connection using a shared access key requires the followin
 
 Complete the following steps to retrieve these values:
 
-1. In your Azure portal, open your storage account. 
+1. In your Azure portal, open your storage account.
 2. Copy the name of your storage account.
 3. Follow [Microsoft documentation](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to copy the storage account **Key**.
 
@@ -53,7 +53,7 @@ Complete the following steps to retrieve these values:
 
 <TabItem value="connection-string">
 
-A [connection string](https://learn.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string) for a storage account includes the authorization information required to access data in your storage account. 
+A [connection string](https://learn.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string) for a storage account includes the authorization information required to access data in your storage account.
 
 An Azure blob storage connection using connection string requires the following information:
 
@@ -62,15 +62,15 @@ An Azure blob storage connection using connection string requires the following 
 
 Complete the following steps to retrieve these values:
 
-1. In your Azure portal, open your storage account. 
+1. In your Azure portal, open your storage account.
 2. Copy the name of your storage account.
-3. Follow [Microsoft documentation](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-get-info?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json&tabs=portal#get-a-connection-string-for-the-storage-account) to copy the **Connection string**. 
+3. Follow [Microsoft documentation](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-get-info?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json&tabs=portal#get-a-connection-string-for-the-storage-account) to copy the **Connection string**.
 
 </TabItem>
 
 <TabItem value="sas-token">
 
-A [shared access signature (SAS) token](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview) provides granular access for a storage account. 
+A [shared access signature (SAS) token](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview) provides granular access for a storage account.
 
 An Azure blob storage connection using SAS token requires the following information:
 
@@ -79,7 +79,7 @@ An Azure blob storage connection using SAS token requires the following informat
 
 Complete the following steps to retrieve these values:
 
-1. In your Azure portal, navigate to your Storage account view and select your subscription. 
+1. In your Azure portal, navigate to your Storage account view and select your subscription.
 2. Copy the name of your storage account.
 3. Follow the [Microsoft documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/translator/document-translation/how-to-guides/create-sas-tokens?tabs=Containers#create-sas-tokens-in-the-azure-portal) to generate your SAS token. Copy the SAS token.
 
@@ -87,7 +87,7 @@ Complete the following steps to retrieve these values:
 
 <TabItem value="azure-app-service-principal">
 
-A [service principal for an Azure app](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview) provides granular access for a storage account. 
+A [service principal for an Azure app](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview) provides granular access for a storage account.
 
 An Azure Blob Storage connection using a service principal requires the following information:
 
@@ -136,7 +136,7 @@ Complete the following steps to retrieve these values:
 4. Fill out the following connection fields using the information you retrieved from [Get connection details](#get-connection-details):
 
     - **Connection Id**: Enter a name for the connection.
-    - **Blob Storage Login**: Enter your storage account name. 
+    - **Blob Storage Login**: Enter your storage account name.
     - **Blog Storage Key**: Enter your storage account **Key**.
 
 5. Click **Test**. After the connection test succeeds, click **Save**.
@@ -222,7 +222,7 @@ If you want, you can replace the value in **Blob Storage Connection String** wit
     - **Account Name**: Enter **Blob Service URL** for your storage account.
     - **Blob Storage Login**: Enter your **Application (client) ID**.
     - **Blob Storage Key**: Enter your client secret **Value**.
-    - **Tenant Id**: Enter your **Directory (tenant) ID**. 
+    - **Tenant Id**: Enter your **Directory (tenant) ID**.
 
 5. Click **Test**. After the connection test succeeds, click **Save**.
 

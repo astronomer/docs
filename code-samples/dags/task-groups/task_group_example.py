@@ -38,7 +38,7 @@ def task_group_example():
     @task
     def load(order_values: dict):
         print(
-            f"""Total order value is: {order_values['total']['total_order_value']:.2f} 
+            f"""Total order value is: {order_values['total']['total_order_value']:.2f}
             and average order value is: {order_values['avg']['avg_order_value']:.2f}"""
         )
 

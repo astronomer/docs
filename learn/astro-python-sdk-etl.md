@@ -52,7 +52,7 @@ More specifically, the Astro Python SDK includes several functions that are help
 - `transform`: Applies a SQL select statement to a source table and saves the result to a destination table. This function allows you to transform your data with a SQL query. It uses a `SELECT` statement that you define to automatically store your results in a new table. By default, the `output_table` is given a unique name each time the DAG runs, but you can overwrite this behavior by defining a specific `output_table` in your function. You can then pass the results of the `transform` downstream to the next task as if it were a native Python object.
 - `dataframe`: Exports a specific SQL table into an in-memory pandas DataFrame. Similar to `transform` for SQL, the `dataframe` function allows you to implement a transformation of your data using Python. You can easily store the results of the `dataframe` function in your database by specifying an `output_table`, which is useful if you want to switch back to SQL in the next step or load your final results to your database.
 - `append`: Inserts rows from the source SQL table into the destination SQL table, if there are no conflicts. This function allows you to take resulting data from another function and append it to an existing table in your database. It is particularly useful in ETL scenarios and when dealing with reporting data.
-  
+
 For a full list of functions, see the [Astro Python SDK README in GitHub](https://github.com/astronomer/astro-sdk).
 
 ## Installation
@@ -64,7 +64,7 @@ For a full list of functions, see the [Astro Python SDK README in GitHub](https:
     ```
 
 2. If you're using Airflow 2.4 or earlier, set the following environment variable to use a required custom XCom backend. If you're using the Astro CLI, add this environment variable to the `.env` file of your Astro project
-    
+
     ```text
     AIRFLOW__CORE__XCOM_BACKEND='astro.custom_backend.astro_custom_backend.AstroCustomXcomBackend'
     ```
@@ -82,7 +82,7 @@ For a full list of functions, see the [Astro Python SDK README in GitHub](https:
     AIRFLOW__ASTRO_SDK__XCOM_STORAGE_CONN_ID=<your_aws_conn>
     AIRFLOW__ASTRO_SDK__XCOM_STORAGE_URL='s3://<your-bucket>/xcom/'
     ```
-    
+
     If you don't configure an external XCom backend, you will only be able to process small amounts of data with the SDK.
 
 For a guided experience to get started, see the [Astro Python SDK tutorial](astro-python-sdk.md).
@@ -139,7 +139,7 @@ While this operator is straight-forward, it requires knowledge of Snowflake and 
 
 ### Combine data
 
-The next step in the pipeline is to combine data. With the Astro Python SDK `transform` function, you can execute SQL to combine your data from multiple tables. The results are automatically stored in a Snowflake table. 
+The next step in the pipeline is to combine data. With the Astro Python SDK `transform` function, you can execute SQL to combine your data from multiple tables. The results are automatically stored in a Snowflake table.
 
 ```python
 @aql.transform
@@ -205,7 +205,7 @@ record_results = aql.append(
 )
 ```
 
-Implementing this transformation without the SDK is more challenging. 
+Implementing this transformation without the SDK is more challenging.
 
 ```python
 @task(task_id='transform_data')

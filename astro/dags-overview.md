@@ -7,7 +7,7 @@ description: 'Learn how to use code-level features specific to Astro in your Apa
 
 Astro includes several features that enhance the Apache Airflow development experience, from DAG writing to testing. To use these features, you might need to modify how you write your DAGs and manage the rest of your code.
 
-Use this documentation to learn about the key differences between managing DAGs on Astro versus on other platforms. 
+Use this documentation to learn about the key differences between managing DAGs on Astro versus on other platforms.
 
 ## Project structure
 
@@ -40,13 +40,13 @@ Astro includes several features that enhance open source Apache Airflow function
 
 - On Astro, the Astro UI renders [Airflow tags](https://airflow.apache.org/docs/apache-airflow/stable/howto/add-dag-tags.html) defined in your DAGs. Use tags to filter DAGs across all Deployments from a single screen.
 - The [Astro Environment Manager](manage-connections-variables.md) allows you to create and manage Airflow connections directly from the Astro UI. Instead of being limited to defining connections in the Airflow UI or with a secrets manager, you can create connections from the Environment Manager on Astro and use the connections in your local Airflow environment or across multiple Deployments and Workspaces.
-- Astro has built-in infrastructure to run the KubernetesPodOperator and Kubernetes executor, such as default Pod limits and requests. Task-level resource limits and requests are set by default on Astro Deployments, which means that tasks running in Kubernetes Pods never request more resources than expected. See [Run the Kubernetes executor](kubernetes-executor.md) and [Run the KubernetesPodOperator](kubernetespodoperator.md) for more specific instructions and examples. 
+- Astro has built-in infrastructure to run the KubernetesPodOperator and Kubernetes executor, such as default Pod limits and requests. Task-level resource limits and requests are set by default on Astro Deployments, which means that tasks running in Kubernetes Pods never request more resources than expected. See [Run the Kubernetes executor](kubernetes-executor.md) and [Run the KubernetesPodOperator](kubernetespodoperator.md) for more specific instructions and examples.
 
 ## DAG observability
 
 In local Airflow environments, you can use the Airflow UI to check your DAG runs, task logs, and component logs just as you would in any other Airflow environment.
 
-In the Astro UI, you have access to the **DAGs** page in addition to the Airflow UI. From here, you can manage DAG and task runs for any Deployment in your Workspace. 
+In the Astro UI, you have access to the **DAGs** page in addition to the Airflow UI. From here, you can manage DAG and task runs for any Deployment in your Workspace.
 
 Astronomer recommends using the UI that best fits the need your team. If you prefer managing your DAGs from a single place and find the way that the way the Astro page is designed helpful, you don't need to use the Airflow UI. If you're a longtime user of Apache Airflow, you might feel more comfortable in the Airflow UI and don't need to use the Astro UI.
 

@@ -104,21 +104,21 @@ To complete this setup from the command line:
     FROM quay.io/astronomer/astro-runtime:6.3.0
     ```
 
-    The `Dockerfile` defines the environment that all your Airflow components run in. You can modify it to make certain resources available to your Airflow environment like certificates or keys. For this migration, you only need to update your Runtime version. 
+    The `Dockerfile` defines the environment that all your Airflow components run in. You can modify it to make certain resources available to your Airflow environment like certificates or keys. For this migration, you only need to update your Runtime version.
 
 2. Open your Astro project `requirements.txt` file and add all Python packages from your source Airflow environment's `requirements.txt` file. See [AWS documentation](https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html) to find this file in your S3 bucket.
 
-    :::warning 
+    :::warning
 
     To avoid breaking dependency upgrades, Astronomer recommends pinning your packages to the versions running in your soure Airflow environment. For example, if you're running `apache-airflow-providers-snowflake` version 3.3.0 on MWAA, you would add `apache-airflow-providers-snowflake==3.3.0` to your Astro `requirements.txt` file.
 
     :::
 
-3. Open your Astro project `dags` folder. Add your DAG files from either your source control platform or S3. 
+3. Open your Astro project `dags` folder. Add your DAG files from either your source control platform or S3.
 
 4. If you used the [`plugins` folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html) in your MWAA project, copy the contents of this folder from your source control platform or S3 to the `/plugins` folder of your Astro project.
 
-After you confirm that your Astro project has all necessary dependencies, deploy the project to your Astro Deployment. 
+After you confirm that your Astro project has all necessary dependencies, deploy the project to your Astro Deployment.
 
 1. Run the following command to authenticate to Astro:
 
@@ -143,40 +143,40 @@ After you confirm that your Astro project has all necessary dependencies, deploy
     FROM quay.io/astronomer/astro-runtime:6.3.0
     ```
 
-    The `Dockerfile` defines the environment that all your Airflow components run in. You can modify it to make certain resources available to your Airflow environment like certificates or keys. For this migration, you only need to update your Runtime version. 
+    The `Dockerfile` defines the environment that all your Airflow components run in. You can modify it to make certain resources available to your Airflow environment like certificates or keys. For this migration, you only need to update your Runtime version.
 
 2. Run the following command to copy your PyPI packages from AWS to your Astro project `requirements.txt` file:
 
     ```sh
     aws s3 cp s3://[BUCKET]/requirements.txt requirements.txt
-    ```  
+    ```
 
-    See [AWS documentation](https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html) to find this file in your S3 bucket. Review the output in your Astro project `requirements.txt` file after running this command to ensure that all packages were imported on their own line of text.  
+    See [AWS documentation](https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html) to find this file in your S3 bucket. Review the output in your Astro project `requirements.txt` file after running this command to ensure that all packages were imported on their own line of text.
 
 3. Run the following command to copy your PyPI packages from AWS to your Astro project `requirements.txt` file:
-  
+
     ```sh
     aws s3 cp --recursive s3://[BUCKET]/dags dags
-    ```  
-    
+    ```
+
     Review your DAG files in `dags` after running this command to ensure that all DAGs were successfully exported.
 
-    :::warning 
+    :::warning
 
     To avoid breaking dependency upgrades, Astronomer recommends pinning your packages to the versions running in your soure Airflow environment. For example, if you're running `apache-airflow-providers-snowflake` version 3.3.0 on MWAA, you would add `apache-airflow-providers-snowflake==3.3.0` to your Astro `requirements.txt` file.
 
     :::
 
 4. If you used the [`plugins` folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html) in your MWAA project, run the following command to directly copy your PyPI packages from AWS to your Astro project `requirements.txt` file:
-  
+
     ```sh
     aws s3 cp --recursive s3://[BUCKET]/plugins.zip plugins.zip
     unzip plugins.zip
     ```
-    
-    Review the contents of your Astro project `plugins` folder after running this command to ensure that all files were successfully exported. 
 
-After you confirm that your Astro project has all necessary dependencies, deploy the project to your Astro Deployment. 
+    Review the contents of your Astro project `plugins` folder after running this command to ensure that all files were successfully exported.
+
+After you confirm that your Astro project has all necessary dependencies, deploy the project to your Astro Deployment.
 
 1. Run the following command to authenticate to Astro:
 
@@ -197,7 +197,7 @@ After you confirm that your Astro project has all necessary dependencies, deploy
 
 ## Step 7: Configure additional data pipeline infrastructure
 
-The core migration of your project is now complete. Read the following to decide whether you need to set up any additional infrastructure on Astro before you cut over your DAGs. 
+The core migration of your project is now complete. Read the following to decide whether you need to set up any additional infrastructure on Astro before you cut over your DAGs.
 
 ### Set up CI/CD
 
@@ -222,7 +222,7 @@ Depending on how thoroughly you want to test your Airflow environment, you can t
 
 :::info
 
-Your migrated Airflow variables and connections are not available locally. You must deploy your project to Astro to test these Airflow objects. 
+Your migrated Airflow variables and connections are not available locally. You must deploy your project to Astro to test these Airflow objects.
 
 :::
 

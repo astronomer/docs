@@ -51,7 +51,7 @@ Complete the following steps to retrieve these values:
     - **Connection Id**: Enter a name for the connection.
     - **Tenant**: Enter the dbt Cloud URL.
     - **API Token**: Enter your user token or service access token.
-    - **Account ID**: Enter your dbt cloud account ID. This field is optional. If you skip this, you must pass the account ID to the dbt cloud operator or hook. 
+    - **Account ID**: Enter your dbt cloud account ID. This field is optional. If you skip this, you must pass the account ID to the dbt cloud operator or hook.
 
 5. Click **Test**. After the connection test succeeds, click **Save**.
 

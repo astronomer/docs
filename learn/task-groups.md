@@ -45,7 +45,7 @@ To get the most out of this guide, you should have an understanding of:
 Task groups are most often used to visually organize complicated DAGs. For example, you might use task groups:
 
 - In big ELT/ETL DAGs, where you have a task group per table or schema.
-- In MLOps DAGs, where you have a task group per model being trained. 
+- In MLOps DAGs, where you have a task group per model being trained.
 - In DAGs owned by several teams, where you have task groups to visually separate the tasks that belong to each team. Although in this case, it might be better to separate the DAG into multiple DAGs and use [Datasets](airflow-datasets.md) to connect them.
 - When you are using the same patterns of tasks in multiple DAGs and want to create a reusable module.
 - When you have an input of unknown length, for example an unknown number of files in a directory. You can use task groups to [dynamically map](#generate-task-groups-dynamically-at-runtime) over the input and create a task group performing sets of actions for each file. This is the only way to dynamically map sequential tasks in Airflow.
@@ -57,7 +57,7 @@ There are two ways to define task groups in your DAGs:
 - Use the `TaskGroup` class to create a task group context.
 - Use the `@task_group` decorator on a Python function.
 
-In most cases, it is a matter of personal preference which method you use. The only exception is when you want to [dynamically map](dynamic-tasks.md) over a task group; this is possible only when using `@task_group`. 
+In most cases, it is a matter of personal preference which method you use. The only exception is when you want to [dynamically map](dynamic-tasks.md) over a task group; this is possible only when using `@task_group`.
 
 The following code shows how to instantiate a simple task group containing two sequential tasks. You can use dependency operators (`<<` and `>>`) both within and between task groups in the same way that you can with individual tasks.
 
@@ -106,7 +106,7 @@ with TaskGroup(group_id='my_task_group') as tg1:
 
     t1 >> t2
 # End task group definition
-    
+
 t3 = EmptyOperator(task_id='end')
 
 # Set task group's (tg1) dependencies
@@ -275,7 +275,7 @@ for g_id in range(1,4):
         if tg_id == "group1":
             t3 = EmptyOperator(task_id="task3")
             t1 >> t3
-                
+
     groups.append(tg1())
 
 [groups[0] , groups[1]] >> groups[2]
@@ -298,7 +298,7 @@ for g_id in range(1,4):
         if tg_id == "group1":
             t3 = EmptyOperator(task_id="task3")
             t1 >> t3
-                
+
         groups.append(tg1)
 
 [groups[0] , groups[1]] >> groups[2]
@@ -386,7 +386,7 @@ The following image shows the expanded view of the nested task groups in the Air
 
 ## Custom task group classes
 
-If you use the same patterns of tasks in several DAGs or Airflow instances, it may be useful to create a custom task group class module. To do so, you need to inherit from the `TaskGroup` class and then define your tasks within that custom class. You also need to use `self` to assign the task to the task group. Other than that, the task definitions will be the same as if you were defining them in a DAG file. 
+If you use the same patterns of tasks in several DAGs or Airflow instances, it may be useful to create a custom task group class module. To do so, you need to inherit from the `TaskGroup` class and then define your tasks within that custom class. You also need to use `self` to assign the task to the task group. Other than that, the task definitions will be the same as if you were defining them in a DAG file.
 
 <CodeBlock language="python">{custom_task_group_example}</CodeBlock>
 

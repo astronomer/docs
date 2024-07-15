@@ -72,7 +72,7 @@ Remove an Organization API token from a Deployment.
 ### Usage
 
 ```sh
-astro deployment organization-token remove --deployment-id=<my-deployment-id> 
+astro deployment organization-token remove --deployment-id=<my-deployment-id>
 ```
 
 ### Options

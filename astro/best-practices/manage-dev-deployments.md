@@ -9,7 +9,7 @@ For most teams working on Astro, Astronomer recommends using multiple Airflow De
 There are many ways to organize your code, CI/CD pipelines, and Deployments to support a sustainable development lifecycle on Astro, and no single setup will work for all teams. However, there are a two main options for managing your development Deployments and promoting code from development to production:
 
 - Maintain a permanent development Deployment that contains the code from a permanent `dev` branch of a version-controlled code repository. You can hibernate this Deployment so that it doesn't consume resources when you're not using it.
-- Configure CI/CD workflows to create preview Deployments that map to feature branches which are deleted when the feature branch is merged into production. 
+- Configure CI/CD workflows to create preview Deployments that map to feature branches which are deleted when the feature branch is merged into production.
 
 This guide covers how to choose which of these methods is best for your team and how to implement both using Astro features.
 
@@ -33,7 +33,7 @@ It's a best practice to maintain [multiple environments](https://docs.astronomer
 
 In general, preview (ephemeral) Deployments offer a better development experience. Since each feature branch maps to its own Astro Deployment, you don't have to worry about conflicts from other developers working on a development branch at the same time. If you have larger teams working on Astro or deploy changes frequently, this is a good option. However, managing Deployments in this way requires more setup to ensure the Deployments have access to external systems and resources, which in turn requires a more complex CI/CD implementation. Your team should have experience with CI/CD to make this pattern successful. Preview Deployments can also come with less predictable costs, especially at larger scale with many feature Deployments being regularly spun up and down.
 
-Permanent development Deployments are easier to set up and manage. You only need to set up the environment once, and Astro's GitHub integration offers far simpler CI/CD implementation for GitHub users. In many cases, this pattern is also more cost-effective, as you can maintain one development Deployment and use Astro's hibernation feature to reduce costs for the Deployment when you aren't using it. This option is often best for smaller teams, teams that deploy infrequently, and teams who are very cost conscious. 
+Permanent development Deployments are easier to set up and manage. You only need to set up the environment once, and Astro's GitHub integration offers far simpler CI/CD implementation for GitHub users. In many cases, this pattern is also more cost-effective, as you can maintain one development Deployment and use Astro's hibernation feature to reduce costs for the Deployment when you aren't using it. This option is often best for smaller teams, teams that deploy infrequently, and teams who are very cost conscious.
 
 :::tip
 

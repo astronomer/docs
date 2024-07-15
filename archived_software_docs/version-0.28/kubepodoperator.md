@@ -173,7 +173,7 @@ This object allows you to specify Memory and CPU requests and limits for any giv
 
 Once you've created the object, apply it to the `resources` parameter of the task. When this DAG runs, it will launch a Pod that runs the `hello-world` image, which is pulled from Docker Hub, in your Airflow Deployment's namespace with the resource requests defined above. Once the task finishes, the Pod will be gracefully terminate.
 
-:::info 
+:::info
 
 On Astronomer, the equivalent of 1AU is: `requests={"cpu": "100m", "memory": "384Mi"}, limits={"cpu": "100m", "memory": "384Mi"}`.
 

@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 A [workload identity](https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview) is an identity you can assign to your Airflow environment which is authorized to access external services and resources. On Azure, a single workload identity can be authorized to multiple Azure resources through Azure resource groups.
 
-The new generic **Azure** connection type lets you assign a workload identity to your Airflow environment so that Airflow can access multiple Azure resources using a single Airflow connection. This configuration greatly simplifies the number of credentials and connections you need to manage for Azure workflows. 
+The new generic **Azure** connection type lets you assign a workload identity to your Airflow environment so that Airflow can access multiple Azure resources using a single Airflow connection. This configuration greatly simplifies the number of credentials and connections you need to manage for Azure workflows.
 
 This guide explains how to set up an Azure Workload Identity connection using the **Azure** connection type on Astro. Astronomer recommends using this connection type for most Azure workflows.
 
@@ -23,7 +23,7 @@ This guide explains how to set up an Azure Workload Identity connection using th
 - (Optional) An [Astro Deployment](https://www.astronomer.io/docs/astro/create-deployment).
 - A Microsoft Entra [managed identity](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?pivots=identity-mi-methods-azp).
 
-:::info 
+:::info
 If you want to use Microsoft Entra Workload ID with a generic Apache Airflow project, your setup steps might vary. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/connections/azure.html).
 :::
 
@@ -37,8 +37,8 @@ If you're using Apache Airflow outside of Astro, your setup will vary based on y
 
 1. In your Azure portal, open the **Managed Identities** menu.
 2. Search for your managed identity, click **Properties**, then copy its **Name**, **Client ID**, **Tenant ID**, and **Resource group name**.
-3. Run the following command to create a workload identity for your Airflow environment, replacing the `<managed-identity>` and `<resource-group>` values with your managed identity **Name** and **Resource group name** respectively. 
-   
+3. Run the following command to create a workload identity for your Airflow environment, replacing the `<managed-identity>` and `<resource-group>` values with your managed identity **Name** and **Resource group name** respectively.
+
     ```bash
     workloads=( scheduler triggerer worker )
     for workload in "${workloads[@]}"; do

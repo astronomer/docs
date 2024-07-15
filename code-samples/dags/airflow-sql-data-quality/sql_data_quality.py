@@ -1,7 +1,7 @@
 """
 ## Check data quality using SQL check operators
 
-This DAG creates a toy table about birds in SQLite to run data quality checks on using the 
+This DAG creates a toy table about birds in SQLite to run data quality checks on using the
 SQLColumnCheckOperator, SQLTableCheckOperator, and SQLCheckOperator.
 """
 

@@ -21,7 +21,7 @@ To install Astronomer on EKS, you'll need access to the following tools and perm
 * Permission to create and modify resources on AWS.
 * Permission to generate a certificate (not self-signed) that covers a defined set of subdomains.
 * PostgreSQL superuser permissions.
-* An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).  
+* An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).
 * If you use Kubernetes version 1.23 or later, the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
 * Optional. [`eksctl`](https://eksctl.io/) for creating and managing your Astronomer cluster on EKS.
 
@@ -120,10 +120,10 @@ Depending on your organization, you may receive either a globally trusted certif
 
 ### Option 3: Use the AWS Certificate Manager as the certificate provider
 
-AWS Certificate Manager (ACM) terminates TLS at the Load Balancer level and does not encrypt the internal traffic inside the cluster. The ACM ingress controller requires an `astronomer-tls` secret with a certificate and private key to encrypt internal traffic. 
+AWS Certificate Manager (ACM) terminates TLS at the Load Balancer level and does not encrypt the internal traffic inside the cluster. The ACM ingress controller requires an `astronomer-tls` secret with a certificate and private key to encrypt internal traffic.
 
 Because ACM relies on annotations attached to Kubernetes resources and does not issue certificates or private key files, you must complete one of the following options to create the `astronomer-tls` secret:
- 
+
 - Create a [self-signed certificate](self-signed-certificate.md). Self-signed certificates are ideal for privately hosted internal applications, as well as in development and testing environments. Avoid using self-signed certificates in installations where the trust and identity of the certificate issuer are important.
 - Create a certificate with [AWS Certificate Manager Private CA](https://aws.amazon.com/blogs/containers/setting-up-end-to-end-tls-encryption-on-amazon-eks-with-the-new-aws-load-balancer-controller/).
 - Create a certificate with [Let's Encrypt](renew-tls-cert.md#automatically-renew-tls-certificates-using-lets-encrypt).
@@ -133,7 +133,7 @@ After you create the certificate, add the following configuration block to your 
     ```yaml
     nginx:
       loadBalancerIP: ~
-      privateLoadBalancer: true  # this does affect aws-load-balancer-type: external 
+      privateLoadBalancer: true  # this does affect aws-load-balancer-type: external
       ingressAnnotations:
         service.beta.kubernetes.io/aws-load-balancer-type: external
         service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
@@ -166,7 +166,7 @@ If you received a globally trusted certificate or created a self-signed certific
 kubectl create secret tls astronomer-tls --cert <your-certificate-filepath> --key <your-private-key-filepath> -n astronomer
 ```
 
-If you created a certificate using Let's Encrypt, the `astronomer-tls` secret already exists in your Kubernetes cluster. Run the following command to confirm it exists: 
+If you created a certificate using Let's Encrypt, the `astronomer-tls` secret already exists in your Kubernetes cluster. Run the following command to confirm it exists:
 
 ```bash
 kubectl describe secret astronomer-tls --namespace astronomer
@@ -241,7 +241,7 @@ kubectl create secret generic astronomer-bootstrap \
 
 ## Step 8: Configure your Helm chart
 
-:::info 
+:::info
 
 To use a third-party ingress controller for Astronomer, see [Third-Party Ingress Controllers](third-party-ingress-controllers.md).
 
@@ -300,7 +300,7 @@ nginx:
   # Dict of arbitrary annotations to add to the nginx ingress. For full configuration options, see https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/advanced-configuration-with-annotations/
   ingressAnnotations: {service.beta.kubernetes.io/aws-load-balancer-type: nlb} # Change to 'elb' if your node group is private and doesn't utilize a NAT gateway
   # If all subnets are private, auto-discovery may fail.
-  # You must enter the subnet IDs manually in the annotation below. 
+  # You must enter the subnet IDs manually in the annotation below.
   # service.beta.kubernetes.io/aws-load-balancer-subnets: subnet-id-1,subnet-id-2
 astronomer:
   houston:
@@ -367,25 +367,25 @@ After you run the previous commands, a set of Kubernetes pods are generated in y
 
 ### Alternative ArgoCD installation
 
-You can install Astronomer with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), which is an open source continuous delivery tool for Kubernetes, as an alternative to using `helm install`. 
+You can install Astronomer with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), which is an open source continuous delivery tool for Kubernetes, as an alternative to using `helm install`.
 
 Because ArgoCD doesn't support sync wave dependencies for [app of apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern) structures, installing Astronomer requires some additional steps compared to the standard ArgoCD workflow:
 
 1. Under the `global` section of your `config.yaml` file, add `enableArgoCDAnnotation: true`.
-   
+
 2. Create a new ArgoCD app. When creating the app, configure the following:
 
     - **Path**: The filepath of your `config.yaml` file
     - **Namespace**: The namespace you want to use for Astronomer
-    - **Cluster**: The Kubernetes cluster in which you're installing Astronomer 
+    - **Cluster**: The Kubernetes cluster in which you're installing Astronomer
     - **Repository URL**: `https://helm.astronomer.io`
 
 3. Sync the ArgoCD app with every component of the Astronomer platform selected. See [Sync (Deploy) the Application](https://argo-cd.readthedocs.io/en/stable/getting_started/#7-sync-deploy-the-application).
-   
-4. Stop the sync when you see that `astronomer-houston-db-migrations` has completed in the Argo UI. 
-   
+
+4. Stop the sync when you see that `astronomer-houston-db-migrations` has completed in the Argo UI.
+
 5. Sync the application a second time, but this time clear `astronomer-alertmanager` in the Argo UI while keeping all other components selected. Wait for this sync to finish completely.
-   
+
 6. Sync the ArgoCD app a third time with all Astronomer platform components selected.
 
 ## Step 10: Verify Pods are up

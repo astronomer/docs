@@ -2,7 +2,7 @@
 title: 'Astronomer Software user role and permission reference'
 sidebar_label: 'User roles and permissions'
 id: role-permission-reference
-description: A list of all default permissions for each role on Astronomer Software. 
+description: A list of all default permissions for each role on Astronomer Software.
 ---
 
 This is where you'll find information about Astronomer Software default user role permissions. To modify these default permissions, see [Customize role permissions](manage-platform-users.md#customize-role-permissions).

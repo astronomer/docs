@@ -1,7 +1,7 @@
 """
 ### Create a custom sensor using the PythonSensor
 
-This DAG showcases how to create a custom sensor using the PythonSensor 
+This DAG showcases how to create a custom sensor using the PythonSensor
 to check the availability of an API.
 """
 

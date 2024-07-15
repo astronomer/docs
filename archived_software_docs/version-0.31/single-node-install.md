@@ -219,7 +219,7 @@ AIRFLOW__CORE__SQL_ALCHEMY_CONN_CMD=vault kv get -field=dsn secret/airflow-db
 
 ## Step 8: Set up the scheduler
 
-In Airflow, [the scheduler](https://airflow.apache.org/docs/apache-airflow/stable/scheduler.html) is responsible for reading from the metadata database to check on the status of each task and decides the order in which tasks should be completed. To get your scheduler running:  
+In Airflow, [the scheduler](https://airflow.apache.org/docs/apache-airflow/stable/scheduler.html) is responsible for reading from the metadata database to check on the status of each task and decides the order in which tasks should be completed. To get your scheduler running:
 
 1. Enable the scheduler by running the following command:
 

@@ -4,7 +4,7 @@ title: "Manage DAG runs from the Astro UI"
 id: manage-dags
 ---
 
-As a data engineer or data scientist, you might need to view details about your DAGs' performance, including task logs, run status, and retries. You might additionally have to manually retry DAG runs or mark them as a specific status when troubleshooting any issues. 
+As a data engineer or data scientist, you might need to view details about your DAGs' performance, including task logs, run status, and retries. You might additionally have to manually retry DAG runs or mark them as a specific status when troubleshooting any issues.
 
 Use this document to learn how to manage your DAGs using either the Airflow UI or the Astro UI.
 
@@ -17,7 +17,7 @@ To access the Airflow UI for your Deployment in the Astro UI:
 1. In the Astro UI, open your Deployment.
 2. Click **Open Airflow**.
 
-To access a Deployment's Airflow UI from the Astro CLI: 
+To access a Deployment's Airflow UI from the Astro CLI:
 
 1. Run the following command to retrieve the URL for the Deployment's Airflow UI:
 
@@ -47,7 +47,7 @@ These actions are available on the **DAGs** page, where you can see detailed inf
 
 ### Available actions
 
-The actions and views on this page are functionally identical to certain actions in the Airflow UI. Use the following table to understand each available Astro UI action and its equivalent action in the Airflow UI. 
+The actions and views on this page are functionally identical to certain actions in the Airflow UI. Use the following table to understand each available Astro UI action and its equivalent action in the Airflow UI.
 
 | User action                              | **DAGs** page workflow                                                 | Equivalent Airflow UI workflow                                                                                                  |
 | ---------------------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |

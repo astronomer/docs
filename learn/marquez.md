@@ -158,10 +158,10 @@ For this tutorial you will create two DAGs to generate and interpret lineage met
     '''
 
     combine_data_query= '''
-        INSERT INTO animal_adoptions_combined (date, type, name, age) 
-            SELECT * 
+        INSERT INTO animal_adoptions_combined (date, type, name, age)
+            SELECT *
             FROM adoption_center_1
-            UNION 
+            UNION
             SELECT *
             FROM adoption_center_2;
     '''
@@ -182,13 +182,13 @@ For this tutorial you will create two DAGs to generate and interpret lineage met
             task_id='create_table',
             postgres_conn_id='postgres_default',
             sql=create_table_query
-        ) 
+        )
 
         insert_data = PostgresOperator(
             task_id='combine',
             postgres_conn_id='postgres_default',
             sql=combine_data_query
-        ) 
+        )
 
         create_table >> insert_data
     ```
@@ -230,13 +230,13 @@ For this tutorial you will create two DAGs to generate and interpret lineage met
                     number INTEGER
                     );
             ''',
-        ) 
+        )
 
         insert_data = PostgresOperator(
             task_id='reporting',
             postgres_conn_id='postgres_default',
             sql=aggregate_reporting_query
-        ) 
+        )
 
         create_table >> insert_data
     ```

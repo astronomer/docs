@@ -38,7 +38,7 @@ Release date: October 11, 2022
 - You can now configure a `livenessProbe` and `readinessProbe` specific to Prometheus in the Prometheus Helm chart.
 - You can now configure a specific `securityContext` for Fluentd Pods and containers in the Fluentd Helm chart.
 
-### Bug fixes 
+### Bug fixes
 
 - Fixed an issue where upgrading Astronomer Software with a custom `houston.deployments.components` value in Helm could break the Software UI.
 - Fixed an issue where upgrading a Deployment from Airflow 1.10.15 to 2.3 can prevent you from configuring the Deployment's resources in the Software UI.

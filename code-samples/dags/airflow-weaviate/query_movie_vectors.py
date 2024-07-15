@@ -1,7 +1,7 @@
 """
 ## Use the Airflow Weaviate Provider to generate and query vectors for movie descriptions
 
-This DAG runs a simple MLOps pipeline that uses the Weaviate Provider to import 
+This DAG runs a simple MLOps pipeline that uses the Weaviate Provider to import
 movie descriptions, generate vectors for them, and query the vectors for movies based on
 concept descriptions.
 """

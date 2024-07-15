@@ -46,7 +46,7 @@ The following table is a reference for all possible key-value pairs in the `gene
 
 The following table is a reference for all possible key-value pairs in the `configs` section of the JSON request.
 
-You can configure multiple `configs` objects for each parameter you want the user to enter. 
+You can configure multiple `configs` objects for each parameter you want the user to enter.
 
 | Name               | Type                                 | Description                                                                                                                                                                        |
 | ------------------ | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -76,9 +76,9 @@ For each `configs` object, you can configure the following values in a `validity
 | `mandatory`         | Boolean                             | Determines whether the parameter is required.                                                                                                                                      |
 | `domain`    | Key-value pair.                              | Limit where the user can select a value from. Set `source` (either `stringList` or `connections`) or `valuesStringList` (List of strings, set only if source is `stringList`) |                                                           |
 
-## Example JSON 
+## Example JSON
 
-The following configuration is an example of how you can configure a custom operator cell to call an internal API. 
+The following configuration is an example of how you can configure a custom operator cell to call an internal API.
 
 ```json
 {

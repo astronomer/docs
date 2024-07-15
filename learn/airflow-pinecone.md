@@ -23,7 +23,7 @@ By combining Pinecone with Airflow, you can:
 - Run dynamic queries with [dynamic task mapping](dynamic-tasks.md), for example to parallelize vector ingestion or search operations to improve performance.
 - Add Airflow features like [retries](rerunning-dags.md#automatically-retry-tasks) and [alerts](error-notifications-in-airflow.md) to your Pinecone operations. Retries protect your MLOps pipelines from transient failures, and alerts notify you of events like task failures or missed service level agreements (SLAs).
 
-## Time to complete 
+## Time to complete
 
 This tutorial takes approximately 30 minutes to complete.
 
@@ -46,11 +46,11 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 :::info
 
-The example code from this tutorial is also available on [GitHub](https://github.com/astronomer/airflow-pinecone-tutorial). 
+The example code from this tutorial is also available on [GitHub](https://github.com/astronomer/airflow-pinecone-tutorial).
 
 :::
 
-## Step 1: Configure your Astro project 
+## Step 1: Configure your Astro project
 
 1. Create a new Astro project:
 
@@ -79,13 +79,13 @@ The example code from this tutorial is also available on [GitHub](https://github
 
 ## Step 2: Add your data
 
-The DAG in this tutorial runs a query on vectorized series descriptions, which were mostly retrieved from [IMDB](https://www.imdb.com/) with added domain expert inputs. 
+The DAG in this tutorial runs a query on vectorized series descriptions, which were mostly retrieved from [IMDB](https://www.imdb.com/) with added domain expert inputs.
 
-1. In your Astro project `include` directory, create a file called `series_data.txt`. 
+1. In your Astro project `include` directory, create a file called `series_data.txt`.
 2. Copy and paste the following text into the file:
 
     ```text
-    1 ::: Star Trek: Discovery (2017) ::: sci-fi ::: Ten years before Kirk, Spock, and the Enterprise, the USS Discovery discovers new worlds and lifeforms using a new innovative mushroom based propulsion system. 
+    1 ::: Star Trek: Discovery (2017) ::: sci-fi ::: Ten years before Kirk, Spock, and the Enterprise, the USS Discovery discovers new worlds and lifeforms using a new innovative mushroom based propulsion system.
     2 ::: Feel Good (2020) ::: romance ::: The series follows recovering addict and comedian Mae, who is trying to control the addictive behaviors and intense romanticism that permeate every facet of their life.
     3 ::: For All Mankind (2019) ::: sci-fi ::: The series dramatizes an alternate history depicting "what would have happened if the global space race had never ended" after the Soviet Union succeeds in the first crewed Moon landing ahead of the United States.
     4 ::: The Legend of Korra (2012) ::: anime ::: Avatar Korra fights to keep Republic City safe from the evil forces of both the physical and spiritual worlds.

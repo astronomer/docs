@@ -7,7 +7,7 @@ a Naive Bayes Classifier to distinguish between quotes from Captain Kirk and
 Captain Picard and provide a prediction for a user-supplied quote.
 
 To be able to run this DAG you will need to add the contents of
-`include/ingestion_data_object_store_use_case` to your object storage system, 
+`include/ingestion_data_object_store_use_case` to your object storage system,
 install the relevant provider package for your object storage and define an
 Airflow connection to it.
 If you do not want to use remote storage you can use `file://` for local object

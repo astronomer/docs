@@ -290,7 +290,7 @@ astronomer:
 
 These are the minimum values you need to configure for installing Astronomer. For information on additional configuration, read [What's Next](install-aws-standard.md#whats-next).
 
-:::info 
+:::info
 
 If you are installing Astronomer in an airgapped environment without access to the public internet, complete all of the setup in [Install in an Airgapped Environment](install-airgapped.md) and then skip directly to Step 10 in this document.
 

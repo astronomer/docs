@@ -51,7 +51,7 @@ To get started with SendGrid:
    AIRFLOW__SMTP__SMTP_STARTTLS=True
    AIRFLOW__SMTP__SMTP_SSL=False
    AIRFLOW__SMTP__SMTP_USER=apikey
-   AIRFLOW__SMTP__SMTP_PASSWORD=<your-api-key>   
+   AIRFLOW__SMTP__SMTP_PASSWORD=<your-api-key>
    AIRFLOW__SMTP__SMTP_PORT=587
    AIRFLOW__SMTP__SMTP_MAIL_FROM=<your-sendgrid-email>
    ```

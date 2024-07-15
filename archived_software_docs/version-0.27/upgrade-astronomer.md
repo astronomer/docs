@@ -148,7 +148,7 @@ Follow the standard installation guide to upgrade to Software 0.28, then repeat 
 
 :::
 
-#### Resync Astronomer's Signing Certificate  
+#### Resync Astronomer's Signing Certificate
 
 As part of the 0.29 release, Astronomer deprecated its usage of [kubed](https://appscode.com/products/kubed/) for performance and security reasons. Kubed was responsible for syncing Astronomer's signing certificate to Deployment namespaces and is now replaced by an in-house utility. While this change does not directly affect users, you need to run a one-time command to reset Astronomer's signing certificate as part of the upgrade process to 0.29.
 

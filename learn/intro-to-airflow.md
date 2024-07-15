@@ -81,7 +81,7 @@ Of course, these are just a few examples, you can orchestrate almost any kind of
 
 ## Running Airflow
 
-There are many ways to run Airflow, some of which are easier than others. Astronomer recommends: 
+There are many ways to run Airflow, some of which are easier than others. Astronomer recommends:
 
 - Using the open-source [**Astro CLI**](https://www.astronomer.io/docs/astro/cli/get-started-cli) to run Airflow locally. The Astro CLI is the easiest way to create a local Airflow instance running in [Docker](https://www.docker.com/) and is free to use for everyone.
 - Using [**Astro**](https://astronomer.io/try-astro) to run Airflow in production. Astro is a fully-managed SaaS application for data orchestration that helps teams write and run data pipelines with Apache Airflow at any level of scale. A [free trial](https://astronomer.io/try-astro) is available.

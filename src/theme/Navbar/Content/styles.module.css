@@ -89,7 +89,7 @@ html[data-theme="dark"] .navbar__bottom {
   .navbar__top .colorModeToggle,
   .navbar__bottom .button {
     display: none;
-  } 
+  }
 }
 
 @media screen and (max-width: 999px) {

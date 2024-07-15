@@ -4,26 +4,26 @@ title: 'astro team'
 id: astro-team
 description: Reference documentation for astro team.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-:::info 
+:::info
 
-This command is available only if you're authenticated to an Astronomer Software installation. 
+This command is available only if you're authenticated to an Astronomer Software installation.
 
 :::
 
 Manage system-level Teams on Astronomer Software. See [Import identity provider groups into Astronomer Software](https://www.astronomer.io/docs/software/import-idp-groups).
 
-## Usage 
+## Usage
 
 This command has several subcommands. Read the following sections to learn how to use each subcommand.
 
-### astro team get 
+### astro team get
 
-View information for a single Team. 
+View information for a single Team.
 
-#### Usage  
+#### Usage
 
 ```sh
 astro team get <team-id>
@@ -42,14 +42,14 @@ You can retrieve a Team's ID in one of two ways:
 | `-r`, `--roles` | View role details for the Team  | None  |
 | `-u`, `--users` | View all users in the Team  | None  |
 
-### astro team list 
+### astro team list
 
 List all Teams on Astronomer Software.
 
-#### Usage  
+#### Usage
 
 ```sh
-astro team list 
+astro team list
 ```
 
 #### Options
@@ -60,11 +60,11 @@ astro team list
 | `-p` `--paginated ` | Paginate the list of Teams. If `--page-size` is not specified, the default page size is 20. | None            |
 | `-s` `--page-size`  | The page size for paginated lists.                                                               | Any integer     |
 
-### astro team update 
+### astro team update
 
 Update an Astro Team's system-level role.
 
-#### Usage  
+#### Usage
 
 ```sh
 astro team update <team-id> --role=<system-role>

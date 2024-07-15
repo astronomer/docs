@@ -13,7 +13,7 @@ To manage users at the Workspace level, see [Manage Workspace users](manage-work
 
 - Organization Owner permissions.
 
-For more information on user roles, see [Manage user permissions on Astro](user-permissions.md). 
+For more information on user roles, see [Manage user permissions on Astro](user-permissions.md).
 
 ## Add a user to an Organization
 
@@ -26,10 +26,10 @@ You can also manually add users to an Organization. You must manually add users 
 - You want to invite a user to an Organization from a domain that you don't own, such as a third party consultant.
 - You want to invite someone from your company to Astro as a role other than Organization Member.
 
-1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
-   
+1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
+
 2. Go to **Access Management**.
-      
+
 3. Click **Invite member**:
 
 4. Enter the user's email.
@@ -44,14 +44,14 @@ After you add the user, their information appears in the **Users** tab in **Acce
 
 See [User permissions](user-permissions.md) to view the permissions for each available Organization role.
 
-1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
-   
+1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
+
 2. Go to **Access Management**.
 
 3. Find the user in the **Users** list and then click **Edit**.
-   
-4. (Optional) Edit the user's role. See [Organization roles](user-permissions.md). 
-   
+
+4. (Optional) Edit the user's role. See [Organization roles](user-permissions.md).
+
 5. If you updated the user's role, click **Update member**. To delete the user, click **Remove member**.
 
 :::info
@@ -84,7 +84,7 @@ You can use the Astro CLI and a shell script to add multiple users to an Organiz
         echo "Usage: $0 <file>"
         exit 1
     fi
-    # Loop through the file to read each user email address and the role, and use Astro CLI to invite them  
+    # Loop through the file to read each user email address and the role, and use Astro CLI to invite them
     while read line; do
         email=$(echo "$line" | cut -d' ' -f1)
         role=$(echo "$line" | cut -d' ' -f2)

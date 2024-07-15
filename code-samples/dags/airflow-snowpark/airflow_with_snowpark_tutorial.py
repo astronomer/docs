@@ -72,7 +72,7 @@ def airflow_with_snowpark_tutorial():
                 print(f"Created database {snowflake_xcom_database}.")
 
                 snowpark_session.sql(
-                    f"""CREATE SCHEMA IF NOT EXISTS 
+                    f"""CREATE SCHEMA IF NOT EXISTS
                         {snowflake_xcom_database}.
                         {snowflake_xcom_schema};
                     """
@@ -81,9 +81,9 @@ def airflow_with_snowpark_tutorial():
 
                 if use_snowpark_warehouse:
                     snowpark_session.sql(
-                        f"""CREATE WAREHOUSE IF NOT EXISTS 
-                        {snowpark_warehouse} 
-                            WITH 
+                        f"""CREATE WAREHOUSE IF NOT EXISTS
+                        {snowpark_warehouse}
+                            WITH
                                 WAREHOUSE_SIZE = 'MEDIUM'
                                 WAREHOUSE_TYPE = 'SNOWPARK-OPTIMIZED';
                         """
@@ -94,10 +94,10 @@ def airflow_with_snowpark_tutorial():
                 print(
                     f"""You do not have the necessary privileges to create objects in Snowflake.
                     If they do not exist already, please contact your Snowflake administrator
-                    to create the following objects for you: 
+                    to create the following objects for you:
                         - DATABASE: {snowflake_xcom_database},
                         - SCHEMA: {snowflake_xcom_schema},
-                        - WAREHOUSE: {snowpark_warehouse} (if you want to use a Snowpark warehouse) 
+                        - WAREHOUSE: {snowpark_warehouse} (if you want to use a Snowpark warehouse)
                     """
                 )
 
@@ -106,15 +106,15 @@ def airflow_with_snowpark_tutorial():
                     {snowflake_xcom_database}.
                     {snowflake_xcom_schema}.
                     {snowflake_xcom_table}
-                        ( 
-                            dag_id varchar NOT NULL, 
-                            task_id varchar NOT NULL, 
+                        (
+                            dag_id varchar NOT NULL,
+                            task_id varchar NOT NULL,
                             run_id varchar NOT NULL,
                             multi_index integer NOT NULL,
                             key varchar NOT NULL,
                             value_type varchar NOT NULL,
                             value varchar NOT NULL
-                        ); 
+                        );
                 """
             ).collect()
             print(f"Table {snowflake_xcom_table} is ready!")
@@ -123,7 +123,7 @@ def airflow_with_snowpark_tutorial():
                 f"""CREATE STAGE IF NOT EXISTS
                     {snowflake_xcom_database}.\
                     {snowflake_xcom_schema}.\
-                    {snowflake_xcom_table_stage} 
+                    {snowflake_xcom_table_stage}
                         DIRECTORY = (ENABLE = TRUE)
                         ENCRYPTION = (TYPE = 'SNOWFLAKE_SSE');
                     """
@@ -406,14 +406,14 @@ def airflow_with_snowpark_tutorial():
             snowpark_session.schema = snowflake_xcom_schema
 
             snowpark_session.sql(
-                f"""DROP TABLE IF EXISTS 
+                f"""DROP TABLE IF EXISTS
                 {snowflake_xcom_database}.
                 {snowflake_xcom_schema}.
                 {snowflake_xcom_table};"""
             ).collect()
 
             snowpark_session.sql(
-                f"""DROP STAGE IF EXISTS                
+                f"""DROP STAGE IF EXISTS
                 {snowflake_xcom_database}.
                 {snowflake_xcom_schema}.
                 {snowflake_xcom_stage};"""

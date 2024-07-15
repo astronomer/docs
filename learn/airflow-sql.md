@@ -47,14 +47,14 @@ Astronomer recommends avoiding top-level code in your DAG file. If you have a SQ
 If you use the Astro CLI, you can store scripts like SQL queries in the `include/` directory:
 
 ```bash
-├─ dags/  
-|    └─ example-dag.py  
-├─ plugins/  
-├─ include/  
-|    ├─ query1.sql  
-|    └─ query2.sql    
-├─ Dockerfile  
-├─ packages.txt  
+├─ dags/
+|    └─ example-dag.py
+├─ plugins/
+├─ include/
+|    ├─ query1.sql
+|    └─ query2.sql
+├─ Dockerfile
+├─ packages.txt
 └─ requirements.txt
 ```
 
@@ -249,7 +249,7 @@ Note that while this example is specific to Snowflake, the concepts apply to any
 
 If you're unfamiliar with Airflow or Python, you can use [gusty](https://github.com/chriscardillo/gusty) to generate DAGs directly from your SQL code.
 
-You can install gusty in your Airflow environment by running `pip install gusty` from your command line. If you use the Astro CLI, you can alternatively add `gusty` to your Astro project `requirements.txt` file. 
+You can install gusty in your Airflow environment by running `pip install gusty` from your command line. If you use the Astro CLI, you can alternatively add `gusty` to your Astro project `requirements.txt` file.
 
 Once you've installed gusty in your Airflow environment, you can turn your SQL files into Airflow tasks by adding YAML instructions to the front matter your SQL file. The front matter is the section at the top of the SQL file enclosed in `---`.
 
@@ -259,7 +259,7 @@ The example below shows how to turn a simple SQL statement into an Airflow task 
 ---
 operator: airflow.providers.postgres.operators.postgres.PostgresOperator
 conn_id: postgres_default
-dependencies: 
+dependencies:
     - task_0
 ---
 

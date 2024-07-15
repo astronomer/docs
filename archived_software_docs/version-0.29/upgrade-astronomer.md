@@ -154,9 +154,9 @@ This topic contains information about upgrading to specific versions of Astronom
 
 To avoid extended service disruptions, Astronomer recommends upgrading Astronomer Software to a compatible version before you upgrade Kubernetes. To view Astronomer Software and Kubernetes compatibility information, see [Version compatibility reference for Astronomer Software](version-compatibility-reference.md#astronomer-software).
 
-### Supported upgrade paths 
+### Supported upgrade paths
 
-If you're upgrading through multiple Astronomer Software versions in a single upgrade process, review the following table to ensure that you're following the correct upgrade path. If your combination of **Current version** and **Target version** isn't listed, you can upgrade directly from your current version to the target version. 
+If you're upgrading through multiple Astronomer Software versions in a single upgrade process, review the following table to ensure that you're following the correct upgrade path. If your combination of **Current version** and **Target version** isn't listed, you can upgrade directly from your current version to the target version.
 
 | Current version | Target version | Upgrade path                |
 | --------------- | -------------- | --------------------------- |
@@ -198,7 +198,7 @@ There is an [unresolved Kubernetes bug](https://github.com/kubernetes/kubernetes
 
 To preserve duplicate keys in your Helm chart, you can either reapply the values after upgrade or ensure that you use the `--reset-values` flag when running the upgrade script in Step 7.
 
-#### Resync Astronomer's signing certificate  
+#### Resync Astronomer's signing certificate
 
 As part of the 0.29 release, Astronomer deprecated its usage of [kubed](https://appscode.com/products/kubed/) for performance and security reasons. Kubed was responsible for syncing Astronomer's signing certificate to Deployment namespaces and is now replaced by an in-house utility. While this change does not directly affect users, you need to run a one-time command to reset Astronomer's signing certificate as part of the upgrade process to 0.29.
 

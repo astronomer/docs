@@ -30,19 +30,19 @@ To access data on the cloud while developing locally with the Astro CLI, export 
 - The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 - The [Astro CLI](astro/cli/overview.md).
 - An [Astro project](cli/develop-project.md#create-an-astro-project).
-    
+
 #### Retrieve AWS user credentials locally
 
 Run the following command to obtain your user credentials locally:
-    
+
 ```
 aws configure
-```    
+```
 
 This command prompts you for your Access Key Id, Secret Access Key, Region, and output format. If you log into AWS using single sign-on (SSO), run `aws configure sso` instead.
 
 The AWS CLI then stores your credentials in two separate files:
-    
+
 - `.aws/config`
 - `.aws/credentials`
 
@@ -56,8 +56,8 @@ The location of these files depends on your operating system:
 
 The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access to your credential files, you'll mount the `.aws` folder as a volume in Docker.
 
-1. In your Astro project, create a file named `docker-compose.override.yml` with the following configuration: 
-    
+1. In your Astro project, create a file named `docker-compose.override.yml` with the following configuration:
+
     <Tabs
         defaultValue="mac"
         groupId= "configure-your-astro-project"
@@ -67,7 +67,7 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
             {label: 'Windows', value: 'windows'},
         ]}>
     <TabItem value="mac">
-    
+
     ```yaml
     version: "3.1"
     services:
@@ -81,10 +81,10 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
             volumes:
             - /Users/<username>/.aws:/home/astro/.aws:rw
     ```
-    
+
     </TabItem>
     <TabItem value="linux">
-    
+
     ```yaml
     version: "3.1"
     services:
@@ -98,10 +98,10 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
             volumes:
             - /home/<username>/.aws:/home/astro/.aws:rw
     ```
-    
+
     </TabItem>
     <TabItem value="windows">
-    
+
     ```yaml
     version: "3.1"
     services:
@@ -143,7 +143,7 @@ For example, if you completed the configuration in this document and then create
 </TabItem>
 <TabItem value="gcp">
 
-#### Prerequisites 
+#### Prerequisites
 
 - A user account on GCP with access to GCP cloud resources.
 - The [Google Cloud SDK](https://cloud.google.com/sdk/docs/install-sdk).
@@ -171,8 +171,8 @@ The location of this file depends on your operating system:
 
 The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access to your credential file, mount it as a Docker volume.
 
-1. In your Astro project, create a file named `docker-compose.override.yml` to your project with the following configuration: 
-       
+1. In your Astro project, create a file named `docker-compose.override.yml` to your project with the following configuration:
+
     <Tabs
         defaultValue="mac"
         groupId= "configure-your-astro-project"
@@ -182,7 +182,7 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
             {label: 'Windows', value: 'windows'},
         ]}>
     <TabItem value="mac">
-    
+
     ```yaml
     version: "3.1"
     services:
@@ -196,10 +196,10 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
             volumes:
             - /Users/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:rw
     ```
-    
+
     </TabItem>
     <TabItem value="linux">
-    
+
     ```yaml
     version: "3.1"
     services:
@@ -213,10 +213,10 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
             volumes:
             - /home/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:rw
     ```
-    
+
     </TabItem>
     <TabItem value="windows">
-    
+
     ```yaml
     version: "3.1"
     services:
@@ -230,13 +230,13 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
             volumes:
             - /c/Users/<username>/AppData/Roaming/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:rw
     ```
-    
+
     </TabItem>
     </Tabs>
-    
+
 2. In your Astro project's `.env` file, add the following environment variable. Ensure that this volume path is the same as the one you configured in `docker-compose.override.yml`.
 
-    
+
     ```text
     GOOGLE_APPLICATION_CREDENTIALS=/usr/local/airflow/gcloud/application_default_credentials.json
     ```
@@ -261,15 +261,15 @@ For example, if you completed the configuration in this document and then create
 - If you're using Windows, [Windows Subsystem Linux](https://learn.microsoft.com/en-us/windows/wsl/install).
 
 #### Retrieve Azure user credentials locally
-    
+
 Run the following command to obtain your user credentials locally:
-      
+
 ```sh
 az login
 ```
 
 The CLI provides you with a link to a webpage where you authenticate to your Azure account. Once you complete the login, the CLI stores your user credentials in your local Azure configuration folder. The developer account credentials are used in place of the credentials associated with the Registered Application (Service Principal) in Microsoft Entra ID.
-    
+
 The default location of the Azure configuration folder depends on your operating system:
 
 - Linux: `$HOME/.azure/`
@@ -280,7 +280,7 @@ The default location of the Azure configuration folder depends on your operating
 
 The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access to your credential files, mount the `.azure` folder as a volume in Docker.
 
-1. In your Astro project, create a file named `docker-compose.override.yml` with the following configuration: 
+1. In your Astro project, create a file named `docker-compose.override.yml` with the following configuration:
 
     <Tabs
         defaultValue="mac"
@@ -290,7 +290,7 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
             {label: 'Windows and Linux', value: 'windowslinux'},
         ]}>
     <TabItem value="mac">
-    
+
     ```yaml
     version: "3.1"
     services:
@@ -304,10 +304,10 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
             volumes:
             - /Users/<username>/.azure:/usr/local/airflow/.azure:rw
     ```
-    
+
     </TabItem>
     <TabItem value="windowslinux">
-    
+
     ```yaml
     version: "3.1"
     services:
@@ -320,21 +320,21 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
         triggerer:
             volumes:
             - /home/<username>/.azure:/usr/local/airflow/.azure
-    
+
     ```
-    
-    :::info 
-    
+
+    :::info
+
     In Azure CLI versions 2.30.0 and later on Windows systems, credentials generated by the CLI are saved in an encrypted file and cannot be accessed from Astro Runtime Docker containers. See [MSAL-based Azure CLI](https://learn.microsoft.com/en-us/cli/azure/msal-based-azure-cli).
-        
+
     To work around this limitation on a Windows computer, use Windows Subsystem Linux (WSL) when completing this setup.
-      
+
     If you installed the Azure CLI both in Windows and WSL, make sure that the `~/.azure` file path in your volume points to the configuration file for the Azure CLI installed in WSL.
-    
+
     :::
-    
+
     </TabItem>
-    </Tabs>    
+    </Tabs>
 
 2. Add the following lines after the `FROM` line in your `Dockerfile` to install the Azure CLI inside your Astro Runtime image:
 
@@ -347,12 +347,12 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
 
 :::info
 
-If you're using an Apple M1 Mac, you must use the`linux/amd64` distribution of Astro Runtime. Replace the first line in the `Dockerfile` of your Astro project with `FROM --platform=linux/amd64 quay.io/astronomer/astro-runtime:<version>`. 
+If you're using an Apple M1 Mac, you must use the`linux/amd64` distribution of Astro Runtime. Replace the first line in the `Dockerfile` of your Astro project with `FROM --platform=linux/amd64 quay.io/astronomer/astro-runtime:<version>`.
 
 :::
 
 3. Add the following environment variable to your `.env` file. Make sure the file path is the same volume location you configured in `docker-compose.override.yml`
-   
+
     ```text
     AZURE_CONFIG_DIR=/usr/local/airflow/.azure
     ```
@@ -370,7 +370,7 @@ For example, if you completed the configuration in this document and then create
 
 ## Test your credentials with a secrets backend
 
-Now that Airflow has access to your user credentials, you can use them to connect to your cloud services. Use the following example setup to test your credentials by pulling values from different secrets backends. 
+Now that Airflow has access to your user credentials, you can use them to connect to your cloud services. Use the following example setup to test your credentials by pulling values from different secrets backends.
 
 
 <Tabs
@@ -387,7 +387,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
 
     - `airflow/variables/<my_variable_name>`
     - `airflow/connections/<my_connection_id>`
-    
+
     For example when adding the secret variable `my_secret_var` you will need to give the secret the name `airflow/variables/my_secret_var`.
 
     When setting the secret type, choose `Other type of secret` and select the `Plaintext` option. If you're creating a connection URI or a non-dict variable as a secret, remove the brackets and quotations that are pre-populated in the plaintext field.
@@ -407,7 +407,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
 
 4. Access the Airflow UI at `localhost:8080` and create an Airflow AWS connection named `aws_standard` with no credentials. See [Connections](https://www.astronomer.io/docs/learn/connections).
 
-   When you use this connection in your DAG, it will fall back to using your configured user credentials. 
+   When you use this connection in your DAG, it will fall back to using your configured user credentials.
 
 5. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve `<my_variable_name>` and `<my_connection_id>` from the secrets backend and print it to the terminal:
 
@@ -431,11 +431,11 @@ Now that Airflow has access to your user credentials, you can use them to connec
 
             conn = BaseHook.get_connection(conn_id="<my_connection_id>")
             print(f"My secret connection is: {conn.get_uri()}") # secrets will be masked in the logs!
-            
+
         print_var()
     ```
 
-6. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run. 
+6. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run.
 7. View logs for your DAG run. If the connection was successful, your masked secrets appear in your logs. See [Airflow logging](https://www.astronomer.io/docs/learn/logging).
 
 </TabItem>
@@ -445,10 +445,10 @@ Now that Airflow has access to your user credentials, you can use them to connec
 
     - `airflow-variables-<my_variable_name>`
     - `airflow-connections-<my_connection_name>`
-    
+
      For example when adding the secret variable `my_secret_var` you will need to give the secret the name `airflow-variables-my_secret_var`.
 
-2. Add the following environment variables to your Astro project `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/secrets-backends/google-cloud-secret-manager-backend.html). Make sure to specify your `project_id`. 
+2. Add the following environment variables to your Astro project `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/secrets-backends/google-cloud-secret-manager-backend.html). Make sure to specify your `project_id`.
 
     ```text
     AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
@@ -463,7 +463,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
 
 4. Access the Airflow UI at `localhost:8080` and create an Airflow GCP connection named `gcp_standard` with no credentials. See [Connections](https://www.astronomer.io/docs/learn/connections).
 
-   When you use this connection in your DAG, it will fall back to using your configured user credentials. 
+   When you use this connection in your DAG, it will fall back to using your configured user credentials.
 
 5. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve `<my_variable_name>` and `<my_connection_id>` from the secrets backend and print it to the terminal:
 
@@ -491,8 +491,8 @@ Now that Airflow has access to your user credentials, you can use them to connec
         print_var()
     ```
 
-6. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run. 
-7. View logs for your DAG run. If the connection was successful, your masked secrets appear in your logs. See [Airflow logging](https://www.astronomer.io/docs/learn/logging). 
+6. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run.
+7. View logs for your DAG run. If the connection was successful, your masked secrets appear in your logs. See [Airflow logging](https://www.astronomer.io/docs/learn/logging).
 
 </TabItem>
 
@@ -502,10 +502,10 @@ Now that Airflow has access to your user credentials, you can use them to connec
 
     - `airflow-variables-<my_variable_name>`
     - `airflow-connections-<my_connection_name>`
-    
+
     For example, to use a secret named `mysecretvar` in your DAG, you must name the secret `airflow-variables-mysecretvar`.
 
-    You will need to store your connection in [URI format](https://www.astronomer.io/docs/learn/connections#define-connections-with-environment-variables). 
+    You will need to store your connection in [URI format](https://www.astronomer.io/docs/learn/connections#define-connections-with-environment-variables).
 
 2. In your Astro project, add the following line to Astro project `requirements.txt` file:
 
@@ -513,8 +513,8 @@ Now that Airflow has access to your user credentials, you can use them to connec
     apache-airflow-providers-microsoft-azure
     ```
 
-3. Add the following environment variables to your Astro project `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/secrets-backends/azure-key-vault.html). Make sure to specify your `vault_url`. 
-  
+3. Add the following environment variables to your Astro project `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/secrets-backends/azure-key-vault.html). Make sure to specify your `vault_url`.
+
     ```text
     AIRFLOW__SECRETS__BACKEND=airflow.providers.microsoft.azure.secrets.key_vault.AzureKeyVaultBackend
     AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "vault_url": "<your-vault-url>"}
@@ -530,7 +530,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
 
 5. Access the Airflow UI at `localhost:8080` and create an Airflow Azure connection named `azure_standard` with no credentials. See [Connections](https://www.astronomer.io/docs/learn/connections).
 
-   When you use this connection in your DAG, it will fall back to using your configured user credentials. 
+   When you use this connection in your DAG, it will fall back to using your configured user credentials.
 
 6. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve a value from `airflow/variables` and print it to the terminal:
 
@@ -558,7 +558,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
         print_var()
     ```
 
-7. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run. 
+7. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run.
 8. View logs for your DAG run. If the connection was successful, your masked secrets appear in your logs. See [Airflow logging](https://www.astronomer.io/docs/learn/logging).
 
 </TabItem>

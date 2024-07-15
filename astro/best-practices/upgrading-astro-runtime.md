@@ -7,16 +7,16 @@ id: upgrading-astro-runtime
 
 Astro includes features that make upgrading to the latest version of Astro Runtime easy and, more importantly, safe. When leveraging these features, follow these best practices to ensure that your Deployments remain stable after you upgrade:
 
-- Monitor for upgrade opportunities using [Organization dashboards](organization-dashboard.md), as well as by following the [Astro Runtime maintenance and lifecycle policy](runtime-version-lifecycle-policy.mdx). 
+- Monitor for upgrade opportunities using [Organization dashboards](organization-dashboard.md), as well as by following the [Astro Runtime maintenance and lifecycle policy](runtime-version-lifecycle-policy.mdx).
 - Check [Upgrade Astro Runtime](upgrade-runtime.md) for advisories on the specific version you're upgrading to.
-- Prepare to upgrade safely using [upgrade tests](cli/test-your-astro-project-locally.md#test-before-an-astro-runtime-upgrade). 
+- Prepare to upgrade safely using [upgrade tests](cli/test-your-astro-project-locally.md#test-before-an-astro-runtime-upgrade).
 - In the case of a malfunction after upgrading, revert to your original Astro Runtime version using [deploy rollbacks](deploy-history.md).
 
 Use this document to learn more about each of these best practices for upgrading Astro Runtime.
 
 ## Best practice guidance
 
-It's best practice to keep your running Astro Runtime versions up-to-date. Astro Runtime upgrades include new Airflow features, as well as bug fixes, security fixes, and improvements to Astro Runtime. 
+It's best practice to keep your running Astro Runtime versions up-to-date. Astro Runtime upgrades include new Airflow features, as well as bug fixes, security fixes, and improvements to Astro Runtime.
 
 ### Monitoring for upgrades
 
@@ -39,9 +39,9 @@ Use the process described in [Upgrade Astro Runtime](upgrade-runtime.md#step-3-o
         - An upgraded `Dockerfile`.
         - `pip freeze` output for both versions.
         - A report with environment metadata and a Results table including any errors logged.
-	
+
 	![Astro Upgrade Test Report](/img/guides/dag_test_report.png)
-	
+
 	- A Dependency Compare report listing the upgrades, additions and removals coming in the new Astro runtime version and underlying Airflow package. For example, a "Major Updates" section lists the packages receiving new major versions, and a "Minor Updates" lists the packages receiving new minor versions:
 	```text
 	Major Updates:
@@ -70,6 +70,6 @@ The `upgrade-test` command can also be used to test the current Runtime version 
 
 :::
 
-## See also 
+## See also
 
 - [Upgrade Astro Runtime](upgrade-runtime.md#step-3-optional-run-upgrade-tests-with-the-astro-cli).

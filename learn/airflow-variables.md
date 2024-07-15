@@ -8,9 +8,9 @@ id: airflow-variables
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-An Airflow variable is a key-value pair that can be used to store information in your Airflow environment. They are commonly used to store instance level information that rarely changes, including secrets like an API key or the path to a configuration file. 
+An Airflow variable is a key-value pair that can be used to store information in your Airflow environment. They are commonly used to store instance level information that rarely changes, including secrets like an API key or the path to a configuration file.
 
-There are two distinct types of Airflow variables: regular values and JSON serialized values. 
+There are two distinct types of Airflow variables: regular values and JSON serialized values.
 
 ![Variables in the Airflow UI](/img/guides/airflow-variables_variables_in_UI.png)
 
@@ -33,7 +33,7 @@ To get the most out of this guide, you should have an understanding of:
 
 ## Best practices for storing information in Airflow
 
-[Airflow variables](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/variables.html#variables) store key-value pairs or short JSON objects that need to be accessible in your whole Airflow instance. They are Airflow’s runtime configuration concept and defined using the [`airflow.model.variable`](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/variable/index.html#module-airflow.models.variable) object. 
+[Airflow variables](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/variables.html#variables) store key-value pairs or short JSON objects that need to be accessible in your whole Airflow instance. They are Airflow’s runtime configuration concept and defined using the [`airflow.model.variable`](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/variable/index.html#module-airflow.models.variable) object.
 
 There are some best practices to keep in mind when using Airflow variables:
 
@@ -64,7 +64,7 @@ There are several ways to create Airflow variables:
 
 To create an Airflow variable in the UI, click on the **Admin** tab and select **Variables**. Then click on the **+** button and enter a key, value and an optional description for your Airflow variable. You also have the option to **Import Variables** from a file.
 
-![UI](/img/guides/airflow-variables_UI_600.png) 
+![UI](/img/guides/airflow-variables_UI_600.png)
 
 ### Using the Airflow CLI
 
@@ -244,7 +244,7 @@ get_var_jinja = BashOperator(
 )
 ```
 
-You can also retrieve an Airflow variable using the Airflow CLI's [`get`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#get_repeat3) and [`list`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#list_repeat8) commands. 
+You can also retrieve an Airflow variable using the Airflow CLI's [`get`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#get_repeat3) and [`list`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#list_repeat8) commands.
 
 ## Hide sensitive information in Airflow variables
 

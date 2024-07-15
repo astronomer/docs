@@ -63,7 +63,7 @@ If any of your GCP resources are on a private network, you can access them using
 - [Private Services Connect](https://cloud.google.com/vpc/docs/private-service-connect)
 - A [VPC Peering connection](https://cloud.google.com/vpc/docs/vpc-peering) between Astronomer's VPC and the VPCs for your broader network
 
-Astro uses four different CIDR blocks to create your Astronomer cluster infrastructure. If you plan on peering with an existing VPC and want to use custom values for your CIDRs, then you must additionally provide your own CIDR ranges (RFC 1918 IP Space) for the following services: 
+Astro uses four different CIDR blocks to create your Astronomer cluster infrastructure. If you plan on peering with an existing VPC and want to use custom values for your CIDRs, then you must additionally provide your own CIDR ranges (RFC 1918 IP Space) for the following services:
 
 - **Subnet CIDR**: Used by nodes in your GKE cluster (Default: `172.20.0.0/22`)
 - **Pod CIDR**: Used by GKE pods (Default: `172.21.0.0/19`)
@@ -149,7 +149,7 @@ When VPC peering with Astronomer is complete, configure and validate the followi
 
 ### Create a Deployment and confirm the install
 
-When Astronomer support confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. See [Create a Deployment](create-deployment.md). 
+When Astronomer support confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. See [Create a Deployment](create-deployment.md).
 
 To confirm a successful installation, in the Astro UI select a Workspace and on the **Deployments** page click **Deployment**. The Astro cluster created by Astronomer support appears as an option in the **Cluster** list.
 

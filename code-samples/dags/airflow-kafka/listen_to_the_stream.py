@@ -1,10 +1,10 @@
 """
 ### DAG continuously listening to a Kafka topic for a specific message
 
-This DAG will always run and asynchronously monitor a Kafka topic for a message 
+This DAG will always run and asynchronously monitor a Kafka topic for a message
 which causes the funtion supplied to the `apply_function` parameter to return a value.
-If a value is returned by the `apply_function`, the `event_triggered_function` is 
-executed. Afterwards the task will go into a deferred state again. 
+If a value is returned by the `apply_function`, the `event_triggered_function` is
+executed. Afterwards the task will go into a deferred state again.
 """
 
 from airflow.decorators import dag

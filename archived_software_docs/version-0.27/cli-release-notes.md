@@ -53,8 +53,8 @@ Astronomer CLI v0.27.2 includes several improvements to the local development ex
 
     Name				State		Ports
     webserver			running		8080
-    triggerer			running		
-    scheduler			running		
+    triggerer			running
+    scheduler			running
     0.27.2_a64c1a-postgres-1	running		5432
     ```
 

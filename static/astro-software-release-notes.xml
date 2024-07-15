@@ -127,12 +127,12 @@ additionalScrapeJobs:
    houston:
       config:
          deployments:
-            enableListAllRuntimeVersions: true   
+            enableListAllRuntimeVersions: true
 </code></pre><p>This new setting changes whether all Admin-level users can view and upgrade to deprecated versions of Astro Runtime from the Software UI.</p><p>:::</p><p>By default, any user with an Admin-level role (Deployment Admin, Workspace Admin, System Admin) can now upgrade a Deployment to an unsupported version of Astro Runtime using the Astro CLI and the Houston API.</p><p>You can additionally set the following value in your <code>values.yaml</code> file to enable these users to view and upgrade to unsupported Runtime versions through the Software UI:</p><pre><code class="language-yaml">astronomer:
    houston:
       config:
          deployments:
-            enableListAllRuntimeVersions: true   
+            enableListAllRuntimeVersions: true
 </code></pre><h3>Change resource provisioning strategy per Deployment</h3><p>You can now set a <strong>Resource Strategy</strong> for each Deployment to fine-tune how Astronomer Software reserves resources for the Deployment within the cluster. The new resource strategies don't use AUs, meaning you can specify the exact CPU/ Memory requests and limits based on the needs of the Deployment. For example, you can configure a Deployment to have significantly more memory than CPU in extra capacity so that memory-intensive tasks are always guaranteed to run. See <a href="https://www.astronomer.io/docs/software/customize-resource-usage">Customize resource usage</a> for more information.</p><h3>Deploy only DAGs with <code>astro deploy -—dags</code></h3><p>You can now deploy only the DAGs folder of an Astro project to a Deployment. If you only need to deploy DAG code changes, DAG-only deploys are faster and safer than a full image deploy. This also allows you to configure CI/CD pipelines that allow certain team members to only push DAGs, while allowing other team members to push Astro project configuration updates. See <a href="deploy-dags.md">Deploy DAGs</a> for more information.</p><h3>Additional improvements</h3><ul>
 <li>
 <p>You can now configure a global label that is applied to all Astronomer Software Pods.</p>
@@ -234,7 +234,7 @@ additionalScrapeJobs:
    houston:
       config:
          deployments:
-            enableSystemAdminCanUseAllRuntimes: true   
+            enableSystemAdminCanUseAllRuntimes: true
 </code></pre><h3>Additional improvements</h3><ul>
 <li>
 <p>You can now configure a global index name prefix to use for both Fluentd and sidecar-based logging, which allows Astronomer Software to retain logs when you migrate between logging solutions. To enable this feature, add the following lines to your <code>values.yaml</code> file:</p>

@@ -5,7 +5,7 @@ id: overview
 description: 'Documentation for how to run Airflow at enterprise scale with Astronomer Software.'
 ---
 
-import AstroCard from '@site/src/components/AstroCard'; 
+import AstroCard from '@site/src/components/AstroCard';
 
 <AstroCard />
 

@@ -35,7 +35,7 @@ To gain a better understanding of DAG scheduling, it's important that you become
 
 - **Data Interval**: A property of each DAG run that represents the period of data that each task should operate on. For example, for a DAG scheduled hourly, each data interval begins at the top of the hour (minute 0) and ends at the close of the hour (minute 59). The DAG run is typically executed at the end of the data interval.
 - **Logical Date**: The start of the data interval. It does not represent when the DAG will be executed. Prior to Airflow 2.2, this was referred to as the execution date.
-- **Timetable**: A DAG property that dictates the data interval and logical date for each DAG run and determines when a DAG is scheduled.  
+- **Timetable**: A DAG property that dictates the data interval and logical date for each DAG run and determines when a DAG is scheduled.
 - **Run After**: The earliest time the DAG can be scheduled. This date is shown in the Airflow UI, and may be the same as the end of the data interval depending on your DAG's timetable.
 - **Backfilling and Catchup**: Related to scheduling. To learn more, see [DAG Runs](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html).
 
@@ -142,13 +142,13 @@ dataset2 = Dataset(f"{DATASETS_PATH}/dataset_2.txt")
     dag_id='dataset_dependent_example_dag',
     catchup=False,
     start_date=datetime(2024, 4, 1),
-    schedule=[dataset1, dataset2],  
-    # Passing a list of datasets will create an AND condition, 
+    schedule=[dataset1, dataset2],
+    # Passing a list of datasets will create an AND condition,
     # This scheduling option is available in Airflow 2.4+
 )
 ```
 
-This DAG runs when both `dataset1` and `dataset2` is updated at least once. 
+This DAG runs when both `dataset1` and `dataset2` is updated at least once.
 
 </TabItem>
 <TabItem value="conditional">
@@ -165,13 +165,13 @@ dataset2 = Dataset(f"{DATASETS_PATH}/dataset_2.txt")
     dag_id='dataset_dependent_example_dag',
     catchup=False,
     start_date=datetime(2024, 4, 1),
-    schedule=(dataset1 | dataset2),  
+    schedule=(dataset1 | dataset2),
     # Use () instead of [] to be able to use conditional dataset scheduling!
     # This scheduling option is available in Airflow 2.9+
 )
 ```
 
-This DAG runs when either `dataset1` or `dataset2` is updated. 
+This DAG runs when either `dataset1` or `dataset2` is updated.
 
 </TabItem>
 <TabItem value="time">
@@ -193,7 +193,7 @@ dataset2 = Dataset(f"{DATASETS_PATH}/dataset_2.txt")
     schedule=DatasetOrTimeSchedule(
         timetable=CronTriggerTimetable("0 0 * * *", timezone="UTC"),
         datasets=(dataset1 | dataset2),
-    ), 
+    ),
     # Use () instead of [] to be able to use conditional dataset scheduling!
     # This scheduling option is available in Airflow 2.9+
 )
@@ -229,7 +229,7 @@ You can run a DAG continuously with a pre-defined timetable. To use the [Continu
 @dag(
     start_date=datetime(2023, 4, 18),
     schedule="@continuous",
-    max_active_runs=1,  
+    max_active_runs=1,
     catchup=False,
 )
 ```

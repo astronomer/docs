@@ -19,7 +19,7 @@ To install Astronomer on EKS, you'll need access to the following tools and perm
 * An SMTP Service & Credentials (for example, Mailgun or Sendgrid).
 * Permission to create and modify resources on AWS.
 * Permission to generate a certificate (not self-signed) that covers a defined set of subdomains.
-* An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).  
+* An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).
 
 ## Step 1: Choose a base domain
 
@@ -113,13 +113,13 @@ This command will generate a report. If the `X509v3 Subject Alternative Name` se
 
 Depending on your organization, you may receive either a globally trusted certificate or a certificate from a private CA. The certificate from your private CA may include a domain certificate, a root certificate, and/or intermediate certificates, all of which need to be in proper certificate order. To verify certificate order, follow the guidelines below.
 
-### Option 3: Use the AWS Certificate Manager as the certificate provider 
+### Option 3: Use the AWS Certificate Manager as the certificate provider
 
 1. Run the following command to generate a private/public RSA key pair:
 
     ```sh
-    $ openssl genrsa -out private.pem 4096  
-    $ openssl rsa -in private.pem -outform PEM -pubout -out public.pem  
+    $ openssl genrsa -out private.pem 4096
+    $ openssl rsa -in private.pem -outform PEM -pubout -out public.pem
     ```
 2.  Open the `values.yaml` file and add this entry:
 

@@ -98,7 +98,7 @@ You can use the [duckdb Python package](https://pypi.org/project/duckdb/) direct
 
 Next, you will create a DAG that instead uses the DuckDB Airflow provider. To use the provider, you will need to define an Airflow connection to your DuckDB database.
 
-1. In the Airflow UI, go to **Admin** -> **Connections** and click **+**. 
+1. In the Airflow UI, go to **Admin** -> **Connections** and click **+**.
 
 2. Create a new connection named `my_local_duckdb_conn` using the following information:
 

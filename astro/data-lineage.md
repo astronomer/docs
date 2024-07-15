@@ -144,22 +144,22 @@ To see details on the assertions that have passed or failed, hover over a given 
 **Compare** mode shows a list of past instances for a given run. Using this mode, you can select two different run instances to see what changed in your pipelines between the two run instances.
 
 1. Click a run on the graph.
-   
-2. Click **Compare**. 
+
+2. Click **Compare**.
 
     ![Compare tab example](/img/docs/lineage-compare.png)
 
-    A bar graph appears showing you the time and duration of previous runs with the same run ID. The colored bar for a run indicates the run's duration and state. Successful runs have a green bar while failed runs have a red bar. 
+    A bar graph appears showing you the time and duration of previous runs with the same run ID. The colored bar for a run indicates the run's duration and state. Successful runs have a green bar while failed runs have a red bar.
 
 3. Select any two runs to open the comparison view for your graph. In this view:
 
     - An orange icon identifies runs and datasets that experienced a code change between the time of your selected runs.
     - The run whose instances you're comparing is highlighted in orange and labeled **Comparing Task**.
-    - Any part of the data pipeline that is affected by the code change is highlighted with orange vertices. 
+    - Any part of the data pipeline that is affected by the code change is highlighted with orange vertices.
     - When you click a run or a dataset which experienced a code change during the comparison period, the code change is highlighted in the bottom table.
-  
+
 4. Select a run or dataset that experienced a code change.
-   
+
 5. Click the **Info** tab. Instead of showing a single code source, this tab now shows code differences during your comparison period. Use this information to determine what code change might have caused downstream errors.
 
 In the following example, two instances of the run `analytics.delivery_times_7_days` are being compared over time. During this period, the dataset `public.delivery_7_days` experienced a code change. Because this dataset is upstream of the compared run, it's marked with an orange notification and has an orange vertex connecting it to the run.
@@ -214,4 +214,4 @@ Alternatively, you can filter datasets by Deployment directly from the **Dataset
 
 1. In the Astro UI, click **Lineage**, then click **Datasets**.
 2. Click **Select namespace**.
-3. Select the namespace for your Deployment. You can find a Deployment's namespace by opening the Deployment in the Astro UI and checking the value in **Namespace**. 
+3. Select the namespace for your Deployment. You can find a Deployment's namespace by opening the Deployment in the Astro UI and checking the value in **Namespace**.

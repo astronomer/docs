@@ -54,7 +54,7 @@ This tutorial uses a local Weaviate instance created as a Docker container. You 
 
 :::info
 
-The example code from this tutorial is also available on [GitHub](https://github.com/astronomer/airflow-weaviate-tutorial). 
+The example code from this tutorial is also available on [GitHub](https://github.com/astronomer/airflow-weaviate-tutorial).
 
 :::
 
@@ -71,14 +71,14 @@ The example code from this tutorial is also available on [GitHub](https://github
 
     ```text
     apache-airflow-providers-weaviate==1.0.0
-    weaviate-client==3.25.3 
+    weaviate-client==3.25.3
     ```
 
 3. This tutorial uses a local Weaviate instance and a [text2vec-transformer model](https://hub.docker.com/r/semitechnologies/transformers-inference/), with each running in a Docker container. To add additional containers to your Astro project, create a new file in your project's root directory called `docker-compose.override.yml` and add the following:
 
     ```yaml
     version: '3.1'
-    services:           
+    services:
       weaviate:
         image: cr.weaviate.io/semitechnologies/weaviate:latest
         command: "--host 0.0.0.0 --port '8081' --scheme http"
@@ -147,7 +147,7 @@ Create a new file called `movie_data.txt` in the `include` directory, then copy 
 
 1. In your `dags` folder, create a file called `query_movie_vectors.py`.
 
-2. Copy the following code into the file. If you want to use `text2vec-openai` for vectorization, change the `VECTORIZER` variable to `text2vec-openai` and make sure you provide an OpenAI API key in the `AIRFLOW_CONN_WEAVIATE_DEFAULT` in your `.env` file. 
+2. Copy the following code into the file. If you want to use `text2vec-openai` for vectorization, change the `VECTORIZER` variable to `text2vec-openai` and make sure you provide an OpenAI API key in the `AIRFLOW_CONN_WEAVIATE_DEFAULT` in your `.env` file.
 
     <CodeBlock language="python">{query_movie_vectors}</CodeBlock>
 

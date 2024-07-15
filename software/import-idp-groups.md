@@ -13,7 +13,7 @@ Astronomer Teams function similar to users. You can:
 - Assign Viewer, Editor, or Admin roles to a Team.
 - View information about users and permissions from the Astronomer UI.
 
-After you configure [SCIM](integrate-auth-system.md#manage-users-and-teams-with-scim), you can use templates to add or remove Teams on Astronomer Software and manage groups of users directly from your IdP. That way, when you create new user groups in the future, you can automatically apply a batch of permissions that they need to access Astronomer Software. 
+After you configure [SCIM](integrate-auth-system.md#manage-users-and-teams-with-scim), you can use templates to add or remove Teams on Astronomer Software and manage groups of users directly from your IdP. That way, when you create new user groups in the future, you can automatically apply a batch of permissions that they need to access Astronomer Software.
 
 ## Implementation considerations
 
@@ -32,7 +32,7 @@ Astronomer user roles function on a "most permissive" policy: If a user has role
 - If a user's most permissive role comes from a Team configuration, then there is no way to override/ remove this permission from a Workspace configuration.
 - Importing a Team from an IdP has no effect on existing Astronomer user roles. Users will continue to have permissions from both contexts, with the most permissive role defining how they interact with a given Workspace or Deployment.
 
-For example, consider a user who has been a Workspace Editor in `Production Workspace` via Astronomer's default authentication for the last year. Your organization recently implemented Okta as your authentication system for Astronomer and added this user to a Team with Workspace Viewer permissions in `Production Workspace`. Because the user still has Workspace Editor permissions from their original account, they will continue to have Workspace Editor permissions in `Production Workspace`. The only way to remove their Editor permissions is to have a Workspace Admin remove them through Workspace settings.  
+For example, consider a user who has been a Workspace Editor in `Production Workspace` via Astronomer's default authentication for the last year. Your organization recently implemented Okta as your authentication system for Astronomer and added this user to a Team with Workspace Viewer permissions in `Production Workspace`. Because the user still has Workspace Editor permissions from their original account, they will continue to have Workspace Editor permissions in `Production Workspace`. The only way to remove their Editor permissions is to have a Workspace Admin remove them through Workspace settings.
 
 :::
 
@@ -86,12 +86,12 @@ After configuring and importing user groups, Workspace Admins and Deployment Adm
 
 ## Create local Teams
 
-If you want to create a Team of Astronomer users, and the team doesn't map to a group in the IdP, you can enable local team creation. 
+If you want to create a Team of Astronomer users, and the team doesn't map to a group in the IdP, you can enable local team creation.
 
 To enable the feature, add the following configuration to your `values.yaml` file and [apply the change to your installation](apply-platform-config.md).
 
 ```yaml
-astronomer: 
+astronomer:
   houston:
     config:
       # Auth configuration.
@@ -110,14 +110,14 @@ Then, to create a local Team:
 3. Give the team a name and a description, then select all the users that you want in the Team.
 4. (Optional) Grant the Team a **System Level Role** if the Team needs system-level permissions.
 
-You can now add the local Team to a Workspace or Deployment as you would with an IdP Team or an individual user. 
+You can now add the local Team to a Workspace or Deployment as you would with an IdP Team or an individual user.
 
-## Disable individual user management 
+## Disable individual user management
 
 To use Teams as the only user management system on Astronomer Software, add the following entry to your `values.yaml` file:
 
 ```yaml
-astronomer: 
+astronomer:
   houston:
     config:
       userManagement:
@@ -126,4 +126,4 @@ astronomer:
 
 Save this configuration and push it to your platform. See [Apply a Platform Config Change](apply-platform-config.md).
 
-After you apply the configuration, individual users can't be invited or assigned Workspace or Deployment-level roles in Astronomer Software. Users must be invited through a Team by a System Admin, and only Teams can be assigned roles for Workspaces and Deployments. You can still create individual service accounts with Workspace and Deployment permissions. 
+After you apply the configuration, individual users can't be invited or assigned Workspace or Deployment-level roles in Astronomer Software. Users must be invited through a Team by a System Admin, and only Teams can be assigned roles for Workspaces and Deployments. You can still create individual service accounts with Workspace and Deployment permissions.

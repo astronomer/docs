@@ -41,8 +41,8 @@ In your Astro project, add the following line to your `requirements.txt` file:
 apache-airflow-providers-microsoft-azure
 ```
 
-Add the following environment variables to your `.env` file: 
-  
+Add the following environment variables to your `.env` file:
+
 ```text
 AIRFLOW__SECRETS__BACKEND=airflow.providers.microsoft.azure.secrets.key_vault.AzureKeyVaultBackend
 AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "vault_url": "<your-vault-url>", "tenant_id": "<your-tenant-id>", "client_id": "<your-client-id>", "client_secret": "<your-client-secret>"}
@@ -57,17 +57,17 @@ By default, this setup requires that you prefix any secret names in Key Vault wi
 ## Step 4: Deploy to Astro
 
 1. Run the following commands to export your environment variables to Astro.
- 
+
     ```sh
     astro deployment variable create --deployment-id <your-deployment-id> --load --env .env
     ```
-    
+
     In the Astro UI, mark `AIRFLOW__SECRETS__BACKEND_KWARGS` as **Secret**. See [Set environment variables in the Astro UI](manage-env-vars.md#using-the-astro-ui).
-  
+
 2. Run the following command to push your updated `requirements.txt` file to Astro:
-  
+
     ```sh
-    astro deploy --deployment-id <your-deployment-id> 
+    astro deploy --deployment-id <your-deployment-id>
     ```
-    
+
 3. (Optional) Remove the environment variables from your `.env` file, or store your `.env` file so that your credentials are hidden, for example with GitHub secrets.

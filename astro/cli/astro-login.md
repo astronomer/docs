@@ -4,15 +4,15 @@ title: 'astro login'
 id: astro-login
 description: Reference documentation for astro login.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-:::info  
+:::info
 
-The behavior and format of this command differs depending on what Astronomer product you're using. Use the following tabs to change product contexts. 
+The behavior and format of this command differs depending on what Astronomer product you're using. Use the following tabs to change product contexts.
 
 :::
 

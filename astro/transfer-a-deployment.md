@@ -10,16 +10,16 @@ Transferring a Deployment can be helpful when your team needs to change user acc
 ## Prerequisites
 
 - You must be a Workspace Owner or Operator in both the original Workspace and the target Workspace.
-- The Workspaces must be in the same Organization. 
+- The Workspaces must be in the same Organization.
 - Deployments cannot be transferred to a different cluster from the one in which they were created.
-- Only the users who are members of the target Workspace can access the Deployment after it is transferred. 
+- Only the users who are members of the target Workspace can access the Deployment after it is transferred.
 
-## Transfer a Deployment to another Workspace 
+## Transfer a Deployment to another Workspace
 
 1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
-2. Click the **Options** menu and select **Transfer Deployment**. 
+2. Click the **Options** menu and select **Transfer Deployment**.
 
     ![Transfer Deployment in options menu](/img/docs/transfer-deployment.png)
 
-3. Select the target Workspace where you want to transfer the Deployment. 
+3. Select the target Workspace where you want to transfer the Deployment.
 4. Click **Transfer Deployment**.

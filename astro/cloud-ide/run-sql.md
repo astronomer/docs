@@ -5,23 +5,23 @@ id: run-sql
 description: Learn how to run SQL queries by creating and configuring SQL cells in the Astro Cloud IDE.
 ---
 
-A SQL cell contains a SQL query that you can run in isolation or as a dependency in your pipeline. Create SQL cells and Warehouse SQL cells to execute SQL as part of your data pipeline. 
+A SQL cell contains a SQL query that you can run in isolation or as a dependency in your pipeline. Create SQL cells and Warehouse SQL cells to execute SQL as part of your data pipeline.
 
-## Prerequisites 
+## Prerequisites
 
 - An IDE project and pipeline. See [Step 2: Create a pipeline](/astro/cloud-ide/quickstart.md#step-2-create-a-pipeline).
-- For Warehouse SQL cells, you need: 
+- For Warehouse SQL cells, you need:
     - A database connection. See [Configure Airflow connections](/astro/cloud-ide/configure-project-environment.md#configure-airflow-connections).
-    - Write permissions to the data warehouse in your database connection. 
+    - Write permissions to the data warehouse in your database connection.
 
 ## Choose a SQL cell type
 
 A SQL cell runs a SQL query against a database and, by default, stores the results of the query in an XCom value for use in other cells. A Warehouse SQL cell runs a SQL query against a database connection and stores the results in your data warehouse. For more information about how these cells work, see [How SQL cells work](#how-sql-cells-work).
 
-The Astro Cloud IDE includes a local [DuckDB](https://duckdb.org/) instance that stores the XCom outputs for all Python and SQL cells without an external database storage connections. Through this instance, SQL cells can run queries against the dataframe or table outputs of other cells. 
+The Astro Cloud IDE includes a local [DuckDB](https://duckdb.org/) instance that stores the XCom outputs for all Python and SQL cells without an external database storage connections. Through this instance, SQL cells can run queries against the dataframe or table outputs of other cells.
 
 Both cell types execute SQL queries, but there are some scenarios where the use of one cell type is preferable. The following table lists the scenarios where Astronomer recommends using a specific type of SQL cell.
-  
+
 | Scenario                                                                                            |     Cell type      |
 | --------------------------------------------------------------------------------------------------- | :----------------: |
 | I don't have write access to an external database.                                                  |      SQL cell      |
@@ -29,7 +29,7 @@ Both cell types execute SQL queries, but there are some scenarios where the use 
 | I want to query a small amount of data from the output of another IDE cell.                         |      SQL cell      |
 | I'm going to use the output of the query only in my external database.                              | Warehouse SQL cell |
 | I'm querying a large amount of data.                                                                | Warehouse SQL cell |
-  
+
 Regardless of the cell type you choose, you can use your query results in downstream cells. However, using the output of a Warehouse cell in a downstream cell requires fetching the output from your external database, which can take longer than fetching the output of a SQL cell with XComs.
 
 ## Create a SQL cell
@@ -58,8 +58,8 @@ Regardless of the cell type you choose, you can use your query results in downst
     - **Table name**: The name of your output table
 
     By default, your input is formatted as a literal string and is defined in your DAG with quotation marks. To format your input as a Python expression, click **Python expression** next to the value name. If you already entered a literal string before changing this setting, remove the quotation marks that the IDE adds to your Python expression.
-    
-    After you switch to **Python expression**, your input for the value is defined in the DAG as a Python expression without quotation marks. You can use your input to call any Python value in your pipeline, such as a global import, an Airflow variable, or an environment variable. 
+
+    After you switch to **Python expression**, your input for the value is defined in the DAG as a Python expression without quotation marks. You can use your input to call any Python value in your pipeline, such as a global import, an Airflow variable, or an environment variable.
 
 ## Run a SQL cell
 
@@ -71,7 +71,7 @@ In your SQL cell, click **Dependencies** and select a cell to be upstream of you
 
 ![Button for specifying an explicit dependency](/img/cloud-ide/create-dependency.png)
 
-To make your SQL cell an upstream dependency for another cell, click **Dependencies** for the other cell and select the name of your SQL cell. 
+To make your SQL cell an upstream dependency for another cell, click **Dependencies** for the other cell and select the name of your SQL cell.
 
 ## View complete code for SQL cells
 

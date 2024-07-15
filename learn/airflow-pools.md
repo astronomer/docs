@@ -17,7 +17,7 @@ One of the benefits of Apache Airflow is that it is built to scale. With the rig
 
 Pools allow you to limit parallelism for an arbitrary set of tasks, allowing you to control when your tasks are run. They are often used in cases where you want to limit the number of parallel tasks that do a certain thing. For example, tasks that make requests to the same API or database, or tasks that run on a GPU node of a Kubernetes cluster.
 
-In this guide, you'll learn basic Airflow pool concepts, how to create and assign pools, and what you can and can't do with pools. You'll also implement some sample DAGs that use pools to fulfill simple requirements. 
+In this guide, you'll learn basic Airflow pool concepts, how to create and assign pools, and what you can and can't do with pools. You'll also implement some sample DAGs that use pools to fulfill simple requirements.
 
 :::tip Other ways to learn
 
@@ -78,7 +78,7 @@ task_a = PythonOperator(
 </TabItem>
 </Tabs>
 
-When tasks are assigned to a pool, they are scheduled as normal until all of the pool's slots are filled. As slots become available, the remaining queued tasks start running. 
+When tasks are assigned to a pool, they are scheduled as normal until all of the pool's slots are filled. As slots become available, the remaining queued tasks start running.
 
 If you assign a task to a pool that doesn't exist, then the task isn't scheduled when the DAG runs. There are currently no errors or checks for this in the Airflow UI, so be sure to double check the name of the pool that you're assigning a task to.
 
@@ -155,7 +155,7 @@ with DAG(
 </TabItem>
 </Tabs>
 
-Additionally, you can configure the number of slots occupied by a task by updating the `pool_slots` parameter (the default is 1). Modifying this value could be useful in cases where you are using pools to manage resource utilization. 
+Additionally, you can configure the number of slots occupied by a task by updating the `pool_slots` parameter (the default is 1). Modifying this value could be useful in cases where you are using pools to manage resource utilization.
 
 ## Pool limitations
 
@@ -167,7 +167,7 @@ When working with pools, keep in mind the following limitations:
 
 ## Example: Limit tasks hitting an API endpoint
 
-This example shows how to implement a pool to control the number of tasks hitting an API endpoint. 
+This example shows how to implement a pool to control the number of tasks hitting an API endpoint.
 
 In this scenario, five tasks across two different DAGs hit the API and may run concurrently based on the DAG schedules. However, to limit the tasks hitting the API at a time to three, you'll create a pool named `api_pool` with three slots. You'll also prioritize the tasks in the `pool_priority_dag` when the pool is full.
 
@@ -195,9 +195,9 @@ In the `pool_priority_dag` below, all three of the tasks hit the API endpoint an
 </Tabs>
 
 
-In the `pool_unimportant_dag` DAG, there are two tasks that hit the API endpoint that should be assigned to the pool, but there are also two other tasks that do not hit the API. Therefore, you assign the pool and priority weights in the `PythonOperator` instantiations. 
+In the `pool_unimportant_dag` DAG, there are two tasks that hit the API endpoint that should be assigned to the pool, but there are also two other tasks that do not hit the API. Therefore, you assign the pool and priority weights in the `PythonOperator` instantiations.
 
-To prioritize `task_x` over `task_y` while keeping both at a lower priority than the tasks in the first DAG, you assign `task_x` a priority weight of 2 and leave `task_y` with the default priority weight of 1. 
+To prioritize `task_x` over `task_y` while keeping both at a lower priority than the tasks in the first DAG, you assign `task_x` a priority weight of 2 and leave `task_y` with the default priority weight of 1.
 
 <Tabs
     defaultValue="taskflow"

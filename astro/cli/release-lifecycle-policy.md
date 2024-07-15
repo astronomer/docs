@@ -27,7 +27,7 @@ Specifically, when a release is in the stable channel, the following is true:
 
 When a release is in the deprecated channel, the following is true:
 
-- Astro and Astronomer Software functionality can still work, but is not guaranteed to work. 
+- Astro and Astronomer Software functionality can still work, but is not guaranteed to work.
 - If you're an Astronomer customer and reach out to support while using a deprecated version of the Astro CLI, Astronomer support will recommend that you upgrade the CLI as a first step.
 - The release includes `deprecated` metadata in `https://updates.astronomer.io/astro-cli`.
 - The release's binary is available on GitHub.
@@ -35,11 +35,11 @@ When a release is in the deprecated channel, the following is true:
 
 ## Astro CLI maintenance policy
 
-The stable release channel contains only the latest patches of the three most recent minor versions of the Astro CLI. 
+The stable release channel contains only the latest patches of the three most recent minor versions of the Astro CLI.
 
 For example, consider a circumstance where the three most recent minor versions of the Astro CLI are 1.18, 1.19, and 1.20. Based on this maintenance policy:
 
 - The latest patch versions for 1.18, 1.19, and 1.20 are all stable. These would be the only available stable releases for the Astro CLI.
 - Say 1.20.1 is the current stable version and Astronomer releases version 1.20.2. This means 1.20.2 becomes the new stable version and version 1.20.1 becomes deprecated. This release has no impact on the channels for the 1.18 and 1.19 releases.
-- If 1.21 releases, all versions of 1.18 are marked as deprecated. This release would have no impact on the channels of 1.19 and 1.20 releases. 
+- If 1.21 releases, all versions of 1.18 are marked as deprecated. This release would have no impact on the channels of 1.19 and 1.20 releases.
 

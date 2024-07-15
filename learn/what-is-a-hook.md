@@ -31,7 +31,7 @@ Hooks wrap around APIs and provide methods to interact with different external s
 
 To use a hook, you typically only need a connection ID to connect with an external system. For more information about setting up connections, see [Manage your connections in Apache Airflow](connections.md).
 
-All hooks inherit from the [BaseHook class](https://github.com/apache/airflow/blob/main/airflow/hooks/base.py), which contains the logic to set up an external connection with a connection ID. On top of making the connection to an external system, individual hooks can contain additional methods to perform various actions within the external system. These methods might rely on different Python libraries for these interactions. For example, the [`S3Hook`](https://registry.astronomer.io/providers/amazon/modules/s3hook) relies on the [`boto3`](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) library to manage its Amazon S3 connection.  
+All hooks inherit from the [BaseHook class](https://github.com/apache/airflow/blob/main/airflow/hooks/base.py), which contains the logic to set up an external connection with a connection ID. On top of making the connection to an external system, individual hooks can contain additional methods to perform various actions within the external system. These methods might rely on different Python libraries for these interactions. For example, the [`S3Hook`](https://registry.astronomer.io/providers/amazon/modules/s3hook) relies on the [`boto3`](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) library to manage its Amazon S3 connection.
 
 The `S3Hook` contains [over 20 methods](https://github.com/apache/airflow/blob/main/airflow/providers/amazon/aws/hooks/s3.py) to interact with Amazon S3 buckets. The following are some of the methods that are included with `S3Hook`:
 
@@ -56,7 +56,7 @@ The following example shows how you can use the hooks ([S3Hook](https://registry
 
 For this use case, you'll use hooks directly in your Python functions because none of the existing Amazon S3 operators can read data from multiple files within an Amazon S3 bucket. Also, none of the existing Slack operators can return the response of a Slack API call, which you might want to log for monitoring purposes.
 
-The source code for the hooks used in this example can be found in the following locations: 
+The source code for the hooks used in this example can be found in the following locations:
 
 - [S3Hook source code](https://github.com/apache/airflow/blob/main/airflow/providers/amazon/aws/hooks/s3.py)
 - [SlackHook source code](https://github.com/apache/airflow/blob/main/airflow/providers/slack/hooks/slack.py)
@@ -86,7 +86,7 @@ The following example DAG uses [Airflow Decorators](https://www.astronomer.io/do
 The following example DAG completes the following steps:
 
 - A Python task with a manually implemented `S3Hook` reads three specific keys from Amazon S3 with the `read_key` method and then returns a dictionary with the file contents converted to integers.
-- A second Python task completes a simple sum check using the results from the first task. 
+- A second Python task completes a simple sum check using the results from the first task.
 - The SlackHook `call` method posts the sum check results to a Slack channel and returns the response from the Slack API.
 
 <Tabs

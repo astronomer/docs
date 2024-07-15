@@ -12,7 +12,7 @@ body:
     id: description
     attributes:
       label: New Feature Description
-      description: Why is the new feature or functionality significant? What benefit does it provide? 
+      description: Why is the new feature or functionality significant? What benefit does it provide?
     validations:
       required: true
   - type: input

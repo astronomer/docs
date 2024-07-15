@@ -5,7 +5,7 @@ id: use-case-llm-customer-feedback
 sidebar_label: "LLMOps with Cohere + OpenSearch"
 ---
 
-With recent advances in the field of Large Language Model Operations (LLMOps), you can now combine the power of different language models to more efficiently get an answer to a query. This use case shows how you can use Apache Airflow to orchestrate an MLOps pipeline using two different models: You'll use embeddings and text classification by [Cohere](https://cohere.com/) with an [OpenSearch](https://opensearch.org/) search engine to analyze synthetic customer feedback data.  
+With recent advances in the field of Large Language Model Operations (LLMOps), you can now combine the power of different language models to more efficiently get an answer to a query. This use case shows how you can use Apache Airflow to orchestrate an MLOps pipeline using two different models: You'll use embeddings and text classification by [Cohere](https://cohere.com/) with an [OpenSearch](https://opensearch.org/) search engine to analyze synthetic customer feedback data.
 
 ![Screenshot of the Airflow UI Grid view with the Graph view selected showing a successful run of the full use case DAG with 17 tasks.](/img/examples/use-case-airflow-cohere-opensearch_full_dag.png)
 
@@ -18,7 +18,7 @@ Before trying this example, make sure you have:
 
 ## Clone the project
 
-Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-llm-customer-feedback.git). To keep your credentials secure when you deploy this project to your own git repository, create a file called `.env` with the contents of the `.env_example` file in the project root directory. 
+Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-llm-customer-feedback.git). To keep your credentials secure when you deploy this project to your own git repository, create a file called `.env` with the contents of the `.env_example` file in the project root directory.
 
 The repository is configured to create and use a local [OpenSearch](https://opensearch.org/docs/latest/) instance, accessible on port `9200`. If you already have a cloud-based OpenSearch instance, you can update the value of `AIRFLOW_CONN_OPENSEARCH_DEFAULT` in `.env` to connect to your own instance.
 
@@ -49,11 +49,11 @@ The other parameters at the beginning of the DAG, such as `TESTIMONIAL_SEARCH_TE
 
 ### Data source
 
-The data in this example is generated using the [`app.py`](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/include/mock_api/app.py) script included in the project. The script creates synthetic customer reviews based on a list of examples and a set of randomized customer parameters. 
+The data in this example is generated using the [`app.py`](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/include/mock_api/app.py) script included in the project. The script creates synthetic customer reviews based on a list of examples and a set of randomized customer parameters.
 
 ### Project overview
 
-This project contains two DAGs, one for the MLOps pipeline and one DAG to delete the index in OpenSearch for testing purposes. 
+This project contains two DAGs, one for the MLOps pipeline and one DAG to delete the index in OpenSearch for testing purposes.
 
 The [`analyze_customer_feedback` DAG](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/dags/analyze_customer_feedback.py) ingests data from the mock API and loads it into an [OpenSearch index](https://opensearch.org/docs/latest/im-plugin/index/). The DAG then uses the Cohere API to get sentiment scores and embeddings for a subset of the customer feedback returned by a keyword OpenSearch query. The embeddings and sentiment analysis scores are ingested back into OpenSearch and a final query is performed to get the positive feedback most similar to a target testimonial. The DAG ends by printing the retrieved testimonial to the logs.
 
@@ -63,7 +63,7 @@ The [`delete_opensearch_index` DAG](https://github.com/astronomer/use-case-llm-c
 
 ### Project code
 
-This use case showcases how you can use the [OpenSearch](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest) and [Cohere Airflow provider](https://registry.astronomer.io/providers/cohere/versions/latest) to analyze customer feedback in an MLOps Airflow pipeline.  
+This use case showcases how you can use the [OpenSearch](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest) and [Cohere Airflow provider](https://registry.astronomer.io/providers/cohere/versions/latest) to analyze customer feedback in an MLOps Airflow pipeline.
 
 The tasks in the `analyze_customer_feedback` DAG can be grouped into four sections:
 
@@ -83,15 +83,15 @@ The tasks in the `analyze_customer_feedback` DAG can be grouped into four sectio
 
     ![Graph view of the final section of the analyze_customer_feedback DAG that queries OpenSearch for the most similar testimonial using k-NN on the embeddings and filter for positive sentiment.](/img/examples/use-case-airflow-cohere-opensearch_final_section.png)
 
-Several parameters are set at the beginning of the DAG. You can adjust the number of pieces of customer feedback returned by the mock API by changing the `NUM_CUSTOMERS` variable. 
+Several parameters are set at the beginning of the DAG. You can adjust the number of pieces of customer feedback returned by the mock API by changing the `NUM_CUSTOMERS` variable.
 
 #### Ingest customer feedback data into OpenSearch
 
-The first six tasks in the `analyze_customer_feedback` DAG perform the necessary steps to ingest data from the mock API into OpenSearch. 
+The first six tasks in the `analyze_customer_feedback` DAG perform the necessary steps to ingest data from the mock API into OpenSearch.
 
 ![Graph view of the first six task in the analyze_customer_feedback DAG dealing with data ingestion.](/img/examples/use-case-airflow-cohere-opensearch_ingest_section.png)
 
-First, the `check_if_index_exists` task uses the [OpenSearchHook](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchHook) to check if an [index](https://opensearch.org/docs/latest/im-plugin/index/) of the name `OPEN_SEARCH_INDEX` already exists in your OpenSearch instance. The task is defined using the [`@task.branch`](airflow-branch-operator.md#taskbranch-branchpythonoperator) decorator and returns a different `task_id` depending on the result of the check. If the index already exists, the empty `index_exists` task will be executed. If the index does not exist, the `create_index` task will be executed. 
+First, the `check_if_index_exists` task uses the [OpenSearchHook](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchHook) to check if an [index](https://opensearch.org/docs/latest/im-plugin/index/) of the name `OPEN_SEARCH_INDEX` already exists in your OpenSearch instance. The task is defined using the [`@task.branch`](airflow-branch-operator.md#taskbranch-branchpythonoperator) decorator and returns a different `task_id` depending on the result of the check. If the index already exists, the empty `index_exists` task will be executed. If the index does not exist, the `create_index` task will be executed.
 
 ```python
 @task.branch
@@ -104,7 +104,7 @@ def check_if_index_exists(index_name: str, conn_id: str) -> str:
     return "create_index"
 ```
 
-The `create_index` task performs index creation using the [OpenSearchCreateIndexOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchCreateIndexOperator). Note how the dictionary passed to the `index_body` parameter includes the properties of the customer feedback documents, including fields for the embeddings and sentiment scores. 
+The `create_index` task performs index creation using the [OpenSearchCreateIndexOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchCreateIndexOperator). Note how the dictionary passed to the `index_body` parameter includes the properties of the customer feedback documents, including fields for the embeddings and sentiment scores.
 
 ```python
 create_index = OpenSearchCreateIndexOperator(
@@ -145,7 +145,7 @@ create_index = OpenSearchCreateIndexOperator(
 )
 ```
 
-Running in parallel, the `get_customer_feedback` task makes a call to the mock API exposed at `customer_ticket_api:5000`. 
+Running in parallel, the `get_customer_feedback` task makes a call to the mock API exposed at `customer_ticket_api:5000`.
 
 ```python
 @task
@@ -159,19 +159,19 @@ def get_customer_feedback(num_customers: int) -> list:
 
 The payload of the mock API is in the format of:
 
-```python 
+```python
 {
-    'ab_test_group': 'A', 
-    'customer_feedback': 'This product has transformed the way I work, absolutely fantastic UX!', 
-    'customer_id': 1714, 
-    'customer_location': 'Switzerland', 
-    'customer_rating': 3, 
-    'product_type': 'cloud service A', 
+    'ab_test_group': 'A',
+    'customer_feedback': 'This product has transformed the way I work, absolutely fantastic UX!',
+    'customer_id': 1714,
+    'customer_location': 'Switzerland',
+    'customer_rating': 3,
+    'product_type': 'cloud service A',
     'timestamp': '2023-11-24T11:25:37Z'
 }
 ```
 
-Next, the `customer_feedback_to_dict_list` task transforms the above payload into a list of dictionaries to be provided to the [OpenSearchAddDocumentOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchAddDocumentOperator) `document` and `doc_id` parameters. 
+Next, the `customer_feedback_to_dict_list` task transforms the above payload into a list of dictionaries to be provided to the [OpenSearchAddDocumentOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchAddDocumentOperator) `document` and `doc_id` parameters.
 
 ```python
 @task
@@ -223,7 +223,7 @@ The resulting list of dictionaries takes the form of:
 ]
 ```
 
-Lastly, the `add_lines_as_documents` task uses the [OpenSearchAddDocumentOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchAddDocumentOperator) to add the customer feedback data to the OpenSearch index. This task is [dynamically mapped](dynamic-tasks.md) over the list of dictionaries returned by the `customer_feedback_to_dict_list` task to create one mapped task instance per set of `doc_id` and `document` parameter inputs. To map over a list of dictionaries, the `.expand_kwargs` method is used. 
+Lastly, the `add_lines_as_documents` task uses the [OpenSearchAddDocumentOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchAddDocumentOperator) to add the customer feedback data to the OpenSearch index. This task is [dynamically mapped](dynamic-tasks.md) over the list of dictionaries returned by the `customer_feedback_to_dict_list` task to create one mapped task instance per set of `doc_id` and `document` parameter inputs. To map over a list of dictionaries, the `.expand_kwargs` method is used.
 
 ```python
 add_lines_as_documents = OpenSearchAddDocumentOperator.partial(
@@ -315,7 +315,7 @@ The dictionaries returned contain a flattened version of the verbose output from
 ]
 ```
 
-A second task, `get_feedback_texts`, is dynamically mapped over the list of dictionaries returned by the `reformat_relevant_reviews` task to extract the `customer_feedback` field from each dictionary. 
+A second task, `get_feedback_texts`, is dynamically mapped over the list of dictionaries returned by the `reformat_relevant_reviews` task to extract the `customer_feedback` field from each dictionary.
 
 ```python
 @task
@@ -333,7 +333,7 @@ The third section of the DAG consists of four tasks that perform sentiment analy
 
 ![Graph view of the section in the analyze_customer_feedback DAG that performs sentiment analysis, vector embeddings with the Cohere API and loads the results back into OpenSearch.](/img/examples/use-case-airflow-cohere-opensearch_sentiment_embedding_section.png)
 
-The first task in this section, `get_sentiment`, uses the [CohereHook](https://registry.astronomer.io/providers/cohere/versions/latest/modules/CohereHook) to get the sentiment of the customer feedback using the Cohere API [text classification endpoint](https://docs.cohere.com/reference/classify). The task is dynamically mapped over the list of feedback texts returned by the `get_feedback_texts` task to create one mapped task instance per customer feedback to be analyzed in parallel. Sentiment examples are stored in the [`classification_examples` file](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/include/classification_examples.py) in the `include` folder. 
+The first task in this section, `get_sentiment`, uses the [CohereHook](https://registry.astronomer.io/providers/cohere/versions/latest/modules/CohereHook) to get the sentiment of the customer feedback using the Cohere API [text classification endpoint](https://docs.cohere.com/reference/classify). The task is dynamically mapped over the list of feedback texts returned by the `get_feedback_texts` task to create one mapped task instance per customer feedback to be analyzed in parallel. Sentiment examples are stored in the [`classification_examples` file](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/include/classification_examples.py) in the `include` folder.
 
 ```python
 @task
@@ -366,7 +366,7 @@ Sentiment scores are returned in the format of:
 {'prediction': 'positive', 'confidence': 0.9305259}
 ```
 
-In parallel, the [CohereEmbeddingOperator](https://registry.astronomer.io/providers/apache-airflow-providers-cohere/versions/latest/modules/CohereEmbeddingOperator) defines the `get_embeddings` task which uses the [embedding endpoint](https://docs.cohere.com/reference/embed) of the Cohere API to get vector embeddings for customer feedback. Similar to the `get_sentiment` task, the `get_embeddings` task is dynamically mapped over the list of feedback texts returned by the `get_feedback_texts` task to create one mapped task instance per customer feedback to be embedded in parallel. 
+In parallel, the [CohereEmbeddingOperator](https://registry.astronomer.io/providers/apache-airflow-providers-cohere/versions/latest/modules/CohereEmbeddingOperator) defines the `get_embeddings` task which uses the [embedding endpoint](https://docs.cohere.com/reference/embed) of the Cohere API to get vector embeddings for customer feedback. Similar to the `get_sentiment` task, the `get_embeddings` task is dynamically mapped over the list of feedback texts returned by the `get_feedback_texts` task to create one mapped task instance per customer feedback to be embedded in parallel.
 
 
 ```python
@@ -403,7 +403,7 @@ full_data = combine_reviews_embeddings_and_sentiments(
 )
 ```
 
-For each combined dictionary, the `load_embeddings_into_opensearch` task uses the [OpenSearchHook](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchHook) to update the relevant document in OpenSearch with the embeddings and sentiment scores. 
+For each combined dictionary, the `load_embeddings_into_opensearch` task uses the [OpenSearchHook](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchHook) to update the relevant document in OpenSearch with the embeddings and sentiment scores.
 
 ```python
 @task
@@ -433,7 +433,7 @@ The final section of the DAG queries OpenSearch using both k-NN on the embedding
 
 ![Graph view of the final section of the analyze_customer_feedback DAG that queries OpenSearch for the most similar testimonial using k-NN on the embeddings and filter for positive sentiment.](/img/examples/use-case-airflow-cohere-opensearch_final_section.png)
 
-First, the `get_embeddings_testimonial_search_term` task converts the target testimonial to vector embeddings using the [CohereEmbeddingOperator](https://registry.astronomer.io/providers/cohere/versions/latest/modules/CohereEmbeddingOperator). 
+First, the `get_embeddings_testimonial_search_term` task converts the target testimonial to vector embeddings using the [CohereEmbeddingOperator](https://registry.astronomer.io/providers/cohere/versions/latest/modules/CohereEmbeddingOperator).
 
 ```python
 get_embeddings_testimonial_search_term = CohereEmbeddingOperator(

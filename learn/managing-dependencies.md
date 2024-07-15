@@ -28,7 +28,7 @@ In this guide you'll learn about the many ways you can implement dependencies in
 - Dependencies with the TaskFlow API.
 - Trigger rules.
 
-To view a video presentation of these concepts, see [Manage Dependencies Between Airflow Deployments, DAGs, and Tasks](https://www.astronomer.io/events/webinars/manage-dependencies-between-airflow-deployments-dags-tasks/). 
+To view a video presentation of these concepts, see [Manage Dependencies Between Airflow Deployments, DAGs, and Tasks](https://www.astronomer.io/events/webinars/manage-dependencies-between-airflow-deployments-dags-tasks/).
 
 The focus of this guide is dependencies between tasks in the same DAG. If you need to implement dependencies between DAGs, see [Cross-DAG dependencies](cross-dag-dependencies.md).
 
@@ -79,7 +79,7 @@ All of these methods are equivalent and result in the DAG shown in the following
 
 ![Basic Dependencies](/img/guides/managing-dependencies_basic_dependencies.png)
 
-Astronomer recommends using a single method consistently. Using both bit-shift operators and `set_upstream`/`set_downstream` in your DAGs can overly-complicate your code. 
+Astronomer recommends using a single method consistently. Using both bit-shift operators and `set_upstream`/`set_downstream` in your DAGs can overly-complicate your code.
 
 To set a dependency where two downstream tasks are dependent on the same upstream task, use lists or tuples. For example:
 
@@ -91,7 +91,7 @@ t0 >> t1 >> [t2, t3]
 t0 >> t1 >> (t2, t3)
 ```
 
-These statements are equivalent and result in the DAG shown in the following image: 
+These statements are equivalent and result in the DAG shown in the following image:
 
 ![List Dependencies](/img/guides/managing-dependencies_list_dependencies.png)
 
@@ -135,7 +135,7 @@ This code creates the following DAG structure:
 
 ![Chain Dependencies](/img/guides/managing-dependencies_chain_dependencies.png)
 
-When you use the `chain` function, any lists or tuples that are set to depend directly on each other need to be the same length.  
+When you use the `chain` function, any lists or tuples that are set to depend directly on each other need to be the same length.
 
 ```python
 chain([t0, t1], [t2, t3])  # this code will work
@@ -145,7 +145,7 @@ chain([t0, t1], t2, [t3, t4, t5])  # this code will work
 
 ### Using `chain_linear()`
 
-To set interconnected dependencies between tasks and lists of tasks, use the `chain_linear()` function. This function is available in Airflow 2.7+, in older versions of Airflow you can set similar dependencies between two lists at a time using the [`cross_downstream()` function](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html#airflow.models.baseoperator.cross_downstream). 
+To set interconnected dependencies between tasks and lists of tasks, use the `chain_linear()` function. This function is available in Airflow 2.7+, in older versions of Airflow you can set similar dependencies between two lists at a time using the [`cross_downstream()` function](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html#airflow.models.baseoperator.cross_downstream).
 
 Replacing `chain` in the previous example with `chain_linear` creates dependencies where each element in the downstream list will depend on each element in the upstream list.
 
@@ -181,7 +181,7 @@ Dependencies for [dynamically mapped tasks](dynamic-tasks.md) can be set in the 
 ```python
 start=EmptyOperator(task_id="start")
 
-@task 
+@task
 def multiply(x,y):
     return x*y
 
@@ -284,7 +284,7 @@ with TaskGroup(group_id="group1") as tg1:
 
     t1 >> t2
 # End task group definition
-    
+
 t3 = EmptyOperator(task_id="end")
 
 # Set task group's (tg1) dependencies
@@ -306,7 +306,7 @@ The image below shows types of dependencies that can be set between tasks and ta
 
 ## TaskFlow API dependencies
 
-The [TaskFlow API](airflow-decorators.md) `@task` decorator allows you to easily turn Python functions into Airflow tasks. 
+The [TaskFlow API](airflow-decorators.md) `@task` decorator allows you to easily turn Python functions into Airflow tasks.
 
 If your DAG has several tasks that are defined with the `@task` decorator and use each other's output, you can leverage inferred dependencies via the TaskFlow API. For example, in the following DAG there are two dependent tasks, `get_a_cat_fact` and `print_the_cat_fact`. To set the dependencies, you pass the called function of the upstream task as a positional argument to the downstream task (`print_the_cat_fact(get_a_cat_fact())`):
 
@@ -316,14 +316,14 @@ This image shows the resulting DAG:
 
 ![TaskFlow Dependencies](/img/guides/managing-dependencies_taskflow_1.png)
 
-Note that you can also assign the called function to an object and then pass that object to the downstream task. This way of defining dependencies is often easier to read and allows you to set the same task as an upstream dependency to multiple other tasks. 
+Note that you can also assign the called function to an object and then pass that object to the downstream task. This way of defining dependencies is often easier to read and allows you to set the same task as an upstream dependency to multiple other tasks.
 
 ```python
-@task 
+@task
 def get_num():
     return 42
 
-@task 
+@task
 def add_one(num):
     return num + 1
 
@@ -351,15 +351,15 @@ def sagemaker_model():
     @task
     def upload_data_to_s3(s3_bucket, test_s3_key):
         """
-        Uploads validation data to S3 from /include/data 
+        Uploads validation data to S3 from /include/data
         """
         s3_hook = S3Hook(aws_conn_id="aws-sagemaker")
 
         # Take string, upload to S3 using predefined method
         s3_hook.load_file(
-            filename="include/data/test.csv", 
-            key=test_s3_key, 
-            bucket_name=s3_bucket, 
+            filename="include/data/test.csv",
+            key=test_s3_key,
+            bucket_name=s3_bucket,
             replace=True
         )
 
@@ -399,8 +399,8 @@ The following options are available:
 - `all_success`: (default) The task runs only when all upstream tasks have succeeded.
 - `all_failed`: The task runs only when all upstream tasks are in a failed or upstream\_failed state.
 - `all_done`: The task runs once all upstream tasks are done with their execution.
-- `all_skipped`: The task runs only when all upstream tasks have been skipped. 
-- `one_failed`: The task runs when at least one upstream task has failed. 
+- `all_skipped`: The task runs only when all upstream tasks have been skipped.
+- `one_failed`: The task runs when at least one upstream task has failed.
 - `one_success`: The task runs when at least one upstream task has succeeded.
 - `one_done`: The task runs when at least one upstream task has either succeeded or failed.
 - `none_failed`: The task runs only when all upstream tasks have succeeded or been skipped.

@@ -5,9 +5,9 @@ id: run-python
 description: Learn how to run Python code by creating and configuring Python cells in the Astro Cloud IDE.
 ---
 
-A Python cell contains a Python function that you can run in isolation or as a dependency in your pipeline. Create Python cells to execute Python as part of your data pipeline. 
+A Python cell contains a Python function that you can run in isolation or as a dependency in your pipeline. Create Python cells to execute Python as part of your data pipeline.
 
-## Prerequisites 
+## Prerequisites
 
 - An IDE project and pipeline. See [Step 2: Create a pipeline](/astro/cloud-ide/quickstart.md#step-2-create-a-pipeline).
 
@@ -33,7 +33,7 @@ See [Run cells in the Astro Cloud IDE](run-cells.md).
 
 In a Python cell, click **Dependencies** and select a cell to make it an explicit upstream dependency of your Python cell. When you run your entire pipeline, the Python cell cannot begin running until the selected upstream cell finishes running.
 
-To make a Python cell an upstream dependency for another cell, click **Dependencies** for the other cell and select the name of your Python cell. 
+To make a Python cell an upstream dependency for another cell, click **Dependencies** for the other cell and select the name of your Python cell.
 
 To create data dependencies between Python cells, see [Pass data between cells](pass-data-between-cells.md).
 

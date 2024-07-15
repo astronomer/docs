@@ -59,7 +59,7 @@ For more information on adding secrets to Secrets Manager, see [AWS documentatio
 
 Add the following environment variables to your Astro project's `.env` file:
 
-```text 
+```text
 AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend
 AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables", "role_arn": "<your-role-arn>"}
 AWS_DEFAULT_REGION=<region>
@@ -73,18 +73,18 @@ After you configure an Airflow connection to AWS, can run a DAG locally to check
 
     ```sh
     $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend
-  
+
     $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables",  "role_arn": "<your-role-arn>", "region_name": "<your-region>"}' --secret
     ```
 
-2. (Optional) Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials. 
+2. (Optional) Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials.
 
   :::info
-    
+
   If you delete the `.env` file, the Secrets Manager backend won't work locally.
 
   :::
 
-3. Open the Airflow UI for your Deployment and create an [Amazon Web Services connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) without credentials. When you use this connection in a DAG, Airflow will automatically fall back to using the credentials in your configured environment variables. 
- 
+3. Open the Airflow UI for your Deployment and create an [Amazon Web Services connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) without credentials. When you use this connection in a DAG, Airflow will automatically fall back to using the credentials in your configured environment variables.
+
 To further customize the Airflow and AWS SSM Parameter Store integration, see the [full list of available kwargs](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/_api/airflow/providers/amazon/aws/secrets/systems_manager/index.html).

@@ -18,7 +18,7 @@ Before trying this example, make sure you have:
 
 ## Clone the project
 
-Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-elt-ml-finance). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. 
+Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-elt-ml-finance). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory.
 
 The repository is configured to spin up and use local [Postgres](https://www.postgresql.org/) and [MinIO](https://min.io/) instances without you needing to define connections or access external tools. MinIO is a local storage solution that mimics the S3 API and can be used with S3 specific Airflow operators.
 
@@ -73,7 +73,7 @@ This use case shows many core Airflow features like [datasets](airflow-datasets.
 
 #### Ingestion DAG
 
-The ingestion DAG, [`in_finance_data`](https://github.com/astronomer/use-case-elt-ml-finance/blob/main/dags/in_finance_data.py), is a helper DAG to simulate data arriving in your object storage from other sources, such as from manual uploads or via an [Kafka](airflow-kafka.md) S3 sink.  
+The ingestion DAG, [`in_finance_data`](https://github.com/astronomer/use-case-elt-ml-finance/blob/main/dags/in_finance_data.py), is a helper DAG to simulate data arriving in your object storage from other sources, such as from manual uploads or via an [Kafka](airflow-kafka.md) S3 sink.
 
 The [script to create mock data](https://github.com/astronomer/use-case-elt-ml-finance/blob/main/include/create_mock_data.py) is located in the include folder and called inside a `@task` decorated function. Modularizing scripts in this way is a common pattern to make them accessible to several DAGs and also make your DAG files easier to read.
 
@@ -134,7 +134,7 @@ The ELT DAG, [`finance_elt`](https://github.com/astronomer/use-case-elt-ml-finan
 
 The two `wait_for_ingest_*` tasks are grouped in a [task group](task-groups.md), which visually groups the tasks in the Airflow UI and allows you to pass arguments like `aws_conn_id` at the group level.
 
-```python 
+```python
 @task_group(
     default_args={
         "aws_conn_id": AWS_CONN_ID,
@@ -185,7 +185,7 @@ s3_to_db_glob = LoadFileOperator.partial(
 ).expand_kwargs(input_files)
 ```
 
-Finally, the three transform tasks use the [@aql.transform](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/transform.html) decorator of the Astro Python SDK to directly use SQL on an input table to create a new output table. For example, the second transform task ingests the temporary table created by the upstream task `select_successful_charges` and calculates the average amount charged per customer using a SQL statement. 
+Finally, the three transform tasks use the [@aql.transform](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/transform.html) decorator of the Astro Python SDK to directly use SQL on an input table to create a new output table. For example, the second transform task ingests the temporary table created by the upstream task `select_successful_charges` and calculates the average amount charged per customer using a SQL statement.
 The resulting temporary table is directly passed into the next task `join_charge_satisfaction`, which joins the average amount charged per customer with the customer satisfaction scores and creates a permanent output table called `model_satisfaction`.
 
 ```python
@@ -199,7 +199,7 @@ def avg_successful_per_customer(tmp_successful: Table) -> Table:
         GROUP BY customer_id;
     """
 
-# ... 
+# ...
 
 # create a temporary table of successful charges from the in_charge table
 tmp_successful = select_successful_charges(
@@ -223,7 +223,7 @@ Additionally, a [cleanup](https://astro-sdk-python.readthedocs.io/en/stable/astr
 
 #### ML DAG
 
-Airflow [datasets](airflow-datasets.md) let you schedule DAGs based on when a specific file or database is updated in a separate DAG. In this example, the ML DAG [`finance_ml`](https://github.com/astronomer/use-case-elt-ml-finance/blob/main/dags/finance_ml.py) is scheduled to run as soon as the `model_satisfaction` table is updated by the ELT DAG. Since the Astro Python SDK is used to update the `model_satisfaction` table, the dataset is automatically created and updated, without explicit `outlets` arguments. 
+Airflow [datasets](airflow-datasets.md) let you schedule DAGs based on when a specific file or database is updated in a separate DAG. In this example, the ML DAG [`finance_ml`](https://github.com/astronomer/use-case-elt-ml-finance/blob/main/dags/finance_ml.py) is scheduled to run as soon as the `model_satisfaction` table is updated by the ELT DAG. Since the Astro Python SDK is used to update the `model_satisfaction` table, the dataset is automatically created and updated, without explicit `outlets` arguments.
 
 The `schedule` parameter of the ML DAG uses the same `Table` definition as a dataset.
 
@@ -235,7 +235,7 @@ The `schedule` parameter of the ML DAG uses the same `Table` definition as a dat
 )
 ```
 
-The first task of the ML DAG takes care of feature engineering. By using the [@aql.dataframe](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator, the `model_satisfaction` table is ingested directly as a [pandas DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html). 
+The first task of the ML DAG takes care of feature engineering. By using the [@aql.dataframe](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator, the `model_satisfaction` table is ingested directly as a [pandas DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html).
 The `feature_eng` task creates a train-test split, scales the numeric features, and one-hot encodes the categorical feature `product_type` using functions from [scikit-learn](https://scikit-learn.org/stable/index.html). The resulting sets of features and targets are returned as a dictionary of pandas DataFrames.
 
 ```python
@@ -290,7 +290,7 @@ feature_eng_table = feature_eng(
 )
 ```
 
-This DAG includes two possible paths for model training, based on whether the Airflow instance runs on [Kubernetes](https://kubernetes.io/). 
+This DAG includes two possible paths for model training, based on whether the Airflow instance runs on [Kubernetes](https://kubernetes.io/).
 
 Since Airflow DAGs are defined as Python code, different task definitions for different environments can be achieved by a simple if/else statement. If the environment is `prod`, the model training task runs using the [@task.kubernetes](kubepod-operator.md#use-the-taskkubernetes-decorator) decorator, which is the decorator version of the [KubernetesPodOperator](https://registry.astronomer.io/providers/apache-airflow-providers-cncf-kubernetes/versions/latest/modules/KubernetesPodOperator). This allows you to run your model training in a dedicated Kubernetes pod, gaining full control over the environment and resources used.
 

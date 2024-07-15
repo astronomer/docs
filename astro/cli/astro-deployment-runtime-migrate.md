@@ -4,12 +4,12 @@ title: "astro deployment runtime migrate"
 id: astro-deployment-runtime-migrate
 description: Migrate a Software Deployment to Astro Runtime.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-:::info 
+:::info
 
-This command is available only if you're authenticated to an Astronomer Software installation. 
+This command is available only if you're authenticated to an Astronomer Software installation.
 
 :::
 
@@ -25,11 +25,11 @@ The Astro CLI lists only the available Runtime versions that are later than the 
 
 | Option                        | Description                                                                                                                    | Possible values
 | --------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `--cancel` | Cancel the migration                                                                | None | 
+| `--cancel` | Cancel the migration                                                                | None |
 | `--deployment-id` (_Required_)           | The ID of the Deployment which you want to migrate to Runtime. To find your Deployment ID, run `astro deployment list`.     | Any Deployment ID |
 
 
-## Related commands 
+## Related commands
 
 - [`astro deployment airflow upgrade`](astro-deployment-airflow-upgrade.md)
 - [`astro deployment runtime upgrade`](astro-deployment-runtime-upgrade.md)

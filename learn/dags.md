@@ -12,7 +12,7 @@ import CodeBlock from '@theme/CodeBlock';
 import example_astronauts_three_tasks from '!!raw-loader!../code-samples/dags/dags/example_astronauts_three_tasks.py';
 import complex_dag_structure from '!!raw-loader!../code-samples/dags/dags/complex_dag_structure.py';
 
-In Airflow, a **DAG** is a data pipeline or workflow. DAGs are the main organizational unit in Airflow; they contain a collection of tasks and dependencies that you want to execute on a schedule. 
+In Airflow, a **DAG** is a data pipeline or workflow. DAGs are the main organizational unit in Airflow; they contain a collection of tasks and dependencies that you want to execute on a schedule.
 
 A DAG is defined in Python code and visualized in the Airflow UI. DAGs can be as simple as a single task or as complex as hundreds or thousands of tasks with complicated dependencies.
 
@@ -54,7 +54,7 @@ Beyond these requirements, a DAG can be as simple or as complicated as you need!
 
 Each task in a DAG performs one unit of work. Tasks can be anything from a simple Python function to a complex data transformation or a call to an external service. They are defined using [Airflow operators](what-is-an-operator.md) or [Airflow decorators](airflow-decorators.md). The dependencies between tasks can be set in different ways (see [Managing Dependencies](managing-dependencies.md)).
 
-The following screenshot shows a simple DAG graph with 3 sequential tasks.  
+The following screenshot shows a simple DAG graph with 3 sequential tasks.
 
 ![Screenshot of the Airflow UI showing the Grid view with the Graph tab selected. A simple DAG is shown with 3 sequential tasks, get_astronauts, print_astronaut_craft (which is a dynamically mapped task) and print_reaction.](/img/guides/dags_simple_dag_graph.png)
 
@@ -118,7 +118,7 @@ Some more complex features visible in this DAG graph are:
 
 - **Dynamically mapped tasks**: A dynamically mapped task is [created dynamically](dynamic-tasks.md) at runtime based on user-defined input. The number of dynamically mapped task instances is shown in brackets (`[]`) behind the task ID.
 - **Branching tasks**: A branching task creates a conditional branch in the DAG. See [Branching in Airflow](airflow-branch-operator.md) for more information.
-- **Edge labels**: Edge labels appear on the edge between two tasks. These labels are often helpful to annotate branch decisions in a DAG graph. 
+- **Edge labels**: Edge labels appear on the edge between two tasks. These labels are often helpful to annotate branch decisions in a DAG graph.
 - **Task groups**: A task group is a tool to logically and visually group tasks in an Airflow DAG. See [Airflow task groups](task-groups.md) for more information.
 - **Setup/teardown tasks**: When using Airflow to manage infrastructure, it can be helpful to define tasks as setup and teardown tasks to take advantage of additional intelligent dependency behavior. Setup and teardown tasks appear with diagonal arrows next to their task IDs and are connected with a dotted line. See [Use setup and teardown tasks in Airflow](airflow-setup-teardown.md) for more information.
 - **Datasets**: Datasets are shown in the DAG graph. If a DAG is scheduled on a dataset, it is shown upstream of the first task of the DAG. If a task in the DAG updates a dataset, it is shown after the respective task as in the previous screenshot. See [Airflow datasets](airflow-datasets.md) for more information.
@@ -134,7 +134,7 @@ There are two types of syntax you can use to structure your DAG:
 - **TaskFlow API**: The TaskFlow API contains the `@dag` decorator. A function decorated with `@dag` defines a DAG. Note that you need to call the function at the end of the script for Airflow to register the DAG. All tasks are defined within the context of the DAG function.
 - **Traditional syntax**: You can create a DAG by instantiating a DAG context using the `DAG` class and defining tasks within that context.
 
-TaskFlow API and traditional syntax can be freely mixed. See [Mixing TaskFlow decorators with traditional operators](airflow-decorators.md#mixing-taskflow-decorators-with-traditional-operators) for more information. 
+TaskFlow API and traditional syntax can be freely mixed. See [Mixing TaskFlow decorators with traditional operators](airflow-decorators.md#mixing-taskflow-decorators-with-traditional-operators) for more information.
 
 The following is an example of the same DAG written using each type of syntax.
 
@@ -243,7 +243,7 @@ The DAGs in the previous section have the following basic parameters defined. It
 
 There are many more DAG-level parameters that let you configure anything from resource usage to the DAG's appearance in the Airflow UI. See [DAG-level parameters](airflow-dag-parameters.md) for a complete list.
 
-## See also 
+## See also
 
 - [Get started with Apache Airflow](get-started-with-airflow.md) tutorial for a hands-on introduction to writing your first simple DAG.
 - [Airflow operators](what-is-an-operator.md) and [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md) for more information on how to define tasks in a DAG.

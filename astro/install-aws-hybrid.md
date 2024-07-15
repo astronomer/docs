@@ -19,7 +19,7 @@ To get started on Astro Hosted, see [Start a trial](trial.md).
 
 :::
 
-The Astro Hybrid data plane on Amazon Web Services (AWS) runs on Elastic Kubernetes Service (EKS). 
+The Astro Hybrid data plane on Amazon Web Services (AWS) runs on Elastic Kubernetes Service (EKS).
 
 To install Astro, Astronomer will create an Astro cluster in a dedicated AWS account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
 
@@ -92,8 +92,8 @@ If you want to continue with the second option, you'll additionally need:
     - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
     - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
 
-    If you're the first person in your Organization to authenticate, you'll be granted Organization Owner permissions. You can create a Workspace and add other team members to the Workspace without the assistance of Astronomer support. See [Manage Workspace users](manage-workspace-users.md). 
-    
+    If you're the first person in your Organization to authenticate, you'll be granted Organization Owner permissions. You can create a Workspace and add other team members to the Workspace without the assistance of Astronomer support. See [Manage Workspace users](manage-workspace-users.md).
+
     To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
 
 ## Retrieve an external ID from the Astro UI
@@ -102,7 +102,7 @@ You must be an Organization Owner to view the external ID. If you are not an Org
 
 1. In the Astro UI, click the **Settings** tab.
 
-2. Click **Show** in the **AWS External ID** field and then click **Copy**. This external ID is a unique identifier that Astro uses to connect to your AWS account. 
+2. Click **Show** in the **AWS External ID** field and then click **Copy**. This external ID is a unique identifier that Astro uses to connect to your AWS account.
 
 3. Save the external ID as a secret or in another secure format. See [How to use an external ID when granting access to your AWS resources to a third party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
 
@@ -124,13 +124,13 @@ Use the external ID to create a cross-account IAM role for Astro.
 
 When new features or functionality are added to Astro, Astronomer might need to modify cross-account role permissions. When setting permissions, Astronomer adheres to the least-privilege permissions standard and adds only the permissions necessary for new features or functionality.
 
-Astronomer support notifies your Organization when any changes are made to the policies that expand cross-account role access. Notifications will include an explanation of the changes being made and why the change was necessary. 
+Astronomer support notifies your Organization when any changes are made to the policies that expand cross-account role access. Notifications will include an explanation of the changes being made and why the change was necessary.
 
 Astronomer can reduce the access available to the policies without notification.
 
 ### Monitor the policies for changes (optional)
 
-You can use CloudTrail to monitor changes to Astro policies. Access to CloudTrail has been limited to prevent the accidental modification or deletion of CloudTrail logs by Astronomer support. The following table lists the events that you should monitor. 
+You can use CloudTrail to monitor changes to Astro policies. Access to CloudTrail has been limited to prevent the accidental modification or deletion of CloudTrail logs by Astronomer support. The following table lists the events that you should monitor.
 
 | Event Names                              | Resource                                                         |
 | ---------------------------------------- | ---------------------------------------------------------------- |
@@ -191,7 +191,7 @@ When VPC peering with Astronomer is complete, configure and validate the followi
 
 ## Create a Deployment and confirm the install
 
-When you receive confirmation that your Astro cluster has been created, Astronomer recommends that you create a Deployment and deploy DAGs. See [Create a Deployment](create-deployment.md). 
+When you receive confirmation that your Astro cluster has been created, Astronomer recommends that you create a Deployment and deploy DAGs. See [Create a Deployment](create-deployment.md).
 
 To confirm a successful installation, in the Astro UI select a Workspace and on the **Deployments** page click **Deployment**. The Astro cluster created by Astronomer support appears as an option in the **Cluster** list.
 

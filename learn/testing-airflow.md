@@ -147,7 +147,7 @@ def test_dag_tags(dag_id, dag, fileloc):
 
 Airflow offers different ways to run DAG validation tests using any Python test runner. This section gives an overview of the most common implementation methods. If you are new to testing Airflow DAGs, you can quickly get started by using Astro CLI commands.
 
-### Airflow CLI 
+### Airflow CLI
 
 The Airflow CLI offers two commands related to local testing:
 
@@ -170,13 +170,13 @@ You can use CI/CD tools to test and deploy your Airflow code. By installing the 
 
 :::info
 
-Astronomer customers can use the Astro GitHub integration, which allows you to automatically deploy code from a GitHUb repository to an Astro deployment, viewing Git metadata in the Astro UI. See [Deploy code with the Astro GitHub integration](https://www.astronomer.io/docs/astro/deploy-github-integration). 
+Astronomer customers can use the Astro GitHub integration, which allows you to automatically deploy code from a GitHUb repository to an Astro deployment, viewing Git metadata in the Astro UI. See [Deploy code with the Astro GitHub integration](https://www.astronomer.io/docs/astro/deploy-github-integration).
 
 :::
 
 ## Add test data or files for local testing
 
-Use the `include` folder of your Astro project to store files for testing locally, such as test data or a dbt project file. The files in your `include` folder are included in your deploys to Astro, but they are not parsed by Airflow. Therefore, you don't need to specify them in `.airflowignore` to prevent parsing. 
+Use the `include` folder of your Astro project to store files for testing locally, such as test data or a dbt project file. The files in your `include` folder are included in your deploys to Astro, but they are not parsed by Airflow. Therefore, you don't need to specify them in `.airflowignore` to prevent parsing.
 
 If you're running Airflow locally, apply your changes by refreshing the Airflow UI.
 
@@ -198,7 +198,7 @@ You may wish to install these requirements and test your DAGs in a [virtualenv](
 
 ### Setup
 
-To use `dag.test()`, you only need to add a few lines of code to the end of your DAG file. If you are using a traditional DAG context, call `dag.test()` after your DAG declaration. If you are using the `@dag` decorator, assign your DAG function to a new object and call the method on that object. 
+To use `dag.test()`, you only need to add a few lines of code to the end of your DAG file. If you are using a traditional DAG context, call `dag.test()` after your DAG declaration. If you are using the `@dag` decorator, assign your DAG function to a new object and call the method on that object.
 
 <Tabs
     defaultValue="traditional"
@@ -265,7 +265,7 @@ You can run the `.test()` method with popular debugging tools such as:
 
 ### Use `dag.test()` with the Astro CLI
 
-If you use the Astro CLI exclusively and do not have the `airflow` package installed locally, you can still debug using `dag.test()` by running `astro dev start`, entering the scheduler container with `astro dev bash -s`, and executing `python <path-to-dag-file>` from within the Docker container. Unlike using the base `airflow` package, this testing method requires starting up a complete Airflow environment. 
+If you use the Astro CLI exclusively and do not have the `airflow` package installed locally, you can still debug using `dag.test()` by running `astro dev start`, entering the scheduler container with `astro dev bash -s`, and executing `python <path-to-dag-file>` from within the Docker container. Unlike using the base `airflow` package, this testing method requires starting up a complete Airflow environment.
 
 ### Use variables and connections in dag.test()
 
@@ -279,7 +279,7 @@ To debug your DAGs in a more realistic environment, you can pass the following A
 This is useful for testing your DAG for different dates or with different connections and configurations. The following code snippet shows the syntax for passing various parameters to `dag.test()`:
 
 ```python
-from pendulum import datetime 
+from pendulum import datetime
 
 if __name__ == "__main__":
     conn_path = "connections.yaml"
@@ -321,7 +321,7 @@ def test_function_returns_5():
     assert my_function(input) == 5
 ```
 
-In the context of Airflow, you can write unit tests for any part of your DAG, but they are most frequently applied to hooks and operators. All Airflow hooks, operators, and provider packages must pass unit testing before code can be merged into the project. For an example of unit testing, see [AWS `S3Hook`](https://registry.astronomer.io/providers/amazon/modules/s3hook) and the associated [unit tests](https://github.com/apache/airflow/blob/main/tests/providers/amazon/aws/hooks/test_s3.py). 
+In the context of Airflow, you can write unit tests for any part of your DAG, but they are most frequently applied to hooks and operators. All Airflow hooks, operators, and provider packages must pass unit testing before code can be merged into the project. For an example of unit testing, see [AWS `S3Hook`](https://registry.astronomer.io/providers/amazon/modules/s3hook) and the associated [unit tests](https://github.com/apache/airflow/blob/main/tests/providers/amazon/aws/hooks/test_s3.py).
 
 If you are using custom hooks or operators, Astronomer recommends using unit tests to check the logic and functionality. In the following example, a custom operator checks if a number is even:
 
@@ -382,13 +382,13 @@ class EvenNumberCheckOperator(unittest.TestCase):
 
 ```
 
-If your DAGs contain `PythonOperators` that execute your own Python functions, it is recommended that you write unit tests for those functions as well. 
+If your DAGs contain `PythonOperators` that execute your own Python functions, it is recommended that you write unit tests for those functions as well.
 
 The most common way to implement unit tests in production is to automate them as part of your CI/CD process. Your CI tool executes the tests and stops the deployment process when errors occur.
 
 ### Mocking
 
-Mocking is the imitation of an external system, dataset, or other object. For example, you might use mocking with an Airflow unit test if you are testing a connection, but don't have access to the metadata database. Mocking could also be used when you need to test an operator that executes an external service through an API endpoint, but you don't want to wait for that service to run a simple test. 
+Mocking is the imitation of an external system, dataset, or other object. For example, you might use mocking with an Airflow unit test if you are testing a connection, but don't have access to the metadata database. Mocking could also be used when you need to test an operator that executes an external service through an API endpoint, but you don't want to wait for that service to run a simple test.
 
 Many [Airflow tests](https://github.com/apache/airflow/tree/master/tests) use mocking. The blog [Testing and debugging Apache Airflow](https://godatadriven.com/blog/testing-and-debugging-apache-airflow/) discusses Airflow mocking and it might help you get started.
 
@@ -406,7 +406,7 @@ There are many ways you can integrate data quality checks into your DAG:
 
 Data quality checks work better at scale if you design your DAGs to load or process data incrementally. To learn more about incremental loading, see [DAG Writing Best Practices in Apache Airflow](dag-best-practices.md). Processing smaller, incremental chunks of data in each DAG Run ensures that any data quality issues have a limited effect.
 
-Learn more about how to approach data quality within Airflow: 
+Learn more about how to approach data quality within Airflow:
 
 - [Data quality and Airflow guide](data-quality.md)
 - [How to Keep Data Quality in Check with Airflow](https://www.astronomer.io/blog/how-to-keep-data-quality-in-check-with-airflow/)

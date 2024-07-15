@@ -51,7 +51,7 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
 :::
 
 ### Configure logging sidecars
- 
+
 1. Retrieve your `config.yaml` file. See [Apply a config change](apply-platform-config.md).
 2. Add the following entry to your `config.yaml` file:
 
@@ -63,7 +63,7 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
         name: sidecar-log-consumer
     ```
 
-    :::tip 
+    :::tip
 
     If you're migrating from Fluentd, additionally set the following configuration so that Astronomer Software can retain logs:
 
@@ -111,7 +111,7 @@ You can customize the default Astronomer Vector logging sidecar to have differen
       ]}>
   <TabItem value="elasticsearch">
 
-    ```yaml 
+    ```yaml
     log_schema:
       timestamp_key : "@timestamp"
     data_dir: "${SIDECAR_LOGS}"
@@ -198,8 +198,8 @@ You can customize the default Astronomer Vector logging sidecar to have differen
           del(.host)
           del(.file)
     # Configuration for ElasticSearch sink.
-    sinks:  
-      out: 
+    sinks:
+      out:
         type: elasticsearch
         # Specify the transforms you want to run before your logs are exported.
         inputs:
@@ -219,7 +219,7 @@ You can customize the default Astronomer Vector logging sidecar to have differen
   </TabItem>
   <TabItem value="datadog">
 
-    ```yaml 
+    ```yaml
     log_schema:
       timestamp_key : "@timestamp"
     data_dir: "${SIDECAR_LOGS}"
@@ -286,7 +286,7 @@ You can customize the default Astronomer Vector logging sidecar to have differen
           component: "${COMPONENT:--}"
           workspace: "${WORKSPACE:--}"
           release: "${RELEASE:--}"
-    # Configuration for Honeycomb sinks      
+    # Configuration for Honeycomb sinks
     sinks:
       my_sink_id:
         type: honeycomb
@@ -295,7 +295,7 @@ You can customize the default Astronomer Vector logging sidecar to have differen
           - transform_syslog
         api_key: <your-api-key>
         dataset: my-honeycomb-dataset
-    
+
     ```
 
   </TabItem>
@@ -384,13 +384,13 @@ After you've created an Elastic deployment and endpoint, you have two options to
      host: "<host-URL>"
      port: "9243"
      # encoded credentials from above step 1
-     secret: "<encoded credentials>"    
+     secret: "<encoded credentials>"
  ```
 3. Add the following entry to your `config.yaml` file to disable internal logging:
 
  ```yaml
  tags:
-   logging: false     
+   logging: false
  ```
 4. Run the following command to upgrade the Astronomer Software release version in the `config.yaml` file:
 
@@ -419,13 +419,13 @@ After you've created an Elastic deployment and endpoint, you have two options to
      host: "<host-URL>"
      port: "9243"
      # kubernetes secret containing credentials
-     secretName: elasticcreds   
+     secretName: elasticcreds
  ```
 3. Add the following entry to your `config.yaml` file to disable internal logging:
 
  ```yaml
  tags:
-      logging: false    
+      logging: false
  ```
 4. Run the following command to upgrade the Astronomer Software release version in the `config.yaml` file:
 

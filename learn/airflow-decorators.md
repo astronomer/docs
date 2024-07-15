@@ -36,7 +36,7 @@ To get the most out of this guide, you should have an understanding of:
 
 ## What is a decorator?
 
-In Python, [decorators](https://realpython.com/primer-on-python-decorators/) are functions that take another function as an argument and extend the behavior of that function. For example, the `@multiply_by_100_decorator` takes any function as the `decorated_function` argument and returns the result of that function multiplied by 100. 
+In Python, [decorators](https://realpython.com/primer-on-python-decorators/) are functions that take another function as an argument and extend the behavior of that function. For example, the `@multiply_by_100_decorator` takes any function as the `decorated_function` argument and returns the result of that function multiplied by 100.
 
 
 ```python
@@ -105,7 +105,7 @@ The decorated version of the DAG eliminates the need to explicitly instantiate t
 
 Here are some other things to keep in mind when using decorators:
 
-- You must call all decorated functions in your DAG file so that Airflow can register the task or DAG. For example, `taskflow()` is called at the end of the previous example to call the DAG function. 
+- You must call all decorated functions in your DAG file so that Airflow can register the task or DAG. For example, `taskflow()` is called at the end of the previous example to call the DAG function.
 - When you define a task, the `task_id` defaults to the name of the function you decorated. If you want to change this behavior, you can pass a `task_id` to the decorator as shown in the `extract` task example. Similarly, other [BaseOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html#airflow.models.baseoperator.BaseOperator) task-level parameters, such as `retries` or `pool`, can be defined within the decorator:
 
     ```python
@@ -155,26 +155,26 @@ Here are some other things to keep in mind when using decorators:
     def taskflow_func():
         my_function()
     ```
-    
+
     This is recommended in cases where you have lengthy Python functions since it will make your DAG file easier to read.
 
-- You can assign the output of a called decorated task to a Python object to be passed as an argument into another decorated task. This is helpful when the output of one decorated task is needed in several downstream functions. 
+- You can assign the output of a called decorated task to a Python object to be passed as an argument into another decorated task. This is helpful when the output of one decorated task is needed in several downstream functions.
 
     ```python
-    @task 
+    @task
     def get_fruit_options():
         return ["peach", "raspberry", "pineapple"]
-    
+
     @task
     def eat_a_fruit(list):
         index = random.randint(0, len(list) - 1)
         print(f"I'm eating a {list[index]}!")
 
-    @task 
+    @task
     def gift_a_fruit(list):
         index = random.randint(0, len(list) - 1)
         print(f"I'm giving you a {list[index]}!")
-    
+
     # you can assign the output of a decorated task to a Python object
     my_fruits = get_fruit_options()
     eat_a_fruit(my_fruits)
@@ -288,9 +288,9 @@ If you want to access any XCom that is not the returned value from an operator, 
 
 ## Astro Python SDK decorators
 
-The [Astro Python SDK](https://github.com/astronomer/astro-sdk) provides decorators and modules that let you write data pipelines in terms of data transformations rather than Airflow concepts. You can focus on defining *execution* logic in SQL and Python without having to worry about orchestration logic or the specifics of underlying databases. 
+The [Astro Python SDK](https://github.com/astronomer/astro-sdk) provides decorators and modules that let you write data pipelines in terms of data transformations rather than Airflow concepts. You can focus on defining *execution* logic in SQL and Python without having to worry about orchestration logic or the specifics of underlying databases.
 
-The code snippet below shows how to use the `@aql.transform` and `@aql.dataframe` decorators to create transformation tasks. 
+The code snippet below shows how to use the `@aql.transform` and `@aql.dataframe` decorators to create transformation tasks.
 
 ```python
 # the @aql.transform decorator allows you to run a SQL query on any number of tables
@@ -310,12 +310,12 @@ def transform_dataframe(df: pd.DataFrame):
     print("purchase dates:", purchase_dates)
     return pd.DataFrame(purchase_dates)
 
-# the decorated functions can be used as tasks in a DAG, writing ELT/ETL logic in 
+# the decorated functions can be used as tasks in a DAG, writing ELT/ETL logic in
 # a functional style
 join_orders_customers(filter_orders(filtered_orders_table), customers_table)
 ```
 
-The Astro Python SDK offers much more functionality that greatly simplifies DAG authoring, for example an operator to load files from object storage directly into a relational table while inferring its schema. To learn more about the Astro Python SDK, check out: 
+The Astro Python SDK offers much more functionality that greatly simplifies DAG authoring, for example an operator to load files from object storage directly into a relational table while inferring its schema. To learn more about the Astro Python SDK, check out:
 
 - [Write a DAG with the Astro Python SDK tutorial](https://www.astronomer.io/docs/learn/astro-python-sdk)
 - [The Astro Python SDK for ETL guide](https://www.astronomer.io/docs/learn/astro-python-sdk-etl)

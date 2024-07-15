@@ -27,7 +27,7 @@ Before trying this example, make sure you have:
 
 ## Clone the project
 
-Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-mlflow). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. 
+Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-mlflow). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory.
 
 The repository is configured to spin up and use local MLflow and MinIO instances without you needing to define connections or access external tools.
 
@@ -68,7 +68,7 @@ The [`train`](https://github.com/astronomer/use-case-mlflow/blob/main/dags/train
 
 ![Graph view of the train DAG showing tasks fetching data and experiment information and training the model. Afterwards a task group contains tasks to register the model with MLflow, create a model version and transition the model version.](/img/examples/use-case-airflow-mlflow_train_dag_graph.png)
 
-The [`predict`](https://github.com/astronomer/use-case-mlflow/blob/main/dags/predict.py) DAG uses the trained model from `train` to create predictions and plot them against the target values. 
+The [`predict`](https://github.com/astronomer/use-case-mlflow/blob/main/dags/predict.py) DAG uses the trained model from `train` to create predictions and plot them against the target values.
 
 ![Graph view of the predict DAG showing the model and features being fetched. Afterwards the ModelLoadAndPredictOperator is used to run predictions with are plotted and saved as a file.](/img/examples/use-case-airflow-mlflow_predict_dag_graph.png)
 
@@ -175,7 +175,7 @@ def fetch_feature_df(**context):
     return feature_df
 ```
 
-The ID number of the MLflow experiment is retrieved using the MLflowClientHook in the `fetch_experiment_id` task in order to track model training in the same experiment. 
+The ID number of the MLflow experiment is retrieved using the MLflowClientHook in the `fetch_experiment_id` task in order to track model training in the same experiment.
 
 The `train_model` task, defined with the `@aql.dataframe` decorator, shows how model training can be parameterized when using Airflow. In this example, the hyperparameters, the `target_colum`, and the model class are hardcoded, but they could also be retrieved from upstream tasks via [XCom](airflow-passing-data-between-tasks.md) or passed into manual runs of the DAG using [DAG params](airflow-params.md).
 
@@ -256,7 +256,7 @@ You can view the registered models in the **Models** tab of the MLflow UI at `lo
 
 #### Prediction DAG
 
-After retrieving the feature dataframe, the target column, and the `model_run_id` from XCom, the `run_prediction` task uses the [ModelLoadAndPredictOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/pyfunc.py) to run a prediction on the whole dataset using the latest version of the registered RidgeCV model. 
+After retrieving the feature dataframe, the target column, and the `model_run_id` from XCom, the `run_prediction` task uses the [ModelLoadAndPredictOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/pyfunc.py) to run a prediction on the whole dataset using the latest version of the registered RidgeCV model.
 
 ```python
 run_prediction = ModelLoadAndPredictOperator(

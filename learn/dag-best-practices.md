@@ -16,7 +16,7 @@ import good_practices_dag_2 from '!!raw-loader!../code-samples/dags/dag-best-pra
 
 Because Airflow is 100% code, knowing the basics of Python is all it takes to get started writing DAGs. However, writing DAGs that are efficient, secure, and scalable requires some Airflow-specific finesse. In this guide, you'll learn how you can develop DAGs that make the most of what Airflow has to offer.
 
-In general, best practices fall into one of two categories: 
+In general, best practices fall into one of two categories:
 
 - DAG design
 - Using Airflow as an orchestrator
@@ -55,7 +55,7 @@ The following DAG design principles will help to make your DAGs idempotent, effi
 
 ### Keep tasks atomic
 
-When organizing your pipeline into individual tasks, each task should be responsible for one operation that can be re-run independently of the others. In an atomized task, a success in part of the task means a success of the entire task. 
+When organizing your pipeline into individual tasks, each task should be responsible for one operation that can be re-run independently of the others. In an atomized task, a success in part of the task means a success of the entire task.
 
 For example, in an ETL pipeline you would ideally want your Extract, Transform, and Load operations covered by three separate tasks. Atomizing these tasks allows you to rerun each operation in the pipeline independently, which supports idempotence.
 
@@ -72,7 +72,7 @@ today = datetime.today()
 yesterday = datetime.today() - timedelta(1)
 ```
 
-If this code is in a DAG file, these functions are executed on every Scheduler heartbeat, which may not be performant. Even more importantly, this doesn't produce an idempotent DAG. You can't rerun a previously failed DAG run for a past date because `datetime.today()` is relative to the current date, not the DAG execution date. 
+If this code is in a DAG file, these functions are executed on every Scheduler heartbeat, which may not be performant. Even more importantly, this doesn't produce an idempotent DAG. You can't rerun a previously failed DAG run for a past date because `datetime.today()` is relative to the current date, not the DAG execution date.
 
 A better way of implementing this is by using an Airflow variable:
 
@@ -86,7 +86,7 @@ You can use one of the Airflow built-in [variables and macros](https://airflow.a
 
 ### Incremental record filtering
 
-You should break out your pipelines into incremental extracts and loads wherever possible. For example, if you have a DAG that runs hourly, each DAG run should process only records from that hour, rather than the whole dataset. When the results in each DAG run represent only a small subset of your total dataset, a failure in one subset of the data won't prevent the rest of your DAG Runs from completing successfully. If your DAGs are idempotent, you can rerun a DAG for only the data that failed rather than reprocessing the entire dataset. 
+You should break out your pipelines into incremental extracts and loads wherever possible. For example, if you have a DAG that runs hourly, each DAG run should process only records from that hour, rather than the whole dataset. When the results in each DAG run represent only a small subset of your total dataset, a failure in one subset of the data won't prevent the rest of your DAG Runs from completing successfully. If your DAGs are idempotent, you can rerun a DAG for only the data that failed rather than reprocessing the entire dataset.
 
 There are multiple ways you can achieve incremental pipelines.
 
@@ -109,25 +109,25 @@ Code that is part of an operator or a decorated task is run by Airflow only when
 ```python
 @dag(...)
 def the_dag():
-    
+
     @task
     def do_thing():
         x + y
 
     num_of_things = call_external_system()    # this is "top level code"
-    
-    
+
+
     chain(do_thing() for _ in range(num_of_things))
 
 the_dag()
 
 ```
 
-Generally, any code that isn't part of your DAG or operator instantiations and that makes requests to external systems is of concern. Airflow executes all code in the `dags_folder` on every [`min_file_process_interval`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#min-file-process-interval), which defaults to 30 seconds. Therefore, any code that is run when the DAG is parsed and makes requests to external systems, like an API or a database, or makes function calls outside of your tasks can cause performance issues since these requests and connections are being made every 30 seconds rather than only when the DAG is scheduled to run. 
+Generally, any code that isn't part of your DAG or operator instantiations and that makes requests to external systems is of concern. Airflow executes all code in the `dags_folder` on every [`min_file_process_interval`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#min-file-process-interval), which defaults to 30 seconds. Therefore, any code that is run when the DAG is parsed and makes requests to external systems, like an API or a database, or makes function calls outside of your tasks can cause performance issues since these requests and connections are being made every 30 seconds rather than only when the DAG is scheduled to run.
 
-To see another example, the following DAG example dynamically generates tasks using the PostgresOperator based on records pulled from a different database. 
+To see another example, the following DAG example dynamically generates tasks using the PostgresOperator based on records pulled from a different database.
 
-In the **Bad practice** example the connection to the other database is made outside of an operator instantiation as top-level code. When the scheduler parses this DAG, it will use the `hook` and `result` variables to query the `grocery_list` table. This query is run every time the DAG is parsed, which can cause performance issues. 
+In the **Bad practice** example the connection to the other database is made outside of an operator instantiation as top-level code. When the scheduler parses this DAG, it will use the `hook` and `result` variables to query the `grocery_list` table. This query is run every time the DAG is parsed, which can cause performance issues.
 
 The version shown under the **Good practice** DAG wraps the connection to the database into its own task, the `get_list_of_results` task. Now the connection is only made at when the DAG actually runs, preventing performance issues.
 
@@ -204,7 +204,7 @@ To get the most out of Airflow, leverage built-in features and the broader Airfl
 
 ### Make use of provider packages
 
-One of the best aspects of Airflow is its robust and active community, which has resulted in integrations between Airflow and other tools known as [provider packages](https://airflow.apache.org/docs/apache-airflow-providers/). 
+One of the best aspects of Airflow is its robust and active community, which has resulted in integrations between Airflow and other tools known as [provider packages](https://airflow.apache.org/docs/apache-airflow-providers/).
 
 Provider packages let you orchestrate third party data processing jobs directly from Airflow. Wherever possible, it's recommended that you make use of these integrations rather than writing Python functions yourself. This makes it easier for organizations using existing tools to adopt Airflow, and you don't have to write new code.
 

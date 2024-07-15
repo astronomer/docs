@@ -32,7 +32,7 @@ When you create an API token for your environment, keep the following best pract
 
 ## Step 2: Install the Astro CLI in your automation tool
 
-To manage your Astro workflows programmatically, you must install the Astro CLI in the environment which will run the workflows. Typically, this requires running `curl -sSL install.astronomer.io | sudo bash -s` or an equivalent installation command before your process starts. See [CI/CD templates](ci-cd-templates/template-overview.md) for examples of how to install the Astro CLI in different version management and workflow automation environments. 
+To manage your Astro workflows programmatically, you must install the Astro CLI in the environment which will run the workflows. Typically, this requires running `curl -sSL install.astronomer.io | sudo bash -s` or an equivalent installation command before your process starts. See [CI/CD templates](ci-cd-templates/template-overview.md) for examples of how to install the Astro CLI in different version management and workflow automation environments.
 
 ## Step 3: Add your API token to your environment
 
@@ -40,11 +40,11 @@ To make your API token accessible to the Astro CLI, you need to set specific env
 
 :::warning
 
-Because these environment variables store sensitive credentials, Astronomer recommends encrypting the variable values before using them in your script. You can do this either directly in your automation tool or in a secrets backend. 
+Because these environment variables store sensitive credentials, Astronomer recommends encrypting the variable values before using them in your script. You can do this either directly in your automation tool or in a secrets backend.
 
 :::
 
-To use a Deployment, Workspace, or Organization API token as an authentication credential, set the following environment variable in your script: 
+To use a Deployment, Workspace, or Organization API token as an authentication credential, set the following environment variable in your script:
 
 ```bash
 ASTRO_API_TOKEN=<your-api-token>

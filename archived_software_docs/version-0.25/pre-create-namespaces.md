@@ -34,7 +34,7 @@ To start using pre-created namespaces:
     astronomer:
 
       houston:
-        config:   
+        config:
           deployments:
 
             # Enable manual namespace names
@@ -62,7 +62,7 @@ To start using pre-created namespaces:
 
 ## Using Pre-Created Namespaces
 
-Once you enable pre-created namespaces, the namespaces you specified appear as an option when configuring a new Deployment via the Software UI.  
+Once you enable pre-created namespaces, the namespaces you specified appear as an option when configuring a new Deployment via the Software UI.
 
 ![Kubernetes Namespace option in the UI](/img/software/kubernetes-namespace.png)
 

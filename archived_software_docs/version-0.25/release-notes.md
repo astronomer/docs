@@ -6,7 +6,7 @@ id: release-notes
 
 This document contains all release notes for Astronomer Software 0.25.
 
-0.30 is the latest long-term support (LTS) version of Astronomer Software. To upgrade to 0.30, read [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). 
+0.30 is the latest long-term support (LTS) version of Astronomer Software. To upgrade to 0.30, read [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md).
 
 If you're upgrading to Astronomer v0.30, see [Upgrade to Astronomer v0.25](upgrade-astronomer.md). To upgrade to a patch version within the Astronomer v0.25 series, see [Upgrade to a Patch Version of Astronomer Software](upgrade-astronomer.md).
 
@@ -24,7 +24,7 @@ All Astronomer Software versions are tested for scale, reliability and security 
 
 Release date: October 18, 2022
 
-### Bug fixes 
+### Bug fixes
 
 - Fixed the following vulnerabilities:
     - [CVE-2022-40674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40674)

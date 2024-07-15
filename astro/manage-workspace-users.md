@@ -16,14 +16,14 @@ To add, edit, or remove Workspace users from a given Workspace, you need either 
 ## Add a user to a Workspace
 
 1. In the Astro UI, click **Workspace Settings** > **Access Management**.
-   
+
 2. In the **Users** tab, click **+ Member**.
-   
+
 3. Select the user's name and email address in the **Organization Member** list.
-   
+
 4. Select a role for the user and then click **Add member**. See [Workspace roles reference](user-permissions.md#workspace-roles).
 
-After you add the user, their information appears in the **Users** tab as a new entry in the **Members** list. 
+After you add the user, their information appears in the **Users** tab as a new entry in the **Members** list.
 
 You can also add groups of users to a Workspace through Teams. See [Manage Teams](manage-teams.md).
 
@@ -34,7 +34,7 @@ You can also add groups of users to a Workspace through Teams. See [Manage Teams
 2. Click **Edit** next to the user's name.
 
 3. (Optional) Edit the user's name and role. See [Workspace roles](user-permissions.md).
-   
+
 4. If you've updated the user's role, click **Update member**. To delete the user, click **Remove member**.
 
 ## Add a group of users to a Workspace using the Astro CLI
@@ -61,7 +61,7 @@ You can use the Astro CLI and a shell script to add multiple users to a Workspac
         echo "Usage: $0 <file>"
         exit 1
     fi
-    
+
     while read line; do
         email=$(echo "$line" | cut -d' ' -f1)
         role=$(echo "$line" | cut -d' ' -f2)

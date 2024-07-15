@@ -99,4 +99,4 @@ If you log in to Astro with a text password, you can reset your password from th
     ![Button to reset password on the Astro UI login page](/img/docs/reset-password.png)
 
 4. Confirm your user email address is correct, then click **Continue**. Astronomer sends an email with a password reset option to the user email address.
-5. Follow the instructions in the email sent by Astronomer to reset your password. 
+5. Follow the instructions in the email sent by Astronomer to reset your password.

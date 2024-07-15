@@ -11,33 +11,33 @@ If you have any questions or a bug to report, contact [Astronomer Support](https
 
 ## Astro CLI 1.6.1
 
-Release date: November 3, 2022 
+Release date: November 3, 2022
 
-### Bug fixes 
+### Bug fixes
 
 - Fixed an issue where authenticating to Astronomer Software with `interactive=true` in your CLI configuration resulted in a 502 error.
 
-## Astro CLI 1.6.0 
+## Astro CLI 1.6.0
 
-Release date: September 28, 2022 
+Release date: September 28, 2022
 
-### New commands to manage Airflow objects 
+### New commands to manage Airflow objects
 
-You can use the new `astro dev object` commands to better manage Airflow connections, variables, and pools between your local testing environment and Astro Deployments. 
+You can use the new `astro dev object` commands to better manage Airflow connections, variables, and pools between your local testing environment and Astro Deployments.
 
-- `astro dev object import` imports connections, variables, and pools from your Astro project `airflow_settings.yaml` into your locally running Airflow environment without restarting it. 
+- `astro dev object import` imports connections, variables, and pools from your Astro project `airflow_settings.yaml` into your locally running Airflow environment without restarting it.
 - `astro dev object export` exports connections, variables, and pools from your local airflow database to a file of your choosing.
 
-### Additional improvements 
+### Additional improvements
 
-- You can now define connections in the `conn_extra` field of `airflow_settings.yaml` as YAML blocks instead of stringified JSON objects. 
+- You can now define connections in the `conn_extra` field of `airflow_settings.yaml` as YAML blocks instead of stringified JSON objects.
 - The Astro CLI for Windows is now distributed as an `.exe` file.
 
-### Bug fixes 
+### Bug fixes
 
-- Fixed an issue where `astro dev start` did not properly load Airflow object configurations from `airflow_settings.yaml` 
+- Fixed an issue where `astro dev start` did not properly load Airflow object configurations from `airflow_settings.yaml`
 - Fixed an issue where `astro deployment user list` listed incorrect roles for some users
-  
+
 ## Astro CLI 1.5.0
 
 Release date: September 2, 2022
@@ -74,7 +74,7 @@ Release date: August 18, 2022
 
 ### New command to run commands in local Airflow containers
 
-You can now run bash commands in any locally running Airflow container using `astro dev bash`. 
+You can now run bash commands in any locally running Airflow container using `astro dev bash`.
 
 ### New commands to manage Teams
 

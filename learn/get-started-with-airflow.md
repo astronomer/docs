@@ -164,7 +164,7 @@ Let's explore the available views in the **DAGs** page. To access different DAG 
 
 ## Step 6: Write a new DAG
 
-Now that we can run DAGs and navigate the UI, let's write our own DAG and run it. 
+Now that we can run DAGs and navigate the UI, let's write our own DAG and run it.
 
 In this step, you'll write a DAG that:
 
@@ -177,7 +177,7 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
 1. Create a new Python file in the `/dags` folder named `my_astronauts_dag.py`.
 2. Open `my_astronauts_dag.py` in your IDE. Add the docstring explaining what this DAG does at the top of the file:
 
-    ```python 
+    ```python
     """
     ## Print the number of people currently in space
 
@@ -186,7 +186,7 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
     """
     ```
 
-    Adding a docstring to your DAG is highly recommended. It helps you and others understand what the DAG does and how it works. It can also be converted to a [DAG Doc](custom-airflow-ui-docs-tutorial.md) by setting `doc_md=__doc__` in the DAG definition. 
+    Adding a docstring to your DAG is highly recommended. It helps you and others understand what the DAG does and how it works. It can also be converted to a [DAG Doc](custom-airflow-ui-docs-tutorial.md) by setting `doc_md=__doc__` in the DAG definition.
 
 3. After the docstring, add the import statements of your Python packages:
 
@@ -245,7 +245,7 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
     The `@task` decorator lets you define Python functions with very little boilerplate code. This is the syntax of the TaskFlow API, which is Airflow's lightweight framework for defining tasks. This `print_num_people_in_space` task pulls the number of people in space from XCom and prints it to the logs. Learn more about XCom in the [Pass data between tasks](airflow-passing-data-between-tasks.md) guide.
 
     You can put this decorator on top of any Python function to turn your code into an Airflow task. This is one of the features that makes Airflow so powerful: Any action that can be defined in Python, no matter how complex, can be orchestrated using Airflow.
-    
+
     Each task in an Airflow DAG requires a unique `task_id`. Here we can see why that's important: the `num_people_in_space` task can call the unique `get_astronauts` task to pull the data it generated from XCom.
 
 6. Add a second task to your DAG:
@@ -317,7 +317,7 @@ When your new DAG appears in the Airflow UI, you can run it to test it.
 
 When one of your tasks prints something, the output appears in Airflow task logs. Task logs are an important feature for troubleshooting DAGs. If a task in your DAG fails, task logs are the best place to investigate why.
 
-1. In the Airflow UI, open the **Grid** view.  
+1. In the Airflow UI, open the **Grid** view.
 2. Click the `print_num_people_in_space` task to access details of the task instance.
 3. Click the **Logs** tab.
 

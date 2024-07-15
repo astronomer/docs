@@ -7,15 +7,15 @@ description: An overview of the documentation available to install and manage As
 
 Use this reference to learn what documentation resources are available to help you install and manage Astronomer Software.
 
-## Install Astronomer Software 
+## Install Astronomer Software
 
-The following topics will help you install and configure a new Astronomer Software installation: 
+The following topics will help you install and configure a new Astronomer Software installation:
 
 - [Install Astronomer on AWS](install-aws-standard.md)
 - [Install Astronomer on GCP](install-gcp-standard.md)
 - [Install Astronomer on Azure](install-azure-standard.md)
 
-The following topics are recommended when your organization needs optional configurations during the Astronomer Software installation: 
+The following topics are recommended when your organization needs optional configurations during the Astronomer Software installation:
 
 - [Generate a self-signed certificate](self-signed-certificate.md)
 - [Renew TLS certificates on Astronomer Software](renew-tls-cert.md)
@@ -44,7 +44,7 @@ If you're an Astronomer Software administrator, the following topics can help yo
 
 ## Keep current
 
-The following topics are available to help make sure you're aware of the latest Astronomer Software functionality and what's required to run Astronomer Software: 
+The following topics are available to help make sure you're aware of the latest Astronomer Software functionality and what's required to run Astronomer Software:
 
 - [Astronomer Software release notes](release-notes.md)
 - [Version compatibility reference](version-compatibility-reference.md)

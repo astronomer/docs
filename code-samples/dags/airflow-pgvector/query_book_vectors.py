@@ -1,7 +1,7 @@
 """
 ## Vectorize book descriptions with OpenAI and store them in Postgres with pgvector
 
-This DAG shows how to use the OpenAI API 1.0+ to vectorize book descriptions and 
+This DAG shows how to use the OpenAI API 1.0+ to vectorize book descriptions and
 store them in Postgres with the pgvector extension.
 It will also help you pick your next book to read based on a mood you describe.
 
@@ -63,7 +63,7 @@ def query_book_vectors():
         task_id="create_table_if_not_exists",
         postgres_conn_id=POSTGRES_CONN_ID,
         sql=f"""
-        CREATE TABLE IF NOT EXISTS {TABLE_NAME} (          
+        CREATE TABLE IF NOT EXISTS {TABLE_NAME} (
             book_id UUID PRIMARY KEY,
             title TEXT,
             year INTEGER,

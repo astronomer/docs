@@ -22,7 +22,7 @@ def extract_data(homes1: Table, homes2: Table):
     return """
     SELECT *
     FROM {{homes1}}
-    UNION 
+    UNION
     SELECT *
     FROM {{homes2}}
     """
@@ -43,7 +43,7 @@ def transform_data(df: pd.DataFrame):
 @transform
 def filter_data(homes_long: Table):
     return """
-    SELECT * 
+    SELECT *
     FROM {{homes_long}}
     WHERE SELL > 200
     """

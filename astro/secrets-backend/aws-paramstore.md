@@ -22,20 +22,20 @@ Create directories for Airflow variables and connections in Parameter Store that
 Variables and connections should be stored in `/airflow/variables` and `/airflow/connections`, respectively. For example, if you're setting a secret variable with the key `my_secret`, it should be stored in the `/airflow/connections/` directory. If you modify the directory paths, make sure you change the values for `variables_prefix` and `connections_prefix` in Step 2.
 
 For instructions, see the [AWS Systems Manager Console](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-create-console.html), the [AWS CLI](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-cli.html), or the [Tools for Windows PowerShell](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-ps.html) documentation.
-  
+
 ## Step 2: Set up Parameter Store locally
 
 Add the following environment variables to your Astro project's `.env` file:
 
-```text 
+```text
 AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.systems_manager.SystemsManagerParameterStoreBackend
 AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables",  "role_arn": "<your-role-arn>", "region_name": "<your-region>"}
 ```
 
 You can now run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
 
-## Step 3: Deploy environment variables to Astro 
-  
+## Step 3: Deploy environment variables to Astro
+
 1. Run the following commands to export your secrets backend configurations as environment variables to Astro.
 
     ```sh

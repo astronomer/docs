@@ -1,17 +1,17 @@
 """
 ## Astronaut ETL example DAG
 
-This DAG queries the list of astronauts currently in space from the 
+This DAG queries the list of astronauts currently in space from the
 Open Notify API and prints each astronaut's name and flying craft.
 
 There are three tasks, one to get the data from the API and save the results,
-one to print the results and a final task to react. The first two tasks are 
-written in Python using Airflow's TaskFlow API, which allows you to easily turn 
+one to print the results and a final task to react. The first two tasks are
+written in Python using Airflow's TaskFlow API, which allows you to easily turn
 Python functions into Airflow tasks, and automatically infer dependencies and pass data.
 
 The second task uses dynamic task mapping to create a copy of the task for
 each Astronaut in the list retrieved from the API. This list will change
-depending on how many Astronauts are in space, and the DAG will adjust 
+depending on how many Astronauts are in space, and the DAG will adjust
 accordingly each time it runs.
 
 The third task is defined using the BashOperator, which is a traditional

@@ -27,9 +27,9 @@ To get the most out of this guide, you should have an understanding of:
 
 ## Project structure
 
-When working with Airflow, a consistent project structure helps keep all DAGs and supporting code organized and easy to understand, and it makes it easier to scale Airflow horizontally within your organization. 
+When working with Airflow, a consistent project structure helps keep all DAGs and supporting code organized and easy to understand, and it makes it easier to scale Airflow horizontally within your organization.
 
-The ideal setup is to keep one directory and repository for each project. This means that you can use a version control tool such as Github or Bitbucket to package everything together. 
+The ideal setup is to keep one directory and repository for each project. This means that you can use a version control tool such as Github or Bitbucket to package everything together.
 
 Astronomer uses the following project structure:
 
@@ -60,7 +60,7 @@ The most common setup for Airflow projects is to keep all code for a given deplo
 - Infrastructure considerations: If you have a set of DAGs that are well suited to the Kubernetes executor and another set that are well suited to the Celery executor, you may want to separate them into two different projects that feed Airflow deployments with different infrastructure. See [Configure Deployment resources](https://www.astronomer.io/docs/astro/configure-deployment).
 - Dependency management: If DAGs have conflicting Python or OS dependencies, one way of managing this can be separating them into separate projects so they are isolated from one another.
 
-Occasionally, some use cases require DAGs from multiple projects to be deployed to the same Airflow deployment. This is a less common pattern and is not recommended for project organization unless it is specifically required. In this case, deploying the files from different repositories together into one Airflow deployment should be managed by your CI/CD tool. If you are implementing this use case with Astronomer Software, you will need to use the [NFS](https://www.astronomer.io/docs/software/deploy-nfs) or [Git-Sync](https://www.astronomer.io/docs/software/deploy-git-sync) deployment methods.  
+Occasionally, some use cases require DAGs from multiple projects to be deployed to the same Airflow deployment. This is a less common pattern and is not recommended for project organization unless it is specifically required. In this case, deploying the files from different repositories together into one Airflow deployment should be managed by your CI/CD tool. If you are implementing this use case with Astronomer Software, you will need to use the [NFS](https://www.astronomer.io/docs/software/deploy-nfs) or [Git-Sync](https://www.astronomer.io/docs/software/deploy-git-sync) deployment methods.
 
 ## Reusing code
 

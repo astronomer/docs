@@ -41,11 +41,11 @@ There are multiple resources for learning about this topic. See also:
 To get the most out of this guide, you should have an understanding of:
 
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- Jinja templating. See [Jinja basics](https://jinja.palletsprojects.com/en/3.1.x/api/#basics). 
+- Jinja templating. See [Jinja basics](https://jinja.palletsprojects.com/en/3.1.x/api/#basics).
 
 ## Templating variables in Airflow
 
-Templating in Airflow works the same as Jinja templating in Python. You enclose the code you want evaluated between double curly braces, and the expression is evaluated at runtime. 
+Templating in Airflow works the same as Jinja templating in Python. You enclose the code you want evaluated between double curly braces, and the expression is evaluated at runtime.
 
 Some of the most commonly used Airflow variables that you can use in templates are:
 
@@ -152,7 +152,7 @@ The following examples demonstrate how to use each method to template the `cwd` 
 
 After defining a task and assigning it to a Python variable, you can modify its `template_fields` attribute. This allows you to enable Jinja templating for any field that is not templated by default.
 
-This method is preferable when you need to template a field only once. 
+This method is preferable when you need to template a field only once.
 
 ```python
     from airflow.decorators import dag
@@ -256,7 +256,7 @@ airflow db migrate  # generates airflow.db, airflow.cfg, and webserver_config.py
 # airflow tasks render [dag_id] [task_id] [execution_date]
 ```
 
-If you use the Astro CLI, a postgres metadata database is automatically configured for you after running `astro dev start` in your project directory. From here, you can run `astro dev run tasks render <parameters>` to test your templated values. 
+If you use the Astro CLI, a postgres metadata database is automatically configured for you after running `astro dev start` in your project directory. From here, you can run `astro dev run tasks render <parameters>` to test your templated values.
 
 For most templates, this is sufficient. However, if an external system such as a variable in your production Airflow metadata database is reached by the templating logic, you must have connectivity to it.
 
@@ -288,7 +288,7 @@ However, it is possible to inject functions into your Jinja environment. In Airf
 BashOperator(
     task_id="print_now",
     # It is currently 2021-08-30 13:51:55.820299
-    bash_command="echo It is currently {{ macros.datetime.now() }}",  
+    bash_command="echo It is currently {{ macros.datetime.now() }}",
 )
 ```
 
@@ -319,7 +319,7 @@ def demo_template():
     print_days = BashOperator(
         task_id="print_days",
         # Call user defined macros
-        bash_command="echo Days since {{ starting_date }} is {{ days_to_now(starting_date) }}",  
+        bash_command="echo Days since {{ starting_date }} is {{ days_to_now(starting_date) }}",
     )
     # Days since 2015-05-01 00:00:00 is 2313
 
@@ -335,14 +335,14 @@ It's also possible to inject functions as Jinja [filters](https://jinja.palletsp
     start_date=datetime(2021, 1, 1),
     schedule=None,
     # Set user_defined_filters to use function as pipe-operation
-    user_defined_filters={"days_to_now": days_to_now},  
+    user_defined_filters={"days_to_now": days_to_now},
     user_defined_macros={"starting_date": datetime(2015, 5, 1)},
 )
 def bash_script_template():
     print_days = BashOperator(
         task_id="print_days",
         # Pipe value to function
-        bash_command="echo Days since {{ starting_date }} is {{ starting_date | days_to_now }}", 
+        bash_command="echo Days since {{ starting_date }} is {{ starting_date | days_to_now }}",
     )
     # Days since 2015-05-01 00:00:00 is 2313
 

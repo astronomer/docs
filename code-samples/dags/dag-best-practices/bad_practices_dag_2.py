@@ -50,7 +50,7 @@ def bad_practices_dag_2():
             two_day_rolling_avg AS (
                 SELECT AVG(a.state, b.state) AS two_day_avg
                 FROM yesterday_covid_data AS a
-                JOIN yesterday_covid_data AS b 
+                JOIN yesterday_covid_data AS b
                 ON a.state = b.state
             )
             SELECT a.state, b.state, c.two_day_avg

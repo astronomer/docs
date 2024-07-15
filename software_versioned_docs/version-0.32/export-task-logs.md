@@ -137,13 +137,13 @@ After you've created an Elastic deployment and endpoint, you have two options to
      host: "<host-URL>"
      port: "9243"
      # encoded credentials from above step 1
-     secret: "<encoded credentials>"    
+     secret: "<encoded credentials>"
  ```
 3. Add the following entry to your `config.yaml` file to disable internal logging:
 
  ```yaml
  tags:
-   logging: false     
+   logging: false
  ```
 4. Run the following command to upgrade the Astronomer Software release version in the `config.yaml` file:
 
@@ -172,13 +172,13 @@ After you've created an Elastic deployment and endpoint, you have two options to
      host: "<host-URL>"
      port: "9243"
      # kubernetes secret containing credentials
-     secretName: elasticcreds   
+     secretName: elasticcreds
  ```
 3. Add the following entry to your `config.yaml` file to disable internal logging:
 
  ```yaml
  tags:
-      logging: false    
+      logging: false
  ```
 4. Run the following command to upgrade the Astronomer Software release version in the `config.yaml` file:
 

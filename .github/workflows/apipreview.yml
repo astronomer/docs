@@ -1,6 +1,6 @@
 name: preview-docs
 
-on: 
+on:
   pull_request:
     paths:
     - 'api/**'

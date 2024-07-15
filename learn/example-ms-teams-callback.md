@@ -36,7 +36,7 @@ Follow these steps to receive notifications in MS Teams for failed tasks in an e
 
 2. Create a [Microsoft Teams Incoming Webhook](https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook?tabs=dotnet#create-incoming-webhooks-1) for the channel where you want to receive notifications. Copy and save the webhook URL.
 
-3. In the Airflow UI, create an Airflow connection by clicking on **Admin** and then **Connections**. Create a new connection with the following parameters. Note that you won't be able to test this connection from the Airflow UI. 
+3. In the Airflow UI, create an Airflow connection by clicking on **Admin** and then **Connections**. Create a new connection with the following parameters. Note that you won't be able to test this connection from the Airflow UI.
 
     - **Connection Id**: `ms_teams_callbacks`
     - **Connection Type**: `HTTP`
@@ -47,13 +47,13 @@ Follow these steps to receive notifications in MS Teams for failed tasks in an e
 
   :::info
 
-  Some corporate environments make use of outbound proxies. If you're behind an outbound proxy for internet access, put the proxy details in the **Extra** field when creating the HTTP Connection in the Airflow UI (For example, `{"proxy":"http://my-proxy:3128"}`). 
+  Some corporate environments make use of outbound proxies. If you're behind an outbound proxy for internet access, put the proxy details in the **Extra** field when creating the HTTP Connection in the Airflow UI (For example, `{"proxy":"http://my-proxy:3128"}`).
 
   :::
 
   :::info
 
-  If the `HTTP` connection type is not available, double check that the [HTTP provider](https://registry.astronomer.io/providers/apache-airflow-providers-http/versions/latest) is installed in your Airflow environment. 
+  If the `HTTP` connection type is not available, double check that the [HTTP provider](https://registry.astronomer.io/providers/apache-airflow-providers-http/versions/latest) is installed in your Airflow environment.
 
   :::
 

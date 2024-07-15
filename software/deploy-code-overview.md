@@ -11,11 +11,11 @@ Deploying code is the process of pushing code to an Astronomer Software Deployme
 - Deploy DAGs using an [NFS volume](deploy-nfs.md).
 - Deploy DAGs using [Git sync](deploy-git-sync.md).
 
-Use this document to learn more about each available method and make a decision about which method is right for your use case. 
+Use this document to learn more about each available method and make a decision about which method is right for your use case.
 
 ## Astro CLI deploys
 
-By default, you can deploy code to an Airflow Deployment by building it into a Docker image and pushing that image to the Astronomer Registry via the CLI or API. This workflow is described in [Deploy code via the CLI](deploy-cli.md). 
+By default, you can deploy code to an Airflow Deployment by building it into a Docker image and pushing that image to the Astronomer Registry via the CLI or API. This workflow is described in [Deploy code via the CLI](deploy-cli.md).
 
 This mechanism builds your DAGs into a Docker image alongside all other files in your Astro project directory, including your Python and OS-level packages, your Dockerfile, and your plugins.
 

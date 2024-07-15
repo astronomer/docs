@@ -8,7 +8,7 @@ description: 'Learn how to add operator extra links using the AirflowExtraLinkPl
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Airflow includes plugins for customizing the Airflow UI. One small but impactful customization is adding extra links in the **Details** view for operators in the UI. These extra links can point to static websites, such as documentation for the operator, or dynamic links created from information during the task instance run. 
+Airflow includes plugins for customizing the Airflow UI. One small but impactful customization is adding extra links in the **Details** view for operators in the UI. These extra links can point to static websites, such as documentation for the operator, or dynamic links created from information during the task instance run.
 
 ![BashOperator with extra link](/img/guides/extra_links_tutorial_bashoperator.png)
 
@@ -79,7 +79,7 @@ This DAG has one SimpleHttpOperator task that posts a GET request to an API as d
 
 Create an [Airflow plugin](using-airflow-plugins.md) to add an extra link to the operator.
 
-1. Create a new Python file named `my_extra_link_plugin.py` in the `plugins` folder of your Airflow project. 
+1. Create a new Python file named `my_extra_link_plugin.py` in the `plugins` folder of your Airflow project.
 
 2. Copy paste the following code into your file.
 
@@ -187,8 +187,8 @@ Another core feature of extra links is that you can dynamically generate them ba
             return response.text
     ```
 
-    This code defines a custom version of the `SimpleHttpOperator` called the `CatHttpOperator`. This operator has a one-line customization before the `return` statement of the `.execute()` method:`context["ti"].xcom_push(key="status_code", value=response.status_code)`. 
-    
+    This code defines a custom version of the `SimpleHttpOperator` called the `CatHttpOperator`. This operator has a one-line customization before the `return` statement of the `.execute()` method:`context["ti"].xcom_push(key="status_code", value=response.status_code)`.
+
     This line pushes the `status_code` attribute of the `response` object to XComs where it can be called from your plugin.
 
 3. Add an empty Python file called `__init__.py` to your `include` folder. This file enables module imports from the folder.
@@ -217,7 +217,7 @@ This task will post the same GET request to the API you defined with the connect
 
 ## Step 8: Run your DAG and view modified XComs
 
-1. Run the `plugins_test_dag`, which now consists of two tasks. 
+1. Run the `plugins_test_dag`, which now consists of two tasks.
 
 2. Select the latest run of the `call_api_cat` task in the Grid view and click on the **XCom** tab to view XComs returned by this task.
 
@@ -240,7 +240,7 @@ Next, you will create a dynamic extra link using an Airflow plugin by following 
     from airflow.models import XCom
     ```
 
-3. Copy paste the following code below the definition of the `HTTPDocsLink` class and above the definition of the `AirflowExtraLinkPlugin` class. 
+3. Copy paste the following code below the definition of the `HTTPDocsLink` class and above the definition of the `AirflowExtraLinkPlugin` class.
 
     ```python
     class CatLink(BaseOperatorLink):
@@ -275,9 +275,9 @@ Next, you will create a dynamic extra link using an Airflow plugin by following 
 
 Your second extra link has now been added to the CatHttpOperator.
 
-1. In the Airflow UI, run `plugins_test_dag` again. 
+1. In the Airflow UI, run `plugins_test_dag` again.
 
-2. Navigate to the Graph View and click on the `call_api_cat` task. 
+2. Navigate to the Graph View and click on the `call_api_cat` task.
 
 3. Click the HTTP Cat button to find the response of your last API call illustrated with a fitting cat.
 
@@ -295,6 +295,6 @@ Congratulations! You added two operator extra links as an Airflow plugin. On the
 
 Extra links can be also be added to operators when creating an [Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers/#how-to-create-your-own-provider). If you want to add an operator extra link to a custom operator as part of a provider package, make sure you install it with the rest of the package using a setup.py file or `wheels`.
 
-In general, adding an operator extra link via plugin as described in this tutorial is easier for use in a limited number of Airflow instances. However, if you are planning to use the extra link in a large number of deployments, consider adding them to an Airflow provider instead. 
+In general, adding an operator extra link via plugin as described in this tutorial is easier for use in a limited number of Airflow instances. However, if you are planning to use the extra link in a large number of deployments, consider adding them to an Airflow provider instead.
 
 :::

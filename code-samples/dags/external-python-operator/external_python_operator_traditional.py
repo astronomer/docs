@@ -21,7 +21,7 @@ def callable_external_python_func():
     conn_params = hook._get_conn_params()
     session = Session.builder.configs(conn_params).create()
     query = """
-        select avg(reps_upper), avg(reps_lower) 
+        select avg(reps_upper), avg(reps_lower)
         from dog_intelligence;
         """
     df = session.sql(query)

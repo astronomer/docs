@@ -156,7 +156,7 @@ creating the model with the training results (SageMakerModelOperator), and testi
 a batch transform job (SageMakerTransformOperatorAsync).
 
 The example use case shown here is using a built-in SageMaker K-nearest neighbors algorithm to make
-predictions on the Iris dataset. To use the DAG, add Airflow variables for `role` (Role ARN to execute SageMaker jobs) 
+predictions on the Iris dataset. To use the DAG, add Airflow variables for `role` (Role ARN to execute SageMaker jobs)
 then fill in the information directly below with the target AWS S3 locations, and model and training job names.
 """
 import textwrap
@@ -165,7 +165,7 @@ from airflow.decorators import task
 from airflow.providers.amazon.aws.operators.sagemaker import SageMakerModelOperator
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 from astronomer.providers.amazon.aws.operators.sagemaker import (
-    SageMakerTrainingOperatorAsync, 
+    SageMakerTrainingOperatorAsync,
     SageMakerTransformOperatorAsync
 )
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
@@ -221,7 +221,7 @@ with DAG('sagemaker_pipeline',
         s3_hook = S3Hook(aws_conn_id=aws_conn_id)
         s3_hook.load_file('iris_train.csv', f'{input_s3_key}/train.csv', bucket_name=s3_bucket, replace=True)
         s3_hook.load_file('iris_test.csv', f'{input_s3_key}/test.csv', bucket_name=s3_bucket, replace=True)
-        
+
         # cleanup
         os.remove('iris_train.csv')
         os.remove('iris_test.csv')
@@ -239,7 +239,7 @@ with DAG('sagemaker_pipeline',
         - Resource specifications for the machine running the training job.
         - The Role ARN for execution.
         For more information about submitting a training job, check out the [API documentation](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html).
-        """), 
+        """),
         aws_conn_id='aws-sagemaker',
         config={
             "AlgorithmSpecification": {
@@ -300,7 +300,7 @@ with DAG('sagemaker_pipeline',
             "PrimaryContainer": {
                 "Mode": "SingleModel",
                 "Image": image_uris.retrieve(framework='knn',region=region),
-                # We are using a Jinja Template to pull the XCom output of the 'train_model' task to use as input for this task 
+                # We are using a Jinja Template to pull the XCom output of the 'train_model' task to use as input for this task
                 "ModelDataUrl": "{{ ti.xcom_pull(task_ids='train_model')['Training']['ModelArtifacts']['S3ModelArtifacts'] }}"
             },
         }

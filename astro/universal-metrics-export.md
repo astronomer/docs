@@ -39,7 +39,7 @@ Use these metadata labels to indentify each individual metric with its correspon
 
 ### Airflow application metrics
 
-Airflow application metrics are defined by Apache Airflow and are related to the health, success, and performance of the DAGs that are orchestrated and executed by Airflow. 
+Airflow application metrics are defined by Apache Airflow and are related to the health, success, and performance of the DAGs that are orchestrated and executed by Airflow.
 
 For example, Airflow application metrics include:
 - The number of task instance failures in your Deployment

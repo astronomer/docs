@@ -106,13 +106,13 @@ Once you've saved your `config.yaml` file with these values, push it to your pla
 
 ### Microsoft Entra ID
 
-Follow these steps to configure Microsoft Entra ID as your OIDC provider. 
+Follow these steps to configure Microsoft Entra ID as your OIDC provider.
 
 #### Register the Application using `App Registrations` on Azure
 
-1. In Microsoft Entra ID, click **App registrations** > **New registration**. 
+1. In Microsoft Entra ID, click **App registrations** > **New registration**.
 2. Complete the following sections:
-  
+
     - **Name**: Any
     - **Supported account types**: Accounts in this organizational directory only (Astronomer only - single tenant)
     - **Redirect URIs**:
@@ -138,9 +138,9 @@ Complete this setup only if you want to import Microsoft Entra ID groups to Astr
 
 1. In your Microsoft Entra ID application management left menu, click **Certificates & secrets**.
 2. Click **New client secret**.
-3. Enter a description in the **Description** field and then select an expiry period in the **Expires** list. 
+3. Enter a description in the **Description** field and then select an expiry period in the **Expires** list.
 4. Click **Add**.
-5. Copy the values in the **Value** and **Secret ID** columns. 
+5. Copy the values in the **Value** and **Secret ID** columns.
 6. Click **API permissions** in the left menu.
 7. Click **Microsoft Graph** and add the following minimum permissions for Microsoft Graph:
 
@@ -149,18 +149,18 @@ Complete this setup only if you want to import Microsoft Entra ID groups to Astr
     - `openid`
     - `profile`
     - `User.Read`
-    
+
     For each of these permissions, select **Grant Admin Consent for Astronomer Data**. Your Microsoft Graph permissions should look similar to the following image:
-    
+
     ![Completed permissions page in Azure](/img/software/azure_api_permissions_consent.png)
 
 
 8. Click **Token configuration** in the left menu.
 9. Click **Add groups claim** and select the following options:
 
-    - In the **Select group types to include in Access, ID, and SAML tokens** area, select every option. 
+    - In the **Select group types to include in Access, ID, and SAML tokens** area, select every option.
     - In **Customize token properties by type** area, expand **ID**, **Access**, and **SAML** and then select **Group ID** for each type.
-    
+
 10. Click **Add**.
 11. Encrypt the secret value you copied as a Kubernetes Secret on your Astronomer installation. See [Store and encrypt identity provider secrets](#store-and-encrypt-identity-provider-secrets).
 
@@ -464,30 +464,30 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 <TabItem value="ME-ID">
 
-1. In your `config.yaml` file, add the following configuration. Replace `<your-generated-secret-code>` with a randomly generated string. 
+1. In your `config.yaml` file, add the following configuration. Replace `<your-generated-secret-code>` with a randomly generated string.
 
     ```yaml
     astronomer:
-      houston: 
+      houston:
         config:
           auth:
             openidConnect:
               microsoft:
                 scimAuthCode: <your-generated-secret-code>
     ```
-   
+
     **Note**: If you have already configured Open ID Connect with Microsoft Entra ID, the `scimAuthCode` key should be on the same level as `clientId` and `discoveryUrl`
 
 2. Push the configuration change. See [Apply a config change](https://www.astronomer.io/docs/software/apply-platform-config).
 
-3. Sign in to the [Microsoft Entra ID portal](https://aad.portal.azure.com/). 
-   
+3. Sign in to the [Microsoft Entra ID portal](https://aad.portal.azure.com/).
+
 4. In the left menu, select **Enterprise applications**, and then click **New application** > **Create your own application**.
-   
+
 5. Enter a name for your application and select **Integrate any other application you don't find in the gallery**.
-  
+
 6. Click **Create** to create an app object. Microsoft Entra ID opens the application management menu for your new application.
-  
+
 7. In the application management menu for your new application, go to **Manage** > **Provisioning** and click **Get Started**.
 
 8. Click **Provisioning Mode** > **Automatic**.
@@ -503,7 +503,7 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 13. Click **Manage** > **Provisioning** > **Settings**.
 
 14. In the **Scope** setting list, select **Sync only assigned users and groups**.
-   
+
 15. Click the **Provisioning status** toggle to turn provisioning status on.
 
 16. Click **Save**.
@@ -516,8 +516,8 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 You can prevent your identity provider passwords, authorization tokens, and security keys from being exposed as plain text by encrypting them in Kubernetes secrets.
 
 This setup is primarily used for encrypting the required secrets for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow).
- 
-1. Create a file named `secret.yaml` that contains the value you want to encrypt as a [Kubernetes secret](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-config-file/#create-the-config-file). The following example encrypts the required client secret for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow) for Okta. 
+
+1. Create a file named `secret.yaml` that contains the value you want to encrypt as a [Kubernetes secret](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-config-file/#create-the-config-file). The following example encrypts the required client secret for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow) for Okta.
 
     ```yaml
     # Required configuration for all secrets

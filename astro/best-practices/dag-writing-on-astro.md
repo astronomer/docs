@@ -4,13 +4,13 @@ sidebar_label: 'DAG writing on Astro'
 id: dag-writing-on-astro
 ---
 
-You can run any valid Airflow DAG on Astro. 
+You can run any valid Airflow DAG on Astro.
 
 That said, following best practices and taking full advantage of Astro features will help you:
 
 - Write DAGs more efficiently.
 - Improve your development workflow.
-- Better organize your deployment and DAGs. 
+- Better organize your deployment and DAGs.
 - Optimize resource usage and task execution efficiency.
 
 This guide describes best practices for taking advantage of Astro features when writing DAGs. While this focuses on writing Airflow DAGs for Astro, all [general Airflow best practices](https://docs.astronomer.io/learn/dag-best-practices) are also recommended.
@@ -60,9 +60,9 @@ When writing DAGs intended for Astro Deployments, use the [Astro CLI](https://do
 
 - Test Airflow DAGs locally.
 - Deploy code to Astro.
-- Automate key actions as part of a CI/CD process. 
+- Automate key actions as part of a CI/CD process.
 
-To get the most out of the Astro CLI: 
+To get the most out of the Astro CLI:
 
 - Use the `dags` directory to store your DAGs. If you have multiple DAGs, you can use subdirectories to keep your environment organized.
 - Modularize your code and store all supporting classes, files and functions in the `include` directory.
