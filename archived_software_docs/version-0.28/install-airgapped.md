@@ -93,7 +93,7 @@ astronomer:
                 pgbouncerExporter:
                   repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-pgbouncer-exporter
 ```
-​
+
 ## Step 4: Fetch Airflow Helm Charts
 
 There are two Helm charts required for Astronomer:
