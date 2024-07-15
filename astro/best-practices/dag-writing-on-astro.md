@@ -4,7 +4,7 @@ sidebar_label: 'DAG writing on Astro'
 id: dag-writing-on-astro
 ---
 
-You can run any valid Airflow DAG on Astro. 
+You can run any valid [Apache Airflow®](https://airflow.apache.org/) DAG on Astro. 
 
 That said, following best practices and taking full advantage of Astro features will help you:
 

@@ -4,7 +4,7 @@ sidebar_label: 'Choosing Airflow or Astro alerts'
 id: airflow-vs-astro-alerts
 ---
 
-When orchestrating data pipelines, it's key that you know when something goes wrong. It could be that a business critical DAG failed or that a DAG that provides data for another team took longer than normal to complete. A common consideration when running Airflow at scale is how to alert your team in different scenarios.
+When orchestrating data pipelines, it's key that you know when something goes wrong. It could be that a business critical DAG failed or that a DAG that provides data for another team took longer than normal to complete. A common consideration when running [Apache Airflow®](https://airflow.apache.org/) at scale is how to alert your team in different scenarios.
 
 Airflow has built-in notification mechanisms for common use cases, but they have some limitations. For the cases where Airflow notifications aren't sufficient, [Astro alerts](https://www.astronomer.io/docs/astro/alerts) provide an additional level of observability. For many use cases, Astronomer recommends using a combination of Airflow and Astro alerts to best cover all alerting scenarios.
 

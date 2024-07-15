@@ -4,7 +4,7 @@ sidebar_label: 'Connections and branch-based deploys'
 id: connections-branch-deploys
 ---
 
-Airflow DAGs often interact with a multitude of external systems, such as data warehouses and APIs. DAGs access these systems using [Airflow connections](manage-connections-variables.md). A common logistical consideration when running Airflow at scale is deciding how to manage connections between development and production environments. Different environment types require different levels of access to external resources.
+[Apache Airflow®](https://airflow.apache.org/) DAGs often interact with a multitude of external systems, such as data warehouses and APIs. DAGs access these systems using [Airflow connections](manage-connections-variables.md). A common logistical consideration when running Airflow at scale is deciding how to manage connections between development and production environments. Different environment types require different levels of access to external resources.
 
 Astro's [branch-based development](automation-overview.md) and [connection management](manage-connections-variables.md) features allow you to automatically share specific Airflow connections with Astro Deployments based on their development context.
 
