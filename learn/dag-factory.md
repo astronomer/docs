@@ -122,11 +122,11 @@ In order to use [DAG-level callbacks](https://www.astronomer.io/docs/learn/error
 1. Create a new file `callback_func.py` in your `dags` directory. 
 2. Copy the contents of the following placeholder callback into the file:
 
-```python
+  ```python
 
-def placeholder_callback():
-    pass
+  def placeholder_callback():
+      pass
 
-```
+  ```
 
 3. Save the file.
