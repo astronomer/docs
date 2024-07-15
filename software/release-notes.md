@@ -26,6 +26,44 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## 0.35.1
+
+Release date: July 15th, 2024
+
+### Secuirty Fix
+
+We identified a critical security issue affecting airflow deployments running with the DAG Only Deploy feature in Astronomer Software.  The DAG only deploy feature was introduced in Software Version 0.34.0 The affected versions are Astronomer Software 0.34.0 to 0.34.2 and 0.35.0
+
+**Security Implication Overview** . 
+
+Due to a missing network policy, in the DAG Only Deploy feature in Astronomer Software, there is a risk that users could potentially access DAGs across different namespaces or Airflow deployments without proper permissions. Each pod requires a network policy to prevent cross-namespace interactions. This policy was not added to the DAG server component, leading to the security implication of cross-namespace DAG access.
+
+Since the DAG Server component is only present on deployments with Dag Only Deploy enabled, there is no risk for any deployments that do not have this feature enabled.  
+
+**Mitigations** . 
+
+Since the issue only affects Airflow Deployments with DAG Only Deploys enabled, one can mitigate this in the interim by ensuring that no airflow deployments have DAG Only Deploys enabled.  
+
+**Recommended Actions** . 
+
+We are releasing patches to address this issue. The patches will include only this fix and are scheduled as follows:
+Version 0.35.1: Available end-of-day on July 15, 2024
+Version 0.34.3: Available end-of-day on July 17, 2024 
+
+Please upgrade to the patched version as soon as it is released. If you have not yet upgraded, please wait to upgrade until a new major version is available. Information for the upgrade will be provided here.
+How to Get Help
+
+### Bug Fixes
+- Resolved the following vulnerabilities:
+   - [CVE-2023-45283](https://github.com/advisories/GHSA-vvjp-q62m-2vph) .  
+   - [CVE-2023-45288](https://github.com/advisories/GHSA-4v7x-pqxf-cx7m) .  
+   - [CVE-2024-24790](https://github.com/advisories/GHSA-49gw-vxvf-fc2g) .  
+   - [CVE-2023-39325](https://github.com/advisories/GHSA-4374-p667-p6c8) .  
+
+
+
+
+
 ## 0.35.0
 
 Release date: July 1, 2024
