@@ -21,7 +21,7 @@ To get the most out of this guide, you should have an understanding of:
 
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow hooks. See [Hooks 101](what-is-a-hook.md).
-- Managing Airflow project structure. See [Managing Airflow code](managing-airflow-code.md).
+- Managing Airflow project structure. See [Managing Apache Airflow® code](managing-airflow-code.md).
 
 ## Create a custom operator
 
@@ -150,7 +150,7 @@ When using the [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli)
 └── requirements.txt    
 ```
 
-For more details on why Astronomer recommends this project structure, see the [Managing Airflow Code guide](managing-airflow-code.md).
+For more details on why Astronomer recommends this project structure, see the [Managing Apache Airflow® Code guide](managing-airflow-code.md).
 
 Using the project structure shown above, you can import the `MyOperator` class from the `my_operator.py` file and the `MyHook` class from the `my_hook.py` file in your DAGs with the following import statements:
 
@@ -228,7 +228,7 @@ class MyBasicMathOperator(BaseOperator):
             return res
 ```
 
-In addition to the custom operator, the example DAG uses a custom hook to connect to the CatFactAPI. This hook abstracts retrieving the API URL from an [Airflow connection](connections.md) and makes several calls to the API in a loop. This code should also be placed in the `include` directory in a file called `cat_fact_hook.py`.
+In addition to the custom operator, the example DAG uses a custom hook to connect to the CatFactAPI. This hook abstracts retrieving the API URL from an [Apache Airflow® connection](connections.md) and makes several calls to the API in a loop. This code should also be placed in the `include` directory in a file called `cat_fact_hook.py`.
 
 ```python
 """This module allows you to connect to the CatFactAPI."""

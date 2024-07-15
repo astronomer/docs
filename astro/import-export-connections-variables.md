@@ -15,7 +15,7 @@ Based on the [management strategy for your connections and variables](manage-con
 
 :::tip
 
-If you use the Astro Environment Manager to [create connections](create-and-link-connections.md), instead of importing and exporting connections from Airflow, you can configure the CLI to automatically retrieve connection details from Astro when you're working locally. See [Work locally with Airflow connections hosted on Astro](cli/local-connections.md) to set up this configuration and learn more about how Astro stores and syncs connection information.
+If you use the Astro Environment Manager to [create connections](create-and-link-connections.md), instead of importing and exporting connections from Airflow, you can configure the CLI to automatically retrieve connection details from Astro when you're working locally. See [Work locally with Apache Airflow® connections hosted on Astro](cli/local-connections.md) to set up this configuration and learn more about how Astro stores and syncs connection information.
 
 :::
 
@@ -136,7 +136,7 @@ See [Set environment variables on Astro](https://www.astronomer.io/docs/astro/ma
 
 ## From the Airflow REST API
 
-You can use the [Airflow REST API](airflow-api.md) to import and export connections and variables from a Deployment or local Airflow environment. Note that the Airflow REST API can only access connections and variables that are stored in the Airflow metadata database.
+You can use the [Apache Airflow® REST API](airflow-api.md) to import and export connections and variables from a Deployment or local Airflow environment. Note that the Airflow REST API can only access connections and variables that are stored in the Airflow metadata database.
 
 To export connections from any Airflow environment, you can use the [List Connections API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_connections) and [Get Connection API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_connection).
 

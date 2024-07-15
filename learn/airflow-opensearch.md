@@ -20,7 +20,7 @@ OpenSearch allows you to perform complex search queries on indexed text document
 Integrating OpenSearch with Airflow allows you to:
 
 - Use Airflow's [data-driven scheduling](airflow-datasets.md) to run operations involving documents stored in OpenSearch based on upstream events in your data ecosystem, such as when a new model is trained or a new dataset is available.
-- Run dynamic queries based on upstream events in your data ecosystem or user input via [Airflow params](airflow-params.md) on documents and vectors stored in OpenSearch to retrieve relevant objects.
+- Run dynamic queries based on upstream events in your data ecosystem or user input via [Apache Airflow® params](airflow-params.md) on documents and vectors stored in OpenSearch to retrieve relevant objects.
 - Add Airflow features like [retries](rerunning-dags.md#automatically-retry-tasks) and [alerts](error-notifications-in-airflow.md) to your OpenSearch operations.
 
 ## Time to complete
@@ -33,9 +33,9 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of OpenSearch. See the [OpenSearch documentation](https://opensearch.org/docs/latest/about/).
 - Vector embeddings. See [Using OpenSearch as a Vector Database](https://opensearch.org/platform/search/vector-database.html).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
-- Airflow decorators. [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md).
-- Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
+- Airflow decorators. [Introduction to the TaskFlow API and Apache Airflow® decorators](airflow-decorators.md).
+- Airflow connections. See [Managing your Connections in Apache Airflow®](connections.md).
 
 ## Prerequisites
 
@@ -58,7 +58,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     $ astro dev init
     ```
 
-2. Add the following two lines to your Astro project `requirements.txt` file to install the [OpenSearch Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-opensearch/stable/index.html) and the [pandas](https://pandas.pydata.org/) package in your Astro project:
+2. Add the following two lines to your Astro project `requirements.txt` file to install the [OpenSearch Apache Airflow® provider](https://airflow.apache.org/docs/apache-airflow-providers-opensearch/stable/index.html) and the [pandas](https://pandas.pydata.org/) package in your Astro project:
 
     ```text
     apache-airflow-providers-opensearch==1.0.0
@@ -102,7 +102,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     ```
 
 
-4. Add the following configuration to your `.env` file to create an [Airflow connection](connections.md) between Airflow and your OpenSearch instance. If you already have a cloud-based OpenSearch instance, you can connect to that instead of the local instance by adjusting the values in the connection.
+4. Add the following configuration to your `.env` file to create an [Apache Airflow® connection](connections.md) between Airflow and your OpenSearch instance. If you already have a cloud-based OpenSearch instance, you can connect to that instead of the local instance by adjusting the values in the connection.
 
     ```text
     AIRFLOW_CONN_OPENSEARCH_DEFAULT='{
@@ -139,7 +139,7 @@ This DAG consists of seven tasks to make a simple ML orchestration pipeline.
 - The `search_for_keyword` task is defined with the [OpenSearchQueryOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchQueryOperator) and performs a [fuzzy query](https://opensearch.org/docs/latest/query-dsl/term/fuzzy/) on the OpenSearch index to find the character and song that mention the `KEYWORD_TO_SEARCH` the most.
 - The `print_query_result` prints the query results to the task logs.
 
-![Screenshot of the Airflow UI showing the successful completion of the `search_hamilton` DAG in the Grid view with the Graph tab selected.](/img/tutorials/airflow-opensearch_dag.png)
+![Screenshot of the Apache Airflow® UI showing the successful completion of the `search_hamilton` DAG in the Grid view with the Graph tab selected.](/img/tutorials/airflow-opensearch_dag.png)
 
 :::tip
 

@@ -8,7 +8,7 @@ sidebar_custom_props: { icon: 'img/integrations/azure-data-factory.png' }
 
 [Azure Data Factory](https://learn.microsoft.com/en-us/azure/data-factory/) (ADF) is a cloud-based data integration and transformation service used to build data pipelines. Integrating ADF with Apache Airflow® allows you to run ADF pipelines and check their status from an Airflow DAG. 
 
-This guide provides the basic setup for creating an ADF connection. For a complete integration tutorial, see [Run Azure Data Factory pipelines in Airflow](airflow-azure-data-factory-integration.md).
+This guide provides the basic setup for creating an ADF connection. For a complete integration tutorial, see [Run Azure Data Factory pipelines in Apache Airflow®](airflow-azure-data-factory-integration.md).
 
 ## Prerequisites
 
@@ -83,7 +83,7 @@ Airflow uses the [`azure-mgmt-datafactory`](https://pypi.org/project/azure-mgmt-
 
 ## See also
 
-- [Apache Airflow Microsoft Azure provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/6.1.1/connections/adf.html)
-- [Import and export Airflow connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
+- [Apache Airflow® Microsoft Azure provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/6.1.1/connections/adf.html)
+- [Import and export Apache Airflow® connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
 - [Azure Data Factory modules](https://registry.astronomer.io/modules?query=azuredatafactory) and [example DAGs](https://registry.astronomer.io/dags?limit=24&sorts=updatedAt%3Adesc&query=azure+data+factory) in the Astronomer Registry
-- [Run Azure Data Factory pipelines in Airflow](airflow-azure-data-factory-integration.md)
+- [Run Azure Data Factory pipelines in Apache Airflow®](airflow-azure-data-factory-integration.md)

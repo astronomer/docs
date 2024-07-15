@@ -247,7 +247,7 @@ You can now restrict the use of a custom Deployment role to specific Workspaces.
 
 - The [custom Deployment roles](https://www.astronomer.io/docs/astro/customize-deployment-roles) feature is now generally available.
 - You can now promote a [development Deployment](https://www.astronomer.io/docs/astro/deployment-resources#hibernate-a-development-deployment) to a production Deployment by switching off the **Development Mode** toggle in the Deployment's configuration.
-- Workspace Members can now see and use [custom Airflow menu items](https://www.astronomer.io/docs/learn/using-airflow-plugins#appbuilder-menu-items). To give a custom role this permission, you can add `deployment.airflow.customMenu.get` to the role's permissions list. This permission works only on Deployments running Astro Runtime 9 or later.
+- Workspace Members can now see and use [custom Apache Airflow® menu items](https://www.astronomer.io/docs/learn/using-airflow-plugins#appbuilder-menu-items). To give a custom role this permission, you can add `deployment.airflow.customMenu.get` to the role's permissions list. This permission works only on Deployments running Astro Runtime 9 or later.
 
     Note that you might have to modify the code for your menu item plugins to make them work on Astro. See [Appbuilder menu items](https://www.astronomer.io/docs/learn/using-airflow-plugins#appbuilder-menu-items) for more information.
 
@@ -596,7 +596,7 @@ See [Install Astro from the Astro marketplace](https://www.astronomer.io/docs/as
 
 ### Create Apache Airflow® connections in the Astro UI and link them to Deployments
 
-You can now create Airflow connections in the Astro UI through the new Environment Manager menu. The Environment Manager lets you create Airflow connections directly in the Astro UI and stores all connections in an Astro-managed secrets backend. You can then share connections between Deployments and set default connections so that your team members always have access to external resources when they create new Deployments. See [Create Airflow connections in the Astro UI](https://www.astronomer.io/docs/astro/create-and-link-connections).
+You can now create Airflow connections in the Astro UI through the new Environment Manager menu. The Environment Manager lets you create Airflow connections directly in the Astro UI and stores all connections in an Astro-managed secrets backend. You can then share connections between Deployments and set default connections so that your team members always have access to external resources when they create new Deployments. See [Create Apache Airflow® connections in the Astro UI](https://www.astronomer.io/docs/astro/create-and-link-connections).
 
 Note that this feature is currently available only for Deployments running the Celery executor.
 
@@ -739,7 +739,7 @@ Deployment API tokens replace Deployment API keys as the most secure and customi
 
 - [Pushing code](https://www.astronomer.io/docs/astro/deploy-code) to a Deployment.
 - Updating a Deployment's [environment variables](https://www.astronomer.io/docs/astro/environment-variables).
-- Making requests to update your Deployment's Airflow environment using the [Airflow REST API](https://www.astronomer.io/docs/astro/airflow-api).
+- Making requests to update your Deployment's Airflow environment using the [Apache Airflow® REST API](https://www.astronomer.io/docs/astro/airflow-api).
 
 Unlike Deployment API keys, you can set an expiration date for Deployment API tokens and rotate them to better manage access to your Deployment. See [Deployment API tokens](https://www.astronomer.io/docs/astro/deployment-api-tokens) to learn how to create and manage Deployment API tokens.
 
@@ -1119,7 +1119,7 @@ Use the new **Billing** page in the Astro UI to see both high-level and detailed
 
 ### New cell type for using Apache Airflow® operators in the Astro Cloud IDE
 
-You can now use any Airflow operator available on the Astronomer Registry in your Astro Cloud IDE pipeline. Operator cells apply formatting and checks for parameter inputs, making it easy to configure operators as part of your pipeline. See [Use Airflow operators in the Astro Cloud IDE](https://www.astronomer.io/docs/astro/cloud-ide/use-airflow-operators).
+You can now use any Airflow operator available on the Astronomer Registry in your Astro Cloud IDE pipeline. Operator cells apply formatting and checks for parameter inputs, making it easy to configure operators as part of your pipeline. See [Use Apache Airflow® operators in the Astro Cloud IDE](https://www.astronomer.io/docs/astro/cloud-ide/use-airflow-operators).
 
 Additionally, you can configure custom cells to use your team's custom operators in a pipeline. See [Create custom operator cells](https://www.astronomer.io/docs/astro/cloud-ide/use-airflow-operators#create-custom-operator-cells).
 
@@ -1830,7 +1830,7 @@ You can now export over 40 Airflow metrics related to the state of your Astro De
 
 For organizations already using the observability service, this integration allows your team to standardize on tooling and gain a more granular view of Deployment metrics in a single place. Once the integration is configured, Astro automatically exports all available metrics to Datadog. For a complete list of supported metrics, see [Data Collected](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected).
 
-To learn more, see [Export Airflow metrics to Datadog](export-datadog.md).
+To learn more, see [Export Apache Airflow® metrics to Datadog](export-datadog.md).
 
 ### Additional improvements
 
@@ -2115,7 +2115,7 @@ For example, if an Airflow task failed because the schema of a database changed,
 
 To learn more about data lineage and how you can configure it on Astro, see:
 
-- [Integrate Airflow and OpenLineage](https://www.astronomer.io/docs/learn/airflow-openlineage)
+- [Integrate Apache Airflow® and OpenLineage](https://www.astronomer.io/docs/learn/airflow-openlineage)
 - [Enable data lineage for External Services](set-up-data-lineage.md)
 - [Data lineage on Astro](data-lineage.md)
 - [OpenLineage Compatibility Matrix](https://openlineage.io/docs/integrations/about#capability-matrix)
@@ -2206,7 +2206,7 @@ A few additional notes about this upgrade:
 - Because Astronomer is upgrading each customer individually over time, the exact date that you will start seeing these logs will vary.
 - When you push code to a Deployment on Runtime 4.2.0+ and trigger this update, all other Deployments on Runtime 4.2.0+ in the same Workspace will also restart in order to receive the lineage backend update. If you plan to push code to any Deployment affected by this change, then we recommend doing so at a time where you can tolerate some Airflow components restarting. For more information about expected behavior, see [What Happens During a Code Deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
 
-For more information about what to expect when lineage tools go live, read Astronomer's [OpenLineage and Airflow guide](https://www.astronomer.io/docs/learn/airflow-openlineage).
+For more information about what to expect when lineage tools go live, read Astronomer's [OpenLineage and Apache Airflow® guide](https://www.astronomer.io/docs/learn/airflow-openlineage).
 
 ### New AWS regions available
 
@@ -2592,7 +2592,7 @@ All user configurations can be found by clicking your user profile picture in th
 
 - In the Astro UI, you can now access the Airflow UI for Deployments via the **Deployments** page's card view:
 
-    ![Open Airflow button in the Deployments page card view](/img/docs/open-airflow-card.png)
+    ![Open Apache Airflow® button in the Deployments page card view](/img/docs/open-airflow-card.png)
 
 - The Astro UI now saves your color mode preference.
 
@@ -2654,7 +2654,7 @@ Astro now officially supports Deployment API keys, which you can use to automate
 
 ### Support for the Airflow REST API
 
-You can now programmatically trigger DAGs and update your Deployments on Astro by making requests to Airflow's [REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html). Currently this feature works only with temporary tokens, which are available at `cloud.astronomer.io/token`. Support for Deployment API keys is coming soon. For more information on using this feature, read [Airflow API](airflow-api.md).
+You can now programmatically trigger DAGs and update your Deployments on Astro by making requests to Airflow's [REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html). Currently this feature works only with temporary tokens, which are available at `cloud.astronomer.io/token`. Support for Deployment API keys is coming soon. For more information on using this feature, read [Apache Airflow® API](airflow-api.md).
 
 ### Additional improvements
 

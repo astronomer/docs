@@ -39,7 +39,7 @@ When Airflow checks for the value of an Airflow variable or connection, it does 
 
 :::tip
 
-Setting Airflow connections via secrets requires knowledge of how to generate Airflow connection URIs. If you plan to store Airflow connections on your secrets backend, read the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#connection-uri-format) for guidance on how to generate a connection URI.
+Setting Airflow connections via secrets requires knowledge of how to generate Airflow connection URIs. If you plan to store Airflow connections on your secrets backend, read the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#connection-uri-format) for guidance on how to generate a connection URI.
 
 :::
 
@@ -67,7 +67,7 @@ To use this feature, you need:
 If you do not already have a Vault server deployed but would like to test this feature, we recommend that you either:
 
 - Sign up for a Vault trial on [Hashicorp Cloud Platform (HCP)](https://cloud.hashicorp.com/products/vault) or
-- Deploy a local Vault server via the instructions in [our Airflow Guide](https://www.astronomer.io/guides/airflow-and-hashicorp-vault).
+- Deploy a local Vault server via the instructions in [our Apache Airflow® Guide](https://www.astronomer.io/guides/airflow-and-hashicorp-vault).
 
 ### Step 1: Create a Policy and AppRole in Vault
 
@@ -122,7 +122,7 @@ $ vault kv get secret/connections/<your-connection-id>
 
 ### Step 3: Set up Vault locally
 
-In your Astro project, add the [Hashicorp Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/index.html) to your project by adding the following to your `requirements.txt` file:
+In your Astro project, add the [Hashicorp Apache Airflow® provider](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/index.html) to your project by adding the following to your `requirements.txt` file:
 
 ```
 apache-airflow-providers-hashicorp
@@ -150,7 +150,7 @@ When you deploy to Astronomer Software in Step 4, you can set these values as se
 By default, Airflow uses `"kv_engine_version": 2`, but we've written this secret using v1. You can change this to accommodate how you write and read your secrets.
 :::
 
-For more information on the Airflow provider for Hashicorp Vault and how to further customize your integration, read the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/_api/airflow/providers/hashicorp/hooks/vault/index.html).
+For more information on the Airflow provider for Hashicorp Vault and how to further customize your integration, read the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/_api/airflow/providers/hashicorp/hooks/vault/index.html).
 
 ### Step 4: Run an example DAG to test Vault locally
 
@@ -228,7 +228,7 @@ Variables and connections should live at `/airflow/variables` and `/airflow/conn
 
 To test AWS Parameter Store locally, configure it as a secrets backend in your Astro project.
 
-First, install the [Airflow provider for Amazon](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/index.html) by adding the following to your project's `requirements.txt` file:
+First, install the [Apache Airflow® provider for Amazon](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/index.html) by adding the following to your project's `requirements.txt` file:
 
 ```
 apache-airflow-providers-amazon
@@ -350,7 +350,7 @@ For more information on creating secrets in Google Cloud Secret Manager, read th
 
 To test Google Secret Manager locally, configure it as a secrets backend in your Astro project.
 
-First, install the [Airflow provider for Google](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/index.html) by adding the following to your project's `requirements.txt` file:
+First, install the [Apache Airflow® provider for Google](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/index.html) by adding the following to your project's `requirements.txt` file:
 
 ```
 apache-airflow-providers-google

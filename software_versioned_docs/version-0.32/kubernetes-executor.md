@@ -17,15 +17,15 @@ To configure these resources for a given task's Pod, you specify a `pod_override
 
 ## Prerequisites
 
-You must have an Airflow Deployment on Astronomer running with the Kubernetes executor. For more information on configuring an executor, see [Configure a Deployment](configure-deployment.md). To learn more about different executor types, see [Airflow executors explained](https://www.astronomer.io/docs/learn/airflow-executors-explained).
+You must have an Airflow Deployment on Astronomer running with the Kubernetes executor. For more information on configuring an executor, see [Configure a Deployment](configure-deployment.md). To learn more about different executor types, see [Apache Airflow® executors explained](https://www.astronomer.io/docs/learn/airflow-executors-explained).
 
 ## Configure the default worker Pod for all Deployments
 
-By default, the Kubernetes executor launches workers based on a `podTemplate` configuration in the [Astronomer Airflow Helm chart](https://github.com/astronomer/airflow-chart/blob/master/values.yaml).
+By default, the Kubernetes executor launches workers based on a `podTemplate` configuration in the [Astronomer Apache Airflow® Helm chart](https://github.com/astronomer/airflow-chart/blob/master/values.yaml).
 
 You can modify the default `podTemplate` to configure the default worker Pods for all Deployments using the Kubernetes executor on your Astronomer Software installation. You can then override this default at the task level using a `pod_override` file. See [Configure the worker Pod for a specific task](#configure-the-worker-pod-for-a-specific-task).
 
-1. In your `config.yaml` file, copy the complete `podTemplate` configuration from your version of the [Astronomer Airflow Helm chart](https://github.com/astronomer/airflow-chart/blob/master/values.yaml). Your file should look like the following:
+1. In your `config.yaml` file, copy the complete `podTemplate` configuration from your version of the [Astronomer Apache Airflow® Helm chart](https://github.com/astronomer/airflow-chart/blob/master/values.yaml). Your file should look like the following:
 
     ```yaml
     astronomer:

@@ -21,7 +21,7 @@ This guide provides information about how lineage metadata is automatically extr
 
 ## Extract lineage metadata from Apache Airflow® operators using supported extractors
 
-Astro uses the [OpenLineage Airflow library](https://openlineage.io/docs/integrations/airflow/) (`openlineage-airflow`) to extract lineage from Airflow tasks and stores that data in the Astro control plane. This package includes [default extractors](https://openlineage.io/docs/integrations/airflow/default-extractors) for popular Airflow operators.
+Astro uses the [OpenLineage Apache Airflow® library](https://openlineage.io/docs/integrations/airflow/) (`openlineage-airflow`) to extract lineage from Airflow tasks and stores that data in the Astro control plane. This package includes [default extractors](https://openlineage.io/docs/integrations/airflow/default-extractors) for popular Airflow operators.
 
 The latest version of the OpenLineage Airflow library is installed on [Astro Runtime](runtime-image-architecture.mdx) by default, meaning that you can use all default extractors without additional configuration. If you use an Airflow operator that includes a default extractor in your DAG, the operator automatically generates lineage metadata to the **Lineage** page on Astro. 
 
@@ -47,7 +47,7 @@ To write a custom extractor, see [OpenLineage documentation](https://openlineage
 
 An alternative to writing a custom extractor is to specify dataset inlets and outlets directly in your task parameters. These inlets and outlets appear as dependency lines on the lineage graph for your DAG. This option is suitable if your priority is rendering an accurate lineage graph of your DAG, and you don't need to generate specific facets from your operators.
 
-To specify inlets and outlets, see the [OpenLineage documentation](https://openlineage.io/docs/integrations/airflow/manual) and [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/lineage.html). Note that OpenLineage only supports specifying inlets and outlets using `Table` objects.
+To specify inlets and outlets, see the [OpenLineage documentation](https://openlineage.io/docs/integrations/airflow/manual) and [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/lineage.html). Note that OpenLineage only supports specifying inlets and outlets using `Table` objects.
 
 ## Extract lineage metadata from external systems to Astro
 
@@ -126,7 +126,7 @@ To test that lineage was configured correctly on your Databricks cluster, run a 
 
 ### OpenLineage and dbt Core with Airflow
 
-Use the information provided here to set up lineage collection for dbt Core tasks. To learn how to create and productionize dbt tasks in Airflow, and how to automatically create dbt Core tasks based on a manifest, see [Orchestrate dbt with Airflow](https://www.astronomer.io/docs/learn/airflow-dbt).
+Use the information provided here to set up lineage collection for dbt Core tasks. To learn how to create and productionize dbt tasks in Airflow, and how to automatically create dbt Core tasks based on a manifest, see [Orchestrate dbt with Apache Airflow®](https://www.astronomer.io/docs/learn/airflow-dbt).
 
 If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
@@ -262,7 +262,7 @@ To confirm that your setup is successful, run a Spark job after you save your co
 
 ## View SQL source code
 
-The SQL source code view for [supported Airflow operators](https://openlineage.io/docs/integrations/about/#capability-matrix) in the Astro UI  **Lineage** page is off by default for all Workspace users. To enable the source code view, set the following [environment variable](manage-env-vars.md) for each Astro Deployment:
+The SQL source code view for [supported Apache Airflow® operators](https://openlineage.io/docs/integrations/about/#capability-matrix) in the Astro UI  **Lineage** page is off by default for all Workspace users. To enable the source code view, set the following [environment variable](manage-env-vars.md) for each Astro Deployment:
 
 - Key: `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE`
 - Value: `False`

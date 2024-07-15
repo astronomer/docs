@@ -21,7 +21,7 @@ This guide provides guidance on when to use Astro or Airflow alerts, as well as 
 This guide highlights when to use the following Astro and Airflow features to create different types of alerts for your pipelines:
 
 - [Astro alerts](https://www.astronomer.io/docs/astro/alerts) for configuring DAG SLAs and failure notifications.
-- [Airflow callbacks](https://www.astronomer.io/docs/learn/error-notifications-in-airflow#airflow-callbacks) for custom task-level alerts. 
+- [Apache Airflow® callbacks](https://www.astronomer.io/docs/learn/error-notifications-in-airflow#airflow-callbacks) for custom task-level alerts. 
 
 ## Best practice guidance
 
@@ -82,12 +82,12 @@ To implement this use case:
 
 1. Open the DAG in your Astro project and configure a pre-built SlackNotifier for one of its tasks as a task-level argument. See [Example pre-built notifier: Slack](https://www.astronomer.io/docs/learn/error-notifications-in-airflow#example-pre-built-notifier-slack) for sample code.  
 2. Deploy your project to your Astro Deployment. See [Deploy code to Astro](https://www.astronomer.io/docs/astro/deploy-code).
-3. Add a connection to Slack in the Astro UI. See [Create Airflow connections in the Astro UI](create-and-link-connections.md). This connection will be used by your SlackNotifier, so make sure the connection ID matches what you used in your DAG code in Step 1.
+3. Add a connection to Slack in the Astro UI. See [Create Apache Airflow® connections in the Astro UI](create-and-link-connections.md). This connection will be used by your SlackNotifier, so make sure the connection ID matches what you used in your DAG code in Step 1.
 4. In your Astro Deployment, configure an Astro **DAG failure** alert for your DAG using the communication channel of your choice. See [Set up Astro alerts](https://www.astronomer.io/docs/astro/alerts).
 5. Configure an Astro **Absolute time** alert for your DAG based on the amount of time you expect your DAG to complete in. Use the communication channel of your choice. See [Set up Astro alerts](https://www.astronomer.io/docs/astro/alerts).
 
 ## See also
 
 - [Set up Astro alerts](https://www.astronomer.io/docs/astro/alerts)
-- [Manage Airflow DAG notifications](https://www.astronomer.io/docs/learn/error-notifications-in-airflow)
-- [Airflow timeouts](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#timeouts)
+- [Manage Apache Airflow® DAG notifications](https://www.astronomer.io/docs/learn/error-notifications-in-airflow)
+- [Apache Airflow® timeouts](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#timeouts)

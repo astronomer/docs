@@ -99,7 +99,7 @@ astronomer:
 There are two Helm charts required for Astronomer:
 
 - The [Astronomer Helm chart](https://github.com/astronomer/astronomer) for the Astronomer Platform
-- The [Airflow Helm chart](https://github.com/astronomer/airflow-chart) for Airflow deployments in Astronomer Platform
+- The [Apache Airflow® Helm chart](https://github.com/astronomer/airflow-chart) for Airflow deployments in Astronomer Platform
 
 The Astronomer Helm chart can be downloaded using `helm pull` and applied locally if desired.
 

@@ -35,7 +35,7 @@ There are multiple resources for learning about this topic. See also:
 
 ## Assumed knowledge
 
-To get the most out of this guide, you should have an understanding of Airflow decorators. See [Introduction to Airflow Decorators guide](airflow-decorators.md).
+To get the most out of this guide, you should have an understanding of Airflow decorators. See [Introduction to Apache Airflow® Decorators guide](airflow-decorators.md).
 
 ## Python SDK functions
 
@@ -69,7 +69,7 @@ For a full list of functions, see the [Astro Python SDK README in GitHub](https:
     AIRFLOW__CORE__XCOM_BACKEND='astro.custom_backend.astro_custom_backend.AstroCustomXcomBackend'
     ```
 
-3. (Optional) Create an [Airflow connection](connections.md) to the database where you want to store the temporary tables created by the Astro SDK. Set the following environment variables to configure your database as an Astro SDK storage backend. If you're using the Astro CLI, add these environment variables to the `.env` file of your Astro project:
+3. (Optional) Create an [Apache Airflow® connection](connections.md) to the database where you want to store the temporary tables created by the Astro SDK. Set the following environment variables to configure your database as an Astro SDK storage backend. If you're using the Astro CLI, add these environment variables to the `.env` file of your Astro project:
 
     ```text
     AIRFLOW__ASTRO_SDK__XCOM_STORAGE_CONN_ID='<your-database-connection-id>'

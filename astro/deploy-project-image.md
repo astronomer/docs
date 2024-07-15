@@ -46,7 +46,7 @@ astro deploy
 
 This command returns a list of Deployments available in your Workspace and prompts you to pick one.
 
-After you select a Deployment, the CLI parses your DAGs and runs a suite of pytests to ensure that they don't contain basic errors. This testing process is equivalent to running `astro dev parse` and `astro dev pytest` in a local Airflow environment. If any of your DAGs fail this testing process, the deploy to Astro also fails. To force a deploy even if your project has errors, you can run `astro deploy --force`. For more information about using pytests, see [Troubleshoot your local Airflow environment](cli/run-airflow-locally.md) and [Testing Airflow DAGs](https://www.astronomer.io/docs/learn/testing-airflow).
+After you select a Deployment, the CLI parses your DAGs and runs a suite of pytests to ensure that they don't contain basic errors. This testing process is equivalent to running `astro dev parse` and `astro dev pytest` in a local Airflow environment. If any of your DAGs fail this testing process, the deploy to Astro also fails. To force a deploy even if your project has errors, you can run `astro deploy --force`. For more information about using pytests, see [Troubleshoot your local Apache Airflow® environment](cli/run-airflow-locally.md) and [Testing Apache Airflow® DAGs](https://www.astronomer.io/docs/learn/testing-airflow).
 
 If your code passes the testing phase, the Astro CLI deploys your project in two separate, simultaneous processes:
 

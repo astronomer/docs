@@ -17,7 +17,7 @@ Other common reasons to access the Airflow context are:
 - You want to use [DAG-level parameters](airflow-params.md) in your Airflow tasks.
 - You want to use the DAG run's [logical date](scheduling-in-airflow.md#scheduling-concepts) in an Apache Airflow® task, for example as part of a file name.
 - You want to explicitly push and pull values to [XCom](airflow-passing-data-between-tasks.md#xcom) with a custom key.
-- You want to make an action in your task conditional on the setting of a specific [Airflow configuration](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html).
+- You want to make an action in your task conditional on the setting of a specific [Apache Airflow® configuration](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html).
 
 Use this document to learn about the data stored in the Airflow context and how to access it.
 
@@ -25,7 +25,7 @@ Use this document to learn about the data stored in the Airflow context and how 
 
 To get the most out of this guide, you should have an understanding of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
+- Basic Airflow concepts. See [Introduction to Apache Airflow®](intro-to-airflow.md).
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 
@@ -110,7 +110,7 @@ greet_friend = BashOperator(
 return_greeting() >> greet_friend
 ```
 
-Find an up to date list of all available templates in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html). Learn more about using XComs to pass data between Airflow tasks in [Pass data between tasks](airflow-passing-data-between-tasks.md).
+Find an up to date list of all available templates in the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html). Learn more about using XComs to pass data between Airflow tasks in [Pass data between tasks](airflow-passing-data-between-tasks.md).
 
 ### Retrieve the Airflow context using custom operators
 
@@ -127,7 +127,7 @@ class PrintDAGIDOperator(BaseOperator):
 
 ## Common Airflow context values
 
-This section gives an overview of the most commonly used keys in the Airflow context dictionary. To see an up-to-date list of all keys and their types, view the [Airflow source code](https://github.com/apache/airflow/blob/main/airflow/utils/context.pyi). 
+This section gives an overview of the most commonly used keys in the Airflow context dictionary. To see an up-to-date list of all keys and their types, view the [Apache Airflow® source code](https://github.com/apache/airflow/blob/main/airflow/utils/context.pyi). 
 
 ### ti / task_instance
 
@@ -196,7 +196,7 @@ def get_dagrun_dates(**context):
     print(run_dates)
 ```
 
-You can find a list of all attributes and methods of the DAG object in the [Airflow documentation of the DAG object](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/dag/index.html#airflow.models.dag.DAG).
+You can find a list of all attributes and methods of the DAG object in the [Apache Airflow® documentation of the DAG object](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/dag/index.html#airflow.models.dag.DAG).
 
 ### dag_run
 
@@ -209,7 +209,7 @@ def print_dagrun_info(**context):
     print(context["dag_run"].external_trigger)
 ```
 
-You can find a list of all attributes and methods of the DAG run object in the [Airflow source code](https://github.com/apache/airflow/blob/main/airflow/models/dagrun.py).
+You can find a list of all attributes and methods of the DAG run object in the [Apache Airflow® source code](https://github.com/apache/airflow/blob/main/airflow/models/dagrun.py).
 
 ### params
 
@@ -221,11 +221,11 @@ def print_param(**context):
     print(context["params"]["my_favorite_param"])
 ```
 
-Learn more about params in the [Airflow params guide](airflow-params.md).
+Learn more about params in the [Apache Airflow® params guide](airflow-params.md).
 
 ### var
 
-The `var` key contains all Airflow variables of your Airflow instance. [Airflow variables](airflow-variables.md) are key-value pairs that are commonly used to store instance-level information that rarely changes.
+The `var` key contains all Airflow variables of your Airflow instance. [Apache Airflow® variables](airflow-variables.md) are key-value pairs that are commonly used to store instance-level information that rarely changes.
 
 ```python
 @task

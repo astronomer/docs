@@ -53,7 +53,7 @@ Astronomer supports 3 executors:
 
 Though it largely depends on your use case, we recommend the Local executor for development environments and the Celery or Kubernetes executors for production environments operating at scale.
 
-For a detailed breakdown of each executor, see [Airflow executors explained](https://www.astronomer.io/docs/learn/airflow-executors-explained).
+For a detailed breakdown of each executor, see [Apache Airflow® executors explained](https://www.astronomer.io/docs/learn/airflow-executors-explained).
 
 ## Scale core resources
 
@@ -68,7 +68,7 @@ Read the following sections to help you determine which core resources to scale 
 
 ### Apache Airflow® webserver
 
-The Airflow webserver is responsible for rendering the [Airflow UI](https://airflow.apache.org/docs/apache-airflow/stable/ui.html), where users can monitor DAGs, view task logs, and set various non-code configurations.
+The Airflow webserver is responsible for rendering the [Apache Airflow® UI](https://airflow.apache.org/docs/apache-airflow/stable/ui.html), where users can monitor DAGs, view task logs, and set various non-code configurations.
 
 If a function within the Airflow UI is slow or unavailable, we recommend increasing the AU allocated towards the webserver. The default resource allocation is 5 AU.
 
@@ -76,11 +76,11 @@ If a function within the Airflow UI is slow or unavailable, we recommend increas
 
 ### Apache Airflow® scheduler
 
-The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks once dependencies have been met.
+The [Apache Airflow® scheduler](https://airflow.apache.org/docs/apache-airflow/stable/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks once dependencies have been met.
 
 If you experience delays in task execution, which you can track via the [Gantt Chart](https://airflow.apache.org/docs/apache-airflow/stable/ui.html#gantt-chart) view of the Airflow UI, we recommend increasing the AU allocated towards the scheduler. The default resource allocation is 10 AU.
 
-> **Tip:** To set alerts that notify you via email when your Airflow scheduler is underprovisioned, refer to [Airflow alerts](airflow-alerts.md).
+> **Tip:** To set alerts that notify you via email when your Airflow scheduler is underprovisioned, refer to [Apache Airflow® alerts](airflow-alerts.md).
 
 #### Scheduler count
 
@@ -88,7 +88,7 @@ Airflow 2.0 comes with the ability for users to run multiple schedulers concurre
 
 Each individual scheduler will be provisioned with the AU specified in **Scheduler Resources**. For example, if you set **Scheduler Resources** to 10 AU and **Scheduler Count** to 2, your Airflow Deployment will run with 2 Airflow schedulers using 10 AU each for a total of 20 AU.
 
-To increase the speed at which tasks are scheduled and ensure high-availability, we recommend provisioning 2 or more Airflow schedulers for production environments. For more information on the Airflow 2.0 scheduler, refer to Astronomer's ["The Airflow 2.0 Scheduler" blog post](https://www.astronomer.io/blog/airflow-2-scheduler).
+To increase the speed at which tasks are scheduled and ensure high-availability, we recommend provisioning 2 or more Airflow schedulers for production environments. For more information on the Airflow 2.0 scheduler, refer to Astronomer's ["The Apache Airflow® 2.0 Scheduler" blog post](https://www.astronomer.io/blog/airflow-2-scheduler).
 
 ### Triggerer
 
@@ -126,13 +126,13 @@ If a deploy is triggered while a Celery worker is executing a task and **Worker 
 
 ## Set environment variables
 
-Environment variables can be used to set [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html) and custom values, both of which can be applied to your Airflow Deployment either locally or on Astronomer.
+Environment variables can be used to set [Apache Airflow® configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html) and custom values, both of which can be applied to your Airflow Deployment either locally or on Astronomer.
 
 These can include setting Airflow Parallelism, an SMTP service for alerts, or a [secrets backend](secrets-backend.md) to manage Airflow connections and variables.
 
 Environment variables can be set for your Airflow Deployment either in the **Variables** tab of the Software UI or in your `Dockerfile`. If you're developing locally, they can also be added to a local `.env` file. For more information on configuring environment variables, read [Environment variables on Astronomer](environment-variables.md).
 
-> **Note**: Environment variables are distinct from [Airflow variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html?highlight=variables) and [XComs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/xcoms.html), which you can configure directly via the Airflow UI and are used for inter-task communication.
+> **Note**: Environment variables are distinct from [Apache Airflow® variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html?highlight=variables) and [XComs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/xcoms.html), which you can configure directly via the Airflow UI and are used for inter-task communication.
 
 ## Customize release names
 
@@ -249,7 +249,7 @@ You can run a cron job to automatically archive task and DAG metadata from your 
     https://github.com/astronomer/airflow-dbcleanup-plugin/releases/download/<latest-version>/astronomer_dbcleanup_plugin-<latest-version>-py3-none-any.whl
     ```
 
-2. Configure an Airflow connection to your external storage service in JSON or URI format so that it can be stored as an environment variable. You must use a service account to authenticate to your service. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#storing-connections-in-environment-variables) to learn how to configure your connection.
+2. Configure an Airflow connection to your external storage service in JSON or URI format so that it can be stored as an environment variable. You must use a service account to authenticate to your service. See [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#storing-connections-in-environment-variables) to learn how to configure your connection.
 3. Store the connection environment variable as a Kubernetes Secret on your Astronomer cluster. See [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret).
 4. Add the following configuration to your `config.yaml` file and change the default values as needed.
    

@@ -55,7 +55,7 @@ The Docker image you'll find in your Dockerfile by default is:
 FROM quay.io/astronomer/ap-airflow:latest-onbuild
 ```
 
-This will install a Debian-based AC image for the latest version of Airflow we support. To specify a particular Airflow version, read [Upgrade Airflow](manage-airflow-versions.md) and the _Customize your Image_ topic below.
+This will install a Debian-based AC image for the latest version of Airflow we support. To specify a particular Airflow version, read [Upgrade Apache Airflow®](manage-airflow-versions.md) and the _Customize your Image_ topic below.
 
 :::tip
 
@@ -96,7 +96,7 @@ It might take a few minutes for the Airflow UI to be available. As you wait for 
 
 After logging in, you should see the DAGs from your `dags` directory in the Airflow UI.
 
-![Example DAG in the Airflow UI](/img/software/sample-dag.png)
+![Example DAG in the Apache Airflow® UI](/img/software/sample-dag.png)
 
 ## What's Next?
 

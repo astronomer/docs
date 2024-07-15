@@ -7,7 +7,7 @@ sidebar_label: "LLMOps with Cohere + OpenSearch"
 
 With recent advances in the field of Large Language Model Operations (LLMOps), you can now combine the power of different language models to more efficiently get an answer to a query. This use case shows how you can use Apache Airflow® to orchestrate an MLOps pipeline using two different models: You'll use embeddings and text classification by [Cohere](https://cohere.com/) with an [OpenSearch](https://opensearch.org/) search engine to analyze synthetic customer feedback data.  
 
-![Screenshot of the Airflow UI Grid view with the Graph view selected showing a successful run of the full use case DAG with 17 tasks.](/img/examples/use-case-airflow-cohere-opensearch_full_dag.png)
+![Screenshot of the Apache Airflow® UI Grid view with the Graph view selected showing a successful run of the full use case DAG with 17 tasks.](/img/examples/use-case-airflow-cohere-opensearch_full_dag.png)
 
 ## Before you start
 
@@ -57,13 +57,13 @@ This project contains two DAGs, one for the MLOps pipeline and one DAG to delete
 
 The [`analyze_customer_feedback` DAG](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/dags/analyze_customer_feedback.py) ingests data from the mock API and loads it into an [OpenSearch index](https://opensearch.org/docs/latest/im-plugin/index/). The DAG then uses the Cohere API to get sentiment scores and embeddings for a subset of the customer feedback returned by a keyword OpenSearch query. The embeddings and sentiment analysis scores are ingested back into OpenSearch and a final query is performed to get the positive feedback most similar to a target testimonial. The DAG ends by printing the retrieved testimonial to the logs.
 
-![Screenshot of the Airflow UI Grid view with the Graph view selected showing a successful run of the full use case DAG with 17 tasks.](/img/examples/use-case-airflow-cohere-opensearch_full_dag.png)
+![Screenshot of the Apache Airflow® UI Grid view with the Graph view selected showing a successful run of the full use case DAG with 17 tasks.](/img/examples/use-case-airflow-cohere-opensearch_full_dag.png)
 
 The [`delete_opensearch_index` DAG](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/dags/delete_opensearch_index.py) deletes the `INDEX_TO_DELETE` in OpenSearch. This DAG is used during development to allow the `analyze_customer_feedback` DAG to create the index from scratch. Run this DAG if you would like to start from a clean slate, for example when making changes to the index schema to adapt the project to your own use case.
 
 ### Project code
 
-This use case showcases how you can use the [OpenSearch](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest) and [Cohere Airflow provider](https://registry.astronomer.io/providers/cohere/versions/latest) to analyze customer feedback in an MLOps Airflow pipeline.  
+This use case showcases how you can use the [OpenSearch](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest) and [Cohere Apache Airflow® provider](https://registry.astronomer.io/providers/cohere/versions/latest) to analyze customer feedback in an MLOps Airflow pipeline.  
 
 The tasks in the `analyze_customer_feedback` DAG can be grouped into four sections:
 
@@ -519,7 +519,7 @@ Congratulations! You've successfully run a full MLOps pipeline with Airflow, Coh
 
 ## See also
 
-- Tutorial: [Orchestrate OpenSearch operations with Apache Airflow](https://www.astronomer.io/docs/learn/airflow-opensearch).
-- Tutorial: [Orchestrate Cohere LLMs with Apache Airflow](https://www.astronomer.io/docs/learn/airflow-cohere)
-- Documentation: [Airflow OpenSearch provider documentation](https://airflow.apache.org/docs/apache-airflow-providers-opensearch/stable/index.html).
-- Documentation: [Airflow Cohere provider documentation](https://airflow.apache.org/docs/apache-airflow-providers-cohere/stable/index.html).
+- Tutorial: [Orchestrate OpenSearch operations with Apache Airflow®](https://www.astronomer.io/docs/learn/airflow-opensearch).
+- Tutorial: [Orchestrate Cohere LLMs with Apache Airflow®](https://www.astronomer.io/docs/learn/airflow-cohere)
+- Documentation: [Apache Airflow® OpenSearch provider documentation](https://airflow.apache.org/docs/apache-airflow-providers-opensearch/stable/index.html).
+- Documentation: [Apache Airflow® Cohere provider documentation](https://airflow.apache.org/docs/apache-airflow-providers-cohere/stable/index.html).

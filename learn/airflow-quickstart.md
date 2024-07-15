@@ -4,7 +4,7 @@ sidebar_label: "Quickstart"
 id: airflow-quickstart
 ---
 
-A great way to explore Apache Airflow® features and use cases is using Astronomer's [Airflow Quickstart](https://github.com/astronomer/airflow-quickstart).
+A great way to explore Apache Airflow® features and use cases is using Astronomer's [Apache Airflow® Quickstart](https://github.com/astronomer/airflow-quickstart).
 
 This quickstart uses open source tools including Airflow, [DuckDB](https://duckdb.org/), [Streamlit](https://streamlit.io/), and the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html) to implement an ELT pipeline that creates an interactive dashboard showing global and local temperature changes over time.
 
@@ -16,7 +16,7 @@ This project is designed to show what Airflow can do and provide a sandbox for y
 
 :::tip
 
-If you are new to Airflow and want more instructions for getting started, check out our step-by-step [Get Started with Airflow](get-started-with-airflow.md) tutorial.
+If you are new to Airflow and want more instructions for getting started, check out our step-by-step [Get Started with Apache Airflow®](get-started-with-airflow.md) tutorial.
 
 :::
 

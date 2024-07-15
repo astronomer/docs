@@ -5,7 +5,7 @@ id: use-case-elt-ml-finance
 sidebar_label: "Financial ELT and ML pipeline"
 ---
 
-ELT/ETL and ML orchestration are two of the most common use cases for Apache Airflow®. This project shows how to use Airflow, the [Astro Python SDK](astro-python-sdk.md), and [Airflow Datasets](airflow-datasets.md) to build a data-driven pipeline that combines ETL and ML. For this example, we use mock financial data modeled after the [Stripe API](https://stripe.com/docs/api/charges). Based on different customer satisfaction scores and product type we'll try to predict the total amount spent per customer, hoping to get some insight into which areas of customer satisfaction to focus on. You can adjust the model class and hyperparameters to improve model fit. What R2 can you achieve?
+ELT/ETL and ML orchestration are two of the most common use cases for Apache Airflow®. This project shows how to use Airflow, the [Astro Python SDK](astro-python-sdk.md), and [Apache Airflow® Datasets](airflow-datasets.md) to build a data-driven pipeline that combines ETL and ML. For this example, we use mock financial data modeled after the [Stripe API](https://stripe.com/docs/api/charges). Based on different customer satisfaction scores and product type we'll try to predict the total amount spent per customer, hoping to get some insight into which areas of customer satisfaction to focus on. You can adjust the model class and hyperparameters to improve model fit. What R2 can you achieve?
 
 ![Two plots side by side showing the results of the RandomForestRegressor model. The left plot shows the results of the train set with an R2 of 0.95. Three clusters are discernible, one around very low numbers for predicted and true values, one linear cluster around values of 500-1500 with a linear relationship and the biggest cluster with more noise in higher values. The test plot to the right shows a similar picture but with more noise and an R2 of 0.85.](/img/examples/use-case-elt-ml-finance_model_result_plot.png)
 
@@ -22,7 +22,7 @@ Clone the example project from the [Astronomer GitHub](https://github.com/astron
 
 The repository is configured to spin up and use local [Postgres](https://www.postgresql.org/) and [MinIO](https://min.io/) instances without you needing to define connections or access external tools. MinIO is a local storage solution that mimics the S3 API and can be used with S3 specific Airflow operators.
 
-If you want to use S3 as your object storage, you can change the `AIRFLOW_CONN_AWS_DEFAULT` in the `.env` file and provide your AWS credentials. To use a different relational database, [add an Airflow connection](connections.md) to a [database supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_databases.html) to your Airflow instance and set `DB_CONN_ID` in the DAG files to your connection ID.
+If you want to use S3 as your object storage, you can change the `AIRFLOW_CONN_AWS_DEFAULT` in the `.env` file and provide your AWS credentials. To use a different relational database, [add an Apache Airflow® connection](connections.md) to a [database supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_databases.html) to your Airflow instance and set `DB_CONN_ID` in the DAG files to your connection ID.
 
 ## Run the project
 
@@ -51,7 +51,7 @@ The data in this example is generated using the [create_mock_data](https://githu
 
 ### Project overview
 
-This project consists of three DAGs: one helper DAG to simulate an ingestion process and two pipeline DAGs which have a dependency relationship through [Airflow datasets](airflow-datasets.md).
+This project consists of three DAGs: one helper DAG to simulate an ingestion process and two pipeline DAGs which have a dependency relationship through [Apache Airflow® datasets](airflow-datasets.md).
 
 ![Datasets view of the use case project showing the DAG finance_elt DAG that produces to the dataset astro://postgres_default@?table=model_satisfaction which is consumed by the second DAG named finance_ml.](/img/examples/use-case-elt-ml-finance_datasets_view.png)
 

@@ -49,7 +49,7 @@ Release Date: April 27, 2021
 
 ### Support for Apache Airflow® 2.0.2
 
-Astronomer Software v0.23 now offers full support for [Airflow 2.0.2](https://github.com/apache/airflow/releases/tag/2.0.2). Airflow 2.0.2 builds upon the success of Airflow 2.0.0 and 2.0.1 with more bug fixes and performance improvements, including:
+Astronomer Software v0.23 now offers full support for [Apache Airflow® 2.0.2](https://github.com/apache/airflow/releases/tag/2.0.2). Airflow 2.0.2 builds upon the success of Airflow 2.0.0 and 2.0.1 with more bug fixes and performance improvements, including:
 
 - Gracefully handling missing `start_date` and `end_date` for DagRuns ([Source](https://github.com/apache/airflow/pull/14452))
 - Faster default role syncing during Webserver start ([Source](https://github.com/apache/airflow/pull/15017))
@@ -109,7 +109,7 @@ In private networks, you might want to disable Alertmanager clustering to avoid 
 
 ### Support for Apache Airflow® 1.10.15
 
-[Airflow 1.10.15](https://github.com/apache/airflow/releases/tag/1.10.15) comes with a suite of enhancements and bug fixes that follow [Airflow 1.10.14](https://github.com/apache/airflow/releases/tag/1.10.14), which was released in December of 2020 to make the migration to [Airflow 2.0](https://www.astronomer.io/blog/introducing-airflow-2-0) as easy as possible. If you haven't migrated to Airflow 2.0 yet, you _must_ upgrade to Airflow 1.10.14+ first.
+[Apache Airflow® 1.10.15](https://github.com/apache/airflow/releases/tag/1.10.15) comes with a suite of enhancements and bug fixes that follow [Apache Airflow® 1.10.14](https://github.com/apache/airflow/releases/tag/1.10.14), which was released in December of 2020 to make the migration to [Apache Airflow® 2.0](https://www.astronomer.io/blog/introducing-airflow-2-0) as easy as possible. If you haven't migrated to Airflow 2.0 yet, you _must_ upgrade to Airflow 1.10.14+ first.
 
 Specifically, Airflow 1.10.15 includes the following changes:
 
@@ -123,7 +123,7 @@ Specifically, Airflow 1.10.15 includes the following changes:
 - Fixed inability to import Airflow plugins on Python 3.8 [(commit)](https://github.com/apache/airflow/pull/12859)
 - Fixed Scheduler not acknowledging active runs properly [(commit)](https://github.com/apache/airflow/pull/13803)
 
-For detailed guidelines on how to upgrade Airflow on Astronomer, read [Upgrade Airflow](manage-airflow-versions.md). For more information on 1.10.15, check out the [Airflow Release](https://airflow.apache.org/docs/apache-airflow/1.10.15/changelog.html) or the corresponding [AC 1.10.15 changelog](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/CHANGELOG.md).
+For detailed guidelines on how to upgrade Airflow on Astronomer, read [Upgrade Apache Airflow®](manage-airflow-versions.md). For more information on 1.10.15, check out the [Apache Airflow® Release](https://airflow.apache.org/docs/apache-airflow/1.10.15/changelog.html) or the corresponding [AC 1.10.15 changelog](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/CHANGELOG.md).
 
 ### Bug fixes
 
@@ -154,7 +154,7 @@ Release Date: January 20, 2021
 
 ### Platform Support for Airflow 2.0
 
-Astronomer Software v0.23 offers full support for [Airflow 2.0](https://www.astronomer.io/blog/introducing-airflow-2-0/). Already available for local development, Airflow 2.0 is a momentous open-source release that includes a refactored Scheduler, over 30 UI/UX improvements, a new REST API and much more.
+Astronomer Software v0.23 offers full support for [Apache Airflow® 2.0](https://www.astronomer.io/blog/introducing-airflow-2-0/). Already available for local development, Airflow 2.0 is a momentous open-source release that includes a refactored Scheduler, over 30 UI/UX improvements, a new REST API and much more.
 
 In support of Airflow 2.0, Astronomer v0.23 includes:
 
@@ -162,13 +162,13 @@ In support of Airflow 2.0, Astronomer v0.23 includes:
 - A mechanism to ensure that users migrate to Airflow 1.10.14 prior to upgrading to 2.0
 - Support for Airflow's ["upgrade check"](https://airflow.apache.org/docs/apache-airflow/v0.23/upgrade-check.html) in the Astronomer CLI (`$ astro dev upgrade-check`)
 
-For local development guidelines, read [Get Started with Airflow 2.0](https://www.astronomer.io/guides/get-started-airflow-2).
+For local development guidelines, read [Get Started with Apache Airflow® 2.0](https://www.astronomer.io/guides/get-started-airflow-2).
 
 ### Support for Multiple Schedulers (_Airflow 2.0+_)
 
 Airflow 2.0 allows users to provision multiple Airflow Schedulers for ultimate high-availability and scale. In tandem with full support for Airflow 2.0 on Astronomer, v0.23 supports the ability to provision up to 4 Schedulers via the Software UI for Airflow Deployments running Airflow 2.0+.
 
-For guidelines, refer to [Configure an Airflow Deployment on Astronomer](configure-deployment.md#scale-core-resources). For Scheduler performance benchmarks and a technical deep-dive into Airflow's critical component, read ["The Airflow 2.0 Scheduler"](https://www.astronomer.io/blog/airflow-2-scheduler).
+For guidelines, refer to [Configure an Apache Airflow® Deployment on Astronomer](configure-deployment.md#scale-core-resources). For Scheduler performance benchmarks and a technical deep-dive into Airflow's critical component, read ["The Apache Airflow® 2.0 Scheduler"](https://www.astronomer.io/blog/airflow-2-scheduler).
 
 ### Airflow Version Selection & Upgrade in Software UI/CLI
 
@@ -176,7 +176,7 @@ Astronomer v0.23 formally introduces **Airflow Version** to the Software UI, CLI
 
 To see the version of Airflow your Deployment is running, refer to its **Settings** page in the Software UI. If you're interested in upgrading versions, you can now initialize the upgrade process via the Software UI or CLI for a guided experience. From there, you'll receive instructions to complete the process by updating the Astronomer Certified (AC) image in your `Dockerfile`.
 
-For more information, refer to [Manage Airflow Versions](manage-airflow-versions.md).
+For more information, refer to [Manage Apache Airflow® Versions](manage-airflow-versions.md).
 
 ### Real-time Support for Latest Astronomer Certified Versions
 
@@ -184,7 +184,7 @@ In contrast with v0.16, Astronomer Software v0.23 does not require that a releas
 
 As soon as a version of Astronomer Certified is published to our [updates service](http://updates.astronomer.io/astronomer-certified), all corresponding Astronomer Certified images and tags will become available for selection in the Software UI and CLI within 24 hours.
 
-For more information, refer to [Manage Airflow Versions](manage-airflow-versions.md).
+For more information, refer to [Manage Apache Airflow® Versions](manage-airflow-versions.md).
 
 ### New Deployment-level Permissions
 
@@ -212,7 +212,7 @@ Previously, the number of Celery Worker replicas that could be immediately creat
 
 For users, this change will result in a quicker, more efficient, and more graceful deploy process.
 
-> **Note:** This improvement applies only to those running Apache Airflow® with the Celery Executor on Astronomer. For more information on Airflow Executors, refer to ["Airflow Executors Explained"](https://www.astronomer.io/guides/airflow-executors-explained) or [Configure an Airflow Deployment on Astronomer](configure-deployment.md).
+> **Note:** This improvement applies only to those running Apache Airflow® with the Celery Executor on Astronomer. For more information on Airflow Executors, refer to ["Apache Airflow® Executors Explained"](https://www.astronomer.io/guides/airflow-executors-explained) or [Configure an Apache Airflow® Deployment on Astronomer](configure-deployment.md).
 
 ### Houston API Improvements
 

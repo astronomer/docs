@@ -61,9 +61,9 @@ If your Astro project contains many DAGs or tasks, then you might experience per
 To improve the performance of your environment, you can:
 
  - Adjust CPU and memory resource allocation in your Docker configuration. Be aware that increasing Docker resource allocation might decrease the performance of your computer.
- - Modify Airflow-level environment variables, including concurrency and parallelism. See [Scaling out Airflow](https://www.astronomer.io/docs/learn/airflow-scaling-workers).
+ - Modify Airflow-level environment variables, including concurrency and parallelism. See [Scaling out Apache Airflow®](https://www.astronomer.io/docs/learn/airflow-scaling-workers).
 
-Generating DAGs dynamically can also decrease the performance of your local Airflow environment, though it's a common authoring pattern for advanced use cases. For more information, see [Dynamically Generating DAGs in Airflow](https://www.astronomer.io/docs/learn/dynamically-generating-dags/). If your DAGs continue to run slowly and you can't scale Docker or Airflow any further, Astronomer recommends pushing your project to a Deployment on Astro that's dedicated to testing.
+Generating DAGs dynamically can also decrease the performance of your local Airflow environment, though it's a common authoring pattern for advanced use cases. For more information, see [Dynamically Generating DAGs in Apache Airflow®](https://www.astronomer.io/docs/learn/dynamically-generating-dags/). If your DAGs continue to run slowly and you can't scale Docker or Airflow any further, Astronomer recommends pushing your project to a Deployment on Astro that's dedicated to testing.
 
 :::tip
 

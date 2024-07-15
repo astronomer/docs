@@ -59,4 +59,4 @@ For each worker queue on your Deployment, you have to specify certain settings t
 ## See also
 
 - [Configure worker queues](configure-worker-queues.mdx).
-- [Airflow Executors explained](https://www.astronomer.io/docs/learn/airflow-executors-explained)
+- [Apache Airflow® Executors explained](https://www.astronomer.io/docs/learn/airflow-executors-explained)

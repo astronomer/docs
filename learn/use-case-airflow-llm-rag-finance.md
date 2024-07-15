@@ -150,7 +150,7 @@ Since this ingestion pipeline runs incrementally, the `start_time` is set to the
 
 :::info
 
-For more information on how Airflow handles DAG run dates see the [Schedule DAGs in Airflow](scheduling-in-airflow.md) guide and for a full list of available templates, see the [Airflow Templates reference](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html).
+For more information on how Airflow handles DAG run dates see the [Schedule DAGs in Apache Airflow®](scheduling-in-airflow.md) guide and for a full list of available templates, see the [Apache Airflow® Templates reference](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html).
 
 :::
 
@@ -631,6 +631,6 @@ Congratulations! You successfully adapted a RAG pipeline using Airflow and Weavi
 
 ## See also
 
-- Webinar: [Run LLMOps in production with Apache Airflow](https://www.astronomer.io/events/webinars/run-llmops-in-production-with-apache-airflow/).
-- Tutorial: [Use Weaviate with Apache Airflow](airflow-weaviate.md).
+- Webinar: [Run LLMOps in production with Apache Airflow®](https://www.astronomer.io/events/webinars/run-llmops-in-production-with-apache-airflow/).
+- Tutorial: [Use Weaviate with Apache Airflow®](airflow-weaviate.md).
 - LLMOps RAG reference architecture: [Ask Astro repository](https://github.com/astronomer/ask-astro).

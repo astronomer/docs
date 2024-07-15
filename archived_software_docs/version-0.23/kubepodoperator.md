@@ -177,7 +177,7 @@ Once you've created the object, simply apply it to the `resources` parameter of 
 
 By default, the KubernetesPodOperator will look for images hosted publicly on [Dockerhub](https://hub.docker.com/). If you want to pull images from a private registry, you may do so.
 
-> **Note:** The KubernetesPodOperator doesn't support passing in `image_pull_secrets` until [Airflow 1.10.2](https://github.com/apache/airflow/blob/master/CHANGELOG.txt#L526).
+> **Note:** The KubernetesPodOperator doesn't support passing in `image_pull_secrets` until [Apache Airflow® 1.10.2](https://github.com/apache/airflow/blob/master/CHANGELOG.txt#L526).
 
 To pull images from a private registry on Astronomer Software, follow the guidelines below.
 

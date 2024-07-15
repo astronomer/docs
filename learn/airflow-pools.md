@@ -23,7 +23,7 @@ In this guide, you'll learn basic Airflow pool concepts, how to create and assig
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: Pools](https://academy.astronomer.io/astro-runtime-pools) module.
+- Astronomer Academy: [Apache Airflow®: Pools](https://academy.astronomer.io/astro-runtime-pools) module.
 
 :::
 
@@ -32,7 +32,7 @@ There are multiple resources for learning about this topic. See also:
 To get the most out of this guide, you should have an understanding of:
 
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- The basics of scaling Airflow. See [Scaling out Airflow](airflow-scaling-workers.md).
+- The basics of scaling Airflow. See [Scaling out Apache Airflow®](airflow-scaling-workers.md).
 
 ## Create a pool
 
@@ -42,7 +42,7 @@ There are three ways you can create and manage pools in Airflow:
 
     ![Pools UI](/img/guides/pools_ui.png)
 
-- The Airflow CLI: Run the `airflow pools` command with the `set` subcommand to create a new pool. See the [Airflow CLI documentation](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#pools) for the full list of pool commands. With the Apache Airflow® CLI, you can also import pools from a JSON file with the `import` subcommand. This can be useful if you have a large number of pools to define and doing so programmatically would be more efficient.
+- The Airflow CLI: Run the `airflow pools` command with the `set` subcommand to create a new pool. See the [Apache Airflow® CLI documentation](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#pools) for the full list of pool commands. With the Apache Airflow® CLI, you can also import pools from a JSON file with the `import` subcommand. This can be useful if you have a large number of pools to define and doing so programmatically would be more efficient.
 - The Airflow REST API: This option is available with Airflow version 2.0 and later. To create a pool, submit a POST request with the name and number of slots as the payload. For more information on working with pools from the API, see the [API documentation](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_pool).
 
 

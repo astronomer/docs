@@ -5,7 +5,7 @@ id: airflow-dag-parameters
 description: "Learn about all important DAG-level parameters in Apache Airflow®."
 ---
 
-In Apache Airflow®, you can configure when and how your DAG runs by setting parameters in the DAG object. DAG-level parameters affect how the entire DAG behaves, as opposed to task-level parameters which only affect a single task or [Airflow configs](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html) which affect the entire Airflow instance. 
+In Apache Airflow®, you can configure when and how your DAG runs by setting parameters in the DAG object. DAG-level parameters affect how the entire DAG behaves, as opposed to task-level parameters which only affect a single task or [Apache Airflow® configs](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html) which affect the entire Airflow instance. 
 
 This guide covers all user-relevant DAG-level parameters in Airflow.
 
@@ -16,8 +16,8 @@ There are four basic DAG-level parameters. It is best practice to always set the
 | Parameter                           | Description |
 |-------------------------------------|-------------|
 | `dag_id`                           | The name of the DAG. This must be unique for each DAG in the Airflow environment. When using the `@dag` decorator and not providing the `dag_id` parameter name, the function name is used as the `dag_id`. When using the `DAG` class, this parameter is required. |
-| `start_date` | The date and time after which the DAG starts being scheduled. Note that the first actual run of the DAG may be later than this date depending on how you define the schedule. See [DAG scheduling and timetables in Airflow](scheduling-in-airflow.md) for more information. This parameter may be required depending on your Airflow version and `schedule`. |
-| `schedule`   | The schedule for the DAG. There are many different ways to define a schedule, see [Scheduling in Airflow](scheduling-in-airflow.md) for more information. Defaults to `timedelta(days=1)`. This parameter replaces the deprecated `schedule_interval` and `timetable` parameters. |
+| `start_date` | The date and time after which the DAG starts being scheduled. Note that the first actual run of the DAG may be later than this date depending on how you define the schedule. See [DAG scheduling and timetables in Apache Airflow®](scheduling-in-airflow.md) for more information. This parameter may be required depending on your Airflow version and `schedule`. |
+| `schedule`   | The schedule for the DAG. There are many different ways to define a schedule, see [Scheduling in Apache Airflow®](scheduling-in-airflow.md) for more information. Defaults to `timedelta(days=1)`. This parameter replaces the deprecated `schedule_interval` and `timetable` parameters. |
 | `catchup`    | Whether the scheduler should backfill all missed DAG runs between the current date and the start date when the DAG is unpaused. This parameter defaults to `True`. It is a best practice to always set it to `False` unless you specifically want to backfill missed DAG runs, see [Catchup](rerunning-dags.md#catchup) for more information. |
 
 ## UI parameters
@@ -46,7 +46,7 @@ There are parameters that relate to [Jinja templating](templating.md), such as:
 
 ## Scaling
 
-Some parameters can be used to scale your DAG's resource usage in Airflow. See [Scaling Airflow to optimize performance](airflow-scaling-workers.md) for more information.
+Some parameters can be used to scale your DAG's resource usage in Airflow. See [Scaling Apache Airflow® to optimize performance](airflow-scaling-workers.md) for more information.
 
 | Parameter                           | Description |
 |-------------------------------------|-------------|
@@ -56,7 +56,7 @@ Some parameters can be used to scale your DAG's resource usage in Airflow. See [
 
 ## Callback parameters
 
-These parameters help you configure the behavior of [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks).
+These parameters help you configure the behavior of [Apache Airflow® callbacks](error-notifications-in-airflow.md#airflow-callbacks).
 
 | Parameter                           | Description |
 |-------------------------------------|-------------|
@@ -67,7 +67,7 @@ These parameters help you configure the behavior of [Airflow callbacks](error-no
 
 :::tip
 
-On Astro, you can use Astro alerts instead of or in addition to Airflow callbacks. See [When to use Airflow or Astro alerts for your pipelines on Astro](https://www.astronomer.io/docs/astro/best-practices/airflow-vs-astro-alerts) for more information.
+On Astro, you can use Astro alerts instead of or in addition to Airflow callbacks. See [When to use Apache Airflow® or Astro alerts for your pipelines on Astro](https://www.astronomer.io/docs/astro/best-practices/airflow-vs-astro-alerts) for more information.
 
 :::
 
@@ -79,7 +79,7 @@ Other DAG parameters include:
 |-------------------------------------|-------------|
 | `end_date`                          | The date beyond which no further DAG runs will be scheduled. Defaults to `None`. |
 | `default_args`            | A dictionary of parameters that are applied to all tasks in the DAG. These parameters are passed directly to each operator, so they must be parameters that are part of the [`BaseOperator`](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html). You can override default arguments at the task level. |
-| `params`                  | A dictionary of DAG-level Airflow params. See [Airflow params](airflow-params.md) for more information. |
+| `params`                  | A dictionary of DAG-level Airflow params. See [Apache Airflow® params](airflow-params.md) for more information. |
 | `dagrun_timeout`          | The time it takes for a DAG run of this DAG to time out and be marked as `failed`. |
 | `access_control`          | Specify optional permissions for roles specific to an individual DAG. See [DAG-level permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#dag-level-permissions). This cannot be implemented on Astro. Astronomer recommends customers to use [Astro's RBAC features](https://www.astronomer.io/docs/astro/user-permissions) instead. |
 | `is_paused_upon_creation` | Whether the DAG is paused when it is created. When not set, the Airflow config `core.dags_are_paused_at_creation` is used, which defaults to `True`. |

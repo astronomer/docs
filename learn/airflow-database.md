@@ -21,8 +21,8 @@ In this guide, you'll learn everything you need to know about the Airflow metada
 
 To get the most out of this guide, you should have an understanding of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
-- Airflow core components. See [Airflow's components](airflow-components.md).
+- Basic Airflow concepts. See [Introduction to Apache Airflow®](intro-to-airflow.md).
+- Airflow core components. See [Apache Airflow®'s components](airflow-components.md).
 
 ## Database specifications
 
@@ -88,7 +88,7 @@ There are additional tables in the metadata database storing data ranging from D
 
 ## Apache Airflow® metadata database best practices
 
-- When upgrading or downgrading Airflow, always follow the [recommended steps for changing Airflow versions](https://airflow.apache.org/docs/apache-airflow/stable/installation/upgrading.html?highlight=upgrade): back up the metadata database, check for deprecated features, pause all DAGs, and make sure no tasks are running.
+- When upgrading or downgrading Airflow, always follow the [recommended steps for changing Apache Airflow® versions](https://airflow.apache.org/docs/apache-airflow/stable/installation/upgrading.html?highlight=upgrade): back up the metadata database, check for deprecated features, pause all DAGs, and make sure no tasks are running.
 
 - Use caution when [pruning old records](https://airflow.apache.org/docs/apache-airflow/stable/usage-cli.html#purge-history-from-metadata-database) from your database with `db clean`. For example, pruning records could affect future runs for tasks that use the `depends_on_past` argument. The `db clean` command allows you to delete records older than `--clean-before-timestamp` from all metadata database tables or a list of tables specified.
 
@@ -98,13 +98,13 @@ There are additional tables in the metadata database storing data ranging from D
 
 - Since the metadata database is critical for the scalability and resiliency of your Airflow deployment, it is best practice to use a managed database service for production environments, for example [AWS RDS](https://aws.amazon.com/rds/) or [Google Cloud SQL](https://cloud.google.com/sql). Alternatively, you can use a managed Airflow service like [Astro](https://www.astronomer.io/try-astro/?utm_medium=docs&utm_content=learn-airflow-database&utm_source=body) with a built-in scalable and resilient metadata database.
 
-- When configuring a database backend, make sure your version is fully supported by checking the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html#choosing-database-backend).
+- When configuring a database backend, make sure your version is fully supported by checking the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html#choosing-database-backend).
 
 - Never directly modifying the metadata database except in extremely rare circumstances, as this can cause dependency issues and corrupt your Airflow instance.
 
 ## Use the Apache Airflow® REST API to access the metadata database
 
-The best method for retrieving data from the metadata database is using the Airflow UI or making a GET request to the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html). 
+The best method for retrieving data from the metadata database is using the Airflow UI or making a GET request to the [Apache Airflow® REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html). 
 
 Between the UI and API, much of the metadata database can be viewed without the risk inherent in direct querying. In rare cases where neither the Airflow UI nor the REST API can provide sufficient data, it is possible to use SQLAlchemy with Airflow models to access data from the metadata database. Direct querying of the metadata database is not recommended since direct manipulation can result in corruption of your Airflow instance.
 
@@ -143,7 +143,7 @@ print(req.json()["total_entries"])
 
 It is also possible to navigate to **Browse** -> **Task Instances** in the Apache Airflow® UI and filter the task instances for all with a state of `success`. The `Record Count` will be on the right side of your screen.
 
-![Count successful tasks Airflow UI](/img/guides/successful_tasks_UI.png)
+![Count successful tasks Apache Airflow® UI](/img/guides/successful_tasks_UI.png)
 
 ### Pause and unpause a DAG
 

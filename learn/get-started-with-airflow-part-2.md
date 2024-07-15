@@ -13,8 +13,8 @@ Use this tutorial after completing [Part 1: Write your first DAG](get-started-wi
 After you complete this tutorial, you'll be able to:
 
 - Add an Airflow provider to your Airflow environment.
-- Create and use an [Airflow connection](connections.md).
-- Create and use an [Airflow variable](airflow-variables.md).
+- Create and use an [Apache Airflow® connection](connections.md).
+- Create and use an [Apache Airflow® variable](airflow-variables.md).
 
 ## Time to complete
 
@@ -65,7 +65,7 @@ The new DAG interacts with GitHub and two external APIs to print the location of
 
 2. Open the Airflow UI to confirm that your DAG was pushed to your environment. On the **DAGs** page, you should see a "DAG Import Error" like the one shown here:
 
-    ![Screenshot of the Airflow UI Showing an Import Error saying: ModuleNotFoundError: No module named 'airflow.providers.github'](/img/tutorials/get-started-with-airflow-part-2_ImportError.png)
+    ![Screenshot of the Apache Airflow® UI Showing an Import Error saying: ModuleNotFoundError: No module named 'airflow.providers.github'](/img/tutorials/get-started-with-airflow-part-2_ImportError.png)
 
     This error is due to a missing provider package. **_Provider packages_** are Python packages maintained separately from core Airflow that contain hooks and operators for interacting with external services. You can browse all available providers in the [Astronomer Registry](https://registry.astronomer.io/).
 
@@ -84,11 +84,11 @@ The new DAG interacts with GitHub and two external APIs to print the location of
 
 After restarting your Airflow instance, you should not see the DAG import error from [Step 2](#step-2-add-a-provider-package). Next, you need to add an Airflow variable to be used in the [GithubSensor](https://registry.astronomer.io/providers/apache-airflow-providers-github/versions/latest/modules/GithubSensor).
 
-[**Airflow variables**](airflow-variables.md) are key value pairs that can be accessed from any DAG in your Airflow environment. Because the variable `my_github_repo` is used in the DAG code with a default of `apache/airflow`, you'll need to create the variable and give it a value in the Airflow UI to wait for a commit in your own repository.
+[**Apache Airflow® variables**](airflow-variables.md) are key value pairs that can be accessed from any DAG in your Airflow environment. Because the variable `my_github_repo` is used in the DAG code with a default of `apache/airflow`, you'll need to create the variable and give it a value in the Airflow UI to wait for a commit in your own repository.
 
 1. Go to **Admin** > **Variables** to open the list of Apache Airflow® variables. Since no Airflow variables have been defined yet, it is empty.
 
-    ![Screenshot of the Airflow UI with the Admin tab menu expanded to show the Variables option.](/img/tutorials/get-started-with-airflow-part-2_AdminVariables.png)
+    ![Screenshot of the Apache Airflow® UI with the Admin tab menu expanded to show the Variables option.](/img/tutorials/get-started-with-airflow-part-2_AdminVariables.png)
 
 2. Click on the **+** sign to open the form for adding a new variable. Set the **Key** for the variable as `my_github_repo` and set the **Val** as a GitHub repository you have administrator access to. Make sure the **Val** is in the format `github_account_name/repository_name` (for example `apache/airflow`). The repository can be private.
 
@@ -96,7 +96,7 @@ After restarting your Airflow instance, you should not see the DAG import error 
 
 ## Step 4: Create a GitHub connection
 
-An [**Airflow connection**](connections.md) is a set of configurations for connecting with an external tool in the data ecosystem. If you use a hook or operator that connects to an external system, it likely needs a connection.
+An [**Apache Airflow® connection**](connections.md) is a set of configurations for connecting with an external tool in the data ecosystem. If you use a hook or operator that connects to an external system, it likely needs a connection.
 
 In your example DAG, you used two operators that interact with two external systems, which means you need to define two different connections.
 
@@ -288,7 +288,7 @@ The DAG itself has three tasks:
     log_iss_location_obj = log_iss_location(get_iss_coordinates.output)
     ```
 
-Lastly, the dependency between the three tasks is set so that the `get_iss_coordinates` task only runs after the `github_sensor` task is successful and the `log_iss_location` task only runs after the `get_iss_coordinates` task is successful. This is done using the `chain` method. You can learn more about setting dependencies between tasks in the [Manage task and task group dependencies in Airflow](managing-dependencies.md) guide.
+Lastly, the dependency between the three tasks is set so that the `get_iss_coordinates` task only runs after the `github_sensor` task is successful and the `log_iss_location` task only runs after the `get_iss_coordinates` task is successful. This is done using the `chain` method. You can learn more about setting dependencies between tasks in the [Manage task and task group dependencies in Apache Airflow®](managing-dependencies.md) guide.
 
 The last line of the DAG file calls the `find_the_iss` function to create the DAG.
 
@@ -322,5 +322,5 @@ find_the_iss()
 ## See also
 
 - The [Astronomer Registry](https://registry.astronomer.io/) to find information on all providers.
-- The [Airflow connections](connections.md) guide to learn more about Airflow connections.
-- The [Airflow variables](airflow-variables.md) guide to learn more about Airflow variables.
+- The [Apache Airflow® connections](connections.md) guide to learn more about Airflow connections.
+- The [Apache Airflow® variables](airflow-variables.md) guide to learn more about Airflow variables.

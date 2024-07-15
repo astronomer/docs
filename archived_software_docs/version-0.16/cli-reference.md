@@ -242,7 +242,7 @@ When managing an existing Deployment using subcommands such as `delete` and `log
 
 ### Related documentation
 
-- [Configure an Airflow Deployment on Astronomer](manage-workspaces.md)
+- [Configure an Apache Airflow® Deployment on Astronomer](manage-workspaces.md)
 
 ## astro deployment airflow upgrade
 
@@ -250,7 +250,7 @@ Initializes the Airflow version upgrade process on any Airflow Deployment on Ast
 
 ### Usage
 
-Run `astro deployment airflow upgrade --deployment-id` to initialize the Airflow upgrade process. To finalize the Airflow upgrade process, complete all of the steps as described in [Upgrade Apache Airflow on Astronomer](manage-airflow-versions.md).
+Run `astro deployment airflow upgrade --deployment-id` to initialize the Airflow upgrade process. To finalize the Airflow upgrade process, complete all of the steps as described in [Upgrade Apache Airflow® on Astronomer](manage-airflow-versions.md).
 
 If you do not specify `--desired-airflow-version`, this command will output a list of available versions of Airflow you can choose from and prompt you to pick one. The Astronomer CLI will only make available versions of Airflow that are higher than the version you're currently running in your `Dockerfile`.
 
@@ -263,7 +263,7 @@ If you do not specify `--desired-airflow-version`, this command will output a li
 
 ### Related documentation
 
-- [Upgrade Apache Airflow on Astronomer](manage-airflow-versions.md)
+- [Upgrade Apache Airflow® on Astronomer](manage-airflow-versions.md)
 - [Manage User Permissions on Astronomer](workspace-permissions.md)
 
 ## astro deployment create
@@ -288,7 +288,7 @@ Run `astro deployment create <new-deployment-name> [flags]` to create a new Depl
 
 ### Related documentation
 
-- [Configure an Airflow Deployment on Astronomer](manage-workspaces.md)
+- [Configure an Apache Airflow® Deployment on Astronomer](manage-workspaces.md)
 - [Integrate IAM Roles](integrate-iam.md)
 
 ## astro deployment delete
@@ -579,7 +579,7 @@ Lists all running Docker containers for your local Airflow environment. This com
 
 ## astro dev run
 
-Runs a single [Airflow CLI command](https://airflow.apache.org/docs/apache-airflow/stable/cli-ref.html) on your local Airflow environment. This command only applies to local development and is not supported for Airflow Deployments on Astronomer.
+Runs a single [Apache Airflow® CLI command](https://airflow.apache.org/docs/apache-airflow/stable/cli-ref.html) on your local Airflow environment. This command only applies to local development and is not supported for Airflow Deployments on Astronomer.
 
 ### Usage
 
@@ -587,7 +587,7 @@ Runs a single [Airflow CLI command](https://airflow.apache.org/docs/apache-airfl
 
 ### Related documentation
 
-- [Access to the Airflow CLI](customize-image.md#access-to-the-airflow-cli)
+- [Access to the Apache Airflow® CLI](customize-image.md#access-to-the-airflow-cli)
 
 ## astro dev start
 
@@ -625,7 +625,7 @@ Runs a script that checks whether all files in your local Airflow project are co
 
 ### Related documentation
 
-- [Running the Airflow Upgrade Check Package](https://airflow.apache.org/docs/apache-airflow/stable/upgrade-check.html#upgrade-check)
+- [Running the Apache Airflow® Upgrade Check Package](https://airflow.apache.org/docs/apache-airflow/stable/upgrade-check.html#upgrade-check)
 
 ## astro upgrade
 

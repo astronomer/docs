@@ -44,13 +44,13 @@ Release date: November 22, 2021
 
 ### Support for Apache Airflow®® 2.2.0
 
-[Apache Airflow 2.2.0](https://airflow.apache.org/blog/airflow-2.2.0/) is an exciting milestone in the open source project. Most notably, this release introduces custom timetables and deferrable operators.
+[Apache Airflow® 2.2.0](https://airflow.apache.org/blog/airflow-2.2.0/) is an exciting milestone in the open source project. Most notably, this release introduces custom timetables and deferrable operators.
 
 #### Custom Timetables
 
 Timetables are a powerful new framework that you can use to create custom schedules using Python. In an effort to provide more flexibility and address known limitations imposed by cron, timetables use an intuitive `data_interval` that, for example, allows you to schedule a DAG to run daily on Monday through Friday, but not on the weekend. Timetables can be easily plugged into existing DAGs, which means that it's easy to create your own or use community-developed timetables in your project.
 
-For more information on using timetables, read the [Apache Airflow Documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/timetable.html).
+For more information on using timetables, read the [Apache Airflow® Documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/timetable.html).
 
 #### Deferrable Operators
 

@@ -60,7 +60,7 @@ For more information on upgrading Kubernetes versions, follow the guidelines off
 | 2.2.4                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
 | 2.2.5                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
 
-For more detail on each version of Astronomer Certified and instructions on how to upgrade, refer to [Upgrade Apache Airflow](manage-airflow-versions.md).
+For more detail on each version of Astronomer Certified and instructions on how to upgrade, refer to [Upgrade Apache Airflow®](manage-airflow-versions.md).
 
 > **Note:** While the Astronomer Certified Python Wheel supports Python versions 3.6, 3.7, and 3.8, Astronomer Certified Docker images have been tested and built only with Python 3.7. To run Astronomer Certified on Docker with Python versions 3.6 or 3.8, you can create a custom image with a different Python version specified. For more information, read [Change Python Versions](customize-image.md#build-with-a-different-python-version).
 

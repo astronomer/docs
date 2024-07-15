@@ -9,7 +9,7 @@ New versions of Astronomer Certified (AC) are released regularly to support new 
 
 Follow this guide to upgrade your Airflow environment either on a virtual machine with the AC Python Wheel or on Docker with the AC Docker image.
 
->**Note:** Upgrading to Apache Airflow® 2.0 requires additional steps and precautions. If you're upgrading from Airflow 1.10 to Airflow 2.0+, we recommend following Apache Airflow's [Upgrading to Airflow 2.0 guide](https://airflow.apache.org/docs/apache-airflow/stable/upgrading-to-2.html).
+>**Note:** Upgrading to Apache Airflow® 2.0 requires additional steps and precautions. If you're upgrading from Airflow 1.10 to Airflow 2.0+, we recommend following Apache Airflow's [Upgrading to Apache Airflow® 2.0 guide](https://airflow.apache.org/docs/apache-airflow/stable/upgrading-to-2.html).
 
 > **Note:** Once you upgrade Airflow versions, you cannot downgrade to an earlier version. The Airflow metadata database structurally changes with each release, which results in backwards incompatibility across versions.
 
@@ -62,7 +62,7 @@ Then, for each machine running Airflow:
     airflow upgradedb
     ```
 
-    > **Note:** This command changes to `airflow db upgrade` in Airflow 2.0+. For more information on major changes in 2.0, read [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/upgrading-to-2.html#airflow-cli-changes-in-2-0).
+    > **Note:** This command changes to `airflow db upgrade` in Airflow 2.0+. For more information on major changes in 2.0, read [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/upgrading-to-2.html#airflow-cli-changes-in-2-0).
 
 3. In a web browser, access the Airflow UI at http://localhost:8080 and click **About** > **Version**. Once there, you should see the correct Airflow version listed.
 

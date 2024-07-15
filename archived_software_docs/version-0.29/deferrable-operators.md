@@ -31,7 +31,7 @@ Tasks that are defined with a deferrable operator run according to the following
 - The triggerer runs the task's Trigger periodically to check whether the condition has been met.
 - Once the Trigger condition succeeds, the task is again queued by the Scheduler. This time, when the task is picked up by a worker, it begins to complete its main function.
 
-For more information on how deferrable operators work and how to use them, see the [Airflow Guide for Deferrable operators](deferrable-operators.md) or the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html).
+For more information on how deferrable operators work and how to use them, see the [Apache Airflow® Guide for Deferrable operators](deferrable-operators.md) or the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html).
 
 ## Astro Runtime prerequisites
 
@@ -41,7 +41,7 @@ To use deferrable operators both in a local Airflow environment and on Astronome
 - The [Astro CLI version 1.0 or later](https://www.astronomer.io/docs/astro/cli-release-notes#v110) installed.
 - Triggerers enabled. See [Enable triggerers](https://www.astronomer.io/docs/software/configure-deployment#enable-triggerers).
 
-All versions of Astro Runtime version 4.2.0 and later support the triggerer and have the `astronomer-providers` package installed. See [Upgrade Airflow](manage-airflow-versions.md).
+All versions of Astro Runtime version 4.2.0 and later support the triggerer and have the `astronomer-providers` package installed. See [Upgrade Apache Airflow®](manage-airflow-versions.md).
 
 ## Astronomer Certified prerequisites
 

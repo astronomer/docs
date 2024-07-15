@@ -118,7 +118,7 @@ Alternatively, you can manually create a template file without using an existing
    astro deployment list
    ```
 
-4. (Optional) Reconfigure any Airflow connections or variables from the Deployment that you copied into the template file. Airflow connections and variables cannot be configured using template files. See [Manage connections in Airflow](manage-connections-variables.md).
+4. (Optional) Reconfigure any Airflow connections or variables from the Deployment that you copied into the template file. Airflow connections and variables cannot be configured using template files. See [Manage connections in Apache Airflow®](manage-connections-variables.md).
 
 ## Update a Deployment using a Deployment file
 

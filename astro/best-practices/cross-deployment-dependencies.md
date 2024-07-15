@@ -12,18 +12,18 @@ This guide uses the following terms to describe cross-deployment dependencies:
 - **Upstream deployment**: A deployment where a DAG must reach a specified state before a DAG in another deployment can run.
 - **Downstream deployment**: A deployment in which a DAG cannot run until a DAG in an upstream deployment reaches a specified state.
 
-Cross-deployment dependencies require special implementation because some methods, like the TriggerDagRunOperator, ExternalTaskSensor, and direct Apache Airflow® Dataset dependencies, are only designed for DAGs in the same deployment. On Astro, there are two recommended methods available for implementing cross-deployment dependencies: Astro Alerts and triggering updates to Airflow Datasets using the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/create_dataset_event).
+Cross-deployment dependencies require special implementation because some methods, like the TriggerDagRunOperator, ExternalTaskSensor, and direct Apache Airflow® Dataset dependencies, are only designed for DAGs in the same deployment. On Astro, there are two recommended methods available for implementing cross-deployment dependencies: Astro Alerts and triggering updates to Airflow Datasets using the [Apache Airflow® REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/create_dataset_event).
 
 ## Feature overview
 
 In this guide, you'll learn when to use the following Astro and Airflow features to create dependencies across Astro deployments. Astro supports cross-deployment dependencies in any Workspace or cluster.
 
 - [Astro Alerts](https://docs.astronomer.io/astro/alerts). Recommended for most Astro use cases as no code modification is required.
-- [Airflow Datasets](https://docs.astronomer.io/learn/airflow-datasets.md). Can be used to trigger a DAG after a task in another DAG updates a dataset.
+- [Apache Airflow® Datasets](https://docs.astronomer.io/learn/airflow-datasets.md). Can be used to trigger a DAG after a task in another DAG updates a dataset.
 
 ## Best practice guidance
 
-Astro Alerts and Airflow Datasets are the best methods for implementing cross-deployment dependencies. The `dagRuns` endpoint of the Airflow API can also be used for this purpose and might be appropriate in cases where you want tasks that do not update datasets to trigger DAGs. This method will not be covered here, but you can implement it by following the guidance in [Airflow REST API](https://docs.astronomer.io/astro/airflow-api#trigger-a-dag-run).
+Astro Alerts and Airflow Datasets are the best methods for implementing cross-deployment dependencies. The `dagRuns` endpoint of the Airflow API can also be used for this purpose and might be appropriate in cases where you want tasks that do not update datasets to trigger DAGs. This method will not be covered here, but you can implement it by following the guidance in [Apache Airflow® REST API](https://docs.astronomer.io/astro/airflow-api#trigger-a-dag-run).
 
 To determine whether an Astro Alert or the Datasets feature is the right solution for your use case, consider the following guidance.
 
@@ -42,7 +42,7 @@ Datasets represent a significant evolution in the way Airflow can be used to def
 
 :::tip
 
-Before Airflow 2.9, you could only create updates to Airflow Datasets from within tasks located in the same deployment as the Dataset. As of Airflow 2.9, you can update a dataset with a `POST` request to the [datasets endpoint of the Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/create_dataset_event), which supports implementation across deployments.
+Before Airflow 2.9, you could only create updates to Airflow Datasets from within tasks located in the same deployment as the Dataset. As of Airflow 2.9, you can update a dataset with a `POST` request to the [datasets endpoint of the Apache Airflow® REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/create_dataset_event), which supports implementation across deployments.
 
 :::
 
@@ -52,7 +52,7 @@ Before Airflow 2.9, you could only create updates to Airflow Datasets from withi
 
 To use Astro Alerts to create cross-deployment dependencies, you should have an understanding of:
 
-- Airflow DAGs. See [Introduction to Airflow DAGs](https://docs.astronomer.io/learn/dags.md).
+- Airflow DAGs. See [Introduction to Apache Airflow® DAGs](https://docs.astronomer.io/learn/dags.md).
 - Creating and managing Astro deployments. See [Create a deployment](https://docs.astronomer.io/astro/create-deployment).
 
 ### Implementation
@@ -83,13 +83,13 @@ Create a dependency between DAGs in separate deployments with an alert trigger o
 
 To use Airflow Datasets to create cross-deployment dependencies, you should have an understanding of:
 
-- Airflow DAGs. See [Introduction to Airflow DAGs](https://docs.astronomer.io/learn/dags.md).
-- [Airflow Datasets](https://docs.astronomer.io/learn/airflow-datasets.md).
-- The [Airflow API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
+- Airflow DAGs. See [Introduction to Apache Airflow® DAGs](https://docs.astronomer.io/learn/dags.md).
+- [Apache Airflow® Datasets](https://docs.astronomer.io/learn/airflow-datasets.md).
+- The [Apache Airflow® API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
 
 ### Implementation
 
-This section explains how to use the [Airflow API's Datasets endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Dataset) to trigger the downstream DAG in another deployment when a dataset is updated. Typical dataset implementation only works for DAGs in the same Apache Airflow® deployment, but by using the Airflow API, you can implement this pattern across deployments.
+This section explains how to use the [Apache Airflow® API's Datasets endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Dataset) to trigger the downstream DAG in another deployment when a dataset is updated. Typical dataset implementation only works for DAGs in the same Apache Airflow® deployment, but by using the Airflow API, you can implement this pattern across deployments.
 
 #### Prerequisites
 
@@ -100,7 +100,7 @@ This section explains how to use the [Airflow API's Datasets endpoint](https://a
 #### Process
 
 1. In your upstream Deployment, which is the Deployment for which you did **not** create an API Token, in the Deployment's **Environment Variables** tab in your Deployment's **Environment** settings, create an environment variable for your API token and use `API_TOKEN` for the key.
-2. For your downstream Deployment, follow the guidance in [Make requests to the Airflow REST API - Step 2](https://docs.astronomer.io/astro/airflow-api#step-2-retrieve-the-deployment-url) to obtain the Deployment URL for your downstream Deployment. The Deployment URL should be in the format of `clq52ag32000108i8e3v3acml.astronomer.run/dz3uu847`.
+2. For your downstream Deployment, follow the guidance in [Make requests to the Apache Airflow® REST API - Step 2](https://docs.astronomer.io/astro/airflow-api#step-2-retrieve-the-deployment-url) to obtain the Deployment URL for your downstream Deployment. The Deployment URL should be in the format of `clq52ag32000108i8e3v3acml.astronomer.run/dz3uu847`.
 3. In your upstream Deployment, use Variables in the Astro UI to create an environment variable where you can store your downstream Deployment URL, using `DEPLOYMENT_URL` for the key.
 4. In the upstream Deployment, add the following DAG to your Astro project running in the upstream Deployment. In the `get_bear` task, the TaskFlow API automatically registers `MY_DATASET` as an outlet Dataset. This creates an update to this Dataset in the _same_ Airflow deployment. The dependent `update_dataset_via_api` task creates or updates the Dataset via a request to the Airflow API Datasets endpoint in a _different_ Airflow deployment.
 

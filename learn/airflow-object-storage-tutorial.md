@@ -8,7 +8,7 @@ id: airflow-object-storage-tutorial
 import CodeBlock from '@theme/CodeBlock';
 import object_storage_use_case from '!!raw-loader!../code-samples/dags/airflow-object-storage-tutorial/object_storage_use_case.py';
 
-Apache Airflow® 2.8 introduced the [Airflow object storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) feature to simplify how you interact with remote and local object storage systems.
+Apache Airflow® 2.8 introduced the [Apache Airflow® object storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) feature to simplify how you interact with remote and local object storage systems.
 
 This tutorial demonstrates the object storage feature using a simple machine learning pipeline. The pipeline trains a classifier to predict whether a sentence is more likely to have been said by Star Trek's Captain Kirk or Captain Picard.
 
@@ -37,8 +37,8 @@ This tutorial takes approximately 20 minutes to complete.
 
 To get the most out of this tutorial, make sure you have an understanding of:
 
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
-- Task Flow API. See [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
+- Task Flow API. See [Introduction to the TaskFlow API and Apache Airflow® decorators](airflow-decorators.md).
 - The basics of [pathlib](https://docs.python.org/3/library/pathlib.html).
 
 ## Prerequisites
@@ -62,7 +62,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
     scikit-learn==1.3.2
     ```
 
-3. To create an [Airflow connection](connections.md) to AWS S3, add the following environment variable to your `.env` file. Make sure to replace `<your-aws-access-key-id>` and `<your-aws-secret-access-key>` with your own AWS credentials. Adjust the connection type and parameters if you are using a different object storage system.
+3. To create an [Apache Airflow® connection](connections.md) to AWS S3, add the following environment variable to your `.env` file. Make sure to replace `<your-aws-access-key-id>` and `<your-aws-secret-access-key>` with your own AWS credentials. Adjust the connection type and parameters if you are using a different object storage system.
 
     ```text
     AIRFLOW_CONN_MY_AWS_CONN='{
@@ -105,13 +105,13 @@ In this example pipeline you will train a classifier to predict whether a senten
     - The `copy_files_train_to_archive` task copies the files from the `base_path_train` to the `base_path_archive` location analogous to the `copy_files_ingest_to_train` task.
     - The `empty_train` task deletes all files from the `base_path_train` location.
 
-    ![Screenshot of the Airflow UI showing the successful completion of the `object_storage_use_case` DAG in the Grid view with the Graph tab selected.](/img/tutorials/airflow-object-storage-tutorial_dag.png)
+    ![Screenshot of the Apache Airflow® UI showing the successful completion of the `object_storage_use_case` DAG in the Grid view with the Graph tab selected.](/img/tutorials/airflow-object-storage-tutorial_dag.png)
 
 ## Step 4: Run your DAG
 
 1. Run `astro dev start` in your Astro project to start Airflow, then open the Airflow UI at `localhost:8080`.
 
-2. In the Airflow UI, run the `object_storage_use_case` DAG by clicking the play button. Provide any quote you like to the `my_quote` [Airflow param](airflow-params.md).
+2. In the Airflow UI, run the `object_storage_use_case` DAG by clicking the play button. Provide any quote you like to the `my_quote` [Apache Airflow® param](airflow-params.md).
 
 3. After the DAG run completes, go to the task logs of the `use_model` task to see the prediction made by the model.
 
@@ -122,4 +122,4 @@ In this example pipeline you will train a classifier to predict whether a senten
 
 ## Conclusion
 
-Congratulations! You just used Airflow's object storage feature to interact with files in different locations. To learn more about other methods and capabilities of this feature, see the [OSS Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html).
+Congratulations! You just used Airflow's object storage feature to interact with files in different locations. To learn more about other methods and capabilities of this feature, see the [OSS Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html).

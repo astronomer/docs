@@ -53,7 +53,7 @@ You can use a classification model with the generated data to predict the cultiv
 
 ### Project overview
 
-This project consists of two DAGs, `create_rose_table` and `rose_classification` which is scheduled on a task in the first DAG completing successfully using an [Airflow dataset](airflow-datasets.md).
+This project consists of two DAGs, `create_rose_table` and `rose_classification` which is scheduled on a task in the first DAG completing successfully using an [Apache Airflow® dataset](airflow-datasets.md).
 
 ![Datasets view of the use case project showing the create_rose_table DAG that produces to the dataset postgres://public/roses which is consumed by the second DAG named rose_classification.](/img/examples/use-case-setup-teardown-data-quality_datasets_view.png)
 
@@ -72,7 +72,7 @@ The [`rose_classification`](https://github.com/astronomer/use-case-setup-teardow
 
 ### Project code
 
-This use case showcases [setup/ teardown tasks](airflow-setup-teardown.md) in a data quality use case, as well as how to leverage [Airflow datasets](airflow-datasets.md) and the [Astro Python SDK](astro-python-sdk.md), an open-source package created by Astronomer to simplify DAG writing with Python functions. The result is a complete ELT and ML pipeline example.
+This use case showcases [setup/ teardown tasks](airflow-setup-teardown.md) in a data quality use case, as well as how to leverage [Apache Airflow® datasets](airflow-datasets.md) and the [Astro Python SDK](astro-python-sdk.md), an open-source package created by Astronomer to simplify DAG writing with Python functions. The result is a complete ELT and ML pipeline example.
 
 #### Create table DAG
 
@@ -267,7 +267,7 @@ If you change the trigger rule of the `sql_check_done` task and the `done` task 
 
 :::
 
-Lastly, the `table_ready_for_the_model` task produces to the [Airflow dataset](airflow-datasets.md) `postgres://public/roses` to trigger the downstream `rose_classification` DAG.
+Lastly, the `table_ready_for_the_model` task produces to the [Apache Airflow® dataset](airflow-datasets.md) `postgres://public/roses` to trigger the downstream `rose_classification` DAG.
 
 ```python
 @task(

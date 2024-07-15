@@ -14,7 +14,7 @@ Since our inception, we've garnered a group of Airflow aficionados and experts w
 In an effort to democratize all-things Airflow, our team has curated 2 public resources available to all Airflow users:
 
 1. [Astronomer Forum](https://forum.astronomer.io)
-2. [Airflow Guides](https://www.astronomer.io/guides/airflow-and-hashicorp-vault)
+2. [Apache Airflow® Guides](https://www.astronomer.io/guides/airflow-and-hashicorp-vault)
 
 If you're an Astronomer customer looking for private support, there are 3 ways to get in touch with Astronomer's Support Team:
 

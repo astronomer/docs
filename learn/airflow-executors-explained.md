@@ -17,7 +17,7 @@ This guide will help you:
 
 To get the most out of this guide, you should have an understanding of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
+- Basic Airflow concepts. See [Introduction to Apache Airflow®](intro-to-airflow.md).
 
 ## What is an executor?
 

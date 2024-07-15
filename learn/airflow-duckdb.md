@@ -15,7 +15,7 @@ import duckdb_tutorial_dag_2 from '!!raw-loader!../code-samples/dags/airflow-duc
 Airflow can interact with DuckDB in three key ways:
 
 - Use the DuckDB Python package directly in [@task decorated tasks](airflow-decorators.md). This method is useful if you want to do ad-hoc analysis in-memory or combine information stored in various DuckDB files.
-- Connect to DuckDB via the [DuckDB Airflow provider](https://registry.astronomer.io/providers/airflow-provider-duckdb/versions/0.1.0). The DuckDB Airflow provider is ideal if you access the same DuckDB database from many tasks in your Airflow environment and want to standardize this connection in a central place. You can also use the DuckDBHook to create custom operators to modularize your DuckDB interactions from within Airflow.
+- Connect to DuckDB via the [DuckDB Apache Airflow® provider](https://registry.astronomer.io/providers/airflow-provider-duckdb/versions/0.1.0). The DuckDB Airflow provider is ideal if you access the same DuckDB database from many tasks in your Airflow environment and want to standardize this connection in a central place. You can also use the DuckDBHook to create custom operators to modularize your DuckDB interactions from within Airflow.
 - Use DuckDB with the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html). The Astro Python SDK is an open-source package created by Astronomer to make interactions with relational data simple and tool-agnostic. The Astro Python SDK is the ideal tool if you want to easily connect to several database tools without changing any underlying code.
 
 In this tutorial we will cover the first two ways. To learn more about how to connect to DuckDB (and other data warehouses) with the Astro Python SDK, see [Write a DAG with the Astro Python SDK](astro-python-sdk.md).
@@ -24,7 +24,7 @@ In this tutorial we will cover the first two ways. To learn more about how to co
 
 There are multiple resources for learning about this topic. See also:
 
-- Webinar: [How to use DuckDB with Airflow](https://www.astronomer.io/events/webinars/how-to-use-duckdb-with-airflow/).
+- Webinar: [How to use DuckDB with Apache Airflow®](https://www.astronomer.io/events/webinars/how-to-use-duckdb-with-airflow/).
 - Example repository: [Astronomer's DuckDB example repository](https://github.com/astronomer/airflow-duckdb-examples).
 
 :::
@@ -38,9 +38,9 @@ This tutorial takes approximately 15 minutes to complete.
 To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of DuckDB. See [the DuckDB documentation](https://duckdb.org/docs/guides/index).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
-- Airflow decorators. See [Introduction to Airflow decorators](airflow-decorators.md).
-- Airflow connections. See [Manage connections in Apache Airflow](connections.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
+- Airflow decorators. See [Introduction to Apache Airflow® decorators](airflow-decorators.md).
+- Airflow connections. See [Manage connections in Apache Airflow®](connections.md).
 
 ## Prerequisites
 
@@ -48,7 +48,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 1: Configure your Astro project
 
-To use DuckDB with Airflow, install the [DuckDB Airflow provider](https://github.com/astronomer/airflow-provider-duckdb) in your Astro project. This will also install the newest version of the [DuckDB Python package](https://pypi.org/project/duckdb).
+To use DuckDB with Airflow, install the [DuckDB Apache Airflow® provider](https://github.com/astronomer/airflow-provider-duckdb) in your Astro project. This will also install the newest version of the [DuckDB Python package](https://pypi.org/project/duckdb).
 
 1. Create a new Astro project:
 

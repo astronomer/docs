@@ -10,11 +10,11 @@ import producer_dag from '!!raw-loader!../code-samples/dags/airflow-listeners/pr
 
 [Apache Airflow® listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Apache Airflow® instance, for example when any DAG run fails or any dataset is updated.
 
-Listeners are implemented as an [Airflow plugin](using-airflow-plugins.md) and can contain any code. In this tutorial, you'll use a listener to send a Slack notification whenever any dataset is updated.
+Listeners are implemented as an [Apache Airflow® plugin](using-airflow-plugins.md) and can contain any code. In this tutorial, you'll use a listener to send a Slack notification whenever any dataset is updated.
 
 :::info
 
-If you only need to implement notifications for specific DAGs and tasks, consider using [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks) instead.
+If you only need to implement notifications for specific DAGs and tasks, consider using [Apache Airflow® callbacks](error-notifications-in-airflow.md#airflow-callbacks) instead.
 
 :::
 
@@ -32,9 +32,9 @@ This tutorial takes approximately 15 minutes to complete.
 
 To get the most out of this tutorial, make sure you have an understanding of:
 
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
-- Airflow plugins. See [Airflow plugins](using-airflow-plugins.md).
-- Airflow datasets. See [Datasets and data-aware scheduling in Airflow](airflow-datasets.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
+- Airflow plugins. See [Apache Airflow® plugins](using-airflow-plugins.md).
+- Airflow datasets. See [Datasets and data-aware scheduling in Apache Airflow®](airflow-datasets.md).
 
 ## Prerequisites
 
@@ -56,7 +56,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
     apache-airflow-providers-slack==8.4.0
     ```
 
-3. Add the following environment variable to your Astro project `.env` file to create an [Airflow connection](connections.md) to Slack. Make sure to replace `<your-slack-webhook-token>` with your own Slack webhook token in the format of `T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`.
+3. Add the following environment variable to your Astro project `.env` file to create an [Apache Airflow® connection](connections.md) to Slack. Make sure to replace `<your-slack-webhook-token>` with your own Slack webhook token in the format of `T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`.
 
     ```text
     AIRFLOW_CONN_SLACK_WEBHOOK_CONN='{
@@ -131,7 +131,7 @@ For Airflow to recognize your listener, you need to create a [plugin](using-airf
 
     <CodeBlock language="python">{producer_dag}</CodeBlock>
 
-    This simple DAG contains one task that queries the [placebear](https://placebear.com/) API and writes the image retrieved to a local `.png` file in the `include` folder using the [Airflow object storage](airflow-object-storage-tutorial.md) feature.
+    This simple DAG contains one task that queries the [placebear](https://placebear.com/) API and writes the image retrieved to a local `.png` file in the `include` folder using the [Apache Airflow® object storage](airflow-object-storage-tutorial.md) feature.
     The task produces an update to the `file://include/bears` dataset, which triggers the listener you created in [Step 2](#step-2-create-your-listener).
 
 ## Step 5: Run your DAG

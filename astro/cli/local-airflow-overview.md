@@ -11,7 +11,7 @@ To run Airflow locally, the Astro CLI creates and runs containers for core Airfl
 
 See the following documentation to get started:
 
-- [Run Airflow locally](cli/run-airflow-locally.md)
+- [Run Apache Airflow® locally](cli/run-airflow-locally.md)
 - [Test your DAGs](cli/test-your-astro-project-locally.md)
 - [Troubleshoot locally](cli/troubleshoot-locally.md)
 - [Sync Deployment connections from Astro](cli/local-connections.md)

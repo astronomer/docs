@@ -20,8 +20,8 @@ In this guide, you'll learn about dynamic task mapping and complete an example i
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: Dynamic Task Mapping](https://academy.astronomer.io/astro-runtime-dynamic-task-mapping) module.
-- Webinar: [Dynamic Tasks in Airflow](https://www.astronomer.io/events/webinars/dynamic-tasks-in-airflow/).
+- Astronomer Academy: [Apache Airflow®: Dynamic Task Mapping](https://academy.astronomer.io/astro-runtime-dynamic-task-mapping) module.
+- Webinar: [Dynamic Tasks in Apache Airflow®](https://www.astronomer.io/events/webinars/dynamic-tasks-in-airflow/).
 
 :::
 
@@ -30,8 +30,8 @@ There are multiple resources for learning about this topic. See also:
 To get the most out of this guide, you should have an understanding of:
 
 - Airflow Operators. See [Operators 101](what-is-an-operator.md).
-- How to use Airflow decorators to define tasks. See [Introduction to Airflow Decorators](airflow-decorators.md).
-- XComs in Airflow. See [Passing Data Between Airflow Tasks](airflow-passing-data-between-tasks.md).
+- How to use Airflow decorators to define tasks. See [Introduction to Apache Airflow® Decorators](airflow-decorators.md).
+- XComs in Airflow. See [Passing Data Between Apache Airflow® Tasks](airflow-passing-data-between-tasks.md).
 
 ## Dynamic task concepts
 
@@ -93,7 +93,7 @@ added_values = PythonOperator.partial(
 </TabItem>
 </Tabs>
 
-![Screenshot of the Airflow UI showing three dynamically mapped task instances created with the code snippets above.](/img/guides/dynamic-tasks_simple_example.png)
+![Screenshot of the Apache Airflow® UI showing three dynamically mapped task instances created with the code snippets above.](/img/guides/dynamic-tasks_simple_example.png)
 
 :::note
 
@@ -111,7 +111,7 @@ When you work with mapped tasks, keep the following in mind:
 - You can have a mapped task that results in no task instances. For example, when your upstream task that generates the mapping values returns an empty list. In this case, the mapped task is marked skipped, and downstream tasks are run according to the trigger rules you set. By default, downstream tasks are also skipped.
 - Some parameters can't be mapped. For example, `task_id`, `pool`, and many `BaseOperator` arguments.
 - `expand()` only accepts keyword arguments.
-- The maximum amount of mapped task instances is determined by the `max_map_length` parameter in the [Airflow configuration](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#max-map-length). By default it is set to 1024.
+- The maximum amount of mapped task instances is determined by the `max_map_length` parameter in the [Apache Airflow® configuration](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#max-map-length). By default it is set to 1024.
 - You can limit the number of mapped task instances for a particular task that run in parallel by setting the following parameters in your dynamically mapped task:
     - Set a limit across all DAG runs with the `max_active_tis_per_dag` parameter.
     - Set a limit for parallel runs within a single DAG with the `max_active_tis_per_dagrun` parameter.
@@ -130,7 +130,7 @@ The number in the brackets show in the DAG run graph, is updated for each DAG ru
 
 To see the logs and XCom pushed by each dynamically mapped task instance, click on the dynamically mapped task, either in the DAG run graph or in the grid. Then click on **[] Mapped Tasks** and select the mapped task instance you want to inspect.
 
-![Gif showing how to navigate to the logs of an individual mapped task instance in the Airflow UI.](/img/guides/dynamic-tasks_mapped_task_logs.gif)
+![Gif showing how to navigate to the logs of an individual mapped task instance in the Apache Airflow® UI.](/img/guides/dynamic-tasks_mapped_task_logs.gif)
 
 ## Mapping over the result of another operator
 

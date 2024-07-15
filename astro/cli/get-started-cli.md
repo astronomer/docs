@@ -45,11 +45,11 @@ Running your project locally allows you to test your DAGs before you deploy them
 
     In this directory, you can find several example DAGs including `example-dag-basic` DAG, which was generated with your Astro project. To provide a basic demonstration of an ETL pipeline, this DAG creates an example JSON string, calculates a value based on the string, and prints the results of the calculation to the Airflow logs.
 
-    ![Example DAG in the Airflow UI](/img/docs/sample-dag.png)
+    ![Example DAG in the Apache Airflow® UI](/img/docs/sample-dag.png)
 
 :::info
 
-The Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the Airflow metadata database by default. If these ports are already in use on your local computer, an error message might appear. To resolve this error message, see [Run Airflow locally](cli/troubleshoot-locally.md#ports-are-not-available-for-my-local-airflow-webserver).
+The Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the Airflow metadata database by default. If these ports are already in use on your local computer, an error message might appear. To resolve this error message, see [Run Apache Airflow® locally](cli/troubleshoot-locally.md#ports-are-not-available-for-my-local-airflow-webserver).
 
 :::
 

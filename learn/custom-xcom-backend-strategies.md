@@ -287,7 +287,7 @@ def clear(
 
 ## Custom serialization and deserialization
 
-By default, Airflow includes [serialization](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/serializers.html) methods for common object types like [JSON](https://www.json.org/json-en.html), [pandas DataFrames](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) and [NumPy](https://numpy.org/). You can see all supported types in the [Airflow source code](https://github.com/apache/airflow/tree/main/airflow/serialization/serializers).
+By default, Airflow includes [serialization](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/serializers.html) methods for common object types like [JSON](https://www.json.org/json-en.html), [pandas DataFrames](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) and [NumPy](https://numpy.org/). You can see all supported types in the [Apache Airflow® source code](https://github.com/apache/airflow/tree/main/airflow/serialization/serializers).
 
 If you need to pass data objects through XCom that are not supported, you have several options:
 

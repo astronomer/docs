@@ -32,7 +32,7 @@ You can use [dynamic task mapping](dynamic-tasks.md) to write DAGs that dynamica
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: Dynamic DAGs](https://academy.astronomer.io/astro-runtime-dynamic-dags).
+- Astronomer Academy: [Apache Airflow®: Dynamic DAGs](https://academy.astronomer.io/astro-runtime-dynamic-dags).
 
 :::
 
@@ -40,7 +40,7 @@ There are multiple resources for learning about this topic. See also:
 
 To get the most out of this guide, you should have an understanding of:
 
-- Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
+- Airflow DAGs. See [Introduction to Apache Airflow® DAGs](dags.md).
 
 ## Single-file methods
 
@@ -174,7 +174,7 @@ You can retrieve this value by fetching the environment variable and passing it 
 
 The DAGs appear in the Airflow UI:
 
-![DAGs from Variables in the Airflow UI](/img/guides/dag_from_variables.png)
+![DAGs from Variables in the Apache Airflow® UI](/img/guides/dag_from_variables.png)
 
 ## Multiple-file methods
 

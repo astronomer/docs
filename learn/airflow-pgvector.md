@@ -20,7 +20,7 @@ Pgvector allows you to store objects alongside their vector embeddings and to qu
 Integrating PostgreSQL with pgvector and Airflow into one end-to-end machine learning pipeline allows you to:
 
 - Use Airflow's [data-driven scheduling](airflow-datasets.md) to run operations involving vectors stored in PostgreSQL based on upstream events in your data ecosystem, such as when a new model is trained or a new dataset is available.
-- Run dynamic queries based on upstream events in your data ecosystem or user input via [Airflow params](airflow-params.md) on vectors stored in PostgreSQL to retrieve similar objects.
+- Run dynamic queries based on upstream events in your data ecosystem or user input via [Apache Airflow® params](airflow-params.md) on vectors stored in PostgreSQL to retrieve similar objects.
 - Add Airflow features like [retries](rerunning-dags.md#automatically-retry-tasks) and [alerts](error-notifications-in-airflow.md) to your pgvector operations.
 - Check your vector database for the existence of a unique key before running potentially costly embedding operations on your data.
 
@@ -35,9 +35,9 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - The basics of pgvector. See the [README of the pgvector repository](https://github.com/pgvector/pgvector/blob/master/README.md).
 - Basic SQL. See [SQL Tutorial](https://www.w3schools.com/sql/sql_intro.asp).
 - Vector embeddings. See [Vector Embeddings](https://tembo.io/blog/pgvector-and-embedding-solutions-with-postgres/).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
-- Airflow decorators. [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md).
-- Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
+- Airflow decorators. [Introduction to the TaskFlow API and Apache Airflow® decorators](airflow-decorators.md).
+- Airflow connections. See [Managing your Connections in Apache Airflow®](connections.md).
 
 ## Prerequisites
 
@@ -61,7 +61,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     $ astro dev init
     ```
 
-2. Add the following two packages to your `requirements.txt` file to install the [pgvector Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-pgvector/stable/index.html) and the [OpenAI Python client](https://platform.openai.com/docs/libraries) in your Astro project:
+2. Add the following two packages to your `requirements.txt` file to install the [pgvector Apache Airflow® provider](https://airflow.apache.org/docs/apache-airflow-providers-pgvector/stable/index.html) and the [OpenAI Python client](https://platform.openai.com/docs/libraries) in your Astro project:
 
     ```text
     apache-airflow-providers-pgvector==1.0.0
@@ -101,7 +101,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     ```
 
 
-4. To create an [Airflow connection](connections.md) to the PostgreSQL database, add the following to your `.env` file. If you are using the OpenAI API for embeddings you will need to update the `OPENAI_API_KEY` environment variable.
+4. To create an [Apache Airflow® connection](connections.md) to the PostgreSQL database, add the following to your `.env` file. If you are using the OpenAI API for embeddings you will need to update the `OPENAI_API_KEY` environment variable.
 
     ```text
     AIRFLOW_CONN_POSTGRES_DEFAULT='{
@@ -150,12 +150,12 @@ One book corresponds to one line in the file.
     - The `get_already_imported_book_ids` task queries the `Book` table to return all `book_id` values of books that were already stored with their vectors in previous DAG runs. 
     - The `import_book_data` task uses the [`@task` decorator](airflow-decorators.md) to read the book data from the `book_data.txt` file and return it as a list of dictionaries with keys corresponding to the columns of the `Book` table.
     - The `create_embeddings_book_data` task is [dynamically mapped](dynamic-tasks.md) over the list of dictionaries returned by the `import_book_data` task to parallelize vector embedding of all book descriptions that have not been added to the `Book` table in previous DAG runs. The `create_embeddings` function defines how the embeddings are computed and can be modified to use other embedding models. If all books in the list have already been added to the `Book` table, then all mapped task instances are skipped.
-    - The `create_embeddings_query` task applies the same `create_embeddings` function to the desired book mood the user provided via [Airflow params](airflow-params.md). 
+    - The `create_embeddings_query` task applies the same `create_embeddings` function to the desired book mood the user provided via [Apache Airflow® params](airflow-params.md). 
     - The `import_embeddings_to_pgvector` task uses the [PgVectorIngestOperator](https://registry.astronomer.io/providers/apache-airflow-providers-pgvector/versions/latest/modules/PgVectorIngestOperator) to insert the book data including the embedding vectors into the PostgreSQL database. This task is dynamically mapped to import the embeddings from one book at a time. The dynamically mapped task instances of books that have already been imported in previous DAG runs are skipped.
     - The `get_a_book_suggestion` task queries the PostgreSQL database for the book that is most similar to the user-provided mood using nearest neighbor search. Note how the vector of the user-provided book mood (`query_vector`) is cast to the `VECTOR` datatype before similarity search: `ORDER BY vector <-> CAST(%(query_vector)s AS VECTOR)`.  
     - The `print_book_suggestion` task prints the book suggestion to the task logs.
 
-    ![Screenshot of the Airflow UI showing the successful completion of the `query_book_vectors` DAG in the Grid view with the Graph tab selected.](/img/tutorials/airflow-pgvector_successful_dag.png)
+    ![Screenshot of the Apache Airflow® UI showing the successful completion of the `query_book_vectors` DAG in the Grid view with the Graph tab selected.](/img/tutorials/airflow-pgvector_successful_dag.png)
 
 :::tip
 
@@ -167,9 +167,9 @@ For information on more advanced search techniques in pgvector, see the [pgvecto
 
 1. Run `astro dev start` in your Astro project to start Airflow and open the Airflow UI at `localhost:8080`.
 
-2. In the Airflow UI, run the `query_book_vectors` DAG by clicking the play button. Then, provide the [Airflow param](airflow-params.md) for the desired `book_mood`.
+2. In the Airflow UI, run the `query_book_vectors` DAG by clicking the play button. Then, provide the [Apache Airflow® param](airflow-params.md) for the desired `book_mood`.
 
-    ![Screenshot of the Airflow UI showing the input form for the book_mood param.](/img/tutorials/airflow-pgvector_params.png)
+    ![Screenshot of the Apache Airflow® UI showing the input form for the book_mood param.](/img/tutorials/airflow-pgvector_params.png)
 
 3. View your book suggestion in the task logs of the `print_book_suggestion` task:
 

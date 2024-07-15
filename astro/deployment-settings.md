@@ -27,7 +27,7 @@ After you create an Astro Deployment, you can modify its settings using the Astr
 - Enable High Availability.
 - Customize your Apache Airflow® environment using environment variables.
 
-For advanced Deployment resource configurations, see [Manage Airflow executors on Astro](executors-overview.md) and [Configure worker queues](configure-worker-queues.mdx).
+For advanced Deployment resource configurations, see [Manage Apache Airflow® executors on Astro](executors-overview.md) and [Configure worker queues](configure-worker-queues.mdx).
 
 :::cli
 

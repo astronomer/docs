@@ -54,7 +54,7 @@ Workspace editors can configure a new or existing Airflow Deployment to use a gi
     - **DAGs Directory:** The directory in your Git repository that hosts your DAGs. Specify the directory's path as relative to the repository's root directory. To use your root directory as your DAGs directory, specify this value as `./`. Other changes outside the DAGs directory in your Git repository must be deployed using `astro deploy`
     - **Rev**: The commit reference of the branch that you want to sync with your Deployment
     - **Ssh Key**: The SSH private key for your Git repository
-    - **Known Hosts**: The public key for your Git provider, which can be retrieved using `ssh-keyscan -t rsa <provider-domain>`. For an example of how to retrieve GitHub's public key, refer to [Apache Airflow documentation](https://airflow.apache.org/docs/helm-chart/stable/production-guide.html#production-guide-knownhosts).
+    - **Known Hosts**: The public key for your Git provider, which can be retrieved using `ssh-keyscan -t rsa <provider-domain>`. For an example of how to retrieve GitHub's public key, refer to [Apache Airflow® documentation](https://airflow.apache.org/docs/helm-chart/stable/production-guide.html#production-guide-knownhosts).
     - **Ephemeral Storage Overwrite Gigabytes**: The storage limit for your Git repository. If your Git repo is larger than 2GB, Astronomer recommends setting this slider to your repo size + 1 Gi
     - **Sync Timeout**: The maximum amount of seconds allowed for a sync. Astronomer recommends increasing this value if your repo is larger than 1GB
 

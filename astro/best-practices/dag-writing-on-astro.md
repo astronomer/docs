@@ -13,15 +13,15 @@ That said, following best practices and taking full advantage of Astro features 
 - Better organize your deployment and DAGs. 
 - Optimize resource usage and task execution efficiency.
 
-This guide describes best practices for taking advantage of Astro features when writing DAGs. While this focuses on writing Airflow DAGs for Astro, all [general Airflow best practices](https://docs.astronomer.io/learn/dag-best-practices) are also recommended.
+This guide describes best practices for taking advantage of Astro features when writing DAGs. While this focuses on writing Airflow DAGs for Astro, all [general Apache Airflow® best practices](https://docs.astronomer.io/learn/dag-best-practices) are also recommended.
 
 :::info New to Airflow?
 
 If you are new to Airflow, Astronomer suggests starting with the following resources:
 
-- Hands-on tutorial: [Get started with Apache Airflow](https://docs.astronomer.io/learn/get-started-with-airflow).
-- Astronomer Academy: [Airflow 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
-- Webinar: [Airflow 101: How to get started writing data pipelines with Apache Airflow](https://www.astronomer.io/events/webinars/airflow-101-how-to-get-started-writing-data-pipelines-with-apache-airflow-video/).
+- Hands-on tutorial: [Get started with Apache Airflow®](https://docs.astronomer.io/learn/get-started-with-airflow).
+- Astronomer Academy: [Apache Airflow® 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
+- Webinar: [Airflow 101: How to get started writing data pipelines with Apache Airflow®](https://www.astronomer.io/events/webinars/airflow-101-how-to-get-started-writing-data-pipelines-with-apache-airflow-video/).
 
 :::
 
@@ -83,12 +83,12 @@ Compared to open-source Airflow, Astro offers a distinct feature set for optimiz
 Making use of the following features can require DAG code changes or adding Airflow configuration environment variables in Astro instead of Airflow. Astronomer recommends considering these features during DAG development to streamline the development process and make use of everything Astro has to offer.
 
 - **[Astro Cloud UI Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables)** for managing connections. This allows you to define connections once and use them in multiple deployments (with or without overrides for individual fields), as well as in your local development environment. Connections in the Environment Manager are stored in the Astronomer managed secrets backend. Using the Environment Manager requires adding the relevant Airflow provider packages to your Astro project and adding configuring the connection in the Astro UI.
-- **[Deployment environment variables in the Astro UI](environment-variables.md)** for storing environment variables. Common uses of environment variables include adding tokens or URLs required by your DAGs, integrating with third-party tooling to export metrics, customizing core settings of Airflow or Airflow Providers, and storing Airflow connections and variables. A number of approaches are supported. For example, you can mark variables as secret for storage in the Astronomer managed secrets backend. You can store [Airflow variables](https://docs.astronomer.io/learn/airflow-variables), which are Airflow native key-value pairs, as environment variables as well by using the format `AIRFLOW_VAR_MYVARIABLENAME`. You can also manage environment variables using your Astro project Dockerfile and, locally, your project `.env` file. Astro project modification and additional configuration in Astro may be required depending on the strategy chosen.
+- **[Deployment environment variables in the Astro UI](environment-variables.md)** for storing environment variables. Common uses of environment variables include adding tokens or URLs required by your DAGs, integrating with third-party tooling to export metrics, customizing core settings of Airflow or Airflow Providers, and storing Airflow connections and variables. A number of approaches are supported. For example, you can mark variables as secret for storage in the Astronomer managed secrets backend. You can store [Apache Airflow® variables](https://docs.astronomer.io/learn/airflow-variables), which are Airflow native key-value pairs, as environment variables as well by using the format `AIRFLOW_VAR_MYVARIABLENAME`. You can also manage environment variables using your Astro project Dockerfile and, locally, your project `.env` file. Astro project modification and additional configuration in Astro may be required depending on the strategy chosen.
 - **[Worker queues](https://docs.astronomer.io/astro/configure-worker-queues)** for optimizing task execution efficiency. Worker queues allow you to define sets of workers with specific resources that execute tasks in parallel. You can assign tasks to specific worker queues to optimize resource usage. This feature is an improvement over OSS Airflow pools, which only manage concurrency and not resources. You can use both worker queues and pools in combination. Config in Astro and DAG code modification are required to use this feature.
-- **[Astro Alerts](alerts.md)** for setting up alerts for your DAGs. Astro alerts add another level of observability to Airflow's notification systems. For example, you can configure an alert to notify you in Slack when a DAG run completes or fails. Unlike Airflow callbacks and SLAs, Astro alerts require no changes to DAG code. For more information, see [When to use Airflow or Astro alerts for your pipelines on Astro](airflow-vs-astro-alerts.md). Config in the Astro UI required.
+- **[Astro Alerts](alerts.md)** for setting up alerts for your DAGs. Astro alerts add another level of observability to Airflow's notification systems. For example, you can configure an alert to notify you in Slack when a DAG run completes or fails. Unlike Airflow callbacks and SLAs, Astro alerts require no changes to DAG code. For more information, see [When to use Apache Airflow® or Astro alerts for your pipelines on Astro](airflow-vs-astro-alerts.md). Config in the Astro UI required.
 
 ## See also
 
-- Webinar: [Best practices for managing Airflow across teams](https://www.astronomer.io/events/webinars/best-practices-for-managing-airflow-across-teams-video/).
+- Webinar: [Best practices for managing Apache Airflow® across teams](https://www.astronomer.io/events/webinars/best-practices-for-managing-airflow-across-teams-video/).
 - Webinar: [DAG writing for data engineers and data scientists](https://www.astronomer.io/events/webinars/dag-writing-for-data-engineers-and-data-scientists-video/).
-- OSS Learn guide: [DAG writing best practices in Apache Airflow](https://docs.astronomer.io/learn/dag-best-practices).
+- OSS Learn guide: [DAG writing best practices in Apache Airflow®](https://docs.astronomer.io/learn/dag-best-practices).

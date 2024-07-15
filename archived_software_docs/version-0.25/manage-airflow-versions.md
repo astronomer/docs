@@ -46,7 +46,7 @@ To initialize the Airflow upgrade process via the Software UI, navigate to **Dep
 1. Select your desired version of Airflow
 2. Click **Upgrade**
 
-![Airflow Upgrade via Software UI](/img/software/airflow-upgrade-astro-ui.gif)
+![Apache Airflow® Upgrade via Software UI](/img/software/airflow-upgrade-astro-ui.gif)
 
 This action will NOT interrupt or otherwise impact your Airflow Deployment or trigger a code change - it is simply a signal to our platform that you _intend_ to upgrade such that we can guide your experience through the rest of the process.
 
@@ -269,7 +269,7 @@ If you begin the upgrade process for your Airflow Deployment and would like to c
 
 Via the Software UI, select **Cancel** next to **Airflow Version**.
 
-![Cancel Airflow Upgrade via Software UI](/img/software/airflow-upgrade-astro-ui-cancel.gif)
+![Cancel Apache Airflow® Upgrade via Software UI](/img/software/airflow-upgrade-astro-ui-cancel.gif)
 
 Via the Astronomer CLI, run:
 

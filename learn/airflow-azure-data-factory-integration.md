@@ -23,9 +23,9 @@ This tutorial takes approximately 30 minutes to complete.
 To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of Azure Data Factory. See [Introduction to Data Factory](https://learn.microsoft.com/en-us/azure/data-factory/introduction).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
+- Airflow connections. See [Managing your Connections in Apache Airflow®](connections.md).
 
 ## Prerequisites
 
@@ -182,4 +182,4 @@ ADF is an easy to learn tool that allows you to quickly create jobs without writ
 
 That's where Airflow comes in. ADF jobs can be run using an Airflow DAG, giving the full capabilities of Airflow orchestration beyond using ADF alone. This allows users that are comfortable with ADF to write their job there, while Airflow acts as the control plane for orchestration.
 
-For a more complex example of orchestrating dependent ADF pipelines with Airflow, see [Orchestrating Multiple Azure Data Factory Pipelines in Airflow](https://registry.astronomer.io/dags/airflow-azure-data-factory).
+For a more complex example of orchestrating dependent ADF pipelines with Airflow, see [Orchestrating Multiple Azure Data Factory Pipelines in Apache Airflow®](https://registry.astronomer.io/dags/airflow-azure-data-factory).

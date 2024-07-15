@@ -16,7 +16,7 @@ An Astro project contains all of the files necessary to test and run DAGs in a l
 - Applying changes
 - Running on-build commands
 
-For information about running your Astro project in a local Airflow, see [Run Airflow locally](cli/run-airflow-locally.md).
+For information about running your Astro project in a local Airflow, see [Run Apache Airflow® locally](cli/run-airflow-locally.md).
 
 :::tip
 
@@ -59,7 +59,7 @@ Use the rest of this document to understand how to interact with each of these f
 
 ## Add DAGs
 
-In Apache Airflow, data pipelines are defined in Python code as Directed Acyclic Graphs (DAGs). A DAG is a collection of tasks and dependencies between tasks that are defined as code. See [Introduction to Airflow DAGs](https://www.astronomer.io/docs/learn/dags).
+In Apache Airflow, data pipelines are defined in Python code as Directed Acyclic Graphs (DAGs). A DAG is a collection of tasks and dependencies between tasks that are defined as code. See [Introduction to Apache Airflow® DAGs](https://www.astronomer.io/docs/learn/dags).
 
 DAGs are stored in the `dags` folder of your Astro project. To add a DAG to your project:
 
@@ -105,13 +105,13 @@ Utility files in the `/dags` directory will not be parsed by Airflow, so you don
 
 ## Add Apache Airflow® connections, pools, variables
 
-Airflow connections connect external applications such as databases and third-party services to Apache Airflow. See [Manage connections in Apache Airflow](https://www.astronomer.io/docs/learn/connections#airflow-connection-basics) or [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
+Airflow connections connect external applications such as databases and third-party services to Apache Airflow. See [Manage connections in Apache Airflow®](https://www.astronomer.io/docs/learn/connections#airflow-connection-basics) or [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
 To add Airflow [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html), [pools](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/pools.html), and [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) to your local Airflow environment, you have the following options:
 
 - Use the Airflow UI. In **Admin**, click **Connections**, **Variables** or **Pools**, and then add your values. These values are stored in the metadata database and are deleted when you run the [`astro dev kill` command](/astro/cli/astro-dev-kill.md), which can sometimes be used for troubleshooting.
 - Modify the `airflow_settings.yaml` file of your Astro project. This file is included in every Astro project and permanently stores your values in plain-text. To prevent you from committing sensitive credentials or passwords to your version control tool, Astronomer recommends adding this file to `.gitignore`.
-- Use the Astro UI to create connections that can be shared across Deployments in a Workspace. These connections are not visible in the Airflow UI. See [Create Airflow connections in the Astro UI](/astro/create-and-link-connections.md).
+- Use the Astro UI to create connections that can be shared across Deployments in a Workspace. These connections are not visible in the Airflow UI. See [Create Apache Airflow® connections in the Astro UI](/astro/create-and-link-connections.md).
 - Use a secret backend, such as AWS Secrets Manager, and access the secret backend locally. See [Configure an external secrets backend on Astro](/astro/secrets-backend.md).
 
 When you add Airflow objects to the Airflow UI of a local environment or to your `airflow_settings.yaml` file, your values can only be used locally. When you deploy your project to a Deployment on Astro, the values in this file are not included.
@@ -269,7 +269,7 @@ my_project
 
 If you need to build a custom view in the Airflow UI or build an application on top of the Airflow metadata database, you can use Airflow plugins. To use an Airflow plugin, add your plugin files to the `plugins` folder of your Astro project. To apply changes from this folder to a local Airflow environment, [restart your local environment](cli/run-airflow-locally.md#restart-a-local-airflow-environment).
 
-To learn more about Airflow plugins and how to build them, see [Airflow Plugins](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/plugins.html) in Airflow documentation or the Astronomer [Airflow plugins](https://www.astronomer.io/docs/learn/using-airflow-plugins) guide.
+To learn more about Airflow plugins and how to build them, see [Apache Airflow® Plugins](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/plugins.html) in Airflow documentation or the Astronomer [Apache Airflow® plugins](https://www.astronomer.io/docs/learn/using-airflow-plugins) guide.
 
 ## Unsupported project configurations 
 

@@ -166,6 +166,6 @@ This error can be resolved by increasing the value of the Airflow configuration 
 
 ## See also
 
-- Tutorial: [Orchestrate dbt Core jobs with Airflow and Cosmos](airflow-dbt.md).
+- Tutorial: [Orchestrate dbt Core jobs with Apache Airflow® and Cosmos](airflow-dbt.md).
 - Documentation: [Astronomer Cosmos](https://astronomer.github.io/astronomer-cosmos/).
-- Webinar: [Introducing Cosmos: The Easy Way to Run dbt Models in Airflow](https://www.astronomer.io/events/webinars/introducing-cosmos-the-east-way-to-run-dbt-models-in-airflow/).
+- Webinar: [Introducing Cosmos: The Easy Way to Run dbt Models in Apache Airflow®](https://www.astronomer.io/events/webinars/introducing-cosmos-the-east-way-to-run-dbt-models-in-airflow/).

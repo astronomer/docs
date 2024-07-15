@@ -73,7 +73,7 @@ Hover over the graph to view a graph legend. If a given worker queue spins a wor
 
 ### Pools
 
-These metrics contain information about your Deployment's configured [Airflow pools](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/pools.html). They can give you insight into how your DAGs are handling concurrency.
+These metrics contain information about your Deployment's configured [Apache Airflow® pools](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/pools.html). They can give you insight into how your DAGs are handling concurrency.
 
 ![Pool analytics in the Astro UI](/img/docs/analytics-pools.png)
 

@@ -200,6 +200,6 @@ Finally, the [Astro Python SDK `aql.cleanup()`](https://astro-sdk-python.readthe
 
 ## See also
 
-- Tutorial: [Orchestrate Databricks jobs with Airflow](airflow-databricks.md).
+- Tutorial: [Orchestrate Databricks jobs with Apache Airflow®](airflow-databricks.md).
 - Documentation: [Astro Databricks provider](https://astronomer.github.io/astro-provider-databricks/).
-- Webinar: [How to Orchestrate Databricks Jobs Using Airflow](https://www.astronomer.io/events/webinars/how-to-orchestrate-databricks-jobs-using-airflow/).
+- Webinar: [How to Orchestrate Databricks Jobs Using Apache Airflow®](https://www.astronomer.io/events/webinars/how-to-orchestrate-databricks-jobs-using-airflow/).

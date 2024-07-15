@@ -15,7 +15,7 @@ See [Manage connections and variables](manage-connections-variables.md) to learn
 
 Secrets backend integrations can be configured individually with each Astro Deployment by someone with [**Workspace Operator**](user-permissions.md#workspace-roles) permissions. 
 
-Using secrets to set Airflow connections requires knowledge of how to generate Airflow connections in URI or JSON format. See [Import and export Airflow connections and variables](import-export-connections-variables.md) for guidance on how to export your connections and variables based on where they are stored.
+Using secrets to set Airflow connections requires knowledge of how to generate Airflow connections in URI or JSON format. See [Import and export Apache Airflow® connections and variables](import-export-connections-variables.md) for guidance on how to export your connections and variables based on where they are stored.
 
 Astro integrates with the following secrets backend tools:
 - [AWS Secrets Manager](secrets-backend/aws-secretsmanager.md)

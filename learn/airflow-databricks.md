@@ -42,14 +42,14 @@ with task_group:
 ```
 
 
-This tutorial shows how to use the Astro Databricks provider to run two Databricks notebooks as a Databricks Workflow. If you don't use Databricks Workflows, see [Alternative ways to run Databricks with Airflow](#alternative-ways-to-run-databricks-with-airflow).
+This tutorial shows how to use the Astro Databricks provider to run two Databricks notebooks as a Databricks Workflow. If you don't use Databricks Workflows, see [Alternative ways to run Databricks with Apache Airflow®](#alternative-ways-to-run-databricks-with-airflow).
 
 :::tip Other ways to learn
 
 There are multiple resources for learning about this topic. See also:
 
-- Webinar: [How to Orchestrate Databricks Jobs Using Airflow](https://www.astronomer.io/events/webinars/how-to-orchestrate-databricks-jobs-using-airflow/).
-- Use case: [ELT with Airflow and Databricks](use-case-airflow-databricks.md) including a ready-to-use [example project repository](https://github.com/astronomer/astro-provider-databricks/blob/main/quickstart/astro-cli.md).
+- Webinar: [How to Orchestrate Databricks Jobs Using Apache Airflow®](https://www.astronomer.io/events/webinars/how-to-orchestrate-databricks-jobs-using-airflow/).
+- Use case: [ELT with Apache Airflow® and Databricks](use-case-airflow-databricks.md) including a ready-to-use [example project repository](https://github.com/astronomer/astro-provider-databricks/blob/main/quickstart/astro-cli.md).
 
 :::
 
@@ -73,9 +73,9 @@ This tutorial takes approximately 30 minutes to complete.
 To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of Databricks. See [Getting started with Databricks](https://www.databricks.com/learn).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
+- Airflow connections. See [Managing your Connections in Apache Airflow®](connections.md).
 
 ## Prerequisites
 

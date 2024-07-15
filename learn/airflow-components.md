@@ -13,7 +13,7 @@ In this guide, you'll learn about the core components of Airflow and how to mana
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: Basics](https://academy.astronomer.io/path/airflow-101/airflow-basics) module.
+- Astronomer Academy: [Apache Airflow®: Basics](https://academy.astronomer.io/path/airflow-101/airflow-basics) module.
 
 :::
 
@@ -21,13 +21,13 @@ There are multiple resources for learning about this topic. See also:
 
 To get the most out of this guide, you should have an understanding of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
+- Basic Airflow concepts. See [Introduction to Apache Airflow®](intro-to-airflow.md).
 
 ## Core components
 
 The following Apache Airflow core components are running at all times: 
 
-- **Webserver:** A Flask server running with Gunicorn that serves the [Airflow UI](airflow-ui.md).
+- **Webserver:** A Flask server running with Gunicorn that serves the [Apache Airflow® UI](airflow-ui.md).
 - **[Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html):** A Daemon responsible for scheduling jobs. This is a multi-threaded Python process that determines what tasks need to be run, when they need to be run, and where they are run.
 - **[Database](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html):** A database where all DAG and task metadata are stored. This is typically a Postgres database, but MySQL and SQLite are also supported.
 - **[Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html):** The mechanism for running tasks. An executor is running within the scheduler whenever Airflow is operational.
@@ -68,7 +68,7 @@ The following resources can help you manage Airflow components:
 - OSS [Official Helm Chart](https://airflow.apache.org/docs/apache-airflow/stable/installation/index.html#using-official-airflow-helm-chart)
 - Managed Airflow on [Astro](https://www.astronomer.io/product/)
 
-Scalability is also an important consideration when setting up your production Airflow environment. See [Scaling out Airflow](airflow-scaling-workers.md).
+Scalability is also an important consideration when setting up your production Airflow environment. See [Scaling out Apache Airflow®](airflow-scaling-workers.md).
 
 ## High availability
 

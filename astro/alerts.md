@@ -14,7 +14,7 @@ Unlike Airflow callbacks and SLAs, Astro alerts require no changes to DAG code. 
 
 :::info
 
-To configure Airflow notifications, see [Airflow email notifications](airflow-email-notifications.md) and [Manage Airflow DAG notifications](https://www.astronomer.io/docs/learn/error-notifications-in-airflow).
+To configure Airflow notifications, see [Apache Airflow® email notifications](airflow-email-notifications.md) and [Manage Apache Airflow® DAG notifications](https://www.astronomer.io/docs/learn/error-notifications-in-airflow).
 
 :::
 
@@ -137,7 +137,7 @@ No external configuration is required for the email integration. Astronomer reco
 :::privatepreview
 :::
 
-The **DAG Trigger** communication channel works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through the `DagRuns` endpoint of the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) to trigger any DAG in your Workspace. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table. 
+The **DAG Trigger** communication channel works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through the `DagRuns` endpoint of the [Apache Airflow® REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) to trigger any DAG in your Workspace. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table. 
 
 The following parameters are used to pass metadata about the alert in the API call:
 

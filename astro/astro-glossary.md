@@ -5,7 +5,7 @@ id: astro-glossary
 description: A quick reference for terms you'll encounter on Astro.
 ---
 
-The following table contains definitions for all of the key terms and concepts you'll come across on Astro. For a glossary of Apache Airflow® terms, see [Airflow glossary](https://www.astronomer.io/docs/learn/airflow-glossary).
+The following table contains definitions for all of the key terms and concepts you'll come across on Astro. For a glossary of Apache Airflow® terms, see [Apache Airflow® glossary](https://www.astronomer.io/docs/learn/airflow-glossary).
 
 | Term                     | Definition                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

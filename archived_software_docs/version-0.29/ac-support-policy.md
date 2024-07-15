@@ -15,7 +15,7 @@ This document provides information on the following:
 - Which versions of AC are currently available
 - The maintenance schedule and end-of-maintenance date for all versions
 
-For guidelines on how to upgrade, read [Upgrade Apache Airflow on Astronomer](manage-airflow-versions.md). For information about Astro Runtime's support policy, see [Runtime release and lifecycle policy](https://www.astronomer.io/docs/astro/runtime-version-lifecycle-policy).
+For guidelines on how to upgrade, read [Upgrade Apache Airflow® on Astronomer](manage-airflow-versions.md). For information about Astro Runtime's support policy, see [Runtime release and lifecycle policy](https://www.astronomer.io/docs/astro/runtime-version-lifecycle-policy).
 
 ## Release channels
 
@@ -76,7 +76,7 @@ Earlier versions of Astronomer Certified might use different formatting in their
 
 For the smoothest, out-of-the-box Airflow experience, Astronomer recommends using the `buster-onbuild` image in your project's `Dockerfile`. These images incorporate Docker ONBUILD commands to copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component.
 
-For complex use cases that require customizing AC base image, see [Customize your Airflow image on Astronomer](customize-image.md).
+For complex use cases that require customizing AC base image, see [Customize your Apache Airflow® image on Astronomer](customize-image.md).
 
 ## Backport policy for bug and security fixes
 

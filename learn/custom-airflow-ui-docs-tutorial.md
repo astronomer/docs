@@ -23,7 +23,7 @@ This tutorial takes approximately 15 minutes to complete.
 
 ## Assumed knowledge
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
+- Basic Airflow concepts. See [Introduction to Apache Airflow®](intro-to-airflow.md).
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
 
 ## Prerequisites

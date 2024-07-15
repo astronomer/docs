@@ -25,7 +25,7 @@ In this guide, you'll learn the basics of Airflow notifications and how to set u
 
 There are multiple resources for learning about this topic. See also:
 
-- Webinar: [How to monitor your pipelines with Airflow and Astro alerts](https://www.astronomer.io/events/webinars/how-to-monitor-your-pipelines-with-airflow-and-astro-alerts/).
+- Webinar: [How to monitor your pipelines with Apache Airflow® and Astro alerts](https://www.astronomer.io/events/webinars/how-to-monitor-your-pipelines-with-airflow-and-astro-alerts/).
 
 :::
 
@@ -33,15 +33,15 @@ There are multiple resources for learning about this topic. See also:
 
 To get the most out of this guide, you should have an understanding of:
 
-- Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
-- Task dependencies. See [Managing dependencies in Apache Airflow](managing-dependencies.md).
+- Airflow DAGs. See [Introduction to Apache Airflow® DAGs](dags.md).
+- Task dependencies. See [Managing dependencies in Apache Airflow®](managing-dependencies.md).
 
 ## Apache Airflow® notification types
 
 Airflow has a few options for notifying you on the status of your DAGs and tasks:
 
 - **Email notifications**: Most Airflow operators have parameters for setting email alerts in case of a task failure or retry. Use email alerts in production pipelines where task failures or retries need immediate attention by a data professional. 
-- **Airflow callbacks**: Callback parameters (`*_callback`) exist both at the task and at the DAG level. You can pass any callable or [Airflow notifier](#notifiers) to these parameters, and Airflow will run them in the case of specific events, such as a task failure. Airflow callbacks offer a lot of flexibility to execute any code based on the state of a task or DAG. They are often used to define actions for specific instances of task failures or successes.
+- **Airflow callbacks**: Callback parameters (`*_callback`) exist both at the task and at the DAG level. You can pass any callable or [Apache Airflow® notifier](#notifiers) to these parameters, and Airflow will run them in the case of specific events, such as a task failure. Airflow callbacks offer a lot of flexibility to execute any code based on the state of a task or DAG. They are often used to define actions for specific instances of task failures or successes.
 - **Airflow notifiers**: Notifiers are custom classes for Airflow callbacks that can be easily reused and standardized. Provider packages can ship pre-built notifiers like the [SlackNotifier](https://airflow.apache.org/docs/apache-airflow-providers-slack/stable/_api/airflow/providers/slack/notifications/slack/index.html). Notifiers can be provided to callback parameters to define which task or DAG state should cause them to be executed. A common use case for notifiers is standardizing actions for task failures across several Airflow instances.
 - **Airflow service-level agreements (SLAs)**: SLAs define the expected time it takes for a specific task to complete. If an SLA is missed, the callable or notifier provided to the `sla_miss_callback` parameter is executed. If you configure an SMTP connection, an email will be sent as well. Since an SLA miss does not stop a task from running, this type of notification is used when intervention is needed if a specific task is taking longer than expected.
 
@@ -49,7 +49,7 @@ Most notifications can be set at the level of both a DAG and a task. Setting a p
 
 :::tip
 
-The OSS notification library [Apprise](https://github.com/caronc/apprise) contains modules to send notifications to many services. You can use Apprise with Airflow by installing the [Apprise Airflow provider](https://registry.astronomer.io/providers/apache-airflow-providers-apprise/versions/latest) which contains the [AppriseNotifier](https://airflow.apache.org/docs/apache-airflow-providers-apprise/stable/_api/airflow/providers/apprise/notifications/apprise/index.html). See the [Apprise Airflow provider documentation](https://airflow.apache.org/docs/apache-airflow-providers-apprise/stable/notifications/apprise_notifier_howto_guide.html) for more information and examples.
+The OSS notification library [Apprise](https://github.com/caronc/apprise) contains modules to send notifications to many services. You can use Apprise with Airflow by installing the [Apprise Apache Airflow® provider](https://registry.astronomer.io/providers/apache-airflow-providers-apprise/versions/latest) which contains the [AppriseNotifier](https://airflow.apache.org/docs/apache-airflow-providers-apprise/stable/_api/airflow/providers/apprise/notifications/apprise/index.html). See the [Apprise Apache Airflow® provider documentation](https://airflow.apache.org/docs/apache-airflow-providers-apprise/stable/notifications/apprise_notifier_howto_guide.html) for more information and examples.
 
 :::
 
@@ -61,11 +61,11 @@ If you want to deliver alerts to email, use [email notifications](#email-notific
 
 If a [notifier class](#notifiers) exists for your use case, you should always use these methods instead of a custom callback. See the Airflow documentation for [an up-to-date list of available Notifiers](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html) and the [Apprise wiki](https://github.com/caronc/apprise/wiki) for a list of services the Apprise notifier can connect to. 
 
-A notifier can be provided to any callback parameter (`*callback`). Only use custom [Airflow callbacks](#airflow-callbacks) when no notifier is available for your use case.
+A notifier can be provided to any callback parameter (`*callback`). Only use custom [Apache Airflow® callbacks](#airflow-callbacks) when no notifier is available for your use case.
 
 :::tip
 
-To execute custom code based on events happening anywhere in your Airflow environment, for example whenever any dataset is updated or any task instance fails, you can use [Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners). See the [Use a listener to send a Slack notification when a Dataset is updated](airflow-listeners.md) tutorial for an example.
+To execute custom code based on events happening anywhere in your Airflow environment, for example whenever any dataset is updated or any task instance fails, you can use [Apache Airflow® listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners). See the [Use a listener to send a Slack notification when a Dataset is updated](airflow-listeners.md) tutorial for an example.
 
 :::
 
@@ -205,11 +205,11 @@ In Airflow you can define actions to be taken due to different DAG or task state
 - `on_retry_callback`: Invoked when a task is retried. This callback only exists at the task level.
 - `sla_miss_callback`: Invoked when a task or DAG misses its defined [Service Level Agreement (SLA)](#airflow-service-level-agreements). This callback is defined at the DAG level for DAGs with defined SLAs and will be applied to every task.
 
-You can provide any Python callable to the `*_callback` parameters or [Airflow notifiers](#notifiers). To execute multiple functions, you can provide several callback items to the same callback parameter in a list.
+You can provide any Python callable to the `*_callback` parameters or [Apache Airflow® notifiers](#notifiers). To execute multiple functions, you can provide several callback items to the same callback parameter in a list.
 
 ### Notifiers
 
-[Airflow notifiers](https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html) are pre-built or custom classes and can be used to standardize and modularize the functions you use to send notifications. Notifiers can be passed to the relevant `*_callback` parameter of your DAG depending on what event you want to trigger the notification.
+[Apache Airflow® notifiers](https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html) are pre-built or custom classes and can be used to standardize and modularize the functions you use to send notifications. Notifiers can be passed to the relevant `*_callback` parameter of your DAG depending on what event you want to trigger the notification.
 
 :::info
 
@@ -286,7 +286,7 @@ It can be imported from the Slack provider package and used with any `*_callback
 
 <CodeBlock language="python">{slack_notifier_example_dag}</CodeBlock>
 
-The DAG above has one task sending a notification to Slack. It uses a Slack [Airflow connection](connections.md) with the connection ID `slack_conn`.
+The DAG above has one task sending a notification to Slack. It uses a Slack [Apache Airflow® connection](connections.md) with the connection ID `slack_conn`.
 
 ![Slack notification](/img/guides/slack_notification.png)
 
@@ -441,7 +441,7 @@ t1 = PythonOperator(
 
 ## Airflow service-level agreements
 
-[Airflow service-level agreements (SLAs)](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#slas) are a type of notification that you can use if your tasks take longer than expected to complete. If a task takes longer than the maximum amount of time to complete as defined in the SLA, the SLA will be missed and notifications are triggered. This can be useful when you have long-running tasks that might require user intervention after a certain period of time, or if you have tasks that need to complete within a certain period. 
+[Apache Airflow® service-level agreements (SLAs)](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#slas) are a type of notification that you can use if your tasks take longer than expected to complete. If a task takes longer than the maximum amount of time to complete as defined in the SLA, the SLA will be missed and notifications are triggered. This can be useful when you have long-running tasks that might require user intervention after a certain period of time, or if you have tasks that need to complete within a certain period. 
 
 :::tip
 
@@ -511,4 +511,4 @@ There is no functionality to disable email alerting for SLAs. If you have an `'e
 
 ## Astronomer notifications
 
-Airflow's built-in notification mechanisms are great for common use cases, but they have some limitations. For the cases where Airflow notifications aren't sufficient, [Astro alerts](https://www.astronomer.io/docs/astro/alerts) provide an additional level of observability. For guidance on when to choose Airflow notifications or Astro alerts, see [When to use Airflow or Astro alerts for your pipelines on Astro](https://www.astronomer.io/docs/astro/best-practices/airflow-vs-astro-alerts).
+Airflow's built-in notification mechanisms are great for common use cases, but they have some limitations. For the cases where Airflow notifications aren't sufficient, [Astro alerts](https://www.astronomer.io/docs/astro/alerts) provide an additional level of observability. For guidance on when to choose Airflow notifications or Astro alerts, see [When to use Apache Airflow® or Astro alerts for your pipelines on Astro](https://www.astronomer.io/docs/astro/best-practices/airflow-vs-astro-alerts).

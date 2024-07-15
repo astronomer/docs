@@ -96,7 +96,7 @@ The Docker image you'll find in your Dockerfile by default is:
 FROM quay.io/astronomer/ap-airflow:latest-onbuild
 ```
 
-This will install a Debian-based AC image for the latest version of Airflow we support. To specify a particular Airflow version, read [Upgrade Airflow](manage-airflow-versions.md) and the _Customize your Image_ topic below.
+This will install a Debian-based AC image for the latest version of Airflow we support. To specify a particular Airflow version, read [Upgrade Apache Airflow®](manage-airflow-versions.md) and the _Customize your Image_ topic below.
 
 ### Example DAG
 
@@ -145,9 +145,9 @@ In the Software UI, use the **New Deployment** menu to configure the following:
 
 Once you've finished, click **Create Deployment**. After it spins up, your new Deployment should look something like this:
 
-![Create an Airflow Deployment on Astronomer](/img/software/create-deployment.png)
+![Create an Apache Airflow® Deployment on Astronomer](/img/software/create-deployment.png)
 
-For a production environment, you'll likely need to set resources and configure your Airflow Deployment to fit the needs of your organization. For more information on configuring Deployments, read [Configure an Airflow Deployment on Astronomer](configure-deployment.md).
+For a production environment, you'll likely need to set resources and configure your Airflow Deployment to fit the needs of your organization. For more information on configuring Deployments, read [Configure an Apache Airflow® Deployment on Astronomer](configure-deployment.md).
 
 ## Step 8: Deploy a DAG
 
@@ -161,7 +161,7 @@ You can now use Astronomer to start Airflow locally and deploy code. To do so:
 
     This command spins up 3 Docker containers on your machine, each for a different Airflow component:
 
-    - **Postgres:** [Airflow's Metadata Database](access-airflow-database.md)
+    - **Postgres:** [Apache Airflow®'s Metadata Database](access-airflow-database.md)
     - **Webserver:** The Airflow component responsible for rendering the Airflow UI
     - **Scheduler:** The Airflow component responsible for monitoring and triggering tasks
 

@@ -163,7 +163,7 @@ As of its momentous [2.0 release](https://www.astronomer.io/blog/introducing-air
 * Implements CRUD (Create, Update, Delete) operations on *all* Airflow resources.
 * Includes authorization capabilities.
 
-> **Note:** To get started with Airflow 2.0 locally, read [Get Started with Apache Airflow 2.0](https://www.astronomer.io/guides/get-started-airflow-2). To upgrade an Airflow Deployment on Astronomer to 2.0, make sure you've first upgraded to both Astronomer Software v0.23 and Airflow 1.10.14. For questions, reach out to [Astronomer Support](https://support.astronomer.io).
+> **Note:** To get started with Airflow 2.0 locally, read [Get Started with Apache Airflow® 2.0](https://www.astronomer.io/guides/get-started-airflow-2). To upgrade an Airflow Deployment on Astronomer to 2.0, make sure you've first upgraded to both Astronomer Software v0.23 and Airflow 1.10.14. For questions, reach out to [Astronomer Support](https://support.astronomer.io).
 
 ### Make a Request
 

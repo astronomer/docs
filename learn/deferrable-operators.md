@@ -56,7 +56,7 @@ There are numerous benefits to using deferrable operators including:
 
 :::tip
 
-When you can't use a deferrable operator for a longer running sensor task, such as when you can't run a triggerer, Astronomer recommends using a sensor in [`reschedule` mode](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/sensors.html) to reduce unnecessary resource overhead. See the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html#difference-between-mode-reschedule-and-deferrable-true-in-sensors) for details about the differences between deferrable operators and schedulers in `reschedule` mode.
+When you can't use a deferrable operator for a longer running sensor task, such as when you can't run a triggerer, Astronomer recommends using a sensor in [`reschedule` mode](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/sensors.html) to reduce unnecessary resource overhead. See the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html#difference-between-mode-reschedule-and-deferrable-true-in-sensors) for details about the differences between deferrable operators and schedulers in `reschedule` mode.
 
 :::
 
@@ -96,7 +96,7 @@ trigger_dag_run = TriggerDagRunOperator(
 )
 ```
 
-You can find a list of operators that support deferrable mode in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/deferrable-operator-ref.html).
+You can find a list of operators that support deferrable mode in the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/deferrable-operator-ref.html).
 
 Previously, before the `deferrable` parameter was available in regular operators, deferrable operators were implemented as standalone operators, usually with an `-Async` suffix. Some of these operators are still available. For example, the `DateTimeSensor` does not have a `deferrable` parameter, but has a deferrable version called `DateTimeSensorAsync`. 
 
@@ -118,7 +118,7 @@ In the following screenshot, running the DAG produces 16 running task instances,
 
 ![Standard sensor Grid View](/img/guides/standard_sensor_slot_taking.png)
 
-Because Airflow imposes default limits on the number of active runs of the same DAG or number of active tasks in a DAG across all runs, you'll have to scale up Airflow to concurrently run any other DAGs and tasks as described in the [Scaling Airflow to optimize performance](airflow-scaling-workers.md) guide.
+Because Airflow imposes default limits on the number of active runs of the same DAG or number of active tasks in a DAG across all runs, you'll have to scale up Airflow to concurrently run any other DAGs and tasks as described in the [Scaling Apache Airflow® to optimize performance](airflow-scaling-workers.md) guide.
 
 Switching out the `DateTimeSensor` for `DateTimeSensorAsync` will create 16 running DAG instances, but the tasks for these DAGs are in a deferred state which does not take up a worker slot. The only difference in the DAG code is using the deferrable operator `DateTimeSensorAsync` over `DateTimeSensor`:
 

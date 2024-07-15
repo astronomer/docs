@@ -15,7 +15,7 @@ Throughout this guide, the term project is used to denote any set of DAGs and su
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: Local Development Environment](https://academy.astronomer.io/path/airflow-101/local-development-environment).
+- Astronomer Academy: [Apache Airflow®: Local Development Environment](https://academy.astronomer.io/path/airflow-101/local-development-environment).
 
 :::
 
@@ -23,7 +23,7 @@ There are multiple resources for learning about this topic. See also:
 
 To get the most out of this guide, you should have an understanding of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
+- Basic Airflow concepts. See [Introduction to Apache Airflow®](intro-to-airflow.md).
 
 ## Project structure
 

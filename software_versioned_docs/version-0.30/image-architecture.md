@@ -31,18 +31,18 @@ The Astronomer Certified Docker image is built from the Python wheel and incorpo
 
 Every supported version of the Astronomer Certified Python wheel is available at [pip.astronomer.io](https://pip.astronomer.io/simple/astronomer-certified/). The Dockerfiles for all supported Astronomer Certified images can be found in [Astronomer's `ap-airflow` GitHub repository](https://github.com/astronomer/ap-airflow):
 
-- [Airflow 2.2.4](https://github.com/astronomer/ap-airflow/blob/master/2.2.4/bullseye/Dockerfile)
-- [Airflow 2.2.3](https://github.com/astronomer/ap-airflow/blob/master/2.2.3/bullseye/Dockerfile)
-- [Airflow 2.2.2](https://github.com/astronomer/ap-airflow/blob/master/2.2.2/bullseye/Dockerfile)
-- [Airflow 2.2.1](https://github.com/astronomer/ap-airflow/blob/master/2.2.1/bullseye/Dockerfile)
-- [Airflow 2.2.0](https://github.com/astronomer/ap-airflow/blob/master/2.2.0/bullseye/Dockerfile)
-- [Airflow 2.1.0](https://github.com/astronomer/ap-airflow/blob/master/2.1.0/buster/Dockerfile)
-- [Airflow 2.0.2](https://github.com/astronomer/ap-airflow/blob/master/2.0.2/buster/Dockerfile)
-- [Airflow 2.0.0](https://github.com/astronomer/ap-airflow/blob/master/2.0.0/buster/Dockerfile)
-- [Airflow 1.10.15](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/buster/Dockerfile)
-- [Airflow 1.10.14](https://github.com/astronomer/ap-airflow/blob/master/1.10.14/buster/Dockerfile)
-- [Airflow 1.10.12](https://github.com/astronomer/ap-airflow/blob/master/1.10.12/buster/Dockerfile)
-- [Airflow 1.10.10](https://github.com/astronomer/ap-airflow/blob/master/1.10.10/buster/Dockerfile)
+- [Apache Airflow® 2.2.4](https://github.com/astronomer/ap-airflow/blob/master/2.2.4/bullseye/Dockerfile)
+- [Apache Airflow® 2.2.3](https://github.com/astronomer/ap-airflow/blob/master/2.2.3/bullseye/Dockerfile)
+- [Apache Airflow® 2.2.2](https://github.com/astronomer/ap-airflow/blob/master/2.2.2/bullseye/Dockerfile)
+- [Apache Airflow® 2.2.1](https://github.com/astronomer/ap-airflow/blob/master/2.2.1/bullseye/Dockerfile)
+- [Apache Airflow® 2.2.0](https://github.com/astronomer/ap-airflow/blob/master/2.2.0/bullseye/Dockerfile)
+- [Apache Airflow® 2.1.0](https://github.com/astronomer/ap-airflow/blob/master/2.1.0/buster/Dockerfile)
+- [Apache Airflow® 2.0.2](https://github.com/astronomer/ap-airflow/blob/master/2.0.2/buster/Dockerfile)
+- [Apache Airflow® 2.0.0](https://github.com/astronomer/ap-airflow/blob/master/2.0.0/buster/Dockerfile)
+- [Apache Airflow® 1.10.15](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/buster/Dockerfile)
+- [Apache Airflow® 1.10.14](https://github.com/astronomer/ap-airflow/blob/master/1.10.14/buster/Dockerfile)
+- [Apache Airflow® 1.10.12](https://github.com/astronomer/ap-airflow/blob/master/1.10.12/buster/Dockerfile)
+- [Apache Airflow® 1.10.10](https://github.com/astronomer/ap-airflow/blob/master/1.10.10/buster/Dockerfile)
 
 ## Image Requirements
 
@@ -69,7 +69,7 @@ If you run the Astronomer Certified Docker image without the Astronomer platform
 
 If you're running the Astronomer Certified Docker image with the Astronomer platform, there are a few ways you can configure environment variables. For more information, read [Environment Variables](environment-variables.md).
 
-Astronomer Certified supports the same environment variables as Apache Airflow. For a list of all configurable environment variables, read the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html).
+Astronomer Certified supports the same environment variables as Apache Airflow. For a list of all configurable environment variables, read the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html).
 
 The following table lists the essential environment variables used when running Airflow with Astronomer Certified. Only environment variables explicitly defined in the Dockerfile are listed here; all other environment variables have the same default value as they have in OSS Airflow.
 

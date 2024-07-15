@@ -24,8 +24,8 @@ This guide covers:
 
 There are multiple resources for learning about this topic. See also:
 
-- Webinar: [Efficient data quality checks with Airflow 2.7](https://www.astronomer.io/events/webinars/efficient-data-quality-checks-with-airflow-2-7/).
-- Use case: [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
+- Webinar: [Efficient data quality checks with Apache Airflow® 2.7](https://www.astronomer.io/events/webinars/efficient-data-quality-checks-with-airflow-2-7/).
+- Use case: [Use Apache Airflow® setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
 
 :::
 
@@ -33,9 +33,9 @@ There are multiple resources for learning about this topic. See also:
 
 To get the most out of this guide, you should have knowledge of:
 
-- What Airflow is and when to use it. See [Introduction to Apache Airflow](intro-to-airflow.md).
+- What Airflow is and when to use it. See [Introduction to Apache Airflow®](intro-to-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
+- Airflow connections. See [Managing your Connections in Apache Airflow®](connections.md).
 - Relational databases. See [Relational database on Wikipedia](https://en.wikipedia.org/wiki/Relational_database).
 
 ## Data quality essentials
@@ -79,7 +79,7 @@ The following DAG graph shows typical locations for data quality checks:
 
 ![Different locations for data quality checks in an ETL pipeline](/img/guides/dq_checks_locations_example_graph.png)
 
-It's common to use data quality checks (`post_check_action_1` and `post_check_action_2`) with [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks) to alert data professionals of data quality issues through channels like email and Slack. You can also create a downstream task that runs only when all data quality checks are successful, which can be useful for reporting purposes.
+It's common to use data quality checks (`post_check_action_1` and `post_check_action_2`) with [Apache Airflow® callbacks](error-notifications-in-airflow.md#airflow-callbacks) to alert data professionals of data quality issues through channels like email and Slack. You can also create a downstream task that runs only when all data quality checks are successful, which can be useful for reporting purposes.
 
 When implementing data quality checks, consider how a check success or failure should influence downstream dependencies. [Trigger Rules](airflow-trigger-rules.md) are especially useful for managing operator dependencies. It often makes sense to test your data quality checks in a dedicated DAG before you incorporate them into your pipelines.
 
@@ -148,13 +148,13 @@ The logs from SQL check operators can be found in the regular Airflow task logs.
 
 :::info
 
-You can find more information on how to use Great Expectations with Airflow in the [Orchestrate Great Expectations with Airflow](airflow-great-expectations.md) tutorial.
+You can find more information on how to use Great Expectations with Airflow in the [Orchestrate Great Expectations with Apache Airflow®](airflow-great-expectations.md) tutorial.
 
 :::
 
 Great Expectations is an open source data validation framework that allows the user to define data quality checks in JSON. The checks, also known as Expectation Suites, can be run in a DAG using the GreatExpectationsOperator from the [Great Expectations provider](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest). All currently available Expectations can be viewed on the [Great Expectations website](https://greatexpectations.io/expectations) and creation of [Custom Expectations](https://docs.greatexpectations.io/docs/oss/guides/expectations/custom_expectations_lp/) is possible.
 
-The easiest way to use Great Expectations with Airflow is to initialize a Great Expectations project in a directory accessible to your Airflow environment and using the automatic creation of a [Checkpoint](https://docs.greatexpectations.io/docs/terms/checkpoint) and [Datasource](https://docs.greatexpectations.io/docs/terms/datasource) from an [Airflow connection](connections.md) by the GreatExpectationsOperator. This basic usage of the GreatExpectationsOperator does not need in-depth Great Expectations knowledge and full customization is possible. 
+The easiest way to use Great Expectations with Airflow is to initialize a Great Expectations project in a directory accessible to your Airflow environment and using the automatic creation of a [Checkpoint](https://docs.greatexpectations.io/docs/terms/checkpoint) and [Datasource](https://docs.greatexpectations.io/docs/terms/datasource) from an [Apache Airflow® connection](connections.md) by the GreatExpectationsOperator. This basic usage of the GreatExpectationsOperator does not need in-depth Great Expectations knowledge and full customization is possible. 
 
 When using Great Expectations, Airflow task logs show the results of the suite at the test-level in a JSON format. To get a [detailed report](https://docs.greatexpectations.io/docs/terms/data_docs/) on the checks that were run and their results, you can view the HTML files located in the `great_expectations/uncommitted/data_docs/local_site/validations` directory in any browser. These data docs can be generated to other backends as well as the local file.
 
@@ -164,7 +164,7 @@ In complex data ecosystems, lineage can be a powerful addition to data quality c
 
 :::info
 
-For more information on data lineage and setting up OpenLineage with Airflow, see [OpenLineage and Airflow](airflow-openlineage.md).
+For more information on data lineage and setting up OpenLineage with Airflow, see [OpenLineage and Apache Airflow®](airflow-openlineage.md).
 
 :::
 
@@ -330,7 +330,7 @@ For each of the checks in this example, an Expectation already exists. This is n
 }
 ```
 
-The corresponding DAG code shows how all the Expectations are run within one task using the GreatExpectationsOperator. Only the root directory of the data context, the schema and the data asset name have to be provided. For a step-by-step example and more information on the parameters of this operator see the [Orchestrate Great Expectations with Airflow](airflow-great-expectations.md) tutorial.
+The corresponding DAG code shows how all the Expectations are run within one task using the GreatExpectationsOperator. Only the root directory of the data context, the schema and the data asset name have to be provided. For a step-by-step example and more information on the parameters of this operator see the [Orchestrate Great Expectations with Apache Airflow®](airflow-great-expectations.md) tutorial.
 
 <CodeBlock language="python">{gx_example_dag}</CodeBlock>
 

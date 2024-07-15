@@ -8,7 +8,7 @@ The Apache Airflow® executor determines which worker resources run your schedul
 
 On Astro, every Deployment requires an executor and you can change the executor at any time. After you choose an executor for an Astro Deployment, you can configure your DAGs and Deployment resources to maximize the executor's efficiency and performance. Use the information provided in this topic to learn how to configure the Celery and Kubernetes executors on Astro.
 
-To learn more about executors in Airflow, see [Airflow executors](https://www.astronomer.io/docs/learn/airflow-executors-explained).
+To learn more about executors in Airflow, see [Apache Airflow® executors](https://www.astronomer.io/docs/learn/airflow-executors-explained).
 
 ## Choose an executor
 

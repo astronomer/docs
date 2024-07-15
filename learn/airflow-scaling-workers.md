@@ -24,7 +24,7 @@ This guide references the parameters available in Airflow version 2.0 and later.
 
 There are multiple resources for learning about this topic. See also:
 
-- Webinar: [Scaling Out Airflow](https://www.astronomer.io/events/webinars/scaling-out-airflow/).
+- Webinar: [Scaling Out Apache Airflow®](https://www.astronomer.io/events/webinars/scaling-out-airflow/).
 
 :::
 
@@ -32,8 +32,8 @@ There are multiple resources for learning about this topic. See also:
 
 To get the most out of this guide, you should have an understanding of:
 
-- Airflow core components. See [Airflow's components](airflow-components.md).
-- Airflow executors. See [Airflow executors explained](airflow-executors-explained.md).
+- Airflow core components. See [Apache Airflow®'s components](airflow-components.md).
+- Airflow executors. See [Apache Airflow® executors explained](airflow-executors-explained.md).
 
 ## Parameter tuning
 
@@ -43,7 +43,7 @@ The reason Airflow allows so many adjustments is that, as an agnostic orchestrat
 
 ### Environment-level settings
 
-Environment-level settings are those that impact your entire Airflow environment (all DAGs). They all have default values that can be overridden by setting the appropriate environment variable or modifying your `airflow.cfg` file. Generally, all default values can be found in the [Airflow Configuration Reference](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html). To check current values for an existing Airflow environment, go to **Admin** > **Configurations** in the Apache Airflow® UI. For more information, see [Setting Configuration Options](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-config.html) in the Apache Airflow documentation.
+Environment-level settings are those that impact your entire Airflow environment (all DAGs). They all have default values that can be overridden by setting the appropriate environment variable or modifying your `airflow.cfg` file. Generally, all default values can be found in the [Apache Airflow® Configuration Reference](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html). To check current values for an existing Airflow environment, go to **Admin** > **Configurations** in the Apache Airflow® UI. For more information, see [Setting Configuration Options](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-config.html) in the Apache Airflow documentation.
 
 If you're running Airflow on Astronomer, you should modify these parameters with Astronomer environment variables. For more information, see [Environment Variables on Astronomer](https://www.astronomer.io/docs/astro/environment-variables).
 
@@ -141,7 +141,7 @@ Task-level settings are defined by task operators that you can use to implement 
 There are two primary task-level Airflow settings users can define in code:
 
 - `max_active_tis_per_dag` (formerly `task_concurrency`): The maximum number of times that the same task can run concurrently across all DAG runs. For instance, if a task pulls from an external resource, such as a data table, that should not be modified by multiple tasks at once, then you can set this value to 1.
-- `pool`: Defines the amount of pools available for a task. Pools are a way to limit the number of concurrent instances of an arbitrary group of tasks. This setting is useful if you have a lot of workers or DAG runs in parallel, but you want to avoid an API rate limit or otherwise don't want to overwhelm a data source or destination. For more information, see the [Airflow Pools Guide](airflow-pools.md).
+- `pool`: Defines the amount of pools available for a task. Pools are a way to limit the number of concurrent instances of an arbitrary group of tasks. This setting is useful if you have a lot of workers or DAG runs in parallel, but you want to avoid an API rate limit or otherwise don't want to overwhelm a data source or destination. For more information, see the [Apache Airflow® Pools Guide](airflow-pools.md).
 
 The parameters above are inherited from the `BaseOperator`, so you can set them in any operator definition. For example:
 
@@ -215,4 +215,4 @@ Scaling your Airflow environment is an art and not a science, and it's highly de
     - Possible DAG-level bottleneck.
     - Change `max_active_task_per_dag`, pools (if using them), or overall `parallelism`.
 
-For help with scaling issues, consider joining the [Apache Airflow Slack](https://airflow.apache.org/community/) or contact [Astronomer support](https://www.astronomer.io/get-astronomer/).
+For help with scaling issues, consider joining the [Apache Airflow® Slack](https://airflow.apache.org/community/) or contact [Astronomer support](https://www.astronomer.io/get-astronomer/).

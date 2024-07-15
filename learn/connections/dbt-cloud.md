@@ -8,7 +8,7 @@ sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
 
 [dbt Cloud](https://www.getdbt.com/product/what-is-dbt/) is a SaaS product that runs SQL-first transformation workflows. Integrating dbt Cloud with Apache Airflow® allows you to trigger dbt cloud jobs and check their status from an Airflow DAG.
 
-This guide provides the basic setup for creating a dbt Cloud Airflow connection. For a complete integration tutorial, see [Orchestrate dbt Cloud jobs with Airflow](airflow-dbt-cloud.md). To run your dbt core jobs using Airflow, see [Orchestrate dbt-core Jobs with Airflow](airflow-dbt.md).
+This guide provides the basic setup for creating a dbt Cloud Airflow connection. For a complete integration tutorial, see [Orchestrate dbt Cloud jobs with Apache Airflow®](airflow-dbt-cloud.md). To run your dbt core jobs using Airflow, see [Orchestrate dbt-core Jobs with Apache Airflow®](airflow-dbt.md).
 
 ## Prerequisites
 
@@ -68,6 +68,6 @@ Note that the connection test only tests the **Tenant** and **API Token** fields
 Airflow uses Python's `requests` library to connect to dbt Cloud through the [dbtHook](https://airflow.apache.org/docs/apache-airflow-providers-dbt-cloud/stable/_api/airflow/providers/dbt/cloud/hooks/dbt/index.html).
 
 ## See also
-- [Apache Airflow dbt cloud provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-dbt-cloud/stable/connections.html)
+- [Apache Airflow® dbt cloud provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-dbt-cloud/stable/connections.html)
 - [dbt Cloud modules](https://registry.astronomer.io/modules?limit=24&sorts=updatedAt%3Adesc&query=dbt) and [example DAGs](https://registry.astronomer.io/dags?limit=24&sorts=updatedAt%3Adesc&query=dbt+cloud) in the Astronomer Registry
-- [Import and export Airflow connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
+- [Import and export Apache Airflow® connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)

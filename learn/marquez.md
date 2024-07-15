@@ -21,8 +21,8 @@ This tutorial takes approximately 30 minutes to complete.
 
 To get the most out of this tutorial, make sure you have an understanding of:
 
-- The basics of OpenLineage. See [Integrate OpenLineage and Airflow](airflow-openlineage.md).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
+- The basics of OpenLineage. See [Integrate OpenLineage and Apache Airflow®](airflow-openlineage.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
 
 ## Prerequisites
 

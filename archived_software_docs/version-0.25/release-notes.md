@@ -185,7 +185,7 @@ With NFS volume-based DAG deploys, you no longer need to rebuild and restart you
 
 This feature must be explicitly enabled on your platform and requires the use of an external NFS volume. For more information, read [Deploy to an NFS Volume](deploy-nfs.md).
 
-> **Note:** To take advantage of this feature, your Apache Airflow® Deployments must be running on Airflow 2.0 or greater. To upgrade your Deployments, read [Manage Airflow Versions](manage-airflow-versions.md).
+> **Note:** To take advantage of this feature, your Apache Airflow® Deployments must be running on Airflow 2.0 or greater. To upgrade your Deployments, read [Manage Apache Airflow® Versions](manage-airflow-versions.md).
 
 ### Bug Fixes
 

@@ -72,7 +72,7 @@ Environment variables set in your `Dockerfile` are stored in plain text. For thi
 
 4. (Optional) To verify if the environment variables are applied correctly to Astro Deployment or your local Airflow environment, you can use `os.getenv("AIRFLOW_VAR_MY_VAR")` inside of Airflow DAGs and tasks.
 
-    To view a list of all the environment variables set in your local Airflow environment, refer to the Step 4 of [Using Astro CLI in local Airflow environment](#in-your-local-airflow-environment)
+    To view a list of all the environment variables set in your local Airflow environment, refer to the Step 4 of [Using Astro CLI in local Apache Airflow® environment](#in-your-local-airflow-environment)
 
 To delete an environment variable from your Astro Runtime image, remove or comment the line in your `Dockerfile` that defines it.
 
@@ -145,6 +145,6 @@ my_project
 
 ## See also
 
-- [Set Airflow connections](https://www.astronomer.io/docs/learn/connections#define-connections-with-environment-variables) using environment variables.
-- [Set Airflow variables](http://www.astronomer.io/docs/learn/airflow-variables#using-environment-variables) using environment variables.
+- [Set Apache Airflow® connections](https://www.astronomer.io/docs/learn/connections#define-connections-with-environment-variables) using environment variables.
+- [Set Apache Airflow® variables](http://www.astronomer.io/docs/learn/airflow-variables#using-environment-variables) using environment variables.
 - [Import and export environment variables](import-export-connections-variables.md#from-environment-variables)

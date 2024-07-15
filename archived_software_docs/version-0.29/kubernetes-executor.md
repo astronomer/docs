@@ -17,7 +17,7 @@ To configure these resources for each Pod, you configure a Pod template. For mor
 
 ## Prerequisites
 
-You must have an Airflow Deployment on Astronomer running with the Kubernetes executor. For more information on configuring an executor, see [Configure a Deployment](configure-deployment.md). To learn more about different executor types, see [Airflow Executors Explained](https://www.astronomer.io/guides/airflow-executors-explained).
+You must have an Airflow Deployment on Astronomer running with the Kubernetes executor. For more information on configuring an executor, see [Configure a Deployment](configure-deployment.md). To learn more about different executor types, see [Apache Airflow® Executors Explained](https://www.astronomer.io/guides/airflow-executors-explained).
 
 ## Configure the Kubernetes executor using pod templates
 

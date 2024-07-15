@@ -8,7 +8,7 @@ sidebar_custom_props: { icon: 'img/integrations/databricks.png' }
 
 [Databricks](https://www.databricks.com/) is a SaaS product for data processing using Apache Spark. Integrating Databricks with Apache Airflow® lets you manage Databricks clusters, as well as execute and monitor Databricks jobs from an Airflow DAG.
 
-This guide provides the basic setup for creating a Databricks connection. For a complete integration tutorial, see [Orchestrate Databricks jobs with Airflow](airflow-databricks.md).
+This guide provides the basic setup for creating a Databricks connection. For a complete integration tutorial, see [Orchestrate Databricks jobs with Apache Airflow®](airflow-databricks.md).
 
 ## Prerequisites
 
@@ -58,6 +58,6 @@ Airflow uses Python's `requests` library to connect to Databricks through the [B
 
 ## See also
 
-- [Apache Airflow Databricks provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-databricks/stable/index.html)
+- [Apache Airflow® Databricks provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-databricks/stable/index.html)
 - [Databricks modules](https://registry.astronomer.io/modules?query=databricks) and [example DAGs](https://registry.astronomer.io/dags?limit=24&sorts=updatedAt%3Adesc&query=databricks) in the Astronomer Registry
-- [Import and export Airflow connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
+- [Import and export Apache Airflow® connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)

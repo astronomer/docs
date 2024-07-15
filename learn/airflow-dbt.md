@@ -38,10 +38,10 @@ DbtTaskGroup(
 
 There are multiple resources for learning about this topic. See also:
 
-- Webinar: [Introducing Cosmos: The Easy Way to Run dbt Models in Airflow](https://www.astronomer.io/events/webinars/introducing-cosmos-the-east-way-to-run-dbt-models-in-airflow/).
-- Use case: [ELT with Airflow and dbt Core](use-case-airflow-dbt.md) including a a ready-to-use [example Cosmos project repository](https://github.com/astronomer/cosmos-use-case).
+- Webinar: [Introducing Cosmos: The Easy Way to Run dbt Models in Apache Airflow®](https://www.astronomer.io/events/webinars/introducing-cosmos-the-east-way-to-run-dbt-models-in-airflow/).
+- Use case: [ELT with Apache Airflow® and dbt Core](use-case-airflow-dbt.md) including a a ready-to-use [example Cosmos project repository](https://github.com/astronomer/cosmos-use-case).
 
-For a tutorial on how to use dbt Cloud with Airflow, see [Orchestrate dbt Cloud with Airflow](airflow-dbt-cloud.md).
+For a tutorial on how to use dbt Cloud with Airflow, see [Orchestrate dbt Cloud with Apache Airflow®](airflow-dbt-cloud.md).
 
 :::
 
@@ -51,10 +51,10 @@ dbt Core offers the possibility to build modular, reuseable SQL components with 
 
 The benefits of using Airflow with dbt Core include:
 
-- Use Airflow's [data-aware scheduling](airflow-datasets.md) and [Airflow sensors](what-is-a-sensor.md) to run models depending on other events in your data ecosystem.
+- Use Airflow's [data-aware scheduling](airflow-datasets.md) and [Apache Airflow® sensors](what-is-a-sensor.md) to run models depending on other events in your data ecosystem.
 - Turn each dbt model into a task, complete with Airflow features like [retries](rerunning-dags.md#automatically-retry-tasks) and [error notifications](error-notifications-in-airflow.md), as well as full observability into past runs directly in the Airflow UI.
 - Run `dbt test` on tables created by individual models immediately after a model has completed. Catch issues before moving downstream and integrate additional [data quality checks](data-quality.md) with your preferred tool to run alongside dbt tests.
-- Run dbt projects using [Airflow connections](connections.md) instead of dbt profiles. You can store all your connections in one place, directly within Airflow or by using a [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html).
+- Run dbt projects using [Apache Airflow® connections](connections.md) instead of dbt profiles. You can store all your connections in one place, directly within Airflow or by using a [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html).
 - Leverage native support for installing and running dbt in a virtual environment to avoid dependency conflicts with Airflow.
 
 ## Time to complete
@@ -66,11 +66,11 @@ This tutorial takes approximately 30 minutes to complete.
 To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of dbt Core. See [What is dbt?](https://docs.getdbt.com/docs/introduction).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
-- How Airflow and dbt concepts relate to each other. See [Similar dbt & Airflow concepts](https://astronomer.github.io/astronomer-cosmos/getting_started/dbt-airflow-concepts.html).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
+- How Airflow and dbt concepts relate to each other. See [Similar dbt & Apache Airflow® concepts](https://astronomer.github.io/astronomer-cosmos/getting_started/dbt-airflow-concepts.html).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- Airflow task groups. See [Airflow task groups](task-groups.md).
-- Airflow connections. See [Manage connections in Apache Airflow](connections.md).
+- Airflow task groups. See [Apache Airflow® task groups](task-groups.md).
+- Airflow connections. See [Manage connections in Apache Airflow®](connections.md).
 
 ## Prerequisites
 
@@ -232,4 +232,4 @@ Using the `BashOperator` to run `dbt run` and other dbt commands can be useful d
 
 Using a dbt-generated `manifest.json` file gives you more visibility into the steps dbt is running in each task. This file is generated in the target directory of your `dbt` project and contains its full representation. For more information on this file, see the [dbt documentation](https://docs.getdbt.com/reference/dbt-artifacts/).
 
-You can learn more about a manifest-based dbt and Airflow project structure, view example code, and read about the `DbtDagParser` in a 3-part blog post series on [Building a Scalable Analytics Architecture With Airflow and dbt](https://www.astronomer.io/blog/airflow-dbt-1/). 
+You can learn more about a manifest-based dbt and Airflow project structure, view example code, and read about the `DbtDagParser` in a 3-part blog post series on [Building a Scalable Analytics Architecture With Apache Airflow® and dbt](https://www.astronomer.io/blog/airflow-dbt-1/). 

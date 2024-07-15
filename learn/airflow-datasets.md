@@ -22,7 +22,7 @@ In this guide, you'll learn about datasets in Airflow and how to use them to imp
 
 :::info
 
-Datasets are a separate feature from object storage, which allows you to interact with files in cloud and local object storage systems. To learn more about using Airflow to interact with files, see [Use Airflow object storage to interact with cloud storage in an ML pipeline](airflow-object-storage-tutorial.md).
+Datasets are a separate feature from object storage, which allows you to interact with files in cloud and local object storage systems. To learn more about using Airflow to interact with files, see [Use Apache Airflow® object storage to interact with cloud storage in an ML pipeline](airflow-object-storage-tutorial.md).
 
 :::
 
@@ -30,9 +30,9 @@ Datasets are a separate feature from object storage, which allows you to interac
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: Datasets](https://academy.astronomer.io/astro-runtime-datasets) module.
+- Astronomer Academy: [Apache Airflow®: Datasets](https://academy.astronomer.io/astro-runtime-datasets) module.
 - Webinar: [Data Driven Scheduling](https://www.astronomer.io/events/webinars/data-driven-scheduling/).
-- Use case: [Orchestrate machine learning pipelines with Airflow datasets](use-case-airflow-datasets-multi-team-ml.md).
+- Use case: [Orchestrate machine learning pipelines with Apache Airflow® datasets](use-case-airflow-datasets-multi-team-ml.md).
 
 :::
 
@@ -40,7 +40,7 @@ There are multiple resources for learning about this topic. See also:
 
 To get the most out of this guide, you should have an existing knowledge of:
 
-- Airflow scheduling concepts. See [Schedule DAGs in Airflow](scheduling-in-airflow.md).
+- Airflow scheduling concepts. See [Schedule DAGs in Apache Airflow®](scheduling-in-airflow.md).
 - Creating dependencies between DAGs. See [Cross-DAG Dependencies](cross-dag-dependencies.md).
 - The Astro Python SDK. See [Using the Astro Python SDK](https://www.astronomer.io/docs/tutorials/astro-python-sdk).
 
@@ -60,7 +60,7 @@ As of Airflow 2.8, you can use [listeners](https://airflow.apache.org/docs/apach
 - on_dataset_created
 - on_dataset_changed
 
-For examples, refer to our [Create Airflow listeners tutorial](https://www.astronomer.io/docs/learn/airflow-listeners).
+For examples, refer to our [Create Apache Airflow® listeners tutorial](https://www.astronomer.io/docs/learn/airflow-listeners).
 :::
 
 ## Dataset concepts
@@ -135,7 +135,7 @@ Airflow 2.9 added several new features to datasets:
 - [Combined Dataset and Time-based Scheduling](#combined-dataset-and-time-based-scheduling)
 - Datasets are now shown in the **Graph** view of a DAG in the Airflow UI. The `upstream1` DAG in the screenshot below is a consumer of the `dataset0` dataset, and has one task `update_dataset_1` that updates the `dataset1` dataset.
 
-    ![Screenshot of the Airflow UI showing the graph view of a DAG with a ](/img/guides/airflow-datasets_in_graph_view.png)
+    ![Screenshot of the Apache Airflow® UI showing the graph view of a DAG with a ](/img/guides/airflow-datasets_in_graph_view.png)
 
 For more information about datasets, see [Data-aware scheduling](https://airflow.apache.org/docs/apache-airflow/stable/concepts/datasets.html). 
 
@@ -168,10 +168,10 @@ DAGs that are triggered by datasets do not have the concept of a data interval. 
 As of Airflow 2.9+ there are three ways to update a dataset:
 
 - A task with an outlet parameter that references the dataset completes successfully.
-- A `POST` request to the [datasets endpoint of the Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Dataset).
+- A `POST` request to the [datasets endpoint of the Apache Airflow® REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Dataset).
 - A manual update in the Airflow UI. 
 
-    ![Screenshot of the Airflow UI showing the view history of updates to a specific dataset in the datasets tab with the play button to update the dataset manually highlighted](/img/guides/airflow-datasets_manually_update_dataset.png)
+    ![Screenshot of the Apache Airflow® UI showing the view history of updates to a specific dataset in the datasets tab with the play button to update the dataset manually highlighted](/img/guides/airflow-datasets_manually_update_dataset.png)
 
 ### Conditional dataset scheduling
 
@@ -238,7 +238,7 @@ with DAG(
 
 The `downstream1_on_any` DAG is triggered whenever any of the datasets `dataset1`, `dataset2`, `dataset3`, or `dataset4` are updated. When clicking on **x of 4 Datasets  updated** in the DAGs view, you can see the dataset expression that defines the schedule.
 
-![Screenshot of the Airflow UI with a pop up showing the dataset expression for the downstream1_on_any DAG listing the 4 datasets under "any"](/img/guides/airflow-datasets_dataset_expression_any.png)
+![Screenshot of the Apache Airflow® UI with a pop up showing the dataset expression for the downstream1_on_any DAG listing the 4 datasets under "any"](/img/guides/airflow-datasets_dataset_expression_any.png)
 
 You can also combine the logical operators to create more complex expressions. For example, to schedule a DAG on an update to either `dataset1` or `dataset2` and either `dataset3` or `dataset4`, you can use the following syntax:
 

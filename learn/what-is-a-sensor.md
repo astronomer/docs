@@ -22,7 +22,7 @@ In this guide, you'll learn how sensors are used in Airflow, best practices for 
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: Sensors](https://academy.astronomer.io/path/airflow-101/sensors-course) module.
+- Astronomer Academy: [Apache Airflow®: Sensors](https://academy.astronomer.io/path/airflow-101/sensors-course) module.
 
 :::
 
@@ -30,7 +30,7 @@ There are multiple resources for learning about this topic. See also:
 
 To get the most out of this guide, you should have an understanding of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
+- Basic Airflow concepts. See [Introduction to Apache Airflow®](intro-to-airflow.md).
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
 
 ## Sensor basics

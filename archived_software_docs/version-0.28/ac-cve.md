@@ -14,7 +14,7 @@ Currently, all supported Astronomer Certified images are listed in two places:
 - [Astronomer Downloads](https://astronomer.io/downloads)
 - [Astronomer's Docker Registry (Quay.io)](https://quay.io/repository/astronomer/ap-airflow?tab=tags)
 
-Refer to [Upgrade Apache Airflow on Astronomer](manage-airflow-versions.md) for detailed guidelines on how to upgrade between Airflow versions on your Software instance.
+Refer to [Upgrade Apache Airflow® on Astronomer](manage-airflow-versions.md) for detailed guidelines on how to upgrade between Airflow versions on your Software instance.
 
 ## Reporting Vulnerabilities and Security Concerns
 

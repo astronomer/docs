@@ -16,7 +16,7 @@ This enables the Executor to scale depending on how many Airflow tasks you're ru
 
 To configure these resources for each pod, you configure a pod template. Read this guide to learn how to configure a pod template and apply it to both Airflow Deployments and individual Airflow tasks. For more information on configuring pod template values, reference the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/#pod-templates).
 
-Note that you must have an Airflow Deployment on Astronomer running with the Kubernetes Executor to follow this setup. For more information on configuring an Executor, read [Configure a Deployment](configure-deployment.md). To learn more about different Executor types, read [Airflow Executors Explained](https://www.astronomer.io/guides/airflow-executors-explained).
+Note that you must have an Airflow Deployment on Astronomer running with the Kubernetes Executor to follow this setup. For more information on configuring an Executor, read [Configure a Deployment](configure-deployment.md). To learn more about different Executor types, read [Apache Airflow® Executors Explained](https://www.astronomer.io/guides/airflow-executors-explained).
 
 ## Configure the Kubernetes Executor Using Pod Templates
 

@@ -65,7 +65,7 @@ To use the Astro CLI to create a Deployment-level Service Account:
 
 ## Step 2: Make an Apache Airflow® REST API request
 
-With the information from Step 1, you can now execute requests against any supported endpoints in the [Airflow Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) via the following base URL:
+With the information from Step 1, you can now execute requests against any supported endpoints in the [Apache Airflow® Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) via the following base URL:
 
 ```
 https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-NAME>/airflow/api/v1
@@ -144,7 +144,7 @@ curl -v -X POST https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-RELEASE-NAME>/airf
 
 The `execution_date` parameter was replaced with `logical_date` in Airflow 2.2. If you run Airflow 2.2+, replace `execution_date` with `logical_date` and add a "Z" to the end of your timestamp. For example, `"logical_date": "2019-11-16T11:34:00Z"`.
 
-For more information, see [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html?highlight=pass%20data#data-interval).
+For more information, see [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html?highlight=pass%20data#data-interval).
 
 :::
 
@@ -191,13 +191,13 @@ As of its momentous [2.0 release](https://www.astronomer.io/blog/introducing-air
 
 :::tip
 
-To get started with Airflow 2 locally, read [Get started with Apache Airflow 2.0](https://www.astronomer.io/guides/get-started-airflow-2). To upgrade an Airflow Deployment on Astronomer to 2.0, make sure you've first upgraded to both Astronomer Software v0.23 and Airflow 1.10.15. For questions, reach out to [Astronomer support](https://support.astronomer.io).
+To get started with Airflow 2 locally, read [Get started with Apache Airflow® 2.0](https://www.astronomer.io/guides/get-started-airflow-2). To upgrade an Airflow Deployment on Astronomer to 2.0, make sure you've first upgraded to both Astronomer Software v0.23 and Airflow 1.10.15. For questions, reach out to [Astronomer support](https://support.astronomer.io).
 
 :::
 
 ### Make a request
 
-To convert a call from the Airflow experimental API, simply update the URL to use the endpoint specified in the [Airflow Stable REST API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
+To convert a call from the Airflow experimental API, simply update the URL to use the endpoint specified in the [Apache Airflow® Stable REST API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
 
 For example, requests to the [Get current configuration endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_config) are different depending on which version of Airflow you run.
 

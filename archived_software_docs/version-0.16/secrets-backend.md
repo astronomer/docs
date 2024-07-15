@@ -31,11 +31,11 @@ To use this feature, you'll need the following:
 If you do not already have a Vault server deployed but would like to test this feature, we'd recommend either:
 
 1. Deploying a light-weight server using [this Heroku Element](https://elements.heroku.com/buttons/pallavkothari/vault)
-2. Deploying a local server via the instructions in [our Airflow and Vault guide](https://www.astronomer.io/guides/airflow-and-hashicorp-vault)
+2. Deploying a local server via the instructions in [our Apache Airflow® and Vault guide](https://www.astronomer.io/guides/airflow-and-hashicorp-vault)
 
 ### Write a Connection to Vault
 
-To start, you'll need to write an [Airflow connection URI](https://airflow.apache.org/docs/stable/howto/connection/index.html#generating-connection-uri) to your Vault server.
+To start, you'll need to write an [Apache Airflow® connection URI](https://airflow.apache.org/docs/stable/howto/connection/index.html#generating-connection-uri) to your Vault server.
 
 To write the connection to your Vault server as a key/value pair, run:
 
@@ -133,7 +133,7 @@ Once you've added this DAG to your project:
 3. Click on `test-task` > `View Logs`
 4. Confirm your `smtp_default` connection information is being printed in the task logs.
 
-![Airflow Logs for Vault](/img/software/logs.png)
+![Apache Airflow® Logs for Vault](/img/software/logs.png)
 
 This works because we set the `connections_path` in our `AIRFLOW__SECRETS__BACKEND_KWARGS` to be `connections`. You are welcome to change this path name if you'd prefer to access Variables from a different Vault directory.
 
@@ -189,7 +189,7 @@ To start, ensure that you have an Airflow Connection or Variable added to Parame
 
 Those should live at `/airflow/connections` and `/airflow/variables`, respectively. If you're using a secret with a connection id of `smtp_default`, it should exist at `/airflow/connections/smtp_default`, for example.
 
-> **Note:** The connection you add _must_ exist as a string representing an Airflow `connection_uri`. [Here is an example](https://godatadriven.com/blog/highlights-of-the-apache-airflow-1-10-10-release/) to help get you started. You can read up on generating a `connection_uri` [in the Airflow docs here](https://airflow.apache.org/docs/stable/howto/connection/index.html#generating-connection-uri).
+> **Note:** The connection you add _must_ exist as a string representing an Airflow `connection_uri`. [Here is an example](https://godatadriven.com/blog/highlights-of-the-apache-airflow-1-10-10-release/) to help get you started. You can read up on generating a `connection_uri` [in the Apache Airflow® docs here](https://airflow.apache.org/docs/stable/howto/connection/index.html#generating-connection-uri).
 
 ### Set your Connection Locally
 

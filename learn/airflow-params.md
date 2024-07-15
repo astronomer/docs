@@ -15,9 +15,9 @@ import tdro_example_downstream_traditional from '!!raw-loader!../code-samples/da
 import simple_param_dag from '!!raw-loader!../code-samples/dags/airflow-params/simple_param_dag.py';
 import simple_param_dag_traditional from '!!raw-loader!../code-samples/dags/airflow-params/simple_param_dag_traditional.py';
 
-Params are arguments which you can pass to an Apache Airflow® DAG or task at runtime and are stored in the [Airflow context dictionary](airflow-context.md) for each DAG run. You can pass DAG and task-level params by using the `params` parameter.
+Params are arguments which you can pass to an Apache Airflow® DAG or task at runtime and are stored in the [Apache Airflow® context dictionary](airflow-context.md) for each DAG run. You can pass DAG and task-level params by using the `params` parameter.
 
-Params are ideal to store information that is specific to individual DAG runs like changing dates, file paths or ML model configurations. Params are not encrypted and therefore not suitable to pass secrets. See also [Best practices for storing information in Airflow](airflow-variables.md#best-practices-for-storing-information-in-airflow).
+Params are ideal to store information that is specific to individual DAG runs like changing dates, file paths or ML model configurations. Params are not encrypted and therefore not suitable to pass secrets. See also [Best practices for storing information in Apache Airflow®](airflow-variables.md#best-practices-for-storing-information-in-airflow).
 
 This guide covers:
 
@@ -30,9 +30,9 @@ This guide covers:
 
 To get the most out of this guide, you should have an understanding of:
 
-- Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
+- Airflow DAGs. See [Introduction to Apache Airflow® DAGs](dags.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- Airflow context. See [Access the Apache Airflow context](airflow-context.md).
+- Airflow context. See [Access the Apache Airflow® context](airflow-context.md).
 
 ## Pass params to a DAG run at runtime
 
@@ -43,7 +43,7 @@ Params can be passed to a DAG at runtime in four different ways:
 - Using the TriggerDagRunOperator with the `conf` parameter.
 - Making a POST request to the Airflow REST APIs [Trigger a new DAG run](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) endpoint and using the `conf` parameter.
 
-Param values passed to a DAG by any of these methods will override existing default values for the same key as long as the [Airflow core config `dag_run_conf_overrides_params`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-run-conf-overrides-params) is set to `True`. 
+Param values passed to a DAG by any of these methods will override existing default values for the same key as long as the [Apache Airflow® core config `dag_run_conf_overrides_params`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-run-conf-overrides-params) is set to `True`. 
 
 :::info 
 
@@ -77,7 +77,7 @@ After setting the configuration, you can start the DAG run with the **Trigger** 
 
 ### CLI
 
-When you run an [Airflow DAG from the CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#dags), you can pass params to the DAG run by providing a JSON string to the `--conf` flag. For example, to trigger the `params_default_example` DAG with the value of `Hello from the CLI` for `param1`, run: 
+When you run an [Apache Airflow® DAG from the CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#dags), you can pass params to the DAG run by providing a JSON string to the `--conf` flag. For example, to trigger the `params_default_example` DAG with the value of `Hello from the CLI` for `param1`, run: 
 
 <Tabs
     defaultValue="astro"
@@ -281,7 +281,7 @@ A boolean type param will create a toggle in the **Trigger DAG** UI.
 
 ![Bool param example](/img/guides/airflow-params_bool.png)
 
-If you provide custom HTML to the `custom_html_form` attribute, you can create more complex UI elements like a color picker. For sample code, see [this example DAG in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/_modules/airflow/example_dags/example_params_ui_tutorial.html). Note that this feature is deprecated as of Airflow 2.8 and its implementation will change in the future.
+If you provide custom HTML to the `custom_html_form` attribute, you can create more complex UI elements like a color picker. For sample code, see [this example DAG in the Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/_modules/airflow/example_dags/example_params_ui_tutorial.html). Note that this feature is deprecated as of Airflow 2.8 and its implementation will change in the future.
 
 ![Color picker example](/img/guides/airflow-params_color_picker.png)
 
@@ -323,7 +323,7 @@ t1 = BashOperator(
 
 ## Access params in a task
 
-You can access params in an Airflow task like you can with other elements in the [Airflow context](airflow-context.md).
+You can access params in an Airflow task like you can with other elements in the [Apache Airflow® context](airflow-context.md).
 
 <Tabs
     defaultValue="taskflow"
@@ -366,6 +366,6 @@ If you try to access a param that has not been specified for a specific DAG run,
 
 The order of precedence for params, with the first item taking most precedence, is as follows:
 
-- Params that have been provided for a specific DAG run by a method detailed in [pass params to a DAG run at runtime](#pass-params-to-a-dag-run-at-runtime) as long as the [Airflow config core.dag_run_conf_overrides_params](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-run-conf-overrides-params) is set to `True`.
+- Params that have been provided for a specific DAG run by a method detailed in [pass params to a DAG run at runtime](#pass-params-to-a-dag-run-at-runtime) as long as the [Apache Airflow® config core.dag_run_conf_overrides_params](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-run-conf-overrides-params) is set to `True`.
 - Param defaults that have been defined at the task level.
 - Param defaults that have been defined at the DAG level.

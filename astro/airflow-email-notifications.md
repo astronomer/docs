@@ -12,7 +12,7 @@ Incorporating a notification framework is critical to the health of your data pi
 - Email notifications
 - Custom callbacks and notifiers
 
-Use this guide to integrate with an SMTP service to have Astro send email notifications whenever a task run fails. To configure DAG alerts for Slack and PagerDuty, see [Astro alerts](alerts.md). For best practices and instructions on configuring other notifications in Airflow, including notifiers and custom callbacks, see [Manage Airflow DAG notifications](https://www.astronomer.io/docs/learn/error-notifications-in-airflow).
+Use this guide to integrate with an SMTP service to have Astro send email notifications whenever a task run fails. To configure DAG alerts for Slack and PagerDuty, see [Astro alerts](alerts.md). For best practices and instructions on configuring other notifications in Airflow, including notifiers and custom callbacks, see [Manage Apache Airflow® DAG notifications](https://www.astronomer.io/docs/learn/error-notifications-in-airflow).
 
 ## Configure Apache Airflow® email notifications
 
@@ -41,7 +41,7 @@ The following topics provide setup steps for integrating each of these external 
 
 5. Verify your integration in SendGrid to confirm that the key was activated. If you get an error indicating that SendGrid can't find the test email, try rerunning the cURL code in your terminal before retrying the verification.
 
-6. Add the following line to the `requirements.txt` file of your Astro project to install the [SendGrid Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-sendgrid/stable/index.html):
+6. Add the following line to the `requirements.txt` file of your Astro project to install the [SendGrid Apache Airflow® provider](https://airflow.apache.org/docs/apache-airflow-providers-sendgrid/stable/index.html):
 
     ```text
     apache-airflow-providers-sendgrid
@@ -55,7 +55,7 @@ The following topics provide setup steps for integrating each of these external 
 
     For more information about these environment variables, see [Send email using SendGrid](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html#send-email-using-sendgrid).
 
-8. In the Airflow UI, [create an Airflow connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#creating-a-connection-with-the-ui) with the following values:
+8. In the Airflow UI, [create an Apache Airflow® connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#creating-a-connection-with-the-ui) with the following values:
 
     - **Connection ID**: `smtp_default`
     - **Connection Type:**: `Email`

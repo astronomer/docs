@@ -108,7 +108,7 @@ $ vault kv get -mount=airflow connections/<your-connection-name>
 
 ## Step 3: Set up Vault locally
 
-In your Astro project, add the [Hashicorp Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/index.html) to your project by adding the following to your `requirements.txt` file:
+In your Astro project, add the [Hashicorp Apache Airflow® provider](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/index.html) to your project by adding the following to your `requirements.txt` file:
 
 ```bash
 apache-airflow-providers-hashicorp
@@ -132,7 +132,7 @@ If you run Vault on Hashicorp Cloud Platform (HCP):
 
 This tells Airflow to look for variable and connection information at the `airflow/variables/*` and `airflow/connections/*` paths in your Vault server. You can now run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
 
-For more information on the Airflow provider for Hashicorp Vault and how to further customize your integration, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/_api/airflow/providers/hashicorp/hooks/vault/index.html).
+For more information on the Airflow provider for Hashicorp Vault and how to further customize your integration, see the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/_api/airflow/providers/hashicorp/hooks/vault/index.html).
 
 ## Step 4: Deploy to Astro  
   

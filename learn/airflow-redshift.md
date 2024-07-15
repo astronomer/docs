@@ -11,7 +11,7 @@ Amazon Redshift is a fully-managed cloud data warehouse. It has become the most 
 
 Developing a dimensional data mart in Redshift requires automation and orchestration for repeated queries, data quality checks, and overall cluster operations. This makes Apache Airflow® the perfect orchestrator to pair with Redshift. With Airflow, you can orchestrate each step of your Redshift pipeline, integrate with services that clean your data, and store and publish your results using SQL and Python code.
 
-In this tutorial, you'll learn about the Redshift modules that are available in the [AWS Airflow provider package](https://registry.astronomer.io/providers/amazon). You'll also complete sample implementations that execute SQL in a Redshift cluster, pause and resume a Redshift cluster, and transfer data between Amazon S3 and a Redshift cluster.
+In this tutorial, you'll learn about the Redshift modules that are available in the [AWS Apache Airflow® provider package](https://registry.astronomer.io/providers/amazon). You'll also complete sample implementations that execute SQL in a Redshift cluster, pause and resume a Redshift cluster, and transfer data between Amazon S3 and a Redshift cluster.
 
 All code in this tutorial is located in the [GitHub repo](https://github.com/astronomer/cs-tutorial-redshift).
 
@@ -20,9 +20,9 @@ All code in this tutorial is located in the [GitHub repo](https://github.com/ast
 To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of [Amazon Redshift](https://aws.amazon.com/redshift/getting-started/?nc=sn&loc=4&dn=1).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
+- Airflow connections. See [Managing your Connections in Apache Airflow®](connections.md).
 
 ## Setup
 
@@ -66,7 +66,7 @@ To use Redshift operators in Airflow, you first need to install the Redshift pro
             - `redshift:PauseCluster`
             - `redshift:ResumeCluster`
 
-    If your Airflow instance is running in the same AWS VPC as your Redshift cluster, you may have other authentication options available. To authenticate to Redshift using IAM Authentication or Okta, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/redshift.html).
+    If your Airflow instance is running in the same AWS VPC as your Redshift cluster, you may have other authentication options available. To authenticate to Redshift using IAM Authentication or Okta, see the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/redshift.html).
 
 ### Sample data
 
@@ -135,7 +135,7 @@ insert into {{ params.schema }}.{{ params.table }}
 end;
 ```
 
-In this SQL query, there are multiple templated parameters: `{{ params.schema }}`, `{{ params.table }}`, and `{{ ds }}`. Based on the task definition, `{{ params.schema }}` is set as `fct` and `{{ params.table }}` is set as `listing`. These values are injected into the SQL query at runtime. The `{{ ds }}` variable is a built-in [Airflow Jinja Template Variable](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html) that returns the DAG run's logical date in the format YYYY-MM-DD. Using templated variables makes your SQL code reusable and aligned DAG writing best practices (particularly in relation to [idempotency](dag-best-practices.md#review-idempotency)).
+In this SQL query, there are multiple templated parameters: `{{ params.schema }}`, `{{ params.table }}`, and `{{ ds }}`. Based on the task definition, `{{ params.schema }}` is set as `fct` and `{{ params.table }}` is set as `listing`. These values are injected into the SQL query at runtime. The `{{ ds }}` variable is a built-in [Apache Airflow® Jinja Template Variable](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html) that returns the DAG run's logical date in the format YYYY-MM-DD. Using templated variables makes your SQL code reusable and aligned DAG writing best practices (particularly in relation to [idempotency](dag-best-practices.md#review-idempotency)).
 
 ## Using the S3ToRedshiftOperator
 

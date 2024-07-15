@@ -21,9 +21,9 @@ Starting in Airflow 2.7, you can use a special type of task to create and delete
 
 There are multiple resources for learning about this topic. See also:
 
-- Webinar: [What’s New in Airflow 2.7](https://www.astronomer.io/events/webinars/whats-new-in-airflow-2-7/).
-- Webinar: [Efficient data quality checks with Airflow 2.7](https://www.astronomer.io/events/webinars/efficient-data-quality-checks-with-airflow-2-7/).
-- Use case: [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
+- Webinar: [What’s New in Apache Airflow® 2.7](https://www.astronomer.io/events/webinars/whats-new-in-airflow-2-7/).
+- Webinar: [Efficient data quality checks with Apache Airflow® 2.7](https://www.astronomer.io/events/webinars/efficient-data-quality-checks-with-airflow-2-7/).
+- Use case: [Use Apache Airflow® setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
 
 :::
 
@@ -31,8 +31,8 @@ There are multiple resources for learning about this topic. See also:
 
 To get the most out of this guide, you should have an understanding of:
 
-- Airflow decorators. See [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators).
-- Managing dependencies in Airflow. See [Manage task and task group dependencies in Airflow](managing-dependencies.md).
+- Airflow decorators. See [Introduction to the TaskFlow API and Apache Airflow® decorators](airflow-decorators).
+- Managing dependencies in Airflow. See [Manage task and task group dependencies in Apache Airflow®](managing-dependencies.md).
 
 ## When to use setup/ teardown tasks
 

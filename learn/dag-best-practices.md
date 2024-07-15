@@ -21,13 +21,13 @@ In general, best practices fall into one of two categories:
 - DAG design
 - Using Airflow as an orchestrator
 
-For an in-depth walk through and examples of some of the concepts covered in this guide, it's recommended that you review the [DAG Writing Best Practices in Apache Airflow](https://www.astronomer.io/blog/dag-writing-best-practices-in-apache-airflow) webinar and the [Github repo](https://github.com/astronomer/webinar-dag-writing-best-practices) for DAG examples.
+For an in-depth walk through and examples of some of the concepts covered in this guide, it's recommended that you review the [DAG Writing Best Practices in Apache Airflow®](https://www.astronomer.io/blog/dag-writing-best-practices-in-apache-airflow) webinar and the [Github repo](https://github.com/astronomer/webinar-dag-writing-best-practices) for DAG examples.
 
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
+- Basic Airflow concepts. See [Introduction to Apache Airflow®](intro-to-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 
 ## Review idempotency
@@ -82,7 +82,7 @@ A better way of implementing this is by using an Airflow variable:
 yesterday = {{ yesterday_ds_nodash }}
 ```
 
-You can use one of the Airflow built-in [variables and macros](https://airflow.apache.org/docs/apache-airflow/stable/macros-ref.html), or you can create your own templated field to pass information at runtime. For more information on this topic, see [templating and macros in Airflow](templating.md).
+You can use one of the Airflow built-in [variables and macros](https://airflow.apache.org/docs/apache-airflow/stable/macros-ref.html), or you can create your own templated field to pass information at runtime. For more information on this topic, see [templating and macros in Apache Airflow®](templating.md).
 
 ### Incremental record filtering
 

@@ -17,7 +17,7 @@ In this tutorial you'll use Airflow to ingest movie descriptions into Weaviate, 
 
 There are multiple resources for learning about this topic. See also:
 
-- Webinar: [Power your LLMOps with Airflow’s Weaviate Provider](https://www.astronomer.io/events/webinars/power-your-llmops-with-airflows-weaviate-provider/).
+- Webinar: [Power your LLMOps with Apache Airflow®’s Weaviate Provider](https://www.astronomer.io/events/webinars/power-your-llmops-with-airflows-weaviate-provider/).
 
 :::
 
@@ -28,7 +28,7 @@ Weaviate allows you to store objects alongside their vector embeddings and to qu
 Integrating Weaviate with Airflow into one end-to-end machine learning pipeline allows you to:
 
 - Use Airflow's [data-driven scheduling](airflow-datasets.md) to run operations on Weaviate based on upstream events in your data ecosystem, such as when a new model is trained or a new dataset is available.
-- Run dynamic queries based on upstream events in your data ecosystem or user input via [Airflow params](airflow-params.md) against Weaviate to retrieve objects with similar vectors.
+- Run dynamic queries based on upstream events in your data ecosystem or user input via [Apache Airflow® params](airflow-params.md) against Weaviate to retrieve objects with similar vectors.
 - Add Airflow features like [retries](rerunning-dags.md#automatically-retry-tasks) and [alerts](error-notifications-in-airflow.md) to your Weaviate operations.
 
 ## Time to complete
@@ -40,10 +40,10 @@ This tutorial takes approximately 30 minutes to complete.
 To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of Weaviate. See [Weaviate Introduction](https://weaviate.io/developers/weaviate).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
-- Airflow decorators. [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
+- Airflow decorators. [Introduction to the TaskFlow API and Apache Airflow® decorators](airflow-decorators.md).
 - Airflow hooks. See [Hooks 101](what-is-a-hook.md).
-- Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
+- Airflow connections. See [Managing your Connections in Apache Airflow®](connections.md).
 
 ## Prerequisites
 
@@ -67,7 +67,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     $ astro dev init
     ```
 
-2. Add the following two packages to your `requirements.txt` file to install the [Weaviate Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-weaviate/stable/index.html) and the [Weaviate Python client](https://weaviate.io/developers/weaviate/client-libraries/python) in your Astro project:
+2. Add the following two packages to your `requirements.txt` file to install the [Weaviate Apache Airflow® provider](https://airflow.apache.org/docs/apache-airflow-providers-weaviate/stable/index.html) and the [Weaviate Python client](https://weaviate.io/developers/weaviate/client-libraries/python) in your Astro project:
 
     ```text
     apache-airflow-providers-weaviate==1.0.0
@@ -106,7 +106,7 @@ The example code from this tutorial is also available on [GitHub](https://github
           - airflow
     ```
 
-4. To create an [Airflow connection](connections.md) to the local Weaviate instance, add the following environment variable to your `.env` file. You only need to provide an `X-OpenAI-Api-Key` if you plan on using the OpenAI API for vectorization.
+4. To create an [Apache Airflow® connection](connections.md) to the local Weaviate instance, add the following environment variable to your `.env` file. You only need to provide an `X-OpenAI-Api-Key` if you plan on using the OpenAI API for vectorization.
 
     ```text
     AIRFLOW_CONN_WEAVIATE_DEFAULT='{
@@ -162,11 +162,11 @@ Create a new file called `movie_data.txt` in the `include` directory, then copy 
 
 1. Run `astro dev start` in your Astro project to start Airflow and open the Airflow UI at `localhost:8080`.
 
-2. In the Airflow UI, run the `query_movie_vectors` DAG by clicking the play button. Then, provide [Airflow params](airflow-params.md) for `movie_concepts`.
+2. In the Airflow UI, run the `query_movie_vectors` DAG by clicking the play button. Then, provide [Apache Airflow® params](airflow-params.md) for `movie_concepts`.
 
     Note that if you are running the project locally on a larger dataset, the `import_data` task might take a longer time to complete because Weaviate generates the vector embeddings in this task.
 
-    ![Screenshot of the Airflow UI showing the successful completion of the `query_movie_vectors` DAG in the Grid view with the Graph tab selected. Since this was the first run of the DAG, the schema had to be newly created. The schema creation was enabled when the branching task `branch_create_schema` selected the downstream `create_schema` task to run.](/img/tutorials/airflow-weaviate_successful_dag.png)
+    ![Screenshot of the Apache Airflow® UI showing the successful completion of the `query_movie_vectors` DAG in the Grid view with the Graph tab selected. Since this was the first run of the DAG, the schema had to be newly created. The schema creation was enabled when the branching task `branch_create_schema` selected the downstream `create_schema` task to run.](/img/tutorials/airflow-weaviate_successful_dag.png)
 
 
 3. View your movie suggestion in the task logs of the `query_embeddings` task:

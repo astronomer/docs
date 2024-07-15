@@ -16,7 +16,7 @@ import TabItem from '@theme/TabItem';
 - Run a SnowPark python function
 - Load and export data to/from Snowflake
 
-This guide provides the basic setup for creating a Snowflake connection. For a complete integration tutorial, see [Orchestrate Snowflake Queries with Airflow](airflow-snowflake.md). To run Snowpark queries in Airflow, see [Run Snowpark queries with the ExternalPythonOperator in Apache Airflow](airflow-isolated-environments.md).
+This guide provides the basic setup for creating a Snowflake connection. For a complete integration tutorial, see [Orchestrate Snowflake Queries with Apache Airflow®](airflow-snowflake.md). To run Snowpark queries in Airflow, see [Run Snowpark queries with the ExternalPythonOperator in Apache Airflow®](airflow-isolated-environments.md).
 
 ## Prerequisites
 
@@ -128,6 +128,6 @@ Airflow uses the [Snowflake connector](https://github.com/snowflakedb/snowflake-
 
 ## See also
 
-- [Apache Airflow Snowflake provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-snowflake/stable/connections/snowflake.html)
+- [Apache Airflow® Snowflake provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-snowflake/stable/connections/snowflake.html)
 - [Snowflake Modules](https://registry.astronomer.io/modules?limit=24&sorts=updatedAt%3Adesc&query=snowflake) and [example DAGs](https://registry.astronomer.io/dags?query=snowflake) in the Astronomer Registry
-- [Import and export Airflow connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
+- [Import and export Apache Airflow® connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)

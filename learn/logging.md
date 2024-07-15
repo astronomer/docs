@@ -31,8 +31,8 @@ In addition to standard logging, Airflow provides observability features that yo
 
 To get the most out of this guide, you should have an understanding of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
-- Airflow core components. See [Airflow's components](airflow-components.md).
+- Basic Airflow concepts. See [Introduction to Apache Airflow®](intro-to-airflow.md).
+- Airflow core components. See [Apache Airflow®'s components](airflow-components.md).
 
 ## Apache Airflow® logging
 
@@ -61,7 +61,7 @@ By default, log file names have the following format:
 
 These filename formats can be reconfigured using `log_filename_template` in `airflow.cfg`.
 
-You can view the full default logging configuration under `DEFAULT_LOGGING_CONFIG` in the [Airflow source code](https://github.com/apache/airflow/blob/main/airflow/config_templates/airflow_local_settings.py).
+You can view the full default logging configuration under `DEFAULT_LOGGING_CONFIG` in the [Apache Airflow® source code](https://github.com/apache/airflow/blob/main/airflow/config_templates/airflow_local_settings.py).
 
 The Airflow UI shows logs using a `read()` method on task handlers that is not part of stdlib. `read()` checks for available logs and displays them in a predefined order:
 
@@ -77,9 +77,9 @@ By default, Airflow outputs logs to the `base_log_folder` configured in `airflow
 
 Airflow also makes audit logs available in the Airflow UI under the "Browse" tab. For example, you can see which user triggered a DAG run:
 
-![Audit Logs List View in the Airflow UI](/img/guides/audit-logs-cap.png)
+![Audit Logs List View in the Apache Airflow® UI](/img/guides/audit-logs-cap.png)
 
-For details about the log levels and events tracked, see [Audit logs in Airflow](https://airflow.apache.org/docs/apache-airflow/stable/security/audit_logs.html).
+For details about the log levels and events tracked, see [Audit logs in Apache Airflow®](https://airflow.apache.org/docs/apache-airflow/stable/security/audit_logs.html).
 
 
 
@@ -94,7 +94,7 @@ If you run Airflow locally, logging information is accessible in the following l
 
 ### Docker Apache Airflow® environment
 
-If you run Airflow in Docker using the [Astro CLI](https://www.astronomer.io/docs/software/install-cli) or by following the relevant guidance in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html), you can find the logs for each Airflow component in the following locations:
+If you run Airflow in Docker using the [Astro CLI](https://www.astronomer.io/docs/software/install-cli) or by following the relevant guidance in the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html), you can find the logs for each Airflow component in the following locations:
 
 - Scheduler: Logs are in `/usr/local/airflow/logs/scheduler` within the scheduler Docker container by default. To enter a docker container in a bash session, run `docker exec -it <container_id> /bin/bash`.
 - Webserver: Logs appear in the console by default. You can access the logs by running `docker logs <webserver_container_id>`.
@@ -164,7 +164,7 @@ Logging in Airflow is ready to use without any additional configuration. However
 
 :::info
 
-Options for configuring logging on Astro differ from those described in this section. For guidance specific to Astro, see: [View Airflow component and task logs for a Deployment](https://www.astronomer.io/docs/astro/view-logs).
+Options for configuring logging on Astro differ from those described in this section. For guidance specific to Astro, see: [View Apache Airflow® component and task logs for a Deployment](https://www.astronomer.io/docs/astro/view-logs).
 
 :::
 

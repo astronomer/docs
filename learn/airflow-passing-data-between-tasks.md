@@ -22,8 +22,8 @@ There are a few methods you can use to implement data sharing between your Airfl
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: XComs 101](https://academy.astronomer.io/path/airflow-101/astro-runtime-xcoms-101) module.
-- Webinar: [How to pass data between your Airflow tasks](https://www.astronomer.io/events/webinars/how-to-pass-data-between-your-airflow-tasks/).
+- Astronomer Academy: [Apache Airflow®: XComs 101](https://academy.astronomer.io/path/airflow-101/astro-runtime-xcoms-101) module.
+- Webinar: [How to pass data between your Apache Airflow® tasks](https://www.astronomer.io/events/webinars/how-to-pass-data-between-your-airflow-tasks/).
 
 :::
 
@@ -32,7 +32,7 @@ There are multiple resources for learning about this topic. See also:
 To get the most out of this guide, you should have an understanding of:
 
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- DAG writing best practices. See [DAG writing best practices in Apache Airflow](dag-best-practices.md).
+- DAG writing best practices. See [DAG writing best practices in Apache Airflow®](dag-best-practices.md).
 
 ## Best practices
 
@@ -66,7 +66,7 @@ You can view your XComs in the Airflow UI by going to **Admin** > **XComs**. You
 
 XComs should be used to pass small amounts of data between tasks. For example, task metadata, dates, model accuracy, or single value query results are all ideal data to use with XCom.
 
-While you can technically pass large amounts of data with XCom, be very careful when doing so and consider using [a custom XCom backend](custom-xcom-backend-strategies.md) and [scaling your Airflow resources](airflow-scaling-workers.md).
+While you can technically pass large amounts of data with XCom, be very careful when doing so and consider using [a custom XCom backend](custom-xcom-backend-strategies.md) and [scaling your Apache Airflow® resources](airflow-scaling-workers.md).
 
 When you use the standard XCom backend, the size-limit for an XCom is determined by your metadata database. Common sizes are: 
 

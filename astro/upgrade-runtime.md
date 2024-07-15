@@ -27,7 +27,7 @@ Astro upgrades can include breaking changes, especially when you're upgrading to
 
 ## Step 2: (Optional) Pin provider package versions
 
-Major Astro Runtime upgrades can include major upgrades to built-in provider packages. These package upgrades can sometimes include breaking changes for your DAGs. See the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers/packages-ref.html) for a list of all available provider packages and their release notes.
+Major Astro Runtime upgrades can include major upgrades to built-in provider packages. These package upgrades can sometimes include breaking changes for your DAGs. See the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow-providers/packages-ref.html) for a list of all available provider packages and their release notes.
 
 For the most stable upgrade path, Astronomer recommends pinning all provider package versions from your current Runtime version before upgrading. To check the version of all provider packages installed in your Runtime version, run:
 
@@ -263,4 +263,4 @@ Astro Runtime 5.0.0, based on Airflow 2.3, includes changes to the schema of the
 
     These warnings have no impact on your tasks or DAGs and can be ignored. If you want to remove these warning messages from the Airflow UI, reach out to [Astronomer support](https://cloud.astronomer.io/open-support-request). If requested, Astronomer can drop incompatible tables from your metadata database.
 
-For more information on Airflow 2.3, see ["Apache Airflow 2.3.0 is here"](https://airflow.apache.org/blog/airflow-2.3.0/) or the [Airflow 2.3.0 changelog](https://airflow.apache.org/docs/apache-airflow/2.3.0/release_notes.html#airflow-2-3-0-2022-04-30).
+For more information on Airflow 2.3, see ["Apache Airflow® 2.3.0 is here"](https://airflow.apache.org/blog/airflow-2.3.0/) or the [Apache Airflow® 2.3.0 changelog](https://airflow.apache.org/docs/apache-airflow/2.3.0/release_notes.html#airflow-2-3-0-2022-04-30).

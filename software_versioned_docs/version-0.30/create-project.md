@@ -47,7 +47,7 @@ Your Dockerfile will include reference to an Astro Runtime Docker image. [Astro 
 
 This Docker image is hosted on [Astronomer's Quay.io registry](https://quay.io/repository/astronomer/runtime?tab=tags) and allows you to run Airflow on Astronomer. Additionally, the image you include in your Dockerfile dictates the version of Airflow you'd like to run both when you're developing locally and pushing up to Astro.
 
-Because Astro Runtime releases more frequently than Apache Airflow, a Runtime image's version number will be different than the Apache Airflow version it supports. See [Astro Runtime and Apache Airflow parity](runtime-image-architecture.md).
+Because Astro Runtime releases more frequently than Apache Airflow, a Runtime image's version number will be different than the Apache Airflow version it supports. See [Astro Runtime and Apache Airflow® parity](runtime-image-architecture.md).
 
 By default, the Docker image in your Dockerfile is:
 
@@ -55,7 +55,7 @@ By default, the Docker image in your Dockerfile is:
 FROM quay.io/astronomer/astro-runtime:<latest-runtime-version>
 ```
 
-This command installs a Debian-based Astro Runtime image that supports the latest version of Airflow. To use a specific Airflow version, read [Upgrade Airflow](manage-airflow-versions.md).
+This command installs a Debian-based Astro Runtime image that supports the latest version of Airflow. To use a specific Airflow version, read [Upgrade Apache Airflow®](manage-airflow-versions.md).
 
 ### Example DAG
 
@@ -90,7 +90,7 @@ It might take a few minutes for the Airflow UI to be available. As you wait for 
 
 After logging in, you should see the DAGs from your `dags` directory in the Airflow UI.
 
-![Example DAG in the Airflow UI](/img/software/sample-dag.png)
+![Example DAG in the Apache Airflow® UI](/img/software/sample-dag.png)
 
 ## What's next?
 

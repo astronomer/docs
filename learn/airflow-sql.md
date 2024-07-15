@@ -70,7 +70,7 @@ To make working with SQL easier, Airflow includes many built in operators. This 
 
 :::info
 
-In Airflow 2+, provider packages are separate from the core of Airflow. If you're running Airflow 2+, you might need to install separate packages (such as `apache-airflow-providers-snowflake`) to use the hooks, operators, and connections described here. In an Astro project, you can do this by adding the package names to your `requirements.txt` file. To learn more, read [Airflow Docs on Provider Packages](https://airflow.apache.org/docs/apache-airflow-providers/index.html).
+In Airflow 2+, provider packages are separate from the core of Airflow. If you're running Airflow 2+, you might need to install separate packages (such as `apache-airflow-providers-snowflake`) to use the hooks, operators, and connections described here. In an Astro project, you can do this by adding the package names to your `requirements.txt` file. To learn more, read [Apache Airflow® Docs on Provider Packages](https://airflow.apache.org/docs/apache-airflow-providers/index.html).
 
 :::
 
@@ -120,9 +120,9 @@ CALL sp_pi_squared();
 
 `sp_pi()` and `sp_pi_squared()` are two stored procedures that are defined in a Snowflake instance. Note that the SQL in these files could be any type of query you need to execute. Sprocs are used here only as an example.
 
-Finally, you need to set up a connection to Snowflake. There are a few ways to manage connections using Astronomer, including [IAM roles](https://www.astronomer.io/docs/software/integrate-iam), [secrets managers](https://www.astronomer.io/docs/software/secrets-backend), and the [Airflow API](https://www.astronomer.io/docs/software/airflow-api). For this example, set up a connection using the Airflow UI. Because the connection in the DAG is called `snowflake`, your configured connection should look something like this:
+Finally, you need to set up a connection to Snowflake. There are a few ways to manage connections using Astronomer, including [IAM roles](https://www.astronomer.io/docs/software/integrate-iam), [secrets managers](https://www.astronomer.io/docs/software/secrets-backend), and the [Apache Airflow® API](https://www.astronomer.io/docs/software/airflow-api). For this example, set up a connection using the Airflow UI. Because the connection in the DAG is called `snowflake`, your configured connection should look something like this:
 
-![Configured Snowflake connection in the Airflow UI](/img/guides/snowflake_connection.png)
+![Configured Snowflake connection in the Apache Airflow® UI](/img/guides/snowflake_connection.png)
 
 With the connection established, you can now run the DAG to execute the SQL queries.
 
@@ -194,7 +194,7 @@ WHERE date = '{{ params.date }}'
 
 :::tip
 
-Airflow params can also be defined at the DAG-level and passed to a DAG at runtime. Params passed at runtime will override param defaults defined at the DAG or the task level. For more information on params see the [Create and use params in Airflow](airflow-params.md) guide.
+Airflow params can also be defined at the DAG-level and passed to a DAG at runtime. Params passed at runtime will override param defaults defined at the DAG or the task level. For more information on params see the [Create and use params in Apache Airflow®](airflow-params.md) guide.
 
 :::
 
@@ -296,4 +296,4 @@ You've learned how to interact with your SQL database from Airflow. There are so
 - What if you want to retrieve data with the PostgresOperator?
 - Is it scalable?
 
-Find out more on Astronomer's [Airflow: Branching](https://academy.astronomer.io/astro-runtime-branching) course for free today.
+Find out more on Astronomer's [Apache Airflow®: Branching](https://academy.astronomer.io/astro-runtime-branching) course for free today.

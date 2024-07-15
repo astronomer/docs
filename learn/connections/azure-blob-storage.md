@@ -237,6 +237,6 @@ Airflow uses the [Azure SDK for Python](https://github.com/Azure/azure-sdk-for-p
 
 ## See also
 
-- [Apache Airflow Microsoft Azure provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/connections/wasb.html).
+- [Apache Airflow® Microsoft Azure provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/connections/wasb.html).
 - [Azure blob storage modules](https://registry.astronomer.io/modules?query=wasb) and [example DAGs](https://registry.astronomer.io/dags/covid_to_azure_blob/versions/1.2.0) in the Astronomer Registry.
-- [Import and export Airflow connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#from-environment-variables).
+- [Import and export Apache Airflow® connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#from-environment-variables).

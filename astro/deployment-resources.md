@@ -11,7 +11,7 @@ Your Deployment resources are the computational resources Astro uses to run Apac
 
 ## Update Apache Airflow® configurations
 
-To update a Deployment's [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html), you set the configurations as environment variables on Astro. See [Set Airflow configurations using environment variables](manage-env-vars.md).
+To update a Deployment's [Apache Airflow® configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html), you set the configurations as environment variables on Astro. See [Set Apache Airflow® configurations using environment variables](manage-env-vars.md).
 
 ## Update environment objects
 
@@ -83,7 +83,7 @@ To manage Kubernetes resources programmatically, you can set default Pod limits 
 
 ## Scheduler size
 
-The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met.
+The [Apache Airflow® scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met.
 
 Scheduler resources must be set for each Deployment and are managed separately from cluster-level infrastructure. To ensure that your tasks have the CPU and memory required to complete successfully on Astro, you can provision the scheduler with varying amounts of CPU and memory.
 

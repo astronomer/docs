@@ -218,7 +218,7 @@ Here, the full Environment Variable would read:
 ENV AIRFLOW_CONN_MY_PROD_DB=my-conn-type://login:password@host:5432/schema
 ```
 
-You're free to set this Environment Variable via an `.env` file locally, via your Dockerfile or via the Software UI as explained above. For more information on how to generate your Connection URI, refer to [Airflow's documentation](https://airflow.apache.org/docs/stable/howto/connection/index.html#generating-connection-uri).
+You're free to set this Environment Variable via an `.env` file locally, via your Dockerfile or via the Software UI as explained above. For more information on how to generate your Connection URI, refer to [Apache Airflow®'s documentation](https://airflow.apache.org/docs/stable/howto/connection/index.html#generating-connection-uri).
 
 ### Apache Airflow® Variables
 
@@ -239,4 +239,4 @@ Here, the Environment Variable would read:
 ENV AIRFLOW_VAR_MY_VAR=2
 ```
 
-> **Note:** The ability to store and fetch Airflow Variables was [introduced in Airflow 1.10.10](https://github.com/apache/airflow/pull/7923) and is not available in earlier versions.
+> **Note:** The ability to store and fetch Airflow Variables was [introduced in Apache Airflow® 1.10.10](https://github.com/apache/airflow/pull/7923) and is not available in earlier versions.

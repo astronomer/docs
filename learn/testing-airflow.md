@@ -25,7 +25,7 @@ To get the most out of this guide, you should have an understanding of:
 - Python testing basics. See [Getting Started with Testing in Python](https://realpython.com/python-testing/).
 - At least one Python test runner. This guide mostly uses [`pytest`](https://docs.pytest.org/en/stable/index.html), but you can use others including [`nose2`](https://docs.nose2.io/en/latest/getting_started.html) and [`unittest`](https://docs.python.org/3/library/unittest.html).
 - CI/CD for Python scripts. See [Continuous Integration with Python: An Introduction](https://realpython.com/python-continuous-integration/).
-- Basic Airflow and [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli) concepts. See [Get started with Airflow](get-started-with-airflow.md).
+- Basic Airflow and [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli) concepts. See [Get started with Apache Airflow®](get-started-with-airflow.md).
 
 ## Write DAG validation tests
 
@@ -121,7 +121,7 @@ def test_dag_tags(dag_id, dag, fileloc):
 
 :::tip
 
-You can view the attributes and methods available for the `dag` model in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/DAG).
+You can view the attributes and methods available for the `dag` model in the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/DAG).
 
 :::
 
@@ -184,15 +184,15 @@ If you're running Airflow locally, apply your changes by refreshing the Airflow 
 
 The `dag.test()` method allows you to run all tasks in a DAG within a single serialized Python process, without running the Airflow scheduler. The `dag.test()` method lets you iterate faster and use IDE debugging tools when developing DAGs.
 
-This functionality replaces the deprecated DebugExecutor. Learn more in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/debug.html).
+This functionality replaces the deprecated DebugExecutor. Learn more in the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/debug.html).
 
 ### Prerequisites
 
 Ensure that your testing environment has:
 
-- [Airflow 2.5.0](https://airflow.apache.org/docs/apache-airflow/stable/start.html) or later. You can check your version by running `airflow version`.
+- [Apache Airflow® 2.5.0](https://airflow.apache.org/docs/apache-airflow/stable/start.html) or later. You can check your version by running `airflow version`.
 - All provider packages that your DAG uses.
-- An initialized [Airflow metadata database](airflow-database.md), if your DAG uses elements of the metadata database like XCom. The Airflow metadata database is created when Airflow is first run in an environment. You can check that it exists with `airflow db check` and initialize a new database with `airflow db migrate` (`airflow db init` in Airflow versions pre-2.7).
+- An initialized [Apache Airflow® metadata database](airflow-database.md), if your DAG uses elements of the metadata database like XCom. The Airflow metadata database is created when Airflow is first run in an environment. You can check that it exists with `airflow db check` and initialize a new database with `airflow db migrate` (`airflow db init` in Airflow versions pre-2.7).
 
 You may wish to install these requirements and test your DAGs in a [virtualenv](https://virtualenv.pypa.io/en/latest/) to avoid dependency conflicts in your local environment.
 
@@ -272,7 +272,7 @@ If you use the Astro CLI exclusively and do not have the `airflow` package insta
 To debug your DAGs in a more realistic environment, you can pass the following Airflow environment configurations to `dag.test()`:
 
 - `execution_date` passed as a `pendulum.datetime` object.
-- [Airflow connections](connections.md) passed as a `.yaml` file.
+- [Apache Airflow® connections](connections.md) passed as a `.yaml` file.
 - Airflow variables passed as a `.yaml` file.
 - DAG configuration passed as a dictionary.
 
@@ -390,24 +390,24 @@ The most common way to implement unit tests in production is to automate them as
 
 Mocking is the imitation of an external system, dataset, or other object. For example, you might use mocking with an Airflow unit test if you are testing a connection, but don't have access to the metadata database. Mocking could also be used when you need to test an operator that executes an external service through an API endpoint, but you don't want to wait for that service to run a simple test. 
 
-Many [Airflow tests](https://github.com/apache/airflow/tree/master/tests) use mocking. The blog [Testing and debugging Apache Airflow](https://godatadriven.com/blog/testing-and-debugging-apache-airflow/) discusses Airflow mocking and it might help you get started.
+Many [Apache Airflow® tests](https://github.com/apache/airflow/tree/master/tests) use mocking. The blog [Testing and debugging Apache Airflow®](https://godatadriven.com/blog/testing-and-debugging-apache-airflow/) discusses Airflow mocking and it might help you get started.
 
 ## Data quality checks
 
 Testing your DAG ensures that your code fulfills your requirements. But even if your code is perfect, data quality issues can break or negatively affect your pipelines. Airflow, being at the center of the modern data engineering stack, is the ideal tool for checking data quality.
 
-Data quality checks differ from code-related testing because the data is not static like your DAG code. It is best practice to incorporate data quality checks into your DAGs and use [Airflow dependencies](managing-dependencies.md) and [branching](airflow-branch-operator.md) to handle what should happen in the event of a data quality issue, from halting the pipeline to [sending notifications](error-notifications-in-airflow.md) to data quality stakeholders.
+Data quality checks differ from code-related testing because the data is not static like your DAG code. It is best practice to incorporate data quality checks into your DAGs and use [Apache Airflow® dependencies](managing-dependencies.md) and [branching](airflow-branch-operator.md) to handle what should happen in the event of a data quality issue, from halting the pipeline to [sending notifications](error-notifications-in-airflow.md) to data quality stakeholders.
 
 There are many ways you can integrate data quality checks into your DAG:
 
 - [SQL check operators](airflow-sql-data-quality.md): Airflow-native operators that run highly customizable data quality checks on a wide variety of relational databases.
-- [Great Expectations](airflow-great-expectations.md): A data quality testing suite with an [Airflow provider](https://registry.astronomer.io/providers/great-expectations) offering the ability to define data quality checks in JSON to run on relational databases, Spark and pandas DataFrames.
+- [Great Expectations](airflow-great-expectations.md): A data quality testing suite with an [Apache Airflow® provider](https://registry.astronomer.io/providers/great-expectations) offering the ability to define data quality checks in JSON to run on relational databases, Spark and pandas DataFrames.
 - [Soda Core](https://www.astronomer.io/docs/learn/soda-data-quality): A framework to check data quality using YAML configuration to define data quality checks to run on relational databases and Spark dataframes.
 
-Data quality checks work better at scale if you design your DAGs to load or process data incrementally. To learn more about incremental loading, see [DAG Writing Best Practices in Apache Airflow](dag-best-practices.md). Processing smaller, incremental chunks of data in each DAG Run ensures that any data quality issues have a limited effect.
+Data quality checks work better at scale if you design your DAGs to load or process data incrementally. To learn more about incremental loading, see [DAG Writing Best Practices in Apache Airflow®](dag-best-practices.md). Processing smaller, incremental chunks of data in each DAG Run ensures that any data quality issues have a limited effect.
 
 Learn more about how to approach data quality within Airflow: 
 
-- [Data quality and Airflow guide](data-quality.md)
-- [How to Keep Data Quality in Check with Airflow](https://www.astronomer.io/blog/how-to-keep-data-quality-in-check-with-airflow/)
-- [Get Improved Data Quality Checks in Airflow with the Updated Great Expectations Operator](https://www.astronomer.io/blog/improved-data-quality-checks-in-airflow-with-great-expectations-operator/)
+- [Data quality and Apache Airflow® guide](data-quality.md)
+- [How to Keep Data Quality in Check with Apache Airflow®](https://www.astronomer.io/blog/how-to-keep-data-quality-in-check-with-airflow/)
+- [Get Improved Data Quality Checks in Apache Airflow® with the Updated Great Expectations Operator](https://www.astronomer.io/blog/improved-data-quality-checks-in-airflow-with-great-expectations-operator/)

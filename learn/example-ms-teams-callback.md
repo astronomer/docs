@@ -6,7 +6,7 @@ sidebar_label: "Microsoft Teams Notifications"
 sidebar_custom_props: { icon: 'img/examples/ms_teams_logo.png' }
 ---
 
-This example shows how to set up Apache Airflow® notifications in a [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software) channel by using [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks). Teams notifications about DAG runs and tasks let you quickly inform many team members about the status of your data pipelines.
+This example shows how to set up Apache Airflow® notifications in a [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software) channel by using [Apache Airflow® callbacks](error-notifications-in-airflow.md#airflow-callbacks). Teams notifications about DAG runs and tasks let you quickly inform many team members about the status of your data pipelines.
 
 ## Before you start
 
@@ -18,7 +18,7 @@ Before trying this example, make sure you have:
 
 ## Send task failure notifications to MS Teams
 
-Follow these steps to receive notifications in MS Teams for failed tasks in an example DAG. Refer to the [Airflow callbacks section](error-notifications-in-airflow.md#airflow-callbacks) of our notifications guide to learn how to set up notifications for other types of events.
+Follow these steps to receive notifications in MS Teams for failed tasks in an example DAG. Refer to the [Apache Airflow® callbacks section](error-notifications-in-airflow.md#airflow-callbacks) of our notifications guide to learn how to set up notifications for other types of events.
 
 1. Open the folder containing your Astro Project. Copy the contents of the `include` folder in the [project GitHub repository](https://github.com/astronomer/cs-tutorial-msteams-callbacks/tree/main/include) to your Astro project `include` folder.
 
@@ -77,11 +77,11 @@ Follow these steps to receive notifications in MS Teams for failed tasks in an e
 
 6. Run your DAG. Any failed task will trigger the `failure_callback` function which sends a notification message to your Teams channel.
 
-The `include` folder of the [project repository](https://github.com/astronomer/cs-tutorial-msteams-callbacks) also contains callback functions for other triggers in addition to the failure callback shown here. You can modify any of the functions to customize the notification message. To learn more about all available callback parameters, see [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks).
+The `include` folder of the [project repository](https://github.com/astronomer/cs-tutorial-msteams-callbacks) also contains callback functions for other triggers in addition to the failure callback shown here. You can modify any of the functions to customize the notification message. To learn more about all available callback parameters, see [Apache Airflow® callbacks](error-notifications-in-airflow.md#airflow-callbacks).
 
 ![Notification](/img/examples/example-ms-teams-callback-task-fail-teams-msg.png)
 
 ## See also
 
 - [MS Teams developer documentation](https://learn.microsoft.com/en-us/microsoftteams/platform/mstdd-landing)
-- [Manage Airflow DAG notifications](error-notifications-in-airflow.md)
+- [Manage Apache Airflow® DAG notifications](error-notifications-in-airflow.md)

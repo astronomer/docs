@@ -15,14 +15,14 @@ Astronomer strongly recommends upgrading any Astronomer Software Deployments cur
 
 Airflow 2 was built to be fast, reliable, and infinitely scalable. Among the hundreds of new features both large and small, Airflow 2 includes:
 
-- [Refactored Airflow Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/scheduler.html#running-more-than-one-scheduler) for enhanced performance and high-availability.
+- [Refactored Apache Airflow® Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/scheduler.html#running-more-than-one-scheduler) for enhanced performance and high-availability.
 - [Full REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) that enables more opportunities for automation.
 - [TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/taskflow.html) for a simpler way to pass information between tasks.
 - [Independent Providers](https://github.com/apache/airflow/tree/master/airflow/providers) for improved usability and a more agile release cadence.
 - Simplified KubernetesExecutor for ultimate flexibility in configuration.
 - [UI/UX Improvements](https://github.com/apache/airflow/pull/11195) including a new Airflow UI and auto-refresh button in the **Graph** view.
 
-Airflow 2.3 subsequently introduced several powerful features, the most notable of which is [dynamic task mapping](https://airflow.apache.org/docs/apache-airflow/2.3.0/concepts/dynamic-task-mapping.html). For more information on Airflow 2.3, see ["Apache Airflow 2.3.0 is here"](https://airflow.apache.org/blog/airflow-2.3.0/) and the [Airflow 2.3.0 changelog](https://airflow.apache.org/docs/apache-airflow/2.3.0/release_notes.html#airflow-2-3-0-2022-04-30).
+Airflow 2.3 subsequently introduced several powerful features, the most notable of which is [dynamic task mapping](https://airflow.apache.org/docs/apache-airflow/2.3.0/concepts/dynamic-task-mapping.html). For more information on Airflow 2.3, see ["Apache Airflow® 2.3.0 is here"](https://airflow.apache.org/blog/airflow-2.3.0/) and the [Apache Airflow® 2.3.0 changelog](https://airflow.apache.org/docs/apache-airflow/2.3.0/release_notes.html#airflow-2-3-0-2022-04-30).
 
 ## Prerequisites
 
@@ -73,7 +73,7 @@ Depending on your DAGs, you might need to make the following changes to make sur
 - Changes to the KubernetesPodOperator.
 - Changing the default value for `dag_run_conf_overrides_params`.
 
-For other compatibility considerations, see [Step 5: Upgrade Airflow DAGs](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/latest/upgrading-to-2.html#step-5-upgrade-airflow-dags) in Apache Airflow documentation.
+For other compatibility considerations, see [Step 5: Upgrade Apache Airflow® DAGs](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/latest/upgrading-to-2.html#step-5-upgrade-airflow-dags) in Apache Airflow documentation.
 
 ## Step 3: Upgrade to Airflow 2.3
 
@@ -88,7 +88,7 @@ To upgrade to Airflow 2.3,
     FROM quay.io/astronomer/astro-runtime:5.4.0
     ```
 
-3. Modify all backport providers and replace them with fully supported [provider packages](https://airflow.apache.org/docs/apache-airflow-providers/index.html). For example, if you were using the [Mongo backport provider](https://pypi.org/project/apache-airflow-backport-providers-mongo/), replace `apache-airflow-backport-providers-mongo` with `apache-airflow-providers-mongo` in your `requirements.txt` file. For more information, see [Airflow documentation on provider packages](https://airflow.apache.org/docs/apache-airflow-providers/index.html).
+3. Modify all backport providers and replace them with fully supported [provider packages](https://airflow.apache.org/docs/apache-airflow-providers/index.html). For example, if you were using the [Mongo backport provider](https://pypi.org/project/apache-airflow-backport-providers-mongo/), replace `apache-airflow-backport-providers-mongo` with `apache-airflow-providers-mongo` in your `requirements.txt` file. For more information, see [Apache Airflow® documentation on provider packages](https://airflow.apache.org/docs/apache-airflow-providers/index.html).
 4. Restart your local environment and open the Airflow UI to confirm that your upgrade was successful.
 5. [Deploy your project](deploy-cli.md) to Astronomer.
 

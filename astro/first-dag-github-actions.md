@@ -23,7 +23,7 @@ Specifically, you will:
 
 The steps take about 15 minutes. If you prefer to use a CLI, you can alternatively create and run your first DAG [using the Astro CLI](first-dag-cli.md) in the same amount of time.
 
-This tutorial assumes that you're familiar with basic Apache Airflow concepts. If you're new to Airflow and want a more general introduction, see the [Airflow 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
+This tutorial assumes that you're familiar with basic Apache Airflow concepts. If you're new to Airflow and want a more general introduction, see the [Apache Airflow® 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
 
 ## Prerequisites
 

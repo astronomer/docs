@@ -23,9 +23,9 @@ This tutorial takes approximately 30 minutes to complete.
 To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of ACI. See [Getting started with Azure Container Instances](https://azure.microsoft.com/en-us/products/container-instances/#getting-started).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
+- Airflow connections. See [Managing your Connections in Apache Airflow®](connections.md).
 
 ## Prerequisites
 

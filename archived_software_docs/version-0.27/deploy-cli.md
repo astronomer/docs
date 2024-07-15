@@ -23,7 +23,7 @@ In order to push up DAGs to a Deployment on Astronomer, you must have:
 
 * [The Astronomer CLI](cli-quickstart.md) installed.
 * Access to an Astronomer platform at `https://app.BASEDOMAIN`.
-* An Astronomer [Workspace](manage-workspaces.md) with at least one active [Airflow Deployment](configure-deployment.md).
+* An Astronomer [Workspace](manage-workspaces.md) with at least one active [Apache Airflow® Deployment](configure-deployment.md).
 
 ## Step 1: Authenticate to Astronomer
 

@@ -264,6 +264,6 @@ Airflow uses the [Amazon Redshift Python Connector](https://docs.aws.amazon.com/
 
 ## See also
 
-- [Apache Airflow Amazon provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/redshift.html)
+- [Apache Airflow® Amazon provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/redshift.html)
 - [Redshift modules](https://registry.astronomer.io/modules?query=redshift) in the Astronomer Registry
-- [Import and export Airflow connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
+- [Import and export Apache Airflow® connections using Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)

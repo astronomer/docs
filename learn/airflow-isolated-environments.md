@@ -21,9 +21,9 @@ In Airflow, you have several options for running custom Python code in isolated 
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: The ExternalPythonOperator](https://academy.astronomer.io/astro-runtime-the-externalpythonoperator).
-- Astronomer Academy: [Airflow: The KubernetesPodOperator](https://academy.astronomer.io/astro-runtime-the-kubernetespodoperator-1).
-- Webinar: [Running Airflow Tasks in Isolated Environments](https://www.astronomer.io/events/webinars/running-airflow-tasks-in-isolated-environments-video/).
+- Astronomer Academy: [Apache Airflow®: The ExternalPythonOperator](https://academy.astronomer.io/astro-runtime-the-externalpythonoperator).
+- Astronomer Academy: [Apache Airflow®: The KubernetesPodOperator](https://academy.astronomer.io/astro-runtime-the-kubernetespodoperator-1).
+- Webinar: [Running Apache Airflow® Tasks in Isolated Environments](https://www.astronomer.io/events/webinars/running-airflow-tasks-in-isolated-environments-video/).
 - Learn from code: [Isolated environments example DAGs repository](https://github.com/astronomer/learn-demos/tree/airflow-isolated-environments).
 
 :::
@@ -38,8 +38,8 @@ This guide covers options to isolate individual tasks in Airflow. If you want to
 
 To get the most out of this guide, you should have an understanding of:
 
-- Airflow decorators. See [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md).
-- Airflow operators. See [Airflow operators](what-is-an-operator.md).
+- Airflow decorators. See [Introduction to the TaskFlow API and Apache Airflow® decorators](airflow-decorators.md).
+- Airflow operators. See [Apache Airflow® operators](what-is-an-operator.md).
 - Python Virtual Environments. See [Python Virtual Environments: A Primer](https://realpython.com/python-virtual-environments-a-primer/).
 - Kubernetes basics. See the [Kubernetes Documentation](https://kubernetes.io/docs/home/).
 
@@ -66,9 +66,9 @@ When creating isolated environments in Airflow, you might not be able to use com
 
 Common limitations include:
 
-- You [cannot pass all Airflow context variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#id1) to a virtual decorator, since Airflow does not support serializing `var`, `ti`, and `task_instance` objects. See [Use Airflow context variables in isolated environments](#use-airflow-context-variables-in-isolated-environments).
-- You do not have access to your [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html) from within the isolated environment. To access your secrets, consider passing them in through [Jinja templating](templating.md). See [Use Airflow variables in isolated environments](#use-airflow-variables-in-isolated-environments).
-- Installing Airflow itself, or Airflow provider packages in the environment provided to the `@task.external_python` decorator or the ExternalPythonOperator, can lead to unexpected behavior. If you need to use Airflow or an Airflow provider module inside your virtual environment, Astronomer recommends using the `@task.virtualenv` decorator or the PythonVirtualenvOperator instead. See [Use Airflow packages in isolated environments](#use-airflow-packages-in-isolated-environments).
+- You [cannot pass all Apache Airflow® context variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#id1) to a virtual decorator, since Airflow does not support serializing `var`, `ti`, and `task_instance` objects. See [Use Apache Airflow® context variables in isolated environments](#use-airflow-context-variables-in-isolated-environments).
+- You do not have access to your [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html) from within the isolated environment. To access your secrets, consider passing them in through [Jinja templating](templating.md). See [Use Apache Airflow® variables in isolated environments](#use-airflow-variables-in-isolated-environments).
+- Installing Airflow itself, or Airflow provider packages in the environment provided to the `@task.external_python` decorator or the ExternalPythonOperator, can lead to unexpected behavior. If you need to use Airflow or an Airflow provider module inside your virtual environment, Astronomer recommends using the `@task.virtualenv` decorator or the PythonVirtualenvOperator instead. See [Use Apache Airflow® packages in isolated environments](#use-airflow-packages-in-isolated-environments).
 
 ## Choosing an isolated environment option
 
@@ -88,7 +88,7 @@ To run tasks in a Python virtual environment you can use:
 
 The virtual environment decorators have operator equivalents with the same functionality. Astronomer recommends using decorators where possible because they simplify the handling of [XCom](airflow-passing-data-between-tasks.md).
 
-![Graph of options for isolated environments in Airflow.](/img/guides/airflow-isolated-environments_isolated_env_options_graph.png)
+![Graph of options for isolated environments in Apache Airflow®.](/img/guides/airflow-isolated-environments_isolated_env_options_graph.png)
 
 Which option you choose depends on your use case and the requirements of your task. The table below shows which decorators and operators are best for particular use cases.
 
@@ -142,7 +142,7 @@ pandas==1.4.4
 
 :::warning
 
-Installing Airflow itself and Airflow provider packages in isolated environments can lead to unexpected behavior and is not recommended. If you need to use Airflow or Airflow provider modules inside your virtual environment, Astronomer recommends to choose the `@task.virtualenv` decorator or the PythonVirtualenvOperator. See [Use Airflow packages in isolated environments](#use-airflow-packages-in-isolated-environments).
+Installing Airflow itself and Airflow provider packages in isolated environments can lead to unexpected behavior and is not recommended. If you need to use Airflow or Airflow provider modules inside your virtual environment, Astronomer recommends to choose the `@task.virtualenv` decorator or the PythonVirtualenvOperator. See [Use Apache Airflow® packages in isolated environments](#use-airflow-packages-in-isolated-environments).
 
 :::
 
@@ -199,7 +199,7 @@ my_isolated_task = ExternalPythonOperator(
 </TabItem>
 <TabItem value="taskflow-xcom">
 
-You can pass information into and out of the `@task.external_python` decorated task the same way as you would when interacting with a `@task` decorated task, see also [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md).
+You can pass information into and out of the `@task.external_python` decorated task the same way as you would when interacting with a `@task` decorated task, see also [Introduction to the TaskFlow API and Apache Airflow® decorators](airflow-decorators.md).
 
 <CodeBlock language="python">{external_python_decorator_dag}</CodeBlock>
 
@@ -207,7 +207,7 @@ You can pass information into and out of the `@task.external_python` decorated t
 
 <TabItem value="traditional-xcom">
 
-You can pass information into the ExternalPythonOperator by using a [Jinja template](templating.md) retrieving [XCom](airflow-passing-data-between-tasks.md) values from the [Airflow context](airflow-context.md). To pass information out of the ExternalPythonOperator, return it from the `python_callable`.
+You can pass information into the ExternalPythonOperator by using a [Jinja template](templating.md) retrieving [XCom](airflow-passing-data-between-tasks.md) values from the [Apache Airflow® context](airflow-context.md). To pass information out of the ExternalPythonOperator, return it from the `python_callable`.
 Note that Jinja templates are rendered as strings unless you set `render_template_as_native_obj=True` in the DAG definition.
 
 <CodeBlock language="python">{external_python_operator_dag}</CodeBlock>
@@ -224,7 +224,7 @@ The Virtualenv operator (`@task.virtualenv` or PythonVirtualenvOperator) creates
 
 :::warning
 
-Installing Airflow itself and Airflow provider packages in isolated environments can lead to unexpected behavior and is generally not recommended. See [Use Airflow packages in isolated environments](#use-airflow-packages-in-isolated-environments).
+Installing Airflow itself and Airflow provider packages in isolated environments can lead to unexpected behavior and is generally not recommended. See [Use Apache Airflow® packages in isolated environments](#use-airflow-packages-in-isolated-environments).
 
 :::
 
@@ -276,7 +276,7 @@ my_isolated_task = PythonVirtualenvOperator(
 </TabItem>
 <TabItem value="taskflow-xcom">
 
-You can pass information into and out of the `@task.virtualenv` decorated task using the same process as you would when interacting with a `@task` decorated task. See [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md) for more detailed information.
+You can pass information into and out of the `@task.virtualenv` decorated task using the same process as you would when interacting with a `@task` decorated task. See [Introduction to the TaskFlow API and Apache Airflow® decorators](airflow-decorators.md) for more detailed information.
 
 <CodeBlock language="python">{virtualenv_decorator_dag}</CodeBlock>
 
@@ -284,7 +284,7 @@ You can pass information into and out of the `@task.virtualenv` decorated task u
 
 <TabItem value="traditional-xcom">
 
-You can pass information into the PythonVirtualenvOperator by using a [Jinja template](templating.md) to retrieve [XCom](airflow-passing-data-between-tasks.md) values from the [Airflow context](airflow-context.md). To pass information out of the PythonVirtualenvOperator, return it from the `python_callable`.
+You can pass information into the PythonVirtualenvOperator by using a [Jinja template](templating.md) to retrieve [XCom](airflow-passing-data-between-tasks.md) values from the [Apache Airflow® context](airflow-context.md). To pass information out of the PythonVirtualenvOperator, return it from the `python_callable`.
 Note that Jinja templates are rendered as strings unless you set `render_template_as_native_obj=True` in the DAG definition.
 
 <CodeBlock language="python">{python_virtualenv_operator_dag}</CodeBlock>
@@ -455,7 +455,7 @@ Virtual branching operators allow you to run conditional task logic in an isolat
 - `@task.branch_external_python` decorator or BranchExternalPythonOperator: Run conditional task logic in an existing virtual Python environment.
 - `@task.branch_virtualenv` decorator or BranchPythonVirtualenvOperator: Run conditional task logic in a newly created virtual Python environment.
 
-To run conditional task logic in an isolated environment, use the branching versions of the virtual environment decorators and operators. You can learn more about branching in Airflow in the [Branching in Airflow](airflow-branch-operator.md) guide.
+To run conditional task logic in an isolated environment, use the branching versions of the virtual environment decorators and operators. You can learn more about branching in Airflow in the [Branching in Apache Airflow®](airflow-branch-operator.md) guide.
 
 <Tabs
     defaultValue="taskflow-epo"
@@ -566,7 +566,7 @@ my_isolated_task = BranchPythonVirtualenvOperator(
 
 ## Use Apache Airflow® context variables in isolated environments
 
-Some variables from the [Airflow context](airflow-context.md) can be passed to isolated environments, for example the `logical_date` of the DAG run. Due to compatibility issues, other objects from the context such as `ti` cannot be passed to isolated environments. For more information, see the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#id1).
+Some variables from the [Apache Airflow® context](airflow-context.md) can be passed to isolated environments, for example the `logical_date` of the DAG run. Due to compatibility issues, other objects from the context such as `ti` cannot be passed to isolated environments. For more information, see the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#id1).
 
 <Tabs
     defaultValue="taskflow-epo"
@@ -656,7 +656,7 @@ my_isolated_task = PythonVirtualenvOperator(
 
 ## Use Airflow variables in isolated environments
 
-You can inject Airflow variables into isolated environments by using [Jinja templating](templating.md) in the `op_kwargs` argument of the PythonVirtualenvOperator or ExternalPythonOperator. This strategy lets you pass secrets into your isolated environment, which are masked in the logs according to rules described in [Hide sensitive information in Airflow variables](airflow-variables.md#hide-sensitive-information-in-airflow-variables).
+You can inject Airflow variables into isolated environments by using [Jinja templating](templating.md) in the `op_kwargs` argument of the PythonVirtualenvOperator or ExternalPythonOperator. This strategy lets you pass secrets into your isolated environment, which are masked in the logs according to rules described in [Hide sensitive information in Apache Airflow® variables](airflow-variables.md#hide-sensitive-information-in-airflow-variables).
 
 <Tabs
     defaultValue="traditional-venv"

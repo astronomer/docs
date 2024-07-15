@@ -45,7 +45,7 @@ This command builds your Astro project into a Docker image and spins up Docker c
 
 After the command finishes, open the Airflow UI at `https://localhost:8080/` and toggle on the `astro_ml_producer` and `astro_ml_consumer` DAGs. Then trigger the `astro_ml_producer` DAG using the play button. You'll see that the `astro_ml_consumer` DAG starts after `astro_ml_producer` completes. 
 
-![Airflow UI View screenshot](/img/examples/use-case-airflow-ml-datasets_airflowuiview.png)
+![Apache Airflow® UI View screenshot](/img/examples/use-case-airflow-ml-datasets_airflowuiview.png)
 
 ## Project contents
 
@@ -225,5 +225,5 @@ pred_file = aql.export_file(
 ## See also
 
 - Tutorial: [How to Write a DAG with the Astro SDK](https://www.astronomer.io/docs/learn/astro-python-sdk).
-- Documentation: [Airflow Datasets Guide](https://www.astronomer.io/docs/learn/airflow-datasets).
-- Webinar: [How to Orchestrate Machine Learning Workflows With Airflow](https://www.astronomer.io/events/webinars/how-to-orchestrate-machine-learning-workflows-with-airflow/).
+- Documentation: [Apache Airflow® Datasets Guide](https://www.astronomer.io/docs/learn/airflow-datasets).
+- Webinar: [How to Orchestrate Machine Learning Workflows With Apache Airflow®](https://www.astronomer.io/events/webinars/how-to-orchestrate-machine-learning-workflows-with-airflow/).

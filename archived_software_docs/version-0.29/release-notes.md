@@ -129,7 +129,7 @@ Astro Runtime includes additional features which are not available in Astronomer
 - Airflow UI improvements, such as showing your Deployment's Docker image tag in the footer
 - Features that are exclusive to Astro Runtime and coming soon, such as new Airflow components and improvements to the DAG development experience
 
-To upgrade a Deployment to Runtime, follow the steps in [Upgrade Airflow](manage-airflow-versions.md), making sure to replace the Astronomer Certified image in your Dockerfile with an Astro Runtime version.
+To upgrade a Deployment to Runtime, follow the steps in [Upgrade Apache Airflow®](manage-airflow-versions.md), making sure to replace the Astronomer Certified image in your Dockerfile with an Astro Runtime version.
 
 ### Use a custom container image registry to deploy code
 

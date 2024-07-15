@@ -24,7 +24,7 @@ The **DAGs** page shows the following summary information about the DAG runs for
 - **Schedule**: The frequency that the DAG runs and the starting time of the next DAG run, expressed relative to the current time.
 - **Deployment**:  The Deployment ID of the Deployment for the current DAG Run.
 - **Owner(s)**: The Airflow DAG owner attribute. You can change the owner attribute when you write or update your DAG.
-- **Tags**: The custom tags that you marked your DAG with. To add custom tags to a DAG, see [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/add-dag-tags.html).
+- **Tags**: The custom tags that you marked your DAG with. To add custom tags to a DAG, see [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/add-dag-tags.html).
 
 ## View DAG run details
 

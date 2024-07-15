@@ -15,7 +15,7 @@ import mlflow_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-mlflo
 
 There are multiple resources for learning about this topic. See also:
 
-- Use case: [Predict possum tail length using MLflow, Airflow, and linear regression](use-case-airflow-mlflow.md) including a ready-to-use [example repository](https://github.com/astronomer/use-case-mlflow). 
+- Use case: [Predict possum tail length using MLflow, Apache Airflow®, and linear regression](use-case-airflow-mlflow.md) including a ready-to-use [example repository](https://github.com/astronomer/use-case-mlflow). 
 
 :::
 
@@ -23,8 +23,8 @@ There are multiple resources for learning about this topic. See also:
 
 The DAG in this tutorial shows three different ways Airflow can interact with MLflow:
 
-- Use an MLflow operator from the [MLflow Airflow provider](https://github.com/astronomer/airflow-provider-mlflow). The MLflow provider contains several operators that abstract over common actions you might want to perform in MLflow, such as creating a deployment with the [CreateDeploymentOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/deployment.py) or running predictions from an existing model with the [ModelLoadAndPredictOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/pyfunc.py). 
-- Use an MLflow hook from the MLflow Airflow provider. The MLflow provider contains several [Airflow hooks](what-is-a-hook.md) that allow you to connect to MLflow using credentials stored in an Airflow connection. You can use these hooks if you need to perform actions in MLflow for which no dedicated operator exists. You can also use these hooks to create your own [custom operators](airflow-importing-custom-hooks-operators.md).
+- Use an MLflow operator from the [MLflow Apache Airflow® provider](https://github.com/astronomer/airflow-provider-mlflow). The MLflow provider contains several operators that abstract over common actions you might want to perform in MLflow, such as creating a deployment with the [CreateDeploymentOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/deployment.py) or running predictions from an existing model with the [ModelLoadAndPredictOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/pyfunc.py). 
+- Use an MLflow hook from the MLflow Airflow provider. The MLflow provider contains several [Apache Airflow® hooks](what-is-a-hook.md) that allow you to connect to MLflow using credentials stored in an Airflow connection. You can use these hooks if you need to perform actions in MLflow for which no dedicated operator exists. You can also use these hooks to create your own [custom operators](airflow-importing-custom-hooks-operators.md).
 - Use the MLflow Python package directly in a [@task decorated task](airflow-decorators.md). The MLflow Python package contains functionality like tracking metrics and artifacts with [`mlflow.sklearn.autolog`](https://mlflow.org/docs/latest/python_api/mlflow.sklearn.html). You can use this package to write custom Airflow tasks for ML-related actions like feature engineering.
 
 ## Time to complete
@@ -36,10 +36,10 @@ This tutorial takes approximately 30 minutes to complete.
 To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of MLflow. See [MLflow Concepts](https://mlflow.org/docs/latest/concepts.html).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow hooks. See [Hooks 101](what-is-a-hook.md).
-- Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
+- Airflow connections. See [Managing your Connections in Apache Airflow®](connections.md).
 
 ## Prerequisites
 
@@ -73,7 +73,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 2: Configure your Apache Airflow® connection
 
-To connect Airflow to your MLflow instance, you need to create a [connection in Airflow](connections.md). 
+To connect Airflow to your MLflow instance, you need to create a [connection in Apache Airflow®](connections.md). 
 
 1. Run `astro dev start` in your Astro project to start up Airflow and open the Airflow UI at `localhost:8080`.
 

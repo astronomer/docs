@@ -38,7 +38,7 @@ This tutorial takes approximately 1 hour to complete.
 
 To get the most out of this tutorial, make sure you have an understanding of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
+- Basic Airflow concepts. See [Introduction to Apache Airflow®](intro-to-airflow.md).
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
 - Basic SQL. See the [W3 Schools SQL tutorial](https://www.w3schools.com/sql/).
 - The Astro Cloud IDE. See [Astro Cloud IDE](https://www.astronomer.io/docs/astro/cloud-ide).
@@ -376,11 +376,11 @@ Note that if you used the `In-memory SQL` connection in your Astro Cloud IDE pro
 
 2. Click **Open Airflow**.
 
-3. In the Airflow UI, configure a connection with the same values as your connection in the Astro Cloud IDE. See [Manage connections in Apache Airflow](connections.md).
+3. In the Airflow UI, configure a connection with the same values as your connection in the Astro Cloud IDE. See [Manage connections in Apache Airflow®](connections.md).
 
 4. Go to **DAGs** and run your DAG by clicking the play button.
 
-    ![Screenshot of the Airflow UI of an Astro deployment showing a successful run of the DAG.](/img/tutorials/cloud-ide-tutorial_dag_on_astro.png)
+    ![Screenshot of the Apache Airflow® UI of an Astro deployment showing a successful run of the DAG.](/img/tutorials/cloud-ide-tutorial_dag_on_astro.png)
 
 :::tip
 

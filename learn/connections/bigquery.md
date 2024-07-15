@@ -101,7 +101,7 @@ This method cannot be used in a local Airflow environment. It is available to us
 If you're running Airflow in a GKE cluster, complete the following steps:
 
 1. In your Google Cloud console, open the Google Cloud project where you're running BigQuery and copy its **ID**.
-2. [Enable Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity) and [configure Airflow to use workload identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to). Copy the name for the Kubernetes service account that you create. 
+2. [Enable Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity) and [configure Apache Airflow® to use workload identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to). Copy the name for the Kubernetes service account that you create. 
 3. Go to **IAM**, then click **Service Accounts** and search for your Kubernetes service account. If you don't see your service account, click **+ ADD** to add your service account to your Google Cloud project.
 4. [Grant roles](https://cloud.google.com/iam/docs/grant-role-console) to your service account to access BigQuery. See [BigQuery roles](https://cloud.google.com/bigquery/docs/access-control#bigquery) for a list of available roles and the permissions.
 
@@ -235,6 +235,6 @@ Airflow uses the [`python-bigquery`](https://github.com/googleapis/python-bigque
 
 ## See also
 
-- [Apache Airflow Google provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/connections/gcp.html)
+- [Apache Airflow® Google provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/connections/gcp.html)
 - [BigQuery Modules](https://registry.astronomer.io/modules?query=bigquery) and [Example DAGs](https://registry.astronomer.io/dags?limit=24&sorts=updatedAt%3Adesc&query=bigquery) in the Astronomer Registry
-- [Import and export Airflow connections using the Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
+- [Import and export Apache Airflow® connections using the Astro CLI](https://www.astronomer.io/docs/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)

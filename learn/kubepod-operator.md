@@ -36,8 +36,8 @@ On Astro, all of the infrastructure required to run the KubernetesPodOperator is
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: The KubernetesPodOperator](https://academy.astronomer.io/astro-runtime-the-kubernetespodoperator-1) module.
-- Webinar: [Running Airflow Tasks in Isolated Environments](https://www.astronomer.io/events/webinars/running-airflow-tasks-in-isolated-environments/).
+- Astronomer Academy: [Apache Airflow®: The KubernetesPodOperator](https://academy.astronomer.io/astro-runtime-the-kubernetespodoperator-1) module.
+- Webinar: [Running Apache Airflow® Tasks in Isolated Environments](https://www.astronomer.io/events/webinars/running-airflow-tasks-in-isolated-environments/).
 
 :::
 
@@ -61,7 +61,7 @@ If you use the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview), y
 ```text
 apache-airflow-providers-cncf-kubernetes==<version>
 ```
-Review the [Airflow Kubernetes provider Documentation](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/index.html#requirements) to make sure you install the correct version of the provider package for your version of Apache Airflow®.
+Review the [Apache Airflow® Kubernetes provider Documentation](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/index.html#requirements) to make sure you install the correct version of the provider package for your version of Apache Airflow®.
 
 You also need an existing Kubernetes cluster to connect to. This is commonly the same cluster that Airflow is running on, but it doesn't have to be.
 
@@ -80,7 +80,7 @@ On Astro, the infrastructure needed to run the KubernetesPodOperator with the Ce
 Setting up your local environment to use the KubernetesPodOperator can help you avoid time consuming deployments to remote environments.
 
 
-Use the steps below to quickly set up a local environment for the KubernetesPodOperator using the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview). Alternatively, you can use the [Helm Chart for Apache Airflow](https://airflow.apache.org/docs/helm-chart/stable/index.html) to run open source Airflow within a local Kubernetes cluster. See [Getting Started With the Official Airflow Helm Chart](https://www.youtube.com/watch?v=39k2Sz9jZ2c&ab_channel=Astronomer).
+Use the steps below to quickly set up a local environment for the KubernetesPodOperator using the [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview). Alternatively, you can use the [Helm Chart for Apache Airflow®](https://airflow.apache.org/docs/helm-chart/stable/index.html) to run open source Airflow within a local Kubernetes cluster. See [Getting Started With the Official Apache Airflow® Helm Chart](https://www.youtube.com/watch?v=39k2Sz9jZ2c&ab_channel=Astronomer).
 
 #### Step 1: Set up Kubernetes
 
@@ -317,7 +317,7 @@ The KubernetesPodOperator can be instantiated like any other operator within the
 
     :::
 
-- `volumes`: A list of `k8s.V1Volumes`, see also the [Kubernetes example DAG from the Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/_modules/tests/system/providers/cncf/kubernetes/example_kubernetes.html).
+- `volumes`: A list of `k8s.V1Volumes`, see also the [Kubernetes example DAG from the Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/_modules/tests/system/providers/cncf/kubernetes/example_kubernetes.html).
 - `affinity` and `tolerations`: Dictionaries of rules for [Pod to Node assignments](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/). Like the `volumes` parameter, these also require a `k8s` object.
 - `pod_template_file`: The path to a Pod template file.
 - `full_pod_spec`: A complete Pod configuration formatted as a Python `k8s` object.
@@ -359,7 +359,7 @@ See the [Astro documentation](https://www.astronomer.io/docs/astro/kubernetespod
 
 The `@task.kubernetes` decorator provides an alternative to the traditional KubernetesPodOperator when you run Python scripts in a separate Kubernetes Pod. The Docker image provided to the `@task.kubernetes` decorator must support executing Python scripts.
 
-Like regular `@task` decorated functions, XComs can be passed to the Python script running in the dedicated Kubernetes pod. If `do_xcom_push` is set to `True` in the decorator parameters, the value returned by the decorated function is pushed to XCom. You can learn more about decorators in the [Introduction to Airflow decorators](airflow-decorators.md) guide.
+Like regular `@task` decorated functions, XComs can be passed to the Python script running in the dedicated Kubernetes pod. If `do_xcom_push` is set to `True` in the decorator parameters, the value returned by the decorated function is pushed to XCom. You can learn more about decorators in the [Introduction to Apache Airflow® decorators](airflow-decorators.md) guide.
 
 Astronomer recommends using the `@task.kubernetes` decorator instead of the KubernetesPodOperator when using XCom with Python scripts in a dedicated Kubernetes pod.
 

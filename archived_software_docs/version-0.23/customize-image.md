@@ -223,7 +223,7 @@ To add a connection, for example, you can run:
 docker exec -it SCHEDULER_CONTAINER bash -c "airflow connections -a --conn_id test_three  --conn_type ' ' --conn_login etl --conn_password pw --conn_extra {"account":"blah"}"
 ```
 
-Refer to the native [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/usage-cli.html) for a list of all commands.
+Refer to the native [Apache Airflow® CLI](https://airflow.apache.org/docs/apache-airflow/stable/usage-cli.html) for a list of all commands.
 
 ## Add Environment Variables Locally
 
@@ -263,7 +263,7 @@ If you're running the Debian-based Astronomer Certified image for Airflow 1.10.1
 FROM quay.io/astronomer/ap-airflow:1.10.12-buster AS stage1
 ```
 
-For a list of all Airflow Images supported on Astronomer, refer to [Upgrade Apache Airflow on Astronomer](manage-airflow-versions.md).
+For a list of all Airflow Images supported on Astronomer, refer to [Upgrade Apache Airflow® on Astronomer](manage-airflow-versions.md).
 
 > **Note:** Do NOT include `-onbuild` at the end of your Airflow Image as you typically would in your `Dockerfile`.
 

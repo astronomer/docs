@@ -24,7 +24,7 @@ This guide explains how to set up an Azure Workload Identity connection using th
 - A Microsoft Entra [managed identity](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?pivots=identity-mi-methods-azp).
 
 :::info 
-If you want to use Microsoft Entra Workload ID with a generic Apache Airflow project, your setup steps might vary. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/connections/azure.html).
+If you want to use Microsoft Entra Workload ID with a generic Apache Airflow project, your setup steps might vary. See [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/connections/azure.html).
 :::
 
 ## Get connection details

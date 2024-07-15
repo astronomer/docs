@@ -42,13 +42,13 @@ Integrating Snowpark for Python with Airflow offers the benefits of:
 
 The Snowpark provider for Airflow simplifies interacting with Snowpark by:
 
-- Connecting to Snowflake using an [Airflow connection](connections/snowflake.md), removing the need to directly pass credentials in your DAG.
+- Connecting to Snowflake using an [Apache Airflow® connection](connections/snowflake.md), removing the need to directly pass credentials in your DAG.
 - Automatically instantiating a Snowpark session.
-- Automatically serializing and deserializing Snowpark dataframes passed using [Airflow XCom](airflow-passing-data-between-tasks.md).
+- Automatically serializing and deserializing Snowpark dataframes passed using [Apache Airflow® XCom](airflow-passing-data-between-tasks.md).
 - Integrating with [OpenLineage](airflow-openlineage.md).
 - Providing a pre-built custom XCom backend for Snowflake.
 
-Additionally, this tutorial shows how to use Snowflake as a custom XCom backend. This is especially useful for organizations with strict compliance requirements who want to keep all their data in Snowflake, but still leverage [Airflow XCom](airflow-passing-data-between-tasks.md) to pass data between tasks.
+Additionally, this tutorial shows how to use Snowflake as a custom XCom backend. This is especially useful for organizations with strict compliance requirements who want to keep all their data in Snowflake, but still leverage [Apache Airflow® XCom](airflow-passing-data-between-tasks.md) to pass data between tasks.
 
 ## Time to complete
 
@@ -59,9 +59,9 @@ This tutorial takes approximately 45 minutes to complete.
 To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of Snowflake and Snowpark. See [Introduction to Snowflake](https://docs.snowflake.com/en/user-guide-intro.html) and the [Snowpark API documentation](https://docs.snowflake.com/en/developer-guide/snowpark/index).
-- Airflow decorators. See [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md).
-- Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
-- Setup/ teardown tasks in Airflow. See [Use setup and teardown tasks in Airflow](airflow-setup-teardown.md).
+- Airflow decorators. See [Introduction to the TaskFlow API and Apache Airflow® decorators](airflow-decorators.md).
+- Airflow connections. See [Managing your Connections in Apache Airflow®](connections.md).
+- Setup/ teardown tasks in Airflow. See [Use setup and teardown tasks in Apache Airflow®](airflow-setup-teardown.md).
 
 ## Prerequisites
 
@@ -147,7 +147,7 @@ The Astro Snowflake provider is currently in beta. Classes from this provider mi
 
 :::
 
-7. To create an [Airflow connection](connections.md) to Snowflake and [allow serialization of Astro Python SDK objects](https://astro-sdk-python.readthedocs.io/en/stable/guides/xcom_backend.html#airflow-s-xcom-backend), add the following to your `.env` file. Make sure to enter your own Snowflake credentials as well as the name of an existing database and schema.
+7. To create an [Apache Airflow® connection](connections.md) to Snowflake and [allow serialization of Astro Python SDK objects](https://astro-sdk-python.readthedocs.io/en/stable/guides/xcom_backend.html#airflow-s-xcom-backend), add the following to your `.env` file. Make sure to enter your own Snowflake credentials as well as the name of an existing database and schema.
 
     ```text
     AIRFLOW__CORE__ALLOWED_DESERIALIZATION_CLASSES=airflow\.* astro\.*
@@ -172,7 +172,7 @@ The Astro Snowflake provider is currently in beta. Classes from this provider mi
 
 :::info
 
-For more information on creating a Snowflake connection, see [Create a Snowflake connection in Airflow](https://www.astronomer.io/docs/learn/connections/snowflake).
+For more information on creating a Snowflake connection, see [Create a Snowflake connection in Apache Airflow®](https://www.astronomer.io/docs/learn/connections/snowflake).
 
 :::
 
@@ -247,12 +247,12 @@ While this tutorial DAG uses a small dataset where model training can be accompl
     ]}>
 <TabItem value="standard">
 
-![Screenshot of the Airflow UI showing the `airflow_with_snowpark_tutorial` DAG having completed successfully in the Grid view with the Graph tab selected.](/img/tutorials/airflow-snowpark_dag_graph_basic.png)
+![Screenshot of the Apache Airflow® UI showing the `airflow_with_snowpark_tutorial` DAG having completed successfully in the Grid view with the Graph tab selected.](/img/tutorials/airflow-snowpark_dag_graph_basic.png)
 
 </TabItem>
 <TabItem value="setup-teardown">
 
-![Screenshot of the Airflow UI in the Grid view with the Graph tab selected, showing the successfully completed `airflow_with_snowpark_tutorial` DAG. This screenshot displays the version of the DAG where SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND is set to true, creating an additional setup/ teardown workflow.](/img/tutorials/airflow-snowpark_dag_graph.png)
+![Screenshot of the Apache Airflow® UI in the Grid view with the Graph tab selected, showing the successfully completed `airflow_with_snowpark_tutorial` DAG. This screenshot displays the version of the DAG where SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND is set to true, creating an additional setup/ teardown workflow.](/img/tutorials/airflow-snowpark_dag_graph.png)
 
 </TabItem>
 </Tabs>

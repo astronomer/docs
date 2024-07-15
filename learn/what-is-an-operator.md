@@ -24,7 +24,7 @@ To view all of the available Airflow operators, go to the [Astronomer Registry](
 
 To get the most out of this guide, you should have an understanding of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
+- Basic Airflow concepts. See [Introduction to Apache Airflow®](intro-to-airflow.md).
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
 
 ## Operator basics
@@ -48,7 +48,7 @@ Operators typically only require a few parameters. Keep the following considerat
 - If an operator doesn't exist for your use case, you can extend an operator to meet your needs. For more information about customizing operators, see the video [Anatomy of an Operator](https://www.astronomer.io/events/webinars/anatomy-of-an-operator).
 - [Sensors](what-is-a-sensor.md) are a type of operator that waits for something to happen. They can be used to make your DAGs more event-driven.
 - [Deferrable Operators](deferrable-operators.md) are a type of operator that releases their worker slot while waiting for their work to be completed. This can result in cost savings and greater scalability. Astronomer recommends using deferrable operators whenever one exists for your use case and your task takes longer than a minute. You must have a triggerer running to use deferrable operators.
-- Any operator that interacts with a service external to Airflow typically requires a connection so that Airflow can authenticate to that external system. For more information about setting up connections, see [Managing your connections in Apache Airflow](connections.md) or in the examples to follow.
+- Any operator that interacts with a service external to Airflow typically requires a connection so that Airflow can authenticate to that external system. For more information about setting up connections, see [Managing your connections in Apache Airflow®](connections.md) or in the examples to follow.
 
 ## Example implementation
 

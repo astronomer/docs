@@ -14,7 +14,7 @@ This tutorial demonstrates how to orchestrate a full ML pipeline including creat
 
 There are multiple resources for learning about this topic. See also:
 
-- Webinar: [Batch Inference with Airflow and SageMaker](https://www.astronomer.io/events/webinars/batch-inference-with-airflow-and-sagemaker/).
+- Webinar: [Batch Inference with Apache Airflow® and SageMaker](https://www.astronomer.io/events/webinars/batch-inference-with-airflow-and-sagemaker/).
 
 :::
 
@@ -27,9 +27,9 @@ This tutorial takes approximately 60 minutes to complete.
 To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of [Amazon S3](https://aws.amazon.com/s3/getting-started/) and [Amazon SageMaker](https://aws.amazon.com/sagemaker/getting-started/).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
+- Airflow connections. See [Managing your Connections in Apache Airflow®](connections.md).
 
 ## Prerequisites
 

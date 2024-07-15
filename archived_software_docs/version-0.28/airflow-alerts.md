@@ -26,7 +26,7 @@ If your team isn't already using an SMTP service, we recommend the following:
 
 Step-by-step instructions on how to integrate these two services with Astronomer are provided below, but you can use any SMTP service for this purpose.
 
-> **Note:** By default, email alerts for process failures are sent whenever individual tasks fail. To receive only 1 email per DAG failure, refer to the Limit Alerts to the DAG Level topic below. For more information and best practices on Apache Airflow® alerts, read [Error Notifications in Airflow](https://www.astronomer.io/docs/learn/error-notifications-in-airflow/).
+> **Note:** By default, email alerts for process failures are sent whenever individual tasks fail. To receive only 1 email per DAG failure, refer to the Limit Alerts to the DAG Level topic below. For more information and best practices on Apache Airflow® alerts, read [Error Notifications in Apache Airflow®](https://www.astronomer.io/docs/learn/error-notifications-in-airflow/).
 
 ### Integrate SendGrid with Astronomer
 
@@ -51,9 +51,9 @@ To get started with SendGrid:
     - **Key**: `AIRFLOW__EMAIL__EMAIL_BACKEND`
     - **Value**: `airflow.providers.sendgrid.utils.emailer.send_email`
     
-    For more information on this environment variable, see [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html#send-email-using-sendgrid).
+    For more information on this environment variable, see [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html#send-email-using-sendgrid).
 
-7. In the Airflow UI, [create an Airflow connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#creating-a-connection-with-the-ui) with the following values:
+7. In the Airflow UI, [create an Apache Airflow® connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#creating-a-connection-with-the-ui) with the following values:
 
     - **Connection ID**: `smtp_default`
     - **Connection Type:**: `Email`
@@ -90,9 +90,9 @@ This setup requires an AWS account and use of the [AWS Management Console](https
     - **Key**: `AIRFLOW__EMAIL__EMAIL_BACKEND`
     - **Value**: `airflow.providers.amazon.aws.utils.emailer.send_email`
     
-    For more information on this environment variable, see [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html#send-email-using-aws-ses).
+    For more information on this environment variable, see [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html#send-email-using-aws-ses).
 
-6. In the Airflow UI, [create an Airflow connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#creating-a-connection-with-the-ui) with the following values:
+6. In the Airflow UI, [create an Apache Airflow® connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#creating-a-connection-with-the-ui) with the following values:
 
     - **Connection ID**: `smtp_default`
     - **Connection Type:**: `Email`

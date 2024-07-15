@@ -28,9 +28,9 @@ This tutorial takes approximately 1 hour to complete.
 
 To get the most out of this tutorial, make sure you have an understanding of:
 
-- Navigating an Airflow Project. See [Get started with Apache Airflow](get-started-with-airflow.md).
-- Airflow Plugins. See [Import plugins to Airflow](using-airflow-plugins.md).
-- Airflow Connections. See [Manage connections in Apache Airflow](connections.md).
+- Navigating an Airflow Project. See [Get started with Apache Airflow®](get-started-with-airflow.md).
+- Airflow Plugins. See [Import plugins to Apache Airflow®](using-airflow-plugins.md).
+- Airflow Connections. See [Manage connections in Apache Airflow®](connections.md).
 - Intermediate knowledge of Python. See [the official Python documentation](https://docs.python.org/3/).
 
 ## Prerequisites
@@ -77,7 +77,7 @@ This DAG has one SimpleHttpOperator task that posts a GET request to an API as d
 
 ## Step 3: Add a static operator extra link
 
-Create an [Airflow plugin](using-airflow-plugins.md) to add an extra link to the operator.
+Create an [Apache Airflow® plugin](using-airflow-plugins.md) to add an extra link to the operator.
 
 1. Create a new Python file named `my_extra_link_plugin.py` in the `plugins` folder of your Airflow project. 
 
@@ -120,7 +120,7 @@ This script accomplishes the following:
 
 1. Run `astro dev start` in your Astro project directory to start up Airflow. If your Airflow instance is already running, use `astro dev restart` to restart it in order to load any changes made in the `plugins` folder.
 
-2. Add an HTTP connection called `random_user_api_conn` to `http://randomuser.me/api/` in the Airflow UI. This API will return data about a randomly generated user persona. Feel free to use a different API, the content returned will not be relevant for this tutorial. Learn more about connections in the [Manage connections in Apache Airflow](connections.md) guide.
+2. Add an HTTP connection called `random_user_api_conn` to `http://randomuser.me/api/` in the Airflow UI. This API will return data about a randomly generated user persona. Feel free to use a different API, the content returned will not be relevant for this tutorial. Learn more about connections in the [Manage connections in Apache Airflow®](connections.md) guide.
 
     ![HTTP connection](/img/guides/extra_links_tutorial_add_http_connection.png)
 
@@ -293,7 +293,7 @@ Congratulations! You added two operator extra links as an Airflow plugin. On the
 
 :::tip
 
-Extra links can be also be added to operators when creating an [Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers/#how-to-create-your-own-provider). If you want to add an operator extra link to a custom operator as part of a provider package, make sure you install it with the rest of the package using a setup.py file or `wheels`.
+Extra links can be also be added to operators when creating an [Apache Airflow® provider](https://airflow.apache.org/docs/apache-airflow-providers/#how-to-create-your-own-provider). If you want to add an operator extra link to a custom operator as part of a provider package, make sure you install it with the rest of the package using a setup.py file or `wheels`.
 
 In general, adding an operator extra link via plugin as described in this tutorial is easier for use in a limited number of Airflow instances. However, if you are planning to use the extra link in a large number of deployments, consider adding them to an Airflow provider instead. 
 

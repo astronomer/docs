@@ -12,7 +12,7 @@ import listen_to_the_stream from '!!raw-loader!../code-samples/dags/airflow-kafk
 import walking_my_pet from '!!raw-loader!../code-samples/dags/airflow-kafka/walking_my_pet.py';
 
 [Apache Kafka](https://kafka.apache.org/documentation/) is an open source tool for handling event streaming. Combining Kafka and Apache Airflow® allows you to build powerful pipelines that integrate streaming data with batch processing.
-In this tutorial, you'll learn how to install and use the [Kafka Airflow provider](https://registry.astronomer.io/providers/apache-airflow-providers-apache-kafka/versions/latest) to interact directly with Kafka topics.
+In this tutorial, you'll learn how to install and use the [Kafka Apache Airflow® provider](https://registry.astronomer.io/providers/apache-airflow-providers-apache-kafka/versions/latest) to interact directly with Kafka topics.
 
 :::warning
 
@@ -29,7 +29,7 @@ This tutorial takes approximately 1 hour to complete.
 To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of Apache Kafka. See the official [Introduction to Kafka](https://kafka.apache.org/intro).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 
 ## Quickstart
@@ -117,7 +117,7 @@ The Kafka Airflow provider uses a Kafka connection assigned to the `kafka_conn_i
 
 ## Step 3: Create a DAG with a producer and a consumer task
 
-The [Kafka Airflow provider package](https://registry.astronomer.io/providers/apache-airflow-providers-apache-kafka/versions/latest) contains a ProduceToTopicOperator, which you can use to produce messages directly to a Kafka topic, and a ConsumeFromTopicOperator, which you can use to directly consume messages from a topic.
+The [Kafka Apache Airflow® provider package](https://registry.astronomer.io/providers/apache-airflow-providers-apache-kafka/versions/latest) contains a ProduceToTopicOperator, which you can use to produce messages directly to a Kafka topic, and a ConsumeFromTopicOperator, which you can use to directly consume messages from a topic.
 
 1. Create a new file in your `dags` folder called `produce_consume_treats.py`.
 

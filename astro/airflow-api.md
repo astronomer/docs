@@ -9,11 +9,11 @@ import TabItem from '@theme/TabItem';
 
 You can use the Apache Airflow® [REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) to automate Airflow workflows in your Deployments on Astro. For example, you can externally trigger a DAG run without accessing your Deployment directly by making an HTTP request in Python or cURL to the [dagRuns endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) in the Apache Airflow® REST API.
 
-To test Airflow API calls in a local Airflow environment running with the Astro CLI, see [Troubleshoot your local Airflow environment](cli/run-airflow-locally.md).
+To test Airflow API calls in a local Airflow environment running with the Astro CLI, see [Troubleshoot your local Apache Airflow® environment](cli/run-airflow-locally.md).
 
 :::info
 
-Updates to the Airflow REST API are released in new Airflow versions and new releases don’t have a separate release cycle or versioning scheme. To take advantage of specific Airflow REST API functionality, you might need to upgrade Astro Runtime. See [Upgrade Runtime](upgrade-runtime.md) and the [Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html).
+Updates to the Airflow REST API are released in new Airflow versions and new releases don’t have a separate release cycle or versioning scheme. To take advantage of specific Airflow REST API functionality, you might need to upgrade Astro Runtime. See [Upgrade Runtime](upgrade-runtime.md) and the [Apache Airflow® release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html).
 
 :::
 
@@ -61,7 +61,7 @@ Alternatively, you can retrieve your Deployment URL by opening the Airflow UI fo
 
 ## Step 3: Make an Apache Airflow® API request
 
-You can execute requests against any endpoint that is listed in the [Airflow REST API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
+You can execute requests against any endpoint that is listed in the [Apache Airflow® REST API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
 
 To make a request based on Airflow documentation, make sure to:
 
@@ -217,7 +217,7 @@ This topic has guidelines on how to trigger a DAG run, but you can modify the ex
 
 1. Create a [Deployment API token](deployment-api-tokens.md) for the Deployment that contains the DAG you want to trigger.
 
-2. In the Deployment that contains the triggering DAG, create an [Airflow HTTP connection](https://airflow.apache.org/docs/apache-airflow-providers-http/stable/connections/http.html) with the following values:
+2. In the Deployment that contains the triggering DAG, create an [Apache Airflow® HTTP connection](https://airflow.apache.org/docs/apache-airflow-providers-http/stable/connections/http.html) with the following values:
 
     - **Connection Id**: `http_conn`
     - **Connection Type**: HTTP
@@ -232,7 +232,7 @@ This topic has guidelines on how to trigger a DAG run, but you can modify the ex
     }
     ```
 
-    See [Manage connections in Apache Airflow](https://www.astronomer.io/docs/learn/connections).
+    See [Manage connections in Apache Airflow®](https://www.astronomer.io/docs/learn/connections).
 
   :::info
 

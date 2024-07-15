@@ -28,7 +28,7 @@ Your Deployment health status will also show a number next to the status if a [D
 
 ![A Deployment health status](/img/docs/health-status.png)
 
-If your Deployment is unhealthy or the status can't be determined, check the status of your tasks and wait for a few minutes. If your Deployment is unhealthy for more than five minutes, review the logs in the [Airflow component logs](view-logs.md#view-airflow-component-logs-in-the-astro-ui) in the Astro UI or contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
+If your Deployment is unhealthy or the status can't be determined, check the status of your tasks and wait for a few minutes. If your Deployment is unhealthy for more than five minutes, review the logs in the [Apache Airflow® component logs](view-logs.md#view-airflow-component-logs-in-the-astro-ui) in the Astro UI or contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Deployment incidents
 

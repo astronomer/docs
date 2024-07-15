@@ -19,7 +19,7 @@ In this tutorial, you'll learn how to use Airflow to load data from an API into 
 
 :::info
 
-This tutorial was developed in partnership with MongoDB. For more details on this integration, including additional instruction on using MongoDB Charts, check out MongoDB's post [Using MongoDB with Apache Airflow](https://www.mongodb.com/developer/products/mongodb/mongodb-apache-airflow/).
+This tutorial was developed in partnership with MongoDB. For more details on this integration, including additional instruction on using MongoDB Charts, check out MongoDB's post [Using MongoDB with Apache Airflow®](https://www.mongodb.com/developer/products/mongodb/mongodb-apache-airflow/).
 
 :::
 
@@ -32,9 +32,9 @@ This tutorial takes approximately 30 minutes to complete.
 To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of MongoDB. See [Getting started](https://www.mongodb.com/docs/manual/tutorial/getting-started/).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- Airflow connections. See [Managing your connections in Apache Airflow](connections.md).
+- Airflow connections. See [Managing your connections in Apache Airflow®](connections.md).
 
 ## Prerequisites
 

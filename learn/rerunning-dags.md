@@ -24,7 +24,7 @@ In this guide, you'll learn how to configure automatic retries, rerun tasks or D
 
 To get the most out of this guide, you should have an understanding of:
 
-- DAG scheduling. See [Schedule DAGs in Airflow](scheduling-in-airflow.md)
+- DAG scheduling. See [Schedule DAGs in Apache Airflow®](scheduling-in-airflow.md)
 
 ## Automatically retry tasks
 
@@ -136,7 +136,7 @@ airflow tasks clear [-h] [-R] [-d] [-e END_DATE] [-X] [-x] [-f] [-r]
                     dag_id
 ```
 
-For more info on the positional arguments for the `clear` command, see the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#clear).
+For more info on the positional arguments for the `clear` command, see the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#clear).
 
 To clear a full DAG run, go to the Grid View in the Airflow UI, click on the DAG run, and then click **Clear** as shown in the following image. 
 
@@ -218,7 +218,7 @@ airflow dags backfill [-h] [-c CONF] [--delay-on-limit DELAY_ON_LIMIT] [-x]
                       dag_id
 ```
 
-For example, `airflow dags backfill -s 2023-04-01 -e 2021-04-02 example_dag` backfills `example_dag` from April 1st-2nd 2023. For more information about the backfill parameter, see the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#backfill). 
+For example, `airflow dags backfill -s 2023-04-01 -e 2021-04-02 example_dag` backfills `example_dag` from April 1st-2nd 2023. For more information about the backfill parameter, see the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#backfill). 
 
 When using backfill keep the following considerations in mind:
 

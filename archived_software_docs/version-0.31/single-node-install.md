@@ -264,7 +264,7 @@ In Airflow, [the scheduler](https://airflow.apache.org/docs/apache-airflow/stabl
     sudo systemctl start astronomer-certified@webserver.service
     ```
 
-> **Note:** For added security and stability, we recommend running the webserver behind a reverse proxy and load balancer such as [nginx](https://www.nginx.com/). For more information on this feature, read the [Apache Airflow documentation](https://airflow.apache.org/docs/stable/howto/run-behind-proxy.html).
+> **Note:** For added security and stability, we recommend running the webserver behind a reverse proxy and load balancer such as [nginx](https://www.nginx.com/). For more information on this feature, read the [Apache Airflow® documentation](https://airflow.apache.org/docs/stable/howto/run-behind-proxy.html).
 
 ## Step 10: Set up workers (Celery only)
 
@@ -323,7 +323,7 @@ To log in to the Airflow UI, you need to first create an Airflow user:
    sudo -H su -u astro bash
    ```
 
-   All [Airflow CLI commands](https://airflow.apache.org/docs/apache-airflow/stable/usage-cli.html) must be run from your `astro` user.
+   All [Apache Airflow® CLI commands](https://airflow.apache.org/docs/apache-airflow/stable/usage-cli.html) must be run from your `astro` user.
 
 2. Create a new `admin` Airflow user with the following command:
 
@@ -337,4 +337,4 @@ To confirm that you successfully installed Apache Airflow, open `http://localhos
 
 Log in with your `admin` user. From there, you should see Airflow's primary 'DAGs' view:
 
-![Empty Airflow UI](/img/software/ac-install.png)
+![Empty Apache Airflow® UI](/img/software/ac-install.png)

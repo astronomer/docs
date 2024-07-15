@@ -18,9 +18,9 @@ This tutorial shows how to use three SQL check operators (SQLColumnCheckOperator
 
 There are multiple resources for learning about this topic. See also:
 
-- Webinar: [Implementing Data Quality Checks in Airflow](https://www.astronomer.io/events/webinars/implementing-data-quality-checks-in-airflow/).
-- Webinar: [Efficient data quality checks with Airflow 2.7](https://www.astronomer.io/events/webinars/efficient-data-quality-checks-with-airflow-2-7/).
-- Use case: [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
+- Webinar: [Implementing Data Quality Checks in Apache Airflow®](https://www.astronomer.io/events/webinars/implementing-data-quality-checks-in-airflow/).
+- Webinar: [Efficient data quality checks with Apache Airflow® 2.7](https://www.astronomer.io/events/webinars/efficient-data-quality-checks-with-airflow-2-7/).
+- Use case: [Use Apache Airflow® setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
 - Example repository: [data quality demo](https://github.com/astronomer/airflow-data-quality-demo/).
 
 :::
@@ -33,8 +33,8 @@ This tutorial takes approximately 30 minutes to complete.
 
 To get the most out of this tutorial, you should have an understanding of:
 
-- How to design a data quality process. See [Data quality and Airflow](data-quality.md).
-- Running SQL from Airflow. See [Using Airflow to execute SQL](airflow-sql.md).
+- How to design a data quality process. See [Data quality and Apache Airflow®](data-quality.md).
+- Running SQL from Airflow. See [Using Apache Airflow® to execute SQL](airflow-sql.md).
 
 ## Prerequisites
 

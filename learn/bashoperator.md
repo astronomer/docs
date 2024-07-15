@@ -27,7 +27,7 @@ In this guide you'll learn:
 To get the most out of this guide, you should have an understanding of:
 
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- Airflow decorators. See [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md).
+- Airflow decorators. See [Introduction to the TaskFlow API and Apache Airflow® decorators](airflow-decorators.md).
 - Basic bash commands. See the [Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html).
 
 ## How to use the BashOperator and `@task.bash` decorator

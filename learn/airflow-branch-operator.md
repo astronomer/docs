@@ -16,7 +16,7 @@ In this guide, you'll learn how you can use `@task.branch` (BranchPythonOperator
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: Branching](https://academy.astronomer.io/astro-runtime-branching) module.
+- Astronomer Academy: [Apache Airflow®: Branching](https://academy.astronomer.io/astro-runtime-branching) module.
 
 :::
 
@@ -25,8 +25,8 @@ There are multiple resources for learning about this topic. See also:
 To get the most out of this guide, you should have an understanding of:
 
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- Dependencies in Airflow. See [Managing Dependencies in Apache Airflow](managing-dependencies.md).
-- Using Airflow decorators. See [Introduction to Airflow decorators](airflow-decorators.md).
+- Dependencies in Airflow. See [Managing Dependencies in Apache Airflow®](managing-dependencies.md).
+- Using Airflow decorators. See [Introduction to Apache Airflow® decorators](airflow-decorators.md).
 
 ## `@task.branch` (BranchPythonOperator)
 

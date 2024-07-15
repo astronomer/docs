@@ -77,7 +77,7 @@ Astronomer provides an [authentication front end](integrate-auth-system.md) with
 
 ### How can implement RBAC with this solution?
 
-Astronomer has [built-in Airflow RBAC support](workspace-permissions.md).
+Astronomer has [built-in Apache Airflow® RBAC support](workspace-permissions.md).
 
 ## Continuous vulnerability assessment and remediation
 

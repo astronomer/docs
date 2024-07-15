@@ -24,7 +24,7 @@ For a tutorial on how to use the open-source dbt Core package with Airflow see [
 To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of dbt. See [Getting started with dbt Cloud](https://docs.getdbt.com/guides/getting-started).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 
 ## Time to complete

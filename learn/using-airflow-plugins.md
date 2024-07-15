@@ -13,8 +13,8 @@ In this guide, you'll learn how to add a plugin to your Airflow instance and wha
 
 To get the most out of this guide, you should have an understanding of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
-- Airflow core components. See [Airflow's components](airflow-components.md).
+- Basic Airflow concepts. See [Introduction to Apache Airflow®](intro-to-airflow.md).
+- Airflow core components. See [Apache Airflow®'s components](airflow-components.md).
 - The basics of Flask. See the [Flask documentation](https://flask.palletsprojects.com/en/2.2.x/).
 
 ## When to use plugins
@@ -58,7 +58,7 @@ The list of currently active plugins can be viewed in the Airflow UI under **Adm
 
 :::info
 
-In order for changes to your plugin to be registered, you will need to restart any Airflow components (e.g. the webserver or scheduler) that use the plugin. Learn more in the [official Airflow documentation on plugins](https://airflow.apache.org/docs/apache-airflow/stable/plugins.html#when-are-plugins-re-loaded).
+In order for changes to your plugin to be registered, you will need to restart any Airflow components (e.g. the webserver or scheduler) that use the plugin. Learn more in the [official Apache Airflow® documentation on plugins](https://airflow.apache.org/docs/apache-airflow/stable/plugins.html#when-are-plugins-re-loaded).
 
 :::
 
@@ -74,7 +74,7 @@ Functionality is added to a plugin by adding components to the class which defin
 
 Other types of plugin components not covered in this guide include:
 
-- `timetables` offer the option to register custom timetables that define schedules which cannot be expressed in CRON. See the [DAG Schedule DAGs in Airflow guide](https://www.astronomer.io/docs/learn/scheduling-in-airflow#timetables) for more information and a code example.
+- `timetables` offer the option to register custom timetables that define schedules which cannot be expressed in CRON. See the [DAG Schedule DAGs in Apache Airflow® guide](https://www.astronomer.io/docs/learn/scheduling-in-airflow#timetables) for more information and a code example.
 - `executors` add the possibility to use a custom [executor](https://www.astronomer.io/docs/learn/airflow-executors-explained) in your Airflow instance.
 
 :::info
@@ -310,11 +310,11 @@ class MyGlobalLink(AirflowPlugin):
 
 You can access the button on task instances in both the **Graph** and **Grid** views.
 
-![Airflow Docs Button](/img/guides/global_operator_extra_link.png)
+![Apache Airflow® Docs Button](/img/guides/global_operator_extra_link.png)
 
 ### Macros
 
-In Airflow you can define custom macros which can be accessed using Jinja templating. Macros can be added at the DAG level by defining them in the DAG parameter `user_defined_macros` as shown in [Using Airflow templates](templating.md). If you want to make macros available to your whole Airflow instance you can register them as a plugin. 
+In Airflow you can define custom macros which can be accessed using Jinja templating. Macros can be added at the DAG level by defining them in the DAG parameter `user_defined_macros` as shown in [Using Apache Airflow® templates](templating.md). If you want to make macros available to your whole Airflow instance you can register them as a plugin. 
 
 Common use cases for custom macros include:
 
@@ -349,9 +349,9 @@ use_plugin_macro = BashOperator(
 
 ### Apache Airflow® listeners
 
-[Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Airflow instance, for example whenever any DAG run fails or an update to any dataset is detected. 
+[Apache Airflow® listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Airflow instance, for example whenever any DAG run fails or an update to any dataset is detected. 
 
-Listeners execute based on the event they are waiting for and are not attached to a task or DAG. This is in contrast to [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks) which are attached to a specific DAG or (set of) task(s) or [Airflow dataset](airflow-datasets.md) consumer DAGs that only execute when a specific (set of) dataset(s) is updated.
+Listeners execute based on the event they are waiting for and are not attached to a task or DAG. This is in contrast to [Apache Airflow® callbacks](error-notifications-in-airflow.md#airflow-callbacks) which are attached to a specific DAG or (set of) task(s) or [Apache Airflow® dataset](airflow-datasets.md) consumer DAGs that only execute when a specific (set of) dataset(s) is updated.
 While the listener itself will execute any time its event occurs, you can use conditional logic to determine whether or not to execute the code within the listener. For example, you can use a listener to send a Slack notification when a DAG run fails, but only if the DAG run was not manually triggered.
 
 You can create a listener using the `@hookimpl` decorator on functions defined with the same name and parameters as listed in the [listeners spec](https://github.com/apache/airflow/tree/main/airflow/listeners/spec) source code. 

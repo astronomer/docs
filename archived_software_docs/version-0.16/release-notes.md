@@ -39,7 +39,7 @@ Release Date: January 5, 2021
 
 #### Support for Apache Airflow®® 1.10.14
 
-Airflow 1.10.14 was built to make testing and migration to [Airflow 2.0](https://www.astronomer.io/blog/introducing-airflow-2-0) as easy as possible. Highlights include:
+Airflow 1.10.14 was built to make testing and migration to [Apache Airflow® 2.0](https://www.astronomer.io/blog/introducing-airflow-2-0) as easy as possible. Highlights include:
 
 - "Warning" to users with duplicate Airflow Connections ([commit](https://github.com/apache/airflow/commit/0e40ddd8e))
 - Enable [DAG Serialization](https://airflow.apache.org/docs/apache-airflow/stable/dag-serialization.html) by default ([commit](https://github.com/apache/airflow/commit/8a265067e))
@@ -54,7 +54,7 @@ To upgrade to AC 1.10.14, add our new Debian image to your Dockerfile:
 FROM quay.io/astronomer/ap-airflow:1.10.14-buster-onbuild
 ```
 
-For detailed guidelines on how to upgrade Airflow on Astronomer, read [Upgrade Airflow](manage-airflow-versions.md). For more information on 1.10.14, check out the [Airflow Release](https://github.com/apache/airflow/releases/tag/1.10.14) or the corresponding [AC 1.10.14 changelog](https://github.com/astronomer/ap-airflow/blob/master/1.10.14/CHANGELOG.md).
+For detailed guidelines on how to upgrade Airflow on Astronomer, read [Upgrade Apache Airflow®](manage-airflow-versions.md). For more information on 1.10.14, check out the [Apache Airflow® Release](https://github.com/apache/airflow/releases/tag/1.10.14) or the corresponding [AC 1.10.14 changelog](https://github.com/astronomer/ap-airflow/blob/master/1.10.14/CHANGELOG.md).
 
 > **Note:** In an effort to standardize our offering and optimize for reliability, we will only support a Debian-based image for AC 1.10.14. Alpine-based images for AC 1.10.5 - 1.10.12 will continue to be supported. For guidelines on how to migrate from Alpine, go to [Upgrade Apache Airflow®](manage-airflow-versions.md).
 
@@ -65,7 +65,7 @@ In addition to support for Airflow 1.10.14, Astronomer v0.16.15 also includes su
 - [1.10.12-2](https://github.com/astronomer/ap-airflow/blob/master/1.10.12/CHANGELOG.md)
 - [1.10.10-6](https://github.com/astronomer/ap-airflow/blob/master/1.10.10/CHANGELOG.md)
 
-For instructions on how to upgrade to the latest patch version of a release, refer to [Upgrade Airflow](manage-airflow-versions.md).
+For instructions on how to upgrade to the latest patch version of a release, refer to [Upgrade Apache Airflow®](manage-airflow-versions.md).
 
 #### Support for Docker Images on Quay.io + DockerHub
 
@@ -73,12 +73,12 @@ Astronomer recently migrated from [Docker Hub](https://hub.docker.com/r/astronom
 
 Astronomer v0.16.15 supports Docker images that are pulled from _either_ Docker registry, though we strongly encourage users to switch to Quay.io images to avoid rate limiting errors from Docker Hub. This change affects both Airflow images (`ap-airflow`) as well as all Docker images required to run the Astronomer platform, including `ap-grafana`, `ap-registry`, `ap-pgbouncer`, etc. If you're running a legacy Airflow image that pulls from `astronomerinc/ap-airflow`, for example, all it takes is modifying that image in your Dockerfile to read `quay.io/astronomer/ap-airflow`. Both have the exact same functionality.
 
-For more information, refer to [Upgrade Apache Airflow on Astronomer](manage-airflow-versions.md) or [this forum post](https://forum.astronomer.io/t/docker-hub-rate-limit-error-toomanyrequests-you-have-reached-your-pull-rate-limit/887).
+For more information, refer to [Upgrade Apache Airflow® on Astronomer](manage-airflow-versions.md) or [this forum post](https://forum.astronomer.io/t/docker-hub-rate-limit-error-toomanyrequests-you-have-reached-your-pull-rate-limit/887).
 
 #### Bug Fixes & Improvements
 
 - Improvement: Support Airflow's ["upgrade check"](https://airflow.apache.org/docs/apache-airflow/stable/upgrade-check.html) in the Astronomer CLI (`$ astro dev upgrade-check`) (_v0.16.5_)
-- Improvement: Support for [Airflow 2.0 in the Astronomer CLI](https://www.astronomer.io/guides/get-started-airflow-2) (_v0.16.5_)
+- Improvement: Support for [Apache Airflow® 2.0 in the Astronomer CLI](https://www.astronomer.io/guides/get-started-airflow-2) (_v0.16.5_)
 
 ### v0.16.12
 
@@ -117,7 +117,7 @@ Release Date: October 8, 2020
 
 #### Support for Apache Airflow® 1.10.12
 
-Astronomer v0.16.9 comes with support for [Airflow 1.10.12](https://airflow.apache.org/blog/airflow-1.10.12/) in addition to 3 patch versions of previously released images.
+Astronomer v0.16.9 comes with support for [Apache Airflow® 1.10.12](https://airflow.apache.org/blog/airflow-1.10.12/) in addition to 3 patch versions of previously released images.
 
 Airflow 1.10.12 notably includes:
 
@@ -127,7 +127,7 @@ Airflow 1.10.12 notably includes:
 - Support for grabbing Airflow configs with sensitive data from Secret Backends ([commit](https://github.com/apache/airflow/pull/9645))
 - Support for AirfowClusterPolicyViolation support in Airflow local settings ([commit](https://github.com/apache/airflow/pull/10282)).
 
-For a detailed breakdown of all changes, refer to the [AC 1.10.12 Changelog](https://github.com/astronomer/ap-airflow/blob/master/1.10.12/CHANGELOG.md). For instructions on how to upgrade to 1.10.12 on Astronomer, refer to ["Airflow Versioning"](manage-airflow-versions.md).
+For a detailed breakdown of all changes, refer to the [AC 1.10.12 Changelog](https://github.com/astronomer/ap-airflow/blob/master/1.10.12/CHANGELOG.md). For instructions on how to upgrade to 1.10.12 on Astronomer, refer to ["Apache Airflow® Versioning"](manage-airflow-versions.md).
 
 > **Note:** AC 1.10.12 will be the _last_ version to support an Alpine-based image. In an effort to standardize our offering and optimize for reliability, we'll exclusively build, test and support Debian-based images starting with AC 1.10.13. A guide for how to migrate from Alpine to Debian coming soon.
 
@@ -203,7 +203,7 @@ prometheus:
 
 For more information on alerts that are generated by default, refer to our ["Alerts" doc](platform-alerts.md).
 
-> **Note:** These alerts are NOT Airflow task-level alerts that require definition at the Airflow code level. For more information on how to set up `email_on_failure` within Airflow, for example, refer to our ["Airflow Alerts" doc](airflow-alerts.md).
+> **Note:** These alerts are NOT Airflow task-level alerts that require definition at the Airflow code level. For more information on how to set up `email_on_failure` within Airflow, for example, refer to our ["Apache Airflow® Alerts" doc](airflow-alerts.md).
 
 #### Bug Fixes and Improvements
 
@@ -231,7 +231,7 @@ These patch releases most notably include:
 - BugFix: Tighten restriction for `apache-airflow` in requirements.txt to allow users to install other packages with that prefix ([commit](https://github.com/astronomer/ap-airflow/commit/c2536db))
 - BugFix: Broken PapermillOperator (1.10.10 only).
 
-For information on how to upgrade Astronomer Certified versions, refer to our ["Manage Airflow Versions" doc](manage-airflow-versions.md).
+For information on how to upgrade Astronomer Certified versions, refer to our ["Manage Apache Airflow® Versions" doc](manage-airflow-versions.md).
 
 #### Airflow Chart: Improved Upgrade Process
 
@@ -312,9 +312,9 @@ Release Date: June 8, 2020
 
 #### Support for Airflow 1.10.10
 
-As of v0.15, Astronomer users can run the Astronomer Certified (AC) 1.10.10 image, which is based on the [Airflow 1.10.10](https://airflow.apache.org/blog/airflow-1.10.10/) open source version released in early April.
+As of v0.15, Astronomer users can run the Astronomer Certified (AC) 1.10.10 image, which is based on the [Apache Airflow® 1.10.10](https://airflow.apache.org/blog/airflow-1.10.10/) open source version released in early April.
 
-Airflow 1.10.10 notably includes the ability to choose a timezone in the Airflow UI, DAG Serialization functionality for improved Webserver performance, and the [ability to sync Airflow Connections and Variables](https://forum.astronomer.io/t/aws-parameter-store-as-secrets-backend-airflow-1-10-10/606) with a Secret Backend tool (e.g. AWS Secret Manager, Hashicorp Vault, etc.)
+Airflow 1.10.10 notably includes the ability to choose a timezone in the Airflow UI, DAG Serialization functionality for improved Webserver performance, and the [ability to sync Apache Airflow® Connections and Variables](https://forum.astronomer.io/t/aws-parameter-store-as-secrets-backend-airflow-1-10-10/606) with a Secret Backend tool (e.g. AWS Secret Manager, Hashicorp Vault, etc.)
 
 For more detail on what's included in AC 1.10.10, reference the [changelog](https://github.com/astronomer/ap-airflow/blob/master/1.10.10/CHANGELOG.md).
 

@@ -17,7 +17,7 @@ The Object Storage XCom Backend available in the [Common IO provider](https://ai
 
 This tutorial will show you how to set up a custom XCom backend using object storage for [AWS S3](https://aws.amazon.com/s3/), [GCP Cloud Storage](https://cloud.google.com/storage) or [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs/).
 
-To learn more about other options for setting custom XCom backends, see [Strategies for custom XCom backends in Airflow](custom-xcom-backend-strategies.md).
+To learn more about other options for setting custom XCom backends, see [Strategies for custom XCom backends in Apache Airflow®](custom-xcom-backend-strategies.md).
 
 :::warning
 
@@ -39,8 +39,8 @@ This tutorial takes approximately 45 minutes to complete.
 
 To get the most out of this tutorial, make sure you have an understanding of:
 
-- XCom basics. See [Passing data between Airflow tasks](airflow-passing-data-between-tasks.md).
-- Airflow connections. See [Manage connections in Apache Airflow](connections.md).
+- XCom basics. See [Passing data between Apache Airflow® tasks](airflow-passing-data-between-tasks.md).
+- Airflow connections. See [Manage connections in Apache Airflow®](connections.md).
 
 ## Prerequisites
 
@@ -353,4 +353,4 @@ We will use a simple DAG to test your custom XCom backend.
 
 ## Conclusion
 
-Congratulations, you learned how to set up a custom XCom backend using object storage! Learn more about other options to set up custom XCom backends in the [Strategies for custom XCom backends in Airflow](custom-xcom-backend-strategies.md) guide.
+Congratulations, you learned how to set up a custom XCom backend using object storage! Learn more about other options to set up custom XCom backends in the [Strategies for custom XCom backends in Apache Airflow®](custom-xcom-backend-strategies.md) guide.

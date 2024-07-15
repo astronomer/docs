@@ -28,7 +28,7 @@ In this guide you'll learn about the many ways you can implement dependencies in
 - Dependencies with the TaskFlow API.
 - Trigger rules.
 
-To view a video presentation of these concepts, see [Manage Dependencies Between Airflow Deployments, DAGs, and Tasks](https://www.astronomer.io/events/webinars/manage-dependencies-between-airflow-deployments-dags-tasks/). 
+To view a video presentation of these concepts, see [Manage Dependencies Between Apache Airflow® Deployments, DAGs, and Tasks](https://www.astronomer.io/events/webinars/manage-dependencies-between-airflow-deployments-dags-tasks/). 
 
 The focus of this guide is dependencies between tasks in the same DAG. If you need to implement dependencies between DAGs, see [Cross-DAG dependencies](cross-dag-dependencies.md).
 
@@ -36,7 +36,7 @@ The focus of this guide is dependencies between tasks in the same DAG. If you ne
 
 To get the most out of this guide, you should have an understanding of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
+- Basic Airflow concepts. See [Introduction to Apache Airflow®](intro-to-airflow.md).
 
 ## Basic dependencies
 
@@ -408,4 +408,4 @@ The following options are available:
 - `none_skipped`: The task runs only when no upstream task is in a skipped state.
 - `always`: The task runs at any time.
 
-Learn more about trigger rules in the [Airflow trigger rules](airflow-trigger-rules.md) guide.
+Learn more about trigger rules in the [Apache Airflow® trigger rules](airflow-trigger-rules.md) guide.

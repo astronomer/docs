@@ -38,7 +38,7 @@ Whether you're building your project locally or deploying to Astro, you can run 
 
 Astro includes several features that enhance open source Apache Airflow functionality.
 
-- On Astro, the Astro UI renders [Airflow tags](https://airflow.apache.org/docs/apache-airflow/stable/howto/add-dag-tags.html) defined in your DAGs. Use tags to filter DAGs across all Deployments from a single screen.
+- On Astro, the Astro UI renders [Apache Airflow® tags](https://airflow.apache.org/docs/apache-airflow/stable/howto/add-dag-tags.html) defined in your DAGs. Use tags to filter DAGs across all Deployments from a single screen.
 - The [Astro Environment Manager](manage-connections-variables.md) allows you to create and manage Airflow connections directly from the Astro UI. Instead of being limited to defining connections in the Airflow UI or with a secrets manager, you can create connections from the Environment Manager on Astro and use the connections in your local Airflow environment or across multiple Deployments and Workspaces.
 - Astro has built-in infrastructure to run the KubernetesPodOperator and Kubernetes executor, such as default Pod limits and requests. Task-level resource limits and requests are set by default on Astro Deployments, which means that tasks running in Kubernetes Pods never request more resources than expected. See [Run the Kubernetes executor](kubernetes-executor.md) and [Run the KubernetesPodOperator](kubernetespodoperator.md) for more specific instructions and examples. 
 
@@ -54,7 +54,7 @@ See [View logs](view-logs.md) and [Manage DAG runs](manage-dags.md) for more inf
 
 ## Airflow alerts
 
-Astro supports a set of alerting features that in many cases replace Apache Airflow SLAs or failure notification. There are some circumstances where Astronomer recommends configuring Astro alerts instead of Airflow SLAs or failure notifications because it can simplify your DAG code and make it easier to manage alerts across multiple DAGs. See [When to use Airflow or Astro alerts for your pipelines on Astro](best-practices/airflow-vs-astro-alerts.md).
+Astro supports a set of alerting features that in many cases replace Apache Airflow SLAs or failure notification. There are some circumstances where Astronomer recommends configuring Astro alerts instead of Airflow SLAs or failure notifications because it can simplify your DAG code and make it easier to manage alerts across multiple DAGs. See [When to use Apache Airflow® or Astro alerts for your pipelines on Astro](best-practices/airflow-vs-astro-alerts.md).
 
 ## Astro open source packages
 

@@ -102,7 +102,7 @@ This QDrant Demo DAG consists of six tasks that generate embeddings in parallel 
 
 2. In the Airflow UI, run the `books_recommend` DAG by clicking the play button. You'll be asked for input about your book preference.
 
-    ![Qdrant reference input shows an example of the UI where Airflow prompts you to enter your book preference.](/img/integrations/qdrant-reference-input.png)
+    ![Qdrant reference input shows an example of the UI where Apache Airflow® prompts you to enter your book preference.](/img/integrations/qdrant-reference-input.png)
 
 3. View the output of your search in the logs of the `search_qdrant` task.
 

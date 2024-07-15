@@ -8,7 +8,7 @@ description: "Configure your Deployment to forward observability data to your Da
 By forwarding Astro data to Datadog, you can integrate Astro into your existing observability practices by analyzing information about your Deployments' performance with Datadog cloud monitoring tools. Currently, you can send the following data to Datadog:
 
 - Apache Airflow® task logs.
-- Supported Datadog [Airflow metrics](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected).
+- Supported Datadog [Apache Airflow® metrics](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected).
 
 Complete the following setup to authenticate your Deployments to Datadog and forward your observability data to your Datadog instance.
 
@@ -35,7 +35,7 @@ You can forward Airflow task logs from a Deployment to [Datadog](https://www.dat
 
   :::info
 
-  By default, the Astro Datadog integration also sends a Deployment's [Airflow metrics](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected) to Datadog. To send only task logs to Datadog, add the following environment variable:
+  By default, the Astro Datadog integration also sends a Deployment's [Apache Airflow® metrics](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected) to Datadog. To send only task logs to Datadog, add the following environment variable:
 
     - **Key**: `ASTRO_DATADOG_METRICS_DISABLED`
     - **Value**: `true`

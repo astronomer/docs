@@ -11,13 +11,13 @@ import gx_dag from '!!raw-loader!../code-samples/dags/airflow-great-expectations
 
 [Great Expectations](https://greatexpectations.io) (GX) is an open source Python-based data validation framework. You can test your data by expressing what you “expect” from it as simple declarative statements in JSON or YAML, then run validations using those [Expectation Suites](https://docs.greatexpectations.io/docs/terms/expectation_suite/) against data in a [Source Data System](https://docs.greatexpectations.io/docs/oss/guides/setup/optional_dependencies/cloud/connect_gx_source_data_system) or a [pandas DataFrame](https://docs.greatexpectations.io/docs/oss/guides/connecting_to_your_data/fluent/in_memory/connect_in_memory_data). Astronomer, with help from Superconductive, maintains the [Great Expectations Apache Airflow® Provider](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest) that gives users a convenient method for running validations directly from their DAGs.
 
-This tutorial shows how to use the [`GreatExpectationsOperator`](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest/modules/GreatExpectationsOperator) in an Airflow DAG, leveraging automatic creation of a default [Checkpoint](https://docs.greatexpectations.io/docs/terms/checkpoint) and connecting via an [Airflow connection](connections.md).
+This tutorial shows how to use the [`GreatExpectationsOperator`](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest/modules/GreatExpectationsOperator) in an Airflow DAG, leveraging automatic creation of a default [Checkpoint](https://docs.greatexpectations.io/docs/terms/checkpoint) and connecting via an [Apache Airflow® connection](connections.md).
 
 :::tip Other ways to learn
 
 There are multiple resources for learning about this topic. See also:
 
-- Webinar: [How to Improve Data Quality with Airflow's Great Expectations Operator](https://www.astronomer.io/events/webinars/how-to-improve-data-quality-with-airflows-great-expectations-operator/).
+- Webinar: [How to Improve Data Quality with Apache Airflow®'s Great Expectations Operator](https://www.astronomer.io/events/webinars/how-to-improve-data-quality-with-airflows-great-expectations-operator/).
 
 :::
 
@@ -30,9 +30,9 @@ This tutorial takes approximately 20 minutes to complete.
 To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of Great Expectations. See [GX Quickstart](https://docs.greatexpectations.io/docs/oss/tutorials/quickstart).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
+- Airflow connections. See [Managing your Connections in Apache Airflow®](connections.md).
 
 ## Prerequisites
 
@@ -42,7 +42,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 1: Configure your Astro project
 
-To use GX with Airflow, install the [Great Expectations Airflow Provider](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest) in your Astro project.
+To use GX with Airflow, install the [Great Expectations Apache Airflow® Provider](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest) in your Astro project.
 
 1. Create a new Astro project:
 
@@ -174,7 +174,7 @@ If you do not want to use this built-in serialization, you can either enable XCo
 The GreatExpectationsOperator is a versatile operator allowing you to integrate GX into your Airflow environment. This tutorial shows the simplest way of using the operator by letting it create a default Checkpoint and Datasource based on an Airflow connection.
 The GreatExpectationsOperator also allows you to pass in a CheckpointConfig object using the `checkpoint_config` parameter or a `checkpoint_kwargs` dictionary. You can also customize the [Execution Engines](https://docs.greatexpectations.io/docs/terms/execution_engine) and pass [DataContextConfig objects](https://docs.greatexpectations.io/docs/terms/data_context) by configuring [Operator parameters](#operator-parameters).
 
-For more examples, check out the [Get Improved Data Quality Checks in Airflow with the Updated Great Expectations Operator](https://www.astronomer.io/blog/improved-data-quality-checks-in-airflow-with-great-expectations-operator/) blog post and the [Airflow data quality demo repository](https://github.com/astronomer/airflow-data-quality-demo/).
+For more examples, check out the [Get Improved Data Quality Checks in Apache Airflow® with the Updated Great Expectations Operator](https://www.astronomer.io/blog/improved-data-quality-checks-in-airflow-with-great-expectations-operator/) blog post and the [Apache Airflow® data quality demo repository](https://github.com/astronomer/airflow-data-quality-demo/).
 
 ### Operator parameters
 
@@ -220,4 +220,4 @@ gx_validate_pg = GreatExpectationsOperator(
 
 ### Connections and backends
 
-The GreatExpectationsOperator can run a Checkpoint on a dataset stored in any backend compatible with GX. This includes BigQuery, MSSQL, MySQL, PostgreSQL, Redshift, Snowflake, SQLite, and Athena, among others. All that’s needed to get the GreatExpectationsOperator to point at an external dataset is to set up an [Airflow Connection](connections.md) to the Datasource and setting the `conn_id` parameter. Connections will still work if you have your connection configured in both Airflow and Great Expectations, as long as the correct Datasource is specified in the Checkpoint passed to the operator.
+The GreatExpectationsOperator can run a Checkpoint on a dataset stored in any backend compatible with GX. This includes BigQuery, MSSQL, MySQL, PostgreSQL, Redshift, Snowflake, SQLite, and Athena, among others. All that’s needed to get the GreatExpectationsOperator to point at an external dataset is to set up an [Apache Airflow® Connection](connections.md) to the Datasource and setting the `conn_id` parameter. Connections will still work if you have your connection configured in both Airflow and Great Expectations, as long as the correct Datasource is specified in the Checkpoint passed to the operator.

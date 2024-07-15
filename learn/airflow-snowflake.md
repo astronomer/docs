@@ -19,7 +19,7 @@ This tutorial covers an example of orchestrating complex Snowflake operations wi
 - Running transformations on data in Snowflake using Airflow operators.
 - Running data quality checks on data in Snowflake.
 
-Additionally, [More on the Airflow Snowflake integration](#more-on-the-airflow-snowflake-integration) offers further information on:
+Additionally, [More on the Apache Airflow® Snowflake integration](#more-on-the-airflow-snowflake-integration) offers further information on:
 
 - Available operators and hooks for orchestrating actions in Snowflake.
 - Leveraging the OpenLineage Airflow integration to get data lineage and enhanced observability from your Snowflake jobs.
@@ -28,7 +28,7 @@ Additionally, [More on the Airflow Snowflake integration](#more-on-the-airflow-s
 
 :::tip
 
-To learn how you can use Airflow to improve your Snowflake cost management, see [Introducing SnowPatrol - Snowflake Anomaly Detection and Cost Management with Machine Learning and Airflow](https://www.astronomer.io/blog/introducing-snowpatrol/).
+To learn how you can use Airflow to improve your Snowflake cost management, see [Introducing SnowPatrol - Snowflake Anomaly Detection and Cost Management with Machine Learning and Apache Airflow®](https://www.astronomer.io/blog/introducing-snowpatrol/).
 
 :::
 
@@ -41,7 +41,7 @@ This tutorial takes approximately 30 minutes to complete.
 To get the most out of this tutorial, make sure you have an understanding of:
 
 - Snowflake basics. See [Introduction to Snowflake](https://docs.snowflake.com/en/user-guide-intro.html).
-- Airflow operators. See [Airflow operators](what-is-an-operator.md).
+- Airflow operators. See [Apache Airflow® operators](what-is-an-operator.md).
 - SQL basics. See the [W3 SQL tutorial](https://www.w3schools.com/sql/).
 
 ## Prerequisites
@@ -86,7 +86,7 @@ Use the Astro CLI to create and run an Airflow project on your local machine.
 
 :::info
 
-For more information on creating a Snowflake connection, see [Create a Snowflake connection in Airflow](https://www.astronomer.io/docs/learn/connections/snowflake).
+For more information on creating a Snowflake connection, see [Create a Snowflake connection in Apache Airflow®](https://www.astronomer.io/docs/learn/connections/snowflake).
 
 :::
 
@@ -305,7 +305,7 @@ The [Astronomer Providers](https://github.com/astronomer/astronomer-providers) p
 
 ### Snowflake and enhanced observability with OpenLineage
 
-The [OpenLineage project](https://openlineage.io/) integration with Airflow lets you obtain and view lineage metadata from your Airflow tasks. As long as an extractor exists for the operator being used, lineage metadata is generated automatically from each task instance. For an overview of how OpenLineage works with Airflow, see [OpenLineage and Airflow](airflow-openlineage.md).
+The [OpenLineage project](https://openlineage.io/) integration with Airflow lets you obtain and view lineage metadata from your Airflow tasks. As long as an extractor exists for the operator being used, lineage metadata is generated automatically from each task instance. For an overview of how OpenLineage works with Airflow, see [OpenLineage and Apache Airflow®](airflow-openlineage.md).
 
 The SnowflakeOperator, SnowflakeOperatorAsync, SQLColumnCheckOperator and SQLTableCheckOperator all have an extractor, which allows you to use lineage metadata to answer the following questions across DAGs:
 
@@ -318,7 +318,7 @@ This image shows an overview of the interaction between OpenLineage, Airflow, an
 
 ![Snowflake OpenLineage](/img/guides/snowflake_openlineage_architecture.png)
 
-To view lineage metadata from your DAGs, you need to have OpenLineage installed in your Airflow environment and a lineage front end running. If you're using [Astro](https://www.astronomer.io/docs/astro/data-lineage), lineage is enabled automatically. If you're using open source tools, you can run Marquez locally and connect it to your Airflow environment. See [OpenLineage and Airflow](airflow-openlineage.md).
+To view lineage metadata from your DAGs, you need to have OpenLineage installed in your Airflow environment and a lineage front end running. If you're using [Astro](https://www.astronomer.io/docs/astro/data-lineage), lineage is enabled automatically. If you're using open source tools, you can run Marquez locally and connect it to your Airflow environment. See [OpenLineage and Apache Airflow®](airflow-openlineage.md).
 
 To show an example of lineage resulting from Snowflake orchestration, you'll look at the write, audit, publish DAG from the previous example. The following image shows the Lineage UI integrated with Astro.
 

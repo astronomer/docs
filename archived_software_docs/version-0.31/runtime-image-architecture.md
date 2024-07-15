@@ -11,7 +11,7 @@ Astro Runtime includes the following features:
 
 - Timely support for new patch, minor, and major versions of Apache Airflow. This includes bug fixes that have not been released by the open source project but are backported to Astro Runtime and available to users earlier.
 - The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Astronomer deferrable operators](https://astronomer-providers.readthedocs.io/en/stable/providers/operators_and_sensors_list.html).
-- The `openlineage-airflow` package. [OpenLineage](https://openlineage.io/) standardizes the definition of data lineage, the metadata that forms lineage metadata, and how data lineage metadata is collected from external systems. See [OpenLineage and Airflow](https://www.astronomer.io/docs/learn/airflow-openlineage/).
+- The `openlineage-airflow` package. [OpenLineage](https://openlineage.io/) standardizes the definition of data lineage, the metadata that forms lineage metadata, and how data lineage metadata is collected from external systems. See [OpenLineage and Apache Airflow®](https://www.astronomer.io/docs/learn/airflow-openlineage/).
 - A custom security manager that enforces user roles and permissions as defined by Astronomer. See [Manage user permissions on Astronomer Software](workspace-permissions.md).
 
 For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime release notes](https://www.astronomer.io/docs/astro/runtime-release-notes).

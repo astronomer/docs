@@ -16,8 +16,8 @@ In this guide, you'll learn Airflow scheduling concepts and the different ways y
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: DAG Scheduling](https://academy.astronomer.io/path/airflow-101/astro-runtime-scheduling) module.
-- Webinar: [Scheduling in Airflow: A Comprehensive Introduction](https://www.astronomer.io/events/webinars/scheduling-in-airflow-comprehensive-intro/).
+- Astronomer Academy: [Apache Airflow®: DAG Scheduling](https://academy.astronomer.io/path/airflow-101/astro-runtime-scheduling) module.
+- Webinar: [Scheduling in Apache Airflow®: A Comprehensive Introduction](https://www.astronomer.io/events/webinars/scheduling-in-airflow-comprehensive-intro/).
 
 :::
 
@@ -25,8 +25,8 @@ There are multiple resources for learning about this topic. See also:
 
 To get the most out of this guide, you should have an existing knowledge of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
-- Configuring Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
+- Basic Airflow concepts. See [Introduction to Apache Airflow®](intro-to-airflow.md).
+- Configuring Airflow DAGs. See [Introduction to Apache Airflow® DAGs](dags.md).
 - Date and time modules in Python3. See the [Python documentation on the `datetime` package](https://docs.python.org/3/library/datetime.html).
 
 ## Scheduling concepts
@@ -204,13 +204,13 @@ This DAG runs every day at midnight UTC and, additionally, whenever either `data
 </TabItem>
 </Tabs>
 
-Datasets can be updated by any tasks in any DAG of the same Airflow environment, by calls to the [dataset endpoint of the Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_upstream_dataset_events), or manually in the Airflow UI.
+Datasets can be updated by any tasks in any DAG of the same Airflow environment, by calls to the [dataset endpoint of the Apache Airflow® REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_upstream_dataset_events), or manually in the Airflow UI.
 
 In the Airflow UI, the DAG now has a schedule of **Dataset**. The **Next Run** column shows the datasets the DAG depends on and how many of them have been updated.
 
 ![Dataset dependent DAG](/img/guides/scheduling-in-airflow_dags_view_dataset_dag.png)
 
-To learn more about datasets and data driven scheduling, see [Datasets and Data-Aware Scheduling in Airflow](airflow-datasets.md) guide.
+To learn more about datasets and data driven scheduling, see [Datasets and Data-Aware Scheduling in Apache Airflow®](airflow-datasets.md) guide.
 
 ## Timetables
 

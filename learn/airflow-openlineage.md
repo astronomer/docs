@@ -18,7 +18,7 @@ Astro offers robust support for extracting and visualizing data lineage. To lear
 
 There are multiple resources for learning about this topic. See also:
 
-- Webinar: [OpenLineage and Airflow: A Deeper Dive](https://www.astronomer.io/events/webinars/openlineage-and-airflow-deeper-dive/).
+- Webinar: [OpenLineage and Apache Airflow®: A Deeper Dive](https://www.astronomer.io/events/webinars/openlineage-and-airflow-deeper-dive/).
 
 :::
 
@@ -26,7 +26,7 @@ There are multiple resources for learning about this topic. See also:
 
 To get the most out of this guide, make sure you have an understanding of:
 
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
+- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 
 ## What is data lineage
@@ -53,7 +53,7 @@ The purpose of an open standard for lineage is to create a more cohesive governa
 
 ##### Getting Started
 
-The shortest path to reliable lineage from Airflow using OpenLineage is via the official [OpenLineage Airflow Provider](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html). Many operators are supported, and more are being added regularly. You can find a list of currently supported operators in the [Provider documentation](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/supported_classes.html). You won't have to modify your DAGs to start emitting lineage, but some basic configuration is necessary &ndash; specifically, installing a package and setting up a transport. The latter can be done via an environment variable. For more details about configuring the Provider, see the [user guide](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/guides/user.html).
+The shortest path to reliable lineage from Airflow using OpenLineage is via the official [OpenLineage Apache Airflow® Provider](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html). Many operators are supported, and more are being added regularly. You can find a list of currently supported operators in the [Provider documentation](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/supported_classes.html). You won't have to modify your DAGs to start emitting lineage, but some basic configuration is necessary &ndash; specifically, installing a package and setting up a transport. The latter can be done via an environment variable. For more details about configuring the Provider, see the [user guide](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/guides/user.html).
 
 :::note
 
@@ -94,7 +94,7 @@ For Astronomer customers using [Astro](https://www.astronomer.io/product/), Open
 
 ## Getting started locally
 
-If you are interested in exploring lineage locally with open source tools, you can run OpenLineage with Airflow using [Marquez](https://marquezproject.ai) as your lineage metadata repository and query API (backend) and UI (frontend). See the [Integrate OpenLineage and Airflow locally with Marquez](marquez.md) tutorial to get started. Or, for a configuration-free option for demo purposes, you can explore [Marquez on GitPod](https://gitpod.io/#https://github.com/MarquezProject/marquez).
+If you are interested in exploring lineage locally with open source tools, you can run OpenLineage with Airflow using [Marquez](https://marquezproject.ai) as your lineage metadata repository and query API (backend) and UI (frontend). See the [Integrate OpenLineage and Apache Airflow® locally with Marquez](marquez.md) tutorial to get started. Or, for a configuration-free option for demo purposes, you can explore [Marquez on GitPod](https://gitpod.io/#https://github.com/MarquezProject/marquez).
 
 ## Limitations
 

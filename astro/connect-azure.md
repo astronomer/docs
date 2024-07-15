@@ -285,4 +285,4 @@ Submit all collected details to [Astronomer support](https://cloud.astronomer.io
 
 ## See Also
 
-- [Manage Airflow connections and variables](manage-connections-variables.md)
+- [Manage Apache Airflow® connections and variables](manage-connections-variables.md)

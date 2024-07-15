@@ -93,7 +93,7 @@ If you choose to use Google Auth, we have [documentation available](integrate-au
 
 ### How can implement RBAC with this solution?
 
-Astronomer has [built-in Airflow RBAC support](workspace-permissions.md).
+Astronomer has [built-in Apache Airflow® RBAC support](workspace-permissions.md).
 
 
 ## Continuous Vulnerability Assessment and Remediation

@@ -56,7 +56,7 @@ This example uses the [Possum Regression dataset](https://www.kaggle.com/dataset
 
 ### Project overview
 
-This project consists of three DAGs which have dependency relationships through [Airflow datasets](airflow-datasets.md).
+This project consists of three DAGs which have dependency relationships through [Apache Airflow® datasets](airflow-datasets.md).
 
 ![Datasets view of the use case project showing the DAG feature_eng updating the datasets astro+s://data/possum.csv and s3://data_possum.csv. The train DAG is scheduled to run as soon as the s3://data_possum.csv is updated and updates the model_trained dataset. The predict DAG is scheduled to run on updates to the model_trained dataset and updates the astro+s3://data/possum_tail_length.csv](/img/examples/use-case-airflow-mlflow_datasets_view.png)
 
@@ -64,7 +64,7 @@ The [`feature_eng`](https://github.com/astronomer/use-case-mlflow/blob/main/dags
 
 ![Graph view of the feature_eng DAG showing a task creating the necessary MinIO buckets, a task group that prepares the MLflow experiment if it does not yet exist and data extraction and feature building tasks.](/img/examples/use-case-airflow-mlflow_feature_eng_dag_graph.png)
 
-The [`train`](https://github.com/astronomer/use-case-mlflow/blob/main/dags/train.py) DAG trains a RidgeCV model on the engineered features from `feature_eng` and then registers the model with MLflow using operators from the [MLflow Airflow provider](https://github.com/astronomer/airflow-provider-mlflow).
+The [`train`](https://github.com/astronomer/use-case-mlflow/blob/main/dags/train.py) DAG trains a RidgeCV model on the engineered features from `feature_eng` and then registers the model with MLflow using operators from the [MLflow Apache Airflow® provider](https://github.com/astronomer/airflow-provider-mlflow).
 
 ![Graph view of the train DAG showing tasks fetching data and experiment information and training the model. Afterwards a task group contains tasks to register the model with MLflow, create a model version and transition the model version.](/img/examples/use-case-airflow-mlflow_train_dag_graph.png)
 
@@ -276,5 +276,5 @@ Congratulations! You ran a ML pipeline tracking model parameters and versions in
 ## See also
 
 - Documentation: [MLflow](https://mlflow.org/docs).
-- Tutorial: [Use MLflow with Apache Airflow](airflow-mlflow.md).
-- Provider: [MLflow Airflow provider](https://github.com/astronomer/airflow-provider-mlflow).
+- Tutorial: [Use MLflow with Apache Airflow®](airflow-mlflow.md).
+- Provider: [MLflow Apache Airflow® provider](https://github.com/astronomer/airflow-provider-mlflow).

@@ -20,7 +20,7 @@ Specifically, you will:
 - Deploy DAGs to Astro with the Astro CLI.
 - Trigger a run of an example DAG in the Airflow UI.
 
-This tutorial takes about 15 minutes. If you're new to Airflow and want a more in-depth tutorial, see [Airflow 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
+This tutorial takes about 15 minutes. If you're new to Airflow and want a more in-depth tutorial, see [Apache Airflow® 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
 
 If you want to deploy your first DAG without installing any software to your local machine, see [Run your first DAG with GitHub Actions](first-dag-github-actions.md).
 
@@ -214,13 +214,13 @@ Newly-deployed DAGs are paused by default and will not start running automatical
 
 2. In the main DAGs view of the Airflow UI, click the slider button next to `example-dag-basic` to unpause it. If you hover over the DAG, it says `DAG is Active`. When you do this, the DAG starts to run on the schedule that is defined in its code.
 
-    ![Pause DAG slider in the Airflow UI](/img/docs/tutorial-unpause-dag.png)
+    ![Pause DAG slider in the Apache Airflow® UI](/img/docs/tutorial-unpause-dag.png)
 
 3. Manually trigger a DAG run of `example-dag-basic` by clicking the play button in the **Actions** column. When you develop DAGs on Astro, triggering a DAG run instead of waiting for the DAG schedule can help you quickly identify and resolve issues.
 
     After you press **Play**, the **Runs** and **Recent Tasks** sections for the DAG start to populate with data.
 
-    ![DAG running in the Airflow UI](/img/docs/tutorial-run-dag.png)
+    ![DAG running in the Apache Airflow® UI](/img/docs/tutorial-run-dag.png)
 
     These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#task-instances) that your DAG and task runs can be in.
 

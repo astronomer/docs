@@ -59,7 +59,7 @@ If you run the Astronomer Certified Docker image without the Astronomer platform
 
 If you're running the Astronomer Certified Docker image with the Astronomer platform, there are a few ways you can configure environment variables. For more information, read [Environment Variables](environment-variables.md).
 
-Astronomer Certified supports the same environment variables as Apache Airflow. For a list of all configurable environment variables, read the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html).
+Astronomer Certified supports the same environment variables as Apache Airflow. For a list of all configurable environment variables, read the [Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html).
 
 The following table lists the essential environment variables used when running Airflow with Astronomer Certified. Only environment variables explicitly defined in the Dockerfile are listed here; all other environment variables have the same default value as they have in OSS Airflow.
 

@@ -34,8 +34,8 @@ In this guide, you'll review the methods for implementing cross-DAG dependencies
 
 To get the most out of this guide, you should have an understanding of:
 
-- Dependencies in Airflow. See [Managing Dependencies in Apache Airflow](managing-dependencies.md).
-- Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
+- Dependencies in Airflow. See [Managing Dependencies in Apache Airflow®](managing-dependencies.md).
+- Airflow DAGs. See [Introduction to Apache Airflow® DAGs](dags.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow sensors. See [Sensors 101](what-is-a-sensor.md).
 
@@ -46,7 +46,7 @@ There are multiple ways to implement cross-DAG dependencies in Airflow, includin
 - [Dataset driven scheduling](airflow-datasets.md).
 - The [TriggerDagRunOperator](https://registry.astronomer.io/providers/apache-airflow/modules/triggerdagrunoperator).
 - The [ExternalTaskSensor](https://registry.astronomer.io/providers/apache-airflow/modules/externaltasksensor).
-- The [Airflow API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
+- The [Apache Airflow® API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
 
 In this section, you'll learn how and when you should use each method and how to view dependencies in the Airflow UI.
 
@@ -93,7 +93,7 @@ In the Airflow UI, the **Next Run** column for the downstream DAG shows dataset 
 
 ![DAG Dependencies View](/img/guides/2_4_DatasetDependentDAG.png)
 
-See [Datasets and Data-Aware Scheduling in Airflow](airflow-datasets.md) to learn more.
+See [Datasets and Data-Aware Scheduling in Apache Airflow®](airflow-datasets.md) to learn more.
 
 ### TriggerDagRunOperator
 
@@ -183,7 +183,7 @@ In the previous example, the upstream DAG (`example_dag`) and downstream DAG (`e
 
 ### Apache Airflow® API
 
-The [Airflow API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) is another way of creating cross-DAG dependencies. To use the API to trigger a DAG run, you can make a POST request to the `DAGRuns` endpoint as described in the [Airflow API documentation](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run).
+The [Apache Airflow® API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) is another way of creating cross-DAG dependencies. To use the API to trigger a DAG run, you can make a POST request to the `DAGRuns` endpoint as described in the [Apache Airflow® API documentation](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run).
 
 This method is useful if your dependent DAGs live in different Airflow environments (more on this in the Cross-Deployment Dependencies section below). The task triggering the downstream DAG will complete once the API call is complete.
 
@@ -218,7 +218,7 @@ To use the SimpleHttpOperator to trigger another DAG, you need to define the fol
 
 - `endpoint`: This should be of the form `'/api/v1/dags/<dag-id>/dagRuns'` where `<dag-id>` is the ID of the DAG you want to trigger.
 - `data`: To trigger a DAG run using this endpoint, you must provide an execution date. In the example above, we use the `execution_date` of the upstream DAG, but this can be any date of your choosing. You can also specify other information about the DAG run as described in the API documentation linked above.
-- `http_conn_id`: This should be an [Airflow connection](connections.md) of [type HTTP](https://airflow.apache.org/docs/apache-airflow-providers-http/stable/connections/http.html), with your Airflow domain as the Host. Any authentication should be provided either as a Login/Password (if using Basic auth) or as a JSON-formatted Extra. In the example below, we use an authorization token.
+- `http_conn_id`: This should be an [Apache Airflow® connection](connections.md) of [type HTTP](https://airflow.apache.org/docs/apache-airflow-providers-http/stable/connections/http.html), with your Airflow domain as the Host. Any authentication should be provided either as a Login/Password (if using Basic auth) or as a JSON-formatted Extra. In the example below, we use an authorization token.
 
 ![Http Connection](/img/guides/http_connection.png)
 

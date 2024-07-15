@@ -200,7 +200,7 @@ In Kubernetes 1.25, [PodSecurityPolicies (PSPs)](https://kubernetes.io/blog/2021
     If you chose this option, complete the following additional setup to satisfy the baseline policy:
 
     - [Export logs using container sidecars](export-task-logs.md#export-logs-using-container-sidecars)
-    - [Use an external Elasticsearch instance for Airflow task log management](export-task-logs.md#use-an-external-elasticsearch-instance-for-airflow-task-log-management)
+    - [Use an external Elasticsearch instance for Apache Airflow® task log management](export-task-logs.md#use-an-external-elasticsearch-instance-for-airflow-task-log-management)
 
 - Implement Pod Security through a third-party Open Policy Agent tool such as [GateKeeper](https://open-policy-agent.github.io/gatekeeper/website/docs/).
 
@@ -346,7 +346,7 @@ astronomer:
               allowPodLogReading: true
 ```
 
-Once you complete this change, compare any values under the `airflow` section with the [default values from airflow-chart](https://github.com/astronomer/airflow-chart/blob/master/values.yaml) and [open source Airflow chart](https://github.com/apache/airflow/blob/main/chart/values.yaml) to ensure that they are formatted correctly. Incorrectly formatted values for these configurations might result in an error during upgrade.
+Once you complete this change, compare any values under the `airflow` section with the [default values from airflow-chart](https://github.com/astronomer/airflow-chart/blob/master/values.yaml) and [open source Apache Airflow® chart](https://github.com/apache/airflow/blob/main/chart/values.yaml) to ensure that they are formatted correctly. Incorrectly formatted values for these configurations might result in an error during upgrade.
 
 ### Upgrading to Astronomer Software 0.25
 

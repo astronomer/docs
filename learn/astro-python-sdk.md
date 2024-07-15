@@ -39,7 +39,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - Basic Python and SQL.
 - Basic knowledge of [Amazon S3](https://aws.amazon.com/s3/getting-started/) and [Snowflake](https://docs.snowflake.com/en/user-guide-getting-started.html).
-- Apache Airflow® fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
+- Apache Airflow® fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow®](get-started-with-airflow.md).
 
 ## Prerequisites
 

@@ -92,7 +92,7 @@ This dashboard shows the amount of persistent storage available to Prometheus, t
 
     For instance, if you click **Edit** in the dropdown menu for the metric, you're able to update the **Metrics** query to show data for a specific time, status, or Deployment.
 
-    ![1-day Airflow Task Volume Metric](/img/software/task-volume.png)
+    ![1-day Apache Airflow® Task Volume Metric](/img/software/task-volume.png)
 
     In the following example, the query has been rewritten in the format `sum(increase(airflow_ti_successes[<time>]))`, which changes the time interval that appears in the metric. We recommend monitoring across longer intervals to clearly identify trends in task failures and successes:
 

@@ -54,7 +54,7 @@ Astro Runtime 11.5.0 includes same-day support for Apache Airflow 2.9.2. Airflow
 - Resolved a bug where valid DAGs that worked in Airflow 2.8 and had outlet datasets with specific URIs stopped working depending on how the URI was formatted [(#39670)](https://github.com/apache/airflow/pull/39670)
 - Resolved an issue where the object storage XCOM backend did not serialize correctly, causing custom XCOM backends to sometimes fail [(#39313)](https://github.com/apache/airflow/pull/39313)
 
-For more information, see the [Apache Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-9-2-2024-06-10).
+For more information, see the [Apache Airflow® release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-9-2-2024-06-10).
 
 ### Additional improvements
 
@@ -98,7 +98,7 @@ For more information, see the [Apache Airflow release notes](https://airflow.apa
 
 :::warning
 
-Due to an [issue related to using custom FAB actions in Airflow plugins](https://github.com/apache/airflow/issues/39144), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.3.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
+Due to an [issue related to using custom FAB actions in Apache Airflow® plugins](https://github.com/apache/airflow/issues/39144), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.3.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
 
 :::
 
@@ -122,7 +122,7 @@ Due to an [issue related to using custom FAB actions in Airflow plugins](https:/
 
 :::warning
 
-Due to an [issue related to using custom FAB actions in Airflow plugins](https://github.com/apache/airflow/issues/39144), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.3.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
+Due to an [issue related to using custom FAB actions in Apache Airflow® plugins](https://github.com/apache/airflow/issues/39144), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.3.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
 
 :::
 
@@ -139,7 +139,7 @@ Due to an [issue related to using custom FAB actions in Airflow plugins](https:/
 
 :::warning
 
-Due to an [issue related to using custom FAB actions in Airflow plugins](https://github.com/apache/airflow/issues/39144), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.3.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
+Due to an [issue related to using custom FAB actions in Apache Airflow® plugins](https://github.com/apache/airflow/issues/39144), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.3.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
 
 :::
 
@@ -155,13 +155,13 @@ Astro Runtime 11.0.0 includes same-day support for Apache Airflow 2.9, which inc
 - Added the ability to automatically pause a DAG after a pre-defined number of sequentially failed runs.
 - Dataset URIs are validated when you enter them, and must conform to the rules set in AIP-60. See the [Dataset documentation](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/datasets.html) for more information.
 
-For more information about the major changes in this release, see the [Airflow Blog](https://airflow.apache.org/blog/airflow-2.9.0/) or the [Airflow release notes](https://airflow.apache.org/docs/apache-airflow/2.9.0/release_notes.html#airflow-2-9-0-2024-04-08).
+For more information about the major changes in this release, see the [Apache Airflow® Blog](https://airflow.apache.org/blog/airflow-2.9.0/) or the [Apache Airflow® release notes](https://airflow.apache.org/docs/apache-airflow/2.9.0/release_notes.html#airflow-2-9-0-2024-04-08).
 
 #### Upgrade to Python 3.12
 
 Airflow now supports Python 3.12. However, [Pendulum](https://pendulum.eustace.io/) 2 does not support Python 3.12. If you upgrade to Python 3.12 and want to use Airflow, you also need to upgrade to Pendulum 3.
 
-Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airflow/2.9.0/release_notes.html#official-support-for-python-3-12-38025) for more information about any limitations in Python 3.12 support.
+Refer to the [Apache Airflow® release notes](https://airflow.apache.org/docs/apache-airflow/2.9.0/release_notes.html#official-support-for-python-3-12-38025) for more information about any limitations in Python 3.12 support.
 
 #### Bug fixes
 
@@ -238,7 +238,7 @@ Astro Runtime 10.6.0 includes same-day support for Apache Airflow 2.8.4. Airflow
 - Fix the serialization of DAGs with `start_date` in a fixed timezone, which could cause the scheduler to crash ([#38139](https://github.com/apache/airflow/pull/38139))
 - Fix a bug where the scheduler heartrate wasn't calculated correctly, the parameter needed to calculate scheduler heartrate has been corrected ([#37992](https://github.com/apache/airflow/pull/37992))
 
-For more information, see the [Apache Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-8-4-2024-03-25).
+For more information, see the [Apache Airflow® release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-8-4-2024-03-25).
 
 ### Additional improvements
 
@@ -260,7 +260,7 @@ Astro Runtime 10.5.0 includes same-day support for Apache Airflow 2.8.3. Airflow
 - Fix external_executor_id being overwritten ([#37784](https://github.com/apache/airflow/pull/37784))
 - Set parsing context dag_id in dag test command ([#37606](https://github.com/apache/airflow/pull/37606))
 
-For more information, see the [Apache Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-8-3-2024-03-11).
+For more information, see the [Apache Airflow® release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-8-3-2024-03-11).
 
 ### Security fixes
 
@@ -278,7 +278,7 @@ Astro Runtime 10.4.0 includes same-day support for Apache Airflow 2.8.2. Airflow
 - Base date for fetching DAG grid view must include selected run_id ([#34887](https://github.com/apache/airflow/pull/34887))
 - Change AirflowTaskTimeout to inherit BaseException ([#35653](https://github.com/apache/airflow/pull/35653))
 
-For more information, see the [Apache Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-8-2-2024-02-26).
+For more information, see the [Apache Airflow® release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-8-2-2024-02-26).
 
 ### Security fixes
 
@@ -319,7 +319,7 @@ Astro Runtime 10.2.0 includes same-day support for Apache Airflow 2.8.1. Airflow
 - Fix scheduler exiting with code 0 on exceptions ([#36880](https://github.com/apache/airflow/pull/36800))
 - Fix Callback exception when a removed task is the last one in the task instance list ([#36693](https://github.com/apache/airflow/pull/36693))
 
-For more information, see the [Apache Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-8-1-2024-01-19).
+For more information, see the [Apache Airflow® release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-8-1-2024-01-19).
 
 ### Security fixes
 
@@ -353,7 +353,7 @@ Astro Runtime 10.0.0 includes same-day support for Apache Airflow 2.8, which inc
 - You can now specify extra index URLs in the PythonVirtualEnvOperator, which makes it easier to spin up virtual environments that include private Python packages.
 - The Airflow UI **Grid** view now supports filtering on multiple run states at once so that you can compare runs across states.
 
-For more information about the major changes in this release, see the [Airflow blog](https://airflow.apache.org/blog/airflow-2.8.0/).
+For more information about the major changes in this release, see the [Apache Airflow® blog](https://airflow.apache.org/blog/airflow-2.8.0/).
 
 ### Additional improvements
 
@@ -625,7 +625,7 @@ Astro Runtime 9.5.0 includes same-day support for Apache Airflow 2.7.3. Airflow 
 - Fix pre-mature evaluation of tasks in mapped task group ([#34337](https://github.com/apache/airflow/pull/34337))
 - Add TriggerRule missing value in REST API ([#35194](https://github.com/apache/airflow/pull/35194))
 
-To learn more, see the [Apache Airflow 2.7.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-3-2023-11-04).
+To learn more, see the [Apache Airflow® 2.7.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-3-2023-11-04).
 
 ### Additional improvements
 
@@ -678,7 +678,7 @@ Astro Runtime 9.2.0 includes same-day support for Apache Airflow 2.7.2. Airflow 
 - Fix the required permissions to clear a TI from the UI ([#34123](https://github.com/apache/airflow/pull/34123))
 - Fixed a bug where manually-triggered DAG runs were causing the recalculation of when the scheduler would trigger the next DAG run ([#34027](https://github.com/apache/airflow/pull/34027))
 
-To learn more, see the [Apache Airflow 2.7.2 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-2-2023-10-12).
+To learn more, see the [Apache Airflow® 2.7.2 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-2-2023-10-12).
 
 ### Additional Improvements
 
@@ -704,7 +704,7 @@ Astro Runtime 9.1.0 includes same-day support for Apache Airflow 2.7.1. Airflow 
 - Add limit 1 if required first value from query result ([#33632](https://github.com/apache/airflow/pull/33632))
 - Fix MappedTaskGroup tasks not respecting upstream dependency ([#33732](https://github.com/apache/airflow/pull/33732))
 
-To learn more, see the [Apache Airflow 2.7.1 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-1-2023-09-07).
+To learn more, see the [Apache Airflow® 2.7.1 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-1-2023-09-07).
 
 ### Additional improvements
 
@@ -731,11 +731,11 @@ Astro Runtime 9 is based on Airflow 2.7, which includes a number of new features
     - **Key**: `AIRFLOW__WEBSERVER__SHOW_TRIGGER_FORM_IF_NO_PARAMS`
     - **Value**: `True`
 
-- Setup and teardown tasks are a new type of task that you can use to prepare resources and configurations for specific tasks, ensuring that they always have resources even when you retry failed tasks. See [Use setup and teardown tasks in Airflow](https://www.astronomer.io/docs/learn/airflow-setup-teardown) to learn how to use them.
+- Setup and teardown tasks are a new type of task that you can use to prepare resources and configurations for specific tasks, ensuring that they always have resources even when you retry failed tasks. See [Use setup and teardown tasks in Apache Airflow®](https://www.astronomer.io/docs/learn/airflow-setup-teardown) to learn how to use them.
 - You can now clear task groups or mark them as successful/failed from the Airflow UI **Grid View** just like individual tasks.
 - You can set `operators.default_deferrable` in your Airflow config to always use the deferrable version of an operator if one is available, which means that you no longer have to update import statements in DAGs to replace traditional operators with deferrable ones.
 
-To learn more, see the [Apache Airflow 2.7.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-0-2023-08-14).
+To learn more, see the [Apache Airflow® 2.7.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-0-2023-08-14).
 
 ### New Python version distributions of Astro Runtime
 
@@ -832,7 +832,7 @@ Astro Runtime 8.7.0 includes same-day support for Apache Airflow 2.6.3. Airflow 
 - Fix `operator_extra_links` property serialization in mapped tasks ([31904](https://github.com/apache/airflow/pull/31904))
 - You can now specify a format for manual `run_id` inputs. Manually entered `run_ids` must conform with the regex specified in the `[scheduler]allowed_run_id_pattern` setting. [32293](https://github.com/apache/airflow/pull/32293))
 
-For a complete list of the changes, see the [Apache Airflow 2.6.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html).
+For a complete list of the changes, see the [Apache Airflow® 2.6.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html).
 
 ### Additional improvements
 
@@ -860,7 +860,7 @@ Astro Runtime 8.5.0 includes same-day support for Apache Airflow 2.6.2. Airflow 
 - Fix Kubernetes executors detection of deleted pods ([31274](https://github.com/apache/airflow/pull/31274))
 - Fix crash when clearing run with task from normal to mapped ([31352](https://github.com/apache/airflow/pull/31352))
 
-For a complete list of the changes, see the [Apache Airflow 2.6.2 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html).
+For a complete list of the changes, see the [Apache Airflow® 2.6.2 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html).
 
 ### Additional improvements
 
@@ -917,7 +917,7 @@ Astro Runtime 8.2.0 includes same-day support for Apache Airflow 2.6.1. Airflow 
 - Fix timestamp parse failure for Kubernetes executor pod tailing ([31175](https://github.com/apache/airflow/pull/31175))
 - Fix calculation of health check threshold for SchedulerJob ([31277](https://github.com/apache/airflow/pull/31277))
 
-For a complete list of the changes, see the [Apache Airflow 2.6.1 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html).
+For a complete list of the changes, see the [Apache Airflow® 2.6.1 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html).
 
 ### Additional improvements
 
@@ -956,7 +956,7 @@ Astro Runtime 8 is based on Airflow 2.6, which includes a number of new features
 - A major bug related to zombie tasks has been fixed. The logic for handling stalled tasks has been moved to the scheduler, and any tasks that have been queued for more than `scheduler.task_queued_timeout` are now marked as failed. This prevents a type of zombie task where tasks are stuck in an infinite loop of being scheduled and queued.
 - You can now view logs for individual triggers in the Airflow UI. Trigger logs tell you when an individual task is sleeping and when it's triggered.
 
-To learn more, see the [Apache Airflow 2.6.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-6-0-2023-04-30).
+To learn more, see the [Apache Airflow® 2.6.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-6-0-2023-04-30).
 
 ### Fewer dependencies installed by default
 
@@ -1037,7 +1037,7 @@ Astro Runtime 7.4.2 includes same-day support for Apache Airflow 2.5.3. Airflow 
 - Fix `TriggerRuleDep` when the mapped tasks count is 0 ([30084](https://github.com/apache/airflow/pull/30084))
 - Fix some long known Graph View UI problems ([29971](https://github.com/apache/airflow/pull/29971))
 
-For a complete list of the changes, see the [Apache Airflow 2.5.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html).
+For a complete list of the changes, see the [Apache Airflow® 2.5.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html).
 
 ### Additional improvements
 
@@ -1066,7 +1066,7 @@ Astro Runtime 7.2.0 includes same-day support for Apache Airflow 2.5.2. Airflow 
 - Fix validation of date-time field in API and Parameter schemas ([29395](https://github.com/apache/airflow/pull/29395))
 - DAG list sorting lost when switching page ([29756](https://github.com/apache/airflow/pull/29756))
 
-For a complete list of the changes, see the [Apache Airflow 2.5.2 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-5-2-2023-03-15).
+For a complete list of the changes, see the [Apache Airflow® 2.5.2 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-5-2-2023-03-15).
 
 ### Additional improvements
 
@@ -1107,7 +1107,7 @@ Astro Runtime 7.2.0 includes same-day support for Apache Airflow 2.5.1. Airflow 
 - Return list of tasks that will be queued ([28066](https://github.com/apache/airflow/pull/28066))
 - Fix masking of non-sensitive environment variables ([28802](https://github.com/apache/airflow/pull/28802))
 
-For a complete list of the changes, see the [Apache Airflow 2.5.1 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-5-1-2023-01-20).
+For a complete list of the changes, see the [Apache Airflow® 2.5.1 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-5-1-2023-01-20).
 
 ### The Astro Python SDK is now included with Astro Runtime
 
@@ -1156,7 +1156,7 @@ Astro Runtime 7.0.0 includes same-day support for Airflow 2.5.0, which includes 
 - New **Parsed at** metric in the DAG view of the Airflow UI [#27573](https://github.com/apache/airflow/pull/27573)
 - Filter datasets in Airflow UI based on recent update events [#26942](https://github.com/apache/airflow/pull/26942)
 
-To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/blog/whats-new-in-apache-airflow-2-5/) and the [Apache Airflow 2.5.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-5-0-2022-12-02).
+To learn more, see [What's New in Apache Airflow® 2.5](https://www.astronomer.io/blog/whats-new-in-apache-airflow-2-5/) and the [Apache Airflow® 2.5.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-5-0-2022-12-02).
 
 ### Additional improvements
 
@@ -1367,7 +1367,7 @@ Astro Runtime 6.0.4 includes same-day support for Airflow 2.4.3, which includes 
 - Make `RotatingFilehandler` used in `DagProcessor` non-caching ([27223](https://github.com/apache/airflow/pull/27223))
 - Fix double logging with some task logging handler ([27591](https://github.com/apache/airflow/pull/27591))
 
-For a complete list of the changes, see the [Apache Airflow 2.4.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-4-3-2022-11-14).
+For a complete list of the changes, see the [Apache Airflow® 2.4.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-4-3-2022-11-14).
 
 ### Additional improvements
 
@@ -1386,7 +1386,7 @@ Astro Runtime 6.0.3 includes same-day support for Airflow 2.4.2. Some changes in
 - Handle mapped tasks in task duration chart ([#26722](https://github.com/apache/airflow/pull/26722))
 - Make tracebacks opt-in ([#27059](https://github.com/apache/airflow/pull/27059))
 
-For a complete list of commits, see the [Apache Airflow 2.4.2 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-4-2-2022-10-23).
+For a complete list of commits, see the [Apache Airflow® 2.4.2 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-4-2-2022-10-23).
 
 ### Additional improvements
 
@@ -1404,7 +1404,7 @@ Astro Runtime 6.0.2 includes same-day support for Airflow 2.4.1, which includes 
 - Fix Deferrable stuck as scheduled during backfill ([#26205](https://github.com/apache/airflow/pull/26205))
 - Don't update backfill run from the scheduler ([#26342](https://github.com/apache/airflow/pull/26342))
 
-For a complete list of commits, see the [Apache Airflow 2.4.1 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-4-1-2022-09-30).
+For a complete list of commits, see the [Apache Airflow® 2.4.1 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-4-1-2022-09-30).
 
 ### Early access Airflow bug fixes
 
@@ -1436,14 +1436,14 @@ Astro Runtime 6.0.2 includes the following bug fixes from Apache Airflow 2.4.2:
 
 ### Airflow 2.4 and data-aware scheduling
 
-Astro Runtime 6.0.0 provides same-day support for [Airflow 2.4.0](https://airflow.apache.org/blog/airflow-2.4.0/), which delivers significant new features for DAG scheduling. The most notable new features in Airflow 2.4.0 are:
+Astro Runtime 6.0.0 provides same-day support for [Apache Airflow® 2.4.0](https://airflow.apache.org/blog/airflow-2.4.0/), which delivers significant new features for DAG scheduling. The most notable new features in Airflow 2.4.0 are:
 
 - [Data-aware scheduling](https://airflow.apache.org/docs/apache-airflow/2.4.0/concepts/datasets.html), which is a new method for scheduling a DAG based on when an upstream DAG modifies a specific dataset.
 - The [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/2.4.0/howto/operator/python.html#externalpythonoperator), which can execute Python code in a virtual environment with different Python libraries and dependencies than your core Airflow environment.
 - Automatic DAG registration. You no longer need to specify `as dag` when defining a DAG object.
 - Support for [zipping](https://airflow.apache.org/docs/apache-airflow/2.4.0/concepts/dynamic-task-mapping.html#combining-upstream-data-aka-zipping) dynamically mapped tasks.
 
-For a complete list of commits, see the [Apache Airflow 2.4.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-4-0-2022-09-19).
+For a complete list of commits, see the [Apache Airflow® 2.4.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-4-0-2022-09-19).
 
 ### Additional improvements
 
@@ -1624,7 +1624,7 @@ Astro Runtime 5.0.11 includes the following bug fix from later Apache Airflow re
 
 ### Airflow 2.3.4
 
-Astro Runtime 5.0.8 includes Airflow 2.3.4, which primarily includes bug fixes. For a complete list of commits, see the [Apache Airflow 2.3.4 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-3-4-2022-08-23).
+Astro Runtime 5.0.8 includes Airflow 2.3.4, which primarily includes bug fixes. For a complete list of commits, see the [Apache Airflow® 2.3.4 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-3-4-2022-08-23).
 
 ### Additional improvements
 
@@ -1648,7 +1648,7 @@ These changes were backported from Apache Airflow 2.3.4, which is not yet genera
 
 ### Additional improvements
 
-- The Astro UI no longer shows source code for [supported Airflow operators](https://openlineage.io/docs/integrations/about#capability-matrix) by default. To reenable this feature for a given Deployment, create an [environment variable](environment-variables.md) with a key of `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE` and a value of `False`.
+- The Astro UI no longer shows source code for [supported Apache Airflow® operators](https://openlineage.io/docs/integrations/about#capability-matrix) by default. To reenable this feature for a given Deployment, create an [environment variable](environment-variables.md) with a key of `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE` and a value of `False`.
 - Upgraded `openlineage-airflow` to version `0.12.0`, which includes support for Spark 3.3.0 and Apache Flink. For a list of all changes, see the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
 - Upgraded `astronomer-providers` to version `1.7.1`, which includes new deferrable operators and improvements to documentation. For more information, see the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.7.1/CHANGELOG.rst).
 - Upgraded `apache-airflow-providers-amazon` to version `4.1.0`, which includes a bug fix for integrating with AWS Secrets Manager.
@@ -1660,7 +1660,7 @@ These changes were backported from Apache Airflow 2.3.4, which is not yet genera
 
 ### Airflow 2.3.3
 
-Astro Runtime 5.0.6 includes Airflow 2.3.3, which includes bug fixes and UI improvements. For a complete list of commits, see the [Apache Airflow 2.3.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-3-3-2022-07-05).
+Astro Runtime 5.0.6 includes Airflow 2.3.3, which includes bug fixes and UI improvements. For a complete list of commits, see the [Apache Airflow® 2.3.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-3-3-2022-07-05).
 
 ### Additional improvements
 
@@ -1714,7 +1714,7 @@ Astro Runtime 5.0.3 includes support for Airflow 2.3.2, which includes:
 - Mask sensitive values for task instances that are not yet running ([#23807](https://github.com/apache/airflow/pull/23807))
 - Add cascade to `dag_tag` to `dag` foreign key ([#23444](https://github.com/apache/airflow/pull/23444))
 
-For more information, see the [changelog for Apache Airflow 2.3.2](https://github.com/apache/airflow/releases/tag/2.3.2).
+For more information, see the [changelog for Apache Airflow® 2.3.2](https://github.com/apache/airflow/releases/tag/2.3.2).
 
 ### Additional improvements
 
@@ -1736,7 +1736,7 @@ Fixes include:
 - Fix secrets rendered in Airflow UI when task is not executed ([#22754](https://github.com/apache/airflow/pull/22754))
 - Performance improvements for faster database migrations to Airflow 2.3
 
-For more information, see the [changelog for Apache Airflow 2.3.1](https://github.com/apache/airflow/releases/tag/2.3.1).
+For more information, see the [changelog for Apache Airflow® 2.3.1](https://github.com/apache/airflow/releases/tag/2.3.1).
 
 ### Additional improvements
 
@@ -1772,14 +1772,14 @@ To access the source code of this package, visit the [Astronomer Providers GitHu
 
 ### Support for Airflow 2.3 & dynamic task mapping
 
-Astro Runtime 5.0.0 provides support for [Airflow 2.3.0](https://airflow.apache.org/blog/airflow-2.3.0/), which is a significant open source release. The most notable new features in Airflow 2.3.0 are:
+Astro Runtime 5.0.0 provides support for [Apache Airflow® 2.3.0](https://airflow.apache.org/blog/airflow-2.3.0/), which is a significant open source release. The most notable new features in Airflow 2.3.0 are:
 
 - [Dynamic task mapping](https://airflow.apache.org/docs/apache-airflow/2.3.0/concepts/dynamic-task-mapping.html), which allows you to generate task instances at runtime based on changing data and input conditions.
 - A new **Grid** view in the Airflow UI that replaces the **Tree** view and provides a more intuitive way to visualize the state of your tasks.
-- The ability to [define Airflow connections in JSON](https://airflow.apache.org/docs/apache-airflow/2.3.0/howto/connection.html#json-format-example) instead of as a Connection URI.
+- The ability to [define Apache Airflow® connections in JSON](https://airflow.apache.org/docs/apache-airflow/2.3.0/howto/connection.html#json-format-example) instead of as a Connection URI.
 - The ability to [reuse a decorated task function](https://airflow.apache.org/docs/apache-airflow/2.3.0/tutorial_taskflow_api.html#reusing-a-decorated-task) between DAGs.
 
-For more information on Airflow 2.3, see ["Apache Airflow 2.3 — Everything You Need to Know"](https://www.astronomer.io/blog/apache-airflow-2-3-everything-you-need-to-know) by Astronomer.
+For more information on Airflow 2.3, see ["Apache Airflow® 2.3 — Everything You Need to Know"](https://www.astronomer.io/blog/apache-airflow-2-3-everything-you-need-to-know) by Astronomer.
 
 ## Astro Runtime 4.2.9
 
@@ -1868,7 +1868,7 @@ Astro Runtime 4.2.7 includes the following bug fixes from later Apache Airflow r
 
 ### Support for Airflow 2.2.5
 
-Astro Runtime 4.2.2 includes support for Apache Airflow 2.2.5, which exclusively contains bug fixes and performance improvements. For details on the release, read the [Airflow 2.2.5 changelog](https://airflow.apache.org/docs/apache-airflow/stable/changelog.html#airflow-2-2-5-2022-04-04).
+Astro Runtime 4.2.2 includes support for Apache Airflow 2.2.5, which exclusively contains bug fixes and performance improvements. For details on the release, read the [Apache Airflow® 2.2.5 changelog](https://airflow.apache.org/docs/apache-airflow/stable/changelog.html#airflow-2-2-5-2022-04-04).
 
 ## Astro Runtime 4.2.1
 
@@ -1915,7 +1915,7 @@ For more information, see [Deferrable operators](https://www.astronomer.io/docs/
 
 ### Support for Airflow 2.2.4
 
-Astro Runtime 4.1.0 includes support for Apache Airflow 2.2.4, which exclusively contains bug fixes and performance improvements. For details on the release, read the [Airflow 2.2.4 changelog](https://airflow.apache.org/docs/apache-airflow/stable/changelog.html#airflow-2-2-4-2022-02-22).
+Astro Runtime 4.1.0 includes support for Apache Airflow 2.2.4, which exclusively contains bug fixes and performance improvements. For details on the release, read the [Apache Airflow® 2.2.4 changelog](https://airflow.apache.org/docs/apache-airflow/stable/changelog.html#airflow-2-2-4-2022-02-22).
 
 ## Astro Runtime 4.0.11
 
@@ -1966,7 +1966,7 @@ These are all [deferrable operators](https://www.astronomer.io/docs/learn/deferr
 
 ### Support for Airflow 2.2.3
 
-Astro Runtime 4.0.8 includes support for [Airflow 2.2.3](https://airflow.apache.org/docs/apache-airflow/stable/changelog.html#airflow-2-2-3-2021-12-20).
+Astro Runtime 4.0.8 includes support for [Apache Airflow® 2.2.3](https://airflow.apache.org/docs/apache-airflow/stable/changelog.html#airflow-2-2-3-2021-12-20).
 
 Airflow 2.2.3 exclusively contains bug fixes, including:
 - Fix for a broken link to task logs in the Gantt view of the Airflow UI ([#20121](https://github.com/apache/airflow/pull/20121))
@@ -2030,7 +2030,7 @@ Because this DAG is essential to Astro's managed service, your organization will
 
 ### Additional improvements
 
-- Added support for [Airflow 2.2.2](https://airflow.apache.org/docs/apache-airflow/stable/changelog.html#airflow-2-2-2-2021-11-15), which includes a series of bug fixes for timetables, DAG scheduling, and database migrations. Most notably, it resolves an issue where some DAG runs would be missing in the Airflow UI if `catchup=True` was set.
+- Added support for [Apache Airflow® 2.2.2](https://airflow.apache.org/docs/apache-airflow/stable/changelog.html#airflow-2-2-2-2021-11-15), which includes a series of bug fixes for timetables, DAG scheduling, and database migrations. Most notably, it resolves an issue where some DAG runs would be missing in the Airflow UI if `catchup=True` was set.
 
 ### Bug fixes
 
@@ -2043,7 +2043,7 @@ Because this DAG is essential to Astro's managed service, your organization will
 
 ### Additional improvements
 
-- Added support for [Airflow 2.2.1](https://airflow.apache.org/docs/apache-airflow/stable/changelog.html#airflow-2-2-1-2021-10-29), which includes a series of bug fixes that address intermittent problems with database migrations from Airflow 2.1 to Airflow 2.2
+- Added support for [Apache Airflow® 2.2.1](https://airflow.apache.org/docs/apache-airflow/stable/changelog.html#airflow-2-2-1-2021-10-29), which includes a series of bug fixes that address intermittent problems with database migrations from Airflow 2.1 to Airflow 2.2
 
 ## Astro Runtime 4.0.1
 
@@ -2062,7 +2062,7 @@ Because this DAG is essential to Astro's managed service, your organization will
 
 ### Support for Airflow 2.2.0
 
-Astro Runtime 4.0.0 is a significant release that supports and enhances [Apache Airflow 2.2.0](https://airflow.apache.org/blog/airflow-2.2.0/), an exciting milestone in the open source project. Most notably, this release introduces custom timetables and deferrable operators.
+Astro Runtime 4.0.0 is a significant release that supports and enhances [Apache Airflow® 2.2.0](https://airflow.apache.org/blog/airflow-2.2.0/), an exciting milestone in the open source project. Most notably, this release introduces custom timetables and deferrable operators.
 
 #### Custom timetables
 
@@ -2070,7 +2070,7 @@ Timetables represent a powerful new framework that allows Airflow users to creat
 
 In addition to supporting the timetables framework, the team at Astronomer has built a `TradingHoursTimetable` that's ready to use in Runtime 4.0.0. You can use this timetable to run a DAG based on whether or not a particular global market is open for trade.
 
-For more information on using timetables, read the [Apache Airflow Documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/timetable.html).
+For more information on using timetables, read the [Apache Airflow® Documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/timetable.html).
 
 #### Deferrable operators
 

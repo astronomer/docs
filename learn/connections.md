@@ -21,7 +21,7 @@ In this guide you'll:
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: Connections 101](https://academy.astronomer.io/path/airflow-101/connections-101) module.
+- Astronomer Academy: [Apache Airflow®: Connections 101](https://academy.astronomer.io/path/airflow-101/connections-101) module.
 
 :::
 
@@ -35,7 +35,7 @@ For Astro customers, Astronomer recommends to take advantage of the [Astro Envir
 
 To get the most out of this guide, you should have an understanding of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
+- Basic Airflow concepts. See [Introduction to Apache Airflow®](intro-to-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow hooks. See [Hooks 101](what-is-a-hook.md).
 
@@ -46,11 +46,11 @@ An Airflow connection is a set of configurations that send requests to the API o
 Airflow connections can be created by using one of the following methods:
 
 - The [Astro Environment Manager](https://www.astronomer.io/docs/astro/manage-connections-variables#astro-cloud-ui-environment-manager), which is the recommended way for Astro customers to manage connections.
-- The [Airflow UI](airflow-ui.md).
+- The [Apache Airflow® UI](airflow-ui.md).
 - [Environment variables](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#environment-variables).
-- The [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Connection).
+- The [Apache Airflow® REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Connection).
 - A [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html) (a system for managing secrets external to Airflow).
-- The [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#connection-cli).
+- The [Apache Airflow® CLI](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#connection-cli).
 - The [`airflow_settings.yaml` file](https://www.astronomer.io/docs/astro/cli/develop-project#configure-airflow_settingsyaml-local-development-only) for Astro CLI users.
 
 This guide focuses on adding connections using the Airflow UI and environment variables. For more in-depth information on configuring connections using other methods, see the [REST API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Connection), [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html) and [Secrets Backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html).
@@ -74,7 +74,7 @@ If you use a mix of strategies for managing connections, it's important to under
 3. Environment Variables
 4. Airflow's metadata database (Airflow UI)
 
-See [How Airflow finds connections](https://www.astronomer.io/docs/astro/manage-connections-variables#how-airflow-finds-connections) for more information.
+See [How Apache Airflow® finds connections](https://www.astronomer.io/docs/astro/manage-connections-variables#how-airflow-finds-connections) for more information.
 
 :::
 
@@ -96,7 +96,7 @@ You don't have to specify every field for most connections. However, the values 
 
 Any parameters that don't have specific fields in the connection form can be defined in the **Extra** field as a JSON dictionary. For example, you can add the `sslmode` or a client `sslkey` in the **Extra** field of your PostgreSQL connection.
 
-You can test some connection types from the Airflow UI with the **Test** button if you enable [`test_connection` in the Airflow config](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#test-connection). After running a connection test, a message shows either a success confirmation or an error message. When using the **Test** button, the connection to your external tool is made from the webserver component of Airflow. See also [Testing connections in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#testing-connections).
+You can test some connection types from the Airflow UI with the **Test** button if you enable [`test_connection` in the Apache Airflow® config](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#test-connection). After running a connection test, a message shows either a success confirmation or an error message. When using the **Test** button, the connection to your external tool is made from the webserver component of Airflow. See also [Testing connections in the Apache Airflow® documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#testing-connections).
 
 ## Define connections with environment variables
 
@@ -138,7 +138,7 @@ Connections that are defined using environment variables do not appear in the li
 
 :::info 
 
-To store a connection in JSON as an Astro environment variable, remove all line breaks in your JSON object so that the value is a single, unbroken line. See [Add Airflow connections and variables using environment variables](https://www.astronomer.io/docs/astro/environment-variables#add-airflow-connections-and-variables-using-environment-variables)
+To store a connection in JSON as an Astro environment variable, remove all line breaks in your JSON object so that the value is a single, unbroken line. See [Add Apache Airflow® connections and variables using environment variables](https://www.astronomer.io/docs/astro/environment-variables#add-airflow-connections-and-variables-using-environment-variables)
 
 :::
 
@@ -148,11 +148,11 @@ Connections often contain sensitive credentials. By default, Airflow hides the `
 
 ## Test a connection
 
-Airflow offers several ways to test your connections by calling the `test_connection` method of the [Airflow hook](what-is-a-hook.md) associated with your connection. Provider hooks that do not have this method defined cannot be tested using these methods.
+Airflow offers several ways to test your connections by calling the `test_connection` method of the [Apache Airflow® hook](what-is-a-hook.md) associated with your connection. Provider hooks that do not have this method defined cannot be tested using these methods.
 
-- Airflow UI: You can test many types of Airflow connections directly from the UI using the **Test** button on the **Connections** page. See [Defining connections in the Airflow UI](#defining-connections-in-the-airflow-ui).
+- Airflow UI: You can test many types of Airflow connections directly from the UI using the **Test** button on the **Connections** page. See [Defining connections in the Apache Airflow® UI](#defining-connections-in-the-airflow-ui).
 - Airflow REST API: The Airflow REST API offers the [`connections/test` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/test_connection) to test connections. This is the same endpoint that the Airflow UI uses to test connections.
-- Airflow CLI: You can test a connection from the [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html) using `airflow connections test <conn_id>`, if you have [`test_connection`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#test-connection) enabled in the Airflow config. If you use the Astro CLI, you can access this command by running `astro dev run connections test <conn_id>`.
+- Airflow CLI: You can test a connection from the [Apache Airflow® CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html) using `airflow connections test <conn_id>`, if you have [`test_connection`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#test-connection) enabled in the Airflow config. If you use the Astro CLI, you can access this command by running `astro dev run connections test <conn_id>`.
 
 :::note
 

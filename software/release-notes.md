@@ -695,7 +695,7 @@ You can now programmatically create or update Deployments using the Houston API 
 
 ### Reduce resource requests for Apache Airflow® components in development environments
 
-You can reduce the amount of CPU and memory that an Airflow component requests in development environments, allowing you to more efficiently provision resources based on the requirements for your development Deployments. See [Underprovision Airflow resources](cluster-resource-provisioning) for configuration steps.
+You can reduce the amount of CPU and memory that an Airflow component requests in development environments, allowing you to more efficiently provision resources based on the requirements for your development Deployments. See [Underprovision Apache Airflow® resources](cluster-resource-provisioning) for configuration steps.
 
 ### New cron job to clean Deployment task data
 
@@ -1312,7 +1312,7 @@ Astro Runtime includes additional features which are not available in Astronomer
 - Airflow UI improvements, such as showing your Deployment's Docker image tag in the footer
 - Features that are exclusive to Astro Runtime and coming soon, such as new Airflow components and improvements to the DAG development experience
 
-To upgrade a Deployment to Runtime, follow the steps in [Upgrade Airflow](manage-airflow-versions.md), making sure to replace the Astronomer Certified image in your Dockerfile with an Astro Runtime version.
+To upgrade a Deployment to Runtime, follow the steps in [Upgrade Apache Airflow®](manage-airflow-versions.md), making sure to replace the Astronomer Certified image in your Dockerfile with an Astro Runtime version.
 
 ### Use a custom container image registry to deploy code
 
@@ -1600,13 +1600,13 @@ Release date: November 22, 2021
 
 ### Support for Apache Airflow® 2.2.0
 
-[Apache Airflow 2.2.0](https://airflow.apache.org/blog/airflow-2.2.0/) is an exciting milestone in the open source project. Most notably, this release introduces custom timetables and deferrable operators.
+[Apache Airflow® 2.2.0](https://airflow.apache.org/blog/airflow-2.2.0/) is an exciting milestone in the open source project. Most notably, this release introduces custom timetables and deferrable operators.
 
 #### Custom Timetables
 
 Timetables are a powerful new framework that you can use to create custom schedules using Python. In an effort to provide more flexibility and address known limitations imposed by cron, timetables use an intuitive `data_interval` that, for example, allows you to schedule a DAG to run daily on Monday through Friday, but not on the weekend. Timetables can be easily plugged into existing DAGs, which means that it's easy to create your own or use community-developed timetables in your project.
 
-For more information on using timetables, read the [Apache Airflow Documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/timetable.html).
+For more information on using timetables, read the [Apache Airflow® Documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/timetable.html).
 
 #### Deferrable Operators
 

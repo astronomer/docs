@@ -76,7 +76,7 @@ astro dev restart
 
 ## Run Airflow CLI commands
 
-To run [Apache Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html) commands locally, run the following:
+To run [Apache Airflow® CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html) commands locally, run the following:
 
 ```sh
 astro dev run <airflow-cli-command>
@@ -88,17 +88,17 @@ For example, the Airflow CLI command for listing connections is `airflow connect
 
 :::info
 
-You can only use `astro dev run` in a local Airflow environment. To automate Airflow actions on Astro, you can use the [Airflow REST API](airflow-api.md). For example, you can make a request to the [`dagRuns` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) to trigger a DAG run programmatically, which is equivalent to running `astro dev run dags trigger` in the Astro CLI.
+You can only use `astro dev run` in a local Airflow environment. To automate Airflow actions on Astro, you can use the [Apache Airflow® REST API](airflow-api.md). For example, you can make a request to the [`dagRuns` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) to trigger a DAG run programmatically, which is equivalent to running `astro dev run dags trigger` in the Astro CLI.
 
 :::
 
 ## Make requests to the Airflow REST API locally
 
-Make requests to the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) in a local Airflow environment with HTTP basic access authentication. This can be useful for testing and troubleshooting API calls before executing them in a Deployment on Astro.
+Make requests to the [Apache Airflow® REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) in a local Airflow environment with HTTP basic access authentication. This can be useful for testing and troubleshooting API calls before executing them in a Deployment on Astro.
 
 To make local requests with cURL or Python, you only need the username and password for your local user. Both of these values are `admin` by default. They are the same credentials for logging into the Airflow UI, and they're listed when you run `astro dev start`.
 
-To make requests to the Airflow REST API in a Deployment on Astro, see [Airflow API](airflow-api.md).
+To make requests to the Airflow REST API in a Deployment on Astro, see [Apache Airflow® API](airflow-api.md).
 
 ### cURL
 

@@ -22,7 +22,7 @@ In this guide, you'll learn about the benefits of decorators and the decorators 
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: Taskflow API](https://academy.astronomer.io/astro-runtime-taskflow) module.
+- Astronomer Academy: [Apache Airflow®: Taskflow API](https://academy.astronomer.io/astro-runtime-taskflow) module.
 - Webinar: [Writing Functional DAGs with Decorators](https://www.astronomer.io/events/webinars/writing-functional-dags-with-decorators/).
 
 :::
@@ -282,7 +282,7 @@ get_23_task >> plus_10_task
 
 :::info
 
-If you want to access any XCom that is not the returned value from an operator, you can use the `xcom_pull` method inside a function, see [how to access ti / task_instance in the Airflow context](airflow-context.md#ti--task_instance) for an example. Traditional operators can also pull from XCom using [Jinja templates](templating.md) in templateable parameters.
+If you want to access any XCom that is not the returned value from an operator, you can use the `xcom_pull` method inside a function, see [how to access ti / task_instance in the Apache Airflow® context](airflow-context.md#ti--task_instance) for an example. Traditional operators can also pull from XCom using [Jinja templates](templating.md) in templateable parameters.
 
 :::
 
