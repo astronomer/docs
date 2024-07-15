@@ -218,7 +218,7 @@ module.exports = {
           id: 'cookiePref',
         },
       ],
-      copyright: '© Astronomer 2024. Various trademarks held by their respective owners.',
+      copyright: '© Astronomer 2024. Apache Airflow®, Airflow, and the Airflow logo are trademarks of the Apache Software Foundation. Various trademarks are held by their respective owners.',
     },
   },
   presets: [
