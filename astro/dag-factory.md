@@ -75,15 +75,9 @@ pip install dag-factory
 
 ```
 
-3. Modify the example configuration file with details for the DAG you want to create, including replacing `<your-DAG-name>`. In order for your DAG to run, the following fields are required:
+3. Modify the example configuration file with parameters for the DAG you want to create, including replacing `<your-DAG-name>`. See [DAG-level parameters in Airflow](airflow-dag-parameters.md) to learn more about each parameter.
 
-- DAG name
-- `start_date`
-- `end_date`
-- `schedule_interval`
-- `tasks`
-
-4. (Optional) Delete any configurations that you don't want or need to specify. For configurations that aren't specified, your DAG will assume the default values that correspond with your current Apache Airflow or Astro Runtime version.
+4. (Optional) Delete any configurations that you don't want to specify. For parameters that aren't specified, your DAG will assume the default values that correspond with your current Apache Airflow or Astro Runtime version.
 
 ## Step 3. Create a DAG Factory file
 
