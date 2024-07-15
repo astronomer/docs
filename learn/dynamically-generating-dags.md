@@ -359,7 +359,7 @@ Learn more about gusty features in the [repository README](https://github.com/ch
 
 ### dag-factory
 
-Another open source tool for dynamic DAG generation is [dag-factory](https://github.com/ajbosco/dag-factory). The `dag-factory` package allows users to create DAGs from YAML files which contain both DAG and task-level parameters, removing the necessity to know about Airflow specific syntax. For examples of how to use dag-factory see their [GitHub repository](https://github.com/ajbosco/dag-factory/tree/master/examples).
+Another open source tool for dynamic DAG generation is [dag-factory](dag-factory.md). The [`dag-factory` package](https://github.com/ajbosco/dag-factory/tree/master/examples) allows users to create DAGs from YAML files which contain both DAG and task-level parameters, removing the necessity to know about Airflow specific syntax. 
 
 ## Scalability
 
