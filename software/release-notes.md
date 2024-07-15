@@ -32,13 +32,7 @@ Release date: July 15, 2024
 
 ### Security fix for DAG-only deploys
 
-Fixed an issue where if you had DAG-only deploys enabled, it was possible for users to access DAGs across different namespaces or Airflow deployments without proper permissions. Each pod requires a network policy to prevent cross-namespace interactions. This policy was not added to the DAG server component, leading to the security implication of cross-namespace DAG access. This issue occurs in Software versions 0.34.0-0.34.2 and 0.35. To mitigate the issue you can:
-
-- Not enable DAG-only deploys in your Deployments
-- Upgrade to 0.35.1 from 0.35
-- If you are not using Software versions 0.34.0-0.34.2 or 0.35, wait to upgrade until the next major release.
-
-See [Upgrade considerations for 0.34 and 0.35](https://www.astronomer.io/docs/software/upgrade-astronomer#upgrade-to-astronomer-software-034-or-035) for more details about the security fix.
+Fixed an issue where if you had DAG-only deploys enabled, it was possible for users to access DAGs across different namespaces or Airflow deployments without proper permissions. See [Upgrade considerations for 0.34 and 0.35](https://www.astronomer.io/docs/software/upgrade-astronomer#upgrade-to-astronomer-software-034-or-035) for more details about the security fix.
 
 ### Bug fixes
 

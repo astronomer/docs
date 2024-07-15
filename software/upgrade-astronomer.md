@@ -224,9 +224,7 @@ If you're upgrading to Astronomer Software 0.29 or later and Kubernetes 1.22 at 
 
 #### Security issue with DAG-only deploys resolved in 0.35.1
 
-Due to a missing network policy in the [DAG-only Deploy](deploy-dags.md#configure-dag-only-deploys-on-a-deployment) feature in Astronomer Software version 0.34.0-0.34.2 and 0.35, there is a risk that users could potentially access DAGs across different namespaces or Airflow deployments without proper permissions. Each pod requires a network policy to prevent cross-namespace interactions. This policy was not added to the DAG server component, leading to the security implication of cross-namespace DAG access.
-
-This issue does not affect Deployments that do not use DAG-only deploys, because the DAG Server component only exists in Deployments with DAG-only deploys enabled.
+Due to an issue with the [DAG-only Deploy](deploy-dags.md#configure-dag-only-deploys-on-a-deployment) feature in Astronomer Software version 0.34.0-0.34.2 and 0.35, there is a risk that users could potentially access DAGs across different namespaces or Airflow deployments without proper permissions. This issue does not affect Deployments that do not use DAG-only deploys.
 
 To mitigate this issue:
 
