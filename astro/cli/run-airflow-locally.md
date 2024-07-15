@@ -2,16 +2,16 @@
 sidebar_label: 'Basic setup'
 title: 'Run your Astro project in a local Airflow environment with the CLI'
 id: run-airflow-locally
-description: Run commands in your local Airflow environment.
+description: Run commands in your local Apache Airflow® environment.
 ---
 
-Running Airflow locally with the Astro CLI can be an easy way to preview and debug DAG changes quickly before deploying your code to Astro. By locally running your DAGs, you can fix issues with your DAGs without consuming infrastructure resources or waiting on code deploy processes.
+Running [Apache Airflow®](https://airflow.apache.org) locally with the Astro CLI can be an easy way to preview and debug DAG changes quickly before deploying your code to Astro. By locally running your DAGs, you can fix issues with your DAGs without consuming infrastructure resources or waiting on code deploy processes.
 
 This document explains how to use the Astro CLI to start a local Airflow environment on your computer and interact with your Astro project. To learn more about unit testing for your DAGs or testing project dependencies when changing Python or Astro Runtime versions, see [Test your project locally](test-your-astro-project-locally.md).
 
 You can find common issues and resolutions in the [troubleshoot a local environment](troubleshoot-locally.md) section.
 
-## Start a local Airflow environment
+## Start a local Apache Airflow® environment
 
 To begin running your project in a local Airflow environment, run:
 
@@ -21,7 +21,7 @@ astro dev start
 
 This command builds your project and spins up 4 containers on your machine, each for a different Airflow component. After the command completes, you can access your project's Airflow UI at `https://localhost:8080/`.
 
-## Restart a local Airflow environment
+## Restart a local Apache Airflow® environment
 
 Restarting your Airflow environment rebuilds your image and restarts the Docker containers running on your local machine with the new image. Restart your environment to apply changes from specific files in your project, or to troubleshoot issues that occur when your project is running.
 

@@ -2,7 +2,7 @@
 sidebar_label: "astro dev object export"
 title: "astro dev object export"
 id: astro-dev-object-export
-description: Export Airflow objects from a local Airflow environment.
+description: Export Apache Airflow® objects from a local Airflow environment.
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
@@ -12,7 +12,7 @@ The behavior and format of this command are the same for both Astro and Software
 
 :::
 
-Export Airflow variables, connections, and pools from a locally running environment to a local file and format of your choice. By default, the command exports all Airflow objects to the `airflow_settings.yaml` file in your Astro project.
+Export [Apache Airflow®](https://airflow.apache.org/) variables, connections, and pools from a locally running environment to a local file and format of your choice. By default, the command exports all Airflow objects to the `airflow_settings.yaml` file in your Astro project.
 
 ## Usage
 
@@ -41,7 +41,7 @@ By default, the command exports all variables, connections, and pools as YAML co
 
 ```sh
 astro dev object export --pools
-# Exports only pools from the local Airflow environment to `airflow_settings.yaml`
+# Exports only pools from the local Apache Airflow® environment to `airflow_settings.yaml`
 
 astro dev object export --env-export --env="myairflowenv.env"
 # Exports all Airflow objects from the local Airflow environment as

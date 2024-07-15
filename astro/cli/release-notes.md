@@ -77,7 +77,7 @@ For more information about this feature, see:
 ### Bug fixes
 
 - Fixed an issue where existing secret environment variables in a Deployment file could be applied to the Deployment with an empty value. The secret variable value now persists.
-- Fixed an issue where `astro deployment inspect` generated an incorrect Airflow API URL.
+- Fixed an issue where `astro deployment inspect` generated an incorrect [Apache Airflow®](https://airflow.apache.org) API URL.
 - Fixed a bug that caused some input checks for `astro deployment upgrade-checks` to fail against valid inputs.
 
 ## Astro CLI 1.25.0
@@ -442,7 +442,7 @@ Release date: May 19, 2023
 
 Release date: May 18, 2023
 
-### New commands to manage Airflow resources on Deployments
+### New commands to manage Apache Airflow® resources on Deployments
 
 Use the following new Astro CLI commands to manage your Airflow variables, pools, connections, on Astro Deployments. These commands are particularly useful for automating the creation of new Deployments based on old ones, as you can now transfer all Airflow resources from a source Deployment to a target Deployment:
 
@@ -738,7 +738,7 @@ Release date: November 3, 2022
 
 Release date: September 28, 2022
 
-### New commands to manage Airflow objects
+### New commands to manage Apache Airflow® objects
 
 You can use the new `astro dev object` commands to better manage Airflow connections, variables, and pools between your local testing environment and Astro Deployments.
 
@@ -806,7 +806,7 @@ Release date: September 2, 2022
 
 Release date: August 18, 2022
 
-### New command to bash into local Airflow containers
+### New command to bash into local Apache Airflow® containers
 
 You can now run bash commands in any locally running Airflow container using `astro dev bash`. You can use this to:
 

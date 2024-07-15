@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment connection copy"
 title: "astro deployment connection copy"
 id: astro-deployment-connection-copy
-description: Copy an Airflow connection from a Deployment.
+description: Copy an Apache Airflow® connection from a Deployment.
 hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
@@ -19,7 +19,7 @@ This command copies **all** connections from one instance to another, but does n
 
 :::
 
-Copy Airflow connections from one Astro Deployment to another. Airflow connections are stored in the target Deployment's metadata database and appear in the Airflow UI.
+Copy [Apache Airflow®](https://airflow.apache.org/) connections from one Astro Deployment to another. Airflow connections are stored in the target Deployment's metadata database and appear in the Airflow UI.
 
 ## Usage
 

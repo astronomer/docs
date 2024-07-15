@@ -9,7 +9,7 @@ toc_max_heading_level: 2
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The Astro CLI requires a container management engine to run Apache Airflow components on your local machine and deploy to Astro. For example, the `astro dev start` and `astro deploy` commands both require containers.
+The Astro CLI requires a container management engine to run [Apache Airflow®](https://airflow.apache.org) components on your local machine and deploy to Astro. For example, the `astro dev start` and `astro deploy` commands both require containers.
 
 By default, the Astro CLI uses [Docker](https://www.docker.com/) as its container management engine. However, if your organization uses [Podman](https://podman.io/) to run and manage containers, you can configure the Astro CLI to use it instead. Podman is a secure, free, and open source alternative to Docker that doesn't require root access and orchestrates containers without using a centralized daemon.
 
@@ -25,7 +25,7 @@ values={[
 ]}>
 <TabItem value="mac">
 
-Set up Podman on a Mac operating system so you can run Apache Airflow locally and deploy to Astro with Podman containers.
+Set up Podman on a Mac operating system so you can run Airflow locally and deploy to Astro with Podman containers.
 
 ### Prerequisites
 

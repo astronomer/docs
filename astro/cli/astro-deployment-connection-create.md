@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment connection create"
 title: "astro deployment connection create"
 id: astro-deployment-connection-create
-description: Create an Airflow connection in a Deployment.
+description: Create an Apache Airflow® connection in a Deployment.
 hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
@@ -13,7 +13,7 @@ This command is only available on Astro.
 
 :::
 
-Create an Airflow connection in a Deployment's metadata database.
+Create an [Apache Airflow®](https://airflow.apache.org/) connection in a Deployment's metadata database.
 
 ## Usage
 

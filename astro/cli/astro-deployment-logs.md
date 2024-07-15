@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment logs"
 title: "astro deployment logs"
 id: astro-deployment-logs
-description: Show Airflow component logs for a Deployment.
+description: Show Apache Airflow® component logs for a Deployment.
 hide_table_of_contents: true
 sidebar_custom_props: { icon: "img/term-icon.png" }
 ---
@@ -24,7 +24,7 @@ values={[
 ]}>
 <TabItem value="astro">
 
-Show [Airflow component logs](view-logs.md#view-airflow-component-logs-in-the-astro-ui) over the last 24 hours for a given Deployment on Astro. These are the same logs that appear in the **Logs** tab of the Astro UI.
+Show [Apache Airflow® component logs](view-logs.md#view-airflow-component-logs-in-the-astro-ui) over the last 24 hours for a given Deployment on Astro. These are the same logs that appear in the **Logs** tab of the Astro UI.
 
 ## Usage
 
@@ -84,7 +84,7 @@ astro deployment logs <deployment-id> triggerer
 | Option                             | Description                                                        | Possible values                                         |
 | ---------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------- |
 | `<deployment-id>` (\_Required)     | The ID of the Deployment for which you want to view logs           | Any valid Deployment ID                                 |
-| `<airflow-component>` (\_Required) | The Airflow component for which you want to view logs              | `scheduler`, `webserver`, `workers`, or `triggerer`     |
+| `<airflow-component>` (\_Required) | The Apache Airflow® component for which you want to view logs              | `scheduler`, `webserver`, `workers`, or `triggerer`     |
 | `--follow`                         | Subscribes to watch more logs                                      | None                                                    |
 | `--search`                         | Searches for the specified string within the logs you're following | Any string                                              |
 | `--since`                          | Limits past logs to those generated in the lookback window         | Lookback time in `h` or `m` (for example, `5m` or `2h`) |

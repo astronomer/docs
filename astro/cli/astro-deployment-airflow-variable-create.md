@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment airflow-variable create"
 title: "astro deployment airflow-variable create"
 id: astro-deployment-airflow-variable-create
-description: Create an Airflow variable in a Deployment.
+description: Create an Apache Airflow® variable in a Deployment.
 hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
@@ -13,7 +13,7 @@ This command is only available on Astro.
 
 :::
 
-Create Airflow variables on a Deployment. Airflow variables are stored in the Deployment's metadata database and appear in the Airflow UI.
+Create [Apache Airflow®](https://airflow.apache.org/) variables on a Deployment. Airflow variables are stored in the Deployment's metadata database and appear in the Airflow UI.
 
 ## Usage
 
@@ -47,7 +47,7 @@ See [Organization](organization-api-tokens.md), [Workspace](workspace-api-tokens
 ## Examples
 
 ```bash
-# create airflow variable called my-variable stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv
+# create Apache Airflow® variable called my-variable stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv
 astro deployment airflow-variable create --deployment-id cl03oiq7d80402nwn7fsl3dmv --key my-variable ---value VAR
 
 # create airflow-variables stored in the Deployment "My Deployment"

@@ -2,7 +2,7 @@
 sidebar_label: "astro dev object import"
 title: "astro dev object import"
 id: astro-dev-object-import
-description: Import Airflow objects from a configuration file.
+description: Import Apache Airflow® objects from a configuration file.
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
@@ -12,7 +12,7 @@ The behavior and format of this command are the same for both Astro and Software
 
 :::
 
-Import Airflow variables, connections, and pools from a configuration file to a locally running Airflow environment.
+Import [Apache Airflow®](https://airflow.apache.org/) variables, connections, and pools from a configuration file to a locally running Airflow environment.
 
 ## Usage
 
@@ -38,7 +38,7 @@ By default, the command imports all variables, connections, and pools from `airf
 
 ```sh
 astro dev object import --pools
-# Imports pools from `airflow_settings.yaml` to a locally running Airflow environment
+# Imports pools from `Apache Airflow®_settings.yaml` to a locally running Airflow environment
 
 astro dev object import --settingsfile="myairflowobjects.yaml"
 # Imports all Airflow objects from `myairflowobjects.yaml` to a locally running Airflow environment

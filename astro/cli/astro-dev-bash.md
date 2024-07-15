@@ -2,7 +2,7 @@
 sidebar_label: "astro dev bash"
 title: "astro dev bash"
 id: astro-dev-bash
-description: Run a bash command in an Airflow component's Docker container.
+description: Run a bash command in an Apache Airflow® component's Docker container.
 hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
@@ -13,7 +13,7 @@ The behavior and format of this command are the same for both Astro and Software
 
 :::
 
-Run a bash command in a locally running Docker container for an Airflow component. This command is equivalent to running `docker exec -it <container-id>`.
+Run a bash command in a locally running Docker container for an [Apache Airflow®](https://airflow.apache.org/) component. This command is equivalent to running `docker exec -it <container-id>`.
 
 ## Usage
 
