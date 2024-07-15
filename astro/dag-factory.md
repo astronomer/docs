@@ -2,7 +2,7 @@
 sidebar_label: 'DAG Factory'
 title: 'Use DAG Factory to create DAGs'
 id: dag-factory
-description: "Learn how to dynamically convert YAML files into Apache Airflow DAGs with the DAG Factory, an open source project that makes creating DAGs easy.
+description: "Learn how to dynamically convert YAML files into Apache Airflow DAGs with the DAG Factory, an open source project that makes creating DAGs easy."
 ---
 
 The DAG Factory is an open source tool managed by Astronomer that allows you to dynamically generate Apache Airflow DAGs from YAML. While Airflow DAGs are traditionally written exclusively in Python, the DAG Factory makes it easy for people who don't know Python to use Airflow.
