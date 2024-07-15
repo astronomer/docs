@@ -18,9 +18,9 @@ If you use a different secrets backend tool or want to learn the general approac
 - A [service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) with the [Secret Manager Secret Accessor](https://cloud.google.com/secret-manager/docs/access-control) role on Google Cloud.
 - (Optional) A [JSON service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys) for the service account. This is required to provide access to a secrets backend from a local machine, or when you're not using Workload Identity.
 
-## Step 1: Create an Airflow variable or connection in Google Cloud Secret Manager
+## Step 1: Create an Apache Airflow® variable or connection in Google Cloud Secret Manager
 
-To start, create an Airflow variable or connection in Google Cloud Secret Manager that you want to store as a secret. You can use the Cloud Console or the gcloud CLI.
+To start, create an [Apache Airflow®](https://airflow.apache.org) variable or connection in Google Cloud Secret Manager that you want to store as a secret. You can use the Cloud Console or the gcloud CLI.
 
 Secrets must be formatted such that:
 - Airflow variables are set as `airflow-variables-<variable-key>`.
