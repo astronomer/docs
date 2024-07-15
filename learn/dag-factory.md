@@ -113,6 +113,8 @@ dag_factory.generate_dags(globals())
 
     ```
 
+    :::
+
 ## Step 4: Add a DAG-level callback
 
 In order to use [DAG-level callbacks](https://www.astronomer.io/docs/learn/error-notifications-in-airflow#airflow-callbacks) you need to add the file referenced in the `on_success_callback_file` and `on_failure_callback_file` parameters of the YAML configuration file.
