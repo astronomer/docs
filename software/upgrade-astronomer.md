@@ -220,7 +220,7 @@ If you're upgrading to Astronomer Software 0.29 or later and Kubernetes 1.22 at 
     ```
 3. Upgrade Kubernetes to version 1.22.
 
-### Upgrade to Astronomer Software 0.34 or 0.35
+### Upgrade to Astronomer Software 0.35
 
 #### Security issue with DAG-only deploys resolved in 0.35.1
 
