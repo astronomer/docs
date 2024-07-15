@@ -56,6 +56,7 @@ pip install dag-factory
   default_view: 'tree'  # or 'graph', 'duration', 'gantt', 'landing_times'
   orientation: 'LR'  # or 'TB', 'RL', 'BT'
   description: 'this is an example dag!'
+  # to use callbacks you will need to complete Step 4 of this tutorial
   on_success_callback_name: print_hello
   on_success_callback_file: /usr/local/airflow/dags/print_hello.py
   on_failure_callback_name: print_hello
@@ -110,3 +111,17 @@ dag_factory.generate_dags(globals())
     load_yaml_dags(globals_dict=globals(), suffix=['dag.yaml'])
 
     ```
+
+## Step 4: Add a DAG-level callback
+
+In order to use [DAG-level callbacks](https://www.astronomer.io/docs/learn/error-notifications-in-airflow#airflow-callbacks) you need to add the file referenced in the `on_success_callback_file` and `on_failure_callback_file` parameters of the YAML configuration file.
+
+1. Create a new file `print_hello.py` in your `dags` directory. 
+2. Copy the contents of the following placeholder callback into the file:
+
+```python
+def placeholder_callback():
+    pass
+```
+
+3. Save the file.
