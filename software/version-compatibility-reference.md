@@ -13,7 +13,7 @@ While the tables below reference the minimum compatible versions, we typically r
 
 <!--- Version-specific -->
 
-The following table shows version compatibility information for all currently supported versions of Astronomer Software and some legacy versions. Check [Astro Software lifecycle schedule](release-lifecycle-policy.md#software-lifecycle-schedule) for more information about supported versions of Astro Software.
+The following table shows version compatibility information for all currently supported versions of Astronomer Software and some legacy versions. Check [Astronomer Software lifecycle schedule](release-lifecycle-policy.md#software-lifecycle-schedule) for more information about supported versions of Astronomer Software.
 
 | Astronomer Platform | Postgres | Python                                         | Astro Runtime        |
 | ------------------- | -------- | ---------------------------------------------- | -------------------- |
