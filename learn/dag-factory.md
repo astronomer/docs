@@ -2,12 +2,12 @@
 sidebar_label: 'DAG Factory'
 title: 'Use DAG Factory to create DAGs'
 id: dag-factory
-description: "Learn how to dynamically convert YAML files into Apache Airflow DAGs with the DAG Factory, an open source project that makes creating DAGs easy."
+description: "Learn how to dynamically convert YAML files into Apache Airflow® DAGs with the DAG Factory, an open source project that makes creating DAGs easy."
 ---
 
-The DAG Factory is an open source tool managed by Astronomer that allows you to dynamically generate Apache Airflow DAGs from YAML. While Airflow DAGs are traditionally written exclusively in Python, the DAG Factory makes it easy for people who don't know Python to use Airflow.
+The DAG Factory is an open source tool managed by Astronomer that allows you to [dynamically generate](dynamically-generating-dags.md) [Apache Airflow®](https://airflow.apache.org/) DAGs from YAML. While Airflow DAGs are traditionally written exclusively in Python, the DAG Factory makes it easy for people who don't know Python to use Airflow.
 
-This guide includes instructions for installing the DAG Factory package into your Astro project and a sample YAML configuration file that you can use to easily specify the details of your DAG, including schedule interval, callbacks, and task names.
+This guide includes instructions for installing the DAG Factory package into your Astro project and a sample YAML configuration file that you can use to easily specify the details of your DAG, including its schedule, callbacks, and task names.
 
 The DAG Factory can be used with all Astronomer products and any Apache Airflow installation. To view the source code of the project, see [DAG Factory](https://github.com/astronomer/dag-factory).
 
@@ -16,7 +16,7 @@ The DAG Factory can be used with all Astronomer products and any Apache Airflow 
 - Python version 3.6.0 or greater
 - Apache Airflow version 2.0 or greater
 
-If you're an Astronomer customer, you must have an Astro project with a supported version of Astro Runtime.
+If you're an Astronomer customer, you must have an Astro project with a supported version of Astro Runtime. See [Astro Runtime lifecycle schedule](/astro/runtime-version-lifecycle-policy.mdx#astro-runtime-lifecycle-schedule) for a list of currently supported Runtime versions.
 
 ## Step 1: Install DAG Factory
 
@@ -25,14 +25,14 @@ To use the DAG Factory, install it as a Python package into your Apache Airflow 
 If you're an Astronomer customer:
 
 1. In your Astro project, open your `requirements.txt` file.
-2. Add `dag-factory` to the file.
-3. Save the changes to your `requirements.txt`.
+2. Add `dag-factory==0.19.0` to the file.
+3. Save the changes to your `requirements.txt` file.
 
 If you're not an Astronomer customer, install the Python package according to the standards at your organization:
 
 ```python
 
-pip install dag-factory
+pip install dag-factory==0.19.0
 
 ```
 
@@ -42,25 +42,26 @@ pip install dag-factory
 2. Copy the contents of the following example configuration file into each YAML file.
 
 ```YAML
-<your-DAG-name>:
+<your-DAG-id>:
   default_args:
     owner: 'example_owner'
-    start_date: 2018-01-01  # or '2 days'
-    end_date: 2018-01-05
+    start_date: 2024-07-01  # or '2 days'
+    end_date: 2030-01-01
     retries: 1
     retry_delay_sec: 300
   schedule_interval: '0 3 * * *'
+  catchup: False
   concurrency: 1
   max_active_runs: 1
   dagrun_timeout_sec: 60
-  default_view: 'tree'  # or 'graph', 'duration', 'gantt', 'landing_times'
+  default_view: 'grid'  # or 'graph', 'duration', 'gantt', 'landing_times' (for Run Duration in newer versions)
   orientation: 'LR'  # or 'TB', 'RL', 'BT'
-  description: 'this is an example dag!'
+  description: 'This is an example dag!'
   # to use callbacks you will need to complete Step 4 of this tutorial
-  on_success_callback_name: print_hello
-  on_success_callback_file: /usr/local/airflow/dags/print_hello.py
-  on_failure_callback_name: print_hello
-  on_failure_callback_file: /usr/local/airflow/dags/print_hello.py
+  on_success_callback_name: placeholder_callback
+  on_success_callback_file: /usr/local/airflow/dags/callback_func.py
+  on_failure_callback_name: placeholder_callback
+  on_failure_callback_file: /usr/local/airflow/dags/callback_func.py
   tasks:
     task_1:
       operator: airflow.operators.bash_operator.BashOperator
@@ -76,16 +77,16 @@ pip install dag-factory
 
 ```
 
-3. Modify the example configuration file with parameters for the DAG you want to create, including replacing `<your-DAG-name>`. See [DAG-level parameters in Airflow](airflow-dag-parameters.md) to learn more about each parameter.
+3. Modify the example configuration file with parameters for the DAG you want to create, including replacing `<your-DAG-id>` with a valid `dag_id`. See [DAG-level parameters in Airflow](airflow-dag-parameters.md) to learn more about each parameter.
 
 4. (Optional) Delete any configurations that you don't want to specify. For parameters that aren't specified, your DAG will assume the default values that correspond with your current Apache Airflow or Astro Runtime version.
 
-## Step 3. Create a DAG Factory file
+## Step 3: Create a DAG Factory file
 
 All YAML files in your `dags` directory must be parsed and converted into Python in order to run on Apache Airflow. In this step, you will create a new DAG Factory file in your Astro project that includes the conversion logic. You only need to do this once and do not need a separate DAG Factory file for each of your DAGs or YAML files.
 
 1. In the `dags` directory of your Astro project, create a new Python file called `dag_factory.py`.
-2. Copy the following contents into your empty Python file. This file represents an Apache Airflow DAG and includes two commands that convert each of your YAML file(s) into DAGs.
+2. Copy the following contents into your empty Python file. This file represents an Apache Airflow DAG and includes two commands that convert each of your YAML file(s) into DAGs. Make sure to replace `/path/to/dags/config_file.yml` with the absolute path to your config file. For Astro CLI users the absolute path to the DAG directory is `/usr/local/airflow/dags`. 
 
 ```python
 
@@ -105,7 +106,7 @@ dag_factory.generate_dags(globals())
 
     ```python
 
-    # 'airflow' is required for the dagbag to parse this file
+    # 'airflow' is required for the dagbag to parse this file - do not remove this comment
     from dagfactory import load_yaml_dags
 
     load_yaml_dags(globals_dict=globals(), suffix=['dag.yaml'])
