@@ -27,22 +27,16 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## July 16, 2024
 
-### Astronomer to support DAG Factory
-
-Astronomer is assuming maintenance responsibility for Adam Boscarino’s [DAG Factory](https://github.com/astronomer/dag-factory), an open source project that generates DAGs from YAML files.
-
-DAG Factory is an important resource for Airflow users that prefer to work with tools other than Python for their data analysis, such as SQL and dbt. Astronomer is committed to supporting the open source community and the ongoing health and development of this project. Going forward, DAG factory will remain open source, and we’ll be working with both Astro customers and Airflow community members to add support for datasets, XCOMs, new operators, and new DAG authoring capabilities as Airflow continues to evolve. See
-
 ### Additional improvements
 
 - Added the following metrics to [Metrics Export](https://www.astronomer.io/docs/astro/export-metrics):
-    - The new `airflow_executor_open_slots`, `airflow_dagrun_dependency-check`, and `airflow_dagrun_dependency-check.<dag_id>` metrics allow you to collect metrics about your DAGs and executor status. <!-- https://github.com/astronomer/astro/pull/22430-->
+    - The new `airflow_executor_open_slots`, `airflow_dagrun_dependency-check`, and `airflow_dagrun_dependency-check.<dag_id>` metrics allow you to collect metrics about your DAGs and executor status.
     -  Monitor task execution with `kube_pod_container_resource_limits`. This new metric enables you to track resource use against the configured limits so you can understand if task execution meets your configured CPU, memory, or storage limits for your Celery Workers or Kubernetes Executor and KubernetesPodOperator pods.
 - Added new suporting documentation for the Astro Terraform Provider, including a Getting Started guide and code examples for common uses. Read [Astro Terraform Provider](https://www.astronomer.io/docs/astro/terraform-provider) for more information.
 
 ### Bug fixes
 
-- Fix an error where start times in the UI were different from actual DAG run trigger times. <!--https://github.com/astronomer/astro/pull/22432-->
+- Fix an error where start times in the UI were different from actual DAG run trigger times.
 
 ## July 9, 2024
 
