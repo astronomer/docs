@@ -1,7 +1,7 @@
 ---
 title: "Cross-deployment dependencies"
 sidebar_label: "Cross-deployment dependencies"
-description: "How to implement dependencies between your Airflow deployments."
+description: "How to implement dependencies between your Apache Airflow® deployments."
 id: cross-deployment-dependencies
 ---
 
