@@ -8,7 +8,7 @@ description: Get started using the Astro Terraform Provider to work with your As
 :::publicpreview
 :::
 
-To use [Terraform](https://www.terraform.io/) with Astro, you must set up authorize the [Astro Terraform Provider](https://registry.terraform.io/providers/astronomer/astro/0.3.0) to access and modify your Astro Organization resources. Then, you can programattically update your Astro Organization using Terraform files.
+To use [Terraform](https://www.terraform.io/) with Astro, you must authorize the [Astro Terraform Provider](https://registry.terraform.io/providers/astronomer/astro/0.3.0) to access and modify your Astro Organization resources. Then, you can programmatically update your Astro Organization using Terraform files.
 
 ## Prerequisites
 
@@ -35,7 +35,7 @@ When you create an API token for your environment, keep the following best pract
 
 1. Retrieve your **Organization ID** from the Astro UI by clicking on your **Organization Settings** in your **Organization Details** section.
 
-2. Create a `main.tf` file with the following code. This code example declares the Astro provider as a requirement, and includes the Organization ID for your Astro resources. You can add your own custom terraform commands, or use one of the example scenarios shared in the [Astro Terraform Provider Github Repo](https://github.com/astronomer/terraform-provider-astro/tree/main/examples/scenarios).
+2. Create a `main.tf` file with the following code. This code example declares the Astro provider as a requirement and includes the Organization ID for your Astro resources. You can add your own custom terraform commands or use one of the example scenarios shared in the [Astro Terraform Provider Github Repo](https://github.com/astronomer/terraform-provider-astro/tree/main/examples/scenarios).
 
 The following example sets up a new Workspace with a hosted Deployment.
 
@@ -96,14 +96,14 @@ If you want to use a different example Terraform file, the [`workspace_per_team.
 
 ```bash
 export ASTRO_API_TOKEN=<your-api-token>
-terraform init # only needed the first time - initializes a working directory and downloads the necessary provider plugins and modules and setting up the backend for storing your infrastructure's state
+terraform init # only needed the first time - initializes a working directory and downloads the necessary provider plugins and modules and sets up the backend for storing your infrastructure's state
 terraform plan # creates a plan that make your resources match your configuration
 terraform apply # performs a plan, just like terraform plan does, and also carries out the planned changes to each resource by using the relevant infrastructure provider's API
 ```
 
 After `terraform apply` completes, Terraform either prints that your configuration was successful or it shares error codes that includes how to resolve any problems.
 
-4. (Optional) You can continue to import additional resources or experiment with Terraform using the [Terraform Provider docs](https://registry.terraform.io/providers/astronomer/astro/latest/docs). After you're done, to prevent any unexpected charges or activity in your account from working with you Terraform example, you can delete any resources you created on Astro by using the following code example:
+4. (Optional) You can continue to import additional resources or experiment with Terraform using the [Terraform Provider docs](https://registry.terraform.io/providers/astronomer/astro/latest/docs). After you're done, to prevent any unexpected charges or activity in your account from working with your Terraform example, you can delete any resources you created on Astro by using the following code example:
 
 ```bash
 
