@@ -39,7 +39,7 @@ To create data dependencies between Python cells, see [Pass data between cells](
 
 ## View complete code for Python cells
 
-To view your Python cell within the context of an Airflow DAG, click **Code**. The Airflow DAG includes your Python function as well as all of the code required to run it on Airflow.
+To view your Python cell within the context of an [Apache Airflow®](https://airflow.apache.org) DAG, click **Code**. The Airflow DAG includes your Python function as well as all of the code required to run it on Airflow.
 
 All Python cells execute Python using `aql.dataframe`, which is a function available in the Astro SDK. See [Astro SDK documentation](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html).
 
