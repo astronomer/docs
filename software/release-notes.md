@@ -28,31 +28,25 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 ## 0.35.1
 
-Release date: July 16, 2024
+Release date: July 15, 2024
+
+### Security fix for DAG-only deploys
+
+Fixed an issue where if you had DAG-only deploys enabled, it was possible for users to access DAGs across different namespaces or Airflow deployments without proper permissions. Each pod requires a network policy to prevent cross-namespace interactions. This policy was not added to the DAG server component, leading to the security implication of cross-namespace DAG access. This issue occurs in Software versions 0.34.0-0.34.2 and 0.35. To mitigate the issue you can:
+
+- Not enable DAG-only deploys in your Deployments
+- Upgrade to 0.35.1 from 0.35
+- If you are not using Software versions 0.34.0-0.34.2 or 0.35, wait to upgrade until the next major release.
+
+See [Upgrade considerations for 0.34 and 0.35](https://www.astronomer.io/docs/software/upgrade-astronomer#upgrade-to-astronomer-software-034-or-035) for more details about the security fix.
 
 ### Bug fixes
-- Fixed a bug where if you had DAG-only deploys enabled, it was possible for users in one Deployment to access DAGs in other Deployments, even if the user did not have access to other DAG-only Deployments.
 
 - Resolved the following vulnerabilities:
-    - [CVE-2021-33194](https://nvd.nist.gov/vuln/detail/CVE-2021-33194)
-    - [CVE-2021-38561](https://nvd.nist.gov/vuln/detail/CVE-2021-38561)
-    - [CVE-2022-21698](https://nvd.nist.gov/vuln/detail/CVE-2022-21698)
-    - [CVE-2023-1370](https://www.cve.org/CVERecord?id=CVE-2023-1370)
-    - [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/CVE-2023-39325)
-    - [CVE-2023-45283](https://nvd.nist.gov/vuln/detail/CVE-2023-45283)
-    - [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/CVE-2023-45288)
-    - [CVE-2023-50868](https://nvd.nist.gov/vuln/detail/CVE-2023-50868)
-    - [CVE-2023-50387](https://nvd.nist.gov/vuln/detail/CVE-2023-50387)
-    - [CVE-2024-2961](https://nvd.nist.gov/vuln/detail/CVE-2024-2961)
-    - [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/CVE-2024-21626)
-    - [CVE-2024-24790](https://nvd.nist.gov/vuln/detail/CVE-2024-24790)
-    - [CVE-2024-25710](https://nvd.nist.gov/vuln/detail/CVE-2024-25710)
-    - [CVE-2024-26308](https://nvd.nist.gov/vuln/detail/CVE-2024-26308)
-    - [CVE-2024-28757](https://nvd.nist.gov/vuln/detail/CVE-2024-28757)
-    - [CVE-2024-33599](https://nvd.nist.gov/vuln/detail/CVE-2024-33599)
-    - [GHSA-xpw8-rcwv-8f8p](https://github.com/advisories/GHSA-xpw8-rcwv-8f8p)
-    - [GHSA-36jr-mh4h-2g58](https://github.com/advisories/GHSA-36jr-mh4h-2g58)
-    - [GHSA-m425-mq94-257g](https://github.com/advisories/GHSA-m425-mq94-257g)
+   - [CVE-2023-45283](https://github.com/advisories/GHSA-vvjp-q62m-2vph)
+   - [CVE-2023-45288](https://github.com/advisories/GHSA-4v7x-pqxf-cx7m)
+   - [CVE-2024-24790](https://github.com/advisories/GHSA-49gw-vxvf-fc2g)
+   - [CVE-2023-39325](https://github.com/advisories/GHSA-4374-p667-p6c8)
 
 ## 0.35.0
 
