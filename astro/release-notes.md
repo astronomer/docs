@@ -37,7 +37,7 @@ DAG Factory is an important resource for Airflow users that prefer to work with 
 
 - Added the following metrics to [Metrics Export](https://www.astronomer.io/docs/astro/export-metrics):
     - The new `airflow_executor_open_slots`, `airflow_dagrun_dependency-check`, and `airflow_dagrun_dependency-check.<dag_id>` metrics allow you to collect metrics about your DAGs and executor status. <!-- https://github.com/astronomer/astro/pull/22430-->
-    -  Monitor task execution with `kube_pod_container_resource_limits`. This new metric enables you to track resource use against the configured limits so you can understand if task execution meets your configured CPU, memory, or storage limits. <!--https://github.com/astronomer/astro/pull/22322-->
+    -  Monitor task execution with `kube_pod_container_resource_limits`. This new metric enables you to track resource use against the configured limits so you can understand if task execution meets your configured CPU, memory, or storage limits for your Celery Workers or Kubernetes Executor and KubernetesPodOperator pods.
 - Added new suporting documentation for the Astro Terraform Provider, including a Getting Started guide and code examples for common uses. Read [Astro Terraform Provider](https://www.astronomer.io/docs/astro/terraform-provider) for more information.
 
 ### Bug fixes
