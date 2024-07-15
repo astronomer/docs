@@ -2,7 +2,7 @@
 sidebar_label: Drone
 title: Astro CI/CD templates for Drone
 id: drone
-description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using Drone CI.
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow® DAGs to Astro using Drone CI.
 ---
 
 Use the following CI/CD templates to automate deploying [Apache Airflow®](https://airflow.apache.org/) DAGs from a Git repository to Astro with [Drone CI](https://www.drone.io/).

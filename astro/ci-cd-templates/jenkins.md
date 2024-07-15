@@ -2,7 +2,7 @@
 sidebar_label: Jenkins
 title: Astro CI/CD templates for Jenkins
 id: jenkins
-description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using Jenkins.
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow® DAGs to Astro using Jenkins.
 ---
 
 import Tabs from '@theme/Tabs';

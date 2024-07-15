@@ -2,7 +2,7 @@
 sidebar_label: AWS S3 bucket
 title: Deploy DAGs from an AWS S3 bucket to Astro using AWS Lambda
 id: aws-s3
-description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using AWS S3 and Lambda.
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow® DAGs to Astro using AWS S3 and Lambda.
 ---
 
 Use the following CI/CD template to automate deploying [Apache Airflow®](https://airflow.apache.org/) DAGs from an S3 bucket to Astro using AWS Lambda.

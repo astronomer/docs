@@ -2,7 +2,7 @@
 sidebar_label: GCS bucket
 title: Deploy DAGs from Google Cloud Storage to Astro
 id: gcs
-description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using Google Cloud Storage.
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow® DAGs to Astro using Google Cloud Storage.
 ---
 
 ## Prerequisites

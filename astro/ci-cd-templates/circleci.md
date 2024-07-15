@@ -2,7 +2,7 @@
 sidebar_label: CircleCI
 title: Astro CI/CD templates for CircleCI
 id: circleci
-description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using CircleCI.
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow® DAGs to Astro using CircleCI.
 ---
 
 import Tabs from '@theme/Tabs';

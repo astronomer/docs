@@ -2,7 +2,7 @@
 sidebar_label: Preview Deployment templates
 title: GitHub Actions templates for deploying code to preview Deployments on Astro
 id: github-actions-deployment-preview
-description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to a preview Deployment using GitHub Actions.
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow® DAGs to a preview Deployment using GitHub Actions.
 ---
 
 import Tabs from '@theme/Tabs';
