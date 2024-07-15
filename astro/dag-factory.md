@@ -2,28 +2,33 @@
 sidebar_label: 'DAG Factory'
 title: 'Use DAG Factory to create DAGs'
 id: dag-factory
-description: "Learn how to dynamically convert YAML files into Apache Airflow DAGs with the DAG Factory, an open source project that makes writing DAGs easy.
+description: "Learn how to dynamically convert YAML files into Apache Airflow DAGs with the DAG Factory, an open source project that makes creating DAGs easy.
 ---
 
-The DAG Factory is an open source tool that allows you to dynamically generate Apache Airflow DAGs from a YAML file. While Airflow DAGs are traditionally written exclusively in Python, the DAG Factory makes it easy for people who don't know Python to use Airflow.
+The DAG Factory is an open source tool managed by Astronomer that allows you to dynamically generate Apache Airflow DAGs from YAML. While Airflow DAGs are traditionally written exclusively in Python, the DAG Factory makes it easy for people who don't know Python to use Airflow.
 
-This guide includes instructions for installing the DAG Factory package into your Astro project and a sample YAML configuration file that you can use to specify the details of your DAG, including schedule interval, callbacks, and task names.
+This guide includes instructions for installing the DAG Factory package into your Astro project and a sample YAML configuration file that you can use to easily specify the details of your DAG, including schedule interval, callbacks, and task names.
 
 The DAG Factory can be used with all Astronomer products and any Apache Airflow installation. To view the source code of the project, see [DAG Factory](https://github.com/astronomer/dag-factory).
 
 ## Prerequisites
 
 - Python version 3.6.0 or greater
-- Apache Airflow version 2.0 or greater. If you're an Astronomer customer, you must run a supported version of Astro Runtime
+- Apache Airflow version 2.0 or greater
+
+If you're an Astronomer customer, you must have an Astro project with a supported version of Astro Runtime.
 
 ## Step 1: Install DAG Factory
-To use DAG Factory, install it as a Python package into your Apache Airflow environment. If you're an Astro customer:
 
-1. In your Astro project, open your `requirements.txt`.
+To use the DAG Factory, install it as a Python package into your Apache Airflow environment.
+
+If you're an Astronomer customer:
+
+1. In your Astro project, open your `requirements.txt` file.
 2. Add `dag-factory` to the file.
 3. Save the changes to your `requirements.txt`.
 
-If you're not an Astronomer customer, install the Python package according to the standards at your organization.
+If you're not an Astronomer customer, install the Python package according to the standards at your organization:
 
 ```python
 
@@ -33,12 +38,11 @@ pip install dag-factory
 
 ## Step 2: Create a YAML file for your DAG
 
-
-1. In the `dags` directory of your Astro project, create new YAML file. For example, `my-dag.yaml`.
-2. Copy the contents of the following example configuration file.
+1. In the `dags` directory of your Astro project, create a new YAML file for each DAG you want to create. For example, `my_dag.yaml`. Astronomer recommends creating a new sub-directory for all of your DAGs defined in YAML and keeping them separate from standard DAG files written in Python.
+2. Copy the contents of the following example configuration file into each YAML file.
 
 ```YAML
-example_dag1:
+<your-DAG-name>:
   default_args:
     owner: 'example_owner'
     start_date: 2018-01-01  # or '2 days'
@@ -71,7 +75,7 @@ example_dag1:
 
 ```
 
-3. Modify the example configuration file with details for the DAG you want to write. In order for your DAG to run, the following fields are required:
+3. Modify the example configuration file with details for the DAG you want to create, including replacing `<your-DAG-name>`. In order for your DAG to run, the following fields are required:
 
 - DAG name
 - `start_date`
@@ -79,15 +83,14 @@ example_dag1:
 - `schedule_interval`
 - `tasks`
 
-4. (Optional) Delete any configurations that you don't want to specify. For configurations that aren't specified, your DAG will assume the default values that correspond with your current Astro Runtime version.
+4. (Optional) Delete any configurations that you don't want or need to specify. For configurations that aren't specified, your DAG will assume the default values that correspond with your current Apache Airflow or Astro Runtime version.
 
+## Step 3. Create a DAG Factory file
 
-## Step 3. Create DAG Factory file to convert YAML into Python
+All YAML files in your `dags` directory must be parsed and converted into Python in order to run on Apache Airflow. In this step, you will create a new DAG Factory file in your Astro project that includes the conversion logic. You only need to do this once and do not need a separate DAG Factory file for each of your DAGs or YAML files.
 
-All YAML files in your `dags` directory must be parsed and converted into Python in order to run on Apache Airflow. In this step, you will create a DAG Factory file in your Astro project that includes the conversion logic. You only need to do this once and do not need a separate DAG Factory file for each of your YAML files.
-
-1. In the `dags` directory of your Astro project, create an empty Python file called `dag_factory.py`.
-2. Copy the following contents into your empty Python file. This file represents an Apache Airflow DAG file and includes two commands that convert each of your YAML file(s) into DAGs.
+1. In the `dags` directory of your Astro project, create a new Python file called `dag_factory.py`.
+2. Copy the following contents into your empty Python file. This file represents an Apache Airflow DAG and includes two commands that convert each of your YAML file(s) into DAGs.
 
 ```python
 
