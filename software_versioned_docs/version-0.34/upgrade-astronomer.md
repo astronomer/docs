@@ -12,7 +12,7 @@ Follow this guide to upgrade to any version of Astronomer Software. For informat
 A few notes before you get started:
 - The upgrade process will not affect running Airflow tasks as long as `upgradeDeployments.enabled=false` is set in your upgrade script.
 - Updates will not cause any downtime to Astronomer services, including the Software UI, the Astro CLI, and the Houston API.
-- To avoid potential complications, perform Astronomer Software upgrades in order and include all minor versions in your upgrade sequence. 
+- To avoid potential complications, perform Astronomer Software upgrades in order and include all minor versions in your upgrade sequence.
 
 :::info Upgrading Kubernetes
 
@@ -22,7 +22,7 @@ To avoid extended service disruptions, Astronomer recommends upgrading Astronome
 
 ## Step 1: Review upgrade considerations
 
-The [Upgrade considerations](upgrade-astronomer.md#upgrade-considerations) section of this document contains upgrade information for specific Astronomer versions. Review these notes before starting the upgrade process. To avoid potential complications, perform Astronomer Software upgrades in order and include all minor versions in your upgrade sequence. 
+The [Upgrade considerations](upgrade-astronomer.md#upgrade-considerations) section of this document contains upgrade information for specific Astronomer versions. Review these notes before starting the upgrade process. To avoid potential complications, perform Astronomer Software upgrades in order and include all minor versions in your upgrade sequence.
 
 ## Step 2: Check permissions
 
@@ -120,20 +120,20 @@ If you do not specify a patch version above, the script will automatically pull 
 
 ### Upgrade with ArgoCD
 
-You can upgrade Astronomer with ArgoCD, which is an open source continuous delivery tool for Kubernetes, as an alternative to using `helm upgrade`. 
+You can upgrade Astronomer with ArgoCD, which is an open source continuous delivery tool for Kubernetes, as an alternative to using `helm upgrade`.
 
 Because ArgoCD doesn't support sync wave dependencies for [app of apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern) structures, upgrading Astronomer requires some additional steps compared to the standard ArgoCD workflow:
 
 1. Make sure `enableArgoCDAnnotation: true` and `astronomer.houston.upgradeDeployments.enabled=false` are set in your `values.yaml` file.
-   
+
 2. In your ArgoCD application, choose the version of Astronomer Software you want to upgrade to from `astronomer/astronomer`.
-   
+
 3. Sync the ArgoCD app with every component of the Astronomer platform selected. See [Sync (Deploy) the Application](https://argo-cd.readthedocs.io/en/stable/getting_started/#7-sync-deploy-the-application).
-   
-4. Stop the sync when you see that `astronomer-houston-db-migrations` has completed in the Argo UI. 
-   
+
+4. Stop the sync when you see that `astronomer-houston-db-migrations` has completed in the Argo UI.
+
 5. Sync the application a second time, but this time clear `astronomer-alertmanager` in the Argo UI while keeping all other components selected. Wait for this sync to finish completely.
-   
+
 6. Sync the ArgoCD app a third time with all Astronomer platform components selected.
 
 ## Step 8: Confirm that the installation was successful
@@ -172,9 +172,9 @@ This topic contains information about upgrading to specific versions of Astronom
 
 To avoid extended service disruptions, Astronomer recommends upgrading Astronomer Software to a compatible version before you upgrade Kubernetes. To view Astronomer Software and Kubernetes compatibility information, see [Version compatibility reference for Astronomer Software](version-compatibility-reference.md#astronomer-software).
 
-### Supported upgrade paths 
+### Supported upgrade paths
 
-If you're upgrading through multiple Astronomer Software versions in a single upgrade process, review the following table to ensure that you're following the correct upgrade path. If your combination of **Current version** and **Target version** isn't listed, you can upgrade directly from your current version to the target version. 
+If you're upgrading through multiple Astronomer Software versions in a single upgrade process, review the following table to ensure that you're following the correct upgrade path. If your combination of **Current version** and **Target version** isn't listed, you can upgrade directly from your current version to the target version.
 
 | Current version | Target version | Upgrade path                |
 | --------------- | -------------- | --------------------------- |
@@ -220,6 +220,30 @@ If you're upgrading to Astronomer Software 0.29 or later and Kubernetes 1.22 at 
     ```
 3. Upgrade Kubernetes to version 1.22.
 
+### Upgrade to Astronomer Software 0.35
+
+#### Security issue with DAG-only deploys resolved in 0.35.1
+
+Due to an issue with the [DAG-only Deploy](deploy-dags.md#configure-dag-only-deploys-on-a-deployment) feature in Astronomer Software version 0.35.0, there is a risk that users could potentially access DAGs across different namespaces or Airflow deployments without proper permissions. This issue does not affect Deployments that do not use DAG-only deploys.
+
+To mitigate this issue:
+
+- Do not use DAG-only Deploys if you use version 0.35
+- If you have not upgraded to version 0.35, wait until the next major release to upgrade your Software version
+- If you use version 0.35, upgrade to 0.35.1
+
+### Upgrade to Astronomer Software 0.34
+
+#### Security issue with DAG-only deploys resolved in 0.34.3
+
+Due to an issue with the [DAG-only Deploy](deploy-dags.md#configure-dag-only-deploys-on-a-deployment) feature in Astronomer Software version 0.34.0-0.34.2, there is a risk that users could potentially access DAGs across different namespaces or Airflow deployments without proper permissions. This issue does not affect Deployments that do not use DAG-only deploys.
+
+To mitigate this issue:
+
+- Do not use DAG-only Deploys if you use versions 0.34.0-0.34.2
+- If you have not upgraded to versions 0.34-0.34.2, wait until the next major release to upgrade your Software version
+- If you use versiosn 0.34.0-0.34.2, upgrade to 0.34.3
+
 ### Upgrade to Astronomer Software 0.32
 
 #### Upgrade to Postgres 15
@@ -255,9 +279,9 @@ helm upgrade --namespace $NAMESPACE \
             astronomer/astronomer
 ```
 
-#### New default resource limits and requests 
+#### New default resource limits and requests
 
-Astronomer Software 0.31 includes new default resource limits and requests on the following resources: 
+Astronomer Software 0.31 includes new default resource limits and requests on the following resources:
 
 - Alertmanager
 - Elasticsearch
@@ -299,7 +323,7 @@ There is an [unresolved Kubernetes bug](https://github.com/kubernetes/kubernetes
 
 To preserve duplicate keys in your Helm chart, you can either reapply the values after upgrade or ensure that you use the `--reset-values` flag when running the upgrade script in Step 7.
 
-#### Resync Astronomer's signing certificate  
+#### Resync Astronomer's signing certificate
 
 As part of the 0.29 release, Astronomer deprecated its usage of [kubed](https://appscode.com/products/kubed/) for performance and security reasons. Kubed was responsible for syncing Astronomer's signing certificate to Deployment namespaces and is now replaced by an in-house utility. While this change does not directly affect users, you need to run a one-time command to reset Astronomer's signing certificate as part of the upgrade process to 0.29.
 

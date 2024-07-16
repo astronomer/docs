@@ -111,6 +111,22 @@ Astronomer [Teams](import-idp-groups.md) can now be created without associating 
     - [CVE-2024-28757](https://nvd.nist.gov/vuln/detail/CVE-2024-28757)
     - [CVE-2024-36361](https://nvd.nist.gov/vuln/detail/CVE-2024-36361)
 
+## 0.34.3
+
+Release date: July 17, 2024
+
+### Security fix for DAG-only deploys
+
+Fixed an issue where if you had a DAG-only deploy, it was possible for users to access its dag-server from any other kubernetes namespace. See [Upgrade considerations for 0.34](https://www.astronomer.io/docs/software/upgrade-astronomer#upgrade-to-astronomer-software-034) for more details about the security fix.
+
+### Bug fixes
+
+- Resolved the following vulnerabilities:
+   - [CVE-2023-45283](https://github.com/advisories/GHSA-vvjp-q62m-2vph)
+   - [CVE-2023-45288](https://github.com/advisories/GHSA-4v7x-pqxf-cx7m)
+   - [CVE-2024-24790](https://github.com/advisories/GHSA-49gw-vxvf-fc2g)
+   - [CVE-2023-39325](https://github.com/advisories/GHSA-4374-p667-p6c8)
+
 ## 0.34.2
 
 Release date: May 31, 2024
