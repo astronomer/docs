@@ -32,7 +32,7 @@ Release date: July 17, 2024
 
 ### Security fix for DAG-only deploys
 
-Fixed an issue where if you had a DAG-only deploy, it was possible for users to access its dag-server from any other kubernetes namespace. See [Upgrade considerations for 0.34](https://www.astronomer.io/docs/software/upgrade-astronomer#upgrade-to-astronomer-software-034) for more details about the security fix.
+Fixed an issue where if you had a DAG-only deploy, it was possible for users to access its dag-server from any other kubernetes namespace. See [Upgrade considerations for 0.34](https://www.astronomer.io/docs/software/0.34/upgrade-astronomer#upgrade-to-astronomer-software-034) for more details about the security fix.
 
 ### Bug fixes
 
