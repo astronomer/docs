@@ -19,9 +19,9 @@ To use [Terraform](https://www.terraform.io/) with Astro, you must authorize the
 
 You can use any of the following credentials to authenticate in an automated process, but an Organization API token is recommended:
 
-- A Deployment API token. See [Deployment API tokens](deployment-api-tokens.md).
-- A Workspace API token. See [Create a Workspace API token](workspace-api-tokens.md).
 - An Organization API token. See [Create an Organization API token](organization-api-tokens.md).
+- A Workspace API token. See [Create a Workspace API token](workspace-api-tokens.md).
+- A Deployment API token. See [Deployment API tokens](deployment-api-tokens.md).
 
 When you create an API token for your environment, keep the following best practices in mind:
 
