@@ -2,10 +2,10 @@
 sidebar_label: "View cluster details"
 title: "View cluster details"
 id: view-cluster-details
-description: Learn how to view a Deployment's cluster details, including your cloud, region, and connection options. 
+description: Learn how to view a Deployment's cluster details, including your cloud, region, and connection options.
 ---
 
-After you configure a Deployment, you can view details about the cluster it runs on in the Astro UI. 
+After you configure a Deployment, you can view details about the cluster it runs on in the Astro UI.
 
 ## View cluster cloud and region
 

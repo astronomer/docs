@@ -5,7 +5,7 @@ id: use-airflow-operators
 description: Learn how to run Airflow operators by creating and configuring operator cells in the Astro Cloud IDE.
 ---
 
-You can import any Airflow operator available on the Astronomer Registry and run it as part of your Cloud IDE pipeline. In most cases, the Cloud IDE can parse parameters and provides you with a detailed form for configuring the operator. 
+You can import any Airflow operator available on the Astronomer Registry and run it as part of your Cloud IDE pipeline. In most cases, the Cloud IDE can parse parameters and provides you with a detailed form for configuring the operator.
 
 ## Use Airflow operator cells
 
@@ -31,7 +31,7 @@ The Astro Cloud IDE is often able to detect the required format for an operator'
 
 Conversely, choose a **Python expression** if you want to define a parameter value without the IDE formatting or checking it. If the IDE cannot detect the required format for a parameter value, you can only define it as a Python expression. You can also use Python expressions to pass values from other cells as data dependencies.
 
-For example, the S3toSnowflakeOperator has a parameter called `autocommit` that takes a boolean value. Because the IDE detects the required value format, it shows a toggle when you select **Literal value**. 
+For example, the S3toSnowflakeOperator has a parameter called `autocommit` that takes a boolean value. Because the IDE detects the required value format, it shows a toggle when you select **Literal value**.
 
 ![A boolean formatted as a literal value](/img/cloud-ide/literal-value.png)
 
@@ -46,14 +46,14 @@ If you click the toggle on and then select **Python expression**, you see that t
 To import a custom operator that your team uses into the Astro Cloud IDE, create a custom cell type in your project configuration.
 
 1. If you're using a custom cell type to call custom operator code, [link your IDE project to a Git repository](deploy-project.md#commit-your-project-to-a-git-repository) and add your custom operator code to the `include` folder of your repository.
-   
+
 2. In the Astro UI, select **Cloud IDE**.
 
 3. Select a project.
 
 4. Click **Custom Cells**, then click **+ Cell Type**
 
-5. Enter a **Custom Cell Type Name**. This is the name that appears in the cell body and when you search for the cell type in your pipeline editor. 
+5. Enter a **Custom Cell Type Name**. This is the name that appears in the cell body and when you search for the cell type in your pipeline editor.
 
 6. Enter a **Definition** for the cell type. A definition is a JSON configuration that defines how a user interacts with the cell type, as well as how the cell type can access your custom operator code. For a complete reference for possible JSON values, see [Custom cell type reference](custom-cell-reference.md).
 

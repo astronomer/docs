@@ -1,7 +1,7 @@
 ---
 title: "Create an Amazon Redshift Connection in Airflow"
 id: redshift
-sidebar_label: Connection 
+sidebar_label: Connection
 description: Learn how to create an Amazon Redshift connection in Airflow.
 sidebar_custom_props: { icon: 'img/integrations/redshift.png' }
 ---
@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/integrations/redshift.png' }
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-[Amazon Redshift](https://aws.amazon.com/redshift/) is a data warehouse product from AWS. Integrating Redshift with Airflow allows you to automate, schedule and monitor a variety of tasks. These tasks include creating, deleting, and resuming a cluster, ingesting or exporting data to and from Redshift, as well as running SQL queries against Redshift. 
+[Amazon Redshift](https://aws.amazon.com/redshift/) is a data warehouse product from AWS. Integrating Redshift with Airflow allows you to automate, schedule and monitor a variety of tasks. These tasks include creating, deleting, and resuming a cluster, ingesting or exporting data to and from Redshift, as well as running SQL queries against Redshift.
 
 This document covers two different methods to connect Airflow to Amazon Redshift:
 
@@ -52,12 +52,12 @@ DB user credentials can be used to establish a connection to an Amazon Redshift 
 
 Complete the following steps to retrieve these values:
 
-1. In your AWS console, select the region that contains your Redshift cluster, open the Redshift cluster dashboard, then open your cluster. 
-   
+1. In your AWS console, select the region that contains your Redshift cluster, open the Redshift cluster dashboard, then open your cluster.
+
 2. From the **General information** section, copy the **Cluster identifier** and **Endpoint**.
-   
+
 3. Open the **Properties** tab and copy the **Database name** and **Port**.
-   
+
 4. [Create a Redshift user](https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html) and [grant a role](https://docs.aws.amazon.com/redshift/latest/dg/r_GRANT.html) so that Airflow can access Redshift through the user. Copy the username and password.
 
 </TabItem>
@@ -77,8 +77,8 @@ Following information is required:
 
 Complete the following steps to retrieve these values:
 
-1. In your AWS console, select the region that contains your Redshift cluster, open the Redshift cluster dashboard, then open your cluster. 
-   
+1. In your AWS console, select the region that contains your Redshift cluster, open the Redshift cluster dashboard, then open your cluster.
+
 2. Open the **General information** tab, then copy the **Cluster identifier** and **Endpoint**.
 
 3. Open the **Properties** tab and copy the **Database name** and **Port**.
@@ -101,13 +101,13 @@ You can use AWS's [Assume Role](https://docs.aws.amazon.com/STS/latest/APIRefere
 
 Complete the following steps to retrieve these values:
 
-1. In your AWS console, select the region that contains your Redshift cluster, open the Redshift cluster dashboard, then open your cluster. 
+1. In your AWS console, select the region that contains your Redshift cluster, open the Redshift cluster dashboard, then open your cluster.
 
 2. Open the **General information** tab, then copy the **Cluster identifier** and **Endpoint**.
 
 3. Open the **Properties** tab and copy the **Database name** and **Port**.
 
-4. Open your IAM dashboard, and [follow the AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions_create-policies.html) to create an IAM role and attach an IAM Policy to access the required services, for example AWS Redshift. 
+4. Open your IAM dashboard, and [follow the AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions_create-policies.html) to create an IAM role and attach an IAM Policy to access the required services, for example AWS Redshift.
 
 5. Edit the trust relationship of the role created in Step 4 to add a trust policy that allows the IAM role to assume your new role.
 
@@ -200,17 +200,17 @@ Complete the following steps to retrieve these values:
 
 5. Enter a name for the connection in the **Connection Id** field.
 
-6. Copy the following JSON template into the **Extra** field, then replace the placeholder values with the information you retrieved in [Get connection details](#get-connection-details). 
+6. Copy the following JSON template into the **Extra** field, then replace the placeholder values with the information you retrieved in [Get connection details](#get-connection-details).
 
     ```json
 
     {
-        "iam": true, 
-        "cluster_identifier": "<your-cluster-identifier>", 
-        "port": 5439, 
+        "iam": true,
+        "cluster_identifier": "<your-cluster-identifier>",
+        "port": 5439,
         "region": "<your-region>",
-        "db_user": "<your-user>", 
-        "database": "<your-database>", 
+        "db_user": "<your-user>",
+        "database": "<your-database>",
         "profile": "<your-profile-name>"
     }
 
@@ -242,7 +242,7 @@ Complete the following steps to retrieve these values:
     - **Host**: Enter the cluster **Endpoint**.
     - **Database**: Enter the **Database name**.
     - **Port**: Enter the **Port**.
-    - **Extra**: 
+    - **Extra**:
         ```json
 
             {

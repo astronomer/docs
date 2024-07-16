@@ -55,7 +55,7 @@ Datasets allow you to define explicit dependencies between DAGs and updates to y
 
 :::note Listening for dataset changes
 
-As of Airflow 2.8, you can use [listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) to enable Airflow to notify you when certain dataset events occur. There are two listener hooks for the following events: 
+As of Airflow 2.8, you can use [listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) to enable Airflow to notify you when certain dataset events occur. There are two listener hooks for the following events:
 
 - on_dataset_created
 - on_dataset_changed
@@ -71,7 +71,7 @@ Currently, the URI is not used to connect to an external system and there is no 
 
 The dataset URI is saved as plain text, so it is recommended that you hide sensitive values using environment variables or a secrets backend.
 
-You can reference the dataset in a task by passing it to the task's `outlets` parameter. `outlets` is part of the `BaseOperator`, so it's available to every Airflow operator. 
+You can reference the dataset in a task by passing it to the task's `outlets` parameter. `outlets` is part of the `BaseOperator`, so it's available to every Airflow operator.
 
 When you define a task's `outlets` parameter, Airflow labels the task as a producer task that updates the datasets. It is up to you to determine which tasks should be considered producer tasks for a dataset. As long as a task has an outlet dataset, Airflow considers it a producer task even if that task doesn't operate on the referenced dataset. In the following example, the `write_instructions_to_file` and `write_info_to_file` are both producer tasks because they have defined outlets.
 
@@ -121,7 +121,7 @@ Any DAG that is scheduled with a dataset is considered a consumer DAG even if th
 
 </Tabs>
 
-Any number of datasets can be provided to the `schedule` parameter as a list or as an expression using [conditional logic](#conditional-dataset-scheduling). If the Datasets are provided in a list, the DAG is triggered after all of the datasets have received at least one update due to a producing task completing successfully. 
+Any number of datasets can be provided to the `schedule` parameter as a list or as an expression using [conditional logic](#conditional-dataset-scheduling). If the Datasets are provided in a list, the DAG is triggered after all of the datasets have received at least one update due to a producing task completing successfully.
 
 When you work with datasets, keep the following considerations in mind:
 
@@ -137,7 +137,7 @@ Airflow 2.9 added several new features to datasets:
 
     ![Screenshot of the Airflow UI showing the graph view of a DAG with a ](/img/guides/airflow-datasets_in_graph_view.png)
 
-For more information about datasets, see [Data-aware scheduling](https://airflow.apache.org/docs/apache-airflow/stable/concepts/datasets.html). 
+For more information about datasets, see [Data-aware scheduling](https://airflow.apache.org/docs/apache-airflow/stable/concepts/datasets.html).
 
 The **Datasets** tab, and the **DAG Dependencies** view in the Airflow UI give you observability for datasets and data dependencies in the DAG's schedule.
 
@@ -169,13 +169,13 @@ As of Airflow 2.9+ there are three ways to update a dataset:
 
 - A task with an outlet parameter that references the dataset completes successfully.
 - A `POST` request to the [datasets endpoint of the Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Dataset).
-- A manual update in the Airflow UI. 
+- A manual update in the Airflow UI.
 
     ![Screenshot of the Airflow UI showing the view history of updates to a specific dataset in the datasets tab with the play button to update the dataset manually highlighted](/img/guides/airflow-datasets_manually_update_dataset.png)
 
 ### Conditional dataset scheduling
 
-In Airflow 2.9 and later, you can use logical operators to combine any number of datasets provided to the `schedule` parameter. The logical operators supported are `|` for OR and `&` for AND. 
+In Airflow 2.9 and later, you can use logical operators to combine any number of datasets provided to the `schedule` parameter. The logical operators supported are `|` for OR and `&` for AND.
 
 For example, to schedule a DAG on an update to either `dataset1`, `dataset2`, `dataset3`, or `dataset4`, you can use the following syntax. Note that the full statement is wrapped in `()`.
 
@@ -345,7 +345,7 @@ from airflow.timetables.trigger import CronTriggerTimetable
         timetable=CronTriggerTimetable("0 0 * * *", timezone="UTC"),
         datasets=(Dataset("dataset3") | Dataset("dataset4")),
         # Use () instead of [] to be able to use conditional dataset scheduling!
-    ), 
+    ),
     catchup=False,
 )
 def toy_downstream3_dataset_and_time_schedule():
@@ -373,7 +373,7 @@ with DAG(
         timetable=CronTriggerTimetable("0 0 * * *", timezone="UTC"),
         datasets=(Dataset("dataset3") | Dataset("dataset4")),
         # Use () instead of [] to be able to use conditional dataset scheduling!
-    ), 
+    ),
     catchup=False,
 ):
     # your tasks here
@@ -385,7 +385,7 @@ with DAG(
 
 ## Datasets with the Astro Python SDK
 
-If you are using the [Astro Python SDK](https://www.astronomer.io/docs/tutorials/astro-python-sdk) version 1.1 or later, you do not need to make any code updates to use datasets. Datasets are automatically registered for any functions with output tables and you do not need to define any `outlet` parameters. 
+If you are using the [Astro Python SDK](https://www.astronomer.io/docs/tutorials/astro-python-sdk) version 1.1 or later, you do not need to make any code updates to use datasets. Datasets are automatically registered for any functions with output tables and you do not need to define any `outlet` parameters.
 
 The following example DAG results in three registered datasets: one for each `load_file` function and one for the resulting data from the `transform` function.
 

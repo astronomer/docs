@@ -159,7 +159,7 @@ You can modify the default `podTemplate` to configure the default worker Pods fo
 
 2. Customize the pod template configuration based on your use case, such as by requesting default limits on CPU and memory usage. To configure these resources for each Pod, you configure a Pod template. For more information on configuring Pod template values, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/#pod-templates).
 3. Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
-  
+
 ## Configure the worker Pod for a specific task
 
 For each task with the Kubernetes executor, you can customize its individual worker Pod and override the defaults used in Astronomer Software by configuring a `pod_override` file.
@@ -239,7 +239,7 @@ When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 10
     ```
 
 2. Add the following import to your DAG file:
-   
+
     ```python
     from airflow.kubernetes.secret import Secret
     ```
@@ -264,7 +264,7 @@ When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 10
 6. In the executable for the task, call the secret value using `os.environ[env_name]`.
 
 In the following example, a secret named `MY_SECRET` is pulled from `infrared-photon-7780-env` and printed to logs.
- 
+
 ```python
 import pendulum
 from kubernetes.client import models as k8s

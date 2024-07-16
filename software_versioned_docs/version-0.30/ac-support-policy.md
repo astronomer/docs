@@ -95,9 +95,9 @@ The maintenance period for an Astronomer Certified version depends on its releas
 | Stable          | 6 Months             |
 | LTS             | 18 Months            |
 
-To fix bugs, Astronomer provides patch releases as new images and recommends that organizations install them regularly to ensure optimum performance. Upgrading only when an issue occurs can delay the resolution of the issue. 
+To fix bugs, Astronomer provides patch releases as new images and recommends that organizations install them regularly to ensure optimum performance. Upgrading only when an issue occurs can delay the resolution of the issue.
 
-For each `major.minor` pair, only the latest patch and hot-fix combination is supported at any given time. If you report an issue with an Astronomer Certified patch or hot-fix version that is not latest, the Astronomer Support team will always ask that you upgrade as a first step to resolution. For example, if Astronomer Certified 2.2.3 is the latest patch in the 2.2.x series, the Support team would encourage any user who reports an issue with Astronomer Certified 2.2.2 to first upgrade to 2.2.3 before starting to troubleshoot the issue. 
+For each `major.minor` pair, only the latest patch and hot-fix combination is supported at any given time. If you report an issue with an Astronomer Certified patch or hot-fix version that is not latest, the Astronomer Support team will always ask that you upgrade as a first step to resolution. For example, if Astronomer Certified 2.2.3 is the latest patch in the 2.2.x series, the Support team would encourage any user who reports an issue with Astronomer Certified 2.2.2 to first upgrade to 2.2.3 before starting to troubleshoot the issue.
 
 Within the maintenance window of each Astronomer Certified version, the following is true:
 

@@ -10,7 +10,7 @@ from airflow.providers.slack.notifications.slack_notifier import SlackNotifier
 SLACK_CONNECTION_ID = "slack_conn"
 SLACK_CHANNEL = "alerts"
 SLACK_MESSAGE = """
-Hello! The {{ ti.task_id }} task is saying hi :wave: 
+Hello! The {{ ti.task_id }} task is saying hi :wave:
 Today is the {{ ds }} and this task finished with the state: {{ ti.state }} :tada:.
 """
 

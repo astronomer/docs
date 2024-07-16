@@ -104,7 +104,7 @@ There are additional tables in the metadata database storing data ranging from D
 
 ## Use the Airflow REST API to access the metadata database
 
-The best method for retrieving data from the metadata database is using the Airflow UI or making a GET request to the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html). 
+The best method for retrieving data from the metadata database is using the Airflow UI or making a GET request to the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
 
 Between the UI and API, much of the metadata database can be viewed without the risk inherent in direct querying. In rare cases where neither the Airflow UI nor the REST API can provide sufficient data, it is possible to use SQLAlchemy with Airflow models to access data from the metadata database. Direct querying of the metadata database is not recommended since direct manipulation can result in corruption of your Airflow instance.
 

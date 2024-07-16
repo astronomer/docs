@@ -25,7 +25,7 @@ A few clarifying notes:
 * Admin access on an Astronomer Workspace
 * Direct access to your Kubernetes Cluster with permission to run `$ kubectl describe po`
 * A compatible version of Kubernetes. See [Version Compatibility Reference](version-compatibility-reference.md)
-* Astronomer Software version 0.26.6 or later 
+* Astronomer Software version 0.26.6 or later
 
 ## AWS
 

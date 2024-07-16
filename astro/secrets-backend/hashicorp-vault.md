@@ -4,7 +4,7 @@ sidebar_label: 'Hashicorp Vault'
 id: hashicorp-vault
 ---
 
-This topic provides steps for using [Hashicorp Vault](https://www.vaultproject.io/) as a secrets backend for both local development and on Astro. 
+This topic provides steps for using [Hashicorp Vault](https://www.vaultproject.io/) as a secrets backend for both local development and on Astro.
 
 To do this, you will:
 - Create an AppRole in Vault which grants Astro minimal required permissions.
@@ -27,7 +27,7 @@ If you use a different secrets backend tool or want to learn the general approac
 If you do not already have a Vault server deployed but would like to test this feature, Astronomer recommends that you either:
 
 - Sign up for a Vault trial on [Hashicorp Cloud Platform (HCP)](https://cloud.hashicorp.com/products/vault) or
-- Deploy a local Vault server. See [Starting the server](https://learn.hashicorp.com/tutorials/vault/getting-started-dev-server?in=vault/getting-started) in Hashicorp documentation. 
+- Deploy a local Vault server. See [Starting the server](https://learn.hashicorp.com/tutorials/vault/getting-started-dev-server?in=vault/getting-started) in Hashicorp documentation.
 
 ## Step 1: Create a Policy and AppRole in Vault
 
@@ -65,7 +65,7 @@ To use Vault as a secrets backend, Astronomer recommends configuring a Vault App
     ```
 
     Save this value. You'll use this later to complete the setup.
-  
+
 ## Step 2: Create an Airflow variable or connection in Vault
 
 To start, create an Airflow variable or connection in Vault that you want to store as a secret. It can be either a real or test value. You will use this secret to test your backend's functionality.
@@ -121,10 +121,10 @@ AIRFLOW__SECRETS__BACKEND=airflow.providers.hashicorp.secrets.vault.VaultBackend
 AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_path": "connections", "variables_path": "variables",  "mount_point": "airflow", "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"astro_role", "secret_id":"<your-approle-secret>"}
 ```
 
-:::info 
+:::info
 
 If you run Vault on Hashicorp Cloud Platform (HCP):
- 
+
 - Replace `http://host.docker.internal:8200` with `https://<your-cluster>.hashicorp.cloud:8200`.
 - Add `"namespace": "admin"` as an argument after `url`.
 
@@ -134,22 +134,22 @@ This tells Airflow to look for variable and connection information at the `airfl
 
 For more information on the Airflow provider for Hashicorp Vault and how to further customize your integration, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/_api/airflow/providers/hashicorp/hooks/vault/index.html).
 
-## Step 4: Deploy to Astro  
-  
-1. Run the following commands to export your environment variables to Astro:   
- 
+## Step 4: Deploy to Astro
+
+1. Run the following commands to export your environment variables to Astro:
+
     ```bash
     astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND=airflow.providers.hashicorp.secrets.vault.VaultBackend
-  
+
     astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "connections", "variables_path": "variables", "mount_point": "airflow", "url": "<your-hashicorpvault-url>", "auth_type": "approle", "role_id":"astro_role", "secret_id":"<your-approle-secret>"}' --secret
     ```
-  
+
 2. Run the following command to push your updated `requirements.txt` file to Astro:
-  
+
     ```bash
-    astro deploy --deployment-id <your-deployment-id> 
+    astro deploy --deployment-id <your-deployment-id>
     ```
 
 3. (Optional) Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials in `AIRFLOW__SECRETS__BACKEND_KWARGS`.
-  
+
 Now, any Airflow variable or connection that you write to your Vault server can be successfully accessed and pulled by any DAG in your Deployment on Astro.

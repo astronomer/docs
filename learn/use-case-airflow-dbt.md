@@ -6,7 +6,7 @@ sidebar_label: "ELT with Airflow + dbt"
 sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
 ---
 
-[dbt Core](https://docs.getdbt.com/) is a popular open-source library for analytics engineering that helps users build interdependent SQL models. Thanks to the [Cosmos](https://astronomer.github.io/astronomer-cosmos/) provider package, you can integrate any dbt project into your DAG with only a few lines of code. The open-source [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html) greatly simplifies common ELT tasks like loading data and allows users to easily use Pandas on data stored in a data warehouse. 
+[dbt Core](https://docs.getdbt.com/) is a popular open-source library for analytics engineering that helps users build interdependent SQL models. Thanks to the [Cosmos](https://astronomer.github.io/astronomer-cosmos/) provider package, you can integrate any dbt project into your DAG with only a few lines of code. The open-source [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html) greatly simplifies common ELT tasks like loading data and allows users to easily use Pandas on data stored in a data warehouse.
 
 This example uses a DAG to load data about changes in solar and renewable energy capacity in different European countries from a local CSV file into a data warehouse. Transformation steps in dbt Core filter the data for a country selected by the user and calculate the percentage of solar and renewable energy capacity for that country in different years. Depending on the trajectory of the percentage of solar and renewable energy capacity in the selected country, the DAG will print different messages to the logs.
 
@@ -42,7 +42,7 @@ To run the example project, first make sure Docker Desktop is running. Then, nav
 astro dev start
 ```
 
-This command builds your project and spins up 4 Docker containers on your machine to run it. After the command finishes, open the Airflow UI at `https://localhost:8080/` and trigger the `my_energy_dag` DAG using the play button.
+This command builds your project and spins up 4 Docker containers on your machine to run it. After the command finishes, open the Airflow UI at `https://localhost:8080/` and trigger the `my_energy_dag` DAG using the play button.
 
 ## Project contents
 
@@ -99,12 +99,12 @@ dbt_tg = DbtTaskGroup(
 )
 ```
 
-The Airflow tasks within the task group are automatically inferred by Cosmos from the dependencies between the two dbt models: 
+The Airflow tasks within the task group are automatically inferred by Cosmos from the dependencies between the two dbt models:
 
 - The first model, [`select_country`](https://github.com/astronomer/cosmos-use-case/blob/main/dags/dbt/my_energy_project/models/select_country.sql), queries the table created by the previous task and creates a subset of the data by only selecting rows for the country that was specified as the `country_code` variable in the `operator_args` parameter of the `DbtTaskGroup`. See the [dataset](https://github.com/astronomer/learn-tutorials-data/blob/main/subset_energy_capacity.csv) for all available country codes.
 
     ```sql
-    select 
+    select
         "YEAR", "COUNTRY", "SOLAR_CAPACITY", "TOTAL_CAPACITY", "RENEWABLES_CAPACITY"
     from postgres.postgres.energy
     where "COUNTRY" = '{{ var("country_code") }}'
@@ -113,7 +113,7 @@ The Airflow tasks within the task group are automatically inferred by Cosmos fro
 - The second model, [`create_pct`](https://github.com/astronomer/cosmos-use-case/blob/main/dags/dbt/my_energy_project/models/create_pct.sql), divides both the solar and renewable energy capacity by the total energy capacity for each year calculating the fractions of these values. Note how the dbt `ref` function creates a dependency between this model and the upstream model `select_country`. Cosmos then automatically translates this into a dependency between Airflow tasks.
 
     ```sql
-    select 
+    select
         "YEAR", "COUNTRY", "SOLAR_CAPACITY", "TOTAL_CAPACITY", "RENEWABLES_CAPACITY",
         "SOLAR_CAPACITY" / "TOTAL_CAPACITY" AS "SOLAR_PCT",
         "RENEWABLES_CAPACITY" / "TOTAL_CAPACITY" AS "RENEWABLES_PCT"
@@ -159,7 +159,7 @@ The files come together in the following project structure:
 
 :::tip
 
-In some cases, especially in larger dbt projects, you might run into a `DagBag import timeout` error. 
+In some cases, especially in larger dbt projects, you might run into a `DagBag import timeout` error.
 This error can be resolved by increasing the value of the Airflow configuration [core.dagbag_import_timeout](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dagbag-import-timeout).
 
 :::

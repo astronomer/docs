@@ -62,7 +62,7 @@ Complete the following steps to retrieve these values:
 
     ![Screenshot of the user menu in Snowsight showing how to copy the role.](/img/tutorials/connections-snowflake_snowsight_role.png)
 
-3. Copy the name of your **Warehouse**. To see all available warehouses, open a new **Worksheet** and open the [context selector menu](https://docs.snowflake.com/en/user-guide/ui-snowsight-worksheets#change-the-session-context-for-a-worksheet) in the content pane. 
+3. Copy the name of your **Warehouse**. To see all available warehouses, open a new **Worksheet** and open the [context selector menu](https://docs.snowflake.com/en/user-guide/ui-snowsight-worksheets#change-the-session-context-for-a-worksheet) in the content pane.
 
     ![Screenshot of the context selector menu in Snowsight showing how to copy the warehouse.](/img/tutorials/connections-snowflake_snowsight_warehouse.png)
 
@@ -80,7 +80,7 @@ Complete the following steps to retrieve these values:
 
 2. Click on your account name in the top right corner and hover over **Switch Role** to see a list of all available roles. Copy your **Role**.
 
-    ![Screenshot roles in Snowflake classic console.](/img/tutorials/connections-snowflake_classic_role.png)
+    ![Screenshot roles in Snowflake classic console.](/img/tutorials/connections-snowflake_classic_role.png)
 
 3. Copy your **Warehouse** from the **Warehouses** tab.
 

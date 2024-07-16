@@ -61,7 +61,7 @@ If you use Docker Desktop, ensure that the [**Use containerd for pulling and sto
 
 ```text
 Push access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
-# or 
+# or
 Unable to find image 'barren-ionization-0185/airflow:latest' locally
 Error response from daemon: pull access denied for barren-ionization-0185/airflow, repository does not exist or may require 'docker login'
 ```

@@ -28,7 +28,7 @@ astro deploy --dags
 
 :::warning
 
-Unlike image deploys, DAG deploys do not include pytests as part of the deploy process by default. This means that DAG deploys have the risk of including faulty code that would otherwise be caught in an image deploy. 
+Unlike image deploys, DAG deploys do not include pytests as part of the deploy process by default. This means that DAG deploys have the risk of including faulty code that would otherwise be caught in an image deploy.
 
 To have the same testing process in DAG deploys, run `astro deploy --dags --pytest`. Note that this can increase the time your deploys take. See [Test your Astro project](cli/test-your-astro-project-locally.md) for more information about how to use the Astro CLI's pytest features.
 

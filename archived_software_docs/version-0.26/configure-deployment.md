@@ -133,7 +133,7 @@ astronomer:
                 default: 0
                 minimum: 0
                 limit: 2
-                minAirflowVersion: "2.2.0"    
+                minAirflowVersion: "2.2.0"
 ```
 
 After you save these changes, push your `config.yaml` file to your installation as described in [Apply a Config Change](apply-platform-config.md).

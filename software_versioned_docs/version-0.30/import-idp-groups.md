@@ -30,7 +30,7 @@ Astronomer user roles function on a "most permissive" policy: If a user has role
 - If a user's most permissive role comes from a Team configuration, then there is no way to override/ remove this permission from a Workspace configuration.
 - Importing a Team from an IdP has no effect on existing Astronomer user roles. Users will continue to have permissions from both contexts, with the most permissive role defining how they interact with a given Workspace or Deployment.
 
-For example, consider a user who has been a Workspace Editor in `Production Workspace` via Astronomer's default authentication for the last year. Your organization recently implemented Okta as your authentication system for Astronomer and added this user to a Team with Workspace Viewer permissions in `Production Workspace`. Because the user still has Workspace Editor permissions from their original account, they will continue to have Workspace Editor permissions in `Production Workspace`. The only way to remove their Editor permissions is to have a Workspace Admin remove them through Workspace settings.  
+For example, consider a user who has been a Workspace Editor in `Production Workspace` via Astronomer's default authentication for the last year. Your organization recently implemented Okta as your authentication system for Astronomer and added this user to a Team with Workspace Viewer permissions in `Production Workspace`. Because the user still has Workspace Editor permissions from their original account, they will continue to have Workspace Editor permissions in `Production Workspace`. The only way to remove their Editor permissions is to have a Workspace Admin remove them through Workspace settings.
 
 :::
 

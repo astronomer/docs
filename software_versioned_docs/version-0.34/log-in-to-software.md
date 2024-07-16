@@ -37,7 +37,7 @@ Developing locally with the Astro CLI does not require an Astro account. This in
 
     If you can't enter your password in the command prompt, your organization is using an alternative authentication method. Contact your administrator, or use an OAuth token for authentication.
 
-    :::     
+    :::
 
 ## Access a different base domain
 

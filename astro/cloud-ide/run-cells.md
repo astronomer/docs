@@ -10,12 +10,12 @@ Test your data pipeline as a whole or in parts using a dedicated and isolated te
 ## Run a cell
 
 1. In the Astro UI, select a Workspace and then click **Cloud IDE**.
-   
+
 2. Select a project on the **Projects** page.
-   
+
 3. Select a pipeline in the **Pipelines** list.
-   
-4. In the pipeline editor, go to a cell and click **Run**. 
+
+4. In the pipeline editor, go to a cell and click **Run**.
 
 ![Running a Cloud IDE cell](/img/cloud-ide/run-cell.png)
 
@@ -33,19 +33,19 @@ You can run a cell with its upstream or downstream dependencies to test parts of
 
 When you run a cell with dependencies, the Cloud IDE runs the most upstream cell first and then runs each downstream cell in order. If you have data dependencies, the Cloud IDE passes data from upstream cells to downstream cells as defined in your code. The logs and results for a given cell run appear in the cell's editing window.
 
-## Run your data pipeline 
+## Run your data pipeline
 
 To test your entire data pipeline in a single run, click **Run** in the top right corner of your pipeline editing window. The Cloud IDE runs all cells with no upstream dependencies first, then runs any downstream cells based on your code.
 
 ## Configure a GitHub repo for running cells
 
-You can use the Astro Cloud IDE GitHub integration to run your code with additional dependencies that aren't configurable within the Cloud IDE, such as helper functions in an `include` folder. The Astro Cloud IDE loads files from your GitHub repository into the testing environment so that your cells can access all of the required files. 
+You can use the Astro Cloud IDE GitHub integration to run your code with additional dependencies that aren't configurable within the Cloud IDE, such as helper functions in an `include` folder. The Astro Cloud IDE loads files from your GitHub repository into the testing environment so that your cells can access all of the required files.
 
 1. Deploy your Astro Cloud IDE project to GitHub if you haven't already. See [Deploy a project](deploy-project.md).
 2. In the Astro UI, select a Workspace and then click **Cloud IDE**.
 3. Select a project on the **Projects** page.
 4. In the **GitHub Repo** pane, click **Configure**.
-5. Configure the following values: 
+5. Configure the following values:
 
     - **Clone GitHub repo during cell execution**: Click the toggle to allow the Cloud IDE to access your GitHub repository files when executing cells. Turn on this feature if you have cells that depend on helper files, such as helper functions in `include`.
     - **Disable auto sync in favor of manual sync**: Optional. Click the toggle to sync your repository only on a manual basis. When you click the toggle, a button appears in the pane that you can use to manually sync your GitHub repository to your Cloud IDE environment.

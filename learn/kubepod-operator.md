@@ -212,7 +212,7 @@ To run a Kubernetes pod locally, you can use the following .json template to cre
 }
 ```
 
-Then, run `astro dev start` with the Astro CLI to spin up a local Airflow environment. Once your environment has been created, open up the connection management UI, and create a new connection of the `Kubernetes Cluster Connection` type. Within the connection creation menu, copy the .json file you created using the above template into the `Kube config (JSON format)` field, and save the connection with the connection id `k8s_conn`. If you'd like to use another connection id, make sure to alter the following example DAG code. 
+Then, run `astro dev start` with the Astro CLI to spin up a local Airflow environment. Once your environment has been created, open up the connection management UI, and create a new connection of the `Kubernetes Cluster Connection` type. Within the connection creation menu, copy the .json file you created using the above template into the `Kube config (JSON format)` field, and save the connection with the connection id `k8s_conn`. If you'd like to use another connection id, make sure to alter the following example DAG code.
 
 #### Step 4: Run your container
 
@@ -343,7 +343,7 @@ The components of the connection can also be set or overwritten at the task leve
 
 :::info Launching Pods in external clusters
 
-If some of your tasks require specific resources such as a GPU, you might want to run them in a different cluster than your Airflow instance. 
+If some of your tasks require specific resources such as a GPU, you might want to run them in a different cluster than your Airflow instance.
 
 The way that you connect to an external cluster will vary based on where your cluster is hosted and where your Airflow environment is hosted, but generally the following conditions must be met to launch a Pod in an external cluster:
 
@@ -351,7 +351,7 @@ The way that you connect to an external cluster will vary based on where your cl
 - Your Airflow environment must have permissions to spin up Pods in the external cluster
 - Your cluster configuration must be passed to your KubernetesPodOperator tasks either through a task-level configuration or a Kubernetes connection
 
-See the [Astro documentation](https://www.astronomer.io/docs/astro/kubernetespodoperator) for a more detailed example of how to configure a KubernetesPodOperator task to launch a Pod in an external EKS cluster. 
+See the [Astro documentation](https://www.astronomer.io/docs/astro/kubernetespodoperator) for a more detailed example of how to configure a KubernetesPodOperator task to launch a Pod in an external EKS cluster.
 
 :::
 

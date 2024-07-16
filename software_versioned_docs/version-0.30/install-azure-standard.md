@@ -314,7 +314,7 @@ nginx:
   ingressAnnotations:
     # required only if using Kubernetes 1.24 or later
     service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: "/healthz"
-    
+
 astronomer:
   houston:
     config:
@@ -381,25 +381,25 @@ After you run the previous commands, a set of Kubernetes pods are generated in y
 
 ### Alternative ArgoCD installation
 
-You can install Astronomer with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), which is an open source continuous delivery tool for Kubernetes, as an alternative to using `helm install`. 
+You can install Astronomer with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), which is an open source continuous delivery tool for Kubernetes, as an alternative to using `helm install`.
 
 Because ArgoCD doesn't support sync wave dependencies for [app of apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern) structures, installing Astronomer requires some additional steps compared to the standard ArgoCD workflow:
 
 1. Under the `global` section of your `config.yaml` file, add `enableArgoCDAnnotation: true`.
-   
+
 2. Create a new ArgoCD app. When creating the app, configure the following:
 
     - **Path**: The filepath of your `config.yaml` file
     - **Namespace**: The namespace you want to use for Astronomer
-    - **Cluster**: The Kubernetes cluster in which you're installing Astronomer 
+    - **Cluster**: The Kubernetes cluster in which you're installing Astronomer
     - **Repository URL**: `https://helm.astronomer.io`
 
 3. Sync the ArgoCD app with every component of the Astronomer platform selected. See [Sync (Deploy) the Application](https://argo-cd.readthedocs.io/en/stable/getting_started/#7-sync-deploy-the-application).
-   
-4. Stop the sync when you see that `astronomer-houston-db-migrations` has completed in the Argo UI. 
-   
+
+4. Stop the sync when you see that `astronomer-houston-db-migrations` has completed in the Argo UI.
+
 5. Sync the application a second time, but this time clear `astronomer-alertmanager` in the Argo UI while keeping all other components selected. Wait for this sync to finish completely.
-   
+
 6. Sync the ArgoCD app a third time with all Astronomer platform components selected.
 
 

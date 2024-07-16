@@ -40,7 +40,7 @@ To filter Grafana metrics by Deployment:
 
     ![Open Workspace in the Software UI](/img/software/click-workspace.png)
 
-2. The release name for a Deployment is listed under the Deployment's proper name. Make note of the release names for each Deployment you want to monitor.  
+2. The release name for a Deployment is listed under the Deployment's proper name. Make note of the release names for each Deployment you want to monitor.
 
     ![Release name location](/img/software/release-name.png)
 

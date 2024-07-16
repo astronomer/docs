@@ -26,7 +26,7 @@ Starting with Astronomer Software v0.23, new versions of Astronomer Certified ar
 
 > **Note:** If you don't want to wait for new versions of Astronomer Certified to appear on their own, you can manually trigger the cron job with the following Kubernetes command:
 >
->    ```sh    
+>    ```sh
 >    kubectl create job --namespace astronomer --from=cronjob/astronomer-houston-update-airflow-check airflow-update-check-first-run
 >    ```
 >
@@ -138,7 +138,7 @@ For our platform's full collection of Docker Images, reference [Astronomer on Qu
 | [2.1.4](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.1.4-buster-onbuild   | N/A                                                           |
 | [2.2.0](https://github.com/astronomer/ap-airflow/blob/master/2.2.0/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.2.0-buster-onbuild   | N/A                                                           |
 | [2.2.1](https://github.com/astronomer/ap-airflow/blob/master/2.2.1/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.2.1-onbuild   | N/A                                                           |
-| [2.2.2](https://github.com/astronomer/ap-airflow/blob/master/2.2.2/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.2.2-onbuild   | N/A      
+| [2.2.2](https://github.com/astronomer/ap-airflow/blob/master/2.2.2/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.2.2-onbuild   | N/A
 
 > **Note:** In November of 2020, Astronomer migrated its Docker Registry from [Docker Hub](https://hub.docker.com/r/astronomerinc/ap-airflow) to [Quay.io](https://quay.io/repository/astronomer/ap-airflow?tab=tags) due to a [change](https://www.docker.com/blog/what-you-need-to-know-about-upcoming-docker-hub-rate-limiting/) in Docker Hub's rate limit policy. If you're using a legacy `astronomerinc/ap-airflow` image, replace it with a corresponding `quay.io/astronomer/ap-airflow` image to avoid rate limiting errors from DockerHub when you deploy to Astronomer (e.g. `toomanyrequests: You have reached your pull rate limit`).
 

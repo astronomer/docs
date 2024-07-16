@@ -1,7 +1,7 @@
 """
 ## DAG to produce to a Dataset showcasing the on_dataset_changed listener
 
-This DAG will produce to a Dataset, updating it which triggers the 
+This DAG will produce to a Dataset, updating it which triggers the
 on_dataset_changed listener define as an Airflow Plugin.
 
 The DAG also shows the difference between a Dataset and ObjectStoragePath.

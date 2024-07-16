@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/integrations/bigquery.png' }
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-[BigQuery](https://cloud.google.com/bigquery) is Google's fully managed and serverless data warehouse. Integrating BigQuery with Airflow lets you execute BigQuery jobs from a DAG. 
+[BigQuery](https://cloud.google.com/bigquery) is Google's fully managed and serverless data warehouse. Integrating BigQuery with Airflow lets you execute BigQuery jobs from a DAG.
 
 There are multiple ways to connect Airflow and BigQuery, all of which require a [GCP Service Account](https://cloud.google.com/docs/authentication#service-accounts):
 
@@ -54,10 +54,10 @@ Complete one of the following sets of steps to retrieve these values:
 
 <TabItem value="key-file-value">
 
-This method requires you to save the contents of your service account key file in your Airflow connection. 
+This method requires you to save the contents of your service account key file in your Airflow connection.
 
 1. In your Google Cloud console, select your Google Cloud project and copy its **ID**.
-2. [Create a new service account](https://cloud.google.com/iam/docs/service-accounts-create). 
+2. [Create a new service account](https://cloud.google.com/iam/docs/service-accounts-create).
 3. [Grant roles](https://cloud.google.com/iam/docs/grant-role-console) to your service account so that it can access BigQuery. See [BigQuery roles](https://cloud.google.com/bigquery/docs/access-control#bigquery) for a list of available roles and the permissions.
 4. [Add a new JSON key file](https://cloud.google.com/iam/docs/keys-create-delete#iam-service-account-keys-create-console) to the service account.
 5. Copy the contents of the key file.
@@ -69,7 +69,7 @@ This method requires you to save the contents of your service account key file i
 This method requires you to mount your service account key file to your Airflow containers.
 
 1. In your Google Cloud console, select your Google Cloud project and copy its **ID**.
-2. [Create a new service account](https://cloud.google.com/iam/docs/service-accounts-create). 
+2. [Create a new service account](https://cloud.google.com/iam/docs/service-accounts-create).
 3. [Grant roles](https://cloud.google.com/iam/docs/grant-role-console) to your service account so that it can access BigQuery. See [BigQuery roles](https://cloud.google.com/bigquery/docs/access-control#bigquery) for a list of available roles and the permissions.
 4. [Add a new JSON key file](https://cloud.google.com/iam/docs/keys-create-delete#iam-service-account-keys-create-console) to the service account.
 5. Download the key file.
@@ -81,7 +81,7 @@ This method requires you to mount your service account key file to your Airflow 
 You can save your service account key file to any secrets backend. See [Configure a secrets backend](https://www.astronomer.io/docs/astro/secrets-backend) for steps on how to configure several popular secrets backend services to use with Airflow on Astro. For example, if you use Google Secret Manager as a secrets backend:
 
 1. In the Google Cloud console, select your Google Cloud project and copy its **ID**.
-2. [Create a new service account](https://cloud.google.com/iam/docs/service-accounts-create). 
+2. [Create a new service account](https://cloud.google.com/iam/docs/service-accounts-create).
 3. [Grant roles](https://cloud.google.com/iam/docs/grant-role-console) to your service account so that it can access BigQuery. See [BigQuery roles](https://cloud.google.com/bigquery/docs/access-control#bigquery) for a list of available roles and the permissions.
 4. [Add a new JSON key file](https://cloud.google.com/iam/docs/keys-create-delete#iam-service-account-keys-create-console) to the service account.
 5. Download the key file.
@@ -96,12 +96,12 @@ You can now use this secret in your Airflow connections.
 
 A [Kubernetes service account](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/) provides an identity to the processes running in a Pod. The process running inside a Pod can use this identity of its associated service account to authenticate cluster's API server. This is also referred to as Workload Identity in [GCP](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity) and [Azure](https://learn.microsoft.com/en-us/azure/aks/learn/tutorial-kubernetes-workload-identity).
 
-This method cannot be used in a local Airflow environment. It is available to use with Airflow on Astro or OSS Airflow running on Kubernetes clusters. 
+This method cannot be used in a local Airflow environment. It is available to use with Airflow on Astro or OSS Airflow running on Kubernetes clusters.
 
 If you're running Airflow in a GKE cluster, complete the following steps:
 
 1. In your Google Cloud console, open the Google Cloud project where you're running BigQuery and copy its **ID**.
-2. [Enable Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity) and [configure Airflow to use workload identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to). Copy the name for the Kubernetes service account that you create. 
+2. [Enable Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity) and [configure Airflow to use workload identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to). Copy the name for the Kubernetes service account that you create.
 3. Go to **IAM**, then click **Service Accounts** and search for your Kubernetes service account. If you don't see your service account, click **+ ADD** to add your service account to your Google Cloud project.
 4. [Grant roles](https://cloud.google.com/iam/docs/grant-role-console) to your service account to access BigQuery. See [BigQuery roles](https://cloud.google.com/bigquery/docs/access-control#bigquery) for a list of available roles and the permissions.
 
@@ -165,7 +165,7 @@ After you complete these steps, any Google Cloud connection you create in the De
 4. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, then choose the **Google Cloud** connection type.
 
 5. Fill out the following connection fields using the information you retrieved from [Get connection details](#get-connection-details):
-    
+
     - **Connection Id**: Enter a name for the connection.
     - **Keyfile Path**: Enter the path of your key file.
 
@@ -216,7 +216,7 @@ After you complete these steps, any Google Cloud connection you create in the De
 3. In your Airflow UI, go to **Admin** > **Connections**. Click the **+** sign to add a new connection, select the connection type as **Google Cloud**.
 
 4. Fill out the following connection fields using the information you retrieved from [Get connection details](#get-connection-details):
-    
+
     - **Connection Id**: Enter a name for the connection.
     - **Project Id**: Enter the **ID** of the Google Cloud project.
 

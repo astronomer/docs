@@ -10,10 +10,10 @@ Deploy rollbacks are an emergency option if a Deployment unexpectedly stops work
 ## Prerequisites
 
 - You must be at least a Deployment Editor or otherwise have the permission `deployment.images.push` or `system.deployments.images.push` to roll back a Deployment.
-- Your Deployment must be on Astro Runtime 5 (Airflow 2.3) or later. Rolling back to any version before Astro Runtime 5 is not supported. 
+- Your Deployment must be on Astro Runtime 5 (Airflow 2.3) or later. Rolling back to any version before Astro Runtime 5 is not supported.
 - Your Deployment must be configured to use image or DAG-only deploys. Rollbacks are not supported for NFS deploys and Git sync deploys.
 - Your Software installation must have `global.dagOnlyDeployment.enabled=True`
-  
+
 ## Configure deploy rollbacks
 
 To use deploy rollbacks, you must have them enabled for your entire installation. This configuration allows individual Deployment users with sufficient permissions to optionally enable them in specific Deployments.
@@ -74,7 +74,7 @@ The following information isn't rolled back:
 
 - Your Deployment's resource configurations, such as executor and scheduler configurations.
 - Your Deployment's environment variable values.
-- Any other Deployment settings that you configure through the Astro UI, such as your Deployment name and description. 
+- Any other Deployment settings that you configure through the Astro UI, such as your Deployment name and description.
 - For Runtime version downgrades, any data related to features that are not available in the rollback version are erased from the metadata database and not recoverable.
 
 Logs related to the rollback are exported to Elasticsearch.

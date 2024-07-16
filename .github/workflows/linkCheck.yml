@@ -17,7 +17,7 @@ jobs:
         uses: lycheeverse/lychee-action@v1.6.1
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        with: 
+        with:
           args: --accept '403' --scheme 'https' --verbose --no-progress './astro/*.md' './software/*.md'  './learn/*.md'
 
       - name: Create Issue From File

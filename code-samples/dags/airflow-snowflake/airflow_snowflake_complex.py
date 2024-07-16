@@ -21,7 +21,7 @@ ROW_COUNT_CHECK = "COUNT(*) = 9"
 with DAG(
     "complex_snowflake_example",
     description="""
-        Example DAG showcasing loading, transforming, 
+        Example DAG showcasing loading, transforming,
         and data quality checking with multiple datasets in Snowflake.
     """,
     doc_md=__doc__,

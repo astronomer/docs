@@ -5,7 +5,7 @@ id: houston-api-examples
 description: Examples of some of the most common queries you might make to the Astronomer Software Houston API
 ---
 
-Use the following example Houston API requests as the basis for the applications you develop for Astronomer Software. 
+Use the following example Houston API requests as the basis for the applications you develop for Astronomer Software.
 
 ## Example queries
 
@@ -47,15 +47,15 @@ query workspaceDeployment {
     createdAt
     updatedAt
     roleBindings {
-      id, 
-      role, 
+      id,
+      role,
       user {
         username,
         emails {
           primary
         }
       }
-    } 
+    }
   }
 }
 ```
@@ -73,7 +73,7 @@ A common query is `users`, which lets you retrieve information about multiple us
     - `fullName` (String): The user's full name
     - `createdAt`(DateTime): When the user was created
     - `updatedAt`(DateTime): When the user was updated
-  
+
 - **Workspace ID**: To retrieve this value, run `astro workspace list`. Alternatively, open a Workspace in the Software UI and copy the value after `/w/` in your Workspace URL, for example `https://app.basedomain/w/<workspace-id>`.
 
 The query returns the requested details for all users who exactly match the values provided for the `userSearch`. For example, the following query would retrieve the requested values for any user accounts with the email `name@mycompany.com`:
@@ -99,7 +99,7 @@ Mutations make a change to your platform's underlying database. The following se
 
 To create a Deployment, you need Workspace Admin permissions and a **Workspace ID**. To retrieve this value, run `astro workspace list`. Alternatively, open a Workspace in the Software UI and copy the value after `/w/` in your Workspace URL, for example `https://app.basedomain/w/<workspace-id>`.
 
-This example mutation creates a Deployment with the Celery executor and the latest Runtime version. It then returns the Deployment's ID and configuration to confirm that it was successfully created. 
+This example mutation creates a Deployment with the Celery executor and the latest Runtime version. It then returns the Deployment's ID and configuration to confirm that it was successfully created.
 
 ```graphql
 mutation CreateNewDeployment{
@@ -117,7 +117,7 @@ mutation CreateNewDeployment{
 
 ### Create or update a Deployment with configurations
 
-:::info 
+:::info
 
 The `upsertDeployment` mutation is behind a feature flag. To enable this feature, set the following configuration in your `config.yaml` file:
 
@@ -278,7 +278,7 @@ To delete a Deployment, you need:
 - Either System Admin or Workspace Admin permissions
 - A Deployment ID. To retrieve this value, run `astro deployment list` or request the `id` value in the `workspaceDeployment` query.
 
-The following example mutation deletes a Deployment, then returns the ID of the Deployment to confirm that it was successfully deleted. 
+The following example mutation deletes a Deployment, then returns the ID of the Deployment to confirm that it was successfully deleted.
 
 ```graphql
 mutation DeleteDeployment {
@@ -299,12 +299,12 @@ To add an existing Astronomer Software user to a Deployment, you need:
 - The ID of the user to add. To retrieve this, request the `id` value in a `users` query or run `astro workspace user list`.
 - The role to add the user as. Can be `DEPLOYMENT_ADMIN`, `DEPLOYMENT_EDITOR`, or `DEPLOYMENT_VIEWER`.
 
-The following query adds a user to a Deployment as a Deployment viewer, then returns the user and Deployment information back to the requester. 
+The following query adds a user to a Deployment as a Deployment viewer, then returns the user and Deployment information back to the requester.
 
 ```graphql
 mutation AddDeploymentUser(
-  $userId: Id! = "f9182b1d-2f7c-4d33-920b-2124b1660d83", 
-  $email: String! = "usertoadd@mycompany.com", 
+  $userId: Id! = "f9182b1d-2f7c-4d33-920b-2124b1660d83",
+  $email: String! = "usertoadd@mycompany.com",
   $deploymentId: Id! = "<some_id>",
   $role: Role! = DEPLOYMENT_VIEWER
 )
@@ -335,7 +335,7 @@ To delete a user from Astronomer Software, you need:
 - System Admin permissions
 - The ID of the user to delete. To retrieve this, request the `id` value in a `users` query or run `astro workspace user list`.
 
-The following query removes a user, then returns information about the deleted user. 
+The following query removes a user, then returns information about the deleted user.
 
 ```graphql
 mutation removeUser {
@@ -356,9 +356,9 @@ If a user on the platform has trouble verifying their email address, you can use
 To run this mutation, you'll need:
 
 - System Admin Permissions
-- The user's email address. This needs to be the email address that the user provided when they began creating an account on the platform. They must have signed up for an account, and Astronomer Software must already have generated an invite token for the user. 
+- The user's email address. This needs to be the email address that the user provided when they began creating an account on the platform. They must have signed up for an account, and Astronomer Software must already have generated an invite token for the user.
 
-The following request verifies the email and returns `true` or `false` based on whether the mutation was successful. 
+The following request verifies the email and returns `true` or `false` based on whether the mutation was successful.
 
 ```graphql
 mutation verifyEmail {
@@ -401,7 +401,7 @@ mutation workspaceAddUser(
 
 ### Add a System Admin
 
-To add a user as a System Admin through the Houston API, you need the following values: 
+To add a user as a System Admin through the Houston API, you need the following values:
 
 - The user's ID. To retrieve this, request the `id` value in a `users` query or run `astro workspace user list`.
 - System Admin permissions.
@@ -428,7 +428,7 @@ To programmatically update environment variables, you need:
 
 - A Deployment ID. To retrieve this value, run `astro deployment list` or request the `id` value in the `workspaceDeployment` query.
 - A Deployment release name: To retrieve this value, run `astro deployment list` in your Workspace. Alternatively, you can copy the **Release name** from your Deployment's **Settings** tab in the Software UI.
-  
+
 
 Then, in your GraphQL Playground, run the following:
 

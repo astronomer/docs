@@ -59,11 +59,11 @@ gcloud composer environments update [GCC_ENVIRONMENT_NAME] \
 
 :::
 
-## Step 2: Create an Astro Workspace 
+## Step 2: Create an Astro Workspace
 
 <Workspaces />
 
-## Step 3: Create an Astro Deployment 
+## Step 3: Create an Astro Deployment
 
 <Deployments />
 
@@ -92,11 +92,11 @@ gcloud composer environments update [GCC_ENVIRONMENT_NAME] \
     FROM quay.io/astronomer/astro-runtime:6.3.0
     ```
 
-   The `Dockerfile` defines the environment where all your Airflow components run. You can modify it to include build-time arguments for your Airflow environment, such as environment variables or credentials. For this migration, you only need to modify the Dockerfile to update your Astro Runtime version. 
+   The `Dockerfile` defines the environment where all your Airflow components run. You can modify it to include build-time arguments for your Airflow environment, such as environment variables or credentials. For this migration, you only need to modify the Dockerfile to update your Astro Runtime version.
 
-2. Open your Astro project `requirements.txt` file and add all Python packages that you installed in your source Airflow environment. See [Google documentation](https://cloud.google.com/composer/docs/composer-2/install-python-dependencies#view-custom) for how to view a list of Python packages in your source Airflow environment. 
+2. Open your Astro project `requirements.txt` file and add all Python packages that you installed in your source Airflow environment. See [Google documentation](https://cloud.google.com/composer/docs/composer-2/install-python-dependencies#view-custom) for how to view a list of Python packages in your source Airflow environment.
 
-    :::warning 
+    :::warning
 
     To avoid breaking dependency upgrades, Astronomer recommends pinning your packages to the versions running in your soure Airflow environment. For example, if you're running `apache-airflow-providers-snowflake` version 3.3.0 on Cloud composer, you would add `apache-airflow-providers-snowflake==3.3.0` to your Astro `requirements.txt` file.
 
@@ -108,7 +108,7 @@ gcloud composer environments update [GCC_ENVIRONMENT_NAME] \
 
 5. If you used the [`data` folder](https://cloud.google.com/composer/docs/concepts/cloud-storage#data) in Cloud Composer, copy the contents of that folder from your source control platform or GCS Bucket to your Astro project `include` folder.
 
-After you confirm that your Astro project has all necessary dependencies, deploy the project to your Astro Deployment. 
+After you confirm that your Astro project has all necessary dependencies, deploy the project to your Astro Deployment.
 
 1. Run the following command to authenticate to Astro:
 
@@ -133,17 +133,17 @@ After you confirm that your Astro project has all necessary dependencies, deploy
     FROM quay.io/astronomer/astro-runtime:6.3.0
     ```
 
-     The `Dockerfile` defines the environment where all your Airflow components run. You can modify it to include build-time arguments for your Airflow environment, such as environment variables or credentials. For this migration, you only need to modify the Dockerfile to update your Astro Runtime version. 
+     The `Dockerfile` defines the environment where all your Airflow components run. You can modify it to include build-time arguments for your Airflow environment, such as environment variables or credentials. For this migration, you only need to modify the Dockerfile to update your Astro Runtime version.
 
 2. Open your Astro project in your terminal. Run the following command to copy your PyPI packages from GCC to your `requirements.txt` file:
 
     ```shell
     gcloud composer environments describe <your-gcc-project-name> --format="value(config.softwareConfig.pypiPackages)" > requirements.txt
-    ```  
+    ```
 
     Review the output in `requirements.txt` after running this command to ensure that all packages were imported on their own line of text.
 
-    :::warning 
+    :::warning
 
     To avoid breaking dependency upgrades, Astronomer recommends pinning your packages to the versions running in your soure Airflow environment. For example, if you're running `apache-airflow-providers-snowflake` version 3.3.0 on Cloud composer, you would add `apache-airflow-providers-snowflake==3.3.0` to your Astro `requirements.txt` file.
 
@@ -155,23 +155,23 @@ After you confirm that your Astro project has all necessary dependencies, deploy
     gcloud composer environments storage dags export --destination=dags
     ```
 
-    Review your DAG files in `dags` after running this command to ensure that all DAGs were successfully exported. 
+    Review your DAG files in `dags` after running this command to ensure that all DAGs were successfully exported.
 
 4. If you utilized the [`plugins` folder](https://cloud.google.com/composer/docs/concepts/cloud-storage#folders_in_the_bucket) in your Cloud Composer storage bucket, run the following command to copy your `plugins` folder contents to your Astro project:
 
     ```sh
     gcloud composer environments storage plugins export --destination=plugins
-    ```  
+    ```
 
-    Review the contents of your Astro project `plugins` folder to ensure that all files were successfully exported. 
+    Review the contents of your Astro project `plugins` folder to ensure that all files were successfully exported.
 
 5. If you utilized the [`data` folder](https://cloud.google.com/composer/docs/concepts/cloud-storage#data) in Cloud Composer, run the following command to copy your `data` folder contents to your Astro project:
 
     ```sh
     gcloud composer environments storage data export --destination=include
-    ```  
-  
-After you confirm that your Astro project has all necessary dependencies, deploy the project to your Astro Deployment. 
+    ```
+
+After you confirm that your Astro project has all necessary dependencies, deploy the project to your Astro Deployment.
 
 1. Run the following command to authenticate to Astro:
 
@@ -186,14 +186,14 @@ After you confirm that your Astro project has all necessary dependencies, deploy
     ```
 
     This command returns a list of Deployments available in your Workspace and prompts you to pick one.
-  
+
 
 </TabItem>
 </Tabs>
 
 ## Step 7: Configure additional data pipeline infrastructure
 
-The core migration of your project is now complete. Read the following topics to see whether you need to set up any additional infrastructure on Astro before cutting over your DAGs. 
+The core migration of your project is now complete. Read the following topics to see whether you need to set up any additional infrastructure on Astro before cutting over your DAGs.
 
 ### Set up CI/CD
 
@@ -220,7 +220,7 @@ Depending on how thoroughly you want to test your Airflow environment, you have 
 - Run `astro run <dag-id>` to test a specific DAG. This command compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations.
 - Run `astro dev start` to start a complete Airflow environment on your local machine. After your project starts up, you can access the Airflow UI at `localhost:8080`. See [Troubleshoot your local Airflow environment](cli/run-airflow-locally.md).
 
-Note that your migrated Airflow variables and connections are not available locally. You must deploy your project to Astro to test these resources. 
+Note that your migrated Airflow variables and connections are not available locally. You must deploy your project to Astro to test these resources.
 
 ## Step 9: Deploy to Astro
 

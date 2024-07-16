@@ -133,7 +133,7 @@ The Great Expectations Airflow Provider requires a GX project to be present in y
 
 The easiest way to use GX with Airflow is to let the GreatExpectationsOperator create a default [Checkpoint](https://docs.greatexpectations.io/docs/terms/checkpoint) and [Datasource](https://docs.greatexpectations.io/docs/terms/datasource) based on an Airflow connection. To set up a connection to a Postgres database complete the following steps:
 
-1. In the Airflow UI at `localhost:8080`, go to **Admin** -> **Connections** and click **+**. 
+1. In the Airflow UI at `localhost:8080`, go to **Admin** -> **Connections** and click **+**.
 
 2. Create a new connection named `postgres_default` using the following information:
 
@@ -157,7 +157,7 @@ The easiest way to use GX with Airflow is to let the GreatExpectationsOperator c
 
     This DAG will create a table in your Postgres database, run a GX validation on the table, and then drop the table.
 
-    The data in the table is validated using the GreatExpectationsOperator (GXO). The operator automatically creates a default Checkpoint and Datasource based on the `postgres_default` connection and runs the Expectations defined in the `strawberry_suite.json` file on the `strawberries` table. Note that instead of using the `schema` parameter of the GXO, you can also provide the schema name to the `data_asset_name` parameter in the form of `my_schema_name.my_table_name`. 
+    The data in the table is validated using the GreatExpectationsOperator (GXO). The operator automatically creates a default Checkpoint and Datasource based on the `postgres_default` connection and runs the Expectations defined in the `strawberry_suite.json` file on the `strawberries` table. Note that instead of using the `schema` parameter of the GXO, you can also provide the schema name to the `data_asset_name` parameter in the form of `my_schema_name.my_table_name`.
 
 3. Open Airflow at `http://localhost:8080/`. Run the DAG manually by clicking the play button.
 
@@ -205,7 +205,7 @@ For a full list of parameters, see the [the Astronomer registry](https://registr
 
 ### Running GX validations on pandas DataFrames
 
-The GreatExpectationsOperator can also be used to run validations on CSV files by passing them in as a pandas DataFrame. This pattern is useful to test pipelines locally with small amounts of data. Note that the `execution_engine` parameter needs to be adjusted. 
+The GreatExpectationsOperator can also be used to run validations on CSV files by passing them in as a pandas DataFrame. This pattern is useful to test pipelines locally with small amounts of data. Note that the `execution_engine` parameter needs to be adjusted.
 
 ```python
 gx_validate_pg = GreatExpectationsOperator(

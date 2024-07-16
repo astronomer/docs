@@ -140,7 +140,7 @@ Contour ships with support for websockets disabled by default. To use a Contour 
       routes:
         - conditions:
           - prefix: /ws
-          enableWebsockets: true  
+          enableWebsockets: true
           services:
             - name: astronomer-houston
               port: 8871

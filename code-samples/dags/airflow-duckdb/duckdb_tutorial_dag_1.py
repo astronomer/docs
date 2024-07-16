@@ -28,7 +28,7 @@ def duckdb_tutorial_dag_1():
         # change the path to connect to a different database
         conn = duckdb.connect("include/my_garden_ducks.db")
         conn.sql(
-            f"""CREATE TABLE IF NOT EXISTS ducks_garden AS 
+            f"""CREATE TABLE IF NOT EXISTS ducks_garden AS
             SELECT * FROM ducks_in_my_garden_df;"""
         )
 

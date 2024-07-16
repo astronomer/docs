@@ -44,7 +44,7 @@ Apache Airflow requires four primary components:
 - The executor (and the workers it runs)
 - The triggerer
 
-To scale these resources, adjust the corresponding slider in the Software UI to increase its available resources. The units associated with these sliders will vary based on your [resource strategy](#select-a-resource-strategy). 
+To scale these resources, adjust the corresponding slider in the Software UI to increase its available resources. The units associated with these sliders will vary based on your [resource strategy](#select-a-resource-strategy).
 
 Read the following sections to help you determine which core resources to scale and when.
 
@@ -58,7 +58,7 @@ If a function within the Airflow UI is slow or unavailable, Astronomer recommend
 
 The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks once dependencies have been met.
 
-If you experience delays in task execution, which you can track via the [Gantt Chart](https://airflow.apache.org/docs/apache-airflow/stable/ui.html#gantt-chart) view of the Airflow UI, Astronomer recommends increasing the resources allocated towards the scheduler. 
+If you experience delays in task execution, which you can track via the [Gantt Chart](https://airflow.apache.org/docs/apache-airflow/stable/ui.html#gantt-chart) view of the Airflow UI, Astronomer recommends increasing the resources allocated towards the scheduler.
 
 :::tip
 
@@ -88,7 +88,7 @@ The Kubernetes executor and KubernetesPodOperator each spin up an individual Kub
 
 The amount of CPU and Memory allocated to **Extra Capacity** maps to [resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/) on the [Kubernetes Namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) in which your Airflow Deployment lives on Astronomer. More specifically, **Extra Capacity** represents the maximum possible resources that could be provisioned to a pod at any given time.
 
-Resources allocated to **Extra Capacity** do not affect scheduler or webserver performance and do not represent actual usage. 
+Resources allocated to **Extra Capacity** do not affect scheduler or webserver performance and do not represent actual usage.
 
 ### (Celery executor only) Configure workers
 

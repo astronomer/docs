@@ -25,7 +25,7 @@ To get the most out of this guide, you should have an understanding of:
 
 ## Core components
 
-The following Apache Airflow core components are running at all times: 
+The following Apache Airflow core components are running at all times:
 
 - **Webserver:** A Flask server running with Gunicorn that serves the [Airflow UI](airflow-ui.md).
 - **[Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html):** A Daemon responsible for scheduling jobs. This is a multi-threaded Python process that determines what tasks need to be run, when they need to be run, and where they are run.
@@ -37,7 +37,7 @@ If you run Airflow locally using the [Astro CLI](https://www.astronomer.io/docs/
 In addition to these core components, there are a few situational components that are used only to run tasks or make use of certain features:
 
 - **Worker:** The process that executes tasks, as defined by the executor. Depending on which executor you choose, you may or may not have workers as part of your Airflow infrastructure.
-- **[Triggerer](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html):** A separate process which supports [deferrable operators](deferrable-operators.md). This component is optional and must be run separately. It is needed only if you plan to use deferrable (or "asynchronous") operators. 
+- **[Triggerer](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html):** A separate process which supports [deferrable operators](deferrable-operators.md). This component is optional and must be run separately. It is needed only if you plan to use deferrable (or "asynchronous") operators.
 
 The following diagram illustrates component interaction:
 
@@ -50,7 +50,7 @@ You can use pre-configured Airflow executors, or you can create a [custom execut
 - **[SequentialExecutor](https://airflow.apache.org/docs/apache-airflow/stable/executor/sequential.html):** Executes tasks sequentially inside the scheduler process, with no parallelism or concurrency. This is the default in Airflow executor.
 - **[LocalExecutor](https://airflow.apache.org/docs/apache-airflow/stable/executor/local.html):** Executes tasks locally inside the scheduler process, but supports parallelism and hyperthreading. This executor is recommended for testing Airflow on a local computer or on a single node.
 - **[CeleryExecutor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html):** Uses a Celery backend (such as Redis, RabbitMq, or another message queue system) to coordinate tasks between preconfigured workers. This executor is ideal for high volumes of shorter running tasks or in environments with consistent task loads. The CeleryExecutor is available as part of the [Celery provider](https://registry.astronomer.io/providers/apache-airflow-providers-celery/versions/latest).
-- **[KubernetesExecutor](https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html):** Calls the Kubernetes API to create a separate pod for each task to run, enabling users to pass in custom configurations for each of their tasks and use resources efficiently. The KubernetesExecutor is available as part of the [CNCF Kubernetes provider](https://registry.astronomer.io/providers/apache-airflow-providers-cncf-kubernetes/versions/latest). This executor is ideal in the following scenarios: 
+- **[KubernetesExecutor](https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html):** Calls the Kubernetes API to create a separate pod for each task to run, enabling users to pass in custom configurations for each of their tasks and use resources efficiently. The KubernetesExecutor is available as part of the [CNCF Kubernetes provider](https://registry.astronomer.io/providers/apache-airflow-providers-cncf-kubernetes/versions/latest). This executor is ideal in the following scenarios:
 
     - You have long running tasks that you don't want to be interrupted by code deploys or Airflow updates.
     - Your tasks require very specific resource configurations.
@@ -60,7 +60,7 @@ You can use pre-configured Airflow executors, or you can create a [custom execut
 
 ## Managing Airflow infrastructure
 
-All Airflow components should be run on an infrastructure that is appropriate for the requirements of your organization. For example, using the [Astro CLI](https://www.astronomer.io/docs/astro/install-cli) to run Airflow on a local computer can be helpful when testing and for DAG development, but it is insufficient to support running DAGs in production. 
+All Airflow components should be run on an infrastructure that is appropriate for the requirements of your organization. For example, using the [Astro CLI](https://www.astronomer.io/docs/astro/install-cli) to run Airflow on a local computer can be helpful when testing and for DAG development, but it is insufficient to support running DAGs in production.
 
 The following resources can help you manage Airflow components:
 
@@ -72,6 +72,6 @@ Scalability is also an important consideration when setting up your production A
 
 ## High availability
 
-Airflow can be made highly available, which makes it suitable for large organizations with critical production workloads. Airflow 2 introduced a highly available scheduler, meaning that you can run multiple Scheduler replicas in an active-active model. This makes the scheduler more performant and resilient, eliminating a single point of failure within your Airflow environment. 
+Airflow can be made highly available, which makes it suitable for large organizations with critical production workloads. Airflow 2 introduced a highly available scheduler, meaning that you can run multiple Scheduler replicas in an active-active model. This makes the scheduler more performant and resilient, eliminating a single point of failure within your Airflow environment.
 
 Running multiple schedulers requires additional database configuration. See [Running More Than One Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html#running-more-than-one-scheduler).

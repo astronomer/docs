@@ -60,7 +60,7 @@ To run Airflow locally, you first need to create an Astro project.
 
 ## Step 2: Create a new DAG
 
-1. In your `dags` folder, create a file named `docs_example_dag.py`. 
+1. In your `dags` folder, create a file named `docs_example_dag.py`.
 
 2. Copy and paste one of the following DAGs based on which coding style you're most comfortable with.
 
@@ -127,7 +127,7 @@ with DAG(
 
 </Tabs>
 
-This DAG has one task called `tell_me_what_to_do`, which queries an [API](https://bored-api.appbrewery.com/random) that provides a random activity for the day and prints it to the logs. 
+This DAG has one task called `tell_me_what_to_do`, which queries an [API](https://bored-api.appbrewery.com/random) that provides a random activity for the day and prints it to the logs.
 
 ## Step 3: Add docs to your DAG
 
@@ -208,7 +208,7 @@ Additionally, using `with DAG():` lets you pass the filepath of a markdown file 
 
 ## Step 4: Add docs to a task
 
-You can also add docs to specific Airflow tasks using Markdown, Monospace, JSON, YAML or reStructuredText. Note that only Markdown will be rendered and other formats will be displayed as rich content. 
+You can also add docs to specific Airflow tasks using Markdown, Monospace, JSON, YAML or reStructuredText. Note that only Markdown will be rendered and other formats will be displayed as rich content.
 
 To add documentation to your task, follow these steps:
 

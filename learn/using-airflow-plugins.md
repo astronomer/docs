@@ -5,7 +5,7 @@ description: "How to use Airflow plugins."
 id: using-airflow-plugins
 ---
 
-Plugins are external features that can be added to customize your Airflow installation. They are automatically imported upon starting your Airflow instance if they have been added to `plugins` folder of an Airflow project. 
+Plugins are external features that can be added to customize your Airflow installation. They are automatically imported upon starting your Airflow instance if they have been added to `plugins` folder of an Airflow project.
 
 In this guide, you'll learn how to add a plugin to your Airflow instance and what Airflow components can be part of a plugin.
 
@@ -27,7 +27,7 @@ Plugins offer a flexible way to customize your Airflow experience by building on
 
 ## How to create a plugin
 
-To add a new plugin to your Airflow instance, you need to create a Python file in the `plugins` folder of your Airflow project. Within that file, create a class which inherits from the `AirflowPlugin` to define the plugin. The code snippet below defines a plugin with the name `empty` without any components. 
+To add a new plugin to your Airflow instance, you need to create a Python file in the `plugins` folder of your Airflow project. Within that file, create a class which inherits from the `AirflowPlugin` to define the plugin. The code snippet below defines a plugin with the name `empty` without any components.
 
 ```python
 from airflow.plugins_manager import AirflowPlugin
@@ -85,14 +85,14 @@ Before Airflow 2.0 custom operators and hooks were added as plugins. This patter
 
 ### Appbuilder menu items
 
-You can update the menu at the top of the Airflow UI to contain custom tabs with links to external websites. Adding top-level menu items and adding sub-items are both supported. 
+You can update the menu at the top of the Airflow UI to contain custom tabs with links to external websites. Adding top-level menu items and adding sub-items are both supported.
 
 For example, the following code creates a plugin that adds two menu items.
 
 - `appbuilder_mitem_toplevel` is a top-level menu button named **Apache** that links to the [Apache homepage](https://www.apache.org/).
 - `appbuilder_mitem_subitem` is a sub-item which is added to the **Docs** menu. It has the name `Astro SDK Docs` and links out to [the documentation for the Astro SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html).
 
-Both additional menu items are added to the `app_builder_menu_items` component of a plugin called `Menu items plugin` which is defined in the `MyMenuItemsPlugin` class. 
+Both additional menu items are added to the `app_builder_menu_items` component of a plugin called `Menu items plugin` which is defined in the `MyMenuItemsPlugin` class.
 
 ```python
 from airflow.plugins_manager import AirflowPlugin
@@ -124,7 +124,7 @@ The screenshot below shows the additional menu items in the Airflow UI.
 
 ### Flask Blueprints and Appbuilder views
 
-Flask blueprints and views are plugin components that allow you to add more elaborate customization to the Airflow UI. A Flask blueprint functions as an organizational tool to group related views and supporting code while Flask views render webpages from html templates. 
+Flask blueprints and views are plugin components that allow you to add more elaborate customization to the Airflow UI. A Flask blueprint functions as an organizational tool to group related views and supporting code while Flask views render webpages from html templates.
 
 :::info
 
@@ -211,7 +211,7 @@ If you want to use custom menu items in an Airflow environment hosted on Astro, 
 
     ```python
     from airflow.www.auth import has_access
-    from airflow.security import permissions 
+    from airflow.security import permissions
 
     # ...
 
@@ -220,7 +220,7 @@ If you want to use custom menu items in an Airflow environment hosted on Astro, 
         default_view = "test"
 
         @expose("/")
-        @has_access([(permissions.ACTION_CAN_ACCESS_MENU, "Custom Menu")]) 
+        @has_access([(permissions.ACTION_CAN_ACCESS_MENU, "Custom Menu")])
         def test(self):
             # render the HTML file from the templates directory with content
             return self.render_template("test.html", content="awesome")
@@ -254,7 +254,7 @@ Additionally you must make sure that the `baseURL` is correctly set for all new 
 
 ### Operator extra links
 
-Operator extra links are additional buttons with links that can be added to specific operators. They can be defined as Python classes derived from the `BaseOperatorLink` class. The example below shows how to create a new operator extra link `MyLink` that is applied to `MyOperator1` and `MyOperator2`. The operator extra link is registered with the `MyAirflowPlugin` by adding it its `operator_extra_links` list. 
+Operator extra links are additional buttons with links that can be added to specific operators. They can be defined as Python classes derived from the `BaseOperatorLink` class. The example below shows how to create a new operator extra link `MyLink` that is applied to `MyOperator1` and `MyOperator2`. The operator extra link is registered with the `MyAirflowPlugin` by adding it its `operator_extra_links` list.
 
 ```python
 from airflow.models.baseoperator import BaseOperatorLink
@@ -314,11 +314,11 @@ You can access the button on task instances in both the **Graph** and **Grid** v
 
 ### Macros
 
-In Airflow you can define custom macros which can be accessed using Jinja templating. Macros can be added at the DAG level by defining them in the DAG parameter `user_defined_macros` as shown in [Using Airflow templates](templating.md). If you want to make macros available to your whole Airflow instance you can register them as a plugin. 
+In Airflow you can define custom macros which can be accessed using Jinja templating. Macros can be added at the DAG level by defining them in the DAG parameter `user_defined_macros` as shown in [Using Airflow templates](templating.md). If you want to make macros available to your whole Airflow instance you can register them as a plugin.
 
 Common use cases for custom macros include:
 
-- Injecting dynamic datetime objects into DAG code in formats not available in pre-defined macros. For example, converting the `{{ ts }}` predefined macro, which provides the logical date of the DAG as a timestamp from `YYYY-MM-DDThh:mm:ss+00:00` to `hh:mm`. 
+- Injecting dynamic datetime objects into DAG code in formats not available in pre-defined macros. For example, converting the `{{ ts }}` predefined macro, which provides the logical date of the DAG as a timestamp from `YYYY-MM-DDThh:mm:ss+00:00` to `hh:mm`.
 - Injecting dynamic arguments into DAG code based on Python logic. For example, passing a different argument to a function on weekdays versus the weekend.
 - Injecting dynamic arguments into DAG code based on XCom values. For example, using a different target blob storage depending on how many files will be ingested, a count determined and pushed to XCom by an upstream task.
 
@@ -349,12 +349,12 @@ use_plugin_macro = BashOperator(
 
 ### Airflow listeners
 
-[Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Airflow instance, for example whenever any DAG run fails or an update to any dataset is detected. 
+[Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Airflow instance, for example whenever any DAG run fails or an update to any dataset is detected.
 
 Listeners execute based on the event they are waiting for and are not attached to a task or DAG. This is in contrast to [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks) which are attached to a specific DAG or (set of) task(s) or [Airflow dataset](airflow-datasets.md) consumer DAGs that only execute when a specific (set of) dataset(s) is updated.
 While the listener itself will execute any time its event occurs, you can use conditional logic to determine whether or not to execute the code within the listener. For example, you can use a listener to send a Slack notification when a DAG run fails, but only if the DAG run was not manually triggered.
 
-You can create a listener using the `@hookimpl` decorator on functions defined with the same name and parameters as listed in the [listeners spec](https://github.com/apache/airflow/tree/main/airflow/listeners/spec) source code. 
+You can create a listener using the `@hookimpl` decorator on functions defined with the same name and parameters as listed in the [listeners spec](https://github.com/apache/airflow/tree/main/airflow/listeners/spec) source code.
 
 For example, the [@hookspec of the `on_task_instance_failed` function](https://github.com/apache/airflow/blob/main/airflow/listeners/spec/taskinstance.py) is:
 
@@ -378,7 +378,7 @@ def on_task_instance_failed(
     # Your code here
 ```
 
-The listener file can then be registered as a plugin by adding it to the `listeners` component of the plugin class. 
+The listener file can then be registered as a plugin by adding it to the `listeners` component of the plugin class.
 
 ```python
 from airflow.plugins_manager import AirflowPlugin

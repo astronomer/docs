@@ -13,7 +13,7 @@ When a Deployment uses the **Custom Resources** resource strategy, Deployment Ad
 
 ## Set custom resource usage in the Software UI
 
-To switch from using AU to using custom resource specifications: 
+To switch from using AU to using custom resource specifications:
 
 1. In the Software UI, open your Deployment.
 2. In the **Settings** tab, change your **Resource Strategy** to **Custom Resources**.

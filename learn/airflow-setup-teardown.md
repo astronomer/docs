@@ -45,7 +45,7 @@ There are many use cases for setup and teardown tasks. For example, you might wa
 - Manage a Spark cluster to run heavy workloads.
 - Manage compute resources to train an ML model.
 - Manage the resources to run [data quality](data-quality.md) checks.
-- Set up storage in your [custom XCom backend](custom-xcom-backend-strategies.md) to hold data processed through Airflow tasks, then tear the extra storage down afterwards when the XCom data is no longer needed. 
+- Set up storage in your [custom XCom backend](custom-xcom-backend-strategies.md) to hold data processed through Airflow tasks, then tear the extra storage down afterwards when the XCom data is no longer needed.
 
 ## Setup/ teardown concepts
 
@@ -73,7 +73,7 @@ Setup/ teardown tasks have different behavior from regular tasks:
 
 ### Before and after using setup and teardown tasks
 
-Setup and teardown tasks can help you write more robust DAGs by making sure resources are set up at the right moment and torn down even when worker tasks fail. 
+Setup and teardown tasks can help you write more robust DAGs by making sure resources are set up at the right moment and torn down even when worker tasks fail.
 
 The following DAG is not using Airflow setup and teardown functionality. It sets up its resources using a standard task called `provision_cluster`, runs three worker tasks using those resources, and tears down the resources using the `tear_down_cluster` task.
 
@@ -83,7 +83,7 @@ The way this DAG is set up, a failure in any of the worker tasks will lead to th
 
 ![DAG without setup/ teardown - upstream failure](/img/guides/airflow-setup-teardown_nosutd_dag_fail.png)
 
-In this example, you can turn the `provision_cluster` task into a setup task and the `tear_down_cluster` into a teardown task by using the code examples shown in [setup/ teardown implementation](#setup-teardown-implementation). 
+In this example, you can turn the `provision_cluster` task into a setup task and the `tear_down_cluster` into a teardown task by using the code examples shown in [setup/ teardown implementation](#setup-teardown-implementation).
 
 After you convert the tasks, the **Grid** view shows your setup tasks with an upwards arrow and teardown tasks with a downwards arrow. After you configure the [setup/ teardown workflow](#creating-setup-teardown-workflows) between `provision_cluster` and `tear_down_cluster`, the tasks are connected by a dotted line. The tasks `worker_task_1`, `worker_task_2` and `worker_task_3` are in the scope of this setup/ teardown workflow.
 
@@ -101,7 +101,7 @@ For example, in the previous DAG, consider if `worker_task_2` failed and `worker
 
 ## Setup/ teardown implementation
 
-There are two ways to turn tasks into setup/ teardown tasks: 
+There are two ways to turn tasks into setup/ teardown tasks:
 
 - Using the `.as_setup()` and `.as_teardown()` methods on TaskFlow API tasks or traditional operators.
 - Using the `@setup` and `@teardown` decorators on a Python function.
@@ -119,7 +119,7 @@ You can define as many setup and teardown tasks in one DAG as you need. In order
 
 Any individual task can be turned into a setup or teardown task.
 
-To turn a task into a setup task, call the `.as_setup()` method on the called task object.  
+To turn a task into a setup task, call the `.as_setup()` method on the called task object.
 
 <Tabs
     defaultValue="taskflow"
@@ -131,7 +131,7 @@ To turn a task into a setup task, call the `.as_setup()` method on the called ta
 <TabItem value="taskflow">
 
 ```python
-@task 
+@task
 def my_setup_task():
     return "Setting up resources!"
 
@@ -231,7 +231,7 @@ When working with the TaskFlow API you can also use the `@setup` and `@teardown`
 ```python
 from airflow.decorators import setup
 
-@setup 
+@setup
 def my_setup_task():
     return "Setting up resources!"
 
@@ -245,7 +245,7 @@ As with the `.as_teardown()` method you cannot have a `@teardown` task without a
 ```python
 from airflow.decorators import task, teardown
 
-@task 
+@task
 def worker_task():
     return "Doing some work!"
 
@@ -671,13 +671,13 @@ my_setup_task >> [my_worker_task_1_obj >> my_worker_task_2_obj] >> my_worker_tas
 
 ## Example DAG
 
-The DAG shown in this example mimics a setup/ teardown pattern that you can run locally. The setup/ teardown workflow consists of the following tasks: 
+The DAG shown in this example mimics a setup/ teardown pattern that you can run locally. The setup/ teardown workflow consists of the following tasks:
 
 - The `create_csv` task is a setup task that creates a CSV file in a directory specified as a [DAG param](airflow-params.md).
 - The `write_to_csv` task is a setup task that writes data to the CSV file.
-- The `fetch_data` task is a setup task that fetches data from a remote source and writes it to the CSV file. 
+- The `fetch_data` task is a setup task that fetches data from a remote source and writes it to the CSV file.
 - The `delete_csv` task is the associated teardown task and deletes the resource of the CSV file.
-- The `get_average_age_obj` task is in scope of the setup/ teardown workflow. If this task fails, the DAG still needs to delete the "CSV file" afterwards (to make it more real, consider the CSV file to be an expensive cluster). 
+- The `get_average_age_obj` task is in scope of the setup/ teardown workflow. If this task fails, the DAG still needs to delete the "CSV file" afterwards (to make it more real, consider the CSV file to be an expensive cluster).
 
     To recover from a failure when rerunning the `get_average_age_obj` task, you always need the CSV file to be created again, as well as the data to be fetched again and written to the CSV file. Because the task is in scope of `create_csv`, `write_to_csv`, and `fetch_data`, these tasks will also rerun when you rerun `get_average_age_obj`.
 

@@ -20,16 +20,16 @@ To configure Airflow notifications, see [Airflow email notifications](airflow-em
 
 ## Alert types
 
-Each Astro alert has a communication channel and a trigger type. The communication channel determines the format and destination of an alert, and the trigger type defines what causes the alert trigger. 
+Each Astro alert has a communication channel and a trigger type. The communication channel determines the format and destination of an alert, and the trigger type defines what causes the alert trigger.
 
-### Trigger types 
+### Trigger types
 
 You can trigger an alert to a communication channel using one of the following trigger types:
 
 - **DAG failure**: The alert triggers whenever the specified DAG fails.
 - **DAG success**: The alert triggers whenever the specified DAG completes
 - **Task duration**: The alert triggers when a specified task takes longer than expected to complete.
-- **Absolute Time**: The alert triggers when a given DAG does not have a successful DAG run within a defined time window. 
+- **Absolute Time**: The alert triggers when a given DAG does not have a successful DAG run within a defined time window.
 
 :::info
 
@@ -137,7 +137,7 @@ No external configuration is required for the email integration. Astronomer reco
 :::privatepreview
 :::
 
-The **DAG Trigger** communication channel works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through the `DagRuns` endpoint of the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) to trigger any DAG in your Workspace. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table. 
+The **DAG Trigger** communication channel works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through the `DagRuns` endpoint of the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) to trigger any DAG in your Workspace. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table.
 
 The following parameters are used to pass metadata about the alert in the API call:
 
@@ -147,7 +147,7 @@ The following parameters are used to pass metadata about the alert in the API ca
   - `dagName`: The name of the DAG that triggered the alert.
   - `message`: The detailed message with the cause of the alert.
   - `note`: By default, this is `Triggering DAG on Airflow <url>`.
-  
+
 The following is an example alert payload that would be passed through the API:
 
 ```json

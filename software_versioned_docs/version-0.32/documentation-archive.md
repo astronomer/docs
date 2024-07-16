@@ -35,7 +35,7 @@ This section contains links to documentation sets that correspond to all previou
 
 - [v0.32](https://www.astronomer.io/docs/software/overview)
 - [v0.30](https://www.astronomer.io/docs/software/0.30/)
-  
+
 ### Unmaintained versions
 
 - [v0.31](https://github.com/astronomer/docs/blob/main/archived_software_docs/version-0.31)
@@ -43,7 +43,7 @@ This section contains links to documentation sets that correspond to all previou
 - [v0.28](https://github.com/astronomer/docs/blob/main/archived_software_docs/version-0.28)
 - [v0.27](https://github.com/astronomer/docs/blob/main/archived_software_docs/version-0.27)
 - [v0.26](https://github.com/astronomer/docs/blob/main/archived_software_docs/version-0.26)
-- [v0.25](https://github.com/astronomer/docs/blob/main/archived_software_docs/version-0.25) 
+- [v0.25](https://github.com/astronomer/docs/blob/main/archived_software_docs/version-0.25)
 - [v0.23](https://github.com/astronomer/docs/blob/main/archived_software_docs/version-0.23)
 - [v0.16](https://github.com/astronomer/docs/blob/main/archived_software_docs/version-0.16)
 - [Astronomer Certified (All versions)](image-architecture.md)

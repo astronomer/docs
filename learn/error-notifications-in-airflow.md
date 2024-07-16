@@ -17,7 +17,7 @@ import sla_task_level_example_taskflow from '!!raw-loader!../code-samples/dags/e
 import sla_task_level_example_traditional from '!!raw-loader!../code-samples/dags/error-notifications-in-airflow/sla_task_level_example_traditional.py';
 import slack_notifier_example_dag from '!!raw-loader!../code-samples/dags/error-notifications-in-airflow/slack_notifier_example_dag.py';
 
-When you're using a data orchestration tool, how do you know when something has gone wrong? Airflow users can check the Airflow UI to determine the status of their DAGs, but this is an inefficient way of managing errors systematically, especially if certain failures need to be addressed promptly or by multiple team members. Fortunately, Airflow has built-in notification mechanisms that can be leveraged to configure error notifications in a way that works for your organization. 
+When you're using a data orchestration tool, how do you know when something has gone wrong? Airflow users can check the Airflow UI to determine the status of their DAGs, but this is an inefficient way of managing errors systematically, especially if certain failures need to be addressed promptly or by multiple team members. Fortunately, Airflow has built-in notification mechanisms that can be leveraged to configure error notifications in a way that works for your organization.
 
 In this guide, you'll learn the basics of Airflow notifications and how to set up common notification mechanisms including email, pre-built and custom notifiers, and SLAs. You'll also learn how to leverage Airflow alerting when using Astro.
 
@@ -40,7 +40,7 @@ To get the most out of this guide, you should have an understanding of:
 
 Airflow has a few options for notifying you on the status of your DAGs and tasks:
 
-- **Email notifications**: Most Airflow operators have parameters for setting email alerts in case of a task failure or retry. Use email alerts in production pipelines where task failures or retries need immediate attention by a data professional. 
+- **Email notifications**: Most Airflow operators have parameters for setting email alerts in case of a task failure or retry. Use email alerts in production pipelines where task failures or retries need immediate attention by a data professional.
 - **Airflow callbacks**: Callback parameters (`*_callback`) exist both at the task and at the DAG level. You can pass any callable or [Airflow notifier](#notifiers) to these parameters, and Airflow will run them in the case of specific events, such as a task failure. Airflow callbacks offer a lot of flexibility to execute any code based on the state of a task or DAG. They are often used to define actions for specific instances of task failures or successes.
 - **Airflow notifiers**: Notifiers are custom classes for Airflow callbacks that can be easily reused and standardized. Provider packages can ship pre-built notifiers like the [SlackNotifier](https://airflow.apache.org/docs/apache-airflow-providers-slack/stable/_api/airflow/providers/slack/notifications/slack/index.html). Notifiers can be provided to callback parameters to define which task or DAG state should cause them to be executed. A common use case for notifiers is standardizing actions for task failures across several Airflow instances.
 - **Airflow service-level agreements (SLAs)**: SLAs define the expected time it takes for a specific task to complete. If an SLA is missed, the callable or notifier provided to the `sla_miss_callback` parameter is executed. If you configure an SMTP connection, an email will be sent as well. Since an SLA miss does not stop a task from running, this type of notification is used when intervention is needed if a specific task is taking longer than expected.
@@ -59,7 +59,7 @@ It's best practice to use pre-built solutions whenever possible. This approach m
 
 If you want to deliver alerts to email, use [email notifications](#email-notifications) for task failures or retries and the [SmtpNotifier](https://airflow.apache.org/docs/apache-airflow-providers-smtp/stable/_api/airflow/providers/smtp/notifications/smtp/index.html) for other events such as successful task runs.
 
-If a [notifier class](#notifiers) exists for your use case, you should always use these methods instead of a custom callback. See the Airflow documentation for [an up-to-date list of available Notifiers](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html) and the [Apprise wiki](https://github.com/caronc/apprise/wiki) for a list of services the Apprise notifier can connect to. 
+If a [notifier class](#notifiers) exists for your use case, you should always use these methods instead of a custom callback. See the Airflow documentation for [an up-to-date list of available Notifiers](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html) and the [Apprise wiki](https://github.com/caronc/apprise/wiki) for a list of services the Apprise notifier can connect to.
 
 A notifier can be provided to any callback parameter (`*callback`). Only use custom [Airflow callbacks](#airflow-callbacks) when no notifier is available for your use case.
 
@@ -140,14 +140,14 @@ To allow Airflow to send emails, you have to provide values to the SMTP section 
 smtp_host = your-smtp-host.com
 smtp_starttls = True
 smtp_ssl = False
-# Uncomment and set the user/pass settings if you want to use SMTP AUTH 
-# smtp_user =                       
-# smtp_password =  
+# Uncomment and set the user/pass settings if you want to use SMTP AUTH
+# smtp_user =
+# smtp_password =
 smtp_port = 587
 smtp_mail_from = noreply@astronomer.io
 ```
 
-You can also set these values using environment variables. In this case, all parameters are preceded by `AIRFLOW__SMTP__`. For example, `smtp_host` can be specified by setting the `AIRFLOW__SMTP__SMTP_HOST` variable. For more on Airflow email configuration, see [Email Configuration](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html). 
+You can also set these values using environment variables. In this case, all parameters are preceded by `AIRFLOW__SMTP__`. For example, `smtp_host` can be specified by setting the `AIRFLOW__SMTP__SMTP_HOST` variable. For more on Airflow email configuration, see [Email Configuration](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html).
 
 If you are using Astro, [use environment variables](https://www.astronomer.io/docs/astro/environment-variables) to set up SMTP because the `airflow.cfg` cannot be directly edited.
 
@@ -194,7 +194,7 @@ def success_email_function(context):
 )
 ```
 
-## Airflow callbacks 
+## Airflow callbacks
 
 In Airflow you can define actions to be taken due to different DAG or task states using `*_callback` parameters:
 
@@ -280,7 +280,7 @@ t1 = PythonOperator(
 
 ### Example pre-built notifier: Slack
 
-An example of a community provided pre-built notifier is the [SlackNotifier](https://airflow.apache.org/docs/apache-airflow-providers-slack/stable/_api/airflow/providers/slack/notifications/slack/index.html#module-airflow.providers.slack.notifications.slack). 
+An example of a community provided pre-built notifier is the [SlackNotifier](https://airflow.apache.org/docs/apache-airflow-providers-slack/stable/_api/airflow/providers/slack/notifications/slack/index.html#module-airflow.providers.slack.notifications.slack).
 
 It can be imported from the Slack provider package and used with any `*_callback` function:
 
@@ -441,11 +441,11 @@ t1 = PythonOperator(
 
 ## Airflow service-level agreements
 
-[Airflow service-level agreements (SLAs)](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#slas) are a type of notification that you can use if your tasks take longer than expected to complete. If a task takes longer than the maximum amount of time to complete as defined in the SLA, the SLA will be missed and notifications are triggered. This can be useful when you have long-running tasks that might require user intervention after a certain period of time, or if you have tasks that need to complete within a certain period. 
+[Airflow service-level agreements (SLAs)](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#slas) are a type of notification that you can use if your tasks take longer than expected to complete. If a task takes longer than the maximum amount of time to complete as defined in the SLA, the SLA will be missed and notifications are triggered. This can be useful when you have long-running tasks that might require user intervention after a certain period of time, or if you have tasks that need to complete within a certain period.
 
 :::tip
 
-Airflow SLAs can be unintuitive, and do not work the way most users expect. If you are an Astronomer customer, consider using the [Astro Task duration or Absolute time alerts](https://www.astronomer.io/docs/astro/alerts#trigger-types). 
+Airflow SLAs can be unintuitive, and do not work the way most users expect. If you are an Astronomer customer, consider using the [Astro Task duration or Absolute time alerts](https://www.astronomer.io/docs/astro/alerts#trigger-types).
 
 :::
 

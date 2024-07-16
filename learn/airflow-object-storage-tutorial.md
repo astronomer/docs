@@ -22,7 +22,7 @@ Object storage is currently considered experimental and might be subject to brea
 
 Object stores are ubiquitous in modern data pipelines. They are used to store raw data, model-artifacts, image, video, text and audio files, and more. Because each object storage system has different file naming and path conventions, it can be challenging to work with data across many different object stores.
 
-Airflow's object storage feature allow you to: 
+Airflow's object storage feature allow you to:
 
 - Abstract your interactions with object stores using a [Path API](https://docs.python.org/3/library/pathlib.html). Note that some limitations apply due to the nature of different remote object storage systems. See [Cloud Object Stores are not real file systems](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html#cloud-object-stores-are-not-real-file-systems).
 - Switch between different object storage systems without having to change your DAG code.
@@ -74,7 +74,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 2: Prepare your data
 
-In this example pipeline you will train a classifier to predict whether a sentence is more likely to have been said by Captain Kirk or Captain Picard. The training set consists of 3 quotes from each captain stored in `.txt` files. 
+In this example pipeline you will train a classifier to predict whether a sentence is more likely to have been said by Captain Kirk or Captain Picard. The training set consists of 3 quotes from each captain stored in `.txt` files.
 
 1. Create a new bucket in your S3 account called `astro-object-storage-tutorial`.
 2. In the bucket, create a folder called `ingest` with two subfolders `kirk_quotes` and `picard_quotes`.
@@ -90,7 +90,7 @@ In this example pipeline you will train a classifier to predict whether a senten
 
     This DAG uses three different object storage locations, which can be aimed at different object storage systems by changing the `OBJECT_STORAGE_X`, `PATH_X` and `CONN_ID_X` for each location.
 
-    - `base_path_ingest`: The base path for the ingestion data. This is the path to the training quotes you uploaded in [Step 2](#step-2-prepare-your-data). 
+    - `base_path_ingest`: The base path for the ingestion data. This is the path to the training quotes you uploaded in [Step 2](#step-2-prepare-your-data).
     - `base_path_train`: The base path for the training data, this is the location from which data for training the model will be read.
     - `base_path_archive`: The base path for the archive location where data that has previously been used for training will be moved to.
 
@@ -99,7 +99,7 @@ In this example pipeline you will train a classifier to predict whether a senten
     - The `list_files_ingest` task takes the `base_path_ingest` as an input and iterates through the subfolders `kirk_quotes` and `picard_quotes` to return all files in the folders as individual `ObjectStoragePath` objects. Using the object storage feature enables you to use the `.iterdir()`, `.is_dir()` and `.is_file()` methods to list and evaluate object storage contents no matter which object storage system they are stored in.
     - The `copy_files_ingest_to_train` task is [dynamically mapped](dynamic-tasks.md) over the list of files returned by the `list_files_ingest` task. It takes the `base_path_train` as an input and copies the files from the `base_path_ingest` to the `base_path_train` location, providing an example of transferring files between different object storage systems using the `.copy()` method of the `ObjectStoragePath` object. Under the hood, this method uses `shutil.copyfileobj()` to stream files in chunks instead of loading them into memory in their entirety.
     - The `list_files_train` task lists all files in the `base_path_train` location.
-    - The `get_text_from_file` task is dynamically mapped over the list of files returned by the `list_files_train` task to read the text from each file using the `.read_blocks()` method of the `ObjectStoragePath` object. Using the object storage feature enables you to switch the object storage system, for example to Azure Blob storage, without needing to change the code. The file name provides the label for the text and both, label and full quote are returned as a dictionary to be passed via [XCom](airflow-passing-data-between-tasks.md) to the next task. 
+    - The `get_text_from_file` task is dynamically mapped over the list of files returned by the `list_files_train` task to read the text from each file using the `.read_blocks()` method of the `ObjectStoragePath` object. Using the object storage feature enables you to switch the object storage system, for example to Azure Blob storage, without needing to change the code. The file name provides the label for the text and both, label and full quote are returned as a dictionary to be passed via [XCom](airflow-passing-data-between-tasks.md) to the next task.
     - The `train_model` task trains a [Naive Bayes classifier](https://scikit-learn.org/stable/modules/naive_bayes.html) on the data returned by the `get_text_from_file` task. The fitted model is serialized as a base64 encoded string and passed via XCom to the next task.
     - The `use_model` task deserializes the trained model to run a prediction on a user-provided quote, determining whether the quote is more likely to have been said by Captain Kirk or Captain Picard. The prediction is printed to the logs.
     - The `copy_files_train_to_archive` task copies the files from the `base_path_train` to the `base_path_archive` location analogous to the `copy_files_ingest_to_train` task.

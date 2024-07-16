@@ -8,7 +8,7 @@ sidebar_custom_props: { icon: 'img/integrations/postgres.png' }
 
 [Postgres](https://www.postgresql.org/) is a free and open source relational database system. Integrating Postgres with Airflow allows you to interact with your Postgres database, run queries, ans load or export data from an Airflow DAG.
 
-This guide provides the basic setup for creating a Postgres connection. 
+This guide provides the basic setup for creating a Postgres connection.
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ A connection from Airflow to Postgres requires the following information:
 
 - Host (also known as the endpoint URL, server name, or instance ID based on your cloud provider)
 - Port (default is 5432)
-- Username 
+- Username
 - Password
 - Schema (default is `public`)
 

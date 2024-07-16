@@ -33,7 +33,7 @@ To use Redshift operators in Airflow, you first need to install the Redshift pro
 2. Connect your Airflow instance to Redshift. The most common way of doing this is by configuring an Airflow connection. In the Airflow UI, go to **Admin** > **Connections** and add the following connections:
 
     - `redshift_default`: The default connection that Airflow Redshift modules use. If you use a name other than `redshift_default` for this connection, you'll need to specify it in the modules that require a Redshift connection. Use the following parameters for your new connection (all other fields can be left blank):
-  
+
      ```yaml
      Connection ID: redshift_default
      Connection Type: Amazon Redshift
@@ -43,15 +43,15 @@ To use Redshift operators in Airflow, you first need to install the Redshift pro
      Password: <your-redshift-password>
      Port: <your-redshift-port> (for example, 5439)
      ```
-  
+
     - `aws_default`: The default connection that other Airflow AWS modules use. For the examples in this guide, you will need this connection for Airflow to communicate with Amazon S3. If you use a name other than `aws_default` for this connection, you'll need to specify it in the modules that require an AWS connection. Use the following parameters for your new connection (all other fields can be left blank):
-  
+
      ```yaml
      Connection ID: aws_default
      Connection Type: Amazon Web Services
      Extra: {
-       "aws_access_key_id": "<your-access-key-id>", 
-       "aws_secret_access_key": "<your-secret-access-key>", 
+       "aws_access_key_id": "<your-access-key-id>",
+       "aws_secret_access_key": "<your-secret-access-key>",
        "region_name": "<your-region-name>"
      }
      ```
@@ -196,7 +196,7 @@ with DAG(
     template_searchpath='/usr/local/airflow/include/example_dag_redshift',
     catchup=False
 ) as dag:
-  
+
     redshift_to_s3 = RedshiftToS3Operator(
         task_id='fct_listing_to_s3',
         s3_bucket='airflow-redshift-demo',
@@ -250,13 +250,13 @@ with DAG(
     template_searchpath='/usr/local/airflow/include/example_dag_redshift',
     catchup=False
 ) as dag:
-  
+
     pause_redshift = RedshiftPauseClusterOperator(
         task_id='pause_redshift',
         cluster_identifier='astronomer-success-redshift',
         aws_conn_id='aws_default'
     )
-    
+
     resume_redshift = RedshiftResumeClusterOperator(
       task_id='resume_redshift',
       cluster_identifier='astronomer-success-redshift',

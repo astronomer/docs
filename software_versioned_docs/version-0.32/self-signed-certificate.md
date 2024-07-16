@@ -29,15 +29,15 @@ Run the following set of commands, and answer the questions when prompted.
     openssl rsa -passin pass:gsahdg -in server.pass.key -out server.key
     ```
 
-3. Run the following command to delete the first key: 
+3. Run the following command to delete the first key:
 
     ```bash
     rm server.pass.key
     ```
 
 4. Run the following command to create a certificate signing request using the password-less private key.
-   You will be asked to provide information to sign the certificate. 
-   Make sure the `Common Name` matches your DNS record, for example `*.astro.example.com`. 
+   You will be asked to provide information to sign the certificate.
+   Make sure the `Common Name` matches your DNS record, for example `*.astro.example.com`.
 
     ```bash
     openssl req -new -key server.key -out server.csr

@@ -30,7 +30,7 @@ To get the most out of this guide, you should have an understanding of:
 
 ## `@task.branch` (BranchPythonOperator)
 
-One of the simplest ways to implement branching in Airflow is to use the `@task.branch` decorator, which is a decorated version of the [BranchPythonOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchpythonoperator). `@task.branch` accepts any Python function as an input as long as the function returns a list of valid IDs for Airflow tasks that the DAG should run after the function completes. 
+One of the simplest ways to implement branching in Airflow is to use the `@task.branch` decorator, which is a decorated version of the [BranchPythonOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchpythonoperator). `@task.branch` accepts any Python function as an input as long as the function returns a list of valid IDs for Airflow tasks that the DAG should run after the function completes.
 
 In the following example we use a `choose_branch` function that returns one set of task IDs if the result is greater than 0.5 and a different set if the result is less than or equal to 0.5:
 
@@ -322,7 +322,7 @@ Another example using the ShortCircuitOperator, can be found on the [Astronomer 
 
 ## Other branch operators
 
-Airflow offers a few other branching operators that work similarly to the BranchPythonOperator but for more specific contexts: 
+Airflow offers a few other branching operators that work similarly to the BranchPythonOperator but for more specific contexts:
 
 - [BranchSQLOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/branchsqloperator): Branches based on whether a given SQL query returns `true` or `false`.
 - [BranchDayOfWeekOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchdayofweekoperator): Branches based on whether the current day of week is equal to a given `week_day` parameter.
@@ -336,7 +336,7 @@ All of these operators take `follow_task_ids_if_true` and `follow_task_ids_if_fa
 
 There is much more to the BranchPythonOperator than simply choosing one task over another.
 
-- What if you want to trigger your tasks only on specific days? And not on holidays?  
+- What if you want to trigger your tasks only on specific days? And not on holidays?
 - What if you want to trigger a DAG Run only if the previous one succeeded?
 
 For more guidance and best practices on common use cases like the ones above, try out Astronomer's

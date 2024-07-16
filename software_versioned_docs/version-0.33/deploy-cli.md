@@ -74,7 +74,7 @@ This command returns a list of Airflow Deployments available in your Workspace a
 
 :::info
 
-If your code deploy fails and you configured your CLI to use Podman, you might need to set an additional environment variable. See [Troubleshoot your Podman configuration](https://www.astronomer.io/docs/astro/cli/configure-cli#troubleshoot-your-configuration). 
+If your code deploy fails and you configured your CLI to use Podman, you might need to set an additional environment variable. See [Troubleshoot your Podman configuration](https://www.astronomer.io/docs/astro/cli/configure-cli#troubleshoot-your-configuration).
 
 :::
 

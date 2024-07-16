@@ -201,7 +201,7 @@ To use a custom XCom backend class, you need to save it in a Python file in the 
 AIRFLOW__CORE__XCOM_BACKEND=include.<your-file-name>.MyCustomXComBackend
 ```
 
-If you want to further customize the functionality for your custom XCom backend, you can override additional methods of the [XCom module](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/xcom/index.html) ([source code](https://github.com/apache/airflow/blob/main/airflow/models/xcom.py)). 
+If you want to further customize the functionality for your custom XCom backend, you can override additional methods of the [XCom module](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/xcom/index.html) ([source code](https://github.com/apache/airflow/blob/main/airflow/models/xcom.py)).
 
 A common use case for this is removing stored XComs upon clearing and rerunning a task in both the Airflow metadata database and the custom XCom backend. To do so, the `.clear()` method needs to be overridden to include the removal of the referenced XCom in the custom XCom backend. The code below shows an example of a `.clear()` method that includes the deletion of an XCom stored in a custom S3 backend, using the AWS version of the `MyCustomXComBackend` XCom backend from [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization) of the tutorial.
 
@@ -291,7 +291,7 @@ By default, Airflow includes [serialization](https://airflow.apache.org/docs/apa
 
 If you need to pass data objects through XCom that are not supported, you have several options:
 
-- Enable [pickling](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#enable-xcom-pickling). This method is easy to implement for local testing, but not suitable for production due to [security issues](https://docs.python.org/3/library/pickle.html). 
+- Enable [pickling](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#enable-xcom-pickling). This method is easy to implement for local testing, but not suitable for production due to [security issues](https://docs.python.org/3/library/pickle.html).
 - Register a custom serializer, see [Serialization](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/serializers.html).
 - Add a `serialize()` and `deserialize()` method to the class of the object you want to pass through XCom, see [Serialization](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/serializers.html).
 - Use a custom XCom backend to define custom serialization and deserialization methods, see [Use a custom XCom backend class](#use-a-custom-xcom-backend-class).

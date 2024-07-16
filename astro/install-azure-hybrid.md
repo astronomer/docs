@@ -47,14 +47,14 @@ Astronomer support will create infrastructure within your Azure account to host 
 
 - A minimum quota of 48 Standard Ddv5-series vCPUs in the selected region. You can use Dv5-series vCPUs, but you'll need 96 total vCPUs composed of 48 Ddv5-series vCPUs and 48 Dv5-series vCPUs. To adjust your quota limits up or down, see [Increase VM-family vCPU quotas](https://docs.microsoft.com/en-us/azure/azure-portal/supportability/per-vm-quota-requests).
 
-    Confirm that the VM types are available in all Availability Zones in the selected region. For example, you can run the following Azure Az PowerShell command to confirm that the Standard_D4d_v5 VMs (the default for Astro) are available in the `CentralUS` region: 
+    Confirm that the VM types are available in all Availability Zones in the selected region. For example, you can run the following Azure Az PowerShell command to confirm that the Standard_D4d_v5 VMs (the default for Astro) are available in the `CentralUS` region:
 
-    ```  
+    ```
     az vm list-skus --location centralus --size Standard_D --all --output table | grep -e 'Restrictions\|Standard_D4d_v5'
-    ```  
-  
+    ```
+
     If the VM types are unavailable, the output returns `Restrictions`. Contact Microsoft Support to have these VMs enabled.
-  
+
     ```
     ResourceType     Locations    Name                    Zones    Restrictions
     virtualMachines  centralus    Standard_D4d_v5          1,2,3    NotAvailableForSubscription, type: Zone, locations: centralus, zones: 1
@@ -74,7 +74,7 @@ Astronomer support will create infrastructure within your Azure account to host 
 
 ### VNet peering prerequisites (Optional)
 
-To give Astro access to any Azure resources on a private network, you must create a VNet peering connection between Astronomer's VNet and the VNets for your broader network. 
+To give Astro access to any Azure resources on a private network, you must create a VNet peering connection between Astronomer's VNet and the VNets for your broader network.
 
 To create a VNet peering connection, contact [Astronomer Support](https://support.astronomer.io/) and provide the following details:
 
@@ -86,11 +86,11 @@ To create a VNet peering connection, contact [Astronomer Support](https://suppor
 - A CIDR block (RFC 1918 IP Space) no smaller than a `/19` range. This CIDR block can't overlap with any Azure VNet(s) that you will peer with later. The default CIDR range is `172.20.0.0/19`.
 - ResourceID, for example: `/subscriptions/<Subscription Id>/resourceGroups/myResourceGroupA/providers/Microsoft.Network/virtualNetworks/myVnetA`. You can find the resource ID in the Azure portal by following step 7 in [Create peering - Azure portal](https://docs.microsoft.com/en-us/azure/virtual-network/create-peering-different-subscriptions#portal).
 
-Additionally, ensure that your Microsoft Entra ID user has at least one of the following role assignments: 
+Additionally, ensure that your Microsoft Entra ID user has at least one of the following role assignments:
 
 -  Network Contributor: This permission is required for any VNet deployed through Resource Manager.
 -  Classic Network Contributor: This permission is required for any VNet deployed through the classic deployment model.
-  
+
 From here, Astronomer support will set up the VNet connection to Astro.
 
 ## Access Astro
@@ -104,8 +104,8 @@ From here, Astronomer support will set up the VNet connection to Astro.
     - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
     - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
 
-    If you're the first person in an Organization to authenticate, you're added as a Workspace Owner to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See [Manage Workspace users](manage-workspace-users.md). 
-    
+    If you're the first person in an Organization to authenticate, you're added as a Workspace Owner to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See [Manage Workspace users](manage-workspace-users.md).
+
     To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
 
 ## Prepare for data plane activation

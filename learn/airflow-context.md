@@ -98,7 +98,7 @@ print_logical_date = BashOperator(
 It is also common to use Jinja templating to access [XCom](airflow-passing-data-between-tasks.md#xcom) values in the parameter of a traditional task. In the code snippet below, the first task `return_greeting` will push the string "Hello" to XCom, and the second task `greet_friend` will use a Jinja template to pull that value from the `ti` (task instance) object of the Airflow context and print `Hello friend! :)` into the logs.
 
 ```python
-@task 
+@task
 def return_greeting():
     return "Hello"
 
@@ -127,7 +127,7 @@ class PrintDAGIDOperator(BaseOperator):
 
 ## Common Airflow context values
 
-This section gives an overview of the most commonly used keys in the Airflow context dictionary. To see an up-to-date list of all keys and their types, view the [Airflow source code](https://github.com/apache/airflow/blob/main/airflow/utils/context.pyi). 
+This section gives an overview of the most commonly used keys in the Airflow context dictionary. To see an up-to-date list of all keys and their types, view the [Airflow source code](https://github.com/apache/airflow/blob/main/airflow/utils/context.pyi).
 
 ### ti / task_instance
 
@@ -163,7 +163,7 @@ def write_file_with_ts(**context):
 
 The `conf` key contains an [AirflowConfigParser object](https://github.com/apache/airflow/blob/main/airflow/configuration.py#L149) that contains information about your Airflow configuration. To see your full Airflow configuration in dictionary format, use the following code:
 
-```python 
+```python
 from pprint import pprint
 
 @task
@@ -187,7 +187,7 @@ def branch_based_on_executor(**context):
 
 The `dag` key contains the DAG object. There are many attributes and methods available for the DAG object. One example is the `.get_run_dates` method from which you can fetch a list of all timestamps on which the DAG will run within a certain time period. This is especially useful for DAGs with [complex schedules](scheduling-in-airflow.md).
 
-```python 
+```python
 @task
 def get_dagrun_dates(**context):
     run_dates = context["dag"].get_run_dates(

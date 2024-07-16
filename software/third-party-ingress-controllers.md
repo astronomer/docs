@@ -95,7 +95,7 @@ global:
     # explicitly set kubernetes.io/ingress.class here
     kubernetes.io/ingress.class: <ingressClass-name>
 
-  authSidecar:  
+  authSidecar:
     enabled: true
     repository: nginxinc/nginx-unprivileged # In airgapped installations, change this to specify your private registry
     tag: stable
@@ -154,7 +154,7 @@ Contour ships with support for websockets disabled by default. To use a Contour 
       routes:
         - conditions:
           - prefix: /ws
-          enableWebsockets: true  
+          enableWebsockets: true
           services:
             - name: astronomer-houston
               port: 8871

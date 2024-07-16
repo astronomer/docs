@@ -7,7 +7,7 @@ hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-[Hibernate an Astro development Deployment](deployment-resources.md#hibernate-a-development-deployment) for a set amount of time. Overrides any existing hibernation schedule and sets the Deployment to hibernate for a specific duration or until a specific date. 
+[Hibernate an Astro development Deployment](deployment-resources.md#hibernate-a-development-deployment) for a set amount of time. Overrides any existing hibernation schedule and sets the Deployment to hibernate for a specific duration or until a specific date.
 
 ## Usage
 
@@ -25,6 +25,6 @@ astro deployment hibernate [one of --until/ --for/ --remove-override]
 | `-r, --remove-override`  | Remove any existing override and resume regular hibernation schedule. | None                                                 |
 | `-f, --force`            | The CLI will not prompt to confirm before hibernating the Deployment. | None                                                 |
 
-## Related commands 
+## Related commands
 
 - [`astro deployment wake-up`](astro-deployment-wake-up.md)

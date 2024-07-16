@@ -220,7 +220,7 @@ For more information on this feature, read [Integrating Airflow and Hashicorp Va
 
 ## Step 8: Set Up the Scheduler
 
-In Airflow, [the Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/scheduler.html) is responsible for reading from the metadata database to check on the status of each task and decides the order in which tasks should be completed. To get your Scheduler running:  
+In Airflow, [the Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/scheduler.html) is responsible for reading from the metadata database to check on the status of each task and decides the order in which tasks should be completed. To get your Scheduler running:
 
 1. Enable the Scheduler by running the following command:
 

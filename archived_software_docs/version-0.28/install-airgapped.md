@@ -93,7 +93,7 @@ astronomer:
                 pgbouncerExporter:
                   repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-pgbouncer-exporter
 ```
-​
+
 ## Step 4: Fetch Airflow Helm Charts
 
 There are two Helm charts required for Astronomer:
@@ -247,7 +247,7 @@ No matter what option you choose, the commands that you run should return the up
 
 ### Configuring a custom updates JSON URL
 
-After you have made the updates JSON accessible within your premises, you must configure the Helm chart to fetch updates from the custom URL:  
+After you have made the updates JSON accessible within your premises, you must configure the Helm chart to fetch updates from the custom URL:
 
 ```yaml
 astronomer:

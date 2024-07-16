@@ -121,7 +121,7 @@ Restarting the pods will force them to pick up the new value.
 
 ## Houston and Astronomer Software x509 Certificate Signed by Unknown Authority error
 
-Occasionally, the shared Houston and Astronomer Software registry Pod certificates fail to synchronize and the following error message appears: 
+Occasionally, the shared Houston and Astronomer Software registry Pod certificates fail to synchronize and the following error message appears:
 
 ```
 Warning Failed 24m (x4 over 26m) kubelet, <node> Failed to pull image "registry.astronomer.base.domain/testing/airflow:deploy-5": rpc error: code = Unknown desc = Error response from daemon: Get https://registry.astronomer.base.domain/v2/: x509: certificate signed by unknown authority

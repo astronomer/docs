@@ -10,9 +10,9 @@ import CodeBlock from '@theme/CodeBlock';
 import cosmos_dag from '!!raw-loader!../code-samples/dags/airflow-dbt/cosmos_dag.py';
 import airflow_dbt_bashoperator from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_bashoperator.py';
 
-[dbt Core](https://docs.getdbt.com/) is an open-source library for analytics engineering that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses. 
+[dbt Core](https://docs.getdbt.com/) is an open-source library for analytics engineering that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses.
 
-The open-source provider package [Cosmos](https://astronomer.github.io/astronomer-cosmos/) allows you to integrate dbt jobs into Airflow by automatically creating Airflow tasks from dbt models. You can turn your dbt Core projects into an Airflow task group with just a few lines of code:
+The open-source provider package [Cosmos](https://astronomer.github.io/astronomer-cosmos/) allows you to integrate dbt jobs into Airflow by automatically creating Airflow tasks from dbt models. You can turn your dbt Core projects into an Airflow task group with just a few lines of code:
 
 ```python
 from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig, ExecutionConfig
@@ -47,7 +47,7 @@ For a tutorial on how to use dbt Cloud with Airflow, see [Orchestrate dbt Cloud 
 
 ## Why use Airflow with dbt Core?
 
-dbt Core offers the possibility to build modular, reuseable SQL components with built-in dependency management and [incremental builds](https://docs.getdbt.com/docs/build/incremental-models). With [Cosmos](https://astronomer.github.io/astronomer-cosmos/) you can integrate dbt jobs into your Airflow orchestration environment as a standalone DAG or as a task group within a DAG. 
+dbt Core offers the possibility to build modular, reuseable SQL components with built-in dependency management and [incremental builds](https://docs.getdbt.com/docs/build/incremental-models). With [Cosmos](https://astronomer.github.io/astronomer-cosmos/) you can integrate dbt jobs into your Airflow orchestration environment as a standalone DAG or as a task group within a DAG.
 
 The benefits of using Airflow with dbt Core include:
 
@@ -111,7 +111,7 @@ To use dbt with Airflow install dbt Core in a virtual environment and Cosmos in 
 
 To integrate your dbt project with Airflow, you need to add the project folder to your Airflow environment. For this step you can either add your own project in a new `dbt` folder in your `dags` directory, or follow the steps below to create a simple project using two models.
 
-1. Create a folder called `dbt` in your `dags` folder. 
+1. Create a folder called `dbt` in your `dags` folder.
 
 2. In the `dbt` folder, create a folder called `my_simple_dbt_project`.
 
@@ -154,18 +154,18 @@ You should now have the following structure within your Astro project:
 
 ## Step 3: Create an Airflow connection to your data warehouse
 
-Cosmos allows you to apply Airflow connections to your dbt project. 
+Cosmos allows you to apply Airflow connections to your dbt project.
 
 1. Start Airflow by running `astro dev start`.
 
-2. In the Airflow UI, go to **Admin** -> **Connections** and click **+**. 
+2. In the Airflow UI, go to **Admin** -> **Connections** and click **+**.
 
 3. Create a new connection named `db_conn`. Select the connection type and supplied parameters based on the data warehouse you are using. For a Postgres connection, enter the following information:
 
     - **Connection ID**: `db_conn`.
     - **Connection Type**: `Postgres`.
     - **Host**: Your Postgres host address.
-    - **Schema**: Your Postgres database. 
+    - **Schema**: Your Postgres database.
     - **Login**: Your Postgres login username.
     - **Password**: Your Postgres password.
     - **Port**: Your Postgres port.
@@ -187,17 +187,17 @@ The DAG you'll write uses Cosmos to create tasks from existing dbt models and th
     <CodeBlock language="python">{cosmos_dag}</CodeBlock>
 
     This DAG uses the `DbtTaskGroup` class from the Cosmos package to create a task group from the models in your dbt project. Dependencies between your dbt models are automatically turned into dependencies between Airflow tasks. Make sure to add your own values for `YOUR_NAME`, `DB_NAME`, and `SCHEMA_NAME`.
-    
+
     Using the `vars` keyword in the dictionary provided to the `operator_args` parameter, you can inject variables into the dbt project. This DAG injects `YOUR_NAME` for the `my_name` variable. If your dbt project contains dbt tests, they will be run directly after a model has completed. Note that it is a best practice to set `retries` to at least 2 for all tasks that run dbt models.
 
 :::tip
 
-In some cases, especially in larger dbt projects, you might run into a `DagBag import timeout` error. 
+In some cases, especially in larger dbt projects, you might run into a `DagBag import timeout` error.
 This error can be resolved by increasing the value of the Airflow configuration [core.dagbag_import_timeout](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dagbag-import-timeout).
 
 :::
 
-3. Run the DAG manually by clicking the play button and view the DAG in the graph view. Double click the task groups in order to expand them and see all tasks. 
+3. Run the DAG manually by clicking the play button and view the DAG in the graph view. Double click the task groups in order to expand them and see all tasks.
 
     ![Cosmos DAG graph view](/img/integrations/airflow-dbt-cosmos_dag_graph_view.png)
 
@@ -232,4 +232,4 @@ Using the `BashOperator` to run `dbt run` and other dbt commands can be useful d
 
 Using a dbt-generated `manifest.json` file gives you more visibility into the steps dbt is running in each task. This file is generated in the target directory of your `dbt` project and contains its full representation. For more information on this file, see the [dbt documentation](https://docs.getdbt.com/reference/dbt-artifacts/).
 
-You can learn more about a manifest-based dbt and Airflow project structure, view example code, and read about the `DbtDagParser` in a 3-part blog post series on [Building a Scalable Analytics Architecture With Airflow and dbt](https://www.astronomer.io/blog/airflow-dbt-1/). 
+You can learn more about a manifest-based dbt and Airflow project structure, view example code, and read about the `DbtDagParser` in a 3-part blog post series on [Building a Scalable Analytics Architecture With Airflow and dbt](https://www.astronomer.io/blog/airflow-dbt-1/).

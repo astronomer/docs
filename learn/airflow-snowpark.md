@@ -13,7 +13,7 @@ import airflow_with_snowpark_tutorial from '!!raw-loader!../code-samples/dags/ai
 
 [Snowpark](https://www.snowflake.com/en/data-cloud/snowpark/) is the set of runtimes and libraries that securely deploy and process Python and other programming code in [Snowflake](https://www.snowflake.com/en/). This includes [Snowpark ML](https://docs.snowflake.com/en/developer-guide/snowpark-ml/index), the Python library and underlying infrastructure for end-to-end ML workflows in Snowflake. Snowpark ML has 2 components: [Snowpark ML Modeling](https://docs.snowflake.com/en/developer-guide/snowpark-ml/snowpark-ml-modeling) for model development, and Snowpark ML Operations including the [Snowpark Model Registry](https://docs.snowflake.com/en/developer-guide/snowpark-ml/snowpark-ml-mlops-model-registry), for model deployment and management.
 
-In this tutorial, you'll learn how to: 
+In this tutorial, you'll learn how to:
 
 - Create a [custom XCom backend](custom-xcom-backend-strategies.md) in Snowflake.
 - Create and use the Snowpark Model Registry in Snowflake.
@@ -70,13 +70,13 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - (Optional) This tutorial includes instructions on how to use the Snowflake [custom XCom backend](custom-xcom-backend-strategies.md) included in the provider. If you want to this custom XCom backend you will need to either:
     - Run the DAG using a Snowflake account with `ACCOUNTADMIN` privileges to allow the DAG's first task to create the required database, schema, stage and table. See [Step 3.3](#step-3-create-your-dag) for more instructions. The free trial account has the required privileges.
-    - Ask your Snowflake administrator to: 
-        - Provide you with the name of an existing database, schema, and stage. You need to use these names in [Step 1.8](#step-1-configure-your-astro-project) for the `AIRFLOW__CORE__XCOM_SNOWFLAKE_TABLE` and `AIRFLOW__CORE__XCOM_SNOWFLAKE_STAGE` environment variables. 
+    - Ask your Snowflake administrator to:
+        - Provide you with the name of an existing database, schema, and stage. You need to use these names in [Step 1.8](#step-1-configure-your-astro-project) for the `AIRFLOW__CORE__XCOM_SNOWFLAKE_TABLE` and `AIRFLOW__CORE__XCOM_SNOWFLAKE_STAGE` environment variables.
         - Create an `XCOM_TABLE` with the following schema:
 
         ```sql
-        dag_id varchar NOT NULL, 
-        task_id varchar NOT NULL, 
+        dag_id varchar NOT NULL,
+        task_id varchar NOT NULL,
         run_id varchar NOT NULL,
         multi_index integer NOT NULL,
         key varchar NOT NULL,
@@ -86,7 +86,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 :::info
 
-The example code from this tutorial is also available on [GitHub](https://github.com/astronomer/airflow-snowpark-tutorial). 
+The example code from this tutorial is also available on [GitHub](https://github.com/astronomer/airflow-snowpark-tutorial).
 
 :::
 
@@ -108,7 +108,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     virtualenv
     ```
 
-3. Change the content of the `Dockerfile` of your Astro project to the following, which creates a virtual environment by using the [Astro venv buildkit](https://github.com/astronomer/astro-provider-venv). The requirements added in the previous step are installed in that virtual environment. This tutorial includes Snowpark Python tasks that are running in virtual environments, which is a common pattern in production to simplify dependency management. This Dockerfile creates a virtual environment called `snowpark` with the Python version 3.8 and the packages specified in `requirements-snowpark.txt`. 
+3. Change the content of the `Dockerfile` of your Astro project to the following, which creates a virtual environment by using the [Astro venv buildkit](https://github.com/astronomer/astro-provider-venv). The requirements added in the previous step are installed in that virtual environment. This tutorial includes Snowpark Python tasks that are running in virtual environments, which is a common pattern in production to simplify dependency management. This Dockerfile creates a virtual environment called `snowpark` with the Python version 3.8 and the packages specified in `requirements-snowpark.txt`.
 
     ```dockerfile
     # syntax=quay.io/astronomer/airflow-extensions:latest
@@ -143,7 +143,7 @@ The example code from this tutorial is also available on [GitHub](https://github
 
 :::warning
 
-The Astro Snowflake provider is currently in beta. Classes from this provider might be subject to change and will be included in the [Snowflake provider](https://registry.astronomer.io/providers/apache-airflow-providers-snowflake/versions/latest) in a future release. 
+The Astro Snowflake provider is currently in beta. Classes from this provider might be subject to change and will be included in the [Snowflake provider](https://registry.astronomer.io/providers/apache-airflow-providers-snowflake/versions/latest) in a future release.
 
 :::
 
@@ -187,7 +187,7 @@ For more information on creating a Snowflake connection, see [Create a Snowflake
 
 ## Step 2: Add your data
 
-The DAG in this tutorial runs a classification model on synthetic data to predict which afternoon beverage a skier will choose based on attributes like ski color, ski resort, and amount of new snow. The data is generated using [this script](https://github.com/astronomer/airflow-snowpark-tutorial/blob/main/include/data/create_ski_dataset.py). 
+The DAG in this tutorial runs a classification model on synthetic data to predict which afternoon beverage a skier will choose based on attributes like ski color, ski resort, and amount of new snow. The data is generated using [this script](https://github.com/astronomer/airflow-snowpark-tutorial/blob/main/include/data/create_ski_dataset.py).
 
 1. Create a new directory in your Astro project's `include` directory called `data`.
 
@@ -197,7 +197,7 @@ The DAG in this tutorial runs a classification model on synthetic data to predic
 
 1. In your `dags` folder, create a file called `airflow_with_snowpark_tutorial.py`.
 
-2. Copy the following code into the file. Make sure to provide your Snowflake database and schema names to `MY_SNOWFLAKE_DATABASE` and `MY_SNOWFLAKE_SCHEMA`. 
+2. Copy the following code into the file. Make sure to provide your Snowflake database and schema names to `MY_SNOWFLAKE_DATABASE` and `MY_SNOWFLAKE_SCHEMA`.
 
     <CodeBlock language="python">{airflow_with_snowpark_tutorial}</CodeBlock>
 
@@ -205,11 +205,11 @@ The DAG in this tutorial runs a classification model on synthetic data to predic
 
     - (Optional) `create_snowflake_objects`: Creates the Snowflake objects required for the Snowflake custom XCom backend. This task uses the `@task.snowflake_python` decorator to run code within Snowpark, automatically instantiating a Snowpark session called `snowpark_session` from the connection ID provided to the `snowflake_conn_id` parameter. This task is a [setup task](airflow-setup-teardown.md) and is only shown in the DAG graph if you set `SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `True`. See also Step 3.3.
 
-    - `load_file`: Loads the data from the `ski_dataset.csv` file into the Snowflake table `MY_SNOWFLAKE_TABLE` using the [load_file operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/load_file.html) from the Astro Python SDK. 
+    - `load_file`: Loads the data from the `ski_dataset.csv` file into the Snowflake table `MY_SNOWFLAKE_TABLE` using the [load_file operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/load_file.html) from the Astro Python SDK.
 
     - `create_model_registry`: Creates a model registry in Snowpark using the [Snowpark ML package](https://docs.snowflake.com/en/developer-guide/snowpark-ml/index). Since the task is defined by the `@task.snowflake_python` decorator, the snowpark session is automatically instantiated from provided connection ID.
 
-    - `transform_table_step_one`: Transforms the data in the Snowflake table using Snowpark syntax to filter to only include rows of skiers that ordered the beverages we are interested in. Computation of this task runs within Snowpark. The resulting table is written to [XCom](airflow-passing-data-between-tasks.md) as a pandas DataFrame. 
+    - `transform_table_step_one`: Transforms the data in the Snowflake table using Snowpark syntax to filter to only include rows of skiers that ordered the beverages we are interested in. Computation of this task runs within Snowpark. The resulting table is written to [XCom](airflow-passing-data-between-tasks.md) as a pandas DataFrame.
 
     - `transform_table_step_two`: Transforms the pandas DataFrame created by the upstream task to filter only for serious skiers (those who skied at least one hour that day).
     This task uses the `@task.snowpark_ext_python` decorator, running the code in the Snowpark virtual environment created in Step 1. The binary provided to the `python` parameter of the decorator determines which virtual environment to run a task in. The `@task.snowpark_ext_python` decorator works analogously to the [@task.external_python decorator](airflow-isolated-environments.md), except the code is executed within Snowpark's compute.

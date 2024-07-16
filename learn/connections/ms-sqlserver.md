@@ -8,7 +8,7 @@ sidebar_custom_props: { icon: 'img/integrations/ms-sqlserver.png' }
 
 [Microsoft SQL Server](https://www.microsoft.com/en-in/sql-server/sql-server-downloads) is a proprietary relational database management system developed by Microsoft. Integrating SQL Server with Airflow allows you to interact with the database or export the data from a SQL server to an external system using an Airflow DAG
 
-This guide provides the basic setup for creating a Microsoft SQL Server connection. 
+This guide provides the basic setup for creating a Microsoft SQL Server connection.
 
 ## Prerequisites
 
@@ -51,16 +51,16 @@ For example, if you are running Microsoft SQL Server in a Relational Data Store 
     This will install the Microsoft provider package, which makes the MS SQL Server connection type available in Airflow.
 
   :::info
-  
+
   To install `apache-airflow-providers-microsoft-mssql` to Airflow 2.6+, you must also add the following lines to `packages.txt` and restart your Astro project.
-  
+
   ```text
   build-essential
   freetds-dev
   libkrb5-dev
   default-libmysqlclient-dev
   ```
-  
+
   :::
 
 2. Run `astro dev restart` to restart your local Airflow environment and apply your changes in `requirements.txt`.

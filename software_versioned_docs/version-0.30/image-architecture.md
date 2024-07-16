@@ -46,7 +46,7 @@ Every supported version of the Astronomer Certified Python wheel is available at
 
 ## Image Requirements
 
-Running Airflow with the Astronomer Certified Docker image requires specific versions for key system components.  
+Running Airflow with the Astronomer Certified Docker image requires specific versions for key system components.
 
 - Python: 3.6, 3.7, 3.8, 3.9
 - Database: PostgreSQL (11, 12), MySQL (5.7, 8.0+)

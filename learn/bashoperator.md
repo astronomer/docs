@@ -161,7 +161,7 @@ The BashOperator can also be provided with a bash script (ending in `.sh`) to be
 
 For this example, you run a bash script which iterates over all files in the `/include` folder and prints their names to the console.
 
-```bash  
+```bash
 #!/bin/bash
 
 echo "The script is starting!"

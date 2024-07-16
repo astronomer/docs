@@ -30,14 +30,14 @@ with DAG(dag_id="example", schedule=None, start_date=datetime.datetime(2023, 1, 
         query = "SELECT store_id, city FROM stores"
         result = client.execute(query)
         return result
-        
+
     def _get_purchases():
         # Pseudocode:
         client = db.client()
         query = "SELECT customer_id, string_agg(store_id, ',') FROM customers GROUP BY customer_id"
         result = client.execute(query)
         return result
-        
+
     PythonOperator(task_id="get_locations", python_callable=_get_locations)
     PythonOperator(task_id="get_purchases", python_callable=_get_purchases)
 ```
@@ -108,9 +108,9 @@ The benefit of this solution is that the `query_db` function can be imported fro
 
 In some cases, you might have code that needs to be shared across different Airflow deployments. For example, if you're onboarding multiple teams to the Astronomer platform and each team has their own code repository. This means you can't reuse the code in the `/include` folder, because it resides in a different Git repository.
 
-To reuse code over multiple projects, you need to store it in a separate Git repository which can be reused by multiple projects. The best way to do this is to create your own Python package from the repository you want to be available to multiple projects. This takes a bit more work to set up, but enables multiple teams using multiple Git repositories to maintain a single source of code. You can see an example Python package in [this repo](https://github.com/astronomer/custom-package-demo). 
+To reuse code over multiple projects, you need to store it in a separate Git repository which can be reused by multiple projects. The best way to do this is to create your own Python package from the repository you want to be available to multiple projects. This takes a bit more work to set up, but enables multiple teams using multiple Git repositories to maintain a single source of code. You can see an example Python package in [this repo](https://github.com/astronomer/custom-package-demo).
 
-The number of options for developing, building, and releasing a Python package are limitless and this guide only provides general guidance. See [**Structuring your project**](https://docs.python-guide.org/writing/structure) and [**Packaging Python projects**](https://packaging.python.org/en/latest/tutorials/packaging-projects) for more information on Python packaging. 
+The number of options for developing, building, and releasing a Python package are limitless and this guide only provides general guidance. See [**Structuring your project**](https://docs.python-guide.org/writing/structure) and [**Packaging Python projects**](https://packaging.python.org/en/latest/tutorials/packaging-projects) for more information on Python packaging.
 
 Setting up a custom Python package requires roughly the following steps:
 

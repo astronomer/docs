@@ -37,7 +37,7 @@ You can override the default trigger rule by setting the `trigger_rule` paramete
 # from airflow.decorators import task
 # from airflow.models.baseoperator import chain
 
-@task 
+@task
 def upstream_task():
     return "Hello..."
 
@@ -73,8 +73,8 @@ The following trigger rules are available:
 - `all_success`: (default) The task runs only when all upstream tasks have succeeded.
 - `all_failed`: The task runs only when all upstream tasks are in a failed or upstream\_failed state.
 - `all_done`: The task runs once all upstream tasks are done with their execution.
-- `all_skipped`: The task runs only when all upstream tasks have been skipped. 
-- `one_failed`: The task runs when at least one upstream task has failed. 
+- `all_skipped`: The task runs only when all upstream tasks have been skipped.
+- `one_failed`: The task runs when at least one upstream task has failed.
 - `one_success`: The task runs when at least one upstream task has succeeded.
 - `one_done`: The task runs when at least one upstream task has either succeeded or failed.
 - `none_failed`: The task runs only when all upstream tasks have succeeded or been skipped.
@@ -82,7 +82,7 @@ The following trigger rules are available:
 - `none_skipped`: The task runs only when no upstream task is in a skipped state.
 - `always`: The task runs at any time.
 
-:::info 
+:::info
 
 There are several advanced Airflow features that influence trigger rules. You can define a DAG in which any task failure stops the DAG execution by setting the [DAG parameter](airflow-dag-parameters.md) `fail_stop` to `True`. This will set all tasks that are still running to `failed` and mark any tasks that have not run yet as `skipped`. Note that you cannot have any trigger rule other than `all_success` in a DAG with `fail_stop` set to `True`.
 

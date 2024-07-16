@@ -32,7 +32,7 @@ To view more detailed information about a specific DAG in the Astro UI, select t
 
 ![The detailed information page for a DAG, accessible from the DAGs view in the Astro UI](/img/docs/dag-detail-metrics.png)
 
-## See also 
+## See also
 
 - [Manage DAGs](manage-dags.md)
 

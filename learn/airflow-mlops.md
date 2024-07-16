@@ -15,7 +15,7 @@ In this guide you learn:
 - Which Airflow features and integrations are especially useful for MLOps.
 - Where to find additional resources and reference implementations on using Airflow for MLOps.
 
-:::tip  
+:::tip
 
 Ready to get started? Check out the recommended resources that showcase machine learning (ML) implementations with Airflow:
 
@@ -76,7 +76,7 @@ Organizations are often at different stages of maturity for each of these compon
 
 The first component of MLOps is to make sure there is strategic aligment with all stakeholders. This component varies widely depending on your organization and use case and can include:
 
-- **Business strategy**: Defining what ML is used for in an organization and what trade-offs are acceptable. Often, models can be optimized for different metrics, for example high recall or high precision, and domain experts are needed to determine the right metrics and model strategy. 
+- **Business strategy**: Defining what ML is used for in an organization and what trade-offs are acceptable. Often, models can be optimized for different metrics, for example high recall or high precision, and domain experts are needed to determine the right metrics and model strategy.
 - **Model governance**: Creating and following regulations for how your organization uses machine learning. This often depends on relevant regulations, like GDPR or HIPAA. Airflow has a built-in integration option with [Open Lineage](airflow-openlineage.md), the open-source standard for tracking data lineage, which is a key component of model governance.
 
 ### DevOps
@@ -88,7 +88,7 @@ Since you define Airflow pipelines in Python code, you can apply DevOps best pra
 
 :::info
 
-Astronomer customers can use the Astro GitHub integration, which allows you to automatically deploy code from a GitHUb repository to an Astro deployment, viewing Git metadata in the Astro UI. See [Deploy code with the Astro GitHub integration](https://www.astronomer.io/docs/astro/deploy-github-integration). 
+Astronomer customers can use the Astro GitHub integration, which allows you to automatically deploy code from a GitHUb repository to an Astro deployment, viewing Git metadata in the Astro UI. See [Deploy code with the Astro GitHub integration](https://www.astronomer.io/docs/astro/deploy-github-integration).
 
 :::
 
@@ -96,7 +96,7 @@ Astronomer customers can use the Astro GitHub integration, which allows you to a
 
 In practice, following modern DevOps patterns when using Airflow for MLOps means:
 
-- Storing all Airflow code and configuration in a version control system like Git. 
+- Storing all Airflow code and configuration in a version control system like Git.
 - Setting up development, staging, and production branches in your version control system and also connecting them to different Airflow environments. For Astro customers, see [Manage Astro connections in branch-based deploy workflows](https://www.astronomer.io/docs/astro/astro-use-case/use-case-astro-connections).
 - Use automatic testing and linting for all Airflow code before deployment.
 - Define all infrastructure as code and use the same CI/CD process for infrastructure as for your Airflow code.
@@ -112,8 +112,8 @@ Give special considerations to the following:
 
 - [**Data quality**](data-quality.md) and data cleaning. If your data is of bad quality, your model predictions will be too. Astronomer recommends incorporating data quality checks and data cleaning steps into your data pipelines to define and monitor the requirements your data has to fulfill in order for downstream ML operations to be successful. Airflow supports integration with any data quality tool that has an API, and has pre-built integrations for tools such as [Great Expectations](airflow-great-expectations.md) and [Soda Core](soda-data-quality.md).
 - **Data preprocessing and feature engineering**. It is common for data to undergo several transformation steps before it is ready to be used as input for an ML model. These steps can include simple [preprocessing steps](https://scikit-learn.org/stable/modules/preprocessing.html) like scaling, one-hot-encoding, or imputation of missing values. It can also include more complex steps like [feature selection](https://scikit-learn.org/stable/modules/feature_selection.html#feature-selection), [dimensionality reduction](https://en.wikipedia.org/wiki/Dimensionality_reduction), or [feature extraction](https://scikit-learn.org/stable/modules/feature_extraction.html). Airflow allows you to run preprocessing and feature engineering steps in a pythonic way using [Airflow decorators](airflow-decorators.md).
-- **Data storage**. 
-    - Training and testing data. The best way to store your data highly depends on your data and type of ML. Data engineering includes ingesting data and moving it to the ideal platform for your ML model to access. This can, for example, be an object storage solution, a relational database management system (RDBMS), or a vector database. Airflow integrates with all these options, with tools such as [Airflow object storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) and the [Astro Python SDK](https://www.astronomer.io/docs/learn/astro-python-sdk) simplifying common operations. 
+- **Data storage**.
+    - Training and testing data. The best way to store your data highly depends on your data and type of ML. Data engineering includes ingesting data and moving it to the ideal platform for your ML model to access. This can, for example, be an object storage solution, a relational database management system (RDBMS), or a vector database. Airflow integrates with all these options, with tools such as [Airflow object storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) and the [Astro Python SDK](https://www.astronomer.io/docs/learn/astro-python-sdk) simplifying common operations.
     - Model artifacts. Model artifacts include model parameters, hyperparameters, and other metadata. Airflow integrates with specialized version control systems such as [MLFlow](airflow-mlflow.md) or [Weights and Biases](airflow-weights-and-biases.md).
 
 Apart from the foundations mentioned above, second day data quality operations in MLOps often include advanced topics like data governance, [data lineage](airflow-openlineage.md), and data cataloging as well as monitoring of data drift.
@@ -144,7 +144,7 @@ Other Airflow users decide to [scale up](airflow-scaling-workers.md) their Airfl
 In practice, following modern model operations patterns when using Airflow for MLOps means:
 
 - Performing exploratory data analysis and test potential ML applications on small subsets of data in a notebook environment before moving to production. Tools like [Jupyter notebooks](https://jupyter.org/) are widely used and run Python code you can later convert to tasks in Airflow DAGs.
-- Using Airflow to orchestrate model training, fine-tuning, testing, and deployment. 
+- Using Airflow to orchestrate model training, fine-tuning, testing, and deployment.
 - Having Airflow tasks monitor the performance of your model and perform automated actions such as re-training, re-deploying, or alerting if the performance drops below a certain threshold.
 
 ![Diagram showing different Airflow DAGs relating to model operations in an MLOps pipeline](/img/guides/airflow-mlops_ml_dags.png)
@@ -153,7 +153,7 @@ In practice, following modern model operations patterns when using Airflow for M
 
 When using Apache Airflow for MLOps, there are three main patterns you can follow:
 
-- Using Apache Airflow to orchestrate actions in other MLOps tools. Airflow is a tool-agnostic orchestrator, which means it can also orchestrate all actions in ML specific tools like [MLFlow](airflow-mlflow.md) or [AWS SageMaker](airflow-sagemaker.md). 
+- Using Apache Airflow to orchestrate actions in other MLOps tools. Airflow is a tool-agnostic orchestrator, which means it can also orchestrate all actions in ML specific tools like [MLFlow](airflow-mlflow.md) or [AWS SageMaker](airflow-sagemaker.md).
 - Combine orchestration of actions in other tools with ML operations running within Airflow. For example, you can create vector embeddings in a Python function in Airflow and then use these embeddings to train a model in [Google Datalab](https://cloud.google.com/monitoring/datalab/set-up-datalab). Modules like the [`@task.kubernetes`](kubepod-operator.md#use-the-taskkubernetes-decorator) or [`@task.external_python_operator`](airflow-isolated-environments.md) make it easy to run any Python code in isolation with optimized environments and resources.
 - Run all your MLOps using Python modules inside Airflow tasks. Since Airflow can run any Python code and [scale indefinitely](airflow-scaling-workers.md), you can use it as an all-purpose MLOps tool.
 
@@ -163,7 +163,7 @@ A specific set of Airflow features can help you implement MLOps best practices:
 
 - [Data driven scheduling](airflow-datasets): With Airflow datasets, you can schedule DAGs to run after a specific dataset is updated by any task in the DAG. For example, you can schedule your model training DAG to run after the training dataset is updated by the data engineering DAG. See [Orchestrate machine learning pipelines with Airflow datasets](use-case-airflow-datasets-multi-team-ml.md).
 
-    ![Screenshot of the Datasets view showing the dataset_de_dag as the producing DAG to the postgres://prodserver:2319/trainset dataset. The dataset_ml_dag is the consuming DAG.](/img/guides/airflow-mlops_datasets.png) 
+    ![Screenshot of the Datasets view showing the dataset_de_dag as the producing DAG to the postgres://prodserver:2319/trainset dataset. The dataset_ml_dag is the consuming DAG.](/img/guides/airflow-mlops_datasets.png)
 
 - [Dynamic task mapping](dynamic-tasks.md): In Airflow, you can map tasks and task groups dynamically at runtime. This allows you to run similar operations in parallel without knowing in advance how many operations run in any given DAGrun. For example, you can dynamically run a set of model training tasks in parallel, each with different hyperparameters.
 
@@ -195,7 +195,7 @@ With Airflow, you can orchestrate actions in any MLOps tool that has an API. Man
 - [OpenAI](airflow-openai.md). A tool to train and deploy large models, including `GPT-4` and `DALL·E 3`.
 - [MLFlow](airflow-mlflow.md). An open source tool to track and version data preprocessing and machine learning models.
 - [Weights & Biases](airflow-weights-and-biases.md). A tool to track and visualize machine learning experiments.
-- [Weaviate](airflow-weaviate.md). An open source vector database. 
+- [Weaviate](airflow-weaviate.md). An open source vector database.
 - [OpenSearch](airflow-opensearch.md). An open source search engine with advanced ML features.
 - [Pgvector](airflow-pgvector.md). A extension enabling vector operations in PostgreSQL.
 - [Pinecone](airflow-pinecone.md). A vector proprietary database.
@@ -212,13 +212,13 @@ Additionally, the provider packages for the main cloud providers include modules
 
 To learn more about using Airflow for MLOps, check out the following resources:
 
-- Reference architectures: 
+- Reference architectures:
     - [Ask Astro: LLM Retrieval Augmented Generation pipeline](https://github.com/astronomer/ask-astro).
 - Webinars:
     - [Orchestrate next-generation AI tools: Explore six new Airflow providers](https://www.astronomer.io/events/webinars/orchestrate-next-generation-ai-tools-explore-six-new-airflow-providers/).
     - [Airflow at Faire: Democratizing Machine Learning at Scale](https://www.astronomer.io/events/webinars/airflow-at-faire-democratizing-machine-learning-at-scale/).
     - [Run LLMOps in production with Apache Airflow](https://www.astronomer.io/events/webinars/run-llmops-in-production-with-apache-airflow/).
-    - [Power your LLMOps with Airflow’s Weaviate Provider](https://www.astronomer.io/events/webinars/power-your-llmops-with-airflows-weaviate-provider/). 
+    - [Power your LLMOps with Airflow’s Weaviate Provider](https://www.astronomer.io/events/webinars/power-your-llmops-with-airflows-weaviate-provider/).
     - [How to use Snowpark with Airflow](https://www.astronomer.io/events/webinars/how-to-use-snowpark-with-airflow/).
     - [How to Orchestrate Machine Learning Workflows with Airflow](https://www.astronomer.io/events/webinars/how-to-orchestrate-machine-learning-workflows-with-airflow/).
     - [Batch Inference with Airflow and SageMaker](https://www.astronomer.io/events/webinars/batch-inference-with-airflow-and-sagemaker/).

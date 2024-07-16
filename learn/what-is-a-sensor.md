@@ -35,7 +35,7 @@ To get the most out of this guide, you should have an understanding of:
 
 ## Sensor basics
 
-Sensors are a type of operator that checks if a condition is met at a specific interval. If the condition is met, the task is marked successful and the DAG can move to downstream tasks. If the condition isn't met, the sensor waits for another interval before checking again. 
+Sensors are a type of operator that checks if a condition is met at a specific interval. If the condition is met, the task is marked successful and the DAG can move to downstream tasks. If the condition isn't met, the sensor waits for another interval before checking again.
 
 All sensors inherit from the [`BaseSensorOperator`](https://github.com/apache/airflow/blob/main/airflow/sensors/base.py) and have the following parameters:
 
@@ -139,4 +139,4 @@ For DAG authors, using deferrable sensors is no different from using regular sen
 - Set the `deferrable` parameter to `True` on individual sensor instances you want to run in deferrable mode.
 - Replace the name of a sensor with its deferrable counterpart if no `deferrable` parameter is available.
 
-For more details, see [Deferrable operators](deferrable-operators.md). 
+For more details, see [Deferrable operators](deferrable-operators.md).

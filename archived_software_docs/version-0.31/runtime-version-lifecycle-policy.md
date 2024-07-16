@@ -85,7 +85,7 @@ The following table contains the exact lifecycle for each published version of A
 | [6](https://www.astronomer.io/docs/astro/runtime-release-notes#astro-runtime-600) | 2.4                    | September 19, 2022 | March 2024              |
 | [7](https://www.astronomer.io/docs/astro/runtime-release-notes#astro-runtime-700) | 2.5                    | December 3, 2022   | June 2023               |
 
-### Long-term support (LTS) releases 
+### Long-term support (LTS) releases
 
 | Runtime Version                                 | Apache Airflow version | Release Date       | End of Maintenance Date |
 | ----------------------------------------------- | ---------------------- | ------------------ | ----------------------- |

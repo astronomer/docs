@@ -4,9 +4,9 @@ instances:
 title: Astro API Reference
 navigation:
   - section: Astro API
-    contents: 
+    contents:
       - page: Overview
-        path: ./docs/pages/overview.mdx 
+        path: ./docs/pages/overview.mdx
       - page: Get started
         path: ./docs/pages/get-started.mdx
       - page: Versioning and support
@@ -15,7 +15,7 @@ navigation:
     api-name: platform
   - api: IAM API Reference
     api-name: iam
-layout: 
+layout:
   searchbar-placement: header
 favicon: ./docs/assets/favicon.svg
 colors:
@@ -25,7 +25,7 @@ colors:
   background:
     dark: '#16142d'
     light: "#f7f4ff"
-logo: 
+logo:
   light: ./docs/assets/logo-light.svg
   dark: ./docs/assets/logo-dark.svg
   href: https://www.astronomer.io/docs/api

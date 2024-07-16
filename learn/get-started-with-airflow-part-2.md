@@ -116,7 +116,7 @@ Note that the option to test connections is only available for selected connecti
 4. Click **Save**.
 
 You should now have two connections as shown in the following screenshot:
-    
+
 ![Connection List](/img/tutorials/get-started-with-airflow-part-2_TwoConnections.png)
 
 ## Step 6: Review the DAG code
@@ -129,15 +129,15 @@ At the top of the file, the DAG is described in a docstring. It's highly recomme
 """
 ## Find the International Space Station
 
-This DAG waits for a specific commit message to appear in a GitHub repository, 
+This DAG waits for a specific commit message to appear in a GitHub repository,
 and then pulls the current location of the International Space Station from an API
 and print it to the logs.
 
-This DAG needs a GitHub connection with the name `my_github_conn` and 
+This DAG needs a GitHub connection with the name `my_github_conn` and
 an HTTP connection with the name `open_notify_api_conn`
 and the host `https://api.open-notify.org/` to work.
 
-Additionally you need to set an Airflow variable with 
+Additionally you need to set an Airflow variable with
 the name `open_notify_api_endpoint` and the value `iss-now.json`.
 """
 ```
@@ -201,7 +201,7 @@ Next, the DAG context is instantiated using the [`@dag` decorator](airflow-decor
 
 - `dag_id` is not set explicitly, so it defaults to the name of the Python function, `find_the_iss`.
 - `start_date` is set to January 1st, 2024, which means the DAG starts to be scheduled after this date.
-- `schedule` is set to `@daily`, which means the DAG runs every day at 0:00 UTC. You can use any [CRON](https://crontab.guru/) string or shorthand for time-based schedules. 
+- `schedule` is set to `@daily`, which means the DAG runs every day at 0:00 UTC. You can use any [CRON](https://crontab.guru/) string or shorthand for time-based schedules.
 - `catchup` is set to `False` to prevent DAG runs from between the `start_date` and today from being backfilled automatically.
 - `doc_md` is set to the docstring of the DAG file to create [DAG Docs](custom-airflow-ui-docs-tutorial.md) you can view in the Airflow UI.
 - `default_args` is set to a dictionary with the key `owner` set to `airflow` and the key `retries` set to `3`. The latter setting gives each task in this DAG 3 retries before failing, which is a common best practice to protect against transient failures.
@@ -219,9 +219,9 @@ Next, the DAG context is instantiated using the [`@dag` decorator](airflow-decor
 def find_the_iss():
 ```
 
-The DAG itself has three tasks: 
+The DAG itself has three tasks:
 
-- The first task uses the [GithubSensor](https://registry.astronomer.io/providers/apache-airflow-providers-github/versions/latest/modules/GithubSensor) to check whether the commit message `Where is the ISS right now?` has been added to your GitHub repository with the help of the `commit_message_checker` function described previously. 
+- The first task uses the [GithubSensor](https://registry.astronomer.io/providers/apache-airflow-providers-github/versions/latest/modules/GithubSensor) to check whether the commit message `Where is the ISS right now?` has been added to your GitHub repository with the help of the `commit_message_checker` function described previously.
 
     This task utilizes the Airflow variable (`my_github_repo`) and the Airflow connection (`my_github_connection`) to access the correct repository with the appropriate credentials. The [sensor](what-is-a-sensor.md) checks for the tag every 5 seconds (`poke_interval`) and times out after one hour (`timeout`). It is best practice to always set a `timeout` because the default value is 7 days, which can impact performance if left unchanged in DAGs that run on a higher frequency.
 

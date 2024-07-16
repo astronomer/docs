@@ -8,20 +8,20 @@ In this quick introduction to the Astro API, you'll make some simple requests to
 
 ## Prerequisites
 
-- An [Astro account](https://www.astronomer.io/docs/astro/log-in-to-astro). 
+- An [Astro account](https://www.astronomer.io/docs/astro/log-in-to-astro).
 - An [Organization API token](https://www.astronomer.io/docs/astro/organization-api-tokens) with the Organization Owner role. Astronomer recommends that you create a new API token for this tutorial.
 - An Astro [Workspace](https://www.astronomer.io/docs/astro/manage-workspaces).
 - A method for making API requests. This tutorial assumes you're using curl, but you can also use tools such as Postman.
 
 ## Step 1: Make your first API request
 
-To access most endpoints, you need to provide an Organization ID to the API as a path parameter. One of the few requests that doesn't require an Organization ID is the [List Organizations](https://www.astronomer.io/docs/astro/api/platform-api-reference#tag/Organization/operation/ListOrganizations) request, which means that you can programmatically retrieve an Organization ID. 
+To access most endpoints, you need to provide an Organization ID to the API as a path parameter. One of the few requests that doesn't require an Organization ID is the [List Organizations](https://www.astronomer.io/docs/astro/api/platform-api-reference#tag/Organization/operation/ListOrganizations) request, which means that you can programmatically retrieve an Organization ID.
 
 To retrieve the Organization ID through the API, run the following command:
 
 ```bash
 curl --location 'https://api.astronomer.io/platform/v1beta1/organizations' \
---header 'Authorization: Bearer <your-organization-api-token>' 
+--header 'Authorization: Bearer <your-organization-api-token>'
 ```
 
 If the command was successful, then you receive a response that begins similarly to the following:
@@ -52,13 +52,13 @@ While you could have retrieved this value manually from the Astro UI, using the 
 
 ## Step 2: Request Workspace details from the API
 
-Using the Organization ID you copied, you can now find the ID for the Workspace where you want to create your API token. 
+Using the Organization ID you copied, you can now find the ID for the Workspace where you want to create your API token.
 
 Run the following command to list all Workspaces in your Organization:
 
 ```bash
 curl --location 'https://api.astronomer.io/platform/v1beta1/organizations/<your-organization-id>/workspaces' \
---header 'Authorization: Bearer <your-api-token>' 
+--header 'Authorization: Bearer <your-api-token>'
 ```
 
 If the command succeeds, the API returns a list of Workspaces similar to the following:
@@ -116,9 +116,9 @@ Now that you have both an Organization ID and a Workspace ID, you can create a W
 1. Run the following command to create a new Workspace API token:
 
     ```bash
-    curl --location 'https://api.astronomer.io/iam/v1beta1/organizations/<your-organization-id>/tokens' \                                            
+    curl --location 'https://api.astronomer.io/iam/v1beta1/organizations/<your-organization-id>/tokens' \
     --header 'Content-Type: application/json' \
-    --header 'Authorization: Bearer <your-organization-api-token>' \                                                                                                                  
+    --header 'Authorization: Bearer <your-organization-api-token>' \
     --data '{
         "description": "I wrote this description using the Astro API!",
         "entityId": "<your-workspace-id>",

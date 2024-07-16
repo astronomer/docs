@@ -81,7 +81,7 @@ This command observes all scheduler containers in the cluster and outputs the re
 
 :::info
 
-By default, Telescope only observes Pods with the label `component=scheduler`. If your Deployments use an alternative label to denote scheduler Pods, use  `--label-selector` in your command. For example, if your label for scheduler pods is `role=scheduler`, you would run.  
+By default, Telescope only observes Pods with the label `component=scheduler`. If your Deployments use an alternative label to denote scheduler Pods, use  `--label-selector` in your command. For example, if your label for scheduler pods is `role=scheduler`, you would run.
 
 ```sh
 --kubernetes --organization-name <your-organization> --label-selector "role=scheduler"

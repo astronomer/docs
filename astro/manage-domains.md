@@ -7,7 +7,7 @@ description: Create and map domains to single sign-on platforms on Astro.
 
 Authorization policies in Astro are based on email domains, which ensures that all users with an approved email domain authenticate with a specific authentication method. Domains can be mapped to single sign-on (SSO) methods so that users who have an email with a domain are automatically directed to your SSO platform when they log in to Astro.
 
-You can only configure a single domain for an SSO connection. However, if you have multiple managed domains, then you can set up multiple different SSO connections, with a separate SSO connection for each domain. 
+You can only configure a single domain for an SSO connection. However, if you have multiple managed domains, then you can set up multiple different SSO connections, with a separate SSO connection for each domain.
 
 ## Create a domain
 
@@ -30,6 +30,6 @@ After your domain is verified, you can map the domain to an SSO connection. Mapp
 ## Delete a domain
 
 1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
-2. In the **Managed Domains** menu, click the trash bin next to the domain you want to delete. 
+2. In the **Managed Domains** menu, click the trash bin next to the domain you want to delete.
 3. Follow the prompts to confirm the deletion.
 

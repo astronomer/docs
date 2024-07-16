@@ -7,7 +7,7 @@ description: 'Use tutorials and guides to make the most out of Airflow and Astro
 
 Developing data pipelines has never been easier than when using the Astro Cloud IDE.
 
-The Astro Cloud IDE automatically generates DAGs based on configurations you set in its notebook-style visual interface. Using the Astro Cloud IDE, you can create a complete data pipeline using Python, SQL, existing [Airflow operators](https://www.astronomer.io/docs/astro/cloud-ide/use-airflow-operators) from [over 100 providers](https://registry.astronomer.io/providers), or [custom cells](https://www.astronomer.io/docs/astro/cloud-ide/custom-cell-reference) without setting dependencies or connections in code. 
+The Astro Cloud IDE automatically generates DAGs based on configurations you set in its notebook-style visual interface. Using the Astro Cloud IDE, you can create a complete data pipeline using Python, SQL, existing [Airflow operators](https://www.astronomer.io/docs/astro/cloud-ide/use-airflow-operators) from [over 100 providers](https://registry.astronomer.io/providers), or [custom cells](https://www.astronomer.io/docs/astro/cloud-ide/custom-cell-reference) without setting dependencies or connections in code.
 
 This tutorial is for Astro customers who want to create their first simple ML pipeline in the Astro Cloud IDE using Python and SQL. To explore Astro Cloud IDE functionality, you will create a pipeline that runs a random forest model to predict dog breed intelligence, then schedule and deploy the pipeline to Astro.
 
@@ -68,7 +68,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 2: Create a new pipeline
 
-1. Click on **+ Pipeline** to create a new pipeline. 
+1. Click on **+ Pipeline** to create a new pipeline.
 
     ![Screenshot of the Astro UI. New pipeline creation dialogue. The pipeline dog_intelligence is created with the description "All dogs are good dogs".](/img/tutorials/cloud-ide-tutorial_create_pipeline.png)
 
@@ -80,11 +80,11 @@ The name you give your pipeline will be the name of the DAG which the Astro Clou
 
 To run your ML model on data, you need to connect to your database. Thankfully, the Astro Cloud IDE handles connection configuration for you! If you are using the in-memory database for developing purposes, you can skip this step.
 
-1. Click **Environment** to add connections, variables, and dependencies to your Astro Cloud IDE project. 
+1. Click **Environment** to add connections, variables, and dependencies to your Astro Cloud IDE project.
 
     ![Screenshot of the Cloud IDE with the environment tab selected showing the option to create Variables, Requirements and Connections as well as view Task Outputs.](/img/tutorials/cloud-ide-tutorial_environment_button.png)
 
-2. Click **+ Connection** to add a new connection. This tutorial uses Snowflake as an example, but you can also use Postgres, Bigquery, or Redshift. 
+2. Click **+ Connection** to add a new connection. This tutorial uses Snowflake as an example, but you can also use Postgres, Bigquery, or Redshift.
 
     Provide your connection credentials as shown in the following screenshots:
 
@@ -96,7 +96,7 @@ To run your ML model on data, you need to connect to your database. Thankfully, 
 
 ## Step 4: Add required Python packages
 
-In the same section where you configured your database connection, open the **Requirements** tab. Here you can add any Python packages that you need for your project. To create the simple ML model, you need to add the `scikit-learn` package. 
+In the same section where you configured your database connection, open the **Requirements** tab. Here you can add any Python packages that you need for your project. To create the simple ML model, you need to add the `scikit-learn` package.
 
 1. Click **+ Requirements**.
 2. In the **PACKAGE NAME** field, type `scikit-learn`. The Astro Cloud IDE produces a list of packages to choose from.
@@ -106,11 +106,11 @@ In the same section where you configured your database connection, open the **Re
 
 ## Step 5: Import a dataset into your database
 
-Now that you've set up the environment for your pipelines, you can create pipelines - starting with your source data! For this tutorial you will try to predict the intelligence of a dog breed based on their upper and lower limits for weight and height. 
+Now that you've set up the environment for your pipelines, you can create pipelines - starting with your source data! For this tutorial you will try to predict the intelligence of a dog breed based on their upper and lower limits for weight and height.
 
 :::info
 
-The dataset used in this tutorial is a slightly modified version of [this dataset on Kaggle](https://www.kaggle.com/datasets/jasleensondhi/dog-intelligence-comparison-based-on-size). 
+The dataset used in this tutorial is a slightly modified version of [this dataset on Kaggle](https://www.kaggle.com/datasets/jasleensondhi/dog-intelligence-comparison-based-on-size).
 
 :::
 
@@ -118,7 +118,7 @@ The dataset used in this tutorial is a slightly modified version of [this datase
 
 2. Run the following SQL statement in a Snowflake worksheet to create the target table:
 
-    ```sql 
+    ```sql
     CREATE TABLE dog_intelligence (
         BREED varchar(50),
         HEIGHT_LOW_INCHES INT,
@@ -168,9 +168,9 @@ Navigate back to your Astro Cloud IDE on Astro.
 
 4. Paste the following SQL code into your cell. This query selects all records that do not contain any `NULL` values in any column. Make sure to update the query with your database and schema name.
 
-    ```sql 
-    SELECT * FROM <your database>.<your_schema>.DOG_INTELLIGENCE 
-    WHERE CONCAT(BREED, HEIGHT_LOW_INCHES, HEIGHT_HIGH_INCHES, WEIGHT_LOW_LBS, 
+    ```sql
+    SELECT * FROM <your database>.<your_schema>.DOG_INTELLIGENCE
+    WHERE CONCAT(BREED, HEIGHT_LOW_INCHES, HEIGHT_HIGH_INCHES, WEIGHT_LOW_LBS,
     WEIGHT_HIGH_LBS, REPS_UPPER, REPS_LOWER) IS NOT NULL
     ```
 
@@ -194,11 +194,11 @@ Before you can train the model, you first need to transform the data in your tab
 
 2. Rename the cell from `sql_1` to `transform_table`.
 
-3. Select the same connection as in your `query_table` cell. 
+3. Select the same connection as in your `query_table` cell.
 
 4. Copy the following SQL statement into the cell:
 
-    ```sql 
+    ```sql
     SELECT HEIGHT_LOW_INCHES, HEIGHT_HIGH_INCHES, WEIGHT_LOW_LBS, WEIGHT_HIGH_LBS,
         CASE WHEN reps_upper <= 25 THEN 'very_smart_dog'
         ELSE 'smart_dog'
@@ -218,7 +218,7 @@ The output table should contain a new binary `INTELLIGENCE_CATEGORY` column whic
 
 Train a random forest model to predict the dog intelligence category of a breed based on height and weight information.
 
-1. Create a new Python cell by clicking **Add Cell** and selecting **Python**. 
+1. Create a new Python cell by clicking **Add Cell** and selecting **Python**.
 
 2. Rename the cell from `python_1` to `model_task`.
 
@@ -263,10 +263,10 @@ Train a random forest model to predict the dog intelligence category of a breed 
     baseline accuracy: {baseline_accuracy},\n
     model accuracy: {score},\n
     feature importances: {feature_importances}
-    """ 
+    """
     ```
 
-    You will notice again how the Astro Cloud IDE will automatically create a dependency between the `transform_table` task and the `model_task` task. The Python code above references the `transform_table` object returned from the `transform_table` cell directly (without Jinja syntax) on line 6. 
+    You will notice again how the Astro Cloud IDE will automatically create a dependency between the `transform_table` task and the `model_task` task. The Python code above references the `transform_table` object returned from the `transform_table` cell directly (without Jinja syntax) on line 6.
 
     The Python code completes the following steps:
 
@@ -280,7 +280,7 @@ Train a random forest model to predict the dog intelligence category of a breed 
 
 4. Run the cell.
 
-The output of the cell shows you both the baseline and the model accuracy. With the model accuracy being higher than baseline, you can conclude that height and weight of dogs have a correlation (but not necessarily causation!) with how many repetitions they need to learn a new command. 
+The output of the cell shows you both the baseline and the model accuracy. With the model accuracy being higher than baseline, you can conclude that height and weight of dogs have a correlation (but not necessarily causation!) with how many repetitions they need to learn a new command.
 
 ![Output of the train model task showing baseline accuracy: 0.54, model accuracy: 0.93, feature importances: [('height_low_inches', 0.11), ('height_high_inches', 0.23), ('weight_low_lbs', 0.32), ('weight_high_lbs', 0.34)]](/img/tutorials/cloud-ide-tutorial_train_task_output.png)
 
@@ -292,7 +292,7 @@ To learn more about random forests check out this [MLU explain article](https://
 
 Setting a schedule for your pipeline will determine how this pipeline will be scheduled once it is deployed to Astro as a DAG. Within the Astro Cloud IDE a pipeline will only run if you start a run manually.
 
-1. Click **Schedule** to see your DAG's current schedule. 
+1. Click **Schedule** to see your DAG's current schedule.
 
 2. Set **START DATE** to yesterday's date.
 
@@ -302,7 +302,7 @@ Setting a schedule for your pipeline will determine how this pipeline will be sc
 
 4. Click **Update Settings** to save your schedule.
 
-## Step 10: View your DAG code 
+## Step 10: View your DAG code
 
 Through this tutorial, the Astro Cloud IDE was building a DAG based on the configurations you set in the Astro UI. Export your pipeline as DAG code to see the results of your work.
 
@@ -320,7 +320,7 @@ Now that you have finished creating a pipeline, you can connect GitHub to the As
 
     ![Dialogue to configure the GitHub connection of the Cloud IDE.](/img/tutorials/cloud-ide-tutorial_configure_github.png)
 
-2. Enter your personal access token and the name of an existing GitHub repository that contains an Astro project. 
+2. Enter your personal access token and the name of an existing GitHub repository that contains an Astro project.
 
 3. Click **Configure** to save your connection details.
 
@@ -332,7 +332,7 @@ If you are writing pipelines that need access to additional files from your `inc
 
 ## Step 12: (Optional) Commit your DAG to GitHub
 
-Export your pipeline by committing it to your connected GitHub repository. 
+Export your pipeline by committing it to your connected GitHub repository.
 
 1. Click **Commit** to open the commit dialogue.
 
@@ -354,7 +354,7 @@ Export your pipeline by committing it to your connected GitHub repository.
 
 3. Create a pull request in GitHub from your dedicated Astro Cloud IDE branch to your development branch and merge the changes you want to add to your Astro Cloud environment.
 
-## Step 13: (Optional) Deploy your DAG to Astro 
+## Step 13: (Optional) Deploy your DAG to Astro
 
 Astro supports CI/CD with GitHub Actions. You can use GitHub Actions to deploy your DAG to Astro automatically when you commit changes to your DAG from within the Cloud IDE to a branch that is configured for CI/CD.
 
@@ -372,7 +372,7 @@ Note that if you used the `In-memory SQL` connection in your Astro Cloud IDE pro
 
 ## Step 14: (Optional) Run your DAG on Astro
 
-1. In the Astro UI, open your Deployment. 
+1. In the Astro UI, open your Deployment.
 
 2. Click **Open Airflow**.
 
@@ -392,7 +392,7 @@ Click the `Open in Cloud IDE` Owner tag to open the DAG in the Astro Cloud IDE.
 
 You now know how to use the Astro Cloud IDE to write a simple ML pipeline! More specifically, you can now:
 
-- Create a new Astro Cloud IDE project and pipeline. 
+- Create a new Astro Cloud IDE project and pipeline.
 - Use a SQL cell to query and transform tables in a database.
 - Pass information between SQL and Python cells.
 - Run a simple `RandomForestClassifier` on a dataset.

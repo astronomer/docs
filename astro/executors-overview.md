@@ -39,9 +39,9 @@ See [Manage the Celery executor](celery-executor.md) to learn more about how to 
 
 ### Kubernetes executor
 
-The Kubernetes executor runs each task in an individual Kubernetes Pod that's defined either in your task or Deployment configuration. When a task completes, its Pod is terminated and the resources are returned to your cluster. On Astro, the infrastructure required to run the Kubernetes executor is built into every Deployment and is managed by Astronomer. 
+The Kubernetes executor runs each task in an individual Kubernetes Pod that's defined either in your task or Deployment configuration. When a task completes, its Pod is terminated and the resources are returned to your cluster. On Astro, the infrastructure required to run the Kubernetes executor is built into every Deployment and is managed by Astronomer.
 
-You can specify the configuration of a task's Pod, including CPU and memory, as part of your DAG definition using the [Kubernetes Python Client](https://github.com/kubernetes-client/python) and the `pod_override` arg. Any task without a `pod_override` runs in a [default Pod](deployment-resources.md#configure-kubernetes-pod-resources) as configured on your Deployment. 
+You can specify the configuration of a task's Pod, including CPU and memory, as part of your DAG definition using the [Kubernetes Python Client](https://github.com/kubernetes-client/python) and the `pod_override` arg. Any task without a `pod_override` runs in a [default Pod](deployment-resources.md#configure-kubernetes-pod-resources) as configured on your Deployment.
 
 The Kubernetes executor is a good option for some use cases. Specifically, the Kubernetes executor is a good fit for your Deployment if:
 

@@ -55,7 +55,7 @@ mutation workspaceAddUser(
 }
 ```
 
-In this mutation, the values to update are formatted as variables in the first part of the request, then applied in the second half. Variables marked with a `!` are required in order for the query to complete. Lastly, the mutation requests the Houston API to return `id` of the added user to confirm that the mutation was successful. In this way, it's possible to make a mutation and a query in a single request. 
+In this mutation, the values to update are formatted as variables in the first part of the request, then applied in the second half. Variables marked with a `!` are required in order for the query to complete. Lastly, the mutation requests the Houston API to return `id` of the added user to confirm that the mutation was successful. In this way, it's possible to make a mutation and a query in a single request.
 
 For more basic GraphQL usage rules and examples, see the [GraphQL documentation](https://graphql.org/learn/queries/).
 
@@ -75,7 +75,7 @@ Then push the configuration change to your cluster. See [Apply a config change](
 
 ## Authenticate to the Houston API
 
-A Houston API request requires a token so that the request can be authenticated and authorized with a specific level of access on Astronomer Software. 
+A Houston API request requires a token so that the request can be authenticated and authorized with a specific level of access on Astronomer Software.
 
 You can retrieve a token in one of the following ways:
 
@@ -90,7 +90,7 @@ curl 'https://houston.mybasedomain.io/v1' -H 'Accept-Encoding: gzip, deflate, br
 
 ## Develop and test Houston API queries
 
-The Astronomer Houston API is available in a [GraphQL playground](https://www.apollographql.com/docs/apollo-server/v2/testing/graphql-playground/) where you can view the Houston API schema and documentation, as well as model, test, and export requests. To test requests in the playground, you must have a valid [authentication token](#authenticate-to-the-houston-api). 
+The Astronomer Houston API is available in a [GraphQL playground](https://www.apollographql.com/docs/apollo-server/v2/testing/graphql-playground/) where you can view the Houston API schema and documentation, as well as model, test, and export requests. To test requests in the playground, you must have a valid [authentication token](#authenticate-to-the-houston-api).
 
 1. Access the Astronomer Houston API GraphQL playground at `https://houston.<your-base-domain>/v1`.
 2. Click **HTTP Headers**.
@@ -100,7 +100,7 @@ The Astronomer Houston API is available in a [GraphQL playground](https://www.ap
     {"authorization": "<your-api-token>"}
     ```
 
-You can now run Houston API queries directly in your browser using the **Play** button in the GraphQL playground. 
+You can now run Houston API queries directly in your browser using the **Play** button in the GraphQL playground.
 
 ## See also
 

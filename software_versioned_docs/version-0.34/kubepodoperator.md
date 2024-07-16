@@ -7,7 +7,7 @@ description: Run the KubernetesPodOperator on Astronomer Software.
 
 The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most customizable Apache Airflow operators. A task using the KubernetesPodOperator runs in a dedicated, isolated Kubernetes Pod that terminates after the task completes. To learn more about the benefits and usage of the KubernetesPodOperator, see the [KubernetesPodOperator Learn guide](https://docs.astronomer.io/learn/kubepod-operator).
 
-This guide explains how to complete specific goals using the KubernetesPodOperator on Astronomer Software. 
+This guide explains how to complete specific goals using the KubernetesPodOperator on Astronomer Software.
 
 ## Prerequisites
 

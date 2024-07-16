@@ -15,7 +15,7 @@ import tdro_example_downstream_traditional from '!!raw-loader!../code-samples/da
 import simple_param_dag from '!!raw-loader!../code-samples/dags/airflow-params/simple_param_dag.py';
 import simple_param_dag_traditional from '!!raw-loader!../code-samples/dags/airflow-params/simple_param_dag_traditional.py';
 
-Params are arguments which you can pass to an Airflow DAG or task at runtime and are stored in the [Airflow context dictionary](airflow-context.md) for each DAG run. You can pass DAG and task-level params by using the `params` parameter.
+Params are arguments which you can pass to an Airflow DAG or task at runtime and are stored in the [Airflow context dictionary](airflow-context.md) for each DAG run. You can pass DAG and task-level params by using the `params` parameter.
 
 Params are ideal to store information that is specific to individual DAG runs like changing dates, file paths or ML model configurations. Params are not encrypted and therefore not suitable to pass secrets. See also [Best practices for storing information in Airflow](airflow-variables.md#best-practices-for-storing-information-in-airflow).
 
@@ -43,9 +43,9 @@ Params can be passed to a DAG at runtime in four different ways:
 - Using the TriggerDagRunOperator with the `conf` parameter.
 - Making a POST request to the Airflow REST APIs [Trigger a new DAG run](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) endpoint and using the `conf` parameter.
 
-Param values passed to a DAG by any of these methods will override existing default values for the same key as long as the [Airflow core config `dag_run_conf_overrides_params`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-run-conf-overrides-params) is set to `True`. 
+Param values passed to a DAG by any of these methods will override existing default values for the same key as long as the [Airflow core config `dag_run_conf_overrides_params`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-run-conf-overrides-params) is set to `True`.
 
-:::info 
+:::info
 
 While it's possible to pass non-JSON serializable params, this behavior is deprecated and will be removed in a future release. It is best practice to make sure your params are JSON serializable.
 
@@ -53,9 +53,9 @@ While it's possible to pass non-JSON serializable params, this behavior is depre
 
 ### Trigger DAG w/ config
 
-You can pass params to a DAG from the Airflow UI by clicking on the Play button and selecting **Trigger DAG w/ config**. 
+You can pass params to a DAG from the Airflow UI by clicking on the Play button and selecting **Trigger DAG w/ config**.
 
-![Trigger DAG w/ config](/img/guides/airflow-params_trigger_dag_w_config_500.png) 
+![Trigger DAG w/ config](/img/guides/airflow-params_trigger_dag_w_config_500.png)
 
 This button opens a UI in which you can specify details for the DAG run:
 
@@ -68,7 +68,7 @@ In Airflow 2.7+, you need to explicitly set the environment variable `AIRFLOW__W
 :::
 
 - You can set the **Logical date** of the DAG run to any date that is in between the `start_date` and the `end_date` of the DAG to create DAG runs in the past or future.
-- You can set the **Run id** to any string. If no run ID is specified, Airflow generates one based on the type of run (`scheduled`, `dataset_triggered`, `manual` or `backfill`) and the logical date (for example: `manual__2023-06-16T08:03:45+00:00`). 
+- You can set the **Run id** to any string. If no run ID is specified, Airflow generates one based on the type of run (`scheduled`, `dataset_triggered`, `manual` or `backfill`) and the logical date (for example: `manual__2023-06-16T08:03:45+00:00`).
 - You can select configurations from recent DAG runs in the **Select Recent Configurations** dropdown menu.
 - The **Trigger DAG** UI will render a UI element for every DAG-level params you define with a default value. See also [Define DAG-level param defaults](#define-dag-level-params-defaults).
 - The information in the UI elements generates a Configuration JSON. You can directly edit the **Generated Configuration JSON** in the UI and add any additional params, whether a default has been defined for them or not.
@@ -77,7 +77,7 @@ After setting the configuration, you can start the DAG run with the **Trigger** 
 
 ### CLI
 
-When you run an [Airflow DAG from the CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#dags), you can pass params to the DAG run by providing a JSON string to the `--conf` flag. For example, to trigger the `params_default_example` DAG with the value of `Hello from the CLI` for `param1`, run: 
+When you run an [Airflow DAG from the CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#dags), you can pass params to the DAG run by providing a JSON string to the `--conf` flag. For example, to trigger the `params_default_example` DAG with the value of `Hello from the CLI` for `param1`, run:
 
 <Tabs
     defaultValue="astro"
@@ -88,7 +88,7 @@ When you run an [Airflow DAG from the CLI](https://airflow.apache.org/docs/apach
     ]}>
 <TabItem value="astro">
 
-Run Airflow commands from the Astro CLI using `astro dev run`: 
+Run Airflow commands from the Astro CLI using `astro dev run`:
 
 ```sh
 astro dev run dags trigger params_defaults_example --conf '{"param1" : "Hello from the CLI"}'
@@ -360,7 +360,7 @@ t1 = PythonOperator(
 
 Params are also accessible as a [Jinja template](templating.md) using the `{{ params.my_param }}` syntax.
 
-If you try to access a param that has not been specified for a specific DAG run, the task will fail with an exception. 
+If you try to access a param that has not been specified for a specific DAG run, the task will fail with an exception.
 
 ## Param precedence
 

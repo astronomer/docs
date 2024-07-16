@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import custom_xcom_backend_test from '!!raw-loader!../code-samples/dags/xcom-backend-tutorial/custom_xcom_backend_test.py';
 
-By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. For production environments that use XCom to pass data between tasks, Astronomer recommends using a custom XCom backend. [Custom XCom backends](custom-xcom-backend-strategies.md) allow you to configure where Airflow stores information that is passed between tasks using [XComs](airflow-passing-data-between-tasks.md#xcom). 
+By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. For production environments that use XCom to pass data between tasks, Astronomer recommends using a custom XCom backend. [Custom XCom backends](custom-xcom-backend-strategies.md) allow you to configure where Airflow stores information that is passed between tasks using [XComs](airflow-passing-data-between-tasks.md#xcom).
 
 The Object Storage XCom Backend available in the [Common IO provider](https://airflow.apache.org/docs/apache-airflow-providers-common-io/stable/index.html) is the easiest way to store XComs in a remote object storage solution.
 
@@ -27,7 +27,7 @@ While a custom XCom backend allows you to store virtually unlimited amounts of d
 
 :::warning
 
-Object storage is currently considered experimental and might be subject to breaking changes in future releases. For more information see [AIP-58](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=263430565). 
+Object storage is currently considered experimental and might be subject to breaking changes in future releases. For more information see [AIP-58](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=263430565).
 
 :::
 
@@ -89,9 +89,9 @@ First, you need to set up the object storage container in your cloud provider wh
     }
     ```
 
-3. Save your policy under the name `AirflowXComBackendAWSS3`. 
+3. Save your policy under the name `AirflowXComBackendAWSS3`.
 
-4. [Create an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) called `airflow-xcom` with the AWS credential type `Access key - Programmatic access` and [attach](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html) the `AirflowXComBackendAWSS3` policy to this user. 
+4. [Create an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) called `airflow-xcom` with the AWS credential type `Access key - Programmatic access` and [attach](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html) the `AirflowXComBackendAWSS3` policy to this user.
 
 5. [Create an access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) of the type `Third-party-service` for your `airflow-xcom` user. Make sure to save the Access Key ID and the Secret Access Key in a secure location to use in [Step 3](#step-3-set-up-your-airflow-connection).
 
@@ -105,7 +105,7 @@ For other ways to set up a connection between Airflow and AWS, see the [Amazon p
 
 <TabItem value="gcp">
 
-1. Log into your Google Cloud account and [create a new project](https://cloud.google.com/resource-manager/docs/creating-managing-projects). 
+1. Log into your Google Cloud account and [create a new project](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
 
 2. [Create a new bucket](https://cloud.google.com/storage/docs/creating-buckets) in your project with Uniform Access Control. Enforce public access prevention.
 
@@ -133,9 +133,9 @@ For other ways to set up a connection between Airflow and Google Cloud, see the 
 
 1. Log into your Azure account and [create a storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create). Ensure that public access to the bucket is blocked.
 
-2. In the storage account, [create a new container](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal). 
+2. In the storage account, [create a new container](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal).
 
-3. [Create a shared access token](https://learn.microsoft.com/en-us/azure/cognitive-services/Translator/document-translation/how-to-guides/create-sas-tokens?tabs=Containers) for your container. 
+3. [Create a shared access token](https://learn.microsoft.com/en-us/azure/cognitive-services/Translator/document-translation/how-to-guides/create-sas-tokens?tabs=Containers) for your container.
 
     In the **Permissions** dropdown menu, enable the following permissions:
 
@@ -145,7 +145,7 @@ For other ways to set up a connection between Airflow and Google Cloud, see the 
     - Write
     - Delete
     - List
-    
+
     Set the duration the token will be valid and set **Allowed Protocols** to `HTTPS only`. Provide the IP address of your Airflow instance. If you are running Airflow locally with the Astro CLI, use the IP address of your computer.
 
 4. Go to your Storage account and navigate to [**Access keys**](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage). Copy the **Key** and **Connection string** values and save them in a secure location to use in [step 3](#step-3-set-up-your-airflow-connection).
@@ -320,7 +320,7 @@ If you are setting up a custom XCom backend for an Astro deployment, you have to
 </TabItem>
 </Tabs>
 
-3. Add the `AIRFLOW__COMMON.IO__XCOM_OBJECTSTORAGE_THRESHOLD` environment variable to your `.env` file to determine when Airflow will store XComs in the object storage vs the metadata database. The default value is `-1` which will store all XComs in the metadata database. Set the value to `0` to store all XComs in the object storage. Any positive value means any XCom with a byte size greater than the threshold will be stored in the object storage and any XCom with a size equal to or less than the threshold will be stored in the metadata database. 
+3. Add the `AIRFLOW__COMMON.IO__XCOM_OBJECTSTORAGE_THRESHOLD` environment variable to your `.env` file to determine when Airflow will store XComs in the object storage vs the metadata database. The default value is `-1` which will store all XComs in the metadata database. Set the value to `0` to store all XComs in the object storage. Any positive value means any XCom with a byte size greater than the threshold will be stored in the object storage and any XCom with a size equal to or less than the threshold will be stored in the metadata database.
 For this tutorial we will set the threshold to `1000` bytes, which means any XCom larger than 1KB will be stored in the object storage.
 
     ```text
@@ -341,13 +341,13 @@ For this tutorial we will set the threshold to `1000` bytes, which means any XCo
 
 ## Step 5: Test your custom XCom backend
 
-We will use a simple DAG to test your custom XCom backend. 
+We will use a simple DAG to test your custom XCom backend.
 
 1. Create a new file in the `dags` directory of your Astro project called `custom_xcom_backend_test.py` and add the following code:
 
     <CodeBlock language="python">{custom_xcom_backend_test}</CodeBlock>
 
-2. Manually trigger the `custom_xcom_backend_test` DAG in the Airflow UI and navigate to the XCom tab of the `push_objects` task. You should see that the `small_obj` XCom shows its value, meaning it was stored in the metadata database, since it is smaller than 1KB. The `big_dict` XCom shows shows the path to the object in the object storage containing the serialized value of the XCom. 
+2. Manually trigger the `custom_xcom_backend_test` DAG in the Airflow UI and navigate to the XCom tab of the `push_objects` task. You should see that the `small_obj` XCom shows its value, meaning it was stored in the metadata database, since it is smaller than 1KB. The `big_dict` XCom shows shows the path to the object in the object storage containing the serialized value of the XCom.
 
     ![XCom tab of the push_objects task showing two key-value pairs showing the "big_obj" being serialized to the custom XCom backend and the "small_obj": a dictionary containing'a': 23, which was stored in the metadata database.](/img/tutorials/custom-xcom-backends-tutorial_small_big_obj.png)
 

@@ -30,7 +30,7 @@ There are multiple resources for learning about this topic. See also:
 
 :::info
 
-This guide covers options to isolate individual tasks in Airflow. If you want to run all of your Airflow tasks in dedicated Kubernetes pods, consider using the [Kubernetes Executor](https://www.astronomer.io/docs/learn/airflow-executors-explained#kubernetes-executor). Astronomer customers can set their Deployments to use the KubernetesExecutor in the Astro UI, see [Manage Airflow executors on Astro](https://www.astronomer.io/docs/astro/executors-overview). 
+This guide covers options to isolate individual tasks in Airflow. If you want to run all of your Airflow tasks in dedicated Kubernetes pods, consider using the [Kubernetes Executor](https://www.astronomer.io/docs/learn/airflow-executors-explained#kubernetes-executor). Astronomer customers can set their Deployments to use the KubernetesExecutor in the Astro UI, see [Manage Airflow executors on Astro](https://www.astronomer.io/docs/astro/executors-overview).
 
 :::
 
@@ -62,7 +62,7 @@ Make sure to pin all package versions, both in your core Airflow environment (`r
 
 ### Limitations
 
-When creating isolated environments in Airflow, you might not be able to use common Airflow features or connect to your Airflow environment in the same way you would in a regular Airflow task.  
+When creating isolated environments in Airflow, you might not be able to use common Airflow features or connect to your Airflow environment in the same way you would in a regular Airflow task.
 
 Common limitations include:
 
@@ -76,7 +76,7 @@ Airflow provides several options for running tasks in isolated environments.
 
 To run tasks in a dedicated Kubernetes Pod you can use:
 
-- [`@task.kubernetes`](#kubernetes-pod-operator) decorator 
+- [`@task.kubernetes`](#kubernetes-pod-operator) decorator
 - [KubernetesPodOperator](#kubernetes-pod-operator) (KPO)
 
 To run tasks in a Python virtual environment you can use:
@@ -114,7 +114,7 @@ Another consideration when choosing an operator is the infrastructure you have a
 
 ## External Python operator
 
-The ExternalPython operator, `@task.external_python` decorator or ExternalPythonOperator, runs a Python function in an existing virtual Python environment, isolated from your Airflow environment. To use the `@task.external_python` decorator or the ExternalPythonOperator, you need to create a separate Python environment to reference. You can use any Python binary created by any means. 
+The ExternalPython operator, `@task.external_python` decorator or ExternalPythonOperator, runs a Python function in an existing virtual Python environment, isolated from your Airflow environment. To use the `@task.external_python` decorator or the ExternalPythonOperator, you need to create a separate Python environment to reference. You can use any Python binary created by any means.
 
 The easiest way to create a Python environment when using the Astro CLI is with the [Astronomer PYENV BuildKit](https://github.com/astronomer/astro-provider-venv). The BuildKit can be used by adding a comment on the first line of the Dockerfile as shown in the following example. Adding this comment enables you to create virtual environments with the `PYENV` keyword.
 
@@ -245,7 +245,7 @@ Add the pinned versions of the packages to the `requirements` parameter of the `
 # from airflow.decorators import task
 
 @task.virtualenv(requirements=["pandas==1.5.1"])  # add your requirements to the list
-def my_isolated_task(): 
+def my_isolated_task():
     import pandas as pd
     print(f"The pandas version in the virtual env is: {pd.__version__}")"
     # your code to run in the isolated environment
@@ -348,7 +348,7 @@ The Python version can be referenced directly using the `python` parameter of th
 # from airflow.decorators import task
 
 @task.virtualenv(
-    requirements=["pandas==1.5.1"], 
+    requirements=["pandas==1.5.1"],
     python_version="3.10",  # specify the Python version
 )
 def my_isolated_task():
@@ -401,12 +401,12 @@ To use the `@task.kubernetes` decorator or the KubernetesPodOperator, you need t
     ]}>
 
 <TabItem value="taskflow">
-    
+
 ```python
 # from airflow.decorators import task
 # from airflow.configuration import conf
 
-# if you are running Airflow on Kubernetes, you can get 
+# if you are running Airflow on Kubernetes, you can get
 # the current namespace from the Airflow conf
 namespace = conf.get("kubernetes", "NAMESPACE")
 
@@ -430,14 +430,14 @@ def my_isolated_task(num: int):
 # from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperator
 # from airflow.configuration import conf
 
-# if you are running Airflow on Kubernetes, you can get 
+# if you are running Airflow on Kubernetes, you can get
 # the current namespace from the Airflow conf
 namespace = conf.get("kubernetes", "NAMESPACE")
 
 my_isolated_task = KubernetesPodOperator(
     task_id="my_isolated_task",
     namespace=namespace,
-    # your Docker image contains the scripts to run in the isolated environment  
+    # your Docker image contains the scripts to run in the isolated environment
     image="<YOUR IMAGE>",
     name="<YOUR POD NAME>",
     in_cluster=True,
@@ -482,7 +482,7 @@ def my_isolated_task():
 
     if num > 50:
         # return the task_id of the downstream task that should be executed
-        return "downstream_task_a"  
+        return "downstream_task_a"
     else:
         return "downstream_task_b"
 ```
@@ -503,7 +503,7 @@ def my_isolated_function():
 
     if num > 50:
         # return the task_id of the downstream task that should be executed
-        return "downstream_task_a"  
+        return "downstream_task_a"
     else:
         return "downstream_task_b"
 
@@ -551,7 +551,7 @@ def my_isolated_function():
 
     if num > 50:
         # return the task_id of the downstream task that should be executed
-        return "downstream_task_a"  
+        return "downstream_task_a"
     else:
         return "downstream_task_b"
 
@@ -578,16 +578,16 @@ Some variables from the [Airflow context](airflow-context.md) can be passed to i
         {label: 'PythonVirtualenvOperator', value: 'traditional-venv'},
     ]}>
 <TabItem value="taskflow-epo">
-    
+
 ```python
 # from airflow.decorators import task
 # import os
 
 # note that to be able to use the logical date, pendulum needs to be installed in the epo_pyenv
 @task.external_python(python=os.environ["ASTRO_PYENV_epo_pyenv"])
-def my_isolated_task(logical_date): 
+def my_isolated_task(logical_date):
     print(f"The logical date is: {logical_date}")
-    # your code to run in the isolated environment 
+    # your code to run in the isolated environment
 
 my_isolated_task()
 ```
@@ -600,7 +600,7 @@ my_isolated_task()
 
 def my_isolated_function(logical_date_from_op_kwargs):
     print(f"The logical date is: {logical_date_from_op_kwargs}")
-    # your code to run in the isolated environment 
+    # your code to run in the isolated environment
 
 my_isolated_task = ExternalPythonOperator(
     task_id="my_isolated_task",
@@ -631,13 +631,13 @@ def my_isolated_task(logical_date):
 
 </TabItem>
 <TabItem value="traditional-venv">
-    
+
 ```python
 # from airflow.operators.python import PythonVirtualenvOperator
 
 def my_isolated_function(logical_date_from_op_kwargs):
     print(f"The logical date is: {logical_date_from_op_kwargs}")
-    # your code to run in the isolated environment 
+    # your code to run in the isolated environment
 
 my_isolated_task = PythonVirtualenvOperator(
     task_id="my_isolated_task",
@@ -711,7 +711,7 @@ my_isolated_task = ExternalPythonOperator(
 
 :::warning
 
-Using Airflow packages inside of isolated environments can lead to unexpected behavior and is not recommended. 
+Using Airflow packages inside of isolated environments can lead to unexpected behavior and is not recommended.
 
 :::
 

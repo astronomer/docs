@@ -15,7 +15,7 @@ In this tutorial you'll use Airflow to create an index in OpenSearch, ingest the
 
 ## Why use Airflow with OpenSearch?
 
-OpenSearch allows you to perform complex search queries on indexed text documents. Additionally, the tool comes with a variety of plugins for use cases such as security analytics, semantic search, and neural search. 
+OpenSearch allows you to perform complex search queries on indexed text documents. Additionally, the tool comes with a variety of plugins for use cases such as security analytics, semantic search, and neural search.
 
 Integrating OpenSearch with Airflow allows you to:
 
@@ -45,7 +45,7 @@ This tutorial uses a local OpenSearch instance created as a [Docker container](h
 
 :::info
 
-The example code from this tutorial is also available on [GitHub](https://github.com/astronomer/airflow-opensearch-tutorial). 
+The example code from this tutorial is also available on [GitHub](https://github.com/astronomer/airflow-opensearch-tutorial).
 
 :::
 
@@ -116,7 +116,7 @@ The example code from this tutorial is also available on [GitHub](https://github
 
 ## Step 2: Add your data
 
-The DAG in this tutorial uses a [Kaggle](https://www.kaggle.com/datasets/lbalter/hamilton-lyrics) dataset that contains the lyrics of the musical [Hamilton](https://hamiltonmusical.com/new-york/). 
+The DAG in this tutorial uses a [Kaggle](https://www.kaggle.com/datasets/lbalter/hamilton-lyrics) dataset that contains the lyrics of the musical [Hamilton](https://hamiltonmusical.com/new-york/).
 
 1. Download the [hamilton_lyrics.csv](https://github.com/astronomer/airflow-opensearch-tutorial/blob/main/include/hamilton_lyrics.csv) from Astronomer's GitHub.
 
@@ -156,13 +156,13 @@ For information on more advanced search techniques in OpenSearch, see the [OpenS
 3. View your song results in the task logs of the `print_query_result` task:
 
     ```text
-    [2023-11-22, 14:01:58 UTC] {logging_mixin.py:154} INFO - 
+    [2023-11-22, 14:01:58 UTC] {logging_mixin.py:154} INFO -
      Top 3 Hamilton characters that mention 'write' the most:
       Character  Number of lines that include 'write'
       HAMILTON                                    15
          ELIZA                                     8
           BURR                                     4
-    [2023-11-22, 14:01:58 UTC] {logging_mixin.py:154} INFO - 
+    [2023-11-22, 14:01:58 UTC] {logging_mixin.py:154} INFO -
      Top 3 Hamilton songs that mention 'write' the most:
          Song  Number of lines that include 'write'
       Non-Stop                                    11

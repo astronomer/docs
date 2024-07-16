@@ -11,7 +11,7 @@ import CodeBlock from '@theme/CodeBlock';
 import custom_operator_example_taskflow from '!!raw-loader!../code-samples/dags/airflow-importing-custom-hooks-operators/custom_operator_example_taskflow.py';
 import custom_operator_example_traditional from '!!raw-loader!../code-samples/dags/airflow-importing-custom-hooks-operators/custom_operator_example_traditional.py';
 
-One of the great benefits of Airflow is its vast network of provider packages that provide hooks, operators, and sensors for many common use cases. Another great benefit of Airflow is that it is highly customizable because everything is defined in Python code. If a hook, operator, or sensor you need doesn't exist in the open source, you can easily define your own. 
+One of the great benefits of Airflow is its vast network of provider packages that provide hooks, operators, and sensors for many common use cases. Another great benefit of Airflow is that it is highly customizable because everything is defined in Python code. If a hook, operator, or sensor you need doesn't exist in the open source, you can easily define your own.
 
 In this guide, you'll learn how to define your own custom Airflow operators and hooks to use in your DAGs. To explore existing hooks, operators, and sensors, visit the [Astronomer Registry](https://registry.astronomer.io/).
 
@@ -74,7 +74,7 @@ A custom hook is a Python class which can be imported into your DAG file. Like r
 At a minimum, a custom hook must:
 
 - Inherit from the `BaseHook` or any other existing hook.
-- Define an `.__init__()` method which runs when the DAG is parsed. 
+- Define an `.__init__()` method which runs when the DAG is parsed.
 
 Many hooks include a `.get_conn()` method wrapping around a call to the BaseHook method `.get_connection()` to retrieve information from an Airflow connection. It is common to call the `.get_conn()` method within the `.__init__()` method. The following is the minimum recommended code to start with for most custom hooks:
 
@@ -131,9 +131,9 @@ When using the [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli)
 ```text
 .
 ├── .astro/
-├── dags/                    
+├── dags/
 │   └── example_dag.py
-├── include/                 
+├── include/
 │   └── custom_operators/
 │       └── my_operator.py
 │   └── custom_hooks/
@@ -145,9 +145,9 @@ When using the [Astro CLI](https://www.astronomer.io/docs/astro/cli/install-cli)
 ├── .gitignore
 ├── .airflow_settings.yaml
 ├── Dockerfile
-├── packages.txt     
+├── packages.txt
 ├── README.md
-└── requirements.txt    
+└── requirements.txt
 ```
 
 For more details on why Astronomer recommends this project structure, see the [Managing Airflow Code guide](managing-airflow-code.md).

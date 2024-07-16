@@ -24,12 +24,12 @@ In the Astro UI, click your Workspace name in the upper left corner, click **Org
 
 ## Update billing details
 
-1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Billing**. 
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Billing**.
 2. If you have no payment method on file, click **Add Payment Method** and enter your payment details. To edit an existing payment method, click **Edit** next to the payment method.
 
 ## View total spend
 
-In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Billing**. 
+In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Billing**.
 
 The **Overview** page contains high level information about your total Astro spend.
 
@@ -38,10 +38,10 @@ The **Overview** page contains high level information about your total Astro spe
 
 ## View invoices
 
-1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Billing**. 
-2. Click **Invoices**. 
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Billing**.
+2. Click **Invoices**.
 
-By default, the Astro UI shows a draft invoice for your current billing cycle. 
+By default, the Astro UI shows a draft invoice for your current billing cycle.
 
 - Each **Charge** is an Astro component that you used at some point in the billing cycle. Note that your worker resources are charged separately from the Deployments they run on and each other. For example, a Deployment with two worker queues will appear as three separate charges in your invoice.
 - **Quantity** represents the number of hours you ran a given Astro component.
@@ -54,8 +54,8 @@ The **Billing** page updates every hour with your total spend in the previous co
 
 ## View component usage by date
 
-1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Billing**. 
-2. Click **Usage**. 
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Billing**.
+2. Click **Usage**.
 
 Each chart on this page shows your usage over the last 30, 60, or 90 days for each billable component type. Hover over nodes on the chart to see your total hour spend for a component on a given day. Use the dropdown menu in the upper right corner to change the timeframe for each chart.
 

@@ -46,7 +46,7 @@ For example, adding the following receiver to `receivers.platformCritical` would
 alertmanager:
   receivers:
     # Configs for platform alerts
-    platform: 
+    platform:
       email_configs:
         - smarthost: smtp.sendgrid.net:587
           from: <your-astronomer-alert-email@example.com>
@@ -101,7 +101,7 @@ prometheus:
         for: 5m
         labels:
           tier: platform
-          severity: critical  
+          severity: critical
         annotations:
           summary: {{ printf "%q" "{{value}} airflow schedulers are not heartbeating." }}
           description: If more than 2 Airflow schedulers are not heartbeating for more than 5 minutes, this alert fires.

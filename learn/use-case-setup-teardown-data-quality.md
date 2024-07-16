@@ -19,7 +19,7 @@ Before trying this example, make sure you have:
 
 ## Clone the project
 
-Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-setup-teardown-data-quality.git). To keep your credentials secure when you deploy this project to your own git repository, create a file called `.env` with the contents of the `.env_example` file in the project root directory. 
+Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-setup-teardown-data-quality.git). To keep your credentials secure when you deploy this project to your own git repository, create a file called `.env` with the contents of the `.env_example` file in the project root directory.
 
 The repository is configured to create and use a local [Postgres](https://www.postgresql.org/) instance, accessible on port `5433`. You do not need to define connections or access external tools.
 
@@ -57,10 +57,10 @@ This project consists of two DAGs, `create_rose_table` and `rose_classification`
 
 ![Datasets view of the use case project showing the create_rose_table DAG that produces to the dataset postgres://public/roses which is consumed by the second DAG named rose_classification.](/img/examples/use-case-setup-teardown-data-quality_datasets_view.png)
 
-The [`create_rose_table`](https://github.com/astronomer/use-case-setup-teardown-data-quality/blob/main/dags/create_rose_table.py) DAG contains a [task group](task-groups.md) with a table creation pattern that includes two types of data quality checks:  
+The [`create_rose_table`](https://github.com/astronomer/use-case-setup-teardown-data-quality/blob/main/dags/create_rose_table.py) DAG contains a [task group](task-groups.md) with a table creation pattern that includes two types of data quality checks:
 
 - Checks that stop the pipeline if data does not pass the checks.
-- Checks that log a warning but do not stop the pipeline. 
+- Checks that log a warning but do not stop the pipeline.
 
 The first type of checks are run on a temporary table that is created and dropped using [setup/ teardown tasks](airflow-setup-teardown.md), which is an efficient way to handle data quality check failures.
 
@@ -126,7 +126,7 @@ chain(
 drop_tmp.as_teardown(setups=[create_tmp, load_data_into_tmp])
 ```
 
-Data quality checks are defined using the two [SQL check operators](airflow-sql-data-quality.md): [SQLColumnCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/versions/latest/modules/SQLColumnCheckOperator) and [SQLTableCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/versions/latest/modules/SQLTableCheckOperator). 
+Data quality checks are defined using the two [SQL check operators](airflow-sql-data-quality.md): [SQLColumnCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/versions/latest/modules/SQLColumnCheckOperator) and [SQLTableCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/versions/latest/modules/SQLTableCheckOperator).
 
 The `test_cols` task runs checks on individual columns of the temporary table, in this case to check that the `petal_size_cm`, `stem_length_cm` and `leaf_size_cm` columns contain values in a reasonable range for the rose cultivars. To see more more examples of defining data quality check statements in the SQLColumnCheckOperator and SQLTableCheckOperator, see the [Run data quality checks using SQL check operators](airflow-sql-data-quality.md).
 
@@ -170,9 +170,9 @@ swap = PostgresOperator(
         $$
         BEGIN
         IF EXISTS (
-            SELECT 1 FROM information_schema.tables 
+            SELECT 1 FROM information_schema.tables
             WHERE table_name = '{TABLE_NAME}' AND table_schema = 'public'
-        ) 
+        )
         THEN
             EXECUTE 'ALTER TABLE ' || '{TABLE_NAME}' || ' RENAME TO ' || '{TABLE_NAME}_backup';
         END IF;
@@ -253,7 +253,7 @@ def validate():
     )
 ```
 
-No matter the outcome of the data quality checks in the `validate` task group, the pipeline will continue because the `sql_check_done` task uses the [trigger rule](airflow-trigger-rules.md) `all_done` to be successful always. 
+No matter the outcome of the data quality checks in the `validate` task group, the pipeline will continue because the `sql_check_done` task uses the [trigger rule](airflow-trigger-rules.md) `all_done` to be successful always.
 
 ```python
 @task(trigger_rule="all_done")
@@ -279,7 +279,7 @@ def table_ready_for_the_model():
 
 #### ML DAG
 
-Airflow [datasets](airflow-datasets.md) let you schedule DAGs based on when a specific file or database is updated in a separate DAG. In this example, the ML DAG [`rose_classification`](https://github.com/astronomer/use-case-setup-teardown-data-quality/blob/main/dags/rose_classification.py) is scheduled to run as soon as the `roses` table is updated by the upstream DAG. 
+Airflow [datasets](airflow-datasets.md) let you schedule DAGs based on when a specific file or database is updated in a separate DAG. In this example, the ML DAG [`rose_classification`](https://github.com/astronomer/use-case-setup-teardown-data-quality/blob/main/dags/rose_classification.py) is scheduled to run as soon as the `roses` table is updated by the upstream DAG.
 
 ```python
 @dag(
@@ -290,7 +290,7 @@ Airflow [datasets](airflow-datasets.md) let you schedule DAGs based on when a sp
 )
 ```
 
-The first task of the ML DAG takes care of feature engineering. By using the [@aql.dataframe](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator, the `roses` table is ingested directly as a [pandas DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html). 
+The first task of the ML DAG takes care of feature engineering. By using the [@aql.dataframe](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator, the `roses` table is ingested directly as a [pandas DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html).
 The `feature_engineering` task creates a train-test split, scales the numeric features, and one-hot encodes the categorical feature `blooming_month` using functions from [scikit-learn](https://scikit-learn.org/stable/index.html). The resulting sets of train and test data are returned as a dictionary of pandas DataFrames.
 
 ```python
@@ -341,7 +341,7 @@ roses_features = feature_engineering(
 )
 ```
 
-The `train_model` task ingests the dictionary and trains a [RandomForestClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier) on the training data. The fitted model is then used to predict the `rose_type` of the test data. 
+The `train_model` task ingests the dictionary and trains a [RandomForestClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier) on the training data. The fitted model is then used to predict the `rose_type` of the test data.
 
 The `train_model` task prints the [accuracy](https://scikit-learn.org/stable/modules/model_evaluation.html#accuracy-score), [f1-score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score), and a classification report to the logs and returns a dictionary of model results for the downstream plotting task.
 
@@ -395,7 +395,7 @@ def train_model(input_data):
     }
 ```
 
-Lastly, the model results are plotted using [matplotlib](https://matplotlib.org/) and [seaborn](https://seaborn.pydata.org/) in the `plot_results` task. The plot is saved in the `include` directory of the local Astro project. If you are running this pipeline in production, make sure to save this file to persistent storage. 
+Lastly, the model results are plotted using [matplotlib](https://matplotlib.org/) and [seaborn](https://seaborn.pydata.org/) in the `plot_results` task. The plot is saved in the `include` directory of the local Astro project. If you are running this pipeline in production, make sure to save this file to persistent storage.
 
 ```python
 @task

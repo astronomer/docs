@@ -1,15 +1,15 @@
 """
 ## Find the International Space Station
 
-This DAG waits for a specific commit message to appear in a GitHub repository, 
+This DAG waits for a specific commit message to appear in a GitHub repository,
 and then will pull the current location of the International Space Station from an API
 and print it to the logs.
 
-This DAG needs a GitHub connection with the name `my_github_conn` and 
+This DAG needs a GitHub connection with the name `my_github_conn` and
 an HTTP connection with the name `open_notify_api_conn`
 and the host `https://api.open-notify.org/` to work.
 
-Additionally you will need to set an Airflow variable with 
+Additionally you will need to set an Airflow variable with
 the name `open_notify_api_endpoint` and the value `iss-now.json`.
 """
 

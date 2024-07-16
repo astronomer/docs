@@ -54,13 +54,13 @@ After you create your registry:
 
 The images and tags which are required for your Software installation depend on the version of Astronomer you're installing. To gather a list of exact images and tags required for your Astronomer version:
 
-1. Run the following command to template the Astronomer Helm chart and fetch all of its rendered image tags. 
+1. Run the following command to template the Astronomer Helm chart and fetch all of its rendered image tags.
 
     ```bash
-    helm template --version <your-astronomer-version> astronomer/astronomer --set global.loggingSidecar.enabled=True --set global.postgresqlEnabled=True --set global.authSidecar.enabled=True --set global.baseDomain=<your-basedomain> | grep "image: " | sed -e \'s/"//g\' -e \'s/image:[ ]//\' -e \'s/^ *//g\' | sort | uniq                           
+    helm template --version <your-astronomer-version> astronomer/astronomer --set global.loggingSidecar.enabled=True --set global.postgresqlEnabled=True --set global.authSidecar.enabled=True --set global.baseDomain=<your-basedomain> | grep "image: " | sed -e \'s/"//g\' -e \'s/image:[ ]//\' -e \'s/^ *//g\' | sort | uniq
     ```
-    
-    This command sets all possible Helm values that could impact which images are required for your installation. By fetching all images now, you save time by eliminating the risk of missing an image. 
+
+    This command sets all possible Helm values that could impact which images are required for your installation. By fetching all images now, you save time by eliminating the risk of missing an image.
 2. Run the following command to template the Airflow Helm chart and fetch its rendered image tags:
 
     ```shell
@@ -299,7 +299,7 @@ No matter what option you choose, the commands that you run should return the up
 
 ### Configuring a custom updates JSON URL
 
-After you have made the updates JSON accessible within your premises, you must configure the Helm chart to fetch updates from the custom URL:  
+After you have made the updates JSON accessible within your premises, you must configure the Helm chart to fetch updates from the custom URL:
 
 ```yaml
 astronomer:

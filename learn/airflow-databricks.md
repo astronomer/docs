@@ -107,7 +107,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 You can orchestrate any Databricks notebooks in a Databricks Workflow using the Astro Databricks provider. If you don't have Databricks notebooks ready, follow these steps to create two notebooks:
 
-1. [Create an empty notebook](https://docs.databricks.com/notebooks/notebooks-manage.html) in your Databricks workspace called `notebook1`. 
+1. [Create an empty notebook](https://docs.databricks.com/notebooks/notebooks-manage.html) in your Databricks workspace called `notebook1`.
 
 2. Copy and paste the following code into the `notebook1` notebook.
 
@@ -127,7 +127,7 @@ You can orchestrate any Databricks notebooks in a Databricks Workflow using the 
 
 1. Start Airflow by running `astro dev start`.
 
-2. In the Airflow UI, go to **Admin** > **Connections** and click **+**. 
+2. In the Airflow UI, go to **Admin** > **Connections** and click **+**.
 
 3. Create a new connection named `databricks_conn`. Select the connection type `Databricks` and enter the following information:
 
@@ -149,9 +149,9 @@ You can orchestrate any Databricks notebooks in a Databricks Workflow using the 
 
     - The `launch` task, which the task group automatically generates, provisions a Databricks `job_cluster` with the spec defined as `job_cluster_spec` and creates the Databricks job from the tasks within the task group.
     - The `notebook1` task runs the `notebook1` notebook in this cluster as the first part of the Databricks job.
-    - The `notebook2` task runs the `notebook2` notebook as the second part of the Databricks job. 
+    - The `notebook2` task runs the `notebook2` notebook as the second part of the Databricks job.
 
-3. Run the DAG manually by clicking the play button and view the DAG in the graph view. Double click the task group in order to expand it and see all tasks.  
+3. Run the DAG manually by clicking the play button and view the DAG in the graph view. Double click the task group in order to expand it and see all tasks.
 
     ![Astro Databricks DAG graph view](/img/guides/astro_databricks_provider_dag_graph.png)
 
@@ -191,7 +191,7 @@ If you only want to rerun specific tasks within your Workflow, you can use the *
 
 ## Alternative ways to run Databricks with Airflow
 
-The Astro Databricks provider is under active development, and support for more Databricks task types is still being added. If you want to orchestrate an action in your Databricks environment that is not yet supported by the Astro Databricks provider such as [updating a Databricks repository](https://registry.astronomer.io/providers/apache-airflow-providers-databricks/versions/latest/modules/DatabricksReposUpdateOperator), check the [community-managed Databricks provider](https://registry.astronomer.io/providers/apache-airflow-providers-databricks/versions/latest) for relevant operators. 
+The Astro Databricks provider is under active development, and support for more Databricks task types is still being added. If you want to orchestrate an action in your Databricks environment that is not yet supported by the Astro Databricks provider such as [updating a Databricks repository](https://registry.astronomer.io/providers/apache-airflow-providers-databricks/versions/latest/modules/DatabricksReposUpdateOperator), check the [community-managed Databricks provider](https://registry.astronomer.io/providers/apache-airflow-providers-databricks/versions/latest) for relevant operators.
 
 Additionally, the community-managed Databricks provider contains hooks (for example the [DatabricksHook](https://registry.astronomer.io/providers/apache-airflow-providers-databricks/versions/latest/modules/DatabricksHook)) that simplify interaction with Databricks, including writing your own [custom Databricks operators](airflow-importing-custom-hooks-operators.md#create-a-custom-operator).
 

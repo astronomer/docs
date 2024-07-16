@@ -15,7 +15,7 @@ import mlflow_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-mlflo
 
 There are multiple resources for learning about this topic. See also:
 
-- Use case: [Predict possum tail length using MLflow, Airflow, and linear regression](use-case-airflow-mlflow.md) including a ready-to-use [example repository](https://github.com/astronomer/use-case-mlflow). 
+- Use case: [Predict possum tail length using MLflow, Airflow, and linear regression](use-case-airflow-mlflow.md) including a ready-to-use [example repository](https://github.com/astronomer/use-case-mlflow).
 
 :::
 
@@ -23,7 +23,7 @@ There are multiple resources for learning about this topic. See also:
 
 The DAG in this tutorial shows three different ways Airflow can interact with MLflow:
 
-- Use an MLflow operator from the [MLflow Airflow provider](https://github.com/astronomer/airflow-provider-mlflow). The MLflow provider contains several operators that abstract over common actions you might want to perform in MLflow, such as creating a deployment with the [CreateDeploymentOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/deployment.py) or running predictions from an existing model with the [ModelLoadAndPredictOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/pyfunc.py). 
+- Use an MLflow operator from the [MLflow Airflow provider](https://github.com/astronomer/airflow-provider-mlflow). The MLflow provider contains several operators that abstract over common actions you might want to perform in MLflow, such as creating a deployment with the [CreateDeploymentOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/deployment.py) or running predictions from an existing model with the [ModelLoadAndPredictOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/pyfunc.py).
 - Use an MLflow hook from the MLflow Airflow provider. The MLflow provider contains several [Airflow hooks](what-is-a-hook.md) that allow you to connect to MLflow using credentials stored in an Airflow connection. You can use these hooks if you need to perform actions in MLflow for which no dedicated operator exists. You can also use these hooks to create your own [custom operators](airflow-importing-custom-hooks-operators.md).
 - Use the MLflow Python package directly in a [@task decorated task](airflow-decorators.md). The MLflow Python package contains functionality like tracking metrics and artifacts with [`mlflow.sklearn.autolog`](https://mlflow.org/docs/latest/python_api/mlflow.sklearn.html). You can use this package to write custom Airflow tasks for ML-related actions like feature engineering.
 
@@ -73,7 +73,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 2: Configure your Airflow connection
 
-To connect Airflow to your MLflow instance, you need to create a [connection in Airflow](connections.md). 
+To connect Airflow to your MLflow instance, you need to create a [connection in Airflow](connections.md).
 
 1. Run `astro dev start` in your Astro project to start up Airflow and open the Airflow UI at `localhost:8080`.
 
@@ -86,10 +86,10 @@ To connect Airflow to your MLflow instance, you need to create a [connection in 
     - **Host**: `http://host.docker.internal`
     - **Port**: `5000`
 
-:::info 
+:::info
 
 If you are using a remote MLflow instance, enter your MLflow instance URL as the **Host** and your username and password as the **Login** and **Password** in the connection. If you are running your MLflow instance via Databricks, enter your Databricks URL as the **Host**, enter `token` as the **Login** and your [Databricks personal access token](https://docs.databricks.com/dev-tools/auth.html#personal-access-tokens-for-users) as the **Password**.
-When you test the connection from the Airflow UI, please note that the **Test** button might return a 405 error message even if your credentials are correct. 
+When you test the connection from the Airflow UI, please note that the **Test** button might return a 405 error message even if your credentials are correct.
 
 :::
 
@@ -103,7 +103,7 @@ When you test the connection from the Airflow UI, please note that the **Test** 
 
     This DAG consists of three tasks, each showing a different way to use MLflow with Airflow.
 
-    - The `create_experiment` task creates a new experiment in MLflow by using the [MLflowClientHook](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/hooks/client.py) in a TaskFlow API task. The MLflowClientHook is one of several [hooks](https://github.com/astronomer/airflow-provider-mlflow/tree/main/mlflow_provider/hooks) in the MLflow provider that contains abstractions over calls to the MLflow API. 
+    - The `create_experiment` task creates a new experiment in MLflow by using the [MLflowClientHook](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/hooks/client.py) in a TaskFlow API task. The MLflowClientHook is one of several [hooks](https://github.com/astronomer/airflow-provider-mlflow/tree/main/mlflow_provider/hooks) in the MLflow provider that contains abstractions over calls to the MLflow API.
     - The `scale_features` task uses the [mlflow](https://pypi.org/project/mlflow/) package in a Python decorated task with [scikit-learn](https://pypi.org/project/scikit-learn/) to log information about the scaler to MLflow. This functionality is not included in any modules of the MLflow provider, so a custom Python function is the best way to implement this task.
     - The `create_registered_model` task uses the [CreateRegisteredModelOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/registry.py) to register a new model in your MLflow instance.
 

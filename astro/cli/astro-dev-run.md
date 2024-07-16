@@ -22,7 +22,7 @@ $ astro dev run users create --role Admin --username admin --email <your-email-a
 # Create a user in your local Airflow environment using the `airflow user create` Airflow CLI command
 
 $ astro dev run connections export - --file-format=env --serialization-format=json
-# Export connections in your local Airflow environment to STDOUT in a JSON format 
+# Export connections in your local Airflow environment to STDOUT in a JSON format
 
 $ astro dev run connections export - --file-format=env
 # Export connections in your local Airflow environment to STDOUT in the default URI format

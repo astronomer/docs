@@ -4,12 +4,12 @@ title: "astro deployment runtime upgrade"
 id: astro-deployment-runtime-upgrade
 description: Upgrade a Deployment (Software only).
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-:::info 
+:::info
 
-This command is available only if you're authenticated to an Astronomer Software installation. 
+This command is available only if you're authenticated to an Astronomer Software installation.
 
 :::
 
@@ -29,14 +29,14 @@ Run `astro deployment runtime upgrade --deployment-id=<deployment-id>` to initia
 
 
 
-## Examples 
+## Examples
 
 ```
 # Upgrade to Runtime 6.0.0
 $ astro deployment runtime --deployment-id telescopic-sky-4599 --desired-runtime-version 6.0.0
 ```
 
-## Related commands 
+## Related commands
 
 - [`astro deployment airflow upgrade`](astro-deployment-airflow-upgrade.md)
 - [`astro deployment runtime migrate`](astro-deployment-runtime-migrate.md)

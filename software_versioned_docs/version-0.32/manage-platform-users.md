@@ -5,7 +5,7 @@ id: manage-platform-users
 description: Add and customize user permissions on Astronomer Software.
 ---
 
-Astronomer Software allows you to adjust permissions for each user role and define how new users join your organization. 
+Astronomer Software allows you to adjust permissions for each user role and define how new users join your organization.
 
 Use this guide to learn about customizing user signups and user roles, as well as how to use Astronomer Software system-level permissions. For a list of the default permissions for each role, see [User roles and permissions](role-permission-reference.md).
 
@@ -129,12 +129,12 @@ For a complete list of Astronomer Software roles and default permissions, see [U
 
 ### Role permission inheritance
 
-In addition to their own permissions, roles inherit permissions from other roles. 
+In addition to their own permissions, roles inherit permissions from other roles.
 
 There are several chains of inheritance in the Software RBAC system. In the following list, `>` represents "inherits from":
 
 - System Admin > System Editor > System Viewer > User
-- Deployment Admin > Deployment Editor > Deployment Viewer > User 
+- Deployment Admin > Deployment Editor > Deployment Viewer > User
 - Workspace Admin > Workspace Editor > Workspace Viewer > User
 
 ### Step 1: Identify a permission change
@@ -189,7 +189,7 @@ If you're a System Admin who wants to limit Workspace creation, you can:
 - Set the `system.workspace.create` permission for the `USER` role to `false`
 - Attach the `system.workspace.create` permission to a separate role of your choice
 
-You might want limit this permission to the `SYSTEM_ADMIN` role on the platform, because System Admins can be responsible for managing cluster-level resources and costs. To reassign this permission to System Admins, your `config.yaml` would appear similar to the following example: 
+You might want limit this permission to the `SYSTEM_ADMIN` role on the platform, because System Admins can be responsible for managing cluster-level resources and costs. To reassign this permission to System Admins, your `config.yaml` would appear similar to the following example:
 
 ```yaml
 astronomer:

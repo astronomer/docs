@@ -25,7 +25,7 @@ A connection from Airflow to Databricks requires the following information:
 
 Complete the following steps to retrieve these values:
 
-1. In the Databricks Cloud UI, copy the URL of your Databricks workspace. For example, it should be formatted as either `https://dbc-75fc7ab7-96a6.cloud.databricks.com/` or `https://your-org.cloud.databricks.com/`. 
+1. In the Databricks Cloud UI, copy the URL of your Databricks workspace. For example, it should be formatted as either `https://dbc-75fc7ab7-96a6.cloud.databricks.com/` or `https://your-org.cloud.databricks.com/`.
 2. To use a personal access token for a user, follow the [Databricks documentation](https://docs.databricks.com/dev-tools/auth.html#databricks-personal-access-tokens-for-users) to generate a new token. To generate a personal access token for a service principal, see [Manage personal access tokens for a service principal](https://docs.databricks.com/administration-guide/users-groups/service-principals.html#manage-personal-access-tokens-for-a-service-principal). Copy the personal access token.
 
 ## Create your connection

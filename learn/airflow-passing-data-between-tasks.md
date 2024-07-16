@@ -68,7 +68,7 @@ XComs should be used to pass small amounts of data between tasks. For example, t
 
 While you can technically pass large amounts of data with XCom, be very careful when doing so and consider using [a custom XCom backend](custom-xcom-backend-strategies.md) and [scaling your Airflow resources](airflow-scaling-workers.md).
 
-When you use the standard XCom backend, the size-limit for an XCom is determined by your metadata database. Common sizes are: 
+When you use the standard XCom backend, the size-limit for an XCom is determined by your metadata database. Common sizes are:
 
 - Postgres: 1 Gb
 - SQLite: 2 Gb
@@ -76,7 +76,7 @@ When you use the standard XCom backend, the size-limit for an XCom is determined
 
 You can see that these limits aren't very big. If you think your data passed via XCom might exceed the size of your metadata database, either use a custom XCom backend or [intermediary data storage](#intermediary-data-storage).
 
-The second limitation in using the standard XCom backend is that only certain types of data can be serialized. 
+The second limitation in using the standard XCom backend is that only certain types of data can be serialized.
 
 By default, Airflow supports serializations for:
 

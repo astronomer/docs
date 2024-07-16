@@ -69,7 +69,7 @@ The Airflow UI shows logs using a `read()` method on task handlers that is not p
 - Logs on the local filesystem
 - Logs from [worker specific webserver subprocesses](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-log-server-port)
 
- When using the Kubernetes Executor and a worker pod still exists, `read()` shows the first 100 lines from the Kubernetes pod logs. If a worker pod spins down, the logs are no longer available. For more information, see [Logging Architecture](https://kubernetes.io/docs/concepts/cluster-administration/logging/).  
+ When using the Kubernetes Executor and a worker pod still exists, `read()` shows the first 100 lines from the Kubernetes pod logs. If a worker pod spins down, the logs are no longer available. For more information, see [Logging Architecture](https://kubernetes.io/docs/concepts/cluster-administration/logging/).
 
 ## Log locations
 
@@ -213,7 +213,7 @@ Logs are sent to remote storage only once a task has been completed or failed. T
 
 2. Start your Airflow environment and go to **Admin** > **Connections** in the Airflow UI.
 
-3. Create a connection of type **Amazon S3** and set `login` to your AWS access key ID and `password` to your AWS secret access key. See [AWS Account and Access Keys](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html) for information about retrieving your AWS access key ID and AWS secret access key.  
+3. Create a connection of type **Amazon S3** and set `login` to your AWS access key ID and `password` to your AWS secret access key. See [AWS Account and Access Keys](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html) for information about retrieving your AWS access key ID and AWS secret access key.
 
 4. Add the following commands to the Dockerfile. Include the double underscores around `LOGGING`:
 
@@ -229,7 +229,7 @@ Logs are sent to remote storage only once a task has been completed or failed. T
     ENV AIRFLOW__LOGGING__ENCRYPT_S3_LOGS=True
     ```
 
-    These environment variables configure remote logging to one S3 bucket (`S3BUCKET_NAME`). Behind the scenes, Airflow uses these configurations to create an `S3TaskHandler` that overrides the default `FileTaskHandler`.  
+    These environment variables configure remote logging to one S3 bucket (`S3BUCKET_NAME`). Behind the scenes, Airflow uses these configurations to create an `S3TaskHandler` that overrides the default `FileTaskHandler`.
 
 5. Restart your Airflow environment and run any task to verify that the task logs are copied to your S3 bucket.
 

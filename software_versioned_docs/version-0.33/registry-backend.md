@@ -76,7 +76,7 @@ nginx:
 
 #################################
 ## SMTP configuration
-#################################  
+#################################
 astronomer:
   houston:
     config:
@@ -144,7 +144,7 @@ To use AWS S3 as a registry backend solution, you'll need:
     $ kubectl create secret generic astronomer-s3-access-key --from-literal=accesskey=<your-access-key> -n <your-namespace>
     $ kubectl create secret generic astronomer-s3-secret-key --from-literal=secretkey=<your-secret-key> -n <your-namespace>
     ```
-   
+
 4. Select one of the following options:
 
   - To authenticate to AWS with your registry credentials, add this entry to the `config.yaml` file:
@@ -157,7 +157,7 @@ To use AWS S3 as a registry backend solution, you'll need:
           region: us-east-1
           regionendpoint: <your-region-endpoint>
           bucket: <your-bucket-name>
-        extraEnvVars: 
+        extraEnvVars:
           - name: REGISTRY_STORAGE_S3_REGION
             value: <your-s3-region>
           - name: REGISTRY_STORAGE_S3_ACCESSKEY
@@ -182,7 +182,7 @@ To use AWS S3 as a registry backend solution, you'll need:
           region: us-east-1
           regionendpoint: <your-region-endpoint>
           bucket: <your-bucket-name>
-        extraEnvVars: 
+        extraEnvVars:
           - name: REGISTRY_STORAGE_S3_REGION
             value: <your-s3-region>
     ```
@@ -211,7 +211,7 @@ astronomer:
       bucket: my-s3-bucket
       encrypt: true
       keyid: my-kms-key-id
-    extraEnvVars: 
+    extraEnvVars:
       - name: REGISTRY_STORAGE_S3_REGION
         value: <your-s3-region>
       - name: REGISTRY_STORAGE_S3_ACCESSKEY
@@ -233,15 +233,15 @@ astronomer:
 To avoid hardcoding credentials for your registry backend, add the following configuration to your `config.yaml` file:
 
 ```yaml
-registry: 
-    serviceAccount: 
-      # Specifies whether a service account should be created 
-      create: true 
-      # Annotations to add to the service account 
-      annotations: 
+registry:
+    serviceAccount:
+      # Specifies whether a service account should be created
+      create: true
+      # Annotations to add to the service account
+      annotations:
         eks.amazonaws.com/role-arn: arn:aws:iam::xxxxxxxxxxxxxx:role/<your-iam-role>
-    s3: 
-      enabled: true 
+    s3:
+      enabled: true
       region: <your-region>
       bucket: <your-registry-backend>
 ```
@@ -279,7 +279,7 @@ astronomer:
       accountkey: my-account-key
       container: my-container-name
       realm: core.windows.net
-    extraEnvVars: 
+    extraEnvVars:
       - name: REGISTRY_STORAGE_AZURE_REGION
         value: <your-azure-region>
       - name: REGISTRY_STORAGE_AZURE_ACCOUNTNAME

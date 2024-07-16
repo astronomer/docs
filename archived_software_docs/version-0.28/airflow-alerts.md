@@ -50,7 +50,7 @@ To get started with SendGrid:
 
     - **Key**: `AIRFLOW__EMAIL__EMAIL_BACKEND`
     - **Value**: `airflow.providers.sendgrid.utils.emailer.send_email`
-    
+
     For more information on this environment variable, see [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html#send-email-using-sendgrid).
 
 7. In the Airflow UI, [create an Airflow connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#creating-a-connection-with-the-ui) with the following values:
@@ -89,7 +89,7 @@ This setup requires an AWS account and use of the [AWS Management Console](https
 
     - **Key**: `AIRFLOW__EMAIL__EMAIL_BACKEND`
     - **Value**: `airflow.providers.amazon.aws.utils.emailer.send_email`
-    
+
     For more information on this environment variable, see [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html#send-email-using-aws-ses).
 
 6. In the Airflow UI, [create an Airflow connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#creating-a-connection-with-the-ui) with the following values:

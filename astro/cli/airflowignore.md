@@ -14,7 +14,7 @@ For more information about `.airflowignore`, see [`.airflowignore` in the Airflo
 
 1. In the `dags` directory of your Astro project, create a new file named `.airflowignore`.
 
-2. List the files or sub-directories you want ignored when you push code to Astro or when you are developing locally. You should list the path for each file or directory relative to the `dags` directory. For example: 
+2. List the files or sub-directories you want ignored when you push code to Astro or when you are developing locally. You should list the path for each file or directory relative to the `dags` directory. For example:
 
     ```text
     mydag.py
@@ -23,7 +23,7 @@ For more information about `.airflowignore`, see [`.airflowignore` in the Airflo
     ```
 
     You can also use regular expressions to specify groups of files. See the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#airflowignore) for more information about usage.
-    
+
 3. Save your changes locally or deploy to Astro.
 
     Your local Airflow environment automatically updates as soon as you save your changes to `.airflowignore`. To apply your change in Astro, you need to deploy. See [Deploy code](/astro/deploy-code.md).

@@ -98,7 +98,7 @@ trigger_dag_run = TriggerDagRunOperator(
 
 You can find a list of operators that support deferrable mode in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/deferrable-operator-ref.html).
 
-Previously, before the `deferrable` parameter was available in regular operators, deferrable operators were implemented as standalone operators, usually with an `-Async` suffix. Some of these operators are still available. For example, the `DateTimeSensor` does not have a `deferrable` parameter, but has a deferrable version called `DateTimeSensorAsync`. 
+Previously, before the `deferrable` parameter was available in regular operators, deferrable operators were implemented as standalone operators, usually with an `-Async` suffix. Some of these operators are still available. For example, the `DateTimeSensor` does not have a `deferrable` parameter, but has a deferrable version called `DateTimeSensorAsync`.
 
 :::info
 
@@ -112,7 +112,7 @@ The following example DAG is scheduled to run every minute between its `start_da
 
 <CodeBlock language="python">{sync_dag}</CodeBlock>
 
-Using `DateTimeSensor`, one worker slot is taken up by every sensor that runs. By using the deferrable version of this sensor, `DateTimeSensorAsync`, you can achieve full concurrency while freeing up your workers to complete additional tasks across your Airflow environment. 
+Using `DateTimeSensor`, one worker slot is taken up by every sensor that runs. By using the deferrable version of this sensor, `DateTimeSensorAsync`, you can achieve full concurrency while freeing up your workers to complete additional tasks across your Airflow environment.
 
 In the following screenshot, running the DAG produces 16 running task instances, each containing one active `DateTimeSensor` taking up one worker slot.
 
