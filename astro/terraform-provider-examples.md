@@ -18,7 +18,7 @@ After you finish your first [Terraform](https://www.terraform.io/) initializatio
 
 ## Example: Import existing resources
 
-By adding both an `import` command and defining the configuration to your Terraform file, you can import existing Astro resources, such as Deployments or Workspaces, for Terraform to manage. After you successfully import import them, Terraform fully manages your resources and you can update or delete them by updating the Terraform configuration file.
+By adding both an `import` command and defining the configuration to your Terraform file, you can import existing Astro resources, such as Deployments or Workspaces, for Terraform to manage. After you successfully import them, Terraform fully manages your resources and you can update or delete them by updating the Terraform configuration file.
 
 :::tip
 
@@ -37,6 +37,7 @@ import {
   id = "<your-deployment-ID>" // ID of the existing deployment
   to = astro_deployment.imported_deployment
 }
+
 // The new resource configuration.
 resource "astro_deployment" "imported_deployment" {
   name                    = "import me"

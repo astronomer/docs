@@ -57,6 +57,7 @@ resource "astro_workspace" "my_workspace" {
   description           = "Managed by Terraform"
   cicd_enforced_default = true
 }
+
 # Create a standard Hosted Deployment in that Workspace
 resource "astro_deployment" "my_standard_deployment" {
   name                    = "My Terraform Deployment"
@@ -100,7 +101,7 @@ terraform plan # creates a plan that make your resources match your configuratio
 terraform apply # performs a plan, just like terraform plan does, and also carries out the planned changes to each resource by using the relevant infrastructure provider's API
 ```
 
-After `terraform apply` completes, Terraform either prints that your configuration was successful or it shares error codes that includes how to resolve any problems.
+After `terraform apply` completes, Terraform either prints that your configuration was successful or it prints error logging that includes information on how to resolve your problem.
 
 4. (Optional) You can continue to import additional resources or experiment with Terraform using the [Terraform Provider docs](https://registry.terraform.io/providers/astronomer/astro/latest/docs). After you're done, to prevent any unexpected charges or activity in your account from working with your Terraform example, you can delete any resources you created on Astro by using the following code example:
 

@@ -8,7 +8,7 @@ description: Learn about the Astro Terraform Provider and how to work with it.
 :::publicpreview
 :::
 
-[Terraform by HashiCorp](https://www.terraform.io/) allows you to manage your infrastructure as code. This means you can programmatically manage resources, user access, and networking using Terraform and Terraform Providers. This provides you with an alternative way to use the Astro CLI, Astro UI, or Astro API to create Deployments and manage users.
+[Terraform by HashiCorp](https://www.terraform.io/) allows you to manage your infrastructure as code. This means you can programmatically manage resources, user access, and networking using Terraform and Terraform Providers. This provides you with an alternative to the Astro CLI, Astro UI, or Astro API to manage resources.
 
 Terraform providers act as an interface between Terraform and different platforms or services that you might use in your infrastructure implementation. You can use the [Astro Terraform Provider](https://github.com/astronomer/terraform-provider-astro) to programmatically manage your Astro resources.
 
