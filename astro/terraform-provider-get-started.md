@@ -8,11 +8,10 @@ description: Get started using the Astro Terraform Provider to work with your As
 :::publicpreview
 :::
 
-To use [Terraform](https://www.terraform.io/) with Astro, you must authorize the [Astro Terraform Provider](https://registry.terraform.io/providers/astronomer/astro/0.3.0) to access and modify your Astro Organization resources. Then, you can programmatically update your Astro Organization using Terraform files.
+To use [Terraform](https://www.terraform.io/) with Astro, you must authorize the [Astro Terraform Provider](https://registry.terraform.io/providers/astronomer/astro/latest) to access and modify your Astro Organization resources. Then, you can programmatically update your Astro Organization using Terraform files.
 
 ## Prerequisites
 
-- [Go](https://go.dev/doc/install) version 1.21 or higher
 - [Terraform](https://developer.hashicorp.com/terraform/install) version 1.0 or higher
 - Astro Workspace Owner [user permissions](user-permissions.md)
 
@@ -49,7 +48,7 @@ terraform {
 }
 
 provider "astro" {
-  organization_id = "<you-astro-organization-id>"
+  organization_id = "<your-astro-organization-id>"
 }
 
 # Create a Workspace
@@ -58,7 +57,7 @@ resource "astro_workspace" "my_workspace" {
   description           = "Managed by Terraform"
   cicd_enforced_default = true
 }
-# Create a standard Hosted Deployment in that wWrkspace
+# Create a standard Hosted Deployment in that Workspace
 resource "astro_deployment" "my_standard_deployment" {
   name                    = "My Terraform Deployment"
   description             = "Managed by Terraform"

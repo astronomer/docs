@@ -12,23 +12,22 @@ After you finish your first [Terraform](https://www.terraform.io/) initializatio
 
 ## Prerequisites
 
-- [Go](https://go.dev/doc/install) version 1.21 or higher
 - [Terraform](https://developer.hashicorp.com/terraform/install) version 1.0 or higher
 - Astro Workspace Owner [user permissions](user-permissions.md)
 - Organization ID
 
 ## Example: Import existing resources
 
-By adding both an `import` command and defining the configuration to your Terraform file, you can import existing Astro resources, such as Deployments or Workspaces, for Terraform to manage. After you successfully import your resources, Terraform can fully manage them and you can update or delete them by updating the Terraform configuration file.
+By adding both an `import` command and defining the configuration to your Terraform file, you can import existing Astro resources, such as Deployments or Workspaces, for Terraform to manage. After you successfully import import them, Terraform fully manages your resources and you can update or delete them by updating the Terraform configuration file.
 
 :::tip
 
-Your Terraform file takes the highest priority in defining your Astro resource configuration. This means that when you import resources using Terraform, you need to specify all required fields if your Terraform file is different from any resource configurations that you configured through the Terraform CLI, Astro CLI, Astro API, or Astro UI. If the Terraform file and your actual Workspace are different, Terraform overrides your Workspace settings to match the configurations in your Terraform file.
+Your Terraform file takes the highest priority in defining your Astro resource configuration. This means that when you import resources using Terraform, you need to specify all required fields if your Terraform file is different from any resource configurations that you configured through the Terraform CLI, Astro CLI, Astro API, or Astro UI. If the resources defined in your Terraform file and your actual resources are different, Terraform overrides your resource settings to match the configurations of the resources in your Terraform file.
 
 :::
 
 <details>
-<summary><strong> Import resources to an existing Deployment example</strong></summary>
+<summary><strong> Import existing Deployment as a resource example</strong></summary>
 
 In a Terraform file, add the following configuration.
 
@@ -115,7 +114,7 @@ resource "astro_workspace" "team_workspaces" {
 
 ## Example: Create a Workspace per Team
 
-You can use Terraform to script creating a Workspace for multiple Teams. The following example shows how to create a Workspace, a Team within that Workspace, and three Deployments for that Team. You can use the full code example in the [Astro Terraform Provider's GitHub](https://github.com/astronomer/terraform-provider-astro/blob/main/examples/scenarios/workspace_per_team.tf) to create multiple teams following the same pattern.
+You can use Terraform to script creating a Workspace for multiple Teams. The following example shows how to create a Workspace, a Cluster, and three Deployments for that Team. You can use the full code example in the [Astro Terraform Provider's GitHub](https://github.com/astronomer/terraform-provider-astro/blob/main/examples/scenarios/workspace_per_team.tf) to create multiple teams following the same pattern.
 
 <details>
 <summary><strong>Terraform Workspaces and Teams code example</strong></summary>
