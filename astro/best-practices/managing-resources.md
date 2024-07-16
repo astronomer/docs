@@ -16,7 +16,7 @@ On the Astro UI, you can:
 - Optimize compute resources and cost.
 - Enable use cases with intensive workloads.
 
-For more details about configuring resources with the UI, see []().
+For more details about configuring resources with the UI, see .
 
 ## Automating resource management at scale
 
