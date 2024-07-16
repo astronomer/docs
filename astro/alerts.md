@@ -20,16 +20,16 @@ To configure Airflow notifications, see [Airflow email notifications](airflow-em
 
 ## Alert types
 
-Each Astro alert has a communication channel and a trigger type. The communication channel determines the format and destination of an alert, and the trigger type defines what causes the alert trigger. 
+Each Astro alert has a notification channel and a trigger type. The notification channel determines the format and destination of an alert, and the trigger type defines what causes the alert trigger.
 
-### Trigger types 
+### Trigger types
 
-You can trigger an alert to a communication channel using one of the following trigger types:
+You can trigger an alert to a notification channel using one of the following trigger types:
 
 - **DAG failure**: The alert triggers whenever the specified DAG fails.
 - **DAG success**: The alert triggers whenever the specified DAG completes
 - **Task duration**: The alert triggers when a specified task takes longer than expected to complete.
-- **Absolute Time**: The alert triggers when a given DAG does not have a successful DAG run within a defined time window. 
+- **Absolute Time**: The alert triggers when a given DAG does not have a successful DAG run within a defined time window.
 
 :::info
 
@@ -37,9 +37,9 @@ You can only set a task duration trigger for an individual task. Alerting on tas
 
 :::
 
-### Communication channels
+### Notification channels
 
-You can send Astro alerts to the following communication channels
+You can send Astro alerts to the following notification channels
 
 - Slack
 - PagerDuty
@@ -50,7 +50,7 @@ You can send Astro alerts to the following communication channels
 
 This feature is in [Private Preview](feature-previews.md). Please reach out to your customer success manager to enable this feature.
 
-The **DAG Trigger** communication channel works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through the Airflow REST API to trigger a DAG on Astro. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table.
+The **DAG Trigger** notification channel works differently from other notification channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through the Airflow REST API to trigger a DAG on Astro. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table.
 
 :::
 
@@ -68,11 +68,11 @@ Astro alerts requires OpenLineage. By default, every Astro Deployment has OpenLi
 
 <!-- Sensitive header used in product - do not change without a redirect-->
 
-## Step 1: Configure your communication channel
+## Step 1: Configure your notification channel
 
 <Tabs
     defaultValue="Slack"
-    groupId= "step-1-configure-your-communication-channel"
+    groupId= "step-1-configure-your-notification-channel"
     values={[
         {label: 'Slack', value: 'Slack'},
         {label: 'PagerDuty', value: 'PagerDuty'},
@@ -137,7 +137,7 @@ No external configuration is required for the email integration. Astronomer reco
 :::privatepreview
 :::
 
-The **DAG Trigger** communication channel works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through the `DagRuns` endpoint of the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) to trigger any DAG in your Workspace. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table. 
+The **DAG Trigger** notification channel works differently from other notification channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through the `DagRuns` endpoint of the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) to trigger any DAG in your Workspace. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table.
 
 The following parameters are used to pass metadata about the alert in the API call:
 
@@ -147,7 +147,7 @@ The following parameters are used to pass metadata about the alert in the API ca
   - `dagName`: The name of the DAG that triggered the alert.
   - `message`: The detailed message with the cause of the alert.
   - `note`: By default, this is `Triggering DAG on Airflow <url>`.
-  
+
 The following is an example alert payload that would be passed through the API:
 
 ```json
@@ -191,23 +191,25 @@ These parameters are accessible in the triggered DAG using [DAG params](https://
 </TabItem>
 </Tabs>
 
-## Step 2: Create your Workspace alert in the Astro UI
+## Step 2: Add a notification channel.
 
-In the Astro UI, you can enable alerts from the **Workspace Settings** page.
+You can enable alerts from the Astro UI.
 
-1. In the Astro UI, click **Alerts**.
+1. In the Astro UI, click **Alerts** in the main menu.
 
-2. Click **Add Alert**.
+2. Click the **Notification channels** tab.
 
-3. Enter your **Alert Name** and choose the alert type, **DAG Success**, **DAG Failure**, or **Task Duration**.
+3. Click **Add Notification Channel**.
 
-4. Choose the **Communication Channels** where you want to send your alert.
+4. Enter a name for your notification channel.
 
-5. Add your communication channel information.
+5. Choose the Channel Type.
+
+6. Add the notification channel information.
 
     <Tabs
         defaultValue="Slack"
-        groupId= "step-1-configure-your-communication-channel"
+        groupId= "step-1-configure-your-notification-channel"
         values={[
             {label: 'Slack', value: 'Slack'},
             {label: 'PagerDuty', value: 'PagerDuty'},
@@ -244,23 +246,43 @@ In the Astro UI, you can enable alerts from the **Workspace Settings** page.
     </TabItem>
     </Tabs>
 
-6. Add DAGs or tasks that your alert applies to.
+7. Click **Create notification channel**.
 
-    - **DAG failure**: Click **+ DAG** to choose the Deployment and the DAG that you want to send an alert about if it fails.
+## Step 3: Create your alert in the Astro UI
 
-    - **DAG success**: Click **DAG** and choose the Deployment and the DAG that you want to send an alert about when it completes.
+1. In the Astro UI, click **Alerts**, and then the **Alerts** Tab.
 
-    - **Task duration**: Click **Task** and choose the Deployment, DAG, and task name. Enter the **Duration** for how long a task should take to run before you send an alert to your communication channels.
+2. Click **Add Alert**.
 
-    - **Absolute Time**: Click **+ DAG** and choose the Deployment and the DAG that you want the alert to assess. Then, select the **Days of Week** that the alert should observe, the **Verification Time** when it should look for a DAG success, and the **Lookback Period** for how long it should look back for a verification time.
+3. Choose the **Alert Type**
+
+    - **DAG failure**: Send an alert if a DAG fails.
+
+    - **DAG success**: Send an alert when a DAG completes.
+
+    - **Task duration**: Enter the **Duration** for how long a task should take to run before you send an alert to your notification channels.
+
+    - **Absolute Time**: Select the **Days of Week** that the alert should observe, the **Verification Time** when it should look for a DAG success, and the **Lookback Period** for how long it should look back for a verification time.
 
     For example, if an alert has a **Verification Time** of 3:00 PM and a **Lookback Period** of 60 minutes, it will trigger whenever the given DAG does not produce a successful DAG run from 2:00 to 3:00 PM. Astro applies the times you specify based on the time zone of your current web browser session, then translates them to UTC in your Airflow environment.
 
-7. (Optional) Repeat Step 6 for additional DAGs or tasks that you want to alert on.
+4. Choose the alert **Severity**, either **Info**, **Warning**, **Critical**, or **Error**.
 
-8. Click **Create alert**.
+5. Define the conditions for when you want your alert to send a notification.
 
-## Step 3: (Optional) Test your DAG failure alert
+  - Select the **Attribute**, **Operator**, and **DAGs** to define when you want Astro to send an Alert and which DAGs that you want the alert to apply to.
+
+## Step 3: (Optional) Change an alert name
+
+After you select a DAG that you want to apply an alert to, Astro automatically generates a name for your alert. However, you can choose to change the name for your alert.
+
+1. Expand the **Change alert names...** section.
+
+2. Edit the **Alert Name**.
+
+3. Click **Create Alert** to save your changes.
+
+## (Optional) Test your DAG failure alert
 
 Astro alerts work whether your DAG run is manual or scheduled, so you can test your configured Astro alerts by failing your DAG manually.
 
