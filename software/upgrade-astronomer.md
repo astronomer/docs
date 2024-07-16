@@ -230,7 +230,7 @@ To mitigate this issue:
 
 - Do not use DAG-only Deploys if you use version 0.35
 - If you have not upgraded to version 0.35, wait until the next major release to upgrade your Software version
-- If you use version 0.35, upgrade to 0.35.1 as soon as they are available.
+- If you use version 0.35, upgrade to 0.35.1 as soon as they are available
 
 ### Upgrade to Astronomer Software 0.32
 
