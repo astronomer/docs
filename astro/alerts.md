@@ -220,21 +220,21 @@ You can enable alerts from the Astro UI.
 
     Paste the Webhook URL from your Slack workspace app. If you need to find a URL for an app you've already created, go to your [Slack Apps](https://api.slack.com/apps) page, select your app, and then choose the **Incoming Webhooks** page.
 
-    ![Add your Slack Webhook URL](/img/docs/astro_alerts_slack.png)
+    ![Add your Slack Webhook URL](/img/docs/astro_alerts_slack_v2.png)
 
     </TabItem>
     <TabItem value="PagerDuty">
 
     Paste the Integration Key from your PagerDuty Integration and select the **Severity** of the alert.
 
-    ![Paste the Integration Key](/img/docs/astro_alerts_pagerduty.png)
+    ![Paste the Integration Key](/img/docs/astro_alerts_pagerduty_v2.png)
 
     </TabItem>
     <TabItem value="Email">
 
     Enter the email addresses that should receive the alert.
 
-    ![Add an email address](/img/docs/astro_alerts_email.png)
+    ![Add an email address](/img/docs/astro_alerts_email_v2.png)
 
     </TabItem>
     <TabItem value="DAG">
