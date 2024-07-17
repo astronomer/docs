@@ -26,6 +26,60 @@ docker run --rm quay.io/astronomer/astro-runtime:11.0.0 pip freeze | grep apache
 
 :::
 
+## Astro Runtime 11.7.0
+
+<Tabs
+    groupid="astro-runtime-1170"
+    defaultValue="standard"
+    values={[
+        {label: 'Standard', value: 'standard'},
+        {label: 'Slim', value: 'slim'},
+    ]}>
+<TabItem value="standard">
+| Package Name                             | Version |
+| :--------------------------------------- | :------ |
+| apache-airflow-providers-amazon          | 8.26.0    |
+| apache-airflow-providers-celery          | 3.7.2     |
+| apache-airflow-providers-cncf-kubernetes | 8.3.3     |
+| apache-airflow-providers-common-io       | 1.3.2     |
+| apache-airflow-providers-common-sql      | 1.14.2    |
+| apache-airflow-providers-datadog         | 3.6.1     |
+| apache-airflow-providers-elasticsearch   | 5.4.1     |
+| apache-airflow-providers-fab             | 1.2.1     |
+| apache-airflow-providers-ftp             | 3.10.0    |
+| apache-airflow-providers-google          | 10.19.0   |
+| apache-airflow-providers-http            | 4.12.0    |
+| apache-airflow-providers-imap            | 3.6.1     |
+| apache-airflow-providers-microsoft-azure | 9.0.1     |
+| apache-airflow-providers-mysql           | 5.6.2     |
+| apache-airflow-providers-openlineage     | 1.9.1     |
+| apache-airflow-providers-postgres        | 5.11.2    |
+| apache-airflow-providers-redis           | 3.7.1     |
+| apache-airflow-providers-smtp            | 1.7.1     |
+| apache-airflow-providers-sqlite          | 3.8.1     |
+| astro-sdk-python                         | 1.8.1     |
+| astronomer-providers                     | 1.19.1    |
+| astronomer-providers-logging             | 1.5.1     |
+
+</TabItem>
+<TabItem value="slim">
+
+| Package Name                             | Version |
+|:---------------------------------------|:----------|
+| apache-airflow-providers-celery        | 3.7.2     |
+| apache-airflow-providers-common-io     | 1.3.2     |
+| apache-airflow-providers-common-sql    | 1.14.2    |
+| apache-airflow-providers-elasticsearch | 5.4.1     |
+| apache-airflow-providers-fab           | 1.2.1     |
+| apache-airflow-providers-ftp           | 3.10.0    |
+| apache-airflow-providers-http          | 4.12.0    |
+| apache-airflow-providers-imap          | 3.6.1     |
+| apache-airflow-providers-mysql         | 5.6.2     |
+| apache-airflow-providers-postgres      | 5.11.2    |
+| apache-airflow-providers-smtp          | 1.7.1     |
+| apache-airflow-providers-sqlite        | 3.8.1     |
+| astronomer-providers-logging           | 1.5.1     |
+
 ## Astro Runtime 11.6.0
 
 <Tabs
