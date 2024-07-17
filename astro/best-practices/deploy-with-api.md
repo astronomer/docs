@@ -14,7 +14,7 @@ This best practice guide first walks through the steps that are necessary to dep
 - An image-only deploy
 - A DAGs-only deploy
 
-Then, the guide shows you the recommended way to combine these three automated processes to create a script with conditional logic that can automatically deploy code to Astro, depending on which types of files change in your Astro project. These examples are bash scripts that use Docker to build the image, but you can use a similar tool like [kaniko](https://github.com/GoogleContainerTools/kaniko). You can also use a different scripting language, like Python, instead of bash.
+Then, the guide shows you the recommended way to combine these three automated processes to create a script with conditional logic that can automatically deploy code to Astro, depending on which types of files change in your Astro project. These examples are bash scripts that use Docker to build the image. You can also use a different scripting language, like Python, instead of bash.
 
 ## Feature overview
 
