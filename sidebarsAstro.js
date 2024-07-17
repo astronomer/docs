@@ -171,6 +171,8 @@ module.exports = {
               ],
             },
           ],
+        },
+        {
           type: "category",
           label: "Astro Terraform Provider",
           items: [
