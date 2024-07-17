@@ -80,6 +80,9 @@ docker run --rm quay.io/astronomer/astro-runtime:11.0.0 pip freeze | grep apache
 | apache-airflow-providers-sqlite        | 3.8.1     |
 | astronomer-providers-logging           | 1.5.1     |
 
+</TabItem>
+</Tabs>
+
 ## Astro Runtime 11.6.0
 
 <Tabs
