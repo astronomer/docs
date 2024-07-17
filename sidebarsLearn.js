@@ -145,6 +145,7 @@ module.exports = {
         'xcom-backend-tutorial',
         'pycharm-local-dev',
         'vscode-local-dev',
+        "dag-factory",
         'example-ms-teams-callback',
         'cloud-ide-tutorial',
         'airflow-object-storage-tutorial',
