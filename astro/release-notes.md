@@ -25,6 +25,19 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## July 16, 2024
+
+### Additional improvements
+
+- Added the following metrics to [Metrics Export](https://www.astronomer.io/docs/astro/export-metrics):
+    - The new `airflow_executor_open_slots`, `airflow_dagrun_dependency-check`, and `airflow_dagrun_dependency-check.<dag_id>` metrics allow you to collect metrics about your DAGs and executor status.
+    - Monitor task execution with `kube_pod_container_resource_limits`. This new metric enables you to track resource use against the configured limits so you can understand if task execution meets your configured CPU, memory, or storage limits for your Celery Workers or Kubernetes Executor and KubernetesPodOperator pods.
+- Added new suporting documentation for the Astro Terraform Provider, including a Getting Started guide and code examples for common uses. Read [Astro Terraform Provider](https://www.astronomer.io/docs/astro/terraform-provider) for more information.
+
+### Bug fixes
+
+- Fix an error where start times in the UI were different from actual DAG run trigger times.
+
 ## July 9, 2024
 
 ### Additional improvements
