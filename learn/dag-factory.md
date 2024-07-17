@@ -81,7 +81,7 @@ pip install dag-factory<=1.0.0
 All YAML files in your `dags` directory must be parsed and converted into Python in order to run on Apache Airflow. In this step, you will create a new DAG Factory file in your Astro project that includes the conversion logic. You only need to do this once and do not need a separate DAG Factory file for each of your DAGs or YAML files.
 
 1. In the `dags` directory of your Astro project, create a new Python file called `dag_factory.py`.
-2. Copy the following contents into your empty Python file. This file represents an Apache Airflow DAG and includes two commands that convert each of your YAML file(s) into DAGs. 
+2. Copy the following contents into your empty Python file. This file represents an Apache Airflow DAG and includes two commands that convert each of your YAML file(s) into DAGs.
 
 ```python
 from pathlib import Path
@@ -93,9 +93,11 @@ from dagfactory import load_yaml_dags
 config_dir = Path(airflow_conf.get("core", "dags_folder")) / "configs"
 load_yaml_dags(globals_dict=globals(), dags_folder=config_dir)
 
+```
+
 ## Step 4: (Optional) Add a DAG-level callback
 
-In order to use [DAG-level callbacks](https://www.astronomer.io/docs/learn/error-notifications-in-airflow#airflow-callbacks) you will need to add callback parameters to your config file. The values will be the paths to the files that contain your callback functions, as well as the callback function names. 
+In order to use [DAG-level callbacks](https://www.astronomer.io/docs/learn/error-notifications-in-airflow#airflow-callbacks) you will need to add callback parameters to your config file. The values will be the paths to the files that contain your callback functions, as well as the callback function names.
 
 In `my_dag.yml`, add the following parameters:
 
@@ -104,7 +106,9 @@ In `my_dag.yml`, add the following parameters:
   on_success_callback_file: /usr/local/airflow/dags/callback_func.py
   on_failure_callback_name: placeholder_callback
   on_failure_callback_file: /usr/local/airflow/dags/callback_func.py
-1. Create a new file `callback_func.py` in your `dags` directory. 
+  ```
+
+1. Create a new file `callback_func.py` in your `dags` directory.
 2. Copy the contents of the following placeholder callback into the file:
 
   ```python
