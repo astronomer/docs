@@ -103,7 +103,8 @@ To set up a private connection between an Astro Virtual Network (VNet) and an Az
             "Microsoft.Network/virtualNetworks/write",
             "Microsoft.Network/virtualNetworks/peer/action",
             "Microsoft.Network/virtualNetworks/virtualNetworkPeerings/write",
-            "Microsoft.Network/virtualNetworks/virtualNetworkPeerings/read"
+            "Microsoft.Network/virtualNetworks/virtualNetworkPeerings/read",
+            "Microsoft.Network/virtualHubs/hubVirtualNetworkConnections/read"
         ],
         "NotActions": [
       
