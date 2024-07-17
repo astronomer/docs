@@ -81,39 +81,29 @@ pip install dag-factory<=1.0.0
 All YAML files in your `dags` directory must be parsed and converted into Python in order to run on Apache Airflow. In this step, you will create a new DAG Factory file in your Astro project that includes the conversion logic. You only need to do this once and do not need a separate DAG Factory file for each of your DAGs or YAML files.
 
 1. In the `dags` directory of your Astro project, create a new Python file called `dag_factory.py`.
-2. Copy the following contents into your empty Python file. This file represents an Apache Airflow DAG and includes two commands that convert each of your YAML file(s) into DAGs. Make sure to replace `/path/to/dags/config_file.yml` with the absolute path to your config file. For Astro CLI users, the absolute path to the DAG directory is `/usr/local/airflow/dags`. 
+2. Copy the following contents into your empty Python file. This file represents an Apache Airflow DAG and includes two commands that convert each of your YAML file(s) into DAGs. 
 
 ```python
+from pathlib import Path
 
 from airflow import DAG
-import dagfactory
+from airflow.configuration import conf as airflow_conf
+from dagfactory import load_yaml_dags
 
-dag_factory = dagfactory.DagFactory("/path/to/dags/config_file.yml")
-
-dag_factory.clean_dags(globals())
-dag_factory.generate_dags(globals())
-
-```
-
-:::tip Multiple config files
-
-If you have multiple YAML configuration files, you can import them with the following code:
-
-    ```python
-
-    # 'airflow' is required for the dagbag to parse this file - do not remove this comment
-    from dagfactory import load_yaml_dags
-
-    load_yaml_dags(globals_dict=globals(), suffix=['dag.yaml'])
-
-    ```
-
-:::
+config_dir = Path(airflow_conf.get("core", "dags_folder")) / "configs"
+load_yaml_dags(globals_dict=globals(), dags_folder=config_dir)
 
 ## Step 4: (Optional) Add a DAG-level callback
 
-In order to use [DAG-level callbacks](https://www.astronomer.io/docs/learn/error-notifications-in-airflow#airflow-callbacks) you need to add the file referenced in the `on_success_callback_file` and `on_failure_callback_file` parameters and the function referenced in the `on_success_callback_name` and `on_failure_callback_name` parameters of the YAML configuration file.
+In order to use [DAG-level callbacks](https://www.astronomer.io/docs/learn/error-notifications-in-airflow#airflow-callbacks) you will need to add callback parameters to your config file. The values will be the paths to the files that contain your callback functions, as well as the callback function names. 
 
+In `my_dag.yml`, add the following parameters:
+
+ ```yaml
+  on_success_callback_name: placeholder_callback
+  on_success_callback_file: /usr/local/airflow/dags/callback_func.py
+  on_failure_callback_name: placeholder_callback
+  on_failure_callback_file: /usr/local/airflow/dags/callback_func.py
 1. Create a new file `callback_func.py` in your `dags` directory. 
 2. Copy the contents of the following placeholder callback into the file:
 
