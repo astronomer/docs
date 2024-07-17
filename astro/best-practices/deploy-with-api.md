@@ -521,21 +521,23 @@ if [[ $file != "$ASTRO_PROJECT_PATH/dags"* ]];then
 fi
 done
 
-# Step 2: Initializing Deploy
-echo -e "Initiating Deploy Process for deployment $DEPLOYMENT_ID\n"
-CREATE_DEPLOY=$(curl --location --request POST "https://api.astronomer.io/platform/v1beta1/organizations/$ORGANIZATION_ID/deployments/$DEPLOYMENT_ID/deploys" \
---header "X-Astro-Client-Identifier: script" \
---header "Content-Type: application/json" \
---header "Authorization: Bearer $ASTRO_API_TOKEN" \
---data '{
-   "type": "IMAGE_AND_DAG"
-}' | jq '.')
 
 DEPLOY_ID=$(echo $CREATE_DEPLOY | jq -r '.id')
 
 # Step 3: If only DAGs changed deploy only the DAGs in your 'dags' folder to your Deployment
 if [ $dags_only == 1 ]
 then
+        echo -e "Initiating Deploy Process for deployment $DEPLOYMENT_ID\n"
+        CREATE_DEPLOY=$(curl --location --request POST "https://api.astronomer.io/platform/v1beta1/organizations/$ORGANIZATION_ID/deployments/$DEPLOYMENT_ID/deploys" \
+        --header "X-Astro-Client-Identifier: script" \
+        --header "Content-Type: application/json" \
+        --header "Authorization: Bearer $ASTRO_API_TOKEN" \
+        --data '{
+        "type": "DAG_ONLY"
+        }' | jq '.')
+
+        DEPLOY_ID=$(echo $CREATE_DEPLOY | jq -r '.id')
+
 	# Upload dags tar file
 	DAGS_UPLOAD_URL=$(echo $CREATE_DEPLOY | jq -r '.dagsUploadUrl')
 	echo -e "\nCreating a dags tar file from $ASTRO_PROJECT_PATH/dags and stored in $ASTRO_PROJECT_PATH/dags.tar\n"
@@ -577,7 +579,19 @@ fi
 # Step 3: If any other files changed build your Astro project into a Docker image, push the image to your Deployment, and then push and DAG changes
 if [ $dags_only == 0 ]
 then
-   # Build and Push Docker Image
+
+        echo -e "Initiating Deploy Process for deployment $DEPLOYMENT_ID\n"
+        CREATE_DEPLOY=$(curl --location --request POST "https://api.astronomer.io/platform/v1beta1/organizations/$ORGANIZATION_ID/deployments/$DEPLOYMENT_ID/deploys" \
+        --header "X-Astro-Client-Identifier: script" \
+        --header "Content-Type: application/json" \
+        --header "Authorization: Bearer $ASTRO_API_TOKEN" \
+        --data '{
+        "type": "IMAGE_AND_DAG"
+        }' | jq '.')
+
+        DEPLOY_ID=$(echo $CREATE_DEPLOY | jq -r '.id')
+
+        # Build and Push Docker Image
 	REPOSITORY=$(echo $CREATE_DEPLOY | jq -r '.imageRepository')
 	TAG=$(echo $CREATE_DEPLOY | jq -r '.imageTag')
 	docker login images.astronomer.cloud -u cli -p $ASTRO_API_TOKEN
