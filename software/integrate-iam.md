@@ -333,9 +333,9 @@ Astronomer Software creates a set of service-accounts for each Airflow instance 
 
 | Component                   | Rationale                                                                                                 |
 |-----------------------------|-----------------------------------------------------------------------------------------------------------|
-| `<release name>-scheduler`         | Customer-provided DAG code is regularly interpreted to determine what tasks are part of DAGs, and that code might incorporate references to values stored in secret storage or XCom.                  |
-| `<release name>-worker`            | Customer-provided DAG code is interpreted at task-run time and might incorporate references to values stored in secret storage or XCom.             |
-| `<release name>-triggerer`         | Customer-provided DAG code is interpreted at task run time and might incorporate references to values stored in secrets storage or XCom.            |
+| `<release name>-scheduler`         | User-provided-provided DAG code is regularly interpreted to determine what tasks are part of DAGs, and that code might incorporate references to values stored in secret storage or XCom.                  |
+| `<release name>-worker`            | User-provided-provided DAG code is interpreted at task-run time and might incorporate references to values stored in secret storage or XCom.             |
+| `<release name>-triggerer`         | User-provided-provided DAG code is interpreted at task run time and might incorporate references to values stored in secrets storage or XCom.            |
 | `<release name>-webserver`         | Provides users a mechanism to view and set secrets and to view XCom entries.|
 | `<release name>-cleanup`           |  Accesses task instances and other data that might include serialized references to values stored in secrets backends or XCOM backends.       |
 | `<release name>-migrate-database-job` | Analyzes serialized DAG models that might include serialized references to values stored in secrets backends or XCOM backends. |
