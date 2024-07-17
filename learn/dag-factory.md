@@ -13,7 +13,7 @@ The DAG Factory can be used with all Astronomer products and any Apache Airflow 
 
 ## Prerequisites
 
-- Python version 3.6.0 or greater
+- Python version 3.8.0 or greater
 - Apache Airflow version 2.0 or greater
 
 If you're an Astronomer customer, you must have an Astro project with a supported version of Astro Runtime. See [Astro Runtime lifecycle schedule](https://www.astronomer.io/docs/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule) for a list of currently supported Runtime versions.
@@ -36,10 +36,10 @@ pip install dag-factory<=1.0.0
 
 ```
 
-## Step 2: Create a YAML file for your DAG
+## Step 2: Create a sub-directory for your DAG configuration files and create a YAML file for your DAG
 
-1. In the `dags` directory of your Astro project, create a new YAML file for each DAG you want to create. For example, `my_dag.yaml`. Astronomer recommends creating a new sub-directory for all your DAGs defined in YAML and keeping them separate from standard DAG files written in Python.
-2. Copy the contents of the following example configuration file into each YAML file.
+1. In the `dags` directory of your Astro project, create a new sub-directory called `configs` to store your DAG configuration files defined in YAML.  Astronomer recommends keeping these separate from standard DAG files written in Python.
+2. Within the new sub-directory, create a new YAML file for your DAG called for example `my_dag.yaml`. Copy the contents of the following example configuration file into the YAML file.
 
 ```YAML
 <your-DAG-id>:
@@ -57,11 +57,6 @@ pip install dag-factory<=1.0.0
   default_view: 'grid'  # or 'graph', 'duration', 'gantt', 'landing_times' (for Run Duration in newer versions)
   orientation: 'LR'  # or 'TB', 'RL', 'BT'
   description: 'This is an example dag!'
-  # to use callbacks you will need to complete Step 4 of this tutorial
-  on_success_callback_name: placeholder_callback
-  on_success_callback_file: /usr/local/airflow/dags/callback_func.py
-  on_failure_callback_name: placeholder_callback
-  on_failure_callback_file: /usr/local/airflow/dags/callback_func.py
   tasks:
     task_1:
       operator: airflow.operators.bash_operator.BashOperator
@@ -115,7 +110,7 @@ If you have multiple YAML configuration files, you can import them with the foll
 
 :::
 
-## Step 4: Add a DAG-level callback
+## Step 4: (Optional) Add a DAG-level callback
 
 In order to use [DAG-level callbacks](https://www.astronomer.io/docs/learn/error-notifications-in-airflow#airflow-callbacks) you need to add the file referenced in the `on_success_callback_file` and `on_failure_callback_file` parameters and the function referenced in the `on_success_callback_name` and `on_failure_callback_name` parameters of the YAML configuration file.
 
