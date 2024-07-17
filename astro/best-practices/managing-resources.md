@@ -22,7 +22,7 @@ For more details about configuring resources with the UI, see [Deployment resour
 
 If you prefer to use a command-line tool, you can use the Astro CLI to manage all the resources configurable with the UI.
 
-For details about managing resources with the Astro CLI, see []().
+For information about all the commands and settings available in the Astro CLI, see [Command reference](https://www.astronomer.io/docs/astro/cli/reference).
 
 :::
 
