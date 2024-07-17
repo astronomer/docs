@@ -86,7 +86,7 @@ The following sections show the four ticket priorities with examples and descrip
 
 ### P1: Critical impact
 
-A Deployment is completely unavailable, or a DAG that was previously working in production is no longer working.
+A production Deployment is completely unavailable, or a DAG that was previously working in production stops working, even though it was not changed.
 
 Astronomer handles P1 tickets with the highest levels of urgency. If Astronomer Support responds to a P1 ticket, and subsequently does not hear back from you for 2 hours, the ticket priority is automatically changed to P2.
 
@@ -100,7 +100,7 @@ Examples:
 
 - A newly deployed production DAG is not working, even though it worked successfully in a development or test environment.
 - The Airflow UI is unavailable.
-- You can't deploy code to your Deployment, but existing DAGs and tasks run as expected.
+- You can't deploy code to a production Deployment, but existing DAGs and tasks run as expected.
 - You need to [modify a Hybrid cluster setting](manage-hybrid-clusters.md) that is required for running tasks, such as adding a new worker instance type.
 - Task logs are missing in the Airflow UI.
 
@@ -116,6 +116,7 @@ Examples:
 - There is an Airflow issue that has a code-based solution.
 - You received a log alert on Astronomer.
 - You lost the ability to use a [Public Preview](https://docs.astronomer.io/astro/feature-previews) feature that does not affect general services.
+- You can't deploy code to a non-production Deployment, but existing DAGs and tasks run as expected.
 
 ### P4: Low impact
 

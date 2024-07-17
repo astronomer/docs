@@ -171,6 +171,13 @@ module.exports = {
               ],
             },
           ],
+          type: "category",
+          label: "Astro Terraform Provider",
+          items: [
+            "terraform-provider",
+            "terraform-provider-get-started",
+            "terraform-provider-examples",
+          ],
         },
         {
           type: "category",
@@ -179,7 +186,6 @@ module.exports = {
             "manage-deployments-as-code",
             "deployment-file-reference"],
         },
-        "api-keys",
       ],
     },
     {

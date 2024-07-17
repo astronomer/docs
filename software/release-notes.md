@@ -26,6 +26,22 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## 0.35.1
+
+Release date: July 15, 2024
+
+### Security fix for DAG-only deploys
+
+Fixed an issue where if you had a DAG-only deploy, it was possible for users to access its dag-server from any other kubernetes namespace. See [Upgrade considerations for 0.35](https://www.astronomer.io/docs/software/upgrade-astronomer#upgrade-to-astronomer-software-035) for more details about the security fix.
+
+### Bug fixes
+
+- Resolved the following vulnerabilities:
+   - [CVE-2023-45283](https://github.com/advisories/GHSA-vvjp-q62m-2vph)
+   - [CVE-2023-45288](https://github.com/advisories/GHSA-4v7x-pqxf-cx7m)
+   - [CVE-2024-24790](https://github.com/advisories/GHSA-49gw-vxvf-fc2g)
+   - [CVE-2023-39325](https://github.com/advisories/GHSA-4374-p667-p6c8)
+
 ## 0.35.0
 
 Release date: July 1, 2024
@@ -60,7 +76,7 @@ Astronomer [Teams](import-idp-groups.md) can now be created without associating 
 - The Astro CLI now shows an error if you attempt to deploy code to a Software installation where `astronomer.houston.config.deployments.registry.protectedCustomRegistry.updateRegistry.host` is not set.
 - Fixed an issue where Jetstream resources were being created even when `global.nats.jetStream.enabled = false` in the Software platform configuration.
 - Fixed an issue where the default `astroUnitsEnabled` value in `values.yaml` was not respected when creating Deployments via the Houston API, resulting in Deployment creation failing when the resource strategy is not explicitly specified.
-- Fixed an issue where Houston could produce errors if the username for a Postgres database included special characters.
+- Fixed an issue where Houston could produce errors if the password for a Postgres database included special characters.
 - Fixed an issue where pagination on specific Software UI screens did not behave as expected.
 - Fixed an issue where the `lastUsedAt` data for a service account was not updated when the service account deployed an Airflow image.
 - Fixed a bug causing disruption to retrieval of logs for users with External Elasticsearch.

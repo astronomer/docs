@@ -64,7 +64,7 @@ astro workspace service-account delete <your-service-account-id>
 
 ### astro workspace service-account get
 
-Shows the name, ID, and API key for each service account on a given Workspace.
+Shows the name, ID, and API token for each service account on a given Workspace.
 
 #### Usage
 

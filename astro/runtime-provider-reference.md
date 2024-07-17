@@ -657,6 +657,27 @@ docker run --rm quay.io/astronomer/astro-runtime:11.0.0 pip freeze | grep apache
 | astronomer-providers                     | 1.18.4  |
 | astronomer-providers-logging             | 1.4.4   |
 
+## Astro Runtime 9.16.0
+
+| Package Name                             | Version |
+| :--------------------------------------- | :------ |
+| apache-airflow-providers-amazon          | 8.25.0  |
+| apache-airflow-providers-celery          | 3.7.2   |
+| apache-airflow-providers-cncf-kubernetes | 7.14.0  |
+| apache-airflow-providers-common-sql      | 1.14.1  |
+| apache-airflow-providers-datadog         | 3.6.1   |
+| apache-airflow-providers-elasticsearch   | 5.4.1   |
+| apache-airflow-providers-ftp             | 3.10.0  |
+| apache-airflow-providers-google          | 10.20.0 |
+| apache-airflow-providers-http            | 4.12.0  |
+| apache-airflow-providers-imap            | 3.6.1   |
+| apache-airflow-providers-microsoft-azure | 10.1.2  |
+| apache-airflow-providers-mysql           | 5.6.2   |
+| apache-airflow-providers-openlineage     | 1.8.0   |
+| apache-airflow-providers-postgres        | 5.11.2  |
+| apache-airflow-providers-redis           | 3.7.1   |
+| apache-airflow-providers-sqlite          | 3.8.1   |
+
 ## Astro Runtime 9.15.0
 
 | Package Name                             | Version |
