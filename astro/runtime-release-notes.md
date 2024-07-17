@@ -29,6 +29,30 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## Astro Runtime 11.7.0
+
+- Release date: July 17, 2024
+- Airflow version: 2.9.3
+
+## Airflow 2.9.3
+
+Astro Runtime 11.7.0 includes same-day support for Apache Airflow 2.9.3. Airflow 2.9.3 contains a number of bug fixes and new features including:
+
+- The time unit for `scheduled_duration` and `queued_duration` metrics has changed to milliseconds instead of seconds [#37936](https://github.com/apache/airflow/pull/37936)
+- Support for OpenTelemetry metrics on Airflow are now considered **Stable**, and was previously added in Airflow version 2.7.0 as **Experimental** [#40286](https://github.com/apache/airflow/pull/40286)
+
+For more information, see the [Apache Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-9-3-2024-07-15).
+
+### Additional improvements
+
+- Upgraded the minor and patch versions of some Astro open source provider packages. See [Astro Runtime 11.7.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-1170)
+
+### Security fixes
+
+- Fixed [CVE-2024-6345](https://www.cvedetails.com/cve/CVE-2024-6345/)
+- Fixed [CVE-2024-39863](https://www.cve.org/CVERecord?id=CVE-2024-39863)
+- Fixed [CVE-2024-39877](https://www.cve.org/CVERecord?id=CVE-2024-39877)
+
 ## Astro Runtime 11.6.0
 
 - Release date: June 28, 2024
@@ -373,6 +397,11 @@ For more information about the major changes in this release, see the [Airflow b
 ### Additional improvements
 
 - Upgraded the minor and patch versions of some Astro open source provider packages. See [Astro Runtime 9.16.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-9160)
+
+### Security fixes
+
+- Fixed [CVE-2024-39863](https://www.cve.org/CVERecord?id=CVE-2024-39863)
+- Fixed [CVE-2024-39877](https://www.cve.org/CVERecord?id=CVE-2024-39877)
 
 ## Astro Runtime 9.15.0
 
