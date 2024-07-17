@@ -36,11 +36,12 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 ## Airflow 2.9.3
 
-Astro Runtime 11.7.0 includes same-day support for Apache Airflow 2.9.3. Airflow 2.9.3 contains a number of bug fixes including:
+Astro Runtime 11.7.0 includes same-day support for Apache Airflow 2.9.3. Airflow 2.9.3 contains a number of bug fixes and new features including:
 
--
+- The time unit for `scheduled_duration` and `queued_duration` metrics has changed to milliseconds instead of seconds [#37936](https://github.com/apache/airflow/pull/37936)
+- Support for OpenTelemetry metrics on Airflow are now considered **Stable**, and was previously added in Airflow version 2.7.0 as **Experimental** [#40286](https://github.com/apache/airflow/pull/40286)
 
-For more information, see the [Apache Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-9-2-2024-06-10).
+For more information, see the [Apache Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-9-3-2024-07-15).
 
 ### Additional improvements
 
