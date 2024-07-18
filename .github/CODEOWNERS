@@ -1,14 +1,14 @@
-*.md @jwitz @paolaperaza @lzdanski
+*.md @paolaperaza @lzdanski
 
-/astro/ @jwitz @paolaperaza @lzdanski
+/astro/ @TJaniF @paolaperaza @lzdanski @merobi-hub
 
-/software/ @jwitz @paolaperaza @lzdanski
+/software/ @TJaniF @paolaperaza @lzdanski @merobi-hub
 
-/learn/ @TJaniF @kentdanas @jwitz @paolaperaza @lzdanski
+/learn/ @TJaniF @kentdanas @paolaperaza @lzdanski @merobi-hub
 
-/code-samples/dags/ @TJaniF @kentdanas
+/code-samples/dags/ @TJaniF @kentdanas @merobi-hub
 
-/astro/best-practices/ @TJaniF @kentdanas
+/astro/best-practices/ @TJaniF @kentdanas @lzdanski @merobi-hub
 
 /astro/runtime-release-notes.md @astronomer/airflow-release-team
 
