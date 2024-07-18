@@ -1,6 +1,6 @@
 ---
-title: 'Upgrade Astronomer Software'
-sidebar_label: 'Upgrade Astronomer'
+title: "Upgrade Astronomer Software"
+sidebar_label: "Upgrade Astronomer"
 id: upgrade-astronomer
 description: Upgrade to a new LTS, stable, or patch version of Astronomer Software.
 ---
@@ -10,6 +10,7 @@ For Astronomer Software customers, new product features are regularly made avail
 Follow this guide to upgrade to any version of Astronomer Software. For information on new features and changes, refer to [Software release notes](release-notes.md).
 
 A few notes before you get started:
+
 - The upgrade process will not affect running Airflow tasks as long as `upgradeDeployments.enabled=false` is set in your upgrade script.
 - Updates will not cause any downtime to Astronomer services, including the Software UI, the Astro CLI, and the Houston API.
 - To avoid potential complications, perform Astronomer Software upgrades in order and include all minor versions in your upgrade sequence.
@@ -58,9 +59,9 @@ All Pods should be in either the `Running` or `Completed` state. If any of your 
 
 1. Run the following command to retrieve your current platform configuration:
 
-    ```sh
-    helm get values <your-platform-release-name> -n <your-platform-namespace>  > values.yaml
-    ```
+   ```sh
+   helm get values <your-platform-release-name> -n <your-platform-namespace>  > values.yaml
+   ```
 
 2. Review this configuration. If you see the line `"USER-SUPPLIED VALUES:"`, delete it.
 3. Create a copy of `values.yaml` called `old_values.yaml`. Save this in case you need to roll back your upgrade.
@@ -176,12 +177,12 @@ To avoid extended service disruptions, Astronomer recommends upgrading Astronome
 
 If you're upgrading through multiple Astronomer Software versions in a single upgrade process, review the following table to ensure that you're following the correct upgrade path. If your combination of **Current version** and **Target version** isn't listed, you can upgrade directly from your current version to the target version.
 
-| Current version | Target version | Upgrade path           |
-| --------------- | -------------- | ---------------------- |
-| 0.29            | 0.31 or later  | 0.29 -> 0.30 -> 0.35.1 |
-| 0.27            | 0.29 or later  | 0.27 -> 0.28 -> 0.35.1 |
-| 0.26            | 0.29 or later  | 0.26 -> 0.28 -> 0.35.1 |
-| 0.25            | 0.29 or later  | 0.25 -> 0.28 -> 0.35.1 |
+| Current version | Target version | Upgrade path                    |
+| --------------- | -------------- | ------------------------------- |
+| 0.29            | 0.31 or later  | 0.29 -> 0.30 -> 0.34.3 or later |
+| 0.27            | 0.29 or later  | 0.27 -> 0.28 -> 0.34.3 or later |
+| 0.26            | 0.29 or later  | 0.26 -> 0.28 -> 0.34.3 or later |
+| 0.25            | 0.29 or later  | 0.25 -> 0.28 -> 0.34.3 or later |
 
 ### Upgrade to Kubernetes 1.25
 
@@ -191,16 +192,16 @@ In Kubernetes 1.25, [PodSecurityPolicies (PSPs)](https://kubernetes.io/blog/2021
 
 - Run the following command to set a baseline Pod Security Standard for all Pods in your Astronomer namespace:
 
-    ```sh
-    kubectl label --overwrite ns <your-namespace> \
-    pod-security.kubernetes.io/enforce=baseline \
-    pod-security.kubernetes.io/enforce-version=v1.25
-    ```
+  ```sh
+  kubectl label --overwrite ns <your-namespace> \
+  pod-security.kubernetes.io/enforce=baseline \
+  pod-security.kubernetes.io/enforce-version=v1.25
+  ```
 
-    If you chose this option, complete the following additional setup to satisfy the baseline policy:
+  If you chose this option, complete the following additional setup to satisfy the baseline policy:
 
-    - [Export logs using container sidecars](export-task-logs.md#export-logs-using-container-sidecars)
-    - [Use an external Elasticsearch instance for Airflow task log management](export-task-logs.md#use-an-external-elasticsearch-instance-for-airflow-task-log-management)
+  - [Export logs using container sidecars](export-task-logs.md#export-logs-using-container-sidecars)
+  - [Use an external Elasticsearch instance for Airflow task log management](export-task-logs.md#use-an-external-elasticsearch-instance-for-airflow-task-log-management)
 
 - Implement Pod Security through a third-party Open Policy Agent tool such as [GateKeeper](https://open-policy-agent.github.io/gatekeeper/website/docs/).
 
@@ -215,9 +216,10 @@ If you're upgrading to Astronomer Software 0.29 or later and Kubernetes 1.22 at 
 1. Follow the standard Software upgrade procedure as described in this document.
 2. For each Deployment, run the following command to upgrade the Deployment to use the latest version of the Airflow Helm chart:
 
-    ```sh
-    kubectl exec -it `kubectl get pods -l component=houston --no-headers -n <deployment-namespace>` -n <deployment-namespace> -- yarn run upgrade-deployments
-    ```
+   ```sh
+   kubectl exec -it `kubectl get pods -l component=houston --no-headers -n <deployment-namespace>` -n <deployment-namespace> -- yarn run upgrade-deployments
+   ```
+
 3. Upgrade Kubernetes to version 1.22.
 
 ### Upgrade to Astronomer Software 0.35
@@ -226,11 +228,7 @@ If you're upgrading to Astronomer Software 0.29 or later and Kubernetes 1.22 at 
 
 Due to an issue with the [DAG-only Deploy](deploy-dags.md#configure-dag-only-deploys-on-a-deployment) feature in Astronomer Software version 0.35.0, there is a risk that users could potentially access DAGs across different namespaces or Airflow deployments without proper permissions. This issue does not affect Deployments that do not use DAG-only deploys.
 
-To mitigate this issue:
-
-- Do not use DAG-only Deploys if you use version 0.35
-- If you have not upgraded to version 0.35, wait until the next major release to upgrade your Software version
-- If you use version 0.35, upgrade to 0.35.1
+To address this issue do not use DAG-only deploys if you use versions 0.35. Only enable DAG-only deploys when you are able to upgrade to version 0.35.1.
 
 ### Upgrade to Astronomer Software 0.34
 
@@ -238,11 +236,7 @@ To mitigate this issue:
 
 Due to an issue with the [DAG-only Deploy](deploy-dags.md#configure-dag-only-deploys-on-a-deployment) feature in Astronomer Software version 0.34.0-0.34.2, there is a risk that users could potentially access DAGs across different namespaces or Airflow deployments without proper permissions. This issue does not affect Deployments that do not use DAG-only deploys.
 
-To mitigate this issue:
-
-- Do not use DAG-only Deploys if you use versions 0.34.0-0.34.2
-- If you have not upgraded to versions 0.34-0.34.2, wait until the next major release to upgrade your Software version
-- If you use versiosn 0.34.0-0.34.2, upgrade to 0.34.3
+To address this issue do not use DAG-only deploys if you use versions 0.34.0-0.34.2. Only enable DAG-only deploys when you are able to upgrade to version 0.34.3 or 0.35.1.
 
 ### Upgrade to Astronomer Software 0.32
 
@@ -311,6 +305,7 @@ The `trgm` extension for PosgreSQL was enabled in Astronomer Software 0.30. Supe
 ```sql
 `ALTER USER <username> WITH SUPERUSER;`
 ```
+
 If you're using Azure Database for PostgreSQL as your database backend, you need to enable the `pg_trgm` extension with the the Azure portal or the Azure CLI before upgrading to Astronomer Software 0.30. To configure PostgreSQL extensions in Azure Database for PostgreSQL, see [PostgreSQL extensions in Azure Database for PostgreSQL](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
 
 If you don't enable the `pg_trgm` extension before upgrading Astronomer Software, the upgrade will fail.
@@ -348,12 +343,12 @@ Before upgrading to Astronomer Software 0.28, ensure that the following tools ar
 - **Kubernetes**: Your version must be 1.19 or greater. If you need to upgrade Kubernetes, contact your cloud provider or your Kubernetes administrator.
 - **Airflow images**: You must be using an Astronomer Certified Airflow image, and the version of your image must be 1.10.15 or greater.
 
-    For example, all of the following images would work for this upgrade:
+  For example, all of the following images would work for this upgrade:
 
-    - `quay.io/astronomer/ap-airflow:1.10.15-7-buster`
-    - `quay.io/astronomer/ap-airflow:2.0.0-3-buster-onbuild`
-    - `quay.io/astronomer/ap-airflow:2.0.2-buster-onbuild`
-    - `quay.io/astronomer/ap-airflow:2.2.2-onbuild`
+  - `quay.io/astronomer/ap-airflow:1.10.15-7-buster`
+  - `quay.io/astronomer/ap-airflow:2.0.0-3-buster-onbuild`
+  - `quay.io/astronomer/ap-airflow:2.0.2-buster-onbuild`
+  - `quay.io/astronomer/ap-airflow:2.2.2-onbuild`
 
 - **Helm**: Your version must be 3.6 ≤ 3.8.
 
@@ -381,7 +376,7 @@ astronomer:
     config:
       deployments:
         helm:
-          airflow:  ## added this key as this config is coming from the subchart
+          airflow: ## added this key as this config is coming from the subchart
             webserver:
               allowPodLogReading: true
 ```
@@ -398,20 +393,20 @@ Before upgrading to 0.25, ensure that the following software is updated to the a
 - **Kubernetes**: Your version must be 1.17 or 1.18. If you need to upgrade Kubernetes, contact your cloud provider's support or your Kubernetes administrator.
 - **Airflow images**: You must be using an Astronomer Certified Airflow image, and the version of your image must be 1.10.5 or greater. In addition, your image should be in the following format:
 
-    ```
-    quay.io/astronomer/ap-airflow:<airflow-version>-<build-number>-<distribution>-onbuild
-    ```
+  ```
+  quay.io/astronomer/ap-airflow:<airflow-version>-<build-number>-<distribution>-onbuild
+  ```
 
-    For example, all of the following images would work for this upgrade:
+  For example, all of the following images would work for this upgrade:
 
-    ```sh
-    quay.io/astronomer/ap-airflow:1.10.10-5-alpine3.10-onbuild
-    quay.io/astronomer/ap-airflow:2.0.0-3-buster-onbuild
-    quay.io/astronomer/ap-airflow:2.0.2-buster-onbuild
-    quay.io/astronomer/ap-airflow:1.10.5-9-buster
-    ```
+  ```sh
+  quay.io/astronomer/ap-airflow:1.10.10-5-alpine3.10-onbuild
+  quay.io/astronomer/ap-airflow:2.0.0-3-buster-onbuild
+  quay.io/astronomer/ap-airflow:2.0.2-buster-onbuild
+  quay.io/astronomer/ap-airflow:1.10.5-9-buster
+  ```
 
-    > **Note:** While `-onbuild` and `<build-number>` are optional, we recommend including them for most upgrades. If you have your own build, test, and publish workflows that are layered on top of the Astronomer Airflow images, then removing `<build-number>` is appropriate because images including `<build-number>` are immutable.
+  > **Note:** While `-onbuild` and `<build-number>` are optional, we recommend including them for most upgrades. If you have your own build, test, and publish workflows that are layered on top of the Astronomer Airflow images, then removing `<build-number>` is appropriate because images including `<build-number>` are immutable.
 
 - **Helm**: Your version must be 3.6 or greater.
 

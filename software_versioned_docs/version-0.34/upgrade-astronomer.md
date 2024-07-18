@@ -176,12 +176,12 @@ To avoid extended service disruptions, Astronomer recommends upgrading Astronome
 
 If you're upgrading through multiple Astronomer Software versions in a single upgrade process, review the following table to ensure that you're following the correct upgrade path. If your combination of **Current version** and **Target version** isn't listed, you can upgrade directly from your current version to the target version.
 
-| Current version | Target version | Upgrade path                |
-| --------------- | -------------- | --------------------------- |
-| 0.29            | 0.31 or later  | 0.29 > 0.30 > 0.35.1 or later |
-| 0.27            | 0.29 or later  | 0.27 > 0.28 > 0.35.1 or later |
-| 0.26            | 0.29 or later  | 0.26 > 0.28 > 0.35.1 or later |
-| 0.25            | 0.29 or later  | 0.25 > 0.28 > 0.35.1 or later |
+| Current version | Target version | Upgrade path                    |
+| --------------- | -------------- | ------------------------------- |
+| 0.29            | 0.31 or later  | 0.29 -> 0.30 -> 0.34.3 or later |
+| 0.27            | 0.29 or later  | 0.27 -> 0.28 -> 0.34.3 or later |
+| 0.26            | 0.29 or later  | 0.26 -> 0.28 -> 0.34.3 or later |
+| 0.25            | 0.29 or later  | 0.25 -> 0.28 -> 0.34.3 or later |
 
 ### Upgrade to Kubernetes 1.25
 
@@ -226,11 +226,7 @@ If you're upgrading to Astronomer Software 0.29 or later and Kubernetes 1.22 at 
 
 Due to an issue with the [DAG-only Deploy](deploy-dags.md#configure-dag-only-deploys-on-a-deployment) feature in Astronomer Software version 0.35.0, there is a risk that users could potentially access DAGs across different namespaces or Airflow deployments without proper permissions. This issue does not affect Deployments that do not use DAG-only deploys.
 
-To mitigate this issue:
-
-- Do not use DAG-only Deploys if you use version 0.35
-- If you have not upgraded to version 0.35, wait until the next major release to upgrade your Software version
-- If you use version 0.35, upgrade to 0.35.1
+To address this issue, do not use DAG-only deploys if you use versions 0.35. Only enable DAG-only deploys when you are able to upgrade to version 0.35.1.
 
 ### Upgrade to Astronomer Software 0.34
 
@@ -238,11 +234,7 @@ To mitigate this issue:
 
 Due to an issue with the [DAG-only Deploy](deploy-dags.md#configure-dag-only-deploys-on-a-deployment) feature in Astronomer Software version 0.34.0-0.34.2, there is a risk that users could potentially access DAGs across different namespaces or Airflow deployments without proper permissions. This issue does not affect Deployments that do not use DAG-only deploys.
 
-To mitigate this issue:
-
-- Do not use DAG-only Deploys if you use versions 0.34.0-0.34.2
-- If you have not upgraded to versions 0.34-0.34.2, wait until the next major release to upgrade your Software version
-- If you use versiosn 0.34.0-0.34.2, upgrade to 0.34.3
+To address this issue, do not use DAG-only deploys if you use versions 0.34.0-0.34.2. Only enable DAG-only deploys when you are able to upgrade to version 0.34.3 or 0.35.1.
 
 ### Upgrade to Astronomer Software 0.32
 
