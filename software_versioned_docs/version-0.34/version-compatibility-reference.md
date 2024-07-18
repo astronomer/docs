@@ -13,7 +13,7 @@ While the tables below reference the minimum compatible versions, we typically r
 
 <!--- Version-specific -->
 
-The following table shows version compatibility information for all currently supported versions of Astronomer Software:
+The following table shows version compatibility information for all currently supported versions of Astronomer Software and some legacy versions. Check [Astronomer Software lifecycle schedule](release-lifecycle-policy.md#software-lifecycle-schedule) for more information about supported versions of Astronomer Software.
 
 | Astronomer Platform | Postgres | Python                                         | Astro Runtime        |
 | ------------------- | -------- | ---------------------------------------------- | -------------------- |
@@ -21,6 +21,7 @@ The following table shows version compatibility information for all currently su
 | v0.32               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions |
 | v0.33               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions |
 | v0.34               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions |
+| v0.35               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions |
 
 See [Kubernetes version support table and policy](#kubernetes-version-support-table-and-policy) for Astronomer platform compatibility with Kubernetes.
 
@@ -36,21 +37,23 @@ In general, Astronomer Software will support a given version of Kubernetes throu
 
 See the following table for all supported Kubernetes versions in each maintained version of Astronomer Software.
 
-| Astronomer platform | Kubernetes 1.22 | Kubernetes 1.23 | Kubernetes 1.24 | Kubernetes 1.25 | Kubernetes 1.26 | Kubernetes 1.27 | Kubernetes 1.28 | Kubernetes 1.29 |
-| :-----------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: |
-|   0.30.0 - 0.30.7   |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |                 |                 |
-|       0.30.8        |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |                 |
-|   0.32.0 - 0.32.2   |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |                 |
-|       0.32.3        |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |                 |
-|       0.32.4        |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
-|       0.32.5        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
-|       0.32.6        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
-|       0.33.0        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |                 |
-|       0.33.1        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
-|       0.33.2        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
-|       0.33.3        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
-|       0.34.0        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
-|       0.34.1        |                 |                 |                |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️         |
+| Astronomer platform | Kubernetes 1.22 | Kubernetes 1.23 | Kubernetes 1.24 | Kubernetes 1.25 | Kubernetes 1.26 | Kubernetes 1.27 | Kubernetes 1.28 | Kubernetes 1.29 | Kubernetes 1.30 |
+| :-----------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: |
+|   0.30.0 - 0.30.7   |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |                 |                 |                 |                 |
+|       0.30.8        |                 |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |                 |                 |                 |
+|   0.32.0 - 0.32.2   |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |                 |                 |                 |
+|       0.32.3        |                 |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |                 |                 |                 |
+|       0.32.4        |                 |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |                 |                 |
+|       0.32.5        |                 |                 |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |                 |                 |
+|       0.32.6        |                 |                 |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |                 |
+|       0.33.0        |                 |                 |       ✔️        |       ✔️        |       ✔️        |       ✔️        |                 |                 |                 |
+|       0.33.1        |                 |                 |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |                 |                 |
+|       0.33.2        |                 |                 |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |                 |                 |
+|       0.33.3        |                 |                 |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |                 |
+|       0.34.0        |                 |                 |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |                 |                 |
+|   0.34.1 - 0.34.3   |                 |                 |                 |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |                 |
+|   0.35.0 -0.35.1    |                 |                 |                 |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |
+
 
 For more information on upgrading Kubernetes versions, follow the guidelines offered by your cloud provider.
 
@@ -61,7 +64,7 @@ For more information on upgrading Kubernetes versions, follow the guidelines off
 
 ## Airflow chart compatibility reference
 
-Astronomer Software Deployments utilize the [Astronomer-distributed Helm chart for Apache Airflow](https://github.com/astronomer/airflow-chart). A Deployment's Airflow chart defines how a Deployment autoscales Pods and interacts with other components in your cluster. 
+Astronomer Software Deployments utilize the [Astronomer-distributed Helm chart for Apache Airflow](https://github.com/astronomer/airflow-chart). A Deployment's Airflow chart defines how a Deployment autoscales Pods and interacts with other components in your cluster.
 
 Use the following table to see the Airflow Helm chart version for each supported version of Astronomer Software. To view the Airflow Helm chart for an unsupported version of Astronomer Software, open the default Astronomer Helm chart in the [`astronomer/astronomer` repository](https://github.com/astronomer/astronomer/blob/master/charts/astronomer/values.yaml) and select the **Tag** that corresponds to the unsupported version. The value of `airflowChartVersion` is the Airflow Helm chart version.
 
@@ -88,6 +91,11 @@ Use the following table to see the Airflow Helm chart version for each supported
 | 0.33.2                      | 1.9.5                                 |
 | 0.33.3                      | 1.9.5                                 |
 | 0.34.0                      | 1.10.0                                |
+| 0.34.1                      | 1.10.0                                |
+| 0.34.2                      | 1.10.2                                |
+| 0.34.3                      | 1.10.2                                |
+| 0.35.0                      | 1.11.0                                |
+| 0.35.1                      | 1.11.0                                |
 
 ## Legacy version compatibility reference
 
