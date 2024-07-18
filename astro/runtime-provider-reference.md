@@ -714,6 +714,11 @@ docker run --rm quay.io/astronomer/astro-runtime:11.0.0 pip freeze | grep apache
 | astronomer-providers                     | 1.18.4  |
 | astronomer-providers-logging             | 1.4.4   |
 
+## Astro Runtime 9.17.0
+
+| Package Name                             | Version |
+| :--------------------------------------- | :------ |
+
 ## Astro Runtime 9.16.0
 
 | Package Name                             | Version |
