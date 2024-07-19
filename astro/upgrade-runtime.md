@@ -7,7 +7,7 @@ description: "Learn how to upgrade the Astro Runtime version on your Deployments
 
 import HostedBadge from '@site/src/components/HostedBadge';
 
-New versions of Astro Runtime are released regularly to support new Astro and Apache Airflow functionality. To take advantage of new features and bug and security fixes, Astronomer recommends upgrading Astro Runtime as new versions are available.
+New versions of Astro Runtime are released regularly to support new Astro and [Apache Airflow®](https://airflow.apache.org) functionality. To take advantage of new features and bug and security fixes, Astronomer recommends upgrading Astro Runtime as new versions are available.
 
 ## Prerequisites
 
@@ -157,7 +157,7 @@ If an Astro Runtime version isn't included in this section, then there are no sp
 
 :::
 
-#### Runtime 11 (Airflow 2.9)
+#### Runtime 11 (Apache Airflow® 2.9)
 
 ##### Restricted versions of Runtime 11
 

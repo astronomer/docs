@@ -5,7 +5,7 @@ id: configure-project-environment
 description: Learn how to configure environment variables, connections, and dependencies for use in your Astro cloud IDE pipelines.
 ---
 
-Configure your Astro Cloud IDE project environment, including Airflow dependencies, variables, and connections, in the Astro UI. You can use your environment configurations in any pipeline within your project.
+Configure your Astro Cloud IDE project environment, including [Apache Airflow®](https://airflow.apache.org) dependencies, variables, and connections, in the Astro UI. You can use your environment configurations in any pipeline within your project.
 
 Environment configuration in the Astro Cloud IDE is similar to Astro project and Airflow configuration, but more options are provided to minimize the time you spend configuring text files.
 

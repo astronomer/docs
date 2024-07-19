@@ -13,7 +13,7 @@ The behavior and format of this command are the same for both Astro and Software
 
 :::
 
-Trigger a single DAG run in a local Airflow environment and see task success or failure in your terminal. This command compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations.
+Trigger a single DAG run in a local [Apache Airflow®](https://airflow.apache.org/) environment and see task success or failure in your terminal. This command compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations.
 
 For more information, see [Test your Astro project locally](cli/test-your-astro-project-locally.md).
 

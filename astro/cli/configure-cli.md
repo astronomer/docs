@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 Every Astro project includes a file called `.astro/config.yaml` that supports various project-level settings, including:
 
 - The name of your Astro project.
-- The port for the Airflow webserver and Postgres metadata database.
+- The port for the [Apache Airflow®](https://airflow.apache.org/) webserver and Postgres metadata database.
 - The username and password for accessing the Postgres metadata database.
 
 In most cases, you only need to modify these settings in the case of debugging and troubleshooting the behavior of Airflow components in your local environment.

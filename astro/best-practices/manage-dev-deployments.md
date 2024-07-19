@@ -4,7 +4,7 @@ sidebar_label: 'Manage dev Deployments'
 id: manage-dev-deployments
 ---
 
-For most teams working on Astro, Astronomer recommends using multiple Airflow Deployments for running and testing development and production versions of your pipelines, and promoting code between them using CI/CD. This allows you to develop your pipelines faster, more securely, and more reliably.
+For most teams working on Astro, Astronomer recommends using multiple [Apache Airflow®](https://airflow.apache.org/) Deployments for running and testing development and production versions of your pipelines, and promoting code between them using CI/CD. This allows you to develop your pipelines faster, more securely, and more reliably.
 
 There are many ways to organize your code, CI/CD pipelines, and Deployments to support a sustainable development lifecycle on Astro, and no single setup will work for all teams. However, there are a two main options for managing your development Deployments and promoting code from development to production:
 

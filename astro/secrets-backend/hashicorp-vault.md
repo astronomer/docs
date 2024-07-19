@@ -8,7 +8,7 @@ This topic provides steps for using [Hashicorp Vault](https://www.vaultproject.i
 
 To do this, you will:
 - Create an AppRole in Vault which grants Astro minimal required permissions.
-- Write a test Airflow variable or connection as a secret to your Vault server.
+- Write a test [Apache Airflow®](https://airflow.apache.org) variable or connection as a secret to your Vault server.
 - Configure your Astro project to pull the secret from Vault.
 - Test the backend in a local environment.
 - Deploy your changes to Astro.

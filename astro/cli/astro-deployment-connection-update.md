@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment connection update"
 title: "astro deployment connection update"
 id: astro-deployment-connection-update
-description: Update an Airflow connection in a Deployment.
+description: Update an Apache Airflow® connection in a Deployment.
 hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
@@ -13,7 +13,7 @@ This command is only available on Astro.
 
 :::
 
-Update the value for a Deployment's Airflow variable.
+Update the value for a Deployment's [Apache Airflow®](https://airflow.apache.org/) variable.
 
 ## Usage
 

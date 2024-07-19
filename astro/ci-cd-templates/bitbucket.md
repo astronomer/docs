@@ -2,10 +2,10 @@
 sidebar_label: Bitbucket
 title: Astro CI/CD templates for Bitbucket
 id: bitbucket
-description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using BitBucket. 
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow® DAGs to Astro using BitBucket. 
 ---
 
-Use the following CI/CD templates to automate deploying Apache Airflow DAGs from a Git repository to Astro with [Bitbucket](https://bitbucket.org/product).
+Use the following CI/CD templates to automate deploying [Apache Airflow®](https://airflow.apache.org/) DAGs from a Git repository to Astro with [Bitbucket](https://bitbucket.org/product).
 
 The templates for Bitbucket use the [image deploy](template-overview.md) process with a _single branch implementation_, which requires only one Astro Deployment.
 

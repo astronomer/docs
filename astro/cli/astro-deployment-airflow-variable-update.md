@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment airflow-variable update"
 title: "astro deployment airflow-variable update"
 id: astro-deployment-airflow-variable-update
-description: Update an existing Deployment Airflow variable.
+description: Update an existing Deployment Apache Airflow® variable.
 hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
@@ -13,7 +13,7 @@ This command is only available on Astro.
 
 :::
 
-Update the value for a Deployment's Airflow variable.
+Update the value for a Deployment's [Apache Airflow®](https://airflow.apache.org/) variable.
 
 ## Usage
 
@@ -47,7 +47,7 @@ See [Organization](organization-api-tokens.md), [Workspace](workspace-api-tokens
 ## Examples
 
 ```bash
-# update airflow-variable called my-airflow-variable stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv
+# update Apache Airflow®-variable called my-airflow-variable stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv
 astro deployment airflow-variable update --deployment-id cl03oiq7d80402nwn7fsl3dmv --key my-variable ---value VAR
 
 # update airflow-variables stored in the Deployment "My Deployment"

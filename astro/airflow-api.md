@@ -1,13 +1,13 @@
 ---
-title: 'Make requests to the Airflow REST API'
-sidebar_label: 'Airflow REST API'
+title: 'Make requests to the Apache Airflow® REST API'
+sidebar_label: 'Apache Airflow® REST API'
 id: airflow-api
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-You can use the Airflow [REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) to automate Airflow workflows in your Deployments on Astro. For example, you can externally trigger a DAG run without accessing your Deployment directly by making an HTTP request in Python or cURL to the [dagRuns endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) in the Airflow REST API.
+You can use the [Apache Airflow®](https://airflow.apache.org) [REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) to automate Airflow workflows in your Deployments on Astro. For example, you can externally trigger a DAG run without accessing your Deployment directly by making an HTTP request in Python or cURL to the [dagRuns endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) in the Airflow REST API.
 
 To test Airflow API calls in a local Airflow environment running with the Astro CLI, see [Troubleshoot your local Airflow environment](cli/run-airflow-locally.md).
 

@@ -2,13 +2,13 @@
 sidebar_label: CircleCI
 title: Astro CI/CD templates for CircleCI
 id: circleci
-description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using CircleCI.
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow® DAGs to Astro using CircleCI.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-[CircleCI](https://circleci.com/) is a continuous integration and continuous delivery platform that can be used to implement DevOps practices. This document provides sample CI/CD templates to automate deploying Apache Airflow DAGs from a GitHub repository to Astro using CircleCI.
+[CircleCI](https://circleci.com/) is a continuous integration and continuous delivery platform that can be used to implement DevOps practices. This document provides sample CI/CD templates to automate deploying [Apache Airflow®](https://airflow.apache.org/) DAGs from a GitHub repository to Astro using CircleCI.
 
 If you have one Deployment and one environment on Astro, use the _single branch implementation_. If you have multiple Deployments that support development and production environments, use the _multiple branch implementation_. If your team builds custom Docker images, use the _custom image_ implementation.
 

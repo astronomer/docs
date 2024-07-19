@@ -2,7 +2,7 @@
 sidebar_label: "astro dev start"
 title: "astro dev start"
 id: astro-dev-start
-description: Build your Astro project and start a local Airflow environment.
+description: Build your Astro project and start a local Apache Airflow® environment.
 hide_table_of_contents: true
 sidebar_custom_props: { icon: "img/term-icon.png" }
 ---
@@ -13,7 +13,7 @@ The behavior and format of this command are the same for both Astro and Software
 
 :::
 
-Build your Astro project into a Docker image and spin up a local Docker container for each Airflow component.
+Build your Astro project into a Docker image and spin up a local Docker container for each [Apache Airflow®](https://airflow.apache.org/) component.
 
 This command can be used to build an Astro project and run it locally. For more information, see [Build and run a project locally](cli/run-airflow-locally.md).
 

@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment pool update"
 title: "astro deployment pool update"
 id: astro-deployment-pool-update
-description: Update a Deployment's Airflow pool.
+description: Update a Deployment's Apache Airflow® pool.
 hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
@@ -13,7 +13,7 @@ This command is only available on Astro.
 
 :::
 
-Update the value for a Deployment's Airflow pool.
+Update the value for a Deployment's [Apache Airflow®](https://airflow.apache.org/) pool.
 
 ## Usage
 
@@ -41,7 +41,7 @@ See [Organization](organization-api-tokens.md), [Workspace](workspace-api-tokens
 | `--deployment-name` | The name of the Deployment where you want to create Airflow pools. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                            |
 | `-w`,`--workspace-id`          | Create Airflow pools in a Deployment that is not in your current Workspace. If not specified, your current Workspace is assumed.          | Any valid Workspace ID                                                         |
 | `--name`          | The Airflow pool name. Required.        | Any string                                                         |
-| `-v`,`--slots`          | Number of airflow pool slots. Required.           | Any integer                                                         |
+| `-v`,`--slots`          | Number of Airflow pool slots. Required.           | Any integer                                                         |
 | `--description`          | The pool description.          | Any string                                                         |
 
 ## Examples

@@ -5,7 +5,7 @@ id: troubleshoot-locally
 description: Address and resolve common issues with local development.
 ---
 
-Use the following topics to resolve common issues with running an Astro project in a local Airflow environment.
+Use the following topics to resolve common issues with running an Astro project in a local [Apache Airflow®](https://airflow.apache.org) environment.
 
 ## Troubleshoot KubernetesPodOperator issues
 
@@ -44,7 +44,7 @@ For example, if your `packages.txt` file contains several packages and you recei
 
 5. Open your Astro project `packages.txt` file and add the package references you removed in Step 1 individually until you find the package that is the source of the error.
 
-## New DAGs aren't visible in the Airflow UI
+## New DAGs aren't visible in the Apache Airflow® UI
 
 Make sure that no DAGs have duplicate `dag_ids`. When two DAGs use the same `dag_id`, the newest DAG won't appear in the Airflow UI and you won't receive an error message.
 
@@ -106,7 +106,7 @@ These logs should help you understand why your webserver or scheduler is unhealt
 - Misconfigured Dockerfile or Docker override file.
 - Misconfigured Airflow settings including `packages.txt` or `requirements.txt`.
 
-## Ports are not available for my local Airflow webserver
+## Ports are not available for my local Apache Airflow® webserver
 
 By default, the Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the Airflow metadata database in a local Airflow environment. If these ports are already in use on your local computer, an error message similar to the following appears:
 

@@ -5,7 +5,7 @@ id: astro-architecture
 description: Learn about how Astro is structured to maximize the power of Apache Airflow.
 ---
 
-Astro is a fully-managed SaaS application for data orchestration that helps teams write and run data pipelines with Apache Airflow at any level of scale. The infrastructure to run Airflow is managed entirely by Astronomer, enabling you to shift your focus from infrastructure to using data to grow your business.
+Astro is a fully-managed SaaS application for data orchestration that helps teams write and run data pipelines with [Apache Airflow®](https://airflow.apache.org) at any level of scale. The infrastructure to run Airflow is managed entirely by Astronomer, enabling you to shift your focus from infrastructure to using data to grow your business.
 
 This document provides an overview of the architecture and key concepts in Astro that enable your team to make the most of your data pipelines. See [Astro Features](features.md) to learn more about Astro functionality. To get started with Astro, see [Start a trial](trial.md).
 

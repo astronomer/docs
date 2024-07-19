@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment airflow-variable copy"
 title: "astro deployment airflow-variable copy"
 id: astro-deployment-airflow-variable-copy
-description: Copy an Airflow variable from a Deployment.
+description: Copy an Apache Airflow® variable from a Deployment.
 hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
@@ -13,7 +13,7 @@ This command is only available on Astro.
 
 :::
 
-Copy Airflow variables from one Astro Deployment to another. Airflow variables are stored in the target Deployment's metadata database and appear in the Airflow UI.
+Copy [Apache Airflow®](https://airflow.apache.org/) variables from one Astro Deployment to another. Airflow variables are stored in the target Deployment's metadata database and appear in the Airflow UI.
 
 ## Usage
 
@@ -48,7 +48,7 @@ See [Organization](organization-api-tokens.md), [Workspace](workspace-api-tokens
 ## Examples
 
 ```bash
-# copy airflow variables stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv to a deployment with an ID of cl03oiq7d80402nwn7fsl3dcd
+# copy Apache Airflow® variables stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv to a deployment with an ID of cl03oiq7d80402nwn7fsl3dcd
 astro deployment airflow-variable copy --source-id cl03oiq7d80402nwn7fsl3dmv --target-id cl03oiq7d80402nwn7fsl3dcd
 
 # copy airflow variables stored in the Deployment "My Deployment" to another Deployment "My Other Deployment"

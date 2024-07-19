@@ -13,7 +13,7 @@ The behavior and format of this command are the same for both Astro and Software
 
 :::
 
-Update any part of the current configuration of your Astro project as defined in the `.astro/config.yaml` file. The configuration in this file contains details about how your project runs in a local Airflow environment, including your Postgres username and password, your Webserver port, and your project name.
+Update any part of the current configuration of your Astro project as defined in the `.astro/config.yaml` file. The configuration in this file contains details about how your project runs in a local [Apache Airflow®](https://airflow.apache.org/) environment, including your Postgres username and password, your Webserver port, and your project name.
 
 ## Usage
 

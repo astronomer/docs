@@ -1,11 +1,11 @@
 ---
-sidebar_label: Use Airflow operators
+sidebar_label: Use Apache Airflow® operators
 title: Use Airflow operators in the Astro Cloud IDE
 id: use-airflow-operators
-description: Learn how to run Airflow operators by creating and configuring operator cells in the Astro Cloud IDE.
+description: Learn how to run Apache Airflow® operators by creating and configuring operator cells in the Astro Cloud IDE.
 ---
 
-You can import any Airflow operator available on the Astronomer Registry and run it as part of your Cloud IDE pipeline. In most cases, the Cloud IDE can parse parameters and provides you with a detailed form for configuring the operator. 
+You can import any [Apache Airflow®](https://airflow.apache.org) operator available on the Astronomer Registry and run it as part of your Cloud IDE pipeline. In most cases, the Cloud IDE can parse parameters and provides you with a detailed form for configuring the operator. 
 
 ## Use Airflow operator cells
 

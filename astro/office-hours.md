@@ -2,13 +2,13 @@
 title: 'Book Astro office hours'
 navTitle: 'Office hours'
 id: astro-office-hours
-description: Attend office hours with Astronomer data engineers to ask non-support questions about Airflow.
+description: Attend office hours with Astronomer data engineers to ask non-support questions about Apache Airflow®.
 ---
 import TeamBadge from '@site/src/components/TeamBadge';
 
 <TeamBadge/>
 
-Office hours are a way for you to meet with Astronomer data engineers and ask about Astro and Airflow features and best practices. Office hours are available weekly on a first-come, first-served basis. An office hour session is typically 30 minutes long.
+Office hours are a way for you to meet with Astronomer data engineers and ask about Astro and [Apache Airflow®](https://airflow.apache.org) features and best practices. Office hours are available weekly on a first-come, first-served basis. An office hour session is typically 30 minutes long.
 
 :::warning
 
@@ -17,7 +17,6 @@ Office hours are not a replacement for support. [Submit a support request](astro
 If you have questions about your Astronomer account or billing, email `success@astronomer.io` instead of attending office hours. If you need more extensive assistance, guidance, or regular long-term engagement, reach out to the [Professional Services](https://www.astronomer.io/professional-services/) team.
 
 :::
-
 
 During an office hours meeting, you can:
 

@@ -11,7 +11,7 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
 
 - An IDE project and pipeline. See [Step 2: Create a pipeline](/astro/cloud-ide/quickstart.md#step-2-create-a-pipeline).
 - For Warehouse SQL cells, you need: 
-    - A database connection. See [Configure Airflow connections](/astro/cloud-ide/configure-project-environment.md#configure-airflow-connections).
+    - A database connection. See [Configure Apache Airflow® connections](/astro/cloud-ide/configure-project-environment.md#configure-airflow-connections).
     - Write permissions to the data warehouse in your database connection. 
 
 ## Choose a SQL cell type
@@ -59,7 +59,7 @@ Regardless of the cell type you choose, you can use your query results in downst
 
     By default, your input is formatted as a literal string and is defined in your DAG with quotation marks. To format your input as a Python expression, click **Python expression** next to the value name. If you already entered a literal string before changing this setting, remove the quotation marks that the IDE adds to your Python expression.
     
-    After you switch to **Python expression**, your input for the value is defined in the DAG as a Python expression without quotation marks. You can use your input to call any Python value in your pipeline, such as a global import, an Airflow variable, or an environment variable. 
+    After you switch to **Python expression**, your input for the value is defined in the DAG as a Python expression without quotation marks. You can use your input to call any Python value in your pipeline, such as a global import, an [Apache Airflow®](https://airflow.apache.org) variable, or an environment variable. 
 
 ## Run a SQL cell
 

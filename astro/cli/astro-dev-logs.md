@@ -2,7 +2,7 @@
 sidebar_label: "astro dev logs"
 title: "astro dev logs"
 id: astro-dev-logs
-description: Show logs for Airflow components.
+description: Show logs for Apache Airflow® components.
 hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
@@ -13,7 +13,7 @@ The behavior and format of this command are the same for both Astro and Software
 
 :::
 
-Show webserver, scheduler, and triggerer logs from your local Airflow environment.
+Show webserver, scheduler, and triggerer logs from your local [Apache Airflow®](https://airflow.apache.org/) environment.
 
 ## Usage
 
@@ -35,7 +35,7 @@ astro dev logs
 
 ```sh
 $ astro dev logs
-# Show the most recent logs from both the Airflow webserver and Scheduler
+# Show the most recent logs from both the Apache Airflow® webserver and Scheduler
 
 $ astro dev logs --follow
 # Stream all new webserver and scheduler logs to the terminal

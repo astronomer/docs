@@ -2,10 +2,10 @@
 sidebar_label: Azure DevOps
 title: Astro CI/CD templates for Azure DevOps
 id: azure-devops
-description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using Azure DevOps.
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow® DAGs to Astro using Azure DevOps.
 ---
 
-Use the following CI/CD templates to automate deploying Apache Airflow DAGs from a Git repository to Astro with [Azure DevOps](https://dev.azure.com/).
+Use the following CI/CD templates to automate deploying [Apache Airflow®](https://airflow.apache.org/) DAGs from a Git repository to Astro with [Azure DevOps](https://dev.azure.com/).
 
 The template for Azure DevOps is based on the [image deploy template](template-overview.md) with a _single branch implementation_, which requires only one Astro Deployment.
 

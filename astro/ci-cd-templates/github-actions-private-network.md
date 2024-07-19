@@ -2,7 +2,7 @@
 sidebar_label: Private network templates
 title: GitHub Actions templates for deploying to Astro from private networks
 id: github-actions-private-network
-description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro on private networks using GitHub Actions.
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow® DAGs to Astro on private networks using GitHub Actions.
 ---
 
 import Tabs from '@theme/Tabs';

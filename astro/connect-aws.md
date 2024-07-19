@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 Use this document to learn how you can grant Astro cluster and its Deployments access to your external AWS resources.
 
-Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to AWS through an Airflow connection. If your cloud restricts IP addresses, you can add the external IPs of your Deployment or cluster to an AWS resource's allowlist.
+Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to AWS through an [Apache Airflow®](https://airflow.apache.org) connection. If your cloud restricts IP addresses, you can add the external IPs of your Deployment or cluster to an AWS resource's allowlist.
 
 If you have stricter security requirements, you can [create a private connection](#create-a-private-connection-between-astro-and-aws) to AWS in a few different ways.
 

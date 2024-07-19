@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment airflow-variable list"
 title: "astro deployment airflow-variable list"
 id: astro-deployment-airflow-variable-list
-description: List variables in an Airflow Deployment.
+description: List variables in an Apache Airflow® Deployment.
 hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
@@ -13,7 +13,7 @@ This command is only available on Astro.
 
 :::
 
-List the Airflow variables stored in a Deployment's metadata database.
+List the [Apache Airflow®](https://airflow.apache.org/) variables stored in a Deployment's metadata database.
 
 ## Usage
 
@@ -41,7 +41,7 @@ This command only lists Airflow variables that were configured through the Airfl
 ## Examples
 
 ```bash
-# List airflow variables stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv
+# List Apache Airflow® variables stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv
 astro deployment airflow-variable list --deployment-id cl03oiq7d80402nwn7fsl3dmv
 
 # List airflow variables stored in the Deployment "My Deployment"

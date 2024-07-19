@@ -10,7 +10,7 @@ toc_min_heading_level: 2
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This document explains all of the possible ways to install, upgrade, and uninstall the Astro CLI. Install the Astro CLI to start running Airflow locally or to manage Astro from your terminal.
+This document explains all of the possible ways to install, upgrade, and uninstall the Astro CLI. Install the Astro CLI to start running [Apache Airflow®](https://airflow.apache.org) locally or to manage Astro from your terminal.
 
 :::info
 

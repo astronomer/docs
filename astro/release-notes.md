@@ -77,7 +77,7 @@ See [Deployment Analytics](https://www.astronomer.io/docs/astro/deployment-metri
 :::publicpreview
 :::
 
-The **Customer Managed Identity** Deployment setting is now available on AWS. This means that you can now assign an existing workload identity and AWS IAM role to your Airflow Deployments on Astro. When you use this setting, your Deployment uses the identity to assume the permissions of your IAM role and gain secure access to your data services. With this feature, you can:
+The **Customer Managed Identity** Deployment setting is now available on AWS. This means that you can now assign an existing workload identity and AWS IAM role to your [Apache Airflow®](https://airflow.apache.org) Deployments on Astro. When you use this setting, your Deployment uses the identity to assume the permissions of your IAM role and gain secure access to your data services. With this feature, you can:
 
     - Re-use or share a customer managed identity across many Deployments, either ephemeral or static.
     - Leverage existing identities when migrating from MWAA or open source Airflow environments
@@ -154,7 +154,7 @@ You are only charged for requested resources which are greater than the minimum 
 - **Celery worker**: 10 GiB minimum by default. 100 GiB maximum.
 - **Kubernetes executor/ Kubernetes pod operator**: 0.25 GiB minimum by default. 100 GiB maximum.
 
-### Automate Airflow, resource, and infrastucture management with the Astro Terraform Provider
+### Automate Apache Airflow®, resource, and infrastucture management with the Astro Terraform Provider
 
 :::publicpreview
 :::
@@ -162,7 +162,6 @@ You are only charged for requested resources which are greater than the minimum 
 You can now use Terraform to automate managing resources and changes to large organizations and Airflow infrastructure with the Astronomer Terraform provider package. The provider is available through both the Terraform Registry and a public Github repository, where you can review the provider's code, make issues, and create pull requests.
 
 Refer to the Astronomer Terraform Provider  docs  in the [Terraform registry](https://registry.terraform.io/providers/astronomer/astro/latest/docs) or the [GitHub repository](https://github.com/astronomer/terraform-provider-astro) for more information.
-
 
 ### Additional improvements
 
@@ -239,7 +238,6 @@ No end user or task runtime change or impact is expected as part of the backend 
 
 :::privatepreview
 :::
-
 
 The Astro GitHub integration is a new way to automatically deploy code from a GitHub repository to Astro without needing to configure a GitHub Action. Compared to using GitHub Actions, the Astro GitHub integration:
 

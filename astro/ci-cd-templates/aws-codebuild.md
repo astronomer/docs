@@ -2,10 +2,10 @@
 sidebar_label: AWS CodeBuild
 title: Astro CI/CD templates for AWS CodeBuild
 id: aws-codebuild
-description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using AWS CodeBuild.
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow® DAGs to Astro using AWS CodeBuild.
 ---
 
-Use the following CI/CD templates to automate deploying Apache Airflow DAGs from a Git repository to Astro with [AWS CodeBuild](https://aws.amazon.com/codebuild/).
+Use the following CI/CD templates to automate deploying [Apache Airflow®](https://airflow.apache.org/) DAGs from a Git repository to Astro with [AWS CodeBuild](https://aws.amazon.com/codebuild/).
 
 The templates for AWS CodeBuild use [image deploy](template-overview.md) templates. If you have one Deployment and one environment on Astro, use the _single branch implementation_. If you have multiple Deployments that support development and production environments, use the _multiple branch implementation_.
 

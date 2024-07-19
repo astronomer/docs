@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import HostedBadge from '@site/src/components/HostedBadge';
 
-When you create an Airflow connection from a Deployment to access cloud resources, Airflow uses your connection details to access those services. You can add credentials to your Airflow connections to authenticate, but it can be risky to add secrets like passwords to your Airflow environment.
+When you create an [Apache Airflow®](https://airflow.apache.org) connection from a Deployment to access cloud resources, Airflow uses your connection details to access those services. You can add credentials to your Airflow connections to authenticate, but it can be risky to add secrets like passwords to your Airflow environment.
 
 To avoid adding secrets to your Airflow connection, you can directly authorize your Astro Deployment to access AWS or GCP cloud services using workload identity. Astronomer recommends using a workload identity in most cases to improve security and avoid managing credentials across your Deployments. If you have less strict security requirements, you can still use any of the methods described in [Airflow connection guides](https://www.astronomer.io/docs/learn/connections) to manage your connection authorization.
 

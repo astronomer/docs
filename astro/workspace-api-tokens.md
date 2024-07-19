@@ -10,7 +10,7 @@ Use Workspace API tokens to automate Workspace actions such as creating Deployme
 - Creating and updating Deployments using a [Deployment file](manage-deployments-as-code.md)
 - Adding batches of users to a Workspace in a CI/CD pipeline. See [Add a group of users to Astro using the Astro CLI](manage-workspace-users.md#add-a-group-of-users-to-a-workspace-using-the-astro-cli).
 - Creating preview Deployments whenever you create a feature branch in your Astro project Git repository.
-- Performing Deployment-level actions on any Deployment in a Workspace, such as deploying code or making calls to the Airflow rest API. Workspace API tokens can complete the same actions as Deployment API tokens for any Deployment in the Workspace.
+- Performing Deployment-level actions on any Deployment in a Workspace, such as deploying code or making calls to the [Apache Airflow®](https://airflow.apache.org) REST API. Workspace API tokens can complete the same actions as Deployment API tokens for any Deployment in the Workspace.
 
 ## Workspace API token types
 
@@ -67,7 +67,6 @@ If you delete a Workspace API token, make sure that no existing CI/CD pipelines 
 4. Update the name, description, or Workspace role of your token, then click **Save Changes**.
 
 5. Optional. To delete a Workspace API token, click **Delete API Token**, enter `Delete`, and then click **Yes, Continue**.
-
 
 ## Delete or remove a Workspace API token
 
@@ -130,4 +129,3 @@ ASTRO_API_TOKEN=<your-token>
 ```
 
 After you set this environment variable, you can run Astro CLI commands from CI/CD pipelines without needing to manually authenticate to Astro. For more information and examples, see [Automate code deploys with CI/CD](set-up-ci-cd.md).
-

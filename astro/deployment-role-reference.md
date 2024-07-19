@@ -20,7 +20,7 @@ This document contains all available permissions that you can assign to a [custo
 - `deployment.update`: Update information about the Deployment, including its details and resource configurations.
 - `deployment.delete`: Delete the Deployment.
 
-## Deployment Airflow AdminMenu
+## Deployment [Apache Airflow®](https://airflow.apache.org) AdminMenu
 
 - `deployment.airflow.adminMenu.get`: View the **Admin** menu in the Airflow UI.
 

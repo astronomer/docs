@@ -13,7 +13,7 @@ This command is only available on Astro.
 
 :::
 
-Copy Airflow pools from one Astro Deployment to another. Airflow pools are stored in the target Deployment's metadata database and appear in the Airflow UI.
+Copy [Apache Airflow®](https://airflow.apache.org/) pools from one Astro Deployment to another. Airflow pools are stored in the target Deployment's metadata database and appear in the Airflow UI.
 
 ## Usage
 
