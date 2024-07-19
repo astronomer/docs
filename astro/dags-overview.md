@@ -2,10 +2,10 @@
 sidebar_label: 'Overview'
 title: 'Write and run DAGs on Astro'
 id: dags-overview
-description: 'Learn how to use code-level features specific to Astro in your Apache Airflow DAGs.'
+description: 'Learn how to use code-level features specific to Astro in your Apache Airflow® DAGs.'
 ---
 
-Astro includes several features that enhance the Apache Airflow development experience, from DAG writing to testing. To use these features, you might need to modify how you write your DAGs and manage the rest of your code.
+Astro includes several features that enhance the [Apache Airflow®](https://airflow.apache.org) development experience, from DAG writing to testing. To use these features, you might need to modify how you write your DAGs and manage the rest of your code.
 
 Use this documentation to learn about the key differences between managing DAGs on Astro versus on other platforms. 
 

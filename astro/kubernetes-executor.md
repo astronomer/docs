@@ -5,7 +5,7 @@ id: 'kubernetes-executor'
 description: Learn how to configure the Pods that the Kubernetes executor runs your tasks in.
 ---
 
-The Kubernetes executor runs each Airflow task in a dedicated Kubernetes [Pod](https://kubernetes.io/docs/concepts/workloads/pods/). On Astro, you can customize these Pods on a per-task basis using a `pod_override` configuration. If a task doesn't contain a `pod_override` configuration, it runs using the default Pod as configured in your Deployment resource settings.
+The Kubernetes executor runs each [Apache Airflow®](https://airflow.apache.org) task in a dedicated Kubernetes [Pod](https://kubernetes.io/docs/concepts/workloads/pods/). On Astro, you can customize these Pods on a per-task basis using a `pod_override` configuration. If a task doesn't contain a `pod_override` configuration, it runs using the default Pod as configured in your Deployment resource settings.
 
 :::info
 
@@ -264,7 +264,6 @@ A Deployment on Astro Hybrid that uses the Kubernetes executor runs worker Pods 
 3. In the **Worker Type** list, select the type of worker to run your Pods on.
 
 4. Click **Update Queue**.
-
 
 ## See also
 

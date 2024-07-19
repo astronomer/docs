@@ -1,11 +1,11 @@
 ---
-title: 'View Airflow component and task logs for a Deployment'
-sidebar_label: 'Airflow logs'
+title: 'View Apache Airflow® component and task logs for a Deployment'
+sidebar_label: 'Apache Airflow® logs'
 id: view-logs
 description: View logs for your Deployments both locally and on Astro.
 ---
 
-View task and Airflow component logs to troubleshoot your data pipelines and better understand the health of both your tasks and their execution environment.
+View task and [Apache Airflow®](https://airflow.apache.org) component logs to troubleshoot your data pipelines and better understand the health of both your tasks and their execution environment.
 
 Airflow has two different log types:
 
@@ -17,7 +17,7 @@ Task logs can additionally be exported to third-party observability platforms. S
 - [Export task logs and metrics to Datadog](export-datadog.md)
 - [Export task logs to AWS Cloudwatch](export-cloudwatch.md)
 
-## Airflow Component Logs
+## Apache Airflow® Component Logs
 
 Airflow has four core components: the scheduler, triggerer, worker, and webserver. Each component records its process in component logs. These logs can be used to monitor overall performance, troubleshoot errors, and optimize resources.
 

@@ -2,12 +2,12 @@
 sidebar_label: 'Manage connections and variables'
 title: 'Manage Airflow connections and variables'
 id: manage-connections-variables
-description: "Learn about different strategies for managing Airflow connections and variables in local environments and on Astro"
+description: "Learn about different strategies for managing Apache Airflow® connections and variables in local environments and on Astro"
 ---
 
 import HostedBadge from '@site/src/components/HostedBadge';
 
-*Airflow connections* are used for storing credentials and other information necessary for connecting to external services. *Airflow variables* are a generic way to store and retrieve arbitrary content or settings as a simple key value store within Airflow.
+*[Apache Airflow®](https://airflow.apache.org) connections* are used for storing credentials and other information necessary for connecting to external services. *Airflow variables* are a generic way to store and retrieve arbitrary content or settings as a simple key value store within Airflow.
 
 Use this document to select the right Airflow connection and variable management strategies for your team.
 
@@ -32,7 +32,7 @@ The following table suggests possible management strategies for specific use cas
 | I want to create Connections once and then apply them to multiple Deployments or Workspaces. | [Astro Environment Manager](#astro-environment-manager) |
 | I don't have a secrets backend, but I still want some security and permissions attached to Airflow objects. | [Astro Environment Manager](#astro-environment-manager) or [Environment variables](#environment-variables) |
 
-### How Airflow finds connections
+### How Apache Airflow® finds connections
 
 Because variables and connections serve different purposes in Airflow, you might want to use a different strategy for each object type. For example, you can use a secrets backend for connections and use combination of a `json` files and the Airflow UI for variables.
 

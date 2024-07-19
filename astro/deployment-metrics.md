@@ -28,7 +28,7 @@ These metrics contain information about your Deployment's DAG runs and task runs
 
   :::warning
 
-  The DAG runs metric does not record DAG run timeouts as failed runs. To see timed out DAG runs, you must go into the Airflow UI to check on the statuses of each DAG run there.
+  The DAG runs metric does not record DAG run timeouts as failed runs. To see timed out DAG runs, you must go into the [Apache Airflow®](https://airflow.apache.org) UI to check on the statuses of each DAG run there.
 
   :::
 

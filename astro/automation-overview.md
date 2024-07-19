@@ -21,7 +21,7 @@ This section of documentation covers how to automate processes on Astro using As
 
 - Deploy code to your Deployment using [CI/CD](set-up-ci-cd.md).
 - Update your Deployment using a [Deployment file](manage-deployments-as-code.md).
-- Make a request to your Deployment using the [Airflow REST API](airflow-api.md).
+- Make a request to your Deployment using the [Apache Airflow®](https://airflow.apache.org) [REST API](airflow-api.md).
 
 ### Workspace actions
 

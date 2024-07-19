@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Airflow email notifications'
-title: 'Configure Airflow email notifications on Astro'
+sidebar_label: 'Apache Airflow® email notifications'
+title: 'Configure Apache Airflow® email notifications on Astro'
 id: airflow-email-notifications
 description: Set up email notifications for Airflow task successes and failures.
 ---
@@ -14,7 +14,7 @@ Incorporating a notification framework is critical to the health of your data pi
 
 Use this guide to integrate with an SMTP service to have Astro send email notifications whenever a task run fails. To configure DAG alerts for Slack and PagerDuty, see [Astro alerts](alerts.md). For best practices and instructions on configuring other notifications in Airflow, including notifiers and custom callbacks, see [Manage Airflow DAG notifications](https://www.astronomer.io/docs/learn/error-notifications-in-airflow).
 
-## Configure Airflow email notifications
+## Configure Apache Airflow® email notifications
 
 On Astro, setting up email notifications requires configuring an SMTP service for delivering each notification. You can use a single SMTP service for your Organization, but you must configure email notifications for each Deployment.
 
@@ -27,7 +27,7 @@ The following topics provide setup steps for integrating each of these external 
 
 ### Integrate with SendGrid
 
-[SendGrid](https://sendgrid.com/) is an email delivery service that you can use to configure Airflow notifications. A free SendGrid account grants users 40,000 free emails within the first 30 days of an account opening and 100 emails per day after that. This should be enough emails for most notification use cases.
+[SendGrid](https://sendgrid.com/) is an email delivery service that you can use to configure [Apache Airflow®](https://airflow.apache.org) notifications. A free SendGrid account grants users 40,000 free emails within the first 30 days of an account opening and 100 emails per day after that. This should be enough emails for most notification use cases.
 
 1. [Create a SendGrid account](https://signup.sendgrid.com). Be prepared to disclose some standard information about yourself and your organization.
 

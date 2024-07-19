@@ -7,9 +7,9 @@ description: "Configure your Deployment resource settings to optimze Deployment 
 
 import HostedBadge from '@site/src/components/HostedBadge';
 
-Your Deployment resources are the computational resources Astro uses to run Airflow in the cloud. Update Deployment resource settings to optimize performance and reduce the cost of running Airflow in the cloud.
+Your Deployment resources are the computational resources Astro uses to run [Apache Airflow®](https://airflow.apache.org) in the cloud. Update Deployment resource settings to optimize performance and reduce the cost of running Airflow in the cloud.
 
-## Update Airflow configurations
+## Update Apache Airflow® configurations
 
 To update a Deployment's [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html), you set the configurations as environment variables on Astro. See [Set Airflow configurations using environment variables](manage-env-vars.md).
 

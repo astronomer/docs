@@ -4,7 +4,7 @@ title: "Astro Hybrid overview"
 id: hybrid-overview
 ---
 
-_Astro Hybrid_ is a self-hosted, Astronomer-managed service for data orchestration that is built for the cloud and powered by Apache Airflow. Astro Hybrid is built with a multi-plane architecture which consists of:
+_Astro Hybrid_ is a self-hosted, Astronomer-managed service for data orchestration that is built for the cloud and powered by [Apache Airflow®](https://airflow.apache.org). Astro Hybrid is built with a multi-plane architecture which consists of:
 
 - A control plane that is hosted by Astronomer.
 - A data plane that runs in your cloud.

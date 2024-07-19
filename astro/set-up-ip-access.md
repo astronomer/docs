@@ -11,7 +11,7 @@ import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
 
 You can restrict which IP addresses or IP address ranges can access the Astro service for your specific Organization. By default, Astro allows users to access their Organization from unsecured networks. However, by creating an IP access list, if your organization uses a VPN or other mechanism that limits the IP addresses your users might have, you can restrict access to Astro based on the IP addresses that you define in the the Astro UI.
 
-After you enable the IP access list, users and user-privileged resources can only interact with Astro while using a network with a permitted IP address, whether by using the Astro UI or programmatically with Astro API or Airflow API requests.
+After you enable the IP access list, users and user-privileged resources can only interact with Astro while using a network with a permitted IP address, whether by using the Astro UI or programmatically with Astro API or [Apache Airflow®](https://airflow.apache.org) API requests.
 
 ## Prerequisites
 

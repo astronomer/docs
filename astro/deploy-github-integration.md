@@ -2,7 +2,7 @@
 title: 'Deploy code with the Astro GitHub integration'
 sidebar_label: 'Deploy code with GitHub'
 id: deploy-github-integration
-description: Learn how to automatically deploy Apache Airflow code to Astro from GitHub with a built-in integration.
+description: Learn how to automatically deploy Apache Airflow® code to Astro from GitHub with a built-in integration.
 ---
 
 import HostedBadge from '@site/src/components/HostedBadge';
@@ -12,7 +12,7 @@ import HostedBadge from '@site/src/components/HostedBadge';
 :::publicpreview
 :::
 
-Astronomer's built-in GitHub integration is the fastest way to implement CI/CD for Apache Airflow and deploy code to Astro. Astro’s automatic deploy system eliminates both the need to implement GitHub Actions and gives you greater visibility into the code you’re running on Astro.
+Astronomer's built-in GitHub integration is the fastest way to implement CI/CD for [Apache Airflow®](https://airflow.apache.org) and deploy code to Astro. Astro’s automatic deploy system eliminates both the need to implement GitHub Actions and gives you greater visibility into the code you’re running on Astro.
 
 To deploy code through an integrated GitHub repository, you first connect a GitHub repository with your Astro project to an Astro Workspace. Then, you map a Git branch in that repository to an Astro Deployment. When a pull request is merged into your mapped branch, your code is automatically deployed to Astro.
 

@@ -2,7 +2,7 @@
 title: "Create and assign custom Deployment roles"
 sidebar_label: Custom Deployment roles
 id: customize-deployment-roles
-description: Customize your users' permissions for Airflow environments on Astro.
+description: Customize your users' permissions for Apache Airflow® environments on Astro.
 ---
 
 import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
@@ -32,7 +32,7 @@ See the [User permissions reference](user-permissions.md) for more information a
 
 You manage and create custom Deployment roles at the Organization level. After you create a custom Deployment role, you can assign users, teams, and Deployment API tokens the role from any Deployment in the Organization.
 
-Deployment roles are additive, meaning that a user with multiple Deployment roles has all of the permissions of each Deployment role as well as their Workspace role. For example, if a user belongs to a Team with a custom Deployment role that includes permissions to edit Airflow variables, and they also have a personal custom Deployment role that includes permissions to edit connections, then the user has permissions to edit both Airflow variables and connections in the Deployment.
+Deployment roles are additive, meaning that a user with multiple Deployment roles has all of the permissions of each Deployment role as well as their Workspace role. For example, if a user belongs to a Team with a custom Deployment role that includes permissions to edit [Apache Airflow®](https://airflow.apache.org) variables, and they also have a personal custom Deployment role that includes permissions to edit connections, then the user has permissions to edit both Airflow variables and connections in the Deployment.
 
 1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
 

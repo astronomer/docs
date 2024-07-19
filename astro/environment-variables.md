@@ -5,7 +5,7 @@ id: environment-variables
 description: Overview of environment variables on Astro
 ---
 
-On Astro, an _Environment Variable_ is a key-value configuration stored in a configuration file that applies to a specific Deployment. You can use environment variables to configure custom environment variables for your Deployment, customize core settings of Airflow and its pre-installed providers, or store Airflow connections and variables.
+On Astro, an _Environment Variable_ is a key-value configuration stored in a configuration file that applies to a specific Deployment. You can use environment variables to configure custom environment variables for your Deployment, customize core settings of [Apache Airflow®](https://airflow.apache.org) and its pre-installed providers, or store Airflow connections and variables.
 
 Some scenarios where you might use environment variables in your Deployment include:
 

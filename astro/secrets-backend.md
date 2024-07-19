@@ -2,10 +2,10 @@
 title: 'Configure a secrets backend'
 sidebar_label: 'Overview'
 id: secrets-backend
-description: "Learn to configure a secrets backend on Astro to store Airflow connections and variables"
+description: "Learn to configure a secrets backend on Astro to store Apache Airflow® connections and variables"
 ---
 
-Apache Airflow [variables](https://www.astronomer.io/docs/learn/airflow-variables) and [connections](https://www.astronomer.io/docs/learn/connections) often contain sensitive information about your external systems that you need to keep in a _secrets backend_ tool, which stores secrets in a secure and centralized location. Unlike other management strategies, such as using Environment Variables or working with connections and variables in the Airflow UI, secrets backends require a third-party secrets manager. This means that you can use a secrets manager administered by your organization for existing security protocols, or you need to choose and set up a secrets backend. 
+[Apache Airflow®](https://airflow.apache.org) [variables](https://www.astronomer.io/docs/learn/airflow-variables) and [connections](https://www.astronomer.io/docs/learn/connections) often contain sensitive information about your external systems that you need to keep in a _secrets backend_ tool, which stores secrets in a secure and centralized location. Unlike other management strategies, such as using Environment Variables or working with connections and variables in the Airflow UI, secrets backends require a third-party secrets manager. This means that you can use a secrets manager administered by your organization for existing security protocols, or you need to choose and set up a secrets backend. 
 
 This document explains the available secrets backend integrations supported by Astro and how Airflow finds connections and variables if you use multiple strategies to manage them.
 
@@ -24,7 +24,7 @@ Astro integrates with the following secrets backend tools:
 - [Google Cloud Secret Manager](secrets-backend/gcp-secretsmanager.md)
 - [Hashicorp Vault](secrets-backend/hashicorp-vault.md)
 
-## How Airflow finds connections or variables
+## How Apache Airflow® finds connections or variables
 
 :::tip
 

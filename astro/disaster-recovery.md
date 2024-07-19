@@ -24,7 +24,7 @@ Astronomer will not be able to restore:
 
 - VPC Routes configured by customers with the AWS console.
 - VPC Security Group rules configured by customers with the AWS console.
-- The Airflow metadata database for Deployments, including:
+- The [Apache Airflow®](https://airflow.apache.org) metadata database for Deployments, including:
     - DAG history and task logs.
     - XComs.
     - Airflow configurations (Variables, Connections, Pools) configured with the Airflow UI. Any configurations set with your deployed Astro Runtime image or environment variables can be recovered.

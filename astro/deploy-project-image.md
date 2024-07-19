@@ -7,7 +7,7 @@ description: Deploy a complete Astro project to a Deployment as a Docker image.
 
 
 
-In a full deploy, the Astro CLI takes every file in your Astro project to builds them into a Docker image. This includes your `Dockerfile`, DAGs, plugins, and all Python and OS-level packages. The CLI then deploys the image to all Airflow components in a Deployment.
+In a full deploy, the Astro CLI takes every file in your Astro project to builds them into a Docker image. This includes your `Dockerfile`, DAGs, plugins, and all Python and OS-level packages. The CLI then deploys the image to all [Apache Airflow®](https://airflow.apache.org) components in a Deployment.
 
 Use this document to learn how full deploys work and how to manually push your Astro project to a Deployment. For production environments, Astronomer recommends automating all code deploys with CI/CD. See [Choose a CI/CD strategy](set-up-ci-cd.md).
 
