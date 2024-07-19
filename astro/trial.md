@@ -58,7 +58,6 @@ All Deployment configurations are preserved during hibernation for 30 days from 
 
 If you need additional time to evaluate Astro, or you need to copy your configuration for future use, you can:
 
-- [Add a payment method](manage-billing#update-billing-details) to continue on the [pay-as-you-go Developer tier](https://astronomer.io/pricing/).
+- [Add a payment method](manage-billing#update-billing-details) to maintain your deployment on our Developer tier. [View pay-as-you-go pricing.](https://astronomer.io/pricing/)
 - Contact [sales](https://astronomer.io/contact/) to request a trial extension.
 - Run `astro deployment inspect` with the Astro CLI to save your existing Deployment configuration as a JSON or YAML file. See [Astro CLI command reference](cli/astro-deployment-inspect.md).
-- Open the Astro UI and [schedule office hours](office-hours.md) with an Astronomer engineer.
