@@ -54,6 +54,13 @@ See the following table for all supported Kubernetes versions in each maintained
 |   0.34.1 - 0.34.2   |                 |                 |                 |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |                 |
 |   0.35.0 -0.35.1    |                 |                 |                 |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |       ✔️        |
 
+
+### General Guidelines for Upgrading Kubernetes Versions
+
+During the initial phase of upgrading the managed node groups, there shouldn't be any immediate impact on the Astronomer or Airflow components, assuming no workloads are running on the nodes being upgraded. Performing a controlled rollout restart of the worker nodes will help minimize disruptions. Ensure that you monitor the health of the new nodes and workloads before decommissioning the old nodes.
+
+Ensure all necessary backups are in place before beginning the upgrade process. Verify that all Astronomer and Airflow components are running as expected on the new nodes. Once the Astronomer version is compatible with the EKS/AKS Cluster, you should not need to change anything from the Astro end. The upgrade will require restarting the Kubelet on each node, which will cause the Astro/Airflow components to restart.
+
 For more information on upgrading Kubernetes versions, follow the guidelines offered by your cloud provider.
 
 - [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html)
