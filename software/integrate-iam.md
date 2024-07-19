@@ -333,9 +333,9 @@ Astronomer Software creates a set of service accounts for each Airflow instance 
 
 | Component                   | Rationale                                                                                                 |
 |-----------------------------|-----------------------------------------------------------------------------------------------------------|
-| `<release name>-scheduler`         | User-provided DAG code is regularly interpreted to determine what tasks are part of DAGs, and that code might incorporate references to values stored in secret storage or XCom.                  |
-| `<release name>-worker`            | User-provided DAG code is interpreted at task-run time and might incorporate references to values stored in secret storage or XCom.             |
-| `<release name>-triggerer`         | User-provided DAG code is interpreted at task run time and might incorporate references to values stored in secrets storage or XCom.            |
+| `<release name>-scheduler`         | User-provided DAG code is regularly interpreted by the scheduler to determine what tasks are part of DAGs, and that code might incorporate references to values stored in secret storage or XCom.                  |
+| `<release name>-worker`            | User-provided DAG code is interpreted by the worker at task run-time and might incorporate references to values stored in secret storage or XCom.             |
+| `<release name>-triggerer`         | User-provided DAG code is interpreted by the triggerer at task run-time and might incorporate references to values stored in secrets storage or XCom.            |
 | `<release name>-webserver`         | Provides a mechanism for you to view XCom entries and to view and set secrets. |
 | `<release name>-cleanup`           |  Accesses task instances and other data that might include serialized references to values stored in secrets backends or XCOM backends.       |
 | `<release name>-migrate-database-job` | Analyzes serialized DAG models that might include serialized references to values stored in secrets backends or XCOM backends. |
