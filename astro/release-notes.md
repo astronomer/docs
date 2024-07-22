@@ -40,8 +40,11 @@ Now, when you first set up your Astro account, you can choose to connect your Gi
 
 - View your Astro resource use with [Organization Dashboards](organization-dashboards.md).
 - Raised the maximum worker node and executor sizes in Astro Hosted Dedicated and Astro Hybrid from 100 to 200 GiB, to allow large clusters to scale up further.
+- Added a new **Extra Large** sized Scheduler.
 
 ### Bug fixes
+
+- Fixed some bugs in the Astro UI for defining ephemeral storage to show storage limits, fix maximum pod size for storage, and add storage for default pod size.
 
 ## July 16, 2024
 
