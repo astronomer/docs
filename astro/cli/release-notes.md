@@ -18,6 +18,25 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 - **Stable versions**: {{CLI_VER_LATEST}}, {{CLI_VER_2}}, and {{CLI_VER_3}}. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md) for more information about support for CLI versions.
 
+## Astro CLI 1.28.0
+
+Release date: July 24, 2024
+
+## Work with dbt projects on Astro
+
+You can now deploy a dbt project to Astro using the Astro CLI. See the following reference pages for more information:
+
+- [astro dbt deploy](astro-dbt-deploy.md)
+- [astro dbt delete](astro-dbt-delete.md)
+
+## Additional improvements
+
+- Added the ability to switch Workspaces by using the Workspace name instead of the `workspace-id`. See [astro workspace switch](astro-workspace-switch.md).
+
+## Bug fixes
+
+-
+
 ## Astro CLI 1.27.1
 
 Release date: May 16, 2024
