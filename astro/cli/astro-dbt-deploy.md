@@ -16,9 +16,9 @@ This command is only available on Astro.
 
 :::
 
-This command allows you to deploy your dbt code to Astro, instead of writing your data transformation processes in Python.
+This command allows you to deploy your dbt code directly to Astro, independent of any DAG deploys or full project image deploys.
 
-This command bundles all files in your dbt project and pushes them to Astro. Before completing the process, it tests your DAGs in your Astro project for errors. If this test fails, the deploy to Astro will also fail.
+This command bundles all files in your dbt project and pushes them to Astro, where they are mounted on your Airflow containers so that your DAGs can access them.
 
 When you run `astro dbt deploy`, the CLI prompts you to select from a list of all Deployments that you can access across Workspaces. To bypass this prompt, you can also specify a Deployment ID in the command. To retrieve a Deployment ID, open your Deployment in the Astro UI and copy the value in the **ID** section of the Deployment page. You can also run `astro deployment list` to find a Deployment ID or name.
 

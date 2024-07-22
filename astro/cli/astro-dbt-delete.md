@@ -16,7 +16,7 @@ This command is only available on Astro.
 
 :::
 
-Delete a dbt project for a Deployment on Astro. This command is functionally identical to deleting a dbt project connection to a Deployment in the Astro UI.
+Delete a dbt project for a Deployment on Astro. This command deletes a dbt project from the Airflow environments where you deployed it.
 
 When you run `astro dbt delete`, you are prompted to select from a list of Deployments that you can access in your Workspace. You can bypass this prompt and specify a Deployment name or ID in the command. To retrieve a Deployment ID, open your Deployment in the Astro UI and copy the value in the **ID** section of the Deployment page. You can also run `astro deployment list` to find a Deployment ID or name.
 
