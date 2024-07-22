@@ -99,8 +99,8 @@ Some connection types require installing dependencies on your Deployment through
 If you are uncertain what provider package the connection needs, you can check in the [Astronomer Registry](https://registry.astronomer.io/).
 
 1. Open the local Astro project for your Deployment.
-2. Add the required provider package name to your project's `requirements.txt` and save your changes, or use the [astro registry provider add](https://www.astronomer.io/docs/astro/cli/astro-registry-provider-add) CLI command.
-3. Deploy your project with the newly added provider to your Deployment.
+2. Add the required provider package name to your project's `requirements.txt` and save your changes, or use the [`astro registry provider add`](https://www.astronomer.io/docs/astro/cli/astro-registry-provider-add) CLI command.
+3. Deploy your project with the new provider to your Deployment.
 
 ## Configure connection sharing for a Workspace
 
