@@ -67,7 +67,7 @@ To manage Kubernetes resources programmatically, you can set default Pod limits 
    - **Default Pod Size**:
      - **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
      - **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
-     - **Storage**: Choose the amount of ephemeral storage in GiB assigned to each pod in the Astro UI. This storage volume is transient and allows for the temporary storage and processing of data. The pod is assigned the minimum 0.25 GiB by default. The maximum possible quota is 200 GiB. Only ephemeral storage requests that are greater than the default minimum of 0.25 GiB are chargeable. Note that this feature is in [Public Preview](feature-previews.md).
+     - **Storage**: Choose the amount of ephemeral storage in GiB assigned to each pod in the Astro UI. This storage volume is transient and allows for the temporary storage and processing of data. The pod is assigned the minimum 0.25 GiB by default. The maximum possible quota is 100 GiB. Only ephemeral storage requests that are greater than the default minimum of 0.25 GiB are chargeable. Note that this feature is in [Public Preview](feature-previews.md).
 
    For a Deployment running in a Hosted dedicated or shared cluster, the maximum possible **CPU** quota is 6400 vCPU and maximum **Memory** quota is 12800 GiB.
 
@@ -98,7 +98,6 @@ The following table lists all possible scheduler sizes for Astro Hosted:
 | Small (Up to ~50 DAGs)         | 1    | 2G     | 5Gi               |
 | Medium (Up to ~250 DAGs)       | 2    | 4G     | 5Gi               |
 | Large (Up to ~1000 DAGs)       | 4    | 8G     | 5Gi               |
-| Extra Large (Up to ~1500 DAGs) | 4.5  | 10G    | 5Gi               |
 
 ### Update scheduler size
 
@@ -231,7 +230,7 @@ When your hibernation schedule starts:
 
 - Your Deployment shows a **Hibernating** status in the Astro UI:
 
-  ![A Deployment with a Hibernating status on the Deployments page of the Astro UI](/img/docs/hibernating-status.png)
+    ![A Deployment with a Hibernating status on the Deployments page of the Astro UI](/img/docs/hibernating-status.png)
 
 - Any task that was previously running will be killed and marked as failed.
 - Tasks and DAGs do not run. Task instances that were already running or scheduled at the time of hibernation will fail and trigger any related notifications.
