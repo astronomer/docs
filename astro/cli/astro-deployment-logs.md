@@ -31,23 +31,29 @@ Show [Airflow component logs](view-logs.md#view-airflow-component-logs-in-the-as
 ```sh
 astro deployment logs
 ```
+
 :::info
 
 When you filter logs using the command flags `--error`, `--warn`, `--info`, and `--key-word`, you can specify only one filter flag per command.
 
 :::
+
 ## Options
 
-| Option              | Description                                                                              | Possible Values                                                                             |
-| ------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `<deployment-id>`   | The ID of the Deployment to show logs for                                                | Any valid Deployment ID                                                                     |
-| `--deployment-name` | The name of the Deployment to show logs for. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                                                   |
-| `-e`,`--error`      | Show only logs with a log level of `ERROR`                                               | None |
-| `-w`,`--warn`       | Show only logs with a log level of `WARNING`                                             | None |
-| `-i`,`--info`       | Show only logs with a log level of `INFO`                                                | None |
-| `--key-word`        | Search the Deployment logs for a specific keyword.                                       | None |
-| `-c`,`--log-count`  | The number of log lines to show. The default is `500`                                    | Any integer. If you request a number of log lines to show that exceeds the total number of logs, then it shows all existing logs.                                                     |
-| `--workspace-id`    | Specify a Workspace to show logs for a Deployment outside of your current Workspace      | Any valid Workspace ID                                                                      |
+| Option                    | Description                                                                              | Possible Values                                                                                                                   |
+| ------------------------- | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `<deployment-id>`         | The ID of the Deployment to show logs for                                                | Any valid Deployment ID                                                                                                           |
+| `-n`, `--deployment-name` | The name of the Deployment to show logs for. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                                                                                         |
+| `-e`,`--error`            | Show only logs with a log level of `ERROR`                                               | None                                                                                                                              |
+| `-i`,`--info`             | Show only logs with a log level of `INFO`                                                | None                                                                                                                              |
+| `--keyword`               | Search the Deployment logs for a specific keyword or phrase.                             | None                                                                                                                              |
+| `-c`,`--log-count`        | The number of log lines to show. The default is `500`                                    | Any integer. If you request a number of log lines to show that exceeds the total number of logs, then it shows all existing logs. |
+| `--scheduler`             | Show logs from the scheduler                                                             | None                                                                                                                              |
+| `--triggerer`             | Show logs from the triggerer                                                             | None                                                                                                                              |
+| `-w`,`--warn`             | Show only logs with a log level of `WARNING`                                             | None                                                                                                                              |
+| `--webserver`             | Show logs from the webserver                                                             | None                                                                                                                              |
+| `--workers`               | Show logs from the workers                                                               | None                                                                                                                              |
+| `--workspace-id`          | Specify a Workspace to show logs for a Deployment outside of your current Workspace      | Any valid Workspace ID                                                                                                            |
 
 ## Examples
 
