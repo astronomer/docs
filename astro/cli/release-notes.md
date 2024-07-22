@@ -24,6 +24,9 @@ Release date: July 24, 2024
 
 ## Work with dbt projects on Astro
 
+:::privatepreview
+:::
+
 You can now deploy a dbt project to Astro using the Astro CLI. See the following reference pages for more information:
 
 - [astro dbt deploy](https://www.astronomer.io/docs/astro/cli/astro-dbt-deploy)
