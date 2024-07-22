@@ -482,6 +482,19 @@ module.exports = {
             'cli/astro-context-switch',
           ],
         },
+        {
+          type: "category",
+          label: "astro dbt",
+          link: {
+            type: 'generated-index',
+            title: "astro dbt command reference",
+            description: 'Use `astro dbt` to manage dbt projects that you connect to Astro.'
+          },
+          items: [
+            'cli/astro-dbt-delete',
+            'cli/astro-dbt-deploy',
+          ],
+        },
         'cli/astro-deploy',
         {
           type: "category",
