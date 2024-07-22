@@ -4,7 +4,7 @@ sidebar_label: 'Managing resources'
 id: managing-resources
 ---
 
-Astro supports a number of approaches to managing [Deployment resources](https://www.astronomer.io/docs/astro/deployment-settings#deployment-resources), so you can provision the resources you need whether you are just starting out or deloying projects programmatically at scale.
+Astro supports several approaches to managing [Deployment resources](https://www.astronomer.io/docs/astro/deployment-settings#deployment-resources), so you can provision the resources you need whether you are just starting or you are deploying projects programmatically at scale.
 
 ## Managing resources manually
 
@@ -28,7 +28,7 @@ For the commands and settings available in the Astro CLI, see [Command reference
 
 ## Managing resources programmatically
 
-Astro recommends the Terraform Provider or Astro API when you need to manage resources programmatically. Typically, teams manage Deployments as code as they start managing instances at scale. Benefits of managing Deployments as code include the ability to have your infrastructure configuration in your version control solution, which allows for tracking and rolling back changes as well as recreating resources easily if something goes wrong.
+Astro recommends the Terraform Provider or Astro API when you need to manage resources programmatically. Typically, teams manage resources as code as they start managing instances at scale. Benefits of managing resources as code include the ability to have your infrastructure configuration in your version control solution, which allows for tracking and rolling back changes as well as recreating resources easily if something goes wrong.
 
 - [Terraform provider](https://www.astronomer.io/docs/astro/terraform-provider). Terraform is an industry-standard tool for managing infrastructure as code (IaC). With the provider, you can use Terraform to automate, templatize, or programmatically manage Astro environments. For example, you can automate creating Workspaces and Teams based on existing resources. Astro recommends this approach in general but especially for teams in organizations where Terraform is already in use.
 - [Astro API](https://www.astronomer.io/docs/api). The API enables you to create or update resources such as Organizations, Deployments, Clusters, Deploys, and Workspaces. An Organization API token is required. You can [download the OpenAPI spec](https://www.astronomer.io/docs/api#download-openapi-specifications) for easy configuration of tools such as Postman and Swagger. Astro recommends the API for Python-centric use cases.
