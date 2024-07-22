@@ -419,17 +419,17 @@ To launch Pods in external clusters from a local Airflow environment, you must a
 
 ### Step 3: Create a Kubernetes cluster connection
 
-Astronomer recommends creating a Kubernetes cluster connection because it's more secure than adding an unencrypted `kubeconfig` file directly to your Astro project. 
+Astronomer recommends creating a Kubernetes cluster connection because it's more secure than adding an unencrypted `kubeconfig` file directly to your Astro project.
 
 1. Convert the `kubeconfig` configuration you retrieved from your cluster to JSON format.
 2. In either the Airflow UI or the Astro environment manager, create a new **Kubernetes Cluster Connection** connection. In the **Kube config (JSON format)** field, paste the `kubeconfig` configuration you retrieved from your cluster after converting it from `yaml` to `json` format.
 4. Click **Save**.
 
-You can now specify this connection in the configuration of any KubernetesPodOperator task that needs to access your external cluster. 
+You can now specify this connection in the configuration of any KubernetesPodOperator task that needs to access your external cluster.
 
 ### Step 4: Install the AWS CLI in your Astro environment
 
-To connect to your external EKS cluster, you need to install the AWS CLI in your Astro project. 
+To connect to your external EKS cluster, you need to install the AWS CLI in your Astro project.
 
 1. Add the following to your `Dockerfile` to install the AWS CLI:
 
@@ -444,7 +444,7 @@ To connect to your external EKS cluster, you need to install the AWS CLI in your
     USER astro
     ```
 
-2. Add the `unzip` package to your `requirements.txt` file to make the `unzip` command available in your Docker container:
+2. Add the `unzip` package to your `packages.txt` file to make the `unzip` command available in your Docker container:
 
     ```txt
     unzip
@@ -459,7 +459,7 @@ In your KubernetesPodOperator task configuration, ensure that you set `cluster-c
 ```python
 run_on_EKS = KubernetesPodOperator(
     task_id="run_on_EKS",
-    kubernetes_conn_id="k8s", 
+    kubernetes_conn_id="k8s",
     cluster_context="<your-cluster-id>",
     namespace="<your-namespace>",
     name="example_pod",
