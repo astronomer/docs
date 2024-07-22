@@ -34,7 +34,7 @@ astro dbt deploy <your-deployment-id> <options>
 | ------------------- | --------------------------------------------------------------------------------- | ------------------------- |
 | `-n`, `--deployment-name` | Name of the Deployment to deploy your dbt project to | Any valid Deployment ID |
 | `--description` | Description of the project to store on the deploy | String |
-| `-m`, `--mount-path` | Path describing where to mount the dbt project in Airflow, so that it is accessible to your DAGs. Default path is `/usr/local/airflow/dbt/<dbt-project-name>` | Any valid path |
+| `-m`, `--mount-path` | Path describing where to mount the dbt project in Airflow, so that it is accessible to your DAGs. Default path is `/usr/local/airflow/dbt/<dbt-project-name>` | Any valid path except  `/usr/local/airflow/dags`, which is used for DAG deploys |
 | `-p`, `--project-path` | Path to the dbt project that you want to deploy. The default is your current directory | Any valid filepath to a dbt project |
 | `-w`, `--wait` | Wait for the Deployment to become healthy before ending the deploy command. Default is `False` | `True` or `False` |
 | `--workspace-id` | The Workspace ID for the Deployment where you want to deploy your dbt project | Any valid Workspace ID |
@@ -47,7 +47,7 @@ To deploy directly to a specific Deployment:
 astro dbt deploy <add-example-id>
 ```
 
-to deploy a project to a specific deployment on the mount path, `example path`.
+to deploy a project to a specific deployment on the mount path, `example-path`.
 
 ```bash
 astro dbt deploy <add-example-id> --mount-path="<need-example-path>"
