@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'When Signing Up for Astro'
 title: 'Run your first DAG on Astro'
-id: 'first-dag-github-actions'
+id: 'first-dag-onboarding'
 description: "Learn how to run your first Apache Airflow® DAG on Astro when you sign up for Astro."
 ---
 
