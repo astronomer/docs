@@ -95,7 +95,7 @@ If you don't see **Amazon Web Services** as a connection type in the Airflow UI,
 
 :::tip
 
-If you use a mix of strategies for managing connections, if you define the same connection in multiple ways, Airflow uses the following order or precedence:
+If you use a mix of strategies for managing connections, if you define the same connection in multiple ways, Airflow uses the following order of precedence:
 
 - Secrets Backend
 - Environment Manager
@@ -167,7 +167,7 @@ If you don't see **Amazon Web Services** as a connection type in the Airflow UI,
 
 :::tip
 
-If you use a mix of strategies for managing connections, if you define the same connection in multiple ways, Airflow uses the following order or precedence:
+If you use a mix of strategies for managing connections, if you define the same connection in multiple ways, Airflow uses the following order of precedence:
 
 - Secrets Backend
 - Environment Manager
@@ -262,7 +262,7 @@ If you don't see **Google Cloud** as a connection type in the Airflow UI, ensure
 
 :::tip
 
-If you use a mix of strategies for managing connections, if you define the same connection in multiple ways, Airflow uses the following order or precedence:
+If you use a mix of strategies for managing connections, if you define the same connection in multiple ways, Airflow uses the following order of precedence:
 
 - Secrets Backend
 - Environment Manager
@@ -322,7 +322,7 @@ Any DAG that uses your connection will now be authorized to Azure through your m
 
 :::tip
 
-If you use a mix of strategies for managing connections, if you define the same connection in multiple ways, Airflow uses the following order or precedence:
+If you use a mix of strategies for managing connections, if you define the same connection in multiple ways, Airflow uses the following order of precedence:
 
 - Secrets Backend
 - Environment Manager
