@@ -617,6 +617,7 @@ module.exports = {
             description: 'Use `astro organization` commands to manage users and their Organization-level permissions.'
           },
           items: [
+            "cli/astro-organization-audit-logs",
             "cli/astro-organization-list",
             "cli/astro-organization-switch",
             "cli/astro-organization-role-list",
