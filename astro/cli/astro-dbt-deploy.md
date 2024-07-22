@@ -44,13 +44,13 @@ astro dbt deploy <your-deployment-id> <options>
 To deploy directly to a specific Deployment:
 
 ```bash
-astro dbt deploy <add-example-id>
+astro dbt deploy clyxf7lfs000108jtcs4b59nm
 ```
 
 to deploy a project to a specific deployment on the mount path, `example-path`.
 
 ```bash
-astro dbt deploy <add-example-id> --mount-path="<need-example-path>"
+astro dbt deploy clyxf7lfs000108jtcs4b59nm --mount-path="/usr/local/airflow/dbt/test-dbt-project"
 ```
 
 ## Related commands

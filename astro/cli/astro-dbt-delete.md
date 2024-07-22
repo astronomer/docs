@@ -48,13 +48,13 @@ astro dbt delete <your-deployment-id> <options>
 To delete a dbt project from a specific Deployment:
 
 ```bash
-astro dbt delete <add-example-id>
+astro dbt delete clyxf6ivz000008jth73k37r6
 ```
 
-To delete a project that has the mount path, `example path` from a specific Deployment.
+To delete a project that has the mount path, `/usr/local/airflow/dbt/test-dbt-project` from a specific Deployment.
 
 ```bash
-astro dbt delete <add-example-id> --mount-path="<need-example-path>"
+astro dbt delete clyxf6ivz000008jth73k37r6 --mount-path="/usr/local/airflow/dbt/test-dbt-project"
 ```
 
 ## Related commands
