@@ -26,16 +26,16 @@ Release date: July 24, 2024
 
 You can now deploy a dbt project to Astro using the Astro CLI. See the following reference pages for more information:
 
-- [astro dbt deploy](astro-dbt-deploy.md)
-- [astro dbt delete](astro-dbt-delete.md)
+- [astro dbt deploy](https://www.astronomer.io/docs/astro/cli/astro-dbt-deploy)
+- [astro dbt delete](https://www.astronomer.io/docs/astro/cli/astro-dbt-delete)
 
 ## Additional improvements
 
-- Added the ability to switch Workspaces by using the Workspace name instead of the `workspace-id`. See [astro workspace switch](astro-workspace-switch.md).
+- Added the ability to switch Workspaces by using the Workspace name instead of the `workspace-id`. See [astro workspace switch](https://www.astronomer.io/docs/astro/cli/astro-workspace-switch).
 
 ## Bug fixes
 
--
+-  Fixed a bug where the command `astro deployment inspect --key configuration.is_development_mode` was printing wrong the value.
 
 ## Astro CLI 1.27.1
 
