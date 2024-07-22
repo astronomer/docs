@@ -38,7 +38,7 @@ Now, when you first set up your Astro account, you can choose to connect your Gi
 
 ### Additional improvements
 
-- View your Astro resource use with [Organization Dashboards](organization-dashboards.md).
+- View your Astro resource use with [Organization Dashboards](https://www.astronomer.io/docs/astro/organization-dashboard).
 - Raised the maximum worker node and executor sizes in Astro Hosted Dedicated and Astro Hybrid from 100 to 200 GiB, to allow large clusters to scale up further.
 - Added a new **Extra Large** sized Scheduler.
 - Improved how the GitHub Integration in the Astro UI links directly to the Astro Project in a GitHub repository.
