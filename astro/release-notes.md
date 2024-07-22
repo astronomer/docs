@@ -25,6 +25,23 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## July 23, 2024
+
+### Run your first DAG on Astro with GitHub Integration
+
+Now, when you first set up your Astro account, you can choose to connect your GitHub account and run a sample Astro project template and DAG. Previously, to run your first DAG on Astro, you needed to either download and use the Astro CLI or work with GitHub Actions. Now, the onboarding process allows you to customize your first experience with Astro to focus on your use case, whether that's Business Opeartions, Generative AI, or learning Airflow, and set up a GitHub Integration to quickly clone and deploy the example DAGs. Try it now with [Start Astro](https://cloud.astronomer.io/start-astro).
+
+### Work with dbt projects on Astro
+
+:::privatepreview
+:::
+
+### Additional improvements
+
+- View your Astro resource use with [Organization Dashboards](organization-dashboards.md).
+
+### Bug fixes
+
 ## July 16, 2024
 
 ### Additional improvements
