@@ -241,7 +241,7 @@ To request additional endpoints, or assistance connecting to other Azure service
 
 - Resource name
 - Resource ID
-- [Group ID](https://blog.blksthl.com/2023/03/22/the-complete-list-of-groupids-for-private-endpoint-privatelink-service-connection/)
+- [Group ID](https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/private-link/private-endpoint-overview.md#private-link-resource )
 
 For example, to connect with Azure Container Registry:
 
