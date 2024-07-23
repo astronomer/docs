@@ -33,7 +33,7 @@ astro organization al <options>
 
 | Option   | Description                                                                          | Valid Values |
 | -------- | ------------------------------------------------------------------------------------ | ------------ |
-| `export` | Export your Organization audit logs in GZIP. Requires Organization Owner permissions | N/A          |
+| `export` | Export your Organization audit logs in GZIP. Requires Organization Owner permissions. | N/A          |
 
 ## Examples
 

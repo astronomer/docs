@@ -16,7 +16,7 @@ This command is only available on Astro.
 
 :::
 
-Delete a dbt project for a Deployment on Astro. This command deletes a dbt project from the Airflow environments where you deployed it.
+Delete a dbt project from a Deployment on Astro. This command deletes a dbt project from the Airflow environments where you deployed it.
 
 When you run `astro dbt delete`, you are prompted to select from a list of Deployments that you can access in your Workspace. You can bypass this prompt and specify a Deployment name or ID in the command. To retrieve a Deployment ID, open your Deployment in the Astro UI and copy the value in the **ID** section of the Deployment page. You can also run `astro deployment list` to find a Deployment ID or name.
 
@@ -41,7 +41,7 @@ astro dbt delete <your-deployment-id> <options>
 | `-m`, `--mount-path` | Path describing where the dbt project you want to delete is mounted in Airflow. Default path is `/usr/local/airflow/dbt/<dbt-project-name>` | Any valid path except `/usr/local/airflow/dags`, which is used for DAG deploys |
 | `-p`, `--project-path` | Path to the dbt project that you want to delete. The default is your current directory | Any valid filepath to a dbt project |
 | `-w`, `--wait` | Wait for the Deployment to become healthy before ending the delete command. Default is `False` | `True` or `False` |
-| `--workspace-id` | The Workspace ID for the Deployment from where you want to delete your dbt project | Any valid Workspace ID |
+| `--workspace-id` | The Workspace ID for the Deployment from which you want to delete your dbt project | Any valid Workspace ID |
 
 ## Examples
 

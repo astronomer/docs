@@ -16,7 +16,7 @@ This command is only available on Astro.
 
 :::
 
-This command allows you to deploy your dbt code directly to Astro, independent of any DAG deploys or full project image deploys.
+This command allows you to deploy your dbt code directly to Astro, independently of any DAG deploys or full project image deploys.
 
 This command bundles all files in your dbt project and pushes them to Astro, where they are mounted on your Airflow containers so that your DAGs can access them.
 
