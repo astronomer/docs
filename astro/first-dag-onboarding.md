@@ -12,7 +12,7 @@ When you first sign up for Astro, you can choose to tailor your experience based
 - Creating an Organization, Workspace, and Deployment
 - Choosing an example Airflow project template to clone into your own sample GitHub Repository
 - Connecting your Astro Deployment to your sample GitHub Repository, so you can deploy code from GitHub
-- Run your first DAG on Astro
+- Running your first DAG on Astro
 
 This tutorial takes about 15 minutes. If you're new to Airflow and want a more in-depth tutorial, see [Airflow 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
 
@@ -68,7 +68,7 @@ An _Astro project_ contains the set of files necessary to run Airflow, including
 
 You can now confirm your selected template and finish configuring your Deployment resources and whether you want to use a GitHub connection for code deploys.
 
-An Astro _Deployment_ is an instance of Apache Airflow that is powered by all core Airflow components, including a webserver, scheduler, and one or more workers. You deploy DAGs to a Deployment, and you can have one or more Deployments within a Workspace.
+An Astro _Deployment_ is an instance of Apache Airflow that is powered entirely by core Airflow components, including a webserver, scheduler, and one or more workers. You deploy DAGs to a Deployment, and you can have one or more Deployments within a Workspace.
 
 - **Selected template**: When you finalize your Deployment, you can confirm or change the template option you selected in Step 3.
 - **Git connection**: Enter your **GitHub Owner** and **Repository Owner** information to deploy code directly to an Astro Deployment when you merge changes to a specific branch. If you choose to skip connecting to GitHub, later, you can return and manually build and Deploy an example DAG by following the steps in [Run your first DAG with the Astro CLI](first-dag-cli.md) or [Run your first DAG with GitHub Actions](first-dag-github-actions.md).
@@ -78,7 +78,7 @@ After you finish configuring your Deployment, click **Create your Project Reposi
 
 ## Step 5: Run your first DAG on Astro
 
-When you create your project and deploy it to Astro, it automatically creates a new Deployment and makes a private GitHub repository in your account with the template that you selected. Then, you can open Airflow and run your DAG.
+When you create your project and deploy it to Astro, this automatically creates a new Deployment and makes a private GitHub repository in your account with the template that you selected. Then, you can open Airflow and run your DAG.
 
 Newly-deployed DAGs are paused by default and will not start running automatically. To run one of the example DAGs in your Astro project according to its schedule, you must unpause it from the Airflow UI hosted on your Deployment.
 
