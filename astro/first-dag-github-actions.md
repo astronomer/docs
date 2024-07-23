@@ -35,7 +35,7 @@ This tutorial assumes that you're familiar with basic Apache Airflow concepts. I
 
 :::info
 
-If you're on your organization's network and can't access Astro, make a request to allowlist the following domains on your network:
+If you're on your organization's network and can't access Astro, make a request to add the following domains to the allowlist on your network:
 
 - `https://cloud.astronomer.io/`
 - `https://api.astronomer.io/`
