@@ -6,6 +6,21 @@ id: managing-resources
 
 Astro supports several approaches to managing [Deployment resources](https://www.astronomer.io/docs/astro/deployment-settings#deployment-resources), so you can provision the resources you need whether you are just starting or you are deploying projects programmatically at scale.
 
+## Recommended approaches
+
+Astronomer recommends choosing the following approaches for these common scenarios:
+
+| Scenario | Astro UI | Terraform Provider | Astro API | Deployment files | Astro CLI |
+| -------- | :------: | :----------------: | :-------: | :--------------: | :-------: |
+| Manually managing resources | x | | | | x |
+| Programmatically managing resources | | x | x | x | |
+| Managing resoures at scale | | x | x | x | |
+| Managing resources for a small team or an individual dev | x | | x | | x |
+| Automating management with CI/CD | | x | x | x | |
+| Managing resource config with version control | | x | x | x | |
+| An approach using Python is needed | | | x | | |
+| An approach using Bash is needed | | | x | | x |
+
 ## Managing resources manually
 
 Astronomer recommends the Astro UI for managing resources if you do not need to deploy or modify project config programmatically. If you are a small team getting started or you are an individual dev creating projects on an ad hoc basis, the Astro UI will likely meet your needs when managing resources. In addition to all the options you need in order to create and customize resources, you will get guidance directly in the UI that will help ensure that your instance is right-sized for your use case.
