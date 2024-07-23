@@ -22,14 +22,14 @@ Deploy rollbacks are an emergency option if a Deployment unexpectedly stops work
 1. In the Astro UI, select a Deployment.
 2. Click **Deploy History**
 
-For each deploy, the **Deploy History** table shows the user that made the deploy, when they made the deploy, what image they used, the type of deploy, and any descriptions they added to the deploy.
+For each deploy, the **Deploy History** table shows the user who made the deploy, when they made the deploy, what image they used, the type of deploy, and any descriptions they added to the deploy.
 
 ### Types of deploys
 
 There are different types of deploys, which are shared in the Deploy History table. You can read more about the different deploy options in [Deploy code to Astro](deploy-code.md). These deploy types include:
 
-    - Image only deploy
-    - DAG only deploy
+    - Image-only deploy
+    - DAG-only deploy
     - GitHub deploy
     - (*Private Preview*) dbt project deploy
 

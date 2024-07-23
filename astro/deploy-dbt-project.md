@@ -11,7 +11,7 @@ import HostedBadge from '@site/src/components/HostedBadge';
 :::privatepreview
 :::
 
-Use dbt on Astro, so you can now deploy your dbt projects directly to Astro, without changes tied to updates with your DAGs or full image code deploys. When you use a dbt project deploy, Astro bundles all files in your dbt project and pushes them to Astro, where they are mounted on your Airflow containers so that your DAGs can access them.
+Use dbt on Astro, so you can now deploy your dbt projects directly to Astro, without changes tied to updates to your DAGs or full image code deploys. When you use a dbt project deploy, Astro bundles all files in your dbt project and pushes them to Astro, where they are mounted on your Airflow containers so that your DAGs can access them.
 
 ## Prerequisites
 
