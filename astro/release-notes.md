@@ -45,6 +45,7 @@ See [dbt project deploys](https://www.astronomer.io/docs/astro/deploy-dbt-projec
 ### Additional improvements
 
 - Improved how the GitHub Integration in the Astro UI links directly to the Astro Project in a GitHub repository.
+- Astro Runtime version 11 is now classified as Long Term Support (LTS). This means that instead of being supported until October 2024, Astro will support Runtime version 11 until October 2025. See the [Astro Runtime maintenance and lifecycle schedule](https://www.astronomer.io/docs/astro/runtime-version-lifecycle-policy) for more information, including information about restricted versions.
 
 ### Bug fixes
 
