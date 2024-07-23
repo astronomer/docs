@@ -56,9 +56,8 @@ An Astro _Organization_ is the highest level entity in Astro and represents a sh
 
 ## Step 3: Select a template
 
-You can choose a template Astro project that shows a demonstration of particular scenarios. An _Astro project_ contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies.
+An _Astro project_ contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. Select a template Astro project to immediately get a demonstration of Airflow's orchestration capabilities.
 
-These templates include a fully functional Astro project for specific use cases, or just a general project for you to use to explore Airflow.
 
 - **Generative AI**: Airflow is a common orchestration engines for AI/Machine Learning jobs, especially for retrieval-augmented generation (RAG).This [generative AI project](https://github.com/astronomer/templates/blob/main/generative-ai/README.md) shows an simple example of building vector embeddings for text and then performing a semantic search on the embeddings.
 - **ETL**: Use a template to make an example [ETL pipeline](https://github.com/astronomer/templates/blob/main/etl/README.md). This template shows an example pattern for defining an ETL workload using DuckDB as the data warehouse of choice.
