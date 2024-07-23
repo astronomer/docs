@@ -105,11 +105,13 @@ This example repository also includes a pre-configured [Astronomer deploy action
 
 8. In GitHub, paste your **Deployment ID**.
 
-9. In the Astro UI, click **API Tokens**.
+9. In the Astro UI, click the **Access** tab on the Deployment screen.
 
-10. Click **+ API Token** to create a new API token, and give the token a **Name** and an **Expiration**.
+10. Click **API Tokens**.
 
-11. Click **Create API Token**, then copy the token that appears.
+11. Click **+ API Token** and select **Add Deployment API Token** to create a new API token, and give the token a **Name** and an **Expiration**.
+
+12. Click **Create API Token**, then copy the token that appears.
 
     :::warning
 
@@ -117,9 +119,9 @@ This example repository also includes a pre-configured [Astronomer deploy action
 
     :::
 
-12. In GitHub, paste the API Token in the **API Token** field on your GitHub Actions workflow page.
+13. In GitHub, paste the API Token in the **API Token** field on your GitHub Actions workflow page.
 
-13. Click **Run workflow**.
+14. Click **Run workflow**.
 
 This automatically deploys the example DAGs in your Astro project to your Deployment.
 
