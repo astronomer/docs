@@ -38,7 +38,7 @@ DbtTaskGroup(
 
 :::tip dbt on Astro
 
-Astro supports direct deployment of dbt projects using the Astro CLI. With a single command, you can deploy any valid dbt project to an Astro Deployment. For more information, see [NEW DOC TITLE](https://www.astronomer.io/docs/astro/deploy-dbt-project).
+Astro supports direct deployment of dbt projects using the Astro CLI. With a single command, you can deploy any valid dbt project to an Astro Deployment. For more information, see [Deploy dbt projects to Astro](https://www.astronomer.io/docs/astro/deploy-dbt-project).
 
 :::
 
