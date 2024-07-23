@@ -52,7 +52,7 @@ You can forward Airflow task logs from a Deployment to [Datadog](https://www.dat
     - **Key**: `ASTRO_DATADOG_TASK_LOGS_TAGS`
     - **Value**: `<tag-key-1>:<tag-value-1>,<tag-key-2>:<tag-value-2>`
 
-  By default, Astro uses the tags `source=astronomer` and `service=astronomer-task-logs`.
+  By default, Astro uses the tags `source=astronomer` and `service=astronomer-task-logs`. Astro automatically adds dag_id, task_id, run_id, and try_number tags to logs sent to Datadog. The minimum runtime versions with this feature are 9.15.0, 10.9.0, and 11.5.0. To use this feature with a different runtime version, upgrade `astronomer-providers-logging` to at least `1.5.1` in the requirements.txt file.
 
 
 ## Export Airflow metrics to Datadog
