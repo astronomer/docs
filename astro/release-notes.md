@@ -29,7 +29,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Run your first DAG on Astro with GitHub Integration
 
-Now, when you first set up your Astro account, you can choose to connect your GitHub account and run a sample Astro project template and DAG. Previously, to run your first DAG on Astro, you needed to either download and use the Astro CLI or work with GitHub Actions. Now, the onboarding process allows you to customize your first experience with Astro to focus on your use case, whether that's Business Opeartions, Generative AI, or learning Airflow, and set up a GitHub Integration to quickly clone and deploy the example DAGs. Try it now with [Start Astro](https://cloud.astronomer.io/start-astro).
+Now, when you first set up your Astro account, you can choose to connect your GitHub account and run a sample Astro project template and DAG. Previously, to run your first DAG on Astro, you needed to either download and use the Astro CLI or work with GitHub Actions. Now, the onboarding process allows you to customize your first experience with Astro to focus on your use case, whether that's Business Operations, Generative AI, or learning Airflow, and set up a GitHub Integration to quickly clone and deploy the example DAGs. Try it now with [Start Astro](https://cloud.astronomer.io/start-astro).
 
 ### Work with dbt projects on Astro
 
@@ -38,7 +38,7 @@ Now, when you first set up your Astro account, you can choose to connect your Gi
 :::privatepreview
 :::
 
-You can now deploy dbt code to Astro quickly and independently from your DAG or image deploys. Data build tool (dbt) core is an open source tool for data transformation that uses SQL, instead of transforming your data with Python in your DAGs. You can also use both Cosmos, an open source tool that integrates dbt models into Airflow and treats them like DAGs, and dbt deploys on Astro to have unparalleled visibility into your dbt tasks with the Airflow UI and a streamlined code deploy process.
+You can now deploy dbt code to Astro quickly and independently of your DAG or image deploys. Data build tool (dbt) core is an open source tool for data transformation that uses SQL to transform your data instead of Python in your DAGs. You can also use both Cosmos, an open source tool that integrates dbt models into Airflow and treats them like DAGs, and dbt deploys on Astro to have unparalleled visibility into your dbt tasks with the Airflow UI and a streamlined code deploy process.
 
 See [dbt project deploys](https://www.astronomer.io/docs/astro/deploy-dbt-project).
 
