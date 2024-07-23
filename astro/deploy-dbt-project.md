@@ -4,6 +4,7 @@ title: 'Deploy dbt projects to Astro'
 id: deploy-dbt-project
 description: Learn how to deploy dbt projects to Astro.
 ---
+import HostedBadge from '@site/src/components/HostedBadge';
 
 <HostedBadge/>
 
