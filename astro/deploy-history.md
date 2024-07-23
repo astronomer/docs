@@ -62,7 +62,7 @@ Astronomer recommends triggering Deployment rollbacks only as a last resort for 
 3. Locate the deploy you want to roll back to. In the **Rollback to** column for the deploy, click **Deploy**.
 4. Provide a description for your rollback, then complete the confirmation to trigger the rollback.
 
-You can roll back to any deploy within the last three months. If your last deploy was more than three months ago, you can only roll back to that deploy. After the rollback completes, the **Deploy History** table shows your rollback deploy as the most recent deploy and includes both your rollback description and rollback deploy time. Your Docker image tag and DAG bundle names are the same as the previous version you rolled back to. The historic deploy that you rolled back to still appears in chronological order in the table.
+You can roll back to any deploy within the last three months. If your last deploy was more than three months ago, you can only roll back to that deploy. After the rollback completes, the **Deploy History** table shows your rollback deploy as the most recent deploy and includes both your rollback description and rollback deploy time. Your Docker image tag, DAG bundle name, and dbt bundles are the same as the previous version you rolled back to. The historic deploy that you rolled back to still appears in chronological order in the table.
 
 For example, consider a user who, on November 8, 2023 at 13:00, rolled back to a deploy from November 6, 2023 at 14:00. At the top of the **Deploy History** table, an entry for the rollback deploy would have the following information:
 
