@@ -8,7 +8,7 @@ Astro supports several approaches to managing [Deployment resources](https://www
 
 ## Managing resources manually
 
-Astro recommends the Astro UI for managing resources if you do not need to deploy or modify project config programmatically. If you are on a small team getting started or you are an individual dev creating projects on an ad hoc basis, the Astro UI will likely meet your needs when managing resources. In addition to all the options you need in order to create and customize resources, you will get guidance that will help ensure that your instance is right-sized for your use case.
+Astronomer recommends the Astro UI for managing resources if you do not need to deploy or modify project config programmatically. If you are on a small team getting started or you are an individual dev creating projects on an ad hoc basis, the Astro UI will likely meet your needs when managing resources. In addition to all the options you need in order to create and customize resources, you will get guidance that will help ensure that your instance is right-sized for your use case.
 
 On the Astro UI, you can:
 
@@ -28,10 +28,11 @@ For the commands and settings available in the Astro CLI, see [Command reference
 
 ## Managing resources programmatically
 
-Astro recommends the Terraform Provider or Astro API when you need to manage resources programmatically. Typically, teams manage resources as code as they start managing instances at scale. Benefits of managing resources as code include the ability to have your infrastructure configuration in your version control solution, which allows for tracking and rolling back changes as well as recreating resources easily if something goes wrong.
+Astronomer recommends the Terraform Provider, Astro API, or Deployment files when you need to manage resources programmatically. Typically, teams manage resources as code as they start managing instances at scale. Benefits of managing resources as code include the ability to have your infrastructure configuration in your version control solution, which allows for tracking and rolling back changes as well as recreating resources easily if something goes wrong. Also, you can create and modify large numbers of Deployments quickly, making it easy to onboard new teams, reallocate resources, reassign Deployments, and more. 
 
 - [Terraform provider](https://www.astronomer.io/docs/astro/terraform-provider). Terraform is an industry-standard tool for managing infrastructure as code (IaC). With the provider, you can use Terraform to automate, templatize, or programmatically manage Astro environments. For example, you can automate creating Workspaces and Teams based on existing resources. Astro recommends this approach in general but especially for teams in organizations where Terraform is already in use.
-- [Astro API](https://www.astronomer.io/docs/api). The API enables you to create or update resources such as Organizations, Deployments, Clusters, Deploys, and Workspaces. An Organization API token is required. You can [download the OpenAPI spec](https://www.astronomer.io/docs/api#download-openapi-specifications) for easy configuration of tools such as Postman and Swagger. Astro recommends the API for Python-centric use cases.
+- [Astro API](https://www.astronomer.io/docs/api). The API enables you to create or update resources such as Organizations, Deployments, Clusters, Deploys, and Workspaces. An Organization API token is required. You can [download the OpenAPI spec](https://www.astronomer.io/docs/api#download-openapi-specifications) for easy configuration of tools such as Postman and Swagger. Astronomer recommends the API for Python-centric use cases.
+- [Deployment files](https://www.astronomer.io/docs/astro/manage-deployments-as-code). You can configure Deployments programmatically using Deployment files, which you can generate automatically from existing Deployments. You can standardize Deployment configuration for specific use cases using Deployment template files, which you can also generate automatically from existing Deployments.
 
 :::info
 
