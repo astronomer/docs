@@ -38,7 +38,7 @@ astro dbt delete <your-deployment-id> <options>
 | ------------------- | --------------------------------------------------------------------------------- | ------------------------- |
 | `-n`, `--deployment-name` | Name of the Deployment to delete your dbt project from | Any valid Deployment ID |
 | `--description` | Description of the project to store on the deploy | String |
-| `-m`, `--mount-path` | Path describing where the dbt project you want to delete is mounted in Airflow. Default path is `/usr/local/airflow/dbt/<dbt-project-name>` | Any valid path |
+| `-m`, `--mount-path` | Path describing where the dbt project you want to delete is mounted in Airflow. Default path is `/usr/local/airflow/dbt/<dbt-project-name>` | Any valid path except `/usr/local/airflow/dags`, which is used for DAG deploys |
 | `-p`, `--project-path` | Path to the dbt project that you want to delete. The default is your current directory | Any valid filepath to a dbt project |
 | `-w`, `--wait` | Wait for the Deployment to become healthy before ending the delete command. Default is `False` | `True` or `False` |
 | `--workspace-id` | The Workspace ID for the Deployment from where you want to delete your dbt project | Any valid Workspace ID |
