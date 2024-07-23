@@ -8,7 +8,7 @@ Astro supports several approaches to managing [Deployment resources](https://www
 
 ## Managing resources manually
 
-Astronomer recommends the Astro UI for managing resources if you do not need to deploy or modify project config programmatically. If you are on a small team getting started or you are an individual dev creating projects on an ad hoc basis, the Astro UI will likely meet your needs when managing resources. In addition to all the options you need in order to create and customize resources, you will get guidance that will help ensure that your instance is right-sized for your use case.
+Astronomer recommends the Astro UI for managing resources if you do not need to deploy or modify project config programmatically. If you are a small team getting started or you are an individual dev creating projects on an ad hoc basis, the Astro UI will likely meet your needs when managing resources. In addition to all the options you need in order to create and customize resources, you will get guidance directly in the UI that will help ensure that your instance is right-sized for your use case.
 
 On the Astro UI, you can:
 
