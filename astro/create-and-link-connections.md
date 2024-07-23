@@ -40,7 +40,7 @@ When you use connections for local development, the Astro CLI reads the connecti
 
 ### Fetching environment secrets
 
-The Astro CLI can automatically retrieve connections from the Astro UI when you start your local airflow instance, which means you can use your connection details without needing to manage credentials between local and deployed environments. Local environments fetch connection information the same way as for Deployments, so they require an active internet connection and for you to be logged in with the Astro CLI. You can only fetch environment secrets from Deployments that belong to Workspaces where you are at least a Workspace Member.
+The Astro CLI can automatically retrieve connections from the Astro UI when you start your local airflow instance with `astro dev start --deployment-id=<your-deployment-id>`, which means you can use your connection details without needing to manage credentials between local and deployed environments. Local environments fetch connection information the same way as for Deployments, so they require an active internet connection and for you to be logged in with the Astro CLI. You can only fetch environment secrets from Deployments that belong to Workspaces where you are at least a Workspace Member.
 
 :::tip
 
