@@ -152,9 +152,9 @@ For example, you might have created a metrics connection to a dev or internal ob
 5. Add the override values to the fields you want to edit. You might need to open **More options** to find the full list of available fields.
 6. Click **Update metrics export**.
 
-## Example: Grafana cloud dashboard {#grafana-example}
+## Example: Grafana Cloud dashboard {#grafana-example}
 
-You can view an example dashboard configuration JSON file for [Grafana cloud](https://grafana.com/products/cloud/) in the [Astronomer Docs GitHub repo](https://github.com/astronomer/docs/tree/main/code-samples/metrics-export).
+You can view an example dashboard configuration JSON file for [Grafana Cloud](https://grafana.com/products/cloud/) in the [Astronomer Docs GitHub repo](https://github.com/astronomer/docs/tree/main/code-samples/metrics-export).
 
 ![Example Grafana dashboard showing available sections, collapsed. These include information about DAGs and tasks, and components; scheduler, webserver, worker, triggerer, and PGBouncer.](/img/docs/ume-example-collapsed.png)
 
