@@ -74,8 +74,8 @@ To authorize your Deployment, create an IAM role to assign as your Deployment's 
 1. [Create an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) to delegate permissions to in an AWS service. Grant the role any permission that the Deployment will need in your AWS account. Copy the IAM role ARN to use later in this setup.
 2. In the Astro UI, select your Deployment and then click **Details**. In the **Advanced** section, click **Edit**.
 3. In the **Workload Identity** menu, select **Customer Managed Identity**.
-4. Enter your IAM role ARN when prompted, then copy and run the provided CLI command.
-5. Click **Update Deployment**. The IAM role is now selectable as a workload identity for the Deployment.
+4. Enter your IAM role ARN when prompted, then copy and run the provided CLI command. Click **Save Configuration** to save the IAM role as a selectable configuration.
+5. Click **Update Deployment** to apply the selected IAM role to the Deployment.
 6. (Optional) Repeat these steps for each Astro Deployment that needs to access your AWS resources. Or, you can edit the `<DeploymentNamespace>` value in `Condition` when setting up the Workload Identity for one of the following scenarios to apply to multiple Deployments.
 
 <details>
