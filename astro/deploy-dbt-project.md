@@ -15,7 +15,7 @@ To orchestrate dbt jobs with Apache Airflow, you need to deploy your dbt project
 
 Depending on your organization's software development lifecycle, your dbt project might live in the same Git repository as your Airflow code or in a different repository. Astronomer supports both methods but recommends having a dedicated Git repository for your dbt code that is separate from your Airflow code. 
 
-To learn more about running dbt core or dbt Cloud with Apache Airflow, see [Orchestrate dbt Core jobs with Airflow](/learn/airflow-dbt.md).
+To learn more about running dbt core or dbt Cloud with Apache Airflow, see [Orchestrate dbt Core jobs with Airflow](https://www.astronomer.io/docs/learn/airflow-dbt).
 
 ## Prerequisites
 
