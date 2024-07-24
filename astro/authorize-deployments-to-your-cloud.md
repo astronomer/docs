@@ -82,20 +82,20 @@ To authorize your Deployment, create an IAM role to assign as your Deployment's 
   <summary><strong>Specify Kubernetes service accounts</strong></summary>
 Available for both Standard and Dedicated clusters. If your organization does not allow you to use a wildcards in your IAM Trust Policies, change the `<DeploymentNamespace>` value in `Condition` to specify the Kubernetes service accounts. The following shows an example:
 
-  ```json
-  {
-      "Condition": {
-          "StringLike": {
-              "<clusterOIDCIssuerUrl>:aud": "sts.amazonaws.com",
-              "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-kpo"
-              "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-scheduler-serviceaccount"
-              "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-triggerer-serviceaccount"
-              "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-webserver-serviceaccount"
-              "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-worker-serviceaccount"
-          }
-      }
-  }
-  ```
+```json
+{
+    "Condition": {
+        "StringLike": {
+            "<clusterOIDCIssuerUrl>:aud": "sts.amazonaws.com",
+            "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-kpo"
+            "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-scheduler-serviceaccount"
+            "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-triggerer-serviceaccount"
+            "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-webserver-serviceaccount"
+            "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-worker-serviceaccount"
+        }
+    }
+}
+```
 </details>
 
 <details>
@@ -103,16 +103,16 @@ Available for both Standard and Dedicated clusters. If your organization does no
 If you want to share or re-use the same customer managed identity on static or ephemeral Deployments for dedicated clusters, without having to update your Trust Policy in your AWS account for every net new Deployment, change the `<DeploymentNamespace>` value in `Condition` to include a wildcard. You should only use a wildcard in dedicated clusters for security purposes. The following shows an example:
 
 
-  ```json
-  {
-      "Condition": {
-          "StringLike": {
-              "<clusterOIDCIssuerUrl>:aud": "sts.amazonaws.com",
-              "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:*:*"
-          }
-      }
-  }
-  ```
+```json
+{
+    "Condition": {
+        "StringLike": {
+            "<clusterOIDCIssuerUrl>:aud": "sts.amazonaws.com",
+            "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:*:*"
+        }
+    }
+}
+```
 </details>
 
 
