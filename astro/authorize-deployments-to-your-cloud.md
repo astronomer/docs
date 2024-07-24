@@ -74,11 +74,13 @@ To authorize your Deployment, create an IAM role to assign as your Deployment's 
 1. [Create an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) to delegate permissions to in an AWS service. Grant the role any permission that the Deployment will need in your AWS account. Copy the IAM role ARN to use later in this setup.
 2. In the Astro UI, select your Deployment and then click **Details**. In the **Advanced** section, click **Edit**.
 3. In the **Workload Identity** menu, select **Customer Managed Identity**.
-4. (Optional - Dedicated clusters only) Customize your managed identity to specify Kubernetes service accounts or use a wildcard so you can share or re-use managed identity information.
+4. Enter your IAM role ARN when prompted, then copy and run the provided CLI command.
+5. Click **Update Deployment**. The IAM role is now selectable as a workload identity for the Deployment.
+6. (Optional) Repeat these steps for each Astro Deployment that needs to access your AWS resources. Or, you can edit the `<DeploymentNamespace>` value in `Condition` when setting up the Workload Identity for one of the following scenarios to apply to multiple Deployments.
 
 <details>
   <summary><strong>Specify Kubernetes service accounts</strong></summary>
-If you want to share or re-use the same customer managed identity on static or ephemeral Deployments for dedicated clusters, and your organization does not allow you to use a wildcard, change the `<DeploymentNamespace>` value in `Condition` to specify the Kubernetes service accounts. The following shows an example:
+Available for both Standard and Dedicated clusters. If you want to share or re-use the same customer managed identity on static or ephemeral Deployments for dedicated clusters, and your organization does not allow you to use a wildcard, change the `<DeploymentNamespace>` value in `Condition` to specify the Kubernetes service accounts. The following shows an example:
 
   ```json
   {
@@ -97,7 +99,7 @@ If you want to share or re-use the same customer managed identity on static or e
 </details>
 
 <details>
-  <summary><strong>Share or re-use a managed identity using a wildcard</strong></summary>
+  <summary><strong>Dedicated clusters only: Share or re-use a managed identity using a wildcard</strong></summary>
 If you want to share or re-use the same customer managed identity on static or ephemeral Deployments for dedicated clusters, without having to update your Trust Policy in your AWS account for every net new Deployment, change the `<DeploymentNamespace>` value in `Condition` to include a wildcard. The following shows an example:
 
 
@@ -113,10 +115,6 @@ If you want to share or re-use the same customer managed identity on static or e
   ```
 </details>
 
-5. Enter your IAM role ARN when prompted, then copy and run the provided CLI command.
-6. Click **Update Deployment**. The IAM role is now selectable as a workload identity for the Deployment.
-
-Repeat these steps for each Astro Deployment that needs to access your AWS resources.
 
 #### Step 2: Create an Airflow connection
 
