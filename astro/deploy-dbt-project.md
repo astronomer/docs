@@ -22,8 +22,9 @@ To learn more about running dbt core or dbt Cloud with Apache Airflow, see [Orch
 - An Astro Deployment
 - An Astro project
 - A dbt project
+- The [Astro CLI v1.28 or greater](https://www.astronomer.io/docs/astro/cli/install-cli)
 
-## Step 1: Deploy your full Astro image
+## Step 1: (Optional) Deploy your full Astro image
 
 In order to first deploy a dbt project to Astro, Astronomer recommends that you have an Astro project already running on your Deployment with DAGs that need to read from dbt. That way, your dbt project will be read and used when you deploy it.
 
@@ -36,13 +37,15 @@ astro deploy
 
 ## Step 2: Deploy your dbt project
 
-Choose a Deployment that you want to deploy your dbt project to.
+From the CLI, run the following command to deploy your dbt project. The command prompts you to choose the Deployment that you want to deploy your dbt project to.
 
 ```bash
 
 astro dbt deploy
 
 ```
+
+See [`astro dbt deploy`](https://www.astronomer.io/docs/astro/cli/astro-dbt-deploy) for more information about this command.
 
 :::tip
 
@@ -65,3 +68,4 @@ astro dbt delete
 
 ```
 
+See [`astro dbt delete`](https://www.astronomer.io/docs/astro/cli/astro-dbt-delete) for more information about this command.
