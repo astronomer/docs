@@ -20,6 +20,10 @@ Universal Metrics Export also provides an alternative to other Astro observabili
 
 With the metrics export, you can configure metrics export at the per-Deployment level. Or, you can define a default metrics exports for your entire Workspace, so that you can create a default process that all Deployments are created with and then later customize at the per-Deployment level.
 
+The following shows an example dashboard in Grafana created with metrics exported from Astro. See the [Grafana dashboard example](#grafana-example) for more information about how to set it up for yourself.
+
+![Example Grafana dashboard showing a detailed view about DAG behavior and performance created from data exported with the Universal Metrics Exporter.](/img/docs/ume-example-dags.png)
+
 ## Metric types
 
 There are two types of metrics that you can export using the universal metrics exporter:
@@ -148,8 +152,16 @@ For example, you might have created a metrics connection to a dev or internal ob
 5. Add the override values to the fields you want to edit. You might need to open **More options** to find the full list of available fields.
 6. Click **Update metrics export**.
 
-## Example: Grafana cloud dashboard
+## Example: Grafana cloud dashboard {#grafana-example}
 
 You can view an example dashboard configuration JSON file for [Grafana cloud](https://grafana.com/products/cloud/) in the [Astronomer Docs GitHub repo](https://github.com/astronomer/docs/tree/main/code-samples/metrics-export).
 
-This configuration file allows you to create a dashboard that provides an at-a-glance view of your
+![Example Grafana dashboard showing available sections, collapsed. These include information about DAGs and tasks, and components; scheduler, webserver, worker, triggerer, and PGBouncer.](/img/docs/ume-example-collapsed.png)
+
+This configuration file allows you to create a dashboard that provides an at-a-glance view of your Astro resources and task execution status. The following image shows an example of the **Scheduler** dashboard view:
+
+![Example Grafana dashboard showing data about the Deployment's scheduler.](/img/docs/ume-example-scheduler.png)
+
+Or, you can view details about resources like your **Workers**, such as in the following image.
+
+![Example Grafana dashboard showing data about the Deployment's workers](/img/docs/ume-example-worker.png)
