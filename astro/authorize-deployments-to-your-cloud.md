@@ -112,28 +112,10 @@ To authorize your Deployment, create an IAM role to assign as your Deployment's 
     ```
   </details>
 
-4. Enter your IAM role ARN when prompted, then copy and run the provided CLI command.
-5. Click **Update Deployment**. The IAM role is now selectable as a workload identity for the Deployment.
+5. Enter your IAM role ARN when prompted, then copy and run the provided CLI command.
+6. Click **Update Deployment**. The IAM role is now selectable as a workload identity for the Deployment.
 
 Repeat these steps for each Astro Deployment that needs to access your AWS resources.
-
-
-
-:::tip Dedicated Cluster only
-
-If you want to share or re-use the same customer managed identity on static or ephemeral Deployments for dedicated clusters, without having to update your Trust Policy in your AWS account for every net new Deployment, change the `<DeploymentNamespace>` value in `Condition` to include a wildcard. The following shows an example:
-
-    ```json
-    {
-        "Condition": {
-            "StringLike": {
-                "<clusterOIDCIssuerUrl>:aud": "sts.amazonaws.com",
-                "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:*:*"
-            }
-        }
-    }
-    ```
-:::
 
 #### Step 2: Create an Airflow connection
 
