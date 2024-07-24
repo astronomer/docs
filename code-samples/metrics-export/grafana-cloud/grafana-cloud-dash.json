@@ -1,0 +1,4105 @@
+{
+    "__inputs": [
+      {
+        "name": "DS_GRAFANACLOUD-PROM",
+        "label": "grafanacloud-prom",
+        "description": "",
+        "type": "datasource",
+        "pluginId": "prometheus",
+        "pluginName": "Prometheus"
+      }
+    ],
+    "__elements": {},
+    "__requires": [
+      {
+        "type": "panel",
+        "id": "bargauge",
+        "name": "Bar gauge",
+        "version": ""
+      },
+      {
+        "type": "grafana",
+        "id": "grafana",
+        "name": "Grafana",
+        "version": "11.2.0-73451"
+      },
+      {
+        "type": "datasource",
+        "id": "prometheus",
+        "name": "Prometheus",
+        "version": "1.0.0"
+      },
+      {
+        "type": "panel",
+        "id": "stat",
+        "name": "Stat",
+        "version": ""
+      },
+      {
+        "type": "panel",
+        "id": "timeseries",
+        "name": "Time series",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": null,
+    "links": [],
+    "panels": [
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 158,
+        "panels": [],
+        "title": "Selected Deployment: ${deployment} / Cluster: $cluster",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "description": "Average heartbeat of your scheduler. If there are multiple schedulers the number of combined heartbeat could increase.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "/ min"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 5,
+          "x": 0,
+          "y": 1
+        },
+        "id": 181,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "value_and_name",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "max(rate(airflow_scheduler_heartbeat_total{namespace=\"$deployment\"}[5m])) * 60",
+            "interval": "",
+            "legendFormat": "Scheduler",
+            "range": true,
+            "refId": "Scheduler"
+          }
+        ],
+        "title": "Heartbeat",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "description": "Indication of whether the scheduler is up and running its loop. An value of \"Unknown\" means that the airflow image is running an older version.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "from": 0.00001,
+                  "result": {
+                    "color": "green",
+                    "index": 0,
+                    "text": "Healthy"
+                  },
+                  "to": 1000000
+                },
+                "type": "range"
+              },
+              {
+                "options": {
+                  "from": 0,
+                  "result": {
+                    "color": "red",
+                    "index": 1,
+                    "text": "Unhealthy"
+                  },
+                  "to": 0.00001
+                },
+                "type": "range"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "text",
+                  "value": null
+                },
+                {
+                  "color": "semi-dark-red",
+                  "value": 0
+                },
+                {
+                  "color": "semi-dark-green",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 6,
+          "x": 5,
+          "y": 1
+        },
+        "id": 182,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "rate(airflow_scheduler_heartbeat_total{namespace=~\"$deployment\", type=\"counter\"}[5m])",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Scheduler",
+            "range": true,
+            "refId": "Scheduler"
+          }
+        ],
+        "title": "Scheduler Health",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "description": "Keeps track of health in terms of its pod readiness",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "index": 0,
+                    "text": "Unhealthy"
+                  }
+                },
+                "type": "value"
+              },
+              {
+                "options": {
+                  "from": 1,
+                  "result": {
+                    "index": 1,
+                    "text": "Healthy"
+                  },
+                  "to": 1000000
+                },
+                "type": "range"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "text",
+                  "value": null
+                },
+                {
+                  "color": "semi-dark-red",
+                  "value": 0
+                },
+                {
+                  "color": "green",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 7,
+          "x": 11,
+          "y": 1
+        },
+        "id": 185,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum(max by (namespace, container) (kube_pod_status_ready{ namespace=\"$deployment\", pod=~\".*webserver.*\"})) == bool 1 or on () vector(0)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Webserver",
+            "range": true,
+            "refId": "Webserver"
+          }
+        ],
+        "title": "Webserver Health",
+        "type": "stat"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 4
+        },
+        "id": 202,
+        "panels": [],
+        "title": "DAG",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "description": "Total DAG runs within the time range",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 0,
+          "y": 5
+        },
+        "id": 160,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "max(floor(increase(airflow_dagrun_duration_count{namespace=\"$deployment\"}[$__range])))",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Success",
+            "range": true,
+            "refId": "Success"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "max(floor(increase(airflow_dagrun_failed_count{namespace=\"$deployment\"}[$__range])))",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Failed",
+            "refId": "Failed"
+          }
+        ],
+        "title": "Total DAG Runs",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "description": "Errors when importing DAG resulted in error",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 8,
+          "x": 8,
+          "y": 5
+        },
+        "id": 187,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "airflow_dag_processing_import_errors{namespace=\"$deployment\"}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Errors",
+            "refId": "B"
+          }
+        ],
+        "title": "DAG Import Errors",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "description": "Tracks number of successful and failed dag runs within the time range of monitor",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 16,
+          "y": 5
+        },
+        "id": 165,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "max(round(increase(airflow_dagrun_duration_count{namespace=\"$deployment\"}[1h]))) or on ()vector(0)",
+            "format": "time_series",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Success per/hour",
+            "refId": "Success"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "max(round(increase(airflow_dagrun_failed_count{namespace=\"$deployment\"}[1h]))) or on ()vector(0)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Failed per/hour",
+            "refId": "Failed"
+          }
+        ],
+        "title": "DAG Run Trend",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "description": "Delay between the scheduled and actual DAG run",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 8,
+          "x": 8,
+          "y": 9
+        },
+        "id": 174,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "max(max_over_time(airflow_dagrun_schedule_delay{namespace=\"$deployment\", quantile=\"0.9\"}[1h])) or on () vector(0)",
+            "interval": "",
+            "legendFormat": "Schedule Delay",
+            "refId": "A"
+          }
+        ],
+        "title": "Peak Hourly P90 DAG Run Schedule Delay",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 8,
+          "x": 0,
+          "y": 12
+        },
+        "id": 173,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "max(airflow_dag_processing_total_parse_time{namespace=\"$deployment\"}) or on () vector(0)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Parse Time",
+            "refId": "B"
+          }
+        ],
+        "title": "DAG processing parse time",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 8,
+          "x": 16,
+          "y": 12
+        },
+        "id": 177,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "max(max_over_time(airflow_dagrun_duration{namespace=\"$deployment\", quantile=\"0.9\"}[1h])) or on () vector(0)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "p90 success response time",
+            "refId": "B"
+          }
+        ],
+        "title": "Peak Hourly P90 Successful Dag Run duration per hour",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "description": "Size of DAG Bag",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "p90 success response time"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "green",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 8,
+          "x": 8,
+          "y": 13
+        },
+        "id": 186,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "max(airflow_dagbag_size{namespace=\"$deployment\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "DagBag Size",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "DAG Bag Size",
+        "type": "stat"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 16
+        },
+        "id": 204,
+        "panels": [],
+        "title": "TASK",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "description": "Total number of running tasks within the time range",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 0,
+          "y": 17
+        },
+        "id": 161,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "max(round(increase(airflow_ti_successes_total{namespace=\"$deployment\"}[$__range])))",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Success",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "max(round(increase(airflow_ti_failures_total{namespace=\"$deployment\"}[$__range])))",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Failed",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "max(round(increase(airflow_zombies_killed{namespace=\"$deployment\"}[$__range])))",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Zombies Killed",
+            "range": true,
+            "refId": "Zombies"
+          }
+        ],
+        "title": "Total TASK runs",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "description": "Total number of running tasks within the time range",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 8,
+          "y": 17
+        },
+        "id": 166,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "max(airflow_executor_running_tasks{namespace=\"$deployment\"})",
+            "interval": "",
+            "legendFormat": "Running",
+            "refId": "Running"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "max(airflow_executor_queued_tasks{namespace=\"$deployment\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Queued",
+            "refId": "A"
+          }
+        ],
+        "title": "TASK Status",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "description": "Total number of running tasks within the time range",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 16,
+          "y": 17
+        },
+        "id": 167,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "max(round(increase(airflow_ti_successes_total{namespace=\"$deployment\"}[1h])))",
+            "interval": "",
+            "legendFormat": "Success per/hour",
+            "range": true,
+            "refId": "Success"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "max(round(increase(airflow_ti_failures_total{namespace=\"$deployment\"}[1h])))",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Failed per/hour",
+            "range": true,
+            "refId": "Failed"
+          }
+        ],
+        "title": "TASK Run Trend",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 8,
+          "x": 0,
+          "y": 24
+        },
+        "id": 175,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "max(airflow_scheduler_tasks_starving{namespace=\"$deployment\"})",
+            "interval": "",
+            "legendFormat": "Tasks Starving",
+            "refId": "A"
+          }
+        ],
+        "title": "Tasks Starving",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 8,
+          "x": 8,
+          "y": 24
+        },
+        "id": 178,
+        "options": {
+          "displayMode": "gradient",
+          "maxVizHeight": 300,
+          "minVizHeight": 16,
+          "minVizWidth": 8,
+          "namePlacement": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showUnfilled": true,
+          "sizing": "auto",
+          "text": {},
+          "valueMode": "color"
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "max(max_over_time(airflow_task_duration{namespace=\"$deployment\", quantile=\"0.9\"}[1h]) or on() vector(0)) by (dag_id) > 0",
+            "interval": "",
+            "legendFormat": "{{dag_id}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Peak P90 task duration per hour ( per DAG )",
+        "type": "bargauge"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "description": "Zombies are the tasks which is stated to be RUNNING, but its latest heartbeat was older than the zombie heartbeat threshold, and thus killed by scheduler.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 8,
+          "x": 16,
+          "y": 24
+        },
+        "id": 176,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "max(airflow_zombies_killed_total{namespace=\"$deployment\"})",
+            "interval": "",
+            "legendFormat": "Killed Zombies",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Zombie Tasks Killed over time",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 28
+        },
+        "id": 206,
+        "panels": [],
+        "title": "Scheduler",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 0,
+          "y": 29
+        },
+        "id": 163,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "count (container_memory_working_set_bytes{namespace=\"$deployment\", container=\"scheduler\"}) or on ()vector(0)",
+            "interval": "",
+            "legendFormat": "Schedulers",
+            "refId": "Scheduler"
+          }
+        ],
+        "title": "Scheduler Count",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "description": "Amount of DAGs the scheduler is processing",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 8,
+          "y": 29
+        },
+        "id": 248,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum(airflow_dagbag_size{namespace=~\"$deployment\"})",
+            "interval": "",
+            "legendFormat": "Schedulers",
+            "range": true,
+            "refId": "Scheduler"
+          }
+        ],
+        "title": "Dagbag Size",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bpm"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Target"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.drawStyle",
+                  "value": "line"
+                },
+                {
+                  "id": "custom.lineWidth",
+                  "value": 2
+                },
+                {
+                  "id": "custom.lineStyle",
+                  "value": {
+                    "dash": [
+                      10,
+                      10
+                    ],
+                    "fill": "dash"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 16,
+          "y": 29
+        },
+        "id": 242,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "expr": "max(irate(airflow_scheduler_heartbeat_total{namespace=\"$deployment\"}[5m]) * 60)",
+            "legendFormat": "Heartrate",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "expr": "12",
+            "hide": false,
+            "legendFormat": "Target",
+            "refId": "B"
+          }
+        ],
+        "title": "Scheduler Heartrate",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "fieldMinMax": false,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Limit"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.drawStyle",
+                  "value": "line"
+                },
+                {
+                  "id": "custom.lineStyle",
+                  "value": {
+                    "dash": [
+                      10,
+                      10
+                    ],
+                    "fill": "dash"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 0,
+          "y": 36
+        },
+        "id": 168,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "rate(container_cpu_usage_seconds_total{namespace=\"$deployment\", container=\"scheduler\"}[5m])",
+            "interval": "",
+            "legendFormat": "{{pod}}",
+            "refId": "Scheduler"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "max(kube_pod_container_resource_limits{unit=\"core\", container=\"scheduler\", namespace=\"$deployment\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Limit",
+            "refId": "Limit"
+          }
+        ],
+        "title": "Scheduler CPU",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Limit"
+              },
+              "properties": [
+                {
+                  "id": "custom.fillOpacity",
+                  "value": 0
+                },
+                {
+                  "id": "custom.drawStyle",
+                  "value": "line"
+                },
+                {
+                  "id": "custom.lineStyle",
+                  "value": {
+                    "dash": [
+                      10,
+                      10
+                    ],
+                    "fill": "dash"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 8,
+          "y": 36
+        },
+        "id": 240,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "container_memory_working_set_bytes{namespace=\"$deployment\", container=\"scheduler\"}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{pod}}",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "max(kube_pod_container_resource_limits{unit=\"byte\", container=\"scheduler\", namespace=\"$deployment\", resource=\"memory\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Limit",
+            "refId": "Limit"
+          }
+        ],
+        "title": "Scheduler Memory",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "description": "Scheduler Pool Status",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 16,
+          "y": 36
+        },
+        "id": 179,
+        "options": {
+          "displayMode": "basic",
+          "maxVizHeight": 300,
+          "minVizHeight": 16,
+          "minVizWidth": 8,
+          "namePlacement": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showUnfilled": true,
+          "sizing": "auto",
+          "text": {},
+          "valueMode": "color"
+        },
+        "pluginVersion": "11.2.0-73451",
+        "repeat": "deployment",
+        "repeatDirection": "v",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "max(airflow_pool_open_slots{namespace=\"$deployment\"}) by (pool)",
+            "interval": "",
+            "legendFormat": "OPEN: {{pool}}",
+            "refId": "Open"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "max(airflow_pool_queued_slots{namespace=\"$deployment\"}) by (pool)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "QUEUED: {{pool}}",
+            "refId": "Queued"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "max(airflow_pool_running_slots{namespace=\"$deployment\"}) by (pool)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "RUNNING: {{pool}}",
+            "refId": "Running"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "max(airflow_pool_starving_tasks{namespace=\"$deployment\"}) by (pool)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "STARVING: {{pool}}",
+            "refId": "Starving"
+          }
+        ],
+        "title": "Pool Status : $deployment",
+        "type": "bargauge"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "description": "Scheduler Pool Status",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 0,
+          "y": 43
+        },
+        "id": 209,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "max(airflow_pool_open_slots{namespace=\"$deployment\"}) by (pool)",
+            "interval": "",
+            "legendFormat": "OPEN: {{pool}}",
+            "refId": "Open"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "max(airflow_pool_queued_slots{namespace=\"$deployment\"}) by (pool)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "QUEUED: {{pool}}",
+            "refId": "Queued"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "max(airflow_pool_running_slots{namespace=\"$deployment\"}) by (pool)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "RUNNING: {{pool}}",
+            "refId": "Running"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "max(airflow_pool_starving_tasks{namespace=\"$deployment\"}) by (pool)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "STARVING: {{pool}}",
+            "refId": "Starving"
+          }
+        ],
+        "title": "Pool Status Trend : $deployment",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 50
+        },
+        "id": 235,
+        "panels": [],
+        "title": "Webserver",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 0,
+          "y": 51
+        },
+        "id": 238,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "count (container_memory_working_set_bytes{namespace=\"$deployment\", container=\"webserver\"}) or on ()vector(0)",
+            "interval": "",
+            "legendFormat": "Schedulers",
+            "refId": "Scheduler"
+          }
+        ],
+        "title": "Webserver",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 8,
+          "y": 51
+        },
+        "id": 239,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "rate(container_cpu_usage_seconds_total{namespace=\"$deployment\", container=\"webserver\"}[5m])",
+            "interval": "",
+            "legendFormat": "{{pod}}",
+            "range": true,
+            "refId": "Scheduler"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "max(kube_pod_container_resource_limits_cpu_cores{container=\"webserver\", namespace=\"$deployment\"}) * 100",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Limit",
+            "refId": "Limit"
+          }
+        ],
+        "title": "Webserver CPU",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 16,
+          "y": 51
+        },
+        "id": 169,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "container_memory_working_set_bytes{namespace=\"$deployment\", container=\"webserver\"}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{pod}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "max(kube_pod_container_resource_limits_memory_bytes{namespace=\"$deployment\", container=\"webserver\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Limit",
+            "refId": "B"
+          }
+        ],
+        "title": "Webserver Memory",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 58
+        },
+        "id": 208,
+        "panels": [],
+        "title": "Worker",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 0,
+          "y": 59
+        },
+        "id": 162,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "count (container_memory_working_set_bytes{namespace=\"$deployment\", container=\"worker\"}) or on ()vector(0)",
+            "interval": "",
+            "legendFormat": "workers",
+            "refId": "Workers"
+          }
+        ],
+        "title": "Worker Count",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 8,
+          "y": 59
+        },
+        "id": 170,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "rate(container_cpu_usage_seconds_total{namespace=\"$deployment\", container=\"worker\"}[5m])",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{pod}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "max(kube_pod_container_resource_limits{unit=\"core\", container=\"worker\", namespace=\"$deployment\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Limit",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "expr": "kube_pod_labels{namespace=\"$deployment\", label_kubernetes_pod_operator=\"True\"} * on (pod) group_left sum without (container, image) (rate(container_cpu_usage_seconds_total{namespace=\"$deployment\", container!=\"\", pod!=\"\", name=\"\"}[5m]))",
+            "hide": false,
+            "legendFormat": "{{pod}}",
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "expr": "kube_pod_labels{namespace=\"$deployment\", label_kubernetes_executor=\"True\"} * on (pod) group_left sum without (container, image) (rate(container_cpu_usage_seconds_total{namespace=\"$deployment\", container!=\"\", pod!=\"\", name=\"\"}[5m]))",
+            "hide": false,
+            "legendFormat": "{{pod}}",
+            "refId": "D"
+          }
+        ],
+        "title": "Worker CPU usage",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 16,
+          "y": 59
+        },
+        "id": 171,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "max(container_memory_working_set_bytes{namespace=\"$deployment\", container=\"worker\"}) by (pod)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{pod}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "max(kube_pod_container_resource_limits{unit=\"byte\", container=\"worker\", namespace=\"$deployment\", resource=\"memory\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Limit",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "expr": "kube_pod_labels{namespace=\"$deployment\", label_kubernetes_pod_operator=\"True\"} * on (pod) group_left sum without (container, image) (container_memory_working_set_bytes{namespace=\"$deployment\", container!=\"\", pod!=\"\"})",
+            "hide": false,
+            "legendFormat": "{{pod}}",
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "expr": "kube_pod_labels{namespace=\"$deployment\", label_kubernetes_executor=\"True\"} * on (pod) group_left sum without (container, image) (container_memory_working_set_bytes{namespace=\"$deployment\", container!=\"\", pod!=\"\"})",
+            "hide": false,
+            "legendFormat": "{{pod}}",
+            "refId": "D"
+          }
+        ],
+        "title": "Worker Memory usage",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 66
+        },
+        "id": 249,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "max (label_replace(kube_pod_container_resource_limits{resource=\"ephemeral_storage\", cluster_id=\"$cluster\", namespace=\"$deployment\", pod=~\".*worker.*\"}, \"queue\", \"$1\", \"pod\", \".*-.*-[0-9]{4}-worker-(.*)-.*-.*\")) by (queue)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "\"{{ queue }}\" worker queue storage limit",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "kubelet_stats_ephemeral_storage_pod_usage{cluster_id=\"$cluster\", pod_namespace=\"$deployment\", pod_name=~\".*worker.*\"}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{pod_name}}",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Ephemeral Storage Usage of Airflow Workers",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 74
+        },
+        "id": 250,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "max (kube_pod_container_resource_limits{resource=\"ephemeral_storage\", cluster_id=\"$cluster\", namespace=\"$deployment\", pod!~\"^($deployment|sensor).*$\"}) by (pod)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{ pod }} storage limit",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "kubelet_stats_ephemeral_storage_pod_usage{cluster_id=\"$cluster\", pod_namespace=\"$deployment\", pod_name!~\"^($deployment|sensor).*$\"}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{pod_name}}",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Ephemeral Storage Usage of Airflow KE/KPOs",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 82
+        },
+        "id": 218,
+        "panels": [],
+        "title": "Triggerer",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 0,
+          "y": 83
+        },
+        "id": 243,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "count (container_memory_working_set_bytes{namespace=\"$deployment\", container=\"triggerer\"}) or on ()vector(0)",
+            "interval": "",
+            "legendFormat": "workers",
+            "refId": "Workers"
+          }
+        ],
+        "title": "Triggerer Count",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 8,
+          "y": 83
+        },
+        "id": 244,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "rate(container_cpu_usage_seconds_total{namespace=\"$deployment\", container=\"triggerer\"}[5m])",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{pod}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "max(kube_pod_container_resource_limits{unit=\"core\", container=\"triggerer\", namespace=\"$deployment\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Limit",
+            "refId": "B"
+          }
+        ],
+        "title": "Triggerer CPU usage",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 16,
+          "y": 83
+        },
+        "id": 245,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "container_memory_working_set_bytes{namespace=\"$deployment\", container=\"triggerer\"}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{pod}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "max(kube_pod_container_resource_limits{unit=\"byte\", container=\"triggerer\", namespace=\"$deployment\", resource=\"memory\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Limit",
+            "refId": "B"
+          }
+        ],
+        "title": "Triggerer Memory",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 0,
+          "y": 90
+        },
+        "id": 247,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": false,
+            "expr": "airflow_triggers_running{namespace=\"$deployment\"}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "running",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "expr": "airflow_triggers_failed{namespace=\"$deployment\"}",
+            "hide": false,
+            "legendFormat": "failed",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "expr": "airflow_triggers_succeeded{namespace=\"$deployment\"}",
+            "hide": false,
+            "legendFormat": "succeeded",
+            "refId": "C"
+          }
+        ],
+        "title": "Running Triggers",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 97
+        },
+        "id": 222,
+        "panels": [],
+        "title": "PGBouncer",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 0,
+          "y": 98
+        },
+        "id": 223,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "count (container_memory_working_set_bytes{namespace=\"$deployment\", container=\"pgbouncer\"}) or on ()vector(0)",
+            "interval": "",
+            "legendFormat": "workers",
+            "refId": "Workers"
+          }
+        ],
+        "title": "PGBouncer",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 8,
+          "y": 98
+        },
+        "id": 226,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "rate(container_cpu_usage_seconds_total{namespace=\"$deployment\", container=\"pgbouncer\"}[5m])",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{pod}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "max(kube_pod_container_resource_limits_cpu_cores{container=\"pgbouncer\", namespace=\"$deployment\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Limit",
+            "refId": "B"
+          }
+        ],
+        "title": "PGBouncer CPU usage",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS_GRAFANACLOUD-PROM}"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 16,
+          "y": 98
+        },
+        "id": 227,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.2.0-73451",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "max(container_memory_working_set_bytes{namespace=\"$deployment\", container=\"pgbouncer\"}) by (pod)",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{pod}}",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_GRAFANACLOUD-PROM}"
+            },
+            "exemplar": true,
+            "expr": "max(kube_pod_container_resource_limits_memory_bytes{container=\"pgbouncer\", namespace=\"$deployment\"})",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "Limit",
+            "refId": "B"
+          }
+        ],
+        "title": "PGBouncer Memory usage",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 39,
+    "tags": [
+      "airflow"
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_GRAFANACLOUD-PROM}"
+          },
+          "definition": "label_values(namespace)",
+          "description": "Astro Runtime Deployment namespace",
+          "hide": 0,
+          "includeAll": false,
+          "label": "Deployment",
+          "multi": false,
+          "name": "deployment",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(namespace)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "^(?:vr-)?[a-zA-Z]+-[a-zA-Z]+-[0-9]+$",
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_GRAFANACLOUD-PROM}"
+          },
+          "definition": "label_values(kube_pod_labels{namespace=\"$deployment\"}, cluster_id)",
+          "description": "Astro Runtime Dedicated Cluster running the Deployment",
+          "hide": 0,
+          "includeAll": false,
+          "label": "Cluster",
+          "multi": false,
+          "name": "cluster",
+          "options": [],
+          "query": {
+            "qryType": 5,
+            "query": "label_values(kube_pod_labels{namespace=\"$deployment\"}, cluster_id)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-15m",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ]
+    },
+    "timezone": "utc",
+    "title": "Astro Deployment Overview",
+    "uid": "airflow-customer-overview",
+    "version": 1,
+    "weekStart": ""
+  }

@@ -17,6 +17,8 @@ This universal metrics export also provides an alternative to other Astro observ
 
 With the metrics export, you can configure metrics export at the per-Deployment level. Or, you can define a default metrics exports for your entire Workspace, so that you can create a default process that all Deployments are created with and then later customize at the per-Deployment level.
 
+
+
 ## Metric types
 
 There are two types of metrics that you can export using the universal metrics exporter:
@@ -143,3 +145,7 @@ For example, you might have created a metrics connection to a dev or internal ob
 4. Click **Edit** to open the metrics export configurations for a specific linked Deployment.
 5. Add the override values to the fields you want to edit. You might need to open **More options** to find the full list of available fields.
 6. Click **Update metrics export**.
+
+## Example: Grafana cloud dashboard
+
+You can view an example dashboard configuration JSON file for [Grafana cloud](https://grafana.com/products/cloud/) in the [Astronomer Docs GitHub repo](https://github.com/astronomer/docs/tree/main/code-samples/metrics-export).
