@@ -14,7 +14,7 @@ Cluster policies are a set of functions that Airflow administrators can define t
 - Pod
 - Airflow Context variables
 
-These policies allow administrators to centrally manage how Airflow users or DAG writers are interacting with the Airflow Cluster. Cluster policies can modify or restrict a user's capability based on organization policy or ensure that users conform to common standards. For example, you may want to ensure all DAGs have `tags` before being deployed to production.
+These policies allow administrators to centrally manage how Airflow users or DAG writers are interacting with the Airflow Cluster. Cluster policies can modify or restrict a user's capability based on organization policy or ensure that users conform to common standards. For example, you may want to ensure all DAGs have `tags` in your production Airflow environment.
 
 Cluster policies can be used to:
 
@@ -22,7 +22,7 @@ Cluster policies can be used to:
 - Set default arguments on DAGs/Tasks
 - Skip a DAG or Task or route a Task to a different worker queue 
 
-In this guide, you'll learn about the types of cluster policies, how they policies work, and how to implement them in Airflow.
+In this guide, you'll learn about the types of cluster policies, how the policies work, and how to implement them in Airflow.
 
 ## Assumed knowledge
 
@@ -37,16 +37,16 @@ There are three types of cluster policies you can use in Airflow:
 
 - `dag_policy`: This policy is applicable to a DAG object, and takes a DAG object `dag` as a parameter. It runs at the time the DAG is loaded from the `DagBag`.
 - `task_policy` : This policy is applicable to a Task object. It gets executed when the task is created during parsing of the task from DagBag at load time. This means that the whole task definition can be altered in the task policy. It does not relate to a specific task running in a `DagRun`. The `task_policy` defined is applied to all the task instances that will be executed in the future.
-- `task_instance_mutation_hook` : This policy is applicable to a Task Instance, which is an instance of a Task object and is created at run time. It takes a TaskInstance object `task_instance` as a parameter. This policy applies not to a task but to the instance of a task that relates to a particular `DagRun`. It is only applied to the currently executed run (i.e. instance) of that task. It is applied to a task instance in an Airflow worker, not in the dag file processor, just before the task instance is executed. 
+- `task_instance_mutation_hook` : This policy is applicable to a Task Instance, which is an instance of a Task object and is created at run time. It takes a TaskInstance object `task_instance` as a parameter. This policy applies not to a task but to the instance of a task that relates to a particular `DagRun`. It is only applied to the currently executed run (i.e. instance) of that task. The policy is applied to a task instance in an Airflow worker before the task instance is executed, not in the dag file processor. 
 - `pod_mutation_hook`: This policy is applicable to a Kubernetes Pod launched by `KubernetesPodOperator` or `KubernetesExecutor` at runtime. It takes a Pod object `pod` as a parameter. This policy is applied to the `kubernetes.client.models.V1Pod` object before it is passed to the Kubernetes client for scheduling. 
 
 ## How cluster policies work
 
 Cluster policies can be implemented using either your `airflow_local_settings.py` file or the `pluggy` interface. Any attributes defined using cluster policies take precedence over the attributes defined in your DAG or Task. 
 
-Once implemented, if any DAGs or tasks are not compliant with your set policies, the policy will raise the `AirflowClusterPolicyViolation` exception and the DAG will not be loaded. This is exception is displayed on the Airflow web UI as an `import error`. 
+Once implemented, if a DAG or task is not compliant with your set policies, the policy will raise the `AirflowClusterPolicyViolation` exception and the DAG will not be loaded. This exception is displayed on the Airflow web UI as an `import error`. 
 
-You can also use `AirflowClusterPolicySkipDag` exception to skip a DAG. For example, you might want to skip month-end DAGs from daily processing, or skip any DAGs that have the wrong environment tag. Another possible use case could be when you are migrating from a deprecated source system to a new one. You might want to skip the old DAGs to avoid any failures and alerts. Note that this exception will not be displayed on the Airflow web UI.
+You can also use the `AirflowClusterPolicySkipDag` exception to skip a DAG. For example, you may want to skip month-end DAGs from daily processing or skip any DAGs with the wrong environment tag. Another possible use case could be when you are migrating from a deprecated source system to a new one. You might want to skip the old DAGs to avoid any failures and alerts. Note that this exception will not be displayed on the Airflow web UI.
 
 ### DAG policy
 
@@ -62,10 +62,10 @@ Some example implementations include:
 - Enforce a default owner for your DAGs.
 - Enforce certain tags for DAGs, either default or based on conditions.
 - Ensure development DAGs do not run in production.
-- Stop a DAG from being executed by raising a `AirflowClusterPolicyViolation` exception
+- Stop a DAG from being executed by raising an `AirflowClusterPolicyViolation` exception.
 
 Note that the `dag_policy` is applied before the `task_policy` and after the DAG has been completely loaded. Hence, overriding the `default_args` parameter has no effect using `dag_policy`. If you want to override the default operator settings, use task policies instead.
-
+#### Example
 ```python
 @hookimpl
 def ensure_dags_are_tagged(dag: "DAG") -> None:
@@ -87,7 +87,7 @@ Some example implementations include:
 - Enforce a task timeout policy.
 - Using a different environment for different operators.
 - Override a `on_success_callback` or `on_failure_callback` for a task.
-
+#### Example
 ```python
 @hookimpl
 def task_policy(task: "BaseOperator") -> None:
@@ -104,7 +104,7 @@ Some example implementations include:
 
 - Enforce a specific queue for certain Airflow Operators.
 - Modify a task instance between retries.
-
+#### Example
 ```python
 @hookimpl
 def task_instance_mutation_hook(task_instance:TaskInstance):
@@ -120,7 +120,7 @@ Note that since priority weight is determined dynamically using weight rules, yo
 
 ### Pod mutation hook
 
-This policy is applicable to Kubernetes Pod created at run time when using the `KubernetesPodOperator` or `KubernetesExecutor`. This is an original policy function that allows altering `kubernetes.client.models.V1Pod` object before they are passed to the Kubernetes client for scheduling.
+This policy is applicable to Kubernetes Pod created at run time when using the `KubernetesPodOperator` or `KubernetesExecutor`. This is a policy function that allows altering `kubernetes.client.models.V1Pod` object before they are passed to the Kubernetes client for scheduling.
 
 This could be used, for instance, to add sidecar or init containers to every worker pod launched. For example, you could use an init container to preload environment configuration or a sidecar container to collect metrics using StatsD. 
 
@@ -134,7 +134,7 @@ Some example implementations include:
 
 - Set resource requests and limits.
 - Increase resources assigned to a Pod.
-
+#### Example
 ```python
 from kubernetes.client import models as k8s
 from airflow.policies import hookimpl
@@ -161,7 +161,7 @@ def pod_mutation_hook(pod) -> None:
 
 ## Implementation
 
-Policies can be implemented using using the `pluggy` interface. `pluggy` is used for plugin management, and allows you to have multiple implementations of the policy functions. You can implement `pluggy` interface using a setup-tools entrypoint in a custom module.
+Policies can be implemented using the `pluggy` interface. `pluggy` is used for plugin management, and allows you to have multiple implementations of the policy functions. You can implement `pluggy` interface using a setup-tools entrypoint in a custom module.
 
 :::info
 
