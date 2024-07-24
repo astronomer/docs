@@ -120,7 +120,7 @@ Repeat these steps for each Astro Deployment that needs to access your AWS resou
 
 #### Step 2: Create an Airflow connection
 
-Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Create an **Amazon Web Services** connection in either the [Astro UI](create-and-link-connections.md) or the Airflow UI for your Deployment, and specify the following fields:
+Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Create an **Amazon Web Services** connection in either the [Astro UI](create-and-link-connections.md) or the Airflow UI for your Deployment and specify the following fields:
 
 - **Connection Id**: Enter a name for the connection.
 
@@ -128,7 +128,7 @@ If you don't see **Amazon Web Services** as a connection type in the Airflow UI,
 
 :::tip
 
-If you use a mix of strategies for managing connections, if you define the same connection in multiple ways, Airflow uses the following order of precedence:
+If you use a mix of strategies for managing connections and define the same connection in multiple ways, Airflow uses the following order of precedence:
 
 - Secrets Backend
 - Environment Manager
