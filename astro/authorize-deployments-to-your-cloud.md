@@ -80,6 +80,7 @@ To authorize your Deployment, create an IAM role to assign as your Deployment's 
 
 <details>
   <summary><strong>Specify Kubernetes service accounts</strong></summary>
+
 Available for both Standard and Dedicated clusters. If your organization does not allow you to use a wildcards in your IAM Trust Policies, change the `<DeploymentNamespace>` value in `Condition` to specify the Kubernetes service accounts. The following shows an example:
 
 ```json
@@ -100,6 +101,7 @@ Available for both Standard and Dedicated clusters. If your organization does no
 
 <details>
   <summary><strong>Dedicated clusters only: Share or re-use a managed identity using a wildcard</strong></summary>
+
 If you want to share or re-use the same customer managed identity on static or ephemeral Deployments for dedicated clusters, without having to update your Trust Policy in your AWS account for every net new Deployment, change the `<DeploymentNamespace>` value in `Condition` to include a wildcard. You should only use a wildcard in dedicated clusters for security purposes. The following shows an example:
 
 
