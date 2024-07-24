@@ -2,14 +2,14 @@
 sidebar_label: 'With Astro CLI'
 title: 'Run your first DAG with the Astro CLI'
 id: 'first-dag-cli'
-description: "Learn how to run your first Apache Airflow DAG on Astro with the Astro CLI."
+description: "Learn how to run your first Apache Airflow® DAG on Astro with the Astro CLI."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-Astro is the industry's leading managed service for Apache Airflow. To quickly learn how Astro works, follow the steps in this quickstart to create an Airflow environment and run your first DAG with the Astro CLI.
+Astro is the industry's leading managed service for [Apache Airflow®](https://airflow.apache.org/). To quickly learn how Astro works, follow the steps in this quickstart to create an Airflow environment and run your first DAG with the Astro CLI.
 
 Specifically, you will:
 
@@ -30,7 +30,7 @@ If you want to deploy your first DAG without installing any software to your loc
 
 :::info
 
-If you're on your organization's network and can't access Astro, make a request to allowlist the following domains on your network:
+If you're on your organization's network and can't access Astro, make a request to add the following domains to the allowlist on your network:
 
 - `https://cloud.astronomer.io/`
 - `https://api.astronomer.io/`

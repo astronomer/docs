@@ -2,6 +2,8 @@
 sidebar_label: 'With GitHub Actions'
 title: 'Run your first DAG with GitHub Actions'
 id: 'first-dag-github-actions'
+description: "Learn how to run your first Apache Airflow® DAG on Astro with GitHub Actions."
+
 ---
 
 :::tip
@@ -10,7 +12,7 @@ The Astro GitHub integration can automatically deploy code from a GitHub reposit
 
 :::
 
-Astro is the industry's leading managed service for Apache Airflow. To quickly learn how Astro works, follow the steps in this quickstart to create an Airflow environment and run your first DAG with GitHub Actions.
+Astro is the industry's leading managed service for [Apache Airflow®](https://airflow.apache.org/). To quickly learn how Astro works, follow the steps in this quickstart to create an Airflow environment and run your first DAG with GitHub Actions.
 
 Specifically, you will:
 
@@ -33,7 +35,7 @@ This tutorial assumes that you're familiar with basic Apache Airflow concepts. I
 
 :::info
 
-If you're on your organization's network and can't access Astro, make a request to allowlist the following domains on your network:
+If you're on your organization's network and can't access Astro, make a request to add the following domains to the allowlist on your network:
 
 - `https://cloud.astronomer.io/`
 - `https://api.astronomer.io/`
