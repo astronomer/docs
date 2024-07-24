@@ -45,71 +45,9 @@ values={[
 ]}>
 <TabItem value="aws">
 
-### Step 1: Authorize the Deployment in your cloud
-
-To grant a Deployment access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles to authorize your Deployment's workload identity. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource, such as Amazon S3 buckets, Redshift instances, and secrets backends.
-
-To authorize your Deployment, create an IAM role that is assumed by the Deployment's workload identity:
-
-1. In the Astro UI, select your Deployment and then click **Details**. Copy the Deployment's **Workload Identity**.
-2. In the AWS account that contains your AWS service, create an IAM role. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
-3. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
-4. Click **Roles** and in the **Role name** column, select the role you created in Step 2.
-5. Click **Trust relationships**.
-6. Click **Edit trust policy** and paste the workload identity you copied from Step 1 in the trust policy. Your policy should look like the following:
-
-   ```json
-   {
-     "Version": "2012-10-17",
-     "Statement": [
-       {
-         "Effect": "Allow",
-         "Principal": {
-           "AWS": ["<workload-identity-role>"]
-         },
-         "Action": "sts:AssumeRole"
-       }
-     ]
-   }
-   ```
-
-7. Click **Update policy**.
-
-Repeat these steps for each Astro Deployment that needs to access your AWS resources.
-
-### Step 2: Create an Airflow connection
-
-Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Either create an **Amazon Web Services** connection in the [Astro UI](create-and-link-connections.md) or the Airflow UI for your Deployment and specify the following fields:
-
-- **Connection Id**: Enter a name for the connection.
-- **Extra**:
-
-  ```json
-  {
-    "role_arn": "<your-role-arn>",
-    "region_name": "<your-region>"
-  }
-  ```
-
-If you don't see **Amazon Web Services** as a connection type in the Airflow UI, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Amazon/versions/latest) for the latest package.
-
-:::tip
-
-If you use a mix of strategies for managing connections, if you define the same connection in multiple ways, Airflow uses the following order of precedence:
-
-- Secrets Backend
-- Environment Manager
-- Environment Variables
-- Airflow UI using the Airflow metadata database
-
-:::
-
 ### Attach an IAM role to your Deployment
 
 <HostedBadge/>
-
-:::publicpreview
-:::
 
 You can attach an AWS IAM role to your Deployment to grant the Deployment all of the role's permissions.
 
@@ -162,6 +100,67 @@ If you want to share or re-use the same customer managed identity on static or e
 Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Create an **Amazon Web Services** connection in either the [Astro UI](create-and-link-connections.md) or the Airflow UI for your Deployment, and specify the following fields:
 
 - **Connection Id**: Enter a name for the connection.
+
+If you don't see **Amazon Web Services** as a connection type in the Airflow UI, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Amazon/versions/latest) for the latest package.
+
+:::tip
+
+If you use a mix of strategies for managing connections, if you define the same connection in multiple ways, Airflow uses the following order of precedence:
+
+- Secrets Backend
+- Environment Manager
+- Environment Variables
+- Airflow UI using the Airflow metadata database
+
+:::
+
+### Alternative setup: Authorize your Deployment with AWS IAM roles
+
+#### Step 1: Authorize the Deployment in your cloud
+
+To grant a Deployment access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles to authorize your Deployment's workload identity. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource, such as Amazon S3 buckets, Redshift instances, and secrets backends.
+
+To authorize your Deployment, create an IAM role that is assumed by the Deployment's workload identity:
+
+1. In the Astro UI, select your Deployment and then click **Details**. Copy the Deployment's **Workload Identity**.
+2. In the AWS account that contains your AWS service, create an IAM role. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
+3. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
+4. Click **Roles** and in the **Role name** column, select the role you created in Step 2.
+5. Click **Trust relationships**.
+6. Click **Edit trust policy** and paste the workload identity you copied from Step 1 in the trust policy. Your policy should look like the following:
+
+   ```json
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Effect": "Allow",
+         "Principal": {
+           "AWS": ["<workload-identity-role>"]
+         },
+         "Action": "sts:AssumeRole"
+       }
+     ]
+   }
+   ```
+
+7. Click **Update policy**.
+
+Repeat these steps for each Astro Deployment that needs to access your AWS resources.
+
+#### Step 2: Create an Airflow connection
+
+Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Either create an **Amazon Web Services** connection in the [Astro UI](create-and-link-connections.md) or the Airflow UI for your Deployment and specify the following fields:
+
+- **Connection Id**: Enter a name for the connection.
+- **Extra**:
+
+  ```json
+  {
+    "role_arn": "<your-role-arn>",
+    "region_name": "<your-region>"
+  }
+  ```
 
 If you don't see **Amazon Web Services** as a connection type in the Airflow UI, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Amazon/versions/latest) for the latest package.
 
