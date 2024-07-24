@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Deployment resources'
-title: 'Configure Deployment resources'
+sidebar_label: "Deployment resources"
+title: "Configure Deployment resources"
 id: deployment-resources
 description: "Configure your Deployment resource settings to optimze Deployment performance."
 ---
@@ -32,11 +32,11 @@ All Deployments use the Celery executor by default. See [Choose an executor](exe
 
 2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
-    ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
+   ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
 
 3. In the **Execution** section, select **Celery** or **Kubernetes** in the **Executor** list.
 
-    If you're moving from the Celery to the Kubernetes executor, all existing worker queues are deleted. Running tasks stop gracefully and all new tasks start with the selected executor.
+   If you're moving from the Celery to the Kubernetes executor, all existing worker queues are deleted. Running tasks stop gracefully and all new tasks start with the selected executor.
 
 4. Click **Update Deployment**.
 
@@ -58,26 +58,26 @@ To manage Kubernetes resources programmatically, you can set default Pod limits 
 
 2. Click the **Options** menu and select **Edit Deployment**.
 
-    ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
+   ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
 
 3. In the **Execution** section, configure the following values:
-    - **CPU Quota**: The maximum combined CPU usage across all running Pods on your Deployment.
-    - **Memory Quota**: The maximum combined memory usage across all running Pods on your Deployment.
-    - **Default Pod Size**:
-        - **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
-        - **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
-        - **Storage**: Choose the amount of ephemeral storage in GiB assigned to each pod in the Astro UI. This storage volume is transient and allows for the temporary storage and processing of data. The pod is assigned the minimum 0.25 GiB by default. The maximum possible quota is 100 GiB. Only ephemeral storage requests that are greater than the default minimum of 0.25 GiB are chargeable. Note that this feature is in [Public Preview](feature-previews.md).
 
-     For a Deployment running in a Hosted dedicated or shared cluster, the maximum possible **CPU** quota is 6400 vCPU and maximum **Memory** quota is 12800 GiB.
+   - **CPU Quota**: The maximum combined CPU usage across all running Pods on your Deployment.
+   - **Memory Quota**: The maximum combined memory usage across all running Pods on your Deployment.
+   - **Default Pod Size**:
+     - **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
+     - **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
+     - **Storage**: Choose the amount of ephemeral storage in GiB assigned to each pod in the Astro UI. This storage volume is transient and allows for the temporary storage and processing of data. The pod is assigned the minimum 0.25 GiB by default. The maximum possible quota is 100 GiB. Only ephemeral storage requests that are greater than the default minimum of 0.25 GiB are chargeable. Note that this feature is in [Public Preview](feature-previews.md).
 
-     :::warning Astro Hosted
+   For a Deployment running in a Hosted dedicated or shared cluster, the maximum possible **CPU** quota is 6400 vCPU and maximum **Memory** quota is 12800 GiB.
 
-     For Astro Hosted environments, if you set your **CPU** and **Memory** resource requests to be less than the maximum limit, Astro automatically requests the maximum limit that you set. This means that you might consume more resources than you expected if you set the limit much higher than the resource request you need.
+   :::warning Astro Hosted
 
-     Check your [Billing and usage](manage-billing.md) to view your resource use and associated charges.
+   For Astro Hosted environments, if you set your **CPU** and **Memory** resource requests to be less than the maximum limit, Astro automatically requests the maximum limit that you set. This means that you might consume more resources than you expected if you set the limit much higher than the resource request you need.
 
-     :::
+   Check your [Billing and usage](manage-billing.md) to view your resource use and associated charges.
 
+   :::
 
 4. Click **Update Deployment**.
 
@@ -93,23 +93,23 @@ Astronomer Deployments run a single scheduler by default. You can configure your
 
 The following table lists all possible scheduler sizes for Astro Hosted:
 
-| Scheduler size          | vCPU | Memory | Ephemeral storage |
-| ----------------------- | ---- | ------ | ----------------- |
-| Small (Up to ~50 DAGs)  | 1    | 2G     | 5Gi               |
-| Medium (Up to ~250 DAGs)| 2    | 4G     | 5Gi               |
-| Large (Up to ~1000 DAGs)| 4    | 8G     | 5Gi               |
+| Scheduler size                 | vCPU | Memory | Ephemeral storage |
+| ------------------------------ | ---- | ------ | ----------------- |
+| Small (Up to ~50 DAGs)         | 1    | 2G     | 5Gi               |
+| Medium (Up to ~250 DAGs)       | 2    | 4G     | 5Gi               |
+| Large (Up to ~1000 DAGs)       | 4    | 8G     | 5Gi               |
 
 ### Update scheduler size
 
 1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
-    ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
+   ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
 
 3. In the **Advanced** section, choose a scheduler size. See [Scheduler size](#scheduler-size).
 4. Click **Update Deployment**.
 
-    The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code and triggers a rebuild of your Deployment image. If you're using the Celery executor, currently running tasks have 24 hours to complete before their running workers are terminated. See [What happens during a code deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
+   The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code and triggers a rebuild of your Deployment image. If you're using the Celery executor, currently running tasks have 24 hours to complete before their running workers are terminated. See [What happens during a code deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
 
 <details>
   <summary><strong>Alternative Astro Hybrid setup</strong></summary>
@@ -119,12 +119,12 @@ To configure the scheduler on an [Astro Hybrid](hybrid-overview.md) Deployment:
 1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
-    ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
+   ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
 
 3. In the **Advanced** section, configure the following values:
 
-    - **Scheduler Resources**: Determine the total CPU and memory allocated to each scheduler in your Deployment, defined as Astronomer Units (AU). One AU is equivalent to 0.1 CPU and 0.375 GiB of memory. The default scheduler size is 5 AU, or .5 CPU and 1.88 GiB memory. The number of schedulers running in your Deployment is determined by **Scheduler Count**, but all schedulers are created with the same CPU and memory allocations.
-    - **Scheduler Count**: Move the slider to select the number of schedulers for the Deployment. Each scheduler is provisioned with the AU you specified in the **Scheduler Resources** field. For example, if you set scheduler resources to 10 AU and **Scheduler Count** to 2, your Deployment will run with 2 Airflow schedulers using 10 AU each. For high availability, Astronomer recommends selecting a minimum of two schedulers.
+   - **Scheduler Resources**: Determine the total CPU and memory allocated to each scheduler in your Deployment, defined as Astronomer Units (AU). One AU is equivalent to 0.1 CPU and 0.375 GiB of memory. The default scheduler size is 5 AU, or .5 CPU and 1.88 GiB memory. The number of schedulers running in your Deployment is determined by **Scheduler Count**, but all schedulers are created with the same CPU and memory allocations.
+   - **Scheduler Count**: Move the slider to select the number of schedulers for the Deployment. Each scheduler is provisioned with the AU you specified in the **Scheduler Resources** field. For example, if you set scheduler resources to 10 AU and **Scheduler Count** to 2, your Deployment will run with 2 Airflow schedulers using 10 AU each. For high availability, Astronomer recommends selecting a minimum of two schedulers.
 
 4. Click **Update Deployment**.
 
@@ -145,7 +145,7 @@ Because this setting results in more resource usage, it can increase the cost of
 
 2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
-    ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
+   ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
 
 3. In the **Advanced** section, click the toggle to **On** for **High Availability**.
 
@@ -198,26 +198,25 @@ To create a hibernation schedule:
 2. Click **Details**. In the **Advanced** section of your Deployment configuration, click **Edit**.
 3. (Optional) Enable a suggested hibernation schedule for your Deployment.
 
-    When you enable Dev mode, Astro automatically includes the following suggested schedules for your Deployment. These hibernation schedules are disabled by default.
+   When you enable Dev mode, Astro automatically includes the following suggested schedules for your Deployment. These hibernation schedules are disabled by default.
 
-    | Schedule                                               | Start schedule | End schedule |
-    | ------------------------------------------------------ | -------------- | ------------ |
-    | Hibernate from 5:00 PM to 9:00 AM                      | 0 17 * * *     | 0 9 * * *    |
-    | Hibernate on weekends (Friday 5:00PM to Monday 9:00AM) | 0 17 * * 5     | 0 9 * * 1    |
+   | Schedule                                               | Start schedule | End schedule |
+   | ------------------------------------------------------ | -------------- | ------------ |
+   | Hibernate from 5:00 PM to 9:00 AM                      | 0 17 \* \* \*  | 0 9 \* \* \* |
+   | Hibernate on weekends (Friday 5:00PM to Monday 9:00AM) | 0 17 \* \* 5   | 0 9 \* \* 1  |
 
 4. Configure the following values in **Hibernation schedules** to create a new schedule:
-     - **Start Schedule**: Specify a cron schedule for your Deployment resources to scale to zero.
-     - **End Schedule**: Specify a cron schedule for Astro to restart your configured resources.
-     - **Description**: (Optional) Give your hibernation schedule a description.
-     - **Enabled**: Tick this checkbox if you want to activate the schedule after configuring it.
+
+   - **Start Schedule**: Specify a cron schedule for your Deployment resources to scale to zero.
+   - **End Schedule**: Specify a cron schedule for Astro to restart your configured resources.
+   - **Description**: (Optional) Give your hibernation schedule a description.
+   - **Enabled**: Tick this checkbox if you want to activate the schedule after configuring it.
 
 5. Select **Update Deployment** to save your changes.
 
 :::tip
 
 You can use the following example cron expressions to implement common Deployment hibernation schedules:
-
-
 
 :::
 
@@ -255,8 +254,8 @@ If you need to run a task or DAG on a Deployment that is currently in hibernatio
 2. Click the **More Actions** menu of the Deployment you want to update, then select **Wake Up Deployment**.
 3. Select one of the following options for how you want your Deployment to wake up:
 
-    - **Wake until further notice**: Your Deployment wakes up immediately for an indefinite period and ignores any configured hibernation schedules.
-    - **Wake until set time and date**: Specify a time that the Deployment should go back into hibernation after waking up.
-    - **Remove override and return to normal schedule**: The Deployment returns to following your configured hibernation schedules.
+   - **Wake until further notice**: Your Deployment wakes up immediately for an indefinite period and ignores any configured hibernation schedules.
+   - **Wake until set time and date**: Specify a time that the Deployment should go back into hibernation after waking up.
+   - **Remove override and return to normal schedule**: The Deployment returns to following your configured hibernation schedules.
 
 4. Click **Confirm**.

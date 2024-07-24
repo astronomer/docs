@@ -25,6 +25,34 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## July 24, 2024
+
+### Run your first DAG on Astro with GitHub Integration
+
+Now, when you first set up your Astro account, you can choose to connect your GitHub account and run a sample Astro project template and DAG. Previously, to run your first DAG on Astro, you needed to either download and use the Astro CLI or work with GitHub Actions. Now, the onboarding process allows you to customize your first experience with Astro to focus on your use case, whether that's Business Operations, Generative AI, or learning Airflow, and set up a GitHub Integration to quickly clone and deploy the example DAGs. Try it now with [Start Astro](https://cloud.astronomer.io/start-astro).
+
+### Work with dbt projects on Astro
+
+<HostedBadge/>
+
+:::privatepreview
+:::
+
+You can now deploy dbt code to Astro quickly and independently of your DAG or image deploys. Data build tool (dbt) core is an open source tool for data transformation that uses SQL to transform your data instead of Python in your DAGs. You can also use both Cosmos, an open source tool that integrates dbt models into Airflow and treats them like DAGs, and dbt deploys on Astro to have unparalleled visibility into your dbt tasks with the Airflow UI and a streamlined code deploy process.
+
+See [Deploy dbt projects](https://www.astronomer.io/docs/astro/deploy-dbt-project) for more information about how to get started.
+
+### Additional improvements
+
+- Improved how the GitHub Integration in the Astro UI links directly to the Astro Project in a GitHub repository.
+- (*Astro Hosted only*) The customer managed workload identity setting for Deployments is now generally available. This allows you to grant Astro Deployments all of the permissions of an AWS IAM role. See [Attach an IAM role to your Deployment](https://www.astronomer.io/docs/astro/authorize-deployments-to-your-cloud#attach-an-iam-role-to-your-deployment) for detailed information.
+- The ability to deploy automatically from GitHub using the official Astro GitHub integration is now generally available. See [Deploy code with GitHub](https://www.astronomer.io/docs/astro/deploy-github-integration) for setup steps.
+- Astro Runtime version 11 is now classified as Long Term Support (LTS). This means that instead of being supported until October 2024, Astro will support Runtime version 11 until October 2025. See the [Astro Runtime maintenance and lifecycle schedule](https://www.astronomer.io/docs/astro/runtime-version-lifecycle-policy) for more information, including information about restricted versions.
+
+### Bug fixes
+
+- Fixed some bugs in the Astro UI for defining ephemeral storage to show storage limits, fix maximum pod size for storage, and add storage for default pod size.
+
 ## July 16, 2024
 
 ### Additional improvements
