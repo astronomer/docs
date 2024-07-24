@@ -48,7 +48,7 @@ Based on how you plan to use Astro, you can find more resources for particular t
     - Extract, transform, and loading operations (ETL)
     - Other
 
-## Step 2: Create your Oganization and Workspace
+## Step 2: Create your Organization and Workspace
 
 Enter a name for your Organization and Workspace. These can be changed later in the Astro UI.
 
