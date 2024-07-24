@@ -76,38 +76,41 @@ To authorize your Deployment, create an IAM role to assign as your Deployment's 
 3. In the **Workload Identity** menu, select **Customer Managed Identity**.
 4. (Optional - Dedicated clusters only) Customize your managed identity to specify Kubernetes service accounts or use a wildcard so you can share or re-use managed identity information.
 
-  <details><summary><strong>Specify Kubernetes service accounts</strong></summary>
-  If you want to share or re-use the same customer managed identity on static or ephemeral Deployments for dedicated clusters, and your organization does not allow you to use a wildcard, change the `<DeploymentNamespace>` value in `Condition` to specify the Kubernetes service accounts. The following shows an example:
+  <details>
+    <summary><strong>Specify Kubernetes service accounts</strong></summary>
+    If you want to share or re-use the same customer managed identity on static or ephemeral Deployments for dedicated clusters, and your organization does not allow you to use a wildcard, change the `<DeploymentNamespace>` value in `Condition` to specify the Kubernetes service accounts. The following shows an example:
 
-    ```json
-    {
-        "Condition": {
-            "StringLike": {
-                "<clusterOIDCIssuerUrl>:aud": "sts.amazonaws.com",
-                "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-kpo"
-                "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-scheduler-serviceaccount"
-                "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-triggerer-serviceaccount"
-                "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-webserver-serviceaccount"
-                "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-worker-serviceaccount"
-            }
-        }
-    }
-    ```
+      ```json
+      {
+          "Condition": {
+              "StringLike": {
+                  "<clusterOIDCIssuerUrl>:aud": "sts.amazonaws.com",
+                  "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-kpo"
+                  "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-scheduler-serviceaccount"
+                  "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-triggerer-serviceaccount"
+                  "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-webserver-serviceaccount"
+                  "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-worker-serviceaccount"
+              }
+          }
+      }
+      ```
   </details>
-  <details><summary><strong>Share or re-use a managed identity using a wildcard</strong></summary>
-  If you want to share or re-use the same customer managed identity on static or ephemeral Deployments for dedicated clusters, without having to update your Trust Policy in your AWS account for every net new Deployment, change the `<DeploymentNamespace>` value in `Condition` to include a wildcard. The following shows an example:
+
+  <details>
+    <summary><strong>Share or re-use a managed identity using a wildcard</strong></summary>
+    If you want to share or re-use the same customer managed identity on static or ephemeral Deployments for dedicated clusters, without having to update your Trust Policy in your AWS account for every net new Deployment, change the `<DeploymentNamespace>` value in `Condition` to include a wildcard. The following shows an example:
 
 
-    ```json
-    {
-        "Condition": {
-            "StringLike": {
-                "<clusterOIDCIssuerUrl>:aud": "sts.amazonaws.com",
-                "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:*:*"
-            }
-        }
-    }
-    ```
+      ```json
+      {
+          "Condition": {
+              "StringLike": {
+                  "<clusterOIDCIssuerUrl>:aud": "sts.amazonaws.com",
+                  "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:*:*"
+              }
+          }
+      }
+      ```
   </details>
 
 5. Enter your IAM role ARN when prompted, then copy and run the provided CLI command.
