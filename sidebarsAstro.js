@@ -92,6 +92,7 @@ module.exports = {
         "deploy-project-image",
         "deploy-dags",
         "deploy-github-integration",
+        "deploy-dbt-project",
         "deploy-history",
       ],
     },

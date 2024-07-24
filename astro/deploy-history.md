@@ -22,7 +22,16 @@ Deploy rollbacks are an emergency option if a Deployment unexpectedly stops work
 1. In the Astro UI, select a Deployment.
 2. Click **Deploy History**
 
-For each deploy, the **Deploy History** table shows the user that made the deploy, when they made the deploy, what image they used, and any descriptions they added to the deploy. 
+For each deploy, the **Deploy History** table shows the user who made the deploy, when they made the deploy, what image they used, the type of deploy, and any descriptions they added to the deploy.
+
+### Types of deploys
+
+There are different types of deploys, which are shared in the Deploy History table. You can read more about the different deploy options in [Deploy code to Astro](deploy-code.md). These deploy types include:
+
+    - Image-only deploy
+    - DAG-only deploy
+    - GitHub deploy
+    - (*Private Preview*) dbt project deploy
 
 ## Add a description to a deploy
 
@@ -50,10 +59,10 @@ Astronomer recommends triggering Deployment rollbacks only as a last resort for 
 
 1. In the Astro UI, select a Deployment.
 2. Click **Deploy History**.
-3. Locate the deploy you want to roll back to. In the **Rollback to** column for the deploy, click **Deploy**. 
+3. Locate the deploy you want to roll back to. In the **Rollback to** column for the deploy, click **Deploy**.
 4. Provide a description for your rollback, then complete the confirmation to trigger the rollback.
 
-You can roll back to any deploy within the last three months. If your last deploy was more than three months ago, you can only roll back to that deploy. After the rollback completes, the **Deploy History** table shows your rollback deploy as the most recent deploy and includes both your rollback description and rollback deploy time. Your Docker image tag and DAG bundle names are the same as the previous version you rolled back to. The historic deploy that you rolled back to still appears in chronological order in the table. 
+You can roll back to any deploy within the last three months. If your last deploy was more than three months ago, you can only roll back to that deploy. After the rollback completes, the **Deploy History** table shows your rollback deploy as the most recent deploy and includes both your rollback description and rollback deploy time. Your Docker image tag, DAG bundle name, and dbt bundles are the same as the previous version you rolled back to. The historic deploy that you rolled back to still appears in chronological order in the table.
 
 For example, consider a user who, on November 8, 2023 at 13:00, rolled back to a deploy from November 6, 2023 at 14:00. At the top of the **Deploy History** table, an entry for the rollback deploy would have the following information:
 
@@ -76,7 +85,7 @@ The following information isn't rolled back:
 
 - Your Deployment's resource configurations, such as executor and scheduler configurations.
 - Your Deployment's environment variable values.
-- Any other Deployment settings that you configure through the Astro UI, such as your Deployment name and description. 
+- Any other Deployment settings that you configure through the Astro UI, such as your Deployment name and description.
 - For Runtime version downgrades, any data related to features that are not available in the rollback version are erased from the metadata database and not recoverable.
 
 A rollback's effect on running tasks depends on whether the rollback downgrades your Deployment:
