@@ -13,7 +13,7 @@ import HostedBadge from '@site/src/components/HostedBadge';
 
 To orchestrate dbt jobs with Apache Airflow, you need to deploy your dbt project to Astro alongside your DAGs and the rest of your Airflow code. dbt Deploys allow you to easily deploy your dbt project to Astro without needing complex processes to incorporate your two sets of code. When you use a dbt project deploy, Astro bundles all files in your dbt project and pushes them to Astro, where they are mounted on your Airflow containers so that your DAGs can access them.
 
-Depending on your organization's software development lifecycle, your dbt project might live in the same Git repository as your Airflow code or in a different repository. Astronomer supports both methods but recommends having a dedicated Git repository for your dbt code that is separate from your Airflow code. 
+Depending on your organization's software development lifecycle, your dbt project might live in the same Git repository as your Airflow code or in a different repository. Astronomer supports both methods but recommends having a dedicated Git repository for your dbt code that is separate from your Airflow code.
 
 To learn more about running dbt core or dbt Cloud with Apache Airflow, see [Orchestrate dbt Core jobs with Airflow](https://www.astronomer.io/docs/learn/airflow-dbt).
 
@@ -55,7 +55,9 @@ astro dbt deploy --mount-path /usr/local/airflow/dbt/example-dbt-project
 ```
 :::
 
-## Step 3: Delete your dbt project
+## Delete your dbt project
+
+You can also delete a dbt project from the Airflow environments where you deployed it. This command does not delete your dbt project source files, it only removes it from the Airflow containers where it was mounted. When you run this command, you will be prompted to choose the Deployment that you want to remove the project from.
 
 ```bash
 
