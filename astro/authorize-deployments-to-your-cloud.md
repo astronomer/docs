@@ -45,7 +45,101 @@ values={[
 ]}>
 <TabItem value="aws">
 
-### Step 1: Authorize the Deployment in your cloud
+### Attach an IAM role to your Deployment
+
+<HostedBadge/>
+
+You can attach an AWS IAM role to your Deployment to grant the Deployment all of the role's permissions.
+
+Using IAM roles provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing IAM roles on new Deployments, or your can attach a single IAM role to multiple Deployments that all require the same level of access to your cloud.
+
+#### Prerequisites
+
+- Minimum Astro Runtime version:
+    - 9.15.0
+    - 10.9.0
+    - 11.5.0
+- A new or existing IAM role in your data sources with the required permissions you want your Deployment to have.
+- If using [AWS CloudShell](https://aws.amazon.com/cloudshell/),
+the required CLIs are enabled by default.
+- If you use a local terminal, the following CLIs are required:
+  - [AWS CLI](https://aws.amazon.com/cli/)
+  - [jq](https://jqlang.github.io/jq/)
+  - [openSSL](https://www.openssl.org/source/)
+
+#### Step 1: Authorize the Deployment to your IAM role
+
+To authorize your Deployment, create an IAM role to assign as your Deployment's workload identity:
+
+1. [Create an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) to delegate permissions to in an AWS service. Grant the role any permission that the Deployment will need in your AWS account. Copy the IAM role ARN to use later in this setup.
+2. In the Astro UI, select your Deployment and then click **Details**. In the **Advanced** section, click **Edit**.
+3. In the **Workload Identity** menu, select **Customer Managed Identity**.
+4. Enter your IAM role ARN when prompted, then copy and run the provided CLI command. Click **Save Configuration** to save the IAM role as a selectable configuration.
+5. Click **Update Deployment** to apply the selected IAM role to the Deployment.
+6. (Optional) Repeat these steps for each Astro Deployment that needs to access your AWS resources. Or, you can edit the `<DeploymentNamespace>` value in `Condition` when setting up the Workload Identity for one of the following scenarios to apply to multiple Deployments.
+
+<details>
+  <summary><strong>Specify Kubernetes service accounts</strong></summary>
+
+Available for both Standard and Dedicated clusters. If your organization does not allow you to use a wildcards in your IAM Trust Policies, change the `<DeploymentNamespace>` value in `Condition` to specify the Kubernetes service accounts. The following shows an example:
+
+```json
+{
+    "Condition": {
+        "StringLike": {
+            "<clusterOIDCIssuerUrl>:aud": "sts.amazonaws.com",
+            "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-kpo"
+            "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-scheduler-serviceaccount"
+            "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-triggerer-serviceaccount"
+            "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-webserver-serviceaccount"
+            "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-worker-serviceaccount"
+        }
+    }
+}
+```
+</details>
+
+<details>
+  <summary><strong>Dedicated clusters only: Share or re-use a managed identity using a wildcard</strong></summary>
+
+If you want to share or re-use the same customer managed identity on static or ephemeral Deployments for dedicated clusters, without having to update your Trust Policy in your AWS account for every net new Deployment, change the `<DeploymentNamespace>` value in `Condition` to include a wildcard. You should only use a wildcard in dedicated clusters for security purposes. The following shows an example:
+
+
+```json
+{
+    "Condition": {
+        "StringLike": {
+            "<clusterOIDCIssuerUrl>:aud": "sts.amazonaws.com",
+            "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:*:*"
+        }
+    }
+}
+```
+</details>
+
+
+#### Step 2: Create an Airflow connection
+
+Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Create an **Amazon Web Services** connection in either the [Astro UI](create-and-link-connections.md) or the Airflow UI for your Deployment and specify the following fields:
+
+- **Connection Id**: Enter a name for the connection.
+
+If you don't see **Amazon Web Services** as a connection type in the Airflow UI, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Amazon/versions/latest) for the latest package.
+
+:::tip
+
+If you use a mix of strategies for managing connections and define the same connection in multiple ways, Airflow uses the following order of precedence:
+
+- Secrets Backend
+- Environment Manager
+- Environment Variables
+- Airflow UI using the Airflow metadata database
+
+:::
+
+### Alternative setup: Authorize your Deployment with AWS IAM roles
+
+#### Step 1: Authorize the Deployment in your cloud
 
 To grant a Deployment access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles to authorize your Deployment's workload identity. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource, such as Amazon S3 buckets, Redshift instances, and secrets backends.
 
@@ -77,7 +171,7 @@ To authorize your Deployment, create an IAM role that is assumed by the Deployme
 
 Repeat these steps for each Astro Deployment that needs to access your AWS resources.
 
-### Step 2: Create an Airflow connection
+#### Step 2: Create an Airflow connection
 
 Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Either create an **Amazon Web Services** connection in the [Astro UI](create-and-link-connections.md) or the Airflow UI for your Deployment and specify the following fields:
 
@@ -90,78 +184,6 @@ Now that your Deployment is authorized, you can connect it to your cloud using a
     "region_name": "<your-region>"
   }
   ```
-
-If you don't see **Amazon Web Services** as a connection type in the Airflow UI, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Amazon/versions/latest) for the latest package.
-
-:::tip
-
-If you use a mix of strategies for managing connections, if you define the same connection in multiple ways, Airflow uses the following order of precedence:
-
-- Secrets Backend
-- Environment Manager
-- Environment Variables
-- Airflow UI using the Airflow metadata database
-
-:::
-
-### Attach an IAM role to your Deployment
-
-<HostedBadge/>
-
-:::publicpreview
-:::
-
-You can attach an AWS IAM role to your Deployment to grant the Deployment all of the role's permissions.
-
-Using IAM roles provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing IAM roles on new Deployments, or your can attach a single IAM role to multiple Deployments that all require the same level of access to your cloud.
-
-#### Prerequisites
-
-- Minimum Astro Runtime version:
-    - 9.15.0
-    - 10.9.0
-    - 11.5.0
-- A new or existing IAM role in your data sources with the required permissions you want your Deployment to have.
-- If using [AWS CloudShell](https://aws.amazon.com/cloudshell/),
-the required CLIs are enabled by default.
-- If you use a local terminal, the following CLIs are required:
-  - [AWS CLI](https://aws.amazon.com/cli/)
-  - [jq](https://jqlang.github.io/jq/)
-  - [openSSL](https://www.openssl.org/source/)
-
-#### Step 1: Authorize the Deployment to your IAM role
-
-To authorize your Deployment, create an IAM role to assign as your Deployment's workload identity:
-
-1. [Create an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) to delegate permissions to in an AWS service. Grant the role any permission that the Deployment will need in your AWS account. Copy the IAM role ARN to use later in this setup.
-2. In the Astro UI, select your Deployment and then click **Details**. In the **Advanced** section, click **Edit**.
-3. In the **Workload Identity** menu, select **Customer Managed Identity**.
-4. Enter your IAM role ARN when prompted, then copy and run the provided CLI command.
-5. Click **Update Deployment**. The IAM role is now selectable as a workload identity for the Deployment.
-
-Repeat these steps for each Astro Deployment that needs to access your AWS resources.
-
-:::tip Dedicated Cluster only
-
-If you want to share or re-use the same customer managed identity on static or ephemeral Deployments for dedicated clusters, without having to update your Trust Policy in your AWS account for every net new Deployment, change the `<DeploymentNamespace>` value in `Condition` to include a wildcard. The following shows an example:
-
-    ```json
-    {
-        "Condition": {
-            "StringLike": {
-                "<clusterOIDCIssuerUrl>:aud": "sts.amazonaws.com",
-                "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:*:*"
-            }
-        }
-    }
-    ```
-:::
-
-#### Step 2: Create an Airflow connection
-
-Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Create an **Amazon Web Services** connection in either the [Astro UI](create-and-link-connections.md) or the Airflow UI for your Deployment, and specify the following fields:
-
-- **Connection Id**: Enter a name for the connection.
 
 If you don't see **Amazon Web Services** as a connection type in the Airflow UI, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Amazon/versions/latest) for the latest package.
 
