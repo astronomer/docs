@@ -11,13 +11,14 @@ import HostedBadge from '@site/src/components/HostedBadge';
 
 <TeamBadge/>
 
+:::publicpreview
+:::
+
 You can export comprehensive metrics about your Astro Deployments directly to any third-party monitoring and alerting system using the universal metrics exporter in Astro. This incorporates metrics about your Astro resource use and performance into your existing obsevability tooling, which gives you access to the data you need to right size Celery workers, Kubernetes executors, and scheduler pods as well as keep you informed about Airflow uptime and task execution status. The universal metrics exporter uses the [Prometheus data model](https://prometheus.io/docs/concepts/data_model/) format using the remote-write capability to export metrics about your Astro Deployments to your preferred monitoring tools.
 
-This universal metrics export also provides an alternative to other Astro observability tools, such as viewing [Deployment metrics](deployment-metrics.md) and [exporting metrics and logs to Datadog](export-datadog.md), which are limited to [Datadog's supported Airflow metrics](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected).
+Universal Metrics Export also provides an alternative to other Astro observability tools, such as viewing [Deployment metrics](deployment-metrics.md) and [exporting metrics and logs to Datadog](export-datadog.md), which are limited to [Datadog's supported Airflow metrics](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected).
 
 With the metrics export, you can configure metrics export at the per-Deployment level. Or, you can define a default metrics exports for your entire Workspace, so that you can create a default process that all Deployments are created with and then later customize at the per-Deployment level.
-
-
 
 ## Metric types
 
@@ -58,14 +59,15 @@ To see the complete list of Airflow application metrics that Astro supports, see
 
 Infrastructure level metrics can help you understand information about the individual nodes and pods that run each Airflow component. These metrics indicate the usage, health, and performance of the pods based on your workload and use case. See the table below for the list of infrastructure metrics that Astro supports.
 
-| Name                                          | Description                             |
-| --------------------------------------------- | --------------------------------------- |
-| `container_cpu_usage_seconds_total`           | CPU usage                               |
-| `container_memory_working_set_bytes`          | Memory usage                            |
-| `kubelet_stats_ephemeral_storage_pod_usage`   | Ephemeral storage usage                 |
-| `kube_pod_status_*`                           | Kubernetes pod status                   |
-| `kube_pod_labels`                             | Kubernetes pod label                    |
-| `kube_pod_container_status_terminated_reason` | Kubernetes container termination reason |
+| Name                                          | Description                                                                                                       |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `container_cpu_usage_seconds_total`           | CPU usage                                                                                                         |
+| `container_memory_working_set_bytes`          | Memory usage                                                                                                      |
+| `kubelet_stats_ephemeral_storage_pod_usage`   | Ephemeral storage usage                                                                                           |
+| `kube_pod_status_*`                           | Kubernetes pod status                                                                                             |
+| `kube_pod_labels`                             | Kubernetes pod label                                                                                              |
+| `kube_pod_container_resource_limits`          | Exports CPU, memory, and storage limits for Celery workers, kubernetes executors, and KubernetesPodOperator pods. |
+| `kube_pod_container_status_terminated_reason` | Kubernetes container termination reason                                                                           |
 
 ## Prerequisites
 
@@ -149,3 +151,5 @@ For example, you might have created a metrics connection to a dev or internal ob
 ## Example: Grafana cloud dashboard
 
 You can view an example dashboard configuration JSON file for [Grafana cloud](https://grafana.com/products/cloud/) in the [Astronomer Docs GitHub repo](https://github.com/astronomer/docs/tree/main/code-samples/metrics-export).
+
+This configuration file allows you to create a dashboard that provides an at-a-glance view of your
