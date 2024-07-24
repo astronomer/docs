@@ -40,11 +40,13 @@ Now, when you first set up your Astro account, you can choose to connect your Gi
 
 You can now deploy dbt code to Astro quickly and independently of your DAG or image deploys. Data build tool (dbt) core is an open source tool for data transformation that uses SQL to transform your data instead of Python in your DAGs. You can also use both Cosmos, an open source tool that integrates dbt models into Airflow and treats them like DAGs, and dbt deploys on Astro to have unparalleled visibility into your dbt tasks with the Airflow UI and a streamlined code deploy process.
 
-See [dbt project deploys](https://www.astronomer.io/docs/astro/deploy-dbt-project).
+See [dbt project deploys](https://www.astronomer.io/docs/astro/deploy-dbt-project) for more information about how to get started.
 
 ### Additional improvements
 
 - Improved how the GitHub Integration in the Astro UI links directly to the Astro Project in a GitHub repository.
+- (*Astro Hosted only*) The customer managed workload identity setting for Deployments is now generally available. This allows you to grant Astro Deployments all of the permissions of an AWS IAM role. See [Attach an IAM role to your Deployment](https://www.astronomer.io/docs/astro/authorize-deployments-to-your-cloud#attach-an-iam-role-to-your-deployment) for detailed information.
+- The ability to deploy automatically from GitHub using the official Astro GitHub integration is now generally available. See [Deploy code with GitHub](https://www.astronomer.io/docs/astro/deploy-github-integration) for setup steps.
 - Astro Runtime version 11 is now classified as Long Term Support (LTS). This means that instead of being supported until October 2024, Astro will support Runtime version 11 until October 2025. See the [Astro Runtime maintenance and lifecycle schedule](https://www.astronomer.io/docs/astro/runtime-version-lifecycle-policy) for more information, including information about restricted versions.
 
 ### Bug fixes
