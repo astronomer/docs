@@ -11,10 +11,11 @@ import HostedBadge from '@site/src/components/HostedBadge';
 
 <TeamBadge/>
 
-:::publicpreview
-:::
-
 You can export comprehensive metrics about your Astro Deployments directly to any third-party monitoring and alerting system using the universal metrics exporter in Astro. The universal metrics exporter uses the [Prometheus data model](https://prometheus.io/docs/concepts/data_model/) format using the remote-write capability to export metrics about your Astro Deployments to your preferred monitoring tools.
+
+This universal metrics export provides an alternative to other Astro observability tools, such as viewing [Deployment metrics](deployment-metrics.md) and [exporting metrics and logs to Datadog](export-datadog.md), which are limited to [Datadog's supported Airflow metrics](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected).
+
+With the metrics export, you can configure metrics export at the per-Deployment level. Or, you can define a default metrics exports for your entire Workspace, so that you can create a default process that all Deployments are created with and then later customize at the per-Deployment level.
 
 ## Metric types
 
@@ -23,25 +24,26 @@ There are two types of metrics that you can export using the universal metrics e
 - Airflow application level metrics
 - Infrastructure level metrics
 
-Both application and infrastructure metrics have the following metadata labels associated with them:
+Both application and infrastructure metrics have metadata labels associated with them. The following list shows the default standard set of labels that Astro attaches to each metric, however, each metric can also include metric-specific labels as well:
 
-  - `cloud_provider`
-  - `cloud_region`
-  - `cluster_organization_id`
-  - `container`
-  - `namespace`
-  - `pod`
-  - `deploymentId`
-  - `organizationId`
-  - `workspaceId`
+- `cloud_provider`
+- `cloud_region`
+- `cluster_organization_id`
+- `container`
+- `namespace`
+- `pod`
+- `deploymentId`
+- `organizationId`
+- `workspaceId`
 
 Use these metadata labels to indentify each individual metric with its corresponding environment in Astro.
 
 ### Airflow application metrics
 
-Airflow application metrics are defined by Apache Airflow and are related to the health, success, and performance of the DAGs that are orchestrated and executed by Airflow. 
+Airflow application metrics are defined by Apache Airflow and are related to the health, success, and performance of the DAGs that are orchestrated and executed by Airflow.
 
 For example, Airflow application metrics include:
+
 - The number of task instance failures in your Deployment
 - The number of SLA misses in your Deployment
 - The number of zombie tasks killed
@@ -54,20 +56,33 @@ To see the complete list of Airflow application metrics that Astro supports, see
 
 Infrastructure level metrics can help you understand information about the individual nodes and pods that run each Airflow component. These metrics indicate the usage, health, and performance of the pods based on your workload and use case. See the table below for the list of infrastructure metrics that Astro supports.
 
-  | Name                                        | Description           |
-  | ------------------------------------------- | --------------------- |
-  | `container_cpu_usage_seconds_total`         | CPU usage               |
-  | `container_memory_working_set_bytes`        | Memory usage            |
-  | `kubelet_stats_ephemeral_storage_pod_usage` | Ephemeral storage usage |
-  | `kube_pod_status_*`                         | Kubernetes pod status |
-  | `kube_pod_labels`                           | Kubernetes pod label  |
-  | `kube_pod_container_status_terminated_reason` | Kubernetes container termination reason |
+| Name                                          | Description                             |
+| --------------------------------------------- | --------------------------------------- |
+| `container_cpu_usage_seconds_total`           | CPU usage                               |
+| `container_memory_working_set_bytes`          | Memory usage                            |
+| `kubelet_stats_ephemeral_storage_pod_usage`   | Ephemeral storage usage                 |
+| `kube_pod_status_*`                           | Kubernetes pod status                   |
+| `kube_pod_labels`                             | Kubernetes pod label                    |
+| `kube_pod_container_status_terminated_reason` | Kubernetes container termination reason |
 
 ## Prerequisites
 
 - Supported Auth: Bearer token or license key, username and password, or custom HTTP header(s) of your target data observability server _(Optional)_
 - A Prometheus data endpoint
 - Network connectivity between your Astro resources and Prometheus endpoint
+
+### Set up your Prometheus endpoint
+
+The following list includes the setup instructions of different commonly used prometheus endpoints. Use these resources to set up your observability tools to receive metrics exports from Astro.
+
+- [Chronosphere](https://docs.chronosphere.io/ingest/collector/configure/prometheus-backend)
+- [Coralogix](https://coralogix.com/docs/prometheus/)
+- [Cribl](https://docs.cribl.io/stream/4.2/sources-prometheus-remote-write/)
+- [Elastic](https://www.elastic.co/guide/en/beats/metricbeat/current/metricbeat-metricset-prometheus-remote_write.html)
+- [Grafana Cloud](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/kubernetes-monitoring/configuration/configure-infrastructure-manually/prometheus/)
+- [Logz.io](http://Logz.iohttps://docs.logz.io/docs/shipping/other/prometheus-remote-write/)
+- [New Relic](https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/install-configure-remote-write/set-your-prometheus-remote-write-integration/)
+- [Sysdig](https://docs.sysdig.com/en/docs/installation/sysdig-monitor/install-prometheus-remote-write/#configure-remote-write-in-prometheus-server)
 
 ## Enable metrics export
 
