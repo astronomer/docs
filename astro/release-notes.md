@@ -25,7 +25,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
-## July 23, 2024
+## July 24, 2024
 
 ### Run your first DAG on Astro with GitHub Integration
 
