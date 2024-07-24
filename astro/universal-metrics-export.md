@@ -11,9 +11,9 @@ import HostedBadge from '@site/src/components/HostedBadge';
 
 <TeamBadge/>
 
-You can export comprehensive metrics about your Astro Deployments directly to any third-party monitoring and alerting system using the universal metrics exporter in Astro. The universal metrics exporter uses the [Prometheus data model](https://prometheus.io/docs/concepts/data_model/) format using the remote-write capability to export metrics about your Astro Deployments to your preferred monitoring tools.
+You can export comprehensive metrics about your Astro Deployments directly to any third-party monitoring and alerting system using the universal metrics exporter in Astro. This incorporates metrics about your Astro resource use and performance into your existing obsevability tooling, which gives you access to the data you need to right size Celery workers, Kubernetes executors, and scheduler pods as well as keep you informed about Airflow uptime and task execution status. The universal metrics exporter uses the [Prometheus data model](https://prometheus.io/docs/concepts/data_model/) format using the remote-write capability to export metrics about your Astro Deployments to your preferred monitoring tools.
 
-This universal metrics export provides an alternative to other Astro observability tools, such as viewing [Deployment metrics](deployment-metrics.md) and [exporting metrics and logs to Datadog](export-datadog.md), which are limited to [Datadog's supported Airflow metrics](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected).
+This universal metrics export also provides an alternative to other Astro observability tools, such as viewing [Deployment metrics](deployment-metrics.md) and [exporting metrics and logs to Datadog](export-datadog.md), which are limited to [Datadog's supported Airflow metrics](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected).
 
 With the metrics export, you can configure metrics export at the per-Deployment level. Or, you can define a default metrics exports for your entire Workspace, so that you can create a default process that all Deployments are created with and then later customize at the per-Deployment level.
 
