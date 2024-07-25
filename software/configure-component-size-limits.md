@@ -17,7 +17,7 @@ You can increase or decrease resources on Astro by units of size know as AU's (A
 * the limit of pods in the namespace by one pod (ResourceQuota)
 
 ### Configure Deployment-level limits for individual pod sizes {#configure-max-pod-size}
-`astronomer.houston.config.deployments.maxPodAu` can be used to configure the maximum size any individual pod can be.
+You can use `astronomer.houston.config.deployments.maxPodAu` to configure the maximum size any individual pod can be.
 
 ```yaml
 astronomer:
