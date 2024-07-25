@@ -270,10 +270,10 @@ Consult with your Astronomer Resident Architect before changing the amount of CP
 
 Configurable options include:
 * `astronomer.houston.config.deployments.astroUnit.cpu` - the amount an AU contributes to the size of a component, in thousandths of a vCPU, and the size of the `LimitRange` or `ResourceQuota`, defaults to `100`.
-* `astronomer.houston.config.deployments.astroUnit.memory` - the amount an AU contributes to the size of a component (in Mi) and the size of the LimitRange/ResourceQuota (defaults to 384)
-* `astronomer.houston.config.deployments.astroUnit.pods` - the amount an AU contributes to the maximum amount of pods permitted by ResourceQuota (defaults to 1)
-* `astronomer.houston.config.deployments.astroUnit.actualConns` - the amount an AU contributes to the limit of connections to the Postgres server (defaults to 0.5)
-* `astronomer.houston.config.deployments.astroUnit.airflowConns` - the amount an AU contributes to the limit of connections used internally by Airflow to the database connection pooler (defaults to 5)
+* `astronomer.houston.config.deployments.astroUnit.memory` - the amount an AU contributes to the size of a component, in Mi, and the size of the `LimitRange` or `ResourceQuota`, set to `384` by default.
+* `astronomer.houston.config.deployments.astroUnit.pods` - the amount an AU contributes to the maximum amount of pods permitted by `ResourceQuota`, set to `1` by default.
+* `astronomer.houston.config.deployments.astroUnit.actualConns` - the amount an AU contributes to the limit of connections to the Postgres server, set to `0.5` by default.
+* `astronomer.houston.config.deployments.astroUnit.airflowConns` - The amount an AU contributes to the limit of connections used internally by Airflow to the database connection pooler, set to `5` by default.
 
 The following code example shows how to set the resources per individual AU:
 
