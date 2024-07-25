@@ -269,7 +269,7 @@ Consult with your Astronomer Resident Architect before changing the amount of CP
 :::
 
 Configurable options include:
-* `astronomer.houston.config.deployments.astroUnit.cpu` - the amount an AU contributes to the size of a component (in thousandths-of-a-Vcpu) and the size of the LimitRange/ResourceQuota (defaults to 100)
+* `astronomer.houston.config.deployments.astroUnit.cpu` - the amount an AU contributes to the size of a component, in thousandths of a vCPU, and the size of the `LimitRange` or `ResourceQuota`, defaults to `100`.
 * `astronomer.houston.config.deployments.astroUnit.memory` - the amount an AU contributes to the size of a component (in Mi) and the size of the LimitRange/ResourceQuota (defaults to 384)
 * `astronomer.houston.config.deployments.astroUnit.pods` - the amount an AU contributes to the maximum amount of pods permitted by ResourceQuota (defaults to 1)
 * `astronomer.houston.config.deployments.astroUnit.actualConns` - the amount an AU contributes to the limit of connections to the Postgres server (defaults to 0.5)
