@@ -16,7 +16,7 @@ You can increase or decrease resources on Astro by units of size know as AU's (A
 * the size of the deployment-namespace's overall cumulative limits (ResourceQuota and LimitRange) by one-tenth of a v-core and 834Mi of memory.
 * the limit of pods in the namespace by one pod (ResourceQuota)
 
-### Configuring deployment-wide limits on individual pod sizes {#configuring-max-pod-size}
+### Configure Deployment-level limits for individual pod sizes {#configure-max-pod-size}
 `astronomer.houston.config.deployments.maxPodAu` can be used to configure the maximum size any individual pod can be.
 
 ```yaml
