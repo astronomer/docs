@@ -14,27 +14,7 @@ import airflow_dbt_bashoperator from '!!raw-loader!../code-samples/dags/airflow-
 
 ### dbt on Airflow with Cosmos and the Astro CLI
 
-The open-source provider package [Cosmos](https://astronomer.github.io/astronomer-cosmos/) allows you to integrate dbt jobs into Airflow by automatically creating Airflow tasks from dbt models. You can turn your dbt Core projects into an Airflow task group with just a few lines of code:
-
-```python
-from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig, ExecutionConfig
-from cosmos.profiles import PostgresUserPasswordProfileMapping
-
-profile_config = ProfileConfig(
-    profile_name="default",
-    target_name="dev",
-    profile_mapping=PostgresUserPasswordProfileMapping(
-        conn_id="my_db_conn",
-        profile_args={"schema": "my_schema"},
-    ),
-)
-
-DbtTaskGroup(
-    project_config=ProjectConfig("path/to/my_project"),
-    profile_config=profile_config,
-    default_args={"retries": 2},
-)
-```
+The open-source provider package [Cosmos](https://astronomer.github.io/astronomer-cosmos/) allows you to integrate dbt jobs into Airflow by automatically creating Airflow tasks from dbt models. You can turn your dbt Core projects into an Airflow task group with just a few lines of code.
 
 :::tip dbt on Astro
 
@@ -67,7 +47,7 @@ The benefits of using Airflow with dbt Core include:
 - Run dbt projects using [Airflow connections](connections.md) instead of dbt profiles. You can store all your connections in one place, directly within Airflow or by using a [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html).
 - Leverage native support for installing and running dbt in a virtual environment to avoid dependency conflicts with Airflow.
 
-With Astro, you get all the benefits above without having to modify your Airflow environment or create connections. You can deploy directly from a dbt project using the Astro CLI.
+With Astro, you get all the above benefits without having to modify your Airflow environment or create connections. You can deploy directly from a dbt project using the Astro CLI. For more information, see [Deploy dbt projects to Astro](https://www.astronomer.io/docs/astro/deploy-dbt-project).
 
 ## Time to complete
 
