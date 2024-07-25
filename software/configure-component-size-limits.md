@@ -275,8 +275,7 @@ Configurable options include:
 * `astronomer.houston.config.deployments.astroUnit.actualConns` - the amount an AU contributes to the limit of connections to the Postgres server (defaults to 0.5)
 * `astronomer.houston.config.deployments.astroUnit.airflowConns` - the amount an AU contributes to the limit of connections used internally by Airflow to the database connection pooler (defaults to 5)
 
-E.g.
-
+The following code example shows how to set the resources per individual AU:
 
 ```yaml
 astronomer:
