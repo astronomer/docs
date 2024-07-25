@@ -12,7 +12,7 @@ import databricks_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-d
 
 [Databricks](https://databricks.com/) is a popular unified data and analytics platform built around [Apache Spark](https://spark.apache.org/) that provides users with fully managed Apache Spark clusters and interactive workspaces.
 
-The open source [Airflow Databricks provider](https://airflow.apache.org/docs/apache-airflow-providers-databricks/stable/index.html) provides full observability and control from Airflow so you can manage Databricks from one place, including enabling you to orchestrate your Databricks notebooks from Airflow and execute them as [Databricks Workflows jobs](https://docs.databricks.com/en/workflows/index.html).
+The open source [Airflow Databricks provider](https://airflow.apache.org/docs/apache-airflow-providers-databricks/stable/index.html) provides full observability and control from Airflow so you can manage Databricks from one place, including enabling you to orchestrate your Databricks notebooks from Airflow and execute them as [Databricks jobs](https://docs.databricks.com/en/workflows/index.html).
 
 You can create a Databricks jobs from existing Databricks notebooks as a task group in your Airflow DAG with just a few lines of code:
 
@@ -58,7 +58,7 @@ Many data teams leverage Databricks' optimized Spark engine to run heavy workloa
 - Leverage [Airflow datasets](airflow-datasets.md) to trigger Databricks jobs from tasks in other DAGs in your Airflow environment or using the Airflow REST API [Create dataset event endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/create_dataset_event), allowing for a data-driven architecture.
 - Use familiar Airflow code as your interface to orchestrate Databricks notebooks as jobs.
 - [Inject parameters](#parameters) into your Databricks job at the job-level. These parameters can be dynamic and retrieved at runtime from other Airflow tasks.
-- Provider version 6.8.0+: Repair single tasks in your Databricks job from the Airflow UI. If a task fails, you can [re-run it](#repairing-a-databricks-job) using an [operator extra link](operator-extra-link-tutorial.md) in the Airflow UI.
+- Repair single tasks in your Databricks job from the Airflow UI (Provider version 6.8.0+ is required). If a task fails, you can [re-run it](#repairing-a-databricks-job) using an [operator extra link](operator-extra-link-tutorial.md) in the Airflow UI.
 
 ## Time to complete
 
