@@ -5,7 +5,7 @@ id: configure-component-size-limits
 description: Learn the ways you can configure the maximum and minimum size of platform and Airflow components on Astronomer Software
 ---
 
-Astronomer Software allows you to customize the minimum and maximum sizes of most platform and Airflow components.
+Astronomer Software allows you to customize the minimum and maximum sizes of most Astronomer platform and Airflow components.
 
 ### Astro Units (AU's) {#what-is-an-au}
 Resources are increased or decreased by units of size know as AU's (Astro Units). Adding or removing an AstroUnit changes a deployments size by changing:
