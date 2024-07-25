@@ -8,7 +8,7 @@ description: Learn the ways you can configure the maximum and minimum size of pl
 Astronomer Software allows you to customize the minimum and maximum sizes of most Astronomer platform and Airflow components.
 
 ### Astro Units (AU's) {#what-is-an-au}
-Resources are increased or decreased by units of size know as AU's (Astro Units). Adding or removing an AstroUnit changes a deployments size by changing:
+You can increase or decrease resources on Astro by units of size know as AU's (Astro Units). Adding or removing an AstroUnit changes a Deployment's size by changing the following:
 * the size of a component by one-tenth of a v-core
 * the size of the component by 384Mi of memory
 * the limit of connections to the Postgres server by half of a connection
