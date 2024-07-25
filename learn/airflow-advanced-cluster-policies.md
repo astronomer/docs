@@ -16,11 +16,13 @@ Cluster policies are a set of functions that Airflow administrators can define t
 
 These policies allow administrators to centrally manage how Airflow users or DAG writers are interacting with the Airflow Cluster. Cluster policies can modify or restrict a user's capability based on organization policy or ensure that users conform to common standards. For example, you may want to ensure all DAGs have `tags` in your production Airflow environment.
 
-Cluster policies can be used to:
+Cluster policies can be used to, for example, centrally:
 
-- Check if DAGs/Tasks meet certain standards
-- Set default arguments on DAGs/Tasks
-- Skip a DAG or Task or route a Task to a different worker queue 
+- Enforce Task or DAG-level retries
+- Verify a DAG's `catchup` parameter based on production or development environment
+- Limit the resources requested by a `KubernetesPodOperator`
+- Routing critical jobs to a specific Celery `queue` or Airflow `pool`
+- Add missing `tags` or `owner` emails
 
 In this guide, you'll learn about the types of cluster policies, how the policies work, and how to implement them in Airflow.
 
@@ -38,11 +40,11 @@ There are three types of cluster policies you can use in Airflow:
 - `dag_policy`: This policy is applicable to a DAG object, and takes a DAG object `dag` as a parameter. It runs at the time the DAG is loaded from the `DagBag`.
 - `task_policy` : This policy is applicable to a Task object. It gets executed when the task is created during parsing of the task from DagBag at load time. This means that the whole task definition can be altered in the task policy. It does not relate to a specific task running in a `DagRun`. The `task_policy` defined is applied to all the task instances that will be executed in the future.
 - `task_instance_mutation_hook` : This policy is applicable to a Task Instance, which is an instance of a Task object and is created at run time. It takes a TaskInstance object `task_instance` as a parameter. This policy applies not to a task but to the instance of a task that relates to a particular `DagRun`. It is only applied to the currently executed run (i.e. instance) of that task. The policy is applied to a task instance in an Airflow worker before the task instance is executed, not in the dag file processor. 
-- `pod_mutation_hook`: This policy is applicable to a Kubernetes Pod launched by `KubernetesPodOperator` or `KubernetesExecutor` at runtime. It takes a Pod object `pod` as a parameter. This policy is applied to the `kubernetes.client.models.V1Pod` object before it is passed to the Kubernetes client for scheduling. 
+- `pod_mutation_hook`: This policy is applicable to a Kubernetes Pod launched by `KubernetesPodOperator` or `KubernetesExecutor` at runtime. It takes a Pod object `pod` as a parameter. This policy is applied to the `kubernetes.client.models.V1Pod` object before it is passed to the Kubernetes client for scheduling. This cluster policy is available only from Aiflow version `2.6`.
 
 ## How cluster policies work
 
-Cluster policies can be implemented using either your `airflow_local_settings.py` file or the `pluggy` interface. Any attributes defined using cluster policies take precedence over the attributes defined in your DAG or Task. 
+Cluster policies can be implemented using either your `airflow_local_settings.py` file or the `pluggy` interface. Any attributes defined using cluster policies take precedence over the attributes defined in your DAG or Task. In Astro, you can only implement policies using the `pluggy` interface.
 
 Once implemented, if a DAG or task is not compliant with your set policies, the policy will raise the `AirflowClusterPolicyViolation` exception and the DAG will not be loaded. This exception is displayed on the Airflow web UI as an `import error`. 
 
@@ -87,16 +89,24 @@ Some example implementations include:
 - Enforce a task timeout policy.
 - Using a different environment for different operators.
 - Override a `on_success_callback` or `on_failure_callback` for a task.
+
 #### Example
+
 ```python
 @hookimpl
 def task_policy(task: "BaseOperator") -> None:
-	min_timeout = datetime.timedelta(hours=24)
-	if not task.execution_timeout or task.execution_timeout > min_timeout:
-		raise AirflowClusterPolicyViolation(f"{task.dag.dag_id}:{task.task_id} time out isgreater than {min_timeout}")
+    min_timeout = datetime.timedelta(hours=24)
+    if not task.execution_timeout or task.execution_timeout > min_timeout:
+        raise AirflowClusterPolicyViolation(f"{task.dag.dag_id}:{task.task_id} time out isgreater than {min_timeout}")
 ```
 
 ### Task Instance mutation hook
+
+:::info
+
+If you are on Airflow version `2.9.1` or lower, you might see some inconsistencies in the application of `task_instance_mutation_hook`. This was fixed in Airflow `2.9.2`.
+
+:::
 
 Task Instance policy allows you to alter task instances before being queued by the Airflow scheduler. This is different from the `task_policy` function, which inspects and mutates tasks “as defined”, whereas task instance policies inspect and mutate task instances before execution.
 
@@ -104,12 +114,14 @@ Some example implementations include:
 
 - Enforce a specific queue for certain Airflow Operators.
 - Modify a task instance between retries.
+
 #### Example
+
 ```python
 @hookimpl
 def task_instance_mutation_hook(task_instance:TaskInstance):
-	if task_instance.try_number >= 3:
-		task_instance.queue = "big-machine"
+    if task_instance.try_number >= 3:
+        task_instance.queue = "big-machine"
 ```
 
 :::tip
@@ -122,19 +134,15 @@ Note that since priority weight is determined dynamically using weight rules, yo
 
 This policy is applicable to Kubernetes Pod created at run time when using the `KubernetesPodOperator` or `KubernetesExecutor`. This is a policy function that allows altering `kubernetes.client.models.V1Pod` object before they are passed to the Kubernetes client for scheduling.
 
-This could be used, for instance, to add sidecar or init containers to every worker pod launched. For example, you could use an init container to preload environment configuration or a sidecar container to collect metrics using StatsD. 
-
-:::tip
-
-Astro does not allow adding init or sidecar containers. Astro provides advanced logging, metrics collection, and multiple ways to manage your environment without the need to run separate containers. 
-
-:::
+This could be used, for instance, to alter the resoures for a Pod or to add sidecar or init containers to every worker pod launched. Astro, however, does not allow adding init or sidecar containers. [Astro](https://www.astronomer.io/docs/astro/deployment-metrics) provides advanced logging, metrics collection, and multiple ways to manage your environment without the need to run separate containers to collect stats or apply environment settings.
 
 Some example implementations include:
 
 - Set resource requests and limits.
 - Increase resources assigned to a Pod.
+
 #### Example
+
 ```python
 from kubernetes.client import models as k8s
 from airflow.policies import hookimpl
@@ -142,9 +150,6 @@ from airflow.policies import hookimpl
 @hookimpl
 def pod_mutation_hook(pod) -> None:
     print("hello from pod_mutation_hook ",type(pod))
-    print("spec : ", pod.spec)
-    print("container base ", pod.spec.containers[0])
-    print("container base type", type(pod.spec.containers[0]))
 
     resources = k8s.V1ResourceRequirements(
         requests={
@@ -165,13 +170,13 @@ Policies can be implemented using the `pluggy` interface. `pluggy` is used for p
 
 :::info
 
-Using the `pluggy` method is available only in Airflow version 2.6 and above. For versions earlier than 2.6, you can use `config/airflow_local_settings.py` file under your `$AIRFLOW_HOME` to define your policies. See [Airflow docs](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/cluster-policies.html#how-do-define-a-policy-function).
+Using the `pluggy` method is available only in Airflow version 2.6 and above. For versions earlier than 2.6, you can use `config/airflow_local_settings.py` file under your `$AIRFLOW_HOME` to define your [policies](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/cluster-policies.html#how-do-define-a-policy-function). Note, that Astro only allows to use `pluggy` interface for implementing cluster policies.
 
 :::
 
 ### Create a package for your policies
 
-You can build a package for the cluster policies you want to apply to your Airflow environment. You can add this package to the `include` folder of your Astro project. You could then install it by [customizing your `Dockerfile`](https://www.astronomer.io/docs/astro/cli/customize-dockerfile). 
+You can build a package for the cluster policies you want to apply to your Airflow environment. You can add this package to the `plugin` folder of your Astro project. You could then install it by [customizing your `Dockerfile`](https://www.astronomer.io/docs/astro/cli/customize-dockerfile). 
 
 For example, you can create a package `my_package` with the following structure:
 
@@ -185,14 +190,13 @@ my_package/
 ├── pyproject.toml
 ├── README.md
 ├── LICENSE
-└── setup.cfg
 ```
 
 1. In the `pyproject.toml` file, add the following:
 
     ```bash
     [build-system]
-    requires = ["setuptools", "wheel"]
+    requires = ["setuptools >= 61.0"]
     build-backend = "setuptools.build_meta"
 
     [project]
@@ -226,30 +230,10 @@ my_package/
             )
     ```
 
-3. In `setup.cfg` add the following:
+3. (Optional) Build the python package to generate the `wheel` file.
 
     ```bash
-
-    [metadata]
-    name = my-package
-    version = 0.1.0
-    author = your name
-    author_email = youremail@email.com
-    description = Policy package
-
-    [options]
-    packages = my_package
-
-    [options.entry_points]
-    airflow.policy =
-    policy = my_package.policy
-
-    ```
-
-4. Build the `wheel` file:
-
-    ```bash
-    python3 -m pip wheel . 
+    python -m build
     ```
 
 ### Setup your Astro project
@@ -258,12 +242,20 @@ my_package/
     
 2. Run `astro dev init` to initialize a new Astro project or open your Astro project. 
     
-3. Copy over the `wheel` file you built in [Create a package for your policies](#create-a-package-for-your-policies) to the `include` folder of your Astro project.
+3. Copy over the plugin package to the `plugins` dirctory of an Astro project. 
 
 4. Add the following line to your `Dockerfile`
 
     ```docker
-    RUN pip install include/my_package-0.1.0-py3-none-any.whl
+    COPY plugins plugins
+    RUN pip install ./plugins
     ```
+
+:::tip Alternate setup
+You can copy over the `wheel` file you built in Step 3 of [Create a package for your policies](#create-a-package-for-your-policies) to the `include` folder of your Astro project and add the following line to your `Dockerfile`:
+```docker
+RUN pip install include/my_package-0.1.0-py3-none-any.whl
+```
+:::
 
 5. For local Airflow, run `astro dev restart` to rebuild the Astro project. For Astro, run `astro deploy` to build and deploy to your Deployment.
