@@ -14,33 +14,6 @@ import databricks_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-d
 
 The open source [Airflow Databricks provider](https://airflow.apache.org/docs/apache-airflow-providers-databricks/stable/index.html) provides full observability and control from Airflow so you can manage Databricks from one place, including enabling you to orchestrate your Databricks notebooks from Airflow and execute them as [Databricks jobs](https://docs.databricks.com/en/workflows/index.html).
 
-You can create a Databricks jobs from existing Databricks notebooks as a task group in your Airflow DAG with just a few lines of code:
-
-```python
-task_group = DatabricksWorkflowTaskGroup(
-    group_id="databricks_workflow",
-    databricks_conn_id=DATABRICKS_CONN_ID,
-    job_clusters=job_cluster_spec,
-)
-
-with task_group:
-    notebook_1 = DatabricksNotebookOperator(
-        task_id="notebook1",
-        databricks_conn_id=DATABRICKS_CONN_ID,
-        notebook_path=DATABRICKS_NOTEBOOK_PATH_1,
-        source="WORKSPACE",
-        job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY,
-    )
-    notebook_2 = DatabricksNotebookOperator(
-        task_id="notebook2",
-        databricks_conn_id=DATABRICKS_CONN_ID,
-        notebook_path=DATABRICKS_NOTEBOOK_PATH_2,
-        source="WORKSPACE",
-        job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY,
-    )
-    notebook_1 >> notebook_2
-```
-
 :::tip Other ways to learn
 
 There are multiple resources for learning about this topic. See also:
