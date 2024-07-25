@@ -1,25 +1,27 @@
 ---
-title: 'Managing resources on Astro'
-sidebar_label: 'Managing resources'
-id: managing-resources
+title: 'Manage resources on Astro'
+sidebar_label: 'Manage resources'
+id: manage-resources
 ---
 
-Astro supports several approaches to managing [Deployment resources](https://www.astronomer.io/docs/astro/deployment-settings#deployment-resources), so you can provision the resources you need whether you are just starting or you are deploying projects programmatically at scale.
+Astro supports several approaches to managing [Deployment resources](https://www.astronomer.io/docs/astro/deployment-settings#deployment-resources), so you can provision the resources you need whether you are just starting out or you are deploying projects programmatically at scale.
 
 ## Recommended approaches
 
-Astronomer recommends choosing the following approaches for these common scenarios:
+Astronomer recommends the following approaches in these common scenarios: 
 
-| Scenario | Astro UI | Terraform Provider | Astro API | Deployment files | Astro CLI |
+| Scenario | Astro UI | Terraform provider | Astro API | Deployment files | Astro CLI |
 | -------- | :------: | :----------------: | :-------: | :--------------: | :-------: |
 | Manually managing resources | x | | | | x |
 | Programmatically managing resources | | x | x | x | |
 | Managing resoures at scale | | x | x | x | |
-| Managing resources for a small team or an individual dev | x | | x | | x |
+| Managing resources for a small team or an individual developer | x | | x | | x |
 | Automating management with CI/CD | | x | x | x | |
 | Managing resource config with version control | | x | x | x | |
 | An approach using Python is needed | | | x | | |
 | An approach using Bash is needed | | | x | | x |
+
+For more detailed information about when to choose each option, see the sections below.
 
 ## Managing resources manually
 
@@ -47,7 +49,7 @@ Astronomer recommends the Terraform Provider, Astro API, or Deployment files whe
 
 - [Terraform provider](https://www.astronomer.io/docs/astro/terraform-provider). Terraform is an industry-standard tool for managing infrastructure as code (IaC). With the provider, you can use Terraform to automate, templatize, or programmatically manage Astro environments. For example, you can automate creating Workspaces and Teams based on existing resources. Astronomer recommends this approach in general but especially for teams in organizations where Terraform is already in use.
 - [Astro API](https://www.astronomer.io/docs/api). The API enables you to create or update resources such as Organizations, Deployments, Clusters, Deploys, and Workspaces. An Organization API token is required. You can [download the OpenAPI spec](https://www.astronomer.io/docs/api#download-openapi-specifications) for easy configuration of tools such as Postman and Swagger. Astronomer recommends the API for Python-centric use cases.
-- [Deployment files](https://www.astronomer.io/docs/astro/manage-deployments-as-code). You can configure Deployments programmatically using Deployment files, which you can generate automatically from existing Deployments. You can standardize Deployment configuration for specific use cases using Deployment template files, which you can also generate automatically from existing Deployments.
+- [Deployment files](https://www.astronomer.io/docs/astro/manage-deployments-as-code). You can configure Deployments programmatically using Deployment files, which you can generate automatically from existing Deployments. You can standardize Deployment configuration for specific use cases using Deployment template files, which you can also generate automatically from existing Deployments. Astronomer recommends this approach when automating Deployment management at scale.
 
 :::info
 

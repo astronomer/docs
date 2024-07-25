@@ -48,18 +48,18 @@ In other cases, Astro alerts are always the better option. If you need to implem
 
 ### Recommended alerts
 
-Astronomer recommends choosing the following alerts for these common scenarios:
+Astronomer recommends choosing the following alerts in these common scenarios:
 
 | Scenario                                   | Astro alert | Airflow email notification | Airflow callback | Airflow SLA | Airflow timeout |
-|--------------------------------------------|-------------|-----------------------------|------------------|--------------|------------------|
-| Email on DAG success or retry               | X           | X                           |                  |              |                  |
-| Email on specific task success or retry     |             | X                           |                  |              |                  |
-| Custom DAG-level alerting logic             |             |                             | X                |              |                  |
-| Custom task-level alerting logic            |             |                             | X                |              |                  |
-| Absolute time DAG SLA                       | X           |                             |                  |              |                  |
-| Task duration SLA                           | X           |                             |                  |              |                  |
-| Stop a running task after some amount of time|           |                             |                  |              | X                |
-| Trigger another DAG based on an alert       | X           |                             |                  |              |                  |
+|--------------------------------------------|:-----------:|:--------------------------:|:----------------:|:-----------:|:---------------:|
+| Email on DAG success or retry              | X           | X                          |                  |             |                 |
+| Email on specific task success or retry    |             | X                          |                  |             |                 |
+| Custom DAG-level alerting logic            |             |                            | X                |             |                 |
+| Custom task-level alerting logic           |             |                            | X                |             |                 |
+| Absolute time DAG SLA                      | X           |                            |                  |             |                 |
+| Task duration SLA                          | X           |                            |                  |             |                 |
+| Stop a running task after some amount of time|           |                            |                  |             | X               |
+| Trigger another DAG based on an alert      | X           |                            |                  |             |                 |
 
 For more information on different types of alerts, check out the documentation linked in [See also](#see-also).
 
