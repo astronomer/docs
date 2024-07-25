@@ -262,7 +262,7 @@ my_executor_config={
 
 KubernetesExecutor task-pods are limited to the LimitRanges and Quotas defined within the pod namespace.
 
-### Customizing Astro Units (AU's) {#redefining-the-au}
+### Customize Astro Units (AU's) {#customize-au}
 
 :::danger
 Consult with your Astronomer Resident Architect before changing the amount of CPU or memory granted by an AU.
