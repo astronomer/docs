@@ -46,7 +46,7 @@ You can use four types of cluster policies in Airflow:
 
 Cluster policies can be implemented using either your `airflow_local_settings.py` file or the `pluggy` interface. Any attributes defined using cluster policies take precedence over the attributes defined in your DAG or Task. In Astro, you can only implement policies using the `pluggy` interface.
 
-Once implemented, if a DAG or task is not compliant with your set policies, the policy will raise the `AirflowClusterPolicyViolation` exception and the DAG will not be loaded. This exception is displayed on the Airflow web UI as an `import error`. 
+Once implemented, if a DAG or task is not compliant with your set policies, the policy will raise the `AirflowClusterPolicyViolation` exception and the DAG will not be loaded. The Airflow web UI displays this exception as an `import error`. 
 
 You can also use the `AirflowClusterPolicySkipDag` exception to skip a DAG. For example, you may want to skip month-end DAGs from daily processing or skip any DAGs with the wrong environment tag. Another possible use case could be when you are migrating from a deprecated source system to a new one. You might want to skip the old DAGs to avoid any failures and alerts. Note that this exception will not be displayed on the Airflow web UI.
 
