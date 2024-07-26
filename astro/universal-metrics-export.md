@@ -14,7 +14,7 @@ import HostedBadge from '@site/src/components/HostedBadge';
 :::publicpreview
 :::
 
-You can export comprehensive metrics about your Apache Airflow usage on Astro directly to any third-party monitoring and alerting system using the universal metrics exporter. This gives you unlimited access to all infrastructure metrics that are available to Astronomer and allows you to use your preferred observability tooling, such as Grafana or CloudWatch.
+You can export comprehensive metrics about your Apache Airflow usage on Astro directly to any third-party monitoring and alerting system using the Universal Metrics Exporter. This gives you unlimited access to all infrastructure metrics that are available to Astronomer and allows you to use your preferred observability tooling, such as Grafana or CloudWatch.
 
 While [Deployment Analytics](deployment-metrics.md), [Deployment health incidents](deployment-health-incidents.md), and [exporting metrics and logs to Datadog](export-datadog.md) on Astro can all help you understand your Airflow usage and infrastructure resource consumption, the Universal Metrics Exporter is additionally valuable because it:
 
@@ -28,7 +28,7 @@ You can use this information to right-size Celery workers, optimize your usage o
 
 ## Metric types
 
-There are two types of metrics that you can export using the universal metrics exporter:
+There are two types of metrics that you can export using the Universal Metrics Exporter:
 
 - Airflow application level metrics
 - Infrastructure level metrics
