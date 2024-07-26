@@ -108,12 +108,12 @@ If you are on Airflow version `2.9.1` or lower, you might see some inconsistenci
 
 :::
 
-Task Instance policy allows you to alter task instances before being queued by the Airflow scheduler. This is different from the `task_policy` function, which inspects and mutates tasks “as defined”, whereas task instance policies inspect and mutate task instances before execution.
+Task Instance policy allows you to alter task instances before the Airflow scheduler queues them. This is different from the `task_policy` function, which inspects and mutates tasks “as defined”. By contrast, task instance policies inspect and mutate task instances before execution.
 
 Some example implementations include:
 
-- Enforce a specific queue for certain Airflow Operators.
-- Modify a task instance between retries.
+- Enforcing a specific queue for certain Airflow Operators.
+- Modifying a task instance between retries.
 
 #### Example
 
@@ -126,13 +126,13 @@ def task_instance_mutation_hook(task_instance:TaskInstance):
 
 :::tip
 
-Note that since priority weight is determined dynamically using weight rules, you cannot alter the `priority_weight` of a task instance within the Task Instance mutation hook.
+Note that since Airflow determines priority weight dynamically using weight rules, you cannot alter the `priority_weight` of a task instance within the Task Instance mutation hook.
 
 :::
 
 ### Pod mutation hook
 
-This policy is applicable to Kubernetes Pod created at run time when using the `KubernetesPodOperator` or `KubernetesExecutor`. This is a policy function that allows altering `kubernetes.client.models.V1Pod` object before they are passed to the Kubernetes client for scheduling.
+This policy is applicable to Kubernetes Pod created at runtime when using the `KubernetesPodOperator` or `KubernetesExecutor`. This is a policy function that allows altering an `kubernetes.client.models.V1Pod` object before Airflow passes it to the Kubernetes client for scheduling.
 
 This could be used, for instance, to alter the resoures for a Pod or to add sidecar or init containers to every worker pod launched. Astro, however, does not allow adding init or sidecar containers. [Astro](https://www.astronomer.io/docs/astro/deployment-metrics) provides advanced logging, metrics collection, and multiple ways to manage your environment without the need to run separate containers to collect stats or apply environment settings.
 
