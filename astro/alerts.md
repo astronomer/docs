@@ -250,7 +250,7 @@ You can enable alerts from the Astro UI.
 
 ## Step 3: Create your alert in the Astro UI
 
-1. In the Astro UI, click **Alerts**, and then the **Alerts** Tab.
+1. In the Astro UI, click on **Alerts** and then the **Alerts** Tab.
 
 2. Click **Add Alert**.
 
@@ -268,13 +268,13 @@ You can enable alerts from the Astro UI.
 
 4. Choose the alert **Severity**, either **Info**, **Warning**, **Critical**, or **Error**.
 
-5. Define the conditions for when you want your alert to send a notification.
+5. Define the conditions on which you want your alert to send a notification.
 
   - Select the **Attribute**, **Operator**, and **DAGs** to define when you want Astro to send an Alert and which DAGs that you want the alert to apply to.
 
 ## Step 3: (Optional) Change an alert name
 
-After you select a DAG that you want to apply an alert to, Astro automatically generates a name for your alert. However, you can choose to change the name for your alert.
+After you select a DAG that you want to apply an alert to, Astro automatically generates a name for your alert. However, you can choose to change the name of your alert.
 
 1. Expand the **Change alert names...** section.
 
