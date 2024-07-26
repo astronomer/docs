@@ -134,12 +134,12 @@ Note that since Airflow determines priority weight dynamically using weight rule
 
 This policy is applicable to Kubernetes Pod created at runtime when using the `KubernetesPodOperator` or `KubernetesExecutor`. This is a policy function that allows altering an `kubernetes.client.models.V1Pod` object before Airflow passes it to the Kubernetes client for scheduling.
 
-This could be used, for instance, to alter the resoures for a Pod or to add sidecar or init containers to every worker pod launched. Astro, however, does not allow adding init or sidecar containers. [Astro](https://www.astronomer.io/docs/astro/deployment-metrics) provides advanced logging, metrics collection, and multiple ways to manage your environment without the need to run separate containers to collect stats or apply environment settings.
+For instance, one could use this to alter the resources for a Pod or to add sidecar or init containers to every worker pod launched. Astro, however, does not allow adding init or sidecar containers. [Astro](https://www.astronomer.io/docs/astro/deployment-metrics) provides advanced logging, metrics collection, and multiple ways to manage your environment without the need to run separate containers to collect stats or apply environment settings.
 
 Some example implementations include:
 
-- Set resource requests and limits.
-- Increase resources assigned to a Pod.
+- Setting resource requests and limits.
+- Increasing resources assigned to a Pod.
 
 #### Example
 
@@ -166,7 +166,7 @@ def pod_mutation_hook(pod) -> None:
 
 ## Implementation
 
-Policies can be implemented using the `pluggy` interface. `pluggy` is used for plugin management, and allows you to have multiple implementations of the policy functions. You can implement `pluggy` interface using a setup-tools entrypoint in a custom module.
+You can implement policies using the `pluggy` interface. `pluggy` is useful for plugin management, allowing you to have multiple implementations of the policy functions. You can implement a `pluggy` interface using a setup-tools entrypoint in a custom module.
 
 :::info
 
