@@ -18,6 +18,14 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 - **Stable versions**: {{CLI_VER_LATEST}}, {{CLI_VER_2}}, and {{CLI_VER_3}}. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md) for more information about support for CLI versions.
 
+## Astro CLI 1.28.1
+
+Release date: July 25, 2024
+
+## Bug fixes
+
+- Fixed a bug where Git ignored all hidden paths, causing Astro to not respect the `.airflowignore` file.
+
 ## Astro CLI 1.28.0
 
 Release date: July 24, 2024
