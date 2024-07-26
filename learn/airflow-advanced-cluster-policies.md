@@ -6,7 +6,7 @@ id: airflow-cluster-policies
 tags: [cluster policies]
 ---
 
-Cluster policies are a set of functions that Airflow administrators can define to mutate or perform custom logic on a few important Airflow objects:
+Cluster policies are sets of rules that Airflow administrators can define to mutate or perform custom logic on a few important Airflow objects:
 
 - DAG
 - Task
@@ -14,7 +14,7 @@ Cluster policies are a set of functions that Airflow administrators can define t
 - Pod
 - Airflow Context variables
 
-These policies allow administrators to centrally manage how Airflow users or DAG writers are interacting with the Airflow Cluster. Cluster policies can modify or restrict a user's capability based on organization policy or ensure that users conform to common standards. For example, you may want to ensure all DAGs have `tags` in your production Airflow environment.
+These policies allow administrators to centrally manage how Airflow users or DAG writers are interacting with the Airflow Cluster. Cluster policies can modify or restrict a user's capability based on organization policy or ensure that users conform to common standards. For example, you might want to ensure all DAGs have `tags` in your production Airflow environment.
 
 Cluster policies can be used to, for example, centrally:
 
@@ -31,14 +31,14 @@ In this guide, you'll learn about the types of cluster policies, how the policie
 To get the most out of this guide, you should have an understanding of:
 
 - Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
-- Astro CLI. See [Get started with Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started-cli)
+- The Astro CLI. See [Get started with Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started-cli)
 
 ## Types of cluster policies
 
-There are three types of cluster policies you can use in Airflow:
+You can use four types of cluster policies in Airflow:
 
 - `dag_policy`: This policy is applicable to a DAG object, and takes a DAG object `dag` as a parameter. It runs at the time the DAG is loaded from the `DagBag`.
-- `task_policy` : This policy is applicable to a Task object. It gets executed when the task is created during parsing of the task from DagBag at load time. This means that the whole task definition can be altered in the task policy. It does not relate to a specific task running in a `DagRun`. The `task_policy` defined is applied to all the task instances that will be executed in the future.
+- `task_policy` : This policy is applicable to a Task object. It gets executed when the task is created during parsing of the task from `DagBag` at load time. This means that the whole task definition can be altered in the task policy. It does not relate to a specific task running in a `DagRun`. The `task_policy` defined is applied to all the task instances that will be executed in the future.
 - `task_instance_mutation_hook` : This policy is applicable to a Task Instance, which is an instance of a Task object and is created at run time. It takes a TaskInstance object `task_instance` as a parameter. This policy applies not to a task but to the instance of a task that relates to a particular `DagRun`. It is only applied to the currently executed run (i.e. instance) of that task. The policy is applied to a task instance in an Airflow worker before the task instance is executed, not in the dag file processor. 
 - `pod_mutation_hook`: This policy is applicable to a Kubernetes Pod launched by `KubernetesPodOperator` or `KubernetesExecutor` at runtime. It takes a Pod object `pod` as a parameter. This policy is applied to the `kubernetes.client.models.V1Pod` object before it is passed to the Kubernetes client for scheduling. This cluster policy is available only from Aiflow version `2.6`.
 
