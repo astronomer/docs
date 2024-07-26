@@ -79,16 +79,16 @@ def ensure_dags_are_tagged(dag: "DAG") -> None:
 
 ### Task policy
 
-The task policy allows you to overwrite or reconfigure a task’s parameters. 
+A task policy allows you to overwrite or reconfigure a task’s parameters. 
 
-- Mutates tasks after they have been added to a DAG.
-- It expects a `BaseOperator` as a parameter and you can configure skip/deny exceptions.
+- It mutates tasks after they have been added to a DAG.
+- It expects a `BaseOperator` as a parameter, and you can configure skip/deny exceptions.
 
 Some example implementations include:
 
-- Enforce a task timeout policy.
+- Enforcing a task timeout policy.
 - Using a different environment for different operators.
-- Override a `on_success_callback` or `on_failure_callback` for a task.
+- Overriding a `on_success_callback` or `on_failure_callback` for a task.
 
 #### Example
 
