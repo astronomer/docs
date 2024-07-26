@@ -44,7 +44,7 @@ You can use four types of cluster policies in Airflow:
 
 ## How cluster policies work
 
-Cluster policies can be implemented using either your `airflow_local_settings.py` file or the `pluggy` interface. Any attributes defined using cluster policies take precedence over the attributes defined in your DAG or Task. In Astro, you can only implement policies using the `pluggy` interface.
+Cluster policies can be implemented using either your `airflow_local_settings.py` file or the `pluggy` interface. Any attributes defined using cluster policies take precedence over the attributes defined in your DAG or Task. On Astro, you can only implement policies using the `pluggy` interface.
 
 Once implemented, if a DAG or task is not compliant with your set policies, the policy will raise the `AirflowClusterPolicyViolation` exception and the DAG will not be loaded. The Airflow web UI displays this exception as an `import error`. 
 
