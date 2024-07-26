@@ -167,16 +167,16 @@ def pod_mutation_hook(pod) -> None:
 ## Implementation
 
 You can implement policies using the `pluggy` interface. `pluggy` is useful for plugin management, allowing you to have multiple implementations of the policy functions. You can implement a `pluggy` interface using a setup-tools entrypoint in a custom module.
-
+In this guide, we describe how to use `pluggy` to implement cluster policies for an Astro project. If you are not using Astro, a similar implementation is possible but steps may vary slightly depending on your Airflow setup.
 :::info
 
-Using the `pluggy` method is available only in Airflow version 2.6 and above. For versions earlier than 2.6, you can use `config/airflow_local_settings.py` file under your `$AIRFLOW_HOME` to define your [policies](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/cluster-policies.html#how-do-define-a-policy-function). Note, that Astro only allows to use `pluggy` interface for implementing cluster policies.
+The `pluggy` method is available only in Airflow version 2.6 and above. For versions older than 2.6, you can use the `config/airflow_local_settings.py` file on your `$AIRFLOW_HOME` to define your [policies](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/cluster-policies.html#how-do-define-a-policy-function). Note that Astro only allows using `pluggy` for implementing cluster policies.
 
 :::
 
-### Create a package for your policies
+### Step 1: Create a package for your policies
 
-You can build a package for the cluster policies you want to apply to your Airflow environment. You can add this package to the `plugin` folder of your Astro project. You could then install it by [customizing your `Dockerfile`](https://www.astronomer.io/docs/astro/cli/customize-dockerfile). 
+The best way to implement cluster policies is to build a package for them that you apply to your Airflow environment. You can add this package to the `plugin` folder of your Astro project and install it by [customizing your `Dockerfile`](https://www.astronomer.io/docs/astro/cli/customize-dockerfile). 
 
 For example, you can create a package `my_package` with the following structure:
 
