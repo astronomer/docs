@@ -115,6 +115,7 @@ module.exports = {
           items: [
             'logging',
             'custom-xcom-backend-strategies',
+            'airflow-cluster-policies',
             'data-quality',
             'deferrable-operators',
             'dynamically-generating-dags',
