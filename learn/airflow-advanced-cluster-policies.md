@@ -44,7 +44,9 @@ You can use four types of cluster policies in Airflow:
 
 ## How cluster policies work
 
-Cluster policies can be implemented using either your `airflow_local_settings.py` file or the `pluggy` interface. Any attributes defined using cluster policies take precedence over the attributes defined in your DAG or Task. On Astro, you can only implement policies using the `pluggy` interface.
+![Cluster policies](/img/guides/airflow-advanced-cluster-policies_diagram.png)
+
+You can implement Cluster policies using either your `airflow_local_settings.py` file or the `pluggy` interface. Any attributes defined using cluster policies take precedence over the attributes defined in your DAG or Task. On Astro, you can only implement policies using the `pluggy` interface.
 
 Once implemented, if a DAG or task is not compliant with your set policies, the policy will raise the `AirflowClusterPolicyViolation` exception and the DAG will not be loaded. The Airflow web UI displays this exception as an `import error`. 
 
@@ -67,7 +69,9 @@ Some example implementations include:
 - Stopping a DAG from being executed by raising an `AirflowClusterPolicyViolation` exception.
 
 Note that the `dag_policy` is applied before the `task_policy` and after the DAG has been completely loaded. Hence, overriding the `default_args` parameter has no effect using `dag_policy`. If you want to override the default operator settings, use task policies instead.
+
 #### Example
+
 ```python
 @hookimpl
 def ensure_dags_are_tagged(dag: "DAG") -> None:
@@ -166,30 +170,28 @@ def pod_mutation_hook(pod) -> None:
 
 ## Implementation
 
-You can implement policies using the `pluggy` interface. `pluggy` is useful for plugin management, allowing you to have multiple implementations of the policy functions. You can implement a `pluggy` interface using a setup-tools entrypoint in a custom module.
-In this guide, we describe how to use `pluggy` to implement cluster policies for an Astro project. If you are not using Astro, a similar implementation is possible but steps may vary slightly depending on your Airflow setup.
-:::info
+In this section, we describe how to use `pluggy` to implement cluster policies for an Airflow project using Astro CLI. `pluggy` is useful for plugin management, allowing you to have multiple implementations of the policy functions.
 
-The `pluggy` method is available only in Airflow version 2.6 and above. For versions older than 2.6, you can use the `config/airflow_local_settings.py` file on your `$AIRFLOW_HOME` to define your [policies](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/cluster-policies.html#how-do-define-a-policy-function). Note that Astro only allows using `pluggy` for implementing cluster policies.
-
-:::
+Note that the `pluggy` method is available only in Airflow version 2.6 and above. For versions lower than 2.6, a similar implementation is possible using the `config/airflow_local_settings.py` file in your `$AIRFLOW_HOME`. You can define your policies within this file. There is no need to build or install any package when you use the `airflow_local_settings.py` file. However, Astro only supports the `pluggy` method.
 
 ### Step 1: Create a package for your policies
 
-The best way to implement cluster policies is to build a package for them that you apply to your Airflow environment. You can add this package to the `plugin` folder of your Astro project and install it by [customizing your `Dockerfile`](https://www.astronomer.io/docs/astro/cli/customize-dockerfile). 
+The best way to implement cluster policies is to build a package for them that you apply to your Airflow environment. You can add this package to the `plugins` folder of your Astro project and install it by [customizing your `Dockerfile`](https://www.astronomer.io/docs/astro/cli/customize-dockerfile). This method uses `setuptools` entrypoint for your project. Read more about python packaging [here](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/). 
 
-For example, you can create a package `my_package` with the following structure:
+For example, you can create a package `plugin_package` with the following structure:
 
 ```bash
-my_package/
+plugin/
 │
-├── my_package/
+├── src/
 │   ├── __init__.py
-│   ├── policy.py
+│   ├── plugin_package/
+│       ├── __init__.py
+│       ├── policy.py
 │
 ├── pyproject.toml
 ├── README.md
-├── LICENSE
+
 ```
 
 1. In the `pyproject.toml` file, add the following:
@@ -230,7 +232,13 @@ my_package/
             )
     ```
 
-3. (Optional) Build the python package to generate the `wheel` file:
+    :::tip
+
+    When using Airflow version lower than 2.6, you can define these policies in `confg/airflow_local_settings.py` and rebuild your local Astro project.
+
+    :::
+
+3. (Optional) Build the python package:
 
     ```bash
     python -m build
@@ -238,24 +246,33 @@ my_package/
 
 ### Step 2: Setup your Astro project
 
-1. Initialize your Astro project using the [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started-cli).
+1. Initialize your Astro project using the [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started-cli) or reopen your Astro project.
     
-2. Run `astro dev init` to initialize a new Astro project or open your Astro project. 
-    
-3. Copy over the plugin package to the `plugins` directory of your Astro project. 
+2. Copy over your plugin package to the `plugins` directory of your Astro project.
 
-4. Add the following line to your `Dockerfile`:
+3. Add the following line to your `Dockerfile`:
 
     ```docker
     COPY plugins plugins
     RUN pip install ./plugins
     ```
 
-:::tip Alternate setup
-You can copy over the `wheel` file you built in Step 3 of [Create a package for your policies](#create-a-package-for-your-policies) to the `include` folder of your Astro project and add the following line to your `Dockerfile`:
-```docker
-RUN pip install include/my_package-0.1.0-py3-none-any.whl
-```
-:::
+    :::tip Alternate setup
+
+    To avoid copying over the source code or to reuse the package across multiple projects, it is recommended to `build` the plugin package. You can then choose to distribute the `wheel` file or upload the package to a private Python repository for easy management and version control. 
+
+    You can copy  over the `wheel` file to the `plugins` directory and `pip install` in your `Dockerfile`:
+
+    ```docker
+    RUN pip install include/plugin_package-0.1.0-py3-none-any.whl
+    ```
+    Read more about python packaging [here](https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/#packaging-your-project).
+
+    :::
 
 5. Run `astro dev restart` to refresh your local Airflow instance. Run `astro deploy` to build and deploy to your Astro Deployment.
+
+
+## References
+- [Airflow docs](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/cluster-policies.html#how-do-define-a-policy-function) on Cluster policies
+- [Airflow summit session](https://airflowsummit.org/sessions/2023/an-introduction-to-airflow-cluster-policies/) on Cluster policies
