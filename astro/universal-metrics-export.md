@@ -14,11 +14,11 @@ import HostedBadge from '@site/src/components/HostedBadge';
 :::publicpreview
 :::
 
-You can export comprehensive metrics about your Astro Deployments directly to any third-party monitoring and alerting system using the universal metrics exporter in Astro. This incorporates metrics about your Astro resource use and performance into your existing obsevability tooling, which gives you access to the data you need to right size Celery workers, Kubernetes executors, and scheduler pods as well as keep you informed about Airflow uptime and task execution status. The universal metrics exporter uses the [Prometheus data model](https://prometheus.io/docs/concepts/data_model/) format using the remote-write capability to export metrics about your Astro Deployments to your preferred monitoring tools.
+You can export comprehensive metrics about your Astro Deployments directly to any third-party monitoring and alerting system using the universal metrics exporter in Astro. This incorporates metrics about your Astro resource use and performance into your existing obsevability tooling, which gives you access to the data you need to right-size Celery workers, Kubernetes executors, and scheduler pods as well as keep you informed about Airflow uptime and task execution status. The universal metrics exporter uses the [Prometheus data model](https://prometheus.io/docs/concepts/data_model/) format using the remote-write capability to export metrics about your Astro Deployments to your preferred monitoring tools.
 
 Universal Metrics Export also provides an alternative to other Astro observability tools, such as viewing [Deployment metrics](deployment-metrics.md) and [exporting metrics and logs to Datadog](export-datadog.md), which are limited to [Datadog's supported Airflow metrics](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected).
 
-With the metrics export, you can configure metrics export at the per-Deployment level. Or, you can define a default metrics exports for your entire Workspace, so that you can create a default process that all Deployments are created with and then later customize at the per-Deployment level.
+With the metrics export, you can configure metrics export at the per-Deployment level. Alternatively, you can define a default metrics exports for your entire Workspace, so that you can create a default process that all Deployments are created with and then later customize at the per-Deployment level.
 
 The following shows an example dashboard in Grafana created with metrics exported from Astro. See the [Grafana dashboard example](#grafana-example) for more information about how to set it up for yourself.
 
@@ -31,7 +31,7 @@ There are two types of metrics that you can export using the universal metrics e
 - Airflow application level metrics
 - Infrastructure level metrics
 
-Both application and infrastructure metrics have metadata labels associated with them. The following list shows the default standard set of labels that Astro attaches to each metric, however, each metric can also include metric-specific labels as well:
+Both application and infrastructure metrics have metadata labels associated with them. The following list shows the default standard set of labels that Astro attaches to each metric; however, each metric can also include metric-specific labels as well:
 
 - `cloud_provider`
 - `cloud_region`
@@ -81,7 +81,7 @@ Infrastructure level metrics can help you understand information about the indiv
 
 ### Set up your Prometheus endpoint
 
-The following list includes the setup instructions of different commonly used prometheus endpoints. Use these resources to set up your observability tools to receive metrics exports from Astro.
+The following list includes the setup instructions of different, commonly used Prometheus endpoints. Use these resources to set up your observability tools to receive metrics exports from Astro.
 
 - [Chronosphere](https://docs.chronosphere.io/ingest/collector/configure/prometheus-backend)
 - [Coralogix](https://coralogix.com/docs/prometheus/)
@@ -162,6 +162,6 @@ This configuration file allows you to create a dashboard that provides an at-a-g
 
 ![Example Grafana dashboard showing data about the Deployment's scheduler.](/img/docs/ume-example-scheduler.png)
 
-Or, you can view details about resources like your **Workers**, such as in the following image.
+Or you can view details about resources like your **Workers**, such as in the following image.
 
 ![Example Grafana dashboard showing data about the Deployment's workers](/img/docs/ume-example-worker.png)
