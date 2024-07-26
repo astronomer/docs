@@ -258,4 +258,4 @@ RUN pip install include/my_package-0.1.0-py3-none-any.whl
 ```
 :::
 
-5. For local Airflow, run `astro dev restart` to rebuild the Astro project. For Astro, run `astro deploy` to build and deploy to your Deployment.
+5. Run `astro dev restart` to refresh your local Airflow instance. Run `astro deploy` to build and deploy to your Astro Deployment.
