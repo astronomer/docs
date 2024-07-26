@@ -42,7 +42,7 @@ When you create an Airflow deployment in Astronomer, the following components ar
 
 ## Customer-supplied components
 
-To run Astronomer in your environment, you just need to bring a Kubernetes cluster and a Postgres database:
+To run Astronomer in your environment, you just need to bring a Kubernetes cluster and either a Postgres or MySQL database:
 
 * [Kubernetes](https://kubernetes.io/) - You bring your own Kubernetes environment (EKS, GKE, AKS, other). Coordinates communication between the services, and provides fault tolerance on failures.
-* [PostgreSQL](https://www.postgresql.org/) - database used as the backend for the Houston service as well as each Airflow deployment.
+* [PostgreSQL](https://www.postgresql.org/) or [MySQL](https://www.mysql.com/) - database used as the backend for the Houston service as well as each Airflow deployment.

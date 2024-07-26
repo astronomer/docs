@@ -69,7 +69,7 @@ The standard Deployment preview template uses GitHub secrets and an Astro Deploy
           - "**"
 
     env:
-      ## Sets Deployment API key credentials as environment variables or GitHub Secret depending on your configuration
+      ## Sets Deployment API Token credentials as environment variables or GitHub Secret depending on your configuration
       ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
 
     jobs:
@@ -189,7 +189,7 @@ This template makes use of the `AIRFLOW__SECRETS__BACKEND_KWARGS` environment va
           - "**"
 
     env:
-      ## Sets Deployment API key credentials as environment variables
+      ## Sets Deployment API token credentials as environment variables
       ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
 
     jobs:

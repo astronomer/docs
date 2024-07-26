@@ -12,13 +12,11 @@ import CodeBlock from '@theme/CodeBlock';
 import create_dag_example from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/create_dag_example.py';
 import create_dag_example_traditional from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/create_dag_example_traditional.py';
 import dags_from_var_example from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_var_example.py';
-import dags_from_connections from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_connections.py';
 import dags_from_var_example_traditional from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_var_example_traditional.py';
-import dags_from_connections_traditional from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_connections_traditional.py';
 
-In Airflow, [DAGs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html) are defined as Python code. Airflow executes all Python code in the `dags_folder` and loads any `DAG` objects that appear in `globals()`. The simplest way to create a DAG is to write it as a static Python file. 
+In Airflow, [DAGs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html) are defined as Python code. Airflow executes all Python code in the `dags_folder` and loads any `DAG` objects that appear in `globals()`. The simplest way to create a DAG is to write it as a static Python file.
 
-Sometimes, manually writing DAGs isn't practical. Maybe you have hundreds or thousands of DAGs that do similar things with just a parameter changing between them. Or maybe you need a set of DAGs to load tables, but don't want to manually update DAGs every time the tables change. In these cases, and others, it makes more sense to dynamically generate DAGs. 
+Sometimes, manually writing DAGs isn't practical. Maybe you have hundreds or thousands of DAGs that do similar things with just a parameter changing between them. Or maybe you need a set of DAGs to load tables, but don't want to manually update DAGs every time the tables change. In these cases, and others, it makes more sense to dynamically generate DAGs.
 
 Because everything in Airflow is code, you can dynamically generate DAGs using Python alone. As long as a `DAG` object in `globals()` is created by Python code that is stored in the `dags_folder`, Airflow will load it. In this guide, you'll learn how to dynamically generate DAGs. You'll learn when DAG generation is the preferred option and what pitfalls to avoid.
 
@@ -143,13 +141,17 @@ The DAGs appear in the Airflow UI:
 
 ![DAGs from Loop](/img/guides/dag_from_loop_zoom.png)
 
-### Example: Generate DAGs from variables
+### Example: Generate DAGs from environment variables
 
-As mentioned previously, the input parameters don't have to exist in the DAG file. Another common form of generating DAGs is by setting values in a Variable object.
+As mentioned previously, the input parameters don't have to exist in the DAG file. Another common form of generating DAGs is by setting values using environment variables.
 
-![Airflow UI variables tab with a DAG Number variable](/img/guides/dag_number_variable.png)
+You can define environment variables locally in the `.env` file of you Astro project or in the [Astro UI](https://www.astronomer.io/docs/astro/manage-env-vars) for your Astro deployments.
 
-You can retrieve this value by importing the Variable class and passing it into your `range`. The `default_var` is set to 3 because you want the interpreter to register this file as valid regardless of whether the variable exists.
+```text
+DYNAMIC_DAG_NUMBER=10
+```
+
+You can retrieve this value by fetching the environment variable and passing it into your `range`. The `default` is set to 3 because you want the interpreter to register this file as valid regardless of whether the variable exists.
 
 <Tabs
     defaultValue="taskflow"
@@ -174,39 +176,6 @@ The DAGs appear in the Airflow UI:
 
 ![DAGs from Variables in the Airflow UI](/img/guides/dag_from_variables.png)
 
-### Example: Generate DAGs from connections
-
-Another way to define input parameters for dynamically generated DAGs is to define Airflow connections. This can be a good option if each of your DAGs connects to a database or an API. Because you'll be setting up the connections anyway, creating the DAGs from that source avoids redundant work. 
-
-To implement this method, you pull the connections from your Airflow metadata database by instantiating the session and querying the connection table. You can also filter this query so that it only pulls connections that match a specific criteria.
-
-![List of connections in the Airflow UI](/img/guides/connections.png)
-
-<Tabs
-    defaultValue="taskflow"
-    groupId="example-generate-dags-from-connections"
-    values={[
-        {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional syntax', value: 'traditional'},
-    ]}>
-<TabItem value="taskflow">
-
-<CodeBlock language="python">{dags_from_connections}</CodeBlock>
-
-</TabItem>
-<TabItem value="traditional">
-
-<CodeBlock language="python">{dags_from_connections_traditional}</CodeBlock>
-
-</TabItem>
-</Tabs>
-
-You are accessing the Models library to bring in the `Connection` class (as you did previously with the `Variable` class). You are also accessing the `Session()` class from `settings`, which will allow us to query the current database session.
-
-![DAGs created from connections](/img/guides/dag_from_connections.png)
-
-All of the connections that match our filter have now been created as a unique DAG.
-
 ## Multiple-file methods
 
 Another method for dynamically generating DAGs is to use code to generate full Python files for each DAG. The end result of this method is having one Python file per generated DAG in your `dags_folder`.
@@ -215,7 +184,7 @@ One way of implementing this method in production is to have a Python script tha
 
 Some benefits of this method:
 
-- It's more scalable than single-file methods. Because the DAG files aren't being generated by parsing code in the `dags_folder`, the DAG generation code isn't executed on every scheduler heartbeat. 
+- It's more scalable than single-file methods. Because the DAG files aren't being generated by parsing code in the `dags_folder`, the DAG generation code isn't executed on every scheduler heartbeat.
 - Since DAG files are being explicitly created before deploying to Airflow, you have full visibility into the DAG code, including from the **Code** button in the Airflow UI.
 
 Some disadvantages of this method:
@@ -314,7 +283,7 @@ This is a straightforward example that works only if all of the DAGs follow the 
 
 A popular tool for dynamically creating DAGs is [gusty](https://github.com/chriscardillo/gusty). gusty is an open source Python library for dynamically generating Airflow DAGs. Tasks can be created from YAML, Python, SQL, R Markdown, and Jupyter Notebooks.
 
-You can install gusty in your Airflow environment by running `pip install gusty` from your command line. If you use the Astro CLI, you can alternatively add `gusty` to your Astro project `requirements.txt` file. 
+You can install gusty in your Airflow environment by running `pip install gusty` from your command line. If you use the Astro CLI, you can alternatively add `gusty` to your Astro project `requirements.txt` file.
 
 To use gusty, create a new directory in your `dags` folder that will contain all gusty DAGs. Subdirectories of this folder will define DAGs, while nested subdirectories will define task groups within their respective DAGs.
 
@@ -390,7 +359,7 @@ Learn more about gusty features in the [repository README](https://github.com/ch
 
 ### dag-factory
 
-Another open source tool for dynamic DAG generation is [dag-factory](https://github.com/ajbosco/dag-factory). The `dag-factory` package allows users to create DAGs from YAML files which contain both DAG and task-level parameters, removing the necessity to know about Airflow specific syntax. For examples of how to use dag-factory see their [GitHub repository](https://github.com/ajbosco/dag-factory/tree/master/examples).
+Another open source tool for dynamic DAG generation is [dag-factory](dag-factory.md). The [`dag-factory` package](https://github.com/astronomer/dag-factory) allows users to create DAGs from YAML files which contain both DAG and task-level parameters, removing the necessity to know about Airflow specific syntax.
 
 ## Scalability
 

@@ -2,6 +2,8 @@
 sidebar_label: 'With GitHub Actions'
 title: 'Run your first DAG with GitHub Actions'
 id: 'first-dag-github-actions'
+description: "Learn how to run your first Apache Airflow® DAG on Astro with GitHub Actions."
+
 ---
 
 :::tip
@@ -10,7 +12,7 @@ The Astro GitHub integration can automatically deploy code from a GitHub reposit
 
 :::
 
-Astro is the industry's leading managed service for Apache Airflow. To quickly learn how Astro works, follow the steps in this quickstart to create an Airflow environment and run your first DAG with GitHub Actions.
+Astro is the industry's leading managed service for [Apache Airflow®](https://airflow.apache.org/). To quickly learn how Astro works, follow the steps in this quickstart to create an Airflow environment and run your first DAG with GitHub Actions.
 
 Specifically, you will:
 
@@ -33,7 +35,7 @@ This tutorial assumes that you're familiar with basic Apache Airflow concepts. I
 
 :::info
 
-If you're on your organization's network and can't access Astro, make a request to allowlist the following domains on your network:
+If you're on your organization's network and can't access Astro, make a request to add the following domains to the allowlist on your network:
 
 - `https://cloud.astronomer.io/`
 - `https://api.astronomer.io/`
@@ -105,11 +107,13 @@ This example repository also includes a pre-configured [Astronomer deploy action
 
 8. In GitHub, paste your **Deployment ID**.
 
-9. In the Astro UI, click **API Tokens**.
+9. In the Astro UI, click the **Access** tab on the Deployment screen.
 
-10. Click **+ API Token** to create a new API token, and give the token a **Name** and an **Expiration**.
+10. Click **API Tokens**.
 
-11. Click **Create API Token**, then copy the token that appears.
+11. Click **+ API Token** and select **Add Deployment API Token** to create a new API token, and give the token a **Name** and an **Expiration**.
+
+12. Click **Create API Token**, then copy the token that appears.
 
     :::warning
 
@@ -117,9 +121,9 @@ This example repository also includes a pre-configured [Astronomer deploy action
 
     :::
 
-12. In GitHub, paste the API Token in the **API Token** field on your GitHub Actions workflow page.
+13. In GitHub, paste the API Token in the **API Token** field on your GitHub Actions workflow page.
 
-13. Click **Run workflow**.
+14. Click **Run workflow**.
 
 This automatically deploys the example DAGs in your Astro project to your Deployment.
 

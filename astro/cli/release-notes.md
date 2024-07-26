@@ -18,6 +18,36 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 - **Stable versions**: {{CLI_VER_LATEST}}, {{CLI_VER_2}}, and {{CLI_VER_3}}. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md) for more information about support for CLI versions.
 
+## Astro CLI 1.28.1
+
+Release date: July 25, 2024
+
+## Bug fixes
+
+- Fixed a bug where the CLI ignored files when bundling DAGs for code deploys.
+
+## Astro CLI 1.28.0
+
+Release date: July 24, 2024
+
+## Work with dbt projects on Astro
+
+:::privatepreview
+:::
+
+You can now deploy a dbt project to Astro using the Astro CLI. See the following reference pages for more information:
+
+- [astro dbt deploy](https://www.astronomer.io/docs/astro/cli/astro-dbt-deploy)
+- [astro dbt delete](https://www.astronomer.io/docs/astro/cli/astro-dbt-delete)
+
+## Additional improvements
+
+- Added the ability to switch Workspaces by using the Workspace name instead of the `workspace-id`. See [astro workspace switch](https://www.astronomer.io/docs/astro/cli/astro-workspace-switch).
+
+## Bug fixes
+
+-  Fixed a bug where the command `astro deployment inspect --key configuration.is_development_mode` was printing wrong the value.
+
 ## Astro CLI 1.27.1
 
 Release date: May 16, 2024

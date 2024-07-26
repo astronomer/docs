@@ -29,6 +29,43 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## Astro Runtime 11.7.0
+
+- Release date: July 17, 2024
+- Airflow version: 2.9.3
+
+## Airflow 2.9.3
+
+Astro Runtime 11.7.0 includes same-day support for Apache Airflow 2.9.3. Airflow 2.9.3 contains a number of bug fixes and new features including:
+
+- The time unit for `scheduled_duration` and `queued_duration` metrics has changed to milliseconds instead of seconds [#37936](https://github.com/apache/airflow/pull/37936)
+- Support for OpenTelemetry metrics on Airflow are now considered **Stable**, and was previously added in Airflow version 2.7.0 as **Experimental** [#40286](https://github.com/apache/airflow/pull/40286)
+
+For more information, see the [Apache Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-9-3-2024-07-15).
+
+### Additional improvements
+
+- Upgraded the minor and patch versions of some Astro open source provider packages. See [Astro Runtime 11.7.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-1170)
+
+### Security fixes
+
+- Fixed [CVE-2024-6345](https://www.cvedetails.com/cve/CVE-2024-6345/)
+- Fixed [CVE-2024-39863](https://www.cve.org/CVERecord?id=CVE-2024-39863)
+- Fixed [CVE-2024-39877](https://www.cve.org/CVERecord?id=CVE-2024-39877)
+
+## Astro Runtime 11.6.0
+
+- Release date: June 28, 2024
+- Airflow version: 2.9.2
+
+### Early access Airflow bug fixes
+
+- Fixed a bug where FAB config options, such as `[fab] update_fab_perms`, were not checking for values in the deprecated webserver config section. For example, `[webserver] update_fab_perms` ([#40317](https://github.com/apache/airflow/pull/40317))
+
+### Additional improvements
+
+- Upgraded the minor and patch versions of some Astro open source provider packages. See [Astro Runtime 11.6.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-1160)
+
 ## Astro Runtime 11.5.0
 
 - Release date: June 11, 2024
@@ -169,9 +206,6 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 
 - Upgraded the minor and patch versions of some Astro open source provider packages. See [Astro Runtime 10.9.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-1090)
 - Includes `astronomer-providers-logging` version 1.1.5.1
-
-### Bug fixes
-- Fixed a bug where liveness/readiness probes might periodically fail when trying to remove a configuration file that did not exist.
 
 ### Security fixes
 
@@ -354,6 +388,33 @@ For more information about the major changes in this release, see the [Airflow b
 - Fixed an issue in Astro where all Airflow task logs exported to Datadog appeared as `INFO` logs regardless of their actual log type.
 - Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_CLIENT_ID` as an environment variable.
 - Fixed an issue where Astro audit logs listed a user's name as `User` for trigger events instead of their IDs.
+
+## Astro Runtime 9.17.0
+
+- Release date: July 18, 2024
+- Airflow version: 2.7.3
+
+### Additional improvements
+
+- Upgraded the minor and patch versions of some Astro open source provider packages. See [Astro Runtime 9.17.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-9170)
+
+### Security fixes
+
+- Fixed [CVE-2024-6345](https://www.cvedetails.com/cve/CVE-2024-6345/)
+
+## Astro Runtime 9.16.0
+
+- Release date: July 10, 2024
+- Airflow version: 2.7.3
+
+### Additional improvements
+
+- Upgraded the minor and patch versions of some Astro open source provider packages. See [Astro Runtime 9.16.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-9160)
+
+### Security fixes
+
+- Fixed [CVE-2024-39863](https://www.cve.org/CVERecord?id=CVE-2024-39863)
+- Fixed [CVE-2024-39877](https://www.cve.org/CVERecord?id=CVE-2024-39877)
 
 ## Astro Runtime 9.15.0
 

@@ -44,15 +44,16 @@ The following table contains all types of Deployment incidents. An **info** inci
 | --------------------------------------- | --------------- | -------------------------------------------------------------------------------------------------- |
 | Scheduler Heartbeat Not Found           | Critical        | The Airflow scheduler has not sent a heartbeat for longer than 10 minutes.                         |
 | Airflow Database Storage Unusually High | Info or Warning | The metadata database has tables that are larger than 50GiB (Info) or 75GiB (Warning).             |
-| Worker Queue at Capacity                | Warning         | At least one worker queue in this Deployment is running the maximum number of tasks and workers.   |
-| Worker Queue Does Not Exist             | Warning         | There is at least 1 task instance that is configured to run on a worker queue that does not exist. |
 | Deprecated Runtime Version              | Warning         | Your Deployment is using a deprecated Astro Runtime version.                                       |
+| Job Scheduling Disabled | Warning | The Airflow scheduler is configured to prevent automatic scheduling of new tasks using DAG schedules.|
+| Worker Queue at Capacity                | Warning         | At least one worker queue in this Deployment is running the maximum number of tasks and workers.   |
+| Worker Queue Does Not Exist             | Warning         | There is at least 1 task instance that is configured to run on a worker queue that does not exist.
 
 Use the following topics to address each of these incidents.
 
 ### Scheduler Heartbeat Not Found
 
-The scheduler has not sent a heartbeat for longer than 10 minutes. This could be a sign that the scheduler is down. Tasks will keep running, but new tasks will not be scheduled. 
+The scheduler has not sent a heartbeat for longer than 10 minutes. This could be a sign that the scheduler is down. Tasks will keep running, but new tasks will not be scheduled.
 
 If you receive this incident notification, Astronomer Support has already been notified and no action is required from you. Ensure that you [configured a Deployment contact email](deployment-details.md#configure-deployment-contact-emails) so that you can be notified if this issue requires additional follow-ups.
 
@@ -75,6 +76,18 @@ If `xcom` is listed in the affected tables, consider taking one of the following
 
 For additional assistance in cleaning up large tables, submit a request to [Astronomer Support](https://cloud.astronomer.io/open-support-request).
 
+### Deprecated Runtime Version
+
+The Astro Runtime version being used by the Deployment has been deprecated. Airflow will continue to run as normal, but you should upgrade as soon as possible.
+
+To upgrade to a [supported version](runtime-version-lifecycle-policy.mdx), see [Upgrade Astro Runtime](upgrade-runtime.md).
+
+### Job Scheduling Disabled
+
+The Airflow scheduler is currently disabled and will not automatically schedule new tasks. To run a new task in this state, you must manually trigger a DAG run. To resume all scheduling, remove any overrides to the `AIRFLOW__SCHEDULER__USE_JOB_SCHEDULE` environment variable.
+
+This variable might be configured in the [Astro UI](manage-env-vars.md#using-the-astro-ui) or in your [Dockerfile](manage-env-vars.md#using-your-dockerfile).
+
 ### Worker Queue at Capacity
 
 At least one worker queue in your Deployment is running the maximum possible number of tasks and workers. Tasks will continue to run but new tasks will not be scheduled until worker resources become available. Click **View details** on the incident to view the affected worker queue(s).
@@ -88,12 +101,6 @@ At least one task is configured to run on a worker queue that does not exist. In
 1. Hover over the Deployment health status and click **View details** for the incident.
 2. Check the DAG and task IDs that reference the non-existent worker queue. The non-existent worker queue name referenced from your DAG code is listed under **Queue**.
 3. For each affected DAG, you can either create a new worker queue with the exact name as shown in **Queue** or update your DAG code to reference an existing worker queue. See [Configure worker queues](configure-worker-queues.mdx#assign-tasks-to-a-worker-queue).
-
-### Deprecated Runtime Version
-
-The Astro Runtime version being used by the Deployment has been deprecated. Airflow will continue to run as normal, but you should upgrade as soon as possible.
-
-To upgrade to a [supported version](runtime-version-lifecycle-policy.mdx), see [Upgrade Astro Runtime](upgrade-runtime.md).
 
 ## See also
 

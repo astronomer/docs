@@ -40,7 +40,7 @@ When you use connections for local development, the Astro CLI reads the connecti
 
 ### Fetching environment secrets
 
-The Astro CLI can automatically retrieve connections from the Astro UI when you start your local airflow instance, which means you can use your connection details without needing to manage credentials between local and deployed environments. Local environments fetch connection information the same way as for Deployments, so they require an active internet connection and for you to be logged in with the Astro CLI. You can only fetch environment secrets from Deployments that belong to Workspaces where you are at least a Workspace Member.
+The Astro CLI can automatically retrieve connections from the Astro UI when you start your local airflow instance with `astro dev start --deployment-id=<your-deployment-id>`, which means you can use your connection details without needing to manage credentials between local and deployed environments. Local environments fetch connection information the same way as for Deployments, so they require an active internet connection and for you to be logged in with the Astro CLI. You can only fetch environment secrets from Deployments that belong to Workspaces where you are at least a Workspace Member.
 
 :::tip
 
@@ -96,9 +96,11 @@ For the most flexibility, you can set default connections and override the conne
 
 Some connection types require installing dependencies on your Deployment through provider packages. If your connection type requires a provider package and the provider package is neither [included in Astro Runtime](https://www.astronomer.io/docs/astro/runtime-image-architecture#provider-packages) nor included in the `requirements.txt` file of your Astro project, Airflow won't be able to use your connection.
 
+If you are uncertain what provider package the connection needs, you can check in the [Astronomer Registry](https://registry.astronomer.io/).
+
 1. Open the local Astro project for your Deployment.
-2. Add the required provider package name to your project's `requirements.txt`. Save your changes.
-3. Run `astro deploy` to rebuild your project image and push the changes to your Deployment.
+2. Add the required provider package name to your project's `requirements.txt` and save your changes, or use the [`astro registry provider add`](https://www.astronomer.io/docs/astro/cli/astro-registry-provider-add) CLI command.
+3. Deploy your project with the new provider to your Deployment.
 
 ## Configure connection sharing for a Workspace
 

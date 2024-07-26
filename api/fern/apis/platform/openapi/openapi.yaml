@@ -55,6 +55,8 @@ components:
           description: The type of database instance that is used for the cluster.
           example: db.t3.medium
           type: string
+        healthStatus:
+          $ref: '#/components/schemas/ClusterHealthStatus'
         id:
           description: The cluster's ID.
           example: clm7k8tgw000008jz97i37y81
@@ -107,6 +109,7 @@ components:
           - UPDATE_FAILED
           - UPDATING
           - ACCESS_DENIED
+          - UPGRADE_PENDING
           example: CREATED
           type: string
         tags:
@@ -155,6 +158,41 @@ components:
       - type
       - updatedAt
       - vpcSubnetRange
+      type: object
+    ClusterHealthStatus:
+      properties:
+        details:
+          description: List of details supporting health assessment.
+          items:
+            $ref: '#/components/schemas/ClusterHealthStatusDetail'
+          type: array
+        value:
+          description: Overall health state (HEALTHY or UNHEALTHY).
+          enum:
+          - HEALTHY
+          - UNHEALTHY
+          - UNKNOWN
+          example: HEALTHY
+          type: string
+      required:
+      - value
+      type: object
+    ClusterHealthStatusDetail:
+      properties:
+        code:
+          description: The health status for a specific component.
+          type: string
+        description:
+          description: A description of the component that was assessed.
+          type: string
+        severity:
+          description: The weight this component is given in overall cluster health
+            assessment.
+          type: string
+      required:
+      - code
+      - description
+      - severity
       type: object
     ClusterK8sTag:
       properties:

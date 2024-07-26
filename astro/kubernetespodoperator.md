@@ -419,22 +419,47 @@ To launch Pods in external clusters from a local Airflow environment, you must a
 
 ### Step 3: Create a Kubernetes cluster connection
 
-Astronomer recommends creating a Kubernetes cluster connection because it's more secure than adding an unencrypted `kubeconfig` file directly to your Astro project. 
+Astronomer recommends creating a Kubernetes cluster connection because it's more secure than adding an unencrypted `kubeconfig` file directly to your Astro project.
 
 1. Convert the `kubeconfig` configuration you retrieved from your cluster to JSON format.
 2. In either the Airflow UI or the Astro environment manager, create a new **Kubernetes Cluster Connection** connection. In the **Kube config (JSON format)** field, paste the `kubeconfig` configuration you retrieved from your cluster after converting it from `yaml` to `json` format.
 4. Click **Save**.
 
-You can now specify this connection in the configuration of any KubernetesPodOperator task that needs to access your external cluster. 
+You can now specify this connection in the configuration of any KubernetesPodOperator task that needs to access your external cluster.
 
-### Step 4: Configure your task
+### Step 4: Install the AWS CLI in your Astro environment
+
+To connect to your external EKS cluster, you need to install the AWS CLI in your Astro project.
+
+1. Add the following to your `Dockerfile` to install the AWS CLI:
+
+    ```dockerfile
+    USER root
+
+    RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    # Note: if you are testing your pipeline locally you may need to adjust the zip version to your dev local environment
+    RUN unzip awscliv2.zip
+    RUN ./aws/install
+
+    USER astro
+    ```
+
+2. Add the `unzip` package to your `packages.txt` file to make the `unzip` command available in your Docker container:
+
+    ```txt
+    unzip
+    ```
+
+If you are working locally, you need to restart your Astro project to apply the changes.
+
+### Step 5: Configure your task
 
 In your KubernetesPodOperator task configuration, ensure that you set `cluster-context` and `namespace` for your remote cluster. In the following example, the task launches a Pod in an external cluster based on the configuration defined in the `k8s` connection.
 
 ```python
 run_on_EKS = KubernetesPodOperator(
     task_id="run_on_EKS",
-    kubernetes_conn_id="k8s", 
+    kubernetes_conn_id="k8s",
     cluster_context="<your-cluster-id>",
     namespace="<your-namespace>",
     name="example_pod",

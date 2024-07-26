@@ -57,6 +57,7 @@ module.exports = {
             'what-is-a-sensor',
             'managing-dependencies',
             'airflow-ui',
+            'airflow-trigger-rules',
             'airflow-variables',
           ],
         },
@@ -114,6 +115,7 @@ module.exports = {
           items: [
             'logging',
             'custom-xcom-backend-strategies',
+            'airflow-cluster-policies',
             'data-quality',
             'deferrable-operators',
             'dynamically-generating-dags',
@@ -144,6 +146,7 @@ module.exports = {
         'xcom-backend-tutorial',
         'pycharm-local-dev',
         'vscode-local-dev',
+        "dag-factory",
         'example-ms-teams-callback',
         'cloud-ide-tutorial',
         'airflow-object-storage-tutorial',

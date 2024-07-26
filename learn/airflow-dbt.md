@@ -12,27 +12,15 @@ import airflow_dbt_bashoperator from '!!raw-loader!../code-samples/dags/airflow-
 
 [dbt Core](https://docs.getdbt.com/) is an open-source library for analytics engineering that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses. 
 
-The open-source provider package [Cosmos](https://astronomer.github.io/astronomer-cosmos/) allows you to integrate dbt jobs into Airflow by automatically creating Airflow tasks from dbt models. You can turn your dbt Core projects into an Airflow task group with just a few lines of code:
+### dbt on Airflow with Cosmos and the Astro CLI
 
-```python
-from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig, ExecutionConfig
-from cosmos.profiles import PostgresUserPasswordProfileMapping
+The open-source provider package [Cosmos](https://astronomer.github.io/astronomer-cosmos/) allows you to integrate dbt jobs into Airflow by automatically creating Airflow tasks from dbt models. You can turn your dbt Core projects into an Airflow task group with just a few lines of code.
 
-profile_config = ProfileConfig(
-    profile_name="default",
-    target_name="dev",
-    profile_mapping=PostgresUserPasswordProfileMapping(
-        conn_id="my_db_conn",
-        profile_args={"schema": "my_schema"},
-    ),
-)
+:::tip dbt on Astro
 
-DbtTaskGroup(
-    project_config=ProjectConfig("path/to/my_project"),
-    profile_config=profile_config,
-    default_args={"retries": 2},
-)
-```
+Astro supports direct deployment of dbt projects using the Astro CLI. With a single command, you can deploy any valid dbt project to an Astro Deployment. For more information, see [Deploy dbt projects to Astro](https://www.astronomer.io/docs/astro/deploy-dbt-project).
+
+:::
 
 :::tip Other ways to learn
 
@@ -47,7 +35,9 @@ For a tutorial on how to use dbt Cloud with Airflow, see [Orchestrate dbt Cloud 
 
 ## Why use Airflow with dbt Core?
 
-dbt Core offers the possibility to build modular, reuseable SQL components with built-in dependency management and [incremental builds](https://docs.getdbt.com/docs/build/incremental-models). With [Cosmos](https://astronomer.github.io/astronomer-cosmos/) you can integrate dbt jobs into your Airflow orchestration environment as a standalone DAG or as a task group within a DAG. 
+dbt Core offers the possibility to build modular, reuseable SQL components with built-in dependency management and [incremental builds](https://docs.getdbt.com/docs/build/incremental-models). 
+
+With [Cosmos](https://astronomer.github.io/astronomer-cosmos/), you can integrate dbt jobs into your open-source Airflow orchestration environment as standalone DAGs or as task groups within DAGs.
 
 The benefits of using Airflow with dbt Core include:
 
@@ -56,6 +46,8 @@ The benefits of using Airflow with dbt Core include:
 - Run `dbt test` on tables created by individual models immediately after a model has completed. Catch issues before moving downstream and integrate additional [data quality checks](data-quality.md) with your preferred tool to run alongside dbt tests.
 - Run dbt projects using [Airflow connections](connections.md) instead of dbt profiles. You can store all your connections in one place, directly within Airflow or by using a [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html).
 - Leverage native support for installing and running dbt in a virtual environment to avoid dependency conflicts with Airflow.
+
+With Astro, you get all the above benefits without having to modify your Airflow environment or create connections. You can deploy directly from a dbt project using the Astro CLI. For more information, see [Deploy dbt projects to Astro](https://www.astronomer.io/docs/astro/deploy-dbt-project).
 
 ## Time to complete
 
@@ -139,7 +131,7 @@ To integrate your dbt project with Airflow, you need to add the project folder t
 
     `model1.sql` selects the variable `my_name`. `model2.sql` depends on `model1.sql` and selects everything from the upstream model.
 
-You should now have the following structure within your Astro project:
+You should now have the following structure within your Airflow environment:
 
 ```text
 .

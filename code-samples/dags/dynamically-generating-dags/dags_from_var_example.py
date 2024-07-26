@@ -1,6 +1,6 @@
 from airflow.decorators import dag, task
-from airflow.models import Variable
 from pendulum import datetime
+import os
 
 
 def create_dag(dag_id, schedule, dag_number, default_args):
@@ -18,7 +18,7 @@ def create_dag(dag_id, schedule, dag_number, default_args):
     return generated_dag
 
 
-number_of_dags = Variable.get("dag_number", default_var=3)
+number_of_dags = os.getenv("DYNAMIC_DAG_NUMBER", default=3)
 number_of_dags = int(number_of_dags)
 
 for n in range(1, number_of_dags):
