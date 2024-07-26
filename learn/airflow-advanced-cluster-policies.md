@@ -107,7 +107,7 @@ If you are on Airflow version `2.9.1` or lower, you might see some inconsistenci
 
 :::
 
-Task Instance policy allows you to alter task instances before the Airflow scheduler queues them. You can implement Task Instance policy using the function `task_instance_mutation_hook`. This is different from the `task_policy` function, which inspects and mutates tasks “as defined”. By contrast, task instance policies inspect and mutate task instances before execution. It takes a TaskInstance object, `task_instance`, as a parameter. This policy applies not to a task but to the instance of a task that relates to a particular `DagRun`. It is only applied to the currently executed run (in other words, instance) of that task. The policy is applied to a task instance in an Airflow worker before the task instance is executed, not in the DAG file processor. 
+A Task Instance policy allows you to alter task instances before the Airflow scheduler queues them. You can implement a Task Instance policy using the function `task_instance_mutation_hook`. This is different from the `task_policy` function, which inspects and mutates tasks “as defined”. By contrast, task instance policies inspect and mutate task instances before execution. It takes a TaskInstance object, `task_instance`, as a parameter. This policy applies not to a task but to the instance of a task that relates to a particular `DagRun`. It is only applied to the currently executed run (in other words, instance) of that task. The policy is applied to a task instance in an Airflow worker before the task instance is executed, not in the DAG file processor. 
 
 Some example implementations include:
 
@@ -171,7 +171,7 @@ Note that the `pluggy` method is available only in Airflow version 2.6 and above
 
 ### Step 1: Create a package for your policies
 
-The simplest way to implement cluster policies is to build a package for them that you apply to your Airflow environment. You can add this package to the `plugins` folder of your Astro project and install it by [customizing your `Dockerfile`](https://www.astronomer.io/docs/astro/cli/customize-dockerfile). This method uses `setuptools` entrypoint for your project. Read more about python packaging [here](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/). 
+The simplest way to implement cluster policies is to build a package for them that you apply to your Airflow environment. You can add this package to the `plugins` folder of your Astro project and install it by [customizing your `Dockerfile`](https://www.astronomer.io/docs/astro/cli/customize-dockerfile). This method uses `setuptools` entrypoint for your project. You can read more about Python packaging [here](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/). 
 
 For example, you can create a package `plugin` with the following structure:
 
@@ -236,7 +236,7 @@ plugin/
 
     :::
 
-3. (Optional) Build the python package:
+3. (Optional) Build the Python package:
 
     ```bash
     python -m build
@@ -264,7 +264,7 @@ plugin/
     ```docker
     RUN pip install .plugins/plugin_package-*.whl
     ```
-    Read more about python packaging [here](https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/#packaging-your-project).
+    You can read more about Python packaging [here](https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/#packaging-your-project).
 
     :::
 
