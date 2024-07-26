@@ -208,7 +208,7 @@ my_package/
     _ = 'my_package.policy'
     ```
 
-2. Define the policies in `policy.py`
+2. Define the policies in `policy.py`:
 
     ```python
     from airflow.policies import hookimpl
@@ -230,21 +230,21 @@ my_package/
             )
     ```
 
-3. (Optional) Build the python package to generate the `wheel` file.
+3. (Optional) Build the python package to generate the `wheel` file:
 
     ```bash
     python -m build
     ```
 
-### Setup your Astro project
+### Step 2: Setup your Astro project
 
-1. Initialize your Astro project using [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started-cli).
+1. Initialize your Astro project using the [Astro CLI](https://www.astronomer.io/docs/astro/cli/get-started-cli).
     
 2. Run `astro dev init` to initialize a new Astro project or open your Astro project. 
     
-3. Copy over the plugin package to the `plugins` dirctory of an Astro project. 
+3. Copy over the plugin package to the `plugins` directory of your Astro project. 
 
-4. Add the following line to your `Dockerfile`
+4. Add the following line to your `Dockerfile`:
 
     ```docker
     COPY plugins plugins
