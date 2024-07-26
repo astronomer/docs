@@ -25,6 +25,36 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## July 30, 2024
+
+### New alerts for Deployment health incidents
+
+<HostedBadge/>
+
+:::privatepreview
+:::
+
+This release introduces four new alert types that correspond to four of the existing [Deployment health incident types](https://www.astronomer.io/docs/astro/deployment-health-incidents#deployment-incidents). These new deployment health alerts allows astro to proactively notify you when deployment health issues arise.
+
+These alerts:
+
+- Use Astro architecture to identify infrastructure-level incidents that are otherwise hard to monitor
+- Gives you granular information about your Deployment's performance, with more detail than **Healthy** or **Unhealthy**.
+- Incorporates Astro's suggestions about Deployment health into your existing alerting workflows, including email, Slack, Pagerduty, to allow you to respond faster.
+
+See [ADD LINK] for more information.
+
+### Additional improvements
+
+- Improved the Astro Alerts UI to streamline creating notification channels and alerts across DAGs and Deployments. See [Astro Alerts](https://www.astronomer.io/docs/astro/alerts) for setup information.
+- Added an example Universal Metrics Export dashboard configuration file for Grafana Cloud. See [Export metrics from Astro](https://www.astronomer.io/docs/astro/export-metrics) for setup instructions and the [configuration example- ADD LINK] on GitHub.
+- Organization Dashboards are now generally available to Enterprise tier customers. See [View Organization Dashboards](https://www.astronomer.io/docs/astro/organization-dashboard) for more information.
+
+### Bug fixes
+
+- Fixed a bug where the Astro UI would show an error in your Deploy History instead of your Runtime Version, if the Runtime version is `yanked`.
+- Fixed an issue when creating an alert where you couldn't select tasks with the same `task_id` across multiple selected DAGs.
+
 ## July 24, 2024
 
 ### Run your first DAG on Astro with GitHub Integration
