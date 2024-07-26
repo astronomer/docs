@@ -8,17 +8,13 @@ import MostCommonBadge from '@site/src/components/MostCommonBadge';
 
 Astro supports a range of options when it comes to organizing your project code and setting up Continuous Integration and Continuous Delivery (CI/CD) pipelines for automated deploys to Astro. 
 
-Astronomer recommends keeping in mind the needs of your team and structure of your organization as you explore the options.
-
 This guide covers the options along with their pros and cons, so you can choose the best option for your team.
 
 ## Feature overview
 
 Astro supports a number of CI/CD strategies. You can:
-1. Host one Astro project in one repository for deployment to multiple Astro Deployments (one-to-many), based on branches.
-2. Host one Astro project in one Git repository for deployment to one Astro Deployment (one-to-one).
-3. Separate your DAGs from other files and maintain multiple repositories for one Astro Deployment (many-to-one).
-4. Host multiple Astro projects in one repository for deployment to multiple Astro Deployments (one-to-many).
+1. Use a monorepo: host an Astro project in one repository for deploys to one or multiple Astro Deployments, based, for example, on permanent dev and prod branches with their own Deployments or a single permanent branch.
+2. Use a multirepo: separate your DAGs from other files in your project and maintain multiple repositories linked to one or multiple Astro Deployments.
 
 ## Best practice guidance
 
@@ -40,22 +36,23 @@ With a version control system in place, you can set up CI/CD by following the gu
 
 Once you have set up CI/CD, Astronomer recommends [enabling CI/CD enforcement](https://www.astronomer.io/docs/astro/set-up-ci-cd#enforce-cicd) so that code pushes can be completed only when using a Deployment or Workspace token.
 
-### Option 1: One repository with multiple permanent branches to multiple Deployments with CI/CD
+### Option 1: Monorepo
 
 <MostCommonBadge/>
 
-When your DAGs are critical to your business, the ability to test your DAGs is critical, as well. Setting up automated deploys from multiple permanent branches of a single repository allows you to implement a robust testing regime for the code you intend to deploy to production. 
+When your DAGs are critical to your business, the ability to test your DAGs is critical, as well. Using a monorepo, you can set up automated deploys from multiple permanent branches of a single repository to enable a robust testing regime for the code you intend to deploy to production.
+
+Within a monorepo, you can also maintain multiple Astro projects, all with Astro Deployments and testing.
 
 This strategy requires:
-- One Astro project.
-- One Astro Workspace for your project.
-- At least two permanent branches in your repository, each representing an environment. Astro recommends naming the branches `main` and `dev`.
-- At least two Astro Deployments, each representing an environment.
+- One Astro Workspace for your project(s).
+- One more more permanent branches in your repository, each representing an environment. Many teams use two permanent branches named `main` and `dev`.
+- One or more Astro Deployments, each representing an environment.
 
 Pros of this approach:
 - You can test code changes to your DAGs in an isolated environment on Astro before deploying the changes to production.
 - It is scaleable: you can map additional branches to additional Deployments, allowing for more testing or ephemeral Deployments for feature development. See [Manage dev Deployments on Astro](manage-dev-deployments). Also, if you work at a larger organization, you can create a Workspace and Astro project for each team or business use case.
-- It supports separate environment configurations. For example, your development Deployment query a development database, and your production Deployment can query a production database without needing complex logic to switch between the two.
+- It supports separate environment configurations. For example, your development Deployment can query a development database, and your production Deployment can query a production database without needing complex logic to switch between the two.
 
 Cons of this approach:
 - Dependencies and environments might be more difficult to manage, to the extent that they differ from project to project.
@@ -66,45 +63,24 @@ For more guidance on setting up CI/CD for deploys to multiple Deployments from a
 
 :::
 
-### Option 2: One repository to one Deployment
+:::info
 
-Creating a single Git repository for each Astro project is the strategy Astronomer recommends for smaller teams in organizations where a single team is responsible for both developing DAGs and maintaining Deployments on Astro.
-
-This strategy requires:
-- One Astro project.
-- One Workspace for your project.
-- One repository.
-- One or multiple Astro Deployments.
-
-Pros of this approach:
-- Your code history and project configuration are centralized, making it easy for developers to contribute changes to DAGs and Deployments while avoiding synchronization problems across files.
-- You don't have to maintain multiple environments for managing dependencies and testing DAGs.
-
-Cons of this approach:
-- You can't easily restrict access to sensitive project settings.
-
-:::info 
-
-Astronomer maintains guides with code templates for a number of popular CI/CD tools. For details about setting up CI/CD workflows, see:
-
-- [Automate actions on Astro](https://www.astronomer.io/docs/astro/automation-overview).
-- [Deploy code with the Astro GitHub integration](https://www.astronomer.io/docs/astro/deploy-github-integration).
+Small teams and organizations getting started on Astro can keep their instances simple with one permanent branch mapped to an Astro Deployment.
 
 :::
 
-### Option 3: Multiple repositories to one Deployment
+### Option 2: Multirepo
 
-A common use case for multiple repositories is keeping Astro Project configuration (such as the `Dockerfile`, `requirements.txt`, or Deployment Configuration-as-Code) separate from DAG code. Astronomer recommends this approach when:
+A common use case for multiple repositories is keeping Astro Project configuration (such as the `Dockerfile`, `requirements.txt`, or Deployment Configuration-as-Code) separate from DAG code. Astronomer recommends a multirepo approach when:
 - You have strict security requirements for who can manage Deployments.
 - You want to minimize complexity for project contributors, automate the creation of Deployments, or manage Deployments more efficiently.
 - You can set up and maintain a somewhat complex CI/CD pipeline.
 
 This strategy requires:
-- One Astro project.
-- One Workspace for your project.
+- A Workspace for your project(s).
 - Multiple repositories.
-- One Astro Deployment.
-- [**DAG-only deploys**](https://www.astronomer.io/docs/astro/deploy-dags#enable-or-disable-dag-only-deploys-on-a-deployment) on the target Deployment and CI/CD pipeline setup for both Git repositories.
+- One or more Astro Deployments.
+- [**DAG-only deploys**](https://www.astronomer.io/docs/astro/deploy-dags#enable-or-disable-dag-only-deploys-on-a-deployment) on the target Deployment and CI/CD pipeline setup for each repository.
 
 Pros of this approach:
 - Keeping project configuration separate from DAG Code enables the use of a single repository for configuring multiple Deployments.
@@ -112,4 +88,4 @@ Pros of this approach:
 
 Cons of this approach:
 - You must keep any local copies of an Astro project synchronized with multiple repositories in order to test Deployment code locally.
-- Team members might have inconsistencies in their local environments if they lack access to the configuration repository. For this reason, Astronomer recommends [setting up a Dev Deployment](manage-dev-deployments) where DAG authors can see and modify project configurations for testing purposes.
+- Team members might have inconsistencies in their local environments if they lack access to the configuration repository. For this reason, Astronomer recommends [setting up a Dev Deployment](manage-dev-deployments) where DAG authors can see and modify project configuration for testing purposes.
