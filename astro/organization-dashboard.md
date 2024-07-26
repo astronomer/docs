@@ -10,9 +10,6 @@ import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
 
 <EnterpriseBadge/>
 
-:::publicpreview
-:::
-
 Astro provides dashboards that share important metrics about your Organization's use of Astro, which you can use to manage Deployments and resources. These dashboards include:
 
 - Organization Overview
