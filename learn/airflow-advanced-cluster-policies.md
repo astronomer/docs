@@ -62,9 +62,9 @@ This means that the DAG processor still parses all DAG files even if you skip on
 Some example implementations include:
 
 - Enforcing a default owner for your DAGs.
-- Enforce certain tags for DAGs, either default or based on conditions.
-- Ensure development DAGs do not run in production.
-- Stop a DAG from being executed by raising an `AirflowClusterPolicyViolation` exception.
+- Enforcing certain tags for DAGs, either default or based on conditions.
+- Ensuring development DAGs do not run in production.
+- Stopping a DAG from being executed by raising an `AirflowClusterPolicyViolation` exception.
 
 Note that the `dag_policy` is applied before the `task_policy` and after the DAG has been completely loaded. Hence, overriding the `default_args` parameter has no effect using `dag_policy`. If you want to override the default operator settings, use task policies instead.
 #### Example
