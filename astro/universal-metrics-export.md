@@ -14,15 +14,17 @@ import HostedBadge from '@site/src/components/HostedBadge';
 :::publicpreview
 :::
 
-You can export comprehensive metrics about your Astro Deployments directly to any third-party monitoring and alerting system using the universal metrics exporter in Astro. This incorporates metrics about your Astro resource use and performance into your existing obsevability tooling, which gives you access to the data you need to right-size Celery workers, Kubernetes executors, and scheduler pods as well as keep you informed about Airflow uptime and task execution status. The universal metrics exporter uses the [Prometheus data model](https://prometheus.io/docs/concepts/data_model/) format using the remote-write capability to export metrics about your Astro Deployments to your preferred monitoring tools.
+You can export comprehensive metrics about your Apache Airflow usage on Astro directly to any third-party monitoring and alerting system using the universal metrics exporter. This gives you unlimited access to all infrastructure metrics that are available to Astronomer and allows you to use your preferred observability tooling, such as Grafana or CloudWatch.
 
-Universal Metrics Export also provides an alternative to other Astro observability tools, such as viewing [Deployment metrics](deployment-metrics.md) and [exporting metrics and logs to Datadog](export-datadog.md), which are limited to [Datadog's supported Airflow metrics](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected).
+While [Deployment Analytics](deployment-metrics.md), [Deployment health incidents](deployment-health-incidents.md), and [exporting metrics and logs to Datadog](export-datadog.md) on Astro can all help you understand your Airflow usage and infrastructure resource consumption, the Universal Metrics Exporter is additionally valuable because it:
 
-With the metrics export, you can configure metrics export at the per-Deployment level. Alternatively, you can define a default metrics exports for your entire Workspace, so that you can create a default process that all Deployments are created with and then later customize at the per-Deployment level.
+- Gives you access to both Kubernetes-level infrastructure metrics as well as task-level execution information specific to Apache Airflow.
+- Provides metrics that aren't available to [Datadog's supported Airflow metrics](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected).
+- Uses the [Prometheus data model](https://prometheus.io/docs/concepts/data_model/) format using the remote-write capability, making it flexible and easy to use.
+- Allows you to configure a metrics export at the per-Deployment level or at the Workspace level.
+- Enables you to customize your observability experience with your tooling and create custom dashboards or alerts that are not currently available in Astro.
 
-The following shows an example dashboard in Grafana created with metrics exported from Astro. See the [Grafana dashboard example](#grafana-example) for more information about how to set it up for yourself.
-
-![Example Grafana dashboard showing a detailed view about DAG behavior and performance created from data exported with the Universal Metrics Exporter.](/img/docs/ume-example-dags.png)
+You can use this information to right-size Celery workers, optimize your usage of the Kubernetes executor, and stay informed about task execution status.
 
 ## Metric types
 
@@ -31,7 +33,7 @@ There are two types of metrics that you can export using the universal metrics e
 - Airflow application level metrics
 - Infrastructure level metrics
 
-Both application and infrastructure metrics have metadata labels associated with them. The following list shows the default standard set of labels that Astro attaches to each metric; however, each metric can also include metric-specific labels as well:
+Both application and infrastructure metrics have metadata labels associated with them. The following list shows the default standard set of labels that Astro attaches to each metric:
 
 - `cloud_provider`
 - `cloud_region`
@@ -43,7 +45,7 @@ Both application and infrastructure metrics have metadata labels associated with
 - `organizationId`
 - `workspaceId`
 
-Use these metadata labels to indentify each individual metric with its corresponding environment in Astro.
+Some metrics additionally include labels that are specific and unique to that metric. Use these metadata labels to identify each individual metric with its corresponding environment in Astro.
 
 ### Airflow application metrics
 
@@ -59,9 +61,9 @@ For example, Airflow application metrics include:
 To see the complete list of Airflow application metrics that Astro supports, see [the Astro StatsD repository](https://github.com/astronomer/ap-vendor/blob/main/statsd-exporter/include/mappings-gen2.yml). To learn more, read the [descriptions of each metric Airflow metrics descriptions in Airflow documentation.
 ](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/metrics.html#metric-descriptions).
 
-### Infrastructure level metrics
+### Infrastructure metrics
 
-Infrastructure level metrics can help you understand information about the individual nodes and pods that run each Airflow component. These metrics indicate the usage, health, and performance of the pods based on your workload and use case. See the table below for the list of infrastructure metrics that Astro supports.
+Infrastructure metrics can help you understand information about the individual Kubernetes nodes and pods that run each Airflow component. These metrics indicate the usage, health, and performance of the pods based on your workload and use case. See the table below for the list of infrastructure metrics that Astro supports.
 
 | Name                                          | Description                                                                                                       |
 | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
@@ -79,7 +81,7 @@ Infrastructure level metrics can help you understand information about the indiv
 - A Prometheus data endpoint
 - Network connectivity between your Astro resources and Prometheus endpoint
 
-### Set up your Prometheus endpoint
+## Set up your Prometheus endpoint
 
 The following list includes the setup instructions of different, commonly used Prometheus endpoints. Use these resources to set up your observability tools to receive metrics exports from Astro.
 
