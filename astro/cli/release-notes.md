@@ -24,7 +24,7 @@ Release date: July 25, 2024
 
 ## Bug fixes
 
-- Fixed a bug where Git ignored all hidden paths, causing Astro to not respect the `.airflowignore` file.
+- Fixed a bug where the CLI ignored files when bundling DAGs for code deploys.
 
 ## Astro CLI 1.28.0
 
