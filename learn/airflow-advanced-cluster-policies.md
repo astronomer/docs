@@ -54,7 +54,7 @@ You can also use the `AirflowClusterPolicySkipDag` exception to skip a DAG. For 
 
 The DAG policy allows you to overwrite or reconfigure a DAG’s parameters based on the criteria you set. It allows you to: 
 
-- Mutate a DAG object after it is loaded in the DagBag.
+- Mutate a DAG object after it is loaded in the `DagBag`.
 - Run code after your DAG has been fully generated. 
 
 This means that the DAG processor still parses all DAG files even if it is skipped using a DAG policy.
