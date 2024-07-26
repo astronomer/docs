@@ -347,6 +347,7 @@ module.exports = {
         'best-practices/dag-writing-on-astro',
         'best-practices/deploy-with-api',
         'best-practices/manage-dev-deployments',
+        'best-practices/manage-resources',
       ],
     },
     {
