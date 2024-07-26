@@ -36,7 +36,7 @@ Only users with **Organization Billing Admin** [user permissions](user-permissio
 
 :::
 
-## Organization Overview
+## Organization overview
 
 The **Organization Overview** dashboard provides at-a-glance summaries about activity across your Organization's Deployments. You can also filter to view summaries for specific Workspaces or Deployments.
 
@@ -54,7 +54,7 @@ Use this dashboard to check that your Deployment has the appropriate resources b
 
 ![View data about Deployment health and DAG success.](/img/docs/dash-deployment-detail.png)
 
-## DAG Run Detail
+## DAG run detail
 
 This dashboard shows the average and median ending time of a specific DAG run, aggregated by a chosen time period, month, week or day. You can use this view to visually inspect when particular DAGs complete their first run, which allows you to see trends over time. Check this dashboard when you make changes to Deployment resources or DAG code to track their effects on performance over time.
 
@@ -90,6 +90,6 @@ In the **Cost Breakdown** dashboard, you can find detailed information about how
 
 ![View the cost of your different Astro resources.](/img/docs/dash-cost-breakdown.png)
 
-## Operator Use
+## Operator use
 
 The **Operator Use** dashboard shows how your Deployments and Workspaces use Operators, as well as how often tasks succeed and fail when using specific operators. Use this data to identify types of operators that could be replaced with more efficient alternatives, or to find operators that fail more than expected. This dashboard provides data to answer the questions, *What are the top operators used across my organization?* and *Which workspace is using the selected operators the most?*.
