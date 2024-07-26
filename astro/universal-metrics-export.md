@@ -133,7 +133,7 @@ If you change the setting from **Restricted** to **Linked to all Deployments**, 
 
 1. Click **Environment** in the main menu and open the **Metrics Export** page.
 2. Click the name of the export target that you want to add per-Deployment field overrides to.
-3. Click **Export sharing** and toggle the setting to choose either:
+3. Click **Deployment Sharing** and toggle the setting to choose either:
    - **Restricted**: Only share individually to Deployments.
    - **Linked to all Deployments**: Link to all current and future Deployments in this Workspace.
 4. (Optional) Change the default field values.
