@@ -16,7 +16,7 @@ Cluster policies are sets of rules that Airflow administrators can define to mut
 
 These policies allow administrators to centrally manage how Airflow users or DAG writers are interacting with the Airflow Cluster. Cluster policies can modify or restrict a user's capability based on organization policy or ensure that users conform to common standards. For example, you might want to ensure all DAGs have `tags` in your production Airflow environment.
 
-Cluster policies can be used to, for example, centrally:
+Here are some common use cases for cluster policies:
 
 - Enforce Task or DAG-level retries
 - Verify a DAG's `catchup` parameter based on production or development environment
@@ -176,7 +176,7 @@ Note that the `pluggy` method is available only in Airflow version 2.6 and above
 
 ### Step 1: Create a package for your policies
 
-The best way to implement cluster policies is to build a package for them that you apply to your Airflow environment. You can add this package to the `plugins` folder of your Astro project and install it by [customizing your `Dockerfile`](https://www.astronomer.io/docs/astro/cli/customize-dockerfile). This method uses `setuptools` entrypoint for your project. Read more about python packaging [here](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/). 
+The simplest way to implement cluster policies is to build a package for them that you apply to your Airflow environment. You can add this package to the `plugins` folder of your Astro project and install it by [customizing your `Dockerfile`](https://www.astronomer.io/docs/astro/cli/customize-dockerfile). This method uses `setuptools` entrypoint for your project. Read more about python packaging [here](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/). 
 
 For example, you can create a package `plugin_package` with the following structure:
 
@@ -185,12 +185,12 @@ plugin/
 │
 ├── src/
 │   ├── __init__.py
-│   ├── plugin_package/
+│   └── plugin_package/
 │       ├── __init__.py
-│       ├── policy.py
+│       └── policy.py
 │
 ├── pyproject.toml
-├── README.md
+└── README.md
 
 ```
 
