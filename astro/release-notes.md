@@ -47,11 +47,12 @@ See [ADD LINK] for more information.
 ### Additional improvements
 
 - Improved the Astro Alerts UI to streamline creating notification channels and alerts across DAGs and Deployments. See [Astro Alerts](https://www.astronomer.io/docs/astro/alerts) for setup information.
-- Added an example Universal Metrics Export dashboard configuration file for Grafana Cloud. See [Export metrics from Astro](https://www.astronomer.io/docs/astro/export-metrics) for setup instructions and the [configuration example- ADD LINK] on GitHub.
+- Added an example Universal Metrics Export dashboard configuration file for Grafana Cloud. See [Export metrics from Astro](https://www.astronomer.io/docs/astro/export-metrics) for setup instructions and the [Grafana Cloud](https://www.astronomer.io/docs/astro/export-metrics#grafana-example) configuration example.
 - Organization Dashboards are now generally available to Enterprise tier customers. See [View Organization Dashboards](https://www.astronomer.io/docs/astro/organization-dashboard) for more information.
 
 ### Bug fixes
 
+- Fixed an issue where if you linked directly to your Astro or Airflow UI, sometimes the link preview would show a 404 error. Now, link previews successfully resolve and include some metadata information.
 - Fixed a bug where the Astro UI would show an error in your Deploy History instead of your Runtime Version, if the Runtime version is `yanked`.
 - Fixed an issue when creating an alert where you couldn't select tasks with the same `task_id` across multiple selected DAGs.
 
