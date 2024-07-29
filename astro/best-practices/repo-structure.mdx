@@ -1,24 +1,24 @@
 ---
-title: 'Organizing code for CI/CD'
-sidebar_label: 'Organizing code for CI/CD'
+title: 'Choose a code repository strategy'
+sidebar_label: 'Repository strategy'
 id: repo-structure
 ---
 
 import MostCommonBadge from '@site/src/components/MostCommonBadge';
 
-Astro supports a range of options when it comes to organizing your project code and setting up Continuous Integration and Continuous Delivery (CI/CD) pipelines for automated deploys to Astro. 
+Astro supports a range of options when it comes to organizing your project code. 
 
 This guide covers the options along with their pros and cons, so you can choose the best option for your team.
 
 ## Feature overview
 
-Astro supports a number of CI/CD strategies. You can:
-1. Use a monorepo: host an Astro project in one repository for deploys to one or multiple Astro Deployments, based, for example, on permanent dev and prod branches with their own Deployments or a single permanent branch.
-2. Use a multirepo: separate your DAGs from other files in your project and maintain multiple repositories linked to one or multiple Astro Deployments.
+Astro supports two basic repository strategies. You can:
+1. Use a **monorepo**: host an Astro project in one repository for deploys to one or multiple Astro Deployments, based, for example, on permanent dev and prod branches with their own Deployments or a single permanent branch. Astronomer recommends this approach for most teams.
+2. Use a **multirepo**: separate your DAGs from other files in your project and maintain multiple repositories linked to one or multiple Astro Deployments. Astronomer recommends this approach for teams needing to meet strict security requirements and teams planning to automate the creation of Deployments.
 
 ## Best practice guidance
 
-Implementing CI/CD is a general software development best practice that enables automated building, testing, merging, and delivery of code. If you haven't yet implemented CI/CD pipelines for your Deployments, benefits of doing so include:
+In addition to choosing a repository strategy suited to your use case, Astronomer recommends implementing CI/CD. Using CI/CD is a general software development best practice that enables automated building, testing, merging, and delivery of code. If you haven't yet implemented CI/CD pipelines for your Deployments, benefits of doing so include:
 - Faster feedback loops.
 - Improved code quality.
 - Streamlined development workflows.
@@ -26,7 +26,7 @@ Implementing CI/CD is a general software development best practice that enables 
 - Less time spent getting code to production.
 - Enhanced collaboration.
 
-Implementation of version control is a longstanding software development best practice that enables:
+Implementing version control is a longstanding software development best practice that enables:
 - Simultaneous collaboration.
 - Easy review of code changes.
 - Safe and secure experimentation on new features and fixes.
@@ -40,7 +40,7 @@ Once you have set up CI/CD, Astronomer recommends [enabling CI/CD enforcement](h
 
 <MostCommonBadge/>
 
-When your DAGs are critical to your business, the ability to test your DAGs is critical, as well. Using a monorepo, you can set up automated deploys from multiple permanent branches of a single repository to enable a robust testing regime for the code you intend to deploy to production.
+When your DAGs are critical to your business, the ability to test your DAGs is critical, as well. Using a monorepo, you can set up automated deploys from multiple branches of a single repository to support multiple Deployments of the same codebase, enabling implementation of robust testing of the code you intend to deploy to production, support for multiple teams, and more.
 
 Within a monorepo, you can also maintain multiple Astro projects, all with Astro Deployments and testing.
 
@@ -51,7 +51,7 @@ This strategy requires:
 
 Pros of this approach:
 - You can test code changes to your DAGs in an isolated environment on Astro before deploying the changes to production.
-- It is scaleable: you can map additional branches to additional Deployments, allowing for more testing or ephemeral Deployments for feature development. See [Manage dev Deployments on Astro](manage-dev-deployments). Also, if you work at a larger organization, you can create a Workspace and Astro project for each team or business use case.
+- It is flexible and scaleable. Mapping branches to additional Deployments allows for permanent testing environments or ephemeral sandbox Deployments for feature testing. See [Manage dev Deployments on Astro](manage-dev-deployments). Also, if you work at a larger organization, you can deploy to different Workspaces and Astro projects to support multiple teams or organize Deployments according to specific business use cases.
 - It supports separate environment configurations. For example, your development Deployment can query a development database, and your production Deployment can query a production database without needing complex logic to switch between the two.
 
 Cons of this approach:
@@ -74,7 +74,7 @@ Small teams and organizations getting started on Astro can keep their instances 
 A common use case for multiple repositories is keeping Astro Project configuration (such as the `Dockerfile`, `requirements.txt`, or Deployment Configuration-as-Code) separate from DAG code. Astronomer recommends a multirepo approach when:
 - You have strict security requirements for who can manage Deployments.
 - You want to minimize complexity for project contributors, automate the creation of Deployments, or manage Deployments more efficiently.
-- You can set up and maintain a somewhat complex CI/CD pipeline.
+- You can set up and maintain a more complex CI/CD pipeline.
 
 This strategy requires:
 - A Workspace for your project(s).
@@ -85,6 +85,7 @@ This strategy requires:
 Pros of this approach:
 - Keeping project configuration separate from DAG Code enables the use of a single repository for configuring multiple Deployments.
 - The possibility of accidental changes to Astro Deployment settings is minimized.
+- You can automate the creation of Deployments and streamline your Deployment management process.
 
 Cons of this approach:
 - You must keep any local copies of an Astro project synchronized with multiple repositories in order to test Deployment code locally.
