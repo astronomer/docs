@@ -53,7 +53,7 @@ Use the following topics to address each of these incidents.
 
 :::info Private Preview: Deployment Health Alerts
 
-You can configure alerts for Deployment health incidents, so that you are automatically notified via Slack, PagerDuty, or email if certain Deployment health incidents occur. See [Astro Alerts](alerts.md) for setup information.
+You can configure alerts for Deployment health incidents so that you are automatically notified via Slack, PagerDuty, or email if certain Deployment health incidents occur. See [Astro Alerts](alerts.md) for setup information.
 
 :::
 
