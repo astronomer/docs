@@ -18,25 +18,7 @@ Astro supports two basic repository strategies. You can:
 
 ## Best practice guidance
 
-In addition to choosing a repository strategy suited to your use case, Astronomer recommends implementing CI/CD and version control. 
-
-Using CI/CD is a general software development best practice that enables automated building, testing, merging, and delivery of code. If you haven't yet implemented CI/CD pipelines for your Deployments, benefits of doing so include:
-- Faster feedback loops.
-- Improved code quality.
-- Streamlined development workflows.
-- Consistent deployments across environments.
-- Less time spent getting code to production.
-- Enhanced collaboration.
-
-Implementing version control is a longstanding software development best practice that enables:
-- Simultaneous collaboration.
-- Easy review of code changes.
-- Safe and secure experimentation on new features and fixes.
-- Improved traceability and auditing.
-
-With a version control system in place, you can set up CI/CD by following the guidance in [Develop a CI/CD workflow for deploying code to Astro](https://astronomer.io/docs/astro/set-up-ci-cd). The option you choose for organizing the code in your shared repository and deploying to Astro should reflect the size and needs of your team. [Deployment API tokens](https://www.astronomer.io/docs/astro/deployment-api-tokens) are required for implementing CI/CD for automated deploys to Astro. 
-
-Once you have set up CI/CD, Astronomer recommends [enabling CI/CD enforcement](https://www.astronomer.io/docs/astro/set-up-ci-cd#enforce-cicd) so that code pushes can be completed only when using a Deployment or Workspace token.
+Depending on your organization's structure and needs, Astronomer recommends either a monorepo or multirepo approach to organizing the code you deploy to Astro. In addition to a repository strategy, Astronomer recommends implementing version control and CI/CD.
 
 ### Option 1: Monorepo
 
@@ -61,13 +43,13 @@ Cons of this approach:
 
 :::tip
 
-For more guidance on setting up CI/CD for deploys to multiple Deployments from a single repository, see [Multiple environments](https://www.astronomer.io/docs/astro/set-up-ci-cd#multiple-environments).
+For guidance on setting up CI/CD for deploys to multiple Deployments from a single repository, see [Multiple environments](https://www.astronomer.io/docs/astro/set-up-ci-cd#multiple-environments).
 
 :::
 
 :::info
 
-Small teams and organizations getting started on Astro can keep their instances simple with one permanent branch mapped to an Astro Deployment.
+Individuals and small teams getting started on Astro can keep their instances simple with one permanent branch mapped to an Astro Deployment.
 
 :::
 
@@ -92,3 +74,25 @@ Pros of this approach:
 Cons of this approach:
 - You must keep any local copies of an Astro project synchronized with multiple repositories in order to test Deployment code locally.
 - Team members might have inconsistencies in their local environments if they lack access to the configuration repository. For this reason, Astronomer recommends [setting up a Dev Deployment](manage-dev-deployments) where DAG authors can see and modify project configuration for testing purposes.
+
+### Also recommended: version control and CI/CD
+
+In addition to choosing a repository strategy suited to your use case, Astronomer recommends implementing version control and CI/CD. 
+
+Implementing version control is a longstanding software development best practice that enables:
+- Simultaneous collaboration.
+- Easy review of code changes.
+- Safe and secure experimentation on new features and fixes.
+- Improved traceability and auditing.
+
+Using CI/CD is a general software development best practice that enables automated building, testing, merging, and delivery of code. If you haven't yet implemented CI/CD pipelines for your Deployments, benefits of doing so include:
+- Faster feedback loops.
+- Improved code quality.
+- Streamlined development workflows.
+- Consistent deployments across environments.
+- Less time spent getting code to production.
+- Enhanced collaboration.
+
+With a version control system in place, you can set up CI/CD by following the guidance in [Develop a CI/CD workflow for deploying code to Astro](https://astronomer.io/docs/astro/set-up-ci-cd). The option you choose for organizing the code in your shared repository and deploying to Astro should reflect the size and needs of your team. [Deployment API tokens](https://www.astronomer.io/docs/astro/deployment-api-tokens) are required for implementing CI/CD for automated deploys to Astro. 
+
+Once you have set up CI/CD, Astronomer recommends [enabling CI/CD enforcement](https://www.astronomer.io/docs/astro/set-up-ci-cd#enforce-cicd) so that code pushes can be completed only when using a Deployment or Workspace token.
