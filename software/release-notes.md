@@ -26,6 +26,28 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## 0.35.2
+
+Release date: July 31, 2024
+
+### End of support for k8s versions 1.25 and 1.26
+
+k8s versions 1.25 and 1.26 are not supported in Software version 0.35.2 and future versions.
+
+### Additional improvements
+
+- Added `priorityClass` support for `fluentd` and `prometheus-node-exporter` daemonsets. See [ADD LINK TO ENV VAR UPDATE].
+- The Astronomer Software UI now lists yanked versions of the Astro Runtime. These versions contain potential bugs and are to be used as per user disccretion. See [ADD LINK Version compatibility reference] for more information about yanked and restricted versions.
+- Updated the configuration so that code deploy revision data and DAG folder PVC cleanup jobs are enabled per Deployment if you use the deploy rollback feature.
+
+### Bug fixes
+
+- Fixed a bug where the DAG server on Openshift platform fails to replace default security context Helm values.
+- Fixed a bug that causes DAG-only deplooys to fail when rollbacks were disabled.
+- Fixed a bug in DAG-only deploys that were causing unhandled exceptions.
+- Fixed a bug that caused the DAG folder PVC to be depleted when a user switches from a DAG-only deploys to any other code deploy type.
+- Fixed a bug in the deploy revision history page in the Astro Software UI that caused the date range query to fail if you set it to less than 90 days for the cleanup policy.
+
 ## 0.35.1
 
 Release date: July 15, 2024
