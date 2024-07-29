@@ -46,7 +46,7 @@ See [ADD LINK] for more information.
 
 ### Additional improvements
 
-- When you link directly to your Astro or Airflow UI, any link previews successfully have improved visuals and now include metadata information.
+- Now, when you link directly to your Astro or Airflow UI, any link previews successfully have improved visuals and include metadata information.
 - Improved the Astro Alerts UI to streamline creating notification channels and alerts across DAGs and Deployments. See [Astro Alerts](https://www.astronomer.io/docs/astro/alerts) for setup information.
 - Added an example Universal Metrics Export dashboard configuration file for Grafana Cloud. See [Export metrics from Astro](https://www.astronomer.io/docs/astro/export-metrics) for setup instructions and [Grafana example](https://www.astronomer.io/docs/astro/export-metrics#grafana-example) for a configuration example.
 - Organization Dashboards are now generally available to Enterprise-tier customers. See [View Organization Dashboards](https://www.astronomer.io/docs/astro/organization-dashboard) for more information.
