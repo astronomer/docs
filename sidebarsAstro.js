@@ -348,6 +348,7 @@ module.exports = {
         'best-practices/deploy-with-api',
         'best-practices/manage-dev-deployments',
         'best-practices/manage-resources',
+        'best-practices/repo-structure',        
       ],
     },
     {
