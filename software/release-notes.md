@@ -30,15 +30,24 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 Release date: July 31, 2024
 
-### End of support for k8s versions 1.25 and 1.26
+### End of support for Kubernetes versions 1.25 and 1.26
 
-k8s versions 1.25 and 1.26 are not supported in Software version 0.35.2 and future versions.
+Kubernetes versions 1.25 and 1.26 are not supported in Software version 0.35.2 and future versions. See [Kubernetes version support table and policy](https://www.astronomer.io/docs/software/version-compatibility-reference#kubernetes-version-support-table-and-policy) for a full list of supported Kubernetes versions and the Software versions they correspond to.
 
 ### Additional improvements
 
-- Added `priorityClass` support for `fluentd` and `prometheus-node-exporter` daemonsets. See [ADD LINK TO ENV VAR UPDATE].
-- The Astronomer Software UI now lists yanked versions of the Astro Runtime. These versions contain potential bugs and are to be used as per user disccretion. See [ADD LINK Version compatibility reference] for more information about yanked and restricted versions.
-- Updated the configuration so that code deploy revision data and DAG folder PVC cleanup jobs are enabled per Deployment if you use the deploy rollback feature.
+- The Astronomer Software UI now lists yanked versions of the Astro Runtime. These versions contain potential bugs and are to be used as per user discretion. See [Restricted Runtime versions](https://www.astronomer.io/docs/software/runtime-version-lifecycle-policy#restricted-runtime-versions) for more information about yanked versions.
+- Updated the configuration so that code deploy revision data and DAG folder PVC cleanup jobs are enabled per Deployment, if you use the deploy rollback feature.
+- Added `priorityClass` support for `fluentd` and `prometheus-node-exporter` daemonsets. Include the following configuration to use:
+
+    ```yaml
+
+    fluentd:
+        priorityClassName: <valid-class-name>
+    prometheus-node-exporter:
+        priorityClassName: <valid-class-name>
+
+  ```
 
 ### Bug fixes
 
