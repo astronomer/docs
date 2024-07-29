@@ -34,13 +34,13 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 :::privatepreview
 :::
 
-This release introduces four new alert types that correspond to four of the existing [Deployment health incident types](https://www.astronomer.io/docs/astro/deployment-health-incidents#deployment-incidents). These new deployment health alerts allows astro to proactively notify you when deployment health issues arise.
+This release introduces four new alert types that correspond to four of the existing [Deployment health incident types](https://www.astronomer.io/docs/astro/deployment-health-incidents#deployment-incidents). These new deployment health alerts allows Astro to proactively notify you when deployment health issues arise.
 
 These alerts:
 
-- Use Astro architecture to identify infrastructure-level incidents that are otherwise hard to monitor
-- Gives you granular information about your Deployment's performance, with more detail than **Healthy** or **Unhealthy**.
-- Incorporates Astro's suggestions about Deployment health into your existing alerting workflows, including email, Slack, Pagerduty, to allow you to respond faster.
+- Use Astro architecture to identify infrastructure-level incidents that are otherwise hard to monitor.
+- Give you granular information about your Deployment's performance, with more detail than **Healthy** or **Unhealthy**.
+- Incorporate Astro's suggestions about Deployment health into your existing alerting workflows, including email, Slack, and Pagerduty, to allow you to respond faster.
 
 See [ADD LINK] for more information.
 
@@ -48,8 +48,8 @@ See [ADD LINK] for more information.
 
 - When you link directly to your Astro or Airflow UI, any link previews successfully have improved visuals and now include metadata information.
 - Improved the Astro Alerts UI to streamline creating notification channels and alerts across DAGs and Deployments. See [Astro Alerts](https://www.astronomer.io/docs/astro/alerts) for setup information.
-- Added an example Universal Metrics Export dashboard configuration file for Grafana Cloud. See [Export metrics from Astro](https://www.astronomer.io/docs/astro/export-metrics) for setup instructions and the [Grafana Cloud](https://www.astronomer.io/docs/astro/export-metrics#grafana-example) configuration example.
-- Organization Dashboards are now generally available to Enterprise tier customers. See [View Organization Dashboards](https://www.astronomer.io/docs/astro/organization-dashboard) for more information.
+- Added an example Universal Metrics Export dashboard configuration file for Grafana Cloud. See [Export metrics from Astro](https://www.astronomer.io/docs/astro/export-metrics) for setup instructions and [Grafana example](https://www.astronomer.io/docs/astro/export-metrics#grafana-example) for a configuration example.
+- Organization Dashboards are now generally available to Enterprise-tier customers. See [View Organization Dashboards](https://www.astronomer.io/docs/astro/organization-dashboard) for more information.
 
 ### Bug fixes
 
