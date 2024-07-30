@@ -143,13 +143,13 @@ The **Customer Managed Identity** Deployment setting is now available on AWS. Th
 
 This can reduce friction when migrating to Astro. See [Attach an IAM role to your Deployment](https://www.astronomer.io/docs/astro/authorize-deployments-to-your-cloud#attach-an-iam-role-to-your-deployment) for detailed information.
 
-### Catatonic Celery worker healer automatically addresses stuck queued tasks
+### Self-healing workers automatically address stuck queued tasks
 
 <HostedBadge/>
 
 A new improvement to the Astro Data Plane now automatically identifies when Celery workers are online and healthy, but not actually processing new tasks. When this happens, it looks like many tasks are stuck in a `queued` state. With this new feature, you will experience a lower frequency of tasks stuck in a `queued` state, which causes performance and reliability issues for your Airflow implementation.
 
-The Catatonic Celery worker healer uses the following process:
+Self-healing workers use the following process:
 
 - It first identifies workers that both have tasks stuck in a `queued` state for an extensive time period and are in Deployments where the concurrency available means that tasks should not be queued.
 - The healer then kills catatonic workers that are not running tasks or shifts workers that are still running tasks into a warm shutdown period.
