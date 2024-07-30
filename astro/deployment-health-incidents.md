@@ -51,6 +51,12 @@ The following table contains all types of Deployment incidents. An **info** inci
 
 Use the following topics to address each of these incidents.
 
+:::info Private Preview: Deployment Health Alerts
+
+You can configure alerts for Deployment health incidents so that you are automatically notified via Slack, PagerDuty, or email if certain Deployment health incidents occur. See [Astro Alerts](alerts.md) for setup information.
+
+:::
+
 ### Scheduler Heartbeat Not Found
 
 The scheduler has not sent a heartbeat for longer than 10 minutes. This could be a sign that the scheduler is down. Tasks will keep running, but new tasks will not be scheduled.

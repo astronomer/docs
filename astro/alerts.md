@@ -4,7 +4,7 @@ title: 'Set up Astro alerts'
 id: alerts
 toc_main_heading_level: 2
 ---
-
+import HostedBadge from '@site/src/components/HostedBadge';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -36,6 +36,27 @@ You can trigger an alert to a notification channel using one of the following tr
 You can only set a task duration trigger for an individual task. Alerting on task group duration is not supported.
 
 :::
+
+#### Deployment health triggers
+
+<HostedBadge/>
+
+:::privatepreview
+:::
+
+In addition to creating trigger types that cause alerts for DAGs, you can also create alerts with triggers that notify you about [Deployment health incidents](deployment-health-incidents.md#deployment-incidents). You can use these alerts for proactive notification when Deployment health issues arise. For example, you can create an alert for when the Airflow metadata database storage is unusually high.
+
+Using Deployment health alerts, you can:
+- Improve alerting coverage beyond DAG and task failures to address infrastructure-level incidents that are otherwise difficult to monitor.
+- Proactively monitor Deployment health and take immediate remediation actions through email, Slack, and PagerDuty to reduce mean time to resolution.
+- Share Deployment health visibility across teams.
+
+You can set the following alerts to send you a notification for specific health incidents:
+
+- **Airflow Database Storage Unusually High**: The alert triggers when the metadata database has tables that are larger than 50GiB (Info) or 75GiB (Warning).
+- **Deprecated Runtime Version**: The alert triggers when your Deployment is using a deprecated Astro Runtime version.
+- **Job Scheduling Disabled**: The alert triggers when the Airflow scheduler is configured to prevent automatic scheduling of new tasks using DAG schedules.
+- **Worker Queue at Capacity**:  The alert triggers when at least one worker queue in this Deployment is running the maximum number of tasks and workers.
 
 ### Notification channels
 
