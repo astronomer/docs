@@ -36,7 +36,6 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 This release introduces four new alert types that correspond to four of the existing [Deployment health incident types](https://www.astronomer.io/docs/astro/deployment-health-incidents#deployment-incidents). These new **Deployment Health Alerts** allows Astro to proactively notify you when Deployment health issues arise.
 
-These alerts:
 
 Using Deployment health alerts, you can:
 - Improve alerting coverage beyond DAG and task failures to address infrastructure-level incidents that are otherwise difficult to monitor.
