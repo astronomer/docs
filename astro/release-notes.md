@@ -40,10 +40,10 @@ These alerts:
 
 Using Deployment health alerts, you can:
 - Improve alerting coverage beyond DAG and task failures to address infrastructure-level incidents that are otherwise difficult to monitor.
-- Proactively monitor Deployment health and take immediate remediation actions through email, Slack, and PagerDuty to reduce average time to resolution.
+- Proactively monitor Deployment health and take immediate remediation actions through email, Slack, and PagerDuty to reduce mean time to resolution.
 - Share Deployment health visibility across teams
 
-See [ADD LINK] for more information.
+See [Astro Alerts: Trigger Types](https://www.astronomer.io/docs/astro/alerts#trigger-types) and [Deployment Health Incidents](https://www.astronomer.io/docs/astro/deployment-health-incidents) for more information.
 
 ### Additional improvements
 
