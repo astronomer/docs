@@ -44,7 +44,7 @@ You can only set a task duration trigger for an individual task. Alerting on tas
 :::privatepreview
 :::
 
-In addition to creating trigger types that cause alerts for DAGs, you can also create alerts with triggers that send alerts for [Deployment health incidents](deployment-health-incidents.md#deployment-incidents). You can use these alerts for proactive notification when Deployment health issues arise. For example, you can create an alert for when the Airflow metadata database storage is unusually high. These alerts:
+In addition to creating trigger types that cause alerts for DAGs, you can also create alerts with triggers that notify you about [Deployment health incidents](deployment-health-incidents.md#deployment-incidents). You can use these alerts for proactive notification when Deployment health issues arise. For example, you can create an alert for when the Airflow metadata database storage is unusually high. These alerts:
 
 Using Deployment health alerts, you can:
 - Improve alerting coverage beyond DAG and task failures to address infrastructure-level incidents that are otherwise difficult to monitor.
