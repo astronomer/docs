@@ -46,9 +46,10 @@ You can only set a task duration trigger for an individual task. Alerting on tas
 
 In addition to creating trigger types that cause alerts for DAGs, you can also create alerts with triggers that send alerts for [Deployment health incidents](deployment-health-incidents.md#deployment-incidents). You can use these alerts for proactive notification when Deployment health issues arise. For example, you can create an alert for when the Airflow metadata database storage is unusually high. These alerts:
 
-- Use Astro architecture to identify infrastructure-level incidents that are otherwise hard to monitor.
-- Give you granular information about your Deployment's performance, with more detail than **Healthy** or **Unhealthy**.
-- Incorporate Astro's suggestions about Deployment health into your existing alerting workflows, including email, Slack, and Pagerduty, to allow you to respond faster.
+Using Deployment health alerts, you can:
+- Improve alerting coverage beyond DAG and task failures to address infrastructure-level incidents that are otherwise difficult to monitor.
+- Proactively monitor Deployment health and take immediate remediation actions through email, Slack, and PagerDuty to reduce average time to resolution.
+- Share Deployment health visibility across teams.
 
 You can set the following alerts to send you a notification for specific health incidents:
 
