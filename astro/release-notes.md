@@ -34,7 +34,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 :::privatepreview
 :::
 
-This release introduces four new alert types that correspond to four of the existing [Deployment health incident types](https://www.astronomer.io/docs/astro/deployment-health-incidents#deployment-incidents). These new Deployment health alerts allows Astro to proactively notify you when Deployment health issues arise.
+This release introduces four new alert types that correspond to four of the existing [Deployment health incident types](https://www.astronomer.io/docs/astro/deployment-health-incidents#deployment-incidents). These new **Deployment Health Alerts** allows Astro to proactively notify you when Deployment health issues arise.
 
 These alerts:
 
