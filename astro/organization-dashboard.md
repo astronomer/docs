@@ -10,12 +10,9 @@ import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
 
 <EnterpriseBadge/>
 
-:::publicpreview
-:::
-
 Astro provides dashboards that share important metrics about your Organization's use of Astro, which you can use to manage Deployments and resources. These dashboards include:
 
-- Organization Explorer
+- Organization Overview
 - Deployment Detail
 - DAG Run Details
 - Cost Breakdown (Hosted only)
@@ -39,9 +36,9 @@ Only users with **Organization Billing Admin** [user permissions](user-permissio
 
 :::
 
-## Organization Explorer
+## Organization overview
 
-The **Organization Explorer** dashboard provides at-a-glance summaries about activity across your Organization's Deployments. You can also filter to view summaries for specific Workspaces or Deployments.
+The **Organization Overview** dashboard provides at-a-glance summaries about activity across your Organization's Deployments. You can also filter to view summaries for specific Workspaces or Deployments.
 
 This dashboard allows you to compare the activity and performances of Deployments to one another. You can identify Deployments, DAGs, or tasks that have had recent behavior changes or are performing in an unexpected way. For example, you can filter the data shown by time period, Workspace name, or Deployment name, to view data such as the number of successful or failed tasks within Workspaces or Deployments. Hovering your cursor over any of the charts brings up a detailed view of the data, indexed by date.
 
