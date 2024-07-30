@@ -25,6 +25,37 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## July 30, 2024
+
+### New alerts for Deployment health incidents
+
+<HostedBadge/>
+
+:::privatepreview
+:::
+
+This release introduces four new alert types that correspond to four of the existing [Deployment health incident types](https://www.astronomer.io/docs/astro/deployment-health-incidents#deployment-incidents). These new **Deployment Health Alerts** allow Astro to proactively notify you when Deployment health issues arise.
+
+
+Using Deployment health alerts, you can:
+- Improve alerting coverage beyond DAG and task failures to address infrastructure-level incidents that are otherwise difficult to monitor.
+- Proactively monitor Deployment health and take immediate remediation actions through email, Slack, and PagerDuty to reduce mean time to resolution.
+- Share Deployment health visibility across teams.
+
+See [Astro Alerts: Trigger Types](https://www.astronomer.io/docs/astro/alerts#trigger-types) and [Deployment Health Incidents](https://www.astronomer.io/docs/astro/deployment-health-incidents) for more information.
+
+### Additional improvements
+
+- Now, when you link directly to your Astro or Airflow UI, any link previews successfully have improved visuals and include metadata information.
+- Improved the Astro Alerts UI to streamline creating notification channels and alerts across DAGs and Deployments. See [Astro Alerts](https://www.astronomer.io/docs/astro/alerts) for setup information.
+- Added an example Universal Metrics Export dashboard configuration file for Grafana Cloud. See [Export metrics from Astro](https://www.astronomer.io/docs/astro/export-metrics) for setup instructions and [Grafana example](https://www.astronomer.io/docs/astro/export-metrics#grafana-example) for a configuration example.
+- Organization Dashboards are now generally available to Enterprise-tier customers. See [View Organization Dashboards](https://www.astronomer.io/docs/astro/organization-dashboard) for more information.
+
+### Bug fixes
+
+- Fixed a bug where the Astro UI would show an error in your Deploy History instead of your Runtime Version, if the Runtime version is `yanked`.
+- Fixed an issue when creating an alert where you couldn't select tasks with the same `task_id` across multiple selected DAGs.
+
 ## July 24, 2024
 
 ### Run your first DAG on Astro with GitHub Integration
@@ -112,13 +143,13 @@ The **Customer Managed Identity** Deployment setting is now available on AWS. Th
 
 This can reduce friction when migrating to Astro. See [Attach an IAM role to your Deployment](https://www.astronomer.io/docs/astro/authorize-deployments-to-your-cloud#attach-an-iam-role-to-your-deployment) for detailed information.
 
-### Catatonic Celery worker healer automatically addresses stuck queued tasks
+### Self-healing workers automatically address stuck queued tasks
 
 <HostedBadge/>
 
 A new improvement to the Astro Data Plane now automatically identifies when Celery workers are online and healthy, but not actually processing new tasks. When this happens, it looks like many tasks are stuck in a `queued` state. With this new feature, you will experience a lower frequency of tasks stuck in a `queued` state, which causes performance and reliability issues for your Airflow implementation.
 
-The Catatonic Celery worker healer uses the following process:
+Self-healing workers use the following process:
 
 - It first identifies workers that both have tasks stuck in a `queued` state for an extensive time period and are in Deployments where the concurrency available means that tasks should not be queued.
 - The healer then kills catatonic workers that are not running tasks or shifts workers that are still running tasks into a warm shutdown period.
