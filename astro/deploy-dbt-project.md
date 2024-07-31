@@ -11,14 +11,16 @@ import HostedBadge from '@site/src/components/HostedBadge';
 
 To orchestrate dbt jobs with Apache Airflow, you need to deploy your dbt project to Astro alongside your DAGs and the rest of your Airflow code. Astro supports a range of options when it comes to adding your dbt project your Airflow deployment.
 
+Depending on your organization's software development lifecycle, your dbt project might live in the same Git repository as your Airflow code or in a different repository. Astronomer supports both methods, but recommends having a dedicated Git repository [Option 2](#option-2-use-dbt-deploys-to-independently-ship-dbt-code) for your dbt code that is separate from your Airflow code. This means your teams working in dbt can remain separate from your teams managing Airflow DAGs.
+
 This guide covers the options along with their pros and cons, so you can choose the best option for your team.
 
 ## Feature overview
 
 Astro supports two basic dbt code deployment strategies. You can:
 
-1. **Include dbt code to your Astro runtime image**: make dbt code directly available in Astro project runtime image. Astronomer recommends this approach for small teams that have a monorepo with their dbt code inside of their Astro project
-2. **Use dbt Deploys to independently ship dbt code**: independently deploy bundles of dbt code directly to Astro. Astronomer recommends this approach for teams that have dbt code in a separate (or in multiple) locations other than their Astro project
+1. **Include dbt code to your Astro runtime image**: make dbt code directly available in Astro project runtime image. This approach works best for small teams just starting out integrating dbt code inside of Astro
+2. **Use dbt Deploys to independently ship dbt code**: independently deploy bundles of dbt code directly to Astro. Astronomer recommends this approach for teams that have dbt code in separate locations other than their Astro project
 
 ## Best practice guidance
 
@@ -57,6 +59,8 @@ If these downsides become applicable to your team, try Option 2.
 
 :::privatepreview
 :::
+
+dbt Deploys allow you to easily deploy your dbt project to Astro without needing complex processes to incorporate your two sets of code. When you use a dbt Deploy, Astro bundles all files in your dbt project and pushes them to Astro, where they are mounted on your Airflow containers so that your DAGs can access them. This allows you to deploy dbt code without requiring you to use a full Astro image deploy.
 
 #### Step 1: (Optional) Deploy your full Astro image
 
