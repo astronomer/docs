@@ -73,7 +73,7 @@ If these downsides become applicable to your team, try Option 2.
 
 dbt Deploys allow you to easily deploy your dbt project to Astro without needing complex processes to incorporate your two sets of code. When you use a dbt Deploy, Astro bundles all files in your dbt project and pushes them to Astro, where they are mounted on your Airflow containers so that your DAGs can access them. This allows you to deploy dbt code without requiring you to use a full Astro image deploy.
 
-#### Step 1: (Optional) Deploy your full Astro image
+### Step 1: (Optional) Deploy your full Astro image
 
 In order to first deploy a dbt project to Astro, Astronomer recommends that you have an Astro project already running on your Deployment with DAGs that need to read from dbt. That way, your dbt project will be read and used when you deploy it.
 
