@@ -82,9 +82,18 @@ astro deploy
 
 ### Step 2: Deploy your dbt project
 
-Next, navigate to the directory of your dbt project. This directory should include the `dbt_project.yml` file, such as the [classic dbt jaffle shop](https://github.com/dbt-labs/jaffle-shop-classic?tab=readme-ov-file) example shown below:
+Next, navigate to the directory of your dbt project. This directory should include the `dbt_project.yml` file, such as the [Classic dbt Jaffle Shop](https://github.com/dbt-labs/jaffle-shop-classic?tab=readme-ov-file) in the following example:
 
-![Jaffle shop project structure](/img/docs/jaffle-shop-project-structure.png)
+```text
+.
+├── etc
+├── models
+├── seeds
+├── .gitignore
+├── LICENSE
+├── README.MD
+└── dbt_project.yml
+```
 
 From the CLI, run the following command to deploy your dbt project. The command prompts you to choose the Deployment that you want to deploy your dbt project to.
 
