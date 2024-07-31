@@ -53,9 +53,9 @@ Kubernetes versions 1.25 and 1.26 are not supported in Software version 0.35.2 a
 
     ```yaml
     astronomer:
-    houston:
+      houston:
         config:
-        deployments:
+          deployments:
             enableListAllRuntimeVersions: true
     ```
 
