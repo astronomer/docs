@@ -68,7 +68,7 @@ If these downsides become applicable to your team, try Option 2.
 
 ### Option 2: Use dbt Deploys to independently ship dbt code
 
-:::privatepreview
+:::publicpreview
 :::
 
 dbt Deploys allow you to easily deploy your dbt project to Astro without needing complex processes to incorporate your two sets of code. When you use a dbt Deploy, Astro bundles all files in your dbt project and pushes them to Astro, where they are mounted on your Airflow containers so that your DAGs can access them. This allows you to deploy dbt code without requiring you to use a full Astro image deploy.
