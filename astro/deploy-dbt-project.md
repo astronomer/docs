@@ -117,7 +117,7 @@ astro dbt deploy --mount-path /usr/local/airflow/dbt/example-dbt-project
 
 Congratulations, you've added your dbt code to your Deployment! Check the [Astro UI](https://cloud.astronomer.io/) to see more information about your dbt Deploy.
 
-![Astro UI with dbt Deploys](/img/docs/astro-ui-with-dbt-deploys.png)
+![Astro UI with dbt Deploys](/img/docs/dbt-deploy-example.png)
 
 ### Delete your dbt project
 
