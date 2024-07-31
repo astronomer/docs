@@ -9,8 +9,6 @@ import HostedBadge from '@site/src/components/HostedBadge';
 
 <HostedBadge/>
 
-:::publicpreview
-:::
 
 To orchestrate dbt jobs with Apache Airflow, you need to deploy your dbt project to Astro alongside your DAGs and the rest of your Airflow code. Astro supports a range of options when it comes to adding your dbt project to your Astro Deployment.
 
