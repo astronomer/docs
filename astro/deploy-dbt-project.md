@@ -12,7 +12,7 @@ import HostedBadge from '@site/src/components/HostedBadge';
 :::publicpreview
 :::
 
-To orchestrate dbt jobs with Apache Airflow, you need to deploy your dbt project to Astro alongside your DAGs and the rest of your Airflow code. Astro supports a range of options when it comes to adding your dbt project your Airflow deployment.
+To orchestrate dbt jobs with Apache Airflow, you need to deploy your dbt project to Astro alongside your DAGs and the rest of your Airflow code. Astro supports a range of options when it comes to adding your dbt project to your Astro Deployment.
 
 Depending on your organization's software development lifecycle, your dbt project might live within your Astro project, in the same Git repository, in an entirely different repository. Astronomer supports all of these methods, but recommends having a single Git repository with your dbt project and Astro project in different directories, and then using [Option 2](#option-2-use-dbt-deploys-to-independently-ship-dbt-code). This means that your teams working in dbt can remain separate from your teams managing Airflow DAGs, but they can all see shared code in one place. 
 
