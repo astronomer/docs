@@ -11,16 +11,16 @@ import HostedBadge from '@site/src/components/HostedBadge';
 
 To orchestrate dbt jobs with Apache Airflow, you need to deploy your dbt project to Astro alongside your DAGs and the rest of your Airflow code. Astro supports a range of options when it comes to adding your dbt project your Airflow deployment.
 
-Depending on your organization's software development lifecycle, your dbt project might live in the same Git repository as your Airflow code or in a different repository. Astronomer supports both methods, but recommends having a dedicated Git repository [Option 2](#option-2-use-dbt-deploys-to-independently-ship-dbt-code) for your dbt code that is separate from your Airflow code. This means your teams working in dbt can remain separate from your teams managing Airflow DAGs.
+Depending on your organization's software development lifecycle, your dbt project might live within your Astro project, in the same Git repository, in an entirely different repository. Astronomer supports all of these methods, but recommends having a single Git repository with your dbt project and Astro project in different directories, and then using [Option 2](#option-2-use-dbt-deploys-to-independently-ship-dbt-code). This means that your teams working in dbt can remain separate from your teams managing Airflow DAGs, but they can all see shared code in one place. 
 
-This guide covers the options along with their pros and cons, so you can choose the best option for your team.
+This guide covers the options for attaching dbt code to Astro deployments, along with their pros and cons, so you can choose the best option for your team.
 
 ## Feature overview
 
 Astro supports two basic dbt code deployment strategies. You can:
 
 1. **Include dbt code to your Astro runtime image**: make dbt code directly available in Astro project runtime image. This approach works best for small teams just starting out integrating dbt code inside of Astro
-2. **Use dbt Deploys to independently ship dbt code**: independently deploy bundles of dbt code directly to Astro. Astronomer recommends this approach for teams that have dbt code in separate locations other than their Astro project
+2. **Use dbt Deploys to independently ship dbt code**: independently deploy bundles of dbt code directly to Astro. Astronomer recommends this approach for teams that have dbt code in locations other than their Astro project
 
 ## Best practice guidance
 
