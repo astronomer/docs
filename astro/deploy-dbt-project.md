@@ -84,7 +84,7 @@ astro deploy
 
 Next, navigate to the directory of your dbt project. This directory should include the `dbt_project.yml` file, such as the [classic dbt jaffle shop](https://github.com/dbt-labs/jaffle-shop-classic?tab=readme-ov-file) example shown below:
 
-![Jaffle shop project structure](/img/docs/reset-password.png)
+![Jaffle shop project structure](/img/docs/jaffle-shop-project-structure.png)
 
 From the CLI, run the following command to deploy your dbt project. The command prompts you to choose the Deployment that you want to deploy your dbt project to.
 
@@ -108,7 +108,7 @@ astro dbt deploy --mount-path /usr/local/airflow/dbt/example-dbt-project
 
 Congrats, you've added your dbt code to your deployment! Check the Astro UI to see more information about your dbt Deploy.
 
-![Astro UI with dbt Deploys](/img/docs/reset-password.png)
+![Astro UI with dbt Deploys](/img/docs/astro-ui-with-dbt-deploys.png)
 
 ### Delete your dbt project
 
