@@ -41,13 +41,10 @@ Kubernetes versions 1.25 and 1.26 are not supported in Software version 0.35.2 a
 - Added `priorityClass` support for `fluentd` and `prometheus-node-exporter` daemonsets. Include the following configuration to use this functionality.
 
     ```yaml
-
     fluentd:
-        priorityClassName: <valid-class-name>
+      priorityClassName: <valid-class-name>
     prometheus-node-exporter:
-        priorityClassName: <valid-class-name>
-
-  ```
+      priorityClassName: <valid-class-name>
 
 ### Behavior changes
 
@@ -63,7 +60,7 @@ Kubernetes versions 1.25 and 1.26 are not supported in Software version 0.35.2 a
 - Fixed a bug that causes DAG-only deploys to fail when rollbacks were disabled.
 - Fixed a bug in DAG-only deploys that were causing unhandled exceptions.
 - Fixed a bug that caused the DAG folder PVC to be depleted when a user switches from DAG-only deploys to any other code deploy type.
-- Fixed a bug in the deploy revision history page in the Astro Software UI that caused the date range query to fail if you set it to less than 90 days for the cleanup policy.
+- Fixed a bug in the deploy revision history page in the Astronomer Software UI that caused the date range query to fail if you set it to less than 90 days for the cleanup policy.
 
 ## 0.35.1
 

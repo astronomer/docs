@@ -188,9 +188,9 @@ If an Astro Runtime version isn't included in this section, then there are no sp
 
 #### Runtime 11 (Airflow 2.9)
 
-##### Restricted versions of Runtime 11
+##### Yanked versions of Runtime 11
 
-You cannot create new Deployments or upgrade to the following versions of Runtime 11, which are `yanked`. These [restricted runtime versions](runtime-version-lifecycle-policy.mdx#restricted-runtime-versions) prevent you from upgrading to or creating a Deployment with a version that contains a known limitation or bug.
+Use caution if you create new Deployments or upgrade to the following versions of Runtime 11, which are `yanked`. These [Runtime versions](runtime-version-lifecycle-policy.mdx#restricted-runtime-versions) warn you about upgrading to or creating a Deployment with a version that contains a known limitation or bug.
 
 - 11.0.0
 - 11.1.0
@@ -201,9 +201,9 @@ In Airflow 2.9, a bug affecting custom actions in Airflow plugins ([#39421](http
 
 #### Runtime 9 (Airflow 2.7)
 
-##### Restricted versions of Runtime 9
+##### Yanked versions of Runtime 9
 
-You cannot create new Deployments or upgrade to the following versions of Runtime 9, which are `yanked`. These [restricted runtime versions](runtime-version-lifecycle-policy.mdx#restricted-runtime-versions) prevent you from upgrading to or creating a Deployment with a version that contains a known limitation or bug.
+Use caution if you create new Deployments or upgrade to the following versions of Runtime 9, which are `yanked`. These [Runtime versions](runtime-version-lifecycle-policy.mdx#restricted-runtime-versions) warn you about upgrading to or creating a Deployment with a version that contains a known limitation or bug.
 
 - 9.0.0
 - 9.1.0
@@ -231,7 +231,7 @@ To continue using these packages with a compatible version of Python, upgrade to
 
 #### Runtime 8 (Airflow 2.6)
 
-Astro Runtime version 8.0.0 is a restricted version of the Astro Runtime (`yanked`), which means you can't create Deployments on Astro with this runtime version. These [restricted runtime versions](runtime-version-lifecycle-policy.mdx#restricted-runtime-versions) prevent you from upgrading to or creating a Deployment with a version that contains a known limitation or bug.
+Astro Runtime version 8.0.0 is a `yanked` version of the Astro Runtime, which means you are advised not to create Deployments with this runtime version. These [Runtime versions](runtime-version-lifecycle-policy.mdx#restricted-runtime-versions) warn you about upgrading to or creating a Deployment with a version that contains a known limitation or bug.
 
 ##### Breaking change to `apache-airflow-providers-cncf-kubernetes` in version 8.4.0
 
