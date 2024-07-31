@@ -89,7 +89,7 @@ The following list includes the setup instructions of different, commonly used P
 - [Coralogix](https://coralogix.com/docs/prometheus/)
 - [Cribl](https://docs.cribl.io/stream/4.2/sources-prometheus-remote-write/)
 - [Elastic](https://www.elastic.co/guide/en/beats/metricbeat/current/metricbeat-metricset-prometheus-remote_write.html)
-- [Grafana Cloud](https://grafana.com/docs/grafana-cloud/monitor-infrastructure/kubernetes-monitoring/configuration/configure-infrastructure-manually/prometheus/)
+- [Grafana Cloud](https://grafana.com/docs/grafana-cloud/send-data/metrics/metrics-prometheus/#send-data-from-a-prometheus-instance )
 - [Logz.io](http://Logz.iohttps://docs.logz.io/docs/shipping/other/prometheus-remote-write/)
 - [New Relic](https://docs.newrelic.com/docs/infrastructure/prometheus-integrations/install-configure-remote-write/set-your-prometheus-remote-write-integration/)
 - [Sysdig](https://docs.sysdig.com/en/docs/installation/sysdig-monitor/install-prometheus-remote-write/#configure-remote-write-in-prometheus-server)
