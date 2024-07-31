@@ -214,6 +214,10 @@ components:
           items:
             type: string
           type: array
+        kubeDnsIp:
+          description: The IP address of the kube-dns service.
+          example: 10.100.100.0
+          type: string
         oidcIssuerUrl:
           description: OIDC issuer URL for the cluster
           example: https://westus2.oic.prod-aks.azure.com/b84efac8-cfae-467a-b223-23b9aea1486d/3075f79e-abc2-4602-a691-28117197e83d/
@@ -541,6 +545,7 @@ components:
           - SMALL
           - MEDIUM
           - LARGE
+          - EXTRA_LARGE
           example: MEDIUM
           type: string
         type:
@@ -905,6 +910,7 @@ components:
           - SMALL
           - MEDIUM
           - LARGE
+          - EXTRA_LARGE
           example: MEDIUM
           type: string
         type:
@@ -1257,6 +1263,7 @@ components:
           - SMALL
           - MEDIUM
           - LARGE
+          - EXTRA_LARGE
           example: MEDIUM
           type: string
         status:
@@ -2090,6 +2097,7 @@ components:
           - SMALL
           - MEDIUM
           - LARGE
+          - EXTRA_LARGE
           type: string
         spec:
           $ref: '#/components/schemas/MachineSpec'
@@ -2229,6 +2237,7 @@ components:
           - SMALL
           - MEDIUM
           - LARGE
+          - EXTRA_LARGE
           example: MEDIUM
           type: string
         type:
@@ -2520,6 +2529,7 @@ components:
           - SMALL
           - MEDIUM
           - LARGE
+          - EXTRA_LARGE
           example: MEDIUM
           type: string
         type:
