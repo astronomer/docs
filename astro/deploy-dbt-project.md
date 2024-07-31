@@ -83,7 +83,7 @@ If you are using a new Deployment, first deploy your Astro project with the Astr
 astro deploy
 ```
 
-#### Step 2: Deploy your dbt project
+### Step 2: Deploy your dbt project
 
 Next, navigate to the directory of your dbt project. This directory should include the `dbt_project.yml` file, such as the [classic dbt jaffle shop](https://github.com/dbt-labs/jaffle-shop-classic?tab=readme-ov-file) example shown below:
 
