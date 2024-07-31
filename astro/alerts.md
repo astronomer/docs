@@ -22,7 +22,7 @@ To configure Airflow notifications, see [Airflow email notifications](airflow-em
 
 Each Astro alert has a notification channel and a trigger type. The notification channel determines the format and destination of an alert, and the trigger type defines what causes the alert trigger.
 
-### Trigger types
+### DAG & task alerts
 
 You can trigger an alert to a notification channel using one of the following trigger types:
 
@@ -37,7 +37,7 @@ You can only set a task duration trigger for an individual task. Alerting on tas
 
 :::
 
-#### Deployment health triggers
+### Deployment health alerts
 
 <HostedBadge/>
 
@@ -58,7 +58,7 @@ You can set the following alerts to send you a notification for specific health 
 - **Job Scheduling Disabled**: The alert triggers when the Airflow scheduler is configured to prevent automatic scheduling of new tasks using DAG schedules.
 - **Worker Queue at Capacity**:  The alert triggers when at least one worker queue in this Deployment is running the maximum number of tasks and workers.
 
-### Notification channels
+## Notification channels
 
 You can send Astro alerts to the following notification channels
 
