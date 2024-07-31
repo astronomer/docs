@@ -30,7 +30,7 @@ For more information and recommendations on using dbt with Apache Airflow and As
 
 Astro supports two basic dbt code deployment strategies. You can:
 
-1. **Include dbt code to your Astro runtime image**: make dbt code directly available in Astro project runtime image. This approach works best for small teams just starting out integrating dbt code inside of Astro
+1. **Include dbt code in your Astro project**: Make dbt code directly available in the Docker image powered by Astro Runtime that contains your Astro project. This approach works best for small teams just starting out integrating dbt code inside of Astro
 2. **Use dbt Deploys**: Independently deploy bundles of dbt code directly to Astro, outside of the context of your Astro project and Docker image. Astronomer recommends this approach for teams that have dbt code in a dedicated directory or Git repository.
 
 ## Best practice guidance
