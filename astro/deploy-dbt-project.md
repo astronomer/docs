@@ -13,7 +13,7 @@ Astro supports a range of options when it comes to adding your dbt project to yo
 
 This guide includes information on the different options your team has for deploying dbt code to Apache Airflow and Astro. Your team can choose the option that best fits your team's software development lifecycle.
 
-For more information and recommendations on using dbt with Apache Airflow and Astro, see [Orchestrate dbt Core jobs with Airflow and Cosmos](airflow-dbt.md).
+For more information and recommendations on using dbt with Apache Airflow and Astro, see [Orchestrate dbt Core jobs with Airflow and Cosmos](/learn/airflow-dbt.md).
 
 ## Repository strategy
 
