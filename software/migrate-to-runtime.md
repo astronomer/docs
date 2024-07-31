@@ -41,7 +41,6 @@ astronomer:
         enableListAllRuntimeVersions: true
 ```
 
-If you use the dotted notation, use the configuration `astronomer.houston.config.deployments.enableListAllRuntimeVersions=true`. 
 After enabling this configuration, the System Administrator can see the equivalent version of Astro Runtime in the **Migrate to Runtime-[Version number]** button. Note that all AC equivalent Runtime versions prior to 2.2.5 are deprecated.
 
 ## Astronomer Houston API migration considerations

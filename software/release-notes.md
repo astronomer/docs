@@ -59,8 +59,6 @@ Kubernetes versions 1.25 and 1.26 are not supported in Software version 0.35.2 a
             enableListAllRuntimeVersions: true
     ```
 
-Or use the alternative dot notation configuration, `astronomer.houston.config.deployments.enableListAllRuntimeVersions=true`.
-
 ### Bug fixes
 
 - Fixed a bug where the DAG server on Openshift platform failed to replace default security context Helm values.
