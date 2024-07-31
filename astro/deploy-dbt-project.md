@@ -11,6 +11,12 @@ import HostedBadge from '@site/src/components/HostedBadge';
 
 Astro supports a range of options when it comes to adding your dbt project to your Deployment. To orchestrate dbt jobs with Apache Airflow, you first need to deploy your dbt project to Astro along with your DAGs and the rest of your Airflow code.
 
+This guide includes information on the different options your team has for deploying dbt code to Apache Airflow and Astro. Your team can choose the option that best fits your team's software development lifecycle.
+
+For more information and recommendations on using dbt with Apache Airflow and Astro, see [Orchestrate dbt Core jobs with Airflow and Cosmos](airflow-dbt.md).
+
+## Repository strategy
+
 Depending on your organization's software development lifecycle, there are three ways you can organize your dbt project relative to your Astro project:
 
 - In the same Git repository and directory as your Astro project.
@@ -19,30 +25,21 @@ Depending on your organization's software development lifecycle, there are three
 
 Astro supports all three methods, but recommends having your dbt project in the same Git repository as your Astro project, but in a different directory. Then, you can use dbt deploys to independently deploy dbt code to Astro from your dbt directory, without needing to deploy either a full Astro project image or your DAGs. This strategy allows your team that maintains dbt to work independently from your team managing Airflow DAGs, but team members can all see shared code in a single Git repository.
 
-This guide includes information on the different options your team has for deploying dbt code to Apache Airflow and Astro. Your team can choose the option that best fits your team's software development lifecycle.
-
-For more information and recommendations on using dbt with Apache Airflow and Astro, see [Orchestrate dbt Core jobs with Airflow and Cosmos](airflow-dbt.md).
+You can see additional recommendations for Astro repository strategy, in the [Repo strategy best practices](/best-practices/repo-structure.md) guide.
 
 ## Feature overview
 
-Astro supports two basic dbt code deployment strategies. You can:
+Astro supports two basic dbt code deploy strategies. You can:
 
-1. **Include dbt code in your Astro project**: Make dbt code directly available in the Docker image powered by Astro Runtime that contains your Astro project. This approach works best for small teams just starting out integrating dbt code inside of Astro
-2. **Use dbt Deploys**: Independently deploy bundles of dbt code directly to Astro, outside of the context of your Astro project and Docker image. Astronomer recommends this approach for teams that have dbt code in a dedicated directory or Git repository.
+- **Include dbt code in your Astro project**: Make dbt code directly available in the Docker image powered by Astro Runtime that contains your Astro project. This approach works best for small teams just starting to integrate dbt code in Astro.
+- **Use dbt Deploys**: Independently deploy bundles of dbt code directly to Astro, outside of the context of your Astro project and Docker image. Astronomer recommends this approach for teams that have dbt code in a dedicated directory or Git repository.
 
-## Prerequisites
-
-- An Astro Deployment
-- An Astro project. Astronomer supports both dbt Cloud and dbt Core.
-- A dbt project
-- The [Astro CLI v1.28 or greater](https://www.astronomer.io/docs/astro/cli/install-cli)
-
-## Option 1: Include dbt code in your Astro runtime image {#option-1}
+## Option 1: Include dbt code in your Astro project {#option-1}
 
 The most direct way to set up dbt on Astro is by including dbt code in your full image. To accomplish this, Astronomer recommends adding the directory `/dbt` to the top-level of your Astro project and including individual dbt projects inside of this directory.
 
 :::tip
-To see an example of this pattern , check out the demo repository of [Astronomer Cosmos](https://github.com/astronomer/cosmos-demo).
+To see an example of this pattern, check out the demo repository of [Astronomer Cosmos](https://github.com/astronomer/cosmos-demo).
 :::
 
 Finally, to push your new dbt code to your Deployment, perform a deploy with the Astro CLI by running:
@@ -65,6 +62,13 @@ If these downsides become applicable to your team, try Option 2.
 :::
 
 dbt Deploys allow you to easily deploy your dbt project to Astro without needing complex processes to incorporate your two sets of code. When you use a dbt Deploy, Astro bundles all files in your dbt project and pushes them to Astro, where they are mounted on your Airflow containers so that your DAGs can access them. This allows you to deploy dbt code without requiring you to use a full Astro image deploy.
+
+### Prerequisites
+
+- An Astro Deployment
+- An Astro project. Astronomer supports both dbt Cloud and dbt Core.
+- A dbt project
+- The [Astro CLI v1.28 or greater](https://www.astronomer.io/docs/astro/cli/install-cli)
 
 ### Step 1: (Optional) Deploy your full Astro image
 
