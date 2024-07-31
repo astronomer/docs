@@ -138,8 +138,10 @@ You can add a view to render a simple templated HTML file on top of the Airflow 
 2. Within that folder create a HTML file called `test.html` and copy the collowing code into it:
 
     ```html
-    <!DOCTYPE html>
-    <p>Airflow is {{ content }}!</p>
+    {% extends "appbuilder/base.html" %}
+    {% block content %}
+        <p>Airflow is {{ content }}!</p>
+    {% endblock %}
     ```
 
 3. In the `plugins` directory, add a Python file called `my_first_view_plugin.py`. Copy the code below.

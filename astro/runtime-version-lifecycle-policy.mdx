@@ -5,11 +5,9 @@ id: runtime-version-lifecycle-policy
 description: "Learn how Astronomer releases and maintains versions of Astro Runtime."
 ---
 
-import LifecycleTable from "../docs-partials/runtime-lifecycle-table.mdx";
+Astro Runtime is a production ready, data orchestration tool based on Apache Airflow that is distributed as a Docker image and is required by all Astronomer products. It is intended to provide organizations with improved functionality, reliability, efficiency, and performance. Deploying Astro Runtime is a requirement if your organization is using Astro.
 
-Astro Runtime is a production-ready data orchestration tool based on Apache Airflow that is distributed as a Docker image and required by all Astronomer products. It provides organizations with improved functionality, reliability, efficiency, and performance in their pipelines. Deploying Astro Runtime is a requirement if your organization is using Astro.
-
-Astronomer maintenance and lifecycle policies are part of the distribution. These policies define: 
+Astronomer maintenance and lifecycle policies are part of the distribution. These policies define:
 - The maintenance window for specific Astro Runtime versions.
 - The frequency of updates.
 
@@ -79,6 +77,8 @@ Astronomer continuously checks for available security fixes for software used in
 
 If a vulnerability is not yet addressed in a third-party dependency and no official fix is available, Astronomer attempts to address the vulnerability or its impact with environmental mitigations. Whenever possible, Astronomer collaborates with the upstream project to support a timely delivery of the official fix. This process also covers images publicly available on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags) and provides context for their vulnerability scanning results.
 
+Astro Runtime releases may or may not include a fix to a Common Vulnerability and Exposure (CVE).  When you use a particular Astro Runtime version the day of release, the CVE fixes that version contains might be undisclosed. For security purposes, a description of these fixes will be retroactively added to release notes only once the CVE resolution is published or announced by the upstream project.
+
 If you identify a vulnerability that results in relevant risk for your organization, contact [Astronomer security](mailto:security@astronomer.io).
 
 ### Backport policy for bug and security fixes
@@ -91,4 +91,25 @@ Occasionally, Astronomer might deviate from the defined response policy and back
 
 ## Astro Runtime lifecycle schedule
 
-<LifecycleTable />
+The following table contains the exact lifecycle for each published version of Astro Runtime. These timelines are based on the LTS and Stable [release channel maintenance policies](#release-channels).
+
+| Runtime version                                                       | Airflow version | Release date       | End of maintenance date |
+| --------------------------------------------------------------------- | --------------- | ------------------ | ----------------------- |
+| [9](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-900) (LTS) | 2.7             | August 18, 2023    | January 2025            |
+| [11](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-1100) (LTS)     | 2.9             | April 8, 2024      | October 2025            |
+
+If you have any questions or concerns, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
+
+## Legacy Astro Runtime versions
+
+The following table contains all major Runtime releases that are no longer supported. Astronomer is not obligated to answer support questions regarding these versions.
+
+| Runtime version                                       | Airflow version | Release date     | End of maintenance date |
+| ----------------------------------------------------- | --------------- | ---------------- | ----------------------- |
+| [3](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-300)       | 2.1.1           | August 12, 2021    | February 2022           |
+| [4](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-400) (LTS) | 2.2             | March 10, 2022     | September 2023          |
+| [5](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-500) (LTS) | 2.3             | April 30, 2022     | April 2024              |
+| [6](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-600) (LTS) | 2.4             | September 19, 2022 | March 2024              |
+| [7](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-700)       | 2.5             | December 3, 2022   | July 2023               |
+| [8](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-800)       | 2.6             | April 30, 2023     | November 2023           |
+| [10](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-1000)     | 2.8             | December 18, 2023  | June 2024               |

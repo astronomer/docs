@@ -15,6 +15,14 @@ In this guide you learn:
 - Which Airflow features and integrations are especially useful for MLOps.
 - Where to find additional resources and reference implementations on using Airflow for MLOps.
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Introduction to GenAI with Apache Airflow®](https://academy.astronomer.io/introduction-to-genai-with-apache-airflow) module.
+
+:::
+
 :::tip  
 
 Ready to get started? Check out the recommended resources that showcase machine learning (ML) implementations with Airflow:

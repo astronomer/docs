@@ -19,11 +19,179 @@ import BusinessBadge from '@site/src/components/BusinessBadge';
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro CLI Version**: {{CLI_VER_LATEST}} ([Release notes](runtime-release-notes.md))
+**Latest Astro CLI Version**: {{CLI_VER_LATEST}} ([Release notes](cli/release-notes.md))
 
 **Latest Astro Runtime Version**: {{RUNTIME_VER}} ([Release notes](runtime-release-notes.md))
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
+
+## July 30, 2024
+
+### New alerts for Deployment health incidents
+
+<HostedBadge/>
+
+:::privatepreview
+:::
+
+This release introduces four new alert types that correspond to four of the existing [Deployment health incident types](https://www.astronomer.io/docs/astro/deployment-health-incidents#deployment-incidents). These new **Deployment Health Alerts** allow Astro to proactively notify you when Deployment health issues arise.
+
+
+Using Deployment health alerts, you can:
+- Improve alerting coverage beyond DAG and task failures to address infrastructure-level incidents that are otherwise difficult to monitor.
+- Proactively monitor Deployment health and take immediate remediation actions through email, Slack, and PagerDuty to reduce mean time to resolution.
+- Share Deployment health visibility across teams.
+
+See [Astro Alerts: Trigger Types](https://www.astronomer.io/docs/astro/alerts#trigger-types) and [Deployment Health Incidents](https://www.astronomer.io/docs/astro/deployment-health-incidents) for more information.
+
+### Additional improvements
+
+- Now, when you link directly to your Astro or Airflow UI, any link previews successfully have improved visuals and include metadata information.
+- Improved the Astro Alerts UI to streamline creating notification channels and alerts across DAGs and Deployments. See [Astro Alerts](https://www.astronomer.io/docs/astro/alerts) for setup information.
+- Added an example Universal Metrics Export dashboard configuration file for Grafana Cloud. See [Export metrics from Astro](https://www.astronomer.io/docs/astro/export-metrics) for setup instructions and [Grafana example](https://www.astronomer.io/docs/astro/export-metrics#grafana-example) for a configuration example.
+- Organization Dashboards are now generally available to Enterprise-tier customers. See [View Organization Dashboards](https://www.astronomer.io/docs/astro/organization-dashboard) for more information.
+
+### Bug fixes
+
+- Fixed a bug where the Astro UI would show an error in your Deploy History instead of your Runtime Version, if the Runtime version is `yanked`.
+- Fixed an issue when creating an alert where you couldn't select tasks with the same `task_id` across multiple selected DAGs.
+
+## July 24, 2024
+
+### Run your first DAG on Astro with GitHub Integration
+
+Now, when you first set up your Astro account, you can choose to connect your GitHub account and run a sample Astro project template and DAG. Previously, to run your first DAG on Astro, you needed to either download and use the Astro CLI or work with GitHub Actions. Now, the onboarding process allows you to customize your first experience with Astro to focus on your use case, whether that's Business Operations, Generative AI, or learning Airflow, and set up a GitHub Integration to quickly clone and deploy the example DAGs. Try it now with [Start Astro](https://cloud.astronomer.io/start-astro).
+
+### Work with dbt projects on Astro
+
+<HostedBadge/>
+
+:::privatepreview
+:::
+
+You can now deploy dbt code to Astro quickly and independently of your DAG or image deploys. Data build tool (dbt) core is an open source tool for data transformation that uses SQL to transform your data instead of Python in your DAGs. You can also use both Cosmos, an open source tool that integrates dbt models into Airflow and treats them like DAGs, and dbt deploys on Astro to have unparalleled visibility into your dbt tasks with the Airflow UI and a streamlined code deploy process.
+
+See [Deploy dbt projects](https://www.astronomer.io/docs/astro/deploy-dbt-project) for more information about how to get started.
+
+### Additional improvements
+
+- Improved how the GitHub Integration in the Astro UI links directly to the Astro Project in a GitHub repository.
+- (*Astro Hosted only*) The customer managed workload identity setting for Deployments is now generally available. This allows you to grant Astro Deployments all of the permissions of an AWS IAM role. See [Attach an IAM role to your Deployment](https://www.astronomer.io/docs/astro/authorize-deployments-to-your-cloud#attach-an-iam-role-to-your-deployment) for detailed information.
+- The ability to deploy automatically from GitHub using the official Astro GitHub integration is now generally available. See [Deploy code with GitHub](https://www.astronomer.io/docs/astro/deploy-github-integration) for setup steps.
+- Astro Runtime version 11 is now classified as Long Term Support (LTS). This means that instead of being supported until October 2024, Astro will support Runtime version 11 until October 2025. See the [Astro Runtime maintenance and lifecycle schedule](https://www.astronomer.io/docs/astro/runtime-version-lifecycle-policy) for more information, including information about restricted versions.
+
+### Bug fixes
+
+- Fixed some bugs in the Astro UI for defining ephemeral storage to show storage limits, fix maximum pod size for storage, and add storage for default pod size.
+
+## July 16, 2024
+
+### Additional improvements
+
+- Added the following metrics to [Metrics Export](https://www.astronomer.io/docs/astro/export-metrics):
+    - The new `airflow_executor_open_slots`, `airflow_dagrun_dependency-check`, and `airflow_dagrun_dependency-check.<dag_id>` metrics allow you to collect metrics about your DAGs and executor status.
+    - Monitor task execution with `kube_pod_container_resource_limits`. This new metric enables you to track resource use against the configured limits so you can understand if task execution meets your configured CPU, memory, or storage limits for your Celery Workers or Kubernetes Executor and KubernetesPodOperator pods.
+- Added new suporting documentation for the Astro Terraform Provider, including a Getting Started guide and code examples for common uses. Read [Astro Terraform Provider](https://www.astronomer.io/docs/astro/terraform-provider) for more information.
+
+### Bug fixes
+
+- Fix an error where start times in the UI were different from actual DAG run trigger times.
+
+## July 9, 2024
+
+### Additional improvements
+
+- Fixed a bug that prevented adding a date input for a DAG filter in the Astro UI.
+
+## July 2, 2024
+
+### Export metrics about your Astro Deployments to observability tools
+
+<TeamBadge/>
+
+:::publicpreview
+:::
+
+You can now export comprehensive, operational metrics about the performance of your Astro Deployments to third-party observability tools, such as New Relic, using the new Universal Metrics Exporter. This new feature allows you to configure a Prometheus endpoint to export metrics using the Prometheus data model, which means you can integrate your Astro observability metrics directly into your existing monitoring tools. See [Export metrics from Astro](https://www.astronomer.io/docs/astro/export-metrics) for setup instructions.
+
+### Added ephemeral storage metrics to Astro Deployment Analytics
+
+To assist you in determining the amount of custom ephemeral storage to configure for your workers and schedulers, you can now use Deployment Analytics to see relevant usage metrics. These include:
+
+- **Ephemeral Storage Usage** metric that shows a % of usage against the configured limit for your Celery Workers, KubernetesPodOperator, Kubernetes Executor, and Scheduler.
+- **Dynamic Y-axis Scaling** to the Celery Worker, KPO/KE, and Scheduler Deployment analytics panel to include dynamic zooming.
+
+See [Deployment Analytics](https://www.astronomer.io/docs/astro/deployment-metrics#deployment-analytics) for more information.
+
+### Additional improvements
+
+- The `Scheduler heartbeat not found` Deployment health incident is downgraded to `Warning` from `Critical`.
+
+## June 25, 2024
+
+### Customer managed workload identity for AWS
+
+<HostedBadge/>
+
+:::publicpreview
+:::
+
+The **Customer Managed Identity** Deployment setting is now available on AWS. This means that you can now assign an existing workload identity and AWS IAM role to your Airflow Deployments on Astro. When you use this setting, your Deployment uses the identity to assume the permissions of your IAM role and gain secure access to your data services. With this feature, you can:
+
+    - Re-use or share a customer managed identity across many Deployments, either ephemeral or static.
+    - Leverage existing identities when migrating from MWAA or open source Airflow environments
+
+This can reduce friction when migrating to Astro. See [Attach an IAM role to your Deployment](https://www.astronomer.io/docs/astro/authorize-deployments-to-your-cloud#attach-an-iam-role-to-your-deployment) for detailed information.
+
+### Self-healing workers automatically address stuck queued tasks
+
+<HostedBadge/>
+
+A new improvement to the Astro Data Plane now automatically identifies when Celery workers are online and healthy, but not actually processing new tasks. When this happens, it looks like many tasks are stuck in a `queued` state. With this new feature, you will experience a lower frequency of tasks stuck in a `queued` state, which causes performance and reliability issues for your Airflow implementation.
+
+Self-healing workers use the following process:
+
+- It first identifies workers that both have tasks stuck in a `queued` state for an extensive time period and are in Deployments where the concurrency available means that tasks should not be queued.
+- The healer then kills catatonic workers that are not running tasks or shifts workers that are still running tasks into a warm shutdown period.
+- After the catatonic worker is shut down, a new healthy, worker comes online and resumes tasks.
+
+This feature is automatically enabled for the Astro Hosted infrastructure and does not require any action.
+
+### Additional Improvements
+
+- Improved the formatting for how IP addresses are listed in the Astro UI to make it easier to copy and paste them.
+
+### Bug fixes
+
+- `europe-west6` is no longer available as a region for dedicated clusters on GCP.
+
+## June 18, 2024
+
+### Additional Improvements
+
+- Moved the **Environment variable** tab in **Deployment Settings** to the **Environment** tab, and renamed it to **Environment Variables**. This helps disambiguate between Environment Variables and Airflow Variables in the Astro UI. Refer to [Manage environment variables](https://www.astronomer.io/docs/astro/manage-env-vars#using-the-astro-ui) for more information about the different methods to set up and manage Environment variables.
+
+### Bug fixes
+
+- Fixed a bug where a duplicate **Customer managed identity** option displayed when configuring Deployment settings.
+
+## June 11, 2024
+
+### Restrict Astro access to specific IP Address ranges with IP Access list
+
+<EnterpriseBadge/>
+
+Organization owners can now limit the IP addresses of users to control who can access the Astro UI or programmatically work with the Astro API for their organization. This allows you to restrict access to your Astro Organization to users on a VPN or to specific network ranges. See [Set up IP Access list](https://astronomer.io/docs/astro/ip-access-list).
+
+### Additional improvements
+
+- When using the GitHub integration, you can now retry a failed deploy or trigger a Git deploy directly from your Deployment settings page in the Astro UI. See [GitHub Integration](https://www.astronomer.io/docs/astro/deploy-github-integration) for more information.
+- Deployments at the end of an Astro trial now automatically hibernate and are not immediately deleted. If your trial has ended, add a credit card number to your Organization to access your Workspaces and wake your hibernating Deployment. While in hibernation, Deployment settings and configurations are preserved. If you do not enter a payment method within 30 days, your hibernating Deployments and all corresponding data are deleted. See [Start a trial](https://www.astronomer.io/docs/astro/trial) for more information.
+- The ability to create, update, and delete Deployment API tokens is restricted to users with the Workspace Owner role. Read [Workspace user permissions](https://www.astronomer.io/docs/astro/user-permissions#workspace-roles) for more information.
+
+### Bug fixes
+
+- Fixed an issue where the Organization Settings Dashboard failed to load correctly.
 
 ## June 6, 2024
 

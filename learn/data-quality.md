@@ -81,7 +81,7 @@ The following DAG graph shows typical locations for data quality checks:
 
 It's common to use data quality checks (`post_check_action_1` and `post_check_action_2`) with [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks) to alert data professionals of data quality issues through channels like email and Slack. You can also create a downstream task that runs only when all data quality checks are successful, which can be useful for reporting purposes.
 
-When implementing data quality checks, consider how a check success or failure should influence downstream dependencies. [Trigger Rules](managing-dependencies.md#trigger-rules) are especially useful for managing operator dependencies. It often makes sense to test your data quality checks in a dedicated DAG before you incorporate them into your pipelines.
+When implementing data quality checks, consider how a check success or failure should influence downstream dependencies. [Trigger Rules](airflow-trigger-rules.md) are especially useful for managing operator dependencies. It often makes sense to test your data quality checks in a dedicated DAG before you incorporate them into your pipelines.
 
 ## When to implement data quality checks
 

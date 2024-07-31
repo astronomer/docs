@@ -90,6 +90,7 @@ module.exports = {
             'deploy-code-overview',
             'deploy-cli',
             'deploy-dags',
+            'deploy-rollbacks',
             'deploy-git-sync',
             'deploy-nfs',
               ],

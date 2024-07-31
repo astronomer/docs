@@ -1,14 +1,16 @@
 """
-### Run notebooks in databricks as a Databricks Workflow using the Astro Databricks provider
+### Run notebooks in databricks as a Databricks Workflow using the Airflow Databricks provider
 
 This DAG runs two Databricks notebooks as a Databricks workflow.
 """
 
 from airflow.decorators import dag
+from airflow.providers.databricks.operators.databricks import DatabricksNotebookOperator
+from airflow.providers.databricks.operators.databricks_workflow import (
+    DatabricksWorkflowTaskGroup,
+)
+from airflow.models.baseoperator import chain
 from pendulum import datetime
-from astro_databricks.operators.notebook import DatabricksNotebookOperator
-from astro_databricks.operators.workflow import DatabricksWorkflowTaskGroup
-
 
 DATABRICKS_LOGIN_EMAIL = "<your-databricks-login-email>"
 DATABRICKS_NOTEBOOK_NAME_1 = "notebook1"
@@ -22,13 +24,13 @@ DATABRICKS_NOTEBOOK_PATH_2 = (
 DATABRICKS_JOB_CLUSTER_KEY = "tutorial-cluster"
 DATABRICKS_CONN_ID = "databricks_conn"
 
-
+# adjust if necessary for example to align the spark version with your Notebooks
 job_cluster_spec = [
     {
         "job_cluster_key": DATABRICKS_JOB_CLUSTER_KEY,
         "new_cluster": {
             "cluster_name": "",
-            "spark_version": "11.3.x-scala2.12",
+            "spark_version": "15.3.x-cpu-ml-scala2.12",
             "aws_attributes": {
                 "first_on_demand": 1,
                 "availability": "SPOT_WITH_FALLBACK",
@@ -47,7 +49,7 @@ job_cluster_spec = [
 ]
 
 
-@dag(start_date=datetime(2023, 6, 1), schedule=None, catchup=False)
+@dag(start_date=datetime(2024, 7, 1), schedule=None, catchup=False)
 def my_simple_databricks_dag():
     task_group = DatabricksWorkflowTaskGroup(
         group_id="databricks_workflow",
@@ -70,7 +72,7 @@ def my_simple_databricks_dag():
             source="WORKSPACE",
             job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY,
         )
-        notebook_1 >> notebook_2
+        chain(notebook_1, notebook_2)
 
 
 my_simple_databricks_dag()

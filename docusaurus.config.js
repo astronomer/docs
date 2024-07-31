@@ -15,10 +15,10 @@ module.exports = {
     preprocessor: ({ filePath, fileContent }) => {
       function updateValues() {
         var mapObj = {
-          '{{CLI_VER_LATEST}}': "1.27.1",
-          '{{CLI_VER_2}}': "1.26.0",
-          '{{CLI_VER_3}}': "1.25.0",
-          '{{RUNTIME_VER}}': "11.4.0",
+          '{{CLI_VER_LATEST}}': "1.28.0",
+          '{{CLI_VER_2}}': "1.27.1",
+          '{{CLI_VER_3}}': "1.26.0",
+          '{{RUNTIME_VER}}': "11.7.0",
         };
         var re = new RegExp(Object.keys(mapObj).join("|"), "gi");
         return fileContent.replaceAll(re, function (matched) {
@@ -139,9 +139,14 @@ module.exports = {
     softwareNav: {
       items: [
         {
-          label: '0.34 (Latest)',
+          label: '0.35 (Latest)',
           to: '/docs/software/',
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
+        },
+        {
+          label: '0.34',
+          to: '/docs/software/0.34/',
+          activeBaseRegex: `(software\/0.34)+`,
         },
         {
           label: '0.33',
@@ -297,7 +302,7 @@ module.exports = {
         lastVersion: 'current',
         versions: {
           current: {
-            label: '0.34',
+            label: '0.35',
             path: '',
             banner: 'none',
           },

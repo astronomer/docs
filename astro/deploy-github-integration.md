@@ -9,10 +9,7 @@ import HostedBadge from '@site/src/components/HostedBadge';
 
 <HostedBadge/>
 
-:::publicpreview
-:::
-
-Astronomer's built-in GitHub integration is the fastest way to implement CI/CD for Apache Airflow and deploy code to Astro. Astro’s automatic deploy system eliminates both the need to implement GitHub Actions and gives you greater visibility into the code you’re running on Astro.
+Astronomer's built-in GitHub integration is the fastest way to implement CI/CD for Apache Airflow and deploy code to Astro. Astro’s automatic deploy system both eliminates the need to implement GitHub Actions and gives you greater visibility into the code you’re running on Astro.
 
 To deploy code through an integrated GitHub repository, you first connect a GitHub repository with your Astro project to an Astro Workspace. Then, you map a Git branch in that repository to an Astro Deployment. When a pull request is merged into your mapped branch, your code is automatically deployed to Astro.
 
@@ -101,19 +98,21 @@ Any commits to your mapped branches will now trigger a code deploy to the corres
 
 ## Deploy from GitHub to Astro
 
-To deploy code from your GitHub repository to Astro, you can either:
+To deploy code from your GitHub repository to Astro, you can:
 
 - Make a direct commit to one of your mapped branches.
-- Merge a pull request against one of our mapped branches.
+- Merge a pull request against one of your mapped branches.
+- Select **Trigger Git Deploy** from the **More actions** menu in your Deployment settings. This deploys the latest commit from your branch. Astronomer recommends this action when your Git branch and Astro fall out of sync and you don't want to create a new commit to get them back in sync.
+- Select **Trigger Git Deploy** from the **More actions** menu for a previously failed deploy. This redeploys that particular Git commit even if it's not necessarily the latest commit in your repository or branch. Astronomer recommends this action when a deploy fails and you want to try it again without creating a new commit.
 
-Both of these actions triggers the Astro App to deploy your Astro project to the mapped Astro Deployment. When DAG-only deploys are enabled, your GitHub repository triggers:
+Any of these actions triggers the Astro App to deploy your Astro project to the mapped Astro Deployment. When DAG-only deploys are enabled, your GitHub repository triggers:
 
 - A DAG-only deploy if only your DAGs are changed.
 - A full project image deploy if you change a configuration in your project.
 
 If DAG-only deploys are disabled, all code changes will trigger a full project image deploy. To learn more about DAG-only deploys, see [Deploy DAGs to Astro](deploy-dags.md).
 
-You can check the status of your deploy in the Astro UI.
+You can check the status of your deploy in the Astro UI in the Deployment's **Deploy History** tab.
 
 ## Review code deploys from the Astro UI
 
