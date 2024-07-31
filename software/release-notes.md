@@ -45,14 +45,21 @@ Kubernetes versions 1.25 and 1.26 are not supported in Software version 0.35.2 a
       priorityClassName: <valid-class-name>
     prometheus-node-exporter:
       priorityClassName: <valid-class-name>
+    ```
 
 ### Behavior changes
 
 - When [migrating to an Astro Runtime from Astronomer Certified (AC)](https://www.astronomer.io/docs/software/migrate-to-runtime#differences-between-astro-runtime-and-astronomer-certified), only AC Versions that are 2.2.5 and greater have equivalent Runtime versions. Previously, you could see equivalent versions of the Astro Runtime you could choose to migrate to in the UI. Now, to see the equivalent version of Astro Runtime for a Deployment running AC in the **Deployment Settings** page, you need to set the following configuration:
 
     ```yaml
-    enableListAllRuntimeVersions: true
+    astronomer:
+    houston:
+        config:
+        deployments:
+            enableListAllRuntimeVersions: true
     ```
+
+Or use the alternative dot notation configuration, `astronomer.houston.config.deployments.enableListAllRuntimeVersions=true`.
 
 ### Bug fixes
 
