@@ -37,7 +37,6 @@ Kubernetes versions 1.25 and 1.26 are not supported in Software version 0.35.2 a
 ### Additional improvements
 
 - The Astronomer Software UI now lists yanked versions of the Astro Runtime. These versions contain potential bugs and are to be used as per user discretion. See [Restricted Runtime versions](https://www.astronomer.io/docs/software/runtime-version-lifecycle-policy#restricted-runtime-versions) for more information about yanked versions.
-- Updated the configuration so that code deploy revision data and DAG folder PVC cleanup jobs are enabled per Deployment if you use the deploy rollback feature.
 - Added `priorityClass` support for `fluentd` and `prometheus-node-exporter` daemonsets. Include the following configuration to use this functionality.
 
     ```yaml
@@ -45,6 +44,13 @@ Kubernetes versions 1.25 and 1.26 are not supported in Software version 0.35.2 a
       priorityClassName: <valid-class-name>
     prometheus-node-exporter:
       priorityClassName: <valid-class-name>
+    ```
+- Added support for `extraEnv` to `fluentd` so that you can pass custom variables. You can use the following configuration for this functionality:
+
+    ```yaml
+    fluentd:
+      extraEnv:
+        RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR: 1
     ```
 
 ### Behavior changes
