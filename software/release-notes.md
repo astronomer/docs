@@ -52,6 +52,17 @@ Kubernetes versions 1.25 and 1.26 are not supported in Software version 0.35.2 a
       extraEnv:
         RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR: 1
     ```
+- Added persistence section to the DAG server config, which can be passed to the Airflow Helm chart.
+
+    ```yaml
+    global:
+      dagOnlyDeployment:
+        enabled: true
+        persistence:
+          persistentVolumeClaimRetentionPolicy:
+            whenDeleted: Delete
+            whenScaled: Retain
+    ```
 
 ### Behavior changes
 
