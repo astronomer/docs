@@ -26,6 +26,64 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## 0.35.2
+
+Release date: August 1, 2024
+
+### End of support for Kubernetes versions 1.25 and 1.26
+
+Kubernetes versions 1.25 and 1.26 are not supported in Software version 0.35.2 and future versions. See [Kubernetes version support table and policy](https://www.astronomer.io/docs/software/version-compatibility-reference#kubernetes-version-support-table-and-policy) for a full list of supported Kubernetes versions and the Software versions they correspond to.
+
+### Additional improvements
+
+- The Astronomer Software UI now lists yanked versions of the Astro Runtime. These versions contain potential bugs and are to be used as per user discretion. See [Restricted Runtime versions](https://www.astronomer.io/docs/software/runtime-version-lifecycle-policy#restricted-runtime-versions) for more information about yanked versions.
+- Added `priorityClass` support for `fluentd` and `prometheus-node-exporter` daemonsets. Include the following configuration to use this functionality.
+
+    ```yaml
+    fluentd:
+      priorityClassName: <valid-class-name>
+    prometheus-node-exporter:
+      priorityClassName: <valid-class-name>
+    ```
+- Added support for `extraEnv` to `fluentd` so that you can pass custom variables. You can use the following configuration for this functionality:
+
+    ```yaml
+    fluentd:
+      extraEnv:
+        RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR: 1
+    ```
+- Added persistence section to the DAG server config, which can be passed to the Airflow Helm chart.
+
+    ```yaml
+    global:
+      dagOnlyDeployment:
+        enabled: true
+        persistence:
+          persistentVolumeClaimRetentionPolicy:
+            whenDeleted: Delete
+            whenScaled: Retain
+    ```
+
+### Behavior changes
+
+- When [migrating to an Astro Runtime from Astronomer Certified (AC)](https://www.astronomer.io/docs/software/migrate-to-runtime#differences-between-astro-runtime-and-astronomer-certified), only AC Versions that are 2.2.5 and greater have equivalent Runtime versions. Previously, you could see equivalent versions of the Astro Runtime you could choose to migrate to in the UI. Now, to see the equivalent version of Astro Runtime for a Deployment running AC in the **Deployment Settings** page, you need to set the following configuration:
+
+    ```yaml
+    astronomer:
+      houston:
+        config:
+          deployments:
+            enableListAllRuntimeVersions: true
+    ```
+
+### Bug fixes
+
+- Fixed a bug where the DAG server on Openshift platform failed to replace default security context Helm values.
+- Fixed a bug that causes DAG-only deploys to fail when rollbacks were disabled.
+- Fixed a bug in DAG-only deploys that were causing unhandled exceptions.
+- Fixed a bug that caused the DAG folder PVC to be depleted when a user switches from DAG-only deploys to any other code deploy type.
+- Fixed a bug in the deploy revision history page in the Astronomer Software UI that caused the date range query to fail if you set it to less than 90 days for the cleanup policy.
+
 ## 0.35.1
 
 Release date: July 15, 2024

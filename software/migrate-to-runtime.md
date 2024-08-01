@@ -31,7 +31,17 @@ Astro Runtime includes additional features which are not available in AC images,
 
 See [Runtime Architecture](runtime-image-architecture.mdx) for more detailed information about Runtime's distribution and features.
 
-All versions of AC have an equivalent version of Astro Runtime. To see the equivalent version of Astro Runtime for a Deployment running AC, open the Deployment in the Software UI and go to **Settings**. The equivalent version of Astro Runtime is shown in the **Migrate to Runtime-[Version number]** button.
+Only AC Versions that are 2.2.5 and greater have equivalent Runtime versions. To see the equivalent version of Astro Runtime for a Deployment running AC in the **Deployment Settings** page, you need to set the following configuration:
+
+```yaml
+astronomer:
+  houston:
+    config:
+      deployments:
+        enableListAllRuntimeVersions: true
+```
+
+After enabling this configuration, the System Administrator can see the equivalent version of Astro Runtime in the **Migrate to Runtime-[Version number]** button. Note that all AC equivalent Runtime versions prior to 2.2.5 are deprecated.
 
 ## Astronomer Houston API migration considerations
 
