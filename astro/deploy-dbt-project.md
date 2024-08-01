@@ -23,7 +23,7 @@ Depending on your organization's software development lifecycle, there are three
 - In the same Git repository but in a separate directory.
 - In a separate Git repository.
 
-Astro supports all three methods, but recommends having your dbt project in the same Git repository as your Astro project, but in a different directory. Then, you can use dbt deploys to independently deploy dbt code to Astro from your dbt directory, without needing to deploy either a full Astro project image or your DAGs. This strategy allows your team that maintains dbt to work independently from your team managing Airflow DAGs, but team members can all see shared code in a single Git repository.
+Astro supports all three methods, but Astronomer recommends having your dbt project in the same Git repository as your Astro project, but in a different directory. Then, you can use dbt deploys to independently deploy dbt code to Astro from your dbt directory without needing to deploy either a full Astro project image or your DAGs. This strategy allows your team maintaining dbt to work independently from your team managing Airflow DAGs, but team members can all see shared code in a single Git repository.
 
 You can see additional recommendations for Astro repository strategy, in the [Repo strategy best practices](https://www.astronomer.io/docs/astro/best-practices/repo-structure) guide.
 
