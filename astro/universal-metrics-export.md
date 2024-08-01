@@ -26,9 +26,9 @@ While [Deployment Analytics](deployment-metrics.md), [Deployment health incident
 
 You can use this information to right-size Celery workers, optimize your usage of the Kubernetes executor, and stay informed about task execution status.
 
-## Metric types
+## Metric categories
 
-There are two types of metrics that you can export using the Universal Metrics Exporter:
+There are two categories of metrics that you can export using the Universal Metrics Exporter:
 
 - Airflow application level metrics
 - Infrastructure level metrics
