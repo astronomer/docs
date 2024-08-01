@@ -48,7 +48,7 @@ Finally, to push your new dbt code to your Deployment, perform a deploy with the
 astro deploy
 ```
 
-While this is the quickest way to get dbt code in your Deployment, there can be drawbacks as your team makes more frequent changes to dbt code or uses more advanced CI/CD. Some of these include:
+While this is the quickest way to get dbt code in your Deployment, there can be drawbacks if your team makes more frequent changes to dbt code or uses more advanced CI/CD. These include:
 
 1. Slower build times when changing only dbt code.
 2. dbt code must live in the same repository and directory as your Astro project.
