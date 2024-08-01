@@ -32,7 +32,7 @@ You can see additional recommendations for Astro repository strategy, in the [Re
 Astro supports two basic dbt code deploy strategies. You can:
 
 - **Include dbt code in your Astro project**: Make dbt code directly available in the Docker image powered by Astro Runtime that contains your Astro project. This approach works best for small teams just starting to integrate dbt code in Astro.
-- **Use dbt Deploys**: Independently deploy bundles of dbt code directly to Astro, outside of the context of your Astro project and Docker image. Astronomer recommends this approach for teams that have dbt code in a dedicated directory or Git repository.
+- **Use dbt Deploys**: Independently deploy bundles of dbt code directly to Astro, outside the context of your Astro project and Docker image. Astronomer recommends this approach for teams who have dbt code in a dedicated directory or Git repository.
 
 ## Option 1: Include dbt code in your Astro project {#option-1}
 
