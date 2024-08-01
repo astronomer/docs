@@ -36,7 +36,7 @@ Astro supports two basic dbt code deploy strategies. You can:
 
 ## Option 1: Include dbt code in your Astro project {#option-1}
 
-The most direct way to set up dbt on Astro is by including dbt code in your full image. To accomplish this, Astronomer recommends adding the directory `/dbt` to the top-level of your Astro project and including individual dbt projects inside of this directory.
+The most direct way to set up dbt on Astro is by including dbt code in your full image. To accomplish this, Astronomer recommends adding the directory `/dbt` to the top level of your Astro project and including individual dbt projects inside this directory.
 
 :::tip
 To see an example of this pattern, check out the demo repository of [Astronomer Cosmos](https://github.com/astronomer/cosmos-demo).
