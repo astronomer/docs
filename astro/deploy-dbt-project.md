@@ -20,7 +20,7 @@ For more information and recommendations on using dbt with Apache Airflow and As
 Depending on your organization's software development lifecycle, there are three ways you can organize your dbt project relative to your Astro project:
 
 - In the same Git repository and directory as your Astro project.
-- In the same Git repository, but in a separate directory.
+- In the same Git repository but in a separate directory.
 - In a separate Git repository.
 
 Astro supports all three methods, but recommends having your dbt project in the same Git repository as your Astro project, but in a different directory. Then, you can use dbt deploys to independently deploy dbt code to Astro from your dbt directory, without needing to deploy either a full Astro project image or your DAGs. This strategy allows your team that maintains dbt to work independently from your team managing Airflow DAGs, but team members can all see shared code in a single Git repository.
