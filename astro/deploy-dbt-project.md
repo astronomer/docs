@@ -82,7 +82,7 @@ astro deploy
 
 ### Step 2: Deploy your dbt project
 
-Next, navigate to the directory of your dbt project. This directory should include the `dbt_project.yml` file, such as the [Classic dbt Jaffle Shop](https://github.com/dbt-labs/jaffle-shop-classic?tab=readme-ov-file) in the following example:
+Next, navigate to the directory of your dbt project. This directory should include the `dbt_project.yml` file, as in the case of the [Classic dbt Jaffle Shop](https://github.com/dbt-labs/jaffle-shop-classic?tab=readme-ov-file) in the following example:
 
 ```text
 .
