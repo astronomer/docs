@@ -121,7 +121,7 @@ Congratulations, you've added your dbt code to your Deployment! Check the [Astro
 
 ### Delete your dbt project
 
-If you want to remove dbt code from your deployment, you can also delete the dbt project from the Airflow environments where you deployed it. This command does not delete your dbt project source files, it only removes it from the Airflow containers where it was mounted. When you run this command, you will be prompted to choose the Deployment that you want to remove the project from.
+If you want to remove dbt code from your deployment, you can also delete the dbt project from the Airflow environments where you deployed it. This command does not delete your dbt project source files. It only removes your project from the Airflow containers where it was mounted. When you run this command, you will be prompted to choose the Deployment from which you want to remove the project.
 
 ```bash
 astro dbt delete
