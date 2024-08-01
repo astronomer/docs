@@ -28,7 +28,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 ## 0.35.2
 
-Release date: July 31, 2024
+Release date: August 1, 2024
 
 ### End of support for Kubernetes versions 1.25 and 1.26
 
