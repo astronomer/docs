@@ -46,7 +46,7 @@ See the following example of a `pod_override` configuration.
 
 ### Example: Set CPU or memory limits and requests
 
-You can request a specific amount of resources for a Kubernetes worker Pod so that a task always has enough resources to run successfully. When requesting resources, make sure that your requests don't exceed the resource limits in your [default Pod](deployment-resources.md#configure-kubernetes-pod-resources).
+You can request a specific amount of resources for a Kubernetes worker Pod so that a task always has enough resources to run successfully. When requesting resources, make sure that your requests don't exceed the resource limits in your deployment's [max pod size](deployment-resources.md#configure-kubernetes-pod-resources).
 
 The following example shows how you can use a `pod_override` configuration in your DAG code to request custom resources for a task:
 
