@@ -22,7 +22,7 @@ To configure Airflow notifications, see [Airflow email notifications](airflow-em
 
 Each Astro alert has a notification channel and a trigger type. The notification channel determines the format and destination of an alert, and the trigger type defines what causes the alert trigger.
 
-### DAG & task alerts
+### DAG and task alerts
 
 You can trigger an alert to a notification channel using one of the following trigger types:
 
