@@ -31,7 +31,7 @@ Your Terraform file takes the highest priority in defining your Astro resource c
 
 In a Terraform file, add the following configuration.
 
-```
+```terraform
 // Import the new configuration to an existing Deployment. After you use `terraform apply` to apply this new configuration once, you can remove this section of code from your Terraform file.
 import {
   id = "<your-deployment-ID>" // ID of the existing deployment
@@ -70,38 +70,37 @@ You can define variables in a separate file and then call it from within other T
 <summary><strong>Define variables in Terraform code example</strong></summary>
 
 In a Terraform `variables.tf` file, you can define your variables:
-```
 
+```terraform
 variable "teams" {
   type = map(object({
-    name = string
+    name                      = string
     default_worker_queue_size = string
-    contact_emails = list(string)
+    contact_emails            = list(string)
   }))
   default = {
     finance = {
-      name = "finance"
+      name                      = "finance"
       default_worker_queue_size = "A5"
-      contact_emails = ["foo@bar.com", "john@doe.com"]
+      contact_emails            = ["foo@bar.com", "john@doe.com"]
     }
     ads = {
-      name = "ads"
+      name                      = "ads"
       default_worker_queue_size = "A10"
-      contact_emails = ["foo@bar.com", "john@doe.com"]
+      contact_emails            = ["foo@bar.com", "john@doe.com"]
     }
     ml = {
-      name = "ml"
+      name                      = "ml"
       default_worker_queue_size = "A40"
-      contact_emails = ["foo@bar.com", "john@doe.com"]
+      contact_emails            = ["foo@bar.com", "john@doe.com"]
     }
   }
 }
-
 ```
 
 Then, in your Terraform configuration file, `main.tf`, you can refer to those variables to create resources:
 
-```
+```terraform
 resource "astro_workspace" "team_workspaces" {
   for_each = var.teams
 
@@ -122,7 +121,7 @@ You can use Terraform to script creating a Workspace for multiple Teams. The fol
 
 Before using the code example, be sure to add your Astro Organization ID for the `organization_id` parameter.
 
-```
+```terraform
 /* Workspace Per Team
 
 Team 1 Workspace
@@ -139,7 +138,6 @@ terraform {
     }
   }
 }
-
 
 provider "astro" {
   organization_id = "<your-astro-organization-id>"
