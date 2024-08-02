@@ -37,7 +37,7 @@ When you create an API token for your environment, keep the following best pract
 
 The following example sets up a new Workspace with a hosted Deployment.
 
-```terraform
+```tcl
 terraform {
   required_providers {
     astro = {
