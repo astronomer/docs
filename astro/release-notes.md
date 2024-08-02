@@ -25,6 +25,20 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## August 6, 2024
+
+### Customize labels on your metrics export
+
+You can now add Key:Value pair labels to metrics that you export using the Universal Metrics Exporter. This allows you to tag and record metrics coming from specific Deployments or Workspaces. See [Export metrics from Astro](https://www.astronomer.io/docs/astro/export-metrics) for more information.
+
+### Additional improvements
+
+- Added a new template allowing you to deploy dbt on Astro when you're onboarding. See [Deploy dbt projects on Astro](https://www.astronomer.io/docs/astro/deploy-dbt-project) for information about dbt deploys, or go to [Get started on Astro](https://cloud.astronomer.io/start-astro) to set up a trial account and try a template.
+
+### Bug fixes
+
+- Fixed an issue where a user could not bulk select alerts if they had different names, but the same configurations.
+
 ## July 30, 2024
 
 ### New alerts for Deployment health incidents
@@ -35,7 +49,6 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 :::
 
 This release introduces four new alert types that correspond to four of the existing [Deployment health incident types](https://www.astronomer.io/docs/astro/deployment-health-incidents#deployment-incidents). These new **Deployment Health Alerts** allow Astro to proactively notify you when Deployment health issues arise.
-
 
 Using Deployment health alerts, you can:
 - Improve alerting coverage beyond DAG and task failures to address infrastructure-level incidents that are otherwise difficult to monitor.
