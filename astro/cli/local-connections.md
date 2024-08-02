@@ -34,7 +34,7 @@ Connection details in the Astro Environment Manager are not visible from the Air
 2. Log in to Astro.
 
     ```zsh
-    astro login <domain name>
+    astro login
     ```
 
 3. Retrieve the ID of either the Workspace or Deployment that you want to import connections from.
