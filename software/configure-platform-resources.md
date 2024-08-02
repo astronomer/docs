@@ -80,7 +80,7 @@ To ensure reliability with a starting set of Airflow Deployments, these estimate
 | Component | Item                                                           | Hourly Cost (Annual Upfront Pricing)|
 | --------- | -------------------------------------------------------------- | ------------------------------------|
 | Compute   | 6 n2-standard-8 at $0.311/hr                                   | $0.31                               |
-| Database  | Cloud SQL for PostgresSQL with 2 cores and 14.4GB at $0.29/hr  | $0.29                               |
+| Database  | Cloud SQL for PostgresSQL with 2 cores and 14.4GiB at $0.29/hr  | $0.29                               |
 | Total     |                                                                | $0.60                               |
 
 For more information, reference the [GCP Pricing Calculator](https://cloud.google.com/products/calculator/#id=f899c077-6b8b-4ccd-8f8c-974e04cbe872).
@@ -90,7 +90,7 @@ For more information, reference the [GCP Pricing Calculator](https://cloud.googl
 | Component | Item                                              | Hourly Cost (Annual Upfront Pricing) |
 | --------- | ------------------------------------------------- | ------------------------------------ |
 | Compute   | 3 x D8s v3 (8 vCPU(s), 32 GiB)                    | $0.95                               |
-| Database  | 1 x Gen 5 (2 vCore), 25 GB Storage, LRS redundancy| $0.18                               |
+| Database  | 1 x Gen 5 (2 vCore), 25 GiB Storage, LRS redundancy| $0.18                               |
 | Total     |                                                   | $1.13                               |
 
 For more information, reference the [Azure Price Calculator](https://azure.microsoft.com/en-us/pricing/calculator/?service=kubernetes-service).

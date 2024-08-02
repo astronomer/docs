@@ -41,7 +41,7 @@ astronomer:
         configureDagDeployment: true
 ```
 
-:::info 
+:::info
 
 If you need to customize the resources available to the DAG deploy mechanism on your Astronomer Software cluster, update your configuration to include the following values:
 
@@ -67,7 +67,7 @@ global:
 
 :::info
 
-When you enable DAG only deploys on a given Deployment, Astronomer Software spins up a component in the Deployment called the DAG deploy server. The default resources for the DAG deploy server are 1 CPU and 1.5 GB of memory, which allows you to push up to 15MB of compressed DAGs per deploy. To deploy more than 15MB of compressed DAGs at a time, increase the CPU and memory in the `resources` configuration by 1 CPU and 1.5MB for each additional 15MB of DAGs you want to upload. For more information, see [How DAG-only deploys work](#trigger-a-dag-only-deploy).
+When you enable DAG only deploys on a given Deployment, Astronomer Software spins up a component in the Deployment called the DAG deploy server. The default resources for the DAG deploy server are 1 CPU and 1.5 GiB of memory, which allows you to push up to 15MB of compressed DAGs per deploy. To deploy more than 15MB of compressed DAGs at a time, increase the CPU and memory in the `resources` configuration by 1 CPU and 1.5MB for each additional 15MB of DAGs you want to upload. For more information, see [How DAG-only deploys work](#trigger-a-dag-only-deploy).
 
 :::
 
@@ -114,11 +114,11 @@ This means that DAG runs could fail due to downstream tasks running code from a 
 
 ## Deploy DAG-only deploys programmatically
 
-Astronomer Software Deployment includes a REST API endpoint that you can use to upload DAGs programmatically. 
+Astronomer Software Deployment includes a REST API endpoint that you can use to upload DAGs programmatically.
 
 ### Prerequisites
 
-Create a service account that has access to your Deployment and copy its associated API key. See [Create a service account using the Software UI](ci-cd.md#create-a-service-account-using-the-software-ui). Alternatively, go to `https://app.BASEDOMAIN/token` and copy the generated token to authenticate with your own user credentials. 
+Create a service account that has access to your Deployment and copy its associated API key. See [Create a service account using the Software UI](ci-cd.md#create-a-service-account-using-the-software-ui). Alternatively, go to `https://app.BASEDOMAIN/token` and copy the generated token to authenticate with your own user credentials.
 
 ### Setup
 

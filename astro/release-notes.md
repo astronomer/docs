@@ -2762,7 +2762,7 @@ You can now programmatically trigger DAGs and update your Deployments on Astro b
 
 ### Improvements
 
-- Increased the limit of **Worker Resources** from 30 AU to 175 AU (17.5 CPU, 65.625 GB RAM). If your tasks require this many resources, reach out to us to make sure that your cluster is sized appropriately
+- Increased the limit of **Worker Resources** from 30 AU to 175 AU (17.5 CPU, 65.625 GiB RAM). If your tasks require this many resources, reach out to us to make sure that your cluster is sized appropriately
 - Collapsed the **People** and **Teams** tabs on the left-hand navigation bar into a single **Access** tab
 - Added a **Cluster** field to the Deployments tab in the Astro UI. Now, you can reference which cluster each of your Deployments is in
 - Replaced our white "A" favicon to one that supports color mode
