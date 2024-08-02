@@ -239,7 +239,7 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 
 #### Setup
 
-1. To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). To retrieve your cluster's AWS account ID in the Astro Hybrid, click the name of your Workspace in the upper left corner of the Astro UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
+1. To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). To retrieve your cluster's AWS account ID in Astro Hybrid, click the name of your Workspace in the upper left corner of the Astro UI, click **Organization Settings**, and then click **Clusters**. Open your cluster and copy its **Account ID**.
 2. In your AWS console, copy the ID of your existing transit gateway (TGW).
 3. [Create a resource share in AWS RAM](https://docs.aws.amazon.com/ram/latest/userguide/working-with-sharing-create.html) and [share the TGW with your cluster's Astro AWS account](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#tgw-sharing).
 
