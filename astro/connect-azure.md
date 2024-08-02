@@ -284,6 +284,51 @@ Submit all collected details to [Astronomer support](https://cloud.astronomer.io
 
 </Tabs>
 
+## Hostname resolution options
+
+Securely connect Astro to resources running in other VNets or on-premises through a resolving service.
+
+As most flexible and reliable solution Astronomer recommends using Domain Name System (DNS) forwarding. In case of small mount of records and unmutable IP addresses, support team can create a Private zone with DNS records, pointed to customer's resources.
+
+<Tabs
+    defaultValue="Domain Name System forwarding"
+    groupId="hostname-resolution-options"
+    values={[
+        {label: 'Domain Name System forwarding', value: 'Domain Name System forwarding'},
+        {label: 'Private hosted zone', value: 'Private hosted zone'},
+    ]}>
+<TabItem value="Domain Name System forwarding">
+
+Use Domain Name System (DNS) forwarding to allow Astro to resolve DNS queries for resources running in other VPCs or on-premises. You have access to internal resources through private names. All changes in zone will be available for Astro environment immediatelly.
+
+To use this solution, make sure Astro can connect to the DNS server using a VNet or VHub peering connection and then submit a request to [Astronomer support](https://cloud.astronomer.io/open-support-request). With your request, include the following information:
+
+- The domain name for forwarding requests
+- The IP address of the DNS server where requests are forwarded
+
+#### Create an Airflow connection to confirm connectivity (optional)
+
+When Astronomer support confirms that DNS forwarding was successfully implemented, you can confirm that it works by creating an Airflow connection to a resource running in a VNet or on-premises. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
+
+</TabItem>
+
+<TabItem value="Private hosted zone">
+
+Private hosted zones can be created for refleting particular DNS records in the customer environment. This solution doesn't require any changes or additional configurations at the customer side. Private zones work well when amount of zones and records is small and stable. Otherwise, name resolution accuracy and connectivity in general can be affected.
+
+To use this solution, submit a request to [Astronomer support](https://cloud.astronomer.io/open-support-request). With your request, include the following information:
+
+- List of DNS records for the Private zone
+- IP addresses that have to be assigned respectively
+
+#### Create an Airflow connection to confirm connectivity (optional)
+
+When Astronomer support confirms that DNS forwarding was successfully implemented, you can confirm that it works by creating an Airflow connection to a resource running in a VPC or on-premises. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
+
+</TabItem>
+
+</Tabs>
+
 ## See Also
 
 - [Manage Airflow connections and variables](manage-connections-variables.md)
