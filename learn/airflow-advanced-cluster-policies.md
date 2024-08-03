@@ -180,7 +180,7 @@ plugin/
 │
 ├── src/
 │   ├── __init__.py
-│   └── plugin_package/
+│   └── policy_plugin/
 │       ├── __init__.py
 │       └── policy.py
 │
