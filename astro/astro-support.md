@@ -33,7 +33,7 @@ The more information you can provide about the issue you're experiencing, the qu
 - What solutions have you already tried?
 - Is this a problem in more than one Deployment?
 
-### Include logs or code snippets
+### Include logs or code snippets as text and not screenshots
 
 If you've already copied task logs or Airflow component logs, send them as a part of your request. The more context you can provide, the better.
 
