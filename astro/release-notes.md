@@ -33,7 +33,7 @@ You can now add Key:Value pair labels to metrics that you export using the Unive
 
 ### Additional improvements
 
-- Added a new template allowing you to deploy dbt on Astro when you're onboarding. See [Deploy dbt projects on Astro](https://www.astronomer.io/docs/astro/deploy-dbt-project) for information about dbt deploys, or go to [Get started on Astro](https://cloud.astronomer.io/start-astro) to set up a trial account and try a template.
+- Added a new template demonstrating how to run dbt projects on Astro using [Cosmos](https://www.astronomer.io/integrations/dbt/) when you're onboarding. See [Get started on Astro](https://cloud.astronomer.io/start-astro) to set up a trial account and try a template.
 
 ### Bug fixes
 
