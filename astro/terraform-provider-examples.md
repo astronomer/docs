@@ -31,7 +31,7 @@ Your Terraform file takes the highest priority in defining your Astro resource c
 
 In a Terraform file, add the following configuration.
 
-```terraform
+```tcl
 // Import the new configuration to an existing Deployment. After you use `terraform apply` to apply this new configuration once, you can remove this section of code from your Terraform file.
 import {
   id = "<your-deployment-ID>" // ID of the existing deployment
@@ -71,7 +71,7 @@ You can define variables in a separate file and then call it from within other T
 
 In a Terraform `variables.tf` file, you can define your variables:
 
-```terraform
+```tcl
 variable "teams" {
   type = map(object({
     name                      = string
@@ -100,7 +100,7 @@ variable "teams" {
 
 Then, in your Terraform configuration file, `main.tf`, you can refer to those variables to create resources:
 
-```terraform
+```tcl
 resource "astro_workspace" "team_workspaces" {
   for_each = var.teams
 
@@ -121,7 +121,7 @@ You can use Terraform to script creating a Workspace for multiple Teams. The fol
 
 Before using the code example, be sure to add your Astro Organization ID for the `organization_id` parameter.
 
-```terraform
+```tcl
 /* Workspace Per Team
 
 Team 1 Workspace
