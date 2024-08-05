@@ -23,7 +23,7 @@ While [Deployment Analytics](deployment-metrics.md), [Deployment health incident
 - Uses the [Prometheus data model](https://prometheus.io/docs/concepts/data_model/) format using the remote-write capability, making it flexible and easy to use.
 - Allows you to configure a metrics export at the per-Deployment level or at the Workspace level.
 - Enables you to customize your observability experience with your tooling and create custom dashboards or alerts that are not currently available in Astro.
-- Offers a way to add custom labels to your exported metrics.
+- Offers a way to add custom metadata as labels to your exported metrics or headers to the HTTP request.
 
 You can use this information to right-size Celery workers, optimize your usage of the Kubernetes executor, and stay informed about task execution status.
 
@@ -47,6 +47,13 @@ Both application and infrastructure metrics have metadata labels associated with
 - `workspaceId`
 
 Some metrics additionally include labels that are specific and unique to that metric. Use these metadata labels to identify each individual metric with its corresponding environment in Astro.
+
+#### Custom metadata
+
+In addition to the default metadata included by Astro with your metrics, you can also add **Custom headers** and **Custom labels** to your metrics exports.
+
+- Custom headers add key-value pairs to the HTTP request made by Astro to your Prometheus server.
+- Custom labels add key-value pairs to the export metadata, so you can filter your metrics downstream.
 
 ### Airflow application metrics
 
@@ -110,7 +117,8 @@ You can enable metrics export at both the Workspace and Deployment level for Ast
 5. (Optional) Click **More Options** to add additional information for your endpoint:
    - **Token** - A bearer token or license key for your Prometheus endpoint.
    - **Username** and **Password** - Credentials for basic authentication, if needed.
-   - Custom **Headers** - Add a **Name** and **Value** pair that can be sent to your server with each remote write. If you add a custom header, any default values are overwritten by your custom configuration. You can add Deployment-specific labels when configuring **Deployment metrics**.
+   - Custom **Headers** - Add a **Name** and **Value** pair that can be sent to your server with as part of the HTTP request with each remote write. If you add a custom header, any default values are overwritten by your custom configuration. You can add Deployment-specific labels when configuring **Deployment metrics**.
+   - Custom **Labels** - Add a **Name** and **Value** pair that can be sent to your server. You can add Deployment-specific labels when configuring **Deployment metrics**.
 6. Click **Create metrics export**.
 7. (Optional) Allow all Deployments to link to this metrics export configuration. See [Link metrics export](#link-exports).
 
@@ -123,7 +131,8 @@ You can enable metrics export at both the Workspace and Deployment level for Ast
 5. (Optional) Click **More Options** to add additional information for your endpoint:
    - **Token** - A bearer token or license key for your Prometheus endpoint.
    - **Username** and **Password** - Credentials for basic authentication, if needed.
-   - Custom **Headers** - Add a **Name** and **Value** pair that can be sent to your server with each remote write. If you add a custom header, any default values or values configured at the Workspace level are overwritten by your custom configuration.
+   - Custom **Headers** - Add a **Name** and **Value** pair that can be sent to your server with as part of the HTTP request with each remote write. If you add a custom header, any default values or values configured at the Workspace level are overwritten by your custom configuration.
+   - Custom **Labels** - Add a **Name** and **Value** pair that can be sent to your server. You can add Deployment-specific labels when configuring **Deployment metrics**.
 6. Click **Create metrics export**.
 
 If you successfully connected your metrics export to your observability service endpoint, after five minutes, your Astro metrics begin to populate in your observability service.
