@@ -338,7 +338,7 @@ Submit all collected details to [Astronomer support](https://cloud.astronomer.io
 
 Securely connect Astro to resources running in other VPCs or on-premises through a resolving service.
 
-Using Route 53 requires sharing a resolver rule with your Astro account. If this is a security concern, Astronomer recommends using Domain Name System (DNS) forwarding. In case of small mount of records and unmutable IP addresses, support team can create a Private zone with DNS records, pointed to customer's resources.
+Using Route 53 requires sharing a resolver rule with your Astro account. If this is a security concern, Astronomer recommends using Domain Name System (DNS) forwarding.If you have a small number of records and immutable IP addresses, the Astronomer support team can create a Private zone with DNS records, pointed to your resources.
 
 <Tabs
     defaultValue="Shared resolver rule"
