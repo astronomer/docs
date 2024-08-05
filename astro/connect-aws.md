@@ -409,11 +409,11 @@ Private hosted zones can be created for refleting particular DNS records in the 
 To use this solution, submit a request to [Astronomer support](https://cloud.astronomer.io/open-support-request). With your request, include the following information:
 
 - List of DNS records for the Private zone
-- IP addresses that have to be assigned respectively
+- IP addresses that have to be assigned to each DNS record
 
-#### Create an Airflow connection to confirm connectivity (optional)
+#### (Optional) Create an Airflow connection to confirm connectivity
 
-When Astronomer support confirms that DNS forwarding was successfully implemented, you can confirm that it works by creating an Airflow connection to a resource running in a VPC or on-premises. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
+After Astronomer support confirms that DNS forwarding was successfully set up, you can confirm that it works by creating an Airflow connection to a resource running in a VPC or on-premises. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
 </TabItem>
 

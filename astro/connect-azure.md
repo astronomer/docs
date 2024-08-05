@@ -288,7 +288,7 @@ Submit all collected details to [Astronomer support](https://cloud.astronomer.io
 
 Securely connect Astro to resources running in other VNets or on-premises through a resolving service.
 
-As most flexible and reliable solution Astronomer recommends using Domain Name System (DNS) forwarding. In case of small mount of records and unmutable IP addresses, support team can create a Private zone with DNS records, pointed to customer's resources.
+Astronomer recommends using Domain Name System (DNS) forwarding as the most flexible and reliable solution. If you have a small number of records and immutable IP addresses, the Astronomer support team can create a Private zone with DNS records, pointed to your resources.
 
 <Tabs
     defaultValue="Domain Name System forwarding"
