@@ -17,7 +17,7 @@ Terraform enables you to define and manage infrastructure as code. Using the [As
 
 ## Step 1: Create an API Token
 
-To use [Terraform](https://www.terraform.io/) with Astro, you must authorize the [Astro Terraform Provider](https://registry.terraform.io/providers/astronomer/astro/latest) to access and modify your Astro resources using an API token. Then, you can programmatically update your Astro Organization using Terraform. You can use any of the following API tokens to authenticate. We recommend applying the principle of least privilege, which means only permitting the necessary actions and no more. Since the code example below creates a new workspace, you'll require an Organization API token with the Organization Owner role.
+To use [Terraform](https://www.terraform.io/) with Astro, you must authorize the [Astro Terraform Provider](https://registry.terraform.io/providers/astronomer/astro/latest) to access and modify your Astro resources using an API token. Then, you can programmatically update your Astro Organization using Terraform. You can use any of the following API tokens to authenticate. Astronomer recommends applying the principle of least privilege, which means only permitting the necessary actions and no more. Since the following code example creates a new workspace, you'll require an Organization API token with the Organization Owner role.
 
 - An Organization API token. See [Create an Organization API token](organization-api-tokens.md).
 - A Workspace API token. See [Create a Workspace API token](workspace-api-tokens.md).
