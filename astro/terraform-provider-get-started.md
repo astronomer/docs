@@ -8,7 +8,7 @@ description: Get started using the Astro Terraform Provider to work with your As
 :::publicpreview
 :::
 
-Terraform enables you to define and manage infrastructure as code. Using the [Astro Terraform Provider](https://registry.terraform.io/providers/astronomer/astro/latest), we'll demonstrate how to manage Astro infrastructure using Terraform by creating and deleting a Workspace and Deployment.
+Terraform enables you to define and manage infrastructure as code. Using the [Astro Terraform Provider](https://registry.terraform.io/providers/astronomer/astro/latest), this guide demonstrates how to manage Astro infrastructure using Terraform, by creating and deleting a Workspace and Deployment.
 
 ## Prerequisites
 
