@@ -23,7 +23,7 @@ While [Deployment Analytics](deployment-metrics.md), [Deployment health incident
 - Uses the [Prometheus data model](https://prometheus.io/docs/concepts/data_model/) format using the remote-write capability, making it flexible and easy to use.
 - Allows you to configure a metrics export at the per-Deployment level or at the Workspace level.
 - Enables you to customize your observability experience with your tooling and create custom dashboards or alerts that are not currently available in Astro.
-- Offers a way to add custom metadata as labels to your exported metrics or headers to the HTTP request.
+- Offers a way to add custom metadata as labels to your exported metrics or HTTP request headers.
 
 You can use this information to right-size Celery workers, optimize your usage of the Kubernetes executor, and stay informed about task execution status.
 
@@ -113,11 +113,11 @@ You can enable metrics export at both the Workspace and Deployment level for Ast
 1. In the Astro UI, select **Environment** on the sidebar menu.
 2. Click the **Metrics Export** tab to configure your metrics export.
 3. Click **+ Metrics Export** to create a new export connection.
-4. Enter the required information for your export, the **Name** and **Endpoint**
+4. Enter the required information for your export, the **Name** and **Endpoint**.
 5. (Optional) Click **More Options** to add additional information for your endpoint:
    - **Token** - A bearer token or license key for your Prometheus endpoint.
    - **Username** and **Password** - Credentials for basic authentication, if needed.
-   - Custom **Headers** - Add a **Name** and **Value** pair that can be sent to your server with as part of the HTTP request with each remote write. If you add a custom header, any default values are overwritten by your custom configuration. You can add Deployment-specific labels when configuring **Deployment metrics**.
+   - Custom **Headers** - Add a **Name** and **Value** pair that can be sent to your server as part of the HTTP request with each remote write. If you add a custom header, any default values are overwritten by your custom configuration. You can add Deployment-specific labels when configuring **Deployment metrics**.
    - Custom **Labels** - Add a **Name** and **Value** pair that can be sent to your server. You can add Deployment-specific labels when configuring **Deployment metrics**.
 6. Click **Create metrics export**.
 7. (Optional) Allow all Deployments to link to this metrics export configuration. See [Link metrics export](#link-exports).
