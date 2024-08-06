@@ -33,11 +33,11 @@ You can now add Key:Value pair labels to metrics that you export using the Unive
 
 ### Additional improvements
 
-- Added a new template demonstrating how to run dbt projects on Astro using [Cosmos](https://www.astronomer.io/integrations/dbt/) when you're onboarding. See [Get started on Astro](https://cloud.astronomer.io/start-astro) to set up a trial account and try a template.
+- Added a new template demonstrating how to run dbt projects on Astro using [Cosmos](https://www.astronomer.io/integrations/dbt/) when you're onboarding. See [Get started on Astro](https://cloud.astronomer.io/start-astro) to set up a trial account and try out a template.
 
 ### Bug fixes
 
-- Fixed an issue where a user could not bulk select alerts if they had different names, but the same configurations.
+- Fixed an issue where a user could not bulk select alerts if they had different names but the same configurations.
 
 ## July 30, 2024
 
