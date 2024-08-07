@@ -545,6 +545,7 @@ components:
           - SMALL
           - MEDIUM
           - LARGE
+          - EXTRA_LARGE
           example: MEDIUM
           type: string
         type:
@@ -909,6 +910,7 @@ components:
           - SMALL
           - MEDIUM
           - LARGE
+          - EXTRA_LARGE
           example: MEDIUM
           type: string
         type:
@@ -1261,6 +1263,7 @@ components:
           - SMALL
           - MEDIUM
           - LARGE
+          - EXTRA_LARGE
           example: MEDIUM
           type: string
         status:
@@ -2094,6 +2097,7 @@ components:
           - SMALL
           - MEDIUM
           - LARGE
+          - EXTRA_LARGE
           type: string
         spec:
           $ref: '#/components/schemas/MachineSpec'
@@ -2233,6 +2237,7 @@ components:
           - SMALL
           - MEDIUM
           - LARGE
+          - EXTRA_LARGE
           example: MEDIUM
           type: string
         type:
@@ -2524,6 +2529,7 @@ components:
           - SMALL
           - MEDIUM
           - LARGE
+          - EXTRA_LARGE
           example: MEDIUM
           type: string
         type:
