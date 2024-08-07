@@ -25,7 +25,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
-## August 6, 2024
+## August 7, 2024
 
 ### Customize labels on your metrics export
 
