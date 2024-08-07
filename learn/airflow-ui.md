@@ -88,9 +88,13 @@ In Airflow 2.7 and later, the DAG view includes keyboard shortcuts. You can see 
 
 The **Details** tab displays information about the DAG, individual DAG runs, and in-depth information about each task instance. Here you can find information like total historic runs of a DAG, the data interval start of a DAG run, and the duration of a task instance. 
 
-To access the details of a specific DAG run or task instance, you need first need to select it in the DAG grid as shown in the following gif:
+To access the details of a specific DAG run or task instance, you first need to select it in the DAG grid as shown in the following gif:
 
 ![Gif showing how to select a specific DAG run or task instance in the DAG grid.](/img/guides/airflow-ui_grid_details.gif)
+
+If a task has been retried, you can also click on a task try button to get details about a specific attempt:
+
+![Screenshot of details tab with task try buttons.](/img/guides/details-ti-tries.png)
 
 When you select a task instance in the DAG grid, three additional options appear underneath the tabs:
 
@@ -137,6 +141,10 @@ The **Run Duration** tab shows a bar chart of the duration of each DAG run over 
 To access the [logs](logging.md#log-locations) of a specific task instance, click on the **Logs** tab which appears as soon as you select a task instance. By default the logs of the task execution are shown, while the **Pre task execution logs** and the **Post task execution logs** are collapsed and can be expanded by clicking on the respective log item.
 
 ![Gif showing how to navigate to the logs of an individual task instance.](/img/guides/airflow-ui_grid_logs.gif)
+
+If a task has been retried, you can click on a task try button to see the logs for a given attempt. Hover over a button for status and duration information at a glance.
+
+![Screenshot of logs tab with task instance try history buttons.](/img/guides/log-attempts-buttons.png)
 
 ## Cluster activity tab
 
