@@ -18,7 +18,7 @@ The open source [Airflow Databricks provider](https://airflow.apache.org/docs/ap
 
 There are multiple resources for learning about this topic. See also:
 
-- Webinar: [How to Orchestrate Databricks jobs Using Airflow](https://www.astronomer.io/events/webinars/%20orchestrate-databricks-jobs-using-airflow-video/).
+- Webinar: [How to Orchestrate Databricks jobs Using Airflow](https://www.astronomer.io/events/webinars/orchestrate-databricks-jobs-using-airflow-video/).
 
 :::
 
