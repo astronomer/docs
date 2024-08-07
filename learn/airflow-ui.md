@@ -224,6 +224,10 @@ The Docs tab provides links to external Airflow resources including:
 
 ![Screenshot of the Airflow UI with the Docs tab selected.](/img/guides/airflow-ui_docs_tab.png)
 
+## Customization options
+
+In the upper right-hand corner of the UI, you will find a light/dark theme toggle button, time zone selector with search functionality, and a login dropdown with a link to an editable user profile view.
+
 ## Conclusion
 
 This guide provided a basic overview of some of the most commonly used features of the Airflow UI. 
