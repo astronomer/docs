@@ -49,7 +49,6 @@ The following prerequisites apply when running Astronomer Software on Amazon EKS
     * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
     * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 - (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) might be required to troubleshoot certain certificate-related conditions.
-- (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) might be required to troubleshoot certain certificate-related conditions.
 
 </TabItem>
 
