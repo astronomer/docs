@@ -1059,7 +1059,7 @@ CHART_VERSION=<v-prefixed version of the Astronomer Software platform chart>
 helm repo add --force-update astronomer https://helm.astronomer.io
 helm repo update
 
-# upgradeDeployments false ensures that Airflow charts are not upgraded when this script is ran
+# upgradeDeployments false ensures that Airflow charts are not upgraded when this script is run
 # If you deployed a config change that is intended to reconfigure something inside Airflow,
 # then you may set this value to "true" instead. When it is "true", then each Airflow chart will
 # restart. Note that some stable version upgrades require setting this value to true regardless of your own configuration.
