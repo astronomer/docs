@@ -1111,7 +1111,7 @@ You can pass `-f/--values values.yaml` to `helm template` to only show images th
 
 ## Step 21: Fetch Airflow/Astro Runtime updates {#fetch-airflow-updates}
 
-By default, Astronomer checks for Airflow/Astro Runtime updates once a day at midnight by querying `https://updates.astronomer.io/astronomer-runtime`, which returns a JSON file with details about the latest available Astro Runtime versions. However, this URL is not accessible in an airgapped environment. There are several options for making these updates accessible in an airgapped environment:
+By default, Astronomer Software checks for Airflow/Astro Runtime updates once a day at midnight by querying `https://updates.astronomer.io/astronomer-runtime`, which returns a JSON file with details about the latest available Astro Runtime versions. However, this URL is not accessible in an airgapped environment. There are several options for making these updates accessible in an airgapped environment:
 
 - You can download the JSON and host it in a location that's accessible within your airgapped environment, for example:
     - AWS S3
