@@ -1031,7 +1031,7 @@ helm repo add astronomer https://helm.astronomer.io/
 helm repo update
 ```
 
-If you don't have internet access to `https://helm.astronomer.io`, download the Astronomer Software Platform Helm chart file corresponding to the version of Astronomer Software you are installing or upgrading to from `https://helm.astronomer.io/astronomer-<version number>.tgz`. For example, for Astronomer Software v0.34.1 you would download `https://helm.astronomer.io/astronomer-0.34.1.tgz`. This file does not need to uploaded to an internal chart repository.
+If you don't have internet access to `https://helm.astronomer.io`, download the Astronomer Software Platform Helm chart file corresponding to the version of Astronomer Software you are installing or upgrading to from `https://helm.astronomer.io/astronomer-<version number>.tgz`. For example, for Astronomer Software v0.34.1 you would download `https://helm.astronomer.io/astronomer-0.34.1.tgz`. This file does not need to be uploaded to an internal chart repository.
 
 ## Step 19: Create and customize upgrade.sh {#create-and-customize-upgradesh}
 
