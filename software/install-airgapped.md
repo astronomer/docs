@@ -1699,7 +1699,7 @@ Setting `astronomer.houston.config.publicSignup: true` with `astronomer.houston.
 
 :::
 
-To disable email transmission and email verision of users attempting to access the platform:
+To disable email transmission and email verification of users attempting to access the platform:
 
 1. In your `values.yaml` file, set `astronomer.houston.config.email.enabled` to `false`.
 2. Set `astronomer.houston.config.publicSignups` to `true`.
