@@ -36,6 +36,7 @@ The **DAGs** view is the landing page when you sign in to Airflow. It shows a li
 In the DAGs view you can:
 
 - Pause/unpause a DAG with the toggle to the left of the DAG name.
+- Reparse a DAG without waiting for Airflow to refresh automatically.
 - Filter the list of DAGs to show active, paused, or all DAGs.
 - Filter the list of DAGs to show currently running DAGs or DAGs that failed their last DAG run.
 - Trigger or delete a DAG with the buttons in the `Actions` section.
