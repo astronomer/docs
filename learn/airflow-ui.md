@@ -101,7 +101,7 @@ When you select a task instance in the DAG grid, two additional options appear u
 ![Screenshot of details shown when a task instance is selected with two additional options.](/img/guides/airflow-ui_grid_ti_options_dark.png)
 
 - **More Details:**  Shows all attributes of a task, including variables and templates.
-- **List Instances, all runs:** Shows a historical view of task instances and statuses for that particular task.
+- **List All Instances:** Shows a historical view of task instances and statuses for that particular task.
 
 ### Graph
 
@@ -141,7 +141,7 @@ To access the [logs](logging.md#log-locations) of a specific task instance, clic
 
 ![Gif showing how to navigate to the logs of an individual task instance.](/img/guides/airflow-ui_grid_logs.gif)
 
-If a task has been retried, you can click on a task try button to see the logs for a given attempt. Hover over a button for status and duration information at a glance.
+Click on the **Logs** tab to see the logs for a selected task. If a task has been retried, you can click on a task try button to see the logs for that attempt. Hover over a button for status and duration information at a glance.
 
 ![Screenshot of logs tab with task instance try history buttons.](/img/guides/log-attempts-buttons.png)
 
