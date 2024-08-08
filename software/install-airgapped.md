@@ -1076,7 +1076,7 @@ helm upgrade --install --namespace $NAMESPACE \
 
 ## Step 20: Fetch images from Astronomer's Helm template {#fetch-images-from-astronomer's-helm-template}
 
-The images and tags that are required for your Software installation depend on the version of Astronomer you want to install. To gather a list of exact images and tags required for your Astronomer version:
+The images and tags that are required for your Software installation depend on the version of Astronomer Software you want to install. To gather a list of exact images and tags required for your Astronomer Software version:
 
 1. Configure your current session by setting the following environment variables locally:
   - `CHART_VERSION` - Your Astronomer Software version, including patch and a `v` prefix. For example, `v0.34.1`.
