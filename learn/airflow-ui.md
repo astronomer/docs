@@ -49,15 +49,15 @@ The **DAG** view gives you detailed insights into a specific DAG, including its 
 
 On the left side you can see a grid representation of the DAG's previous runs, including their duration and the outcome of all individual task instances. Each column represents a DAG run, and each square represents a task instance in that DAG run. Task instances are color-coded according to their status. A small play icon on a DAG run indicates that a run was triggered manually, and a small dataset icon shows that a run was triggered by a [dataset update](https://astronomer.io/guides/airflow-datasets). If no icon is shown, the DAG ran according to its schedule.
 
-![Screenshot of the Airflow UI DAG view of an individual DAG. The left side with the DAG grid view is highlighted.](/img/guides/airflow-ui_grid_left_side.png)
+![Screenshot of the Airflow UI DAG view of an individual DAG. The left side with the DAG grid view is highlighted.](/img/guides/airflow-ui_grid_left_side_dark.png)
 
 On the right side you can see further details about the item (DAG, DAG run or task instance) that is currently selected. 
 
-![Screenshot of the Airflow UI DAG view of an individual DAG. The right side with the DAG details is highlighted.](/img/guides/airflow-ui_grid_right_side.png)
+![Screenshot of the Airflow UI DAG view of an individual DAG. The right side with the DAG details is highlighted.](/img/guides/airflow-ui_grid_right_side_dark.png)
 
 When a DAG run, task instance, or [task group](task-groups.md) instance is selected in the DAG grid, several action buttons appear:
 
-![Screenshot of the Airflow UI DAG view shown when an individual task instances is selected with 3 additional buttons available.](/img/guides/airflow-ui_grid_actions.png)
+![Screenshot of the Airflow UI DAG view shown when an individual task instances is selected with 3 additional buttons available.](/img/guides/airflow-ui_grid_actions_dark.png)
 
 - **Clear** / **Clear task** : This button will clear the selected DAG run, task group instance, or task instance and run it again. This is useful if you want to re-run a task or DAG run that has failed or during local development. After clicking **Clear task** you will be offered a detailed interface controlling which task instances should be cleared and rerun. See [Manually rerun tasks or DAGs](rerunning-dags.md#manually-rerun-tasks-or-dags).
 - **Mark state as...**: This button allows you to mark the selected DAG run, task group instance or task instance as successful or failed without running it. This option is often useful when the root cause of a task failure was fixed manually in the external data tool and there's no need to rerun the task. Many data teams leverage [Task Instance Notes and DAG Run Notes](rerunning-dags#add-notes-to-cleared-tasks-and-dags) in order to document the reason for marking a task instance as failed or successful.
@@ -96,12 +96,11 @@ If a task has been retried, you can also click on a task try button to get detai
 
 ![Screenshot of details tab with task try buttons.](/img/guides/details-ti-tries.png)
 
-When you select a task instance in the DAG grid, three additional options appear underneath the tabs:
+When you select a task instance in the DAG grid, two additional options appear underneath the tabs:
 
-![Screenshot of details shown when a task instance is selected with three additional options.](/img/guides/airflow-ui_grid_ti_options.png)
+![Screenshot of details shown when a task instance is selected with two additional options.](/img/guides/airflow-ui_grid_ti_options_dark.png)
 
 - **More Details:**  Shows all attributes of a task, including variables and templates.
-- **Rendered Template:** Shows the task's metadata after it has been templated.
 - **List Instances, all runs:** Shows a historical view of task instances and statuses for that particular task.
 
 ### Graph
@@ -155,13 +154,19 @@ It also includes historical metrics like the states of past DAG runs and task in
 
 ## Datasets tab
 
-The **Dataset** tab links to a page showing all datasets that have been produced in the Airflow environment, as well as all dependencies between datasets and DAGs in a graph.
+The **Dataset** tab links to a page showing all datasets that have been produced in the Airflow environment, with additional tabs offering: 
+- a dependency graph of all dependencies between datasets and DAGs.
+- a table of datasets containing a URI, the total number of updates, and a timestamp of the last update for each dataset.
 
-![Screenshot of the Datasets tab of the Airflow UI showing several datasets and DAGs.](/img/guides/airflow-ui_datasets_tab.png)
+![Screenshot of the Datasets page showing all datasets in the Airflow environment.](/img/guides/airflow-ui_datasets_page.png)
 
-Click a dataset to open the history of all updates to the dataset that were recorded in the Airflow environment. You can use the Play button to manually trigger an update to a Dataset.
+Click on a dataset to open the history of all updates to the dataset that were recorded in the Airflow environment. You can use the Play button to manually trigger an update to a Dataset.
 
-![Screenshot of the Datasets tab with an individual dataset selected, it is highlighted in the dependency view on the right.](/img/guides/airflow-ui_dataset_details.png)
+![Screenshot of the Datasets tab of the Airflow UI showing several datasets and DAGs.](/img/guides/airflow-ui_datasets_details_tab_dark.png)
+
+Click on the **Dependency graph** tab to view a holistic graph of datasets and DAGs.
+
+![Screenshot of the Datasets tab with an individual dataset selected, it is highlighted in the dependency view on the right.](/img/guides/airflow-ui_dataset_details_dark.png)
 
 ## Security tab
 
@@ -235,6 +240,9 @@ The Docs tab provides links to external Airflow resources including:
 ## Customization options
 
 In the upper right-hand corner of the UI, you will find a light/dark theme toggle button, time zone selector with search functionality, and a login dropdown with a link to an editable user profile view.
+
+![Screenshot of theme toggle button.](/img/guides/astro-theme-toggle.png)
+![Screenshot of user profile.](/img/guides/astro_ui_profile.png)
 
 ## Conclusion
 
