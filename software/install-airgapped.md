@@ -73,7 +73,6 @@ The following prerequisites apply when running Astronomer Software on Google GKE
     * Configured to use the DNS servers where Astronomer Software DNS records can be created.
     * [Helm with minimum version 3.6](https://helm.sh/docs/intro/install).
     * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-    * The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 - (Situational) The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html) might be required to troubleshoot certain certificate-related conditions.
 
 
