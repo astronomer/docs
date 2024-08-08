@@ -143,7 +143,7 @@ Use a manual process to renew TLS certificates when your organization has its ow
    kubectl delete secret astronomer-tls -n astronomer
    ```
 
-2. Follow the instructions for requesting a TLS certificate from your organization's security team as described in [Step 4: Configure TLS](install-airgapped.md#requesting-and-validating-an-astronomer-tls-certificate). The linked guide is written for users installing Astronomer on AWS, but this step is the same regardless of which service you use.
+2. Follow the instructions for requesting a TLS certificate from your organization's security team as described in [Step 4: Configure TLS](install-airgapped.md#requesting-and-validating-an-astronomer-tls-certificate).
 
 3. Restart your Houston, nginx, and registry pods to begin using the new certificate by running the following commands:
    ```sh
