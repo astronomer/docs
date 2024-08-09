@@ -25,7 +25,10 @@ After you enable the IP access list, users and user-privileged resources can onl
 4. Add the IP Adress range or ranges in CIDR format.
     :::danger
 
-    Make sure the first IP range you add is inclusive of the IP you are currently using, or you will be locked out of your organization.
+    You must make sure that you include critical services in your IP range. These include:
+
+    - Make sure the first IP range you add is inclusive of the IP you are currently using, or you will be locked out of your Astro Organization.
+    - You must include the IP address of your identity provider (IdP), if you have one, or it will also be locked out.
 
     :::
 
