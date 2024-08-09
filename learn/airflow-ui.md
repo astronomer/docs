@@ -264,11 +264,10 @@ The Docs tab provides links to external Airflow resources including:
 
 In the upper right-hand corner of the UI, you will find a light/dark theme toggle button, time zone selector with search functionality, and a login dropdown with a link to an editable user profile view.
 
-![Screenshot of theme toggle button.](/img/guides/astro-theme-toggle.png)
-![Screenshot of user profile.](/img/guides/astro_ui_profile.png)
+![Screenshot of theme toggle button.](/img/guides/airflow-ui_customization_options_lrg.png)
 
 ## Conclusion
 
 This guide provided a basic overview of some of the most commonly used features of the Airflow UI.
 
-The Airflow community is consistently working on improvements to the UI to provide a better user experience and additional functionality. Make sure you upgrade your Airflow environment frequently to ensure you are taking advantage of Airflow UI updates as they are released.
+The Airflow community is consistently working on improvements to the UI to provide a better user experience and additional functionality. Make sure you upgrade your Airflow environment frequently to ensure you are taking advantage of Airflow UI updates as the community releases them.
