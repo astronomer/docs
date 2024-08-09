@@ -41,22 +41,22 @@ astronomer:
         maxExtraAu: 400 # default is 400
 ```
 
-### Configuring the sizes of individual deployment-level components {#configuring-individual-deployment-components}
+### Configure the sizes of individual Deployment-level components {#configure-deployment-components}
 
-Components represent different parts of the Astronomer Software deployment. You can customize the default configuration for a component by defining it in `astronomer.houston.config.deployments.components`.
+Components represent different parts of the Astronomer Software Deployment. You can customize the default configuration for a component by defining it in `astronomer.houston.config.deployments.components`.
 
-A list of configurable components and options is provided in [Configurable Components](#list-of-configurable-components).
+A list of configurable components and options is provided in [Configurable Components](#configurable-components).
 
 :::tip
-KubernetesExecutor Task pod-sizes are created on an as-needed basis and don't have standing resource-requirements. Their resource-requirements are [configured at the task level](#configuring-kubernetes-task-pod-size).
+KubernetesExecutor Task pod sizes are created on an as-needed basis, and don't have persisting resource requirements. Their resource requirements are [configured at the task level](#configure-kubernetes-task-pod-size).
 :::
 
-When defining components, the **full definition** of the component must be included in the list entry undernearth the components key, not just the portions you wish to change.
+When defining components, you must include the full definition of the component in the list entry after the components key, instead of only the components you want to define.
 
-For example, to increase the maximum size a Celery worker task can be from 30 AU (3 Vcpu/11.5Gi) to 50AU (3 Vcpu/192Gi), add the full Celery worker component definition to `astronomer.houston.config.deployments.components` in your `values.yaml` with a higher limit (defined in AUs) as per the following example:
+For example, to increase the maximum size a Celery worker task from 30 AU (3 Vcpu/11.5Gi) to 50AU (3 Vcpu/192Gi), add the full Celery worker component definition to `astronomer.houston.config.deployments.components` in your `values.yaml` with a higher limit (defined in AUs):
 
 :::tip
-When raising cpu/memory limits, ensure the [maximum pod size](#configuring-max-pod-size) is large enough to avoid errors during pod-creation.
+When increasing CPU or memory limits, ensure the [maximum pod size](#configure-max-pod-size) is large enough to avoid errors during pod creation.
 :::
 
 ```yaml
@@ -86,19 +86,19 @@ astronomer:
         #     ...
 ```
 
-### Configurable Components {#list-of-configurable-components}
+### Configurable Components
 
 :::info
-When [defining components](#configuring-individual-deployment-components) the **full definition** of the component must be included in the list entry undernearth the components key, not just the portions you wish to change.
+When [defining components](#configure-individual-deployment-components), you must include the full definition of the component in the list entry after the components key, instead of only the components you want to define.
 :::
 
 :::tip
-KubernetesExecutor Task pod-sizes are created on an as-needed basis and don't have standing resource-requirements. Their resource-requirements are [configured at the task level](#configuring-kubernetes-task-pod-size).
+KubernetesExecutor task pod sizes are created on an as-needed basis and don't have persisting resource requirements. Their resource requirements are [configured at the task level](#configure-kubernetes-task-pod-size).
 :::
 
 Configurable components include:
 
-**Airflow Scheduler**
+- **Airflow Scheduler**
 
    ```yaml
    - name: scheduler
@@ -114,7 +114,7 @@ Configurable components include:
          minAirflowVersion: 2.0.0
    ```
 
-**Airflow Webserver**
+- **Airflow Webserver**
 
    ```yaml
    - name: webserver
@@ -124,7 +124,7 @@ Configurable components include:
        limit: 30
    ```
 
-**StatsD**
+- **StatsD**
 
    ```yaml
    - name: statsd
@@ -134,7 +134,7 @@ Configurable components include:
        limit: 30
    ```
 
-**Database Connection Pooler (PgBouncer)**
+- **Database Connection Pooler (PgBouncer)**
 
    ```yaml
    - name: pgbouncer
@@ -144,7 +144,7 @@ Configurable components include:
        limit: 2
    ```
 
-**Celery Diagnostic Web Interface (Flower)**
+- **Celery Diagnostic Web Interface (Flower)**
 
    ```yaml
    - name: flower
@@ -154,7 +154,7 @@ Configurable components include:
        limit: 2
    ```
 
-**Redis**
+- **Redis**
 
    ```yaml
    - name: redis
@@ -164,7 +164,7 @@ Configurable components include:
        limit: 2
    ```
 
-**Celery Workers**
+- **Celery Workers**
 
    ```yaml
    - name: workers
@@ -183,7 +183,7 @@ Configurable components include:
          limit: 10
    ```
 
-**Triggerer**
+- **Triggerer**
 
    ```yaml
    - name: triggerer
@@ -199,26 +199,15 @@ Configurable components include:
          minAirflowVersion: 2.2.0
    ```
 
-### Configuring the size of KubernetesExecutor Task Pods {#configuring-kubernetes-task-pod-size}
+### Configure the size of KubernetesExecutor task pods {#configure-kubernetes-task-pod-size}
 
-Kubernetes Executor task-pods are defined at the task-level with the dag by passing resource-requests as part of `executor_config` into the Operator, as per the example below:
-
-When not defined, these tasks default to using 1 AU (one-tenth of a Vcpu/384 Mi of memory).
-
-:::tip
-Ask your Astronomer Resident Architect about options for customizing the default task pod size.
-:::
+Kubernetes Executor task pods are defined at the task level when the DAG passes resource requests as part of `executor_config` into the Operator. When not defined, these tasks default to using 1 AU, which is one-tenth of a Vcpu/384 Mi of memory. This means that when you define resource requests or limits for CPU and memory, ensure the [maximum pod size](#configure-max-pod-size) is large enough to avoid errors during pod creation.
 
 :::danger
 Astronomer Software does not automatically raise then namespace-level cumulative resource-limits for pods created by KubernetesExecutor. To avoid pod-creation failures, increase `maxExtraAu`s to support your desired level of resourcing and concurrency.
 :::
 
-
-:::tip
-When setting cpu/memory requests/limits, ensure the [maximum pod size](#configuring-max-pod-size) is large enough to avoid errors during pod-creation.
-:::
-
-E.g.
+The following example demonstrates how to configure resource limits and requests:
 ```
 # import kubernetes.client.models as k8s
 from kubernetes.client import models as k8s
@@ -260,7 +249,7 @@ my_executor_config={
 
 ```
 
-KubernetesExecutor task-pods are limited to the LimitRanges and Quotas defined within the pod namespace.
+Note that KubernetesExecutor task pods are limited to the `LimitRanges` and `quotas` defined within the pod namespace.
 
 ### Customize Astro Units (AU's) {#customize-au}
 
