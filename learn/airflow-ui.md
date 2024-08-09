@@ -146,6 +146,12 @@ The **Run Duration** tab shows a bar chart of the duration of each DAG run over 
 
 ![Screenshot of the Run Duration tab showing a bar graph of the duration of each DAG run over time.](/img/guides/airflow-ui_grid_run_duration.png)
 
+### Kubernetes Pod Spec
+
+The **K8s Pod Spec** tab displays information about a task's K8s pod if a task has been run on one.
+
+![Screenshot of the K8s Pod Spec tab showing information about a K8s pod if employed.](/img/guides/airflow-ui_k8s_tab.png)
+
 ### Task Duration
 
 The **Task Duration** tab shows a line chart of the duration of each task across all DAG runs.
