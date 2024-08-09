@@ -146,6 +146,12 @@ The **Run Duration** tab shows a bar chart of the duration of each DAG run over 
 
 ![Screenshot of the Run Duration tab showing a bar graph of the duration of each DAG run over time.](/img/guides/airflow-ui_grid_run_duration.png)
 
+### Task Duration
+
+The **Task Duration** tab shows a line chart of the duration of each task across all DAG runs.
+
+![Screenshot of the Task Duration tab showing a line graph of the duration of each task across all DAG runs.](/img/guides/airflow-ui_task_duration_dark.png)
+
 ### Logs
 
 To access the [logs](logging.md#log-locations) of a specific task instance, click on the **Logs** tab which appears as soon as you select a task instance. By default the logs of the task execution are shown, while the **Pre task execution logs** and the **Post task execution logs** are collapsed and can be expanded by clicking on the respective log item.
