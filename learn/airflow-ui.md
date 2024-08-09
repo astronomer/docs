@@ -46,13 +46,13 @@ To see more information about a specific DAG, click its name or use one of the l
 
 ## Individual DAG view
 
-The **DAG** view gives you detailed insights into a specific DAG, including its DAG runs and task instances. 
+The **DAG** view gives you detailed insights into a specific DAG, including its DAG runs and task instances.
 
 On the left side you can see a grid representation of the DAG's previous runs, including their duration and the outcome of all individual task instances. Each column represents a DAG run, and each square represents a task instance in that DAG run. Task instances are color-coded according to their status. A small play icon on a DAG run indicates that a run was triggered manually, and a small dataset icon shows that a run was triggered by a [dataset update](https://astronomer.io/guides/airflow-datasets). If no icon is shown, the DAG ran according to its schedule.
 
 ![Screenshot of the Airflow UI DAG view of an individual DAG. The left side with the DAG grid view is highlighted.](/img/guides/airflow-ui_grid_left_side_dark.png)
 
-On the right side you can see further details about the item (DAG, DAG run or task instance) that is currently selected. 
+On the right side you can see further details about the item (DAG, DAG run or task instance) that is currently selected.
 
 ![Screenshot of the Airflow UI DAG view of an individual DAG. The right side with the DAG details is highlighted.](/img/guides/airflow-ui_grid_right_side_dark.png)
 
@@ -62,7 +62,7 @@ When a DAG run, task instance, or [task group](task-groups.md) instance is selec
 
 - **Clear** / **Clear task** : This button will clear the selected DAG run, task group instance, or task instance and run it again. This is useful if you want to re-run a task or DAG run that has failed or during local development. After clicking **Clear task** you will be offered a detailed interface controlling which task instances should be cleared and rerun. See [Manually rerun tasks or DAGs](rerunning-dags.md#manually-rerun-tasks-or-dags).
 - **Mark state as...**: This button allows you to mark the selected DAG run, task group instance or task instance as successful or failed without running it. This option is often useful when the root cause of a task failure was fixed manually in the external data tool and there's no need to rerun the task. Many data teams leverage [Task Instance Notes and DAG Run Notes](rerunning-dags#add-notes-to-cleared-tasks-and-dags) in order to document the reason for marking a task instance as failed or successful.
-- **Filter DAG by task**: This button allows you to filter the tasks shown in the DAG grid and DAG graph based on task dependencies. For example, when you select **Filter downstream**, the UI shows only the tasks downstream of your selected task. 
+- **Filter DAG by task**: This button allows you to filter the tasks shown in the DAG grid and DAG graph based on task dependencies. For example, when you select **Filter downstream**, the UI shows only the tasks downstream of your selected task.
 
 ![Gif of the Airflow DAG view showing how applying the filters 'Filter downstream' and 'Filter upstream' affect the grid to the left and the DAG graph.](/img/guides/airflow-ui_grid_filter.gif)
 
@@ -87,7 +87,7 @@ In Airflow 2.7 and later, the DAG view includes keyboard shortcuts. You can see 
 
 ### Details
 
-The **Details** tab displays information about the DAG, individual DAG runs, and in-depth information about each task instance. Here you can find information like total historic runs of a DAG, the data interval start of a DAG run, and the duration of a task instance. 
+The **Details** tab displays information about the DAG, individual DAG runs, and in-depth information about each task instance. Here you can find information like total historic runs of a DAG, the data interval start of a DAG run, and the duration of a task instance.
 
 To access the details of a specific DAG run or task instance, you first need to select it in the DAG grid as shown in the following gif:
 
@@ -120,7 +120,7 @@ Earlier Airflow versions had a different **Graph** view that was not integrated 
 
 The Gantt chart visualizes task duration and overlap, so you can quickly identify bottlenecks and costly tasks.
 
-![](/img/guides/airflow-ui_gantt_dark.png)
+![Screenshot of Gantt chart showing task duration and overlap.](/img/guides/airflow-ui_gantt_dark.png)
 
 You can also find information about previous retries if a task has been retried:
 
@@ -136,7 +136,7 @@ This tab shows code only from the file that generated the DAG. It does not show 
 
 ### Audit Logs
 
-The **Audit Logs** tab shows a list of events that have occurred in your Airflow environment relating to the DAG, DAG run or task instance you have selected. 
+The **Audit Logs** tab shows a list of events that have occurred in your Airflow environment relating to the DAG, DAG run or task instance you have selected.
 
 ![Screenshot of the Audit Logs tab showing a list of events that have occurred in the Airflow environment for one run of the complex_dag_structure_rainbow DAG.](/img/guides/airflow-ui_grid_audit_logs.png)
 
@@ -177,7 +177,7 @@ It also includes historical metrics like the states of past DAG runs and task in
 
 ## Datasets tab
 
-The **Dataset** tab links to a page showing all datasets that have been produced in the Airflow environment, with additional tabs offering: 
+The **Dataset** tab links to a page showing all datasets that have been produced in the Airflow environment, with additional tabs offering:
 - a dependency graph of all dependencies between datasets and DAGs.
 - a table of datasets containing a URI, the total number of updates, and a timestamp of the last update for each dataset.
 
@@ -269,6 +269,6 @@ In the upper right-hand corner of the UI, you will find a light/dark theme toggl
 
 ## Conclusion
 
-This guide provided a basic overview of some of the most commonly used features of the Airflow UI. 
+This guide provided a basic overview of some of the most commonly used features of the Airflow UI.
 
 The Airflow community is consistently working on improvements to the UI to provide a better user experience and additional functionality. Make sure you upgrade your Airflow environment frequently to ensure you are taking advantage of Airflow UI updates as they are released.
