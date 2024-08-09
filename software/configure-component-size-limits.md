@@ -28,7 +28,7 @@ astronomer:
 ```
 
 ### Configure Deployment-level limits for resource usage {#configure-cumulative-resource-limits}
-Astronomer Software limits the amount of resources that can be used by all pods in an Airflow deployment by creating and managing a `LimitRange` and `ResourceQuota` for the namespace associated with each Airflow deployment.
+Astronomer Software limits the amount of resources that can be used by all pods in a Deployment by creating and managing a `LimitRange` and `ResourceQuota` for the namespace associated with each Deployment.
 
 These values are automatically adjust to account for the resource requirements of various components.
 
