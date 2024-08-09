@@ -31,7 +31,7 @@ To get the most out of this guide, you should have an understanding of:
 
 The **DAGs** view is the landing page when you sign in to Airflow. It shows a list of all your DAGs, the status of recent DAG runs and tasks, the time of the last DAG run, and basic metadata about the DAG like the owner and the schedule. To see the status of the DAGs update in real time, toggle **Auto-refresh**.
 
-![Screenshot of the Airflow UI DAGs view showing several DAGs with their run history and current run status.](/img/guides/airflow-ui_DAGs_overview.png)
+![Screenshot of the Airflow UI DAGs view showing several DAGs with their run history and current run status.](/img/guides/airflow-ui_DAGs_overview_dark.png)
 
 In the DAGs view you can:
 
@@ -106,7 +106,7 @@ When you select a task instance in the DAG grid, two additional options appear u
 
 ### Graph
 
-The **Graph** tab shows a  graph visualization of the tasks and dependencies in your DAG, including [Airflow datasets](airflow-datasets.md) a DAG is scheduled on or updates. If you select a task or task group instance in a DAG grid column, the graph highlights and zooms to the selected task. You can also navigate complex DAGs using **Filter Tasks** option and the minimap. This view is useful to explore the DAG structure and task dependencies.
+The **Graph** tab shows a  graph visualization of the tasks and dependencies in your DAG, including [Airflow datasets](airflow-datasets.md) a DAG is scheduled on or updates. If you select a task or task group instance in a DAG grid column, the graph highlights and zooms to the selected task. You can also navigate complex DAGs using the **Filter Tasks** option and the minimap. This view is useful for exploring the DAG structure and task dependencies.
 
 ![Gif showing how to navigate the DAG graph.](/img/guides/airflow-ui_grid_graph.gif)
 
@@ -115,6 +115,16 @@ The **Graph** tab shows a  graph visualization of the tasks and dependencies in 
 Earlier Airflow versions had a different **Graph** view that was not integrated into the DAG view. See the [Airflow documentation of your version](https://airflow.apache.org/docs/apache-airflow/2.6.3/ui.html#graph-view) for more information.
 
 :::
+
+### Gantt Chart
+
+The Gantt chart visualizes task duration and overlap, so you can quickly identify bottlenecks and costly tasks.
+
+![](/img/guides/airflow-ui_gantt_dark.png)
+
+You can also find information about previous retries if a task has been retried:
+
+![Screenshot of the Gantt chart with a retried task selected.](/img/guides/airflow-ui_gantt_retries.png)
 
 ### Code
 
