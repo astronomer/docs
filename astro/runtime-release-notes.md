@@ -31,14 +31,14 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 ## Astro Runtime 11.8.0
 
-- Release date: August 8, 2024
+- Release date: August 9, 2024
 - Airflow version: 2.9.3
 
 ### Additional improvements
 
 - Fixed the Tasks API endpoint for scenarios when a DAG doesn't have a `start_date` ([#40878](https://github.com/apache/airflow/pull/40878)
 - Added validation for the project URL that comes from installed providers, before displaying the URL in views ([#40933](https://github.com/apache/airflow/pull/40933))
-- Upgraded the minor and patch versions of some Astro open source provider packages. See [Astro Runtime 11.8.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-1180)
+- Upgraded the minor and patch versions of some open-source provider packages. See [Astro Runtime 11.8.0 provider packages](https://www.astronomer.io/docs/astro/runtime-provider-reference#astro-runtime-1180)
 
 ## Astro Runtime 11.7.0
 
