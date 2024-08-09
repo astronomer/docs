@@ -95,9 +95,9 @@ The following table lists all possible scheduler sizes for Astro Hosted:
 
 | Scheduler size                 | vCPU | Memory | Ephemeral storage |
 | ------------------------------ | ---- | ------ | ----------------- |
-| Small (Up to ~50 DAGs)         | 1    | 2G     | 5Gi               |
-| Medium (Up to ~250 DAGs)       | 2    | 4G     | 5Gi               |
-| Large (Up to ~1000 DAGs)       | 4    | 8G     | 5Gi               |
+| Small (Up to ~50 DAGs)         | 1    | 2G     | 5GiB              |
+| Medium (Up to ~250 DAGs)       | 2    | 4G     | 5GiB              |
+| Large (Up to ~1000 DAGs)       | 4    | 8G     | 5GiB              |
 
 ### Update scheduler size
 
