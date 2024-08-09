@@ -197,7 +197,6 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
     kind: RoleBinding
     metadata:
       name: deployment-commander-rolebinding
-      namespace: <your-namespace-name> # Should be namespace you are granting access to
     roleRef:
       apiGroup: rbac.authorization.k8s.io
       kind: Role
@@ -209,8 +208,7 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
     ```
 
 2. Save this file and name it `commander.yaml`.
-3. In the Kubernetes cluster hosting Astronomer Software, run `kubectl apply -f commander.yaml`.
-4. Optional. Repeat steps 1-3 to add more namespaces to your pool.
+3. For each namespace you configured in `astronomer.houston.config.deployments.preCreatedNamespaces`, run `kubectl -n <airflow namespace> apply -f commander.yaml`.
 
 ### Step 2: Configure a namespace pool in Astronomer
 

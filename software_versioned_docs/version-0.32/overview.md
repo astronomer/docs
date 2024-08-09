@@ -24,7 +24,7 @@ The following diagram shows how you can run Airflow in your private cloud using 
 
 ## Get Started
 <LinkCardGrid>
-  <LinkCard truncate label="Installation guides" description="Install Astronomer Software on your cloud." href="/software/category/install" />
+  <LinkCard truncate label="Installation guides" description="Install Astronomer Software on your cloud." href="/software/install-airgapped" />
   <LinkCard truncate label="Integrate an auth system" description="Set up enterprise-grade user authentication on Astronomer Software." href="/software/integrate-auth-system" />
   <LinkCard truncate label="CI/CD and automation" description="Use the Houston API and CI/CD tools to automate code deploys and changes to your platform." href="/software/ci-cd" />
 </LinkCardGrid>

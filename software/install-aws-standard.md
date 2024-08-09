@@ -4,7 +4,10 @@ title: 'Install Astronomer Software on AWS EKS'
 id: install-aws
 description: Install Astronomer Software on Amazon Web Services (AWS).
 sidebar_custom_props: { icon: 'img/aws.png' }
+unlisted: true
 ---
+
+<!-- ARCHIVED - DO NOT MAKE UPDATES TO THIS DOC OR PUBLISH -->
 
 This guide describes the steps to install Astronomer Software on Amazon Web Services (AWS), which allows you to deploy and scale [Apache Airflow](https://airflow.apache.org/) within an AWS [Elastic Kubernetes Service](https://aws.amazon.com/eks/) (EKS) cluster.
 

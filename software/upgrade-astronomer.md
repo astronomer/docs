@@ -86,7 +86,7 @@ RELEASE_NAME=<astronomer-platform-release-name>
 NAMESPACE=<astronomer-platform-namespace>
 ASTRO_VERSION=<astronomer-version>
 
-helm repo add astronomer https://helm.astronomer.io
+helm repo add --force-update astronomer https://helm.astronomer.io
 helm repo update
 
 # upgradeDeployments false ensures that Airflow charts are not upgraded when this script is ran
@@ -102,7 +102,7 @@ helm upgrade --namespace $NAMESPACE \
             --timeout 20m \
             --set astronomer.houston.upgradeDeployments.enabled=false \
             $RELEASE_NAME \
-            astronomer/astronomer
+            astronomer/astronomer $@
 ```
 
 Make sure to substitute the following 3 variables with your own values:

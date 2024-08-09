@@ -4,7 +4,10 @@ title: 'Install Astronomer Software on GCP GKE'
 id: install-gcp
 description: Install Astronomer Software on Google Cloud Platform (GCP).
 sidebar_custom_props: { icon: 'img/gcp.png' }
+unlisted: true
 ---
+
+<!-- ARCHIVED - DO NOT MAKE UPDATES TO THIS DOC OR PUBLISH -->
 
 This guide describes the steps to install Astronomer on Google Cloud Platform (GCP), which allows you to deploy and scale any number of [Apache Airflow](https://airflow.apache.org/) deployments within an [GCP Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine/) cluster.
 

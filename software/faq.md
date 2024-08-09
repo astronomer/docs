@@ -63,7 +63,7 @@ No. Review the [Astronomer Helm chart repo](https://github.com/astronomer/astron
 
 ### What scripts are used for deployment?
 
-The default method for installing and upgrading Astronomer Software is using the Astronomer Helm chart located at `https://helm.astronomer.io`. See the Astronomer Software installation guides ([AWS](install-aws-standard.md), [GCP](install-gcp-standard.md), and [Azure](install-azure-standard.md)) and [Upgrade Astronomer](upgrade-astronomer.md).
+The default method for installing and upgrading Astronomer Software is using the Astronomer Helm chart located at `https://helm.astronomer.io`. See the [Astronomer Software installation guide](install-airgapped.md).
 
 ## Authentication
 

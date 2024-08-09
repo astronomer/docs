@@ -5,7 +5,7 @@ id: self-signed-certificate
 description: Generate a self-signed certificate to use with Astronomer Software.
 ---
 
-This guide describes the steps to generate a self-signed certificate to use with Astronomer Software. You might want to complete this setup as part of [installing Astronomer Software on AWS](install-aws-standard.md).
+This guide describes the steps to generate a self-signed certificate to use with Astronomer Software. 
 
 Self-signed certificates are ideal for privately hosted internal applications, as well as in development and testing environments. Avoid using self-signed certificates in installations where the trust and identity of the certificate issuer are important.
 
