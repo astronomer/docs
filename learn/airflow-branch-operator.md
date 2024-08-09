@@ -30,7 +30,7 @@ To get the most out of this guide, you should have an understanding of:
 
 ## `@task.branch` (BranchPythonOperator)
 
-One of the simplest ways to implement branching in Airflow is to use the `@task.branch` decorator, which is a decorated version of the [BranchPythonOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchpythonoperator). `@task.branch` accepts any Python function as an input as long as the function returns a list of valid IDs for Airflow tasks that the DAG should run after the function completes. 
+One of the simplest ways to implement branching in Airflow is to use the `@task.branch` decorator, which is a decorated version of the [BranchPythonOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchpythonoperator). `@task.branch` accepts any Python function as an input as long as the function returns a list of valid IDs for Airflow tasks that the DAG should run after the function completes.
 
 In the following example we use a `choose_branch` function that returns one set of task IDs if the result is greater than 0.5 and a different set if the result is less than or equal to 0.5:
 
@@ -207,6 +207,15 @@ In this DAG, `random.choice()` returns one random option out of a list of four b
 ![Branching Graph View](/img/guides/branching_decorator_graph.png)
 
 If you have downstream tasks that need to run regardless of which branch is taken, like the `join` task in the previous example, you need to update the [trigger rule](airflow-trigger-rules.md). The default trigger rule in Airflow is `all_success`, which means that if upstream tasks are skipped, then the downstream task will not run. In the previous example, `none_failed_min_one_success` is specified to indicate that the task should run as long as one upstream task succeeded and no tasks failed.
+
+Starting with version 2.10, you can pass TaskGroups in some operators. If you provide a `task_group_id` to the operator instead of a `task_id`, it will be expanded into the roots of that task group. The operators that support this approach are:
+- BaseBranchOperator
+- BranchPythonOperator
+- BranchPythonVirtualenvOperator
+- BranchExternalPythonOperator
+- BranchDateTimeOperator
+- LatestOnlyOperator
+- BranchDayOfWeekOperator.
 
 Finally, note that with the `@task.branch` decorator your Python function *must* return at least one task ID for whichever branch is chosen (in other words, it can't return nothing). If one of the paths in your branching should do nothing, you can use an EmptyOperator in that branch.
 
