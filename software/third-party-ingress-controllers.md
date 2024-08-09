@@ -65,7 +65,7 @@ OpenShift's standard ingress controller restricts hostname use to a single names
 kubectl -n openshift-ingress-operator patch ingresscontroller/default --patch '{"spec":{"routeAdmission":{"namespaceOwnership":"InterNamespaceAllowed"}}}' --type=merge
 ```
 
-Alternatively, see [Use Openshift Ingress Sharding](https://docs.openshift.com/container-platform/4.15/networking/ingress-sharding.html) to create an additional Ingress instance with the required routeAdmission policy.
+Alternatively, see [Use Openshift Ingress Sharding](https://docs.openshift.com/container-platform/4.15/networking/ingress-sharding.html) to create an additional Ingress instance with the required `routeAdmission` policy.
 For more information, including information about security implications for multi-tenant clusters, see the [Openshift Ingress operator documentation](https://docs.openshift.com/container-platform/4.15/networking/ingress-operator.html).
 
 OpenShift clusters with multi-tenant isolation enabled need to explicitly allow traffic from the ingress controller's namespace to services associated with ingresses in other namespaces.
