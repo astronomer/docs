@@ -31,7 +31,7 @@ To get the most out of this guide, you should have an understanding of:
 
 The **DAGs** view is the landing page when you sign in to Airflow. It shows a list of all your DAGs, the status of recent DAG runs and tasks, the time of the last DAG run, and basic metadata about the DAG like the owner and the schedule. To see the status of the DAGs update in real time, toggle **Auto-refresh**.
 
-![Screenshot of the Airflow UI DAGs view showing several DAGs with their run history and current run status.](/img/guides/airflow-ui_DAGs_overview_dark.png)
+![Screenshot of the Airflow UI DAGs view showing several DAGs with their run history and current run status.](/img/guides/airflow-ui_DAGs_overview_dark_fixed.png)
 
 In the DAGs view you can:
 
