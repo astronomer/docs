@@ -89,6 +89,7 @@ Available for both Standard and Dedicated clusters. If your organization does no
         "StringLike": {
             "<clusterOIDCIssuerUrl>:aud": "sts.amazonaws.com",
             "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-kpo"
+            "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-dag-processor-serviceaccount"
             "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-scheduler-serviceaccount"
             "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-triggerer-serviceaccount"
             "<clusterOIDCIssuerUrl>:sub": "system:serviceaccount:<DeploymentNamespace>:<DeploymentNamespace>-webserver-serviceaccount"
