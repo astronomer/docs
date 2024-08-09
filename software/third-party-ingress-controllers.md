@@ -70,7 +70,7 @@ For more information, including information about security implications for mult
 
 OpenShift clusters with multi-tenant isolation enabled need to explicitly allow traffic from the ingress controller's namespace to services associated with ingresses in other namespaces.
 
-Label the namespace containing your ingress controller with the `network.openshift.io/policy-group=ingress` label. However, the label can vary based on the specific policy and configuration on your cluster. For example, you might run the following:
+Label the namespace containing your ingress controller with the `network.openshift.io/policy-group=ingress` label. The label can vary based on the specific policy and configuration on your cluster, however. For example, you might run the following:
 
 ```sh
 kubectl label namespace/<ingress namespace> network.openshift.io/policy-group=ingress
