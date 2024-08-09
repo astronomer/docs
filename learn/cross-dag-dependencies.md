@@ -134,6 +134,12 @@ In the following image, you can see that the `trigger_dependent_dag` task in the
 
 If your dependent DAG requires a config input or a specific execution date, you can specify them in the operator using the `conf` and `execution_date` params respectively.
 
+:::tip
+
+Starting with version 2.10, you can set `skip_when_already_exists` to `True` to keep the operator from attempting to trigger runs that have already occurred and failing as a result. This could happen in the case of rerun DAGs and tasks.
+
+:::
+
 ### ExternalTaskSensor
 
 To create cross-DAG dependencies from a downstream DAG, consider using one or more [ExternalTaskSensors](https://registry.astronomer.io/providers/apache-airflow/modules/externaltasksensor). The downstream DAG will pause until a task is completed in the upstream DAG before resuming.
