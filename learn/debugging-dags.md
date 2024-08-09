@@ -174,6 +174,10 @@ The task logs provide information about the error that caused the failure.
 
 ![Error Log](/img/guides/error_log_2.png)
 
+Starting with version 2.10, the **Details** tab displays information about dependencies causing a task to fail or not to run (Task Failed Dependencies). If available, this information is displayed for any task in a `scheduled` or `None` state.
+
+![Task Failed Dependencies](/img/guides/task_failed_dependency.png)
+
 To help identify and resolve task failures, you can set up error notifications. See [Error Notifications in Airflow](error-notifications-in-airflow.md).
 
 Task failures in newly developed DAGs with error messages such as `Task exited with return code Negsignal.SIGKILL` or containing a `-9` error code are often caused by a lack of memory. Increase the resources for your scheduler, webserver, or pod, depending on whether you're running the Local, Celery, or Kubernetes executors respectively.
