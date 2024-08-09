@@ -32,7 +32,7 @@ Astronomer Software limits the amount of resources that can be used by all pods 
 
 These values are automatically adjust to account for the resource requirements of various components.
 
-You can add additional resources, beyond the standard amount allocated based on the resource-requirements of standing components, to the `LimitRange` and `ResourceQuota` by configuring `astronomer.houston.config.deployments.maxExtraAu` to account for the requirements of KubernetesExecutor and KubernetesPodOperator tasks.
+You can add additional resources, beyond the standard amount allocated based on the resource-requirements of standing components, to the `LimitRange` and `ResourceQuota`. Add resources by configuring `astronomer.houston.config.deployments.maxExtraAu` to account for the requirements of KubernetesExecutor and KubernetesPodOperator tasks.
 ```yaml
 astronomer:
   houston:
